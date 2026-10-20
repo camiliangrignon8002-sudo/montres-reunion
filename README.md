@@ -4,7 +4,7 @@ Chaque matin vers **10h (heure de La Réunion)**, GitHub cherche (puis toutes le
 à moins de 250 € sur **ParuVendu** (.re et .fr) et dans les magasins **Cash Express** de Saint-Pierre et Sainte-Clotilde. Il écarte les montres connectées, les montres de
 sport, les montres pour femme ou enfant et les accessoires, puis :
 
-- met à jour l'appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/
+- met à jour l'appli (onglets « Sélection 974 » et « Omega » : toutes les Omega homme en vente à La Réunion et en métropole, sur ParuVendu, Cash Express et Collector Square) : https://camiliangrignon8002-sudo.github.io/montres-reunion/
 - envoie une **notification sur le téléphone** (appli ntfy, sujet `montres974-ut9qstgpdc`) :
   un résumé, puis une notification par nouvelle montre avec sa photo et deux boutons,
   **Contacter le vendeur** et **Google Maps**.
