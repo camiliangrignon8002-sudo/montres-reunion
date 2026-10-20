@@ -105,7 +105,8 @@ def leboncoin():
         payload["offset"] = offset
         r = requests.post("https://api.leboncoin.fr/finder/search",
                           json=payload, headers=headers, timeout=30, **IMPERSONATE)
-        r.raise_for_status()
+        if r.status_code != 200:
+            raise RuntimeError(f"HTTP {r.status_code} : {r.text[:200]!r}")
         ads = r.json().get("ads") or []
         for ad in ads:
             loc = ad.get("location") or {}
@@ -231,7 +232,7 @@ def main():
             annonces += source()
         except Exception as exc:  # une source en panne ne bloque pas les autres
             erreurs.append(f"{source.__name__}: {exc}")
-            print(f"[erreur] {source.__name__}: {exc}", file=sys.stderr)
+            print(f"::error::{source.__name__}: {exc}")
 
     montres = [a for a in annonces if est_montre_homme(a["titre"], a["description"])]
     vus = set(json.loads(SEEN_FILE.read_text())) if SEEN_FILE.exists() else set()
