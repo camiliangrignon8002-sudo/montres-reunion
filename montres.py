@@ -706,6 +706,10 @@ def photos(a):
 ICONE_PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>'
 ICONE_LOUPE = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.8-4.8"/></svg>'
 ICONE_CHEVRON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>'
+ICONE_MENU = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>'
+ICONE_COEUR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.1A4.2 4.2 0 0 1 12 7.4a4.2 4.2 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20Z"/></svg>'
+ICONE_SAC = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8h13l-1 12h-11Z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>'
+ICONE_COTE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l4-5 3 3 5-7"/></svg>'
 ICONE_SORTIE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-8 8M17 14v5H5V7h5"/></svg>'
 ICONE_CLOCHE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15L6 16Z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg>'
 VAPID_PUBLIQUE = "BELW2vkzh_ExmwyQlA4tQNi6rSXtBDZPDX2i1g-mXCFM2n5sHz6Rw4y065ax3IUcMbcmlRtCNEeXtWAVgpsAsbE"
@@ -734,9 +738,9 @@ def carte_produit(i, a, e):
     cherche = " ".join(x for x in (a["titre"], a.get("marque"), a.get("taille"), a.get("description", "")[:400],
                                    a.get("ville"), a.get("region"), a.get("etat")) if x)
     return f"""
-      <article class="produit" data-i="{i}" data-prix="{a['prix'] if a.get('prix') is not None else ''}" data-region="{e(a['region'])}"
+      <article class="produit" data-i="{i}" data-id="{e(a['id'])}" data-prix="{a['prix'] if a.get('prix') is not None else ''}" data-region="{e(a['region'])}"
         data-neuf="{'neuf' if a.get('neuf') else 'occasion'}" data-mouvement="{e(a.get('mouvement', ''))}" data-marque="{e(a.get('marque', ''))}" data-texte="{e(cherche)}">
-        <div class="tuile">{tuile}</div>
+        <div class="tuile">{tuile}<button class="like" aria-label="J'aime">{ICONE_COEUR}</button></div>
         <h3>{e(a['titre'])}</h3>
         <p class="sous">{e(sous)}</p>
         <p class="prix">{prix_txt(a, 'Prix sur demande')}</p>
@@ -752,7 +756,7 @@ def page_html(catalogue, maj):
         "photos": photos(a), "date": date_fr(a.get("date")), "vendeur": a.get("vendeur", ""), "etat": a.get("etat", ""),
         "marque": a.get("marque", ""), "taille": a.get("taille", ""), "neuf": bool(a.get("neuf")), "mouvement": a.get("mouvement", ""),
         "publie": ("Mise en ligne le " + date_fr(a["date"])) if a.get("date") else ("Repérée le " + date_fr(a.get("vue", ""))),
-        "url": a["url"], "carte": carte_google(a), "embed": carte_embed(a),
+        "url": a["url"], "carte": carte_google(a), "embed": carte_embed(a), "id": a["id"], "p": a.get("prix"),
     } for a in catalogue]
     cartes = "".join(carte_produit(i, a, e) for i, a in enumerate(catalogue))
     marques = {}
@@ -805,6 +809,32 @@ svg{{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-
 .o-montre .aiguilles{{stroke:currentColor;stroke-width:1.5;stroke-linecap:round}}
 .icone{{width:44px;height:44px;display:grid;place-items:center;position:relative}}
 .icone svg{{width:20px;height:20px}}
+.droite{{display:flex}}
+.pastille{{position:absolute;top:9px;right:8px;min-width:16px;height:16px;padding:0 4px;border-radius:99px;background:var(--accent);color:#fff;font-size:10px;line-height:16px;font-weight:500}}
+.like{{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--verre);color:var(--encre)}}
+.like svg{{width:17px;height:17px}}
+.like.on svg,#f-like.on svg{{fill:var(--accent);stroke:var(--accent)}}
+.dans-panier .tuile::after{{content:"Dans le panier";position:absolute;left:10px;bottom:10px;background:var(--bouton);color:var(--sur-bouton);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:99px}}
+.mvt-fiche{{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--filet);border-radius:99px;padding:6px 14px}}
+.duo{{display:flex;gap:10px}}
+.duo .pill:first-child{{flex:1}}
+.pill.rond{{width:50px;flex:none}}
+#f-panier.on{{background:var(--bouton);color:var(--sur-bouton);border-color:var(--bouton)}}
+dialog.menu{{margin:0 auto 0 0;height:100%;max-height:100%;width:min(86vw,360px);border-radius:0 22px 22px 0;padding-top:env(safe-area-inset-top)}}
+dialog.menu[open]{{animation:glisseGauche .4s cubic-bezier(.2,.8,.2,1)}}
+@keyframes glisseGauche{{from{{transform:translateX(-40px);opacity:0}}to{{transform:none;opacity:1}}}}
+.liste-menu{{display:flex;flex-direction:column;padding:10px 12px calc(20px + env(safe-area-inset-bottom))}}
+.liste-menu button{{display:flex;align-items:center;gap:14px;padding:16px 10px;border-bottom:1px solid var(--filet);font-size:15px;letter-spacing:.04em;text-align:left}}
+.liste-menu button span{{flex:1}}
+.liste-menu svg{{width:20px;height:20px}}
+.liste-menu small{{color:var(--doux)}}
+.aide{{color:var(--doux);font-size:14px;margin-bottom:14px}}
+.champ.grand{{height:46px}}
+.cote-carte{{border:1px solid var(--filet);border-radius:18px;padding:18px;margin-top:16px}}
+.cote-carte h5{{font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--doux)}}
+.cote-carte .gros{{font-size:28px;font-weight:300;margin-top:6px}}
+.cote-carte p{{font-size:13px;color:var(--doux);margin-top:4px}}
+.total{{font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-top:8px}}
 .tourne svg{{animation:tourne .9s linear infinite}}
 @keyframes tourne{{to{{transform:rotate(360deg)}}}}
 .recherche{{display:flex;align-items:center;gap:10px;padding:0 16px 12px}}
@@ -913,9 +943,10 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
 <div class="tirer" id="tirer" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg></div>
 <header class="haut">
   <div class="ligne-haut">
-    <button class="icone" id="loupe" aria-label="Rechercher">{ICONE_LOUPE}</button>
+    <button class="icone" id="ouvrir-menu" aria-label="Menu">{ICONE_MENU}<span class="pastille" id="pastille-menu" hidden></span></button>
     <button class="marque-site" id="accueil" aria-label="Montres, retour à l'accueil">M<svg class="o-montre" viewBox="0 0 24 44" aria-hidden="true"><path class="cuir" d="M7.6 4.5Q7.6 3 9 3h6q1.4 0 1.4 1.5L17 12.6H7Z"/><path class="cuir" d="M7 31.4h10l-.6 8.1Q16.4 41 15 41H9q-1.4 0-1.4-1.5Z"/><circle cx="12" cy="22" r="9.2" class="cadran"/><circle cx="12" cy="15.4" r=".8" class="point"/><circle cx="18.6" cy="22" r=".8" class="point"/><circle cx="5.4" cy="22" r=".8" class="point"/><path d="M12 22 8.2 19.8M12 22l4.6-3.4" class="aiguilles"/></svg>NTRES</button>
-    <button class="icone" id="rafraichir" aria-label="Rafraîchir"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg></button>
+    <div class="droite"><button class="icone" id="loupe" aria-label="Rechercher">{ICONE_LOUPE}</button>
+    <button class="icone" id="rafraichir" aria-label="Rafraîchir"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg></button></div>
   </div>
   <div class="recherche" id="barre-recherche" hidden>
     <label class="champ">{ICONE_LOUPE}<input id="q" type="search" placeholder="Marque, modèle, taille (ex. 42 mm)" autocomplete="off" enterkeyhint="search"></label>
@@ -946,6 +977,26 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
 <main class="grille" id="grille">{cartes}
   <p class="vide" id="vide" hidden>Aucune montre ne correspond à ces critères.</p>
 </main>
+<dialog id="menu" class="menu" aria-label="Menu">
+  <div class="tete-filtres"><span></span><h2>Menu</h2><button id="menu-fermer">Fermer</button></div>
+  <nav class="liste-menu">
+    <button data-vue="likes">{ICONE_COEUR}<span>Mes likes</span><small id="n-likes">0</small></button>
+    <button data-vue="panier">{ICONE_SAC}<span>Mon panier</span><small id="n-panier">0</small></button>
+    <button data-action="recherche">{ICONE_LOUPE}<span>Rechercher</span></button>
+    <button data-action="cote">{ICONE_COTE}<span>Cote des montres</span></button>
+    <button data-action="accueil"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11 12 4l8 7v9h-5v-6H9v6H4Z"/></svg><span>Accueil</span></button>
+  </nav>
+</dialog>
+
+<dialog id="cote" aria-label="Cote des montres">
+  <div class="tete-filtres"><span></span><h2>Cote des montres</h2><button id="cote-fermer">Fermer</button></div>
+  <div class="section-filtre">
+    <p class="aide">Tape un modèle ou une marque : l'appli calcule le prix moyen auquel il se vend, d'occasion et neuf, d'après toutes les annonces qu'elle connaît.</p>
+    <label class="champ grand">{ICONE_LOUPE}<input id="cote-q" type="search" placeholder="ex. Seiko 5, Speedmaster, Casio A159" autocomplete="off"></label>
+    <div id="cote-resultat"></div>
+  </div>
+</dialog>
+
 <footer>La Réunion : ParuVendu, Cash Express, GEM Atelier Bijoux<br> Europe : Ocarat, Histoire d'Or, Maty, Cash Express, Collector Square<br>Montres connectées et de sport exclues<br>Recherche toutes les 2&nbsp;h · notification à 10&nbsp;h pour La Réunion à moins de {PRIX_MAX}&nbsp;€</footer>
 
 <dialog id="filtres" aria-label="Filtres">
@@ -989,7 +1040,10 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
     <p class="lieu" id="f-lieu"></p>
     <h2 id="f-titre"></h2>
     <p class="prix" id="f-prix"></p>
+    <p class="mvt-fiche" id="f-mvt"></p>
     <div class="actions">
+      <div class="duo"><button class="pill" id="f-panier">{ICONE_SAC}<span>Ajouter au panier</span></button>
+        <button class="pill rond" id="f-like" aria-label="J'aime">{ICONE_COEUR}</button></div>
       <a class="pill plein" id="f-contact" target="_blank" rel="noopener">Contacter le vendeur</a>
       <a class="pill" id="f-maps" target="_blank" rel="noopener">{ICONE_PIN}Itinéraire</a>
     </div>
@@ -1008,8 +1062,14 @@ produits.forEach(p => p.recherche = norme(p.dataset.texte));
 const euros = n => n.toLocaleString('fr-FR') + ' €';
 
 // État des filtres (mémorisé sur ce téléphone)
+// J'aime et panier : gardés sur ce téléphone
+const lire = k => {{ try {{ return new Set(JSON.parse(localStorage.getItem(k) || '[]')); }} catch (e) {{ return new Set(); }} }};
+const garder = (k, v) => {{ try {{ localStorage.setItem(k, JSON.stringify([...v])); }} catch (e) {{}} }};
+const likes = lire('likes'), panier = lire('panier');
+const basculer = (ens, cle, id) => {{ ens.has(id) ? ens.delete(id) : ens.add(id); garder(cle, ens); appliquer(); }};
+
 // Écran d'accueil : montres de La Réunion à moins de {PRIX_MAX} €, tous mouvements
-const ACCUEIL = {{ q: '', categorie: 'toutes', min: null, max: {PRIX_MAX}, region: 'La Réunion', neuf: '', mouvement: '', marques: [], tri: 'recent' }};
+const ACCUEIL = {{ q: '', categorie: 'toutes', min: null, max: {PRIX_MAX}, region: 'La Réunion', neuf: '', mouvement: '', marques: [], tri: 'recent', vue: null }};
 let etat = {{ ...ACCUEIL }};
 if (!['La Réunion', 'Métropole', 'Europe', 'Tout'].includes(etat.region)) etat.region = 'La Réunion';
 if (!['toutes', 'omega'].includes(etat.categorie)) etat.categorie = 'toutes';
@@ -1021,6 +1081,7 @@ function appliquer() {{
   // Toutes les montres qui passent les filtres, sauf le lieu (pour compter par lieu)
   const omega = etat.categorie === 'omega';
   const filtrer = (avecMarques, avecMouvement = true) => produits.filter(p => {{
+    if (etat.vue) return (etat.vue === 'likes' ? likes : panier).has(p.dataset.id);
     if (omega && p.dataset.marque !== 'Omega') return false;
     const prix = p.dataset.prix === '' ? null : +p.dataset.prix;
     if (etat.min != null && (prix == null || prix < etat.min)) return false;
@@ -1051,6 +1112,7 @@ function appliquer() {{
   if (etat.tri !== 'recent') visibles.sort((a, b) => ((+a.dataset.prix || 0) - (+b.dataset.prix || 0)) * (etat.tri === 'asc' ? 1 : -1));
   produits.forEach(p => p.hidden = true);
   visibles.forEach(p => {{ p.hidden = false; p.style.animation = 'none'; grille.insertBefore(p, $('vide')); }});
+  if (etat.vue) visibles = tous;
   $('nb').textContent = visibles.length;
   $('vide').hidden = visibles.length > 0;
   // Étiquettes des puces
@@ -1063,12 +1125,22 @@ function appliquer() {{
   puce('p-lieu', `${{etat.region}} · ${{n[etat.region]}}`, true);
   document.querySelectorAll('[data-categorie]').forEach(b => b.setAttribute('aria-selected', b.dataset.categorie === etat.categorie));
   $('p-marque').parentNode.hidden = omega;
-  $('titre-onglet').textContent = omega ? 'Omega' : etat.region;
+  $('titre-onglet').textContent = etat.vue === 'likes' ? 'Mes likes' : etat.vue === 'panier' ? 'Mon panier' : omega ? 'Omega' : etat.region;
+  document.querySelector('.puces').hidden = !!etat.vue; document.querySelector('.onglets').hidden = !!etat.vue;
   $('texte-onglet').textContent = omega ? `Toutes les Omega homme en vente · ${{etat.region === 'Tout' ? 'partout' : etat.region}}` : {{
     'La Réunion': "Montres homme neuves et d'occasion",
-    'Métropole': "Montres homme neuves et d'occasion jusqu'à {PRIX_MAX} €, et Omega à tout prix",
+    'Métropole': "Montres homme neuves et d'occasion",
     'Europe': "La Réunion et la métropole réunies, toutes marques",
     'Tout': "Toutes les montres de l'appli" }}[etat.region];
+  if (etat.vue === 'likes') $('texte-onglet').textContent = 'Les montres que tu as aimées';
+  if (etat.vue === 'panier') {{
+    const total = montres.filter(m => panier.has(m.id) && m.p != null).reduce((t, m) => t + m.p, 0);
+    $('texte-onglet').textContent = `Total : ${{total.toLocaleString('fr-FR', {{ maximumFractionDigits: 2 }})}} €`;
+  }}
+  produits.forEach(p => {{ p.querySelector('.like').classList.toggle('on', likes.has(p.dataset.id)); p.classList.toggle('dans-panier', panier.has(p.dataset.id)); }});
+  $('n-likes').textContent = likes.size; $('n-panier').textContent = panier.size;
+  $('pastille-menu').hidden = !panier.size; $('pastille-menu').textContent = panier.size;
+  $('effacer').hidden = $('effacer').hidden && !etat.vue;
   puce('p-marque', etat.marques.length === 1 ? etat.marques[0] : etat.marques.length ? etat.marques.length + ' marques' : 'Marque', etat.marques.length > 0);
   puce('p-tri', {{ recent: 'Plus récentes', asc: 'Prix croissant', desc: 'Prix décroissant' }}[etat.tri], etat.tri !== 'recent');
   $('effacer').hidden = JSON.stringify({{ ...etat, q: '' }}) === JSON.stringify(ACCUEIL) && !etat.q;
@@ -1078,7 +1150,7 @@ function appliquer() {{
 // Le mot MONTRES : retour à l'écran d'accueil, sans aucun filtre
 $('accueil').addEventListener('click', () => {{
   $('q').value = ''; $('barre-recherche').hidden = true;
-  etat = {{ ...ACCUEIL }};
+  etat = {{ ...ACCUEIL, vue: null }};
   remplirFeuille(); appliquer(); scrollTo({{ top: 0, behavior: 'smooth' }});
 }});
 
@@ -1122,7 +1194,7 @@ filtres.querySelectorAll('[name=tranche]').forEach(x => x.addEventListener('chan
 filtres.addEventListener('change', ev => {{ if (ev.target.name !== 'tranche') lireFeuille(); }});
 const raz = () => {{ etat = {{ ...ACCUEIL, q: etat.q, categorie: etat.categorie }}; remplirFeuille(); appliquer(); }};
 document.querySelectorAll('[data-categorie]').forEach(b => b.addEventListener('click', () => {{
-  etat.categorie = b.dataset.categorie;
+  etat.categorie = b.dataset.categorie; etat.vue = null;
   if (etat.categorie === 'omega' && etat.max === ACCUEIL.max && etat.min == null) etat.max = null;
   appliquer(); scrollTo(0, 0);
 }}));
@@ -1141,6 +1213,8 @@ document.querySelectorAll('.tuile').forEach(t => {{ const d = t.querySelector('.
 // Fiche détaillée
 grille.addEventListener('click', ev => {{
   if (ev.target.closest('a')) return;  // lien « Voir sur … » : on laisse ouvrir le site
+  const coeur = ev.target.closest('.like');
+  if (coeur) {{ basculer(likes, 'likes', coeur.closest('.produit').dataset.id); return; }}
   const p = ev.target.closest('.produit'); if (!p) return;
   const m = montres[p.dataset.i], ph = m.photos.length ? m.photos : ['icon-512.png'];
   $('f-photos').replaceChildren(...ph.map(src => Object.assign(document.createElement('img'), {{ src, alt: '' }})));
@@ -1158,10 +1232,56 @@ grille.addEventListener('click', ev => {{
   $('f-maps').hidden = !m.carte; $('f-maps').href = m.carte || '#';
   $('f-contact').href = m.url;
   $('f-contact').textContent = m.source === 'ParuVendu' ? "Voir l'annonce et contacter le vendeur" : `Voir sur ${{m.source}}`;
+  $('f-mvt').textContent = m.mouvement ? 'Mouvement ' + m.mouvement.toLowerCase() : 'Mouvement non précisé par le vendeur';
+  majFiche = () => {{
+    $('f-like').classList.toggle('on', likes.has(m.id));
+    $('f-panier').classList.toggle('on', panier.has(m.id));
+    $('f-panier').querySelector('span').textContent = panier.has(m.id) ? 'Retirer du panier' : 'Ajouter au panier';
+  }};
+  ficheId = m.id; majFiche();
   fiche.showModal(); fiche.scrollTop = 0;
 }});
 compter($('f-photos'), $('f-compteur'));
+let ficheId = null, majFiche = () => {{}};
+$('f-like').addEventListener('click', () => {{ basculer(likes, 'likes', ficheId); majFiche(); }});
+$('f-panier').addEventListener('click', () => {{ basculer(panier, 'panier', ficheId); majFiche(); }});
 $('f-fermer').addEventListener('click', () => fiche.close());
+
+// Menu (trois traits)
+const menu = $('menu');
+$('ouvrir-menu').addEventListener('click', () => menu.showModal());
+$('menu-fermer').addEventListener('click', () => menu.close());
+menu.addEventListener('click', ev => {{
+  if (ev.target === menu) return menu.close();
+  const b = ev.target.closest('button'); if (!b || !b.closest('.liste-menu')) return;
+  menu.close();
+  if (b.dataset.vue) {{ etat.vue = b.dataset.vue; appliquer(); scrollTo(0, 0); }}
+  else if (b.dataset.action === 'recherche') {{ etat.vue = null; appliquer(); $('loupe').click(); }}
+  else if (b.dataset.action === 'cote') {{ $('cote').showModal(); $('cote-q').focus(); }}
+  else $('accueil').click();
+}});
+
+// Cote : prix moyen d'un modèle d'après toutes les annonces connues
+const cote = $('cote');
+$('cote-fermer').addEventListener('click', () => cote.close());
+cote.addEventListener('click', ev => {{ if (ev.target === cote) cote.close(); }});
+const fmt = n => n.toLocaleString('fr-FR', {{ maximumFractionDigits: 0 }}) + ' €';
+$('cote-q').addEventListener('input', () => {{
+  const mots = norme($('cote-q').value).split(/\\s+/).filter(Boolean);
+  const zone = $('cote-resultat');
+  if (!mots.length) return zone.replaceChildren();
+  const trouves = montres.filter(m => m.p != null && mots.every(w => norme(m.titre + ' ' + m.marque).includes(w)));
+  const bloc = (titre, liste) => {{
+    if (!liste.length) return `<div class="cote-carte"><h5>${{titre}}</h5><p>Aucune annonce pour ce modèle.</p></div>`;
+    const prix = liste.map(m => m.p).sort((a, b) => a - b);
+    const moy = prix.reduce((a, b) => a + b, 0) / prix.length, med = prix[Math.floor(prix.length / 2)];
+    return `<div class="cote-carte"><h5>${{titre}}</h5><div class="gros">${{fmt(moy)}}</div>
+      <p>prix moyen sur ${{prix.length}} annonce${{prix.length > 1 ? 's' : ''}} · médian ${{fmt(med)}}</p>
+      <p>de ${{fmt(prix[0])}} à ${{fmt(prix[prix.length - 1])}}</p></div>`;
+  }};
+  zone.innerHTML = bloc("Se revend d'occasion", trouves.filter(m => !m.neuf)) + bloc('Prix neuf en boutique', trouves.filter(m => m.neuf))
+    + `<p class="aide" style="margin-top:14px">Calculé sur les annonces présentes dans l'appli. Plus il y a d'annonces, plus la cote est fiable.</p>`;
+}});
 fiche.addEventListener('click', ev => {{ if (ev.target === fiche) fiche.close(); }});
 fiche.addEventListener('close', () => {{ $('f-carte').src = 'about:blank'; }});
 
@@ -1329,9 +1449,9 @@ def main():
 
     reunion_neuves = collecter(SOURCES_REUNION_NEUVES)
     omega = collecter(SOURCES_OMEGA)
-    # Europe : neuves et d'occasion, dans la limite de prix (les Omega restent à tout prix)
+    # Métropole : neuves et d'occasion, à tout prix (l'appli affiche d'abord celles à moins de PRIX_MAX)
     europe = [a for a in collecter(SOURCES_EUROPE)
-              if a.get("prix") is not None and a["prix"] <= PRIX_MAX and est_montre_homme(a["titre"], a["description"])]
+              if a.get("prix") is not None and est_montre_homme(a["titre"], a["description"])]
 
     catalogue = {}
     for a in montres + reunion_neuves + omega + europe:
