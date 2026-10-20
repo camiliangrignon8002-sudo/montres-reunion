@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Montres Réunion</title>
+<style>
+:root{--bg:#f6f4ef;--card:#fff;--text:#1d1c1a;--muted:#6b675f;--accent:#0f5e4f;--line:#e4e0d8}
+@media (prefers-color-scheme:dark){:root{--bg:#151513;--card:#201f1c;--text:#eeebe4;--muted:#a19c92;--accent:#5fc2a8;--line:#34322d}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,sans-serif}
+header{padding:20px 16px 8px;max-width:1100px;margin:auto}h1{margin:0;font-size:22px}
+header p{margin:4px 0 0;color:var(--muted)}
+main{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));padding:16px;max-width:1100px;margin:auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.photo{position:relative;display:block;aspect-ratio:1;background:var(--line)}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.noimg{display:grid;place-items:center;height:100%;color:var(--muted)}
+.new{position:absolute;top:10px;left:10px;background:var(--accent);color:var(--card);font-size:12px;font-weight:600;padding:3px 8px;border-radius:99px}
+.body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.price{font-size:20px;font-weight:700;color:var(--accent)}
+h2{font-size:15px;margin:0}.meta{margin:0;color:var(--muted);font-size:13px}
+details{font-size:13px;color:var(--muted)}summary{cursor:pointer}
+iframe{width:100%;height:200px;border:0;border-radius:8px;margin-top:6px}
+.actions{display:flex;gap:8px;margin-top:auto;padding-top:6px}
+.btn{flex:1;text-align:center;padding:9px;border-radius:9px;border:1px solid var(--line);color:var(--text);text-decoration:none;font-weight:600;font-size:13px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--card)}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted)}
+</style></head><body>
+<header><h1>⌚ Montres homme à La Réunion</h1>
+<p>0 annonces à moins de 250 € · hors montres connectées et de sport · mis à jour le 21/10/2026 à 01h26</p></header>
+<main><p class="empty">Aucune montre trouvée aujourd'hui.</p></main>
+</body></html>
