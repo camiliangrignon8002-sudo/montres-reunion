@@ -843,7 +843,7 @@ dialog.menu[open]{{animation:glisseGauche .4s cubic-bezier(.2,.8,.2,1)}}
 .champ input{{flex:1;min-width:0;height:100%;outline:none;font-size:16px}}
 .champ input::placeholder{{color:var(--doux)}}
 .annuler{{color:var(--accent);font-size:15px}}
-.onglets{{display:flex;justify-content:center;gap:34px}}
+.onglets{{display:flex;justify-content:center;gap:34px;margin-bottom:14px}}
 .onglets button{{font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--doux);padding:4px 0 10px;position:relative;transition:color .25s}}
 .onglets button::after{{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .3s}}
 .onglets button[aria-selected=true]{{color:var(--accent)}}
