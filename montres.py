@@ -45,7 +45,7 @@ EXCLURE = [
     "bracelet pour", "bracelet de montre", "bracelet montre", "boite vide",
     "ecrin", "coffret vide", "presentoir", "remontoir", "pile", "outil",
     "piece detachee", "pour pieces", "recherche", "cherche", "achete",
-    "smart", "piano", "clavier", "synthe", "calculatrice", "reveil", "horloge", "pendule", "radio",
+    "smart", "etui", "rangement", "boite a montre", "boite de", "piano", "clavier", "synthe", "calculatrice", "reveil", "horloge", "pendule", "radio",
 ]
 FEMME = ["femme", "femmme", "dame", "lady", "ladies", "woman", "women", "feminin"]
 # Marques et modèles pour femme qui ne le disent pas dans le titre (vus chez Cash Express)
@@ -54,7 +54,7 @@ MONTRE = ["montre", "watch", "chrono", "automatique", "seiko", "casio", "tissot"
           "citizen", "orient", "festina", "lip", "fossil", "hamilton", "timex",
           "swatch", "certina", "edox", "boss", "diesel", "lorus", "pulsar",
           "bulova", "invicta", "g-shock", "gshock", "rolex", "omega", "longines",
-          "tag heuer", "mathey", "herbelin", "yema", "baltic", "vostok", "raketa"]
+          "tag heuer", "mathey", "herbelin", "yema", "baltic", "vostok", "raketa", "pagani", "benyar"]
 
 
 # Marques reconnues pour la recherche et le filtre (nom affiché)
@@ -69,7 +69,7 @@ MARQUES = ["Omega", "Rolex", "Tag Heuer", "Longines", "Tudor", "Breitling", "Car
            "Jacques Lemans", "Obaku", "Nixon", "Boccia", "Breil", "Morellato", "Liu Jo", "Esprit", "Lee Cooper",
            "Mathey-Tissot", "Maty", "Gant", "Kenneth Cole", "Superdry", "Tag Heuer", "Bell & Ross", "Panerai",
            "Zenith", "Oris", "Junghans", "Nomos", "MeisterSinger", "Glycine", "Alpina", "Rado", "Movado",
-           "Seiko 5", "Citizen Eco-Drive"]
+           "Seiko 5", "Citizen Eco-Drive", "Pagani Design", "Benyar"]
 # Autres façons d'écrire une marque
 ALIAS_MARQUES = {"boss": "Hugo Boss", "ice-watch": "Ice Watch", "icewatch": "Ice Watch", "seiko 5": "Seiko",
                  "citizen eco-drive": "Citizen", "armani": "Emporio Armani", "swatch group": "Swatch",
@@ -86,7 +86,8 @@ def enrichir(a):
         a["marque"] = next((v for k, v in ALIAS_MARQUES.items() if trouve(k)), "")
     if not a["marque"] and " – " in a["titre"]:
         a["marque"] = a["titre"].split(" – ")[0]
-    taille = re.search(r"(?<!\d)([2-5]\d(?:[.,]\d)?)\s?mm\b", a["titre"] + " " + a.get("description", ""), re.I)
+    # boîtier entre 30 et 59 mm (20-24 mm, c'est la largeur du bracelet)
+    taille = re.search(r"(?<!\d)([3-5]\d(?:[.,]\d)?)\s?mm\b", a["titre"] + " " + a.get("description", ""), re.I)
     taille = taille.group(1) if taille else a.get("taille_fiche", "")
     a["taille"] = f"{taille.replace('.', ',')} mm" if taille else ""
     a["mouvement"] = type_mouvement(a.get("mouvement", "") + " " + a["titre"] + " " + a.get("description", ""))
@@ -648,9 +649,34 @@ def completer_fiches(catalogue):
     print(f"{min(len(a_lire), FICHES_PAR_PASSAGE)} fiches lues, {max(0, len(a_lire) - FICHES_PAR_PASSAGE)} restantes.")
 
 
+def pagani():
+    """Montres neuves de Pagani Design France (boutique Shopify : liste publique des produits)."""
+    montres = []
+    for n in range(1, 5):
+        produits = json.loads(page(f"https://pagani-design.fr/products.json?limit=250&page={n}")).get("products", [])
+        if not produits:
+            break
+        for p in produits:
+            tags = [t.lower() for t in p.get("tags", [])]
+            if "accessoires" in tags or "bracelets" in tags or ("femme" in tags and "homme" not in tags) \
+                    or re.match(r"(?i)(bracelet|bo[iî]te|[ée]tui)", p["title"]):
+                continue
+            prix = valeur_prix(p["variants"][0]["price"]) if p.get("variants") else None
+            mouvement = "Automatique" if "automático" in tags else "Quartz" if "cuarzo" in tags else ""
+            taille = next((t[:-2] for t in tags if re.fullmatch(r"(3[4-9]|4\d|5\d)mm", t)), "")
+            montres.append(neuve(
+                id=f"pd-{p['id']}", source="Pagani Design", titre=p["title"].title().replace("Pagani Design", "Pagani Design –", 1)
+                if p["title"].upper().startswith("PAGANI DESIGN") else p["title"].title(),
+                description=texte(p.get("body_html", ""))[:600], prix=prix,
+                url=f"https://pagani-design.fr/products/{p['handle']}",
+                photos=[i["src"] for i in p.get("images", [])][:10], ville="Boutique en ligne", region="Métropole",
+                adresse="", vendeur="Pagani Design France", mouvement=mouvement, taille_fiche=taille))
+    return [a for a in montres if est_montre_homme("montre " + a["titre"])]
+
+
 SOURCES_REUNION_NEUVES = [gem]
-SITES_AJOUTES = {"gem", "oc", "hdo", "maty", "cef", "cs"}  # pas de « nouveautés » avant leur premier passage de 10h
-SOURCES_EUROPE = [ocarat, histoiredor, maty, cashexpress_france]
+SITES_AJOUTES = {"gem", "oc", "hdo", "maty", "cef", "cs", "pd"}  # pas de « nouveautés » avant leur premier passage de 10h
+SOURCES_EUROPE = [ocarat, histoiredor, maty, cashexpress_france, pagani]
 
 
 # ---------------------------------------------------------------- page web
@@ -997,7 +1023,7 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
   </div>
 </dialog>
 
-<footer>La Réunion : ParuVendu, Cash Express, GEM Atelier Bijoux<br> Europe : Ocarat, Histoire d'Or, Maty, Cash Express, Collector Square<br>Montres connectées et de sport exclues<br>Recherche toutes les 2&nbsp;h · notification à 10&nbsp;h pour La Réunion à moins de {PRIX_MAX}&nbsp;€</footer>
+<footer>La Réunion : ParuVendu, Cash Express, GEM Atelier Bijoux<br> Métropole : Ocarat, Histoire d'Or, Maty, Pagani Design, Cash Express, Collector Square<br>Montres connectées et de sport exclues<br>Recherche toutes les 2&nbsp;h · notification à 10&nbsp;h pour La Réunion à moins de {PRIX_MAX}&nbsp;€</footer>
 
 <dialog id="filtres" aria-label="Filtres">
   <div class="tete-filtres"><button id="f-raz">Effacer</button><h2>Filtres</h2><button id="f-ok">OK</button></div>
