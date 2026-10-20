@@ -1,36 +1,30 @@
 # ⌚ Montres homme – La Réunion (< 250 €)
 
-Chaque matin à **10h**, ton Mac cherche les annonces de **montres pour homme** à moins de 250 €
-sur Leboncoin (974). Il écarte les montres connectées, les montres de sport, les montres pour
-femme ou enfant et les accessoires. Ensuite :
+Chaque matin vers **10h (heure de La Réunion)**, GitHub cherche les **montres pour homme**
+à moins de 250 € sur **ParuVendu Réunion**. Il écarte les montres connectées, les montres de
+sport, les montres pour femme ou enfant et les accessoires, puis :
 
-- ton téléphone reçoit **une notification par nouvelle montre**, avec sa photo, son prix, sa ville
-  et deux boutons, **Contacter le vendeur** et **Google Maps** ;
-- une page avec toutes les montres (photos, carte, description) est mise à jour sur le Mac :
-  c'est le fichier **« Montres Réunion »** sur le Bureau.
+- met à jour l'appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/
+- envoie une **notification sur le téléphone** (appli ntfy, sujet `montres974-ut9qstgpdc`) :
+  un résumé, puis une notification par nouvelle montre avec sa photo et deux boutons,
+  **Contacter le vendeur** et **Google Maps**.
 
-## Installation sur Mac (une seule fois)
+## Installer sur le téléphone
 
-1. Sur ton téléphone, installe l'appli gratuite **ntfy**, appuie sur **+** et abonne-toi au sujet
-   **`montres974-ut9qstgpdc`**.
-2. Sur le Mac, ouvre **Terminal** (Cmd + Espace, tape « Terminal », puis Entrée).
-3. Copie-colle cette ligne, puis appuie sur Entrée :
+1. **Notifications** : installe l'appli gratuite **ntfy**, appuie sur **+** et abonne-toi
+   au sujet `montres974-ut9qstgpdc`.
+2. **Appli** : ouvre le lien ci-dessus dans **Safari**, appuie sur **Partager** (le carré avec
+   une flèche), puis **Sur l'écran d'accueil**. Sur Android, ouvre-le dans Chrome, menu ⋮,
+   puis **Ajouter à l'écran d'accueil**.
 
-   ```
-   curl -fsSL https://raw.githubusercontent.com/camiliangrignon8002-sudo/montres-reunion/main/install.sh | bash
-   ```
+## Réglages
 
-   S'il te demande d'installer les « outils de ligne de commande », clique sur **Installer**,
-   attends la fin, puis colle la même ligne une seconde fois.
+- Prix maximum : `PRIX_MAX` dans `montres.py`.
+- Heure : ligne `cron` dans `.github/workflows/montres.yml` (`0 6 * * *` = 10h Réunion).
+- Mots exclus et marques reconnues : listes `EXCLURE`, `FEMME` et `MONTRE` dans `montres.py`.
+- Lancer une recherche tout de suite : onglet **Actions → Montres Réunion → Run workflow**.
 
-La même ligne sert aussi à mettre l'appli à jour.
+## Limites
 
-## Bon à savoir
-
-- Le Mac doit être allumé ou en veille à 10h. S'il était éteint, la recherche se lance à son prochain réveil.
-- Journal des recherches : `~/montres-reunion/journal.txt`.
-- Lancer une recherche à la main : `bash ~/montres-reunion/lancer.sh`
-- Désinstaller : `launchctl unload ~/Library/LaunchAgents/re.montres.reunion.plist && rm -rf ~/montres-reunion ~/Library/LaunchAgents/re.montres.reunion.plist`
+- Leboncoin, Facebook Marketplace et Vinted bloquent la lecture automatique : ils ne sont pas inclus.
 - La carte montre la commune du vendeur, pas son adresse exacte.
-- Seul Leboncoin est inclus. Facebook Marketplace demande d'être connecté et interdit la collecte automatique.
-- Les serveurs GitHub sont bloqués par Leboncoin, d'où l'installation sur le Mac.
