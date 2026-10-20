@@ -700,7 +700,12 @@ svg{{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-
 .haut{{position:sticky;top:0;z-index:10;background:var(--verre);backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px);
   border-bottom:1px solid var(--filet);padding-top:env(safe-area-inset-top)}}
 .ligne-haut{{height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 6px}}
-.marque-site{{font-size:15px;letter-spacing:.42em;margin-right:-.42em}}
+.marque-site{{display:flex;align-items:center;font-size:15px;letter-spacing:.42em;margin-right:-.42em;line-height:1}}
+.o-montre{{width:15px;height:28px;margin:0 .42em 0 0;overflow:visible}}
+.o-montre .cuir{{fill:currentColor;opacity:.88}}
+.o-montre .cadran{{fill:var(--fond);stroke:currentColor;stroke-width:1.5}}
+.o-montre .point{{fill:currentColor;stroke:none}}
+.o-montre .aiguilles{{stroke:currentColor;stroke-width:1.5;stroke-linecap:round}}
 .icone{{width:44px;height:44px;display:grid;place-items:center;position:relative}}
 .icone svg{{width:20px;height:20px}}
 .tourne svg{{animation:tourne .9s linear infinite}}
@@ -812,7 +817,7 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
 <header class="haut">
   <div class="ligne-haut">
     <button class="icone" id="loupe" aria-label="Rechercher">{ICONE_LOUPE}</button>
-    <span class="marque-site">MONTRES</span>
+    <button class="marque-site" id="accueil" aria-label="Montres, retour à l'accueil">M<svg class="o-montre" viewBox="0 0 24 44" aria-hidden="true"><path class="cuir" d="M7.6 4.5Q7.6 3 9 3h6q1.4 0 1.4 1.5L17 12.6H7Z"/><path class="cuir" d="M7 31.4h10l-.6 8.1Q16.4 41 15 41H9q-1.4 0-1.4-1.5Z"/><circle cx="12" cy="22" r="9.2" class="cadran"/><circle cx="12" cy="15.4" r=".8" class="point"/><circle cx="18.6" cy="22" r=".8" class="point"/><circle cx="5.4" cy="22" r=".8" class="point"/><path d="M12 22 8.2 19.8M12 22l4.6-3.4" class="aiguilles"/></svg>NTRES</button>
     <button class="icone" id="rafraichir" aria-label="Rafraîchir"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg></button>
   </div>
   <div class="recherche" id="barre-recherche" hidden>
@@ -959,6 +964,13 @@ function appliquer() {{
   $('f-voir').textContent = `Afficher ${{visibles.length}} montre${{visibles.length > 1 ? 's' : ''}}`;
   try {{ localStorage.setItem('filtres', JSON.stringify({{ ...etat, q: '' }})); }} catch (e) {{}}
 }}
+
+// Le mot MONTRES : retour à l'écran d'accueil, sans aucun filtre
+$('accueil').addEventListener('click', () => {{
+  $('q').value = ''; $('barre-recherche').hidden = true;
+  etat = {{ q: '', categorie: 'toutes', min: null, max: null, region: 'La Réunion', neuf: '', marques: [], tri: 'recent' }};
+  remplirFeuille(); appliquer(); scrollTo({{ top: 0, behavior: 'smooth' }});
+}});
 
 // Recherche (loupe)
 $('loupe').addEventListener('click', () => {{ $('barre-recherche').hidden = false; $('q').focus(); }});
