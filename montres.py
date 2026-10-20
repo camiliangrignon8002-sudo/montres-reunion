@@ -46,7 +46,7 @@ EXCLURE = [
 ]
 FEMME = ["femme", "femmme", "dame", "lady", "ladies", "woman", "women", "feminin"]
 # Marques et modèles pour femme qui ne le disent pas dans le titre (vus chez Cash Express)
-MODELES_FEMME = ["cluse", "madison", "candy", "petite", "adeline", "fluette", "gracieuse", "camille", "minuit", "triomphe"]
+MODELES_FEMME = ["cluse", "madison", "parfois", "candy", "petite", "adeline", "fluette", "gracieuse", "camille", "minuit", "triomphe"]
 MONTRE = ["montre", "watch", "chrono", "automatique", "seiko", "casio", "tissot",
           "citizen", "orient", "festina", "lip", "fossil", "hamilton", "timex",
           "swatch", "certina", "edox", "boss", "diesel", "lorus", "pulsar",

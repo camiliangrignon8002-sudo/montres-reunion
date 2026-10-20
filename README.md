@@ -1,7 +1,7 @@
 # ⌚ Montres homme – La Réunion (< 250 €)
 
 Chaque matin vers **10h (heure de La Réunion)**, GitHub cherche (puis toutes les 2 h dans la journée, sans notification) les **montres pour homme**
-à moins de 250 € sur **ParuVendu Réunion**. Il écarte les montres connectées, les montres de
+à moins de 250 € sur **ParuVendu** (.re et .fr) et dans les magasins **Cash Express** de Saint-Pierre et Sainte-Clotilde. Il écarte les montres connectées, les montres de
 sport, les montres pour femme ou enfant et les accessoires, puis :
 
 - met à jour l'appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/
