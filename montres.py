@@ -318,7 +318,7 @@ def omega_cashexpress():
         if contient(norm(ville), VILLES_HORS_ZONE):
             continue
         a.update({"ville": ville, "cp": MAGASINS_REUNION.get(ville, ""),
-                  "region": "La Réunion" if ville in MAGASINS_REUNION else "Métropole",
+                  "region": "La Réunion" if ville in MAGASINS_REUNION else "Europe",
                   "adresse": f"Cash Express {ville}" + (", La Réunion" if ville in MAGASINS_REUNION else ", France"),
                   "vendeur": f"Cash Express {ville} (magasin)"})
         montres.append(a)
@@ -347,7 +347,7 @@ def omega_collectorsquare():
             "titre": html.unescape(lien.group(2)), "description": "",
             "prix": int(prix.group(1)) if prix else None,
             "url": "https://www.collectorsquare.com" + lien.group(1),
-            "ville": "Paris", "cp": "", "region": "Métropole", "adresse": "Collector Square, Paris",
+            "ville": "Paris", "cp": "", "region": "Europe", "adresse": "Collector Square, Paris",
             "lat": None, "lng": None, "date": "", "etat": etat, "vendeur": "Collector Square (expertisée)",
             "photos": list(dict.fromkeys(re.findall(r'src="(https://medias\.collectorsquare\.com/images/products/[^"]+)"', li))),
         }
@@ -399,6 +399,148 @@ def cashexpress():
 SOURCES = [paruvendu, cashexpress]
 
 
+# ---------------------------------------------------------------- montres neuves et Europe
+
+PAGES_MAX = int(os.environ.get("PAGES_MAX", "8"))  # pages lues par site et par passage (reste discret)
+
+
+def page(url):
+    r = requests.get(url, timeout=30, **IMPERSONATE)
+    time.sleep(0.5)
+    if r.status_code != 200:
+        raise RuntimeError(f"HTTP {r.status_code} ({url})")
+    return r.text
+
+
+def valeur_prix(txt):
+    chiffres = re.sub(r"[^\d,.]", "", txt.replace(" ", "").replace(" ", "")).replace(",", ".")
+    if not chiffres:
+        return None
+    v = float(chiffres)
+    return int(v) if v.is_integer() else v
+
+
+def neuve(**champs):
+    base = {"description": "", "lat": None, "lng": None, "date": "", "etat": "Neuf", "neuf": True, "cp": ""}
+    base.update(champs)
+    return base
+
+
+def gem():
+    """Montres homme neuves de GEM Atelier Bijoux (4 boutiques à La Réunion)."""
+    montres, vus = [], set()
+    for n in range(1, PAGES_MAX + 1):
+        h = page("https://www.gembijoux.com/fr/montres/montres-homme" + (f"/page/{n}" if n > 1 else ""))
+        nouveaux = 0
+        for b in h.split("<li data-pname=")[1:]:
+            lien = re.search(r'<a[^>]+href="([^"]+)"', b)
+            nom = re.search(r'class="prod-item__name">(.*?)</span>', b, re.S)
+            prix = re.search(r'class="prod-item__prix">(.*?)</p>', b, re.S)
+            if not (lien and nom and prix) or lien.group(1) in vus:
+                continue
+            vus.add(lien.group(1))
+            nouveaux += 1
+            url = lien.group(1) if lien.group(1).startswith("http") else "https://www.gembijoux.com" + lien.group(1)
+            images = list(dict.fromkeys(re.findall(r'(https://images\.hbjo-online\.com/[^"?\s]+)\?w=', b)))
+            montres.append(neuve(
+                id="gem-" + url.rstrip("/").split("/")[-1], source="GEM", titre=texte(nom.group(1)),
+                prix=valeur_prix(texte(prix.group(1))), url=url, photos=[i + "?w=1000" for i in images],
+                ville="Boutiques GEM", region="La Réunion", adresse="GEM Atelier Bijoux, La Réunion",
+                vendeur="GEM Atelier Bijoux (Saint-Denis, Saint-Pierre, Sainte-Marie, Saint-Gilles)"))
+        if nouveaux == 0:
+            break
+    return [a for a in montres if est_montre_homme(a["titre"])]
+
+
+def ocarat():
+    """Montres homme neuves d'Ocarat (bijouterie en ligne française)."""
+    montres, vus = [], set()
+    for n in range(1, PAGES_MAX + 1):
+        h = page("https://ocarat.com/montre-homme/" + (f"?p={n}" if n > 1 else ""))
+        for b in h.split('<article class="ajax_block_product"')[1:]:
+            ident = re.search(r'data-id-product="(\d+)"', b)
+            lien = re.search(r'class="product-name" href="([^"]+)"', b)
+            prix = re.search(r'product-price">(.*?)</span>', b, re.S)
+            if not (ident and lien and prix) or ident.group(1) in vus:
+                continue
+            vus.add(ident.group(1))
+            marque = texte((re.search(r'class="product-brand[^"]*">(.*?)</span>', b, re.S) or [None, ""])[1])
+            titre = texte((re.search(r'class="product-title">(.*?)</span>', b, re.S) or [None, ""])[1])
+            images = re.findall(r'src="(https://images\.ocarat\.com/[^"]+)"', b)
+            montres.append(neuve(
+                id=f"oc-{ident.group(1)}", source="Ocarat", titre=f"{marque} – {titre}" if marque else titre,
+                prix=valeur_prix(texte(prix.group(1))), url=lien.group(1),
+                photos=sorted(dict.fromkeys(images), key=lambda i: "secondary" in i), ville="Boutique en ligne",
+                region="Europe", adresse="", vendeur="Ocarat (livraison France et Belgique)"))
+    return montres
+
+
+def histoiredor():
+    """Montres homme neuves d'Histoire d'Or (bijouteries en France)."""
+    montres, vus = [], set()
+    for n in range(PAGES_MAX):
+        h = page(f"https://www.histoiredor.com/fr_FR/c/montres/facette/homme/?start={n * 40}&sz=40")
+        tuiles = h.split('data-item="tile"')[1:]
+        for b in tuiles:
+            lien = re.search(r"class=\"c-product-tile__name-link\"[^>]*href='([^']+)'[^>]*>(.*?)</a>", b, re.S)
+            prix = re.search(r'itemprop="price" content="([\d.]+)"', b)
+            if not (lien and prix) or lien.group(1) in vus:
+                continue
+            vus.add(lien.group(1))
+            images = list(dict.fromkeys(re.findall(r'(https://www\.histoiredor\.com/dw/image/[^"?\s]+\.jpg)\?sw=', html.unescape(b))))
+            montres.append(neuve(
+                id="hdo-" + lien.group(1).rstrip("/").split("/")[-1].replace(".html", ""), source="Histoire d'Or",
+                titre=texte(lien.group(2)), prix=valeur_prix(prix.group(1)),
+                url="https://www.histoiredor.com" + lien.group(1), photos=[i + "?sw=1000&sh=1000" for i in images],
+                ville="Boutique en ligne et magasins", region="Europe", adresse="",
+                vendeur="Histoire d'Or (retrait en magasin possible)"))
+        if not tuiles:
+            break
+    return montres
+
+
+def maty():
+    """Montres homme neuves de Maty (première page de la sélection)."""
+    h = page("https://www.maty.com/montres-homme/montres-homme.html")
+    montres = []
+    for b in h.split('<div class="produit pl-event"')[1:]:
+        ref = re.search(r'data-reference="(\d+)"', b)
+        lien = re.search(r'<h2 class="desc"><span><a href="([^"]+)">(.*?)</a>', b, re.S)
+        prix = re.search(r'class="prix-final">(.*?)</p>', b, re.S)
+        if not (ref and lien and prix):
+            continue
+        images = list(dict.fromkeys(re.findall(r'//photos\.maty\.com/(\d+/V\d+)/\d+/([^"\s]+?)\.jpeg', b)))
+        montres.append(neuve(
+            id=f"maty-{ref.group(1)}", source="Maty", titre=texte(lien.group(2)), prix=valeur_prix(texte(prix.group(1))),
+            url="https://www.maty.com" + lien.group(1),
+            photos=[f"https://photos.maty.com/{v}/500/{nom}.jpeg" for v, nom in images],
+            ville="Boutique en ligne et magasins", region="Europe", adresse="", vendeur="Maty"))
+    return montres
+
+
+def cashexpress_france():
+    """Montres de marque d'occasion de tous les magasins Cash Express (France)."""
+    montres, vus = [], set()
+    for n in range(1, PAGES_MAX + 1):
+        nouveaux = 0
+        for a in cashexpress_cartes("https://www.cashexpress.fr/c-19/montres-marques" + (f"?page={n}" if n > 1 else "")):
+            if a["id"] in vus:
+                continue
+            vus.add(a["id"])
+            nouveaux += 1
+            a.update({"id": "cef-" + a["id"][3:], "ville": "Magasin en France", "region": "Europe", "adresse": "",
+                      "vendeur": "Cash Express (magasin en France)", "etat": "Occasion"})
+            montres.append(a)
+        if nouveaux == 0:
+            break
+    return montres
+
+
+SOURCES_REUNION_NEUVES = [gem]
+SITES_AJOUTES = {"gem", "oc", "hdo", "maty", "cef", "cs"}  # pas de « nouveautés » avant leur premier passage de 10h
+SOURCES_EUROPE = [ocarat, histoiredor, maty, cashexpress_france]
+
+
 # ---------------------------------------------------------------- page web
 
 MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."]
@@ -412,6 +554,8 @@ def date_fr(iso):
 
 
 def carte_google(a):
+    if not (a.get("lat") or a.get("adresse") or a.get("cp")) and a.get("region") == "Europe":
+        return ""  # boutique en ligne : pas d'adresse précise
     if a.get("lat") and a.get("lng"):
         q = f"{a['lat']},{a['lng']}"
     elif a.get("adresse"):
@@ -423,6 +567,8 @@ def carte_google(a):
 
 def carte_embed(a):
     """Carte Google Maps intégrable (sans clé API)."""
+    if not (a.get("lat") or a.get("adresse") or a.get("cp")) and a.get("region") == "Europe":
+        return ""  # boutique en ligne : pas d'adresse précise
     if a.get("lat") and a.get("lng"):
         q = f"{a['lat']},{a['lng']}"
     elif a.get("adresse"):
@@ -448,6 +594,7 @@ def photos(a):
 ICONE_PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>'
 ICONE_LOUPE = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.8-4.8"/></svg>'
 ICONE_CHEVRON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>'
+ICONE_SORTIE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-8 8M17 14v5H5V7h5"/></svg>'
 ICONE_CLOCHE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15L6 16Z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg>'
 VAPID_PUBLIQUE = "BELW2vkzh_ExmwyQlA4tQNi6rSXtBDZPDX2i1g-mXCFM2n5sHz6Rw4y065ax3IUcMbcmlRtCNEeXtWAVgpsAsbE"
 TOPIC_ABONNEMENTS = f"{NTFY_TOPIC or 'montres974-ut9qstgpdc'}-abonnements"
@@ -470,17 +617,18 @@ def carte_produit(i, a, e):
         tuile += f'<span class="compteur"><b>1</b>/{nb}</span>'
     if a.get("nouveau"):
         tuile += '<span class="badge">Nouveauté</span>'
-    sous = " · ".join(x for x in (a.get("ville") or "La Réunion", a.get("taille"), a.get("etat")) if x)
+    sous = " · ".join(x for x in ("Neuve" if a.get("neuf") else (a.get("etat") or "Occasion"), a.get("taille"),
+                                   a.get("ville") if a["region"] == "La Réunion" else "") if x)
     cherche = " ".join(x for x in (a["titre"], a.get("marque"), a.get("taille"), a.get("description", "")[:400],
                                    a.get("ville"), a.get("region"), a.get("etat")) if x)
     return f"""
       <article class="produit" data-i="{i}" data-prix="{a['prix'] if a.get('prix') is not None else ''}" data-region="{e(a['region'])}"
-        data-marque="{e(a.get('marque', ''))}" data-texte="{e(cherche)}">
+        data-neuf="{'neuf' if a.get('neuf') else 'occasion'}" data-marque="{e(a.get('marque', ''))}" data-texte="{e(cherche)}">
         <div class="tuile">{tuile}</div>
         <h3>{e(a['titre'])}</h3>
         <p class="sous">{e(sous)}</p>
         <p class="prix">{prix_txt(a, 'Prix sur demande')}</p>
-        <span class="voir">{ICONE_PIN}<span>{e(a['region'])}</span></span>
+        <a class="voir" href="{e(a['url'])}" target="_blank" rel="noopener">Voir sur {e(a['source'])} {ICONE_SORTIE}</a>
       </article>"""
 
 
@@ -490,7 +638,7 @@ def page_html(catalogue, maj):
         "titre": a["titre"], "prix": prix_txt(a, "Prix sur demande"), "lieu": a.get("ville") or "La Réunion",
         "region": a["region"], "source": a["source"], "description": a.get("description", ""),
         "photos": photos(a), "date": date_fr(a.get("date")), "vendeur": a.get("vendeur", ""), "etat": a.get("etat", ""),
-        "marque": a.get("marque", ""), "taille": a.get("taille", ""),
+        "marque": a.get("marque", ""), "taille": a.get("taille", ""), "neuf": bool(a.get("neuf")),
         "url": a["url"], "carte": carte_google(a), "embed": carte_embed(a),
     } for a in catalogue]
     cartes = "".join(carte_produit(i, a, e) for i, a in enumerate(catalogue))
@@ -547,6 +695,11 @@ svg{{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-
 .champ input{{flex:1;min-width:0;height:100%;outline:none;font-size:16px}}
 .champ input::placeholder{{color:var(--doux)}}
 .annuler{{color:var(--accent);font-size:15px}}
+.onglets{{display:flex;justify-content:center;gap:34px}}
+.onglets button{{font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--doux);padding:4px 0 10px;position:relative;transition:color .25s}}
+.onglets button::after{{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .3s}}
+.onglets button[aria-selected=true]{{color:var(--accent)}}
+.onglets button[aria-selected=true]::after{{transform:scaleX(1)}}
 .puces{{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:0 16px 12px}}
 .puces::-webkit-scrollbar{{display:none}}
 .puce{{flex:none;display:flex;align-items:center;gap:4px;font-size:13px;border:1px solid var(--filet);border-radius:99px;padding:6px 10px 6px 14px;white-space:nowrap}}
@@ -582,7 +735,8 @@ svg{{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-
 .sous{{font-size:13px;color:var(--doux);margin:6px 6px 0}}
 .prix{{font-size:14px;font-weight:500;letter-spacing:.06em;margin-top:12px}}
 .voir{{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding-bottom:4px;border-bottom:1px solid var(--filet);font-size:13px;letter-spacing:.06em;color:var(--doux)}}
-.voir svg{{width:15px;height:15px}}
+.voir{{text-decoration:none;color:var(--encre)}}
+.voir svg{{width:14px;height:14px}}
 .vide{{grid-column:1/-1;text-align:center;color:var(--doux);padding:30px 0 60px}}
 footer{{text-align:center;color:var(--doux);font-size:12px;padding:28px 20px 40px;border-top:1px solid var(--filet);line-height:1.8}}
 
@@ -648,17 +802,21 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
     <label class="champ">{ICONE_LOUPE}<input id="q" type="search" placeholder="Marque, modèle, taille (ex. 42 mm)" autocomplete="off" enterkeyhint="search"></label>
     <button class="annuler" id="annuler">Annuler</button>
   </div>
+  <nav class="onglets" role="tablist">
+    <button role="tab" data-region="La Réunion" aria-selected="true">La Réunion</button>
+    <button role="tab" data-region="Europe" aria-selected="false">Europe</button>
+  </nav>
   <div class="puces">
     <button class="puce" data-section="prix"><span id="p-prix">Prix</span>{ICONE_CHEVRON}</button>
-    <button class="puce" data-section="lieu"><span id="p-lieu">Lieu</span>{ICONE_CHEVRON}</button>
+    <button class="puce" data-section="etat"><span id="p-etat">Neuf / occasion</span>{ICONE_CHEVRON}</button>
     <button class="puce" data-section="marque"><span id="p-marque">Marque</span>{ICONE_CHEVRON}</button>
     <button class="puce" data-section="tri"><span id="p-tri">Trier</span>{ICONE_CHEVRON}</button>
   </div>
 </header>
 
 <section class="intro">
-  <h1>Collection</h1>
-  <p>Montres homme d'occasion à La Réunion et en métropole</p>
+  <h1 id="titre-onglet">La Réunion</h1>
+  <p id="texte-onglet">Montres homme neuves et d'occasion, tous prix</p>
   <p class="compte"><span id="nb">{len(catalogue)}</span> montres</p>
   <p class="maj-date">{e(maj[:1].upper() + maj[1:])}</p>
   <button class="effacer" id="effacer" hidden>Effacer les filtres</button>
@@ -667,7 +825,7 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
 <main class="grille" id="grille">{cartes}
   <p class="vide" id="vide" hidden>Aucune montre ne correspond à ces critères.</p>
 </main>
-<footer>Sources : ParuVendu, Cash Express, Collector Square · montres connectées et de sport exclues<br>Recherche toutes les 2&nbsp;h · notification à 10&nbsp;h pour La Réunion à moins de {PRIX_MAX}&nbsp;€</footer>
+<footer>La Réunion : ParuVendu, Cash Express, GEM Atelier Bijoux<br> Europe : Ocarat, Histoire d'Or, Maty, Cash Express, Collector Square<br>Montres connectées et de sport exclues<br>Recherche toutes les 2&nbsp;h · notification à 10&nbsp;h pour La Réunion à moins de {PRIX_MAX}&nbsp;€</footer>
 
 <dialog id="filtres" aria-label="Filtres">
   <div class="tete-filtres"><button id="f-raz">Effacer</button><h2>Filtres</h2><button id="f-ok">OK</button></div>
@@ -676,10 +834,10 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
     {tranches}
     <div class="bornes"><label>De<input id="min" type="number" inputmode="numeric" placeholder="0">€</label><label>à<input id="max" type="number" inputmode="numeric" placeholder="∞">€</label></div>
   </div>
-  <div class="section-filtre" id="s-lieu"><h4>Lieu</h4>
-    <label class="ligne-choix"><input type="radio" name="region" value="" checked><span>Partout</span></label>
-    <label class="ligne-choix"><input type="radio" name="region" value="La Réunion"><span>La Réunion</span></label>
-    <label class="ligne-choix"><input type="radio" name="region" value="Métropole"><span>Métropole</span></label>
+  <div class="section-filtre" id="s-etat"><h4>Neuf ou occasion</h4>
+    <label class="ligne-choix"><input type="radio" name="neuf" value="" checked><span>Neuves et d'occasion</span></label>
+    <label class="ligne-choix"><input type="radio" name="neuf" value="neuf"><span>Neuves</span></label>
+    <label class="ligne-choix"><input type="radio" name="neuf" value="occasion"><span>D'occasion</span></label>
   </div>
   <div class="section-filtre" id="s-marque"><h4>Marque</h4>{liste_marques}</div>
   <div class="section-filtre" id="s-tri"><h4>Trier par</h4>
@@ -701,7 +859,7 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
       <a class="pill plein" id="f-contact" target="_blank" rel="noopener">Contacter le vendeur</a>
       <a class="pill" id="f-maps" target="_blank" rel="noopener">{ICONE_PIN}Itinéraire</a>
     </div>
-    <div class="bloc"><h4>Localisation</h4><div class="plan"><iframe id="f-carte" loading="lazy" title="Carte"></iframe></div></div>
+    <div class="bloc" id="f-bloc-carte"><h4>Localisation</h4><div class="plan"><iframe id="f-carte" loading="lazy" title="Carte"></iframe></div></div>
     <div class="bloc"><h4>Informations</h4><dl class="infos" id="f-infos"></dl></div>
     <div class="bloc" id="f-bloc-desc"><h4>Description</h4><p id="f-desc"></p></div>
   </div>
@@ -716,8 +874,10 @@ produits.forEach(p => p.recherche = norme(p.dataset.texte));
 const euros = n => n.toLocaleString('fr-FR') + ' €';
 
 // État des filtres (mémorisé sur ce téléphone)
-let etat = {{ q: '', min: null, max: null, region: '', marques: [], tri: 'recent' }};
+let etat = {{ q: '', min: null, max: null, region: 'La Réunion', neuf: '', marques: [], tri: 'recent' }};
 try {{ Object.assign(etat, JSON.parse(localStorage.getItem('filtres') || '{{}}'), {{ q: '' }}); }} catch (e) {{}}
+if (!['La Réunion', 'Europe'].includes(etat.region)) etat.region = 'La Réunion';
+if (!['', 'neuf', 'occasion'].includes(etat.neuf)) etat.neuf = '';
 
 function appliquer() {{
   const mots = norme(etat.q).split(/\\s+/).filter(Boolean);
@@ -725,7 +885,8 @@ function appliquer() {{
     const prix = p.dataset.prix === '' ? null : +p.dataset.prix;
     if (etat.min != null && (prix == null || prix < etat.min)) return false;
     if (etat.max != null && (prix == null || prix > etat.max)) return false;
-    if (etat.region && p.dataset.region !== etat.region) return false;
+    if (p.dataset.region !== etat.region) return false;
+    if (etat.neuf && p.dataset.neuf !== etat.neuf) return false;
     if (etat.marques.length && !etat.marques.includes(p.dataset.marque)) return false;
     return mots.every(m => p.recherche.includes(m));
   }});
@@ -739,10 +900,14 @@ function appliquer() {{
     : etat.max != null ? `Moins de ${{euros(etat.max)}}` : etat.min != null ? `Plus de ${{euros(etat.min)}}` : 'Prix';
   const puce = (id, txt, actif) => {{ $(id).textContent = txt; $(id).parentNode.classList.toggle('active', actif); }};
   puce('p-prix', prixTxt, prixTxt !== 'Prix');
-  puce('p-lieu', etat.region || 'Lieu', !!etat.region);
+  puce('p-etat', {{ '': 'Neuf / occasion', neuf: 'Neuves', occasion: "D'occasion" }}[etat.neuf], !!etat.neuf);
+  document.querySelectorAll('.onglets button').forEach(b => b.setAttribute('aria-selected', b.dataset.region === etat.region));
+  $('titre-onglet').textContent = etat.region;
+  $('texte-onglet').textContent = etat.region === 'La Réunion' ? "Montres homme neuves et d'occasion, tous prix"
+    : "Montres homme neuves et d'occasion jusqu'à {PRIX_MAX} €, et Omega à tout prix";
   puce('p-marque', etat.marques.length === 1 ? etat.marques[0] : etat.marques.length ? etat.marques.length + ' marques' : 'Marque', etat.marques.length > 0);
   puce('p-tri', {{ recent: 'Trier', asc: 'Prix croissant', desc: 'Prix décroissant' }}[etat.tri], etat.tri !== 'recent');
-  $('effacer').hidden = !(etat.q || prixTxt !== 'Prix' || etat.region || etat.marques.length);
+  $('effacer').hidden = !(etat.q || prixTxt !== 'Prix' || etat.neuf || etat.marques.length);
   $('f-voir').textContent = `Afficher ${{visibles.length}} montre${{visibles.length > 1 ? 's' : ''}}`;
   try {{ localStorage.setItem('filtres', JSON.stringify({{ ...etat, q: '' }})); }} catch (e) {{}}
 }}
@@ -757,7 +922,7 @@ $('annuler').addEventListener('click', () => {{ $('q').value = ''; etat.q = ''; 
 const lireFeuille = () => {{
   const num = v => v === '' || v == null ? null : Math.max(0, +v);
   etat.min = num($('min').value); etat.max = num($('max').value);
-  etat.region = filtres.querySelector('[name=region]:checked').value;
+  etat.neuf = filtres.querySelector('[name=neuf]:checked').value;
   etat.marques = [...filtres.querySelectorAll('[name=marque]:checked')].map(x => x.value);
   etat.tri = filtres.querySelector('[name=tri]:checked').value;
   appliquer();
@@ -766,7 +931,7 @@ const remplirFeuille = () => {{
   $('min').value = etat.min ?? ''; $('max').value = etat.max ?? '';
   const tr = `${{etat.min ?? ''}}-${{etat.max ?? ''}}`.replace(/^0-/, '0-');
   filtres.querySelectorAll('[name=tranche]').forEach(x => x.checked = x.value === tr || (x.value === '-' && tr === '-'));
-  filtres.querySelectorAll('[name=region]').forEach(x => x.checked = x.value === etat.region);
+  filtres.querySelectorAll('[name=neuf]').forEach(x => x.checked = x.value === etat.neuf);
   filtres.querySelectorAll('[name=marque]').forEach(x => x.checked = etat.marques.includes(x.value));
   filtres.querySelectorAll('[name=tri]').forEach(x => x.checked = x.value === etat.tri);
 }};
@@ -781,7 +946,8 @@ filtres.querySelectorAll('[name=tranche]').forEach(x => x.addEventListener('chan
   filtres.querySelectorAll('[name=tranche]').forEach(x => x.checked = false); lireFeuille();
 }}));
 filtres.addEventListener('change', ev => {{ if (ev.target.name !== 'tranche') lireFeuille(); }});
-const raz = () => {{ etat = {{ q: etat.q, min: null, max: null, region: '', marques: [], tri: 'recent' }}; remplirFeuille(); appliquer(); }};
+const raz = () => {{ etat = {{ q: etat.q, min: null, max: null, region: etat.region, neuf: '', marques: [], tri: 'recent' }}; remplirFeuille(); appliquer(); }};
+document.querySelectorAll('.onglets button').forEach(b => b.addEventListener('click', () => {{ etat.region = b.dataset.region; appliquer(); scrollTo(0, 0); }}));
 $('f-raz').addEventListener('click', raz);
 $('effacer').addEventListener('click', () => {{ $('q').value = ''; etat.q = ''; $('barre-recherche').hidden = true; raz(); }});
 ['f-ok', 'f-voir'].forEach(id => $(id).addEventListener('click', () => {{ filtres.close(); scrollTo(0, 0); }}));
@@ -796,20 +962,24 @@ document.querySelectorAll('.tuile').forEach(t => {{ const d = t.querySelector('.
 
 // Fiche détaillée
 grille.addEventListener('click', ev => {{
+  if (ev.target.closest('a')) return;  // lien « Voir sur … » : on laisse ouvrir le site
   const p = ev.target.closest('.produit'); if (!p) return;
   const m = montres[p.dataset.i], ph = m.photos.length ? m.photos : ['icon-512.png'];
   $('f-photos').replaceChildren(...ph.map(src => Object.assign(document.createElement('img'), {{ src, alt: '' }})));
   $('f-photos').scrollLeft = 0;
   $('f-compteur').innerHTML = ph.length > 1 ? `<b>1</b>/${{ph.length}}` : '';
-  $('f-lieu').textContent = m.lieu + ' · ' + m.region;
+  $('f-lieu').textContent = (m.neuf ? 'Neuve' : 'Occasion') + ' · ' + (m.region === 'La Réunion' ? m.lieu : m.lieu + ' · Europe');
   $('f-titre').textContent = m.titre; $('f-prix').textContent = m.prix;
   $('f-desc').textContent = m.description; $('f-bloc-desc').hidden = !m.description;
   $('f-infos').replaceChildren(...[['Marque', m.marque], ['Taille', m.taille], ['État', m.etat], ['Vendeur', m.vendeur],
-      ['Lieu', m.lieu + ', ' + m.region], ['Mise à jour', m.date], ['Site', m.source]]
+      ['État', m.neuf ? 'Neuve' : ''], ['Lieu', m.lieu + ', ' + m.region], ['Mise à jour', m.date], ['Site', m.source]]
     .filter(([, v]) => v).map(([k, v]) => {{
       const d = document.createElement('div'); d.innerHTML = '<dt></dt><dd></dd>';
       d.children[0].textContent = k; d.children[1].textContent = v; return d; }}));
-  $('f-carte').src = m.embed; $('f-contact').href = m.url; $('f-maps').href = m.carte;
+  $('f-carte').src = m.embed || 'about:blank'; $('f-bloc-carte').hidden = !m.embed;
+  $('f-maps').hidden = !m.carte; $('f-maps').href = m.carte || '#';
+  $('f-contact').href = m.url;
+  $('f-contact').textContent = m.source === 'ParuVendu' ? "Voir l'annonce et contacter le vendeur" : `Voir sur ${{m.source}}`;
   fiche.showModal(); fiche.scrollTop = 0;
 }});
 compter($('f-photos'), $('f-compteur'));
@@ -969,20 +1139,35 @@ def main():
             print(f"::error::{source.__name__}: {exc}")
 
     montres = [a for a in annonces if est_montre_homme(a["titre"], a["description"])]
-    omega = []
-    for source in SOURCES_OMEGA:
-        try:
-            omega += source()
-        except Exception as exc:
-            print(f"::error::{source.__name__}: {exc}")
-    catalogue = {a["id"]: a for a in montres}
-    for a in omega:
-        catalogue.setdefault(a["id"], a)
+
+    def collecter(sources):
+        trouves = []
+        for source in sources:
+            try:
+                trouves += source()
+            except Exception as exc:  # un site en panne ne bloque pas les autres
+                print(f"::error::{source.__name__}: {exc}")
+        return trouves
+
+    reunion_neuves = collecter(SOURCES_REUNION_NEUVES)
+    omega = collecter(SOURCES_OMEGA)
+    # Europe : neuves et d'occasion, dans la limite de prix (les Omega restent à tout prix)
+    europe = [a for a in collecter(SOURCES_EUROPE)
+              if a.get("prix") is not None and a["prix"] <= PRIX_MAX and est_montre_homme(a["titre"], a["description"])]
+
+    catalogue = {}
+    for a in montres + reunion_neuves + omega + europe:
+        cle = a["id"].replace("cef-", "ce-")  # même article Cash Express vu en magasin réunionnais et en national
+        catalogue.setdefault(cle, a)
     catalogue = [enrichir(a) for a in catalogue.values()]
     vus = set(json.loads(SEEN_FILE.read_text())) if SEEN_FILE.exists() else set()
+    prefixes_connus = {v.split("-")[0] for v in vus}
     for a in catalogue:
-        a["nouveau"] = a["id"] not in vus
         a.setdefault("region", "La Réunion")
+        a.setdefault("neuf", False)
+        # un site ajouté à l'appli ne déclenche pas une avalanche de « nouveautés » à son premier passage
+        prefixe = a["id"].split("-")[0]
+        a["nouveau"] = a["id"] not in vus and (prefixe not in SITES_AJOUTES or prefixe in prefixes_connus)
     catalogue.sort(key=lambda a: a.get("date", ""), reverse=True)        # plus récentes d'abord
     catalogue.sort(key=lambda a: (not a["nouveau"], a["region"] != "La Réunion"))  # nouveautés, puis La Réunion
     # La notification de 10h ne concerne que La Réunion à moins de PRIX_MAX
