@@ -8,6 +8,7 @@ import json
 import os
 import re
 import sys
+import time
 import unicodedata
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
@@ -277,6 +278,10 @@ def cashexpress_cartes(url):
 # ---------------------------------------------------------------- catégorie Omega (tout prix, Réunion + métropole)
 
 MAGASINS_REUNION = {"Saint-Pierre": "97410", "Sainte-Clotilde": "97490"}
+# Magasins des Antilles et de Guyane : hors zone (on garde La Réunion et la métropole)
+VILLES_HORS_ZONE = ["baie-mahault", "abymes", "pointe-a-pitre", "gosier", "lamentin", "fort-de-france", "ducos",
+                    "robert", "schoelcher", "riviere-salee", "le-moule", "sainte-anne", "cayenne", "kourou", "matoury",
+                    "remire", "jarry", "trois-ilets", "saint-martin"]
 
 
 def pas_pour_femme(a):
@@ -290,6 +295,8 @@ def omega_cashexpress():
             continue
         cashexpress_fiche(a)
         ville = a.pop("magasin", "") or "France"
+        if contient(norm(ville), VILLES_HORS_ZONE):
+            continue
         a.update({"ville": ville, "cp": MAGASINS_REUNION.get(ville, ""),
                   "region": "La Réunion" if ville in MAGASINS_REUNION else "Métropole",
                   "adresse": f"Cash Express {ville}" + (", La Réunion" if ville in MAGASINS_REUNION else ", France"),
@@ -326,6 +333,14 @@ def omega_collectorsquare():
         }
         if pas_pour_femme(a):
             montres.append(a)
+    for a in montres:  # fiche produit : photos en grand format
+        r = requests.get(a["url"], timeout=30, **IMPERSONATE)
+        code = a["id"][3:]
+        grandes = [p for p in re.findall(rf'https://medias\.collectorsquare\.com/images/products/{code}/[^"\'\s]+\.jpg', r.text)
+                   if "/thumb-" not in p] if r.status_code == 200 else []
+        if grandes:
+            a["photos"] = sorted(dict.fromkeys(grandes), key=lambda p: "/00pp-" not in p)
+        time.sleep(0.3)  # rester discret envers le site
     return montres
 
 
