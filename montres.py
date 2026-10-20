@@ -62,13 +62,27 @@ MARQUES = ["Omega", "Rolex", "Tag Heuer", "Longines", "Tudor", "Breitling", "Car
            "Edox", "Frédérique Constant", "Baume & Mercier", "Raymond Weil", "Michel Herbelin", "Yema", "Lip",
            "Festina", "Lotus", "Fossil", "Hugo Boss", "Lacoste", "Diesel", "Guess", "Michael Kors", "Maserati",
            "Daniel Wellington", "Pierre Lannier", "Ice Watch", "Timex", "Bulova", "Invicta", "Stuhrling",
-           "Ingersoll", "Jaguar", "Montblanc", "Cat", "Lorus", "Pulsar", "Vostok", "Raketa", "Baltic"]
+           "Ingersoll", "Jaguar", "Montblanc", "Cat", "Lorus", "Pulsar", "Vostok", "Raketa", "Baltic",
+           "Tommy Hilfiger", "Calvin Klein", "Emporio Armani", "Armani Exchange", "Skagen", "Bering", "Briston",
+           "Rosefield", "Police", "Nautica", "Timberland", "Sector", "Philip Watch", "Victorinox", "Swiss Military",
+           "Jacques Lemans", "Obaku", "Nixon", "Boccia", "Breil", "Morellato", "Liu Jo", "Esprit", "Lee Cooper",
+           "Mathey-Tissot", "Maty", "Gant", "Kenneth Cole", "Superdry", "Tag Heuer", "Bell & Ross", "Panerai",
+           "Zenith", "Oris", "Junghans", "Nomos", "MeisterSinger", "Glycine", "Alpina", "Rado", "Movado",
+           "Seiko 5", "Citizen Eco-Drive"]
+# Autres façons d'écrire une marque
+ALIAS_MARQUES = {"boss": "Hugo Boss", "ice-watch": "Ice Watch", "icewatch": "Ice Watch", "seiko 5": "Seiko",
+                 "citizen eco-drive": "Citizen", "armani": "Emporio Armani", "swatch group": "Swatch",
+                 "casio vintage": "Casio", "g shock": "G-Shock", "tag-heuer": "Tag Heuer", "dw": "Daniel Wellington"}
 
 
 def enrichir(a):
     """Ajoute la marque et la taille (mm) quand on peut les lire dans l'annonce."""
     t = norm(a["titre"])
-    a["marque"] = next((m for m in MARQUES if re.search(r"(?<![a-z])" + re.escape(norm(m)) + r"(?![a-z])", t)), "")
+    trouve = lambda nom: re.search(r"(?<![a-z])" + re.escape(norm(nom)) + r"(?![a-z])", t)
+    a["marque"] = next((m for m in MARQUES if trouve(m)), "")
+    a["marque"] = ALIAS_MARQUES.get(norm(a["marque"]), a["marque"])
+    if not a["marque"]:
+        a["marque"] = next((v for k, v in ALIAS_MARQUES.items() if trouve(k)), "")
     if not a["marque"] and " – " in a["titre"]:
         a["marque"] = a["titre"].split(" – ")[0]
     taille = re.search(r"(?<!\d)([2-5]\d(?:[.,]\d)?)\s?mm\b", a["titre"] + " " + a.get("description", ""), re.I)
@@ -649,7 +663,7 @@ def page_html(catalogue, maj):
         if a.get("marque"):
             marques[a["marque"]] = marques.get(a["marque"], 0) + 1
     liste_marques = "".join(
-        f'<label class="ligne-choix"><input type="checkbox" name="marque" value="{e(m)}"><span>{e(m)}</span><small>{n}</small></label>'
+        f'<label class="ligne-choix" data-marque="{e(m)}"><input type="checkbox" name="marque" value="{e(m)}"><span>{e(m)}</span><small>{n}</small></label>'
         for m, n in sorted(marques.items(), key=lambda x: (-x[1], x[0])))
     tranches = "".join(
         f'<label class="ligne-choix"><input type="radio" name="tranche" value="{mini}-{maxi or ""}"><span>{tranche_txt(mini, maxi)}</span></label>'
@@ -805,6 +819,10 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
     <label class="champ">{ICONE_LOUPE}<input id="q" type="search" placeholder="Marque, modèle, taille (ex. 42 mm)" autocomplete="off" enterkeyhint="search"></label>
     <button class="annuler" id="annuler">Annuler</button>
   </div>
+  <nav class="onglets" role="tablist">
+    <button role="tab" data-categorie="toutes" aria-selected="true">Toutes les montres</button>
+    <button role="tab" data-categorie="omega" aria-selected="false">Omega</button>
+  </nav>
   <div class="puces">
     <button class="puce active" data-section="lieu"><span id="p-lieu">La Réunion</span>{ICONE_CHEVRON}</button>
     <button class="puce" data-section="prix"><span id="p-prix">Prix</span>{ICONE_CHEVRON}</button>
@@ -833,6 +851,7 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
     <label class="ligne-choix"><input type="radio" name="lieu" value="La Réunion" checked><span>La Réunion</span><small id="c-reunion"></small></label>
     <label class="ligne-choix"><input type="radio" name="lieu" value="Métropole"><span>Métropole</span><small id="c-metropole"></small></label>
     <label class="ligne-choix"><input type="radio" name="lieu" value="Europe"><span>Europe <em class="precision">(La Réunion + métropole)</em></span><small id="c-europe"></small></label>
+    <label class="ligne-choix"><input type="radio" name="lieu" value="Tout"><span>Tout</span><small id="c-tout"></small></label>
   </div>
   <div class="section-filtre" id="s-prix"><h4>Prix</h4>
     <label class="ligne-choix"><input type="radio" name="tranche" value="-" checked><span>Tous les prix</span></label>
@@ -844,7 +863,7 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
     <label class="ligne-choix"><input type="radio" name="neuf" value="neuf"><span>Neuves</span></label>
     <label class="ligne-choix"><input type="radio" name="neuf" value="occasion"><span>D'occasion</span></label>
   </div>
-  <div class="section-filtre" id="s-marque"><h4>Marque</h4>{liste_marques}</div>
+  <div class="section-filtre" id="s-marque"><h4>Marques disponibles <small id="nb-marques" class="precision"></small></h4>{liste_marques}</div>
   <div class="section-filtre" id="s-tri"><h4>Trier par</h4>
     <label class="ligne-choix"><input type="radio" name="tri" value="recent" checked><span>Plus récentes d'abord</span></label>
     <label class="ligne-choix"><input type="radio" name="tri" value="asc"><span>Prix croissant</span></label>
@@ -879,26 +898,41 @@ produits.forEach(p => p.recherche = norme(p.dataset.texte));
 const euros = n => n.toLocaleString('fr-FR') + ' €';
 
 // État des filtres (mémorisé sur ce téléphone)
-let etat = {{ q: '', min: null, max: null, region: 'La Réunion', neuf: '', marques: [], tri: 'recent' }};
+let etat = {{ q: '', categorie: 'toutes', min: null, max: null, region: 'La Réunion', neuf: '', marques: [], tri: 'recent' }};
 try {{ Object.assign(etat, JSON.parse(localStorage.getItem('filtres') || '{{}}'), {{ q: '' }}); }} catch (e) {{}}
-if (!['La Réunion', 'Métropole', 'Europe'].includes(etat.region)) etat.region = 'La Réunion';
+if (!['La Réunion', 'Métropole', 'Europe', 'Tout'].includes(etat.region)) etat.region = 'La Réunion';
+if (!['toutes', 'omega'].includes(etat.categorie)) etat.categorie = 'toutes';
+const dansLieu = (p, r) => r === 'Europe' || r === 'Tout' || p.dataset.region === r;  // Europe = La Réunion + métropole
 if (!['', 'neuf', 'occasion'].includes(etat.neuf)) etat.neuf = '';
 
 function appliquer() {{
   const mots = norme(etat.q).split(/\\s+/).filter(Boolean);
   // Toutes les montres qui passent les filtres, sauf le lieu (pour compter par lieu)
-  const tous = produits.filter(p => {{
+  const omega = etat.categorie === 'omega';
+  const filtrer = (avecMarques) => produits.filter(p => {{
+    if (omega && p.dataset.marque !== 'Omega') return false;
     const prix = p.dataset.prix === '' ? null : +p.dataset.prix;
     if (etat.min != null && (prix == null || prix < etat.min)) return false;
     if (etat.max != null && (prix == null || prix > etat.max)) return false;
     if (etat.neuf && p.dataset.neuf !== etat.neuf) return false;
-    if (etat.marques.length && !etat.marques.includes(p.dataset.marque)) return false;
+    if (avecMarques && !omega && etat.marques.length && !etat.marques.includes(p.dataset.marque)) return false;
     return mots.every(m => p.recherche.includes(m));
   }});
-  const compte = r => tous.filter(p => r === 'Europe' || p.dataset.region === r).length;
-  const n = {{ 'La Réunion': compte('La Réunion'), 'Métropole': compte('Métropole'), 'Europe': tous.length }};
-  $('c-reunion').textContent = n['La Réunion']; $('c-metropole').textContent = n['Métropole']; $('c-europe').textContent = n['Europe'];
-  let visibles = tous.filter(p => etat.region === 'Europe' || p.dataset.region === etat.region);
+  const tous = filtrer(true);
+  const compte = r => tous.filter(p => dansLieu(p, r)).length;
+  const n = {{ 'La Réunion': compte('La Réunion'), 'Métropole': compte('Métropole'), 'Europe': compte('Europe'), 'Tout': compte('Tout') }};
+  $('c-reunion').textContent = n['La Réunion']; $('c-metropole').textContent = n['Métropole'];
+  $('c-europe').textContent = n['Europe']; $('c-tout').textContent = n['Tout'];
+  // Marques disponibles dans le lieu choisi (avec les autres filtres), triées par nombre de montres
+  const parMarque = {{}};
+  filtrer(false).filter(p => dansLieu(p, etat.region)).forEach(p => {{ if (p.dataset.marque) parMarque[p.dataset.marque] = (parMarque[p.dataset.marque] || 0) + 1; }});
+  const lignes = [...document.querySelectorAll('#s-marque .ligne-choix')];
+  lignes.forEach(l => {{ const k = parMarque[l.dataset.marque] || 0; l.querySelector('small').textContent = k;
+    l.hidden = !k && !etat.marques.includes(l.dataset.marque); }});
+  lignes.sort((a, b) => (parMarque[b.dataset.marque] || 0) - (parMarque[a.dataset.marque] || 0)).forEach(l => $('s-marque').appendChild(l));
+  $('nb-marques').textContent = `(${{Object.keys(parMarque).length}})`;
+  $('s-marque').hidden = omega;
+  let visibles = tous.filter(p => dansLieu(p, etat.region));
   if (etat.tri !== 'recent') visibles.sort((a, b) => ((+a.dataset.prix || 0) - (+b.dataset.prix || 0)) * (etat.tri === 'asc' ? 1 : -1));
   produits.forEach(p => p.hidden = true);
   visibles.forEach(p => {{ p.hidden = false; p.style.animation = 'none'; grille.insertBefore(p, $('vide')); }});
@@ -911,14 +945,17 @@ function appliquer() {{
   puce('p-prix', prixTxt, prixTxt !== 'Prix');
   puce('p-etat', {{ '': 'Neuf / occasion', neuf: 'Neuves', occasion: "D'occasion" }}[etat.neuf], !!etat.neuf);
   puce('p-lieu', `${{etat.region}} · ${{n[etat.region]}}`, true);
-  $('titre-onglet').textContent = etat.region;
-  $('texte-onglet').textContent = {{
+  document.querySelectorAll('[data-categorie]').forEach(b => b.setAttribute('aria-selected', b.dataset.categorie === etat.categorie));
+  $('p-marque').parentNode.hidden = omega;
+  $('titre-onglet').textContent = omega ? 'Omega' : etat.region;
+  $('texte-onglet').textContent = omega ? `Toutes les Omega homme en vente · ${{etat.region === 'Tout' ? 'partout' : etat.region}}` : {{
     'La Réunion': "Montres homme neuves et d'occasion, tous prix",
     'Métropole': "Montres homme neuves et d'occasion jusqu'à {PRIX_MAX} €, et Omega à tout prix",
-    'Europe': "La Réunion et la métropole réunies" }}[etat.region];
+    'Europe': "La Réunion et la métropole réunies, toutes marques",
+    'Tout': "Toutes les montres de l'appli" }}[etat.region];
   puce('p-marque', etat.marques.length === 1 ? etat.marques[0] : etat.marques.length ? etat.marques.length + ' marques' : 'Marque', etat.marques.length > 0);
   puce('p-tri', {{ recent: 'Plus récentes', asc: 'Prix croissant', desc: 'Prix décroissant' }}[etat.tri], etat.tri !== 'recent');
-  $('effacer').hidden = !(etat.q || prixTxt !== 'Prix' || etat.neuf || etat.marques.length);
+  $('effacer').hidden = !(etat.q || prixTxt !== 'Prix' || etat.neuf || (!omega && etat.marques.length));
   $('f-voir').textContent = `Afficher ${{visibles.length}} montre${{visibles.length > 1 ? 's' : ''}}`;
   try {{ localStorage.setItem('filtres', JSON.stringify({{ ...etat, q: '' }})); }} catch (e) {{}}
 }}
@@ -959,7 +996,8 @@ filtres.querySelectorAll('[name=tranche]').forEach(x => x.addEventListener('chan
   filtres.querySelectorAll('[name=tranche]').forEach(x => x.checked = false); lireFeuille();
 }}));
 filtres.addEventListener('change', ev => {{ if (ev.target.name !== 'tranche') lireFeuille(); }});
-const raz = () => {{ etat = {{ q: etat.q, min: null, max: null, region: etat.region, neuf: '', marques: [], tri: 'recent' }}; remplirFeuille(); appliquer(); }};
+const raz = () => {{ etat = {{ q: etat.q, categorie: etat.categorie, min: null, max: null, region: etat.region, neuf: '', marques: [], tri: 'recent' }}; remplirFeuille(); appliquer(); }};
+document.querySelectorAll('[data-categorie]').forEach(b => b.addEventListener('click', () => {{ etat.categorie = b.dataset.categorie; appliquer(); scrollTo(0, 0); }}));
 $('f-raz').addEventListener('click', raz);
 $('effacer').addEventListener('click', () => {{ $('q').value = ''; etat.q = ''; $('barre-recherche').hidden = true; raz(); }});
 ['f-ok', 'f-voir'].forEach(id => $(id).addEventListener('click', () => {{ filtres.close(); scrollTo(0, 0); }}));
