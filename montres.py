@@ -141,9 +141,12 @@ def paruvendu():
             annonces.setdefault(a["id"], a)
     retenues = [a for a in annonces.values()
                 if (a["prix"] is None or a["prix"] <= PRIX_MAX) and est_montre_homme(a["titre"], a["description"])]
+    uniques = {}
     for a in retenues:
         paruvendu_fiche(a)
-    return [a for a in retenues if not a["date"] or a["date"] >= DEPUIS]
+        # même montre publiée plusieurs fois par le même vendeur : on n'en garde qu'une
+        uniques.setdefault((norm(a["titre"]), a["prix"], a["vendeur"], norm(a["description"])[:80]), a)
+    return [a for a in uniques.values() if not a["date"] or a["date"] >= DEPUIS]
 
 
 SOURCES = [paruvendu]
