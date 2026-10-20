@@ -45,6 +45,8 @@ EXCLURE = [
     "piece detachee", "pour pieces", "recherche", "cherche", "achete",
 ]
 FEMME = ["femme", "femmme", "dame", "lady", "ladies", "woman", "women", "feminin"]
+# Marques et modèles pour femme qui ne le disent pas dans le titre (vus chez Cash Express)
+MODELES_FEMME = ["cluse", "madison", "candy", "petite", "adeline", "fluette", "gracieuse", "camille", "minuit", "triomphe"]
 MONTRE = ["montre", "watch", "chrono", "automatique", "seiko", "casio", "tissot",
           "citizen", "orient", "festina", "lip", "fossil", "hamilton", "timex",
           "swatch", "certina", "edox", "boss", "diesel", "lorus", "pulsar",
@@ -67,7 +69,7 @@ def est_montre_homme(titre, description=""):
         return False
     if contient(t, EXCLURE):
         return False
-    if contient(t, FEMME) and "homme" not in t and "mixte" not in t:
+    if contient(t, FEMME + MODELES_FEMME) and "homme" not in t and "mixte" not in t:
         return False
     # Description : on n'écarte que les cas sans ambiguïté (marques de connectées/sport).
     d = norm(description)
@@ -94,6 +96,8 @@ def texte(fragment):
 
 def paruvendu_liste(recherche):
     r = requests.get(f"https://www.paruvendu.re/vente-occasion/?q={quote(recherche)}", timeout=30, **IMPERSONATE)
+    if r.status_code == 404:  # recherche sans résultat
+        return
     if r.status_code != 200:
         raise RuntimeError(f"HTTP {r.status_code}")
     for c in r.text.split("<app-annonce")[1:]:
@@ -145,8 +149,10 @@ def paruvendu_fr_liste():
     for page in (1, 2, 3, 4):
         url = "https://www.paruvendu.fr/annonces/montre/la-reunion-97400/" + (f"?p={page}" if page > 1 else "")
         r = requests.get(url, timeout=30, **IMPERSONATE)
+        if r.status_code == 404 and page > 1:  # plus de pages
+            break
         if r.status_code != 200:
-            raise RuntimeError(f"HTTP {r.status_code}")
+            raise RuntimeError(f"HTTP {r.status_code} ({url})")
         nouveaux = 0
         for b in r.text.split('class="debarras-annonce')[1:]:
             ident = re.search(r'data-id="(\d+)"', b)
@@ -216,6 +222,7 @@ def paruvendu():
     return [a for a in uniques.values() if not a["date"] or a["date"] >= DEPUIS]
 
 
+ETATS = ["Jamais servi", "Comme neuf", "Très bon état", "Bon état", "Correct"]
 MAGASINS_CASH_EXPRESS = {
     "saint-pierre": ("Saint-Pierre", "97410"),
     "sainte-clotilde": ("Sainte-Clotilde", "97490"),
@@ -260,9 +267,10 @@ def cashexpress():
             photos = [p.replace("\\/", "/") for p in re.findall(r'"src":"([^"]+)"', variation.group(1))]
             a["photos"] = ["https://www.cashexpress.fr" + p for p in photos] or a["photos"]
         corps = re.sub(r"\s+", " ", texte(re.sub(r"<(script|style|svg).*?</\1>", "", h, flags=re.S)))
-        etat = re.search(r"État : (?:État )?(.{2,40}?) [\d ]+,\d\d ?€", corps)
-        if etat:
-            a["etat"] = etat.group(1).strip()[:1].upper() + etat.group(1).strip()[1:]
+        etat = re.search(r"État : (?:État )?(.{2,60}?) [\d ]+,\d\d ?€", corps)
+        if etat:  # plusieurs exemplaires possibles : on garde le premier état cité
+            trouves = [(norm(etat.group(1)).find(norm(x)), x) for x in ETATS if norm(x) in norm(etat.group(1))]
+            a["etat"] = min(trouves)[1] if trouves else etat.group(1).strip().capitalize()
         desc = re.search(r"Ajouter au panier Description (.*?) Caractéristiques", corps)
         if desc:
             a["description"] = desc.group(1).strip()
