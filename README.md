@@ -1,6 +1,6 @@
 # ⌚ Montres homme – La Réunion (< 250 €)
 
-Chaque matin vers **10h (heure de La Réunion)**, GitHub cherche les **montres pour homme**
+Chaque matin vers **10h (heure de La Réunion)**, GitHub cherche (puis toutes les 2 h dans la journée, sans notification) les **montres pour homme**
 à moins de 250 € sur **ParuVendu Réunion**. Il écarte les montres connectées, les montres de
 sport, les montres pour femme ou enfant et les accessoires, puis :
 
