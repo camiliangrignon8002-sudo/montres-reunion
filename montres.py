@@ -766,7 +766,7 @@ def carte_produit(i, a, e):
     return f"""
       <article class="produit" data-i="{i}" data-id="{e(a['id'])}" data-prix="{a['prix'] if a.get('prix') is not None else ''}" data-region="{e(a['region'])}"
         data-neuf="{'neuf' if a.get('neuf') else 'occasion'}" data-mouvement="{e(a.get('mouvement', ''))}" data-marque="{e(a.get('marque', ''))}" data-texte="{e(cherche)}">
-        <div class="tuile">{tuile}<button class="like" aria-label="J'aime">{ICONE_COEUR}</button></div>
+        <div class="tuile">{tuile}<button class="like" aria-label="J'aime">{ICONE_COEUR}</button><button class="ajout" aria-label="Ajouter au panier">{ICONE_SAC}</button></div>
         <h3>{e(a['titre'])}</h3>
         <p class="sous">{e(sous)}</p>
         <p class="prix">{prix_txt(a, 'Prix sur demande')}</p>
@@ -840,7 +840,10 @@ svg{{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-
 .like{{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--verre);color:var(--encre)}}
 .like svg{{width:17px;height:17px}}
 .like.on svg,#f-like.on svg{{fill:var(--accent);stroke:var(--accent)}}
-.dans-panier .tuile::after{{content:"Dans le panier";position:absolute;left:10px;bottom:10px;background:var(--bouton);color:var(--sur-bouton);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:99px}}
+.ajout{{position:absolute;right:8px;bottom:8px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--verre);color:var(--encre);transition:background .2s,color .2s}}
+.ajout svg{{width:17px;height:17px}}
+.dans-panier .ajout{{background:var(--bouton);color:var(--sur-bouton)}}
+.tuile .compteur{{right:auto;left:50%;transform:translateX(-50%)}}
 .mvt-fiche{{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--filet);border-radius:99px;padding:6px 14px}}
 .duo{{display:flex;gap:10px}}
 .duo .pill:first-child{{flex:1}}
@@ -1163,7 +1166,8 @@ function appliquer() {{
     const total = montres.filter(m => panier.has(m.id) && m.p != null).reduce((t, m) => t + m.p, 0);
     $('texte-onglet').textContent = `Total : ${{total.toLocaleString('fr-FR', {{ maximumFractionDigits: 2 }})}} €`;
   }}
-  produits.forEach(p => {{ p.querySelector('.like').classList.toggle('on', likes.has(p.dataset.id)); p.classList.toggle('dans-panier', panier.has(p.dataset.id)); }});
+  produits.forEach(p => {{ p.querySelector('.like').classList.toggle('on', likes.has(p.dataset.id)); p.classList.toggle('dans-panier', panier.has(p.dataset.id));
+    p.querySelector('.ajout').setAttribute('aria-label', panier.has(p.dataset.id) ? 'Retirer du panier' : 'Ajouter au panier'); }});
   $('n-likes').textContent = likes.size; $('n-panier').textContent = panier.size;
   $('pastille-menu').hidden = !panier.size; $('pastille-menu').textContent = panier.size;
   $('effacer').hidden = $('effacer').hidden && !etat.vue;
@@ -1241,6 +1245,8 @@ grille.addEventListener('click', ev => {{
   if (ev.target.closest('a')) return;  // lien « Voir sur … » : on laisse ouvrir le site
   const coeur = ev.target.closest('.like');
   if (coeur) {{ basculer(likes, 'likes', coeur.closest('.produit').dataset.id); return; }}
+  const sac = ev.target.closest('.ajout');
+  if (sac) {{ basculer(panier, 'panier', sac.closest('.produit').dataset.id); return; }}
   const p = ev.target.closest('.produit'); if (!p) return;
   const m = montres[p.dataset.i], ph = m.photos.length ? m.photos : ['icon-512.png'];
   $('f-photos').replaceChildren(...ph.map(src => Object.assign(document.createElement('img'), {{ src, alt: '' }})));
