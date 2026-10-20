@@ -8,8 +8,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Montres">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+<link rel="icon" href="icon-192.png?v=2">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -30,7 +30,17 @@ img{display:block}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
 
 /* En-tête */
-header{text-align:center;padding:calc(env(safe-area-inset-top) + 40px) 0 44px}
+header{text-align:center;padding:calc(env(safe-area-inset-top) + 66px) 0 44px}
+.rafraichir{position:absolute;top:calc(env(safe-area-inset-top) + 14px);right:16px;width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;color:var(--doux);border:1px solid var(--filet);transition:color .3s,border-color .3s}
+.rafraichir:active{color:var(--encre);border-color:var(--encre)}
+.rafraichir svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.tourne svg{animation:tourne .9s linear infinite}
+@keyframes tourne{to{transform:rotate(360deg)}}
+.tirer{position:fixed;top:calc(env(safe-area-inset-top) + 10px);left:50%;z-index:20;width:40px;height:40px;margin-left:-20px;border-radius:50%;
+  display:grid;place-items:center;background:var(--fond);border:1px solid var(--filet);color:var(--or);opacity:0;transform:translateY(-60px);pointer-events:none}
+.tirer svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round}
+header{position:relative}
 .maison{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--doux)}
 .maison::before,.maison::after{content:"";width:28px;height:1px;background:var(--filet)}
 h1{font-family:var(--serif);font-weight:400;font-size:clamp(46px,13vw,84px);line-height:.95;letter-spacing:-.01em;margin-top:42px}
@@ -99,11 +109,12 @@ dialog::backdrop{background:rgba(8,8,7,.55);backdrop-filter:blur(4px);-webkit-ba
 .btn:active{opacity:.8}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
-<header><div class="wrap">
+<div class="tirer" id="tirer" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg></div>
+<header><button class="rafraichir" id="rafraichir" aria-label="Rafraîchir"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5"/></svg></button><div class="wrap">
   <p class="maison caps">Montres · La Réunion</p>
   <h1>La sélection<em>montres homme, moins de 250&nbsp;€</em></h1>
   <p class="resume caps"><span>2 pièces</span><span>dès 65 €</span></p>
-  <p class="maj">Mise à jour le 21.10</p>
+  <p class="maj">Mise à jour le 21.10 à 02h01</p>
 </div></header>
 <nav><div class="tri" role="group" aria-label="Trier">
   <button class="caps" data-tri="nouveau" aria-pressed="true">Récentes</button>
@@ -187,5 +198,23 @@ liste.addEventListener('click', ev => {
 $('f-fermer').addEventListener('click', () => fiche.close());
 fiche.addEventListener('click', ev => { if (ev.target === fiche) fiche.close(); });
 fiche.addEventListener('close', () => { $('f-carte').src = 'about:blank'; });
+
+// Rafraîchir : bouton, ou tirer la page vers le bas depuis le haut
+const recharger = () => { $('rafraichir').classList.add('tourne'); $('tirer').classList.add('tourne');
+  location.replace(location.pathname + '?r=' + Date.now()); };
+$('rafraichir').addEventListener('click', recharger);
+let depart = null, distance = 0;
+addEventListener('touchstart', ev => { depart = scrollY <= 0 && !fiche.open ? ev.touches[0].clientY : null; distance = 0; }, { passive: true });
+addEventListener('touchmove', ev => {
+  if (depart === null) return;
+  distance = Math.max(0, Math.min(140, ev.touches[0].clientY - depart));
+  $('tirer').style.opacity = Math.min(1, distance / 90);
+  $('tirer').style.transform = `translateY(${distance * .6 - 60}px) rotate(${distance * 3}deg)`;
+}, { passive: true });
+addEventListener('touchend', () => {
+  if (depart !== null && distance >= 90) recharger();
+  else { $('tirer').style.opacity = 0; $('tirer').style.transform = ''; }
+  depart = null;
+});
 </script>
 </body></html>
