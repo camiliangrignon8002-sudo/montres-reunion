@@ -28,6 +28,7 @@ NOTIFIER = os.environ.get("NOTIFIER", "true") == "true"
 PAGE_URL = os.environ.get("PAGE_URL", "")
 ROOT = Path(__file__).parent
 SEEN_FILE = ROOT / "data" / "seen.json"
+PREMIERE_VUE_FILE = ROOT / "data" / "premiere_vue.json"  # id -> date et heure où l'appli a vu la montre pour la 1re fois
 OUT_FILE = ROOT / "docs" / "index.html"
 REUNION = timezone(timedelta(hours=4))
 
@@ -318,7 +319,7 @@ def omega_cashexpress():
         if contient(norm(ville), VILLES_HORS_ZONE):
             continue
         a.update({"ville": ville, "cp": MAGASINS_REUNION.get(ville, ""),
-                  "region": "La Réunion" if ville in MAGASINS_REUNION else "Europe",
+                  "region": "La Réunion" if ville in MAGASINS_REUNION else "Métropole",
                   "adresse": f"Cash Express {ville}" + (", La Réunion" if ville in MAGASINS_REUNION else ", France"),
                   "vendeur": f"Cash Express {ville} (magasin)"})
         montres.append(a)
@@ -347,7 +348,7 @@ def omega_collectorsquare():
             "titre": html.unescape(lien.group(2)), "description": "",
             "prix": int(prix.group(1)) if prix else None,
             "url": "https://www.collectorsquare.com" + lien.group(1),
-            "ville": "Paris", "cp": "", "region": "Europe", "adresse": "Collector Square, Paris",
+            "ville": "Paris", "cp": "", "region": "Métropole", "adresse": "Collector Square, Paris",
             "lat": None, "lng": None, "date": "", "etat": etat, "vendeur": "Collector Square (expertisée)",
             "photos": list(dict.fromkeys(re.findall(r'src="(https://medias\.collectorsquare\.com/images/products/[^"]+)"', li))),
         }
@@ -471,7 +472,7 @@ def ocarat():
                 id=f"oc-{ident.group(1)}", source="Ocarat", titre=f"{marque} – {titre}" if marque else titre,
                 prix=valeur_prix(texte(prix.group(1))), url=lien.group(1),
                 photos=sorted(dict.fromkeys(images), key=lambda i: "secondary" in i), ville="Boutique en ligne",
-                region="Europe", adresse="", vendeur="Ocarat (livraison France et Belgique)"))
+                region="Métropole", adresse="", vendeur="Ocarat (livraison France et Belgique)"))
     return montres
 
 
@@ -492,7 +493,7 @@ def histoiredor():
                 id="hdo-" + lien.group(1).rstrip("/").split("/")[-1].replace(".html", ""), source="Histoire d'Or",
                 titre=texte(lien.group(2)), prix=valeur_prix(prix.group(1)),
                 url="https://www.histoiredor.com" + lien.group(1), photos=[i + "?sw=1000&sh=1000" for i in images],
-                ville="Boutique en ligne et magasins", region="Europe", adresse="",
+                ville="Boutique en ligne et magasins", region="Métropole", adresse="",
                 vendeur="Histoire d'Or (retrait en magasin possible)"))
         if not tuiles:
             break
@@ -514,7 +515,7 @@ def maty():
             id=f"maty-{ref.group(1)}", source="Maty", titre=texte(lien.group(2)), prix=valeur_prix(texte(prix.group(1))),
             url="https://www.maty.com" + lien.group(1),
             photos=[f"https://photos.maty.com/{v}/500/{nom}.jpeg" for v, nom in images],
-            ville="Boutique en ligne et magasins", region="Europe", adresse="", vendeur="Maty"))
+            ville="Boutique en ligne et magasins", region="Métropole", adresse="", vendeur="Maty"))
     return montres
 
 
@@ -528,7 +529,7 @@ def cashexpress_france():
                 continue
             vus.add(a["id"])
             nouveaux += 1
-            a.update({"id": "cef-" + a["id"][3:], "ville": "Magasin en France", "region": "Europe", "adresse": "",
+            a.update({"id": "cef-" + a["id"][3:], "ville": "Magasin en France", "region": "Métropole", "adresse": "",
                       "vendeur": "Cash Express (magasin en France)", "etat": "Occasion"})
             montres.append(a)
         if nouveaux == 0:
@@ -554,7 +555,7 @@ def date_fr(iso):
 
 
 def carte_google(a):
-    if not (a.get("lat") or a.get("adresse") or a.get("cp")) and a.get("region") == "Europe":
+    if not (a.get("lat") or a.get("adresse") or a.get("cp")) and a.get("region") != "La Réunion":
         return ""  # boutique en ligne : pas d'adresse précise
     if a.get("lat") and a.get("lng"):
         q = f"{a['lat']},{a['lng']}"
@@ -567,7 +568,7 @@ def carte_google(a):
 
 def carte_embed(a):
     """Carte Google Maps intégrable (sans clé API)."""
-    if not (a.get("lat") or a.get("adresse") or a.get("cp")) and a.get("region") == "Europe":
+    if not (a.get("lat") or a.get("adresse") or a.get("cp")) and a.get("region") != "La Réunion":
         return ""  # boutique en ligne : pas d'adresse précise
     if a.get("lat") and a.get("lng"):
         q = f"{a['lat']},{a['lng']}"
@@ -639,6 +640,7 @@ def page_html(catalogue, maj):
         "region": a["region"], "source": a["source"], "description": a.get("description", ""),
         "photos": photos(a), "date": date_fr(a.get("date")), "vendeur": a.get("vendeur", ""), "etat": a.get("etat", ""),
         "marque": a.get("marque", ""), "taille": a.get("taille", ""), "neuf": bool(a.get("neuf")),
+        "publie": ("Mise en ligne le " + date_fr(a["date"])) if a.get("date") else ("Repérée le " + date_fr(a.get("vue", ""))),
         "url": a["url"], "carte": carte_google(a), "embed": carte_embed(a),
     } for a in catalogue]
     cartes = "".join(carte_produit(i, a, e) for i, a in enumerate(catalogue))
@@ -777,6 +779,7 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
 .ligne-choix{{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--filet);cursor:pointer;font-size:15px}}
 .ligne-choix span{{flex:1}}
 .ligne-choix small{{color:var(--doux);font-size:13px}}
+.precision{{font-style:normal;color:var(--doux);font-size:13px}}
 .ligne-choix input{{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:1px solid var(--doux);border-radius:50%;display:grid;place-items:center;flex:none}}
 .ligne-choix input[type=checkbox]{{border-radius:6px}}
 .ligne-choix input:checked{{background:var(--bouton);border-color:var(--bouton)}}
@@ -802,11 +805,8 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
     <label class="champ">{ICONE_LOUPE}<input id="q" type="search" placeholder="Marque, modèle, taille (ex. 42 mm)" autocomplete="off" enterkeyhint="search"></label>
     <button class="annuler" id="annuler">Annuler</button>
   </div>
-  <nav class="onglets" role="tablist">
-    <button role="tab" data-region="La Réunion" aria-selected="true">La Réunion</button>
-    <button role="tab" data-region="Europe" aria-selected="false">Europe</button>
-  </nav>
   <div class="puces">
+    <button class="puce active" data-section="lieu"><span id="p-lieu">La Réunion</span>{ICONE_CHEVRON}</button>
     <button class="puce" data-section="prix"><span id="p-prix">Prix</span>{ICONE_CHEVRON}</button>
     <button class="puce" data-section="etat"><span id="p-etat">Neuf / occasion</span>{ICONE_CHEVRON}</button>
     <button class="puce" data-section="marque"><span id="p-marque">Marque</span>{ICONE_CHEVRON}</button>
@@ -829,6 +829,11 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
 
 <dialog id="filtres" aria-label="Filtres">
   <div class="tete-filtres"><button id="f-raz">Effacer</button><h2>Filtres</h2><button id="f-ok">OK</button></div>
+  <div class="section-filtre" id="s-lieu"><h4>Lieu</h4>
+    <label class="ligne-choix"><input type="radio" name="lieu" value="La Réunion" checked><span>La Réunion</span><small id="c-reunion"></small></label>
+    <label class="ligne-choix"><input type="radio" name="lieu" value="Métropole"><span>Métropole</span><small id="c-metropole"></small></label>
+    <label class="ligne-choix"><input type="radio" name="lieu" value="Europe"><span>Europe <em class="precision">(La Réunion + métropole)</em></span><small id="c-europe"></small></label>
+  </div>
   <div class="section-filtre" id="s-prix"><h4>Prix</h4>
     <label class="ligne-choix"><input type="radio" name="tranche" value="-" checked><span>Tous les prix</span></label>
     {tranches}
@@ -841,7 +846,7 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
   </div>
   <div class="section-filtre" id="s-marque"><h4>Marque</h4>{liste_marques}</div>
   <div class="section-filtre" id="s-tri"><h4>Trier par</h4>
-    <label class="ligne-choix"><input type="radio" name="tri" value="recent" checked><span>Nouveautés</span></label>
+    <label class="ligne-choix"><input type="radio" name="tri" value="recent" checked><span>Plus récentes d'abord</span></label>
     <label class="ligne-choix"><input type="radio" name="tri" value="asc"><span>Prix croissant</span></label>
     <label class="ligne-choix"><input type="radio" name="tri" value="desc"><span>Prix décroissant</span></label>
   </div>
@@ -876,20 +881,24 @@ const euros = n => n.toLocaleString('fr-FR') + ' €';
 // État des filtres (mémorisé sur ce téléphone)
 let etat = {{ q: '', min: null, max: null, region: 'La Réunion', neuf: '', marques: [], tri: 'recent' }};
 try {{ Object.assign(etat, JSON.parse(localStorage.getItem('filtres') || '{{}}'), {{ q: '' }}); }} catch (e) {{}}
-if (!['La Réunion', 'Europe'].includes(etat.region)) etat.region = 'La Réunion';
+if (!['La Réunion', 'Métropole', 'Europe'].includes(etat.region)) etat.region = 'La Réunion';
 if (!['', 'neuf', 'occasion'].includes(etat.neuf)) etat.neuf = '';
 
 function appliquer() {{
   const mots = norme(etat.q).split(/\\s+/).filter(Boolean);
-  let visibles = produits.filter(p => {{
+  // Toutes les montres qui passent les filtres, sauf le lieu (pour compter par lieu)
+  const tous = produits.filter(p => {{
     const prix = p.dataset.prix === '' ? null : +p.dataset.prix;
     if (etat.min != null && (prix == null || prix < etat.min)) return false;
     if (etat.max != null && (prix == null || prix > etat.max)) return false;
-    if (p.dataset.region !== etat.region) return false;
     if (etat.neuf && p.dataset.neuf !== etat.neuf) return false;
     if (etat.marques.length && !etat.marques.includes(p.dataset.marque)) return false;
     return mots.every(m => p.recherche.includes(m));
   }});
+  const compte = r => tous.filter(p => r === 'Europe' || p.dataset.region === r).length;
+  const n = {{ 'La Réunion': compte('La Réunion'), 'Métropole': compte('Métropole'), 'Europe': tous.length }};
+  $('c-reunion').textContent = n['La Réunion']; $('c-metropole').textContent = n['Métropole']; $('c-europe').textContent = n['Europe'];
+  let visibles = tous.filter(p => etat.region === 'Europe' || p.dataset.region === etat.region);
   if (etat.tri !== 'recent') visibles.sort((a, b) => ((+a.dataset.prix || 0) - (+b.dataset.prix || 0)) * (etat.tri === 'asc' ? 1 : -1));
   produits.forEach(p => p.hidden = true);
   visibles.forEach(p => {{ p.hidden = false; p.style.animation = 'none'; grille.insertBefore(p, $('vide')); }});
@@ -901,12 +910,14 @@ function appliquer() {{
   const puce = (id, txt, actif) => {{ $(id).textContent = txt; $(id).parentNode.classList.toggle('active', actif); }};
   puce('p-prix', prixTxt, prixTxt !== 'Prix');
   puce('p-etat', {{ '': 'Neuf / occasion', neuf: 'Neuves', occasion: "D'occasion" }}[etat.neuf], !!etat.neuf);
-  document.querySelectorAll('.onglets button').forEach(b => b.setAttribute('aria-selected', b.dataset.region === etat.region));
+  puce('p-lieu', `${{etat.region}} · ${{n[etat.region]}}`, true);
   $('titre-onglet').textContent = etat.region;
-  $('texte-onglet').textContent = etat.region === 'La Réunion' ? "Montres homme neuves et d'occasion, tous prix"
-    : "Montres homme neuves et d'occasion jusqu'à {PRIX_MAX} €, et Omega à tout prix";
+  $('texte-onglet').textContent = {{
+    'La Réunion': "Montres homme neuves et d'occasion, tous prix",
+    'Métropole': "Montres homme neuves et d'occasion jusqu'à {PRIX_MAX} €, et Omega à tout prix",
+    'Europe': "La Réunion et la métropole réunies" }}[etat.region];
   puce('p-marque', etat.marques.length === 1 ? etat.marques[0] : etat.marques.length ? etat.marques.length + ' marques' : 'Marque', etat.marques.length > 0);
-  puce('p-tri', {{ recent: 'Trier', asc: 'Prix croissant', desc: 'Prix décroissant' }}[etat.tri], etat.tri !== 'recent');
+  puce('p-tri', {{ recent: 'Plus récentes', asc: 'Prix croissant', desc: 'Prix décroissant' }}[etat.tri], etat.tri !== 'recent');
   $('effacer').hidden = !(etat.q || prixTxt !== 'Prix' || etat.neuf || etat.marques.length);
   $('f-voir').textContent = `Afficher ${{visibles.length}} montre${{visibles.length > 1 ? 's' : ''}}`;
   try {{ localStorage.setItem('filtres', JSON.stringify({{ ...etat, q: '' }})); }} catch (e) {{}}
@@ -923,6 +934,7 @@ const lireFeuille = () => {{
   const num = v => v === '' || v == null ? null : Math.max(0, +v);
   etat.min = num($('min').value); etat.max = num($('max').value);
   etat.neuf = filtres.querySelector('[name=neuf]:checked').value;
+  etat.region = filtres.querySelector('[name=lieu]:checked').value;
   etat.marques = [...filtres.querySelectorAll('[name=marque]:checked')].map(x => x.value);
   etat.tri = filtres.querySelector('[name=tri]:checked').value;
   appliquer();
@@ -932,6 +944,7 @@ const remplirFeuille = () => {{
   const tr = `${{etat.min ?? ''}}-${{etat.max ?? ''}}`.replace(/^0-/, '0-');
   filtres.querySelectorAll('[name=tranche]').forEach(x => x.checked = x.value === tr || (x.value === '-' && tr === '-'));
   filtres.querySelectorAll('[name=neuf]').forEach(x => x.checked = x.value === etat.neuf);
+  filtres.querySelectorAll('[name=lieu]').forEach(x => x.checked = x.value === etat.region);
   filtres.querySelectorAll('[name=marque]').forEach(x => x.checked = etat.marques.includes(x.value));
   filtres.querySelectorAll('[name=tri]').forEach(x => x.checked = x.value === etat.tri);
 }};
@@ -947,7 +960,6 @@ filtres.querySelectorAll('[name=tranche]').forEach(x => x.addEventListener('chan
 }}));
 filtres.addEventListener('change', ev => {{ if (ev.target.name !== 'tranche') lireFeuille(); }});
 const raz = () => {{ etat = {{ q: etat.q, min: null, max: null, region: etat.region, neuf: '', marques: [], tri: 'recent' }}; remplirFeuille(); appliquer(); }};
-document.querySelectorAll('.onglets button').forEach(b => b.addEventListener('click', () => {{ etat.region = b.dataset.region; appliquer(); scrollTo(0, 0); }}));
 $('f-raz').addEventListener('click', raz);
 $('effacer').addEventListener('click', () => {{ $('q').value = ''; etat.q = ''; $('barre-recherche').hidden = true; raz(); }});
 ['f-ok', 'f-voir'].forEach(id => $(id).addEventListener('click', () => {{ filtres.close(); scrollTo(0, 0); }}));
@@ -968,11 +980,11 @@ grille.addEventListener('click', ev => {{
   $('f-photos').replaceChildren(...ph.map(src => Object.assign(document.createElement('img'), {{ src, alt: '' }})));
   $('f-photos').scrollLeft = 0;
   $('f-compteur').innerHTML = ph.length > 1 ? `<b>1</b>/${{ph.length}}` : '';
-  $('f-lieu').textContent = (m.neuf ? 'Neuve' : 'Occasion') + ' · ' + (m.region === 'La Réunion' ? m.lieu : m.lieu + ' · Europe');
+  $('f-lieu').textContent = (m.neuf ? 'Neuve' : 'Occasion') + ' · ' + (m.region === 'La Réunion' ? m.lieu : m.lieu + ' · ' + m.region);
   $('f-titre').textContent = m.titre; $('f-prix').textContent = m.prix;
   $('f-desc').textContent = m.description; $('f-bloc-desc').hidden = !m.description;
   $('f-infos').replaceChildren(...[['Marque', m.marque], ['Taille', m.taille], ['État', m.etat], ['Vendeur', m.vendeur],
-      ['État', m.neuf ? 'Neuve' : ''], ['Lieu', m.lieu + ', ' + m.region], ['Mise à jour', m.date], ['Site', m.source]]
+      ['État', m.neuf ? 'Neuve' : ''], ['Lieu', m.lieu + ', ' + m.region], ['Date', m.publie], ['Site', m.source]]
     .filter(([, v]) => v).map(([k, v]) => {{
       const d = document.createElement('div'); d.innerHTML = '<dt></dt><dd></dd>';
       d.children[0].textContent = k; d.children[1].textContent = v; return d; }}));
@@ -1168,8 +1180,16 @@ def main():
         # un site ajouté à l'appli ne déclenche pas une avalanche de « nouveautés » à son premier passage
         prefixe = a["id"].split("-")[0]
         a["nouveau"] = a["id"] not in vus and (prefixe not in SITES_AJOUTES or prefixe in prefixes_connus)
-    catalogue.sort(key=lambda a: a.get("date", ""), reverse=True)        # plus récentes d'abord
-    catalogue.sort(key=lambda a: (not a["nouveau"], a["region"] != "La Réunion"))  # nouveautés, puis La Réunion
+    # Classement par dernière mise en ligne : la plus récente en premier.
+    # Les boutiques ne datent pas leurs produits : on retient le moment où l'appli les a vus pour la première fois.
+    premiere_vue = json.loads(PREMIERE_VUE_FILE.read_text()) if PREMIERE_VUE_FILE.exists() else {}
+    maintenant = datetime.now(REUNION).strftime("%Y-%m-%dT%H:%M")
+    for a in catalogue:
+        premiere_vue.setdefault(a["id"], maintenant)
+        a["vue"] = premiere_vue[a["id"]]
+        a["publie"] = a["date"] + "T00:00" if a.get("date") and a["date"] < a["vue"] else a["vue"]
+    PREMIERE_VUE_FILE.write_text(json.dumps(premiere_vue, sort_keys=True))
+    catalogue.sort(key=lambda a: a["publie"], reverse=True)  # à égalité, on garde l'ordre des sites
     # La notification de 10h ne concerne que La Réunion à moins de PRIX_MAX
     nouvelles = [a for a in catalogue if a["nouveau"] and a["region"] == "La Réunion"
                  and (a.get("prix") is None or a["prix"] <= PRIX_MAX)]
