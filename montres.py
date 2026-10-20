@@ -204,23 +204,45 @@ iframe{{width:100%;height:200px;border:0;border-radius:8px;margin-top:6px}}
 
 # ---------------------------------------------------------------- notification
 
+NOTIFS_MAX = 10  # nombre maximum de montres envoyées une par une chaque matin
+
+
+def envoyer(**message):
+    """Publie une notification ntfy (format JSON : accents et € sans souci)."""
+    requests.post("https://ntfy.sh/", json={"topic": NTFY_TOPIC, **message}, timeout=30)
+
+
 def notifier(nb_total, nouvelles):
     if not NTFY_TOPIC:
         print("NTFY_TOPIC non défini : pas de notification.")
         return
-    if nouvelles:
-        apercu = "\n".join(f"• {a['prix']} € – {a['titre'][:50]} ({a['ville']})" for a in nouvelles[:5])
-        msg = f"{len(nouvelles)} nouvelle(s) montre(s) sur {nb_total} en vente :\n{apercu}"
-    else:
-        msg = f"Pas de nouvelle montre aujourd'hui ({nb_total} toujours en vente)."
-    headers = {"Title": "Montres homme Réunion < %d €" % PRIX_MAX, "Tags": "watch"}
-    if PAGE_URL:
-        headers["Click"] = PAGE_URL
-        headers["Actions"] = f"view, Voir les montres, {PAGE_URL}"
-    if nouvelles and nouvelles[0].get("image"):
-        headers["Attach"] = nouvelles[0]["image"]
-    requests.post(f"https://ntfy.sh/{NTFY_TOPIC}", data=msg.encode("utf-8"),
-                  headers=headers, timeout=30)
+    titre = f"Montres homme Réunion < {PRIX_MAX} €"
+    if not nouvelles:
+        envoyer(title=titre, tags=["watch"],
+                message=f"Pas de nouvelle montre aujourd'hui ({nb_total} toujours en vente).",
+                **({"click": PAGE_URL} if PAGE_URL else {}))
+        return
+    reste = len(nouvelles) - NOTIFS_MAX
+    envoyer(title=titre, tags=["watch"],
+            message=f"{len(nouvelles)} nouvelle(s) montre(s) ce matin, {nb_total} en vente au total."
+                    + (f" Les {NOTIFS_MAX} plus récentes suivent ; les autres sont sur la page « Montres Réunion » du Mac." if reste > 0 else ""),
+            **({"click": PAGE_URL} if PAGE_URL else {}))
+    # Une notification par montre : photo, bouton vendeur et bouton carte.
+    for a in reversed(nouvelles[:NOTIFS_MAX]):  # la plus récente arrive en dernier, donc en haut
+        lien_map, _ = carte_google(a)
+        prix = f"{a['prix']} €" if a.get("prix") is not None else "Prix ?"
+        msg = {
+            "title": f"{prix} · {a['ville'] or 'La Réunion'}",
+            "message": a["titre"],
+            "click": a["url"],
+            "actions": [
+                {"action": "view", "label": "Contacter le vendeur", "url": a["url"]},
+                {"action": "view", "label": "Google Maps", "url": lien_map},
+            ],
+        }
+        if a.get("image"):
+            msg["attach"] = a["image"]
+        envoyer(**msg)
 
 
 # ---------------------------------------------------------------- main
@@ -251,9 +273,8 @@ def main():
 
     if erreurs and not annonces:
         if NTFY_TOPIC:
-            requests.post(f"https://ntfy.sh/{NTFY_TOPIC}",
-                          data=("Recherche impossible aujourd'hui : " + "; ".join(erreurs))[:300].encode(),
-                          headers={"Title": "Montres Réunion : erreur", "Tags": "warning"}, timeout=30)
+            envoyer(title="Montres Réunion : erreur", tags=["warning"],
+                    message=("Recherche impossible aujourd'hui : " + "; ".join(erreurs))[:300])
         sys.exit(1)
     notifier(len(montres), nouvelles)
 

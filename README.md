@@ -1,37 +1,36 @@
 # ⌚ Montres homme – La Réunion (< 250 €)
 
-Chaque matin vers **10h (heure de La Réunion)**, GitHub lance une recherche, garde
-uniquement les **montres pour homme** (pas de montres connectées, pas de montres de sport,
-pas de femme ou enfant, pas d'accessoires), publie une page avec **photo, prix, ville, carte
-Google Maps et bouton « Contacter le vendeur »**, puis t'envoie une **notification** sur ton téléphone.
+Chaque matin à **10h**, ton Mac cherche les annonces de **montres pour homme** à moins de 250 €
+sur Leboncoin (974). Il écarte les montres connectées, les montres de sport, les montres pour
+femme ou enfant et les accessoires. Ensuite :
 
-## Installation (une seule fois, environ 10 minutes)
+- ton téléphone reçoit **une notification par nouvelle montre**, avec sa photo, son prix, sa ville
+  et deux boutons, **Contacter le vendeur** et **Google Maps** ;
+- une page avec toutes les montres (photos, carte, description) est mise à jour sur le Mac :
+  c'est le fichier **« Montres Réunion »** sur le Bureau.
 
-1. **Notification sur le téléphone** : installe l'appli gratuite **ntfy** (App Store ou Google Play).
-   Appuie sur **+** et abonne-toi à un nom de sujet difficile à deviner, par exemple
-   `montres974-` suivi de chiffres au hasard (ex. `montres974-83k2p9`).
-2. **Crée un dépôt GitHub** (compte gratuit sur github.com) et envoie-y les fichiers de ce dossier.
-3. Dans le dépôt : **Settings → Secrets and variables → Actions → New repository secret**
-   - Name : `NTFY_TOPIC`
-   - Secret : le nom de sujet choisi à l'étape 1
-4. **Settings → Pages** : Source = *Deploy from a branch*, Branch = `main`, dossier = `/docs`.
-5. **Actions → Montres Réunion → Run workflow** pour un premier essai tout de suite.
+## Installation sur Mac (une seule fois)
 
-La page sera visible sur `https://TON-PSEUDO.github.io/NOM-DU-DEPOT/`. La notification ouvre cette page.
+1. Sur ton téléphone, installe l'appli gratuite **ntfy**, appuie sur **+** et abonne-toi au sujet
+   **`montres974-ut9qstgpdc`**.
+2. Sur le Mac, ouvre **Terminal** (Cmd + Espace, tape « Terminal », puis Entrée).
+3. Copie-colle cette ligne, puis appuie sur Entrée :
 
-## Réglages
+   ```
+   curl -fsSL https://raw.githubusercontent.com/camiliangrignon8002-sudo/montres-reunion/main/install.sh | bash
+   ```
 
-- Prix maximum : change `PRIX_MAX` dans `montres.py` (250 par défaut).
-- Heure : ligne `cron` dans `.github/workflows/montres.yml` (`0 6 * * *` = 10h Réunion).
-- Mots exclus et marques reconnues : listes `EXCLURE`, `FEMME` et `MONTRE` dans `montres.py`.
+   S'il te demande d'installer les « outils de ligne de commande », clique sur **Installer**,
+   attends la fin, puis colle la même ligne une seconde fois.
 
-## Limites à connaître
+La même ligne sert aussi à mettre l'appli à jour.
 
-- **Source actuelle : Leboncoin (département 974).** Facebook Marketplace exige d'être
-  connecté et interdit la collecte automatique ; ce n'est donc pas inclus.
-- Leboncoin peut bloquer les serveurs de GitHub. Si c'est le cas, tu reçois une notification
-  « Recherche impossible ». La solution est alors de lancer `python montres.py` depuis ton propre ordinateur.
-- La position sur la carte correspond à la **commune** indiquée par le vendeur, pas à son adresse exacte.
-- Pour contacter le vendeur, le bouton ouvre l'annonce Leboncoin (messagerie ou téléphone, selon le vendeur).
-- GitHub peut lancer la tâche avec quelques minutes de retard, et la met en pause après 60 jours
-  sans activité sur le dépôt. Les mises à jour quotidiennes de la page suffisent normalement à l'éviter.
+## Bon à savoir
+
+- Le Mac doit être allumé ou en veille à 10h. S'il était éteint, la recherche se lance à son prochain réveil.
+- Journal des recherches : `~/montres-reunion/journal.txt`.
+- Lancer une recherche à la main : `bash ~/montres-reunion/lancer.sh`
+- Désinstaller : `launchctl unload ~/Library/LaunchAgents/re.montres.reunion.plist && rm -rf ~/montres-reunion ~/Library/LaunchAgents/re.montres.reunion.plist`
+- La carte montre la commune du vendeur, pas son adresse exacte.
+- Seul Leboncoin est inclus. Facebook Marketplace demande d'être connecté et interdit la collecte automatique.
+- Les serveurs GitHub sont bloqués par Leboncoin, d'où l'installation sur le Mac.
