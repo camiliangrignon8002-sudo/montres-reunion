@@ -26,5 +26,6 @@ sport, les montres pour femme ou enfant et les accessoires, puis :
 
 ## Limites
 
+- Annonces publiées ou mises à jour depuis 2024 (réglable avec `DEPUIS` dans `montres.py`).
 - Leboncoin, Facebook Marketplace et Vinted bloquent la lecture automatique : ils ne sont pas inclus.
 - La carte montre la commune du vendeur, pas son adresse exacte.
