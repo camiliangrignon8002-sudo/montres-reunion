@@ -44,7 +44,7 @@ EXCLURE = [
     "ecrin", "coffret vide", "presentoir", "remontoir", "pile", "outil",
     "piece detachee", "pour pieces", "recherche", "cherche", "achete",
 ]
-FEMME = ["femme", "dame", "lady", "ladies", "woman", "women"]
+FEMME = ["femme", "femmme", "dame", "lady", "ladies", "woman", "women", "feminin"]
 MONTRE = ["montre", "watch", "chrono", "automatique", "seiko", "casio", "tissot",
           "citizen", "orient", "festina", "lip", "fossil", "hamilton", "timex",
           "swatch", "certina", "edox", "boss", "diesel", "lorus", "pulsar",
@@ -73,6 +73,10 @@ def est_montre_homme(titre, description=""):
     d = norm(description)
     if contient(d, ["apple watch", "garmin", "fitbit", "amazfit", "smartwatch",
                     "montre connectee", "galaxy watch"]) and "pas connectee" not in d:
+        return False
+    # Description qui présente clairement une montre pour femme
+    if contient(d, ["pour femme", "montre femme", "feminin", "pour elle", "pour dame", "poignet feminin"]) \
+            and not contient(d, ["homme", "mixte", "unisexe"]):
         return False
     return True
 
@@ -135,23 +139,137 @@ def paruvendu_fiche(a):
         a["vendeur"] = texte(vendeur.group(1))
 
 
+def paruvendu_fr_liste():
+    """Rubrique « montres La Réunion » de ParuVendu.fr : mêmes annonces, mais certaines n'y sont que là."""
+    vus = set()
+    for page in (1, 2, 3, 4):
+        url = "https://www.paruvendu.fr/annonces/montre/la-reunion-97400/" + (f"?p={page}" if page > 1 else "")
+        r = requests.get(url, timeout=30, **IMPERSONATE)
+        if r.status_code != 200:
+            raise RuntimeError(f"HTTP {r.status_code}")
+        nouveaux = 0
+        for b in r.text.split('class="debarras-annonce')[1:]:
+            ident = re.search(r'data-id="(\d+)"', b)
+            lien = re.search(r'href="(https://www\.paruvendu\.fr/annonces/[^"]+-(\d{5})/\d+[^"]*)"', b)
+            if not ident or not lien or ident.group(1) in vus:
+                continue
+            vus.add(ident.group(1))
+            nouveaux += 1
+            bloc = re.search(r'<p class="text-sm text-justify">(.*?)</p>', b, re.S)
+            titre = re.search(r'font-semibold block">(.*?)</span>', bloc.group(1), re.S) if bloc else None
+            prix = re.search(r'text-red font-medium[^>]*>\s*<div>(.*?)</div>', b, re.S)
+            chiffres = re.sub(r"\D", "", texte(prix.group(1))) if prix else ""
+            ville = re.search(r'<span class="px-2 text-black">([^<]+)</span>', b)
+            image = re.search(r'<img src="([^"]+)"', b)
+            yield {
+                "id": f"pv-{ident.group(1)}",
+                "source": "ParuVendu",
+                "titre": texte(titre.group(1)) if titre else "",
+                "description": texte(re.sub(r'<span class="font-semibold block">.*?</span>', "", bloc.group(1), flags=re.S)) if bloc else "",
+                "prix": int(chiffres) if chiffres else None,
+                "url": lien.group(1),
+                "ville": re.sub(r"\s*\(\d+\)$", "", texte(ville.group(1))) if ville else "",
+                "cp": lien.group(2),
+                "lat": None, "lng": None,
+                "photos": [html.unescape(image.group(1))] if image and "novisu" not in image.group(1) else [],
+                "date": "", "etat": "", "vendeur": "",
+            }
+        if nouveaux == 0:
+            break
+
+
+def paruvendu_fr_fiche(a):
+    r = requests.get(a["url"], timeout=30, **IMPERSONATE)
+    if r.status_code != 200:
+        return
+    h = html.unescape(r.text)
+    photos = re.findall(r'(https://img\.paruvendu\.fr/media_ext/[^"\s]+_rct\?func=crop&w=1000&gravity=auto)', h)
+    if photos:
+        a["photos"] = list(dict.fromkeys(photos))
+    corps = re.sub(r"\s+", " ", texte(re.sub(r"<(script|style|svg).*?</\1>", "", h, flags=re.S)))
+    desc = re.search(r"Description de l'annonce (.*?)(?: Montre à vendre à | Lire la suite|  Référence)", corps)
+    if desc:
+        a["description"] = desc.group(1).strip()
+    vendeur = re.search(r"€ ([^€]{2,40}?)\.? Membre depuis", corps)
+    if vendeur:
+        a["vendeur"] = vendeur.group(1).strip()
+
+
 def paruvendu():
     """Montres de ParuVendu Réunion (pages publiques, robots autorisés)."""
     annonces = {}
     for recherche in RECHERCHES:
         for a in paruvendu_liste(recherche):
             annonces.setdefault(a["id"], a)
+    for a in paruvendu_fr_liste():
+        annonces.setdefault(a["id"], a)
     retenues = [a for a in annonces.values()
                 if (a["prix"] is None or a["prix"] <= PRIX_MAX) and est_montre_homme(a["titre"], a["description"])]
     uniques = {}
     for a in retenues:
-        paruvendu_fiche(a)
+        if "paruvendu.fr" in a["url"]:
+            paruvendu_fr_fiche(a)
+        else:
+            paruvendu_fiche(a)
         # même montre publiée plusieurs fois par le même vendeur : on n'en garde qu'une
         uniques.setdefault((norm(a["titre"]), a["prix"], a["vendeur"], norm(a["description"])[:80]), a)
     return [a for a in uniques.values() if not a["date"] or a["date"] >= DEPUIS]
 
 
-SOURCES = [paruvendu]
+MAGASINS_CASH_EXPRESS = {
+    "saint-pierre": ("Saint-Pierre", "97410"),
+    "sainte-clotilde": ("Sainte-Clotilde", "97490"),
+}
+
+
+def cashexpress():
+    """Montres de marque d'occasion des magasins Cash Express de La Réunion (robots autorisés)."""
+    montres = []
+    for slug, (ville, cp) in MAGASINS_CASH_EXPRESS.items():
+        r = requests.get(f"https://www.cashexpress.fr/c-19/magasin/{slug}/montres-marques", timeout=30, **IMPERSONATE)
+        if r.status_code != 200:
+            raise RuntimeError(f"HTTP {r.status_code} ({slug})")
+        for c in re.split(r'<a class="product-card" ', r.text)[1:]:
+            lien = re.search(r'href="([^"]+)"', c)
+            nom = re.search(r'__name">(.*?)</div>', c, re.S)
+            prix = re.search(r'class="price">(.*?)</div>', c, re.S)
+            if not (lien and nom and prix):
+                continue
+            marque = texte((re.search(r'__brand[^>]*>(.*?)</div>', c, re.S) or [None, ""])[1]).title()
+            valeur = float(re.sub(r"[^\d,]", "", texte(prix.group(1))).replace(",", "."))
+            image = re.search(r'<img src="([^"]+)"', c)
+            a = {
+                "id": "ce-" + lien.group(1).rstrip("/").split("/")[-2],
+                "source": "Cash Express",
+                "titre": f"{marque} – {texte(nom.group(1))}" if marque else texte(nom.group(1)),
+                "description": "", "prix": int(valeur) if valeur.is_integer() else valeur,
+                "url": lien.group(1), "ville": ville, "cp": cp, "lat": None, "lng": None,
+                "adresse": f"Cash Express {ville}, La Réunion",
+                "photos": ["https://www.cashexpress.fr" + image.group(1)] if image else [],
+                "date": "", "etat": "", "vendeur": f"Cash Express {ville} (magasin)",
+            }
+            if valeur <= PRIX_MAX and est_montre_homme(a["titre"]):
+                montres.append(a)
+    for a in montres:
+        r = requests.get(a["url"], timeout=30, **IMPERSONATE)
+        if r.status_code != 200:
+            continue
+        h = html.unescape(r.text)
+        variation = re.search(r'"currentVariation":\{.*?"images":\{(.*?)\}\},"shop"', h, re.S)
+        if variation:
+            photos = [p.replace("\\/", "/") for p in re.findall(r'"src":"([^"]+)"', variation.group(1))]
+            a["photos"] = ["https://www.cashexpress.fr" + p for p in photos] or a["photos"]
+        corps = re.sub(r"\s+", " ", texte(re.sub(r"<(script|style|svg).*?</\1>", "", h, flags=re.S)))
+        etat = re.search(r"État : (?:État )?(.{2,40}?) [\d ]+,\d\d ?€", corps)
+        if etat:
+            a["etat"] = etat.group(1).strip()[:1].upper() + etat.group(1).strip()[1:]
+        desc = re.search(r"Ajouter au panier Description (.*?) Caractéristiques", corps)
+        if desc:
+            a["description"] = desc.group(1).strip()
+    return [a for a in montres if est_montre_homme(a["titre"], a["description"])]
+
+
+SOURCES = [paruvendu, cashexpress]
 
 
 # ---------------------------------------------------------------- page web
@@ -169,6 +287,8 @@ def date_fr(iso):
 def carte_google(a):
     if a.get("lat") and a.get("lng"):
         q = f"{a['lat']},{a['lng']}"
+    elif a.get("adresse"):
+        q = a["adresse"]
     else:
         q = f"{a.get('ville') or ''} {a.get('cp') or ''}, La Réunion".strip()
     return f"https://www.google.com/maps/search/?api=1&query={quote(q)}"
@@ -178,9 +298,18 @@ def carte_embed(a):
     """Carte Google Maps intégrable (sans clé API)."""
     if a.get("lat") and a.get("lng"):
         q = f"{a['lat']},{a['lng']}"
+    elif a.get("adresse"):
+        q = a["adresse"]
     else:
         q = f"{a.get('ville') or ''} {a.get('cp') or ''}, La Réunion".strip()
     return f"https://maps.google.com/maps?q={quote(q)}&z=11&output=embed"
+
+
+def prix_txt(a, defaut):
+    p = a.get("prix")
+    if p is None:
+        return defaut
+    return f"{p} €" if isinstance(p, int) else f"{p:.2f} €".replace(".", ",")
 
 
 def photos(a):
@@ -191,31 +320,34 @@ def page_html(annonces, maj):
     e = html.escape
     donnees, cartes = [], []
     for i, a in enumerate(annonces):
-        prix = f"{a['prix']} €" if a.get("prix") is not None else "Prix sur demande"
+        prix = prix_txt(a, "Prix sur demande")
         details = a.get("ville") or "La Réunion"
         donnees.append({
             "titre": a["titre"], "prix": prix, "details": details, "source": a["source"],
             "description": a.get("description", ""), "photos": photos(a), "date": date_fr(a.get("date")),
             "vendeur": a.get("vendeur", ""), "etat": a.get("etat", ""), "url": a["url"], "carte": carte_google(a), "embed": carte_embed(a),
         })
-        img = (f'<img src="{e(photos(a)[0])}" alt="" loading="lazy">' if photos(a)
-               else '<span class="sans-photo">Photo indisponible</span>')
+        imgs = "".join(f'<img src="{e(src)}" alt="" loading="lazy">' for src in photos(a))
+        nb = len(photos(a))
+        visuel = (f'<span class="defile-carte">{imgs}</span>' if imgs else '<span class="sans-photo">Photo indisponible</span>')
+        if nb > 1:
+            visuel += f'<span class="nb-photos caps"><b>1</b> / {nb}</span>'
         cartes.append(f"""
     <article class="piece" style="--i:{min(i, 12)}" data-i="{i}" data-prix="{a['prix'] if a.get('prix') is not None else 99999}">
-      <button class="ouvrir" aria-label="Voir {e(a['titre'])}">
-        <span class="visuel">{img}</span>
+      <div class="ouvrir" role="button" tabindex="0" aria-label="Voir {e(a['titre'])}">
+        <span class="visuel">{visuel}</span>
         <span class="legende">
           <span class="sur">{'<em>Nouveauté</em> · ' if a.get('nouveau') else ''}{e(a.get('ville') or 'La Réunion')}</span>
           <span class="nom">{e(a['titre'])}</span>
           <span class="prix">{prix}</span>
         </span>
-      </button>
+      </div>
     </article>""")
 
     prix_connus = [a["prix"] for a in annonces if a.get("prix") is not None]
     resume = [f"{len(annonces)} pièce{'s' if len(annonces) > 1 else ''}"]
     if prix_connus:
-        resume.append(f"dès {min(prix_connus)} €")
+        resume.append("dès " + prix_txt({"prix": min(prix_connus)}, ""))
     vide = f"""
     <div class="vide"><p class="vide-titre">La sélection est vide</p>
     <p>Aucune montre homme à moins de {PRIX_MAX} € pour le moment.<br>Prochaine recherche demain à 10h.</p></div>"""
@@ -285,9 +417,13 @@ main{{display:grid;gap:56px 28px;grid-template-columns:repeat(auto-fill,minmax(3
 .piece{{animation:apparait 1s cubic-bezier(.2,.6,.2,1) both;animation-delay:calc(var(--i) * 90ms)}}
 @keyframes apparait{{from{{opacity:0;transform:translateY(18px)}}to{{opacity:1;transform:none}}}}
 .ouvrir{{display:block;width:100%}}
-.visuel{{display:block;aspect-ratio:4/5;background:var(--voile);overflow:hidden}}
-.visuel img{{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.6,.2,1)}}
-.ouvrir:hover .visuel img{{transform:scale(1.035)}}
+.ouvrir{{cursor:pointer}}
+.visuel{{position:relative;display:block;aspect-ratio:4/5;background:var(--voile);overflow:hidden}}
+.defile-carte{{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}}
+.defile-carte::-webkit-scrollbar{{display:none}}
+.defile-carte img{{flex:none;width:100%;height:100%;object-fit:cover;scroll-snap-align:center}}
+.nb-photos{{position:absolute;bottom:12px;right:12px;background:var(--verre);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:5px 10px;font-size:10px;letter-spacing:.18em}}
+.nb-photos b{{font-weight:500}}
 .sans-photo{{display:grid;place-items:center;height:100%;color:var(--doux);font-family:var(--serif);font-style:italic;font-size:18px}}
 .legende{{display:flex;flex-direction:column;align-items:center;text-align:center;padding:22px 8px 0;gap:6px}}
 .sur{{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--doux)}}
@@ -348,7 +484,7 @@ dialog::backdrop{{background:rgba(8,8,7,.55);backdrop-filter:blur(4px);-webkit-b
 </main>
 <footer>
   <p class="caps">Montres homme · hors connectées et sport</p>
-  <p>Annonces en ligne depuis 2024 · Source : ParuVendu Réunion · Recherche chaque jour à 10h</p>
+  <p>Annonces en ligne depuis 2024 · Sources : ParuVendu, Cash Express Saint-Pierre et Sainte-Clotilde · Recherche chaque jour à 10h</p>
 </footer>
 
 <dialog id="fiche" aria-label="Détail de la montre">
@@ -402,6 +538,12 @@ $('f-fermer').addEventListener('click', () => fiche.close());
 fiche.addEventListener('click', ev => {{ if (ev.target === fiche) fiche.close(); }});
 fiche.addEventListener('close', () => {{ $('f-carte').src = 'about:blank'; }});
 
+// Compteur de photos sur chaque carte
+document.querySelectorAll('.defile-carte').forEach(d => {{
+  const nb = d.parentNode.querySelector('.nb-photos b'); if (!nb) return;
+  d.addEventListener('scroll', () => nb.textContent = Math.round(d.scrollLeft / d.clientWidth) + 1, {{ passive: true }});
+}});
+
 // Rafraîchir : bouton, ou tirer la page vers le bas depuis le haut
 const recharger = () => {{ $('rafraichir').classList.add('tourne'); $('tirer').classList.add('tourne');
   location.replace(location.pathname + '?r=' + Date.now()); }};
@@ -450,7 +592,7 @@ def notifier(nb_total, nouvelles):
             **({"actions": [{"action": "view", "label": "Ouvrir l'appli", "url": PAGE_URL}]} if PAGE_URL else {}))
     # Une notification par montre : photo, bouton vendeur et bouton carte.
     for a in reversed(nouvelles[:NOTIFS_MAX]):  # la première arrive en dernier, donc en haut
-        prix = f"{a['prix']} €" if a.get("prix") is not None else "Prix libre"
+        prix = prix_txt(a, "Prix libre")
         msg = {
             "title": f"{prix} · {a['ville'] or 'La Réunion'}",
             "message": a["titre"],
