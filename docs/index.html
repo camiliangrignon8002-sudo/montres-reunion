@@ -1,30 +1,93 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Montres Réunion</title>
+<meta name="description" content="Montres homme d'occasion à La Réunion, moins de 250 €.">
+<meta name="theme-color" content="#f6f2ea" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121614" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Montres">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f6f4ef;--card:#fff;--text:#1d1c1a;--muted:#6b675f;--accent:#0f5e4f;--line:#e4e0d8}
-@media (prefers-color-scheme:dark){:root{--bg:#151513;--card:#201f1c;--text:#eeebe4;--muted:#a19c92;--accent:#5fc2a8;--line:#34322d}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,sans-serif}
-header{padding:20px 16px 8px;max-width:1100px;margin:auto}h1{margin:0;font-size:22px}
-header p{margin:4px 0 0;color:var(--muted)}
-main{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));padding:16px;max-width:1100px;margin:auto}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
-.photo{position:relative;display:block;aspect-ratio:1;background:var(--line)}
-.photo img{width:100%;height:100%;object-fit:cover;display:block}
-.noimg{display:grid;place-items:center;height:100%;color:var(--muted)}
-.new{position:absolute;top:10px;left:10px;background:var(--accent);color:var(--card);font-size:12px;font-weight:600;padding:3px 8px;border-radius:99px}
-.body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
-.price{font-size:20px;font-weight:700;color:var(--accent)}
-h2{font-size:15px;margin:0}.meta{margin:0;color:var(--muted);font-size:13px}
-details{font-size:13px;color:var(--muted)}summary{cursor:pointer}
-iframe{width:100%;height:200px;border:0;border-radius:8px;margin-top:6px}
-.actions{display:flex;gap:8px;margin-top:auto;padding-top:6px}
-.btn{flex:1;text-align:center;padding:9px;border-radius:9px;border:1px solid var(--line);color:var(--text);text-decoration:none;font-weight:600;font-size:13px}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--card)}
-.empty{grid-column:1/-1;text-align:center;color:var(--muted)}
+:root{--fond:#f6f2ea;--carte:#fffdf9;--encre:#1b1f1d;--doux:#6f6a60;--trait:#e6dfd2;--vert:#14332c;--or:#a87a2a;--sur-vert:#f6f2ea}
+@media (prefers-color-scheme:dark){:root{--fond:#121614;--carte:#1a1f1c;--encre:#ece7dc;--doux:#9b958a;--trait:#2a312d;--vert:#cfe3d9;--or:#d6a957;--sur-vert:#121614}}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--fond);color:var(--encre);font:15px/1.5 Inter,system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header{padding:36px 0 20px}
+.sur-titre{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--or);font-weight:600}
+h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(30px,7vw,44px);line-height:1.05;letter-spacing:-.01em;margin-top:8px}
+.resume{color:var(--doux);margin-top:10px}
+.resume b{color:var(--encre);font-weight:600}
+.barre{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--fond) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--trait);margin:0 -16px;padding:10px 16px}
+.choix{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.choix button{flex:none;font:inherit;font-size:13px;font-weight:500;color:var(--encre);background:transparent;border:1px solid var(--trait);border-radius:99px;padding:7px 14px;cursor:pointer}
+.choix button[aria-pressed=true]{background:var(--vert);border-color:var(--vert);color:var(--sur-vert)}
+main{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));padding:20px 0 48px}
+.carte{background:var(--carte);border:1px solid var(--trait);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.photo{position:relative;display:block;aspect-ratio:4/3;background:var(--trait);overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.photo:hover img{transform:scale(1.03)}
+.sans-photo{display:grid;place-items:center;height:100%;color:var(--doux);font-size:13px}
+.tag{position:absolute;top:12px;left:12px;background:var(--carte);color:var(--or);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:99px}
+.infos{padding:16px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.ligne{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+h2{font-size:16px;font-weight:600;line-height:1.3}
+.prix{font-family:Fraunces,Georgia,serif;font-size:20px;font-weight:600;color:var(--vert);white-space:nowrap}
+.lieu{display:flex;align-items:center;gap:6px;color:var(--doux);font-size:13px}
+.lieu svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+.desc{color:var(--doux);font-size:13px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto;padding-top:8px}
+.btn{display:flex;align-items:center;justify-content:center;gap:7px;padding:11px;border-radius:12px;border:1px solid var(--trait);color:var(--encre);text-decoration:none;font-weight:600;font-size:14px}
+.btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+.btn.plein{background:var(--vert);border-color:var(--vert);color:var(--sur-vert)}
+.vide{grid-column:1/-1;text-align:center;padding:64px 16px;color:var(--doux)}
+.vide-titre{font-family:Fraunces,Georgia,serif;font-size:24px;color:var(--encre);margin-bottom:6px}
+footer{color:var(--doux);font-size:12px;text-align:center;padding:0 0 32px}
 </style></head><body>
-<header><h1>⌚ Montres homme à La Réunion</h1>
-<p>0 annonces à moins de 250 € · hors montres connectées et de sport · mis à jour le 21/10/2026 à 01h27</p></header>
-<main><p class="empty">Aucune montre trouvée aujourd'hui.</p></main>
+<div class="wrap">
+  <header>
+    <p class="sur-titre">La Réunion · moins de 250 €</p>
+    <h1>Montres homme</h1>
+    <p class="resume"><b>1</b> en vente dont <b>1</b> nouvelle · mis à jour le 21/10 à 01h40</p>
+  </header>
+  <div class="barre"><div class="choix" role="group" aria-label="Trier">
+    <button data-tri="nouveau" aria-pressed="true">Nouveautés</button>
+    <button data-tri="prix-asc" aria-pressed="false">Prix croissant</button>
+    <button data-tri="prix-desc" aria-pressed="false">Prix décroissant</button>
+  </div></div>
+  <main id="liste">
+    <article class="carte" data-prix="65" data-nouveau="1">
+      <a class="photo" href="https://www.paruvendu.re/vente-occasion/saint-denis-97400/montre-homme-montre/1269416327/" target="_blank" rel="noopener"><img src="https://media.paruvendu.re/media_ext/_https_/media.paruvendu.fr/95/7e/L3ZpZGUtZ3Jlbmllci9tZWRpYS1wYS9XQjE3LzEvOS9XQjE3MTk5NTQ2M18xLmpwZWc_sizecrop_320x280?2026102023" alt="Montre homme" loading="lazy"><span class="tag">Nouveau</span></a>
+      <div class="infos">
+        <div class="ligne"><h2>Montre homme</h2><span class="prix">65 €</span></div>
+        <p class="lieu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>Saint-Denis<span>·</span>ParuVendu</p>
+        <p class="desc">Montre jamais portée car trop imposante à mon poignet</p>
+        <div class="actions">
+          <a class="btn plein" href="https://www.paruvendu.re/vente-occasion/saint-denis-97400/montre-homme-montre/1269416327/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4V5Z"/></svg>Contacter</a>
+          <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Saint-Denis%2097400%2C%20La%20R%C3%A9union" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>Carte</a>
+        </div>
+      </div>
+    </article>
+  </main>
+  <footer>Hors montres connectées et de sport · Sources : ParuVendu Réunion</footer>
+</div>
+<script>
+const liste = document.getElementById('liste');
+const ordre = [...liste.querySelectorAll('.carte')];
+document.querySelectorAll('[data-tri]').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('[data-tri]').forEach(x => x.setAttribute('aria-pressed', x === b));
+  const t = b.dataset.tri, cartes = [...ordre];
+  if (t !== 'nouveau') cartes.sort((a, c) => (a.dataset.prix - c.dataset.prix) * (t === 'prix-asc' ? 1 : -1));
+  cartes.forEach(c => liste.appendChild(c));
+}));
+</script>
 </body></html>
