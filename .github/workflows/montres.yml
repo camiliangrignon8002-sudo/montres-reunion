@@ -19,7 +19,7 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python montres.py
         env:
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC || 'montres974-ut9qstgpdc' }}
           PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
       - name: Publier la page
         if: always()
