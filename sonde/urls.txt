@@ -1,0 +1,7 @@
+https://www.bienici.com/realEstateAd.json?id=citya-immobilier-501991-GES03180022-34
+https://www.bienici.com/account.json?id=citya-immobilier-501991
+https://www.bienici.com/accounts.json?ids=citya-immobilier-501991
+https://www.bienici.com/realEstateAdContactInfo.json?id=citya-immobilier-501991-GES03180022-34
+https://www.bienici.com/agency.json?id=citya-immobilier-501991
+https://www.bienici.com/agence/citya-saint-denis
+https://www.bienici.com/realEstateAd.json?id=netty-company58298tcg-appt-2786
