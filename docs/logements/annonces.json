@@ -1599,43 +1599,34 @@
   "vu": "2026-10-21T12:07+04:00"
  },
  {
-  "id": "figaro-108474953",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108474953.html",
-  "titre": "Location  appartement 1 pièce 20 m² à Sainte Clotilde (97490), 560 €",
+  "id": "zimo-01a07c45-39b7-7bdc-96fd-e6e30e960043",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-1-piece-20-m2/01a07c45-39b7-7bdc-96fd-e6e30e960043",
+  "titre": "Appartement 1 pièce 20 m²",
   "prix": 560.0,
   "commune": "Saint-Denis",
-  "quartier": "Sainte Clotilde",
+  "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
   "surface": 20.0,
   "meuble": null,
   "photos": [
-   "https://lh3.googleusercontent.com/_iSkscS_gOnoXD01xYSvEWVke0vg5OR59ZmYqUm0Nob9NhE3B9xhBATm3PQuKnrYvgFqNdC6OzVGe9QHWsaEGDqW1URx9lBr93olQQ=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/qFt1jcimHPczAQdviKz9tnK8ypRpWNrmtTyD0C2VzVwsF1ony0Eg4YzO5dp16z8WRrmta-hZes2Bp624XJydhQBIw2FPq2aZYHPHNg=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/cK-Xt2OPKTJ4SL_TUXKOe6pirLWOyi6ZpDxogju3IeuD7fZ--61mGSfICtOvl3Wdi1WOJsJTi_AUDvVbDcz4eQoqKZM3bnnJLI4kTw=rw-w940-h605-l80"
+   "https://img.e-xiste.com/_iNM3UNwniCXAi69P5DiRlZNPsoo-4AjlUdXcxkRftg/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fimmo-cdn.fr%2Fimages%2Ffigaro%2F6a9eaecca223ac14e09cb538-1.jpg"
   ],
-  "description": "RUNIMMO vous propose en location un studio de 20m2 dans la résidence Central Fac 9 situé rue des jacinthes à SAINTE CLOTILDE.\nIl se compose d'une entrée avec kitchenette aménagée et équipée, un séjour/chambre, salle d'eau avec WC.\nDisponible de suite\nN'hésitez pas à recontacter Anaïs pour une visite 0692359521.\nHonoraires de 260 € TTC à la charge du locataire comprenant 60 € TTC pour l'état des lieux. Loyer de base 530 €/mois. Provision sur charges 30 €/mois, régularisation annuelle. Dépôt de garantie 530 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.\nCarte pro. CP175012018000034249",
-  "caracteristiques": [
-   "Proche université"
-  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "",
+  "annonceur": "Pro · via Figaro Immobilier",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "0692 35 95 21",
+  "tel": "",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-1-piece-20-m2/01a07c45-39b7-7bdc-96fd-e6e30e960043"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -2186,6 +2177,41 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "figaro-108377217",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108377217.html",
+  "titre": "Location meublée appartement 1 pièce 16 m² à Saint paul (97460), 600 €",
+  "prix": 600.0,
+  "commune": "Le Port",
+  "quartier": "Saint paul",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 16.0,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/V8t4jUk9JOvqxHSjYks6F7CN9MvRnXUGC132I-P3EIYqJPmfXuLA5YYetKpgRay9KcGpCXfmQBwaxt3R94YwhpT7R4ZOePzbPZJIQw=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/a3tW_AOl9sAEI0RzegVvKUjVKI3HDOfC8YHBOMUDl_V1AVGdF8NL1R5mwFIA62-4oGYlkr80SKNA5e_iUe7UH1AKZkhzguB2jvHo=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/xyr8KWNJjo-adpsxY5w1bUkbtUYw1AnwJc48_Glu8RNe0A7fGnIBJgA2dlu2ouU54maNbkxRgQtAbu7llYtoYk_f3XMs-5h_YOWAjQ=rw-w940-h605-l80"
+  ],
+  "description": "Nous vous proposons à la location cette chambre meublée d'une surface de 16m2, située à Saint Gilles les Hauts.\nLe locataire aura à sa disposition sa propre SDB personnelle ainsi que son WC (type chambre parentale)\nEn commun tous le reste de la maison et les extérieurs.\nLoyer 600EUR\nEau, électricité et internet inclus dans le loyer - le logement est loué meublé - le ménage est fait dans les espaces personnels (et compris dans le loyer) tous les 15 jours\nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www.georisques.gouv.fr",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord-Ouest",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T17:56+04:00"
  },
  {
   "id": "zimo-01a11734-78a6-7892-b7d4-6b5051050245",
@@ -2991,6 +3017,10 @@
    {
     "source": "Bien'ici",
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/ag340369-551086409"
+   },
+   {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html"
    },
    {
     "source": "Zimo",
