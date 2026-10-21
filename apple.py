@@ -461,10 +461,11 @@ def prestashop_miniatures(h, base):
     res = []
     for bloc in re.split(r'<article[^>]+class="[^"]*product-miniature', h)[1:]:
         bloc = bloc.split("</article>")[0]
-        lien = re.search(r'href="(https?://[^"]+\.html)[^"]*"', bloc)
+        lien = re.search(r'href="(https?://[^"]+\.html)(#[^"]*)?"', bloc)
         if not lien:
             continue
-        p = {"url": lien.group(1), "titre": "", "prix": None, "prix_avant": None, "photo": "", "dispo": True, "marque": ""}
+        p = {"url": lien.group(1), "titre": "", "prix": None, "prix_avant": None, "photo": "", "dispo": True, "marque": "",
+             "variante": html.unescape(lien.group(2) or "")}
         for o in ld_json(bloc):
             if o.get("@type") == "Product":
                 p["titre"] = html.unescape(o.get("name") or "")
@@ -480,6 +481,12 @@ def prestashop_miniatures(h, base):
             t = re.search(r'class="[^"]*product-title[^"]*"[^>]*>(.*?)</h\d>', bloc, re.S) or \
                 re.search(r'class="[^"]*product-miniature__title[^"]*"[^>]*>(.*?)</', bloc, re.S)
             p["titre"] = ligne(t.group(1)) if t else ""
+        if not p["titre"]:  # Isleden : le nom n'est que dans l'image
+            t = re.search(r'<img[^>]+(?:title|alt)\s*=\s*"([^"]{6,})"', bloc)
+            p["titre"] = html.unescape(t.group(1)).strip() if t else ""
+        if p["prix"] is None:
+            m = re.search(r'itemprop="price"[^>]*content="([\d.]+)"', bloc)
+            p["prix"] = prix_de(m.group(1)) if m else None
         if p["prix"] is None:
             m = re.search(r'class="[^"]*(?:product-miniature__price|price)"[^>]*>(.*?)</span>', bloc, re.S)
             p["prix"] = prix_de(ligne(m.group(1))) if m else None
@@ -487,7 +494,8 @@ def prestashop_miniatures(h, base):
         if avant:
             p["prix_avant"] = prix_de(ligne(avant.group(1)))
         if not p["photo"]:
-            img = re.search(r'data-full-size-image-url\s*=\s*"([^"]+)"', bloc) or re.search(r'<img[^>]+src\s*=\s*"([^"]+)"', bloc)
+            img = re.search(r'data-full-size-image-url\s*=\s*"([^"]+)"', bloc) or re.search(r'data-original\s*=\s*"([^"]+)"', bloc) or \
+                re.search(r'<img[^>]+src\s*=\s*"(http[^"]+)"', bloc)
             p["photo"] = img.group(1) if img else ""
         if re.search(r"out-of-stock|rupture|epuise|indisponible", norm(bloc)) and "InStock" not in bloc:
             p["dispo"] = False
@@ -1043,16 +1051,41 @@ def delbos():
                            r'href="(/magasin/[a-z0-9-]+)"', lieux=lieux, pages_max=20)
 
 
-def zeopstore():
+def zeopstore(pages_max=260):
+    """Zeop Store affiche ses listes en JavaScript, mais chaque fiche s'ouvre avec son numéro (/x,3783.htm)
+    et donne les numéros des produits voisins : on parcourt le catalogue Apple de proche en proche."""
     base = "https://www.zeopstore.re"
-    pages = [base + "/"]
-    r = get(base + "/")
-    if r:  # rayons du site (téléphonie, informatique, Apple…)
-        pages += [urljoin(base, u) for u in dict.fromkeys(re.findall(r'href="(/[a-z0-9-]+(?:,[a-z]+)?\.htm)"', r.text))
-                  if re.search(r"apple|iphone|ipad|mac|smartphone|telephon|mobile|informatique|tablette|montre|audio|reconditionn|occasion", u)][:25]
-    lieux = adresse_du_site([base + "/nos-boutiques.htm", base + "/contact.htm", base + "/mentions-legales.htm"], "Zeop Store")
-    return boutique_schema("Zeop Store", "zs-", pages, r'href="((?:https://www\.zeopstore\.re)?/[a-z0-9-]+,\d+\.htm)"',
-                           lieux=lieux, pages_max=6, garder=semble_apple)
+    a_voir, vus = [], set()
+    for page in ["/apple", "/iphone", "/ipad", "/mac", "/apple-watch", "/airpods"]:
+        r = get(base + page)
+        if r:
+            a_voir += [int(x) for x in re.findall(r'href="/[a-z0-9-]+,(\d+)\.htm"', r.text)]
+    lieux = adresse_du_site([base + "/articles/nous-contacter", base + "/articles/mentions-legales"], "Zeop Store")
+    res = []
+    while a_voir and len(vus) < pages_max:
+        n = a_voir.pop(0)
+        if n in vus:
+            continue
+        vus.add(n)
+        r = get(f"{base}/x,{n}.htm")
+        if not r:
+            continue
+        f = schema_fiche(r.text)
+        classe = classer(f["titre"], f["marque"] or "")
+        if not classe or norm(f["marque"]) not in ("apple", "beats", ""):
+            continue
+        canon = re.search(r'href="(/[a-z0-9-]+,%d\.htm)"' % n, r.text)
+        url = base + (canon.group(1) if canon else f"/x,{n}.htm")
+        voisins = re.search(r"products:'([\d,]+)'", r.text)
+        if voisins:
+            a_voir += [int(x) for x in voisins.group(1).split(",") if x and int(x) not in vus]
+        cat, tags = classe
+        res.append(produit(id=f"zs-{n}", vendeur="Zeop Store", etat=f["etat_schema"] or "Neuf", cat=cat, tags=tags,
+                           titre=f["titre"], prix=arrondi(f["prix"]), photos=f["photos"][:10], url=url, description=f["description"],
+                           lieux=list(lieux), dispo=f["dispo"], a_partir=f.get("des", False), options=f["options"], complet=True))
+        time.sleep(0.3)
+    print(f"  Zeop Store : {len(vus)} fiches ouvertes", file=sys.stderr)
+    return res
 
 
 def smart974():
@@ -1091,8 +1124,11 @@ def pineapple():
 
 def prestashop_boutique(nom, prefixe, base, rayons_fixes, motif_rayons, lieux, etat_rayon=None):
     """Boutique PrestaShop à vignettes (TelROI, OrdiROI, Isleden)."""
-    accueil = get(base + "/")
-    rayons = prestashop_liens_categories(accueil.text, base, motif_rayons) if accueil else []
+    rayons = []
+    for page in [base + "/"] + [base + r for r in rayons_fixes]:  # les sous-rayons (iPhone 11, 12…) sont listés dans les rayons
+        r = get(page)
+        if r:
+            rayons += prestashop_liens_categories(r.text, base, motif_rayons)
     res = {}
     for url in dict.fromkeys([base + r for r in rayons_fixes] + rayons):
         for p in prestashop_categorie(url, pages_max=10):
@@ -1103,11 +1139,16 @@ def prestashop_boutique(nom, prefixe, base, rayons_fixes, motif_rayons, lieux, e
             t = norm(p["titre"] + " " + p["url"])
             etat = "Reconditionné" if re.search(r"reconditionn|grade [abc]|\bgrade\b|refurb", t) else \
                 "Occasion" if re.search(r"occasion", t) else (etat_rayon or "Neuf")
+            detail = ""
+            m = re.search(r"etat-([a-z_]+)", norm(p["variante"]))
+            if m:  # Isleden : « #/1296-etat-bon_etat »
+                detail = m.group(1).replace("_", " ").capitalize().replace("etat", "état").replace("Etat", "État")
             res[p["url"]] = produit(id=prefixe + (re.search(r"/(\d+)-", p["url"]) or re.search(r"(.*)", p["url"])).group(1)[-40:],
+                                    etat_detail=detail,
                                     vendeur=nom, etat=etat, cat=cat, tags=tags, titre=p["titre"], prix=arrondi(p["prix"]),
                                     prix_avant=arrondi(p["prix_avant"]), photos=[p["photo"]] if p["photo"] else [],
                                     url=p["url"], lieux=list(lieux), dispo=p["dispo"], titre_coupe=p["titre"].endswith("..."),
-                                    etat_fiche=True)
+                                    etat_fiche=etat_rayon is None)  # TelROI, OrdiROI : l'état n'est que dans la fiche
     return list(res.values())
 
 
@@ -1126,8 +1167,11 @@ def ordiroi():
 
 
 def isleden():
-    return prestashop_boutique("Isleden", "il-", "https://isleden.re", ["/1000025613-apple-iphone-reconditionne"],
-                               r"iphone|ipad|apple|macbook|watch|airpods", [], etat_rayon="Reconditionné")
+    return prestashop_boutique("Isleden", "il-", "https://isleden.re",
+                               ["/1000025613-apple-iphone-reconditionne", "/1000025651-iphone-x-xr-xs", "/1000025655-iphone-11",
+                                "/1000025731-iphone-12", "/1000025732-iphone-13", "/1000026309-iphone-14", "/1000031797-iphone-15",
+                                "/1000026301-autres-produits-reconditionnes"],
+                               r"iphone|ipad|apple|macbook|watch|airpods|reconditionn", [], etat_rayon="Reconditionné")
 
 
 LECLIC_GALERIES = {"le portail": "Saint-Leu", "la reserve": "Sainte-Marie"}  # galeries Leclerc dont la commune est sûre
@@ -1206,8 +1250,8 @@ def lire_fiche(a):
 
 def completer(produits, fiches):
     limite = (datetime.now(timezone.utc) - timedelta(days=FICHE_JOURS)).isoformat()
-    a_lire = [a for a in produits if a["url"] not in fiches or fiches[a["url"]].get("lu", "") < limite
-              or fiches[a["url"]].get("v") != VERSION_FICHE]
+    a_lire = [a for a in produits if not a.get("complet") and (a["url"] not in fiches or fiches[a["url"]].get("lu", "") < limite
+              or fiches[a["url"]].get("v") != VERSION_FICHE)]
     # d'abord les produits jamais lus (iShop en tête : sa page de rayon ne donne ni le nom complet ni le prix)
     a_lire.sort(key=lambda a: (a["url"] in fiches, not (a.get("a_completer") or a.get("etat_fiche")), a["vendeur"] == "ParuVendu"))
     lus = 0
@@ -1306,7 +1350,7 @@ def finaliser(a):
     a["rang"] = rang(a)
     if a["vendeur"] == "Leclerc (Leclic)":  # « … - Espace Culturel E.Leclerc – Le Portail »
         a["titre"] = re.sub(r"\s+-\s+(?:Espace Culturel|E\.?Leclerc|Leclerc).*$", "", a["titre"]).strip()
-    for cle in ("a_completer", "titre_coupe", "marque", "annonceur", "date", "etat_fiche"):
+    for cle in ("a_completer", "titre_coupe", "marque", "annonceur", "date", "etat_fiche", "complet"):
         a.pop(cle, None)
     return a
 
@@ -1409,9 +1453,8 @@ def notifier(produits, maintenant):
 
 SOURCES = [("iShop", ishop), ("Microstor", microstor), ("Phenix Store", phenix), ("Darty", darty),
            ("Cash Express", cashexpress), ("ParuVendu", paruvendu), ("Delbos Informatique", delbos),
-           ("Leclerc (Leclic)", leclic), ("TelROI", telroi), ("OrdiROI", ordiroi), ("smart974", smart974),
-           ("Pineapple", pineapple)]
-# Isleden et Zeop Store chargent leurs produits en JavaScript : leurs fonctions restent prêtes mais ne renvoient rien pour l'instant
+           ("Leclerc (Leclic)", leclic), ("TelROI", telroi), ("OrdiROI", ordiroi), ("Isleden", isleden),
+           ("Zeop Store", zeopstore), ("smart974", smart974), ("Pineapple", pineapple)]
 
 
 def main():
