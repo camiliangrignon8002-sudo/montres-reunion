@@ -1055,7 +1055,7 @@ def zeopstore(pages_max=260):
     """Zeop Store affiche ses listes en JavaScript, mais chaque fiche s'ouvre avec son numéro (/x,3783.htm)
     et donne les numéros des produits voisins : on parcourt le catalogue Apple de proche en proche."""
     base = "https://www.zeopstore.re"
-    a_voir, vus = [], set()
+    a_voir, vus = [3783, 3786], set()  # deux fiches Apple connues (iMac, MacBook Pro) pour amorcer le parcours
     for page in ["/apple", "/iphone", "/ipad", "/mac", "/apple-watch", "/airpods"]:
         r = get(base + page)
         if r:
@@ -1071,16 +1071,20 @@ def zeopstore(pages_max=260):
         if not r:
             continue
         f = schema_fiche(r.text)
+        voisins = re.search(r"products:'([\d,]+)'", r.text)
         classe = classer(f["titre"], f["marque"] or "")
-        if not classe or norm(f["marque"]) not in ("apple", "beats", ""):
+        apple = classe and norm(f["marque"]) in ("apple", "beats", "")
+        if voisins:  # les voisins d'un produit Apple passent en premier
+            nouveaux = [int(x) for x in voisins.group(1).split(",") if x and int(x) not in vus]
+            a_voir = nouveaux + a_voir if apple else a_voir + nouveaux
+        if not apple:
             continue
         canon = re.search(r'href="(/[a-z0-9-]+,%d\.htm)"' % n, r.text)
         url = base + (canon.group(1) if canon else f"/x,{n}.htm")
-        voisins = re.search(r"products:'([\d,]+)'", r.text)
-        if voisins:
-            a_voir += [int(x) for x in voisins.group(1).split(",") if x and int(x) not in vus]
         cat, tags = classe
-        res.append(produit(id=f"zs-{n}", vendeur="Zeop Store", etat=f["etat_schema"] or "Neuf", cat=cat, tags=tags,
+        # leur fiche dit « occasion » pour tout, même les câbles neufs : on se fie au nom du produit
+        etat = "Reconditionné" if re.search(r"reconditionn|grade", norm(f["titre"])) else "Occasion" if "occasion" in norm(f["titre"]) else "Neuf"
+        res.append(produit(id=f"zs-{n}", vendeur="Zeop Store", etat=etat, cat=cat, tags=tags,
                            titre=f["titre"], prix=arrondi(f["prix"]), photos=f["photos"][:10], url=url, description=f["description"],
                            lieux=list(lieux), dispo=f["dispo"], a_partir=f.get("des", False), options=f["options"], complet=True))
         time.sleep(0.3)
