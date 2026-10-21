@@ -71,7 +71,23 @@ button{font:inherit;color:inherit}
 .ligne2 label{display:flex;align-items:center;gap:6px}
 input[type=range]{width:130px;accent-color:var(--accent)}
 select,.champ{font:inherit;font-size:14px;padding:6px 8px;border-radius:8px;border:1px solid var(--ligne);background:var(--carte);color:var(--texte)}
-.compte{color:var(--doux);font-size:13px;margin-left:auto}
+.compte{color:var(--doux);font-size:13px}
+.ligne-compte{display:flex;align-items:center;gap:12px;min-height:22px}
+.lien{border:0;background:none;color:var(--accent);font-size:13px;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.pilule{flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--ligne);background:var(--carte);border-radius:999px;padding:7px 12px 7px 14px;font-size:14px;cursor:pointer;white-space:nowrap}
+.pilule .ic{width:14px;height:14px;opacity:.7}
+.pilule[aria-pressed=true]{border-color:var(--accent);background:var(--accent-doux);color:var(--accent);font-weight:600}
+dialog.feuille{margin:auto auto 0;width:100%;max-width:560px;border-radius:18px 18px 0 0;padding-bottom:env(safe-area-inset-bottom)}
+@media (min-width:700px){dialog.feuille{margin:auto;border-radius:18px}}
+.liste-choix{display:flex;flex-direction:column}
+.liste-choix button{display:flex;align-items:center;gap:10px;border:0;border-bottom:1px solid var(--ligne);background:none;padding:13px 4px;font-size:15.5px;text-align:left;cursor:pointer}
+.liste-choix button:last-child{border-bottom:0}
+.liste-choix button .n{margin-left:auto;color:var(--doux);font-size:13px}
+.liste-choix button .ic{width:18px;height:18px;color:var(--accent);visibility:hidden}
+.liste-choix button[aria-checked=true]{font-weight:600;color:var(--accent)}
+.liste-choix button[aria-checked=true] .ic{visibility:visible}
+.liste-choix .groupe{font-weight:600}
+.liste-choix .sous{padding-left:22px}
 .entete-vue{max-width:1200px;margin:auto;padding:14px 16px 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .entete-vue h2{margin:0;font-size:19px;flex:1}
 .entete-vue p{flex-basis:100%;margin:0;color:var(--doux);font-size:13px}
@@ -228,14 +244,13 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
       <button data-v="agence" aria-pressed="false"><i data-i="agence"></i>Agences</button>
       <button data-v="particulier" aria-pressed="false"><i data-i="perso"></i>Particuliers</button>
     </div>
-    <div class="rangee" id="types"></div>
-    <div class="rangee" id="communes"></div>
-    <div class="ligne2">
-      <label>Max <input type="range" id="prix" min="200" max="__PRIX_MAX__" step="10" value="__PRIX_MAX__"> <b id="prixv"></b></label>
-      <select id="meuble" aria-label="Meublé"><option value="">Meublé ou vide</option><option value="1">Meublé</option><option value="0">Vide</option></select>
-      <select id="filtreVues" aria-label="Annonces vues"><option value="">Vues et pas vues</option><option value="non">Pas encore vues</option><option value="oui">Déjà vues</option></select>
-      <select id="tri" aria-label="Trier"><option value="prix">Prix croissant</option><option value="recent">Plus récentes</option><option value="surface">Plus grandes</option><option value="m2">Prix au m²</option></select>
-      <span class="compte" id="compte"></span>
+    <div class="rangee" id="pilules" aria-label="Filtres"></div>
+    <div class="ligne-compte"><span class="compte" id="compte"></span><button class="lien" id="effacerFiltres" hidden>Effacer les filtres</button></div>
+    <div hidden>
+      <input type="range" id="prix" min="200" max="__PRIX_MAX__" step="10" value="__PRIX_MAX__">
+      <select id="meuble"><option value=""></option><option value="1"></option><option value="0"></option></select>
+      <select id="filtreVues"><option value=""></option><option value="non"></option><option value="oui"></option></select>
+      <select id="tri"><option value="prix"></option><option value="recent"></option><option value="surface"></option><option value="m2"></option></select>
     </div>
   </div>
   <main id="liste"></main>
@@ -279,6 +294,12 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
   <label>Lien de l'annonce<input class="champ" name="url" type="url" inputmode="url" placeholder="https://"></label>
   <label>Photos<input class="champ" name="photos" type="file" accept="image/*" multiple></label>
   <div class="actions"><button class="btn sec" value="annuler" formnovalidate>Annuler</button><button class="btn" value="ok">Enregistrer</button></div>
+</form></dialog>
+
+<dialog id="dlgFiltre" class="feuille"><form class="dlg" method="dialog">
+  <h3 id="filtreTitre"></h3>
+  <div id="filtreChoix" class="liste-choix"></div>
+  <div class="actions"><button class="btn sec" value="fermer">Fermer</button></div>
 </form></dialog>
 
 <dialog id="dlgContact"><form class="dlg" method="dialog">
@@ -441,17 +462,59 @@ function puces(el, choix, cle) {
   el.onclick = e => { const b = e.target.closest(".puce"); if (!b) return; etat[cle] = b.dataset.v; puces(el, choix, cle); afficher(); };
 }
 const estType = (a, t) => t === "" || (t === "Studio/T1" ? ["Studio", "T1"].includes(a.type) : a.type === t);
+// Filtres rangés : un bouton par filtre, ses choix s'ouvrent quand on le touche
+const champ = id => ({lire: () => $(id).value, ecrire: v => { $(id).value = v; }});
+const FILTRES = {
+  type: {nom: "Type", titre: "Type de logement", lire: () => etat.type, ecrire: v => { etat.type = v; }, defaut: "",
+    choix: () => [["", "Tous les types"], ["Studio/T1", "Studio / T1"], ["T2", "T2"], ["T3", "T3"]].map(([v, t]) => [v, t, ANNONCES.filter(a => estType(a, v)).length])},
+  commune: {nom: "Commune", titre: "Commune", lire: () => etat.commune, ecrire: v => { etat.commune = v; }, defaut: "",
+    choix: () => {
+      const secteurs = {};
+      for (const [c, s] of Object.entries(COMMUNES)) (secteurs[s] = secteurs[s] || []).push(c);
+      const l = [["", "Toutes les communes", ANNONCES.length]];
+      for (const [s, cs] of Object.entries(secteurs)) {
+        l.push(["secteur:" + s, "Tout le " + s, ANNONCES.filter(a => a.secteur === s).length, "groupe"]);
+        for (const c of cs) l.push([c, c, ANNONCES.filter(a => a.commune === c).length, "sous"]);
+      }
+      return l;
+    }},
+  prix: {nom: "Loyer", titre: "Loyer maximum", ...champ("#prix"), defaut: String(PRIX_MAX),
+    choix: () => [PRIX_MAX, 700, 650, 600, 550, 500, 450, 400].map(p => [String(p), p === PRIX_MAX ? "Tous les loyers" : `Jusqu'à ${p} €`, ANNONCES.filter(a => a.prix <= p).length])},
+  meuble: {nom: "Meublé", titre: "Meublé ou vide", ...champ("#meuble"), defaut: "",
+    choix: () => [["", "Meublé ou vide"], ["1", "Meublé"], ["0", "Vide"]]},
+  vues: {nom: "Déjà vues", titre: "Annonces déjà vues", ...champ("#filtreVues"), defaut: "",
+    choix: () => [["", "Toutes les annonces"], ["non", "Pas encore vues"], ["oui", "Déjà vues"]]},
+  tri: {nom: "Trier", titre: "Trier par", ...champ("#tri"), defaut: "prix",
+    choix: () => [["prix", "Prix croissant"], ["recent", "Plus récentes"], ["surface", "Plus grandes"], ["m2", "Prix au m²"]]},
+};
+const CHEVRON = svg('<path d="m6 9 6 6 6-6"/>'), COCHE = svg('<path d="m5 12.5 4.5 4.5L19 7.5"/>');
 function construirePuces() {
-  puces($("#types"), [["", "Tous"], ["Studio/T1", "Studio / T1"], ["T2", "T2"], ["T3", "T3"]].map(([v, t]) => [v, `${t} (${ANNONCES.filter(a => estType(a, v)).length})`]), "type");
-  const secteurs = {};
-  for (const [c, s] of Object.entries(COMMUNES)) (secteurs[s] = secteurs[s] || []).push(c);
-  const choixCommunes = [["", "Toutes les communes"]];
-  for (const [s, cs] of Object.entries(secteurs)) {
-    choixCommunes.push(["secteur:" + s, s]);
-    for (const c of cs) choixCommunes.push([c, `${c} (${ANNONCES.filter(a => a.commune === c).length})`]);
-  }
-  puces($("#communes"), choixCommunes, "commune");
+  let actifs = 0;
+  $("#pilules").innerHTML = Object.entries(FILTRES).map(([cle, f]) => {
+    const v = f.lire(), actif = v !== f.defaut;
+    if (actif && cle !== "tri") actifs++;
+    const libelle = actif ? (f.choix().find(c => c[0] === v) || [, f.nom])[1].replace(/^Tout le /, "") : f.nom;
+    return `<button class="pilule" data-f="${cle}" aria-pressed="${actif}">${esc(libelle)}${CHEVRON}</button>`;
+  }).join("");
+  $("#effacerFiltres").hidden = !actifs;
 }
+let filtreOuvert = null;
+$("#pilules").onclick = e => {
+  const b = e.target.closest(".pilule"); if (!b) return;
+  filtreOuvert = b.dataset.f; const f = FILTRES[filtreOuvert];
+  $("#filtreTitre").textContent = f.titre;
+  $("#filtreChoix").innerHTML = f.choix().map(([v, t, n, cls]) =>
+    `<button type="button" data-v="${esc(v)}" class="${cls || ""}" aria-checked="${f.lire() === v}">${COCHE}${esc(t)}${n != null ? `<span class="n">${n}</span>` : ""}</button>`).join("");
+  $("#dlgFiltre").showModal();
+};
+$("#filtreChoix").onclick = e => {
+  const b = e.target.closest("button"); if (!b || !filtreOuvert) return;
+  FILTRES[filtreOuvert].ecrire(b.dataset.v); $("#dlgFiltre").close(); afficher();
+};
+$("#effacerFiltres").onclick = () => {
+  for (const [cle, f] of Object.entries(FILTRES)) if (cle !== "tri") f.ecrire(f.defaut);
+  afficher();
+};
 construirePuces();
 $("#categorie").onclick = e => {
   const b = e.target.closest("button"); if (!b) return;
@@ -532,7 +595,7 @@ function carte(a, horsLigne) {
 // ------------------------------------------------ vues
 let vue = "annonces";
 function afficher() {
-  const max = +$("#prix").value; $("#prixv").textContent = max + " €";
+  const max = +$("#prix").value; construirePuces();
   const m = $("#meuble").value, tri = $("#tri").value, c = etat.commune, t = etat.type, cat = etat.categorie, fv = $("#filtreVues").value;
   const crit = lireRecherche(etat.q);
   const l = ANNONCES.filter(a => a.prix <= max && estType(a, t)

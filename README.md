@@ -39,7 +39,9 @@ Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/logements/
 **Toutes les heures, jour et nuit**, GitHub cherche les **appartements à louer**
 (studio, T1, T2, T3) à **740 € maximum** à Saint-Denis (avec Sainte-Clotilde et La Montagne), Sainte-Marie,
 Sainte-Suzanne, La Possession et Le Port, sur **Bien'ici**, **ParuVendu**, **Zimo**
-(qui reprend aussi des annonces de Leboncoin), **EntreParticuliers** et **Figaro Immobilier**.
+(qui reprend aussi des annonces de Leboncoin), **EntreParticuliers**, **Figaro Immobilier**, **Superimmo**,
+**Immobilier entre particuliers**, **Immo Transac** et les sites des agences du nord (Getim, Guy Hoquet, Les Flamboyants,
+Urbanis, La Nouvelle Agence, GTI, Herren, Isautier, Sorim, OFIM). Sites d'agences : liste `SITES` dans `logements.py`.
 
 Il garde seulement les logements qui peuvent ouvrir droit aux **aides au logement de la CAF** (AL ou APL) :
 il écarte les locations de vacances ou de courte durée, les colocations, les chambres, et les annonces

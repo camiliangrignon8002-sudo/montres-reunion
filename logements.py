@@ -168,7 +168,10 @@ def nombre(txt):
     m = re.search(r"\d[\d\s\xa0 .]*(?:,\d+)?", str(txt or ""))
     if not m:
         return None
-    s = re.sub(r"[\s\xa0 .]", "", m.group(0)).replace(",", ".")
+    s = re.sub(r"[\s\xa0 ]", "", m.group(0)).rstrip(".")
+    if re.fullmatch(r"\d+\.\d{1,2}", s):  # 1000.33 : point décimal
+        return float(s)
+    s = s.replace(".", "").replace(",", ".")
     try:
         return float(s)
     except ValueError:
@@ -524,6 +527,155 @@ def figaro():
     return res
 
 
+# ---------------------------------------------------------------- sites d'agences et petites annonces
+
+# Chaque site : pages de liste à lire, et forme des liens vers ses annonces.
+# Les pages d'annonce sont ensuite lues par fiche_agence (méthode commune à tous ces sites).
+SITES = [
+    {"nom": "Getim", "listes": ["https://www.getim.com/fr/location-appartement.htm"],
+     "lien": r'https://www\.getim\.com/location/appartement-[^"]+\.htm'},
+    {"nom": "Guy Hoquet", "listes": ["https://www.guyhoquet-reunion.fr/annonces/transaction/Location.html"]
+     + [f"https://www.guyhoquet-reunion.fr/annonces/transaction/location.html?manufacturers_id=transaction&page={n}" for n in range(2, 6)],
+     "lien": r'(?:\.\./|/)?fiches/3-[^"]+\.html'},
+    {"nom": "Les Flamboyants", "listes": ["https://www.agencelesflamboyants.com/annonces/transaction/Location.html"]
+     + [f"https://www.agencelesflamboyants.com/annonces/transaction/location.html?manufacturers_id=transaction&page={n}" for n in range(2, 6)],
+     "lien": r'(?:\.\./|/)?fiches/3-[^"]+\.html'},
+    {"nom": "Urbanis", "listes": [f"https://www.urbanis.re/location/{n}" for n in range(1, 5)],
+     "lien": r'/location/\d+-[a-z-]+/appartement/\d+-[^"/]+'},
+    {"nom": "La Nouvelle Agence", "listes": [f"https://www.lna.re/location/{n}" for n in range(1, 5)],
+     "lien": r'/location/\d+-[a-z-]+/appartement/[^"]+'},
+    {"nom": "GTI", "listes": [f"https://www.gti.re/location/{n}" for n in range(1, 5)],
+     "lien": r'/location/\d+-[a-z-]+/appartement/\d+-[^"/]+'},
+    {"nom": "Herren Immobilier", "listes": ["https://www.herren-immobilier.com/location/appartement"],
+     "lien": r'/location/appartement/\d+[^"]*'},
+    {"nom": "Isautier", "listes": ["https://isautier.re/bien-en-location/"], "lien": r'https://isautier\.re/bien/\d+/'},
+    {"nom": "Sorim", "listes": [f"https://www.sorim.re/en/rentals?page={n}" for n in range(1, 5)], "lien": r'/en/property/\d+'},
+    {"nom": "OFIM", "listes": [f"https://www.ofim.fr/liste-location.html?page={n}" for n in range(1, 6)],
+     "lien": r'https://www\.ofim\.fr/\d+/Location-Appartement-[^"]+\.html'},
+    {"nom": "Superimmo", "listes": ["https://www.superimmo.com/location/appartement/la-reunion"]
+     + [f"https://www.superimmo.com/location/dom-tom/la-reunion/p/{n}" for n in range(2, 8)],
+     "lien": r'/annonces/location-appartement-[^"]+', "agrege": True},
+    {"nom": "Immobilier entre particuliers",
+     "listes": ["https://www.immobilier-entre-particuliers.fr/annonces-immobilieres-la-reunion"],
+     "lien": r'/annonces-immobilieres-la-reunion/annonce-immobiliere-particulier-\d+\.html', "particulier": True},
+]
+COMMUNES_AILLEURS = ["saint-pierre", "st-pierre", "saint-paul", "st-paul", "tampon", "saint-louis", "st-louis", "saint-leu",
+                     "saint-joseph", "saint-benoit", "saint-philippe", "etang-sale", "les-avirons", "petite-ile", "entre-deux",
+                     "cilaos", "salazie", "bras-panon", "plaine-des-palmistes", "sainte-rose", "trois-bassins", "saline",
+                     "ravine-des-cabris", "saint-gilles", "saint-andre", "st-andre", "97410", "97411", "97430", "97460", "97450",
+                     "97480", "97470", "97440", "97436", "97424", "97427", "97414", "97425"]
+
+
+def sites_agences():
+    """Liste les annonces des sites d'agences : on garde seulement les liens, les pages sont lues ensuite."""
+    res = []
+    for site in SITES:
+        vus_site = set()
+        for liste in site["listes"]:
+            r = get(liste)
+            if not r:
+                break
+            nouveaux = 0
+            for lien in re.findall(r'href="(' + site["lien"] + r')"', r.text):
+                url = urljoin(liste, html.unescape(lien))
+                if url in vus_site:
+                    continue
+                vus_site.add(url)
+                nouveaux += 1
+                # l'adresse du lien dit souvent la commune : inutile de lire les annonces du sud ou de l'ouest
+                if any(re.search(r"(?<![a-z])" + c + r"(?![a-z])", norm(url).replace("+", "-").replace("_", "-")) for c in COMMUNES_AILLEURS):
+                    continue
+                res.append(annonce(id=re.sub(r"[^a-z0-9]+", "-", norm(site["nom"])) + "-" + re.sub(r"\W+", "-", url.split("://")[1])[-60:],
+                                   source=site["nom"], url=url, commune=commune_de(url.replace("-", " ")) or "?",
+                                   pro=False if site.get("particulier") else True, site_agence=True))
+            if not nouveaux:
+                break
+        print(f"  {site['nom']} : {len(vus_site)} liens")
+    return res
+
+
+def immotransac():
+    """Immo Transac publie tout son catalogue dans un seul fichier."""
+    r = get("https://immotransac.re/nos-biens/data/catalogue.json")
+    if not r:
+        return []
+    res = []
+    for x in r.json().get("data", []):
+        if x.get("typeTransaction") != "Location" or x.get("statutVente") not in (None, "disponible"):
+            continue
+        if norm(x.get("Type de bien")) not in ("appartement", "studio", "duplex"):
+            continue
+        loyer = (x.get("loyerBase") or x.get("loyerActuel") or 0) + (x.get("chargesMensuellesLocation") or 0)
+        photos = [x.get("Photo URL") or x.get("Photo Principale")] + re.findall(
+            r'https://[^"\']+/Photo/[^"\']+\.(?:jpe?g|webp)', json.dumps(x.get("Medias", {}).get("photos", x.get("Medias", {}))))
+        res.append(annonce(
+            id=f"immotransac-{x.get('Référence') or x.get('id')}", source="Immo Transac", url=x.get("Lien MiniSite") or "https://immotransac.re/location/appartement",
+            titre=x.get("Titre annonce") or x.get("Titre") or "", prix=loyer or None, commune=commune_de(x.get("Ville")),
+            quartier=x.get("Quartier") or x.get("Ville") or "", pieces=x.get("Nombre de pièces"), surface=x.get("Surface habitable"),
+            photos=list(dict.fromkeys(p for p in photos if p and "cartes" not in p))[:15], description=x.get("Annonce Netty") or "",
+            date=x.get("derniereModification") or "", annonceur="Immo Transac", tel="0692 78 28 78", pro=True,
+            charges=x.get("chargesMensuellesLocation") or None))
+    return res
+
+
+PHOTO_EXCLUE = re.compile(r"logo|icon|picto|favicon|avatar|banni|banner|bandeau|footer|header|flag|drapeau|marker|"
+                          r"\bdpe|\bges|sprite|placeholder|loading|social|facebook|whatsapp|instagram|qrcode|agence-|equipe|"
+                          r"partenaire|label|fnaim|unis\b|/themes?/|/static/img|apple-touch|blank|pixel|1x1|commerciaux|negociat|conseiller", re.I)
+
+
+def fiche_agence(a, h):
+    """Lecture commune des pages d'annonce de sites d'agences : titre, loyer, surface, pièces, photos, contact."""
+    corps = re.sub(r"<(script|style|noscript|svg|nav|footer|header)\b.*?</\1>", " ", h, flags=re.S | re.I)
+    txt = texte(corps)
+    titre = meta(h, "og:title") or texte((re.findall(r"<h1[^>]*>(.*?)</h1>", h, re.S) or [""])[0]) \
+        or texte((re.findall(r"<title>(.*?)</title>", h, re.S) or [""])[0])
+    f = {"titre": titre.strip()[:140]}
+    desc = meta(h, "og:description") or meta(h, "description")
+    f["description"] = description_complete(h, desc)
+    montant = r"(\d[\d\s\u202f\xa0.]{0,8}(?:,\d+)?)\s?(?:€|euros?\b|eur\b)"
+    for motif, ou in [(r"(?:charges comprises|toutes charges|\bcc\b|c\.c\.)[^0-9€\n]{0,25}?" + montant, txt),
+                      (r"(?:loyer|prix|tarif|rent|price)[^0-9€\n]{0,40}?" + montant, txt),
+                      (montant + r"\s?(?:/\s?mois|par mois|cc\b|c\.c|hc\b|charges)", txt), (montant, titre), (montant, txt)]:
+        prix = next((nombre(m.group(1)) for m in re.finditer(motif, ou, re.I) if 150 <= (nombre(m.group(1)) or 0) <= 5000), None)
+        if prix:
+            f["prix"] = prix
+            break
+    surf = (re.search(r"(\d+(?:[.,]\d+)?)\s?m(?:²|2)", titre)
+            or re.search(r"(?:surface|superficie|habitable|living area)[^0-9\n]{0,30}(\d+(?:[.,]\d+)?)\s?m", txt, re.I))
+    if surf:
+        f["surface"] = nombre(surf.group(1))
+    pieces = (re.search(r"\b[TF]\s?(\d)\b|(\d+)\s*pi[eè]ces?|(\d+)\s*rooms?", titre, re.I)
+              or re.search(r"(\d+)\s*pi[eè]ces?|nombre de pi[eè]ces\s*:?\s*(\d+)|\b[TF](\d)\b|(\d+)\s*rooms?\b|rooms?\s*:?\s*(\d+)", txt, re.I))
+    if pieces:
+        f["pieces"] = int(next(g for g in pieces.groups() if g))
+    if re.search(r"\bstudio\b|studette", norm(titre)):
+        f["studio"] = True
+    f["commune"] = commune_de(a["url"].replace("-", " "), titre, f["description"][:400])
+    titre_n = norm(titre).replace("-", " ")
+    if any(re.search(r"(?<![a-z])" + c.replace("-", " ") + r"(?![a-z])", titre_n) for c in COMMUNES_AILLEURS + ["bras panon"]):
+        f["commune"] = ""  # le titre nomme une autre commune : on ne se fie pas à la description
+    photos = []
+    trouvees = re.findall(r'(?:src|data-src|data-lazy|href|content|data-original|data-bg)=["\']([^"\'\s>]+?\.(?:jpe?g|webp)(?:\?[^"\'\s>]*)?)', h, re.I)
+    trouvees += re.findall(r'(https://photo\.superimmo\.com/[a-z0-9]+)', h)
+    for p in trouvees:
+        p = urljoin(a["url"], html.unescape(p))
+        cle = re.sub(r"[-_]?\d{2,4}x\d{2,4}|[?].*$", "", p.rsplit("/", 1)[-1])
+        if PHOTO_EXCLUE.search(p) or any(cle == c for _, c in photos):
+            continue
+        photos.append((p, cle))
+    photos = [p for p, _ in photos]
+    ident = max(re.findall(r"\d{5,}", a["url"]), key=len, default="")
+    if ident and any(ident in p for p in photos):  # les photos de l'annonce portent souvent son numéro
+        photos = [p for p in photos if ident in p]
+    f["photos"] = photos[:15]
+    tel = next((format_tel(t) for t in re.findall(r'href="tel:([^"]+)"', h) if format_tel(t)), "")
+    mail = next((m for m in re.findall(r'href="mailto:([^"?]+)', h) if "@" in m and not re.search(r"noreply|no-reply|dpo|rgpd|webmaster", m)), "")
+    f["tel"], f["email"] = tel, html.unescape(mail)
+    if not a.get("pro") is False:
+        f["annonceur"] = a["source"]
+    return {k: v for k, v in f.items() if v not in (None, "", [])}
+
+
 # ---------------------------------------------------------------- pages d'annonce
 
 PHOTOS_SITE = {
@@ -541,6 +693,8 @@ def lire_fiche(a):
     f = {}
     if a["source"] == "ParuVendu":
         f = paruvendu_fiche(a, h)
+    elif a.get("site_agence"):
+        f = fiche_agence(a, h)
     objets = ld_json(h)
     fiche = next((o for o in objets if o.get("@type") in ("RealEstateListing", "Product", "Offer", "Apartment",
                                                             "SingleFamilyResidence", "Residence", "Accommodation")
@@ -755,7 +909,8 @@ def main():
     vus = json.loads(VUS_FILE.read_text()) if VUS_FILE.exists() else {}
     toutes, sources_ok = [], []
     for nom, fonction in [("Bien'ici", bienici), ("ParuVendu", paruvendu), ("Zimo", zimo),
-                          ("EntreParticuliers", entreparticuliers), ("Figaro Immobilier", figaro)]:
+                          ("EntreParticuliers", entreparticuliers), ("Figaro Immobilier", figaro),
+                          ("Immo Transac", immotransac), ("Sites d'agences", sites_agences)]:
         try:
             trouvees = fonction()
         except Exception as e:
@@ -763,7 +918,7 @@ def main():
             continue
         print(f"{nom} : {len(trouvees)} annonces")
         if trouvees:
-            sources_ok.append(nom)
+            sources_ok += sorted({a["source"] for a in trouvees}) if fonction is sites_agences else [nom]
         toutes += trouvees
     completer(toutes, fiches)
     gardees = sans_doublons([a for a in toutes if garder(a)])
@@ -776,7 +931,7 @@ def main():
             nouvelles.append(a)
         a["vu"] = min(deja) if deja else maintenant.isoformat(timespec="minutes")
         vus[a["id"]] = a["vu"]
-        for cle in ("absente", "studio", "fiche_bloquee", "depuis", "bienici_id"):
+        for cle in ("absente", "studio", "fiche_bloquee", "depuis", "bienici_id", "site_agence"):
             a.pop(cle, None)
     gardees.sort(key=lambda a: a["prix"])
     par_source = {}
