@@ -735,6 +735,7 @@ ICONE_CHEVRON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 
 ICONE_MENU = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>'
 ICONE_COEUR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.1A4.2 4.2 0 0 1 12 7.4a4.2 4.2 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20Z"/></svg>'
 ICONE_SAC = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8h13l-1 12h-11Z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>'
+ICONE_PARTAGE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3.5M8 7.5l4-4 4 4"/><path d="M7 11H5.5v9.5h13V11H17"/></svg>'
 ICONE_COTE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l4-5 3 3 5-7"/></svg>'
 ICONE_SORTIE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5M19 5l-8 8M17 14v5H5V7h5"/></svg>'
 ICONE_CLOCHE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15L6 16Z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg>'
@@ -766,7 +767,7 @@ def carte_produit(i, a, e):
     return f"""
       <article class="produit" data-i="{i}" data-id="{e(a['id'])}" data-prix="{a['prix'] if a.get('prix') is not None else ''}" data-region="{e(a['region'])}"
         data-neuf="{'neuf' if a.get('neuf') else 'occasion'}" data-mouvement="{e(a.get('mouvement', ''))}" data-marque="{e(a.get('marque', ''))}" data-texte="{e(cherche)}">
-        <div class="tuile">{tuile}<button class="like" aria-label="J'aime">{ICONE_COEUR}</button><button class="ajout" aria-label="Ajouter au panier">{ICONE_SAC}</button></div>
+        <div class="tuile">{tuile}<button class="like" aria-label="J'aime">{ICONE_COEUR}</button><button class="partager" aria-label="Partager">{ICONE_PARTAGE}</button><button class="ajout" aria-label="Ajouter au panier">{ICONE_SAC}</button></div>
         <h3>{e(a['titre'])}</h3>
         <p class="sous">{e(sous)}</p>
         <p class="prix">{prix_txt(a, 'Prix sur demande')}</p>
@@ -840,6 +841,10 @@ svg{{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-
 .like{{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--verre);color:var(--encre)}}
 .like svg{{width:17px;height:17px}}
 .like.on svg,#f-like.on svg{{fill:var(--accent);stroke:var(--accent)}}
+.partager{{position:absolute;top:48px;right:8px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--verre);color:var(--encre)}}
+.partager svg{{width:16px;height:16px}}
+.toast{{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:50;background:var(--bouton);color:var(--sur-bouton);padding:10px 18px;border-radius:99px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none}}
+.toast.visible{{opacity:1}}
 .ajout{{position:absolute;right:8px;bottom:8px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--verre);color:var(--encre);transition:background .2s,color .2s}}
 .ajout svg{{width:17px;height:17px}}
 .dans-panier .ajout{{background:var(--bouton);color:var(--sur-bouton)}}
@@ -1026,6 +1031,7 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
   </div>
 </dialog>
 
+<div class="toast" id="toast" role="status"></div>
 <footer>La Réunion : ParuVendu, Cash Express, GEM Atelier Bijoux<br> Métropole : Ocarat, Histoire d'Or, Maty, Pagani Design, Cash Express, Collector Square<br>Montres connectées et de sport exclues<br>Recherche toutes les 2&nbsp;h · notification à 10&nbsp;h pour La Réunion à moins de {PRIX_MAX}&nbsp;€</footer>
 
 <dialog id="filtres" aria-label="Filtres">
@@ -1072,7 +1078,8 @@ dialog::backdrop{{background:rgba(0,0,0,.4);backdrop-filter:blur(6px);-webkit-ba
     <p class="mvt-fiche" id="f-mvt"></p>
     <div class="actions">
       <div class="duo"><button class="pill" id="f-panier">{ICONE_SAC}<span>Ajouter au panier</span></button>
-        <button class="pill rond" id="f-like" aria-label="J'aime">{ICONE_COEUR}</button></div>
+        <button class="pill rond" id="f-like" aria-label="J'aime">{ICONE_COEUR}</button>
+        <button class="pill rond" id="f-partager" aria-label="Partager">{ICONE_PARTAGE}</button></div>
       <a class="pill plein" id="f-contact" target="_blank" rel="noopener">Contacter le vendeur</a>
       <a class="pill" id="f-maps" target="_blank" rel="noopener">{ICONE_PIN}Itinéraire</a>
     </div>
@@ -1245,6 +1252,8 @@ grille.addEventListener('click', ev => {{
   if (ev.target.closest('a')) return;  // lien « Voir sur … » : on laisse ouvrir le site
   const coeur = ev.target.closest('.like');
   if (coeur) {{ basculer(likes, 'likes', coeur.closest('.produit').dataset.id); return; }}
+  const part = ev.target.closest('.partager');
+  if (part) {{ partager(montres[part.closest('.produit').dataset.i]); return; }}
   const sac = ev.target.closest('.ajout');
   if (sac) {{ basculer(panier, 'panier', sac.closest('.produit').dataset.id); return; }}
   const p = ev.target.closest('.produit'); if (!p) return;
@@ -1270,11 +1279,21 @@ grille.addEventListener('click', ev => {{
     $('f-panier').classList.toggle('on', panier.has(m.id));
     $('f-panier').querySelector('span').textContent = panier.has(m.id) ? 'Retirer du panier' : 'Ajouter au panier';
   }};
-  ficheId = m.id; majFiche();
+  ficheId = m.id; ficheM = m; majFiche();
   fiche.showModal(); fiche.scrollTop = 0;
 }});
 compter($('f-photos'), $('f-compteur'));
-let ficheId = null, majFiche = () => {{}};
+// Partager une montre : menu de partage du téléphone, sinon copie du lien
+const toast = txt => {{ $('toast').textContent = txt; $('toast').classList.add('visible'); setTimeout(() => $('toast').classList.remove('visible'), 2200); }};
+async function partager(m) {{
+  const texte = `${{m.titre}} – ${{m.prix}} (${{m.lieu}}, ${{m.region}})`;
+  try {{
+    if (navigator.share) return await navigator.share({{ title: m.titre, text: texte, url: m.url }});
+    await navigator.clipboard.writeText(texte + ' ' + m.url); toast('Lien copié');
+  }} catch (e) {{ if (e.name !== 'AbortError') toast('Partage impossible'); }}
+}}
+let ficheId = null, ficheM = null, majFiche = () => {{}};
+$('f-partager').addEventListener('click', () => ficheM && partager(ficheM));
 $('f-like').addEventListener('click', () => {{ basculer(likes, 'likes', ficheId); majFiche(); }});
 $('f-panier').addEventListener('click', () => {{ basculer(panier, 'panier', ficheId); majFiche(); }});
 $('f-fermer').addEventListener('click', () => fiche.close());
