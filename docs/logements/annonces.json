@@ -1144,37 +1144,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a15d88-4ca6-770e-bf11-c8570eb218ba",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-1-piece-22-m2/01a15d88-4ca6-770e-bf11-c8570eb218ba",
-  "titre": "Studio 1 pièce 22 m²",
-  "prix": 545.0,
-  "commune": "Saint-André",
-  "quartier": "Saint-André",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 22.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/O5Bb4bfl2EHpomY-dYCpSPBpOr1otQe7Q3fkTkXJXxk/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_ab4e0085-00a3-4739-acb3-f5140e56da9f.jpg"
-  ],
-  "description": "Location Studio Saint-André (974) 1 pièces 22 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord-Est",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:30+04:00"
- },
- {
   "id": "zimo-01a1594f-9b9d-792d-8e68-9a13bcc77293",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/t1-bis-a-louer-bellepierre/01a1594f-9b9d-792d-8e68-9a13bcc77293",
@@ -1235,42 +1204,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "figaro-109954321",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-109954321.html",
-  "titre": "Location meublée appartement 1 pièce 23.13 m² à Moufia (97490), 556 €",
-  "prix": 556.0,
-  "commune": "Saint-Denis",
-  "quartier": "Moufia",
-  "pieces": 1,
-  "type": "T1",
-  "surface": null,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/5KLsLsg_37-fA48xSgivrqeJcTOfmGsKP9LOeAJlvT_1DsHKEqpNnzPE89g28ee4aFhru18vQO8MO5EMyOKmGO6OPOBplcGOgrbc=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/WyRpiuEWX2zXJNGl4h-lnXcTIJEP6TfypUF9F8y51xjYK3UqX2kX4GlwrPIV21QL3rUvQqiExyxCFvPotjTrgHgF5pNAmLADSVfJ1rk=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/99_cdZohfbED3PkP5TdL-gDHLMN7J6nzyBv-5XhVXzxXvTbvrUDzbESdeE2ZOGmTtDkDKGY6IDI9h88lQ22c-Bqroob4D8szOhnThZQ=rw-w940-h605-l80"
-  ],
-  "description": "Runimmo vous propose en location ce charmant appartement T1 entièrement meublé pour étudiant qui recherchent un nid douillet et fonctionnel. Cet appartement de 23,13 m² vous offre tout le confort nécessaire, situé au 7 rue des Jacinthes - résidence 'Central Fac 9 '. Réservé uniquement aux étudiants.\nÀ l'intérieur, La pièce à vivre, baignée de lumière naturelle, est spacieuse et accueillante.. La salle de bains, moderne et fonctionnelle. Ce bien est proche des commodités, et des commerces.\nPour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 301 € TTC à la charge du locataire comprenant 69 € TTC pour l'état des lieux. Loyer de base 521 €/mois. Provision sur charges 35 €/mois, régularisation annuelle. Dépôt de garantie 1 042 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
-  "caracteristiques": [
-   "Meublé",
-   "Proche université"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0692 26 92 05",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:07+04:00"
  },
  {
   "id": "zimo-01a07c45-39b7-7bdc-96fd-e6e30e960043",
@@ -1876,56 +1809,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "pv-1296165887",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296165887A1KILHAP000",
-  "titre": "Location appartement 2 pièces de 40m2 à Saint andre (97440)",
-  "prix": 602.0,
-  "commune": "Saint-André",
-  "quartier": "Saint-André",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 40.0,
-  "meuble": null,
-  "photos": [
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/47/5b/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS1kb21haW5lX2RlLTE1Mjg5Mjk4MzczODA2NDMyODg0LmpwZz8yMDI2MTAxMTIwMTUzNw_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/bc/d9/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE0NzQtNTgwNzAyODc5NzAwMTY4MjkyOS5qcGc_MjAyNjEwMjAxMTQ0NDQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/6d/88/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE0ODAtMTQ2OTI0NjA5NDc5ODQwOTYzOTcuanBnPzIwMjYxMDIwMTE0NDQ0_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/9b/df/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLUlNR180ODc0LTE4MDc4MjU1Nzk0ODAxMTY5NzgwLmpwZz8yMDI2MTAyMDExNDAzNA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/18/ec/L3dhL2ltYWdlcy9iaWVucy8xLzczYjQ2MDE1ZDA0YmQyMjAyZjVjMjEyY2UxOGJhMGNhL3Bob3RvXzEyZjQ0YTkzYzM4YmFlMjZjYzJlOTgzNmFkMGQ0NWJmLmpwZz8yMDI2MTAyMDA3MjEyOA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/lanouvelleagence.staticlbi.com/c5/92/L3dhL2ltYWdlcy9iaWVucy8xLzhlM2ZkMmJhZWE2MDkyZDQ4ODQzM2UzMGVjYTE0YjI3L3Bob3RvXzEzYjU0MTIzZjdkNTUxNGRjMmI0YzExZTNhNmM0NWI3X0luY18wLmpwZz8yMDI2MTAyMDA3MjA1Mg_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/photos.exportadapt.com/8a/16/LzY5MDA0LzY5MDA0MTA0NjhfNzYuanBnPzIwMjYxMDIwMDEwMDIx_rct?func=crop&w=1000&gravity=auto"
-  ],
-  "description": "À LOUER : Appartement T2 situé à Saint André, dans un environnement calme et agréable. Ce bien immobilier, d'une superficie de 40 m², se trouve au premier étage d'une résidence de deux étages, offrant ainsi un cadre de vie paisible. L'appartement se compose de deux pièces, dont une chambre spacieuse, idéale pour un couple ou une personne seule. La cuisine est aménagée et équipée, Le salon, lumineux, est parfait pour se détendre après une longue journée. De plus, vous pourrez profiter d'un balcon, un atout indéniable pour savourer vos moments de détente en extérieur. Ce bien dispose également d'une salle de bain, offrant tout le confort nécessaire. Un emplacement de parking est inclus, facilitant ainsi le stationnement de votre véhicule. La résidence est dotée d'une piscine, un véritable plus pour profiter des journées ensoleillées. En termes de commodités, vous trouverez à proximité immédiate plusieurs supermarchés, tels que La Centrale et Leader Price, à moins de 500 mètres. Pour les familles, plusieurs établissements scolaires, allant du collège au lycée, sont accessibles à moins de 1500 mètres. De plus, plusieurs pharmacies se situent à proximité, garantissant un accès facile aux soins de santé. Ce logement est idéal pour ceux qui recherchent un cadre de vie agréable, alliant tranquillité et proximité des commodités. N'hésitez pas à nous contacter pour plus d'informations ou pour organiser une visite. Le bien est soumis au statut de la copropriété. Loyer de 602,37 euros par mois charges comprises dont 29,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). Soit avec Assurance Habitation et Assistance* ( 21.00 euros ) : 623,37 euros. Les honoraires charge locataire sont de 448,66 euros ( soit 11,10 euros/m² ) dont 122,47 euros pour état des lieux ( soit 3,03 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
-  "caracteristiques": [
-   "Varangue / balcon",
-   "Parking",
-   "Piscine"
-  ],
-  "date": "",
-  "annonceur": "Citya Belvédère",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "02 57 54 20 85",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord-Est",
-  "caf": false,
-  "aussi": [
-   {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/saint-andre/appartement/2pieces/citya-immobilier-52424705300084-GES25510029-542"
-   },
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-2-pieces-40-m2/01a1269a-8ffe-71f3-a539-e236cb460f24"
-   }
-  ],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
   "id": "zimo-01a11734-78a6-7892-b7d4-6b5051050245",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-meuble-19-m2-sainte-clotilde/01a11734-78a6-7892-b7d4-6b5051050245",
@@ -2097,7 +1980,7 @@
    "Cuisine équipée",
    "Proche transports"
   ],
-  "date": "2026-10-14T06:19:55.175Z",
+  "date": "2026-10-21T08:38:41.646Z",
   "annonceur": "Cabinet Habilis",
   "lat": -20.885213429062585,
   "lon": 55.46273022242031,
@@ -2143,34 +2026,46 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a155d4-7df5-7858-ac69-d1abcf35119e",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-1-piece-35-m2/01a155d4-7df5-7858-ac69-d1abcf35119e",
-  "titre": "Studio 1 pièce 35 m²",
+  "id": "figaro-110025017",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025017.html",
+  "titre": "Location meublée appartement 1 pièce 35 m² à Saint-Denis (97400), 620 €",
   "prix": 620.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
   "surface": 35.0,
-  "meuble": null,
+  "meuble": true,
   "photos": [
-   "https://img.e-xiste.com/wGxDnUV-p9nzp7imBPRFv0sO6Vn1NXMnxRV9wGmrCqU/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_5b98b023-b52d-44b2-ae1d-b6c076c073da.jpg"
+   "https://lh3.googleusercontent.com/9x9ldaQiNtBs5m4oO1RH1ej4jM20PQxcnoHiVR2IWNSEwS1UaKy9wE91EZd1dyxvxGiOVvVM5RnFphkMp7XYTe6eXK7tofrhVuzvTQ=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/7KdItYX7bTMMUQLGzNaWlow6W2p0rzAjizbOZpZqwDTOW7_xz18tGJEYeoTgPk6X9d33j-erp1g_9ZFJA63ZT2BhQQvuxPYFwXPoJQ=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/hBEHql9QUyNfhmdWYv24eVlsLM4zsMsD6BhhHtcdGpif1GVpCSrSAFaaiA35b-dkz1VLHpBUXKIfXGkffg8KmoNAicsp664zRevcmQ=rw-w940-h605-l80"
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 35 m²",
-  "caracteristiques": [],
+  "description": "RUNIMMO vous présente en location un studio meublé de 35m2 situé à la Trinité à Saint-Denis (97400), comprenant une belle pièce principale lumineuse, un coin cuisine tout équipée, une belle salle de bains, un balcon et une place de parking privative.\nLe bien est idéalement bien situé, à 2 minutes à pied du parc de la Trinité, proche des transports en commun et des commerces.\nPour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 455 € TTC à la charge du locataire comprenant 350 € TTC pour l'état des lieux. Loyer de base 580 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 160 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Proche transports"
+  ],
   "date": "",
-  "annonceur": "Pro · via leboncoin",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0692 26 92 05",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/studio-1-piece-35-m2/01a155d4-7df5-7858-ac69-d1abcf35119e"
+   }
+  ],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -2322,39 +2217,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a12473-f035-7c1a-8073-50de0ae34ac7",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/location-studio-residence-les-serins-place-parking/01a12473-f035-7c1a-8073-50de0ae34ac7",
-  "titre": "Location studio résidence les serins place parking",
-  "prix": 630.0,
-  "commune": "Saint-André",
-  "quartier": "Saint-André",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 38.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/kDfqktY4OcLiFTggv0Xev87Mk7l6K7iwtEPY-A1MCWI/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_cebfd1f5-5397-4af6-b75a-a9028666e81d.jpg"
-  ],
-  "description": "Location Studio Saint-André (974) 1 pièces 38 m²",
-  "caracteristiques": [
-   "Parking"
-  ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord-Est",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
   "id": "zimo-019fc587-13d9-7d58-a392-11cc7ca37785",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/grand-t2-plein-coeur-saint-denis/019fc587-13d9-7d58-a392-11cc7ca37785",
@@ -2383,58 +2245,6 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "bienici-netty-company58298tcg-appt-2042",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/saint-andre/appartement/3pieces/netty-company58298tcg-appt-2042",
-  "titre": "AGREABLE F3 RECENT ST ANDRE CENTRE",
-  "prix": 636.8,
-  "commune": "Saint-André",
-  "quartier": "Saint-André",
-  "pieces": 3,
-  "type": "T3",
-  "surface": 59.23,
-  "meuble": false,
-  "photos": [
-   "https://file.bienici.com/photo/netty-company58298tcg-appt-2042_img.netty.immo_productcw_company58298tcg_2_LA2042_17890330693_LA2042_9_original.jpg",
-   "https://file.bienici.com/photo/netty-company58298tcg-appt-2042_img.netty.immo_productcw_company58298tcg_2_LA2042_17890330693_LA2042_10_original.jpg",
-   "https://file.bienici.com/photo/netty-company58298tcg-appt-2042_img.netty.immo_productcw_company58298tcg_2_LA2042_17890330693_LA2042_11_original.jpg",
-   "https://file.bienici.com/photo/netty-company58298tcg-appt-2042_img.netty.immo_productcw_company58298tcg_2_LA2042_17890330703_LA2042_12_original.jpg"
-  ],
-  "description": "A louer, au centre de St André et d'accès très rapide et facile, beau F3 de standing avec 2 parkings. Il dispose de chambres climatisées avec placards, d'une cuisine équipée (plaque vitro, hotte et placards) et de volets roulants motorisés. Proche de toutes commodités, transports et commerces. Situation idéale. Disponible le 13/07/2019<br>Honoraires de 606,80 € TTC  à la charge du locataire comprenant  179,47 € TTC  pour l'état des lieux. Loyer de base 606.80 €/mois. Provision sur charges 30 €/mois, régularisation annuelle. Dépôt de garantie 606 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr. <br>Votre conseiller GESTION TRANSACTIONS IMMOBILIERS : Gilles MICHEL<br>Agent commercial (Entreprise individuelle)  <br>  RSAC 750993081",
-  "caracteristiques": [
-   "Ascenseur",
-   "Climatisation",
-   "Interphone",
-   "Digicode",
-   "Accès handicapé",
-   "WC séparés",
-   "1e étage",
-   "2 chambres",
-   "Construit en 2009",
-   "Parking",
-   "Cuisine équipée",
-   "Proche transports"
-  ],
-  "date": "2026-10-19T17:03:49.327Z",
-  "annonceur": "GESTION TRANSACTIONS IMMOBILIERS",
-  "lat": -20.960633232,
-  "lon": 55.64927306,
-  "charges": 30,
-  "pro": true,
-  "tel": "0692 37 59 79",
-  "email": "",
-  "adresse": "53 rue Montreuil, 97400 Saint-Denis",
-  "secteur": "Nord-Est",
-  "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/agreable-f3-recent-st-andre-centre/01a15567-672e-7bb5-b4b9-2a217bb58f0c"
-   }
-  ],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -3003,54 +2813,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "pv-1293524200",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1293524200A1KILHAP000",
-  "titre": "Location appartement 3 pièces de 52m2 à Saint andre (97440)",
-  "prix": 680.0,
-  "commune": "Saint-André",
-  "quartier": "Saint-André",
-  "pieces": 3,
-  "type": "T3",
-  "surface": 52.0,
-  "meuble": true,
-  "photos": [
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/0b/9f/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS0xMDA3MTctMTk2NjQyLTQ4NDIzNzIxOTQ2MzUzNTQ5OTcuanBnPzIwMjYwOTIzMDUxNTEz_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/bc/d9/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE0NzQtNTgwNzAyODc5NzAwMTY4MjkyOS5qcGc_MjAyNjEwMjAxMTQ0NDQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/6d/88/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE0ODAtMTQ2OTI0NjA5NDc5ODQwOTYzOTcuanBnPzIwMjYxMDIwMTE0NDQ0_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/9b/df/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLUlNR180ODc0LTE4MDc4MjU1Nzk0ODAxMTY5NzgwLmpwZz8yMDI2MTAyMDExNDAzNA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/18/ec/L3dhL2ltYWdlcy9iaWVucy8xLzczYjQ2MDE1ZDA0YmQyMjAyZjVjMjEyY2UxOGJhMGNhL3Bob3RvXzEyZjQ0YTkzYzM4YmFlMjZjYzJlOTgzNmFkMGQ0NWJmLmpwZz8yMDI2MTAyMDA3MjEyOA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/lanouvelleagence.staticlbi.com/c5/92/L3dhL2ltYWdlcy9iaWVucy8xLzhlM2ZkMmJhZWE2MDkyZDQ4ODQzM2UzMGVjYTE0YjI3L3Bob3RvXzEzYjU0MTIzZjdkNTUxNGRjMmI0YzExZTNhNmM0NWI3X0luY18wLmpwZz8yMDI2MTAyMDA3MjA1Mg_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/photos.exportadapt.com/8a/16/LzY5MDA0LzY5MDA0MTA0NjhfNzYuanBnPzIwMjYxMDIwMDEwMDIx_rct?func=crop&w=1000&gravity=auto"
-  ],
-  "description": "À LOUER ! Bienvenue dans votre futur cocon à Saint André, un charmant appartement T3 qui ne demande qu'à être habité. Avec ses 51 m² de surface, cet espace vous accueillera avec chaleur et confort. Imaginez-vous en train de savourer votre café du matin dans un salon lumineux et accueillant, où chaque mètre carré est optimisé pour votre bien-être. La pièce de vie est le cœur de cet appartement, parfaite pour les moments de convivialité en famille ou entre amis. Les trois pièces de ce bien vous offrent la flexibilité d'aménager selon vos envies. Que vous souhaitiez un bureau pour télétravailler, une chambre pour vous reposer ou une salle de jeux pour vos enfants, cet appartement s'adapte à vos désirs. La cuisine, entièrement équipée, saura ravir les amateurs de gastronomie. Préparez vos plats préférés tout en profitant d'un espace fonctionnel et pratique. La possibilité de concocter de bons petits plats est une promesse de moments gourmands à partager. Situé dans un cadre agréable de Saint André, vous bénéficierez d'un environnement paisible, tout en étant à proximité des commodités essentielles. Bien que cet appartement ne soit pas meublé, il vous offre la toile parfaite pour exprimer votre style et votre personnalité. Cet appartement est idéal pour ceux qui recherchent un espace à personnaliser selon leurs goûts et un lieu où il fait bon vivre. Ne laissez pas passer cette opportunité de créer votre nouveau chez-vous !. Le bien est soumis au statut de la copropriété. Loyer de 680,00 euros par mois charges comprises dont 70,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). Soit avec Assurance Habitation et Assistance* ( 25.00 euros ) : 705,00 euros. Les honoraires charge locataire sont de 575,42 euros ( soit 11,10 euros/m² ) dont 157,07 euros pour état des lieux ( soit 3,03 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
-  "caracteristiques": [
-   "Meublé"
-  ],
-  "date": "",
-  "annonceur": "Citya Belvédère",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "02 57 54 20 85",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord-Est",
-  "caf": false,
-  "aussi": [
-   {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/saint-andre/appartement/3pieces/citya-immobilier-52424705300084-GES02820047-542"
-   },
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-3-pieces-52-m2/019f91f0-c467-72f2-8d0d-00e4b5a88104"
-   }
-  ],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
   "id": "zimo-01a15489-9004-7edf-8010-59939018b533",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-1-piece-25-m2/01a15489-9004-7edf-8010-59939018b533",
@@ -3209,77 +2971,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:07+04:00"
- },
- {
-  "id": "zimo-01a14aab-a0b2-73fe-bfde-ed3f116b23b3",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-58-m2/01a14aab-a0b2-73fe-bfde-ed3f116b23b3",
-  "titre": "Appartement 1 pièce 58 m²",
-  "prix": 680.0,
-  "commune": "Saint-André",
-  "quartier": "Saint-André",
-  "pieces": 1,
-  "type": "T1",
-  "surface": 58.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/ZcjJ-xqMRpy6SoWtg66anMWW4Urr1SGKxNiuYHYOdHw/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_47931b67-0161-45a4-946c-44fb02fac60c.jpg"
-  ],
-  "description": "Location T1 Saint-André (974) 1 pièces 58 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Particulier · via SeLoger",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord-Est",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "figaro-110025019",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025019.html",
-  "titre": "Location meublée appartement 1 pièce 24.72 m² à Saint-Denis (97400), 680 €",
-  "prix": 680.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": null,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/yuCmIU2VVliHTLDaZhVC7dQKHEkgKEF6DHQ-ttgsVhQAPLGwNA5tAPiqMUtHx_Fi20T2kJ4msyZlSZU0puhHAbG_czetMbLgPw9a1Q=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/yaXvVs2WqRwgODHf5qBPzomBUey_xX2i128B7aL_lfg_OPyLKOcWN2eLsJR12XoYVeArIB6vvQhyx9LafbnkKMuk-aMmTyiaifvvRg=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/7UCEdPc8N0qDHp3URGOPM4ulUFrJfLTgQrpB_Ytl0J4qbV1esvf4iJe_shR9VajkSduyLpxJij9rLgzo6KTia6_brGJTRoy5dn7QP94=rw-w940-h605-l80"
-  ],
-  "description": "RUNIMMO vous propose en location un studio joliment meublé de 24,72 m2, situé dans la rue monthyon à Saint-Denis (97400), résidence ' LA GOELETTE '. Ce bien se compose d'une pièce principale lumineuse et climatisée, une cuisine aménagée et équipée, une belle salle d'eau avec wc et une grande terrasse. Une place de parking privative est disponible en sous-sol. Ce bien se situe proche du jardin de l'état, et du centre ville de Saint-Denis. Pour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 321 € TTC à la charge du locataire comprenant 74 € TTC pour l'état des lieux. Loyer de base 640 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 280 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Parking",
-   "Climatisation",
-   "Jardin",
-   "Cuisine équipée"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0692 26 92 05",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
  },
  {
   "id": "zimo-01a05377-8d6f-7c5c-a2cf-6d36c4eae793",
@@ -3485,37 +3176,6 @@
   "email": "",
   "adresse": "45 rue de Paris, 97400 Saint-Denis",
   "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "zimo-019f4e38-cdca-7365-93af-780a07a451eb",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-a-louer/019f4e38-cdca-7365-93af-780a07a451eb",
-  "titre": "Studio à louer",
-  "prix": 695.0,
-  "commune": "Saint-André",
-  "quartier": "Saint-André",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 19.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/n5pG8bE3yMGFQybu0dcZvQnTJJuo2VMb7BedLAb57ws/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_d104d1f2-5c19-4010-9b91-1fc75026322f.jpg"
-  ],
-  "description": "Location Studio Saint-André (974) 1 pièces 19 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord-Est",
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
@@ -3780,39 +3440,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a1541c-f5a9-7bcb-93c0-9447229781e5",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/joli-f2-location-meuble-saint-andre/01a1541c-f5a9-7bcb-93c0-9447229781e5",
-  "titre": "Joli F2 location meublé Saint André",
-  "prix": 700.0,
-  "commune": "Saint-André",
-  "quartier": "Saint-André",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 35.0,
-  "meuble": true,
-  "photos": [
-   "https://img.e-xiste.com/6NQfKmkcjKiCcEZRyRvLQWGolop_XgC7RHpDjQkHcSI/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_c80524f7-c109-4258-abd6-e3e4d5b6b34a.jpg"
-  ],
-  "description": "Location T2 Saint-André (974) 2 pièces 35 m²",
-  "caracteristiques": [
-   "Meublé"
-  ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord-Est",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
   "id": "zimo-01a09f00-e6b4-75c1-8cd1-d20485a8993e",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-2-pieces-41-m2/01a09f00-e6b4-75c1-8cd1-d20485a8993e",
@@ -3988,54 +3615,37 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "bienici-immo-facile-19006271",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/2pieces/immo-facile-19006271",
+  "id": "zimo-01a1361f-7a4f-773b-b168-dc2e51c9a705",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-t2-a-louer-a-saint-denis-trinite-dernier-etage-avec-terrasse-et-parking/01a1361f-7a4f-773b-b168-dc2e51c9a705",
   "titre": "Appartement T2 à louer à Saint Denis - Trinité, dernier étage avec terrasse et parking",
-  "prix": 716.8,
+  "prix": 717.0,
   "commune": "Saint-Denis",
-  "quartier": "Vauban",
+  "quartier": "La Trinité",
   "pieces": 2,
   "type": "T2",
-  "surface": 42.51,
+  "surface": 43.0,
   "meuble": null,
   "photos": [
-   "https://file.bienici.com/photo/immo-facile-19006271_media.immo-facile.com_office2_pagesimmoweb_137430_137431_137_catalog_images_pr_p_1_9_0_0_6_2_7_1_19006271a.jpg_DATEMAJ_13_10_2026-13_39_31",
-   "https://file.bienici.com/photo/immo-facile-19006271_media.immo-facile.com_office2_pagesimmoweb_137430_137431_137_catalog_images_pr_p_1_9_0_0_6_2_7_1_19006271b.jpg_DATEMAJ_13_10_2026-13_39_31",
-   "https://file.bienici.com/photo/immo-facile-19006271_media.immo-facile.com_office2_pagesimmoweb_137430_137431_137_catalog_images_pr_p_1_9_0_0_6_2_7_1_19006271c.jpg_DATEMAJ_13_10_2026-13_39_31",
-   "https://file.bienici.com/photo/immo-facile-19006271_media.immo-facile.com_office2_pagesimmoweb_137430_137431_137_catalog_images_pr_p_1_9_0_0_6_2_7_1_19006271d.jpg_DATEMAJ_13_10_2026-13_32_53",
-   "https://file.bienici.com/photo/immo-facile-19006271_media.immo-facile.com_office2_pagesimmoweb_137430_137431_137_catalog_images_pr_p_1_9_0_0_6_2_7_1_19006271e.jpg_DATEMAJ_13_10_2026-13_32_53"
+   "https://img.e-xiste.com/hnB5GQ4AJzrC0OqPU7VLVGdhVP9769hYnJtELL7hDzs/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_9f6d20d4-7b0c-426e-9812-eda555e20ad8.jpg"
   ],
-  "description": "À louer, appartement de type T2 d'une surface de 42.51 m² situé au 4ème et dernier étage d'un immeuble dans le quartier de la Trinité à Saint Denis. Ce logement comprend une chambre, une  petite terrasse agréable, et une place de parking privative. <br> Le prix du loyer est de 740.20€ dont 36.35 € de charges de copropriété et 23.40€ de taxe d'ordure ménagère.<br>Honoraires d'agence 425.10€ pour le bail et 127.53€ pour l'état des lieux<br>Vous bénéficierez d'un environnement pratique avec de nombreux commerces et services à proximité : supermarchés, boulangeries, restaurants, pharmacies,  bureaux de poste, parcs et médecins. <br> Ne manquez pas cette opportunité de vivre dans un quartier dynamique et bien desservi.<br>Pour plus d'informations, contactez votre commercial réfèrent MOUTOUNAICK Nartaradjan <span class=\"importDescriptionDecorator\" data-type=\"phone\">0692 86 51 86</span> <br>Pour plus de rapidité pour programmer une visite, constituer votre dossier candidat : <span class=\"importDescriptionDecorator\" data-url=\"https://app.garantme.fr/fr/getim/housing-application\" data-type=\"failingUrl\">https://app.garantme.fr/fr/getim/housing-application</span><br>Conditions de solvabilité en agence.<br>Barème des honoraires : <span class=\"importDescriptionDecorator\" data-url=\"https://www.getim.com/fr/honoraires.htm\" data-type=\"agencyFeeUrl\">https://www.getim.com/fr/honoraires.htm</span><br>Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site www.georisques.gouv.fr<br>",
+  "description": "Location T2 Saint-Denis (974) 2 pièces 43 m²",
   "caracteristiques": [
-   "Ascenseur",
-   "Parking (1)",
-   "4e étage",
-   "1 chambre",
    "Varangue / balcon",
    "Parking"
   ],
-  "date": "2026-10-13T14:29:51.980Z",
-  "annonceur": "GETIM NORD",
-  "lat": -20.884477270638964,
-  "lon": 55.46310456942476,
-  "charges": 36.35,
+  "date": "",
+  "annonceur": "Pro · via bien'ici",
+  "lat": null,
+  "lon": null,
+  "charges": null,
   "pro": true,
-  "tel": "0692 86 51 86",
+  "tel": "",
   "email": "",
-  "adresse": "4, AVENUE DE LA VICTOIRE, 97400 Saint-Denis",
+  "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-t2-a-louer-a-saint-denis-trinite-dernier-etage-avec-terrasse-et-parking/01a1361f-7a4f-773b-b168-dc2e51c9a705"
-   },
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-2-pieces-43-m2/01a0ce8e-7e51-7a4c-a7ca-d8b0a9892690"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
