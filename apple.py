@@ -30,8 +30,9 @@ FICHES_FILE = ROOT / "data" / "apple_fiches.json"  # pages produit déjà lues (
 VUS_FILE = ROOT / "data" / "apple_vus.json"        # id -> date où l'appli a vu le produit la 1re fois
 OUT_DIR = ROOT / "docs" / "apple"
 REUNION = timezone(timedelta(hours=4))
-FICHES_PAR_PASSAGE = int(os.environ.get("FICHES_PAR_PASSAGE", "400"))  # nouvelles pages produit lues à chaque passage
+FICHES_PAR_PASSAGE = int(os.environ.get("FICHES_PAR_PASSAGE", "600"))  # nouvelles pages produit lues à chaque passage
 FICHE_JOURS = 4  # une page produit est relue au bout de ce nombre de jours
+VERSION_FICHE = 2  # à augmenter quand lire_fiche apprend à lire une nouvelle information
 
 # ---------------------------------------------------------------- communes (centre approximatif)
 
@@ -195,7 +196,8 @@ ACCESSOIRE = (r"\bcoques?\b|\betuis?\b|\bhousses?\b|\bprotections?\b|\bverres? t
               r"\bpower ?bank\b|\bstylets?\b|\bpencil\b|\bclaviers?\b|\bkeyboard\b|\bsouris\b|\bmouse\b|\btrackpad\b|\bairtags?\b|"
               r"\bhubs?\b|\bdocks?\b|\bsacoches?\b|\bsacs?\b|\bsleeve\b|\bfolio\b|\bsmart cover\b|\bmagsafe\b|\bcordons?\b|"
               r"\bdragonnes?\b|\bprises?\b|\balimentation\b|\bbumper\b|\bportefeuille\b|\bwallet\b|\bmagstick\b|\bcase\b|"
-              r"\bglass\b|\bsafe privacy\b|\blightning\b|\busb ?c\b|\bcover\b|\bembouts?\b|\btelecommande\b|\bremote\b")
+              r"\bglass\b|\bsafe privacy\b|\blightning\b|\busb ?c\b|\bcover\b|\bembouts?\b|\btelecommande\b|\bremote\b|\bpochettes?\b|"
+              r"\bprotege\b|\baircase\b|\bsilicone\b|\bsupport\b|\bskin\b|\bcoverbook\b|\bcharging\b|\bcharger\b|\bholder\b|\bstand\b")
 SOUS_CATS = [
     ("Bracelets Apple Watch", r"\bbracelets?\b|\bboucle\b|\bband\b|\bloop\b|\bdragonne\b"),
     ("AirTag", r"\bairtags?\b"),
@@ -203,7 +205,7 @@ SOUS_CATS = [
     ("Claviers et souris", r"\bclaviers?\b|\bkeyboard\b|\bsouris\b|\bmouse\b|\btrackpad\b"),
     ("MagSafe", r"\bmagsafe\b|\bqi2\b|\bmagstick\b"),
     ("Coques et protections", r"\bcoques?\b|\betuis?\b|\bhousses?\b|\bprotections?\b|\bverres?\b|\bfilms?\b|\bfolio\b|"
-                              r"\bsmart cover\b|\bbumper\b|\bsleeve\b|\bsacoches?\b|\bsacs?\b|\bcase\b|\bglass\b|\bcover\b"),
+                              r"\bsmart cover\b|\bbumper\b|\bpochettes?\b|\baircase\b|\bsilicone\b|\bsleeve\b|\bsacoches?\b|\bsacs?\b|\bcase\b|\bglass\b|\bcover\b"),
     ("Chargeurs et câbles", r"\bchargeurs?\b|\bcables?\b|\badaptateurs?\b|\balimentation\b|\bhubs?\b|\bdocks?\b|"
                             r"\bbatteries?\b|\bpower ?bank\b|\bstations?\b|\bprises?\b|\blightning\b|\busb\b|\bcordons?\b"),
     ("Audio", r"\bcasques?\b|\becouteurs?\b|\benceintes?\b|\bbeats\b"),
@@ -214,9 +216,19 @@ AUTRES_MARQUES = r"\b(?:samsung|galaxy|huawei|xiaomi|redmi|garmin|amazfit|fitbit
 PAS_A_VENDRE = r"\b(?:recherche|recherches|cherche|cherchons|achete|achat de|rachete|rachat|echange contre|troc)\b"
 
 
+def accessoire_seul(t):
+    """« iPhone 18 Pro Clear Case », « AirPods 4 coque silicone » : un accessoire nommé après l'appareil.
+    Mais « iPhone 13 avec coque » ou « iPad + étui » restent des appareils vendus avec un accessoire."""
+    for m in re.finditer(ACCESSOIRE, t):
+        if not re.search(r"\b(?:avec|et|plus|offerte?s?|inclus|fournie?s?|sans)\s(?:\w+\s){0,2}$", t[:m.start()]):
+            if m.group(0) not in ("lightning", "usb c", "usbc", "support", "stand", "remote", "magsafe", "charging"):
+                return True
+    return False
+
+
 def classer(titre, marque="", description=""):
     """(catégorie, étiquettes) pour un produit Apple ou un accessoire pour appareil Apple ; None sinon."""
-    t = mots(titre).strip()
+    t = mots(titre.replace("+", " plus ")).strip()
     if re.search(AUTRES_MARQUES, t):
         return None
     debut = None
@@ -231,7 +243,7 @@ def classer(titre, marque="", description=""):
             cat = "accessoires"
         else:
             return None
-    elif acc and (acc.start() < debut[1] or re.search(POUR_APPAREIL, t)):
+    elif acc and (acc.start() < debut[1] or re.search(POUR_APPAREIL, t) or accessoire_seul(t)):
         cat = "accessoires"
     else:
         cat = debut[0]
@@ -517,13 +529,13 @@ def prestashop_fiche(h):
             if t and t not in morceaux:
                 morceaux.append(t)
     f["description"] = "\n".join(morceaux)[:2500] or html.unescape(meta(h, "description"))
-    variantes = re.search(r'class="[^"]*product-variants[^"]*"(.*?)(?:product-add-to-cart|product-quantity|id="add-to-cart)', h, re.S)
+    variantes = re.search(r'class="[^"]*product(?:-|__)variants[^"]*"(.*?)(?:product-add-to-cart|product__add-to-cart|product-quantity|id="add-to-cart)', h, re.S)
     if variantes:
-        for bloc in re.split(r'class="[^"]*product-variants-item', variantes.group(1))[1:]:
+        for bloc in re.split(r'class="(?:[^"]*product-variants-item|variant)"', variantes.group(1))[1:]:
             nom = re.search(r'<(?:label|span)[^>]*class="[^"]*(?:control-label|form-label)[^"]*"[^>]*>(.*?)</', bloc, re.S)
             valeurs = [html.unescape(v) for v in re.findall(r'title="([^"]+)"', bloc)] or \
                 [ligne(v) for v in re.findall(r"<option[^>]*>(.*?)</option>", bloc, re.S)]
-            nom = ligne(nom.group(1)).rstrip(" :") if nom else ""
+            nom = ligne(nom.group(1)).split(":")[0].strip() if nom else ""  # « Couleur : Minuit »
             valeurs = list(dict.fromkeys(v for v in valeurs if v and len(v) < 40))
             if nom and valeurs:
                 f["options"][nom] = valeurs
@@ -565,8 +577,17 @@ def microstor():
 
 
 def phenix_lieux():
-    r = get("https://phenix-store.com/magasins")
     lieux = []
+    for page in ("https://phenix-store.com/nous-contacter", "https://phenix-store.com/content/4-a-propos"):
+        r = get(page)
+        if not r:
+            continue
+        corps = re.sub(r"\s+", " ", texte(r.text))
+        m = re.search(r"((?:\d{1,4}[ ,]*(?:bis|ter)?[ ,]*)?(?:rue|avenue|bd|boulevard|chemin|route|zac|za|zi|centre|galerie|place|allee|allée|lotissement|résidence|residence)[^,;:|]{3,60}?)[ ,-]*(974\d\d)\s+([A-Za-zÀ-ÿ'’ -]{3,30})", corps, re.I)
+        if m and CP_COMMUNES.get(m.group(2)):
+            commune = CP_COMMUNES[m.group(2)]
+            return [lieu("Phenix Store " + commune, commune, f"{m.group(1).strip()}, {m.group(2)} {m.group(3).strip()}")]
+    r = get("https://phenix-store.com/magasins")
     if r:
         for bloc in re.split(r'<article[^>]*class="[^"]*store-item|<div[^>]*class="[^"]*store-item', r.text)[1:]:
             nom = re.search(r"<h3[^>]*>(.*?)</h3>", bloc, re.S) or re.search(r'class="[^"]*card-title[^"]*"[^>]*>(.*?)</', bloc, re.S)
@@ -584,7 +605,8 @@ def phenix():
     rayons = prestashop_liens_categories(accueil.text, base, r"apple|iphone|ipad|watch|mac|neuf|reconditionne|smartphones|accessoires|ecouteurs") if accueil else []
     principaux = [base + p for p in ["/23-apple", "/3-smartphones", "/5-neuf", "/6-reconditionne", "/20-ipad", "/15-apple-watch",
                                      "/7-accessoires-apple", "/93-ecouteurs_apple", "/114-nos-offres"]]
-    lieux = phenix_lieux() or [lieu("Phenix Store", "Saint-Denis")]
+    lieux = phenix_lieux()  # sans adresse trouvée, l'appli indique « vente en ligne »
+    print(f"  Phenix Store : magasin {[l['adresse'] for l in lieux]}", file=sys.stderr)
     res = {}
     for url in dict.fromkeys(principaux + rayons):
         for p in prestashop_categorie(url):
@@ -903,13 +925,15 @@ def lire_fiche(a):
     else:
         f = paruvendu_fiche(h)
     f["lu"] = datetime.now(timezone.utc).isoformat(timespec="minutes")
-    f["photos"] = [urljoin(a["url"], p) for p in f.get("photos", []) if p and not re.search(r"logo|icon|favicon|placeholder|default_image", p)][:10]
+    f["v"] = VERSION_FICHE
+    f["photos"] = list(dict.fromkeys(urljoin(a["url"], p) for p in f.get("photos", []) if p and not re.search(r"logo|icon|favicon|placeholder|default_image", p)))[:10]
     return f
 
 
 def completer(produits, fiches):
     limite = (datetime.now(timezone.utc) - timedelta(days=FICHE_JOURS)).isoformat()
-    a_lire = [a for a in produits if a["url"] not in fiches or fiches[a["url"]].get("lu", "") < limite]
+    a_lire = [a for a in produits if a["url"] not in fiches or fiches[a["url"]].get("lu", "") < limite
+              or fiches[a["url"]].get("v") != VERSION_FICHE]
     # d'abord les produits jamais lus (iShop en tête : sa page de rayon ne donne ni le nom complet ni le prix)
     a_lire.sort(key=lambda a: (a["url"] in fiches, not a.get("a_completer"), a["vendeur"] == "ParuVendu"))
     lus = 0
@@ -934,8 +958,8 @@ def completer(produits, fiches):
             a["photos"] = list(dict.fromkeys(f["photos"] + a["photos"]))[:10]
         if f.get("description") and len(f["description"]) > len(a["description"]):
             a["description"] = f["description"]
-        if a.get("a_completer") and f.get("prix") is not None:
-            a["prix"] = arrondi(f["prix"])
+        if f.get("prix") and (a.get("a_completer") or a["prix"] is None or a["prix"] < 0.2 * f["prix"]):
+            a["prix"] = arrondi(f["prix"])  # Microstor : la liste montre 1, 2, 3 € pour les produits à options
         if a.get("a_completer") and f.get("dispo") is False:
             a["dispo"] = False
         a["options"] = f.get("options") or {}
@@ -961,10 +985,14 @@ def finaliser(a):
     en_plus = {}
     opts = a.pop("options", {}) or {}
     for nom, valeurs in opts.items():
+        n = norm(nom)
         if len(valeurs) > 1:
-            n = norm(nom)
             cle = "Stockages proposés" if "stock" in n or "capacit" in n else "Couleurs proposées" if "couleur" in n else nom
             en_plus[cle] = ", ".join(valeurs[:8])
+        elif valeurs and ("stock" in n or "capacit" in n):
+            en_plus["Capacité"] = valeurs[0]
+        elif valeurs and "etat" not in n:
+            en_plus[nom] = valeurs[0]
     site = a.pop("carac_site", {}) or {}
     for k in ("Processeur", "Système d'exploitation", "Mémoire vive", "Taille de l'écran", "Résolution", "Capacité de stockage", "Couleur"):
         if site.get(k):
@@ -974,7 +1002,7 @@ def finaliser(a):
     if detail and norm(detail) != norm(a["etat"]):
         a["carac"]["État"] = detail
     # prix de la version la moins chère : l'appli écrit « dès … »
-    a["des"] = bool(a.pop("a_partir", False) or any(len(v) > 1 for k, v in opts.items() if re.search(r"stock|capacit|etat", norm(k))))
+    a["des"] = bool(a.pop("a_partir", False) or any(len(v) > 1 for k, v in opts.items() if "couleur" not in norm(k)))
     if a["vendeur"] == "ParuVendu":
         if a.get("annonceur"):
             a["carac"]["Vendeur"] = a["annonceur"]
@@ -986,6 +1014,11 @@ def finaliser(a):
         elif re.search(r"pour pieces|hs\b|casse|ne s'allume|bloque icloud|ecran fissure", t):
             a["carac"]["État"] = "Pour pièces ou à réparer"
     a["modele"] = modele(a["titre"], a["cat"])
+    if a["vendeur"] == "Cash Express":  # « Montre connectee watch se 3 40mm gps » -> « Apple Watch SE 3 · 40 mm · GPS »
+        if a["modele"]:
+            a["titre"] = " · ".join([a["modele"]] + [a["carac"][k] for k in ("Capacité", "Taille", "Connectivité") if a["carac"].get(k)])
+        else:
+            a["titre"] = a["titre"][:1].upper() + a["titre"][1:]
     a["rang"] = rang(a)
     for cle in ("a_completer", "titre_coupe", "marque", "annonceur", "date"):
         a.pop(cle, None)
