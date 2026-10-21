@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Logements Nord Réunion</title>
+<meta name="description" content="Studios, T1, T2 et T3 à louer jusqu'à __PRIX_MAX__ € dans le nord de La Réunion, avec aides au logement possibles.">
+<meta name="theme-color" content="#0f766e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Logements 974">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+<style>
+:root{
+  --fond:#f4f6f5;--carte:#fff;--texte:#16201d;--doux:#5b6b66;--ligne:#dfe5e3;
+  --accent:#0f766e;--accent-doux:#e3f2ef;--prix:#0b5f58;--nouveau:#c2410c;--fav:#e11d48;
+  --ombre:0 1px 2px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme:dark){:root{
+  --fond:#0e1412;--carte:#18201e;--texte:#e8eeec;--doux:#9aaba6;--ligne:#2a3532;
+  --accent:#2dd4bf;--accent-doux:#163330;--prix:#5eead4;--nouveau:#fb923c;--fav:#fb7185;
+  --ombre:0 1px 2px rgba(0,0,0,.4);
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fond);color:var(--texte);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-text-size-adjust:100%}
+header{padding:18px 16px 6px;max-width:1200px;margin:auto}
+h1{margin:0;font-size:22px;letter-spacing:-.01em}
+.sous{color:var(--doux);font-size:13px;margin-top:2px}
+.filtres{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--fond) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--ligne)}
+.filtres-in{max-width:1200px;margin:auto;padding:10px 16px;display:flex;flex-direction:column;gap:8px}
+.rangee{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:1px}
+.rangee::-webkit-scrollbar{display:none}
+.puce{flex:none;border:1px solid var(--ligne);background:var(--carte);color:var(--texte);border-radius:999px;padding:6px 12px;font:inherit;font-size:13.5px;cursor:pointer;white-space:nowrap}
+.puce[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){.puce[aria-pressed=true]{color:#06201d}}
+.ligne2{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:13.5px}
+.ligne2 label{display:flex;align-items:center;gap:6px}
+input[type=range]{width:140px;accent-color:var(--accent)}
+select{font:inherit;font-size:13.5px;padding:5px 8px;border-radius:8px;border:1px solid var(--ligne);background:var(--carte);color:var(--texte)}
+.compte{color:var(--doux);font-size:13px;margin-left:auto}
+main{max-width:1200px;margin:auto;padding:14px 16px 40px;display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+.carte{background:var(--carte);border-radius:16px;overflow:hidden;box-shadow:var(--ombre);display:flex;flex-direction:column;min-width:0}
+.photos{position:relative;aspect-ratio:4/3;background:var(--ligne)}
+.defile{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.defile::-webkit-scrollbar{display:none}
+.defile img{flex:none;width:100%;height:100%;object-fit:cover;scroll-snap-align:start;cursor:zoom-in;background:var(--ligne)}
+.sansphoto{display:grid;place-items:center;height:100%;color:var(--doux);font-size:40px}
+.nb{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;padding:2px 8px;border-radius:999px}
+.fl{position:absolute;top:50%;transform:translateY(-50%);border:0;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.85);color:#111;font-size:18px;cursor:pointer;display:none}
+.photos:hover .fl{display:block}
+.fl.g{left:8px}.fl.d{right:8px}
+.badges{position:absolute;left:8px;top:8px;display:flex;gap:5px}
+.badge{font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.92);color:#16201d}
+.badge.nouv{background:var(--nouveau);color:#fff}
+.coeur{position:absolute;right:8px;top:8px;border:0;background:rgba(255,255,255,.92);width:34px;height:34px;border-radius:50%;font-size:17px;cursor:pointer;line-height:34px;padding:0}
+.corps{padding:12px 14px 14px;display:flex;flex-direction:column;gap:7px;flex:1}
+.haut{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.prix{font-size:22px;font-weight:700;color:var(--prix)}
+.prix small{font-size:12px;font-weight:500;color:var(--doux)}
+.type{font-weight:600;font-size:14px;text-align:right}
+.lieu{font-size:14px}
+.lieu b{font-weight:600}
+.meta{color:var(--doux);font-size:12.5px}
+.carac{display:flex;flex-wrap:wrap;gap:5px}
+.carac span{font-size:12px;background:var(--accent-doux);color:var(--texte);padding:2px 8px;border-radius:6px}
+.carac .caf{background:#dcfce7;color:#14532d}
+@media (prefers-color-scheme:dark){.carac .caf{background:#14532d;color:#dcfce7}}
+.desc{font-size:13.5px;white-space:pre-line;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;color:var(--texte)}
+.desc.ouvert{display:block}
+.plus{border:0;background:none;color:var(--accent);font:inherit;font-size:13px;padding:0;cursor:pointer;align-self:flex-start}
+.actions{display:flex;gap:8px;margin-top:auto;padding-top:4px}
+.btn{flex:1;text-align:center;text-decoration:none;font-weight:600;font-size:14px;padding:9px 10px;border-radius:10px;background:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){.btn{color:#06201d}}
+.btn.sec{background:transparent;color:var(--accent);border:1px solid var(--ligne);flex:0 0 auto}
+.aussi{font-size:12px;color:var(--doux)}
+.aussi a{color:var(--accent)}
+.vide{grid-column:1/-1;text-align:center;color:var(--doux);padding:50px 10px}
+footer{max-width:1200px;margin:auto;padding:0 16px 40px;color:var(--doux);font-size:12.5px}
+footer p{margin:6px 0}
+#loupe{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:20;display:none}
+#loupe.ouvert{display:block}
+#loupe .defile img{object-fit:contain;background:transparent;cursor:default}
+#loupe .fermer{position:absolute;top:max(12px,env(safe-area-inset-top));right:12px;z-index:2;border:0;background:rgba(255,255,255,.2);color:#fff;width:40px;height:40px;border-radius:50%;font-size:22px;cursor:pointer}
+#loupe .fl{display:block}
+</style>
+</head>
+<body>
+<header>
+  <h1>🏠 Logements Nord Réunion</h1>
+  <div class="sous">Studio, T1, T2, T3 jusqu'à __PRIX_MAX__ € · aides CAF possibles · mis à jour __MAJ__</div>
+</header>
+
+<div class="filtres"><div class="filtres-in">
+  <div class="rangee" id="types"></div>
+  <div class="rangee" id="communes"></div>
+  <div class="ligne2">
+    <label>Max <input type="range" id="prix" min="200" max="__PRIX_MAX__" step="10" value="__PRIX_MAX__"> <b id="prixv"></b></label>
+    <select id="meuble" aria-label="Meublé">
+      <option value="">Meublé ou vide</option><option value="1">Meublé</option><option value="0">Vide</option>
+    </select>
+    <select id="tri" aria-label="Trier">
+      <option value="prix">Prix croissant</option><option value="recent">Plus récentes</option>
+      <option value="surface">Plus grandes</option><option value="m2">Prix au m²</option>
+    </select>
+    <span class="compte" id="compte"></span>
+  </div>
+</div></div>
+
+<main id="liste"></main>
+
+<footer>
+  <p><b>Aides au logement :</b> à La Réunion, la CAF verse l'allocation logement (AL) ou l'APL pour une résidence principale louée avec un bail, vide ou meublée. L'appli écarte les locations de vacances ou de courte durée, les colocations, et les annonces où le propriétaire refuse la CAF. « CAF citée » veut dire que l'annonce parle des aides. Le montant dépend de vos revenus : faites une simulation sur caf.fr.</p>
+  <p><b>Zone :</b> Nord (Saint-Denis avec Sainte-Clotilde et La Montagne, Sainte-Marie), Nord-Est (Sainte-Suzanne, Saint-André), Nord-Ouest (La Possession, Le Port).</p>
+  <p><b>Sites lus :</b> __SOURCES__. Leboncoin, SeLoger, PAP et Logic-Immo bloquent la lecture automatique, mais la plupart des annonces d'agence y figurent aussi sur Bien'ici. Une même annonce présente sur plusieurs sites n'apparaît qu'une fois.</p>
+</footer>
+
+<div id="loupe" role="dialog" aria-label="Photos">
+  <button class="fermer" aria-label="Fermer">×</button>
+  <div class="defile" style="height:100%"></div>
+  <button class="fl g" aria-label="Photo précédente">‹</button><button class="fl d" aria-label="Photo suivante">›</button>
+</div>
+
+<script>
+const ANNONCES = __DONNEES__;
+const COMMUNES = __COMMUNES__;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let favoris = [];
+try { favoris = JSON.parse(localStorage.getItem("logements-favoris") || "[]"); } catch (e) {}
+const etat = {type: "", commune: "", fav: false};
+
+function puces(el, choix, cle) {
+  el.innerHTML = choix.map(([v, t]) => `<button class="puce" data-v="${esc(v)}" aria-pressed="${etat[cle] === v}">${esc(t)}</button>`).join("");
+  el.onclick = e => {
+    const b = e.target.closest(".puce"); if (!b) return;
+    etat[cle] = b.dataset.v; puces(el, choix, cle); afficher();
+  };
+}
+const nbType = t => ANNONCES.filter(a => t === "" || (t === "Studio/T1" ? ["Studio", "T1"].includes(a.type) : a.type === t)).length;
+puces($("#types"), [["", "Tous"], ["Studio/T1", "Studio / T1"], ["T2", "T2"], ["T3", "T3"], ["fav", "♥ Favoris"]].map(([v, t]) => [v, v === "fav" ? t : `${t} (${nbType(v)})`]), "type");
+const secteurs = {};
+for (const [c, s] of Object.entries(COMMUNES)) (secteurs[s] = secteurs[s] || []).push(c);
+const choixCommunes = [["", "Toutes les communes"]];
+for (const [s, cs] of Object.entries(secteurs)) {
+  choixCommunes.push(["secteur:" + s, s]);
+  for (const c of cs) choixCommunes.push([c, `${c} (${ANNONCES.filter(a => a.commune === c).length})`]);
+}
+puces($("#communes"), choixCommunes, "commune");
+
+const recent = a => (Date.now() - new Date(a.vu).getTime()) < 48 * 3600e3;
+const prixM2 = a => a.surface ? a.prix / a.surface : 1e9;
+
+function carte(a) {
+  const photos = a.photos.length
+    ? `<div class="defile">${a.photos.map((p, i) => `<img src="${esc(p)}" alt="Photo ${i + 1}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`).join("")}</div>
+       ${a.photos.length > 1 ? `<button class="fl g" aria-label="Photo précédente">‹</button><button class="fl d" aria-label="Photo suivante">›</button><span class="nb">📷 ${a.photos.length}</span>` : ""}`
+    : `<div class="sansphoto">🏠</div>`;
+  const fav = favoris.includes(a.id);
+  const carac = [
+    a.caf ? `<span class="caf">✓ CAF citée</span>` : "",
+    a.meuble === true ? "<span>Meublé</span>" : a.meuble === false ? "<span>Vide</span>" : "",
+    ...a.caracteristiques.filter(c => c !== "Meublé").map(c => `<span>${esc(c)}</span>`)
+  ].join("");
+  const quartier = a.quartier && a.quartier !== a.commune ? ` · ${esc(a.quartier)}` : "";
+  const date = a.date ? new Date(a.date) : new Date(a.vu);
+  const carteUrl = a.lat ? `https://www.google.com/maps/search/?api=1&query=${a.lat},${a.lon}`
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((a.quartier && a.quartier !== a.commune ? a.quartier + " " : "") + a.commune + " La Réunion")}`;
+  return `<article class="carte" data-id="${esc(a.id)}">
+    <div class="photos">${photos}
+      <div class="badges">${recent(a) ? '<span class="badge nouv">Nouveau</span>' : ""}<span class="badge">${esc(a.source)}</span></div>
+      <button class="coeur" aria-label="Favori">${fav ? "❤️" : "🤍"}</button>
+    </div>
+    <div class="corps">
+      <div class="haut"><div class="prix">${Math.round(a.prix)} €<small> /mois${a.charges ? " CC" : ""}</small></div>
+        <div class="type">${esc(a.type)}${a.surface ? ` · ${String(Math.round(a.surface * 10) / 10).replace(".", ",")} m²` : ""}</div></div>
+      <div class="lieu">📍 <b>${esc(a.commune)}</b>${quartier} <span class="meta">(${esc(a.secteur)})</span></div>
+      <div class="meta">${esc(a.annonceur || "")}${a.annonceur ? " · " : ""}${isNaN(date) ? "" : "le " + date.toLocaleDateString("fr-FR", {day: "numeric", month: "short"})}${a.charges ? ` · dont ${Math.round(a.charges)} € de charges` : ""}</div>
+      ${a.titre && !/^(T\d|Studio)( |$)/.test(a.titre) ? `<div><b>${esc(a.titre)}</b></div>` : ""}
+      ${carac ? `<div class="carac">${carac}</div>` : ""}
+      ${a.description ? `<div class="desc">${esc(a.description)}</div><button class="plus">Lire la suite</button>` : ""}
+      ${a.photos.length <= 1 ? `<div class="meta">Les autres photos et tous les détails sont sur l'annonce d'origine.</div>` : ""}
+      ${a.aussi && a.aussi.length ? `<div class="aussi">Aussi sur ${a.aussi.map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.source)}</a>`).join(", ")}</div>` : ""}
+      <div class="actions"><a class="btn" href="${esc(a.url)}" target="_blank" rel="noopener">Voir l'annonce</a><a class="btn sec" href="${carteUrl}" target="_blank" rel="noopener">🗺️ Carte</a></div>
+    </div></article>`;
+}
+
+function afficher() {
+  const max = +$("#prix").value; $("#prixv").textContent = max + " €";
+  const m = $("#meuble").value, tri = $("#tri").value, c = etat.commune, t = etat.type;
+  let l = ANNONCES.filter(a => a.prix <= max
+    && (t === "" || t === "fav" || (t === "Studio/T1" ? ["Studio", "T1"].includes(a.type) : a.type === t))
+    && (t !== "fav" || favoris.includes(a.id))
+    && (c === "" || (c.startsWith("secteur:") ? a.secteur === c.slice(8) : a.commune === c))
+    && (m === "" || String(+!!a.meuble) === m));
+  const cmp = {prix: (a, b) => a.prix - b.prix, recent: (a, b) => (b.vu || "").localeCompare(a.vu || "") || (b.date || "").localeCompare(a.date || ""),
+               surface: (a, b) => (b.surface || 0) - (a.surface || 0), m2: (a, b) => prixM2(a) - prixM2(b)}[tri];
+  l.sort(cmp);
+  $("#compte").textContent = `${l.length} annonce${l.length > 1 ? "s" : ""}`;
+  $("#liste").innerHTML = l.length ? l.map(carte).join("") : `<div class="vide">Aucune annonce avec ces filtres.</div>`;
+}
+["#prix", "#meuble", "#tri"].forEach(s => $(s).addEventListener("input", afficher));
+
+function defiler(zone, sens) { const d = zone.querySelector(".defile"); d.scrollBy({left: sens * d.clientWidth, behavior: "smooth"}); }
+$("#liste").addEventListener("click", e => {
+  const art = e.target.closest(".carte"); if (!art) return;
+  if (e.target.classList.contains("plus")) {
+    const d = art.querySelector(".desc"); d.classList.toggle("ouvert");
+    e.target.textContent = d.classList.contains("ouvert") ? "Réduire" : "Lire la suite";
+  } else if (e.target.classList.contains("coeur")) {
+    const id = art.dataset.id;
+    favoris = favoris.includes(id) ? favoris.filter(x => x !== id) : [...favoris, id];
+    try { localStorage.setItem("logements-favoris", JSON.stringify(favoris)); } catch (err) {}
+    e.target.textContent = favoris.includes(id) ? "❤️" : "🤍";
+  } else if (e.target.classList.contains("fl")) {
+    defiler(art, e.target.classList.contains("d") ? 1 : -1);
+  } else if (e.target.tagName === "IMG") {
+    const a = ANNONCES.find(x => x.id === art.dataset.id);
+    const imgs = [...art.querySelectorAll(".defile img")]; const i = imgs.indexOf(e.target);
+    const d = $("#loupe .defile");
+    d.innerHTML = imgs.map(im => `<img src="${esc(im.src)}" alt="" referrerpolicy="no-referrer">`).join("");
+    $("#loupe").classList.add("ouvert"); document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => d.scrollLeft = i * d.clientWidth);
+  }
+});
+$("#loupe").addEventListener("click", e => {
+  if (e.target.classList.contains("fl")) return defiler($("#loupe"), e.target.classList.contains("d") ? 1 : -1);
+  if (e.target.classList.contains("fermer") || e.target.tagName !== "IMG") { $("#loupe").classList.remove("ouvert"); document.body.style.overflow = ""; }
+});
+document.addEventListener("keydown", e => {
+  if (!$("#loupe").classList.contains("ouvert")) return;
+  if (e.key === "Escape") $("#loupe .fermer").click();
+  if (e.key === "ArrowRight") defiler($("#loupe"), 1);
+  if (e.key === "ArrowLeft") defiler($("#loupe"), -1);
+});
+afficher();
+</script>
+</body>
+</html>

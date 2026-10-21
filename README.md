@@ -29,3 +29,29 @@ sport, les montres pour femme ou enfant et les accessoires, puis :
 - Annonces publiées ou mises à jour depuis 2024 (réglable avec `DEPUIS` dans `montres.py`).
 - Leboncoin, Facebook Marketplace et Vinted bloquent la lecture automatique : ils ne sont pas inclus.
 - La carte montre la commune du vendeur, pas son adresse exacte.
+
+---
+
+# 🏠 Logements Nord Réunion (studio à T3, jusqu'à 740 €)
+
+Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/logements/
+
+Toutes les 3 h (de 6h15 à 21h15, heure de La Réunion), GitHub cherche les **appartements à louer**
+(studio, T1, T2, T3) à **740 € maximum** à Saint-Denis (avec Sainte-Clotilde et La Montagne), Sainte-Marie,
+Sainte-Suzanne, Saint-André, La Possession et Le Port, sur **Bien'ici**, **ParuVendu**, **Zimo**
+(qui reprend aussi des annonces de Leboncoin), **EntreParticuliers** et **Figaro Immobilier**.
+
+Il garde seulement les logements qui peuvent ouvrir droit aux **aides au logement de la CAF** (AL ou APL) :
+il écarte les locations de vacances ou de courte durée, les colocations, les chambres, et les annonces
+où le propriétaire refuse la CAF. La pastille « CAF citée » indique que l'annonce parle des aides.
+
+Chaque annonce montre les photos, le prix, le type, la surface, la commune et le quartier, les
+caractéristiques (meublé, parking, varangue…), la description et un lien vers l'annonce d'origine.
+Une même annonce publiée sur plusieurs sites n'apparaît qu'une fois.
+
+- Prix maximum : `PRIX_MAX` dans `logements.py`. Communes : `COMMUNES` dans `logements.py`.
+- Lancer une recherche tout de suite : onglet **Actions → Logements Nord Réunion → Run workflow**.
+- Leboncoin, SeLoger, PAP et Logic-Immo bloquent la lecture automatique. Une partie de leurs annonces arrive
+  quand même par Zimo et Bien'ici.
+- Les pages d'annonce de Zimo sont protégées : pour ces annonces, l'appli montre une photo et le résumé,
+  et le reste est sur le site d'origine.
