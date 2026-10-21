@@ -71,8 +71,12 @@ sujet `logements974-w9y80xhxga`), avec la photo, le prix et les boutons « Voir 
 Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/apple/
 
 **Toutes les 3 heures, de 6h à 22h (heure de La Réunion)**, GitHub relève les produits Apple **neufs,
-reconditionnés et d'occasion** en vente sur l'île : **iShop**, **Microstor**, **Phenix Store**, **Darty Réunion**,
-les magasins **Cash Express** de Saint-Pierre et Sainte-Clotilde, et les annonces **ParuVendu** (particuliers).
+reconditionnés et d'occasion** en vente **à La Réunion**, sur 14 sites de l'île : **iShop**, **Microstor**, **Phenix Store**,
+**Darty Réunion**, **Leclerc (Leclic.re)**, **Delbos Informatique**, **TelROI**, **OrdiROI**, **Zeop Store**, **Isleden**,
+**smart974**, **Pineapple**, les magasins **Cash Express** de Saint-Pierre et Sainte-Clotilde, et les annonces **ParuVendu**.
+
+**Notification de midi** : chaque jour vers 12h, une notification donne le nombre de produits Apple sortis en vente
+dans les dernières 24 h et les liste (appli gratuite **ntfy**, sujet `apple974-hcmkgo9gki`).
 
 - Catégories façon Apple Store (iPhone, Apple Watch, iPad, Mac, AirPods, TV et Maison, Accessoires) qui défilent
   de droite à gauche, puces d'accessoires (MagSafe, coques, bracelets, chargeurs, Apple Pencil…) et rangée des magasins.
@@ -88,6 +92,8 @@ les magasins **Cash Express** de Saint-Pierre et Sainte-Clotilde, et les annonce
 Réglages : liste `SOURCES` et fonctions de chaque site dans `apple.py`, page dans `apple_page.html`.
 Lancer une recherche tout de suite : onglet **Actions → Apple Réunion → Run workflow**.
 
-Limites : Leboncoin et Facebook Marketplace bloquent la lecture automatique. Le prix affiché « dès » est celui de la
+Limites : Leboncoin (captcha anti-robot) et Facebook Marketplace (connexion obligatoire) bloquent la lecture
+automatique ; la rubrique « Aussi sur » de l'appli ouvre directement leur recherche à La Réunion. SFR Réunion, Orange Réunion
+et Easy Cash refusent aussi les robots. Le prix affiché « dès » est celui de la
 version la moins chère. Pour Microstor et ParuVendu, la carte montre la commune, pas l'adresse exacte.
 

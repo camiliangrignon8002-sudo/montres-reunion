@@ -118,6 +118,16 @@ h2.sec small{font-size:14px;font-weight:400;color:var(--doux)}
 .coeur{position:absolute;top:6px;right:6px;width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.86);display:grid;place-items:center;z-index:2;color:#1d1d1f}
 .coeur svg.ic{width:19px;height:19px}
 .coeur[aria-pressed=true]{color:#ff2d55}
+.partage-carte{position:absolute;right:6px;bottom:8px;width:32px;height:32px;border:0;border-radius:50%;background:var(--champ);display:grid;place-items:center;color:var(--bleu);z-index:2}
+.partage-carte svg.ic{width:17px;height:17px}
+.carte .corps{padding-right:44px}
+.nouveau{position:absolute;top:36px;left:9px;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:999px;background:var(--bleu);color:#fff;z-index:1;text-transform:uppercase;letter-spacing:.03em}
+.rail .carte{width:168px}
+.ailleurs{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 16px}
+.ailleurs a{background:var(--carte);border-radius:18px;box-shadow:var(--ombre);padding:14px;color:var(--texte);display:flex;flex-direction:column;gap:4px}
+.ailleurs a b{font-size:15.5px}
+.ailleurs a span{font-size:12.5px;color:var(--doux)}
+.ailleurs a em{font-style:normal;font-size:13px;color:var(--bleu);font-weight:600;margin-top:4px}
 .coeur[aria-pressed=true] svg{fill:currentColor}
 .vide{text-align:center;color:var(--doux);padding:50px 30px}
 .vide svg.ic{width:46px;height:46px;stroke-width:1.2;margin-bottom:8px}
@@ -298,6 +308,7 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
   <symbol id="i-tv" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12" rx="1.6"/><path d="M8.5 20h7M12 16.5V20"/></symbol>
   <symbol id="i-cable" viewBox="0 0 24 24"><path d="M7 3v4M11 3v4M5.5 7h7v3.5A3.5 3.5 0 0 1 9 14v0a3.5 3.5 0 0 1-3.5-3.5Z"/><path d="M9 14v2.5a4.5 4.5 0 0 0 9 0V5"/></symbol>
   <symbol id="i-tout" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></symbol>
+  <symbol id="i-cloche" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15L6 16Z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
   <symbol id="i-photo" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 8"/></symbol>
 </svg>
 
@@ -317,11 +328,19 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
 
     <div class="rail" id="rail-cats" aria-label="Catégories"></div>
 
+    <section id="bloc-nouveautes" hidden>
+      <h2 class="sec">Nouveautés du jour <small id="nb-nouveautes"></small></h2>
+      <div class="rail" id="rail-nouveautes" aria-label="Nouveautés du jour"></div>
+    </section>
+
     <h2 class="sec">Accessoires</h2>
     <div class="rail" id="rail-acc" aria-label="Accessoires"></div>
 
     <h2 class="sec">Les magasins <small id="nb-magasins"></small></h2>
     <div class="rail" id="rail-mags" aria-label="Magasins"></div>
+
+    <h2 class="sec">Aussi sur <small>ouvre le site</small></h2>
+    <div class="ailleurs" id="ailleurs"></div>
 
     <h2 class="sec" id="titre-liste">Toutes les annonces</h2>
     <div class="outils" id="outils">
@@ -378,7 +397,11 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
     <button data-action="actualiser"><svg class="ic"><use href="#i-maj"/></svg>Actualiser</button>
   </nav>
   <nav id="m-magasins"></nav>
-  <p class="info">Annonces lues sur les sites d'iShop, Microstor, Darty Réunion, Phenix Store, Cash Express (Saint-Pierre, Sainte-Clotilde) et ParuVendu, plusieurs fois par jour. Les prix et le stock peuvent changer : vérifie sur le site du vendeur avant de te déplacer.<br><br>Sources lues au dernier passage : <span id="sources">__SOURCES__</span></p>
+  <nav>
+    <a href="https://ntfy.sh/__NTFY__" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:13px 16px;color:var(--texte)"><svg class="ic" style="color:var(--bleu)"><use href="#i-cloche"/></svg>Notification de midi</a>
+  </nav>
+  <p class="info">Chaque jour vers 12h, une notification donne le nombre de produits Apple sortis en vente dans les 24 h et les liste. Pour la recevoir : installe l'appli gratuite <b>ntfy</b>, touche <b>+</b> et abonne-toi au sujet <b>__NTFY__</b>.</p>
+  <p class="info">Annonces lues plusieurs fois par jour sur les sites des magasins de La Réunion et sur ParuVendu. Leboncoin et Facebook Marketplace bloquent les robots : la rubrique « Aussi sur » ouvre directement leur recherche à La Réunion. Les prix et le stock peuvent changer : vérifie sur le site du vendeur avant de te déplacer.<br><br>Sources lues au dernier passage : <span id="sources">__SOURCES__</span></p>
 </aside>
 
 <!-- Fiche produit -->
@@ -462,7 +485,9 @@ const NOM_CAT = Object.fromEntries(CATS.map(c => [c[0], c[1]]));
 const SOUS = ["MagSafe", "Coques et protections", "Bracelets Apple Watch", "Chargeurs et câbles", "Apple Pencil", "Claviers et souris", "AirTag", "Audio", "Autres"];
 const ETATS = ["Neuf", "Reconditionné", "Occasion"];
 const CAPAS = ["64 Go", "128 Go", "256 Go", "512 Go", "1 To", "2 To"];
-const COULEURS_MAG = {"iShop": "#0071e3", "Microstor": "#1d1d1f", "Darty": "#e30613", "Phenix Store": "#f28c00", "Cash Express": "#00a19a", "ParuVendu": "#6e3fc7"};
+const COULEURS_MAG = {"iShop": "#0071e3", "Microstor": "#1d1d1f", "Darty": "#e30613", "Phenix Store": "#f28c00", "Cash Express": "#00a19a",
+  "ParuVendu": "#6e3fc7", "Delbos Informatique": "#1f6feb", "Leclerc (Leclic)": "#0055a4", "TelROI": "#d6336c", "OrdiROI": "#c2255c",
+  "Isleden": "#ff130d", "Zeop Store": "#7bb31a", "smart974": "#0f766e", "Pineapple": "#f59f00"};
 const TRIS = [["pertinence", "Pertinence"], ["prix-asc", "Prix croissant"], ["prix-desc", "Prix décroissant"], ["distance", "Les plus proches"], ["recent", "Les plus récentes"]];
 
 let DONNEES = {annonces: [], communes: {}, photos_cat: {}, vendeurs: {}, maj: ""};
@@ -552,6 +577,8 @@ function carte(a) {
   const lieu = l ? `${ic("pin")}${esc(l.commune || l.nom)}${a._d != null ? " · " + distTxt(a._d) : ""}` : a.pro ? `${ic("sac")}Vente en ligne` : "";
   return `<div class="carte" role="button" tabindex="0" data-id="${esc(a.id)}">
     <span class="etat ${esc(a.etat)}">${esc(a.etat)}</span>
+    ${estNouveau(a) ? `<span class="nouveau">Nouveau</span>` : ""}
+    <button class="partage-carte" data-partage="${esc(a.id)}" aria-label="Partager">${ic("partage")}</button>
     <button class="coeur" data-fav="${esc(a.id)}" aria-pressed="${fav}" aria-label="${fav ? "Retirer des favoris" : "Ajouter aux favoris"}">${ic("coeur")}</button>
     <div class="ph${a.pro ? "" : " photo"}">${photo ? `<img loading="lazy" decoding="async" src="${esc(photo)}" alt="" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{innerHTML:'${ic("photo").replace(/"/g, "&quot;")}'}))">` : ic("photo")}</div>
     <div class="corps">
@@ -561,6 +588,24 @@ function carte(a) {
       <div class="bas"><span class="prix">${a.des && a.prix != null ? "<small>dès </small>" : ""}${euros(a.prix)}${a.prix_avant ? `<s>${euros(a.prix_avant)}</s>` : ""}</span><span class="lieu">${lieu}</span></div>
     </div>
   </div>`;
+}
+
+const IL_Y_A_24H = () => new Date(Date.now() - 24 * 3600e3).toISOString();
+function estNouveau(a) { return a.vu && a.nouveau !== false && new Date(a.vu).toISOString() >= IL_Y_A_24H(); }
+async function partager(a) {
+  const t = `${a.titre} – ${a.des ? "dès " : ""}${euros(a.prix)} chez ${a.vendeur}${(a.lieux || [])[0] ? " (" + a.lieux[0].commune + ")" : ""}`;
+  try {
+    if (navigator.share) await navigator.share({title: a.titre, text: t, url: a.url});
+    else { await navigator.clipboard.writeText(t + "\n" + a.url); toast("Lien copié"); }
+  } catch (e) {}
+}
+// Leboncoin et Marketplace refusent les robots : on ouvre leur recherche à La Réunion
+function ailleurs() {
+  const q = RECHERCHE || (F.sous && F.sous !== "Autres" ? F.sous : "") || {iphone: "iPhone", ipad: "iPad", mac: "MacBook", watch: "Apple Watch", airpods: "AirPods", maison: "Apple TV", accessoires: "Apple"}[F.cat] || "Apple";
+  const e = encodeURIComponent(q);
+  $("#ailleurs").innerHTML = `
+    <a href="https://www.leboncoin.fr/recherche?text=${e}&locations=d_974" target="_blank" rel="noopener"><b>Leboncoin</b><span>Annonces « ${esc(q)} » à La Réunion</span><em>Ouvrir ↗</em></a>
+    <a href="https://www.facebook.com/marketplace/search/?query=${e}%20974" target="_blank" rel="noopener"><b>Marketplace</b><span>Facebook, autour de toi</span><em>Ouvrir ↗</em></a>`;
 }
 
 // Rendu progressif : 30 cartes à la fois, la suite quand on arrive en bas
@@ -574,6 +619,7 @@ function rendreGrille() {
   const n = LISTE.length;
   $("#compte").textContent = ANNONCES.length ? `${n.toLocaleString("fr-FR")} annonce${n > 1 ? "s" : ""}` : "Aucune annonce pour le moment";
   if (!n && ANNONCES.length) $("#grille").innerHTML = `<div class="vide" style="grid-column:1/-1">${ic("loupe")}<br>Aucune annonce ne correspond.<br><button class="lien" onclick="toutEffacer()">Effacer les filtres</button></div>`;
+  ailleurs();
   const titre = F.sous || (F.cat ? NOM_CAT[F.cat] : "Toutes les annonces");
   $("#titre-liste").textContent = titre;
   majPilules();
@@ -644,6 +690,10 @@ function construireAccueil() {
   }).join("");
   $("#m-magasins").innerHTML = vendeurs.map(v => `<button data-vendeur="${esc(v)}">${ic("magasin")}${esc(v)}<em>${parV[v].n}</em></button>`).join("");
   $("#m-tout").textContent = ANNONCES.length;
+  const nouveautes = ANNONCES.filter(estNouveau).sort((a, b) => (a.cat === "accessoires") - (b.cat === "accessoires") || (b.vu || "").localeCompare(a.vu || ""));
+  $("#bloc-nouveautes").hidden = !nouveautes.length;
+  $("#nb-nouveautes").textContent = nouveautes.length ? `${nouveautes.length} en 24 h` : "";
+  $("#rail-nouveautes").innerHTML = nouveautes.slice(0, 30).map(carte).join("");
   // filtres de la feuille
   $("#f-vendeur").dataset.liste = JSON.stringify(vendeurs);
   const communes = Object.keys(DONNEES.communes || {}).sort((a, b) => a.localeCompare(b, "fr"));
@@ -762,10 +812,7 @@ function ouvrirFiche(id) {
   if (d) { requestAnimationFrame(() => { if (d.scrollHeight <= d.clientHeight + 4) { d.classList.remove("plie"); $("#desc-plus").parentNode.remove(); } }); $("#desc-plus").onclick = e => { d.classList.remove("plie"); e.target.parentNode.remove(); }; }
   $("#f-fav").onclick = () => { basculerFavori(a); ouvrirFiche(a.id); };
   $("#f-panier").onclick = () => { ajouterPanier(a); ouvrirFiche(a.id); };
-  $("#f-partage").onclick = async () => {
-    const t = `${a.titre} – ${euros(a.prix)} chez ${a.vendeur}`;
-    try { if (navigator.share) await navigator.share({title: a.titre, text: t, url: a.url}); else { await navigator.clipboard.writeText(t + "\n" + a.url); toast("Lien copié"); } } catch (e) {}
-  };
+  $("#f-partage").onclick = () => partager(a);
   $("#fiche-defile").querySelectorAll(".autres button").forEach(b => b.onclick = () => ouvrirFiche(b.dataset.id));
   $("#fiche-defile").scrollTop = 0;
   ouvrir("fiche");
@@ -773,6 +820,8 @@ function ouvrirFiche(id) {
 document.addEventListener("click", e => {
   const f = e.target.closest("[data-fav]");
   if (f) { e.stopPropagation(); const a = PAR_ID[f.dataset.fav] || FAVORIS[f.dataset.fav]; if (a) basculerFavori(a); return; }
+  const sp = e.target.closest("[data-partage]");
+  if (sp) { e.stopPropagation(); const a = PAR_ID[sp.dataset.partage] || FAVORIS[sp.dataset.partage]; if (a) partager(a); return; }
   const c = e.target.closest(".carte[data-id]");
   if (c) ouvrirFiche(c.dataset.id);
 });

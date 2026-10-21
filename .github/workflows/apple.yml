@@ -3,11 +3,16 @@ name: Apple Réunion
 on:
   schedule:
     - cron: "20 2-18/3 * * *"   # toutes les 3 h de 6h20 à 22h20 (heure de La Réunion)
+    - cron: "45 7 * * *"         # 11h45 à La Réunion : recherche + notification de midi (résumé des nouveautés)
   workflow_dispatch:             # bouton "Run workflow" pour lancer à la main
     inputs:
       sources:
         description: "Sources à lire, séparées par des virgules (vide = toutes)"
         default: ""
+      notifier:
+        description: "Envoyer la notification du jour"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -19,7 +24,7 @@ concurrency:
 jobs:
   recherche:
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -29,6 +34,9 @@ jobs:
       - run: python apple.py
         env:
           SOURCES: ${{ inputs.sources }}
+          NOTIFIER: ${{ github.event.schedule == '45 7 * * *' || inputs.notifier == true }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC_APPLE || 'apple974-hcmkgo9gki' }}
+          PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/apple/
       - name: Publier la page
         if: always()
         run: |

@@ -32,7 +32,11 @@ OUT_DIR = ROOT / "docs" / "apple"
 REUNION = timezone(timedelta(hours=4))
 FICHES_PAR_PASSAGE = int(os.environ.get("FICHES_PAR_PASSAGE", "600"))  # nouvelles pages produit lues à chaque passage
 FICHE_JOURS = 4  # une page produit est relue au bout de ce nombre de jours
-VERSION_FICHE = 2  # à augmenter quand lire_fiche apprend à lire une nouvelle information
+VERSION_FICHE = 2
+# Notification de midi : appli gratuite ntfy, abonnement au sujet ci-dessous
+NTFY_TOPIC = os.environ.get("NTFY_TOPIC", "apple974-hcmkgo9gki")
+NOTIFIER = os.environ.get("NOTIFIER", "false") == "true"
+PAGE_URL = os.environ.get("PAGE_URL", "https://camiliangrignon8002-sudo.github.io/montres-reunion/apple/")  # à augmenter quand lire_fiche apprend à lire une nouvelle information
 
 # ---------------------------------------------------------------- communes (centre approximatif)
 
@@ -906,6 +910,240 @@ def paruvendu_fiche(h):
     return f
 
 
+# ---------------------------------------------------------------- autres boutiques de l'île (fiches schema.org)
+
+ETATS_SCHEMA = {"NewCondition": "Neuf", "RefurbishedCondition": "Reconditionné", "UsedCondition": "Occasion",
+                "DamagedCondition": "Occasion"}
+
+
+def schema_fiche(h):
+    """Page produit décrite en schema.org (Delbos, Zeop Store, smart974, Pineapple, TelROI…)."""
+    f = {"titre": "", "photos": [], "description": "", "options": {}, "prix": None, "dispo": True, "etat_schema": "", "marque": ""}
+    for o in ld_json(h):
+        if o.get("@type") not in ("Product", ["Product"]):
+            continue
+        f["titre"] = html.unescape(o.get("name") or "")
+        img = o.get("image") or []
+        f["photos"] = [img] if isinstance(img, str) else [i.get("url") if isinstance(i, dict) else i for i in img]
+        f["description"] = texte(html.unescape(o.get("description") or ""))[:2500]
+        if isinstance(o.get("brand"), dict):
+            f["marque"] = o["brand"].get("name") or ""
+        offres = o.get("offers") or []
+        offres = [offres] if isinstance(offres, dict) else offres
+        if offres and offres[0].get("@type") == "AggregateOffer":
+            f["prix"] = prix_de(offres[0].get("lowPrice"))
+            f["des"] = True
+        prix = [prix_de(x.get("price")) for x in offres if x.get("price") not in (None, "")]
+        prix = [x for x in prix if x]
+        if prix and f["prix"] is None:
+            f["prix"] = min(prix)
+            f["des"] = len(set(prix)) > 1
+        etats = {str(x.get("itemCondition") or o.get("itemCondition") or "").rsplit("/", 1)[-1] for x in offres} | \
+            {str(o.get("itemCondition") or "").rsplit("/", 1)[-1]}
+        f["etat_schema"] = next((ETATS_SCHEMA[e] for e in ("UsedCondition", "RefurbishedCondition", "NewCondition") if e in etats), "")
+        dispo = " ".join(str(x.get("availability", "")) for x in offres)
+        if dispo and not re.search(r"InStock|PreOrder|LimitedAvailability|BackOrder", dispo):
+            f["dispo"] = False
+        if len(offres) > 1:
+            noms = [ligne(x.get("name") or "") for x in offres if x.get("name")]
+            if noms:
+                f["options"]["Versions"] = list(dict.fromkeys(noms))
+        break
+    if not f["titre"]:
+        t = re.search(r"<h1[^>]*>(.*?)</h1>", h, re.S)
+        f["titre"] = ligne(t.group(1)) if t else meta(h, "og:title")
+    if not f["photos"] and meta(h, "og:image"):
+        f["photos"] = [meta(h, "og:image")]
+    if not f["description"]:
+        f["description"] = meta(h, "og:description") or meta(h, "description")
+    return f
+
+
+def adresse_du_site(pages, nom):
+    """Adresse du magasin lue sur la page contact / mentions légales (code postal 974xx)."""
+    for page in pages:
+        r = get(page)
+        if not r:
+            continue
+        corps = re.sub(r"\s+", " ", texte(r.text))
+        for m in re.finditer(r"((?:\d{1,4}[ ,]*(?:bis|ter)?[ ,]*)?(?:rue|avenue|av\.|bd|boulevard|chemin|route|zac|za|zi|zae|centre|galerie|place|allee|allée|lotissement|résidence|residence|parc|impasse|rond-point)[^,;:|]{3,60}?)[ ,-]*(974\d\d)\s+([A-Za-zÀ-ÿ'’ -]{3,30})", corps, re.I):
+            commune = CP_COMMUNES.get(m.group(2))
+            if commune:
+                return [lieu(f"{nom} {commune}", commune, f"{m.group(1).strip()}, {m.group(2)} {m.group(3).strip()}")]
+    return []
+
+
+def boutique_schema(nom, prefixe, pages, motif_produit, etat_defaut="Neuf", lieux=None, pages_max=12, garder=None):
+    """Parcourt des pages de liste (avec ?page=N) et retient les liens produit ; la fiche schema.org fait le reste."""
+    urls = {}
+    for page in pages:
+        for n in range(1, pages_max + 1):
+            url = page if n == 1 else page + ("&" if "?" in page else "?") + f"page={n}"
+            r = get(url)
+            if not r:
+                break
+            trouves = [urljoin(page, u) for u in re.findall(motif_produit, r.text)]
+            nouveaux = [u for u in dict.fromkeys(trouves) if u not in urls]
+            for u in nouveaux:
+                urls[u] = page
+            if not nouveaux or f"page={n + 1}" not in r.text:
+                break
+            time.sleep(0.4)
+    res = []
+    for u in urls:
+        slug = u.rstrip("/").rsplit("/", 1)[-1]
+        titre = re.sub(r"[-_,]+", " ", re.sub(r"\.html?$|,\d+\.htm$", "", slug)).strip()
+        if garder and not garder(u, titre):
+            continue
+        res.append(produit(id=prefixe + re.sub(r"[^a-z0-9]+", "-", norm(slug))[-60:], vendeur=nom, etat=etat_defaut,
+                           titre=titre, url=u, lieux=list(lieux or []), a_completer=True))
+    print(f"  {nom} : {len(urls)} liens produit, {len(res)} gardés", file=sys.stderr)
+    return res
+
+
+def semble_apple(u, titre):
+    return bool(re.search(r"apple|iphone|ipad|macbook|imac|mac-mini|mac mini|airpods|airtag|watch|homepod|magsafe|pencil", norm(u + " " + titre)))
+
+
+def delbos():
+    lieux = adresse_du_site(["https://delbosinformatique.re/contact", "https://delbosinformatique.re/mentions-legales"], "Delbos Informatique") \
+        or [lieu("Delbos Informatique (retrait)", "Petite-Île")]
+    return boutique_schema("Delbos Informatique", "db-", ["https://delbosinformatique.re/magasin?rayon=apple"],
+                           r'href="(/magasin/[a-z0-9-]+)"', lieux=lieux, pages_max=20)
+
+
+def zeopstore():
+    base = "https://www.zeopstore.re"
+    pages = [base + "/"]
+    r = get(base + "/")
+    if r:  # rayons du site (téléphonie, informatique, Apple…)
+        pages += [urljoin(base, u) for u in dict.fromkeys(re.findall(r'href="(/[a-z0-9-]+(?:,[a-z]+)?\.htm)"', r.text))
+                  if re.search(r"apple|iphone|ipad|mac|smartphone|telephon|mobile|informatique|tablette|montre|audio|reconditionn|occasion", u)][:25]
+    lieux = adresse_du_site([base + "/nos-boutiques.htm", base + "/contact.htm", base + "/mentions-legales.htm"], "Zeop Store")
+    return boutique_schema("Zeop Store", "zs-", pages, r'href="((?:https://www\.zeopstore\.re)?/[a-z0-9-]+,\d+\.htm)"',
+                           lieux=lieux, pages_max=6, garder=semble_apple)
+
+
+def smart974():
+    r = get("https://smart974.re/")
+    pages = sorted(set(re.findall(r'href="([a-z0-9-]+\.html)"', r.text))) if r else []
+    lieux = adresse_du_site(["https://smart974.re/mentions-legales.html", "https://smart974.re/contact.html"], "smart974")
+    res = []
+    for p in pages:
+        if semble_apple(p, "") and not re.search(r"seniors|commander|panier|contact|mentions|cgv|faq", p):
+            res.append(produit(id="s9-" + p.replace(".html", ""), vendeur="smart974", etat="Reconditionné",
+                               titre=p.replace(".html", "").replace("-", " "), url="https://smart974.re/" + p, lieux=lieux, a_completer=True))
+    return res
+
+
+def pineapple():
+    base = "https://pineapple.re"
+    r = get(base + "/catalogue/smartphones/")
+    rayons = [base + "/catalogue/smartphones/"]
+    if r:
+        rayons += sorted(set(re.findall(r'href="(https://pineapple\.re/catalogue/smartphones/[a-z0-9-]+/)"', r.text)))
+    urls = {}
+    for rayon in rayons:
+        for n in range(1, 6):
+            rr = get(rayon + (f"page/{n}/" if n > 1 else ""))
+            if not rr:
+                break
+            nouveaux = [u for u in dict.fromkeys(re.findall(r'href="(https://pineapple\.re/boutique/[a-z0-9/-]+/)"', rr.text)) if u not in urls]
+            for u in nouveaux:
+                urls[u] = rayon
+            if not nouveaux or f"page/{n + 1}/" not in rr.text:
+                break
+    lieux = adresse_du_site([base + "/mentions-legales/", base + "/sav/"], "Pineapple")
+    return [produit(id="pa-" + u.rstrip("/").rsplit("/", 1)[-1][-60:], vendeur="Pineapple", etat="Reconditionné",
+                    titre=u.rstrip("/").rsplit("/", 1)[-1].replace("-", " "), url=u, lieux=lieux, a_completer=True) for u in urls]
+
+
+def prestashop_boutique(nom, prefixe, base, rayons_fixes, motif_rayons, lieux, etat_rayon=None):
+    """Boutique PrestaShop à vignettes (TelROI, OrdiROI, Isleden)."""
+    accueil = get(base + "/")
+    rayons = prestashop_liens_categories(accueil.text, base, motif_rayons) if accueil else []
+    res = {}
+    for url in dict.fromkeys([base + r for r in rayons_fixes] + rayons):
+        for p in prestashop_categorie(url, pages_max=10):
+            classe = classer(p["titre"], p["marque"] or "")
+            if not classe or p["url"] in res:
+                continue
+            cat, tags = classe
+            t = norm(p["titre"] + " " + p["url"])
+            etat = "Reconditionné" if re.search(r"reconditionn|grade [abc]|\bgrade\b|refurb", t) else \
+                "Occasion" if re.search(r"occasion", t) else (etat_rayon or "Neuf")
+            res[p["url"]] = produit(id=prefixe + (re.search(r"/(\d+)-", p["url"]) or re.search(r"(.*)", p["url"])).group(1)[-40:],
+                                    vendeur=nom, etat=etat, cat=cat, tags=tags, titre=p["titre"], prix=arrondi(p["prix"]),
+                                    prix_avant=arrondi(p["prix_avant"]), photos=[p["photo"]] if p["photo"] else [],
+                                    url=p["url"], lieux=list(lieux), dispo=p["dispo"], titre_coupe=p["titre"].endswith("..."))
+    return list(res.values())
+
+
+def telroi():
+    lieux = adresse_du_site(["https://telroi.re/content/4-a-propos", "https://telroi.re/nous-contacter", "https://telroi.re/magasins"], "TelROI") \
+        or [lieu("TelROI", "Sainte-Clotilde")]
+    return prestashop_boutique("TelROI", "tr-", "https://telroi.re", ["/4-smartphones-et-tablettes"],
+                               r"iphone|ipad|apple|watch|airpods|reconditionn", lieux)
+
+
+def ordiroi():
+    lieux = adresse_du_site(["https://ordiroi.re/content/4-a-propos", "https://ordiroi.re/nous-contacter", "https://ordiroi.re/magasins"], "OrdiROI")
+    return prestashop_boutique("OrdiROI", "or-", "https://ordiroi.re",
+                               ["/7-apple", "/113-ipad", "/114-imac", "/115-mac-studio", "/116-macbook", "/117-macbook-air",
+                                "/118-macbook-pro", "/120-mac-mini", "/155-apple-watch"], r"iphone|ipad|apple|watch|mac", lieux)
+
+
+def isleden():
+    return prestashop_boutique("Isleden", "il-", "https://isleden.re", ["/1000025613-apple-iphone-reconditionne"],
+                               r"iphone|ipad|apple|macbook|watch|airpods", [], etat_rayon="Reconditionné")
+
+
+LECLIC_GALERIES = {"le portail": "Saint-Leu", "la reserve": "Sainte-Marie"}  # galeries Leclerc dont la commune est sûre
+
+
+def leclic():
+    base = "https://leclic.re"
+    rayons = ["/taxons/electromenager-high-tech/high-tech-12/telephonie-3", "/taxons/electromenager-high-tech/high-tech-12/informatique-1"]
+    r = get(base + rayons[0])
+    if r:
+        rayons += [u for u in dict.fromkeys(re.findall(r'href="(/taxons/electromenager-high-tech/high-tech-12/[a-z0-9/-]+)"', r.text))
+                   if re.search(r"tablette|montre|objets?-connect|audio|casque|ecouteur|accessoire|pc-portable|ordinateur", u)][:10]
+    res = {}
+    for rayon in dict.fromkeys(rayons):
+        for n in range(1, 26):
+            rr = get(base + rayon + (f"?page={n}" if n > 1 else ""))
+            if not rr:
+                break
+            cartes = rr.text.split('class="ui fluid card"')[1:]
+            for c in cartes:
+                lien = re.search(r'href="(/products/[^"]+)"', c)
+                marque = re.search(r'cityTheme-product-list-brand">([^<]*)<', c)
+                nom = re.search(r'sylius-product-name"[^>]*>(.*?)</a>', c, re.S)
+                if not (lien and nom) or base + lien.group(1) in res:
+                    continue
+                titre = ligne(re.sub(r'<span class="cityTheme-product-list-brand">.*?</span>', "", nom.group(1), flags=re.S)).lstrip("- ").strip()
+                classe = classer(titre, ligne(marque.group(1)) if marque else "")
+                if not classe:
+                    continue
+                prix = re.search(r'cityTheme-product-price"[^>]*>\s*<b>(.*?)</b>', c, re.S)
+                img = re.search(r'<img src="([^"]+)"', c)
+                vendeur = re.search(r'Vendu par\s*<a[^>]*>(.*?)</a>', c, re.S)
+                vendeur = ligne(vendeur.group(1)) if vendeur else "Leclerc"
+                commune = next((v for k, v in LECLIC_GALERIES.items() if k in norm(vendeur)), "")
+                cat, tags = classe
+                titre = titre[:1].upper() + titre[1:]
+                res[base + lien.group(1)] = produit(
+                    id="lc-" + lien.group(1).rsplit("-", 5)[0][-50:].strip("-") + "-" + lien.group(1)[-8:], vendeur="Leclerc (Leclic)",
+                    etat="Reconditionné" if "reconditionn" in norm(titre) else "Neuf", cat=cat, tags=tags,
+                    titre=titre, prix=arrondi(prix_de(ligne(prix.group(1)))) if prix else None,
+                    photos=[img.group(1)] if img else [], url=base + lien.group(1),
+                    lieux=[lieu(vendeur, commune)] if commune else [{"nom": vendeur, "commune": "", "adresse": "", "lat": None, "lng": None}])
+            if not cartes or f"page={n + 1}" not in rr.text:
+                break
+            time.sleep(0.4)
+    return list(res.values())
+
+
 # ---------------------------------------------------------------- pages produit (avec mémoire)
 
 def lire_fiche(a):
@@ -922,8 +1160,12 @@ def lire_fiche(a):
         f = darty_fiche(h)
     elif v == "Cash Express":
         f = cashexpress_fiche(h)
-    else:
+    elif v == "ParuVendu":
         f = paruvendu_fiche(h)
+    else:
+        f = schema_fiche(h) if v not in ("TelROI", "OrdiROI", "Isleden") else prestashop_fiche(h)
+        if v in ("TelROI", "OrdiROI", "Isleden"):
+            f.update({k: x for k, x in schema_fiche(h).items() if k in ("etat_schema",) and x})
     f["lu"] = datetime.now(timezone.utc).isoformat(timespec="minutes")
     f["v"] = VERSION_FICHE
     f["photos"] = list(dict.fromkeys(urljoin(a["url"], p) for p in f.get("photos", []) if p and not re.search(r"logo|icon|favicon|placeholder|default_image", p)))[:10]
@@ -962,6 +1204,12 @@ def completer(produits, fiches):
             a["prix"] = arrondi(f["prix"])  # Microstor : la liste montre 1, 2, 3 € pour les produits à options
         if a.get("a_completer") and f.get("dispo") is False:
             a["dispo"] = False
+        if a.get("a_completer") and f.get("des"):
+            a["a_partir"] = True
+        if f.get("marque") and a.get("a_completer"):
+            a["marque"] = f["marque"]
+        if f.get("etat_schema") and a["vendeur"] not in ("Microstor", "iShop", "Darty"):
+            a["etat"] = f["etat_schema"]
         a["options"] = f.get("options") or {}
         a["carac_site"] = f.get("carac_site") or {}
         if f.get("etat"):
@@ -978,7 +1226,7 @@ def completer(produits, fiches):
 def finaliser(a):
     """Catégorie (iShop : connue seulement après la page produit), caractéristiques, nom du modèle."""
     if not a["cat"]:
-        classe = classer(a["titre"], "apple")
+        classe = classer(a["titre"], a.get("marque") or "apple")
         if not classe:
             return None
         a["cat"], a["tags"] = classe
@@ -1046,10 +1294,82 @@ def photos_categories(produits):
     return res
 
 
+# ---------------------------------------------------------------- notification de midi
+
+NOMS_CATS = {"iphone": "iPhone", "watch": "Apple Watch", "ipad": "iPad", "mac": "Mac", "airpods": "AirPods",
+             "maison": "TV et Maison", "accessoires": "Accessoires"}
+
+
+def euros(p):
+    if p is None:
+        return "prix sur demande"
+    return f"{p:,.2f}".rstrip("0").rstrip(".").replace(",", " ").replace(".", ",") + " €"
+
+
+def marquer_premier_passage(produits):
+    """Le premier passage sur un site ajoute tout son catalogue d'un coup : ce ne sont pas des nouveautés."""
+    debut = {}
+    for a in produits:
+        debut[a["vendeur"]] = min(debut.get(a["vendeur"], a["vu"]), a["vu"])
+    for a in produits:
+        if datetime.fromisoformat(a["vu"]) <= datetime.fromisoformat(debut[a["vendeur"]]) + timedelta(hours=3):
+            a["nouveau"] = False
+
+
+def resume_du_jour(produits, maintenant):
+    """Les produits apparus dans les dernières 24 h : nombre, par catégorie, et les plus intéressants."""
+    depuis = (maintenant - timedelta(hours=24)).isoformat(timespec="minutes")
+    nouveaux = [a for a in produits if a["vu"] >= depuis and a.get("nouveau", True)]
+    if not nouveaux:
+        return None
+    par_cat = {}
+    for a in nouveaux:
+        par_cat[a["cat"]] = par_cat.get(a["cat"], 0) + 1
+    par_etat = {}
+    for a in nouveaux:
+        par_etat[a["etat"]] = par_etat.get(a["etat"], 0) + 1
+    lignes = [" · ".join(f"{NOMS_CATS[c]} {n}" for c, n in sorted(par_cat.items(), key=lambda x: -x[1])),
+              " · ".join(f"{e.lower()} {n}" for e, n in sorted(par_etat.items(), key=lambda x: -x[1])), ""]
+    # d'abord les appareils (pas les coques), les plus récents
+    tries = sorted(nouveaux, key=lambda a: (a["cat"] == "accessoires", -a["rang"]))
+    choix, vendeurs = [], {}
+    for a in tries:  # chaque vendeur à tour de rôle, pour ne pas lister 12 fois le même magasin
+        vendeurs.setdefault(a["vendeur"], []).append(a)
+    while len(choix) < 12 and any(vendeurs.values()):
+        for v in list(vendeurs):
+            if vendeurs[v] and len(choix) < 12:
+                choix.append(vendeurs[v].pop(0))
+    for a in choix:
+        lieu = a["lieux"][0]["commune"] if a["lieux"] else "en ligne"
+        lignes.append(f"• {a['titre'][:60]} – {'dès ' if a['des'] else ''}{euros(a['prix'])} ({a['vendeur']}, {lieu}, {a['etat'].lower()})")
+    if len(nouveaux) > 12:
+        lignes.append(f"… et {len(nouveaux) - 12} autres dans l'appli")
+    n = len(nouveaux)
+    return {"title": f"{n} nouveau{'x' if n > 1 else ''} produit{'s' if n > 1 else ''} Apple en vente à La Réunion",
+            "message": "\n".join(lignes)[:3800]}
+
+
+def notifier(produits, maintenant):
+    r = resume_du_jour(produits, maintenant)
+    if not r:
+        r = {"title": "Pas de nouveau produit Apple aujourd'hui",
+             "message": f"{len(produits)} produits Apple sont en vente à La Réunion dans l'appli."}
+    try:
+        requests.post("https://ntfy.sh/", json={"topic": NTFY_TOPIC, "click": PAGE_URL, "tags": ["apple"],
+                                                "icon": PAGE_URL + "icon-192.png",
+                                                "actions": [{"action": "view", "label": "Ouvrir l'appli", "url": PAGE_URL}], **r},
+                      timeout=30)
+        print("Notification envoyée :", r["title"])
+    except Exception as e:
+        print(f"  notification non envoyée : {e!r}", file=sys.stderr)
+
+
 # ---------------------------------------------------------------- main
 
 SOURCES = [("iShop", ishop), ("Microstor", microstor), ("Phenix Store", phenix), ("Darty", darty),
-           ("Cash Express", cashexpress), ("ParuVendu", paruvendu)]
+           ("Cash Express", cashexpress), ("ParuVendu", paruvendu), ("Delbos Informatique", delbos),
+           ("Leclerc (Leclic)", leclic), ("TelROI", telroi), ("OrdiROI", ordiroi), ("Isleden", isleden),
+           ("Zeop Store", zeopstore), ("smart974", smart974), ("Pineapple", pineapple)]
 
 
 def main():
@@ -1079,6 +1399,7 @@ def main():
     maintenant = datetime.now(REUNION)
     for a in gardes:
         a["vu"] = vus.setdefault(a["id"], maintenant.isoformat(timespec="minutes"))
+    marquer_premier_passage(gardes)
     gardes.sort(key=lambda a: (-a["rang"], a["prix"] or 0))
     par = {}
     for a in gardes:
@@ -1101,7 +1422,10 @@ def main():
     gabarit = (ROOT / "apple_page.html").read_text(encoding="utf-8")
     (OUT_DIR / "index.html").write_text(gabarit.replace("__MAJ__", html.escape(maj))
                                         .replace("__SOURCES__", html.escape(", ".join(sources_ok)))
+                                        .replace("__NTFY__", NTFY_TOPIC)
                                         .replace("__VERSION__", maintenant.strftime("%Y%m%d%H%M")), encoding="utf-8")
+    if NOTIFIER:
+        notifier(gardes, maintenant)
 
 
 if __name__ == "__main__":
