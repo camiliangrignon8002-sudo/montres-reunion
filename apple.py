@@ -187,7 +187,7 @@ def prix_de(txt):
 
 
 def arrondi(p):
-    if p is None:
+    if not p:  # 0 € : le magasin n'affiche pas encore le prix
         return None
     return int(p) if float(p).is_integer() else round(p, 2)
 
@@ -621,7 +621,7 @@ def phenix_lieux():
         m = re.search(r"((?:\d{1,4}[ ,]*(?:bis|ter)?[ ,]*)?(?:rue|avenue|bd|boulevard|chemin|route|zac|za|zi|centre|galerie|place|allee|allée|lotissement|résidence|residence)[^,;:|]{3,60}?)[ ,-]*(974\d\d)\s+([A-Za-zÀ-ÿ'’ -]{3,30})", corps, re.I)
         if m and CP_COMMUNES.get(m.group(2)):
             commune = CP_COMMUNES[m.group(2)]
-            return [lieu("Phenix Store " + commune, commune, f"{m.group(1).strip()}, {m.group(2)} {m.group(3).strip()}")]
+            return [lieu("Phenix Store " + commune, commune, f"{m.group(1).strip()}, {m.group(2)} {commune}")]
     r = get("https://phenix-store.com/magasins")
     if r:
         for bloc in re.split(r'<article[^>]*class="[^"]*store-item|<div[^>]*class="[^"]*store-item', r.text)[1:]:
@@ -1000,7 +1000,7 @@ def adresse_du_site(pages, nom):
         for m in re.finditer(r"((?:\d{1,4}[ ,]*(?:bis|ter)?[ ,]*)?(?:rue|avenue|av\.|bd|boulevard|chemin|route|zac|za|zi|zae|centre|galerie|place|allee|allée|lotissement|résidence|residence|parc|impasse|rond-point)[^,;:|]{3,60}?)[ ,-]*(974\d\d)\s+([A-Za-zÀ-ÿ'’ -]{3,30})", corps, re.I):
             commune = CP_COMMUNES.get(m.group(2))
             if commune:
-                return [lieu(f"{nom} {commune}", commune, f"{m.group(1).strip()}, {m.group(2)} {m.group(3).strip()}")]
+                return [lieu(f"{nom} {commune}", commune, f"{m.group(1).strip()}, {m.group(2)} {commune}")]
     return []
 
 
