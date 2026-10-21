@@ -1,0 +1,39 @@
+name: Logements Nord Réunion
+
+on:
+  schedule:
+    - cron: "15 2-18/3 * * *"  # toutes les 3 h de 6h15 à 21h15 (heure de La Réunion)
+  workflow_dispatch:       # bouton "Run workflow" pour lancer à la main
+  push:
+    branches: [sonde-logements]
+    paths: [logements.py, logements_page.html, .github/workflows/logements.yml]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: logements
+  cancel-in-progress: false
+
+jobs:
+  recherche:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python logements.py
+      - name: Publier la page
+        if: always()
+        run: |
+          git config user.name "logements-bot"
+          git config user.email "logements-bot@users.noreply.github.com"
+          git add docs/logements data/logements_*.json
+          git diff --cached --quiet || git commit -m "Mise à jour des logements $(date -u +%F)"
+          # le code a pu changer pendant la recherche : on se remet à jour avant de publier
+          for essai in 1 2 3; do
+            git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break
+            sleep 5
+          done
