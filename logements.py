@@ -5,6 +5,7 @@ garde celles qui peuvent ouvrir droit aux aides au logement de la CAF, puis écr
 docs/logements/index.html. Lancé régulièrement par GitHub Actions (.github/workflows/logements.yml).
 """
 
+import base64
 import html
 import json
 import os
@@ -245,10 +246,35 @@ def caracteristiques(texte_complet):
     return trouves
 
 
+TEL = re.compile(r"(?<![\d+])(?:\+33|\+262|0033|00262|0)\s?[1-9](?:[\s.\-]?\d{2}){4}(?!\d)")
+MAIL = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
+
+
+def format_tel(t):
+    chiffres = re.sub(r"\D", "", t)
+    if chiffres.startswith(("00262", "00336", "00337")):
+        chiffres = "0" + chiffres[5:] if chiffres.startswith("00262") else "0" + chiffres[4:]
+    elif chiffres.startswith("262") and len(chiffres) == 12:
+        chiffres = "0" + chiffres[3:]
+    elif chiffres.startswith("33") and len(chiffres) == 11:
+        chiffres = "0" + chiffres[2:]
+    if len(chiffres) != 10:
+        return ""
+    return chiffres[:4] + " " + " ".join(chiffres[i:i + 2] for i in range(4, 10, 2))  # 0692 12 34 56
+
+
+def contacts_du_texte(txt):
+    """Téléphone et e-mail écrits dans l'annonce elle-même."""
+    tel = next((format_tel(m.group(0)) for m in TEL.finditer(txt or "") if format_tel(m.group(0))), "")
+    mail = next((m.group(0) for m in MAIL.finditer(txt or "") if not re.search(r"\.(?:png|jpe?g|webp)$", m.group(0))), "")
+    return tel, mail
+
+
 def annonce(**champs):
     a = {"id": "", "source": "", "url": "", "titre": "", "prix": None, "commune": "", "quartier": "",
          "pieces": None, "type": "", "surface": None, "meuble": None, "photos": [], "description": "",
-         "caracteristiques": [], "date": "", "annonceur": "", "lat": None, "lon": None, "charges": None}
+         "caracteristiques": [], "date": "", "annonceur": "", "lat": None, "lon": None, "charges": None,
+         "pro": None, "tel": "", "email": "", "adresse": ""}
     a.update(champs)
     return a
 
@@ -305,11 +331,28 @@ def bienici():
                 date=x.get("modificationDate") or x.get("publicationDate") or "",
                 annonceur=x.get("accountDisplayName") or ("Agence" if x.get("adCreatedByPro") else "Particulier"),
                 lat=pos.get("lat"), lon=pos.get("lon"), charges=x.get("charges"),
-                studio=x.get("isStudio")))
+                studio=x.get("isStudio"), pro=bool(x.get("adCreatedByPro") or x.get("accountType") in ("agency", "pro")),
+                bienici_id=x["id"]))
         debut += 100
         if debut >= d.get("total", 0) or debut >= 1000:
             break
     return res
+
+
+def bienici_fiche(a):
+    """Coordonnées de l'agence (Bien'ici ne montre pas l'e-mail : on écrit par son formulaire)."""
+    url = "https://www.bienici.com/realEstateAd.json?id=" + quote(a["bienici_id"])
+    r = get(url)
+    if not r:
+        return {"absente": True} if url in DISPARUE else None
+    c = r.json().get("contactRelativeData") or {}
+    adr = c.get("address") or {}
+    return {k: v for k, v in {
+        "tel": format_tel(c.get("phoneToDisplay") or ""),
+        "annonceur": c.get("agencyNameToDisplay") or c.get("contactNameToDisplay") or "",
+        "adresse": ", ".join(x for x in [adr.get("street"), " ".join(y for y in [adr.get("postalCode"), adr.get("city")] if y)] if x),
+        "pro": bool(c.get("contactIsPro") or c.get("contactIsAgency")) if c else None,
+    }.items() if v not in (None, "")}
 
 
 # ---------------------------------------------------------------- ParuVendu
@@ -346,7 +389,8 @@ def paruvendu():
                 titre=(titre.group(1).strip() if titre else "Appartement"),
                 prix=nombre(prix.group(1)) if prix else None, commune=commune_de(ville), quartier=re.sub(r"\s*\(\d+\)", "", ville),
                 pieces=int(pieces.group(1)) if pieces else None, surface=nombre(surface.group(1)) if surface else None,
-                photos=re.findall(r'src="(https://img\.paruvendu\.fr/media_ext/[^"]+?)\?func', b)))
+                photos=re.findall(r'src="(https://img\.paruvendu\.fr/media_ext/[^"]+?)\?func', b),
+                pro='alt="pro :' in b or "imgOffice" in b))
         if not nouveaux:
             break
     return res
@@ -359,7 +403,15 @@ def paruvendu_fiche(a, h):
         if p not in photos and "novisu" not in p and "logo" not in p.lower():
             photos.append(p)
     lieu = re.search(r"location appartement [^<]*? à ([^<(]+)\((\d{5})\)", h, re.I)
-    return {"description": texte(desc.group(1)) if desc else meta(h, "og:description"),
+    tel = ""
+    for code in re.findall(r'href="tel:\$1"[^>]*?\btel="([A-Za-z0-9+/=]+)"', h):
+        try:
+            tel = format_tel(base64.b64decode(code).decode("utf-8", "ignore"))
+        except ValueError:
+            continue
+        if tel:
+            break
+    return {"tel": tel,"description": texte(desc.group(1)) if desc else meta(h, "og:description"),
             "photos": [p + "?func=crop&w=1000&gravity=auto" for p in photos],
             "commune": commune_de(lieu.group(2) if lieu else "", meta(h, "og:description"))}
 
@@ -404,7 +456,8 @@ def zimo():
                     pieces=int(pieces.group(1)) if pieces else None, surface=nombre(surface.group(1)) if surface else None,
                     photos=[o["image"]] if o.get("image") else [], description=sous_titre,
                     annonceur=" · ".join(x for x in [annonceur, "via " + html.unescape(origine[-1].strip()) if origine else ""] if x),
-                    fiche_bloquee=True, depuis=quand[-1] if quand else ""))
+                    fiche_bloquee=True, depuis=quand[-1] if quand else "",
+                    pro={"Particulier": False}.get(annonceur, True if annonceur else None)))
             if len(produits) < 20:
                 break
     return res
@@ -538,24 +591,30 @@ def lire_fiche(a):
     return {k: v for k, v in f.items() if v not in (None, "", [])}
 
 
+VERSION_FICHE = 2  # à augmenter quand lire_fiche apprend à lire une nouvelle information
+
+
 def completer(annonces, fiches):
     """Lit les pages des annonces qui peuvent convenir (une seule fois par annonce)."""
     lues = 0
     for a in annonces:
-        if a["source"] == "Bien'ici" or a.get("fiche_bloquee"):
+        if a.get("fiche_bloquee"):
             continue
         if (a["prix"] and a["prix"] > PRIX_MAX) or not a["commune"]:
             continue
+        if fiches.get(a["url"], {}).get("v") != VERSION_FICHE and not fiches.get(a["url"], {}).get("absente"):
+            fiches.pop(a["url"], None)  # lue avant qu'on garde les coordonnées : on la relit
         if a["url"] not in fiches and lues < 400:
-            f = lire_fiche(a)
+            f = bienici_fiche(a) if a["source"] == "Bien'ici" else lire_fiche(a)
             lues += 1
             time.sleep(2 if a["source"] == "Figaro Immobilier" else 0.5)
             if f is not None:  # page injoignable pour l'instant : on réessaiera au prochain passage
                 f["lu"] = datetime.now(timezone.utc).isoformat()
+                f["v"] = VERSION_FICHE
                 fiches[a["url"]] = f
         f = fiches.get(a["url"], {})
         for k, v in f.items():
-            if k in ("lu", "absente"):
+            if k in ("lu", "absente", "v"):
                 continue
             if k == "photos" and len(a["photos"]) >= len(v):
                 continue
@@ -592,8 +651,19 @@ def garder(a):
         elif re.search(r"(?<![a-z])meuble(?!s? non)", norm(tout)) and not re.search(r"non meuble", norm(tout)):
             a["meuble"] = True
     a["secteur"] = COMMUNES[a["commune"]][0]
+    tel, mail = contacts_du_texte(a["description"])
+    a["tel"] = a["tel"] or tel
+    a["email"] = a["email"] or mail
+    if a["pro"] is None:
+        if a["source"] == "Figaro Immobilier" or re.search(r"\bagence\b|honoraires|mandat|\bcarte (?:t|g|professionnelle)", norm(tout)):
+            a["pro"] = True
+        elif a["source"] == "EntreParticuliers" or re.search(r"particulier|proprietaire", norm(tout + " " + a["annonceur"])):
+            a["pro"] = False
     a["caf"] = aide_mentionnee(tout)
     a["caracteristiques"] = list(dict.fromkeys(a["caracteristiques"] + caracteristiques(tout)))
+    a["titre"] = re.sub(r"\s*[-–|:]\s*(?:ParuVendu\.fr|Figaro Immobilier|Zimo|Entreparticuliers).*$", "", a["titre"], flags=re.I)
+    a["titre"] = re.sub(r"^Annonce\s+", "", a["titre"]).strip()
+    a["titre"] = a["titre"][:1].upper() + a["titre"][1:]
     if not a["titre"] or len(a["titre"]) < 4:
         a["titre"] = f"{a['type']} {int(a['surface'])} m²" if a["surface"] else a["type"]
     return True
@@ -648,7 +718,7 @@ def main():
     for a in gardees:
         vus.setdefault(a["id"], maintenant.isoformat(timespec="minutes"))
         a["vu"] = vus[a["id"]]
-        for cle in ("absente", "studio", "fiche_bloquee", "depuis"):
+        for cle in ("absente", "studio", "fiche_bloquee", "depuis", "bienici_id"):
             a.pop(cle, None)
     gardees.sort(key=lambda a: a["prix"])
     par_source = {}
