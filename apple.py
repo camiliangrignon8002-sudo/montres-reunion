@@ -28,6 +28,7 @@ except ImportError:  # pragma: no cover
 ROOT = Path(__file__).parent
 FICHES_FILE = ROOT / "data" / "apple_fiches.json"  # pages produit déjà lues (url -> infos)
 VUS_FILE = ROOT / "data" / "apple_vus.json"        # id -> date où l'appli a vu le produit la 1re fois
+GEO_FILE = ROOT / "data" / "apple_geo.json"        # adresse de magasin -> [lat, lng] (API Adresse du gouvernement)
 OUT_DIR = ROOT / "docs" / "apple"
 REUNION = timezone(timedelta(hours=4))
 FICHES_PAR_PASSAGE = int(os.environ.get("FICHES_PAR_PASSAGE", "600"))  # nouvelles pages produit lues à chaque passage
@@ -103,8 +104,38 @@ def commune_de(*textes):
     return ""
 
 
+GEO = json.loads(GEO_FILE.read_text()) if GEO_FILE.exists() else {}
+
+
+def geocoder(adresse):
+    """Position exacte d'une adresse de La Réunion (Géoplateforme / API Adresse, gratuite et sans clé), avec cache."""
+    if adresse in GEO:
+        return GEO[adresse]
+    pos, repondu = None, False
+    for url in ("https://data.geopf.fr/geocodage/search", "https://api-adresse.data.gouv.fr/search/"):
+        try:
+            r = requests.get(url, params={"q": adresse, "limit": 1}, timeout=20)
+            if r.status_code != 200:
+                continue
+            f = (r.json().get("features") or [None])[0]
+            if f and str(f["properties"].get("postcode", "")).startswith("974") and f["properties"].get("score", 0) >= 0.5:
+                lng, lat = f["geometry"]["coordinates"]
+                pos = [round(lat, 5), round(lng, 5)]
+            repondu = True
+            break
+        except Exception as e:
+            print(f"  géocodage impossible ({adresse}) : {e!r}", file=sys.stderr)
+    if repondu:  # une panne réseau ne doit pas passer pour une adresse introuvable
+        GEO[adresse] = pos
+    return pos
+
+
 def lieu(nom, commune, adresse=""):
     lat, lng = COMMUNES.get(commune, (None, None))
+    if adresse and re.search(r"\b974\d\d\b", adresse):
+        pos = geocoder(adresse)
+        if pos:
+            lat, lng = pos
     return {"nom": nom, "commune": commune, "adresse": adresse, "lat": lat, "lng": lng}
 
 
@@ -1413,6 +1444,7 @@ def main():
     FICHES_FILE.parent.mkdir(exist_ok=True)
     FICHES_FILE.write_text(json.dumps(fiches, ensure_ascii=False))
     VUS_FILE.write_text(json.dumps(vus, ensure_ascii=False))
+    GEO_FILE.write_text(json.dumps(GEO, ensure_ascii=False, indent=0))
     jours = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"]
     maj = f"{jours[maintenant.weekday()]} {maintenant:%d/%m à %Hh%M}"
     donnees = {"maj": maj, "sources": sources_ok, "communes": {c: list(v) for c, v in COMMUNES.items()},
