@@ -36,7 +36,7 @@ sport, les montres pour femme ou enfant et les accessoires, puis :
 
 Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/logements/
 
-Toutes les 3 h (de 6h15 à 21h15, heure de La Réunion), GitHub cherche les **appartements à louer**
+**Toutes les heures, jour et nuit**, GitHub cherche les **appartements à louer**
 (studio, T1, T2, T3) à **740 € maximum** à Saint-Denis (avec Sainte-Clotilde et La Montagne), Sainte-Marie,
 Sainte-Suzanne, Saint-André, La Possession et Le Port, sur **Bien'ici**, **ParuVendu**, **Zimo**
 (qui reprend aussi des annonces de Leboncoin), **EntreParticuliers** et **Figaro Immobilier**.
@@ -55,3 +55,9 @@ Une même annonce publiée sur plusieurs sites n'apparaît qu'une fois.
   quand même par Zimo et Bien'ici.
 - Les pages d'annonce de Zimo sont protégées : pour ces annonces, l'appli montre une photo et le résumé,
   et le reste est sur le site d'origine.
+
+## Notifications des nouveaux logements
+
+Dès qu'un nouveau logement apparaît, une notification arrive sur le téléphone (appli gratuite **ntfy**,
+sujet `logements974-w9y80xhxga`), avec la photo, le prix et les boutons « Voir l'annonce », « Appeler » et
+« Ouvrir l'appli ». Rien n'est envoyé quand il n'y a pas de nouveau logement.

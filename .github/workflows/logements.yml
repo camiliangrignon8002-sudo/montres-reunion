@@ -2,8 +2,13 @@ name: Logements Nord Réunion
 
 on:
   schedule:
-    - cron: "15 2-18/3 * * *"  # toutes les 3 h de 6h15 à 21h15 (heure de La Réunion)
+    - cron: "15 * * * *"   # toutes les heures, jour et nuit : nouvelle recherche + notification des nouveaux logements
   workflow_dispatch:       # bouton "Run workflow" pour lancer à la main
+    inputs:
+      notifier:
+        description: "Envoyer les notifications"
+        type: boolean
+        default: true
 
 permissions:
   contents: write
@@ -15,6 +20,7 @@ concurrency:
 jobs:
   recherche:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -22,6 +28,10 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - run: python logements.py
+        env:
+          NOTIFIER: ${{ github.event_name == 'schedule' || inputs.notifier }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC_LOGEMENTS || 'logements974-w9y80xhxga' }}
+          PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/logements/
       - name: Publier la page
         if: always()
         run: |

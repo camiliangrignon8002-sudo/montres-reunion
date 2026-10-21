@@ -31,6 +31,11 @@ VUS_FILE = ROOT / "data" / "logements_vus.json"         # id -> date où l'appli
 JSON_FILE = ROOT / "docs" / "logements" / "annonces.json"
 OUT_FILE = ROOT / "docs" / "logements" / "index.html"
 REUNION = timezone(timedelta(hours=4))
+# Notifications : appli gratuite ntfy, abonnement au sujet ci-dessous
+NTFY_TOPIC = os.environ.get("NTFY_TOPIC", "logements974-w9y80xhxga")
+NOTIFIER = os.environ.get("NOTIFIER", "true") == "true"
+PAGE_URL = os.environ.get("PAGE_URL", "https://camiliangrignon8002-sudo.github.io/montres-reunion/logements/")
+NOTIFS_MAX = 15  # au-delà, une seule notification résume le reste
 
 # ---------------------------------------------------------------- zone
 
@@ -684,8 +689,52 @@ def sans_doublons(annonces):
         g.sort(key=lambda a: (len(a["photos"]), len(a["description"])), reverse=True)
         meilleur = g[0]
         meilleur["aussi"] = [{"source": x["source"], "url": x["url"]} for x in g[1:] if x["source"] != meilleur["source"]]
+        meilleur["ids"] = [x["id"] for x in g]  # pour reconnaître l'annonce si un autre site la reprend
         res.append(meilleur)
     return res
+
+
+# ---------------------------------------------------------------- notifications
+
+def envoyer(**message):
+    """Publie une notification ntfy (format JSON : accents et € sans souci)."""
+    try:
+        requests.post("https://ntfy.sh/", json={"topic": NTFY_TOPIC, **message}, timeout=30)
+    except Exception as e:
+        print(f"  notification non envoyée : {e!r}", file=sys.stderr)
+
+
+def notifier(nouvelles, nb_total):
+    """Une notification par nouveau logement, avec sa photo, son prix et ses boutons."""
+    if not nouvelles or not NOTIFIER or not NTFY_TOPIC:
+        return
+    nouvelles = sorted(nouvelles, key=lambda a: a["prix"])
+    if len(nouvelles) > 1:
+        envoyer(title=f"🏠 {len(nouvelles)} nouveaux logements", tags=["house"], click=PAGE_URL,
+                message=f"{len(nouvelles)} nouveaux logements dans le nord, {nb_total} en tout.")
+    for a in reversed(nouvelles[:NOTIFS_MAX]):  # la moins chère arrive en dernier, donc en haut
+        lignes = [a["titre"]]
+        details = " · ".join(x for x in [f"{a['surface']:g} m²" if a["surface"] else "", "Meublé" if a["meuble"] else "",
+                                         "Particulier" if a["pro"] is False else (a["annonceur"] or "Agence"),
+                                         "CAF citée" if a["caf"] else ""] if x)
+        if details:
+            lignes.append(details)
+        if a["tel"]:
+            lignes.append("📞 " + a["tel"])
+        actions = [{"action": "view", "label": "Voir l'annonce", "url": a["url"]},
+                   {"action": "view", "label": "Ouvrir l'appli", "url": PAGE_URL + "#a=" + quote(a["id"])}]
+        if a["tel"]:
+            actions.insert(1, {"action": "view", "label": "Appeler", "url": "tel:" + re.sub(r"\D", "", a["tel"])})
+        msg = {"title": f"🏠 {a['type']} · {round(a['prix'])} € · {a['quartier'] if a['quartier'] and a['quartier'] != a['commune'] else a['commune']}",
+               "message": "\n".join(lignes), "click": PAGE_URL + "#a=" + quote(a["id"]), "tags": ["new"],
+               "priority": 4, "actions": actions[:3]}
+        if a["photos"]:
+            msg["attach"] = a["photos"][0]
+        envoyer(**msg)
+    if len(nouvelles) > NOTIFS_MAX:
+        envoyer(title="🏠 Et d'autres encore", click=PAGE_URL,
+                message=f"{len(nouvelles) - NOTIFS_MAX} autres nouveaux logements sont dans l'appli.")
+    print(f"  {min(len(nouvelles), NOTIFS_MAX)} notification(s) envoyée(s)")
 
 
 # ---------------------------------------------------------------- page
@@ -696,7 +745,7 @@ def page_html(annonces, maj, sources_ok):
     gabarit = (ROOT / "logements_page.html").read_text(encoding="utf-8")
     return (gabarit.replace("__DONNEES__", donnees).replace("__COMMUNES__", communes)
             .replace("__MAJ__", html.escape(maj)).replace("__PRIX_MAX__", str(PRIX_MAX))
-            .replace("__SOURCES__", html.escape(", ".join(sources_ok))))
+            .replace("__SOURCES__", html.escape(", ".join(sources_ok))).replace("__NTFY__", NTFY_TOPIC))
 
 
 def main():
@@ -717,9 +766,14 @@ def main():
     completer(toutes, fiches)
     gardees = sans_doublons([a for a in toutes if garder(a)])
     maintenant = datetime.now(REUNION)
+    premiere_fois = not vus  # au tout premier passage, tout est « nouveau » : on ne notifie pas
+    nouvelles = []
     for a in gardees:
-        vus.setdefault(a["id"], maintenant.isoformat(timespec="minutes"))
-        a["vu"] = vus[a["id"]]
+        deja = [vus[i] for i in a.pop("ids") if i in vus]
+        if not deja:
+            nouvelles.append(a)
+        a["vu"] = min(deja) if deja else maintenant.isoformat(timespec="minutes")
+        vus[a["id"]] = a["vu"]
         for cle in ("absente", "studio", "fiche_bloquee", "depuis", "bienici_id"):
             a.pop(cle, None)
     gardees.sort(key=lambda a: a["prix"])
@@ -741,6 +795,9 @@ def main():
     jours = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"]
     maj = f"{jours[maintenant.weekday()]} {maintenant:%d/%m à %Hh%M}"
     OUT_FILE.write_text(page_html(gardees, maj, sources_ok), encoding="utf-8")
+    print(f"Nouvelles : {len(nouvelles)}")
+    if not premiere_fois:
+        notifier(nouvelles, len(gardees))
 
 
 if __name__ == "__main__":
