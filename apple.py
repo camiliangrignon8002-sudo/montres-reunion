@@ -1463,6 +1463,7 @@ def main():
                "photos_cat": photos_categories(gardes), "annonces": gardes}
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUT_DIR / "annonces.json").write_text(json.dumps(donnees, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    (OUT_DIR / "specs.json").write_text((ROOT / "apple_specs.json").read_text(encoding="utf-8"), encoding="utf-8")
     gabarit = (ROOT / "apple_page.html").read_text(encoding="utf-8")
     (OUT_DIR / "index.html").write_text(gabarit.replace("__MAJ__", html.escape(maj))
                                         .replace("__SOURCES__", html.escape(", ".join(sources_ok)))

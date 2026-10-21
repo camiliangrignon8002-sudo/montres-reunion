@@ -1,0 +1,976 @@
+{
+ "puces": {
+  "A13 Bionic": {
+   "rang": 1,
+   "annee": 2019
+  },
+  "A14 Bionic": {
+   "rang": 2,
+   "annee": 2020
+  },
+  "A15 Bionic": {
+   "rang": 3,
+   "annee": 2021
+  },
+  "A16 Bionic": {
+   "rang": 4,
+   "annee": 2022
+  },
+  "A17 Pro": {
+   "rang": 5,
+   "annee": 2023
+  },
+  "A18": {
+   "rang": 6,
+   "annee": 2024
+  },
+  "A18 Pro": {
+   "rang": 6.5,
+   "annee": 2024
+  },
+  "A19": {
+   "rang": 7,
+   "annee": 2025
+  },
+  "A19 Pro": {
+   "rang": 7.5,
+   "annee": 2025
+  },
+  "M1": {
+   "rang": 10,
+   "annee": 2020
+  },
+  "M1 Pro": {
+   "rang": 10.5,
+   "annee": 2021
+  },
+  "M1 Max": {
+   "rang": 10.8,
+   "annee": 2021
+  },
+  "M2": {
+   "rang": 11,
+   "annee": 2022
+  },
+  "M2 Pro": {
+   "rang": 11.5,
+   "annee": 2023
+  },
+  "M2 Max": {
+   "rang": 11.8,
+   "annee": 2023
+  },
+  "M3": {
+   "rang": 12,
+   "annee": 2023
+  },
+  "M3 Pro": {
+   "rang": 12.5,
+   "annee": 2023
+  },
+  "M3 Max": {
+   "rang": 12.8,
+   "annee": 2023
+  },
+  "M4": {
+   "rang": 13,
+   "annee": 2024
+  },
+  "M4 Pro": {
+   "rang": 13.5,
+   "annee": 2024
+  },
+  "M4 Max": {
+   "rang": 13.8,
+   "annee": 2024
+  },
+  "M5": {
+   "rang": 14,
+   "annee": 2025
+  },
+  "S8": {
+   "rang": 20,
+   "annee": 2022
+  },
+  "S9": {
+   "rang": 21,
+   "annee": 2023
+  },
+  "S10": {
+   "rang": 22,
+   "annee": 2024
+  },
+  "H1": {
+   "rang": 30,
+   "annee": 2019
+  },
+  "H2": {
+   "rang": 31,
+   "annee": 2022
+  }
+ },
+ "modeles": {
+  "iPhone 11": {
+   "Sortie": 2019,
+   "Puce": "A13 Bionic",
+   "Écran": "6,1 pouces LCD, 60 Hz",
+   "pouces": 6.1,
+   "hz": 60,
+   "Appareil photo": "2 capteurs 12 Mpx (grand-angle + ultra grand-angle)",
+   "zoom": 0,
+   "ultra": true,
+   "Autonomie": "jusqu'à 17 h de vidéo",
+   "video_h": 17,
+   "Poids": "194 g",
+   "poids_g": 194,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": []
+  },
+  "iPhone 11 Pro": {
+   "Sortie": 2019,
+   "Puce": "A13 Bionic",
+   "Écran": "5,8 pouces OLED, 60 Hz",
+   "pouces": 5.8,
+   "hz": 60,
+   "Appareil photo": "3 capteurs 12 Mpx, téléobjectif 2x",
+   "zoom": 2,
+   "ultra": true,
+   "Autonomie": "jusqu'à 18 h de vidéo",
+   "video_h": 18,
+   "Poids": "188 g",
+   "poids_g": 188,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": []
+  },
+  "iPhone 11 Pro Max": {
+   "Sortie": 2019,
+   "Puce": "A13 Bionic",
+   "Écran": "6,5 pouces OLED, 60 Hz",
+   "pouces": 6.5,
+   "hz": 60,
+   "Appareil photo": "3 capteurs 12 Mpx, téléobjectif 2x",
+   "zoom": 2,
+   "ultra": true,
+   "Autonomie": "jusqu'à 20 h de vidéo",
+   "video_h": 20,
+   "Poids": "226 g",
+   "poids_g": 226,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": []
+  },
+  "iPhone SE 2020": {
+   "Sortie": 2020,
+   "Puce": "A13 Bionic",
+   "Écran": "4,7 pouces LCD, 60 Hz",
+   "pouces": 4.7,
+   "hz": 60,
+   "Appareil photo": "1 capteur 12 Mpx",
+   "zoom": 0,
+   "ultra": false,
+   "Autonomie": "jusqu'à 13 h de vidéo",
+   "video_h": 13,
+   "Poids": "148 g",
+   "poids_g": 148,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Touch ID (bouton)",
+   "fonctions": []
+  },
+  "iPhone SE 2022": {
+   "Sortie": 2022,
+   "Puce": "A15 Bionic",
+   "Écran": "4,7 pouces LCD, 60 Hz",
+   "pouces": 4.7,
+   "hz": 60,
+   "Appareil photo": "1 capteur 12 Mpx",
+   "zoom": 0,
+   "ultra": false,
+   "Autonomie": "jusqu'à 15 h de vidéo",
+   "video_h": 15,
+   "Poids": "144 g",
+   "poids_g": 144,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Touch ID (bouton)",
+   "fonctions": [
+    "5G"
+   ]
+  },
+  "iPhone 12 Mini": {
+   "Sortie": 2020,
+   "Puce": "A14 Bionic",
+   "Écran": "5,4 pouces OLED, 60 Hz",
+   "pouces": 5.4,
+   "hz": 60,
+   "Appareil photo": "2 capteurs 12 Mpx (grand-angle + ultra grand-angle)",
+   "zoom": 0,
+   "ultra": true,
+   "Autonomie": "jusqu'à 15 h de vidéo",
+   "video_h": 15,
+   "Poids": "135 g",
+   "poids_g": 135,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe"
+   ]
+  },
+  "iPhone 12": {
+   "Sortie": 2020,
+   "Puce": "A14 Bionic",
+   "Écran": "6,1 pouces OLED, 60 Hz",
+   "pouces": 6.1,
+   "hz": 60,
+   "Appareil photo": "2 capteurs 12 Mpx (grand-angle + ultra grand-angle)",
+   "zoom": 0,
+   "ultra": true,
+   "Autonomie": "jusqu'à 17 h de vidéo",
+   "video_h": 17,
+   "Poids": "164 g",
+   "poids_g": 164,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe"
+   ]
+  },
+  "iPhone 12 Pro": {
+   "Sortie": 2020,
+   "Puce": "A14 Bionic",
+   "Écran": "6,1 pouces OLED, 60 Hz",
+   "pouces": 6.1,
+   "hz": 60,
+   "Appareil photo": "3 capteurs 12 Mpx, téléobjectif 2x, LiDAR",
+   "zoom": 2,
+   "ultra": true,
+   "Autonomie": "jusqu'à 17 h de vidéo",
+   "video_h": 17,
+   "Poids": "189 g",
+   "poids_g": 189,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe"
+   ]
+  },
+  "iPhone 12 Pro Max": {
+   "Sortie": 2020,
+   "Puce": "A14 Bionic",
+   "Écran": "6,7 pouces OLED, 60 Hz",
+   "pouces": 6.7,
+   "hz": 60,
+   "Appareil photo": "3 capteurs 12 Mpx, téléobjectif 2,5x, LiDAR",
+   "zoom": 2.5,
+   "ultra": true,
+   "Autonomie": "jusqu'à 20 h de vidéo",
+   "video_h": 20,
+   "Poids": "228 g",
+   "poids_g": 228,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe"
+   ]
+  },
+  "iPhone 13 Mini": {
+   "Sortie": 2021,
+   "Puce": "A15 Bionic",
+   "Écran": "5,4 pouces OLED, 60 Hz",
+   "pouces": 5.4,
+   "hz": 60,
+   "Appareil photo": "2 capteurs 12 Mpx (grand-angle + ultra grand-angle)",
+   "zoom": 0,
+   "ultra": true,
+   "Autonomie": "jusqu'à 17 h de vidéo",
+   "video_h": 17,
+   "Poids": "140 g",
+   "poids_g": 140,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe"
+   ]
+  },
+  "iPhone 13": {
+   "Sortie": 2021,
+   "Puce": "A15 Bionic",
+   "Écran": "6,1 pouces OLED, 60 Hz",
+   "pouces": 6.1,
+   "hz": 60,
+   "Appareil photo": "2 capteurs 12 Mpx (grand-angle + ultra grand-angle)",
+   "zoom": 0,
+   "ultra": true,
+   "Autonomie": "jusqu'à 19 h de vidéo",
+   "video_h": 19,
+   "Poids": "173 g",
+   "poids_g": 173,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe"
+   ]
+  },
+  "iPhone 13 Pro": {
+   "Sortie": 2021,
+   "Puce": "A15 Bionic",
+   "Écran": "6,1 pouces OLED ProMotion, 120 Hz",
+   "pouces": 6.1,
+   "hz": 120,
+   "Appareil photo": "3 capteurs 12 Mpx, téléobjectif 3x, LiDAR",
+   "zoom": 3,
+   "ultra": true,
+   "Autonomie": "jusqu'à 22 h de vidéo",
+   "video_h": 22,
+   "Poids": "203 g",
+   "poids_g": 203,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe"
+   ]
+  },
+  "iPhone 13 Pro Max": {
+   "Sortie": 2021,
+   "Puce": "A15 Bionic",
+   "Écran": "6,7 pouces OLED ProMotion, 120 Hz",
+   "pouces": 6.7,
+   "hz": 120,
+   "Appareil photo": "3 capteurs 12 Mpx, téléobjectif 3x, LiDAR",
+   "zoom": 3,
+   "ultra": true,
+   "Autonomie": "jusqu'à 28 h de vidéo",
+   "video_h": 28,
+   "Poids": "238 g",
+   "poids_g": 238,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe"
+   ]
+  },
+  "iPhone 14": {
+   "Sortie": 2022,
+   "Puce": "A15 Bionic",
+   "Écran": "6,1 pouces OLED, 60 Hz",
+   "pouces": 6.1,
+   "hz": 60,
+   "Appareil photo": "2 capteurs 12 Mpx (grand-angle + ultra grand-angle)",
+   "zoom": 0,
+   "ultra": true,
+   "Autonomie": "jusqu'à 20 h de vidéo",
+   "video_h": 20,
+   "Poids": "172 g",
+   "poids_g": 172,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "SOS d'urgence par satellite"
+   ]
+  },
+  "iPhone 14 Plus": {
+   "Sortie": 2022,
+   "Puce": "A15 Bionic",
+   "Écran": "6,7 pouces OLED, 60 Hz",
+   "pouces": 6.7,
+   "hz": 60,
+   "Appareil photo": "2 capteurs 12 Mpx (grand-angle + ultra grand-angle)",
+   "zoom": 0,
+   "ultra": true,
+   "Autonomie": "jusqu'à 26 h de vidéo",
+   "video_h": 26,
+   "Poids": "203 g",
+   "poids_g": 203,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "SOS d'urgence par satellite"
+   ]
+  },
+  "iPhone 14 Pro": {
+   "Sortie": 2022,
+   "Puce": "A16 Bionic",
+   "Écran": "6,1 pouces OLED ProMotion, 120 Hz",
+   "pouces": 6.1,
+   "hz": 120,
+   "Appareil photo": "48 Mpx + ultra grand-angle + téléobjectif 3x",
+   "zoom": 3,
+   "ultra": true,
+   "Autonomie": "jusqu'à 23 h de vidéo",
+   "video_h": 23,
+   "Poids": "206 g",
+   "poids_g": 206,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "Dynamic Island",
+    "SOS d'urgence par satellite",
+    "Écran toujours allumé"
+   ]
+  },
+  "iPhone 14 Pro Max": {
+   "Sortie": 2022,
+   "Puce": "A16 Bionic",
+   "Écran": "6,7 pouces OLED ProMotion, 120 Hz",
+   "pouces": 6.7,
+   "hz": 120,
+   "Appareil photo": "48 Mpx + ultra grand-angle + téléobjectif 3x",
+   "zoom": 3,
+   "ultra": true,
+   "Autonomie": "jusqu'à 29 h de vidéo",
+   "video_h": 29,
+   "Poids": "240 g",
+   "poids_g": 240,
+   "Connecteur": "Lightning",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "Dynamic Island",
+    "SOS d'urgence par satellite",
+    "Écran toujours allumé"
+   ]
+  },
+  "iPhone 15": {
+   "Sortie": 2023,
+   "Puce": "A16 Bionic",
+   "Écran": "6,1 pouces OLED, 60 Hz",
+   "pouces": 6.1,
+   "hz": 60,
+   "Appareil photo": "48 Mpx + ultra grand-angle 12 Mpx",
+   "zoom": 0,
+   "ultra": true,
+   "Autonomie": "jusqu'à 20 h de vidéo",
+   "video_h": 20,
+   "Poids": "171 g",
+   "poids_g": 171,
+   "Connecteur": "USB-C (USB 2)",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "Dynamic Island",
+    "SOS d'urgence par satellite"
+   ]
+  },
+  "iPhone 15 Plus": {
+   "Sortie": 2023,
+   "Puce": "A16 Bionic",
+   "Écran": "6,7 pouces OLED, 60 Hz",
+   "pouces": 6.7,
+   "hz": 60,
+   "Appareil photo": "48 Mpx + ultra grand-angle 12 Mpx",
+   "zoom": 0,
+   "ultra": true,
+   "Autonomie": "jusqu'à 26 h de vidéo",
+   "video_h": 26,
+   "Poids": "201 g",
+   "poids_g": 201,
+   "Connecteur": "USB-C (USB 2)",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "Dynamic Island",
+    "SOS d'urgence par satellite"
+   ]
+  },
+  "iPhone 15 Pro": {
+   "Sortie": 2023,
+   "Puce": "A17 Pro",
+   "Écran": "6,1 pouces OLED ProMotion, 120 Hz",
+   "pouces": 6.1,
+   "hz": 120,
+   "Appareil photo": "48 Mpx + ultra grand-angle + téléobjectif 3x",
+   "zoom": 3,
+   "ultra": true,
+   "Autonomie": "jusqu'à 23 h de vidéo",
+   "video_h": 23,
+   "Poids": "187 g",
+   "poids_g": 187,
+   "Connecteur": "USB-C rapide (USB 3)",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "Dynamic Island",
+    "Bouton Action",
+    "Apple Intelligence",
+    "SOS d'urgence par satellite",
+    "Écran toujours allumé",
+    "Châssis en titane"
+   ]
+  },
+  "iPhone 15 Pro Max": {
+   "Sortie": 2023,
+   "Puce": "A17 Pro",
+   "Écran": "6,7 pouces OLED ProMotion, 120 Hz",
+   "pouces": 6.7,
+   "hz": 120,
+   "Appareil photo": "48 Mpx + ultra grand-angle + téléobjectif 5x",
+   "zoom": 5,
+   "ultra": true,
+   "Autonomie": "jusqu'à 29 h de vidéo",
+   "video_h": 29,
+   "Poids": "221 g",
+   "poids_g": 221,
+   "Connecteur": "USB-C rapide (USB 3)",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "Dynamic Island",
+    "Bouton Action",
+    "Apple Intelligence",
+    "SOS d'urgence par satellite",
+    "Écran toujours allumé",
+    "Châssis en titane"
+   ]
+  },
+  "iPhone 16": {
+   "Sortie": 2024,
+   "Puce": "A18",
+   "Écran": "6,1 pouces OLED, 60 Hz",
+   "pouces": 6.1,
+   "hz": 60,
+   "Appareil photo": "48 Mpx + ultra grand-angle 12 Mpx",
+   "zoom": 0,
+   "ultra": true,
+   "Autonomie": "jusqu'à 22 h de vidéo",
+   "video_h": 22,
+   "Poids": "170 g",
+   "poids_g": 170,
+   "Connecteur": "USB-C (USB 2)",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "Dynamic Island",
+    "Bouton Action",
+    "Apple Intelligence",
+    "Commande de l'appareil photo",
+    "SOS d'urgence par satellite"
+   ]
+  },
+  "iPhone 16 Plus": {
+   "Sortie": 2024,
+   "Puce": "A18",
+   "Écran": "6,7 pouces OLED, 60 Hz",
+   "pouces": 6.7,
+   "hz": 60,
+   "Appareil photo": "48 Mpx + ultra grand-angle 12 Mpx",
+   "zoom": 0,
+   "ultra": true,
+   "Autonomie": "jusqu'à 27 h de vidéo",
+   "video_h": 27,
+   "Poids": "199 g",
+   "poids_g": 199,
+   "Connecteur": "USB-C (USB 2)",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "Dynamic Island",
+    "Bouton Action",
+    "Apple Intelligence",
+    "Commande de l'appareil photo",
+    "SOS d'urgence par satellite"
+   ]
+  },
+  "iPhone 16 Pro": {
+   "Sortie": 2024,
+   "Puce": "A18 Pro",
+   "Écran": "6,3 pouces OLED ProMotion, 120 Hz",
+   "pouces": 6.3,
+   "hz": 120,
+   "Appareil photo": "48 Mpx + ultra grand-angle 48 Mpx + téléobjectif 5x",
+   "zoom": 5,
+   "ultra": true,
+   "Autonomie": "jusqu'à 27 h de vidéo",
+   "video_h": 27,
+   "Poids": "199 g",
+   "poids_g": 199,
+   "Connecteur": "USB-C rapide (USB 3)",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "Dynamic Island",
+    "Bouton Action",
+    "Apple Intelligence",
+    "Commande de l'appareil photo",
+    "SOS d'urgence par satellite",
+    "Écran toujours allumé",
+    "Châssis en titane"
+   ]
+  },
+  "iPhone 16 Pro Max": {
+   "Sortie": 2024,
+   "Puce": "A18 Pro",
+   "Écran": "6,9 pouces OLED ProMotion, 120 Hz",
+   "pouces": 6.9,
+   "hz": 120,
+   "Appareil photo": "48 Mpx + ultra grand-angle 48 Mpx + téléobjectif 5x",
+   "zoom": 5,
+   "ultra": true,
+   "Autonomie": "jusqu'à 33 h de vidéo",
+   "video_h": 33,
+   "Poids": "227 g",
+   "poids_g": 227,
+   "Connecteur": "USB-C rapide (USB 3)",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "Dynamic Island",
+    "Bouton Action",
+    "Apple Intelligence",
+    "Commande de l'appareil photo",
+    "SOS d'urgence par satellite",
+    "Écran toujours allumé",
+    "Châssis en titane"
+   ]
+  },
+  "iPhone 16e": {
+   "Sortie": 2025,
+   "Puce": "A18",
+   "Écran": "6,1 pouces OLED, 60 Hz",
+   "pouces": 6.1,
+   "hz": 60,
+   "Appareil photo": "1 capteur 48 Mpx",
+   "zoom": 0,
+   "ultra": false,
+   "Autonomie": "jusqu'à 26 h de vidéo",
+   "video_h": 26,
+   "Poids": "167 g",
+   "poids_g": 167,
+   "Connecteur": "USB-C (USB 2)",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "Bouton Action",
+    "Apple Intelligence",
+    "SOS d'urgence par satellite"
+   ]
+  },
+  "iPhone 17": {
+   "Sortie": 2025,
+   "Puce": "A19",
+   "Écran": "6,3 pouces OLED ProMotion, 120 Hz",
+   "pouces": 6.3,
+   "hz": 120,
+   "Appareil photo": "48 Mpx + ultra grand-angle 48 Mpx",
+   "zoom": 0,
+   "ultra": true,
+   "Autonomie": "jusqu'à 30 h de vidéo",
+   "video_h": 30,
+   "Poids": "177 g",
+   "poids_g": 177,
+   "Connecteur": "USB-C (USB 2)",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "Dynamic Island",
+    "Bouton Action",
+    "Apple Intelligence",
+    "Commande de l'appareil photo",
+    "SOS d'urgence par satellite",
+    "Écran toujours allumé"
+   ]
+  },
+  "iPhone Air": {
+   "Sortie": 2025,
+   "Puce": "A19 Pro",
+   "Écran": "6,5 pouces OLED ProMotion, 120 Hz",
+   "pouces": 6.5,
+   "hz": 120,
+   "Appareil photo": "1 capteur 48 Mpx",
+   "zoom": 0,
+   "ultra": false,
+   "Autonomie": "jusqu'à 27 h de vidéo",
+   "video_h": 27,
+   "Poids": "165 g",
+   "poids_g": 165,
+   "Connecteur": "USB-C (USB 2)",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "Dynamic Island",
+    "Bouton Action",
+    "Apple Intelligence",
+    "Commande de l'appareil photo",
+    "SOS d'urgence par satellite",
+    "Écran toujours allumé",
+    "Châssis en titane"
+   ]
+  },
+  "iPhone 17 Pro": {
+   "Sortie": 2025,
+   "Puce": "A19 Pro",
+   "Écran": "6,3 pouces OLED ProMotion, 120 Hz",
+   "pouces": 6.3,
+   "hz": 120,
+   "Appareil photo": "3 capteurs 48 Mpx, téléobjectif 4x",
+   "zoom": 4,
+   "ultra": true,
+   "Autonomie": "jusqu'à 33 h de vidéo",
+   "video_h": 33,
+   "Poids": "206 g",
+   "poids_g": 206,
+   "Connecteur": "USB-C rapide (USB 3)",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "Dynamic Island",
+    "Bouton Action",
+    "Apple Intelligence",
+    "Commande de l'appareil photo",
+    "SOS d'urgence par satellite",
+    "Écran toujours allumé"
+   ]
+  },
+  "iPhone 17 Pro Max": {
+   "Sortie": 2025,
+   "Puce": "A19 Pro",
+   "Écran": "6,9 pouces OLED ProMotion, 120 Hz",
+   "pouces": 6.9,
+   "hz": 120,
+   "Appareil photo": "3 capteurs 48 Mpx, téléobjectif 4x",
+   "zoom": 4,
+   "ultra": true,
+   "Autonomie": "jusqu'à 37 h de vidéo",
+   "video_h": 37,
+   "Poids": "233 g",
+   "poids_g": 233,
+   "Connecteur": "USB-C rapide (USB 3)",
+   "Déverrouillage": "Face ID",
+   "fonctions": [
+    "5G",
+    "MagSafe",
+    "Dynamic Island",
+    "Bouton Action",
+    "Apple Intelligence",
+    "Commande de l'appareil photo",
+    "SOS d'urgence par satellite",
+    "Écran toujours allumé"
+   ]
+  },
+  "AirPods": {
+   "Sortie": 2019,
+   "Puce": "H1",
+   "Autonomie": "jusqu'à 5 h d'écoute",
+   "ecoute_h": 5,
+   "Réduction de bruit": "Non",
+   "anc": false,
+   "fonctions": [
+    "Siri mains libres"
+   ]
+  },
+  "AirPods 3": {
+   "Sortie": 2021,
+   "Puce": "H1",
+   "Autonomie": "jusqu'à 6 h d'écoute",
+   "ecoute_h": 6,
+   "Réduction de bruit": "Non",
+   "anc": false,
+   "fonctions": [
+    "Audio spatial",
+    "Résistants à la transpiration"
+   ]
+  },
+  "AirPods 4": {
+   "Sortie": 2024,
+   "Puce": "H2",
+   "Autonomie": "jusqu'à 5 h d'écoute",
+   "ecoute_h": 5,
+   "Réduction de bruit": "Non",
+   "anc": false,
+   "fonctions": [
+    "Audio spatial personnalisé",
+    "USB-C"
+   ]
+  },
+  "AirPods Pro": {
+   "Sortie": 2019,
+   "Puce": "H1",
+   "Autonomie": "jusqu'à 4.5 h d'écoute",
+   "ecoute_h": 4.5,
+   "Réduction de bruit": "Oui, active",
+   "anc": true,
+   "fonctions": [
+    "Mode Transparence",
+    "Embouts intra-auriculaires"
+   ]
+  },
+  "AirPods Pro 2": {
+   "Sortie": 2022,
+   "Puce": "H2",
+   "Autonomie": "jusqu'à 6 h d'écoute",
+   "ecoute_h": 6,
+   "Réduction de bruit": "Oui, active",
+   "anc": true,
+   "fonctions": [
+    "Mode Transparence adaptatif",
+    "Audio spatial personnalisé",
+    "Boîtier avec haut-parleur (Localiser)"
+   ]
+  },
+  "AirPods Pro 3": {
+   "Sortie": 2025,
+   "Puce": "H2",
+   "Autonomie": "jusqu'à 8 h d'écoute",
+   "ecoute_h": 8,
+   "Réduction de bruit": "Oui, active",
+   "anc": true,
+   "fonctions": [
+    "Mode Transparence adaptatif",
+    "Capteur de fréquence cardiaque",
+    "Résistance à l'eau et à la poussière"
+   ]
+  },
+  "AirPods Max": {
+   "Sortie": 2020,
+   "Puce": "H1",
+   "Autonomie": "jusqu'à 20 h d'écoute",
+   "ecoute_h": 20,
+   "Réduction de bruit": "Oui, active",
+   "anc": true,
+   "fonctions": [
+    "Casque sur les oreilles",
+    "Audio spatial"
+   ]
+  },
+  "Apple Watch SE": {
+   "Sortie": 2022,
+   "Puce": "S8",
+   "Autonomie": "jusqu'à 18 h",
+   "montre_h": 18,
+   "Tailles": "40 ou 44 mm",
+   "fonctions": [
+    "Détection des accidents",
+    "Notifications de rythme cardiaque"
+   ]
+  },
+  "Apple Watch SE 2": {
+   "Sortie": 2022,
+   "Puce": "S8",
+   "Autonomie": "jusqu'à 18 h",
+   "montre_h": 18,
+   "Tailles": "40 ou 44 mm",
+   "fonctions": [
+    "Détection des accidents",
+    "Notifications de rythme cardiaque"
+   ]
+  },
+  "Apple Watch SE 3": {
+   "Sortie": 2025,
+   "Puce": "S10",
+   "Autonomie": "jusqu'à 18 h",
+   "montre_h": 18,
+   "Tailles": "40 ou 44 mm",
+   "fonctions": [
+    "Écran toujours allumé",
+    "Détection des accidents",
+    "Recharge rapide"
+   ]
+  },
+  "Apple Watch Series 8": {
+   "Sortie": 2022,
+   "Puce": "S8",
+   "Autonomie": "jusqu'à 18 h",
+   "montre_h": 18,
+   "Tailles": "41 ou 45 mm",
+   "fonctions": [
+    "ECG",
+    "Oxygène sanguin",
+    "Écran toujours allumé",
+    "Capteur de température"
+   ]
+  },
+  "Apple Watch Series 9": {
+   "Sortie": 2023,
+   "Puce": "S9",
+   "Autonomie": "jusqu'à 18 h",
+   "montre_h": 18,
+   "Tailles": "41 ou 45 mm",
+   "fonctions": [
+    "ECG",
+    "Écran toujours allumé",
+    "Toucher deux fois",
+    "Capteur de température"
+   ]
+  },
+  "Apple Watch Series 10": {
+   "Sortie": 2024,
+   "Puce": "S10",
+   "Autonomie": "jusqu'à 18 h",
+   "montre_h": 18,
+   "Tailles": "42 ou 46 mm",
+   "fonctions": [
+    "ECG",
+    "Écran toujours allumé plus grand",
+    "Toucher deux fois",
+    "Recharge rapide"
+   ]
+  },
+  "Apple Watch Series 11": {
+   "Sortie": 2025,
+   "Puce": "S10",
+   "Autonomie": "jusqu'à 24 h",
+   "montre_h": 24,
+   "Tailles": "42 ou 46 mm",
+   "fonctions": [
+    "ECG",
+    "Écran toujours allumé",
+    "Toucher deux fois",
+    "Recharge rapide",
+    "Plus résistante aux rayures"
+   ]
+  },
+  "Apple Watch Ultra 2": {
+   "Sortie": 2023,
+   "Puce": "S9",
+   "Autonomie": "jusqu'à 36 h",
+   "montre_h": 36,
+   "Tailles": "49 mm",
+   "fonctions": [
+    "Boîtier en titane",
+    "GPS double fréquence",
+    "Bouton Action",
+    "Sirène",
+    "Plongée 40 m"
+   ]
+  },
+  "Apple Watch Ultra 3": {
+   "Sortie": 2025,
+   "Puce": "S10",
+   "Autonomie": "jusqu'à 42 h",
+   "montre_h": 42,
+   "Tailles": "49 mm",
+   "fonctions": [
+    "Boîtier en titane",
+    "SOS d'urgence par satellite",
+    "GPS double fréquence",
+    "Bouton Action",
+    "Plongée 40 m"
+   ]
+  }
+ }
+}
