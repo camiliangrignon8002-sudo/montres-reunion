@@ -1,0 +1,819 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+<head>
+	
+
+	<title>SHLMR</title>
+
+	<meta charset="UTF-8">
+	
+	<base href="https://www.shlmr.fr/" >
+
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta property="og:title" content="SHLMR" />
+    <meta property="og:description" content="La SHLMR (Société Anonyme d'Habitations à Loyer Modéré de la Réunion) est aujourd'hui l'un des principaux bailleurs et promoteurs sociaux des DOM" />
+    <meta property="og:image" content="Assets/img/visuel_rs.jpg"/>
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="SHLMR">
+    <meta name="twitter:description" content="La SHLMR (Société Anonyme d'Habitations à Loyer Modéré de la Réunion) est aujourd'hui l'un des principaux bailleurs et promoteurs sociaux des DOM">
+    <meta name="twitter:image" content="Assets/img/visuel_rs.jpg">   
+
+
+	<link rel="icon" type="image/png" sizes="96x96" href="Assets/img/favicon.png">
+	
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="Assets/css/bootstrap-3-3-7.min.css"> 
+	<link rel="stylesheet" href="Assets/css/style.min.css"> 
+	<script src="Assets/js/modernizr.js"></script>
+
+	<!-- - - - - jQuery -->
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+	<!--script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script-->
+	
+	<!-- - - - - Inputmask -->
+	<script src="Assets/js/inputmask/jquery.inputmask.bundle.js"></script>
+	<script src="Assets/js/inputmask/inputmask.date.extensions.js"></script>
+
+   	<!-- - - - - Bootstrap 3-3-7 -->
+   	<script src="Assets/js/bootstrap-3-3-7.min.js"></script>
+	
+	<!-- - - - - vTicker -->
+   	<script src="Assets/js/jquery.vticker.min.js"></script>
+
+   	<!-- - - - - Fancybox 3 -->
+	<link rel="stylesheet" type="text/css" href="Assets/js/fancybox-3/jquery.fancybox.css">
+	<script src="Assets/js/fancybox-3/jquery.fancybox.js"></script>
+	
+	<!-- - - - - - Owl Caroussel -->
+	<link rel="stylesheet" type="text/css" href="Assets/js/owl-carousel/owl.carousel.min.css">
+	<link rel="stylesheet" type="text/css" href="Assets/js/owl-carousel/owl.theme.default.min.css">
+	<script src="Assets/js/owl-carousel/owl.carousel.min.js"></script>
+
+	<!-- - - - - - - - - Mixitup -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.mixitup/latest/jquery.mixitup.min.js"></script>
+
+	<!-- - - - - - - - - - - - - EU Cookie Law -->
+	<!--link rel="stylesheet" type="text/css" href="Assets/js/cookie-law/jquery-eu-cookie-law-popup.css"/>
+	<script src="Assets/js/cookie-law/jquery-eu-cookie-law-popup.js"></script -->
+
+	<!-- - - - - - - - - jetmenu -->
+	<link rel="stylesheet" type="text/css" href="Assets/js/jetmenu/jetmenu.css" >
+	<script type="text/javascript" src="Assets/js/jetmenu/jetmenu.js"></script>
+	
+	<!-- - - - - - - - - social share privacy -->
+	<script type="text/javascript" src="https://panzi.github.io/SocialSharePrivacy/javascripts/jquery.cookies.js"></script>
+	<script type="application/x-social-share-privacy-settings">{"path_prefix":"https://panzi.github.io/SocialSharePrivacy/","layout":"line","services":{"buffer":{"status":false},"delicious":{"status":false},"disqus":{"status":false},"facebook":{"status":false},"flattr":{"status":false},"hackernews":{"status":false},"linkedin":{"status":false},"pinterest":{"status":false},"reddit":{"status":false},"stumbleupon":{"status":false},"tumblr":{"status":false},"xing":{"status":false}}}</script>
+	<script type="text/javascript" src="Assets/js/jquery.socialshareprivacy.min.fr.js"></script>
+
+
+	<!-- Tarte au citron JS + options -->
+	<script type="text/javascript" src="https://www.shlmr.fr/Assets/js/tarteaucitron-1.21.0/tarteaucitron.min.js"></script>
+	<script type="text/javascript" src="https://www.shlmr.fr/Assets/js/tarteaucitron-init-v1.js"></script>
+
+	<!-- - - jquery-captcha -->
+	<script src="Assets/js/jquery-captcha/jquery-captcha.min.js"></script>
+
+	<!-- - - - - - scripts -->
+	<script src="Assets/js/23mars-scripts.js?rand=405187417"></script>
+
+	<style>
+		/* - - - - - - - - - -  *\
+		|*  tarte au citron
+		\* - - - - - - - - - -  */
+
+		#tarteaucitronAlertBig {
+			background:#fff !important;
+			color: #111 !important;
+			border: solid 1px #ccc !important;
+			margin: 30px 15px !important;
+		}
+		#tarteaucitronDisclaimerAlert {
+			font:normal 14px Arial,sans-serif !important;
+			color: #111 !important;
+		}
+
+		.tarteaucitronPartnersList {
+		display: none !important;
+		}
+
+		div#tarteaucitronAlertBig::before {
+		content: '🍪' !important;
+		font-size: 40px !important;
+		}
+	</style>
+
+</head>
+<body>
+
+	
+
+
+
+	<!-- - - - - - - - MODAL -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document" style="width:90%;max-width:1000px;">
+
+	    <div class="modal-content" style="border-radius:none !important; padding:0 !important;">
+
+		   	<div class="modal-bt-fermer" data-dismiss="modal" aria-label="Close"></div>
+	     	
+	    
+		    <div class="modal-body" style="margin:0; padding:0;">
+		        Chargement en cours...
+		    </div>
+	    
+		    <div class="modal-footer" style="background:#EC1B4D;border:none;" >
+		    	<button type="button" class="btn btn-default" data-dismiss="modal" style="background:#C63356; color:#fff; border:none;">Fermer</button>
+		    </div>
+	    
+	    </div>
+
+	</div>
+	</div>
+
+
+	<!-- - - - - - - - -  BT Scroll *** -->	
+	<div class="bt_scroll up"></div>
+	<div class="bt_scroll down"></div>
+	
+
+
+	
+
+
+
+	<!-- - - - - - - - - - Barre haute Rechercher -->
+	<div class="barre-haute-container">
+	<div class="barre-haute-wrapper">
+
+			<div class="row" style="margin:0 !important; position:relative;">
+				
+				<div class="col-sm-12 col-md-2 text-center">
+					<a href="http://www.shlmr.fr" class="lien-vide">
+						<img src="Assets/svg/logo.svg" alt=""  style="width:180px;height:auto; display:inline-block; background:#fff; padding:10px;">
+					</a>
+				</div>
+
+
+
+				<div class="col-sm-12 col-md-10 col-menu-secondaire text-right">
+
+					<div class="menu-wrapper">
+
+					<ul id="jetmenu" class="jetmenu">
+						<!--li>
+							<a href="//www.shlmr.fr">
+								<img src="Assets/img/icon_home.png" alt="" style="width:auto;height:20px;position:relative;top:-3px;" >
+							</a>
+						</li-->
+
+						<li><a href="#">La SHLMR</a><ul class="dropdown text-left"><li><a href="historique" target="_self">Historique</a></li><li><a href="chiffres-cles-2024" target="_self">Chiffres clés 2024</a></li><li><a href="gouvernance" target="_self">Gouvernance</a></li><li><a href="organisation" target="_self">Organisation</a></li><li><a href="bureaux-et-agences" target="_self">Bureaux et agences</a></li><li><a href="index-de-l-egalite-professionnelle-femmes-hommes-2025" target="_self">Index de l'égalité professionnelle Femmes Hommes 2025</a></li><li><a href="enquetes-de-ressources" target="_self">Enquêtes de ressources</a></li><li><a href="notre-politique-jeune" target="_self">Notre Politique Jeune</a></li></ul><!-- / dropdown --></li><li><a href="#">Nos réalisations</a><ul class="dropdown text-left"><li><a href="le-patrimoine" target="_self">Le patrimoine</a></li><li><a href="l-amenagement" target="_self">L'aménagement</a></li><li><a href="la-rehabilitation" target="_self">La Réhabilitation</a></li></ul><!-- / dropdown --></li><li><a href="blog">Le Blog</a><li><a href="#">Espace Professionnels</a><ul class="dropdown text-left"><li><a href="achats-shlmr" target="_self">Achats SHLMR</a></li><li><a href="spaser-shlmr" target="_self">SPASER SHLMR</a></li><li><a href="mediation-interne-relations-fournisseurs" target="_self">Médiation Interne : Relations Fournisseurs</a></li><li><a href="guihd" target="_self">GuiHD</a></li><li><a href="fovi" target="_self">FOVI</a></li><li><a href="deontologie" target="_self">Déontologie</a></li><li><a href="label-logement-des-hauts" target="_self">Label Logement des Hauts</a></li></ul><!-- / dropdown --></li><li><a href="#">Communication</a><ul class="dropdown text-left"><li><a href="espace-presse" target="_self">Espace Presse</a></li></ul><!-- / dropdown --></li>
+						<li>
+							<a href="https://shlmr.taleez.com/" target="_blank">
+								Offres d'emploi
+							</a>
+						</li>
+
+						<li>
+							<a href="//www.shlmr.fr/rapports-activite" target="_blank" style="color:#fff; background-color:#11416d;">
+								Rapports d'activité
+							</a>
+						</li>
+
+					</ul>
+				    </div>
+				
+				</div>
+
+				
+			</div><!-- / row -->
+
+	</div><!-- / barre-haute-wrapper -->
+	</div><!-- / barre-haute-container -->
+	
+
+<style>
+
+</style>
+
+
+<!-- - - - - - - - - - - - - - - - - - - - zone promotionnelle --> 
+
+
+<!-- - - - - - - - - - - - - - - - - - - 3 blocs  HIDE -->
+<div class="container container-3-blocs">
+<div class="row "> <!-- class = row-eq-height ? -->
+   
+   <!-- - - - 1 -->
+   <div class="col-md-4">
+     
+     <div class="Box-Zone-Container-Wrapper bloc_1" data-blocs="blocs_1">
+       
+       <div class="Locataire-Devenir-Zone Box-Zone">
+         <div class="Box-Zone-plus"><img src="Assets/img/box-zone-plus.png" alt=""></div>
+         Vous souhaitez 
+         <br>
+         <span class="Box-Zone-Titre">DEVENIR LOCATAIRE</span>
+       </div><!-- / Locataire-Devenir-Zone  -->
+
+
+       <div class="Box-Zone-Devenir">
+         <ul class="Box-Zone-Liste-blanc"><li><a href="//www.shlmr.fr/qu-est-ce-qu-un-logement-social" class="Box-Zone-Lien-Texte-blanc">Qu'est-ce qu'un logement social ?</a></li><li><a href="//www.shlmr.fr/demande-de-logement-social" class="Box-Zone-Lien-Texte-blanc">Demande de logement social</a></li><li><a href="//www.shlmr.fr/conditions-d-attribution" class="Box-Zone-Lien-Texte-blanc">Conditions d'attribution</a></li></ul>         <a href="https://www.demande-logement-social.gouv.fr/" target="_blank" class="lien-vide">
+         <div id="Locataire-Devenir-Bouton" class="Box-Zone-Bouton">
+         <div class="Box-Zone-Bouton-Texte transform-y">
+           <span>Effectuez en ligne votre</span><br>
+           DEMANDE DE LOGEMENT
+         </div>
+         </div>
+         </a>
+       </div><!-- / Box-Zone-Devenir -->
+
+     </div><!-- / Box-Zone-Container-Wrapper -->
+
+   </div><!-- / col -->
+   
+   <!-- - - - 2 -->
+   <div class="col-md-4">
+     
+     <div class="Box-Zone-Container-Wrapper bloc_2" data-blocs="blocs_2">
+
+       <div class="Locataire-Deja-Zone Box-Zone">
+         <div class="Box-Zone-plus"><img src="Assets/img/box-zone-plus.png" alt=""></div>
+         Je suis
+         <br>
+         <span class="Box-Zone-Titre">LOCATAIRE</span>
+       </div><!-- / Locataire-Deja-Zone -->
+       
+       <div class="Box-Zone-Deja">
+         <div class="row">
+
+           <div class="col-md-4 text-center">
+             <a href="https://extranet-clients.shlmr.fr/xloc/index.php/inscription-locataire" class="lien-vide" target="_blank">
+             <div id="locataire-creation-wrapper" style="margin:10px auto 0px auto;">
+               <img src="./Assets/img/locataire-icon-creation.png" alt="">
+               <div class="locataire-creation-contenu">
+                 <span>Création de votre</span><br>
+                 COMPTE CLIENT
+               </div>
+             </div><!-- / locataire-creation-wrapper -->
+             </a>
+             <a href="./Assets/img-slider/mode-emploi.jpg" class="locataire-creation-lien" data-fancybox="gallery" rel="gallery">Voir le mode d’emploi</a>
+           </div><!-- / col -->
+
+           <div class="col-md-4 text-center">
+           
+              <a href="Assets/actions/espace-locataire-compte.php?r=tr3u3xtr0" class="lien-vide" target="_blank">
+              <div id="locataire-connexion-wrapper">
+                <img src="./Assets/img/locataire-icon-connexion.png" alt="">
+                <div class="locataire-connexion-contenu">
+                  <span>Connectez-vous à votre</span><br>
+                  ESPACE CLIENT
+                </div><!-- /  locataire-connexion-contenu -->
+              </div><!-- /  locataire-connexion-wrapper -->
+              </a>
+
+              
+              
+              <a href=" https://www.shlmr.fr/mettre-a-jour-ses-coordonnees"  class="lien-vide" target="_blank">
+              <div class="locataire-maj-lien"> 
+                <div><img src="./Assets/img/icon-maj-blanc.png" alt="" style="width:25px;height:auto;margin-right:5px;"></div>   
+                <div>Mettre à jour vos coordonnées</div>
+              </div>
+              </a>      
+
+            </div><!-- / col -->
+
+           <div class="col-md-4">
+             <ul class="Box-Zone-Liste"><li><a href="//www.shlmr.fr/representants-des-locataires" class="Box-Zone-Lien-Texte">Représentants des locataires</a></li><li><a href="//www.shlmr.fr/securite-assurances" class="Box-Zone-Lien-Texte">Sécurité / Assurances</a></li><li><a href="//www.shlmr.fr/urgence-sinistre" class="Box-Zone-Lien-Texte">Urgence sinistre</a></li><li><a href="//www.shlmr.fr/contacts" class="Box-Zone-Lien-Texte">Contacts</a></li></ul>             
+             <a href="//www.shlmr.fr/Assets/pdf/shlmr-guide-du-locataire-2025-v1.pdf" target="_blank" class="lien-vide">
+             <div class="appel-agence-wrapper text-center">
+                 <div><img src="./Assets/img/icon-guide-locataire.png" alt=""></div>
+                 <div>Guide du locataire</div>
+             </div><!-- / titre -->
+             </a>
+
+             <a href="//www.shlmr.fr/securite-assurances" class="lien-vide">
+             <div class="appel-agence-wrapper text-center" style="background-color: #11416d;">
+                 <div><img src="./Assets/img/icon-securite.png" alt=""></div>
+                 <div>Sécurité / Assurances</div>
+             </div><!-- / titre -->
+             </a>
+
+             <a href="//www.shlmr.fr/acheter-mon-logement-hlm" class="lien-vide">
+             <div class="appel-agence-wrapper text-center">
+                 <div><img src="./Assets/img/icon-achat.png" alt=""></div>
+                 <div>Acheter mon logement HLM</div>
+             </div><!-- / titre -->
+             </a>
+
+             <a href="//www.shlmr.fr/bureaux-et-agences" class="lien-vide">
+             <div class="appel-agence-wrapper text-center">
+                 <div><img src="./Assets/img/icon-phone-blanc.png" alt=""></div>
+                 <div>Appeler votre agence</div>
+             </div><!-- / titre -->
+             </a>
+
+             
+             
+           </div><!-- / col -->
+
+         </div><!-- / row -->
+        
+
+
+         <!-- Régelement CB -->
+         <div class="mr-wrapper">
+           <div class="titre text-center">
+             LES MODES DE RÈGLEMENT DÉMATÉRIALISÉS DE VOTRE LOYER
+           </div><!-- / titre -->
+
+           <div style="margin:25px;">
+
+            <div class="row" style="display:none;">
+              <div class="col-md-4">
+                <img src="./Assets/img/locataire-paiement-cartebancaire.png" alt="" style="width:150px; height:auto;">
+              </div> <!-- c -->
+
+              <div class="col-md-4">
+                <img src="./Assets/img/locataire-paiement-virement.png" alt="" style="width:150px; height:auto;">
+              </div> <!-- c -->
+
+              <div class="col-md-4">
+                <img src="./Assets/img/locataire-paiement-prelevement.png" alt="" style="width:150px; height:auto;">
+              </div> <!-- c -->
+            </div> <!-- r -->
+
+
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mr-container">
+                    <div class="soustitre">CARTE BANCAIRE</div>
+                    <div class="mr-contenu" style="font-size:18px;">
+                      <ul class="mr-cb-list text-center"> 
+                        <li>
+                          <a href="https://extranet-clients.shlmr.fr/xloc/index.php/payer-directement-en-ligne" target="_blank" style="font-size:18px;">
+                            Payer en CB sans espace client
+                          </a>
+                        </li>
+                        <li>
+                          <a href="./Assets/actions/espace-locataire-compte.php?r=tr3u3xtr0" target="_blank" style="font-size:18px;">
+                            Payer en CB avec mon espace client
+                          </a>
+                        </li>
+                      </ul>
+                      <div class="mr-infosplus text-center" style="padding:5px;">PAIEMENT EN PLUSIEURS FOIS POSSIBLE</div>
+                    </div>
+                  </div>
+                </div><!-- / col -->
+
+                <div class="col-md-6">
+                  <div class="mr-container">
+                    <div class="soustitre">Virement avec votre IBAN nominatif</div>
+                    <ul style="padding:5px 20px; text-align: justify;">
+                      <li>
+                        Pour effectuer un virement, il vous suffit de créer le bénéficiaire en quelques minutes depuis votre espace bancaire en ligne, ou de vous rendre dans votre agence bancaire.
+                        <br>
+                        Avec ce mode de paiement, vous restez maître de la date et du montant de vos règlements.
+                        <br>
+                        Votre IBAN nominatif, associé à votre référence de contrat, votre adresse, ainsi que votre nom et prénom, sera disponible sur votre quittance à compter du mois de mai.</li>
+                    </ul>
+                  </div>
+                </div><!-- / col -->
+
+              </div><!-- / row -->
+
+              <div class="row">
+
+                <div class="col-md-6 col-centered">
+                  <div class="mr-container">
+                    
+                    <div class="soustitre">PRÉLÉVEMENT AUTOMATIQUE</div>
+                    <ol>
+                      <li><a href="//www.shlmr.fr/Assets/documents/SHLMR-mandat-de-prelevement-sepa-2025.pdf" style="font-size:17px; word-break: normal;" target="_blank">Téléchargez notre mandat SEPA SHLMR</a></li>
+                      <li><a href="//www.shlmr.fr/Assets/documents/DIXIT-mandat-de-prelevement-sepa-2025.pdf" style="font-size:17px; word-break: normal;" target="_blank">Téléchargez notre mandat SEPA Dixit</a></li>
+                                          
+                      <li>Choisissez la date du prélèvement : le 6 ou le 10 du mois</li>
+                      <li>Renvoyez le mandat, rempli et signé par mail, avec votre RIB. (Photo acceptée)</li>
+                    </ol>
+                  </div>
+                </div><!-- / col -->
+
+              </div><!-- / row -->
+
+
+
+             <div class="row">
+               <div class="col-md-12 text-center">
+                 <div class="mr-echanges">
+                   <span>- POUR TOUS VOS ÉCHANGES -</span><br>
+                   Indiquez vos : nom, prénom et n° de référence client (6 chiffres+clé) *
+                   <br><br>
+                   * votre référence client se trouve dans l’encadré en haut à droite sur votre quittance de loyer.
+                 </div>
+               </div><!-- / col -->
+             </div><!-- / row -->
+             
+           </div><!-- / margin:25px -->
+
+         </div><!-- / mr-wrapper -->
+
+
+         <div class="row">
+           <div class="col-md-12">
+             <div class="action-logement-aides-wrapper text-center">
+                 <img src="./Assets/img/icon-infos-blanc.png" alt=""><br>
+                 Vous travaillez dans une entreprise de plus de 10 salariés ou au chômage depuis moins de 12 mois.<br>
+                 Action logement vous propose de nombreuses aides : <br>
+                 <a href="https://www.actionlogement.fr/le-cil-pass-assistancer-0" target="_blank">https://www.actionlogement.fr/le-cil-pass-assistancer-0</a>
+             </div><!-- / titre -->
+           </div><!-- col -->
+         </div><!-- / row -->
+         
+       </div><!-- / Box-Zone-Deja -->
+             
+     </div><!-- / Box-Zone-Container-Wrapper -->
+
+   </div><!-- / col -->
+   
+   <!-- - - - - 3 -->
+   <div class="col-md-4">
+     
+     <div class="Box-Zone-Container-Wrapper bloc_3"  data-blocs="blocs_3">
+
+       <div class="PetitesAnnonces-Zone Box-Zone">
+         <div class="Box-Zone-plus"><img src="Assets/img/box-zone-plus.png" alt=""></div>
+         Petites annonces
+         <br>
+         <span class="Box-Zone-Titre">À LOUER / À VENDRE</span>
+       </div><!-- / PetitesAnnonces-Zone -->
+       
+       <div class="Box-Zone-PetitesAnnonces">
+         <div class="row">
+   
+           <div class="col-md-6 text-left" style="padding-top:5px;">
+             <a href="https://www.shlmr.fr/acheter-en-location-accession" class="lien-vide">
+             <div id="" class="pa-btn-liste-wrapper">
+               <div class="pa-btn-liste-icon">
+                 <img src="https://www.shlmr.fr/Assets/img/icon-al-bleu.png" alt="">
+               </div>
+               <div class="">
+                 Acheter en Location/Accession
+               </div>
+             </div>
+             </a>
+
+             <a href="https://www.shlmr.fr/acheter-un-logement-hlm" class="lien-vide">
+             <div id="" class="pa-btn-liste-wrapper">
+               <div class="pa-btn-liste-icon">
+                 <img src="https://www.shlmr.fr/Assets/img/icon-al-bleu.png" alt="">
+               </div>
+               <div class="">
+                 Acheter un logement HLM
+               </div>
+             </div>
+             </a>
+
+             <a href="https://www.shlmr.fr/les-aides-a-l-achat" class="lien-vide">
+             <div id="" class="pa-btn-liste-wrapper">
+               <div class="pa-btn-liste-icon">
+                 <img src="https://www.shlmr.fr/Assets/img/icon-al-bleu.png" alt="">
+               </div>
+               <div class="">
+                 Les aides à l'achat
+               </div>
+             </div>
+             </a>
+
+             <a href="petites-annonces" class="lien-vide">
+             <div id="" class="pa-btn-wrapper">
+               <div class="pa-btn-icon">
+                 <img src="https://www.shlmr.fr/Assets/img/icon-alertes-emails.png" alt="">
+               </div>
+               <div class="">
+                 <span>Consulter toutes</span><br>
+                 NOS ANNONCES					
+               </div>
+             </div>
+             </a>
+
+             <div id="" class="pa-btn-wrapper Btn-Form-Alerte">
+               <div class="pa-btn-icon">
+                 <img src="https://www.shlmr.fr/Assets/img/icon-alerte.png" alt="">
+               </div>
+               <div class="">
+                 CRÉER VOTRE ALERTE MAIL<br>
+                 <span>pour recevoir nos dernières offres</span>
+               </div>
+             </div>
+           </div><!-- / col -->
+
+
+           <div class="col-md-6 text-left">
+             <h2 class="pa-accueil-titre">Nos dernières annonces parues</h2>
+                            <a href="http://www.shlmr.fr/petites-annonces/436/t3-nouvelle-residence-aloe-macra-beausejour" class="lien-vide">
+               <div class="pa-accueil-annonces">
+
+                 <div class="pa-vignette" style="width:100px !important; height:auto; padding:0 10px 0 0;">
+                    
+                                            <img src="https://www.shlmr.fr/img-petites-annonces/vig_generique.jpg" style="width:100%;height:auto;border:solid 1px #ccc;">
+                                                         </div>
+
+                 <div style="width:100%; font:500 12px 'Open Sans',Arial;word-break: normal;">
+                   <span style="font:600 16px 'Open Sans',Arial;">
+                                          À LOUER<br>                   </span>
+                   <strong>T3-Nouvelle résidence 'ALOE MACRA' BEAUSEJOUR</strong><br>
+                   Appartement                                                         Sainte Marie                 </div>
+
+               </div>
+               </a>
+                            <a href="http://www.shlmr.fr/petites-annonces/437/t4-nouvelle-residence-aloe-macra-beausejour" class="lien-vide">
+               <div class="pa-accueil-annonces">
+
+                 <div class="pa-vignette" style="width:100px !important; height:auto; padding:0 10px 0 0;">
+                    
+                                            <img src="https://www.shlmr.fr/img-petites-annonces/vig_generique.jpg" style="width:100%;height:auto;border:solid 1px #ccc;">
+                                                         </div>
+
+                 <div style="width:100%; font:500 12px 'Open Sans',Arial;word-break: normal;">
+                   <span style="font:600 16px 'Open Sans',Arial;">
+                                          À LOUER<br>                   </span>
+                   <strong>T4-Nouvelle résidence 'ALOE MACRA' BEAUSEJOUR</strong><br>
+                   Appartement                                                         Sainte Marie                 </div>
+
+               </div>
+               </a>
+                            <a href="http://www.shlmr.fr/petites-annonces/331/t2-residence-le-chambly-st-denis-centre-rue-marechal-leclerc" class="lien-vide">
+               <div class="pa-accueil-annonces">
+
+                 <div class="pa-vignette" style="width:100px !important; height:auto; padding:0 10px 0 0;">
+                                        <img src="https://www.shlmr.fr/img-petites-annonces/331/vig/cbly.jpeg " style="width:100%;height:auto;border:solid 1px #ccc;">
+                                    </div>
+
+                 <div style="width:100%; font:500 12px 'Open Sans',Arial;word-break: normal;">
+                   <span style="font:600 16px 'Open Sans',Arial;">
+                                          À LOUER<br>                   </span>
+                   <strong>T2 Résidence le Chambly - ST DENIS CENTRE - RUE MARECHAL LECLERC</strong><br>
+                   Appartement                                                         Saint Denis                 </div>
+
+               </div>
+               </a>
+                          
+           </div><!-- / col -->
+
+         </div><!-- / row -->       
+       </div><!-- Box-Zone-PetitesAnnonces -->
+
+     </div><!-- / Box-Zone-Container-Wrapper -->
+
+   </div><!-- / col -->
+
+</div><!-- / row -->
+</div><!-- / container -->
+<br>
+
+
+<script>
+$(document).ready(function(){
+
+  var document_width = $('html').width();
+  if( document_width <= 991 ){ 
+    console.log("READY - html <= 991 "); 
+    $('.Box-Zone-Devenir').slideUp();
+    $('.Box-Zone-Deja').slideUp();
+    $('.Box-Zone-PetitesAnnonces').slideUp();
+  };
+
+  // - - - - - - - - - - - - - - - - - Window Resize
+  $( window ).resize(function() {
+
+    var document_width = $('html').width();
+
+    if( document_width <= 991 ){
+      console.log(" html <= 991 ");
+
+    }else{
+
+    };
+
+  });
+
+
+}); // - - - - Ready
+</script> 
+
+
+
+    
+    
+
+
+    
+	<!-- - - - - - - - Facebook -->
+	<div id="fb-root"></div>
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v23.0"></script>
+
+
+<!-- - - - - - - - - - - - - - - - - - - - zone promotionnelle --> 
+
+
+
+<style>
+
+    .BTN-large-accueil-wrapper {
+        display: flex; align-items: center; justify-content: center;
+        height:100%;
+    }
+    .BTN-large-accueil-wrapper .icon { width:70px; height:auto; padding:5px; }
+    .BTN-large-accueil-wrapper .icon img { width:100%; height:auto; }
+    .BTN-large-accueil-wrapper .contenu { width:100%; padding:5px; }
+
+    .Faq-zone {
+        width: 100%; height: 100px;
+        position: relative;
+        background-color: #11416D; border: solid 5px #1665aa;
+        background-image: url(./Assets/img/background-btn.png);
+        background-repeat: no-repeat;
+        background-position: right top;
+        color: #fff;
+        font: 600 16px "Open Sans",Arial;
+        margin: 0 0 10px 0; padding: 0;
+        cursor: pointer;        
+    }
+
+</style>
+
+<!-- - - - - Appels d'offres / Contact / Propriétaire -->
+<div class="container" style="margin: 10px auto;">
+<div class="row">
+
+		<div class="col-md-3">
+			<a href="https://shlmr.achatpublic.com/sdm/ent/gen/index.do" target="_blank" class="lien-vide">
+			<div class="AppelsOffres-zone">
+                <div class="BTN-large-accueil-wrapper">
+					<div class="icon"><img src="Assets/img/icon-appels-offre.png" alt=""></div>
+					<div class="contenu">
+						Consultez nos<br>
+						<span>APPELS D'OFFRES</span>
+					</div>
+				</div><!-- / BTN-large-accueil-wrapper -->
+			</div>
+			</a>
+		</div>
+
+		<div class="col-md-3">
+			<div class="NousContacter-zone Btn-Form-Contact" >
+				<div class="BTN-large-accueil-wrapper">
+					<div class="icon"><img src="Assets/img/icon-contact.png" alt=""></div>
+					<div class="contenu">
+						<span>NOUS CONTACTER</span><br>
+						<span class="NousContacter-infos" style="font-size:11px;">
+							Un renseignement, une réclamation...
+						</span>
+					</div>
+				</div><!-- / BTN-large-accueil-wrapper -->
+			</div>
+		</div>
+
+		<div class="col-md-3">
+				<a href="https://www.shlmr.fr/faq" class="lien-vide">
+				<div class="Faq-zone" >
+					<div class="BTN-large-accueil-wrapper">
+						<div class="icon"><img src="Assets/img/icon-faq.png" alt=""></div>
+						<div class="contenu">
+							<span>FAQ</span><br>
+							<span class="NousContacter-infos" style="font-size:11px;">
+								Questions / Réponses
+							</span>
+						</div>
+					</div><!-- / BTN-large-accueil-wrapper -->
+				</div>
+							</a>
+			</div>
+
+			<div class="col-md-3">
+				<a href="https://extranet2.ics.fr/V5/connexion-shlmr.html" target="_blank" class="lien-vide">
+				<div class="Coproprietaire-zone">
+					<div class="BTN-large-accueil-wrapper">
+											<div class="icon"><img src="Assets/img/icon-coproprietaire.png" alt=""></div>
+						<div class="contenu">
+							Je suis<br>
+							<span>COPROPRIÉTAIRE</span>
+						</div>
+					</div><!-- / BTN-large-accueil-wrapper -->
+				</div>
+				</a>
+			</div>
+
+</div>
+</div>
+
+
+
+<!-- - - - - PROMO Offres d'emploi -->
+<div class="container" style="margin: 15px auto;">
+<div class="row">
+
+		<div class="col-md-12 text-center">
+			<a href="https://shlmr.taleez.com/" target="_blank" class="lien-vide">
+				<img src="Assets/img/offres-d-emploi-visuel-2.jpg" alt="" style="border:solid 1px #ccc;">
+			</a>
+		</div>
+
+</div>
+</div>
+
+
+
+
+<!-- - - - - Facebook -->
+<div class="container rs-container">
+<div class="row">
+
+	<div class="col-sm-12 text-center">
+
+		<div class="fb-page" data-href="https://www.facebook.com/SHLMRpageofficielle" data-tabs="timeline" data-width="500" data-height="800" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/SHLMRpageofficielle" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/SHLMRpageofficielle">SHLMR</a></blockquote></div>
+
+	</div>
+
+</div>
+</div>
+
+<br>
+<br>
+
+
+
+
+
+
+<!-- - - - -->	
+<!-- - - - FOOTER -->	
+<!-- - - - -->	
+<div class="container-fluid container-footer" style="background:#eeeeee; letter-spacing: 0px;">
+
+	<div class="row" style="width:100%; max-width:1170px; margin:50px auto; padding:35px 25px 25px 25px; background:#eee;">
+
+		<div class="col-md-6 footer-urgences">
+			<div style="width:100%;height:auto;padding:10px;color:#fff;background:#EE1F57;text-align:center;">
+				<img src="Assets/svg/icon-appel-urgence.svg" alt="" style="width:80px; height:auto;"><br>	
+				<span style="font:600 18px 'Open Sans',Arial;">Urgences SHLMR</span><br>
+				<span style="font:600 30px 'Open Sans',Arial;">0262 929 000</span><br>
+				(En dehors des heures d'ouverture de bureau)
+			</div>
+		</div>
+
+
+		<div class="col-md-6 footer-installations">
+			<div style="width:100%;height:auto;padding:20px;background:#fbfbfb;margin:auto;text-align:center;">
+
+				<strong>
+					La rénovation thermique et énergétique des bailleurs sociaux et l’installation des chauffe-eaux solaires sont financées par l’Union européenne dans le cadre du programme FEDER-FSE+ Réunion dont l’Autorité de gestion est la Région Réunion.
+					<br><br>
+					L’Europe s’engage à La Réunion avec le fonds FEDER. 
+				</strong>
+
+				<div style="display-flex justify-content-center align-items-center">
+					<img src="Assets/img/logo-europe-finance-v1.webp" alt="" style="width:90px; height:auto; margin:10px;">
+					<img src="Assets/img/logo-region-reunion-v1.webp" alt="" style="width:90px; height:auto; margin:10px;">
+				</div>
+
+				<a href="https://www.shlmr.fr/les-operations-concernees-par-le-financement-feder-fse-reunion" style="padding: 5px; border: solid 1px #ee1f57; border-radius: 5px; display: inline-block;">
+					<strong>Découvrez ici les opérations concernées par ces financements</strong>
+				</a>
+
+			</div>			
+		</div><!-- c -->
+
+	</div><!-- r -->
+
+
+
+	<div class="row" style="width:100%; max-width:1170px; margin:50px auto; background:#eee;">
+
+		<div class="col-md-12 text-center">
+			<div style="padding:25px 0; margin:25px 0;">
+				&copy; 2026 <strong>SHLMR</strong> 
+				
+				<span class="Btn-Form-Contact-Style Btn-Form-Contact" style="color:#ee1f57; margin:0 15px;"><strong>Nous contacter</strong></span> 
+				<a href="faq" style="margin:0 15px;"><strong>FAQ</strong></a> 
+				<a href="mentions-legales" style="margin:0 15px;"><strong>Mentions légales</strong></a> 
+				<a href="infos-cookies" style="margin:0 15px;"><strong>Politique d'utilisation des cookies</strong></a>
+				<a href="politique-de-confidentialite"><strong>Politique de confidentialité</strong></a>
+				<a href="#tarteaucitron"><strong>Gestion des cookies</strong></a>
+			</div>
+		</div><!-- c -->
+
+	</div><!-- r -->
+
+</div> <!-- ///// fin wrapper -->
+
+</body>
+</html>
