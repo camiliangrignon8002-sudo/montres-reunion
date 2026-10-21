@@ -1,0 +1,51 @@
+[
+ {
+  "i": 0,
+  "url": "https://immotransac.re/nos-biens/data/catalogue.json",
+  "code": 200,
+  "taille": 2198417,
+  "debut": "{\"data\":[{\"Annonce Netty\":\"🌅 « LA VILLA DU PONANT » :\\n\\n   • Maison de plain-pied de 130 m², cinq pièces, quatre chambres.\\n   • Construite en dur en 1984, rénovée en 2012, en très bon état général.\\n   • Terrain clos de 1 125 m² à Boucan Canot, sur la côte Ouest de Saint-Paul.\\n   • Piscine enterr"
+ },
+ {
+  "i": 1,
+  "url": "https://www.sorim.re/en/property/86700590",
+  "code": 200,
+  "taille": 30289,
+  "debut": "<!DOCTYPE html>\n<html lang=\"en\" prefix=\"og: http://ogp.me/ns#\">\n  <head>\n\n                  <meta charset=\"UTF-8\">\n              <title> Property Rental : Apartment in Saint-Denis - Sorim.</title>\n              <meta name=\"description\" content=\" Property Rental : 4 rooms Apartment based in Saint-Den"
+ },
+ {
+  "i": 2,
+  "url": "https://isautier.re/bien/83169322/",
+  "code": 200,
+  "taille": 111724,
+  "debut": "<!doctype html>\n<html class=\"scroll-smooth\" lang=\"fr-FR\">\n\n<head>\n    <!-- Google tag (gtag.js) -->\n    <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-J9PM3333CM\"></script>\n    <script>\n        window.dataLayer = window.dataLayer || [];\n\n        function gtag() {\n            dataLa"
+ },
+ {
+  "i": 3,
+  "url": "https://www.herren-immobilier.com/location/appartement/7247-studio-au-moufia",
+  "code": 200,
+  "taille": 48133,
+  "debut": "<!DOCTYPE HTML>\n<html lang=\"fr-fr\" dir=\"ltr\">\n\n<head>\n<meta charset=\"utf-8\" />\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\n  <base href=\"https://www.herren-immobilier.com/location/appartement/7247-studio-au-moufia\" />\n  <meta name=\"keywords\" content=\"€, Loyer, Nombre, Proximité, S"
+ },
+ {
+  "i": 4,
+  "url": "https://www.urbanis.re/location/12-la-possession/appartement/393-bel-appartement-t3-en-location-nue-a-la-possession",
+  "code": 200,
+  "taille": 361952,
+  "debut": "\n\n<!DOCTYPE html>\n<!-- Levant -->\n<html lang=\"fr\">\n<head>\n    <meta charset=\"utf-8\"/>\n    <base href=\"https://www.urbanis.re/\">\n\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n\n    <title>Location appartement La Possession 3 pièces 57m² 1005.75€ | Urbanis</title>\n    <meta name=\"descripti"
+ },
+ {
+  "i": 5,
+  "url": "https://www.sorim.re/fr/locations",
+  "code": 200,
+  "taille": 23502,
+  "debut": "<!DOCTYPE html>\n<html lang=\"fr\" prefix=\"og: http://ogp.me/ns#\">\n  <head>\n\n                  <meta charset=\"UTF-8\">\n              <title>Locations  | SORIM</title>\n              <meta property=\"og:title\" content=\"Locations  | SORIM\">\n              <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"ht"
+ },
+ {
+  "i": 6,
+  "url": "https://www.sorim.re/property/86700590",
+  "code": 404,
+  "taille": 9854,
+  "debut": "<!DOCTYPE html>\n<html lang=\"en\" prefix=\"og: http://ogp.me/ns#\">\n  <head>\n\n                  <meta charset=\"UTF-8\">\n              <title>404 | SORIM</title>\n              <meta name=\"description\" content=\"Real estate agency Sorim, Real estate consulting. Quality sale and acquisition in Saint-Denis.\">"
+ }
+]
