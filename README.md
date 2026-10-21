@@ -71,9 +71,9 @@ sujet `logements974-w9y80xhxga`), avec la photo, le prix et les boutons « Voir 
 Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/apple/
 
 **Toutes les 3 heures, de 6h à 22h (heure de La Réunion)**, GitHub relève les produits Apple **neufs,
-reconditionnés et d'occasion** en vente **à La Réunion**, sur 14 sites de l'île : **iShop**, **Microstor**, **Phenix Store**,
-**Darty Réunion**, **Leclerc (Leclic.re)**, **Delbos Informatique**, **TelROI**, **OrdiROI**, **Zeop Store**, **Isleden**,
-**smart974**, **Pineapple**, les magasins **Cash Express** de Saint-Pierre et Sainte-Clotilde, et les annonces **ParuVendu**.
+reconditionnés et d'occasion** en vente **à La Réunion**, sur 12 sites de l'île : **iShop**, **Microstor**, **Phenix Store**,
+**Darty Réunion**, **Leclerc (Leclic.re)**, **Delbos Informatique**, **TelROI**, **OrdiROI**, **smart974**, **Pineapple**,
+les magasins **Cash Express** de Saint-Pierre et Sainte-Clotilde, et les annonces **ParuVendu**.
 
 **Notification de midi** : chaque jour vers 12h, une notification donne le nombre de produits Apple sortis en vente
 dans les dernières 24 h et les liste (appli gratuite **ntfy**, sujet `apple974-hcmkgo9gki`).
@@ -94,6 +94,6 @@ Lancer une recherche tout de suite : onglet **Actions → Apple Réunion → Run
 
 Limites : Leboncoin (captcha anti-robot) et Facebook Marketplace (connexion obligatoire) bloquent la lecture
 automatique ; la rubrique « Aussi sur » de l'appli ouvre directement leur recherche à La Réunion. SFR Réunion, Orange Réunion
-et Easy Cash refusent aussi les robots. Le prix affiché « dès » est celui de la
+et Easy Cash refusent aussi les robots ; Isleden et Zeop Store affichent leurs produits en JavaScript (pas encore lus). Le prix affiché « dès » est celui de la
 version la moins chère. Pour Microstor et ParuVendu, la carte montre la commune, pas l'adresse exacte.
 

@@ -31,7 +31,7 @@ VUS_FILE = ROOT / "data" / "apple_vus.json"        # id -> date où l'appli a vu
 GEO_FILE = ROOT / "data" / "apple_geo.json"        # adresse de magasin -> [lat, lng] (API Adresse du gouvernement)
 OUT_DIR = ROOT / "docs" / "apple"
 REUNION = timezone(timedelta(hours=4))
-FICHES_PAR_PASSAGE = int(os.environ.get("FICHES_PAR_PASSAGE", "600"))  # nouvelles pages produit lues à chaque passage
+FICHES_PAR_PASSAGE = int(os.environ.get("FICHES_PAR_PASSAGE", "900"))  # nouvelles pages produit lues à chaque passage
 FICHE_JOURS = 4  # une page produit est relue au bout de ce nombre de jours
 VERSION_FICHE = 2
 # Notification de midi : appli gratuite ntfy, abonnement au sujet ci-dessous
@@ -373,7 +373,7 @@ def caracteristiques(titre, description, cat, en_plus=None):
         v = int(batterie.group(1) or batterie.group(2))
         if 50 <= v <= 100:
             c["Batterie"] = f"{v} %"
-    garantie = re.search(r"garantie?\s*(?:de\s*)?(\d{1,2})\s*(mois|ans?)\b", td)
+    garantie = re.search(r"garantie?\s*:?\s*(?:de\s*)?(\d{1,2})\s*(mois|ans?)\b", td)
     if garantie:
         c["Garantie"] = f"{garantie.group(1)} {garantie.group(2)}"
     for k, v in (en_plus or {}).items():
@@ -1106,7 +1106,8 @@ def prestashop_boutique(nom, prefixe, base, rayons_fixes, motif_rayons, lieux, e
             res[p["url"]] = produit(id=prefixe + (re.search(r"/(\d+)-", p["url"]) or re.search(r"(.*)", p["url"])).group(1)[-40:],
                                     vendeur=nom, etat=etat, cat=cat, tags=tags, titre=p["titre"], prix=arrondi(p["prix"]),
                                     prix_avant=arrondi(p["prix_avant"]), photos=[p["photo"]] if p["photo"] else [],
-                                    url=p["url"], lieux=list(lieux), dispo=p["dispo"], titre_coupe=p["titre"].endswith("..."))
+                                    url=p["url"], lieux=list(lieux), dispo=p["dispo"], titre_coupe=p["titre"].endswith("..."),
+                                    etat_fiche=True)
     return list(res.values())
 
 
@@ -1208,7 +1209,7 @@ def completer(produits, fiches):
     a_lire = [a for a in produits if a["url"] not in fiches or fiches[a["url"]].get("lu", "") < limite
               or fiches[a["url"]].get("v") != VERSION_FICHE]
     # d'abord les produits jamais lus (iShop en tête : sa page de rayon ne donne ni le nom complet ni le prix)
-    a_lire.sort(key=lambda a: (a["url"] in fiches, not a.get("a_completer"), a["vendeur"] == "ParuVendu"))
+    a_lire.sort(key=lambda a: (a["url"] in fiches, not (a.get("a_completer") or a.get("etat_fiche")), a["vendeur"] == "ParuVendu"))
     lus = 0
     for a in a_lire[:FICHES_PAR_PASSAGE]:
         f = lire_fiche(a)
@@ -1222,7 +1223,7 @@ def completer(produits, fiches):
     for a in produits:
         f = fiches.get(a["url"])
         if not f:
-            if a.get("a_completer"):
+            if a.get("a_completer") or a.get("etat_fiche"):  # l'état (neuf, grade…) n'est connu qu'avec la fiche
                 a["dispo"] = False  # iShop : sans sa page produit, ni nom complet ni prix
             continue
         if f.get("titre") and (a.get("a_completer") or a.get("titre_coupe")):
@@ -1277,6 +1278,10 @@ def finaliser(a):
         if site.get(k):
             en_plus[k] = site[k]
     detail = a.pop("etat_detail", "")
+    grade = re.search(r"\bgrade\s*:?\s*(a\+?|b|c|correct|bon|tres bon|excellent|parfait|premium|comme neuf)\b", norm(a["titre"] + " " + a["description"][:1500]))
+    if grade and a["etat"] == "Neuf" and a["vendeur"] not in ("Microstor", "iShop", "Darty"):
+        a["etat"] = "Reconditionné"  # TelROI, OrdiROI… : « Grade : Correct » dans la fiche
+        detail = detail or "Grade " + grade.group(1).upper() if len(grade.group(1)) <= 2 else detail or "Grade " + grade.group(1)
     a["carac"] = caracteristiques(a["titre"], a["description"], a["cat"], en_plus)
     if detail and norm(detail) != norm(a["etat"]):
         a["carac"]["État"] = detail
@@ -1299,7 +1304,9 @@ def finaliser(a):
         else:
             a["titre"] = a["titre"][:1].upper() + a["titre"][1:]
     a["rang"] = rang(a)
-    for cle in ("a_completer", "titre_coupe", "marque", "annonceur", "date"):
+    if a["vendeur"] == "Leclerc (Leclic)":  # « … - Espace Culturel E.Leclerc – Le Portail »
+        a["titre"] = re.sub(r"\s+-\s+(?:Espace Culturel|E\.?Leclerc|Leclerc).*$", "", a["titre"]).strip()
+    for cle in ("a_completer", "titre_coupe", "marque", "annonceur", "date", "etat_fiche"):
         a.pop(cle, None)
     return a
 
@@ -1307,7 +1314,10 @@ def finaliser(a):
 def sans_doublons(produits):
     uniques = {}
     for a in produits:
-        cle = a["url"] if a["pro"] else (mots(a["titre"]), a["prix"], mots(a["description"])[:60])
+        if a["vendeur"] in ("TelROI", "OrdiROI"):  # même groupe, même catalogue : TelROI d'abord (il a une adresse)
+            cle = ("roi", mots(a["titre"]), a["prix"])
+        else:
+            cle = a["url"] if a["pro"] else (mots(a["titre"]), a["prix"], mots(a["description"])[:60])
         uniques.setdefault(cle, a)
     return list(uniques.values())
 
@@ -1399,8 +1409,9 @@ def notifier(produits, maintenant):
 
 SOURCES = [("iShop", ishop), ("Microstor", microstor), ("Phenix Store", phenix), ("Darty", darty),
            ("Cash Express", cashexpress), ("ParuVendu", paruvendu), ("Delbos Informatique", delbos),
-           ("Leclerc (Leclic)", leclic), ("TelROI", telroi), ("OrdiROI", ordiroi), ("Isleden", isleden),
-           ("Zeop Store", zeopstore), ("smart974", smart974), ("Pineapple", pineapple)]
+           ("Leclerc (Leclic)", leclic), ("TelROI", telroi), ("OrdiROI", ordiroi), ("smart974", smart974),
+           ("Pineapple", pineapple)]
+# Isleden et Zeop Store chargent leurs produits en JavaScript : leurs fonctions restent prêtes mais ne renvoient rien pour l'instant
 
 
 def main():
@@ -1423,8 +1434,9 @@ def main():
     if not tous:
         print("Aucune source n'a répondu : la page n'est pas modifiée.")
         return
+    tous = sans_doublons(tous)
     completer(tous, fiches)
-    gardes = [a for a in (finaliser(a) for a in sans_doublons(tous)) if a]
+    gardes = [a for a in (finaliser(a) for a in tous) if a]
     # le stock disparu d'un magasin n'a rien à faire dans l'appli
     gardes = [a for a in gardes if a["dispo"] is not False or a["vendeur"] == "ParuVendu"]
     maintenant = datetime.now(REUNION)
