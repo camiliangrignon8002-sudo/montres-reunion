@@ -1,0 +1,51 @@
+[
+ {
+  "i": 0,
+  "url": "https://www.bienici.com/realEstateAd.json?id=citya-immobilier-501991-GES03180022-34",
+  "code": 200,
+  "taille": 3649,
+  "debut": "{\"reference\":\"GES03180022-34\",\"energyClassification\":\"NS\",\"greenhouseGazClassification\":\"NS\",\"charges\":28,\"safetyDeposit\":459.09,\"agencyRentalFee\":657.94,\"agencyFeeUrl\":\"https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location\",\"adType\":\"rent\",\"floor\":1,\"roomsQuantity\":1,\"bed"
+ },
+ {
+  "i": 1,
+  "url": "https://www.bienici.com/account.json?id=citya-immobilier-501991",
+  "code": 404,
+  "taille": 15069,
+  "debut": "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\"><title>Toutes les annonces immobilières dans le neuf et l’ancien - Bien’ici</title><script>!function(){function i(){delete window.navigationStartRefined,document.removeEventListener(\"visibilitychange\",i)}\"visible\"===document.visibilityState&"
+ },
+ {
+  "i": 2,
+  "url": "https://www.bienici.com/accounts.json?ids=citya-immobilier-501991",
+  "code": 404,
+  "taille": 15069,
+  "debut": "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\"><title>Toutes les annonces immobilières dans le neuf et l’ancien - Bien’ici</title><script>!function(){function i(){delete window.navigationStartRefined,document.removeEventListener(\"visibilitychange\",i)}\"visible\"===document.visibilityState&"
+ },
+ {
+  "i": 3,
+  "url": "https://www.bienici.com/realEstateAdContactInfo.json?id=citya-immobilier-501991-GES03180022-34",
+  "code": 404,
+  "taille": 15069,
+  "debut": "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\"><title>Toutes les annonces immobilières dans le neuf et l’ancien - Bien’ici</title><script>!function(){function i(){delete window.navigationStartRefined,document.removeEventListener(\"visibilitychange\",i)}\"visible\"===document.visibilityState&"
+ },
+ {
+  "i": 4,
+  "url": "https://www.bienici.com/agency.json?id=citya-immobilier-501991",
+  "code": 404,
+  "taille": 15069,
+  "debut": "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\"><title>Toutes les annonces immobilières dans le neuf et l’ancien - Bien’ici</title><script>!function(){function i(){delete window.navigationStartRefined,document.removeEventListener(\"visibilitychange\",i)}\"visible\"===document.visibilityState&"
+ },
+ {
+  "i": 5,
+  "url": "https://www.bienici.com/agence/citya-saint-denis",
+  "code": 404,
+  "taille": 15069,
+  "debut": "<!DOCTYPE html><html lang=\"fr\"><head><meta charset=\"UTF-8\"><title>Toutes les annonces immobilières dans le neuf et l’ancien - Bien’ici</title><script>!function(){function i(){delete window.navigationStartRefined,document.removeEventListener(\"visibilitychange\",i)}\"visible\"===document.visibilityState&"
+ },
+ {
+  "i": 6,
+  "url": "https://www.bienici.com/realEstateAd.json?id=netty-company58298tcg-appt-2786",
+  "code": 200,
+  "taille": 5594,
+  "debut": "{\"reference\":\"3012-GTI974\",\"adType\":\"rent\",\"propertyType\":\"flat\",\"postalCode\":\"97400\",\"city\":\"Saint-Denis\",\"price\":488.65,\"agencyRentalFee\":288.64,\"surfaceArea\":22,\"roomsQuantity\":1,\"title\":\"A LOUER APPARTEMENT F1 A L'ETAT IRREPROCHABLE PROCHE HYPER CENTR\",\"description\":\"L'agence GTI vous propose à "
+ }
+]
