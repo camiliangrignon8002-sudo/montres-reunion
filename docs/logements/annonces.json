@@ -213,24 +213,30 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a13ffe-7d70-7800-aeb4-3741d0f4ab82",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-t1-duplex-ste-clotilde/01a13ffe-7d70-7800-aeb4-3741d0f4ab82",
-  "titre": "Appartement T1 Duplex - Ste Clotilde",
+  "id": "figaro-109910151",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-109910151.html",
+  "titre": "Location  appartement 2 pièces 30 m² à Sainte Clotilde (97490), 401 €",
   "prix": 401.0,
   "commune": "Saint-Denis",
-  "quartier": "Sainte-Clotilde",
+  "quartier": "Sainte Clotilde",
   "pieces": 2,
   "type": "T2",
   "surface": 30.0,
   "meuble": null,
   "photos": [
-   "https://img.e-xiste.com/FJ-e15EBAKdJAgjHrz7PresQqd1xPMD9AA4NFkyzZQU/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_432a991d-c297-43ce-aa19-66474391cb94.jpg"
+   "https://lh3.googleusercontent.com/nqXJMVJuxXhYtZv6tA6_FVwhwwEsLOk80NO0iZpop0qifDd4mgETD2FZ1dCMktpbEMQ8JpqTJRm5F8kn_bP8SGoUaraBqENtm_a-=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/_yUgDGN1kNmjXAXGIDJHJOkqnr4586hNYe3-e2wciKcqg84Cn7QEOgaJqbW_w4feo9aoavGV0ZKMX04WEIhmJuIKoTLi5tuJMB5F=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/_e-15zspf4JGg0MC8hdSmdt4Stwq79FLaSbqQgk2YtSYGq2pIzkIDmnACJWbeS-7yrGFXcbj7PhtYRb_nPr0jwgDjUMsmyM26jIKSQ=rw-w940-h605-l80"
   ],
-  "description": "Location T1 bis Saint-Denis (974) 2 pièces 30 m²",
-  "caracteristiques": [],
+  "description": "Idéal étudiant ! Grand T1 Bis en duplex d'environ 30 m² comprenant : une entrée, un séjour avec un coin kitchenette, un coin chambre en mezzanine, un petit balcon et une place de parking extérieur. Disponible  fin novembre 2026. Eau inclus dans le montant du loyer.",
+  "caracteristiques": [
+   "Varangue / balcon",
+   "Parking",
+   "Proche université"
+  ],
   "date": "",
-  "annonceur": "Pro · via bien'ici",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -240,7 +246,12 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-t1-duplex-ste-clotilde/01a13ffe-7d70-7800-aeb4-3741d0f4ab82"
+   }
+  ],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -3226,6 +3237,46 @@
   "email": "",
   "adresse": "",
   "secteur": "Nord-Est",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "figaro-110025019",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025019.html",
+  "titre": "Location meublée appartement 1 pièce 24.72 m² à Saint-Denis (97400), 680 €",
+  "prix": 680.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": null,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/yuCmIU2VVliHTLDaZhVC7dQKHEkgKEF6DHQ-ttgsVhQAPLGwNA5tAPiqMUtHx_Fi20T2kJ4msyZlSZU0puhHAbG_czetMbLgPw9a1Q=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/yaXvVs2WqRwgODHf5qBPzomBUey_xX2i128B7aL_lfg_OPyLKOcWN2eLsJR12XoYVeArIB6vvQhyx9LafbnkKMuk-aMmTyiaifvvRg=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/7UCEdPc8N0qDHp3URGOPM4ulUFrJfLTgQrpB_Ytl0J4qbV1esvf4iJe_shR9VajkSduyLpxJij9rLgzo6KTia6_brGJTRoy5dn7QP94=rw-w940-h605-l80"
+  ],
+  "description": "RUNIMMO vous propose en location un studio joliment meublé de 24,72 m2, situé dans la rue monthyon à Saint-Denis (97400), résidence ' LA GOELETTE '. Ce bien se compose d'une pièce principale lumineuse et climatisée, une cuisine aménagée et équipée, une belle salle d'eau avec wc et une grande terrasse. Une place de parking privative est disponible en sous-sol. Ce bien se situe proche du jardin de l'état, et du centre ville de Saint-Denis. Pour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 321 € TTC à la charge du locataire comprenant 74 € TTC pour l'état des lieux. Loyer de base 640 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 280 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Climatisation",
+   "Jardin",
+   "Cuisine équipée"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 26 92 05",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
