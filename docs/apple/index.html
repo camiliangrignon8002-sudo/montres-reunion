@@ -275,6 +275,30 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
 .groupe-vendeur{margin:18px 20px 8px;display:flex;justify-content:space-between;align-items:center;font-size:15px}
 .groupe-vendeur b{font-size:17px}
 
+/* Comparaison */
+.cmp-tetes{display:grid;gap:10px;padding:4px 16px 6px}
+.cmp-tete{position:relative;background:var(--carte);border-radius:18px;box-shadow:var(--ombre);padding:10px 10px 12px;display:flex;flex-direction:column;gap:3px;border:0;text-align:left;min-width:0}
+.cmp-tete img,.cmp-tete .sans{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;border-radius:12px;display:grid;place-items:center;color:#c7c7cc}
+.cmp-tete small{font-size:11px;font-weight:600;color:var(--doux);text-transform:uppercase;letter-spacing:.03em;margin-top:6px}
+.cmp-tete span{font-size:13.5px;font-weight:600;line-height:1.25;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.cmp-tete b{font-size:16px}
+.cmp-tete .retirer{position:absolute;top:6px;right:6px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(120,120,128,.18);display:grid;place-items:center;color:var(--doux)}
+.cmp-tete .retirer svg.ic{width:14px;height:14px;stroke-width:2.4}
+.cmp-ajout{border:2px dashed var(--ligne);background:transparent;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--bleu);font-weight:600;font-size:14px;min-height:180px}
+.verdict{margin:14px 16px 0;background:var(--carte);border-radius:18px;padding:14px 16px;box-shadow:var(--ombre)}
+.verdict h4{margin:0 0 8px;font-size:17px}
+.verdict ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14.5px}
+.verdict .note{padding:8px 0 0}
+.cmp-ligne{margin:10px 16px 0;background:var(--carte);border-radius:16px;padding:12px 14px}
+.cmp-ligne h5{margin:0;font-size:15px}
+.cmp-ligne p{margin:2px 0 10px;font-size:12.5px;color:var(--doux);line-height:1.4}
+.cmp-vals{display:grid;gap:8px}
+.cmp-vals div{background:var(--fond);border-radius:10px;padding:8px 10px;font-size:14px;font-weight:500;min-width:0;overflow-wrap:anywhere}
+.cmp-vals div.mieux{background:var(--vert-doux);color:var(--vert);font-weight:700}
+.cmp-vals div.mieux::before{content:"✓ ";}
+.cmp-vals div.vide{color:var(--doux);font-weight:400}
+.cmp-vals ul{margin:0;padding-left:16px;font-size:13px;font-weight:500}
+.cmp-vals li.plus{color:var(--vert);font-weight:700}
 #tirer{position:fixed;left:50%;top:calc(60px + env(safe-area-inset-top));transform:translate(-50%,-70px);z-index:25;width:40px;height:40px;border-radius:50%;background:var(--carte);box-shadow:var(--ombre);display:grid;place-items:center;color:var(--bleu);opacity:0;pointer-events:none}
 #toast{position:fixed;left:50%;bottom:calc(98px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:rgba(29,29,31,.92);color:#fff;padding:10px 16px;border-radius:14px;font-size:14.5px;z-index:60;opacity:0;transition:.25s;pointer-events:none;max-width:88vw;text-align:center}
 #toast.on{opacity:1;transform:translate(-50%,0)}
@@ -309,6 +333,8 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
   <symbol id="i-cable" viewBox="0 0 24 24"><path d="M7 3v4M11 3v4M5.5 7h7v3.5A3.5 3.5 0 0 1 9 14v0a3.5 3.5 0 0 1-3.5-3.5Z"/><path d="M9 14v2.5a4.5 4.5 0 0 0 9 0V5"/></symbol>
   <symbol id="i-tout" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></symbol>
   <symbol id="i-cloche" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15L6 16Z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-balance" viewBox="0 0 24 24"><path d="M12 4v16M7 20h10M5 7h14"/><path d="m5 7-3 7a3 3 0 0 0 6 0Zm14 0-3 7a3 3 0 0 0 6 0Z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-photo" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 8"/></symbol>
 </svg>
 
@@ -324,7 +350,7 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
 <main class="page">
   <!-- Accueil -->
   <section id="vue-produits">
-    <div class="grand-titre"><h1>Produits</h1><div class="maj">Mis à jour<br><span id="maj">jeudi 22/10 à 02h48</span></div></div>
+    <div class="grand-titre"><h1>Produits</h1><div class="maj">Mis à jour<br><span id="maj">jeudi 22/10 à 03h12</span></div></div>
 
     <div class="rail" id="rail-cats" aria-label="Catégories"></div>
 
@@ -365,6 +391,12 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
     <div class="grille" id="grille-favoris"></div>
   </section>
 
+  <!-- Comparaison -->
+  <section id="vue-comparaison" hidden>
+    <div class="vue-titre"><h1>Comparaison</h1><p>Compare 2 ou 3 produits : composants, ce qu'ils changent au quotidien, prix et vendeur.</p></div>
+    <div id="comparaison"></div>
+  </section>
+
   <!-- Panier -->
   <section id="vue-panier" hidden>
     <div class="vue-titre"><h1>Panier</h1><p>Les achats se font sur le site ou dans le magasin du vendeur.</p></div>
@@ -389,6 +421,7 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
   <nav>
     <button data-aller="favoris"><svg class="ic"><use href="#i-coeur"/></svg>Favoris<em id="m-fav">0</em></button>
     <button data-aller="panier"><svg class="ic"><use href="#i-sac"/></svg>Panier<em id="m-panier">0</em></button>
+    <button data-aller="comparaison"><svg class="ic"><use href="#i-balance"/></svg>Comparaison<em id="m-cmp">0</em></button>
     <button data-aller="produits"><svg class="ic"><use href="#i-produits"/></svg>Tous les produits<em id="m-tout"></em></button>
   </nav>
   <nav>
@@ -401,7 +434,7 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
     <a href="https://ntfy.sh/apple974-hcmkgo9gki" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:13px 16px;color:var(--texte)"><svg class="ic" style="color:var(--bleu)"><use href="#i-cloche"/></svg>Notification de midi</a>
   </nav>
   <p class="info">Chaque jour vers 12h, une notification donne le nombre de produits Apple sortis en vente dans les 24 h et les liste. Pour la recevoir : installe l'appli gratuite <b>ntfy</b>, touche <b>+</b> et abonne-toi au sujet <b>apple974-hcmkgo9gki</b>.</p>
-  <p class="info">Annonces lues plusieurs fois par jour sur les sites des magasins de La Réunion et sur ParuVendu. Leboncoin et Facebook Marketplace bloquent les robots : la rubrique « Aussi sur » ouvre directement leur recherche à La Réunion. Les prix et le stock peuvent changer : vérifie sur le site du vendeur avant de te déplacer.<br><br>Sources lues au dernier passage : <span id="sources">iShop, Microstor, Phenix Store, Darty, Cash Express, ParuVendu, Delbos Informatique, Leclerc (Leclic), TelROI, OrdiROI, smart974, Pineapple</span></p>
+  <p class="info">Annonces lues plusieurs fois par jour sur les sites des magasins de La Réunion et sur ParuVendu. Leboncoin et Facebook Marketplace bloquent les robots : la rubrique « Aussi sur » ouvre directement leur recherche à La Réunion. Les prix et le stock peuvent changer : vérifie sur le site du vendeur avant de te déplacer.<br><br>Sources lues au dernier passage : <span id="sources">iShop, Microstor, Phenix Store, Darty, Cash Express, ParuVendu, Delbos Informatique, Leclerc (Leclic), TelROI, OrdiROI, Isleden, Zeop Store, smart974, Pineapple</span></p>
 </aside>
 
 <!-- Fiche produit -->
@@ -753,7 +786,7 @@ $("#tiroir").addEventListener("click", e => {
   fermer();
   if (b.dataset.aller) setTimeout(() => allerA(b.dataset.aller), 60);
   else if (b.dataset.vendeur) setTimeout(() => { allerA("produits"); F.vendeurs = [b.dataset.vendeur]; appliquer(); }, 60);
-  else if (b.dataset.action === "recherche") setTimeout(ouvrirRecherche, 120);
+  else if (b.dataset.action === "recherche") setTimeout(() => ouvrirRecherche(false), 120);
   else if (b.dataset.action === "filtres") setTimeout(ouvrirFiltres, 120);
   else if (b.dataset.action === "actualiser") actualiser();
 });
@@ -795,6 +828,7 @@ function ouvrirFiche(id) {
         <a class="btn bleu large" href="${esc(a.url)}" target="_blank" rel="noopener">${ic("sortie")}Voir l'annonce chez ${esc(a.vendeur)}</a>
         ${l0 ? `<a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=${l0.lat},${l0.lng}" target="_blank" rel="noopener">${ic("route")}Itinéraire</a>` : ""}
         <button class="btn${l0 ? "" : " large"}" id="f-partage">${ic("partage")}Partager</button>
+        <button class="btn large" id="f-comparer">${ic("balance")}${COMPARER.includes(a.id) ? "Dans la comparaison · voir" : "Comparer avec un autre produit"}</button>
       </div>
       ${!lieux && a.pro ? `<div class="bloc"><h4>Où le trouver</h4><div class="lieu-l">${ic("sac")}<div><b>Vente en ligne</b><small>Commande sur le site de ${esc(a.vendeur)}, livraison à La Réunion</small></div></div></div>` : ""}
       ${lieux ? `<div class="bloc"><h4>${a.pro ? "Où le trouver" : "Lieu"}</h4>${lieux}${l0 ? `<iframe class="carte-map" loading="lazy" title="Carte" src="https://maps.google.com/maps?q=${l0.lat},${l0.lng}&z=${a.pro ? 14 : 12}&output=embed"></iframe>` : ""}</div>` : ""}
@@ -813,6 +847,10 @@ function ouvrirFiche(id) {
   $("#f-fav").onclick = () => { basculerFavori(a); ouvrirFiche(a.id); };
   $("#f-panier").onclick = () => { ajouterPanier(a); ouvrirFiche(a.id); };
   $("#f-partage").onclick = () => partager(a);
+  $("#f-comparer").onclick = () => {
+    if (!COMPARER.includes(a.id)) ajouterComparaison(a);
+    fermer(); setTimeout(() => allerA("comparaison"), 60);
+  };
   $("#fiche-defile").querySelectorAll(".autres button").forEach(b => b.onclick = () => ouvrirFiche(b.dataset.id));
   $("#fiche-defile").scrollTop = 0;
   ouvrir("fiche");
@@ -823,6 +861,10 @@ document.addEventListener("click", e => {
   const sp = e.target.closest("[data-partage]");
   if (sp) { e.stopPropagation(); const a = PAR_ID[sp.dataset.partage] || FAVORIS[sp.dataset.partage]; if (a) partager(a); return; }
   const c = e.target.closest(".carte[data-id]");
+  if (c && CHOIX_COMPARAISON && c.closest("#grille-recherche")) {
+    const a = PAR_ID[c.dataset.id]; if (a) ajouterComparaison(a);
+    CHOIX_COMPARAISON = false; fermer(); setTimeout(() => allerA("comparaison"), 60); return;
+  }
   if (c) ouvrirFiche(c.dataset.id);
 });
 document.addEventListener("keydown", e => { if (e.key === "Enter" && e.target.matches(".carte[data-id]")) ouvrirFiche(e.target.dataset.id); });
@@ -844,7 +886,7 @@ function ajouterPanier(a) {
 function compteurs() {
   const nf = Object.keys(FAVORIS).length, np = Object.values(PANIER).reduce((s, x) => s + x.q, 0);
   for (const [id, n] of [["#pastille-fav", nf], ["#pastille-panier", np]]) { $(id).textContent = n; $(id).hidden = !n; }
-  $("#m-fav").textContent = nf; $("#m-panier").textContent = np;
+  $("#m-fav").textContent = nf; $("#m-panier").textContent = np; $("#m-cmp").textContent = COMPARER.length;
   $("#pastille-menu").textContent = np; $("#pastille-menu").hidden = !np;
 }
 function afficherFavoris() {
@@ -886,9 +928,10 @@ $("#panier").addEventListener("click", e => {
 
 function allerA(v) {
   vue = v;
-  for (const n of ["produits", "favoris", "panier"]) $("#vue-" + n).hidden = n !== v;
+  for (const n of ["produits", "favoris", "panier", "comparaison"]) $("#vue-" + n).hidden = n !== v;
   document.querySelectorAll(".onglets nav button").forEach(b => b.setAttribute("aria-current", b.dataset.vue === v));
-  $("#petit-titre").textContent = {produits: "Produits", favoris: "Favoris", panier: "Panier"}[v];
+  $("#petit-titre").textContent = {produits: "Produits", favoris: "Favoris", panier: "Panier", comparaison: "Comparaison"}[v];
+  if (v === "comparaison") afficherComparaison();
   if (v === "favoris") afficherFavoris();
   if (v === "panier") afficherPanier();
   scrollTo(0, 0);
@@ -970,7 +1013,10 @@ $("#tri-liste").onclick = e => {
 
 // ------------------------------------------------------------------ recherche
 const SUGGESTIONS = ["iPhone 17 Pro", "iPhone 16", "iPhone reconditionné", "MacBook Air", "MacBook Pro", "iPad Air", "Apple Watch Ultra", "AirPods Pro", "Mac mini", "Coque MagSafe", "Apple Pencil", "AirTag"];
-function ouvrirRecherche() {
+let CHOIX_COMPARAISON = false;  // la recherche sert alors à choisir un produit à comparer
+function ouvrirRecherche(pourComparer) {
+  CHOIX_COMPARAISON = pourComparer === true;
+  $("#recherche h3").textContent = CHOIX_COMPARAISON ? "Choisir un produit à comparer" : "Rechercher";
   ouvrir("recherche");
   majRecherche();
   setTimeout(() => $("#q").focus(), 80);
@@ -1003,7 +1049,189 @@ $("#q").oninput = () => { clearTimeout(minuterieQ); minuterieQ = setTimeout(majR
 $("#q").onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); validerRecherche(false); $("#q").blur(); } };
 $("#q-effacer").onclick = () => { $("#q").value = ""; majRecherche(); $("#q").focus(); };
 $("#suggestions").onclick = e => { const b = e.target.closest("button"); if (!b) return; $("#q").value = b.dataset.q; majRecherche(); validerRecherche(false); };
-$("#btn-loupe").onclick = ouvrirRecherche;
+$("#btn-loupe").onclick = () => ouvrirRecherche(false);
+
+// ------------------------------------------------------------------ comparaison
+let COMPARER = lire("apple974-comparer", []);        // ids, dans l'ordre d'ajout (3 au plus)
+let COMPARER_COPIES = lire("apple974-comparer-copies", {});
+let SPECS = null;                                     // fiche technique de référence (specs.json), chargée à la demande
+function sauverComparaison() { ecrire("apple974-comparer", COMPARER); ecrire("apple974-comparer-copies", COMPARER_COPIES); compteurs(); }
+function ajouterComparaison(a) {
+  if (COMPARER.includes(a.id)) return;
+  if (COMPARER.length >= 3) { const ancien = COMPARER.shift(); delete COMPARER_COPIES[ancien]; toast("3 produits au plus : le premier a été retiré"); }
+  COMPARER.push(a.id); COMPARER_COPIES[a.id] = copie(a);
+  sauverComparaison();
+}
+async function chargerSpecs() {
+  if (SPECS) return SPECS;
+  try { const r = await fetch("specs.json?v=202610220312"); SPECS = await r.json(); } catch (e) { SPECS = {puces: {}, modeles: {}}; }
+  return SPECS;
+}
+const ORDRE_ETAT = {"Neuf": 3, "Reconditionné": 2, "Occasion": 1};
+function enGo(t) { const m = String(t || "").match(/(\d+)\s*(Go|To)/i); return m ? +m[1] * (/to/i.test(m[2]) ? 1024 : 1) : null; }
+function rangPuce(nom) {
+  if (!nom || !SPECS) return null;
+  const n = norm(nom).replace(/bionic/g, "").trim();
+  let meilleur = null;
+  for (const [k, v] of Object.entries(SPECS.puces)) {
+    const kn = norm(k).replace(/bionic/g, "").trim();
+    if (n === kn || n.startsWith(kn + " ") || n === kn.split(" ")[0] && !meilleur) meilleur = v;
+    if (n === kn) return v;
+  }
+  return meilleur;
+}
+// Ce que chaque ligne veut dire, en clair
+const LIGNES = [
+  {cle: "prix", nom: "Prix", aide: "Ce que tu paies chez ce vendeur, au dernier relevé.",
+   val: (a) => a.prix == null ? null : (a.des ? "dès " : "") + euros(a.prix), num: (a) => a.prix, mieux: "bas"},
+  {cle: "etat", nom: "État", aide: "Neuf : jamais servi. Reconditionné : remis en état et testé par un professionnel, avec garantie. Occasion : vendu tel quel par un particulier ou un dépôt-vente.",
+   val: (a) => a.etat + ((a.carac || {})["État"] ? " · " + a.carac["État"] : ""), num: (a) => ORDRE_ETAT[a.etat], mieux: "haut"},
+  {cle: "puce", nom: "Puce (processeur)", aide: "Le cerveau de l'appareil. Plus elle est récente, plus tout va vite (photos, jeux, applis) et plus longtemps il recevra les mises à jour d'Apple.",
+   val: (a, s) => (s && s.Puce) || (a.carac || {})["Puce"], num: (a, s) => { const r = rangPuce((s && s.Puce) || (a.carac || {})["Puce"]); return r && r.rang; }, mieux: "haut"},
+  {cle: "sortie", nom: "Année de sortie", aide: "Un modèle récent reste à jour plus longtemps et se revend mieux.",
+   val: (a, s) => s && s.Sortie, num: (a, s) => s && s.Sortie, mieux: "haut"},
+  {cle: "capa", nom: "Stockage", aide: "La place pour tes photos, vidéos et applis. 128 Go suffit pour un usage courant ; 256 Go ou plus si tu filmes beaucoup ou gardes tout sur le téléphone.",
+   val: (a) => (a.carac || {})["Capacité"] || (a.carac || {})["Stockages proposés"], num: (a) => enGo((a.carac || {})["Capacité"]), mieux: "haut"},
+  {cle: "ram", nom: "Mémoire vive", aide: "Permet d'ouvrir beaucoup d'applis et d'onglets en même temps sans ralentir. 16 Go est confortable sur un Mac.",
+   val: (a) => (a.carac || {})["Mémoire"] || (a.carac || {})["RAM"], num: (a) => enGo((a.carac || {})["Mémoire"] || (a.carac || {})["RAM"]), mieux: "haut"},
+  {cle: "ecran", nom: "Écran", aide: "La taille se mesure en diagonale. 120 Hz (ProMotion) rend le défilement et les animations plus fluides que 60 Hz.",
+   val: (a, s) => (s && s["Écran"]) || (a.carac || {})["Écran"] || (a.carac || {})["Taille"], num: (a, s) => s && s.hz, mieux: "haut"},
+  {cle: "photo", nom: "Appareil photo", aide: "Le téléobjectif zoome sans perte de qualité (portraits, concerts, animaux). L'ultra grand-angle fait entrer plus de paysage ou de monde sur la photo.",
+   val: (a, s) => s && s["Appareil photo"], num: (a, s) => s && ((s.zoom || 0) * 10 + (s.ultra ? 1 : 0)), mieux: "haut"},
+  {cle: "autonomie", nom: "Autonomie", aide: "Durée annoncée par Apple quand l'appareil est neuf (vidéo pour un iPhone, écoute pour des AirPods). Sur un appareil d'occasion, elle dépend aussi de l'usure de la batterie.",
+   val: (a, s) => s && s.Autonomie, num: (a, s) => s && (s.video_h || s.ecoute_h || s.montre_h), mieux: "haut"},
+  {cle: "batterie", nom: "Santé de la batterie", aide: "100 % = comme neuve. En dessous de 80 %, elle tient nettement moins longtemps et se remplace (compter environ 100 € chez un réparateur).",
+   val: (a) => (a.carac || {})["Batterie"], num: (a) => parseInt((a.carac || {})["Batterie"]) || null, mieux: "haut"},
+  {cle: "bruit", nom: "Réduction de bruit", aide: "Coupe les bruits autour de toi (bus, avion, rue) pour écouter sans monter le son.",
+   val: (a, s) => s && s["Réduction de bruit"], num: (a, s) => s && (s.anc ? 1 : 0), mieux: "haut"},
+  {cle: "tailles", nom: "Tailles de boîtier", aide: "Le plus grand boîtier offre un écran plus lisible ; le plus petit est plus discret au poignet.",
+   val: (a, s) => (a.carac || {})["Taille"] || (s && s.Tailles), num: () => null},
+  {cle: "poids", nom: "Poids", aide: "Plus léger, il est plus agréable à tenir longtemps et en poche.",
+   val: (a, s) => s && s.Poids, num: (a, s) => s && s.poids_g, mieux: "bas"},
+  {cle: "port", nom: "Prise de charge", aide: "USB-C : le même câble que les Mac, iPad et la plupart des chargeurs récents. Lightning : l'ancien câble propre à Apple.",
+   val: (a, s) => s && s.Connecteur, num: (a, s) => s && s.Connecteur ? (/usb-c rapide/i.test(s.Connecteur) ? 2 : /usb-c/i.test(s.Connecteur) ? 1 : 0) : null, mieux: "haut"},
+  {cle: "deverr", nom: "Déverrouillage", aide: "Face ID reconnaît ton visage ; Touch ID ton empreinte sur le bouton.",
+   val: (a, s) => s && s["Déverrouillage"], num: () => null},
+  {cle: "garantie", nom: "Garantie", aide: "Durée pendant laquelle le vendeur répare ou remplace gratuitement en cas de panne.",
+   val: (a) => (a.carac || {})["Garantie"], num: (a) => { const g = (a.carac || {})["Garantie"]; const m = String(g || "").match(/(\d+)\s*(mois|an)/); return m ? +m[1] * (m[2] === "an" ? 12 : 1) : null; }, mieux: "haut"},
+  {cle: "lieu", nom: "Où l'acheter", aide: "Vendeur et commune ; la distance s'affiche si tu as choisi ta position dans les filtres.",
+   val: (a) => { const p = lieuProche(a); return `${a.vendeur}${p ? " · " + (p.l.commune || p.l.nom) + (p.d != null ? " (" + distTxt(p.d) + ")" : "") : a.pro ? " · en ligne" : ""}`; }, num: (a) => { const p = lieuProche(a); return p && p.d != null ? p.d : null; }, mieux: "bas"},
+];
+function meilleurs(nums, sens) {
+  const ok = nums.filter(n => n != null);
+  if (ok.length < 2 || new Set(ok).size < 2) return [];
+  const cible = sens === "bas" ? Math.min(...ok) : Math.max(...ok);
+  return nums.map((n, i) => n === cible ? i : -1).filter(i => i >= 0);
+}
+function nomCourt(a) { return a.modele || a.titre.slice(0, 32); }
+function verdict(liste, specs) {
+  const phrases = [];
+  const autres = (i) => liste.filter((_, j) => j !== i);
+  // prix
+  const prix = liste.map(a => a.prix);
+  const ib = meilleurs(prix, "bas");
+  if (ib.length === 1) {
+    const a = liste[ib[0]], plusCher = Math.max(...prix.filter(p => p != null));
+    phrases.push(`<b>Le moins cher :</b> ${esc(nomCourt(a))} chez ${esc(a.vendeur)}, ${euros(plusCher - a.prix)} de moins${liste.length > 2 ? " que le plus cher" : ""}.`);
+  }
+  // puissance
+  const puces = liste.map((a, i) => { const nom = (specs[i] && specs[i].Puce) || (a.carac || {})["Puce"]; const r = rangPuce(nom); return r ? {nom, rang: r.rang} : null; });
+  const ip = meilleurs(puces.map(p => p && p.rang), "haut");
+  if (ip.length === 1) {
+    const autresP = puces.filter((p, j) => p && j !== ip[0]).map(p => p.nom);
+    const ecart = Math.round(puces[ip[0]].rang - Math.max(...puces.filter((p, j) => p && j !== ip[0]).map(p => p.rang)));
+    phrases.push(`<b>Le plus puissant :</b> ${esc(nomCourt(liste[ip[0]]))} (puce ${esc(puces[ip[0]].nom)} contre ${esc(autresP.join(", "))}${ecart >= 1 ? `, ${ecart} génération${ecart > 1 ? "s" : ""} d'écart` : ""}) : plus rapide et suivi plus longtemps par les mises à jour.`);
+  }
+  // autonomie
+  const auto = specs.map(s => s && (s.video_h || s.ecoute_h || s.montre_h));
+  const ia = meilleurs(auto, "haut");
+  if (ia.length === 1) {
+    const diff = auto[ia[0]] - Math.max(...auto.filter((v, j) => v != null && j !== ia[0]));
+    if (diff >= 2) phrases.push(`<b>Tient le plus longtemps :</b> ${esc(nomCourt(liste[ia[0]]))}, environ ${diff} h de plus${specs[ia[0]].video_h ? " en vidéo" : ""} (chiffres Apple, appareil neuf).`);
+  }
+  // photo
+  const zoom = specs.map(s => s && s.zoom);
+  const iz = meilleurs(zoom, "haut");
+  if (iz.length === 1 && zoom[iz[0]] > 0) phrases.push(`<b>Le meilleur pour les photos :</b> ${esc(nomCourt(liste[iz[0]]))}, grâce à son téléobjectif ${String(zoom[iz[0]]).replace(".", ",")}x qui zoome sans perte de qualité.`);
+  // écran
+  const hz = specs.map(s => s && s.hz);
+  const ih = meilleurs(hz, "haut");
+  if (ih.length === 1) phrases.push(`<b>Écran le plus fluide :</b> ${esc(nomCourt(liste[ih[0]]))} (120 Hz contre 60 Hz).`);
+  const pouces = specs.map(s => s && s.pouces);
+  const ie = meilleurs(pouces, "haut");
+  if (ie.length === 1 && liste.every(a => a.cat === liste[0].cat)) phrases.push(`<b>Le plus grand écran :</b> ${esc(nomCourt(liste[ie[0]]))} (${String(pouces[ie[0]]).replace(".", ",")} pouces).`);
+  // stockage
+  const go = liste.map(a => enGo((a.carac || {})["Capacité"]));
+  const ig = meilleurs(go, "haut");
+  if (ig.length === 1) phrases.push(`<b>Le plus de stockage :</b> ${esc(nomCourt(liste[ig[0]]))} (${esc(liste[ig[0]].carac["Capacité"])}).`);
+  // poids
+  const poids = specs.map(s => s && s.poids_g);
+  const il = meilleurs(poids, "bas");
+  if (il.length === 1) { const d = Math.min(...poids.filter((v, j) => v != null && j !== il[0])) - poids[il[0]]; if (d >= 15) phrases.push(`<b>Le plus léger :</b> ${esc(nomCourt(liste[il[0]]))} (${d} g de moins).`); }
+  // état
+  const etats = liste.map(a => ORDRE_ETAT[a.etat]);
+  if (new Set(etats).size > 1) { const i = etats.indexOf(Math.max(...etats)); phrases.push(`<b>Le plus sûr :</b> ${esc(nomCourt(liste[i]))}, vendu ${esc(liste[i].etat.toLowerCase())}${liste[i].etat === "Neuf" ? " avec la garantie complète" : ""}.`); }
+  // fonctions en plus
+  specs.forEach((s, i) => {
+    if (!s || !s.fonctions) return;
+    const ailleurs = new Set(specs.filter((x, j) => x && j !== i).flatMap(x => x.fonctions || []));
+    if (!specs.some((x, j) => x && j !== i)) return;
+    const plus = s.fonctions.filter(f => !ailleurs.has(f));
+    if (plus.length) phrases.push(`<b>En plus sur ${esc(nomCourt(liste[i]))} :</b> ${esc(plus.join(", "))}.`);
+  });
+  if (!phrases.length) phrases.push("Ces produits sont très proches : choisis surtout selon le prix, l'état et le vendeur le plus pratique pour toi.");
+  return phrases;
+}
+async function afficherComparaison() {
+  const liste = COMPARER.map(id => PAR_ID[id] || COMPARER_COPIES[id]).filter(Boolean);
+  const n = Math.max(liste.length, 1);
+  const cols = `grid-template-columns:repeat(${Math.min(3, liste.length < 3 ? liste.length + 1 : 3)},minmax(0,1fr))`;
+  const tetes = liste.map(a => `<div class="cmp-tete">
+      <button class="retirer" data-retirer="${esc(a.id)}" aria-label="Retirer de la comparaison">${ic("x")}</button>
+      ${(a.photos || [])[0] ? `<img src="${esc(a.photos[0])}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<span class="sans">${ic("photo")}</span>`}
+      <small>${esc(a.vendeur)} · ${esc(a.etat)}</small><span>${esc(a.titre)}</span><b>${a.des && a.prix != null ? "dès " : ""}${euros(a.prix)}</b>
+      <button class="lien" data-voir="${esc(a.id)}" style="text-align:left;margin-top:2px">Voir la fiche</button>
+    </div>`).join("") + (liste.length < 3 ? `<button class="cmp-ajout" id="cmp-ajouter">${ic("plus")}Ajouter un produit</button>` : "");
+  if (liste.length < 2) {
+    $("#comparaison").innerHTML = `<div class="cmp-tetes" style="${cols}">${tetes}</div>
+      <div class="vide" style="padding-top:20px">${ic("balance")}<br>Choisis ${liste.length ? "un deuxième produit" : "deux produits"} à comparer.<br>Depuis une fiche produit, touche « Comparer avec un autre produit », ou touche « Ajouter un produit » ici.</div>`;
+    brancherComparaison(); return;
+  }
+  await chargerSpecs();
+  const specs = liste.map(a => (SPECS.modeles || {})[a.modele] || null);
+  const colsVals = `grid-template-columns:repeat(${liste.length},minmax(0,1fr))`;
+  const lignes = LIGNES.map(l => {
+    const vals = liste.map((a, i) => l.val(a, specs[i]));
+    if (vals.every(v => v == null || v === "")) return "";
+    const nums = liste.map((a, i) => l.num(a, specs[i]) ?? null);
+    const best = l.mieux ? meilleurs(nums, l.mieux) : [];
+    return `<div class="cmp-ligne"><h5>${esc(l.nom)}</h5><p>${esc(l.aide)}</p><div class="cmp-vals" style="${colsVals}">${
+      vals.map((v, i) => `<div class="${v == null || v === "" ? "vide" : best.includes(i) && best.length < liste.length ? "mieux" : ""}">${v == null || v === "" ? "non précisé" : esc(v)}</div>`).join("")}</div></div>`;
+  }).join("");
+  // fonctions : ce que chacun a, en vert ce que les autres n'ont pas
+  const toutes = specs.map(s => (s && s.fonctions) || []);
+  const fonctions = toutes.some(f => f.length) ? `<div class="cmp-ligne"><h5>Fonctions</h5><p>En vert : ce que l'autre produit n'a pas.</p><div class="cmp-vals" style="${colsVals}">${
+    toutes.map((f, i) => { const ailleurs = new Set(toutes.filter((_, j) => j !== i).flat()); return f.length ? `<div><ul>${f.map(x => `<li class="${ailleurs.has(x) ? "" : "plus"}">${esc(x)}</li>`).join("")}</ul></div>` : `<div class="vide">non précisé</div>`; }).join("")}</div></div>` : "";
+  const sansFiche = liste.filter((a, i) => !specs[i]);
+  $("#comparaison").innerHTML = `<div class="cmp-tetes" style="${cols}">${tetes}</div>
+    <div class="verdict"><h4>En bref</h4><ul>${verdict(liste, specs).map(p => `<li>${p}</li>`).join("")}</ul>
+      ${sansFiche.length ? `<p class="note">Fiche technique détaillée pas encore disponible pour ${sansFiche.map(a => esc(nomCourt(a))).join(", ")} : la comparaison utilise ce qu'indique le vendeur.</p>` : ""}
+      <p class="note">Composants et autonomies : chiffres officiels d'Apple pour l'appareil neuf. Prix et état : relevés chez le vendeur.</p></div>
+    ${lignes}${fonctions}
+    <div style="padding:16px"><button class="btn large" style="width:100%" id="cmp-vider">Vider la comparaison</button></div>`;
+  brancherComparaison();
+}
+function brancherComparaison() {
+  const z = $("#comparaison");
+  z.querySelectorAll("[data-retirer]").forEach(b => b.onclick = () => { COMPARER = COMPARER.filter(x => x !== b.dataset.retirer); delete COMPARER_COPIES[b.dataset.retirer]; sauverComparaison(); afficherComparaison(); });
+  z.querySelectorAll("[data-voir]").forEach(b => b.onclick = () => ouvrirFiche(b.dataset.voir));
+  const aj = $("#cmp-ajouter"); if (aj) aj.onclick = () => {
+    const premier = PAR_ID[COMPARER[0]] || COMPARER_COPIES[COMPARER[0]];
+    $("#q").value = premier ? (premier.modele || NOM_CAT[premier.cat] || "").split(" ").slice(0, 2).join(" ") : "";
+    ouvrirRecherche(true);
+  };
+  const v = $("#cmp-vider"); if (v) v.onclick = () => { COMPARER = []; COMPARER_COPIES = {}; sauverComparaison(); afficherComparaison(); };
+}
 
 // ------------------------------------------------------------------ données et actualisation
 function charger(d) {
@@ -1015,6 +1243,7 @@ function charger(d) {
   construireAccueil(); compteurs(); rendreGrille();
   if (vue === "favoris") afficherFavoris();
   if (vue === "panier") afficherPanier();
+  if (vue === "comparaison") afficherComparaison();
 }
 let enCours = false;
 async function actualiser(silencieux) {
@@ -1054,7 +1283,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden && Da
 
 $("#grille").innerHTML = Array.from({length: 6}, () => `<div class="squelette"></div>`).join("");
 compteurs();
-fetch("annonces.json?v=202610220248").then(r => r.json()).then(charger).catch(() => actualiser(true));
+fetch("annonces.json?v=202610220312").then(r => r.json()).then(charger).catch(() => actualiser(true));
 if (location.hash) history.replaceState(null, "", location.pathname);
 </script>
 </body>
