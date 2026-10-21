@@ -177,6 +177,7 @@ function carte(a) {
       ${a.titre && !/^(T\d|Studio)( |$)/.test(a.titre) ? `<div><b>${esc(a.titre)}</b></div>` : ""}
       ${carac ? `<div class="carac">${carac}</div>` : ""}
       ${a.description ? `<div class="desc">${esc(a.description)}</div><button class="plus">Lire la suite</button>` : ""}
+      ${a.photos.length <= 1 ? `<div class="meta">Les autres photos et tous les détails sont sur l'annonce d'origine.</div>` : ""}
       ${a.aussi && a.aussi.length ? `<div class="aussi">Aussi sur ${a.aussi.map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.source)}</a>`).join(", ")}</div>` : ""}
       <div class="actions"><a class="btn" href="${esc(a.url)}" target="_blank" rel="noopener">Voir l'annonce</a><a class="btn sec" href="${carteUrl}" target="_blank" rel="noopener">🗺️ Carte</a></div>
     </div></article>`;

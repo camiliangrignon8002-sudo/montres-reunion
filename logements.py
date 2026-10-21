@@ -82,6 +82,22 @@ def commune_de(*textes):
     return ""
 
 
+QUARTIERS = {"sainte-clotilde": "Sainte-Clotilde", "sainte clotilde": "Sainte-Clotilde", "ste clotilde": "Sainte-Clotilde",
+             "ste-clotilde": "Sainte-Clotilde", "la montagne": "La Montagne", "le brule": "Le Brûlé", "moufia": "Le Moufia",
+             "bellepierre": "Bellepierre", "chaudron": "Le Chaudron", "la bretagne": "La Bretagne", "camelias": "Les Camélias",
+             "bois de nefles": "Bois-de-Nèfles", "montgaillard": "Montgaillard", "la source": "La Source", "le butor": "Le Butor",
+             "vauban": "Vauban", "providence": "La Providence", "saint-francois": "Saint-François", "trinite": "La Trinité",
+             "petite-ile": "Petite-Île", "petite ile": "Petite-Île", "beausejour": "Beauséjour", "la convenance": "La Convenance",
+             "duparc": "Duparc", "gillot": "Gillot", "rivière des pluies": "Rivière des Pluies", "riviere des pluies": "Rivière des Pluies",
+             "ravine a malheur": "Ravine à Malheur", "riviere des galets": "Rivière des Galets", "quartier francais": "Quartier Français",
+             "cambuston": "Cambuston", "centre-ville": "Centre-ville", "centre ville": "Centre-ville", "barachois": "Barachois"}
+
+
+def quartier_de(txt):
+    n = norm(txt)
+    return next((v for k, v in QUARTIERS.items() if re.search(r"(?<![a-z])" + re.escape(k) + r"(?![a-z])", n)), "")
+
+
 # ---------------------------------------------------------------- aides au logement
 
 # Les aides de la CAF (AL/APL) sont versées pour une résidence principale louée vide ou meublée
@@ -351,22 +367,44 @@ def paruvendu_fiche(a, h):
 # ---------------------------------------------------------------- Zimo
 
 def zimo():
+    """Zimo regroupe aussi des annonces de Leboncoin et d'agences. Ses pages d'annonce sont protégées
+    (Cloudflare) : on se contente de la liste, qui donne prix, type, surface, commune et une photo."""
     res = []
-    for commune, (_, _, slug, _, _) in COMMUNES.items():
+    for slug in [v[2] for v in COMMUNES.values()]:
         for page in range(1, 10):
             r = get(f"https://www.zimo.fr/annonces/immobilier/location/appartement/{slug}" + (f"?page={page}" if page > 1 else ""))
             if not r:
                 break
-            produits = [o for o in ld_json(r.text) if o.get("@type") == "Product" and "/annonce/" in o.get("url", "")]
+            h = r.text
+            produits = {o["url"]: o for o in ld_json(h) if o.get("@type") == "Product" and "/annonce/" in o.get("url", "")}
             if not produits:
                 break
-            for o in produits:
-                prix = (o.get("offers") or {}).get("price")
-                ident = "zimo-" + o["url"].rstrip("/").split("/")[-1]
+            debut = 0
+            for m in re.finditer(r'<a href="(/annonce/[^"]+)"\s+title="([^"]*)"', h):
+                carte, debut = h[debut:m.start()], m.end()
+                url = "https://www.zimo.fr" + m.group(1)
+                ident = "zimo-" + url.rstrip("/").split("/")[-1]
                 if any(x["id"] == ident for x in res):
                     continue
-                res.append(annonce(id=ident, source="Zimo", url=o["url"], titre=o.get("name", ""),
-                                   prix=nombre(prix), commune=commune, photos=[o["image"]] if o.get("image") else []))
+                o = produits.get(url, {})
+                sous_titre = re.findall(r'<div class="leading-6 font-medium[^"]*">\s*(.*?)\s*</div>', carte, re.S)
+                sous_titre = texte(sous_titre[-1]) if sous_titre else ""
+                badges = [texte(b) for b in re.findall(r'<span class="badge[^"]*">(.*?)</span>', carte, re.S)]
+                origine = re.findall(r'</div>\s*<span>([^<]{2,40})</span>\s*<i class="fas fa-caret-right"', carte)
+                quand = re.findall(r"<time>([^<]+)</time>", carte)
+                titre = html.unescape(m.group(2))
+                commune = commune_de(sous_titre, titre)
+                pieces = re.search(r"(\d+) pi[eè]ces?", sous_titre)
+                surface = re.search(r"([\d,.]+) ?m²", sous_titre)
+                prix = (o.get("offers") or {}).get("price") or next((b for b in badges if "€" in b), None)
+                annonceur = next((b for b in badges if b in ("Particulier", "Professionnel", "Pro", "Agence")), "")
+                res.append(annonce(
+                    id=ident, source="Zimo", url=url, titre=titre, prix=nombre(prix), commune=commune,
+                    quartier=quartier_de(titre + " " + sous_titre) or commune,
+                    pieces=int(pieces.group(1)) if pieces else None, surface=nombre(surface.group(1)) if surface else None,
+                    photos=[o["image"]] if o.get("image") else [], description=sous_titre,
+                    annonceur=" · ".join(x for x in [annonceur, "via " + html.unescape(origine[-1].strip()) if origine else ""] if x),
+                    fiche_bloquee=True, depuis=quand[-1] if quand else ""))
             if len(produits) < 20:
                 break
     return res
@@ -504,14 +542,14 @@ def completer(annonces, fiches):
     """Lit les pages des annonces qui peuvent convenir (une seule fois par annonce)."""
     lues = 0
     for a in annonces:
-        if a["source"] == "Bien'ici":
+        if a["source"] == "Bien'ici" or a.get("fiche_bloquee"):
             continue
         if (a["prix"] and a["prix"] > PRIX_MAX) or not a["commune"]:
             continue
         if a["url"] not in fiches and lues < 400:
             f = lire_fiche(a)
             lues += 1
-            time.sleep(0.5)
+            time.sleep(2 if a["source"] == "Figaro Immobilier" else 0.5)
             if f is not None:  # page injoignable pour l'instant : on réessaiera au prochain passage
                 f["lu"] = datetime.now(timezone.utc).isoformat()
                 fiches[a["url"]] = f
@@ -544,6 +582,8 @@ def garder(a):
     a["type"] = "Studio" if a.get("studio") else type_logement(a["pieces"], a["titre"], a["description"])
     if a["type"] not in ("Studio", "T1", "T2", "T3"):
         return False
+    if a["surface"] and a["surface"] > 300:  # erreur de saisie (le prix ou la référence à la place)
+        a["surface"] = None
     if a["surface"] and a["surface"] < 9:  # moins de 9 m² : logement non décent, pas d'aide
         return False
     if a["meuble"] is None:  # on ne le dit que si l'annonce le précise
@@ -608,8 +648,8 @@ def main():
     for a in gardees:
         vus.setdefault(a["id"], maintenant.isoformat(timespec="minutes"))
         a["vu"] = vus[a["id"]]
-        a.pop("absente", None)
-        a.pop("studio", None)
+        for cle in ("absente", "studio", "fiche_bloquee", "depuis"):
+            a.pop(cle, None)
     gardees.sort(key=lambda a: a["prix"])
     par_source = {}
     for a in gardees:
