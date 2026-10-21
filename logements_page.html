@@ -37,9 +37,19 @@ button{font:inherit;color:inherit}
 .icone{border:0;background:transparent;color:#fff;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;cursor:pointer;flex:none;position:relative}
 .icone:hover{background:rgba(255,255,255,.12)}
 .icone svg{width:24px;height:24px}
-.titre{flex:1;min-width:0;display:flex;align-items:center;gap:8px}
-.titre img{width:30px;height:30px;border-radius:8px;box-shadow:0 0 0 1.5px rgba(255,255,255,.4)}
-.titre b{font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.titre{flex:1;min-width:0;display:flex;align-items:center;gap:9px;border:0;background:transparent;color:#fff;cursor:pointer;padding:6px 4px;border-radius:12px;text-align:left}
+.titre svg{width:26px;height:26px;flex:none}
+.titre b{font-size:17.5px;font-weight:600;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ic{width:17px;height:17px;flex:none;vertical-align:-3px}
+.btn,.puce,.segment button,.tiroir nav button,.choix .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.tiroir nav button{justify-content:flex-start}
+.tiroir nav button .ic{width:20px;height:20px;color:var(--accent)}
+.choix .btn{justify-content:flex-start}
+.point{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block;flex:none}
+.tourne svg{animation:tourne .8s linear infinite}
+@keyframes tourne{to{transform:rotate(360deg)}}
+#tirer{position:fixed;left:50%;top:calc(64px + env(safe-area-inset-top));transform:translate(-50%,-60px);z-index:9;width:38px;height:38px;border-radius:50%;background:var(--carte);box-shadow:var(--ombre);display:grid;place-items:center;color:var(--accent);opacity:0;transition:opacity .15s}
+#tirer svg{width:20px;height:20px}
 .pastille{position:absolute;top:4px;right:2px;background:#fff;color:var(--marque);font-size:10px;font-weight:700;border-radius:999px;min-width:16px;height:16px;padding:0 4px;display:grid;place-items:center}
 .recherche{max-width:1200px;margin:auto;padding:0 12px 10px}
 .recherche-champ{display:flex;align-items:center;gap:8px;background:#fff;border-radius:12px;padding:0 10px}
@@ -83,12 +93,14 @@ main{max-width:1200px;margin:auto;padding:12px 16px 40px;display:grid;grid-templ
 .badge.nouv{background:var(--nouveau);color:#fff}
 .badge.part{background:#fef3c7;color:#713f12}
 .badge.agence{background:#e0e7ff;color:#1e1b4b}
-.badge.oeil{background:rgba(0,0,0,.65);color:#fff}
+.badge.oeil{background:rgba(0,0,0,.62);color:#fff;display:inline-flex;align-items:center;gap:4px}
+.badge.oeil .ic{width:13px;height:13px}
 .statut{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;padding:7px 10px;border-radius:10px;background:var(--accent-doux)}
 .statut.contacte{background:#e0f2fe;color:#0c4a6e}
 .statut.recontacter{background:#fef3c7;color:#713f12}
 .statut.non{background:#fee2e2;color:#7f1d1d}
 @media (prefers-color-scheme:dark){.statut.contacte{background:#0c2d40;color:#bae6fd}.statut.recontacter{background:#3d2e06;color:#fde68a}.statut.non{background:#3f1414;color:#fecaca}}
+.statut b{font-weight:600}
 .statut button{margin-left:auto;border:0;background:none;color:inherit;text-decoration:underline;cursor:pointer;font-size:13px;padding:0}
 .carte.deja-vue .photos{opacity:.82}
 .carte.cible{outline:3px solid var(--accent);outline-offset:2px}
@@ -168,7 +180,13 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
     <button class="icone" id="ouvrirMenu" aria-label="Menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
-    <div class="titre"><img src="favicon-32.png" srcset="icon-192.png 2x" alt=""><b id="titreVue">Logements Nord Réunion</b></div>
+    <button class="titre" id="accueil" aria-label="Retour à l'accueil">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/></svg>
+      <b id="titreVue">Logements 974</b>
+    </button>
+    <button class="icone" id="rafraichir" aria-label="Actualiser">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg>
+    </button>
     <button class="icone" id="ouvrirRecherche" aria-label="Rechercher">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
     </button>
@@ -187,18 +205,19 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
   </div>
 </div>
 
+<div id="tirer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg></div>
 <div class="voile" id="voile"></div>
 <aside class="tiroir" id="tiroir" aria-label="Menu">
   <div class="tiroir-tete"><img src="icon-192.png" alt=""><div><b>Logements 974</b><small>Nord de La Réunion · mis à jour __MAJ__</small></div></div>
   <nav>
-    <button data-vue="annonces">🏠 Toutes les annonces <span class="n" id="nAnnonces"></span></button>
-    <button data-vue="favoris">❤️ Mes favoris <span class="n" id="nFavoris"></span></button>
-    <button data-vue="mes">🛒 Mes logements <span class="n" id="nMes"></span></button>
-    <button data-vue="contactes">📞 Déjà contactés <span class="n" id="nContactes"></span></button>
-    <button data-action="ajouter">➕ Ajouter un logement</button>
+    <button data-vue="annonces"><i data-i="maison"></i>Toutes les annonces <span class="n" id="nAnnonces"></span></button>
+    <button data-vue="favoris"><i data-i="coeur"></i>Mes favoris <span class="n" id="nFavoris"></span></button>
+    <button data-vue="mes"><i data-i="sac"></i>Mes logements <span class="n" id="nMes"></span></button>
+    <button data-vue="contactes"><i data-i="tel"></i>Déjà contactés <span class="n" id="nContactes"></span></button>
+    <button data-action="ajouter"><i data-i="plus"></i>Ajouter un logement</button>
     <hr>
-    <button data-action="notifs">🔔 Notifications</button>
-    <button data-action="apropos">ℹ️ Aides CAF et sites lus</button>
+    <button data-action="notifs"><i data-i="cloche"></i>Notifications</button>
+    <button data-action="apropos"><i data-i="info"></i>Aides CAF et sites lus</button>
   </nav>
 </aside>
 
@@ -206,15 +225,15 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
   <div class="filtres">
     <div class="segment" id="categorie" role="group" aria-label="Catégorie">
       <button data-v="" aria-pressed="true">Toutes</button>
-      <button data-v="agence" aria-pressed="false">🏢 Agences</button>
-      <button data-v="particulier" aria-pressed="false">👤 Particuliers</button>
+      <button data-v="agence" aria-pressed="false"><i data-i="agence"></i>Agences</button>
+      <button data-v="particulier" aria-pressed="false"><i data-i="perso"></i>Particuliers</button>
     </div>
     <div class="rangee" id="types"></div>
     <div class="rangee" id="communes"></div>
     <div class="ligne2">
       <label>Max <input type="range" id="prix" min="200" max="__PRIX_MAX__" step="10" value="__PRIX_MAX__"> <b id="prixv"></b></label>
       <select id="meuble" aria-label="Meublé"><option value="">Meublé ou vide</option><option value="1">Meublé</option><option value="0">Vide</option></select>
-      <select id="filtreVues" aria-label="Annonces vues"><option value="">Vues et pas vues</option><option value="non">Pas encore vues</option><option value="oui">👁 Déjà vues</option></select>
+      <select id="filtreVues" aria-label="Annonces vues"><option value="">Vues et pas vues</option><option value="non">Pas encore vues</option><option value="oui">Déjà vues</option></select>
       <select id="tri" aria-label="Trier"><option value="prix">Prix croissant</option><option value="recent">Plus récentes</option><option value="surface">Plus grandes</option><option value="m2">Prix au m²</option></select>
       <span class="compte" id="compte"></span>
     </div>
@@ -223,18 +242,18 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
 </section>
 
 <section id="vueFavoris" hidden>
-  <div class="entete-vue"><h2>❤️ Mes favoris</h2><p>Touche le cœur d'une annonce pour la garder ici. Elle reste ici même si elle disparaît du site.</p></div>
+  <div class="entete-vue"><h2>Mes favoris</h2><p>Touche le cœur d'une annonce pour la garder ici. Elle reste ici même si elle disparaît du site.</p></div>
   <main id="listeFavoris"></main>
 </section>
 
 <section id="vueContactes" hidden>
-  <div class="entete-vue"><h2>📞 Déjà contactés</h2><p>Les annonces où tu as touché « Contacté ? ». Touche le statut pour le changer.</p></div>
+  <div class="entete-vue"><h2>Déjà contactés</h2><p>Les annonces où tu as touché « Contacté ? ». Touche le statut pour le changer.</p></div>
   <div class="filtres"><div class="rangee" id="filtreContact"></div></div>
   <main id="listeContactes"></main>
 </section>
 
 <section id="vueMes" hidden>
-  <div class="entete-vue"><h2>🛒 Mes logements</h2><button class="btn" data-action="ajouter" style="flex:0 0 auto">➕ Ajouter</button>
+  <div class="entete-vue"><h2>Mes logements</h2><button class="btn" data-action="ajouter" style="flex:0 0 auto"><i data-i="plus"></i>Ajouter</button>
     <p>Ton panier : les logements qui t'intéressent. Ajoute tes photos de visite, une note et où tu en es. Tout reste sur ce téléphone.</p></div>
   <main id="listeMes"></main>
 </section>
@@ -266,21 +285,21 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
   <h3>As-tu contacté cette annonce ?</h3>
   <p class="meta" id="dlgContactTitre"></p>
   <div class="choix">
-    <button class="btn sec" value="contacte">✅ Déjà contacté (j'attends la réponse)</button>
-    <button class="btn sec" value="recontacter">🔁 À recontacter</button>
-    <button class="btn sec" value="non">⛔ Ne pas recontacter</button>
-    <button class="btn sec" value="effacer">↩️ Pas encore contacté</button>
+    <button class="btn sec" value="contacte"><span class="point" style="color:#0369a1"></span>Déjà contacté, j'attends la réponse</button>
+    <button class="btn sec" value="recontacter"><span class="point" style="color:#b45309"></span>À recontacter</button>
+    <button class="btn sec" value="non"><span class="point" style="color:#b91c1c"></span>Ne pas recontacter</button>
+    <button class="btn sec" value="effacer"><span class="point" style="color:#9ca3af"></span>Pas encore contacté</button>
   </div>
   <div class="actions"><button class="btn sec" value="annuler">Annuler</button></div>
 </form></dialog>
 
 <dialog id="dlgNotifs"><form class="dlg" method="dialog">
-  <h3>🔔 Notifications</h3>
+  <h3>Notifications</h3>
   <p>Toutes les heures, jour et nuit, l'appli cherche de nouveaux logements. Dès qu'il y en a un, tu reçois une notification avec la photo, le prix, et les boutons « Voir l'annonce » et « Appeler ».</p>
   <p><b>1.</b> Installe l'appli gratuite <b>ntfy</b> (App Store ou Google Play).<br>
      <b>2.</b> Dans ntfy, touche <b>+</b> et abonne-toi au sujet :</p>
   <p style="font-size:17px;font-weight:700;user-select:all;background:var(--accent-doux);padding:10px;border-radius:10px;text-align:center">__NTFY__</p>
-  <div class="boutons"><button class="btn sec" type="button" id="copierSujet">📋 Copier le sujet</button><a class="btn" href="https://ntfy.sh/__NTFY__" target="_blank" rel="noopener">Ouvrir dans ntfy</a></div>
+  <div class="boutons"><button class="btn sec" type="button" id="copierSujet"><i data-i="copier"></i>Copier le sujet</button><a class="btn" href="https://ntfy.sh/__NTFY__" target="_blank" rel="noopener">Ouvrir dans ntfy</a></div>
   <p class="meta">Tu ne reçois rien quand il n'y a pas de nouveau logement.</p>
   <div class="actions"><button class="btn sec">Fermer</button></div>
 </form></dialog>
@@ -303,13 +322,37 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
 <div class="toast" id="toast"></div>
 
 <script>
-const ANNONCES = __DONNEES__;
+let ANNONCES = __DONNEES__;
+// Icônes au trait, dans le style de la barre du haut
+const svg = d => `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const I = {
+  maison: svg('<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/>'),
+  coeur: svg('<path d="M12 20s-7-4.4-9-8.8C1.6 7.9 3.6 4.5 7 4.5c2 0 3.4 1.1 5 2.9 1.6-1.8 3-2.9 5-2.9 3.4 0 5.4 3.4 4 6.7C19 15.6 12 20 12 20z"/>'),
+  sac: svg('<path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/>'),
+  tel: svg('<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>'),
+  plus: svg('<path d="M12 5v14M5 12h14"/>'),
+  cloche: svg('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>'),
+  info: svg('<circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/>'),
+  agence: svg('<path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16"/><path d="M15 9h4a1 1 0 0 1 1 1v11"/><path d="M3 21h18M8 8h3M8 12h3M8 16h3"/>'),
+  perso: svg('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'),
+  oeil: svg('<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>'),
+  sms: svg('<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>'),
+  mail: svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>'),
+  lieu: svg('<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>'),
+  carte: svg('<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/>'),
+  ok: svg('<path d="m5 12.5 4.5 4.5L19 7.5"/>'),
+  photo: svg('<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>'),
+  crayon: svg('<path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="m13.5 6.5 4 4"/>'),
+  poubelle: svg('<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>'),
+  copier: svg('<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/>'),
+};
+document.querySelectorAll("i[data-i]").forEach(el => el.outerHTML = I[el.dataset.i] || "");
 const COMMUNES = __COMMUNES__;
 const PRIX_MAX = __PRIX_MAX__;
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const norm = s => String(s ?? "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
-const PAR_ID = Object.fromEntries(ANNONCES.map(a => [a.id, a]));
+let PAR_ID = Object.fromEntries(ANNONCES.map(a => [a.id, a]));
 
 // ------------------------------------------------ stockage sur le téléphone
 function lire(cle, defaut) { try { return JSON.parse(localStorage.getItem(cle)) ?? defaut; } catch (e) { return defaut; } }
@@ -318,7 +361,7 @@ let favoris = lire("logements-favoris", []);            // ids, dans l'ordre d'a
 let favorisCopies = lire("logements-favoris-annonces", {}); // id -> annonce (si elle disparaît du site)
 let contactes = lire("logements-contactes", {});  // id -> {statut, date, annonce}
 let vues = lire("logements-vues", {});            // id -> date où j'ai consulté l'annonce
-const STATUTS_CONTACT = {contacte: "✅ Déjà contacté", recontacter: "🔁 À recontacter", non: "⛔ Ne pas recontacter"};
+const STATUTS_CONTACT = {contacte: "Déjà contacté", recontacter: "À recontacter", non: "Ne pas recontacter"};
 const dateCourte = d => new Date(d).toLocaleDateString("fr-FR", {day: "numeric", month: "short"});
 function marquerVue(id, art) {
   if (!id || vues[id]) return;
@@ -326,7 +369,7 @@ function marquerVue(id, art) {
   if (art) {
     art.classList.add("deja-vue");
     const b = art.querySelector(".badges");
-    if (b && !b.querySelector(".oeil")) b.insertAdjacentHTML("afterbegin", '<span class="badge oeil">👁 Déjà vue</span>');
+    if (b && !b.querySelector(".oeil")) b.insertAdjacentHTML("afterbegin", `<span class="badge oeil">${I.oeil}Déjà vue</span>`);
   }
 }
 function mettreStatut(a, statut) {
@@ -398,15 +441,18 @@ function puces(el, choix, cle) {
   el.onclick = e => { const b = e.target.closest(".puce"); if (!b) return; etat[cle] = b.dataset.v; puces(el, choix, cle); afficher(); };
 }
 const estType = (a, t) => t === "" || (t === "Studio/T1" ? ["Studio", "T1"].includes(a.type) : a.type === t);
-puces($("#types"), [["", "Tous"], ["Studio/T1", "Studio / T1"], ["T2", "T2"], ["T3", "T3"]].map(([v, t]) => [v, `${t} (${ANNONCES.filter(a => estType(a, v)).length})`]), "type");
-const secteurs = {};
-for (const [c, s] of Object.entries(COMMUNES)) (secteurs[s] = secteurs[s] || []).push(c);
-const choixCommunes = [["", "Toutes les communes"]];
-for (const [s, cs] of Object.entries(secteurs)) {
-  choixCommunes.push(["secteur:" + s, s]);
-  for (const c of cs) choixCommunes.push([c, `${c} (${ANNONCES.filter(a => a.commune === c).length})`]);
+function construirePuces() {
+  puces($("#types"), [["", "Tous"], ["Studio/T1", "Studio / T1"], ["T2", "T2"], ["T3", "T3"]].map(([v, t]) => [v, `${t} (${ANNONCES.filter(a => estType(a, v)).length})`]), "type");
+  const secteurs = {};
+  for (const [c, s] of Object.entries(COMMUNES)) (secteurs[s] = secteurs[s] || []).push(c);
+  const choixCommunes = [["", "Toutes les communes"]];
+  for (const [s, cs] of Object.entries(secteurs)) {
+    choixCommunes.push(["secteur:" + s, s]);
+    for (const c of cs) choixCommunes.push([c, `${c} (${ANNONCES.filter(a => a.commune === c).length})`]);
+  }
+  puces($("#communes"), choixCommunes, "commune");
 }
-puces($("#communes"), choixCommunes, "commune");
+construirePuces();
 $("#categorie").onclick = e => {
   const b = e.target.closest("button"); if (!b) return;
   etat.categorie = b.dataset.v;
@@ -422,9 +468,9 @@ const telLien = t => "tel:" + String(t).replace(/[^\d+]/g, "");
 const estMobile = t => /^0(69[2-3]|639|[67])/.test(String(t).replace(/\D/g, "")) ;
 
 function carrousel(photos) {
-  if (!photos.length) return `<div class="sansphoto">🏠</div>`;
+  if (!photos.length) return `<div class="sansphoto">${I.maison}</div>`;
   return `<div class="defile">${photos.map((p, i) => `<img src="${esc(p)}" alt="Photo ${i + 1}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`).join("")}</div>
-    ${photos.length > 1 ? `<button class="fl g" aria-label="Photo précédente">‹</button><button class="fl d" aria-label="Photo suivante">›</button><span class="nb">📷 ${photos.length}</span>` : ""}`;
+    ${photos.length > 1 ? `<button class="fl g" aria-label="Photo précédente">‹</button><button class="fl d" aria-label="Photo suivante">›</button><span class="nb">${photos.length} photos</span>` : ""}`;
 }
 
 function blocContact(a) {
@@ -432,12 +478,12 @@ function blocContact(a) {
   const sujet = `Annonce ${a.type || "logement"} ${a.commune || ""} – ${Math.round(a.prix || 0)} €`;
   const corps = `Bonjour,\n\nVotre annonce « ${a.titre || sujet} » (${a.url || ""}) m'intéresse. Le logement est-il toujours disponible ? Acceptez-vous les aides de la CAF (APL / AL) ?\n\nMerci, bonne journée.`;
   const btns = [];
-  if (a.tel) btns.push(`<a class="btn" href="${telLien(a.tel)}">📞 ${esc(a.tel)}</a>`);
-  if (a.tel && estMobile(a.tel)) btns.push(`<a class="btn sec" href="sms:${String(a.tel).replace(/[^\d+]/g, "")}?&body=${encodeURIComponent(corps)}">💬 SMS</a>`);
-  if (a.email) btns.push(`<a class="btn sec" href="mailto:${esc(a.email)}?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}">✉️ ${esc(a.email)}</a>`);
-  if (!a.email && a.url) btns.push(`<a class="btn sec" href="${esc(a.url)}" target="_blank" rel="noopener">✉️ Écrire via ${esc(a.source || "le site")}</a>`);
+  if (a.tel) btns.push(`<a class="btn" href="${telLien(a.tel)}">${I.tel}${esc(a.tel)}</a>`);
+  if (a.tel && estMobile(a.tel)) btns.push(`<a class="btn sec" href="sms:${String(a.tel).replace(/[^\d+]/g, "")}?&body=${encodeURIComponent(corps)}">${I.sms}SMS</a>`);
+  if (a.email) btns.push(`<a class="btn sec" href="mailto:${esc(a.email)}?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}">${I.mail}${esc(a.email)}</a>`);
+  if (!a.email && a.url) btns.push(`<a class="btn sec" href="${esc(a.url)}" target="_blank" rel="noopener">${I.mail}Écrire via ${esc(a.source || "le site")}</a>`);
   return `<div class="contact">
-    ${qui ? `<div class="qui">${a.pro === false ? "👤" : "🏢"} <b>${esc(qui)}</b>${a.adresse ? ` · ${esc(a.adresse)}` : ""}</div>` : ""}
+    ${qui ? `<div class="qui">${a.pro === false ? I.perso : I.agence} <b>${esc(qui)}</b>${a.adresse ? ` · ${esc(a.adresse)}` : ""}</div>` : ""}
     ${btns.length ? `<div class="boutons">${btns.join("")}</div>` : ""}
     ${!a.tel && !a.email ? `<div class="meta">Pas de téléphone ni d'e-mail dans l'annonce : passe par le site.</div>` : ""}
   </div>`;
@@ -447,7 +493,7 @@ function carte(a, horsLigne) {
   const fav = favoris.includes(a.id);
   const dansMes = mes.some(m => m.id === "a:" + a.id);
   const carac = [
-    a.caf ? `<span class="caf">✓ CAF citée</span>` : "",
+    a.caf ? `<span class="caf">CAF citée</span>` : "",
     a.meuble === true ? "<span>Meublé</span>" : a.meuble === false ? "<span>Vide</span>" : "",
     ...(a.caracteristiques || []).filter(c => c !== "Meublé").map(c => `<span>${esc(c)}</span>`)
   ].join("");
@@ -458,14 +504,14 @@ function carte(a, horsLigne) {
   const ct = contactes[a.id];
   return `<article class="carte${vues[a.id] ? " deja-vue" : ""}" data-id="${esc(a.id)}">
     <div class="photos">${carrousel(a.photos || [])}
-      <div class="badges">${vues[a.id] ? '<span class="badge oeil">👁 Déjà vue</span>' : ""}${horsLigne ? '<span class="badge nouv">Plus en ligne</span>' : recent(a) ? '<span class="badge nouv">Nouveau</span>' : ""}
+      <div class="badges">${vues[a.id] ? `<span class="badge oeil">${I.oeil}Déjà vue</span>` : ""}${horsLigne ? '<span class="badge nouv">Plus en ligne</span>' : recent(a) ? '<span class="badge nouv">Nouveau</span>' : ""}
         ${a.pro === true ? '<span class="badge agence">Agence</span>' : a.pro === false ? '<span class="badge part">Particulier</span>' : ""}<span class="badge">${esc(a.source)}</span></div>
       <button class="coeur" data-act="fav" aria-label="${fav ? "Retirer des favoris" : "Ajouter aux favoris"}" aria-pressed="${fav}">${COEUR(fav)}</button>
     </div>
     <div class="corps">
       <div class="haut"><div class="prix">${Math.round(a.prix)} €<small> /mois${a.charges ? " CC" : ""}</small></div>
         <div class="type">${esc(a.type)}${a.surface ? ` · ${String(Math.round(a.surface * 10) / 10).replace(".", ",")} m²` : ""}</div></div>
-      <div class="lieu">📍 <b>${esc(a.commune)}</b>${quartier} <span class="meta">(${esc(a.secteur)})</span></div>
+      <div class="lieu">${I.lieu} <b>${esc(a.commune)}</b>${quartier} <span class="meta">(${esc(a.secteur)})</span></div>
       <div class="meta">${isNaN(date) ? "" : "Publiée le " + date.toLocaleDateString("fr-FR", {day: "numeric", month: "short"})}${a.charges ? ` · dont ${Math.round(a.charges)} € de charges` : ""}</div>
       ${a.titre && !/^(T\d|Studio)( |$)/.test(a.titre) ? `<div><b>${esc(a.titre)}</b></div>` : ""}
       ${carac ? `<div class="carac">${carac}</div>` : ""}
@@ -473,12 +519,12 @@ function carte(a, horsLigne) {
       ${(a.photos || []).length <= 1 ? `<div class="meta">Les autres photos et tous les détails sont sur l'annonce d'origine.</div>` : ""}
       ${a.aussi && a.aussi.length ? `<div class="aussi">Aussi sur ${a.aussi.map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.source)}</a>`).join(", ")}</div>` : ""}
       ${blocContact(a)}
-      ${ct ? `<div class="statut ${ct.statut}">${STATUTS_CONTACT[ct.statut]} <span class="meta">le ${dateCourte(ct.date)}</span><button data-act="contact">Changer</button></div>` : ""}
+      ${ct ? `<div class="statut ${ct.statut}"><span class="point"></span><b>${STATUTS_CONTACT[ct.statut]}</b> <span>· ${dateCourte(ct.date)}</span><button data-act="contact">Changer</button></div>` : ""}
       <div class="boutons">
-        ${ct ? "" : `<button class="btn sec" data-act="contact">📞 Contacté ?</button>`}
+        ${ct ? "" : `<button class="btn sec" data-act="contact">${I.tel}Contacté ?</button>`}
         <a class="btn sec" href="${esc(a.url)}" target="_blank" rel="noopener">Voir l'annonce</a>
-        <a class="btn sec" href="${carteUrl}" target="_blank" rel="noopener">🗺️ Carte</a>
-        <button class="btn ${dansMes ? "ok" : ""}" data-act="panier">${dansMes ? "✓ Dans mes logements" : "🛒 Mes logements"}</button>
+        <a class="btn sec" href="${carteUrl}" target="_blank" rel="noopener">${I.carte}Carte</a>
+        <button class="btn ${dansMes ? "ok" : ""}" data-act="panier">${dansMes ? I.ok + "Dans mes logements" : I.sac + "Mes logements"}</button>
       </div>
     </div></article>`;
 }
@@ -505,7 +551,7 @@ function afficher() {
 function afficherFavoris() {
   const crit = lireRecherche(etat.q);
   const l = favoris.map(id => PAR_ID[id] ? [PAR_ID[id], false] : favorisCopies[id] ? [favorisCopies[id], true] : null).filter(Boolean).filter(([a]) => correspond(a, crit)).reverse();
-  $("#listeFavoris").innerHTML = l.length ? l.map(([a, hl]) => carte(a, hl)).join("") : `<div class="vide">Pas encore de favori. Touche le ♡ sur une annonce.</div>`;
+  $("#listeFavoris").innerHTML = l.length ? l.map(([a, hl]) => carte(a, hl)).join("") : `<div class="vide">Pas encore de favori. Touche le cœur sur une annonce.</div>`;
 }
 
 let filtreContact = "";
@@ -516,13 +562,13 @@ function afficherContactes() {
   $("#filtreContact").innerHTML = choix.map(([v, t]) => `<button class="puce" data-v="${v}" aria-pressed="${filtreContact === v}">${t} (${tous.filter(x => !v || x[2].statut === v).length})</button>`).join("");
   const l = tous.filter(x => !filtreContact || x[2].statut === filtreContact).sort((x, y) => y[2].date.localeCompare(x[2].date));
   $("#listeContactes").innerHTML = l.length ? l.map(([a, hl]) => carte(a, hl)).join("")
-    : `<div class="vide">Aucune annonce ici.<br>Sur une annonce, touche « 📞 Contacté ? » pour la ranger ici.</div>`;
+    : `<div class="vide">Aucune annonce ici.<br>Sur une annonce, touche « Contacté ? » pour la ranger ici.</div>`;
 }
 $("#filtreContact").onclick = e => { const b = e.target.closest(".puce"); if (!b) return; filtreContact = b.dataset.v; afficherContactes(); };
 
 const URLS = new Map();
 function urlPhoto(blob) { if (!URLS.has(blob)) URLS.set(blob, URL.createObjectURL(blob)); return URLS.get(blob); }
-const STATUTS = ["À contacter", "Contacté", "Visite prévue", "Visité", "Dossier envoyé", "Accepté 🎉", "Refusé", "Plus disponible"];
+const STATUTS = ["À contacter", "Contacté", "Visite prévue", "Visité", "Dossier envoyé", "Accepté", "Refusé", "Plus disponible"];
 function carteMes(m) {
   const a = m.annonce || m;
   const enLigne = m.annonce && PAR_ID[m.annonce.id];
@@ -536,20 +582,20 @@ function carteMes(m) {
     <div class="corps">
       <div class="haut"><div class="prix">${a.prix ? Math.round(a.prix) + " €" : "—"}<small> /mois</small></div>
         <div class="type">${esc(a.type || "")}${a.surface ? ` · ${String(a.surface).replace(".", ",")} m²` : ""}</div></div>
-      <div class="lieu">📍 <b>${esc(a.commune || "")}</b>${quartier}</div>
+      <div class="lieu">${I.lieu} <b>${esc(a.commune || "")}</b>${quartier}</div>
       ${a.titre ? `<div><b>${esc(a.titre)}</b></div>` : ""}
       ${a.description ? `<div class="desc">${esc(a.description)}</div><button class="plus">Lire la suite</button>` : ""}
       <label class="meta">Où j'en suis
-        <select class="champ" data-act="statut">${STATUTS.map(s => `<option ${s === m.statut ? "selected" : ""}>${s}</option>`).join("")}</select></label>
+        <select class="champ" data-act="statut">${STATUTS.map(s => `<option ${s === (m.statut || "").replace(/\s*🎉/u, "") ? "selected" : ""}>${s}</option>`).join("")}</select></label>
       <textarea class="champ note" data-act="note" placeholder="Ma note : visite le…, questions, impressions…">${esc(m.note || "")}</textarea>
       <div class="meta">Mes photos (${(m.mesPhotos || []).length})</div>
       ${perso ? `<div class="mesphotos">${perso}</div>` : ""}
       ${blocContact(a)}
       <div class="boutons">
-        <label class="btn sec">📷 Ajouter des photos<input type="file" accept="image/*" multiple hidden data-act="photos"></label>
-        ${m.annonce ? "" : `<button class="btn sec" data-act="modifier">✏️ Modifier</button>`}
+        <label class="btn sec">${I.photo}Ajouter des photos<input type="file" accept="image/*" multiple hidden data-act="photos"></label>
+        ${m.annonce ? "" : `<button class="btn sec" data-act="modifier">${I.crayon}Modifier</button>`}
         ${a.url ? `<a class="btn sec" href="${esc(a.url)}" target="_blank" rel="noopener">Voir l'annonce</a>` : ""}
-        <button class="btn sec" data-act="retirer">🗑️ Retirer</button>
+        <button class="btn sec" data-act="retirer">${I.poubelle}Retirer</button>
       </div>
     </div></article>`;
 }
@@ -557,7 +603,7 @@ function afficherMes() {
   const crit = lireRecherche(etat.q);
   const l = mes.filter(m => correspond(m.annonce || m, crit));
   $("#listeMes").innerHTML = l.length ? l.map(carteMes).join("")
-    : `<div class="vide">Ton panier est vide.<br>Touche « 🛒 Mes logements » sur une annonce, ou ➕ Ajouter pour un logement trouvé ailleurs.</div>`;
+    : `<div class="vide">Ton panier est vide.<br>Touche « Mes logements » sur une annonce, ou « Ajouter » pour un logement trouvé ailleurs.</div>`;
 }
 function compteurs() {
   $("#nAnnonces").textContent = ANNONCES.length;
@@ -571,7 +617,7 @@ function allerA(v) {
   vue = v;
   $("#vueAnnonces").hidden = v !== "annonces"; $("#vueFavoris").hidden = v !== "favoris"; $("#vueMes").hidden = v !== "mes";
   $("#vueContactes").hidden = v !== "contactes";
-  $("#titreVue").textContent = {annonces: "Logements Nord Réunion", favoris: "Mes favoris", mes: "Mes logements", contactes: "Déjà contactés"}[v];
+  $("#titreVue").textContent = {annonces: "Logements 974", favoris: "Mes favoris", mes: "Mes logements", contactes: "Déjà contactés"}[v];
   document.querySelectorAll(".tiroir nav [data-vue]").forEach(b => b.setAttribute("aria-current", b.dataset.vue === v));
   fermerMenu(); rafraichir(); scrollTo(0, 0);
   try { history.replaceState(null, "", v === "annonces" ? location.pathname : "#" + v); } catch (e) {}
@@ -582,6 +628,49 @@ const ouvrirMenu = () => { $("#tiroir").classList.add("ouvert"); $("#voile").cla
 const fermerMenu = () => { $("#tiroir").classList.remove("ouvert"); $("#voile").classList.remove("ouvert"); };
 $("#ouvrirMenu").onclick = ouvrirMenu; $("#voile").onclick = fermerMenu;
 $("#allerMes").onclick = () => allerA("mes");
+
+// Le toit : retour à l'accueil, sans filtre ni recherche
+$("#accueil").onclick = () => {
+  Object.assign(etat, {type: "", commune: "", categorie: "", q: ""});
+  $("#q").value = ""; $("#zoneRecherche").hidden = true;
+  $("#prix").value = $("#prix").max; $("#meuble").value = ""; $("#filtreVues").value = ""; $("#tri").value = "prix";
+  $("#categorie").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x.dataset.v === ""));
+  construirePuces(); allerA("annonces");
+};
+
+// Actualiser : on recharge les annonces publiées depuis la dernière ouverture
+let enCours = false;
+async function actualiser() {
+  if (enCours) return; enCours = true;
+  $("#rafraichir").classList.add("tourne");
+  try {
+    const r = await fetch("annonces.json?t=" + Date.now(), {cache: "no-store"});
+    if (!r.ok) throw new Error(r.status);
+    const neuves = await r.json();
+    const avant = new Set(ANNONCES.map(a => a.id));
+    const nb = neuves.filter(a => !avant.has(a.id)).length;
+    ANNONCES = neuves; PAR_ID = Object.fromEntries(ANNONCES.map(a => [a.id, a]));
+    construirePuces(); compteurs(); rafraichir();
+    toast(nb ? `${nb} nouvelle${nb > 1 ? "s" : ""} annonce${nb > 1 ? "s" : ""}` : "Les annonces sont à jour");
+  } catch (e) { toast("Pas de connexion, réessaie dans un instant"); }
+  $("#rafraichir").classList.remove("tourne"); enCours = false;
+}
+$("#rafraichir").onclick = actualiser;
+
+// Tirer la page vers le bas pour actualiser
+let y0 = null, tire = 0;
+const rond = $("#tirer");
+addEventListener("touchstart", e => { y0 = scrollY <= 0 && !document.querySelector("dialog[open], .tiroir.ouvert, #loupe.ouvert") ? e.touches[0].clientY : null; tire = 0; }, {passive: true});
+addEventListener("touchmove", e => {
+  if (y0 === null) return;
+  tire = Math.max(0, Math.min(110, e.touches[0].clientY - y0));
+  rond.style.opacity = Math.min(1, tire / 70);
+  rond.style.transform = `translate(-50%, ${tire - 60}px) rotate(${tire * 3}deg)`;
+}, {passive: true});
+addEventListener("touchend", () => {
+  if (y0 !== null && tire > 75) actualiser();
+  y0 = null; rond.style.opacity = 0; rond.style.transform = "translate(-50%,-60px)";
+});
 $("#tiroir").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   if (b.dataset.vue) allerA(b.dataset.vue);
@@ -607,13 +696,13 @@ function ouvrirLoupe(srcs, i) {
 }
 function basculerFavori(a) {
   if (favoris.includes(a.id)) { favoris = favoris.filter(x => x !== a.id); delete favorisCopies[a.id]; toast("Retiré des favoris"); }
-  else { favoris.push(a.id); favorisCopies[a.id] = a; toast("❤️ Ajouté aux favoris"); }
+  else { favoris.push(a.id); favorisCopies[a.id] = a; toast("Ajouté aux favoris"); }
   ecrire("logements-favoris", favoris); ecrire("logements-favoris-annonces", favorisCopies); compteurs();
 }
 async function basculerPanier(a) {
   const id = "a:" + a.id;
   if (mes.some(m => m.id === id)) { await retirerMes(id); toast("Retiré de mes logements"); }
-  else { await garderMes({id, annonce: a, statut: STATUTS[0], note: "", mesPhotos: [], cree: Date.now()}); toast("🛒 Ajouté à mes logements"); }
+  else { await garderMes({id, annonce: a, statut: STATUTS[0], note: "", mesPhotos: [], cree: Date.now()}); toast("Ajouté à mes logements"); }
 }
 document.addEventListener("click", async e => {
   const art = e.target.closest(".carte"); if (!art) return;
@@ -650,7 +739,7 @@ document.addEventListener("change", async e => {
   if (e.target.dataset.act === "photos" && e.target.files.length) {
     toast("Ajout des photos…");
     for (const f of e.target.files) m.mesPhotos = [...(m.mesPhotos || []), await reduire(f)];
-    await garderMes(m); afficherMes(); toast("📷 Photos ajoutées");
+    await garderMes(m); afficherMes(); toast("Photos ajoutées");
   }
 });
 document.addEventListener("input", e => {
@@ -715,7 +804,7 @@ $("#dlgLogement").addEventListener("close", async () => {
     quartier: v("quartier"), description: v("description"), tel: v("tel"), email: v("email"), annonceur: v("annonceur"), url: v("url"),
     secteur: COMMUNES[v("commune")] || ""});
   for (const fi of f.elements.photos.files) m.mesPhotos = [...(m.mesPhotos || []), await reduire(fi)];
-  await garderMes(m); toast(enEdition ? "Logement modifié" : "🛒 Logement ajouté"); allerA("mes");
+  await garderMes(m); toast(enEdition ? "Logement modifié" : "Logement ajouté"); allerA("mes");
 });
 
 // ------------------------------------------------ démarrage

@@ -710,7 +710,7 @@ def notifier(nouvelles, nb_total):
         return
     nouvelles = sorted(nouvelles, key=lambda a: a["prix"])
     if len(nouvelles) > 1:
-        envoyer(title=f"🏠 {len(nouvelles)} nouveaux logements", tags=["house"], click=PAGE_URL,
+        envoyer(title=f"{len(nouvelles)} nouveaux logements", click=PAGE_URL,
                 message=f"{len(nouvelles)} nouveaux logements dans le nord, {nb_total} en tout.")
     for a in reversed(nouvelles[:NOTIFS_MAX]):  # la moins chère arrive en dernier, donc en haut
         lignes = [a["titre"]]
@@ -720,19 +720,19 @@ def notifier(nouvelles, nb_total):
         if details:
             lignes.append(details)
         if a["tel"]:
-            lignes.append("📞 " + a["tel"])
+            lignes.append("Tél. " + a["tel"])
         actions = [{"action": "view", "label": "Voir l'annonce", "url": a["url"]},
                    {"action": "view", "label": "Ouvrir l'appli", "url": PAGE_URL + "#a=" + quote(a["id"])}]
         if a["tel"]:
             actions.insert(1, {"action": "view", "label": "Appeler", "url": "tel:" + re.sub(r"\D", "", a["tel"])})
-        msg = {"title": f"🏠 {a['type']} · {round(a['prix'])} € · {a['quartier'] if a['quartier'] and a['quartier'] != a['commune'] else a['commune']}",
-               "message": "\n".join(lignes), "click": PAGE_URL + "#a=" + quote(a["id"]), "tags": ["new"],
+        msg = {"title": f"Nouveau · {a['type']} · {round(a['prix'])} € · {a['quartier'] if a['quartier'] and a['quartier'] != a['commune'] else a['commune']}",
+               "message": "\n".join(lignes), "click": PAGE_URL + "#a=" + quote(a["id"]),
                "priority": 4, "actions": actions[:3]}
         if a["photos"]:
             msg["attach"] = a["photos"][0]
         envoyer(**msg)
     if len(nouvelles) > NOTIFS_MAX:
-        envoyer(title="🏠 Et d'autres encore", click=PAGE_URL,
+        envoyer(title="Et d'autres encore", click=PAGE_URL,
                 message=f"{len(nouvelles) - NOTIFS_MAX} autres nouveaux logements sont dans l'appli.")
     print(f"  {min(len(nouvelles), NOTIFS_MAX)} notification(s) envoyée(s)")
 
