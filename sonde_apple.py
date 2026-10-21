@@ -1,38 +1,35 @@
 """Sonde temporaire : décrit la structure des sites Apple de La Réunion (lancée à la main)."""
-import re, json
+import re
 from curl_cffi import requests
 
 def court(s, n):
     return re.sub(r"\s+", " ", s)[:n]
 
-def montre(u, n=700, **kw):
+def montre(u, marques=(), n=1500, liens=None):
     print("=" * 30, u)
     try:
-        r = requests.request(kw.pop("methode", "GET"), u, timeout=40, impersonate="chrome", **kw)
+        r = requests.get(u, timeout=40, impersonate="chrome")
     except Exception as e:
         print("ERREUR", e); return
     h = r.text
-    print("status", r.status_code, "url", r.url, "taille", len(h), r.headers.get("content-type"))
-    indices = [k for k in ["Shopify", "woocommerce", "wp-content", "prestashop", "PrestaShop", "Magento", "sylius", "Sylius",
-                           "__NEXT_DATA__", "wix", "ld+json", "product-miniature", "datadome", "captcha"] if k in h]
-    print("  indices", indices)
-    if "json" in (r.headers.get("content-type") or ""):
-        print("  JSON", court(h, n))
-    liens = sorted(set(re.findall(r'href="([^"#]*(?:iphone|apple|ipad|macbook|produit|product)[^"#]*)"', h, re.I)))
-    print("  liens", len(liens), liens[:25])
-    i = h.find("€")
-    if i > 0:
-        print("  PRIX", court(h[max(0, i - n):i + 100], n + 100))
+    print("status", r.status_code, "url", r.url, "taille", len(h))
+    for m in marques:
+        i = h.find(m)
+        print("  MARQUE", m, i, court(h[max(0, i - 200):i + n], n + 200) if i >= 0 else "")
+    if liens:
+        t = sorted(set(re.findall(liens, h)))
+        print("  LIENS", len(t), t[:40])
 
-for site in ["https://delbosinformatique.re/magasin?rayon=apple", "https://leclic.re/taxons/electromenager-high-tech/high-tech-12/telephonie-3",
-             "https://isleden.re/1000025613-apple-iphone-reconditionne", "https://telroi.re/", "https://ordiroi.re/iphone/",
-             "https://smart974.re/", "https://pineapple.re/", "https://www.sfr.re/", "https://boutique.orange.re/", "https://www.orange.re/",
-             "https://www.zeop.re/"]:
-    montre(site)
-for base in ["https://smart974.re", "https://pineapple.re", "https://telroi.re", "https://ordiroi.re", "https://isleden.re"]:
-    montre(base + "/products.json?limit=3", 400)
-    montre(base + "/wp-json/wc/store/v1/products?search=iphone&per_page=3", 400)
-montre("https://www.leboncoin.fr/recherche?text=iphone&locations=d_974", 400)
-montre("https://api.leboncoin.fr/finder/search", 600, methode="POST",
-       headers={"api_key": "ba0c2dad52b3ec", "Content-Type": "application/json"},
-       data=json.dumps({"limit": 5, "filters": {"keywords": {"text": "iphone"}, "location": {"departments": ["974"]}, "category": {}}}))
+montre("https://delbosinformatique.re/magasin?rayon=apple", ["/magasin/apple-airpods-5"], 2500, r'href="(/magasin[^"]*)"')
+montre("https://delbosinformatique.re/magasin?rayon=apple&page=2", [], 10, r'href="(/magasin/[^"?]+)"')
+montre("https://delbosinformatique.re/magasin/apple-airpods-5", ["ld+json", "Caract"], 2000)
+montre("https://leclic.re/taxons/electromenager-high-tech/high-tech-12/telephonie-3", ["apple-airpods-pro-3rd", "page=2"], 2500, r'href="(/taxons/[^"]+)"')
+montre("https://leclic.re/search?q=apple", ["/products/"], 800)
+montre("https://zeopstore.re/", ["€"], 1500, r'href="([^"]+\.htm)"')
+montre("https://www.zeopstore.re/apple-macbook-pro-gris-sideral,3786.htm", ["€", "ld+json"], 1500)
+montre("https://smart974.re/iphone-13.html", ["€", "<h1"], 2500)
+montre("https://pineapple.re/catalogue/smartphones/", ["class=\"product", "page/2"], 2000)
+montre("https://isleden.re/1000025613-apple-iphone-reconditionne", ["product-miniature"], 2000)
+montre("https://ordiroi.re/7-apple", ["product-miniature"], 600, r'href="(https://ordiroi\.re/\d+-[a-z0-9-]+)"')
+montre("https://www.easycash.fr/magasins", [], 10, r'href="([^"]*(?:reunion|saint-pierre|le-port|saint-denis|sainte-clotilde|saint-paul|974)[^"]*)"')
+montre("https://www.easycash.fr/recherche?q=iphone", ["€"], 1500)
