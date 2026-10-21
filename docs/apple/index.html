@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Apple 974</title>
+<meta name="description" content="Tous les produits Apple neufs, reconditionnés et d'occasion en vente à La Réunion : iShop, Microstor, Darty, Phenix Store, Cash Express et particuliers.">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Apple 974">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root{
+  --fond:#f2f2f7;--carte:#fff;--texte:#1d1d1f;--doux:#6e6e73;--ligne:#e3e3e8;--champ:#e9e9ee;
+  --bleu:#0071e3;--bleu-doux:#e8f1fc;--prix:#1d1d1f;--rouge:#e30000;--vert:#1a7f37;--vert-doux:#e3f4e8;
+  --orange:#b25000;--orange-doux:#fdf0e3;--violet:#6e3fc7;--violet-doux:#efe9fb;
+  --verre:rgba(255,255,255,.72);--verre-bord:rgba(0,0,0,.06);
+  --ombre:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.06);
+  --r:22px;
+}
+@media (prefers-color-scheme:dark){:root{
+  --fond:#000;--carte:#1c1c1e;--texte:#f5f5f7;--doux:#98989d;--ligne:#2c2c2e;--champ:#2c2c2e;
+  --bleu:#2997ff;--bleu-doux:#0d2540;--prix:#f5f5f7;--rouge:#ff453a;--vert:#30d158;--vert-doux:#0f2e18;
+  --orange:#ff9f0a;--orange-doux:#33210a;--violet:#bf9bff;--violet-doux:#2a1f40;
+  --verre:rgba(30,30,32,.72);--verre-bord:rgba(255,255,255,.08);
+  --ombre:0 1px 2px rgba(0,0,0,.5);
+}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fond);color:var(--texte);font:16px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding-bottom:calc(110px + env(safe-area-inset-bottom));overflow-x:hidden}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--bleu);text-decoration:none}
+[hidden]{display:none!important}
+svg.ic{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.page{max-width:1100px;margin:auto}
+
+/* En-tête */
+.entete{position:sticky;top:0;z-index:20;padding:env(safe-area-inset-top) 0 0;background:transparent;transition:background .2s}
+.entete.colle{background:var(--verre);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:.5px solid var(--verre-bord)}
+.entete-in{max-width:1100px;margin:auto;display:flex;align-items:center;gap:4px;padding:8px 12px;min-height:52px}
+.entete-in .petit-titre{flex:1;text-align:center;font-weight:600;font-size:17px;opacity:0;transition:opacity .2s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.entete.colle .petit-titre{opacity:1}
+.rond{border:0;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--carte);box-shadow:var(--ombre);position:relative;flex:none}
+.rond:active{transform:scale(.94)}
+.pastille{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--rouge);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
+.tourne svg{animation:tourne .8s linear infinite}
+@keyframes tourne{to{transform:rotate(360deg)}}
+.grand-titre{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:4px 20px 14px}
+.grand-titre h1{margin:0;font-size:34px;line-height:1.1;font-weight:700;letter-spacing:-.02em}
+.grand-titre .maj{font-size:12.5px;color:var(--doux);text-align:right}
+h2.sec{font-size:24px;font-weight:700;letter-spacing:-.015em;margin:26px 20px 12px;display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+h2.sec small{font-size:14px;font-weight:400;color:var(--doux)}
+
+/* Rails qui défilent de droite à gauche */
+.rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;padding:2px 20px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.rail::-webkit-scrollbar{display:none}
+.rail>*{scroll-snap-align:start;flex:none}
+.cat{width:140px;height:158px;border:0;border-radius:var(--r);background:var(--carte);box-shadow:var(--ombre);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:12px 8px 14px;gap:10px;position:relative;transition:transform .15s}
+.cat:active{transform:scale(.97)}
+.cat .vis{flex:1;width:100%;display:grid;place-items:center;overflow:hidden}
+.cat .vis img{max-width:100%;max-height:86px;object-fit:contain;mix-blend-mode:multiply}
+@media (prefers-color-scheme:dark){.cat .vis img{mix-blend-mode:normal}}
+.cat .vis svg{width:54px;height:54px;stroke-width:1.3;color:var(--doux)}
+.cat b{font-weight:500;font-size:16px;white-space:nowrap}
+.cat[aria-pressed=true]{box-shadow:0 0 0 2.5px var(--bleu),var(--ombre)}
+.cat .nb{position:absolute;top:9px;right:11px;font-size:11.5px;color:var(--doux)}
+.puce{border:0;border-radius:999px;background:var(--carte);box-shadow:var(--ombre);padding:13px 22px;font-size:16px;white-space:nowrap}
+.puce[aria-pressed=true]{background:var(--texte);color:var(--fond)}
+.mag{width:200px;border:0;border-radius:18px;background:var(--carte);box-shadow:var(--ombre);padding:14px 16px;text-align:left;display:flex;flex-direction:column;gap:3px}
+.mag b{font-size:16px;font-weight:600}
+.mag span{font-size:13px;color:var(--doux)}
+.mag[aria-pressed=true]{box-shadow:0 0 0 2.5px var(--bleu),var(--ombre)}
+.logo-mag{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:700;font-size:13px;color:#fff;margin-bottom:6px}
+
+/* Barre de filtres */
+.outils{position:sticky;top:calc(68px + env(safe-area-inset-top));z-index:15;padding:10px 0 8px;background:var(--fond)}
+.segment{margin:0 20px 10px;display:flex;background:var(--champ);border-radius:10px;padding:2px}
+.segment button{flex:1;border:0;background:transparent;border-radius:8px;padding:7px 4px;font-size:14px;font-weight:500;white-space:nowrap}
+.segment button[aria-pressed=true]{background:var(--carte);box-shadow:0 1px 3px rgba(0,0,0,.12);font-weight:600}
+.pilules{display:flex;gap:8px;overflow-x:auto;padding:0 20px;scrollbar-width:none}
+.pilules::-webkit-scrollbar{display:none}
+.pilule{flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--ligne);background:var(--carte);border-radius:999px;padding:7px 13px;font-size:14px;white-space:nowrap}
+.pilule svg.ic{width:16px;height:16px}
+.pilule.actif{border-color:var(--bleu);background:var(--bleu-doux);color:var(--bleu);font-weight:600}
+.compte{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 20px 4px;color:var(--doux);font-size:13.5px}
+.lien{border:0;background:none;color:var(--bleu);padding:0;font-size:inherit}
+
+/* Grille : 2 annonces par ligne */
+.grille{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:8px 16px}
+@media (min-width:720px){.grille{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1000px){.grille{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.carte{position:relative;background:var(--carte);border-radius:20px;box-shadow:var(--ombre);overflow:hidden;display:flex;flex-direction:column;border:0;padding:0;text-align:left;width:100%;transition:transform .15s}
+.carte:active{transform:scale(.98)}
+.carte .ph{aspect-ratio:1/1;background:#fff;display:grid;place-items:center;overflow:hidden;position:relative}
+@media (prefers-color-scheme:dark){.carte .ph{background:#f5f5f7}}
+.carte .ph img{width:100%;height:100%;object-fit:contain;padding:10px}
+.carte .ph.photo img{object-fit:cover;padding:0}
+.carte .ph svg{width:48px;height:48px;color:#c7c7cc;stroke-width:1.2}
+.carte .corps{padding:10px 12px 13px;display:flex;flex-direction:column;gap:3px;flex:1}
+.carte .vendeur{font-size:11.5px;font-weight:600;color:var(--doux);text-transform:uppercase;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.carte .nom{font-size:14.5px;font-weight:600;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.carte .specs{font-size:12.5px;color:var(--doux);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.carte .bas{margin-top:auto;padding-top:6px;display:flex;flex-direction:column;gap:1px}
+.carte .prix{font-size:17px;font-weight:700;color:var(--prix)}
+.carte .prix small{font-size:12.5px;font-weight:500;color:var(--doux)}
+.gros-prix small{font-size:17px;font-weight:500;color:var(--doux)}
+.carte .prix s{font-size:12.5px;font-weight:400;color:var(--doux);margin-left:5px}
+.carte .lieu{font-size:12px;color:var(--doux);display:flex;align-items:center;gap:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.carte .lieu svg.ic{width:13px;height:13px}
+.etat{position:absolute;top:9px;left:9px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--vert-doux);color:var(--vert);z-index:1}
+.etat.Reconditionné{background:var(--violet-doux);color:var(--violet)}
+.etat.Occasion{background:var(--orange-doux);color:var(--orange)}
+.coeur{position:absolute;top:6px;right:6px;width:34px;height:34px;border:0;border-radius:50%;background:rgba(255,255,255,.86);display:grid;place-items:center;z-index:2;color:#1d1d1f}
+.coeur svg.ic{width:19px;height:19px}
+.coeur[aria-pressed=true]{color:#ff2d55}
+.coeur[aria-pressed=true] svg{fill:currentColor}
+.vide{text-align:center;color:var(--doux);padding:50px 30px}
+.vide svg.ic{width:46px;height:46px;stroke-width:1.2;margin-bottom:8px}
+.squelette{background:linear-gradient(90deg,var(--champ),var(--carte),var(--champ));background-size:200% 100%;animation:sq 1.2s infinite;border-radius:20px;aspect-ratio:3/4.4}
+@keyframes sq{to{background-position:-200% 0}}
+#plus{display:block;margin:14px auto;height:1px}
+
+/* Barre d'onglets du bas */
+.onglets{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:0 12px calc(10px + env(safe-area-inset-bottom));display:flex;gap:10px;justify-content:center;pointer-events:none}
+.onglets nav,.onglets .loupe-btn{pointer-events:auto;background:var(--verre);-webkit-backdrop-filter:saturate(180%) blur(24px);backdrop-filter:saturate(180%) blur(24px);border:.5px solid var(--verre-bord);box-shadow:0 8px 30px rgba(0,0,0,.12)}
+.onglets nav{flex:1;max-width:460px;display:flex;border-radius:999px;padding:5px}
+.onglets nav button{flex:1;border:0;background:transparent;border-radius:999px;padding:6px 2px 5px;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:11.5px;font-weight:500;position:relative}
+.onglets nav button svg.ic{width:25px;height:25px}
+.onglets nav button[aria-current=true]{color:var(--bleu);background:var(--champ)}
+.onglets nav .pastille{top:0;right:calc(50% - 22px)}
+.loupe-btn{width:62px;height:62px;border-radius:50%;border:0;display:grid;place-items:center;flex:none}
+.loupe-btn svg.ic{width:28px;height:28px}
+
+/* Feuilles (fiche, filtres, recherche, menu) */
+.voile{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s}
+.voile.ouvert{opacity:1;pointer-events:auto}
+.feuille{position:fixed;left:0;right:0;bottom:0;z-index:50;max-height:94vh;max-height:94dvh;background:var(--fond);border-radius:16px 16px 0 0;transform:translateY(105%);transition:transform .32s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;max-width:760px;margin:auto}
+.feuille{visibility:hidden;transition:transform .32s cubic-bezier(.2,.8,.2,1),visibility 0s .32s}
+.feuille.ouvert{transform:none;visibility:visible;transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+.tiroir{visibility:hidden;transition:transform .28s,visibility 0s .28s}
+.tiroir.ouvert{visibility:visible;transition:transform .28s}
+.feuille .poignee{width:38px;height:5px;border-radius:3px;background:var(--ligne);margin:7px auto 0;flex:none}
+.feuille .haut{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 14px 8px 20px;flex:none}
+.feuille .haut h3{margin:0;font-size:19px;font-weight:700}
+.feuille .defile{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 0 calc(24px + env(safe-area-inset-bottom));overscroll-behavior:contain}
+.fermer{border:0;width:32px;height:32px;border-radius:50%;background:var(--champ);display:grid;place-items:center;color:var(--doux)}
+.fermer svg.ic{width:17px;height:17px;stroke-width:2.4}
+
+/* Fiche produit */
+#fiche{height:94vh;height:94dvh;overflow:hidden}
+#fiche .poignee{position:absolute;left:0;right:0;z-index:3}
+#fiche .haut{position:absolute;top:8px;right:0;z-index:3;padding:0 12px}
+#fiche .fermer{background:rgba(120,120,128,.2);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.galerie{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;background:#fff;width:100%;height:min(100vw,52vh)}
+.galerie::-webkit-scrollbar{display:none}
+.galerie img{flex:none;width:100%;height:100%;object-fit:contain;scroll-snap-align:center;padding:16px}
+.galerie .sans{flex:none;width:100%;display:grid;place-items:center;color:#c7c7cc}
+.points{display:flex;justify-content:center;gap:6px;padding:10px 0 0}
+.points i{width:7px;height:7px;border-radius:50%;background:var(--ligne)}
+.points i.on{background:var(--texte)}
+.fiche-corps{padding:14px 20px}
+.fiche-corps .vendeur{font-size:13px;font-weight:600;color:var(--doux);text-transform:uppercase;letter-spacing:.03em}
+.fiche-corps h2{margin:4px 0 6px;font-size:24px;line-height:1.2;letter-spacing:-.01em}
+.gros-prix{font-size:28px;font-weight:700;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.gros-prix s{font-size:16px;color:var(--doux);font-weight:400}
+.gros-prix .remise{font-size:13px;font-weight:700;color:#fff;background:var(--rouge);padding:2px 7px;border-radius:6px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 4px}
+.badge{font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--champ)}
+.badge.Neuf{background:var(--vert-doux);color:var(--vert)}
+.badge.Reconditionné{background:var(--violet-doux);color:var(--violet)}
+.badge.Occasion{background:var(--orange-doux);color:var(--orange)}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 6px}
+.btn{border:0;border-radius:14px;padding:14px 12px;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;background:var(--carte);box-shadow:var(--ombre);color:var(--texte)}
+.btn.bleu{background:var(--bleu);color:#fff;box-shadow:none}
+.btn.large{grid-column:1/-1}
+.btn svg.ic{width:20px;height:20px}
+.btn[aria-pressed=true] svg{fill:#ff2d55;color:#ff2d55}
+.bloc{background:var(--carte);border-radius:16px;margin:16px 0 0;overflow:hidden}
+.bloc h4{margin:0;padding:14px 16px 6px;font-size:13px;font-weight:600;color:var(--doux);text-transform:uppercase;letter-spacing:.04em}
+.bloc .ligne{display:flex;justify-content:space-between;gap:14px;padding:11px 16px;border-top:.5px solid var(--ligne);font-size:15px}
+.bloc .ligne:first-of-type{border-top:0}
+.bloc .ligne span:first-child{color:var(--doux)}
+.bloc .ligne span:last-child{text-align:right;font-weight:500}
+.bloc p{margin:0;padding:4px 16px 16px;font-size:15px;white-space:pre-line;color:var(--texte)}
+.bloc .plie{max-height:9.5em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 65%,transparent)}
+.bloc .lieu-l{display:flex;align-items:center;gap:12px;padding:12px 16px;border-top:.5px solid var(--ligne);color:var(--texte)}
+.bloc .lieu-l:first-of-type{border-top:0}
+.bloc .lieu-l svg.ic{color:var(--bleu)}
+.bloc .lieu-l div{flex:1;min-width:0}
+.bloc .lieu-l b{display:block;font-weight:600;font-size:15px}
+.bloc .lieu-l small{color:var(--doux);font-size:13px}
+.bloc .lieu-l em{font-style:normal;color:var(--doux);font-size:13.5px;white-space:nowrap}
+.carte-map{width:100%;height:180px;border:0;display:block}
+.autres{display:flex;flex-direction:column}
+.autres button{border:0;background:none;text-align:left;display:flex;align-items:center;gap:12px;padding:10px 16px;border-top:.5px solid var(--ligne)}
+.autres button:first-of-type{border-top:0}
+.autres img{width:48px;height:48px;object-fit:contain;background:#fff;border-radius:10px;flex:none}
+.autres div{flex:1;min-width:0;font-size:14px}
+.autres div small{display:block;color:var(--doux);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.autres b{font-size:15.5px;white-space:nowrap}
+.note{font-size:12.5px;color:var(--doux);padding:12px 4px 0;line-height:1.45}
+
+/* Filtres */
+.groupe{background:var(--carte);border-radius:16px;margin:0 16px 16px;padding:14px 16px}
+.groupe>b{display:block;font-size:15px;margin-bottom:10px}
+.groupe .aide{font-size:12.5px;color:var(--doux);margin-top:8px}
+.choix{display:flex;flex-wrap:wrap;gap:8px}
+.choix button{border:1px solid var(--ligne);background:var(--fond);border-radius:999px;padding:7px 13px;font-size:14px}
+.choix button[aria-pressed=true]{background:var(--bleu);border-color:var(--bleu);color:#fff}
+.prix-champs{display:flex;align-items:center;gap:10px}
+.prix-champs label{flex:1;display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--doux)}
+.champ{font:inherit;font-size:16px;width:100%;padding:10px 12px;border-radius:10px;border:0;background:var(--champ);color:var(--texte)}
+input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
+.rayon-val{font-weight:600;color:var(--bleu)}
+.position{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.pied-filtres{position:sticky;bottom:0;display:flex;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:var(--fond);border-top:.5px solid var(--ligne)}
+.pied-filtres .btn{flex:1}
+.tri-liste button{display:flex;width:100%;justify-content:space-between;align-items:center;border:0;background:none;padding:14px 16px;font-size:16px;border-top:.5px solid var(--ligne)}
+.tri-liste button:first-child{border-top:0}
+.tri-liste button[aria-pressed=true]{color:var(--bleu);font-weight:600}
+
+/* Recherche */
+#recherche{height:94vh;height:94dvh}
+.champ-recherche{display:flex;align-items:center;gap:8px;margin:4px 16px 12px;background:var(--champ);border-radius:12px;padding:0 10px}
+.champ-recherche svg.ic{color:var(--doux);width:19px;height:19px}
+.champ-recherche input{flex:1;border:0;outline:0;background:transparent;font:inherit;font-size:17px;padding:10px 0;color:var(--texte);min-width:0}
+.suggestions{padding:0 20px}
+.suggestions b{display:block;font-size:13px;color:var(--doux);text-transform:uppercase;letter-spacing:.04em;margin:10px 0 4px}
+.suggestions button{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;text-align:left;padding:10px 0;font-size:17px;color:var(--bleu);border-bottom:.5px solid var(--ligne)}
+.suggestions button svg.ic{width:18px;height:18px;color:var(--doux)}
+
+/* Menu ☰ */
+.tiroir{position:fixed;top:0;bottom:0;left:0;z-index:50;width:min(320px,86vw);background:var(--fond);transform:translateX(-102%);transition:transform .28s cubic-bezier(.2,.8,.2,1);padding:calc(16px + env(safe-area-inset-top)) 12px 20px;display:flex;flex-direction:column;gap:4px;overflow-y:auto}
+.tiroir.ouvert{transform:none}
+.tiroir>*{flex:none}
+.tiroir .tete{display:flex;align-items:center;gap:12px;padding:6px 8px 16px}
+.tiroir .tete b{font-size:22px;font-weight:700}
+.tiroir nav{background:var(--carte);border-radius:14px;overflow:hidden;margin-bottom:14px}
+.tiroir nav button{display:flex;align-items:center;gap:14px;width:100%;border:0;background:none;padding:13px 16px;font-size:16px;text-align:left;border-top:.5px solid var(--ligne)}
+.tiroir nav button:first-child{border-top:0}
+.tiroir nav button svg.ic{color:var(--bleu)}
+.tiroir nav button em{margin-left:auto;font-style:normal;color:var(--doux);font-size:14px}
+.tiroir .info{font-size:12.5px;color:var(--doux);padding:0 8px;line-height:1.5}
+
+/* Vues Favoris / Panier */
+.vue-titre{padding:4px 20px 6px}
+.vue-titre h1{margin:0;font-size:34px;font-weight:700;letter-spacing:-.02em}
+.vue-titre p{margin:4px 0 0;color:var(--doux);font-size:14px}
+.ligne-panier{display:flex;gap:12px;align-items:center;background:var(--carte);border-radius:18px;padding:10px;margin:0 16px 10px;box-shadow:var(--ombre)}
+.ligne-panier img,.ligne-panier .sans{width:76px;height:76px;object-fit:contain;background:#fff;border-radius:12px;flex:none;display:grid;place-items:center;color:#c7c7cc}
+.ligne-panier .txt{flex:1;min-width:0;border:0;background:none;text-align:left;padding:0}
+.ligne-panier .txt small{display:block;font-size:11.5px;font-weight:600;color:var(--doux);text-transform:uppercase}
+.ligne-panier .txt span{display:block;font-size:14.5px;font-weight:600;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ligne-panier .txt b{display:block;font-size:16px;margin-top:3px}
+.qte{display:flex;flex-direction:column;align-items:center;gap:4px}
+.qte button{width:30px;height:30px;border-radius:50%;border:0;background:var(--champ);font-size:18px;line-height:1;display:grid;place-items:center}
+.total{margin:6px 16px 10px;background:var(--carte);border-radius:18px;padding:16px;box-shadow:var(--ombre)}
+.total .ligne{display:flex;justify-content:space-between;font-size:15px;padding:4px 0;color:var(--doux)}
+.total .ligne.fort{font-size:19px;font-weight:700;color:var(--texte);border-top:.5px solid var(--ligne);margin-top:6px;padding-top:10px}
+.groupe-vendeur{margin:18px 20px 8px;display:flex;justify-content:space-between;align-items:center;font-size:15px}
+.groupe-vendeur b{font-size:17px}
+
+#tirer{position:fixed;left:50%;top:calc(60px + env(safe-area-inset-top));transform:translate(-50%,-70px);z-index:25;width:40px;height:40px;border-radius:50%;background:var(--carte);box-shadow:var(--ombre);display:grid;place-items:center;color:var(--bleu);opacity:0;pointer-events:none}
+#toast{position:fixed;left:50%;bottom:calc(98px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:rgba(29,29,31,.92);color:#fff;padding:10px 16px;border-radius:14px;font-size:14.5px;z-index:60;opacity:0;transition:.25s;pointer-events:none;max-width:88vw;text-align:center}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-loupe" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.6-4.6"/></symbol>
+  <symbol id="i-maj" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></symbol>
+  <symbol id="i-coeur" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.1A4.2 4.2 0 0 1 12 7.4a4.2 4.2 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20Z"/></symbol>
+  <symbol id="i-sac" viewBox="0 0 24 24"><path d="M5.5 8h13l-1 12h-11Z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></symbol>
+  <symbol id="i-produits" viewBox="0 0 24 24"><rect x="2.5" y="6" width="13" height="9" rx="1.5"/><path d="M1.5 18h15"/><rect x="17.5" y="7" width="5" height="11" rx="1.3"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.2"/></symbol>
+  <symbol id="i-filtre" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></symbol>
+  <symbol id="i-tri" viewBox="0 0 24 24"><path d="M7 4v16M3.5 16.5 7 20l3.5-3.5M17 20V4M13.5 7.5 17 4l3.5 3.5"/></symbol>
+  <symbol id="i-euro" viewBox="0 0 24 24"><path d="M17 6.5A6.5 6.5 0 1 0 17 17.5"/><path d="M4 10.5h9M4 13.5h9"/></symbol>
+  <symbol id="i-cible" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-sortie" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-8 8M17 14v5H5V7h5"/></symbol>
+  <symbol id="i-partage" viewBox="0 0 24 24"><path d="M12 15V3.5M8 7.5l4-4 4 4"/><path d="M7 11H5.5v9.5h13V11H17"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><path d="M12 2 21 12 12 22 3 12Z"/><path d="M9 14v-3h5M12 8.5 14.5 11 12 13.5"/></symbol>
+  <symbol id="i-magasin" viewBox="0 0 24 24"><path d="M4 9.5V20h16V9.5"/><path d="M3 9.5 5 4h14l2 5.5a2.5 2.5 0 0 1-4.5 1.3 2.5 2.5 0 0 1-4.5 0 2.5 2.5 0 0 1-4.5 0A2.5 2.5 0 0 1 3 9.5Z"/><path d="M10 20v-5h4v5"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+  <symbol id="i-iphone" viewBox="0 0 24 24"><rect x="6.5" y="2" width="11" height="20" rx="2.6"/><path d="M10.5 4.5h3"/></symbol>
+  <symbol id="i-ipad" viewBox="0 0 24 24"><rect x="4" y="2.5" width="16" height="19" rx="2.2"/><path d="M11 18.8h2"/></symbol>
+  <symbol id="i-mac" viewBox="0 0 24 24"><rect x="4" y="4.5" width="16" height="11" rx="1.4"/><path d="M2 18.5h20l-1 1.5H3Z"/></symbol>
+  <symbol id="i-watch" viewBox="0 0 24 24"><rect x="6.5" y="6" width="11" height="12" rx="3"/><path d="M8.5 6 9.3 2.5h5.4L15.5 6M8.5 18l.8 3.5h5.4l.8-3.5"/></symbol>
+  <symbol id="i-airpods" viewBox="0 0 24 24"><path d="M8 4a3 3 0 0 0-3 3v1a3 3 0 0 0 3 3h.5v8.5a1.5 1.5 0 0 0 3 0V7a3 3 0 0 0-3.5-3Z"/><path d="M16 4a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3h-.5v8.5"/></symbol>
+  <symbol id="i-tv" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12" rx="1.6"/><path d="M8.5 20h7M12 16.5V20"/></symbol>
+  <symbol id="i-cable" viewBox="0 0 24 24"><path d="M7 3v4M11 3v4M5.5 7h7v3.5A3.5 3.5 0 0 1 9 14v0a3.5 3.5 0 0 1-3.5-3.5Z"/><path d="M9 14v2.5a4.5 4.5 0 0 0 9 0V5"/></symbol>
+  <symbol id="i-tout" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.6"/></symbol>
+  <symbol id="i-photo" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 8"/></symbol>
+</svg>
+
+<header class="entete" id="entete">
+  <div class="entete-in">
+    <button class="rond" id="btn-menu" aria-label="Menu : favoris, panier, magasins"><svg class="ic"><use href="#i-menu"/></svg><span class="pastille" id="pastille-menu" hidden></span></button>
+    <div class="petit-titre" id="petit-titre">Produits</div>
+    <button class="rond" id="btn-maj" aria-label="Actualiser les annonces"><svg class="ic"><use href="#i-maj"/></svg></button>
+  </div>
+</header>
+<div id="tirer"><svg class="ic"><use href="#i-maj"/></svg></div>
+
+<main class="page">
+  <!-- Accueil -->
+  <section id="vue-produits">
+    <div class="grand-titre"><h1>Produits</h1><div class="maj">Mis à jour<br><span id="maj">jeudi 22/10 à 01h20</span></div></div>
+
+    <div class="rail" id="rail-cats" aria-label="Catégories"></div>
+
+    <h2 class="sec">Accessoires</h2>
+    <div class="rail" id="rail-acc" aria-label="Accessoires"></div>
+
+    <h2 class="sec">Les magasins <small id="nb-magasins"></small></h2>
+    <div class="rail" id="rail-mags" aria-label="Magasins"></div>
+
+    <h2 class="sec" id="titre-liste">Toutes les annonces</h2>
+    <div class="outils" id="outils">
+      <div class="segment" id="seg-etat" role="group" aria-label="État">
+        <button data-v="" aria-pressed="true">Tout</button><button data-v="Neuf" aria-pressed="false">Neuf</button><button data-v="Reconditionné" aria-pressed="false">Reconditionné</button><button data-v="Occasion" aria-pressed="false">Occasion</button>
+      </div>
+      <div class="pilules">
+        <button class="pilule" id="p-filtres"><svg class="ic"><use href="#i-filtre"/></svg>Filtres<span id="nb-filtres"></span></button>
+        <button class="pilule" id="p-prix"><svg class="ic"><use href="#i-euro"/></svg><span>Prix</span></button>
+        <button class="pilule" id="p-rayon"><svg class="ic"><use href="#i-cible"/></svg><span>Autour de moi</span></button>
+        <button class="pilule" id="p-tri"><svg class="ic"><use href="#i-tri"/></svg><span>Pertinence</span></button>
+      </div>
+    </div>
+    <div class="compte"><span id="compte">Chargement…</span><button class="lien" id="tout-effacer" hidden>Tout effacer</button></div>
+    <div class="grille" id="grille"></div>
+    <div id="plus"></div>
+  </section>
+
+  <!-- Favoris -->
+  <section id="vue-favoris" hidden>
+    <div class="vue-titre"><h1>Favoris</h1><p id="favoris-info"></p></div>
+    <div class="grille" id="grille-favoris"></div>
+  </section>
+
+  <!-- Panier -->
+  <section id="vue-panier" hidden>
+    <div class="vue-titre"><h1>Panier</h1><p>Les achats se font sur le site ou dans le magasin du vendeur.</p></div>
+    <div id="panier"></div>
+  </section>
+</main>
+
+<div class="onglets">
+  <nav aria-label="Navigation">
+    <button data-vue="produits" aria-current="true"><svg class="ic"><use href="#i-produits"/></svg>Produits</button>
+    <button data-vue="favoris" aria-current="false"><svg class="ic"><use href="#i-coeur"/></svg>Favoris<span class="pastille" id="pastille-fav" hidden></span></button>
+    <button data-vue="panier" aria-current="false"><svg class="ic"><use href="#i-sac"/></svg>Panier<span class="pastille" id="pastille-panier" hidden></span></button>
+  </nav>
+  <button class="loupe-btn" id="btn-loupe" aria-label="Rechercher"><svg class="ic"><use href="#i-loupe"/></svg></button>
+</div>
+
+<div class="voile" id="voile"></div>
+
+<!-- Menu ☰ -->
+<aside class="tiroir" id="tiroir" aria-label="Menu">
+  <div class="tete"><button class="fermer" data-fermer aria-label="Fermer"><svg class="ic"><use href="#i-x"/></svg></button><b>Apple 974</b></div>
+  <nav>
+    <button data-aller="favoris"><svg class="ic"><use href="#i-coeur"/></svg>Favoris<em id="m-fav">0</em></button>
+    <button data-aller="panier"><svg class="ic"><use href="#i-sac"/></svg>Panier<em id="m-panier">0</em></button>
+    <button data-aller="produits"><svg class="ic"><use href="#i-produits"/></svg>Tous les produits<em id="m-tout"></em></button>
+  </nav>
+  <nav>
+    <button data-action="recherche"><svg class="ic"><use href="#i-loupe"/></svg>Rechercher</button>
+    <button data-action="filtres"><svg class="ic"><use href="#i-filtre"/></svg>Filtres</button>
+    <button data-action="actualiser"><svg class="ic"><use href="#i-maj"/></svg>Actualiser</button>
+  </nav>
+  <nav id="m-magasins"></nav>
+  <p class="info">Annonces lues sur les sites d'iShop, Microstor, Darty Réunion, Phenix Store, Cash Express (Saint-Pierre, Sainte-Clotilde) et ParuVendu, plusieurs fois par jour. Les prix et le stock peuvent changer : vérifie sur le site du vendeur avant de te déplacer.<br><br>Sources lues au dernier passage : <span id="sources">iShop, Microstor, Phenix Store, Darty, Cash Express, ParuVendu</span></p>
+</aside>
+
+<!-- Fiche produit -->
+<div class="feuille" id="fiche" role="dialog" aria-modal="true" aria-label="Détail du produit">
+  <div class="poignee"></div>
+  <div class="haut"><span></span><button class="fermer" data-fermer aria-label="Fermer"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <div class="defile" id="fiche-defile"></div>
+</div>
+
+<!-- Filtres -->
+<div class="feuille" id="filtres" role="dialog" aria-modal="true" aria-label="Filtres">
+  <div class="poignee"></div>
+  <div class="haut"><h3>Filtres</h3><button class="fermer" data-fermer aria-label="Fermer"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <div class="defile">
+    <div class="groupe" id="g-prix">
+      <b>Prix</b>
+      <div class="prix-champs">
+        <label>Minimum (€)<input class="champ" id="prix-min" type="number" inputmode="numeric" min="0" step="10" placeholder="0"></label>
+        <label>Maximum (€)<input class="champ" id="prix-max" type="number" inputmode="numeric" min="0" step="10" placeholder="Sans limite"></label>
+      </div>
+      <input type="range" id="prix-curseur" min="0" max="4000" step="25" value="4000" aria-label="Prix maximum">
+      <div class="choix" id="prix-rapide" style="margin-top:10px"></div>
+    </div>
+    <div class="groupe" id="g-rayon">
+      <b>Rayon autour de moi</b>
+      <div class="position">
+        <button class="pilule" id="ma-position"><svg class="ic"><use href="#i-cible"/></svg>Ma position</button>
+        <select class="champ" id="commune" style="flex:1;width:auto" aria-label="Ou choisis une commune"></select>
+      </div>
+      <div>Dans un rayon de <span class="rayon-val" id="rayon-val">toute l'île</span></div>
+      <input type="range" id="rayon" min="5" max="80" step="5" value="80" aria-label="Rayon en kilomètres">
+      <div class="aide" id="rayon-aide">Choisis ta position ou une commune pour voir les distances.</div>
+    </div>
+    <div class="groupe"><b>Catégorie</b><div class="choix" id="f-cat"></div></div>
+    <div class="groupe"><b>État</b><div class="choix" id="f-etat"></div></div>
+    <div class="groupe"><b>Vendeur</b><div class="choix" id="f-vendeur"></div></div>
+    <div class="groupe"><b>Capacité</b><div class="choix" id="f-capa"></div></div>
+    <div class="groupe"><b>Vendu par</b><div class="choix" id="f-pro"></div></div>
+  </div>
+  <div class="pied-filtres"><button class="btn" id="f-effacer">Effacer</button><button class="btn bleu" id="f-voir">Voir</button></div>
+</div>
+
+<!-- Tri -->
+<div class="feuille" id="tri" role="dialog" aria-modal="true" aria-label="Trier">
+  <div class="poignee"></div>
+  <div class="haut"><h3>Trier par</h3><button class="fermer" data-fermer aria-label="Fermer"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <div class="defile"><div class="groupe" style="padding:0"><div class="tri-liste" id="tri-liste"></div></div></div>
+</div>
+
+<!-- Recherche -->
+<div class="feuille" id="recherche" role="dialog" aria-modal="true" aria-label="Rechercher">
+  <div class="poignee"></div>
+  <div class="haut"><h3>Rechercher</h3><button class="fermer" data-fermer aria-label="Fermer"><svg class="ic"><use href="#i-x"/></svg></button></div>
+  <label class="champ-recherche"><svg class="ic"><use href="#i-loupe"/></svg><input id="q" type="search" enterkeyhint="search" autocomplete="off" placeholder="iPhone 17 Pro, MacBook Air M4, 256 Go…"><button class="fermer" id="q-effacer" aria-label="Effacer" hidden><svg class="ic"><use href="#i-x"/></svg></button></label>
+  <div class="defile" id="recherche-defile">
+    <div class="suggestions" id="suggestions"></div>
+    <div class="compte" id="q-compte" hidden></div>
+    <div class="grille" id="grille-recherche"></div>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+const $ = s => document.querySelector(s);
+const ic = (n, cls = "ic") => `<svg class="${cls}"><use href="#i-${n}"/></svg>`;
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const norm = s => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+const euros = n => n == null ? "Prix sur demande" : Number(n).toLocaleString("fr-FR", {minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2}) + " €";
+function lire(cle, defaut) { try { const v = JSON.parse(localStorage.getItem(cle)); return v ?? defaut; } catch (e) { return defaut; } }
+function ecrire(cle, v) { try { localStorage.setItem(cle, JSON.stringify(v)); } catch (e) {} }
+let minuterieToast;
+function toast(t) { const e = $("#toast"); e.textContent = t; e.classList.add("on"); clearTimeout(minuterieToast); minuterieToast = setTimeout(() => e.classList.remove("on"), 2600); }
+
+const CATS = [
+  ["", "Tout", "tout"], ["iphone", "iPhone", "iphone"], ["watch", "Apple Watch", "watch"], ["ipad", "iPad", "ipad"],
+  ["mac", "Mac", "mac"], ["airpods", "AirPods", "airpods"], ["maison", "TV et Maison", "tv"], ["accessoires", "Accessoires", "cable"],
+];
+const NOM_CAT = Object.fromEntries(CATS.map(c => [c[0], c[1]]));
+const SOUS = ["MagSafe", "Coques et protections", "Bracelets Apple Watch", "Chargeurs et câbles", "Apple Pencil", "Claviers et souris", "AirTag", "Audio", "Autres"];
+const ETATS = ["Neuf", "Reconditionné", "Occasion"];
+const CAPAS = ["64 Go", "128 Go", "256 Go", "512 Go", "1 To", "2 To"];
+const COULEURS_MAG = {"iShop": "#0071e3", "Microstor": "#1d1d1f", "Darty": "#e30613", "Phenix Store": "#f28c00", "Cash Express": "#00a19a", "ParuVendu": "#6e3fc7"};
+const TRIS = [["pertinence", "Pertinence"], ["prix-asc", "Prix croissant"], ["prix-desc", "Prix décroissant"], ["distance", "Les plus proches"], ["recent", "Les plus récentes"]];
+
+let DONNEES = {annonces: [], communes: {}, photos_cat: {}, vendeurs: {}, maj: ""};
+let ANNONCES = [], PAR_ID = {};
+const F = Object.assign({cat: "", sous: "", etat: "", vendeurs: [], capas: [], pro: "", min: null, max: null, rayon: 80, tri: "pertinence"}, lire("apple974-filtres", {}));
+let POS = lire("apple974-position", null);   // {lat, lng, nom}
+let FAVORIS = lire("apple974-favoris", {});  // id -> annonce (copie, pour la garder si elle disparaît)
+let PANIER = lire("apple974-panier", {});    // id -> {a, q}
+let vue = "produits";
+let RECHERCHE = "";  // recherche validée « avec les filtres » : elle s'ajoute aux filtres de la liste
+
+function sauverFiltres() { ecrire("apple974-filtres", F); }
+
+// ------------------------------------------------------------------ distances
+function km(a, b) {
+  const R = 6371, r = x => x * Math.PI / 180;
+  const dLat = r(b.lat - a.lat), dLng = r(b.lng - a.lng);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(r(a.lat)) * Math.cos(r(b.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+function lieuProche(a) {
+  const lieux = (a.lieux || []).filter(l => l.lat != null);
+  if (!lieux.length) return null;
+  if (!POS) return {l: lieux[0], d: null};
+  let m = null;
+  for (const l of lieux) { const d = km(POS, l); if (!m || d < m.d) m = {l, d}; }
+  return m;
+}
+const distTxt = d => d == null ? "" : d < 1 ? "< 1 km" : `${Math.round(d)} km`;
+
+// ------------------------------------------------------------------ filtres
+function correspond(a, q) {
+  if (q) {
+    const t = a._t || (a._t = norm([a.titre, a.vendeur, a.etat, NOM_CAT[a.cat], ...(a.tags || []), a.modele, ...Object.values(a.carac || {}), ...(a.lieux || []).map(l => l.commune)].join(" ")).replace(/[^a-z0-9]+/g, " "));
+    for (const mot of norm(q).replace(/[^a-z0-9]+/g, " ").trim().split(" ")) {
+      if (!mot) continue;
+      const formes = [mot, mot.replace(/gb$/, "go"), mot.replace(/tb$/, "to"), mot.replace(/^(\d+)(go|to)$/, "$1 $2")];
+      if (!formes.some(f => t.includes(f))) return false;
+    }
+  }
+  return true;
+}
+function filtrer(liste, {q = RECHERCHE, sansFiltres = false} = {}) {
+  const res = [];
+  for (const a of liste) {
+    if (!correspond(a, q)) continue;
+    if (!sansFiltres) {
+      if (F.cat && a.cat !== F.cat) continue;
+      if (F.sous && !(a.tags || []).includes(F.sous)) continue;
+      if (F.etat && a.etat !== F.etat) continue;
+      if (F.vendeurs.length && !F.vendeurs.includes(a.vendeur)) continue;
+      if (F.capas.length && !F.capas.includes((a.carac || {})["Capacité"])) continue;
+      if (F.pro === "pro" && !a.pro) continue;
+      if (F.pro === "particulier" && a.pro) continue;
+      if (F.min != null && (a.prix == null || a.prix < F.min)) continue;
+      if (F.max != null && (a.prix == null || a.prix > F.max)) continue;
+    }
+    const p = lieuProche(a);
+    a._d = p ? p.d : null; a._lieu = p ? p.l : null;
+    if (!sansFiltres && POS && F.rayon < 80 && (a._d == null || a._d > F.rayon)) continue;
+    res.push(a);
+  }
+  return trier(res, q);
+}
+function trier(res, q) {
+  const t = F.tri;
+  if (t === "prix-asc") res.sort((a, b) => (a.prix ?? 1e9) - (b.prix ?? 1e9));
+  else if (t === "prix-desc") res.sort((a, b) => (b.prix ?? -1) - (a.prix ?? -1));
+  else if (t === "distance") res.sort((a, b) => (a._d ?? 1e9) - (b._d ?? 1e9) || (a.prix ?? 1e9) - (b.prix ?? 1e9));
+  else if (t === "recent") res.sort((a, b) => (b.vu || "").localeCompare(a.vu || ""));
+  else res.sort((a, b) => (b.rang || 0) - (a.rang || 0) || (b.vu || "").localeCompare(a.vu || ""));
+  return res;
+}
+function nbFiltres() {
+  return [F.sous, F.pro, F.min != null, F.max != null, POS && F.rayon < 80].filter(Boolean).length + F.vendeurs.length + F.capas.length;
+}
+
+// ------------------------------------------------------------------ cartes
+function specs(a) {
+  const c = a.carac || {};
+  return [c["Capacité"], c["Puce"], c["Écran"], c["Taille"], c["Couleur"], c["Connectivité"]].filter(Boolean).slice(0, 3).join(" · ");
+}
+function carte(a) {
+  const fav = !!FAVORIS[a.id];
+  const photo = (a.photos || [])[0];
+  const l = a._lieu || (a.lieux || [])[0];
+  const lieu = l ? `${ic("pin")}${esc(l.commune || l.nom)}${a._d != null ? " · " + distTxt(a._d) : ""}` : a.pro ? `${ic("sac")}Vente en ligne` : "";
+  return `<div class="carte" role="button" tabindex="0" data-id="${esc(a.id)}">
+    <span class="etat ${esc(a.etat)}">${esc(a.etat)}</span>
+    <button class="coeur" data-fav="${esc(a.id)}" aria-pressed="${fav}" aria-label="${fav ? "Retirer des favoris" : "Ajouter aux favoris"}">${ic("coeur")}</button>
+    <div class="ph${a.pro ? "" : " photo"}">${photo ? `<img loading="lazy" decoding="async" src="${esc(photo)}" alt="" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{innerHTML:'${ic("photo").replace(/"/g, "&quot;")}'}))">` : ic("photo")}</div>
+    <div class="corps">
+      <span class="vendeur">${esc(a.vendeur)}</span>
+      <span class="nom">${esc(a.titre)}</span>
+      <span class="specs">${esc(specs(a))}</span>
+      <div class="bas"><span class="prix">${a.des && a.prix != null ? "<small>dès </small>" : ""}${euros(a.prix)}${a.prix_avant ? `<s>${euros(a.prix_avant)}</s>` : ""}</span><span class="lieu">${lieu}</span></div>
+    </div>
+  </div>`;
+}
+
+// Rendu progressif : 30 cartes à la fois, la suite quand on arrive en bas
+let LISTE = [], affichees = 0;
+const PAS = 30;
+function rendreGrille() {
+  LISTE = filtrer(ANNONCES);
+  affichees = 0;
+  $("#grille").innerHTML = "";
+  ajouterCartes();
+  const n = LISTE.length;
+  $("#compte").textContent = ANNONCES.length ? `${n.toLocaleString("fr-FR")} annonce${n > 1 ? "s" : ""}` : "Aucune annonce pour le moment";
+  if (!n && ANNONCES.length) $("#grille").innerHTML = `<div class="vide" style="grid-column:1/-1">${ic("loupe")}<br>Aucune annonce ne correspond.<br><button class="lien" onclick="toutEffacer()">Effacer les filtres</button></div>`;
+  const titre = F.sous || (F.cat ? NOM_CAT[F.cat] : "Toutes les annonces");
+  $("#titre-liste").textContent = titre;
+  majPilules();
+}
+function ajouterCartes() {
+  const bout = LISTE.slice(affichees, affichees + PAS);
+  $("#grille").insertAdjacentHTML("beforeend", bout.map(carte).join(""));
+  affichees += bout.length;
+}
+new IntersectionObserver(e => { if (e[0].isIntersecting && affichees < LISTE.length && vue === "produits") ajouterCartes(); }, {rootMargin: "900px"}).observe($("#plus"));
+
+function majPilules() {
+  const n = nbFiltres();
+  $("#nb-filtres").textContent = n ? ` · ${n}` : "";
+  $("#p-filtres").classList.toggle("actif", n > 0);
+  const prix = F.min != null || F.max != null;
+  $("#p-prix span").textContent = prix ? (F.min != null && F.max != null ? `${F.min} – ${F.max} €` : F.max != null ? `≤ ${F.max} €` : `≥ ${F.min} €`) : "Prix";
+  $("#p-prix").classList.toggle("actif", prix);
+  const r = POS && F.rayon < 80;
+  $("#p-rayon span").textContent = POS ? (r ? `${F.rayon} km · ${POS.nom}` : POS.nom) : "Autour de moi";
+  $("#p-rayon").classList.toggle("actif", !!r);
+  $("#p-tri span").textContent = Object.fromEntries(TRIS)[F.tri];
+  $("#p-tri").classList.toggle("actif", F.tri !== "pertinence");
+  $("#tout-effacer").hidden = !(n || F.cat || F.etat || RECHERCHE || F.tri !== "pertinence");
+  if (RECHERCHE) {
+    $("#titre-liste").innerHTML = `« ${esc(RECHERCHE)} » <small><button class="lien" id="q-retirer">retirer</button></small>`;
+    $("#q-retirer").onclick = () => { RECHERCHE = ""; appliquer(false); };
+  }
+  document.querySelectorAll("#seg-etat button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === F.etat));
+  document.querySelectorAll("#rail-cats .cat").forEach(b => b.setAttribute("aria-pressed", b.dataset.cat === F.cat && !F.sous));
+  document.querySelectorAll("#rail-acc .puce").forEach(b => b.setAttribute("aria-pressed", F.cat === "accessoires" && b.dataset.sous === F.sous));
+  document.querySelectorAll("#rail-mags .mag").forEach(b => b.setAttribute("aria-pressed", F.vendeurs.length === 1 && F.vendeurs[0] === b.dataset.v));
+}
+function toutEffacer() {
+  RECHERCHE = "";
+  Object.assign(F, {cat: "", sous: "", etat: "", vendeurs: [], capas: [], pro: "", min: null, max: null, rayon: 80, tri: "pertinence"});
+  sauverFiltres(); rendreGrille();
+}
+function appliquer(scroll = true) {
+  sauverFiltres(); rendreGrille();
+  if (scroll) { const y = $("#titre-liste").getBoundingClientRect().top + scrollY - 70; if (scrollY > y + 10 || scrollY < y - 600) scrollTo({top: y, behavior: "smooth"}); }
+}
+
+// ------------------------------------------------------------------ accueil
+function construireAccueil() {
+  const nbCat = {};
+  for (const a of ANNONCES) nbCat[a.cat] = (nbCat[a.cat] || 0) + 1;
+  $("#rail-cats").innerHTML = CATS.map(([k, nom, icone]) => {
+    const photo = DONNEES.photos_cat[k];
+    const n = k ? nbCat[k] || 0 : ANNONCES.length;
+    return `<button class="cat" data-cat="${k}" aria-pressed="false"><span class="nb">${n}</span><span class="vis">${photo ? `<img src="${esc(photo)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ic(icone)}</span><b>${nom}</b></button>`;
+  }).join("");
+  const nbSous = {};
+  for (const a of ANNONCES) if (a.cat === "accessoires") for (const s of a.tags || []) nbSous[s] = (nbSous[s] || 0) + 1;
+  $("#rail-acc").innerHTML = `<button class="puce" data-sous="">Tous les accessoires</button>` +
+    SOUS.filter(s => nbSous[s]).map(s => `<button class="puce" data-sous="${esc(s)}">${esc(s)}</button>`).join("");
+  const parV = {};
+  for (const a of ANNONCES) {
+    const v = parV[a.vendeur] || (parV[a.vendeur] = {n: 0, etats: new Set(), communes: new Set()});
+    v.n++; v.etats.add(a.etat); (a.lieux || []).forEach(l => a.pro && v.communes.add(l.commune));
+  }
+  const vendeurs = Object.keys(parV).sort((a, b) => parV[b].n - parV[a].n);
+  $("#nb-magasins").textContent = vendeurs.length ? `${vendeurs.length} vendeurs` : "";
+  $("#rail-mags").innerHTML = vendeurs.map(v => {
+    const info = parV[v], communes = [...info.communes];
+    const sous = v === "ParuVendu" ? "Particuliers et pros, toute l'île" : communes.length ? communes.slice(0, 3).join(", ") + (communes.length > 3 ? "…" : "") : "";
+    return `<button class="mag" data-v="${esc(v)}"><span class="logo-mag" style="background:${COULEURS_MAG[v] || "#8e8e93"}">${esc(v.slice(0, 2))}</span><b>${esc(v)}</b><span>${info.n} annonces · ${[...info.etats].sort((a, b) => ETATS.indexOf(a) - ETATS.indexOf(b)).join(", ").toLowerCase()}</span><span>${esc(sous)}</span></button>`;
+  }).join("");
+  $("#m-magasins").innerHTML = vendeurs.map(v => `<button data-vendeur="${esc(v)}">${ic("magasin")}${esc(v)}<em>${parV[v].n}</em></button>`).join("");
+  $("#m-tout").textContent = ANNONCES.length;
+  // filtres de la feuille
+  $("#f-vendeur").dataset.liste = JSON.stringify(vendeurs);
+  const communes = Object.keys(DONNEES.communes || {}).sort((a, b) => a.localeCompare(b, "fr"));
+  $("#commune").innerHTML = `<option value="">Choisir une commune…</option>` + communes.map(c => `<option${POS && POS.nom === c ? " selected" : ""}>${esc(c)}</option>`).join("");
+}
+$("#rail-cats").addEventListener("click", e => {
+  const b = e.target.closest(".cat"); if (!b) return;
+  F.cat = F.cat === b.dataset.cat && b.dataset.cat ? "" : b.dataset.cat; F.sous = "";
+  appliquer();
+});
+$("#rail-acc").addEventListener("click", e => {
+  const b = e.target.closest(".puce"); if (!b) return;
+  if (F.cat === "accessoires" && F.sous === b.dataset.sous && b.dataset.sous) F.sous = "";
+  else { F.cat = "accessoires"; F.sous = b.dataset.sous; }
+  appliquer();
+});
+$("#rail-mags").addEventListener("click", e => {
+  const b = e.target.closest(".mag"); if (!b) return;
+  F.vendeurs = F.vendeurs.length === 1 && F.vendeurs[0] === b.dataset.v ? [] : [b.dataset.v];
+  appliquer();
+});
+$("#seg-etat").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; F.etat = b.dataset.v; appliquer(false); });
+$("#tout-effacer").onclick = toutEffacer;
+
+// ------------------------------------------------------------------ feuilles
+let ouverte = null;
+function ouvrir(id) {
+  if (ouverte && ouverte !== id) fermer(true);
+  ouverte = id;
+  $("#" + id).classList.add("ouvert"); $("#voile").classList.add("ouvert");
+  document.body.style.overflow = "hidden";
+  if (location.hash !== "#" + id) history.pushState({f: id}, "", "#" + id);
+}
+function fermer(sansHistorique) {
+  if (!ouverte) return;
+  $("#" + ouverte).classList.remove("ouvert"); $("#voile").classList.remove("ouvert");
+  document.body.style.overflow = "";
+  ouverte = null;
+  if (!sansHistorique && location.hash) history.back();
+}
+addEventListener("popstate", () => { if (ouverte) fermer(true); });
+$("#voile").onclick = () => fermer();
+document.addEventListener("click", e => { if (e.target.closest("[data-fermer]")) fermer(); });
+addEventListener("keydown", e => { if (e.key === "Escape") fermer(); });
+// glisser vers le bas pour fermer une feuille
+document.querySelectorAll(".feuille").forEach(f => {
+  let y0 = null, dy = 0;
+  f.addEventListener("touchstart", e => { const d = f.querySelector(".defile"); y0 = (!d || d.scrollTop <= 0 || !d.contains(e.target)) ? e.touches[0].clientY : null; dy = 0; }, {passive: true});
+  f.addEventListener("touchmove", e => { if (y0 == null) return; dy = Math.max(0, e.touches[0].clientY - y0); if (dy > 0) { f.style.transition = "none"; f.style.transform = `translateY(${dy}px)`; } }, {passive: true});
+  f.addEventListener("touchend", () => { f.style.transition = ""; f.style.transform = ""; if (y0 != null && dy > 110) fermer(); y0 = null; });
+});
+
+// Menu ☰
+$("#btn-menu").onclick = () => { $("#tiroir").classList.add("ouvert"); $("#voile").classList.add("ouvert"); ouverte = "tiroir"; history.pushState({f: "tiroir"}, "", "#menu"); };
+$("#tiroir").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b || b.hasAttribute("data-fermer")) return;
+  fermer();
+  if (b.dataset.aller) setTimeout(() => allerA(b.dataset.aller), 60);
+  else if (b.dataset.vendeur) setTimeout(() => { allerA("produits"); F.vendeurs = [b.dataset.vendeur]; appliquer(); }, 60);
+  else if (b.dataset.action === "recherche") setTimeout(ouvrirRecherche, 120);
+  else if (b.dataset.action === "filtres") setTimeout(ouvrirFiltres, 120);
+  else if (b.dataset.action === "actualiser") actualiser();
+});
+
+// ------------------------------------------------------------------ fiche produit
+function memeModele(a) {
+  if (!a.modele) return [];
+  return ANNONCES.filter(b => b.id !== a.id && b.modele === a.modele && b.prix != null &&
+    ((a.carac || {})["Capacité"] || "") === ((b.carac || {})["Capacité"] || "")).sort((x, y) => x.prix - y.prix).slice(0, 8);
+}
+function ouvrirFiche(id) {
+  const a = PAR_ID[id] || FAVORIS[id] || (PANIER[id] || {}).a;
+  if (!a) return;
+  const enLigne = !!PAR_ID[id];
+  const p = lieuProche(a); a._d = p ? p.d : null;
+  const photos = a.photos || [];
+  const c = a.carac || {};
+  const lignes = Object.entries(c).filter(([, v]) => v).map(([k, v]) => `<div class="ligne"><span>${esc(k)}</span><span>${esc(v)}</span></div>`).join("");
+  const lieux = (a.lieux || []).map(l => {
+    const d = POS && l.lat != null ? km(POS, l) : null;
+    const carte = l.lat != null ? `https://www.google.com/maps/dir/?api=1&destination=${l.lat},${l.lng}` : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((l.adresse || l.nom) + " " + (l.commune || "") + " La Réunion")}`;
+    return `<a class="lieu-l" href="${carte}" target="_blank" rel="noopener">${ic("pin")}<div><b>${esc(l.nom || l.commune)}</b><small>${esc(l.adresse || (l.commune + (a.pro ? "" : " (commune du vendeur)")))}</small></div><em>${distTxt(d)}</em></a>`;
+  }).sort((x, y) => 0).join("");
+  const remise = a.prix_avant && a.prix ? Math.round((1 - a.prix / a.prix_avant) * 100) : 0;
+  const autres = memeModele(a);
+  const fav = !!FAVORIS[a.id];
+  const l0 = (a.lieux || []).find(l => l.lat != null);
+  $("#fiche-defile").innerHTML = `
+    <div class="galerie" id="galerie">${photos.length ? photos.map(u => `<img src="${esc(u)}" alt="" loading="lazy" referrerpolicy="no-referrer">`).join("") : `<div class="sans">${ic("photo")}</div>`}</div>
+    ${photos.length > 1 ? `<div class="points" id="points">${photos.map((_, i) => `<i class="${i ? "" : "on"}"></i>`).join("")}</div>` : ""}
+    <div class="fiche-corps">
+      <div class="vendeur">${esc(a.vendeur)}${a.pro ? "" : " · particulier"}</div>
+      <h2>${esc(a.titre)}</h2>
+      <div class="gros-prix">${a.des && a.prix != null ? "<small>Dès</small>" : ""}${euros(a.prix)}${a.prix_avant ? `<s>${euros(a.prix_avant)}</s>` : ""}${remise >= 3 ? `<span class="remise">−${remise} %</span>` : ""}</div>
+      <div class="badges"><span class="badge ${esc(a.etat)}">${esc(a.etat)}</span>${c["État"] && c["État"] !== a.etat ? `<span class="badge">${esc(c["État"])}</span>` : ""}<span class="badge">${esc((a.tags || [])[0] || NOM_CAT[a.cat] || "")}</span>${a.dispo === false ? `<span class="badge" style="color:var(--rouge)">En rupture</span>` : ""}${!enLigne ? `<span class="badge" style="color:var(--rouge)">Plus en ligne</span>` : ""}</div>
+      <div class="actions">
+        <button class="btn" id="f-fav" aria-pressed="${fav}">${ic("coeur")}${fav ? "Favori" : "Favoris"}</button>
+        <button class="btn" id="f-panier">${ic("sac")}${PANIER[a.id] ? "Dans le panier" : "Au panier"}</button>
+        <a class="btn bleu large" href="${esc(a.url)}" target="_blank" rel="noopener">${ic("sortie")}Voir l'annonce chez ${esc(a.vendeur)}</a>
+        ${l0 ? `<a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=${l0.lat},${l0.lng}" target="_blank" rel="noopener">${ic("route")}Itinéraire</a>` : ""}
+        <button class="btn${l0 ? "" : " large"}" id="f-partage">${ic("partage")}Partager</button>
+      </div>
+      ${!lieux && a.pro ? `<div class="bloc"><h4>Où le trouver</h4><div class="lieu-l">${ic("sac")}<div><b>Vente en ligne</b><small>Commande sur le site de ${esc(a.vendeur)}, livraison à La Réunion</small></div></div></div>` : ""}
+      ${lieux ? `<div class="bloc"><h4>${a.pro ? "Où le trouver" : "Lieu"}</h4>${lieux}${l0 ? `<iframe class="carte-map" loading="lazy" title="Carte" src="https://maps.google.com/maps?q=${l0.lat},${l0.lng}&z=${a.pro ? 14 : 12}&output=embed"></iframe>` : ""}</div>` : ""}
+      ${lignes ? `<div class="bloc"><h4>Caractéristiques</h4>${lignes}</div>` : ""}
+      ${a.description ? `<div class="bloc"><h4>Description</h4><p class="plie" id="desc">${esc(a.description)}</p><p><button class="lien" id="desc-plus">Lire la suite</button></p></div>` : ""}
+      ${autres.length ? `<div class="bloc"><h4>Le même ${esc(a.modele)} ailleurs</h4><div class="autres">${autres.map(b => `<button data-id="${esc(b.id)}">${(b.photos || [])[0] ? `<img src="${esc(b.photos[0])}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ""}<div>${esc(b.vendeur)} · ${esc(b.etat)}<small>${esc(b.titre)}</small></div><b>${euros(b.prix)}</b></button>`).join("")}</div></div>` : ""}
+      <p class="note">${a.vu ? `Vu dans l'appli pour la première fois le ${new Date(a.vu).toLocaleDateString("fr-FR", {day: "numeric", month: "long"})}. ` : ""}${a.des ? "Prix de la version la moins chère : le prix change selon la capacité, la couleur ou l'état choisis. " : ""}Prix et stock relevés sur le site de ${esc(a.vendeur)} : ils peuvent avoir changé depuis.</p>
+    </div>`;
+  const g = $("#galerie");
+  if (photos.length > 1) g.addEventListener("scroll", () => {
+    const i = Math.round(g.scrollLeft / g.clientWidth);
+    document.querySelectorAll("#points i").forEach((p, j) => p.classList.toggle("on", i === j));
+  }, {passive: true});
+  const d = $("#desc");
+  if (d) { requestAnimationFrame(() => { if (d.scrollHeight <= d.clientHeight + 4) { d.classList.remove("plie"); $("#desc-plus").parentNode.remove(); } }); $("#desc-plus").onclick = e => { d.classList.remove("plie"); e.target.parentNode.remove(); }; }
+  $("#f-fav").onclick = () => { basculerFavori(a); ouvrirFiche(a.id); };
+  $("#f-panier").onclick = () => { ajouterPanier(a); ouvrirFiche(a.id); };
+  $("#f-partage").onclick = async () => {
+    const t = `${a.titre} – ${euros(a.prix)} chez ${a.vendeur}`;
+    try { if (navigator.share) await navigator.share({title: a.titre, text: t, url: a.url}); else { await navigator.clipboard.writeText(t + "\n" + a.url); toast("Lien copié"); } } catch (e) {}
+  };
+  $("#fiche-defile").querySelectorAll(".autres button").forEach(b => b.onclick = () => ouvrirFiche(b.dataset.id));
+  $("#fiche-defile").scrollTop = 0;
+  ouvrir("fiche");
+}
+document.addEventListener("click", e => {
+  const f = e.target.closest("[data-fav]");
+  if (f) { e.stopPropagation(); const a = PAR_ID[f.dataset.fav] || FAVORIS[f.dataset.fav]; if (a) basculerFavori(a); return; }
+  const c = e.target.closest(".carte[data-id]");
+  if (c) ouvrirFiche(c.dataset.id);
+});
+document.addEventListener("keydown", e => { if (e.key === "Enter" && e.target.matches(".carte[data-id]")) ouvrirFiche(e.target.dataset.id); });
+
+// ------------------------------------------------------------------ favoris et panier
+function copie(a) { const {_t, _d, _lieu, ...reste} = a; return reste; }
+function basculerFavori(a) {
+  if (FAVORIS[a.id]) { delete FAVORIS[a.id]; toast("Retiré des favoris"); }
+  else { FAVORIS[a.id] = copie(a); toast("Ajouté aux favoris"); }
+  ecrire("apple974-favoris", FAVORIS);
+  document.querySelectorAll(`[data-fav="${CSS.escape(a.id)}"]`).forEach(b => { b.setAttribute("aria-pressed", !!FAVORIS[a.id]); b.setAttribute("aria-label", FAVORIS[a.id] ? "Retirer des favoris" : "Ajouter aux favoris"); });
+  compteurs();
+  if (vue === "favoris") afficherFavoris();
+}
+function ajouterPanier(a) {
+  if (PANIER[a.id]) PANIER[a.id].q++; else PANIER[a.id] = {a: copie(a), q: 1};
+  ecrire("apple974-panier", PANIER); compteurs(); toast("Ajouté au panier");
+}
+function compteurs() {
+  const nf = Object.keys(FAVORIS).length, np = Object.values(PANIER).reduce((s, x) => s + x.q, 0);
+  for (const [id, n] of [["#pastille-fav", nf], ["#pastille-panier", np]]) { $(id).textContent = n; $(id).hidden = !n; }
+  $("#m-fav").textContent = nf; $("#m-panier").textContent = np;
+  $("#pastille-menu").textContent = np; $("#pastille-menu").hidden = !np;
+}
+function afficherFavoris() {
+  const liste = Object.values(FAVORIS).map(f => PAR_ID[f.id] || f);
+  for (const a of liste) { const p = lieuProche(a); a._d = p ? p.d : null; a._lieu = p ? p.l : null; }
+  $("#favoris-info").textContent = liste.length ? `${liste.length} produit${liste.length > 1 ? "s" : ""} gardé${liste.length > 1 ? "s" : ""} sur ce téléphone` : "";
+  $("#grille-favoris").innerHTML = liste.length ? liste.map(carte).join("") :
+    `<div class="vide" style="grid-column:1/-1">${ic("coeur")}<br>Pas encore de favoris.<br>Touche le cœur d'une annonce pour la garder ici.</div>`;
+}
+function afficherPanier() {
+  const lignes = Object.values(PANIER);
+  if (!lignes.length) { $("#panier").innerHTML = `<div class="vide">${ic("sac")}<br>Ton panier est vide.<br>Ajoute des produits depuis leur fiche pour comparer le total par vendeur.</div>`; return; }
+  const parV = {};
+  for (const l of lignes) { const a = PAR_ID[l.a.id] || l.a; (parV[a.vendeur] || (parV[a.vendeur] = [])).push({a, q: l.q, enLigne: !!PAR_ID[a.id]}); }
+  let total = 0, n = 0, h = "";
+  for (const [v, ls] of Object.entries(parV)) {
+    const sous = ls.reduce((s, l) => s + (l.a.prix || 0) * l.q, 0);
+    total += sous; n += ls.reduce((s, l) => s + l.q, 0);
+    h += `<div class="groupe-vendeur"><b>${esc(v)}</b><span>${euros(sous)}</span></div>` + ls.map(({a, q, enLigne}) => `
+      <div class="ligne-panier">
+        ${(a.photos || [])[0] ? `<img src="${esc(a.photos[0])}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<span class="sans">${ic("photo")}</span>`}
+        <button class="txt" data-ouvrir="${esc(a.id)}"><small>${esc(a.etat)}${enLigne ? "" : " · plus en ligne"}</small><span>${esc(a.titre)}</span><b>${euros(a.prix)}</b></button>
+        <div class="qte"><button data-plus="${esc(a.id)}" aria-label="Un de plus">+</button><span>${q}</span><button data-moins="${esc(a.id)}" aria-label="Un de moins">−</button></div>
+      </div>`).join("");
+  }
+  h += `<div class="total"><div class="ligne"><span>${n} article${n > 1 ? "s" : ""}</span><span>${Object.keys(parV).length} vendeur${Object.keys(parV).length > 1 ? "s" : ""}</span></div><div class="ligne fort"><span>Total</span><span>${euros(total)}</span></div></div>
+        <div style="padding:0 16px"><button class="btn large" style="width:100%" id="vider">Vider le panier</button></div>`;
+  $("#panier").innerHTML = h;
+}
+$("#panier").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.ouvrir) return ouvrirFiche(b.dataset.ouvrir);
+  if (b.dataset.plus) PANIER[b.dataset.plus].q++;
+  else if (b.dataset.moins) { if (--PANIER[b.dataset.moins].q <= 0) delete PANIER[b.dataset.moins]; }
+  else if (b.id === "vider") { if (!confirm("Vider le panier ?")) return; PANIER = {}; }
+  else return;
+  ecrire("apple974-panier", PANIER); compteurs(); afficherPanier();
+});
+
+function allerA(v) {
+  vue = v;
+  for (const n of ["produits", "favoris", "panier"]) $("#vue-" + n).hidden = n !== v;
+  document.querySelectorAll(".onglets nav button").forEach(b => b.setAttribute("aria-current", b.dataset.vue === v));
+  $("#petit-titre").textContent = {produits: "Produits", favoris: "Favoris", panier: "Panier"}[v];
+  if (v === "favoris") afficherFavoris();
+  if (v === "panier") afficherPanier();
+  scrollTo(0, 0);
+}
+document.querySelector(".onglets nav").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.vue === vue && vue === "produits") scrollTo({top: 0, behavior: "smooth"});
+  allerA(b.dataset.vue);
+});
+
+// ------------------------------------------------------------------ filtres (feuille)
+function choix(el, options, actifs, surClic) {
+  el.innerHTML = options.map(([v, t]) => `<button data-v="${esc(v)}" aria-pressed="${actifs(v)}">${esc(t)}</button>`).join("");
+  el.onclick = e => { const b = e.target.closest("button"); if (!b) return; surClic(b.dataset.v); remplirFiltres(); };
+}
+function remplirFiltres() {
+  choix($("#f-cat"), CATS.map(c => [c[0], c[1]]), v => v === F.cat, v => { F.cat = v; F.sous = ""; });
+  choix($("#f-etat"), [["", "Tout"], ...ETATS.map(e => [e, e])], v => v === F.etat, v => { F.etat = v; });
+  const vendeurs = JSON.parse($("#f-vendeur").dataset.liste || "[]");
+  choix($("#f-vendeur"), vendeurs.map(v => [v, v]), v => F.vendeurs.includes(v), v => { F.vendeurs = F.vendeurs.includes(v) ? F.vendeurs.filter(x => x !== v) : [...F.vendeurs, v]; });
+  choix($("#f-capa"), CAPAS.map(c => [c, c]), v => F.capas.includes(v), v => { F.capas = F.capas.includes(v) ? F.capas.filter(x => x !== v) : [...F.capas, v]; });
+  choix($("#f-pro"), [["", "Tous"], ["pro", "Magasins"], ["particulier", "Particuliers"]], v => v === F.pro, v => { F.pro = v; });
+  choix($("#prix-rapide"), [["0-200", "Moins de 200 €"], ["200-500", "200 à 500 €"], ["500-1000", "500 à 1 000 €"], ["1000-1500", "1 000 à 1 500 €"], ["1500-", "Plus de 1 500 €"]],
+    v => v === `${F.min ?? 0}-${F.max ?? ""}`, v => { const [a, b] = v.split("-"); F.min = +a || null; F.max = b ? +b : null; });
+  $("#prix-min").value = F.min ?? ""; $("#prix-max").value = F.max ?? "";
+  $("#prix-curseur").value = F.max ?? 4000;
+  $("#rayon").value = F.rayon;
+  $("#rayon-val").textContent = F.rayon >= 80 ? "toute l'île" : `${F.rayon} km`;
+  $("#rayon-aide").textContent = POS ? `Distances calculées depuis ${POS.nom}. À vol d'oiseau : sur la route, compte un peu plus.` : "Choisis ta position ou une commune pour voir les distances.";
+  $("#commune").value = POS && POS.nom !== "Ma position" ? POS.nom : "";
+  $("#ma-position").classList.toggle("actif", !!POS && POS.nom === "Ma position");
+  const n = filtrer(ANNONCES).length;
+  $("#f-voir").textContent = `Voir ${n.toLocaleString("fr-FR")} annonce${n > 1 ? "s" : ""}`;
+}
+function ouvrirFiltres(focus) {
+  remplirFiltres(); ouvrir("filtres");
+  if (focus) setTimeout(() => $(focus).scrollIntoView({behavior: "smooth", block: "start"}), 320);
+}
+const nombre = v => v === "" || v == null || isNaN(+v) ? null : Math.max(0, +v);
+$("#prix-min").oninput = e => { F.min = nombre(e.target.value); remplirFiltresSansChamps(); };
+$("#prix-max").oninput = e => { F.max = nombre(e.target.value); remplirFiltresSansChamps(); };
+$("#prix-curseur").oninput = e => { F.max = +e.target.value >= 4000 ? null : +e.target.value; $("#prix-max").value = F.max ?? ""; remplirFiltresSansChamps(); };
+function remplirFiltresSansChamps() { const n = filtrer(ANNONCES).length; $("#f-voir").textContent = `Voir ${n.toLocaleString("fr-FR")} annonce${n > 1 ? "s" : ""}`; }
+$("#rayon").oninput = e => {
+  F.rayon = +e.target.value;
+  if (!POS && F.rayon < 80) { toast("Choisis d'abord ta position ou une commune"); }
+  $("#rayon-val").textContent = F.rayon >= 80 ? "toute l'île" : `${F.rayon} km`;
+  remplirFiltresSansChamps();
+};
+$("#commune").onchange = e => {
+  const c = DONNEES.communes[e.target.value];
+  if (!c) { POS = null; } else { POS = {lat: c[0], lng: c[1], nom: e.target.value}; if (F.rayon >= 80) F.rayon = 20; }
+  ecrire("apple974-position", POS); remplirFiltres();
+};
+$("#ma-position").onclick = () => {
+  if (!navigator.geolocation) return toast("La localisation n'est pas disponible");
+  toast("Recherche de ta position…");
+  navigator.geolocation.getCurrentPosition(p => {
+    POS = {lat: p.coords.latitude, lng: p.coords.longitude, nom: "Ma position"};
+    if (F.rayon >= 80) F.rayon = 20;
+    ecrire("apple974-position", POS); remplirFiltres(); toast("Position trouvée");
+  }, () => toast("Position refusée : choisis plutôt une commune"), {enableHighAccuracy: false, timeout: 12000, maximumAge: 600000});
+};
+$("#f-effacer").onclick = () => { Object.assign(F, {cat: "", sous: "", etat: "", vendeurs: [], capas: [], pro: "", min: null, max: null, rayon: 80}); remplirFiltres(); };
+$("#f-voir").onclick = () => { fermer(); allerA("produits"); appliquer(); };
+$("#p-filtres").onclick = () => ouvrirFiltres();
+$("#p-prix").onclick = () => ouvrirFiltres("#g-prix");
+$("#p-rayon").onclick = () => ouvrirFiltres("#g-rayon");
+$("#p-tri").onclick = () => {
+  $("#tri-liste").innerHTML = TRIS.map(([v, t]) => `<button data-v="${v}" aria-pressed="${v === F.tri}">${t}${v === F.tri ? "<span>✓</span>" : ""}</button>`).join("");
+  ouvrir("tri");
+};
+$("#tri-liste").onclick = e => {
+  const b = e.target.closest("button"); if (!b) return;
+  F.tri = b.dataset.v;
+  if (F.tri === "distance" && !POS) { fermer(); setTimeout(() => ouvrirFiltres("#g-rayon"), 300); toast("Choisis ta position ou ta commune"); sauverFiltres(); return; }
+  fermer(); appliquer(false);
+};
+
+// ------------------------------------------------------------------ recherche
+const SUGGESTIONS = ["iPhone 17 Pro", "iPhone 16", "iPhone reconditionné", "MacBook Air", "MacBook Pro", "iPad Air", "Apple Watch Ultra", "AirPods Pro", "Mac mini", "Coque MagSafe", "Apple Pencil", "AirTag"];
+function ouvrirRecherche() {
+  ouvrir("recherche");
+  majRecherche();
+  setTimeout(() => $("#q").focus(), 80);
+}
+function majRecherche() {
+  const q = $("#q").value.trim();
+  $("#q-effacer").hidden = !q;
+  if (!q) {
+    const recents = lire("apple974-recherches", []);
+    $("#suggestions").hidden = false; $("#q-compte").hidden = true; $("#grille-recherche").innerHTML = "";
+    $("#suggestions").innerHTML = (recents.length ? `<b>Recherches récentes</b>` + recents.map(r => `<button data-q="${esc(r)}">${ic("maj")}${esc(r)}</button>`).join("") : "") +
+      `<b>Suggestions</b>` + SUGGESTIONS.map(s => `<button data-q="${esc(s)}">${ic("loupe")}${esc(s)}</button>`).join("");
+    return;
+  }
+  $("#suggestions").hidden = true;
+  const res = filtrer(ANNONCES, {q, sansFiltres: true});
+  $("#q-compte").hidden = false;
+  $("#q-compte").innerHTML = `<span>${res.length} résultat${res.length > 1 ? "s" : ""}</span>${res.length ? `<button class="lien" id="q-tout">Voir avec les filtres</button>` : ""}`;
+  $("#grille-recherche").innerHTML = res.length ? res.slice(0, 60).map(carte).join("") : `<div class="vide" style="grid-column:1/-1">${ic("loupe")}<br>Rien pour « ${esc(q)} ».<br>Essaie un autre mot (ex. « iPhone 15 », « M3 », « 256 Go »).</div>`;
+  const t = $("#q-tout"); if (t) t.onclick = () => validerRecherche(true);
+}
+function validerRecherche(versListe) {
+  const q = $("#q").value.trim(); if (!q) return;
+  const r = [q, ...lire("apple974-recherches", []).filter(x => x.toLowerCase() !== q.toLowerCase())].slice(0, 6);
+  ecrire("apple974-recherches", r);
+  if (versListe) { RECHERCHE = q; fermer(); allerA("produits"); appliquer(); }
+}
+let minuterieQ;
+$("#q").oninput = () => { clearTimeout(minuterieQ); minuterieQ = setTimeout(majRecherche, 120); };
+$("#q").onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); validerRecherche(false); $("#q").blur(); } };
+$("#q-effacer").onclick = () => { $("#q").value = ""; majRecherche(); $("#q").focus(); };
+$("#suggestions").onclick = e => { const b = e.target.closest("button"); if (!b) return; $("#q").value = b.dataset.q; majRecherche(); validerRecherche(false); };
+$("#btn-loupe").onclick = ouvrirRecherche;
+
+// ------------------------------------------------------------------ données et actualisation
+function charger(d) {
+  DONNEES = d;
+  ANNONCES = d.annonces || [];
+  PAR_ID = Object.fromEntries(ANNONCES.map(a => [a.id, a]));
+  if (d.maj) $("#maj").textContent = d.maj;
+  if (d.sources) $("#sources").textContent = d.sources.join(", ");
+  construireAccueil(); compteurs(); rendreGrille();
+  if (vue === "favoris") afficherFavoris();
+  if (vue === "panier") afficherPanier();
+}
+let enCours = false;
+async function actualiser(silencieux) {
+  if (enCours) return; enCours = true;
+  $("#btn-maj").classList.add("tourne");
+  try {
+    const r = await fetch("annonces.json?t=" + Date.now(), {cache: "no-store"});
+    if (!r.ok) throw new Error(r.status);
+    const d = await r.json();
+    const avant = new Set(ANNONCES.map(a => a.id));
+    const nb = avant.size ? d.annonces.filter(a => !avant.has(a.id)).length : 0;
+    charger(d);
+    if (silencieux !== true) toast(nb ? `${nb} nouvelle${nb > 1 ? "s" : ""} annonce${nb > 1 ? "s" : ""}` : "Les annonces sont à jour");
+  } catch (e) { if (silencieux !== true) toast("Pas de connexion, réessaie dans un instant"); }
+  $("#btn-maj").classList.remove("tourne"); enCours = false;
+}
+$("#btn-maj").onclick = actualiser;
+
+// Tirer la page vers le bas pour actualiser
+let y0 = null, tire = 0;
+const rond = $("#tirer");
+addEventListener("touchstart", e => { y0 = scrollY <= 0 && !ouverte ? e.touches[0].clientY : null; tire = 0; }, {passive: true});
+addEventListener("touchmove", e => {
+  if (y0 === null) return;
+  tire = Math.max(0, Math.min(120, e.touches[0].clientY - y0));
+  rond.style.opacity = Math.min(1, tire / 70);
+  rond.style.transform = `translate(-50%, ${tire - 70}px) rotate(${tire * 3}deg)`;
+}, {passive: true});
+addEventListener("touchend", () => {
+  if (y0 !== null && tire > 80) actualiser();
+  y0 = null; rond.style.opacity = 0; rond.style.transform = "translate(-50%,-70px)";
+});
+addEventListener("scroll", () => $("#entete").classList.toggle("colle", scrollY > 40), {passive: true});
+// quand l'appli revient au premier plan après un moment, on recharge en silence
+let cache = Date.now();
+document.addEventListener("visibilitychange", () => { if (!document.hidden && Date.now() - cache > 15 * 60e3) { cache = Date.now(); actualiser(true); } });
+
+$("#grille").innerHTML = Array.from({length: 6}, () => `<div class="squelette"></div>`).join("");
+compteurs();
+fetch("annonces.json?v=202610220120").then(r => r.json()).then(charger).catch(() => actualiser(true));
+if (location.hash) history.replaceState(null, "", location.pathname);
+</script>
+</body>
+</html>
