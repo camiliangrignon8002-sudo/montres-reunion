@@ -324,7 +324,7 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
 <main class="page">
   <!-- Accueil -->
   <section id="vue-produits">
-    <div class="grand-titre"><h1>Produits</h1><div class="maj">Mis à jour<br><span id="maj">jeudi 22/10 à 02h13</span></div></div>
+    <div class="grand-titre"><h1>Produits</h1><div class="maj">Mis à jour<br><span id="maj">jeudi 22/10 à 02h48</span></div></div>
 
     <div class="rail" id="rail-cats" aria-label="Catégories"></div>
 
@@ -1054,7 +1054,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden && Da
 
 $("#grille").innerHTML = Array.from({length: 6}, () => `<div class="squelette"></div>`).join("");
 compteurs();
-fetch("annonces.json?v=202610220213").then(r => r.json()).then(charger).catch(() => actualiser(true));
+fetch("annonces.json?v=202610220248").then(r => r.json()).then(charger).catch(() => actualiser(true));
 if (location.hash) history.replaceState(null, "", location.pathname);
 </script>
 </body>
