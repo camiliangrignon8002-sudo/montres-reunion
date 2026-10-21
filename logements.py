@@ -260,7 +260,9 @@ def format_tel(t):
         chiffres = "0" + chiffres[2:]
     if len(chiffres) != 10:
         return ""
-    return chiffres[:4] + " " + " ".join(chiffres[i:i + 2] for i in range(4, 10, 2))  # 0692 12 34 56
+    if chiffres.startswith(("0262", "0263", "0692", "0693", "0639")):  # à La Réunion : 0692 12 34 56
+        return chiffres[:4] + " " + " ".join(chiffres[i:i + 2] for i in range(4, 10, 2))
+    return " ".join(chiffres[i:i + 2] for i in range(0, 10, 2))
 
 
 def contacts_du_texte(txt):
@@ -652,7 +654,7 @@ def garder(a):
             a["meuble"] = True
     a["secteur"] = COMMUNES[a["commune"]][0]
     tel, mail = contacts_du_texte(a["description"])
-    a["tel"] = a["tel"] or tel
+    a["tel"] = format_tel(a["tel"]) or tel
     a["email"] = a["email"] or mail
     if a["pro"] is None:
         if a["source"] == "Figaro Immobilier" or re.search(r"\bagence\b|honoraires|mandat|\bcarte (?:t|g|professionnelle)", norm(tout)):
