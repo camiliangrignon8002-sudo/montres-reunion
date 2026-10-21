@@ -44,7 +44,6 @@ COMMUNES = {
     "Saint-Denis": ("Nord", ["97400", "97490", "97417"], "saint-denis-97400", "saint+denis+97400", "-192468"),
     "Sainte-Marie": ("Nord", ["97438"], "sainte-marie-97438", "sainte+marie+97438", "-280212"),
     "Sainte-Suzanne": ("Nord-Est", ["97441"], "sainte-suzanne-97441", "sainte+suzanne+97441", "-280102"),
-    "Saint-André": ("Nord-Est", ["97440"], "saint-andre-97440", "saint+andre+97440", "-280118"),
     "La Possession": ("Nord-Ouest", ["97419"], "la-possession-97419", "la+possession+97419", "-278304"),
     "Le Port": ("Nord-Ouest", ["97420"], "le-port-97420", "le+port+97420", "-278311"),
 }
@@ -63,7 +62,10 @@ LIEUX = {
     "la possession": "La Possession", "possession": "La Possession", "ravine a malheur": "La Possession",
     "le port": "Le Port", "port est": "Le Port", "riviere des galets": "Le Port",
 }
+# Communes reconnues mais écartées : leurs annonces ne doivent pas passer pour une commune voisine
+EXCLUES = {"Saint-André": ["97440"]}
 CP_COMMUNE = {cp: c for c, v in COMMUNES.items() for cp in v[1]}
+CP_COMMUNE.update({cp: c for c, cps in EXCLUES.items() for cp in cps})
 
 
 def norm(s):
@@ -636,7 +638,7 @@ def completer(annonces, fiches):
 # ---------------------------------------------------------------- tri
 
 def garder(a):
-    if a.get("absente") or not a["prix"] or not a["commune"]:
+    if a.get("absente") or not a["prix"] or a["commune"] not in COMMUNES:
         return False
     if not (0 < a["prix"] <= PRIX_MAX) or a["prix"] < 150:  # en dessous : parking, cave ou prix à la nuit
         return False

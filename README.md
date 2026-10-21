@@ -38,7 +38,7 @@ Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/logements/
 
 **Toutes les heures, jour et nuit**, GitHub cherche les **appartements à louer**
 (studio, T1, T2, T3) à **740 € maximum** à Saint-Denis (avec Sainte-Clotilde et La Montagne), Sainte-Marie,
-Sainte-Suzanne, Saint-André, La Possession et Le Port, sur **Bien'ici**, **ParuVendu**, **Zimo**
+Sainte-Suzanne, La Possession et Le Port, sur **Bien'ici**, **ParuVendu**, **Zimo**
 (qui reprend aussi des annonces de Leboncoin), **EntreParticuliers** et **Figaro Immobilier**.
 
 Il garde seulement les logements qui peuvent ouvrir droit aux **aides au logement de la CAF** (AL ou APL) :
