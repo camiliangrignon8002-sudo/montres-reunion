@@ -1941,6 +1941,42 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "figaro-89244115",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-89244115.html",
+  "titre": "Location meublée appartement 1 pièce 19.18 m² à Sainte Clotilde (97490), 587 €",
+  "prix": 587.0,
+  "commune": "Saint-Denis",
+  "quartier": "Sainte Clotilde",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 19.18,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/fdFBhBTe85ECPAn1cPI_CKjfV96VPxhMGQzimys0MJ-ntyj8Z2pquYK0K8-DihO6WE6E3R-kWiSlZ0ke2LxoMWXIFPbOKyJWE_U9lw=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/-89jw3ppFh5lTjhQZxphbcdKtwdF1hzf26RqagFii4h6DBIHOegSVOjw-Zn87wqVIz_PYjAfoMPPbr7HIb83t2TCaS3zBpYsN3zwFoE=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/kRUYRC0hX2M7u-rlqNbWIG4eSAwJVUqMLEQ_h3HXNIgaboxQOWPp3fG4JkSnxvCjtOjC2Bj-elxL6tnjloyUzNhrAMF0L5EuXtiGKw=rw-w940-h605-l80"
+  ],
+  "description": "ENEZ Immobilier vous propose ce studio meublé de 19m2 situé au 7 rue des Jacinthes à ST DENIS.\nIl se compose d'un séjour chambre avec placard, d'une kitchenette équipée, d'une salle d'eau avec WC.\nVous disposerez également d'un parking en sous-sol.\nDisponibilité : DE SUITE\nN'hésitez pas à nous contacter au 0693228334 pour le visiter rapidement",
+  "caracteristiques": [
+   "Meublé",
+   "Parking"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0693 22 83 34",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T15:50+04:00"
+ },
+ {
   "id": "zimo-01a15861-f4c8-79f4-96fc-8c9bf65c540b",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-2-pieces-56-m2/01a15861-f4c8-79f4-96fc-8c9bf65c540b",
@@ -3021,10 +3057,6 @@
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/ag340369-551086409"
    },
    {
-    "source": "Figaro Immobilier",
-    "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html"
-   },
-   {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a0cf1e-21a7-7b69-bfcb-d74b3312e7ae"
    }
@@ -3492,6 +3524,59 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "bienici-netty-transac-appt-2853",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/netty-transac-appt-2853",
+  "titre": "Meublé & Terrasse Privative — Studio 23 m² + 7 m² de terras",
+  "prix": 675,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 23,
+  "meuble": true,
+  "photos": [
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495544_LA2853_2_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495545_LA2853_3_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495560_LA2853_13_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495558_LA2853_12_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495542_LA2853_1_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495547_LA2853_4_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495549_LA2853_5_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495550_LA2853_6_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495551_LA2853_7_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495553_LA2853_8_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495554_LA2853_9_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495556_LA2853_10_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495557_LA2853_11_original.jpg"
+  ],
+  "description": "« LE STUDIO DU CAMPUS » :<br>   • Studio meublé de 23 m² habitables, une pièce à vivre.<br>   • Terrasse privative de 7 m² en prolongement.<br>   • Premier étage avec ascenseur, résidence avec piscine et salle de sport.<br>   • À Sainte-Clotilde, université et commerces à pied.<br>   • Location meublée, bail d'un an.<br>EN PRIME : les 7 m² de terrasse, que presque aucun studio de ce segment ne propose.<br>À Sainte-Clotilde, le campus à côté, Le Studio du Campus, déjà tout meublé.<br>Les 3 Atouts qui font la différence :<br>   • MEUBLÉ ET PRÊT À VIVRE — cuisine équipée, lave-linge, placards intégrés, climatisation complète. Vous arrivez avec une valise et vous vivez le soir même, sans un meuble à acheter ni un abonnement à monter.<br>   • 7 M² DE TERRASSE PRIVATIVE — un extérieur à soi quand la quasi-totalité des studios du secteur n'offre qu'une fenêtre. De quoi prendre le café dehors et faire respirer les 23 m².<br>   • PISCINE ET SALLE DE SPORT DANS LA RÉSIDENCE — deux équipements collectifs déjà là, entretenus, inclus dans le quotidien. Ce sont des services réels, pas une promesse de plaquette.<br>Le Confort d'un bien prêt à vivre :<br>   • Cuisine ouverte et équipée, pensée pour un usage quotidien simple.<br>   • Climatisation complète sur l'ensemble du logement.<br>   • Placards intégrés : le rangement ne mange pas la surface.<br>   • Lave-linge installé, dans son renfoncement près de l'entrée.<br>   • Salle d'eau avec douche, vasque, grand miroir et WC.<br>   • Premier étage desservi par ascenseur, très bon état général.<br>POURQUOI AGIR VITE ?<br>Un studio meublé, avec terrasse privative, à moins de dix minutes à pied de l'université et des commerces : sur Sainte-Clotilde, cette combinaison part généralement en quelques jours à la rentrée comme en cours d'année.<br>ÉTAT GÉNÉRAL<br>Le studio est en très bon état et ne demande aucun travaux. Carrelage beige clair, murs blancs, menuiseries en bon état : l'ensemble est sain et immédiatement habitable.<br>UNE PIÈCE DE 23 M² ORGANISÉE<br>La pièce principale est meublée et prête à vivre : canapé d'angle, table avec ses bancs, téléviseur. Le volume est régulier, la lumière traverse, et la baie coulissante donne directement sur la terrasse.<br>CUISINE OUVERTE ET ÉQUIPÉE<br>La cuisine est ouverte sur la pièce et déjà équipée : évier inox, plaque de cuisson, hotte, réfrigérateur, micro-ondes, rangements hauts et bas. Tout est en place, il n'y a rien à acheter.<br>SALLE D'EAU<br>La salle d'eau réunit une cabine de douche avec paroi coulissante et pommeau de pluie, une vasque sur meuble à tiroirs, un grand miroir éclairé et des étagères. Le WC est dans la même pièce.<br>CLIMATISATION, RANGEMENTS ET LAVE-LINGE<br>La climatisation couvre tout le logement. Les placards sont intégrés : ils libèrent le sol et évitent d'ajouter une armoire dans une pièce unique. Un lave-linge est installé dans son renfoncement, près de l'entrée : pas de laverie à chercher, pas de machine à acheter.<br>PISCINE ET SALLE DE SPORT<br>La résidence met à disposition une piscine et une salle de sport. Deux équipements qui changent le quotidien d'un studio et que l'on ne retrouve pas sur ce segment de loyer.<br>À PIED : UNIVERSITÉ, COMMERCES, BUS<br>L'université est à environ 500 mètres, la pharmacie et le médecin à 200 mètres, l'arrêt de bus en bas de la résidence. La boulangerie et la mairie annexe sont à 600 mètres, les commerces à un kilomètre.<br>7 M²...",
+  "caracteristiques": [
+   "Ascenseur",
+   "1e étage",
+   "Meublé",
+   "Varangue / balcon",
+   "Climatisation",
+   "Piscine",
+   "Cuisine équipée",
+   "Proche transports",
+   "Proche université"
+  ],
+  "date": "2026-10-21T16:56:59.852Z",
+  "annonceur": "Agence IMMO TRANSAC RÉUNION",
+  "lat": -20.87998885,
+  "lon": 55.448136944,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "344 avenue des Mascareignes, 97440 Saint-André",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T21:47+04:00"
  },
  {
   "id": "zimo-01a149cf-61c2-7e26-b2b4-dd03b333d1e3",
