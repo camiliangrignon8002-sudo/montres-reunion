@@ -69,13 +69,13 @@ h2.sec small{font-size:14px;font-weight:400;color:var(--doux)}
 .cat b{font-weight:500;font-size:16px;white-space:nowrap}
 .cat[aria-pressed=true]{box-shadow:0 0 0 2.5px var(--bleu),var(--ombre)}
 .cat .nb{position:absolute;top:9px;right:11px;font-size:11.5px;color:var(--doux)}
-.puce{border:0;border-radius:999px;background:var(--carte);box-shadow:var(--ombre);padding:13px 22px;font-size:16px;white-space:nowrap}
+.puce{border:0;border-radius:999px;background:var(--carte);box-shadow:var(--ombre);padding:9px 16px;font-size:15px;white-space:nowrap}
 .puce[aria-pressed=true]{background:var(--texte);color:var(--fond)}
-.mag{width:200px;border:0;border-radius:18px;background:var(--carte);box-shadow:var(--ombre);padding:14px 16px;text-align:left;display:flex;flex-direction:column;gap:3px}
-.mag b{font-size:16px;font-weight:600}
-.mag span{font-size:13px;color:var(--doux)}
+.mag{border:0;border-radius:999px;background:var(--carte);box-shadow:var(--ombre);padding:6px 14px 6px 6px;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.mag b{font-size:14.5px;font-weight:600}
+.mag span{font-size:12.5px;color:var(--doux)}
 .mag[aria-pressed=true]{box-shadow:0 0 0 2.5px var(--bleu),var(--ombre)}
-.logo-mag{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:700;font-size:13px;color:#fff;margin-bottom:6px}
+.logo-mag{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:11.5px;color:#fff!important}
 
 /* Barre de filtres */
 .outils{position:sticky;top:calc(68px + env(safe-area-inset-top));z-index:15;padding:10px 0 8px;background:var(--fond)}
@@ -123,11 +123,10 @@ h2.sec small{font-size:14px;font-weight:400;color:var(--doux)}
 .carte .corps{padding-right:44px}
 .nouveau{position:absolute;top:36px;left:9px;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:999px;background:var(--bleu);color:#fff;z-index:1;text-transform:uppercase;letter-spacing:.03em}
 .rail .carte{width:168px}
-.ailleurs{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 16px}
-.ailleurs a{background:var(--carte);border-radius:18px;box-shadow:var(--ombre);padding:14px;color:var(--texte);display:flex;flex-direction:column;gap:4px}
-.ailleurs a b{font-size:15.5px}
-.ailleurs a span{font-size:12.5px;color:var(--doux)}
-.ailleurs a em{font-style:normal;font-size:13px;color:var(--bleu);font-weight:600;margin-top:4px}
+.ailleurs{display:flex;gap:8px;padding:0 20px;flex-wrap:wrap}
+.ailleurs a{background:var(--carte);border-radius:999px;box-shadow:var(--ombre);padding:8px 14px;color:var(--texte);display:inline-flex;align-items:center;gap:6px;font-size:14px}
+.ailleurs a b{font-weight:600}
+.ailleurs a em{font-style:normal;color:var(--bleu);font-weight:600}
 .coeur[aria-pressed=true] svg{fill:currentColor}
 .vide{text-align:center;color:var(--doux);padding:50px 30px}
 .vide svg.ic{width:46px;height:46px;stroke-width:1.2;margin-bottom:8px}
@@ -365,7 +364,7 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
     <h2 class="sec">Les magasins <small id="nb-magasins"></small></h2>
     <div class="rail" id="rail-mags" aria-label="Magasins"></div>
 
-    <h2 class="sec">Aussi sur <small>ouvre le site</small></h2>
+    <h2 class="sec">Aussi sur <small>recherche « Apple » à La Réunion</small></h2>
     <div class="ailleurs" id="ailleurs"></div>
 
     <h2 class="sec" id="titre-liste">Toutes les annonces</h2>
@@ -637,8 +636,8 @@ function ailleurs() {
   const q = RECHERCHE || (F.sous && F.sous !== "Autres" ? F.sous : "") || {iphone: "iPhone", ipad: "iPad", mac: "MacBook", watch: "Apple Watch", airpods: "AirPods", maison: "Apple TV", accessoires: "Apple"}[F.cat] || "Apple";
   const e = encodeURIComponent(q);
   $("#ailleurs").innerHTML = `
-    <a href="https://www.leboncoin.fr/recherche?text=${e}&locations=d_974" target="_blank" rel="noopener"><b>Leboncoin</b><span>Annonces « ${esc(q)} » à La Réunion</span><em>Ouvrir ↗</em></a>
-    <a href="https://www.facebook.com/marketplace/search/?query=${e}%20974" target="_blank" rel="noopener"><b>Marketplace</b><span>Facebook, autour de toi</span><em>Ouvrir ↗</em></a>`;
+    <a href="https://www.leboncoin.fr/recherche?text=${e}&locations=d_974" target="_blank" rel="noopener"><b>Leboncoin</b><em>↗</em></a>
+    <a href="https://www.facebook.com/marketplace/search/?query=${e}%20974" target="_blank" rel="noopener"><b>Marketplace</b><em>↗</em></a>`;
 }
 
 // Rendu progressif : 30 cartes à la fois, la suite quand on arrive en bas
@@ -719,7 +718,7 @@ function construireAccueil() {
   $("#rail-mags").innerHTML = vendeurs.map(v => {
     const info = parV[v], communes = [...info.communes];
     const sous = v === "ParuVendu" ? "Particuliers et pros, toute l'île" : communes.length ? communes.slice(0, 3).join(", ") + (communes.length > 3 ? "…" : "") : "";
-    return `<button class="mag" data-v="${esc(v)}"><span class="logo-mag" style="background:${COULEURS_MAG[v] || "#8e8e93"}">${esc(v.slice(0, 2))}</span><b>${esc(v)}</b><span>${info.n} annonces · ${[...info.etats].sort((a, b) => ETATS.indexOf(a) - ETATS.indexOf(b)).join(", ").toLowerCase()}</span><span>${esc(sous)}</span></button>`;
+    return `<button class="mag" data-v="${esc(v)}" title="${esc(sous)}"><span class="logo-mag" style="background:${COULEURS_MAG[v] || "#8e8e93"}">${esc(v.slice(0, 2))}</span><b>${esc(v)}</b><span>${info.n}</span></button>`;
   }).join("");
   $("#m-magasins").innerHTML = vendeurs.map(v => `<button data-vendeur="${esc(v)}">${ic("magasin")}${esc(v)}<em>${parV[v].n}</em></button>`).join("");
   $("#m-tout").textContent = ANNONCES.length;
