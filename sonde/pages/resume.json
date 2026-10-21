@@ -1,0 +1,135 @@
+[
+ {
+  "i": 0,
+  "url": "https://isautier.re/bien-en-location/",
+  "code": 200,
+  "taille": 306299,
+  "debut": "<!doctype html>\n<html class=\"scroll-smooth\" lang=\"fr-FR\">\n\n<head><meta charset=\"UTF-8\" /><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\\/7\\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf(\"?\")==-1){if"
+ },
+ {
+  "i": 1,
+  "url": "https://www.agencelesflamboyants.com/annonces/transaction/Location.html",
+  "code": 200,
+  "taille": 331278,
+  "debut": "<!DOCTYPE html>\n<html lang=\"fr\" lang=\"fr\">\n\n<head>\n        <base href=\"//www.agencelesflamboyants.com/catalog/\" ><meta charset=\"iso-8859-1\"><title>À louer | Agence LES FLAMBOYANTS | LES FLAMBOYANTS Saint-Denis</title><meta name=\"description\" content=\"Découvrez tous nos biens immobiliers en location "
+ },
+ {
+  "i": 2,
+  "url": "https://www.getim.com/fr/location-appartement.htm",
+  "code": 200,
+  "taille": 69119,
+  "debut": "<!DOCTYPE html>\r\n<!--[if IE 8]> <html lang=\"en\" class=\"ie8\"> <![endif]-->\r\n<!--[if IE 9]> <html lang=\"en\" class=\"ie9\"> <![endif]-->\r\n<!--[if !IE]><!--> <html lang=\"fr\"> <!--<![endif]-->\r\n<head>\r\n    <title>Appartement à louer Saint-Denis la Réunion | Getim Immobilier</title>\r\n\r\n    <!-- Meta -->\r\n  "
+ },
+ {
+  "i": 3,
+  "url": "https://www.guyhoquet-reunion.fr/annonces/transaction/Location.html",
+  "code": 200,
+  "taille": 201961,
+  "debut": "<!DOCTYPE html>\n<html lang=\"fr\" >\n\n<head>\n        <base href=\"//www.guyhoquet-reunion.fr/catalog/\" ><meta charset=\"iso-8859-1\"><title>Annonces immobilières de location | Louer | Guy Hoquet La Réunion</title><meta name=\"description\" content=\"Vous souhaitez louer un bien immobilier à La Réunion ? Nos "
+ },
+ {
+  "i": 4,
+  "url": "https://www.urbanis.re/location/1",
+  "code": 200,
+  "taille": 478719,
+  "debut": "\n\n<!DOCTYPE html>\n<!-- Levant -->\n<html lang=\"fr\">\n<head>\n    <meta charset=\"utf-8\"/>\n    <base href=\"https://www.urbanis.re/\">\n\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n\n    <title>10 annonces de logements à louer</title>\n    <meta name=\"description\" content=\"Consultez notre catalo"
+ },
+ {
+  "i": 5,
+  "url": "https://www.lna.re/location/1",
+  "code": 200,
+  "taille": 189634,
+  "debut": "\n\n<!DOCTYPE html>\n<!-- Zephyr -->\n<html lang=\"fr\">\n<head>\n    <meta charset=\"utf-8\"/>\n    <base href=\"https://www.lna.re/\">\n\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n\n    <title>9 annonces de logements à louer</title>\n    <meta name=\"description\" content=\"Consultez notre catalogue c"
+ },
+ {
+  "i": 6,
+  "url": "https://www.gti.re/location/1",
+  "code": 200,
+  "taille": 229453,
+  "debut": "\n\n<!DOCTYPE html>\n<!-- Alize -->\n<html lang=\"fr\">\n<head>\n    <meta charset=\"utf-8\"/>\n    <base href=\"https://www.gti.re/\">\n\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n\n    <title>Locations immobilières | AGENCE G.T.I.</title>\n    <meta name=\"description\" content=\"\">\n    <meta name=\"au"
+ },
+ {
+  "i": 7,
+  "url": "https://immotransac.re/location/appartement",
+  "code": 200,
+  "taille": 212695,
+  "debut": "<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n  <script src=\"/errorReporter.js\" data-app=\"location-public\"></script>\n  <title>Appartements à louer à La Réunion | Agence Immo Transac Réunion</title>\n  <meta name="
+ },
+ {
+  "i": 8,
+  "url": "https://www.sorim.re/locations",
+  "code": 200,
+  "taille": 26592,
+  "debut": "<!DOCTYPE html>\n<html lang=\"en\" prefix=\"og: http://ogp.me/ns#\">\n  <head>\n\n                  <meta charset=\"UTF-8\">\n              <title>Homepage I SORIM</title>\n              <meta property=\"og:title\" content=\"Homepage I SORIM\">\n              <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"https:"
+ },
+ {
+  "i": 9,
+  "url": "https://www.herren-immobilier.com/location/appartement",
+  "code": 200,
+  "taille": 47445,
+  "debut": "<!DOCTYPE HTML>\n<html lang=\"fr-fr\" dir=\"ltr\">\n\n<head>\n<meta charset=\"utf-8\" />\n<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\n  <base href=\"https://www.herren-immobilier.com/location/appartement\" />\n  <meta name=\"keywords\" content=\"Proximité, Cuisine, M², Habitable, Prix, €, Loyer, S"
+ },
+ {
+  "i": 10,
+  "url": "https://www.ofim.fr/73531/Location-Maison-Villa-SAINTE-MARIE-ile-de-la-Reunion-A-Louer-disponible-Bas-de-Maison-F3-avec-Jardin-Vue.html",
+  "code": 200,
+  "taille": 132126,
+  "debut": "<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n   <meta charset=\"utf-8\">\n   \n   <meta name=\"description\" content=\"Location maison F3 à Sainte-Marie. Bas de maison PMR avec jardin, vue mer et montagne. 2 chambres climatisées, balcon, garage. Calme et lumineux.\">\n   <meta name=\"keywords\" content=\"reunion,974"
+ },
+ {
+  "i": 11,
+  "url": "https://www.getim.com/location/appartement-sainte-clotilde-97490/52741388.htm",
+  "code": 200,
+  "taille": 45802,
+  "debut": "<!DOCTYPE html>\r\n<!--[if IE 8]> <html lang=\"en\" class=\"ie8\"> <![endif]-->\r\n<!--[if IE 9]> <html lang=\"en\" class=\"ie9\"> <![endif]-->\r\n<!--[if !IE]><!--> <html lang=\"fr\"> <!--<![endif]-->\r\n<head>\r\n    <title>location Appartement SAINTE CLOTILDE 97490</title>\r\n\r\n    <!-- Meta -->\r\n    <meta charset=\"wi"
+ },
+ {
+  "i": 12,
+  "url": "https://www.guyhoquet-reunion.fr/fiches/3-33-27_7802357/appartement-moufia-1-piece-s.html",
+  "code": 200,
+  "taille": 217334,
+  "debut": "<!DOCTYPE html><html lang=\"fr\" >\n\n<head>\n        <base href=\"//www.guyhoquet-reunion.fr/catalog/\" ><meta charset=\"iso-8859-1\"><meta name=\"description\" content=\"Appartement Moufia 1 pièce(s) - T1 A VENDRE 1 rue de l' Anjou au Moufia, à 12 minutes à pied de la fac; 97490 sainte Clotilde. Au 3ème étage"
+ },
+ {
+  "i": 13,
+  "url": "https://www.lna.re/location/106-st-denis/appartement/t6/1209-t5-6-a-louer-au-coeur-de-saint-denis/",
+  "code": 200,
+  "taille": 256405,
+  "debut": "\n\n<!DOCTYPE html>\n<!-- Zephyr -->\n<html lang=\"fr\">\n<head>\n    <meta charset=\"utf-8\"/>\n    <base href=\"https://www.lna.re/\">\n\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n\n    <title>Location appartement Saint-Denis 6 pièces 147.61m² 2300€ | La Nouvelle Agence</title>\n    <meta name=\"des"
+ },
+ {
+  "i": 14,
+  "url": "https://www.superimmo.com/annonces/location-appartement-23m-moufia-97490-x129k38",
+  "code": 200,
+  "taille": 168727,
+  "debut": "<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n  <meta charset=\"utf-8\">\n  <link href=\"https://photo.superimmo.com\" rel=\"dns-prefetch\">\n  <link href=\"https://api.superimmo.com\" rel=\"preconnect\">\n  <link href=\"https://l.superimmo.com\" rel=\"preconnect\">\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
+ },
+ {
+  "i": 15,
+  "url": "https://www.superimmo.com/location/appartement/la-reunion?page=2",
+  "code": 200,
+  "taille": 220997,
+  "debut": "<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n  <meta charset=\"utf-8\">\n  <link href=\"https://photo.superimmo.com\" rel=\"dns-prefetch\">\n  <link href=\"https://api.superimmo.com\" rel=\"preconnect\">\n  <link href=\"https://l.superimmo.com\" rel=\"preconnect\">\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n"
+ },
+ {
+  "i": 16,
+  "url": "https://www.immobilier-entre-particuliers.fr/annonces-immobilieres-la-reunion/annonce-immobiliere-particulier-405528.html",
+  "code": 200,
+  "taille": 19348,
+  "debut": "<!DOCTYPE html><!--[if IE 8]> <html lang=\"fr\" class=\"ie8\"> <![endif]--><!--[if IE 9]> <html lang=\"fr\" class=\"ie9\"> <![endif]--><!--[if !IE]><!--><html lang=\"fr\" xmlns:og=\"http://ogp.me/ns#\"><!--<![endif]--><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1"
+ },
+ {
+  "i": 17,
+  "url": "https://www.sorim.re/en/rentals",
+  "code": 200,
+  "taille": 23134,
+  "debut": "<!DOCTYPE html>\n<html lang=\"en\" prefix=\"og: http://ogp.me/ns#\">\n  <head>\n\n                  <meta charset=\"UTF-8\">\n              <title>Rentals | SORIM</title>\n              <meta property=\"og:title\" content=\"Rentals | SORIM\">\n              <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"https://"
+ },
+ {
+  "i": 18,
+  "url": "https://www.ofim.fr/liste-location.html?page=2",
+  "code": 200,
+  "taille": 112996,
+  "debut": "<!DOCTYPE html>\n<html lang=\"fr\">\n<head>\n   <meta charset=\"utf-8\">\n   \n   <meta name=\"description\" content=\"Consultez nos offres de location immobilière à la Réunion. Appartements, maisons, villas et studios à louer — OFIM.\">\n   <meta name=\"keywords\" content=\"\">\n   <meta name=\"author\" content=\"OFIM -"
+ }
+]
