@@ -2,39 +2,66 @@
  "puces": {
   "A13 Bionic": {
    "rang": 1,
-   "annee": 2019
+   "annee": 2019,
+   "cpu": "CPU 6 cœurs",
+   "gpu": "GPU 4 cœurs",
+   "ne": "Neural Engine 8 cœurs"
   },
   "A14 Bionic": {
    "rang": 2,
-   "annee": 2020
+   "annee": 2020,
+   "cpu": "CPU 6 cœurs",
+   "gpu": "GPU 4 cœurs",
+   "ne": "Neural Engine 16 cœurs"
   },
   "A15 Bionic": {
    "rang": 3,
-   "annee": 2021
+   "annee": 2021,
+   "cpu": "CPU 6 cœurs",
+   "gpu": "GPU 4 cœurs",
+   "ne": "Neural Engine 16 cœurs"
   },
   "A16 Bionic": {
    "rang": 4,
-   "annee": 2022
+   "annee": 2022,
+   "cpu": "CPU 6 cœurs",
+   "gpu": "GPU 5 cœurs",
+   "ne": "Neural Engine 16 cœurs"
   },
   "A17 Pro": {
    "rang": 5,
-   "annee": 2023
+   "annee": 2023,
+   "cpu": "CPU 6 cœurs",
+   "gpu": "GPU 6 cœurs",
+   "ne": "Neural Engine 16 cœurs"
   },
   "A18": {
    "rang": 6,
-   "annee": 2024
+   "annee": 2024,
+   "cpu": "CPU 6 cœurs",
+   "gpu": "GPU 5 cœurs",
+   "ne": "Neural Engine 16 cœurs"
   },
   "A18 Pro": {
    "rang": 6.5,
-   "annee": 2024
+   "annee": 2024,
+   "cpu": "CPU 6 cœurs",
+   "gpu": "GPU 6 cœurs",
+   "ne": "Neural Engine 16 cœurs"
   },
   "A19": {
    "rang": 7,
-   "annee": 2025
+   "annee": 2025,
+   "cpu": "CPU 6 cœurs",
+   "gpu": "GPU 5 cœurs",
+   "ne": "Neural Engine 16 cœurs"
   },
   "A19 Pro": {
    "rang": 7.5,
-   "annee": 2025
+   "annee": 2025,
+   "cpu": "CPU 6 cœurs",
+   "gpu": "GPU 6 cœurs",
+   "ne": "Neural Engine 16 cœurs"
   },
   "M1": {
    "rang": 10,
@@ -107,6 +134,13 @@
   "H2": {
    "rang": 31,
    "annee": 2022
+  },
+  "A20 Pro": {
+   "rang": 8.5,
+   "annee": 2026,
+   "cpu": "CPU 6 cœurs",
+   "gpu": "GPU 7 cœurs avec Neural Accelerators",
+   "ne": "Deux Neural Engine 16 cœurs"
   }
  },
  "modeles": {
@@ -125,7 +159,8 @@
    "poids_g": 194,
    "Connecteur": "Lightning",
    "Déverrouillage": "Face ID",
-   "fonctions": []
+   "fonctions": [],
+   "Résistance à l'eau": "jusqu'à 2 m pendant 30 min"
   },
   "iPhone 11 Pro": {
    "Sortie": 2019,
@@ -142,7 +177,8 @@
    "poids_g": 188,
    "Connecteur": "Lightning",
    "Déverrouillage": "Face ID",
-   "fonctions": []
+   "fonctions": [],
+   "Résistance à l'eau": "jusqu'à 4 m pendant 30 min"
   },
   "iPhone 11 Pro Max": {
    "Sortie": 2019,
@@ -159,7 +195,8 @@
    "poids_g": 226,
    "Connecteur": "Lightning",
    "Déverrouillage": "Face ID",
-   "fonctions": []
+   "fonctions": [],
+   "Résistance à l'eau": "jusqu'à 4 m pendant 30 min"
   },
   "iPhone SE 2020": {
    "Sortie": 2020,
@@ -176,7 +213,8 @@
    "poids_g": 148,
    "Connecteur": "Lightning",
    "Déverrouillage": "Touch ID (bouton)",
-   "fonctions": []
+   "fonctions": [],
+   "Résistance à l'eau": "jusqu'à 1 m pendant 30 min"
   },
   "iPhone SE 2022": {
    "Sortie": 2022,
@@ -195,7 +233,8 @@
    "Déverrouillage": "Touch ID (bouton)",
    "fonctions": [
     "5G"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 1 m pendant 30 min"
   },
   "iPhone 12 Mini": {
    "Sortie": 2020,
@@ -215,7 +254,8 @@
    "fonctions": [
     "5G",
     "MagSafe"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 12": {
    "Sortie": 2020,
@@ -235,7 +275,8 @@
    "fonctions": [
     "5G",
     "MagSafe"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 12 Pro": {
    "Sortie": 2020,
@@ -255,7 +296,8 @@
    "fonctions": [
     "5G",
     "MagSafe"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 12 Pro Max": {
    "Sortie": 2020,
@@ -275,7 +317,8 @@
    "fonctions": [
     "5G",
     "MagSafe"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 13 Mini": {
    "Sortie": 2021,
@@ -295,7 +338,8 @@
    "fonctions": [
     "5G",
     "MagSafe"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 13": {
    "Sortie": 2021,
@@ -315,7 +359,8 @@
    "fonctions": [
     "5G",
     "MagSafe"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 13 Pro": {
    "Sortie": 2021,
@@ -335,7 +380,9 @@
    "fonctions": [
     "5G",
     "MagSafe"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min",
+   "gpu": "GPU 5 cœurs"
   },
   "iPhone 13 Pro Max": {
    "Sortie": 2021,
@@ -355,7 +402,9 @@
    "fonctions": [
     "5G",
     "MagSafe"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min",
+   "gpu": "GPU 5 cœurs"
   },
   "iPhone 14": {
    "Sortie": 2022,
@@ -376,7 +425,9 @@
     "5G",
     "MagSafe",
     "SOS d'urgence par satellite"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min",
+   "gpu": "GPU 5 cœurs"
   },
   "iPhone 14 Plus": {
    "Sortie": 2022,
@@ -397,7 +448,9 @@
     "5G",
     "MagSafe",
     "SOS d'urgence par satellite"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min",
+   "gpu": "GPU 5 cœurs"
   },
   "iPhone 14 Pro": {
    "Sortie": 2022,
@@ -420,7 +473,8 @@
     "Dynamic Island",
     "SOS d'urgence par satellite",
     "Écran toujours allumé"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 14 Pro Max": {
    "Sortie": 2022,
@@ -443,7 +497,8 @@
     "Dynamic Island",
     "SOS d'urgence par satellite",
     "Écran toujours allumé"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 15": {
    "Sortie": 2023,
@@ -465,7 +520,8 @@
     "MagSafe",
     "Dynamic Island",
     "SOS d'urgence par satellite"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 15 Plus": {
    "Sortie": 2023,
@@ -487,7 +543,8 @@
     "MagSafe",
     "Dynamic Island",
     "SOS d'urgence par satellite"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 15 Pro": {
    "Sortie": 2023,
@@ -513,7 +570,8 @@
     "SOS d'urgence par satellite",
     "Écran toujours allumé",
     "Châssis en titane"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 15 Pro Max": {
    "Sortie": 2023,
@@ -539,7 +597,8 @@
     "SOS d'urgence par satellite",
     "Écran toujours allumé",
     "Châssis en titane"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 16": {
    "Sortie": 2024,
@@ -564,7 +623,8 @@
     "Apple Intelligence",
     "Commande de l'appareil photo",
     "SOS d'urgence par satellite"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 16 Plus": {
    "Sortie": 2024,
@@ -589,7 +649,8 @@
     "Apple Intelligence",
     "Commande de l'appareil photo",
     "SOS d'urgence par satellite"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 16 Pro": {
    "Sortie": 2024,
@@ -616,7 +677,8 @@
     "SOS d'urgence par satellite",
     "Écran toujours allumé",
     "Châssis en titane"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 16 Pro Max": {
    "Sortie": 2024,
@@ -643,7 +705,8 @@
     "SOS d'urgence par satellite",
     "Écran toujours allumé",
     "Châssis en titane"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 16e": {
    "Sortie": 2025,
@@ -665,7 +728,9 @@
     "Bouton Action",
     "Apple Intelligence",
     "SOS d'urgence par satellite"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min",
+   "gpu": "GPU 4 cœurs"
   },
   "iPhone 17": {
    "Sortie": 2025,
@@ -691,7 +756,8 @@
     "Commande de l'appareil photo",
     "SOS d'urgence par satellite",
     "Écran toujours allumé"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone Air": {
    "Sortie": 2025,
@@ -718,7 +784,9 @@
     "SOS d'urgence par satellite",
     "Écran toujours allumé",
     "Châssis en titane"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min",
+   "gpu": "GPU 5 cœurs"
   },
   "iPhone 17 Pro": {
    "Sortie": 2025,
@@ -744,7 +812,8 @@
     "Commande de l'appareil photo",
     "SOS d'urgence par satellite",
     "Écran toujours allumé"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "iPhone 17 Pro Max": {
    "Sortie": 2025,
@@ -770,7 +839,8 @@
     "Commande de l'appareil photo",
     "SOS d'urgence par satellite",
     "Écran toujours allumé"
-   ]
+   ],
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min"
   },
   "AirPods": {
    "Sortie": 2019,
@@ -971,6 +1041,22 @@
     "Bouton Action",
     "Plongée 40 m"
    ]
+  },
+  "iPhone Duo": {
+   "Sortie": 2026,
+   "Puce": "A20 Pro",
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min",
+   "Dos": "Ceramic Shield",
+   "fonctions": [],
+   "partiel": true
+  },
+  "iPhone 18 Pro Max": {
+   "Sortie": 2026,
+   "Puce": "A20 Pro",
+   "Résistance à l'eau": "jusqu'à 6 m pendant 30 min",
+   "Dos": "Ceramic Shield",
+   "fonctions": [],
+   "partiel": true
   }
  }
 }

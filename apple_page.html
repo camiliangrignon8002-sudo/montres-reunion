@@ -274,30 +274,40 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
 .groupe-vendeur{margin:18px 20px 8px;display:flex;justify-content:space-between;align-items:center;font-size:15px}
 .groupe-vendeur b{font-size:17px}
 
-/* Comparaison */
-.cmp-tetes{display:grid;gap:10px;padding:4px 16px 6px}
-.cmp-tete{position:relative;background:var(--carte);border-radius:18px;box-shadow:var(--ombre);padding:10px 10px 12px;display:flex;flex-direction:column;gap:3px;border:0;text-align:left;min-width:0}
-.cmp-tete img,.cmp-tete .sans{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;border-radius:12px;display:grid;place-items:center;color:#c7c7cc}
-.cmp-tete small{font-size:11px;font-weight:600;color:var(--doux);text-transform:uppercase;letter-spacing:.03em;margin-top:6px}
-.cmp-tete span{font-size:13.5px;font-weight:600;line-height:1.25;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.cmp-tete b{font-size:16px}
-.cmp-tete .retirer{position:absolute;top:6px;right:6px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(120,120,128,.18);display:grid;place-items:center;color:var(--doux)}
-.cmp-tete .retirer svg.ic{width:14px;height:14px;stroke-width:2.4}
-.cmp-ajout{border:2px dashed var(--ligne);background:transparent;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--bleu);font-weight:600;font-size:14px;min-height:180px}
-.verdict{margin:14px 16px 0;background:var(--carte);border-radius:18px;padding:14px 16px;box-shadow:var(--ombre)}
-.verdict h4{margin:0 0 8px;font-size:17px}
-.verdict ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14.5px}
-.verdict .note{padding:8px 0 0}
-.cmp-ligne{margin:10px 16px 0;background:var(--carte);border-radius:16px;padding:12px 14px}
-.cmp-ligne h5{margin:0;font-size:15px}
-.cmp-ligne p{margin:2px 0 10px;font-size:12.5px;color:var(--doux);line-height:1.4}
-.cmp-vals{display:grid;gap:8px}
-.cmp-vals div{background:var(--fond);border-radius:10px;padding:8px 10px;font-size:14px;font-weight:500;min-width:0;overflow-wrap:anywhere}
-.cmp-vals div.mieux{background:var(--vert-doux);color:var(--vert);font-weight:700}
-.cmp-vals div.mieux::before{content:"✓ ";}
-.cmp-vals div.vide{color:var(--doux);font-weight:400}
-.cmp-vals ul{margin:0;padding-left:16px;font-size:13px;font-weight:500}
-.cmp-vals li.plus{color:var(--vert);font-weight:700}
+/* Comparaison façon apple.com */
+.cmp-tetes-fixes{position:sticky;top:calc(68px + env(safe-area-inset-top));z-index:12;background:var(--fond);padding:4px 0 0}
+.cmp-2{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;padding:0 20px}
+.cmp-choix{display:block;border-bottom:1px solid var(--ligne);padding:4px 0 8px}
+.cmp-choix select{width:100%;border:0;background:transparent;font:inherit;font-size:19px;font-weight:600;color:var(--texte);appearance:none;-webkit-appearance:none;padding:6px 22px 6px 0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230071e3' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0 center;background-size:18px;text-overflow:ellipsis}
+.cmp-haut>div{text-align:center;padding:18px 0 22px;border-bottom:1px solid var(--ligne)}
+.cmp-photo{height:220px;display:grid;place-items:center}
+.cmp-photo img{max-width:100%;max-height:220px;object-fit:contain}
+.cmp-photo svg.ic{width:60px;height:60px;color:#c7c7cc;stroke-width:1.2}
+.cmp-couleurs{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:16px}
+.cmp-couleurs i{width:24px;height:24px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.cmp-couleurs i.on{outline:2px solid var(--bleu);outline-offset:3px}
+.cmp-nom-couleur{font-size:13px;color:var(--doux);margin:8px 0 0}
+.cmp-nouveau{color:#b64400;font-size:13.5px;margin:18px 0 0}
+.cmp-prix{font-size:18px;font-weight:600;margin:6px 0 0;line-height:1.3}
+.cmp-ou{font-size:12.5px;color:var(--doux);margin:4px 0 14px}
+.cmp-btn{display:inline-flex;padding:10px 20px;border-radius:999px;font-size:16px}
+.cmp-lien{display:block;margin:12px auto 0;font-size:15px;text-decoration:none}
+.cmp-vide{padding:40px 0;color:var(--doux);font-size:14px;text-align:center}
+.cmp-sec{padding:22px 0 4px;border-bottom:1px solid var(--ligne)}
+.cmp-sec h3{margin:0 20px 2px;font-size:13px;font-weight:600;color:var(--doux);text-transform:uppercase;letter-spacing:.05em}
+.cmp-sec .cmp-aide{margin:0 20px 14px;font-size:13px;color:var(--doux);line-height:1.4}
+.cmp-sec .cmp-2 p{margin:0 0 12px;font-size:16px;line-height:1.3}
+.cmp-sec .cmp-2 p.fort{font-weight:600}
+.cmp-sec .cmp-2 p.grand{font-size:30px;font-weight:600;line-height:1.1}
+.cmp-sec .cmp-2 p.grand small{font-size:15px;font-weight:500}
+.cmp-sec .cmp-2 p.oui{font-size:14.5px}
+.cmp-sec .cmp-2 p.non{font-size:14.5px;color:var(--doux)}
+.cmp-sec .cmp-2 p.vide-cmp{color:var(--doux)}
+.badge-puce{width:72px;height:72px;border:4px solid var(--texte);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 0 12px;line-height:1}
+.badge-puce b{font-size:23px;font-weight:700}
+.badge-puce small{font-size:12px;font-weight:700;margin-top:2px}
+.cmp-bref ul{margin:0 20px 14px;padding-left:18px;display:flex;flex-direction:column;gap:7px;font-size:14.5px}
 #tirer{position:fixed;left:50%;top:calc(60px + env(safe-area-inset-top));transform:translate(-50%,-70px);z-index:25;width:40px;height:40px;border-radius:50%;background:var(--carte);box-shadow:var(--ombre);display:grid;place-items:center;color:var(--bleu);opacity:0;pointer-events:none}
 #toast{position:fixed;left:50%;bottom:calc(98px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:rgba(29,29,31,.92);color:#fff;padding:10px 16px;border-radius:14px;font-size:14.5px;z-index:60;opacity:0;transition:.25s;pointer-events:none;max-width:88vw;text-align:center}
 #toast.on{opacity:1;transform:translate(-50%,0)}
@@ -392,7 +402,7 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
 
   <!-- Comparaison -->
   <section id="vue-comparaison" hidden>
-    <div class="vue-titre"><h1>Comparaison</h1><p>Compare 2 ou 3 produits : composants, ce qu'ils changent au quotidien, prix et vendeur.</p></div>
+    <div class="vue-titre"><h1>Comparaison</h1><p>Choisis deux modèles : composants, ce qu'ils changent au quotidien et meilleur prix à La Réunion.</p></div>
     <div id="comparaison"></div>
   </section>
 
@@ -1050,15 +1060,15 @@ $("#q-effacer").onclick = () => { $("#q").value = ""; majRecherche(); $("#q").fo
 $("#suggestions").onclick = e => { const b = e.target.closest("button"); if (!b) return; $("#q").value = b.dataset.q; majRecherche(); validerRecherche(false); };
 $("#btn-loupe").onclick = () => ouvrirRecherche(false);
 
-// ------------------------------------------------------------------ comparaison
-let COMPARER = lire("apple974-comparer", []);        // ids, dans l'ordre d'ajout (3 au plus)
-let COMPARER_COPIES = lire("apple974-comparer-copies", {});
-let SPECS = null;                                     // fiche technique de référence (specs.json), chargée à la demande
-function sauverComparaison() { ecrire("apple974-comparer", COMPARER); ecrire("apple974-comparer-copies", COMPARER_COPIES); compteurs(); }
+// ------------------------------------------------------------------ comparaison (façon apple.com : 2 colonnes, un modèle par colonne)
+let COLONNES = lire("apple974-comparaison", [null, null]);   // [{m: modèle, id: annonce choisie}, …]
+let SPECS = null;
+const COMPARER = { get length() { return COLONNES.filter(Boolean).length; }, includes: id => COLONNES.some(c => c && c.id === id) };
+function sauverComparaison() { ecrire("apple974-comparaison", COLONNES); compteurs(); }
 function ajouterComparaison(a) {
-  if (COMPARER.includes(a.id)) return;
-  if (COMPARER.length >= 3) { const ancien = COMPARER.shift(); delete COMPARER_COPIES[ancien]; toast("3 produits au plus : le premier a été retiré"); }
-  COMPARER.push(a.id); COMPARER_COPIES[a.id] = copie(a);
+  const c = {m: a.modele || "", id: a.id};
+  const libre = COLONNES.findIndex(x => !x);
+  COLONNES[libre >= 0 ? libre : 1] = c;
   sauverComparaison();
 }
 async function chargerSpecs() {
@@ -1068,61 +1078,146 @@ async function chargerSpecs() {
 }
 const ORDRE_ETAT = {"Neuf": 3, "Reconditionné": 2, "Occasion": 1};
 function enGo(t) { const m = String(t || "").match(/(\d+)\s*(Go|To)/i); return m ? +m[1] * (/to/i.test(m[2]) ? 1024 : 1) : null; }
-function rangPuce(nom) {
+function puceDe(nom) {
   if (!nom || !SPECS) return null;
   const n = norm(nom).replace(/bionic/g, "").trim();
-  let meilleur = null;
-  for (const [k, v] of Object.entries(SPECS.puces)) {
-    const kn = norm(k).replace(/bionic/g, "").trim();
-    if (n === kn || n.startsWith(kn + " ") || n === kn.split(" ")[0] && !meilleur) meilleur = v;
-    if (n === kn) return v;
-  }
-  return meilleur;
+  for (const [k, v] of Object.entries(SPECS.puces)) if (norm(k).replace(/bionic/g, "").trim() === n) return {nom: k, ...v};
+  for (const [k, v] of Object.entries(SPECS.puces)) { const kn = norm(k).replace(/bionic/g, "").trim(); if (n.startsWith(kn + " ") || kn.startsWith(n + " ")) return {nom: k, ...v}; }
+  return null;
 }
-// Ce que chaque ligne veut dire, en clair
-const LIGNES = [
-  {cle: "prix", nom: "Prix", aide: "Ce que tu paies chez ce vendeur, au dernier relevé.",
-   val: (a) => a.prix == null ? null : (a.des ? "dès " : "") + euros(a.prix), num: (a) => a.prix, mieux: "bas"},
-  {cle: "etat", nom: "État", aide: "Neuf : jamais servi. Reconditionné : remis en état et testé par un professionnel, avec garantie. Occasion : vendu tel quel par un particulier ou un dépôt-vente.",
-   val: (a) => a.etat + ((a.carac || {})["État"] ? " · " + a.carac["État"] : ""), num: (a) => ORDRE_ETAT[a.etat], mieux: "haut"},
-  {cle: "puce", nom: "Puce (processeur)", aide: "Le cerveau de l'appareil. Plus elle est récente, plus tout va vite (photos, jeux, applis) et plus longtemps il recevra les mises à jour d'Apple.",
-   val: (a, s) => (s && s.Puce) || (a.carac || {})["Puce"], num: (a, s) => { const r = rangPuce((s && s.Puce) || (a.carac || {})["Puce"]); return r && r.rang; }, mieux: "haut"},
-  {cle: "sortie", nom: "Année de sortie", aide: "Un modèle récent reste à jour plus longtemps et se revend mieux.",
-   val: (a, s) => s && s.Sortie, num: (a, s) => s && s.Sortie, mieux: "haut"},
-  {cle: "capa", nom: "Stockage", aide: "La place pour tes photos, vidéos et applis. 128 Go suffit pour un usage courant ; 256 Go ou plus si tu filmes beaucoup ou gardes tout sur le téléphone.",
-   val: (a) => (a.carac || {})["Capacité"] || (a.carac || {})["Stockages proposés"], num: (a) => enGo((a.carac || {})["Capacité"]), mieux: "haut"},
-  {cle: "ram", nom: "Mémoire vive", aide: "Permet d'ouvrir beaucoup d'applis et d'onglets en même temps sans ralentir. 16 Go est confortable sur un Mac.",
-   val: (a) => (a.carac || {})["Mémoire"] || (a.carac || {})["RAM"], num: (a) => enGo((a.carac || {})["Mémoire"] || (a.carac || {})["RAM"]), mieux: "haut"},
-  {cle: "ecran", nom: "Écran", aide: "La taille se mesure en diagonale. 120 Hz (ProMotion) rend le défilement et les animations plus fluides que 60 Hz.",
-   val: (a, s) => (s && s["Écran"]) || (a.carac || {})["Écran"] || (a.carac || {})["Taille"], num: (a, s) => s && s.hz, mieux: "haut"},
-  {cle: "photo", nom: "Appareil photo", aide: "Le téléobjectif zoome sans perte de qualité (portraits, concerts, animaux). L'ultra grand-angle fait entrer plus de paysage ou de monde sur la photo.",
-   val: (a, s) => s && s["Appareil photo"], num: (a, s) => s && ((s.zoom || 0) * 10 + (s.ultra ? 1 : 0)), mieux: "haut"},
-  {cle: "autonomie", nom: "Autonomie", aide: "Durée annoncée par Apple quand l'appareil est neuf (vidéo pour un iPhone, écoute pour des AirPods). Sur un appareil d'occasion, elle dépend aussi de l'usure de la batterie.",
-   val: (a, s) => s && s.Autonomie, num: (a, s) => s && (s.video_h || s.ecoute_h || s.montre_h), mieux: "haut"},
-  {cle: "batterie", nom: "Santé de la batterie", aide: "100 % = comme neuve. En dessous de 80 %, elle tient nettement moins longtemps et se remplace (compter environ 100 € chez un réparateur).",
-   val: (a) => (a.carac || {})["Batterie"], num: (a) => parseInt((a.carac || {})["Batterie"]) || null, mieux: "haut"},
-  {cle: "bruit", nom: "Réduction de bruit", aide: "Coupe les bruits autour de toi (bus, avion, rue) pour écouter sans monter le son.",
-   val: (a, s) => s && s["Réduction de bruit"], num: (a, s) => s && (s.anc ? 1 : 0), mieux: "haut"},
-  {cle: "tailles", nom: "Tailles de boîtier", aide: "Le plus grand boîtier offre un écran plus lisible ; le plus petit est plus discret au poignet.",
-   val: (a, s) => (a.carac || {})["Taille"] || (s && s.Tailles), num: () => null},
-  {cle: "poids", nom: "Poids", aide: "Plus léger, il est plus agréable à tenir longtemps et en poche.",
-   val: (a, s) => s && s.Poids, num: (a, s) => s && s.poids_g, mieux: "bas"},
-  {cle: "port", nom: "Prise de charge", aide: "USB-C : le même câble que les Mac, iPad et la plupart des chargeurs récents. Lightning : l'ancien câble propre à Apple.",
-   val: (a, s) => s && s.Connecteur, num: (a, s) => s && s.Connecteur ? (/usb-c rapide/i.test(s.Connecteur) ? 2 : /usb-c/i.test(s.Connecteur) ? 1 : 0) : null, mieux: "haut"},
-  {cle: "deverr", nom: "Déverrouillage", aide: "Face ID reconnaît ton visage ; Touch ID ton empreinte sur le bouton.",
-   val: (a, s) => s && s["Déverrouillage"], num: () => null},
-  {cle: "garantie", nom: "Garantie", aide: "Durée pendant laquelle le vendeur répare ou remplace gratuitement en cas de panne.",
-   val: (a) => (a.carac || {})["Garantie"], num: (a) => { const g = (a.carac || {})["Garantie"]; const m = String(g || "").match(/(\d+)\s*(mois|an)/); return m ? +m[1] * (m[2] === "an" ? 12 : 1) : null; }, mieux: "haut"},
-  {cle: "lieu", nom: "Où l'acheter", aide: "Vendeur et commune ; la distance s'affiche si tu as choisi ta position dans les filtres.",
-   val: (a) => { const p = lieuProche(a); return `${a.vendeur}${p ? " · " + (p.l.commune || p.l.nom) + (p.d != null ? " (" + distTxt(p.d) + ")" : "") : a.pro ? " · en ligne" : ""}`; }, num: (a) => { const p = lieuProche(a); return p && p.d != null ? p.d : null; }, mieux: "bas"},
+function rangPuce(nom) { const p = puceDe(nom); return p ? {rang: p.rang} : null; }
+const TEINTES = {"noir": "#2c2c2e", "blanc": "#f5f5f0", "argent": "#e3e4e5", "or": "#f1dcb6", "bleu": "#5b8bd6", "bleu intense": "#2b3a55",
+  "orange cosmique": "#e0762f", "orange": "#f08a3c", "lavande": "#c7b8e0", "sauge": "#b5c4a8", "bleu brume": "#a9c2d9", "bleu ciel": "#bcd6ea",
+  "ciel nocturne": "#2a3245", "minuit": "#2a2f3a", "lumiere stellaire": "#f0e6d6", "gris sideral": "#6e6e73", "titane naturel": "#bab4a9",
+  "titane noir": "#3b3b3d", "titane blanc": "#ecebe6", "titane bleu": "#4b5a6e", "titane sable": "#c9a98a", "rose": "#f4c6cc", "vert": "#b9d3b0",
+  "jaune": "#f6e27a", "violet": "#c9b3e5", "mauve": "#c9b3e5", "rouge": "#c8102e", "bordeaux": "#4a1a22", "glacier": "#dfe9f5",
+  "blanc stellaire": "#f4f2ee", "graphite": "#4b4b4d", "bleu alpin": "#a7c1d9", "vert alpin": "#566b5a", "outremer": "#3a4fa0", "sarcelle": "#5fa8a4", "gris": "#8e8e93"};
+function teinte(nom) { return TEINTES[norm(nom).replace(/[^a-z ]/g, "").trim()] || null; }
+// toutes les offres de l'île pour un modèle, la moins chère d'abord
+function offres(m) { return ANNONCES.filter(a => a.modele === m && a.prix != null).sort((x, y) => x.prix - y.prix); }
+function modelesDispo() {
+  const par = {};
+  for (const a of ANNONCES) if (a.modele && a.cat !== "accessoires") (par[a.modele] || (par[a.modele] = {m: a.modele, cat: a.cat, n: 0, rang: 0})).n++;
+  for (const a of ANNONCES) if (par[a.modele]) par[a.modele].rang = Math.max(par[a.modele].rang, a.rang || 0);
+  return Object.values(par).sort((x, y) => CATS.findIndex(c => c[0] === x.cat) - CATS.findIndex(c => c[0] === y.cat) || y.rang - x.rang || x.m.localeCompare(y.m, "fr", {numeric: true}));
+}
+function representant(col) {
+  if (!col) return null;
+  if (col.m) {
+    const o = offres(col.m);
+    const choisi = col.id && (PAR_ID[col.id] || null);
+    return choisi && choisi.modele === col.m ? choisi : o[0] || choisi;
+  }
+  return PAR_ID[col.id] || null;
+}
+function photoModele(m, a) {
+  const o = ANNONCES.filter(x => x.modele === m && (x.photos || [])[0]);
+  const neuve = o.find(x => x.etat === "Neuf" && ["Microstor", "iShop", "Phenix Store", "Darty", "Delbos Informatique"].includes(x.vendeur));
+  return ((neuve || o[0] || a || {}).photos || [])[0];
+}
+function couleursModele(m, a) {
+  const noms = new Set();
+  for (const x of (m ? ANNONCES.filter(y => y.modele === m) : [a])) {
+    const c = x.carac || {};
+    if (c["Couleur"]) noms.add(c["Couleur"]);
+    String(c["Couleurs proposées"] || "").split(",").map(s => s.trim()).filter(Boolean).forEach(s => noms.add(s));
+  }
+  return [...noms].filter(teinte).slice(0, 8);
+}
+function badgePuce(nom) {
+  const m = String(nom || "").match(/^([AMSH]\d+)\s*(.*)$/i);
+  if (!m) return "";
+  return `<div class="badge-puce"><b>${esc(m[1].toUpperCase())}</b>${m[2] && !/bionic/i.test(m[2]) ? `<small>${esc(m[2].toUpperCase())}</small>` : ""}</div>`;
+}
+const SECTIONS = [
+  {titre: "Puce", aide: "Le cerveau de l'appareil : plus elle est récente, plus tout va vite et plus longtemps il reçoit les mises à jour d'Apple. Le Neural Engine fait tourner les fonctions d'intelligence (photos, dictée, Apple Intelligence).",
+   rendu: (a, s) => { const nom = (s && s.Puce) || (a.carac || {})["Puce"]; if (!nom) return ""; const p = puceDe(nom) || {};
+     return `${badgePuce(nom)}<p class="fort">Puce ${esc(nom)}</p>${[s && s.cpu || p.cpu, s && s.gpu || p.gpu, p.ne].filter(Boolean).map(x => `<p>${esc(x)}</p>`).join("")}`; }},
+  {titre: "Écran", aide: "La taille se mesure en diagonale. ProMotion à 120 Hz rend le défilement plus fluide qu'un écran à 60 Hz.",
+   rendu: (a, s) => s && s.pouces ? `<p class="grand">${String(s.pouces).replace(".", ",")}<small> pouces</small></p><p>${esc(s["Écran"].replace(/^[\d,]+ pouces /, ""))}</p>` :
+     (a.carac || {})["Écran"] ? `<p class="grand">${esc(a.carac["Écran"].replace(" pouces", ""))}<small> pouces</small></p>` : (a.carac || {})["Taille"] ? `<p class="grand">${esc(a.carac["Taille"])}</p>` : (s && s.Tailles) ? `<p>${esc(s.Tailles)}</p>` : ""},
+  {titre: "Appareil photo", aide: "Le téléobjectif zoome sans perte de qualité ; l'ultra grand-angle fait entrer plus de paysage ou de monde sur la photo.",
+   rendu: (a, s) => s && s["Appareil photo"] ? `${s.zoom ? `<p class="grand">${String(s.zoom).replace(".", ",")}x<small> zoom optique</small></p>` : ""}<p>${esc(s["Appareil photo"])}</p>${s.ultra ? "<p>Ultra grand-angle</p>" : ""}` : ""},
+  {titre: "Autonomie", aide: "Chiffre annoncé par Apple pour l'appareil neuf. Sur un appareil d'occasion, regarde aussi la santé de la batterie.",
+   rendu: (a, s) => { const h = s && (s.video_h || s.ecoute_h || s.montre_h); const bat = (a.carac || {})["Batterie"];
+     return (h ? `<p class="grand">${h}<small> h</small></p><p>${s.video_h ? "de lecture vidéo" : s.ecoute_h ? "d'écoute" : "d'utilisation"}</p>` : "") + (bat ? `<p>Batterie de cette annonce : <b>${esc(bat)}</b></p>` : ""); }},
+  {titre: "Stockage à La Réunion", aide: "La place pour tes photos, vidéos et applis. Capacités trouvées en vente sur l'île pour ce modèle.",
+   rendu: (a, s, m) => { const t = [...new Set((m ? offres(m) : [a]).flatMap(x => [(x.carac || {})["Capacité"], ...String((x.carac || {})["Stockages proposés"] || "").split(",")]).map(x => (x || "").trim()).filter(x => enGo(x)))].sort((x, y) => enGo(x) - enGo(y));
+     return t.length ? t.map(x => `<p>${esc(x)}</p>`).join("") : ""; }},
+  {titre: "Résistance", aide: "Protection contre l'eau et la poussière : ça résiste à une chute dans une piscine ou à la pluie, pas à la plongée.",
+   rendu: (a, s) => s && (s["Résistance à l'eau"] || s.Dos) ? `${s.Dos ? `<p>Dos ${esc(s.Dos)}</p>` : ""}${s["Résistance à l'eau"] ? `<p>Résistant à l'eau ${esc(s["Résistance à l'eau"])}</p>` : ""}` : ""},
+  {titre: "Réduction de bruit", aide: "Coupe les bruits autour de toi (bus, avion, rue) pour écouter sans monter le son.",
+   rendu: (a, s) => s && s["Réduction de bruit"] ? `<p class="fort">${esc(s["Réduction de bruit"])}</p>` : ""},
+  {titre: "Poids et prise", aide: "Plus léger = plus agréable en main. USB-C : le même câble que les Mac, iPad et la plupart des chargeurs.",
+   rendu: (a, s) => s && (s.Poids || s.Connecteur) ? `${s.Poids ? `<p class="grand">${esc(s.Poids.replace(" g", ""))}<small> g</small></p>` : ""}${s.Connecteur ? `<p>${esc(s.Connecteur)}</p>` : ""}${s["Déverrouillage"] ? `<p>${esc(s["Déverrouillage"])}</p>` : ""}` : ""},
+  {titre: "Sortie", aide: "Un modèle récent reste à jour plus longtemps et se revend mieux.",
+   rendu: (a, s) => s && s.Sortie ? `<p class="grand">${s.Sortie}</p>` : ""},
 ];
+function colonneHTML(i, col, a, s, modeles) {
+  const m = col && col.m;
+  const options = `<option value="">Choisir un modèle…</option>` + CATS.slice(1).map(([k, nom]) => {
+    const ms = modeles.filter(x => x.cat === k); if (!ms.length) return "";
+    return `<optgroup label="${esc(nom)}">${ms.map(x => `<option value="${esc(x.m)}"${x.m === m ? " selected" : ""}>${esc(x.m)}</option>`).join("")}</optgroup>`;
+  }).join("") + (col && !m && a ? `<option value="" selected>${esc(a.titre.slice(0, 40))}</option>` : "");
+  const tete = `<label class="cmp-choix"><select data-col="${i}" aria-label="Modèle de la colonne ${i + 1}">${options}</select></label>`;
+  if (!a) return {tete, corps: `<div class="cmp-vide">Choisis un modèle dans la liste.</div>`};
+  const o = m ? offres(m) : [a];
+  const photo = m ? photoModele(m, a) : (a.photos || [])[0];
+  const couleurs = couleursModele(m, a);
+  const etats = [...new Set(o.map(x => x.etat))].sort((x, y) => ORDRE_ETAT[y] - ORDRE_ETAT[x]);
+  const nouveau = s && s.Sortie >= new Date().getFullYear() - 1;
+  const corps = `
+    <div class="cmp-photo">${photo ? `<img src="${esc(photo)}" alt="" referrerpolicy="no-referrer">` : ic("photo")}</div>
+    ${couleurs.length ? `<div class="cmp-couleurs">${couleurs.map((c, j) => `<i title="${esc(c)}" style="background:${teinte(c)}"${j === 0 ? ' class="on"' : ""}></i>`).join("")}</div><p class="cmp-nom-couleur">${esc(couleurs[0])}${couleurs.length > 1 ? ` et ${couleurs.length - 1} autre${couleurs.length > 2 ? "s" : ""}` : ""}</p>` : ""}
+    ${nouveau ? `<p class="cmp-nouveau">Nouveau</p>` : ""}
+    <p class="cmp-prix">${o.length > 1 || a.des ? "À partir de " : ""}${euros(o[0] ? o[0].prix : a.prix)}</p>
+    <p class="cmp-ou">${o.length > 1 ? `${o.length} offres à La Réunion · ${esc(etats.join(", ").toLowerCase())}` : `chez ${esc(a.vendeur)} · ${esc(a.etat.toLowerCase())}`}</p>
+    <button class="btn bleu cmp-btn" data-voir="${esc((o[0] || a).id)}">${o[0] && o[0].etat === "Neuf" ? "Acheter" : "Voir l'offre"}</button>
+    ${o.length > 1 ? `<button class="lien cmp-lien" data-offres="${esc(m)}">Voir les ${o.length} offres ›</button>` : ""}`;
+  return {tete, corps};
+}
+async function afficherComparaison() {
+  await chargerSpecs();
+  const modeles = modelesDispo();
+  // première ouverture : on propose les deux modèles les plus récents
+  if (!COLONNES[0] && !COLONNES[1] && modeles.length > 1) { COLONNES = [{m: modeles[0].m}, {m: modeles[1].m}]; sauverComparaison(); }
+  const reps = COLONNES.map(representant);
+  const specs = COLONNES.map((c, i) => reps[i] ? (SPECS.modeles || {})[(c && c.m) || reps[i].modele] || null : null);
+  const cols = COLONNES.map((c, i) => colonneHTML(i, c, reps[i], specs[i], modeles));
+  const deux = reps.filter(Boolean);
+  const sections = SECTIONS.map(sec => {
+    const contenus = COLONNES.map((c, i) => reps[i] ? sec.rendu(reps[i], specs[i], c && c.m) : "");
+    if (contenus.every(x => !x)) return "";
+    return `<section class="cmp-sec"><h3>${esc(sec.titre)}</h3><p class="cmp-aide">${esc(sec.aide)}</p>
+      <div class="cmp-2">${contenus.map(x => `<div>${x || `<p class="vide-cmp">—</p>`}</div>`).join("")}</div></section>`;
+  }).join("");
+  // fonctions : ✓ ou — pour chaque colonne, comme sur apple.com
+  const fonctions = [...new Set(specs.flatMap(s => (s && s.fonctions) || []))];
+  const blocFonctions = fonctions.length ? `<section class="cmp-sec"><h3>Fonctions</h3><p class="cmp-aide">✓ : l'appareil l'a. — : il ne l'a pas.</p>
+    <div class="cmp-2">${specs.map(s => `<div>${fonctions.map(f => (s && (s.fonctions || []).includes(f)) ? `<p class="oui">✓ ${esc(f)}</p>` : `<p class="non">— ${esc(f)}</p>`).join("")}</div>`).join("")}</div></section>` : "";
+  const partiels = COLONNES.map((c, i) => reps[i] && (!specs[i] || specs[i].partiel) ? (c && c.m) || reps[i].titre : null).filter(Boolean);
+  $("#comparaison").innerHTML = `
+    <div class="cmp-tetes-fixes"><div class="cmp-2">${cols.map(c => c.tete).join("")}</div></div>
+    <div class="cmp-2 cmp-haut">${cols.map(c => `<div>${c.corps}</div>`).join("")}</div>
+    ${deux.length === 2 ? `<section class="cmp-sec cmp-bref"><h3>En bref</h3><ul>${verdict(deux, specs.filter((_, i) => reps[i])).map(p => `<li>${p}</li>`).join("")}</ul></section>` : ""}
+    ${sections}${blocFonctions}
+    <p class="note" style="padding:14px 20px 0">Composants : chiffres officiels d'Apple pour l'appareil neuf${partiels.length ? ` (fiche encore partielle pour ${partiels.map(esc).join(", ")})` : ""}. Prix : la meilleure offre relevée à La Réunion.</p>`;
+  $("#comparaison").querySelectorAll("select[data-col]").forEach(sel => sel.onchange = () => {
+    const i = +sel.dataset.col; COLONNES[i] = sel.value ? {m: sel.value} : COLONNES[i]; sauverComparaison(); afficherComparaison();
+  });
+  $("#comparaison").querySelectorAll("[data-voir]").forEach(b => b.onclick = () => ouvrirFiche(b.dataset.voir));
+  $("#comparaison").querySelectorAll("[data-offres]").forEach(b => b.onclick = () => {
+    RECHERCHE = b.dataset.offres; Object.assign(F, {cat: "", sous: "", etat: "", vendeurs: [], capas: [], pro: "", min: null, max: null, tri: "prix-asc"});
+    allerA("produits"); appliquer();
+  });
+}
+function nomCourt(a) { return a.modele || a.titre.slice(0, 32); }
 function meilleurs(nums, sens) {
   const ok = nums.filter(n => n != null);
   if (ok.length < 2 || new Set(ok).size < 2) return [];
   const cible = sens === "bas" ? Math.min(...ok) : Math.max(...ok);
   return nums.map((n, i) => n === cible ? i : -1).filter(i => i >= 0);
 }
-function nomCourt(a) { return a.modele || a.titre.slice(0, 32); }
 function verdict(liste, specs) {
   const phrases = [];
   const autres = (i) => liste.filter((_, j) => j !== i);
@@ -1180,56 +1275,6 @@ function verdict(liste, specs) {
   });
   if (!phrases.length) phrases.push("Ces produits sont très proches : choisis surtout selon le prix, l'état et le vendeur le plus pratique pour toi.");
   return phrases;
-}
-async function afficherComparaison() {
-  const liste = COMPARER.map(id => PAR_ID[id] || COMPARER_COPIES[id]).filter(Boolean);
-  const n = Math.max(liste.length, 1);
-  const cols = `grid-template-columns:repeat(${Math.min(3, liste.length < 3 ? liste.length + 1 : 3)},minmax(0,1fr))`;
-  const tetes = liste.map(a => `<div class="cmp-tete">
-      <button class="retirer" data-retirer="${esc(a.id)}" aria-label="Retirer de la comparaison">${ic("x")}</button>
-      ${(a.photos || [])[0] ? `<img src="${esc(a.photos[0])}" alt="" loading="lazy" referrerpolicy="no-referrer">` : `<span class="sans">${ic("photo")}</span>`}
-      <small>${esc(a.vendeur)} · ${esc(a.etat)}</small><span>${esc(a.titre)}</span><b>${a.des && a.prix != null ? "dès " : ""}${euros(a.prix)}</b>
-      <button class="lien" data-voir="${esc(a.id)}" style="text-align:left;margin-top:2px">Voir la fiche</button>
-    </div>`).join("") + (liste.length < 3 ? `<button class="cmp-ajout" id="cmp-ajouter">${ic("plus")}Ajouter un produit</button>` : "");
-  if (liste.length < 2) {
-    $("#comparaison").innerHTML = `<div class="cmp-tetes" style="${cols}">${tetes}</div>
-      <div class="vide" style="padding-top:20px">${ic("balance")}<br>Choisis ${liste.length ? "un deuxième produit" : "deux produits"} à comparer.<br>Depuis une fiche produit, touche « Comparer avec un autre produit », ou touche « Ajouter un produit » ici.</div>`;
-    brancherComparaison(); return;
-  }
-  await chargerSpecs();
-  const specs = liste.map(a => (SPECS.modeles || {})[a.modele] || null);
-  const colsVals = `grid-template-columns:repeat(${liste.length},minmax(0,1fr))`;
-  const lignes = LIGNES.map(l => {
-    const vals = liste.map((a, i) => l.val(a, specs[i]));
-    if (vals.every(v => v == null || v === "")) return "";
-    const nums = liste.map((a, i) => l.num(a, specs[i]) ?? null);
-    const best = l.mieux ? meilleurs(nums, l.mieux) : [];
-    return `<div class="cmp-ligne"><h5>${esc(l.nom)}</h5><p>${esc(l.aide)}</p><div class="cmp-vals" style="${colsVals}">${
-      vals.map((v, i) => `<div class="${v == null || v === "" ? "vide" : best.includes(i) && best.length < liste.length ? "mieux" : ""}">${v == null || v === "" ? "non précisé" : esc(v)}</div>`).join("")}</div></div>`;
-  }).join("");
-  // fonctions : ce que chacun a, en vert ce que les autres n'ont pas
-  const toutes = specs.map(s => (s && s.fonctions) || []);
-  const fonctions = toutes.some(f => f.length) ? `<div class="cmp-ligne"><h5>Fonctions</h5><p>En vert : ce que l'autre produit n'a pas.</p><div class="cmp-vals" style="${colsVals}">${
-    toutes.map((f, i) => { const ailleurs = new Set(toutes.filter((_, j) => j !== i).flat()); return f.length ? `<div><ul>${f.map(x => `<li class="${ailleurs.has(x) ? "" : "plus"}">${esc(x)}</li>`).join("")}</ul></div>` : `<div class="vide">non précisé</div>`; }).join("")}</div></div>` : "";
-  const sansFiche = liste.filter((a, i) => !specs[i]);
-  $("#comparaison").innerHTML = `<div class="cmp-tetes" style="${cols}">${tetes}</div>
-    <div class="verdict"><h4>En bref</h4><ul>${verdict(liste, specs).map(p => `<li>${p}</li>`).join("")}</ul>
-      ${sansFiche.length ? `<p class="note">Fiche technique détaillée pas encore disponible pour ${sansFiche.map(a => esc(nomCourt(a))).join(", ")} : la comparaison utilise ce qu'indique le vendeur.</p>` : ""}
-      <p class="note">Composants et autonomies : chiffres officiels d'Apple pour l'appareil neuf. Prix et état : relevés chez le vendeur.</p></div>
-    ${lignes}${fonctions}
-    <div style="padding:16px"><button class="btn large" style="width:100%" id="cmp-vider">Vider la comparaison</button></div>`;
-  brancherComparaison();
-}
-function brancherComparaison() {
-  const z = $("#comparaison");
-  z.querySelectorAll("[data-retirer]").forEach(b => b.onclick = () => { COMPARER = COMPARER.filter(x => x !== b.dataset.retirer); delete COMPARER_COPIES[b.dataset.retirer]; sauverComparaison(); afficherComparaison(); });
-  z.querySelectorAll("[data-voir]").forEach(b => b.onclick = () => ouvrirFiche(b.dataset.voir));
-  const aj = $("#cmp-ajouter"); if (aj) aj.onclick = () => {
-    const premier = PAR_ID[COMPARER[0]] || COMPARER_COPIES[COMPARER[0]];
-    $("#q").value = premier ? (premier.modele || NOM_CAT[premier.cat] || "").split(" ").slice(0, 2).join(" ") : "";
-    ouvrirRecherche(true);
-  };
-  const v = $("#cmp-vider"); if (v) v.onclick = () => { COMPARER = []; COMPARER_COPIES = {}; sauverComparaison(); afficherComparaison(); };
 }
 
 // ------------------------------------------------------------------ données et actualisation
