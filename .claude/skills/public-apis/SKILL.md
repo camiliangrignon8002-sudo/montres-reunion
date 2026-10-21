@@ -1,6 +1,6 @@
 ---
 name: public-apis
-description: Catalogue de ~1 400 API publiques et gratuites (51 catégories : météo, géocodage, devises, shopping, transport, open data, etc.) tiré de github.com/public-apis/public-apis. À utiliser quand il faut trouver une API pour une nouvelle fonction (ex. convertir un prix, géolocaliser une commune, ajouter une source de données) ou quand l'utilisateur demande « quelle API pour… ».
+description: Catalogue de ~2 100 API publiques et gratuites (51 catégories : météo, géocodage, devises, shopping, transport, open data, etc.) tiré de github.com/public-apis/public-apis. À utiliser quand il faut trouver une API pour une nouvelle fonction (ex. convertir un prix, géolocaliser une commune, ajouter une source de données) ou quand l'utilisateur demande « quelle API pour… ».
 ---
 
 # API publiques
