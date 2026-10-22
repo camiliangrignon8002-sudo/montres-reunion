@@ -511,7 +511,8 @@
           h("div", { class: "list" }, altern.map((e) => {
             const days = Array.from({ length: 14 }, (_, i) => C.addDays(today, i)).filter((d) => C.calStatus(s, e, d) === "formation");
             const unk = Array.from({ length: 14 }, (_, i) => C.addDays(today, i)).some((d) => C.calStatus(s, e, d) === "inconnu");
-            return h("div", { class: "item" }, h("b", { class: "grow" }, e.name),
+            // Prénom sur sa propre ligne, jours de CFA en dessous : le prénom n'est jamais coupé.
+            return h("div", { class: "item alt-item" }, h("b", {}, e.name),
               h("span", { class: "small" }, days.length ? h("span", { class: "chip cours" }, `CFA : ${days.map((d) => C.DAYS_SHORT[C.dow(d)].toLowerCase() + " " + C.fmtDate(d, "short")).join(", ")}`) : unk ? h("span", { class: "chip warn" }, "Calendrier incomplet") : h("span", { class: "muted" }, "Pas de cours sous 14 jours")));
           })))));
   } };
