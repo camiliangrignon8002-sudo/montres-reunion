@@ -252,30 +252,24 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "figaro-109910151",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-109910151.html",
-  "titre": "Location  appartement 2 pièces 30 m² à Sainte Clotilde (97490), 401 €",
+  "id": "zimo-01a13ffe-7d70-7800-aeb4-3741d0f4ab82",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-t1-duplex-ste-clotilde/01a13ffe-7d70-7800-aeb4-3741d0f4ab82",
+  "titre": "Appartement T1 Duplex - Ste Clotilde",
   "prix": 401.0,
   "commune": "Saint-Denis",
-  "quartier": "Sainte Clotilde",
+  "quartier": "Sainte-Clotilde",
   "pieces": 2,
   "type": "T2",
   "surface": 30.0,
   "meuble": null,
   "photos": [
-   "https://lh3.googleusercontent.com/nqXJMVJuxXhYtZv6tA6_FVwhwwEsLOk80NO0iZpop0qifDd4mgETD2FZ1dCMktpbEMQ8JpqTJRm5F8kn_bP8SGoUaraBqENtm_a-=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/_yUgDGN1kNmjXAXGIDJHJOkqnr4586hNYe3-e2wciKcqg84Cn7QEOgaJqbW_w4feo9aoavGV0ZKMX04WEIhmJuIKoTLi5tuJMB5F=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/_e-15zspf4JGg0MC8hdSmdt4Stwq79FLaSbqQgk2YtSYGq2pIzkIDmnACJWbeS-7yrGFXcbj7PhtYRb_nPr0jwgDjUMsmyM26jIKSQ=rw-w940-h605-l80"
+   "https://img.e-xiste.com/FJ-e15EBAKdJAgjHrz7PresQqd1xPMD9AA4NFkyzZQU/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_432a991d-c297-43ce-aa19-66474391cb94.jpg"
   ],
-  "description": "Idéal étudiant ! Grand T1 Bis en duplex d'environ 30 m² comprenant : une entrée, un séjour avec un coin kitchenette, un coin chambre en mezzanine, un petit balcon et une place de parking extérieur. Disponible  fin novembre 2026. Eau inclus dans le montant du loyer.",
-  "caracteristiques": [
-   "Varangue / balcon",
-   "Parking",
-   "Proche université"
-  ],
+  "description": "Location T1 bis Saint-Denis (974) 2 pièces 30 m²",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "",
+  "annonceur": "Pro · via bien'ici",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -285,12 +279,7 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-t1-duplex-ste-clotilde/01a13ffe-7d70-7800-aeb4-3741d0f4ab82"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -2179,6 +2168,41 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "figaro-108377217",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108377217.html",
+  "titre": "Location meublée appartement 1 pièce 16 m² à Saint paul (97460), 600 €",
+  "prix": 600.0,
+  "commune": "Le Port",
+  "quartier": "Saint paul",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 16.0,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/V8t4jUk9JOvqxHSjYks6F7CN9MvRnXUGC132I-P3EIYqJPmfXuLA5YYetKpgRay9KcGpCXfmQBwaxt3R94YwhpT7R4ZOePzbPZJIQw=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/a3tW_AOl9sAEI0RzegVvKUjVKI3HDOfC8YHBOMUDl_V1AVGdF8NL1R5mwFIA62-4oGYlkr80SKNA5e_iUe7UH1AKZkhzguB2jvHo=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/xyr8KWNJjo-adpsxY5w1bUkbtUYw1AnwJc48_Glu8RNe0A7fGnIBJgA2dlu2ouU54maNbkxRgQtAbu7llYtoYk_f3XMs-5h_YOWAjQ=rw-w940-h605-l80"
+  ],
+  "description": "Nous vous proposons à la location cette chambre meublée d'une surface de 16m2, située à Saint Gilles les Hauts.\nLe locataire aura à sa disposition sa propre SDB personnelle ainsi que son WC (type chambre parentale)\nEn commun tous le reste de la maison et les extérieurs.\nLoyer 600EUR\nEau, électricité et internet inclus dans le loyer - le logement est loué meublé - le ménage est fait dans les espaces personnels (et compris dans le loyer) tous les 15 jours\nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www.georisques.gouv.fr",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord-Ouest",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T17:56+04:00"
+ },
+ {
   "id": "zimo-01a11734-78a6-7892-b7d4-6b5051050245",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-meuble-19-m2-sainte-clotilde/01a11734-78a6-7892-b7d4-6b5051050245",
@@ -2982,10 +3006,6 @@
    {
     "source": "Bien'ici",
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/ag340369-551086409"
-   },
-   {
-    "source": "Figaro Immobilier",
-    "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html"
    },
    {
     "source": "Zimo",
@@ -3967,44 +3987,34 @@
   "vu": "2026-10-21T12:07+04:00"
  },
  {
-  "id": "figaro-107794481",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-107794481.html",
-  "titre": "Location meublée appartement 1 pièce 21.74 m² à Saint-Denis (97400), 688 €",
+  "id": "zimo-019fe1d2-3968-72af-9c83-582481ec3913",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/019fe1d2-3968-72af-9c83-582481ec3913",
+  "titre": "Appartement 1 pièce 22 m²",
   "prix": 688.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
-  "surface": 21.74,
-  "meuble": true,
+  "surface": 22.0,
+  "meuble": null,
   "photos": [
-   "https://lh3.googleusercontent.com/9QN6bm8fck2QO6yxLUE6PIMUYUWEu5f6vZN5wvnoSkjJiKRNOdGkUPASmGW1miuukgp2m5YWjP8AdUUIWLpJydE_xOG0kxYl_n9OoY4=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/evaAflRgXRaIFx775leYx1C3u0QeagnvvN8UaaG2Dp72AI44rn0nQ6BxWoILsXFGoq6mNoVrubRNQwmPLLvXkPdHt6oolRzMGnK0Iw=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/-cSNFXzBmX5MYzxesh6xhHybQ7gHGcW7ONsQH1iSRoeUg8tlbP1AflJykRfYlt883sA1aIg7-RUQnMV-45P2ggQcnSGyyDytMMsN=rw-w940-h605-l80"
+   "https://img.e-xiste.com/F7VvgHq7H0t9eengABdOSuTabRILwlNMkjdPZy8aDPM/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fimmo-cdn.fr%2Fimages%2Ffigaro%2F6a772189e41bb2d26d5a4854-1.jpg"
   ],
-  "description": "RUNIMMO vous propose à la location, en plein coeur du centre-ville de Saint-Denis (97400), ce studio meublé de 22m2. Studio entièrement meublé, moderne et fonctionnel, Son espace de vie lumineux, sans vis-à-vis, vous assurera la tranquillité. Ce bien est proche des commerces du centre-ville, proche du CHU Felix GUYON, du Jardin de L'état et des commodités. Pour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 283 € TTC à la charge du locataire comprenant 65 € TTC pour l'état des lieux. Loyer de base 632 €/mois. Provision sur charges 29 €/mois, régularisation annuelle. Complément de loyer 27 €/mois. Dépôt de garantie 1 264 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
-  "caracteristiques": [
-   "Meublé",
-   "Jardin"
-  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 22 m²",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "",
+  "annonceur": "Pro · via Figaro Immobilier",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "0692 26 92 05",
+  "tel": "",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/019fe1d2-3968-72af-9c83-582481ec3913"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
