@@ -30,6 +30,7 @@
     checkMaxWeek: true, maxWeekHours: 48,
     coverageFromTemplate: true,
     rulesConfirmed: false,
+    appliedUpdates: [],
   };
 
   // Codes qui empêchent d'enregistrer une modification ou de valider un planning.
@@ -381,8 +382,8 @@
         const segs = t.segs.map(({ s, e, z }) => ({ s, e, z }));
         let reason = null;
         if (!emp) reason = "personne absente de l'équipe";
-        else if (include && !include.has(emp.id)) reason = "non sélectionné(e) pour cette génération";
         else if (emp.active === false) reason = "employé désactivé";
+        else if (include && !include.has(emp.id)) reason = "non sélectionné(e) pour cette génération";
         else if (extra.some((x) => x.emp === emp.id && x.date === date)) reason = "contrainte particulière saisie pour cette génération";
         else {
           const av = availability(state, emp.id, date, segs);
@@ -735,6 +736,7 @@
           const p = op.patch || {};
           for (const [k, v] of Object.entries(p)) {
             if (!(k in DEFAULT_SETTINGS)) continue;
+            if (Array.isArray(DEFAULT_SETTINGS[k])) { if (!Array.isArray(v)) { fail(`Valeur invalide pour ${k}.`); continue; } s.settings[k] = v.map(String).slice(0, 200); continue; }
             if (typeof DEFAULT_SETTINGS[k] === "number" && !(Number(v) > 0)) { fail(`Valeur invalide pour ${k}.`); continue; }
             s.settings[k] = typeof DEFAULT_SETTINGS[k] === "number" ? Number(v) : !!v;
           }

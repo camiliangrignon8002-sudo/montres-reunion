@@ -142,6 +142,13 @@
 
   root.PlanningReference = {
     extraWeeks, ruleUpdates,
+    // Changements d'équipe demandés par le responsable (appliqués une seule fois, à l'ouverture).
+    teamUpdates: [{
+      id: "equipe-2026-10-22",
+      summary: "Sonia et Sylvie supprimées ; Lydia retirée de l'équipe à partir du 23/10/2026",
+      remove: ["sonia", "sylvie"],
+      leave: { lydia: "2026-10-23" },
+    }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
       alternance: "BTS MCO 1 – CFA Levavasseur – Calendrier d'alternance 2026-2027 (capture)",

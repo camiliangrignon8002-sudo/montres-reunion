@@ -79,7 +79,7 @@ const MOCK = `
     await page.click("text=Importer ces données");
     await page.waitForSelector("table.plan");
     const cells = await page.$$eval("table.plan td.cell .blk", (b) => b.length);
-    check("semaine du 19/10 importée : 104 blocs (52 journées × 2)", cells === 104, String(cells));
+    check("semaine du 19/10 importée : 102 blocs (51 journées, Lydia retirée le 23/10)", cells === 102, String(cells));
     check("légende visible", await page.isVisible(".legend"));
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/2-semaine.png` });
 
@@ -132,7 +132,7 @@ const MOCK = `
     await page.click('button[aria-label="Semaine suivante"]');
     await page.waitForSelector('td.cell[aria-label^="Lucas, Mercredi 28"]');
     const w2 = await page.evaluate(() => { const w = PlanningApp.state.weeks["2026-10-26"]; return { n: w.shifts.length, min: w.shifts.reduce((a, x) => a + PlanningCore.shiftMinutes(x.segs), 0), err: PlanningCore.validateWeek(PlanningApp.state, "2026-10-26").filter((i) => i.level === "erreur").length }; });
-    check("semaine du 26/10 ajoutée : 366 h, aucune erreur", w2.min === 366 * 60 && w2.err === 0, JSON.stringify(w2));
+    check("semaine du 26/10 ajoutée : 338 h (366 h − 28 h de Lydia), aucune erreur", w2.min === 338 * 60 && w2.err === 0, JSON.stringify(w2));
     // cours : Camilian et Fleur ne peuvent pas être placés le 12 et le 13 novembre
     await page.click('button[aria-label="Semaine suivante"]');
     await page.click('button[aria-label="Semaine suivante"]');
@@ -141,7 +141,7 @@ const MOCK = `
     await page.click("text=Préparer la proposition");
     await page.waitForSelector("text=Proposition de planning");
     const notPlaced = await page.textContent(".dialog");
-    check("génération : 4 postes non attribués (CFA les 12 et 13 nov.)", /4 poste\(s\) non attribué/.test(notPlaced));
+    check("génération : 6 postes non attribués (4 CFA les 12-13 nov. + 2 de Lydia)", /6 poste\(s\) non attribué/.test(notPlaced) && (notPlaced.match(/formation au CFA/g) || []).length === 4 && (notPlaced.match(/employé désactivé/g) || []).length === 2);
     await page.click(".dialog footer >> text=/Enregistrer 1 semaine/");
     await page.waitForSelector("text=Postes à pourvoir");
     const coursTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) .tag-cours', (x) => x.length);
@@ -243,7 +243,7 @@ const MOCK = `
     check("db : config, semaine et historique écrits", docs.includes("config/employees") && docs.includes("weeks/2026-10-19") && docs.some((k) => k.startsWith("history/")), docs.length + " documents");
     // rechargement : les données reviennent de la base
     const n1 = await page.evaluate(async () => { await PlanningApp.refresh(); return PlanningApp.state.weeks["2026-10-19"].shifts.length; });
-    check("db : relecture après actualisation", n1 === 52);
+    check("db : relecture après actualisation", n1 === 51);
 
     await page.click("text=Assistant");
     await page.waitForSelector("#ai-input:not([disabled])");
@@ -307,6 +307,8 @@ const MOCK = `
     check("règles ajoutées aux données déjà sur le téléphone", rules.seb && rules.seb.fixedHours.s === "07:00" && rules.eric.daysOff.join() === "5,6" && rules.eric.fixedHours.s === "07:00" && rules.nat.fixedHours.e === "13:30" && rules.nat.daysOff.join() === "5,6", JSON.stringify(rules).slice(0, 120));
     await page.evaluate(() => PlanningApp.go("team"));
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/11-regles.png`, fullPage: true });
+    const team = await page.evaluate(() => { const st = PlanningApp.state; const ly = st.employees.find((e) => e.id === "lydia"); return { sonia: !!st.employees.find((e) => e.id === "sonia"), sylvie: !!st.employees.find((e) => e.id === "sylvie"), lydiaActive: ly && ly.active, lydiaAfter: Object.values(st.weeks).flatMap((w) => w.shifts).filter((x) => x.emp === "lydia" && x.date >= "2026-10-23").length, lydiaBefore: Object.values(st.weeks).flatMap((w) => w.shifts).filter((x) => x.emp === "lydia" && x.date < "2026-10-23").length }; });
+    check("Sonia et Sylvie supprimées, Lydia retirée à partir du 23/10", !team.sonia && !team.sylvie && team.lydiaActive === false && team.lydiaAfter === 0 && team.lydiaBefore === 1, JSON.stringify(team));
     const man = await page.evaluate(async () => (await fetch("manifest.webmanifest")).json());
     check("appli téléphone : manifeste installable", man.display === "standalone" && man.icons.length === 2);
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/10-pwa.png` });

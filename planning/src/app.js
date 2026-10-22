@@ -1420,6 +1420,26 @@
       if (!cur || !cur.shifts.length) await this.applyRefWeek(p, false);
       else this.pendingRef.push(p);
     }
+    // Départs de l'équipe : la personne est désactivée et ses créneaux à partir de la date sont retirés
+    // (ses postes deviennent « à pourvoir », les jours passés restent dans l'historique des heures).
+    for (const u of R.teamUpdates || []) {
+      const done = this.state.settings.appliedUpdates || [];
+      if (done.includes(u.id)) continue;
+      const ops = [];
+      for (const id of u.remove || []) {
+        const e = C.empById(this.state, id);
+        if (!e) continue;
+        const used = Object.values(this.state.weeks).some((w) => w.shifts.some((x) => x.emp === id)) || this.state.template.shifts.some((t) => t.emp === id);
+        ops.push(used ? { type: "updateEmployee", id, patch: { active: false } } : { type: "removeEmployee", id });
+      }
+      for (const [id, from] of Object.entries(u.leave || {})) {
+        if (!C.empById(this.state, id)) continue;
+        ops.push({ type: "updateEmployee", id, patch: { active: false } });
+        for (const w of Object.values(this.state.weeks)) for (const x of w.shifts) if (x.emp === id && x.date >= from) ops.push({ type: "removeShift", emp: id, date: x.date });
+      }
+      ops.push({ type: "setSettings", patch: { appliedUpdates: [...done, u.id] } });
+      await this.commit(ops, { source: "import", summary: u.summary, quiet: true, noImpacts: true, allowErrors: true });
+    }
     this.render();
   };
   App.applyRefWeek = async function (p, replacing) {
