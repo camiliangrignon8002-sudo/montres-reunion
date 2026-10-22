@@ -79,7 +79,7 @@ const MOCK = `
     await page.click("text=Importer ces données");
     await page.waitForSelector("table.plan");
     const cells = await page.$$eval("table.plan td.cell .blk", (b) => b.length);
-    check("semaine du 19/10 importée : 102 blocs (51 journées, Lydia retirée le 23/10)", cells === 102, String(cells));
+    check("semaine du 19/10 importée : 100 blocs (50 journées, sans Lydia)", cells === 100, String(cells));
     check("légende visible", await page.isVisible(".legend"));
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/2-semaine.png` });
 
@@ -141,7 +141,7 @@ const MOCK = `
     await page.click("text=Préparer la proposition");
     await page.waitForSelector("text=Proposition de planning");
     const notPlaced = await page.textContent(".dialog");
-    check("génération : 6 postes non attribués (4 CFA les 12-13 nov. + 2 de Lydia)", /6 poste\(s\) non attribué/.test(notPlaced) && (notPlaced.match(/formation au CFA/g) || []).length === 4 && (notPlaced.match(/employé désactivé/g) || []).length === 2);
+    check("génération : 4 postes non attribués (CFA les 12-13 nov.)", /4 poste\(s\) non attribué/.test(notPlaced) && (notPlaced.match(/formation au CFA/g) || []).length === 4);
     await page.click(".dialog footer >> text=/Enregistrer 1 semaine/");
     await page.waitForSelector("text=Postes à pourvoir");
     const coursTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) .tag-cours', (x) => x.length);
@@ -254,7 +254,7 @@ const MOCK = `
     check("db : config, semaine et historique écrits", docs.includes("config/employees") && docs.includes("weeks/2026-10-19") && docs.some((k) => k.startsWith("history/")), docs.length + " documents");
     // rechargement : les données reviennent de la base
     const n1 = await page.evaluate(async () => { await PlanningApp.refresh(); return PlanningApp.state.weeks["2026-10-19"].shifts.length; });
-    check("db : relecture après actualisation", n1 === 51);
+    check("db : relecture après actualisation", n1 === 50);
 
     await page.click("text=Assistant");
     await page.waitForSelector("#ai-input:not([disabled])");
@@ -318,13 +318,18 @@ const MOCK = `
     check("règles ajoutées aux données déjà sur le téléphone", rules.seb && rules.seb.fixedHours.s === "07:00" && rules.eric.daysOff.join() === "5,6" && rules.eric.fixedHours.s === "07:00" && rules.nat.fixedHours.e === "13:30" && rules.nat.daysOff.join() === "5,6", JSON.stringify(rules).slice(0, 120));
     await page.evaluate(() => PlanningApp.go("team"));
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/11-regles.png`, fullPage: true });
-    const team = await page.evaluate(() => { const st = PlanningApp.state; const ly = st.employees.find((e) => e.id === "lydia"); return { sonia: !!st.employees.find((e) => e.id === "sonia"), sylvie: !!st.employees.find((e) => e.id === "sylvie"), lydiaActive: ly && ly.active, lydiaAfter: Object.values(st.weeks).flatMap((w) => w.shifts).filter((x) => x.emp === "lydia" && x.date >= "2026-10-23").length, lydiaBefore: Object.values(st.weeks).flatMap((w) => w.shifts).filter((x) => x.emp === "lydia" && x.date < "2026-10-23").length }; });
-    check("Sonia et Sylvie supprimées, Lydia retirée à partir du 23/10", !team.sonia && !team.sylvie && team.lydiaActive === false && team.lydiaAfter === 0 && team.lydiaBefore === 1, JSON.stringify(team));
-    // Réparation d'un départ appliqué par l'ancienne version (sans date de départ ni postes vidés)
-    await page.evaluate(() => { const k = "planning-equipe:config/employees"; const v = JSON.parse(localStorage.getItem(k)); delete v.find((e) => e.id === "lydia").leftOn; localStorage.setItem(k, JSON.stringify(v)); for (const m of ["2026-10-19", "2026-10-26"]) { const wk = "planning-equipe:weeks/" + m; const w = JSON.parse(localStorage.getItem(wk)); delete w.vacated; localStorage.setItem(wk, JSON.stringify(w)); } });
+    // Données d'un téléphone qui avait encore Lydia (avant qu'elle soit retirée) : elle doit disparaître partout
+    await page.evaluate(() => {
+      const k = "planning-equipe:config/employees"; const v = JSON.parse(localStorage.getItem(k));
+      v.push({ id: "lydia", name: "Lydia", role: "salarie", zones: { ZP: "confirme" }, active: false, leftOn: "2026-10-23" }); localStorage.setItem(k, JSON.stringify(v));
+      const wk = "planning-equipe:weeks/2026-10-19"; const w = JSON.parse(localStorage.getItem(wk));
+      w.shifts.push({ id: "x1", emp: "lydia", date: "2026-10-22", segs: [{ s: "05:30", e: "11:00", z: "ZP" }, { s: "11:30", e: "13:00", z: "ZP" }] });
+      w.vacated = [{ date: "2026-10-23", emp: "lydia", segs: [{ s: "05:30", e: "13:00", z: "ZP" }], reason: "départ de Lydia" }]; localStorage.setItem(wk, JSON.stringify(w));
+      const sk = "planning-equipe:config/settings"; const st = JSON.parse(localStorage.getItem(sk)); st.appliedUpdates = st.appliedUpdates.filter((x) => x !== "patronne-lydia"); localStorage.setItem(sk, JSON.stringify(st));
+    });
     await page.reload(); await page.waitForFunction(() => window.PlanningApp && PlanningApp.ready); await page.waitForTimeout(400);
-    const rep = await page.evaluate(() => ({ left: PlanningApp.state.employees.find((e) => e.id === "lydia").leftOn, v: ["2026-10-19", "2026-10-26"].map((m) => (PlanningApp.state.weeks[m].vacated || []).length), err: ["2026-10-19", "2026-10-26"].map((m) => PlanningCore.validateWeek(PlanningApp.state, m).filter((i) => i.level === "erreur").length) }));
-    check("départ de Lydia : jours passés valides, 5 postes vidés à pourvoir", rep.left === "2026-10-23" && rep.v.join() === "1,4" && rep.err.join() === "0,0", JSON.stringify(rep));
+    const ly = await page.evaluate(() => { const st = PlanningApp.state; return { emp: !!st.employees.find((e) => e.id === "lydia"), sonia: !!st.employees.find((e) => e.id === "sonia"), shifts: Object.values(st.weeks).flatMap((w) => w.shifts).filter((x) => x.emp === "lydia").length, vac: Object.values(st.weeks).flatMap((w) => w.vacated || []).filter((x) => x.emp === "lydia").length, tpl: st.template.shifts.filter((t) => t.emp === "lydia").length, err: ["2026-10-19", "2026-10-26"].map((m) => PlanningCore.validateWeek(st, m).filter((i) => i.level === "erreur" || i.code === "UNCOVERED").length) }; });
+    check("Lydia (patronne) retirée partout, Sonia et Sylvie supprimées, aucun poste à pourvoir à sa place", !ly.emp && !ly.sonia && !ly.shifts && !ly.vac && !ly.tpl && ly.err.join() === "0,0", JSON.stringify(ly));
     const conf = await page.evaluate(() => { const st = PlanningApp.state; return { rules: st.settings.rulesConfirmed, day: st.settings.maxDayHours, week: st.settings.maxWeekHours, pause: st.settings.minPauseMinutes, uncertain: st.employees.filter((e) => Object.values(e.zones || {}).some((v) => v !== "confirme")).length, doubts: Object.values(st.weeks).flatMap((w) => w.shifts).filter((x) => x.segs.some((g) => g.doute)).length }; });
     check("informations confirmées (35 h, 7 h + 30 min, zones, couleurs)", conf.rules && conf.day === 7 && conf.week === 35 && conf.pause === 30 && conf.uncertain === 0 && conf.doubts === 0, JSON.stringify(conf));
     const man = await page.evaluate(async () => (await fetch("manifest.webmanifest")).json());

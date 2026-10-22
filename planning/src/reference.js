@@ -27,7 +27,6 @@
   put("eric", [0, 1, 2, 4], mat7(ZP));
   put("eric", [3], mat7(ZR, MIX));
   put("fleur", [2, 3, 4, 5, 6], nuit7(ZR));
-  put("lydia", [3, 4], ouv7(ZP));
   put("maelle", [0, 1], soir7(ZP));
   put("maelle", [2, 3, 6], soir7b(ZP));
   put("mathilde", [0, 1, 3, 4], soir6(ZR));
@@ -51,7 +50,6 @@
     E("charlotte", "Charlotte", "salarie", { ZP: "deduit", ZR: "incertain" }, "Vert partout ; fin de service mardi et mercredi surlignée en orange par-dessus le vert."),
     E("eric", "Eric", "salarie", { ZP: "deduit", ZR: "incertain" }, "Vert partout ; fin de service jeudi surlignée en orange par-dessus le vert."),
     E("fleur", "Fleur", "alternant", { ZR: "deduit" }, "5 jours sur 5 en orange (zone réservée).", { calendarId: "bts-mco1" }),
-    E("lydia", "Lydia", "salarie", { ZP: "deduit", ZR: "deduit" }, "Vert (ouverture 05:30) ; orange jeudi et vendredi de la semaine du 26/10 (06:00)."),
     E("maelle", "Maelle", "salarie", { ZP: "deduit" }, "5 jours sur 5 en vert."),
     E("mathilde", "Mathilde", "salarie", { ZR: "deduit", ZP: "deduit" }, "Orange lundi, mardi, jeudi, vendredi ; vert samedi."),
     E("murielle", "Murielle", "salarie", { ZP: "deduit", ZR: "deduit" }, "Vert lundi et mardi ; orange mercredi, samedi, dimanche."),
@@ -101,8 +99,6 @@
   put2("fleur", [0, 1, 2], nuit7(ZR));
   put2("lucas", [2], soir7(ZP));
   put2("lucas", [5, 6], aubeB(ZP));
-  put2("lydia", [1, 2], ouvB(ZP));
-  put2("lydia", [3, 4], aubeB(ZR));
   put2("maelle", [2], soirB(ZP));
   put2("maelle", [3, 4, 5, 6], soir7(ZP));
   put2("mathilde", [2, 3, 4, 5, 6], soir6(ZR));
@@ -116,8 +112,8 @@
   put2("sebastien", [1, 2, 3, 4], mat7(ZR));
   const extraWeeks = [{
     refId: "papier-2026-10-26", monday: "2026-10-26", source: "planning papier (photo)", shifts: W2,
-    zonesAdd: { camilian: ["ZR"], lucas: ["ZP"], lydia: ["ZR"] },
-    totalsOnPaper: { camilian: 21, charlotte: 35, eric: 35, fleur: 21, lucas: 21, lydia: 28, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35 },
+    zonesAdd: { camilian: ["ZR"], lucas: ["ZP"] },
+    totalsOnPaper: { camilian: 21, charlotte: 35, eric: 35, fleur: 21, lucas: 21, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35 },
     notes: ["Lydia, samedi 31/10 : ajout manuscrit « 06H / 13H » surligné en orange, hors des totaux imprimés : non ajouté, à confirmer."],
   }];
 
@@ -145,14 +141,17 @@
     // Changements d'équipe demandés par le responsable (appliqués une seule fois, à l'ouverture).
     teamUpdates: [{
       id: "equipe-2026-10-22",
-      summary: "Sonia et Sylvie supprimées ; Lydia retirée de l'équipe à partir du 23/10/2026",
+      summary: "Sonia et Sylvie supprimées",
       remove: ["sonia", "sylvie"],
-      leave: { lydia: "2026-10-23" },
     }, {
       id: "confirmation-2026-10-22",
       summary: "Informations confirmées : zones, couleurs lues sur les photos, 35 h par semaine, journées de 7 h + 30 min de pause, 11 h de repos",
       confirmAll: true,
       settings: { contractHours: 35, maxWeekHours: 35, maxDayHours: 7, checkPause: true, minPauseMinutes: 30, minRestHours: 11, checkRest: true, checkMaxDay: true, checkMaxWeek: true, rulesConfirmed: true },
+    }, {
+      id: "patronne-lydia",
+      summary: "Lydia (la patronne) retirée du planning : horaires, modèle, heures et équipe",
+      purge: ["lydia"],
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
@@ -169,7 +168,7 @@
       id: "bts-mco1", name: "BTS MCO 1 – CFA Levavasseur 2026-2027", from: "2026-08-01", to: "2027-07-31", months,
       note: "Rose = formation au CFA, blanc « ENTREPRISE » = en entreprise, gris foncé = week-end, gris clair = jour férié.",
     }],
-    totalsOnPaper: { camilian: 35, charlotte: 35, eric: 35, fleur: 35, lydia: 14, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35, amandine: 0, sonia: 0, sophie: 0, sylvie: 0 },
+    totalsOnPaper: { camilian: 35, charlotte: 35, eric: 35, fleur: 35, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35, amandine: 0, sonia: 0, sophie: 0, sylvie: 0 },
     questions: [
       "Le planning indique « Page 1/2 » : la page 2 contient-elle une semaine 2 (rotation) ou d'autres employés ?",
       "Amandine et Sophie n'ont aucun horaire : sont-elles encore dans l'équipe, et dans quelle zone ?",

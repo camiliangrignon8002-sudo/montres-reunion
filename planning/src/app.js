@@ -1504,6 +1504,18 @@
         const used = Object.values(this.state.weeks).some((w) => w.shifts.some((x) => x.emp === id)) || this.state.template.shifts.some((t) => t.emp === id);
         ops.push(used ? { type: "updateEmployee", id, patch: { active: false } } : { type: "removeEmployee", id });
       }
+      // Personne retirée de tout le planning (ex. la patronne) : ses créneaux, postes vidés, modèle, heures et fiche.
+      for (const id of u.purge || []) {
+        const st = this.state;
+        for (const w of Object.values(st.weeks)) {
+          const mine = w.shifts.filter((x) => x.emp === id), vac = (w.vacated || []).filter((v) => v.emp === id);
+          if (mine.length || vac.length) ops.push({ type: "putWeek", monday: w.week, week: { ...C.clone(w), shifts: w.shifts.filter((x) => x.emp !== id), vacated: (w.vacated || []).filter((v) => v.emp !== id) } });
+        }
+        if (st.template.shifts.some((t) => t.emp === id)) ops.push({ type: "setTemplate", template: { ...C.clone(st.template), shifts: st.template.shifts.filter((t) => t.emp !== id) } });
+        for (const a of Object.values(st.adjustments || {})) if (a.emp === id) ops.push({ type: "removeAdjustment", id: a.id });
+        for (const a of Object.values(st.absences || {})) if (a.emp === id) ops.push({ type: "removeAbsence", id: a.id });
+        if (C.empById(st, id)) ops.push({ type: "removeEmployee", id });
+      }
       if (u.confirmAll) ops.push({ type: "confirmAll" });
       if (u.settings) ops.push({ type: "setSettings", patch: u.settings });
       for (const [id, from] of Object.entries(u.leave || {})) {

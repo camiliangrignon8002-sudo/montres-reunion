@@ -40,7 +40,7 @@ test("modèle : les totaux relus correspondent à la colonne Total du papier", (
 test("génération semaine 1 : 52 créneaux, aucune erreur bloquante", () => {
   const s = fresh();
   const { week, report } = C.generateWeek(s, W1);
-  assert.equal(week.shifts.length, 52);
+  assert.equal(week.shifts.length, 50);
   assert.equal(report.notPlaced.length, 0);
   assert.equal(C.blockingIssues(report.issues).length, 0);
 });
@@ -206,7 +206,7 @@ test("export CSV puis réimport : mêmes créneaux", () => {
   assert.ok(csv.startsWith("﻿Semaine;Date"));
   const { shifts, rejected } = C.csvToShifts(s, csv);
   assert.equal(rejected.length, 0);
-  assert.equal(shifts.length, 52);
+  assert.equal(shifts.length, 50);
   const r = apply(fresh(), [{ type: "importShifts", shifts }], { allowErrors: true });
   const a = r.state.weeks[W1].shifts.map((x) => x.emp + x.date + C.segKey(x.segs)).sort();
   const b = s.weeks[W1].shifts.map((x) => x.emp + x.date + C.segKey(x.segs)).sort();
