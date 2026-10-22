@@ -333,7 +333,7 @@
       id: "equipe-2026-10-22c",
       summary: "Sophie supprimée ; Amandine en vacances (retour non renseigné)",
       remove: ["sophie"],
-      onLeave: { amandine: { type: "vacances", since: "2026-10-19" } },
+      onLeave: { amandine: { type: "vacances", since: "2026-09-30" } },
       leftOn: { sophie: "2026-10-19" },
     }, {
       id: "validation-2026-10-22",
@@ -348,6 +348,10 @@
       id: "semaines-septembre",
       summary: "Plannings papier de septembre (07/09 au 04/10) ajoutés et validés",
       validatePaperWeeks: true,
+    }, {
+      id: "amandine-vacances-0930",
+      summary: "Amandine en vacances depuis le 30/09/2026",
+      onLeave: { amandine: { type: "vacances", since: "2026-09-30" } },
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
