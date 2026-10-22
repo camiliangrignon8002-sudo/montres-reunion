@@ -946,6 +946,39 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "figaro-98661035",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-98661035.html",
+  "titre": "Location  appartement 1 pièce 20 m² à Moufia (97490), 500 €",
+  "prix": 500.0,
+  "commune": "Saint-Denis",
+  "quartier": "Moufia",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 20.0,
+  "meuble": null,
+  "photos": [
+   "https://lh3.googleusercontent.com/4AmR21oczw3d0xwlGeqTEe3VHkaEfugPmyOtPv01WvX2-UFQUQEW6BuTRJgF2j-X-KNoI38Fn2lfPo2SbofEZd9WLgAqD1pSSGmqGA=rw-w700-h660-l80"
+  ],
+  "description": "A louer studio comprenant :\n1 kitchenette\n1 pièce principale climatisée\n1 SDE + WC\nPlacards aménagés",
+  "caracteristiques": [
+   "Climatisation"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T13:51+04:00"
+ },
+ {
   "id": "superimmo--annonces-location-appartement-23m-saint-denis-97490-x10jbs8",
   "source": "Superimmo",
   "url": "https://www.superimmo.com/annonces/location-appartement-23m-saint-denis-97490-x10jbs8",
@@ -3968,44 +4001,34 @@
   "vu": "2026-10-21T12:07+04:00"
  },
  {
-  "id": "figaro-107794481",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-107794481.html",
-  "titre": "Location meublée appartement 1 pièce 21.74 m² à Saint-Denis (97400), 688 €",
+  "id": "zimo-019fe1d2-3968-72af-9c83-582481ec3913",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/019fe1d2-3968-72af-9c83-582481ec3913",
+  "titre": "Appartement 1 pièce 22 m²",
   "prix": 688.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
-  "surface": 21.74,
-  "meuble": true,
+  "surface": 22.0,
+  "meuble": null,
   "photos": [
-   "https://lh3.googleusercontent.com/9QN6bm8fck2QO6yxLUE6PIMUYUWEu5f6vZN5wvnoSkjJiKRNOdGkUPASmGW1miuukgp2m5YWjP8AdUUIWLpJydE_xOG0kxYl_n9OoY4=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/evaAflRgXRaIFx775leYx1C3u0QeagnvvN8UaaG2Dp72AI44rn0nQ6BxWoILsXFGoq6mNoVrubRNQwmPLLvXkPdHt6oolRzMGnK0Iw=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/-cSNFXzBmX5MYzxesh6xhHybQ7gHGcW7ONsQH1iSRoeUg8tlbP1AflJykRfYlt883sA1aIg7-RUQnMV-45P2ggQcnSGyyDytMMsN=rw-w940-h605-l80"
+   "https://img.e-xiste.com/F7VvgHq7H0t9eengABdOSuTabRILwlNMkjdPZy8aDPM/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fimmo-cdn.fr%2Fimages%2Ffigaro%2F6a772189e41bb2d26d5a4854-1.jpg"
   ],
-  "description": "RUNIMMO vous propose à la location, en plein coeur du centre-ville de Saint-Denis (97400), ce studio meublé de 22m2. Studio entièrement meublé, moderne et fonctionnel, Son espace de vie lumineux, sans vis-à-vis, vous assurera la tranquillité. Ce bien est proche des commerces du centre-ville, proche du CHU Felix GUYON, du Jardin de L'état et des commodités. Pour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 283 € TTC à la charge du locataire comprenant 65 € TTC pour l'état des lieux. Loyer de base 632 €/mois. Provision sur charges 29 €/mois, régularisation annuelle. Complément de loyer 27 €/mois. Dépôt de garantie 1 264 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
-  "caracteristiques": [
-   "Meublé",
-   "Jardin"
-  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 22 m²",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "",
+  "annonceur": "Pro · via Figaro Immobilier",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "0692 26 92 05",
+  "tel": "",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/019fe1d2-3968-72af-9c83-582481ec3913"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
