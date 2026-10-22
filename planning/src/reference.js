@@ -157,6 +157,11 @@
       summary: "Sophie supprimée ; Amandine en vacances (retour non renseigné)",
       remove: ["sophie"],
       onLeave: { amandine: { type: "vacances", since: "2026-10-19" } },
+    }, {
+      id: "validation-2026-10-22",
+      summary: "Tout est confirmé ; semaines des plannings papier (19/10 et 26/10) validées",
+      confirmAll: true,
+      validatePaperWeeks: true,
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",

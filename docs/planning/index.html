@@ -511,6 +511,11 @@ table.t td.num { white-space: nowrap; }
       summary: "Sophie supprimée ; Amandine en vacances (retour non renseigné)",
       remove: ["sophie"],
       onLeave: { amandine: { type: "vacances", since: "2026-10-19" } },
+    }, {
+      id: "validation-2026-10-22",
+      summary: "Tout est confirmé ; semaines des plannings papier (19/10 et 26/10) validées",
+      confirmAll: true,
+      validatePaperWeeks: true,
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
@@ -2234,6 +2239,8 @@ table.t td.num { white-space: nowrap; }
         this.loadError = (e && e.message) || "erreur inconnue";
       }
       this.ready = true;
+      // Premier lancement : les calendriers analysés (déjà confirmés) sont importés automatiquement.
+      if (!this.state && !this.loadError && root.PlanningReference && Store.canWrite) { await this.importReference(true); return; }
       if (!this.state) this.ui.screen = "import";
       this.render();
       await this.syncReference();
@@ -3271,13 +3278,13 @@ table.t td.num { white-space: nowrap; }
     const calStats = (() => { const o = { E: 0, P: 0, W: 0, F: 0, "?": 0 }; for (const v of Object.values(R.calendars[0].months)) for (const c of v) o[c]++; return o; })();
     const refState = C.stateFromReference(R);
     wrap.append(h("section", { class: "card" },
-      h("div", { class: "row between" }, h("h2", {}, "Calendriers analysés"), s ? h("span", { class: "chip ok" }, "Importés") : h("span", { class: "chip warn" }, "En attente de votre confirmation")),
+      h("div", { class: "row between" }, h("h2", {}, "Calendriers analysés"), s ? h("span", { class: "chip ok" }, "Importés et confirmés") : h("span", { class: "chip info" }, "Import en cours…")),
       h("p", { class: "small muted" }, `Sources : ${R.source.planning} ; ${R.source.alternance}. Lecture faite le ${C.fmtDate(R.source.importedOn, "num")}.`),
       h("h3", { style: { "margin-top": "14px" } }, "1. Planning modèle (semaine du 19/10/2026)"),
       h("ul", { class: "small" },
-        h("li", {}, `${refEmp.length - 1} prénoms sur le planning ; ${refEmp.filter((e) => tplDays(e.id).length).length} ont des horaires, 4 n'en ont aucun (Amandine, Sonia, Sophie, Sylvie).`),
+        h("li", {}, "16 prénoms sur le planning papier. Depuis : Lydia (la patronne) est retirée du planning, Sonia, Sylvie et Sophie ne font plus partie de l'équipe, Amandine est en vacances."),
         h("li", {}, "Chaque journée = 2 blocs « De / A » séparés par une pause de 30 min (ex. 13:30–17:00 puis 17:30–21:00). La 3e colonne de chaque jour est vide."),
-        h("li", {}, "Totaux vérifiés : ils correspondent à la colonne « Total » du papier (35 h, Mathilde 30 h, Lydia 14 h)."),
+        h("li", {}, "Totaux vérifiés : ils correspondent à la colonne « Total » du papier (35 h, Mathilde 30 h)."),
         h("li", {}, "Couleurs : légende manuscrite « ZP » en vert = zone publique, « ZR » en orange = zone réservée."),
         h("li", {}, "Horaires types : ouverture 05:30, 06:00 ou 07:00 ; après-midi 13:30, 14:30 ou 15:30 ; fermeture 21:00 ou 22:00. Couverture 7 jours sur 7."),
         h("li", {}, "Une seule semaine est fournie (« Semaine 1 », « Page 1/2 ») : aucune rotation ne peut encore être déduite.")),
@@ -3292,11 +3299,16 @@ table.t td.num { white-space: nowrap; }
         h("li", {}, "La semaine du 19/10/2026 est entièrement « entreprise » : cohérent avec Fleur et Camilian au travail ce jour-là."),
         h("li", {}, "Week-ends : aucun cours. Hypothèse retenue : travail possible le week-end (le planning modèle fait travailler Fleur et Camilian le samedi et le dimanche)."),
         h("li", {}, "Avant août 2026 et après juillet 2027 : statut inconnu, jamais considéré comme disponible.")),
-      h("h3", { style: { "margin-top": "14px" } }, "3. Zones déduites par personne"),
-      h("ul", { class: "small" }, refEmp.map((e) => h("li", {}, h("b", {}, e.name), ` : ${Object.entries(e.zones).map(([z, lv]) => `${z}${lv === "incertain" ? " (à confirmer)" : ""}`).join(", ") || "inconnue"} — ${e.zoneNote}`))),
-      h("h3", { style: { "margin-top": "14px" } }, "Points incertains à vérifier"),
-      h("ul", { class: "small" }, doubts.map((t) => h("li", {}, `${C.empById(refState, t.emp).name}, ${C.DAYS[t.dow].toLowerCase()} : ${t.segs.filter((g) => g.doute).map((g) => `${g.s}–${g.e}`).join(", ")} — couleur mélangée, enregistré en ZR « à confirmer ».`))),
-      h("h3", { style: { "margin-top": "14px" } }, "Questions"),
+      h("h3", { style: { "margin-top": "14px" } }, "3. Zones par personne"),
+      s ? h("ul", { class: "small" }, s.employees.map((e) => h("li", {}, h("b", {}, e.name), ` : ${Object.entries(e.zones || {}).map(([z, lv]) => `${z}${lv === "confirme" ? " (confirmée)" : lv === "incertain" ? " (à confirmer)" : ""}`).join(", ") || "à définir"}${e.onLeave ? " — en vacances" : ""}`)))
+        : h("ul", { class: "small" }, refEmp.map((e) => h("li", {}, h("b", {}, e.name), ` : ${Object.entries(e.zones).map(([z, lv]) => `${z}${lv === "incertain" ? " (à confirmer)" : ""}`).join(", ") || "inconnue"} — ${e.zoneNote}`))),
+      h("h3", { style: { "margin-top": "14px" } }, "Points incertains"),
+      (() => {
+        const left = s ? Object.values(s.weeks).flatMap((w) => w.shifts).filter((x) => x.segs.some((g) => g.doute)) : doubts;
+        if (s && !left.length) return h("p", { class: "small", style: { color: "var(--ok)" } }, "Aucun : toutes les informations sont confirmées.");
+        return h("ul", { class: "small" }, (s ? left.map((x) => h("li", {}, `${empName(s, x.emp)}, ${C.fmtDate(x.date, "day")} : couleur à confirmer.`)) : doubts.map((t) => h("li", {}, `${C.empById(refState, t.emp).name}, ${C.DAYS[t.dow].toLowerCase()} : ${t.segs.filter((g) => g.doute).map((g) => `${g.s}–${g.e}`).join(", ")} — couleur mélangée, enregistrée en ZR.`))));
+      })(),
+      h("h3", { style: { "margin-top": "14px" } }, "Questions encore ouvertes (facultatif)"),
       h("ol", { class: "small" }, R.questions.map((q) => h("li", {}, q))),
       Store.canWrite ? h("div", { class: "row", style: { "margin-top": "14px" } }, btn(s ? "Réimporter ces données…" : "Importer ces données", () => this.importReference(), "primary"), h("span", { class: "small muted" }, s ? "Remplace l'équipe, les zones, le modèle et le calendrier (après confirmation). Les plannings et absences sont conservés." : "Crée l'équipe, les zones, le modèle et le calendrier, ainsi que la semaine du 19/10/2026 telle qu'elle est sur le papier.")) : null));
 
@@ -3316,7 +3328,7 @@ table.t td.num { white-space: nowrap; }
     return wrap;
   } };
 
-  App.importReference = async function () {
+  App.importReference = async function (auto) {
     const R = root.PlanningReference, existing = !!this.state;
     if (existing && !(await confirmDialog("Réimporter les calendriers analysés ?", "L'équipe, les zones, le planning modèle et le calendrier d'alternance seront remplacés par les données extraites des photos (vos corrections seront perdues ; elles restent dans l'historique). Les plannings et absences sont conservés.", "Réimporter", true))) return;
     if (!Store.canWrite) { toast(Store.readOnlyReason, "err"); return; }
@@ -3334,7 +3346,7 @@ table.t td.num { white-space: nowrap; }
     const ok = await this.persist(changes, "import", existing ? "Réimport des calendriers analysés" : "Import initial des deux calendriers");
     if (!ok) { this.state = prev; this.render(); return; }
     this.loadError = null;
-    toast("Calendriers importés. Vérifiez les points « à confirmer ».");
+    toast(auto ? "Planning de l'équipe chargé." : "Calendriers importés.");
     await this.syncReference();
     this.ui.monday = R.template.referenceWeek;
     this.go("week");
@@ -3554,6 +3566,11 @@ table.t td.num { white-space: nowrap; }
       }
       for (const [id, leave] of Object.entries(u.onLeave || {})) if (C.empById(this.state, id)) ops.push({ type: "updateEmployee", id, patch: { onLeave: leave } });
       if (u.confirmAll) ops.push({ type: "confirmAll" });
+      if (u.validatePaperWeeks) for (const w of Object.values(this.state.weeks)) {
+        if (!(w.refId || /papier/.test(w.source || "")) || w.status === "validé" || !w.shifts.length) continue;
+        if (C.blockingIssues(C.validateWeek(this.state, w.week)).length) continue; // une semaine avec une erreur reste en brouillon
+        ops.push({ type: "setWeekStatus", monday: w.week, status: "validé", acknowledge: true });
+      }
       if (u.settings) ops.push({ type: "setSettings", patch: u.settings });
       for (const [id, from] of Object.entries(u.leave || {})) {
         if (!C.empById(this.state, id)) continue;

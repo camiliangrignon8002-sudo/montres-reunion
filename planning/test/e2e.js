@@ -73,10 +73,17 @@ const MOCK = `
     await fixClock(ctx);
     const page = await ctx.newPage(); watch(page);
     await page.goto(FILE);
-    await page.waitForSelector("text=Calendriers analysés");
-    check("premier lancement : écran d'import avec résumé", await page.isVisible("text=Points incertains à vérifier"));
+    await page.waitForSelector("table.plan");
+    check("premier lancement : import automatique, sans confirmation à donner", await page.evaluate(() => !!PlanningApp.state && PlanningApp.ui.screen === "week"));
+    await page.waitForTimeout(300);
+    const st0 = await page.evaluate(() => ({ s19: PlanningApp.state.weeks["2026-10-19"].status, s26: PlanningApp.state.weeks["2026-10-26"].status, doubts: Object.values(PlanningApp.state.weeks).flatMap((w) => w.shifts).filter((x) => x.segs.some((g) => g.doute)).length, banner: !!document.querySelector(".card h3") && /Informations à confirmer/.test(document.body.textContent) }));
+    check("tout confirmé : semaines papier validées, aucun point en attente", st0.s19 === "validé" && st0.s26 === "validé" && st0.doubts === 0, JSON.stringify(st0));
+    await page.evaluate(() => PlanningApp.go("import"));
+    check("écran Importation : plus rien en attente", (await page.isVisible("text=Importés et confirmés")) && (await page.isVisible("text=Aucun : toutes les informations sont confirmées.")) && !(await page.isVisible("text=En attente de votre confirmation")));
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/1-import.png`, fullPage: false });
-    await page.click("text=Importer ces données");
+    await page.evaluate(() => PlanningApp.go("dashboard"));
+    check("tableau de bord : plus de bandeau « Informations à confirmer »", !(await page.isVisible("text=Informations à confirmer")));
+    await page.evaluate(() => PlanningApp.go("week"));
     await page.waitForSelector("table.plan");
     const cells = await page.$$eval("table.plan td.cell .blk", (b) => b.length);
     check("semaine du 19/10 importée : 100 blocs (50 journées, sans Lydia)", cells === 100, String(cells));
@@ -246,10 +253,8 @@ const MOCK = `
     await ctx.addInitScript(MOCK);
     const page = await ctx.newPage(); watch(page);
     await page.goto(FILE);
-    await page.waitForSelector("text=Importer ces données");
-    check("db : mode base de données partagée", await page.evaluate(() => PlanningStore.mode) === "db");
-    await page.click("text=Importer ces données");
     await page.waitForSelector("table.plan");
+    check("db : mode base de données partagée", await page.evaluate(() => PlanningStore.mode) === "db");
     const docs = await page.evaluate(() => [...window.__mockStore.keys()].sort());
     check("db : config, semaine et historique écrits", docs.includes("config/employees") && docs.includes("weeks/2026-10-19") && docs.some((k) => k.startsWith("history/")), docs.length + " documents");
     // rechargement : les données reviennent de la base
@@ -301,9 +306,6 @@ const MOCK = `
     const page = await ctx.newPage(); watch(page);
     await page.goto(url);
     check("appli téléphone : pas de code demandé", !(await page.$("#unlock-code")));
-    if (SHOTS) await page.screenshot({ path: `${SHOTS}/9-pwa-import.png` });
-    await page.waitForSelector("text=Importer ces données");
-    await page.click("text=Importer ces données");
     await page.waitForSelector(".daybar");
     check("appli téléphone : import puis planning du jour", await page.isVisible(".shift-row"));
     await page.reload();
