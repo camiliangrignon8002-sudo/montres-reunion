@@ -246,7 +246,7 @@ test("remplaçants : jamais un alternant en cours, jamais une zone interdite, ja
 });
 
 test("semaine du 26/10 (planning papier) : totaux de la feuille et aucune erreur bloquante", () => {
-  const x = REF.extraWeeks[0];
+  const x = REF.extraWeeks.find((w) => w.monday === "2026-10-26");
   let s = withWeek1();
   const ops = Object.entries(x.zonesAdd).map(([emp, zs]) => ({ type: "setZones", emp, zones: { ...C.empById(s, emp).zones, ...Object.fromEntries(zs.map((z) => [z, "deduit"])) } }));
   s = apply(s, ops).state;
@@ -310,4 +310,12 @@ test("confirmation : zones confirmées, doutes levés, pause vérifiée", () => 
   const r2 = apply(s, [{ type: "setShift", emp: "maelle", date: W1, segs: [{ s: "13:30", e: "21:00", z: "ZP" }] }]);
   assert.ok(C.validateWeek(r2.state, W1).some((i) => i.code === "PAUSE" && i.emp === "maelle"));
   assert.ok(C.validateWeek(r2.state, W1).some((i) => i.code === "DAY_MAX" && i.emp === "maelle"));
+});
+
+test("semaines du 05/10 et du 12/10 (plannings papier) : totaux des feuilles", () => {
+  for (const x of REF.extraWeeks.filter((w) => w.dayTotals)) {
+    const day = [0, 0, 0, 0, 0, 0, 0];
+    for (const t of x.shifts) day[t.dow] += C.shiftMinutes(t.segs) / 60;
+    assert.deepEqual(day, x.dayTotals, x.monday);
+  }
 });

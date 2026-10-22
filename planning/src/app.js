@@ -1525,7 +1525,7 @@
         const e = C.empById(this.state, id);
         if (!e) continue;
         const used = Object.values(this.state.weeks).some((w) => w.shifts.some((x) => x.emp === id)) || this.state.template.shifts.some((t) => t.emp === id);
-        ops.push(used ? { type: "updateEmployee", id, patch: { active: false } } : { type: "removeEmployee", id });
+        ops.push(used ? { type: "updateEmployee", id, patch: { active: false, leftOn: (u.leftOn && u.leftOn[id]) || e.leftOn || this.today() } } : { type: "removeEmployee", id });
       }
       // Personne retirée de tout le planning (ex. la patronne) : ses créneaux, postes vidés, modèle, heures et fiche.
       for (const id of u.purge || []) {
@@ -1560,6 +1560,17 @@
   };
   App.applyRefWeek = async function (p, replacing) {
     const x = p.x, s = this.state;
+    // Ancien employé présent sur un planning passé : remis dans les données comme parti (jamais planifié ensuite).
+    const pre = [];
+    for (const f of x.formerEmployees || []) {
+      const e = C.empById(s, f.id);
+      if (!e) pre.push({ type: "addEmployee", employee: { name: f.name, role: "salarie", zones: f.zones } }, { type: "updateEmployee", id: f.id, patch: { active: false, leftOn: f.leftOn } });
+      else {
+        const missing = Object.keys(f.zones || {}).filter((z) => !(e.zones || {})[z]);
+        if (missing.length) pre.push({ type: "setZones", emp: f.id, zones: { ...(e.zones || {}), ...Object.fromEntries(missing.map((z) => [z, f.zones[z]])) } });
+        if (e.active === false && !e.leftOn) pre.push({ type: "updateEmployee", id: f.id, patch: { leftOn: f.leftOn } });
+      }
+    }
     const week = { week: x.monday, status: "brouillon", source: x.source, refId: x.refId, shifts: x.shifts.map((t, i) => ({ id: `${x.refId}-${i}`, emp: t.emp, date: C.addDays(x.monday, t.dow), segs: C.clone(t.segs) })) };
     const ops = [];
     for (const [emp, zs] of Object.entries(x.zonesAdd || {})) {
@@ -1567,6 +1578,7 @@
       const missing = zs.filter((z) => !(e.zones || {})[z]);
       if (missing.length) ops.push({ type: "setZones", emp, zones: { ...(e.zones || {}), ...Object.fromEntries(missing.map((z) => [z, "deduit"])) } });
     }
+    ops.unshift(...pre);
     ops.push({ type: "putWeek", monday: x.monday, week });
     if (replacing) await this.saveVersion(x.monday, "Avant remplacement par le planning papier");
     const r = await this.commit(ops, { source: "import", summary: `Planning papier de la semaine du ${C.fmtWeek(x.monday)}`, allowErrors: true, quiet: true, noImpacts: true });

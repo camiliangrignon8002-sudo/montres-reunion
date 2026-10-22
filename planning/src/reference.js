@@ -110,7 +110,66 @@
   put2("reine-claude", [3, 4, 5, 6], nuit7(ZR));
   put2("sebastien", [0], mat7(ZP).map((g) => ({ ...g, z: ZP })));
   put2("sebastien", [1, 2, 3, 4], mat7(ZR));
+  // Semaines du 05/10 et du 12/10/2026 (photos des plannings papier). Totaux relus : 339,5 h et 380 h, identiques aux feuilles.
+  const g = (a, b, za, c, d2, zb) => [{ s: a, e: b, z: za }, { s: c, e: d2, z: zb }];
+  const W0510 = [];
+  const p0 = (emp, dows, segs) => dows.forEach((d) => W0510.push({ emp, dow: d, segs }));
+  p0("camilian", [6], g("13:30", "17:30", ZP, "18:00", "21:00", ZP));
+  p0("charlotte", [0, 2], g("05:30", "10:30", ZP, "11:00", "13:00", ZR));
+  p0("charlotte", [1], g("05:30", "10:30", ZP, "11:00", "13:00", ZP));
+  p0("charlotte", [3, 4], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  p0("charlotte", [5], g("05:30", "10:30", ZP, "11:00", "12:00", ZP));
+  p0("eric", [0, 1, 2], g("07:00", "12:00", ZP, "12:30", "14:30", ZP));
+  p0("eric", [3, 4], g("05:30", "10:30", ZP, "11:00", "13:00", ZP));
+  p0("fleur", [6], g("14:30", "17:30", ZR, "18:00", "22:00", ZR));
+  p0("maelle", [0, 1, 2, 3], g("13:30", "18:00", ZP, "18:30", "21:00", ZP));
+  p0("maelle", [5], g("13:30", "17:30", ZP, "18:00", "21:00", ZP));
+  p0("maelle", [6], g("08:00", "11:30", ZP, "12:00", "13:30", ZP));
+  p0("mathilde", [0, 2, 3], g("15:30", "18:00", ZR, "18:30", "22:00", ZR));
+  p0("mathilde", [4, 5], g("14:30", "18:00", ZP, "18:30", "21:00", ZP));
+  p0("murielle", [0, 1, 4, 5], g("14:30", "17:30", ZR, "18:00", "22:00", ZR));
+  p0("murielle", [6], g("13:30", "17:30", ZP, "18:00", "21:00", ZP));
+  p0("nathalie", [0, 1, 2, 5, 6], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  p0("reine-claude", [2, 3, 4, 5, 6], g("14:30", "17:30", ZR, "18:00", "22:00", ZR));
+  p0("sebastien", [0, 3, 4], g("07:00", "12:00", ZP, "12:30", "14:30", ZP));
+  p0("sebastien", [1], g("16:00", "18:00", ZR, "18:30", "22:00", ZR));
+  p0("sebastien", [5], g("07:00", "12:00", ZP, "12:30", "14:30", ZR));
+  p0("sebastien", [6], g("05:30", "10:00", ZP, "10:30", "12:00", ZR));
+  p0("sophie", [0, 1, 2, 3, 4], g("13:30", "17:30", ZP, "18:00", "21:00", ZP));
+  const W1210 = [];
+  const p1 = (emp, dows, segs) => dows.forEach((d) => W1210.push({ emp, dow: d, segs }));
+  p1("camilian", [2, 3, 4, 5, 6], g("13:30", "17:30", ZP, "18:00", "21:00", ZP));
+  p1("charlotte", [0, 5], g("05:30", "10:30", ZP, "11:00", "13:00", ZP));
+  p1("charlotte", [1, 2], g("05:30", "10:30", ZP, "11:00", "13:00", ZR));
+  p1("charlotte", [3], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  p1("eric", [0, 1, 2, 3, 4], g("07:00", "12:00", ZP, "12:30", "14:30", ZP));
+  p1("fleur", [2, 3, 4, 5, 6], g("14:30", "17:30", ZR, "18:00", "22:00", ZR));
+  p1("maelle", [0, 1], g("13:30", "18:00", ZP, "18:30", "21:00", ZP));
+  p1("maelle", [3, 4, 6], g("05:30", "10:30", ZP, "11:00", "13:00", ZP));
+  p1("mathilde", [0], g("08:00", "12:30", ZR, "13:00", "14:30", ZR));
+  p1("mathilde", [3, 4], g("15:30", "18:00", ZR, "18:30", "22:00", ZR));
+  p1("mathilde", [5, 6], g("14:30", "18:00", ZP, "18:30", "21:00", ZP));
+  p1("murielle", [0, 1, 2], g("14:30", "17:00", ZR, "17:30", "22:00", ZR));
+  p1("murielle", [5], g("07:00", "12:00", ZR, "12:30", "14:30", ZR));
+  p1("murielle", [6], g("07:00", "12:00", ZP, "12:30", "14:30", ZR));
+  p1("nathalie", [0, 1, 2, 5, 6], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  p1("reine-claude", [0, 1, 5, 6], g("14:30", "18:00", ZR, "18:30", "22:00", ZR));
+  p1("reine-claude", [4], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  p1("sebastien", [1, 2], g("07:00", "12:00", ZP, "12:30", "14:30", ZP));
+  p1("sebastien", [3, 4], g("07:00", "12:00", ZP, "12:30", "14:30", ZR));
+  p1("sebastien", [5], g("06:00", "11:00", ZP, "11:30", "13:30", ZP));
+  p1("sophie", [0, 1, 2, 3, 4], g("13:30", "17:30", ZP, "18:00", "21:00", ZP));
+  const SOPHIE = { id: "sophie", name: "Sophie", zones: { ZP: "confirme" }, leftOn: "2026-10-19" };
+
   const extraWeeks = [{
+    refId: "papier-2026-10-05", monday: "2026-10-05", source: "planning papier (photo)", shifts: W0510, formerEmployees: [SOPHIE],
+    totalsOnPaper: { camilian: 7, charlotte: 41, eric: 35, fleur: 7, maelle: 40, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 39.5, sophie: 35 },
+    dayTotals: [55, 47.5, 48, 48, 48, 47, 46],
+  }, {
+    refId: "papier-2026-10-12", monday: "2026-10-12", source: "planning papier (photo)", shifts: W1210, formerEmployees: [SOPHIE],
+    totalsOnPaper: { camilian: 35, charlotte: 35, eric: 35, fleur: 35, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35, sophie: 35 },
+    dayTotals: [55, 56, 56, 55, 55, 55, 48],
+  }, {
     refId: "papier-2026-10-26", monday: "2026-10-26", source: "planning papier (photo)", shifts: W2,
     zonesAdd: { camilian: ["ZR"], lucas: ["ZP"] },
     totalsOnPaper: { camilian: 21, charlotte: 35, eric: 35, fleur: 21, lucas: 21, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35 },
@@ -157,10 +216,15 @@
       summary: "Sophie supprimée ; Amandine en vacances (retour non renseigné)",
       remove: ["sophie"],
       onLeave: { amandine: { type: "vacances", since: "2026-10-19" } },
+      leftOn: { sophie: "2026-10-19" },
     }, {
       id: "validation-2026-10-22",
       summary: "Tout est confirmé ; semaines des plannings papier (19/10 et 26/10) validées",
       confirmAll: true,
+      validatePaperWeeks: true,
+    }, {
+      id: "semaines-0510-1210",
+      summary: "Plannings papier des semaines du 05/10 et du 12/10 ajoutés et validés",
       validatePaperWeeks: true,
     }],
     source: {
