@@ -82,7 +82,7 @@ ${appScripts}
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 ${reset}
 </head><body>
-${body(lockedTag)}<script>if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});</script>
+${body(plainTag)}<script>if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});</script>
 </body></html>
 `);
   fs.writeFileSync(path.join(out, "manifest.webmanifest"), JSON.stringify({

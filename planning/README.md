@@ -20,7 +20,7 @@ Une seule page web (HTML + JavaScript sans framework, ~250 Ko) publiée comme ar
 | IA | `src/ai.js` | Claude via la capacité `sample` de l'artifact, avec 7 outils contrôlés |
 | Interface | `src/app.js`, `src/styles.css` | Les 12 écrans |
 
-`PLANNING_CODE=… node planning/build.js` assemble `dist/planning.html` (publié) et `dist/standalone.html` (à ouvrir
+`node planning/build.js` assemble `dist/planning.html` (publié) et `dist/standalone.html` (à ouvrir
 dans un navigateur, données sur l'appareil, sans IA).
 
 Pourquoi un artifact plutôt qu'un serveur à installer : rien à faire tourner sur le MacBook Air,
@@ -85,7 +85,6 @@ NODE_PATH=$(npm root -g) node planning/test/e2e.js   # 28 vérifications dans Ch
 
 ## Appli téléphone (GitHub Pages)
 
-`docs/planning/` est l'appli installable (même interface). Le dépôt étant public, les données de l'équipe y
-sont chiffrées (AES-GCM, clé dérivée du code d'accès par PBKDF2, 250 000 itérations) et ne sont déchiffrées
-que sur le téléphone. Les données saisies restent sur ce téléphone ; l'assistant IA est dans la version Claude.
-`src/reference.js` (en clair) n'est pas versionné : le build le reconstitue avec `PLANNING_CODE`.
+`docs/planning/` est l'appli installable (même interface), sans code d'accès : les données de l'équipe sont
+dans la page, lisibles par toute personne qui a le lien (le dépôt est public). Les données saisies restent sur
+le téléphone ; l'assistant IA est dans la version Claude.

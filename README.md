@@ -111,8 +111,8 @@ Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/planning/
 Plannings de l'équipe (zone publique / zone réservée), jours de CFA des alternants, congés et absences,
 génération à partir du planning modèle, historique, exports PDF / Excel / CSV.
 
-- Au premier lancement, l'appli demande un **code d'accès** : les prénoms et horaires de l'équipe sont
-  chiffrés dans la page (le dépôt est public). Ensuite les données restent sur le téléphone.
+- Au premier lancement, touchez **Importer ces données** : l'équipe, les zones, le modèle et le calendrier
+  du CFA s'installent, puis les données restent sur le téléphone. Pas de code d'accès.
 - L'**assistant IA** et le partage avec l'équipe sont dans la version Claude :
   https://claude.ai/artifact/GqCvGUNogmGmept7ND8mdY
 - Installer : ouvrir le lien dans **Safari** → **Partager** → **Sur l'écran d'accueil**.

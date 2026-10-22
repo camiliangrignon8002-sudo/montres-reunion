@@ -232,7 +232,7 @@ const MOCK = `
   }
 
   // ---------------- 3. Appli téléphone (docs/planning, données chiffrées) ----------------
-  if (process.env.PLANNING_CODE) {
+  {
     const http = require("http"), fs = require("fs");
     const root = path.join(__dirname, "..", "..", "docs", "planning");
     const types = { ".html": "text/html", ".js": "text/javascript", ".png": "image/png", ".webmanifest": "application/manifest+json" };
@@ -242,15 +242,8 @@ const MOCK = `
     await fixClock(ctx);
     const page = await ctx.newPage(); watch(page);
     await page.goto(url);
-    await page.waitForSelector("#unlock-code");
-    check("appli téléphone : demande le code d'accès", true);
-    if (SHOTS) await page.screenshot({ path: `${SHOTS}/9-pwa-code.png` });
-    await page.fill("#unlock-code", "mauvais-code");
-    await page.click("text=Déverrouiller");
-    await page.waitForSelector("text=Code incorrect");
-    check("appli téléphone : mauvais code refusé", true);
-    await page.fill("#unlock-code", process.env.PLANNING_CODE.toUpperCase());
-    await page.click("text=Déverrouiller");
+    check("appli téléphone : pas de code demandé", !(await page.$("#unlock-code")));
+    if (SHOTS) await page.screenshot({ path: `${SHOTS}/9-pwa-import.png` });
     await page.waitForSelector("text=Importer ces données");
     await page.click("text=Importer ces données");
     await page.waitForSelector(".daybar");
