@@ -159,9 +159,126 @@
   p1("sebastien", [3, 4], g("07:00", "12:00", ZP, "12:30", "14:30", ZR));
   p1("sebastien", [5], g("06:00", "11:00", ZP, "11:30", "13:30", ZP));
   p1("sophie", [0, 1, 2, 3, 4], g("13:30", "17:30", ZP, "18:00", "21:00", ZP));
-  const SOPHIE = { id: "sophie", name: "Sophie", zones: { ZP: "confirme" }, leftOn: "2026-10-19" };
+  const SOPHIE = { id: "sophie", name: "Sophie", zones: { ZP: "confirme", ZR: "confirme" }, leftOn: "2026-10-19" };
+  const SONIA = { id: "sonia", name: "Sonia", zones: { ZR: "confirme" }, leftOn: "2026-09-21" };
+  const SYLVIE = { id: "sylvie", name: "Sylvie", zones: { ZP: "confirme" }, leftOn: "2026-10-05" };
 
-  const extraWeeks = [{
+  // Septembre 2026 (photos des plannings papier). Lydia (la patronne) n'est pas reprise.
+  // Totaux relus : 455 h (476 h moins les 21 h de Lydia), 478 h, 415 h, 408 h (corrections manuscrites appliquées).
+  const mk = () => { const list = []; return { list, p: (emp, dows, segs) => dows.forEach((d) => list.push({ emp, dow: d, segs })) }; };
+  const std = g("07:00", "12:00", ZP, "12:30", "14:30", ZP);
+  const S07 = mk(), a = S07.p;
+  a("amandine", [1, 2, 3], g("14:30", "17:30", ZR, "18:00", "22:00", ZR));
+  a("amandine", [4, 5], g("13:30", "17:30", ZP, "18:00", "21:00", ZP));
+  a("camilian", [0], std);
+  a("camilian", [3], g("13:30", "17:30", ZP, "18:00", "21:00", ZP));
+  a("camilian", [4], g("08:00", "12:00", ZP, "12:30", "15:30", ZP));
+  a("camilian", [5], std);
+  a("camilian", [6], g("06:00", "12:00", ZP, "12:30", "13:30", ZP));
+  a("charlotte", [0, 1], g("05:30", "10:30", ZP, "11:00", "13:00", ZP));
+  a("charlotte", [2, 3], g("13:30", "17:30", ZP, "18:00", "21:00", ZP));
+  a("charlotte", [6], g("07:00", "11:30", ZP, "12:00", "14:30", ZP));
+  a("eric", [0, 1, 2, 3, 4], std);
+  a("fleur", [0, 3, 4, 5, 6], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  a("maelle", [0, 1, 4], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));
+  a("maelle", [5], g("05:30", "11:00", ZP, "11:30", "13:30", ZP));
+  a("maelle", [6], g("05:30", "11:00", ZP, "11:30", "12:30", ZP));
+  a("murielle", [0, 1, 6], g("13:30", "18:00", ZP, "18:30", "21:00", ZP));
+  a("murielle", [2], g("14:30", "18:00", ZR, "18:30", "22:00", ZR));
+  a("murielle", [5], g("07:00", "12:00", ZR, "12:30", "14:30", ZR));
+  a("nathalie", [0, 1, 2, 3, 6], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  a("reine-claude", [0], g("14:30", "17:30", ZR, "18:00", "22:00", ZR));
+  a("reine-claude", [2, 3], g("05:30", "10:30", ZP, "11:00", "13:00", ZP));
+  a("reine-claude", [4, 5], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  a("sebastien", [0, 1, 2, 3, 4], std);
+  a("sonia", [2, 3, 4, 5, 6], g("14:30", "18:00", ZR, "18:30", "22:00", ZR));
+  a("sophie", [0, 1], g("14:30", "18:00", ZR, "18:30", "22:00", ZR));
+  a("sophie", [4, 5, 6], g("14:30", "17:30", ZR, "18:00", "22:00", ZR));
+  a("sylvie", [0, 1, 4, 5, 6], g("13:30", "17:30", ZP, "18:00", "21:00", ZP));
+  const S14 = mk(), b = S14.p;
+  b("amandine", [0, 1, 4, 5, 6], g("13:30", "18:00", ZP, "18:30", "21:00", ZP));
+  b("camilian", [1, 2, 3, 4, 6], std);
+  b("charlotte", [0, 1], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));
+  b("charlotte", [2, 3], g("13:30", "18:00", ZP, "18:30", "21:00", ZP));
+  b("charlotte", [4], g("08:00", "12:30", ZP, "13:00", "15:30", ZP));
+  b("eric", [0, 1, 2, 3, 4], std);
+  b("fleur", [0], g("08:00", "12:30", ZR, "13:00", "15:30", ZR));
+  b("fleur", [2, 3, 4, 6], g("07:00", "12:00", ZR, "12:30", "14:30", ZR));
+  b("maelle", [0, 3, 4, 5, 6], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));
+  b("mathilde", [2], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));
+  b("mathilde", [3], g("08:00", "12:00", ZR, "12:30", "14:30", ZR));
+  b("mathilde", [4], g("07:00", "10:30", ZR, "11:00", "13:30", ZR));
+  b("mathilde", [5], g("07:30", "11:00", ZR, "11:30", "13:00", ZR));
+  b("mathilde", [6], g("07:00", "12:00", ZP, "12:30", "13:30", ZP));
+  b("murielle", [0, 1, 3, 4], g("14:30", "18:00", ZR, "18:30", "22:00", ZR));
+  b("murielle", [2], g("13:30", "18:00", ZP, "18:30", "21:00", ZP));
+  b("nathalie", [0, 1, 2, 5, 6], g("06:00", "11:30", ZR, "12:00", "13:30", ZR));
+  b("reine-claude", [2, 3, 4, 5, 6], g("14:30", "18:00", ZR, "18:30", "22:00", ZR));
+  b("sebastien", [0, 1, 2, 4, 5], std);
+  b("sonia", [3, 4], g("06:00", "11:30", ZR, "12:00", "13:30", ZR));
+  b("sonia", [5, 6], g("07:00", "12:00", ZR, "12:30", "14:30", ZR));
+  b("sophie", [0, 1, 2, 5, 6], g("14:30", "17:30", ZR, "18:00", "22:00", ZR));
+  b("sylvie", [0, 1, 4, 5, 6], g("13:30", "17:30", ZP, "18:00", "21:00", ZP));
+  const S21 = mk(), c = S21.p;
+  c("amandine", [1], g("07:00", "12:00", ZR, "12:30", "14:30", ZR));
+  c("amandine", [3, 4], g("14:30", "17:30", ZR, "18:00", "22:00", ZR));
+  c("amandine", [5], g("09:00", "12:30", ZR, "13:00", "16:30", ZP));
+  c("amandine", [6], g("07:00", "12:00", ZP, "12:30", "14:30", ZR));
+  c("camilian", [2, 3, 4], std);
+  c("camilian", [5, 6], g("13:30", "18:00", ZP, "18:30", "21:00", ZP));
+  c("charlotte", [0], g("06:00", "11:00", ZR, "11:30", "13:30", ZP));
+  c("charlotte", [1, 2], g("05:30", "10:30", ZP, "11:00", "13:00", ZP));
+  c("charlotte", [3], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  c("charlotte", [4], g("07:00", "12:00", ZR, "12:30", "14:30", ZR));
+  c("eric", [0, 1, 2, 3, 4], std);
+  c("fleur", [2, 3, 4], g("07:00", "12:00", ZR, "12:30", "14:30", ZR));
+  c("fleur", [5, 6], g("14:30", "18:00", ZR, "18:30", "22:00", ZR));
+  c("maelle", [0, 1, 4, 5, 6], g("13:30", "18:00", ZP, "18:30", "21:00", ZP));
+  c("mathilde", [1], g("15:30", "18:00", ZR, "18:30", "22:00", ZR));
+  c("mathilde", [2, 3], g("14:30", "18:00", ZP, "18:30", "21:00", ZP));
+  c("mathilde", [5], g("07:00", "11:00", ZP, "11:30", "12:30", ZP));
+  c("mathilde", [6], g("14:30", "17:30", ZR, "18:00", "22:00", ZR));
+  c("murielle", [0, 1, 2], g("14:30", "17:30", ZR, "18:00", "22:00", ZR));
+  c("murielle", [5], g("07:00", "12:00", ZR, "12:30", "14:30", ZR));
+  c("murielle", [6], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  c("nathalie", [0, 1, 2, 4, 5], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  c("reine-claude", [0, 2, 3, 4, 5], g("14:30", "17:30", ZR, "18:00", "22:00", ZR));
+  c("sophie", [0, 1, 2, 3, 4], g("13:30", "17:30", ZP, "18:00", "21:00", ZP));
+  c("sylvie", [0, 3, 4, 5, 6], g("05:30", "10:30", ZP, "11:00", "13:00", ZP));
+  const S28 = mk(), d0 = S28.p;
+  d0("amandine", [0, 1], g("13:30", "17:00", ZP, "17:30", "21:00", ZP));
+  d0("camilian", [1, 2, 6], std); // mercredi : corrigé à la main « 07h-14h30 »
+  d0("camilian", [3], g("08:00", "12:30", ZR, "13:00", "15:30", ZP));
+  d0("camilian", [4], g("13:30", "17:00", ZP, "17:30", "21:00", ZP)); // corrigé à la main « 13h30-21h ZP »
+  d0("charlotte", [0, 1], g("05:30", "10:30", ZR, "11:00", "13:00", ZP));
+  d0("eric", [0, 1, 2, 3, 4], std);
+  d0("fleur", [1, 2, 3, 4, 5], g("14:30", "18:00", ZR, "18:30", "22:00", ZR));
+  d0("maelle", [0, 6], g("13:30", "18:00", ZP, "18:30", "21:00", ZP));
+  d0("maelle", [2, 3], g("05:30", "10:30", ZP, "11:00", "13:00", ZP));
+  d0("maelle", [5], g("06:00", "11:30", ZP, "12:00", "13:30", ZP));
+  d0("mathilde", [2, 3, 4, 5], g("14:30", "17:30", ZP, "18:00", "21:00", ZP));
+  d0("mathilde", [6], g("15:30", "17:30", ZR, "18:00", "22:00", ZR));
+  d0("murielle", [0, 5, 6], g("14:30", "18:30", ZR, "19:00", "22:00", ZR));
+  d0("murielle", [3, 4], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  d0("nathalie", [0, 1, 2, 5, 6], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  d0("reine-claude", [0, 1, 2, 4], g("14:30", "18:00", ZR, "18:30", "22:00", ZR));
+  d0("reine-claude", [3], g("14:30", "17:30", ZR, "18:00", "22:00", ZR));
+  d0("sebastien", [0, 1, 2, 4, 5], std);
+  d0("sophie", [1, 2, 3, 5, 6], g("13:30", "17:30", ZP, "18:00", "21:00", ZP)); // mercredi ajouté, vendredi barré à la main
+  d0("sylvie", [0, 1, 4, 5, 6], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));
+  const SEPT = [
+    { monday: "2026-09-07", shifts: S07.list, formerEmployees: [SONIA, SOPHIE, SYLVIE], absences: [{ emp: "mathilde", type: "conges", from: "2026-09-07", to: "2026-09-13", note: "CP (planning papier)" }],
+      totalsOnPaper: { amandine: 35, camilian: 35, charlotte: 35, eric: 35, fleur: 35, maelle: 35, mathilde: 0, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35, sonia: 35, sophie: 35, sylvie: 35 } },
+    { monday: "2026-09-14", shifts: S14.list, formerEmployees: [SONIA, SOPHIE, SYLVIE], dayTotals: [70, 63, 70, 62, 83, 61, 69],
+      totalsOnPaper: { amandine: 35, camilian: 35, charlotte: 35, eric: 35, fleur: 35, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35, sonia: 28, sophie: 35, sylvie: 35 } },
+    { monday: "2026-09-21", shifts: S21.list, formerEmployees: [SOPHIE, SYLVIE], dayTotals: [56, 55, 62, 62, 70, 61, 49],
+      totalsOnPaper: { amandine: 35, camilian: 35, charlotte: 35, eric: 35, fleur: 35, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sophie: 35, sylvie: 35 } },
+    { monday: "2026-09-28", shifts: S28.list, formerEmployees: [SOPHIE, SYLVIE], dayTotals: [63, 70, 62, 55, 55, 55, 48],
+      absences: [{ emp: "charlotte", type: "conges", from: "2026-09-30", to: "2026-10-04", note: "CP (planning papier)" }, { emp: "amandine", type: "conges", from: "2026-10-02", to: "2026-10-04", note: "CP (planning papier)" }],
+      totalsOnPaper: { amandine: 14, camilian: 35, charlotte: 14, eric: 35, fleur: 35, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35, sophie: 35, sylvie: 35 } },
+  ].map((w) => ({ ...w, refId: "papier-" + w.monday, source: "planning papier (photo)", zonesAdd: { amandine: ["ZP", "ZR"] } }));
+
+  const extraWeeks = [...SEPT, {
     refId: "papier-2026-10-05", monday: "2026-10-05", source: "planning papier (photo)", shifts: W0510, formerEmployees: [SOPHIE],
     totalsOnPaper: { camilian: 7, charlotte: 41, eric: 35, fleur: 7, maelle: 40, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 39.5, sophie: 35 },
     dayTotals: [55, 47.5, 48, 48, 48, 47, 46],
@@ -202,6 +319,7 @@
       id: "equipe-2026-10-22",
       summary: "Sonia et Sylvie supprimées",
       remove: ["sonia", "sylvie"],
+      leftOn: { sonia: "2026-09-21", sylvie: "2026-10-05" },
     }, {
       id: "confirmation-2026-10-22",
       summary: "Informations confirmées : zones, couleurs lues sur les photos, 35 h par semaine, journées de 7 h + 30 min de pause, 11 h de repos",
@@ -226,6 +344,10 @@
       id: "semaines-0510-1210",
       summary: "Plannings papier des semaines du 05/10 et du 12/10 ajoutés et validés",
       validatePaperWeeks: true,
+    }, {
+      id: "semaines-septembre",
+      summary: "Plannings papier de septembre (07/09 au 04/10) ajoutés et validés",
+      validatePaperWeeks: true,
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
@@ -245,7 +367,7 @@
     totalsOnPaper: { camilian: 35, charlotte: 35, eric: 35, fleur: 35, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35, amandine: 0, sonia: 0, sophie: 0, sylvie: 0 },
     questions: [
       "Le planning indique « Page 1/2 » : la page 2 contient-elle une semaine 2 (rotation) ou d'autres employés ?",
-      "Amandine (en vacances) : dans quelle zone travaille-t-elle, et quand revient-elle ?",
+      "Amandine (en vacances) : quand revient-elle ?",
     ],
   };
 })(typeof globalThis !== "undefined" ? globalThis : this);
