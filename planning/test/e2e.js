@@ -94,6 +94,31 @@ const MOCK = `
     await page.waitForTimeout(150);
     check("modification d'un horaire enregistrée", await page.isVisible('td.cell[aria-label*="Fleur, Mercredi 21 octobre : 14:30–17:00 · 17:30–21:30"]'));
 
+    // fiche heures : clic sur un prénom
+    await page.click('td.name button:has(b:text-is("Fleur"))');
+    await page.waitForSelector(".dialog >> text=prévues au planning");
+    check("clic sur le prénom : heures de la semaine", /34 h 30/.test(await page.textContent(".dialog .kpis")));
+    await page.selectOption("#aj-type", "heures_sup");
+    await page.fill("#aj-date", "2026-10-21"); await page.fill("#aj-dur", "1h30");
+    await page.click('.dialog button[type="submit"]:text("Ajouter")');
+    await page.waitForSelector(".dialog >> text=+1 h 30");
+    await page.selectOption("#aj-type", "retard");
+    await page.fill("#aj-date", "2026-10-22"); await page.fill("#aj-dur", "0:15");
+    await page.click('.dialog button[type="submit"]:text("Ajouter")');
+    await page.waitForSelector(".dialog >> text=−0 h 15");
+    await page.waitForTimeout(100);
+    const kp = await page.textContent(".dialog .kpis");
+    check("heures sup et retard ajoutés : total réel recalculé", /35 h 45/.test(kp), kp.replace(/\s+/g, " "));
+    await page.click('.dialog .seg-ctl button:text("Mois")');
+    await page.waitForTimeout(100);
+    if (SHOTS) await page.screenshot({ path: `${SHOTS}/12-heures.png` });
+    await page.click('.dialog footer >> text=Fermer');
+    await page.click('.side [data-screen="month"]');
+    await page.waitForSelector("text=Heures du mois");
+    const row = await page.textContent('tr:has(button:text-is("Fleur"))');
+    check("mois : heures sup, retards et total de Fleur", /\+1 h 30/.test(row) && /−0 h 15/.test(row), row.replace(/\s+/g, " "));
+    await page.click('.side [data-screen="week"]');
+
     // semaine du 26/10 : planning papier ajouté automatiquement
     await page.click('button[aria-label="Semaine suivante"]');
     await page.waitForSelector('td.cell[aria-label^="Lucas, Mercredi 28"]');

@@ -162,6 +162,8 @@
         case "addAbsence": return `${C.ABSENCE_TYPES[o.absence.type]} : ${n(o.absence.emp)} du ${C.fmtDate(o.absence.from, "short")} au ${C.fmtDate(o.absence.to || o.absence.from, "short")}`;
         case "updateAbsence": return `Absence modifiée : ${n(o.absence.emp)}`;
         case "removeAbsence": return "Absence supprimée";
+        case "addAdjustment": return `${C.ADJUST_TYPES[o.adjustment.type].label} : ${n(o.adjustment.emp)} ${d(o.adjustment.date)} (${C.ADJUST_TYPES[o.adjustment.type].sign > 0 ? "+" : "−"}${C.fmtHours(Math.round(Number(o.adjustment.minutes)))})`;
+        case "removeAdjustment": return "Heures sup / retard supprimé";
         case "addEmployee": return `Ajout de ${o.employee.name}`;
         case "updateEmployee": return `Fiche de ${n(o.id)} modifiée`;
         case "removeEmployee": return `Suppression de ${n(o.id)}`;
@@ -220,7 +222,7 @@
       if (!cfg.employees) { this.state = null; this.history = []; return; }
       this.state = {
         employees: cfg.employees || [], zones: cfg.zones || [], settings: { ...C.DEFAULT_SETTINGS, ...(cfg.settings || {}) },
-        template: cfg.template || { shifts: [] }, calendars: cfg.calendars || [], weeks: data.weeks || {}, absences: data.absences || {},
+        template: cfg.template || { shifts: [] }, calendars: cfg.calendars || [], weeks: data.weeks || {}, absences: data.absences || {}, adjustments: data.adjustments || {},
       };
       this.history = await Store.listLog("history", 150).catch(() => []);
       const ids = [...new Set(this.history.map((x) => x.by).filter((x) => x && x !== "cet appareil" && x !== "inconnu"))];
@@ -247,6 +249,7 @@
       for (const c of changes) {
         if (c.col === "weeks") { if (c.removed) delete this.state.weeks[c.id]; else this.state.weeks[c.id] = c.data; n++; }
         else if (c.col === "absences") { if (c.removed) delete this.state.absences[c.id]; else this.state.absences[c.id] = c.data; n++; }
+        else if (c.col === "adjustments") { this.state.adjustments = this.state.adjustments || {}; if (c.removed) delete this.state.adjustments[c.id]; else this.state.adjustments[c.id] = c.data; n++; }
         else if (c.col === "config" && C.CONFIG_KEYS.includes(c.id) && !c.removed) { this.state[c.id] = c.id === "settings" ? { ...C.DEFAULT_SETTINGS, ...c.data.value } : c.data.value; n++; }
       }
       if (n) { this.render(); toast("Le planning vient d'être modifié par une autre personne."); }
@@ -326,7 +329,7 @@
       entry = entry || this.describeUndo();
       if (!entry) { toast("Rien à annuler."); return; }
       if (!Store.canWrite) { toast(Store.readOnlyReason, "err"); return; }
-      const current = (c) => (c.col === "weeks" ? this.state.weeks[c.id] : c.col === "absences" ? this.state.absences[c.id] : this.state[c.id]) || null;
+      const current = (c) => (c.col === "weeks" ? this.state.weeks[c.id] : c.col === "absences" ? this.state.absences[c.id] : c.col === "adjustments" ? (this.state.adjustments || {})[c.id] : this.state[c.id]) || null;
       const drift = entry.changes.some((c) => JSON.stringify(current(c)) !== JSON.stringify(c.after));
       if (drift && !(await confirmDialog("Modifié depuis", "Ces éléments ont été modifiés après cette action. Revenir à l'état d'avant effacera aussi ces modifications plus récentes (elles restent dans l'historique). Continuer ?", "Revenir quand même", true))) return;
       const changes = entry.changes.map((c) => ({ col: c.col, id: c.id, before: current(c), after: c.before }));
@@ -533,7 +536,7 @@
         }),
         h("th", { class: "tot" }, "Total"))),
       h("tbody", {}, grid.rows.map((row) => h("tr", { class: row.emp.active === false ? "inactive" : "" },
-        h("td", { class: "name" }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?")),
+        h("td", { class: "name" }, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"))),
         row.cells.map((cell) => {
           const k = row.emp.id + "|" + cell.date, lvl = cellIssue[k];
           const kids = [];
@@ -590,7 +593,7 @@
               const lvl = cellIssue[x.emp + "|" + d];
               const p = C.pauses(x.segs);
               return h("div", { class: "shift-row", role: "button", tabindex: "0", onClick: () => this.openEditor(x.emp, d), onKeydown: (e) => { if (e.key === "Enter") this.openEditor(x.emp, d); } },
-                h("div", { class: "who" }, empName(s, x.emp), lvl ? h("span", { class: "chip " + (lvl === "erreur" ? "err" : "warn"), style: { "margin-left": "6px" } }, lvl === "erreur" ? "!" : "?") : null),
+                h("div", { class: "who" }, h("button", { type: "button", class: "name-btn inline", onClick: (ev) => { ev.stopPropagation(); this.openPerson(x.emp, "week"); }, title: "Heures de la semaine" }, empName(s, x.emp)), lvl ? h("span", { class: "chip " + (lvl === "erreur" ? "err" : "warn"), style: { "margin-left": "6px" } }, lvl === "erreur" ? "!" : "?") : null),
                 h("div", { class: "blocks" }, x.segs.map((g) => blk(s, g)), p.length ? h("span", { class: "pause" }, `Pause ${p.map((y) => `${y.s}–${y.e}`).join(", ")}`) : null),
                 h("span", { class: "small num muted" }, C.fmtHours(C.shiftMinutes(x.segs))));
             })]) : h("div", { class: "empty", style: { border: "0" } }, w ? "Personne ce jour-là." : "Aucun planning pour cette semaine.")),
@@ -892,18 +895,28 @@
           abs.length ? h("span", { class: "bar tag-abs", title: abs.map((e) => e.name).join(", ") }, `Abs. ${abs.length}`) : null)));
     }
     const monthDays = Array.from({ length: last }, (_, i) => `${this.ui.month}-${String(i + 1).padStart(2, "0")}`);
-    const hours = s.employees.map((e) => {
-      let min = 0, days = 0;
-      for (const d of monthDays) { const w = C.getWeek(s, C.mondayOf(d)); const x = w && w.shifts.find((sh) => sh.emp === e.id && sh.date === d); if (x) { min += C.shiftMinutes(x.segs); days++; } }
-      return { e, min, days };
-    }).filter((x) => x.min || x.e.active !== false);
+    const hours = s.employees.map((e) => ({ e, h: C.hoursSummary(s, e.id, monthDays[0], monthDays[monthDays.length - 1]) })).filter((x) => x.h.total || x.h.planned || x.e.active !== false);
+    const exportHours = () => {
+      const lines = [["Mois", "Prénom", "Jours planifiés", "Heures prévues", "Heures sup", "Journées en plus", "Retards", "Total réel"].join(";")];
+      for (const x of hours) lines.push([this.ui.month, x.e.name, x.h.workedDays + x.h.extraDayCount, C.hoursDecimal(x.h.planned), C.hoursDecimal(x.h.extra), C.hoursDecimal(x.h.extraDays), C.hoursDecimal(x.h.late), C.hoursDecimal(x.h.total)].map((v) => String(v).replace(".", ",")).join(";"));
+      saveFile(`heures-${this.ui.month}.csv`, new Blob(["\ufeff" + lines.join("\r\n") + "\r\n"], { type: "text/csv;charset=utf-8" }));
+    };
     const move = (n) => { const d = new Date(Date.UTC(y, m - 1 + n, 1)); this.ui.month = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`; this.render(); };
     return h("div", { class: "stack", style: { gap: "16px" } },
       h("div", { class: "week-head" }, h("div", { class: "when" }, iconBtn("left", "Mois précédent", () => move(-1)), iconBtn("right", "Mois suivant", () => move(1))), h("h1", { style: { "text-transform": "capitalize" } }, `${C.MONTHS[m - 1]} ${y}`), h("div", { style: { flex: "1" } }), Store.canWrite ? btn([icon("wand"), "Générer le mois"], () => { this.ui.monday = C.mondayOf(first); this.openGenerate(); }, "sm primary") : null),
       legend(s),
       h("div", { class: "month" }, C.DAYS_SHORT.map((d) => h("div", { class: "dh" }, d)), cells),
-      h("section", { class: "card" }, h("h2", {}, "Heures du mois"), h("div", { class: "t-wrap" }, h("table", { class: "t" }, h("thead", {}, h("tr", {}, h("th", {}, "Personne"), h("th", {}, "Jours"), h("th", {}, "Heures"))),
-        h("tbody", {}, hours.map((x) => h("tr", {}, h("td", {}, x.e.name), h("td", { class: "num" }, x.days), h("td", { class: "num" }, C.fmtHours(x.min)))))))));
+      h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", {}, "Heures du mois"), btn("Exporter (CSV)", exportHours, "sm ghost")),
+        h("p", { class: "small muted" }, "Touchez un prénom pour voir le détail et ajouter des heures sup, une journée en plus ou un retard."),
+        h("div", { class: "t-wrap" }, h("table", { class: "t" }, h("thead", {}, h("tr", {}, h("th", {}, "Personne"), h("th", {}, "Jours"), h("th", {}, "Prévu"), h("th", {}, "Heures sup"), h("th", {}, "Jours en plus"), h("th", {}, "Retards"), h("th", {}, "Total"))),
+        h("tbody", {}, hours.map((x) => h("tr", {},
+          h("td", {}, h("button", { type: "button", class: "name-btn inline", onClick: () => this.openPerson(x.e.id, "month") }, x.e.name)),
+          h("td", { class: "num" }, x.h.workedDays + x.h.extraDayCount),
+          h("td", { class: "num" }, C.fmtHours(x.h.planned)),
+          h("td", { class: "num", style: { color: x.h.extra ? "var(--ok)" : "" } }, x.h.extra ? "+" + C.fmtHours(x.h.extra) : "—"),
+          h("td", { class: "num", style: { color: x.h.extraDays ? "var(--ok)" : "" } }, x.h.extraDays ? `+${C.fmtHours(x.h.extraDays)} (${x.h.extraDayCount} j)` : "—"),
+          h("td", { class: "num", style: { color: x.h.late ? "var(--danger)" : "" } }, x.h.late ? "−" + C.fmtHours(x.h.late) : "—"),
+          h("td", { class: "num" }, h("b", {}, C.fmtHours(x.h.total))))))))));
   } };
 
   // ---------- Calendrier des alternants ----------
@@ -1092,6 +1105,7 @@
     const who = (id) => (id === "cet appareil" ? "Cet appareil" : this.names[id] || (id === Store.userId ? "Vous" : "Une autre personne"));
     const fmtAt = (at) => { const d = new Date(at); return isNaN(d) ? "" : `${C.fmtDate(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`, "num")} ${fmtTime(d)}`; };
     const detail = (c) => {
+      if (c.col === "adjustments") { const a = c.after || c.before; return h("div", { class: "small muted" }, a ? `${c.after ? "" : "Supprimé : "}${C.ADJUST_TYPES[a.type].label} ${empName(s, a.emp)} ${C.fmtDate(a.date, "short")} (${C.fmtHours(a.minutes)})` : ""); }
       if (c.col !== "weeks" || !("before" in c)) return h("div", { class: "small muted" }, c.col === "absences" ? (c.after ? `Absence : ${empName(s, c.after.emp)} ${C.fmtDate(c.after.from, "short")} → ${C.fmtDate(c.after.to, "short")}` : "Absence supprimée") : c.col === "config" ? `Paramètres : ${({ employees: "équipe", zones: "zones", settings: "règles", template: "modèle", calendars: "calendrier d'alternance" })[c.id] || c.id}` : "");
       const key = (x) => `${x.emp}|${x.date}`;
       const b = new Map(((c.before && c.before.shifts) || []).map((x) => [key(x), x])), a = new Map(((c.after && c.after.shifts) || []).map((x) => [key(x), x]));
@@ -1206,7 +1220,7 @@
       changes.push(weekChange);
     }
     const prev = this.state;
-    this.state = { ...base, weeks: prev ? prev.weeks : {}, absences: prev ? prev.absences : {} };
+    this.state = { ...base, weeks: prev ? prev.weeks : {}, absences: prev ? prev.absences : {}, adjustments: prev ? prev.adjustments || {} : {} };
     if (weekChange) this.state.weeks[weekChange.id] = weekChange.after;
     const ok = await this.persist(changes, "import", existing ? "Réimport des calendriers analysés" : "Import initial des deux calendriers");
     if (!ok) { this.state = prev; this.render(); return; }
@@ -1291,6 +1305,70 @@
         if (r.ok) { this.ui.calId = id; this.go("alternants"); }
         return r.ok;
       } }] });
+  };
+
+  // ---------- Fiche heures d'une personne (semaine ou mois) ----------
+  App.openPerson = function (empId, scope) {
+    let mode = scope === "month" ? "month" : "week";
+    let monday = this.ui.monday, month = this.ui.month;
+    if (mode === "week" && this.ui.screen === "month") monday = C.mondayOf(`${month}-01`);
+    const body = h("div", { class: "stack" });
+    const range = () => {
+      if (mode === "week") return { from: monday, to: C.addDays(monday, 6), label: `Semaine du ${C.fmtWeek(monday)}` };
+      const [y, m] = month.split("-").map(Number);
+      return { from: `${month}-01`, to: `${month}-${String(new Date(Date.UTC(y, m, 0)).getUTCDate()).padStart(2, "0")}`, label: `${C.MONTHS[m - 1]} ${y}` };
+    };
+    const move = (n) => {
+      if (mode === "week") monday = C.addDays(monday, 7 * n);
+      else { const [y, m] = month.split("-").map(Number); const d = new Date(Date.UTC(y, m - 1 + n, 1)); month = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`; }
+      draw();
+    };
+    const draw = () => {
+      const s = this.state, e = C.empById(s, empId);
+      if (!e) { body.replaceChildren(h("p", {}, "Personne introuvable.")); return; }
+      const r = range(), x = C.hoursSummary(s, empId, r.from, r.to);
+      const ref = mode === "week" ? C.templateMinutes(s, empId) : 0;
+      const kpi = (label, val, color) => h("div", { class: "kpi" }, h("b", { style: color ? { color } : {} }, val), h("span", {}, label));
+      const typeSel = h("select", { class: "input", id: "aj-type" }, Object.entries(C.ADJUST_TYPES).map(([k, v]) => h("option", { value: k }, v.label)));
+      const dateIn = h("input", { type: "date", class: "input", id: "aj-date", value: r.from <= this.today() && this.today() <= r.to ? this.today() : r.from });
+      const durIn = h("input", { class: "input", id: "aj-dur", placeholder: "ex. 1h30, 0:20, 7h", inputmode: "text" });
+      const noteIn = h("input", { class: "input", id: "aj-note", maxlength: "200", placeholder: "Facultatif" });
+      typeSel.addEventListener("change", () => { if (typeSel.value === "journee_sup" && !durIn.value) durIn.value = "7h"; });
+      body.replaceChildren(...[
+        h("div", { class: "row between" },
+          h("div", { class: "seg-ctl", role: "group", "aria-label": "Période" }, ["week", "month"].map((m) => h("button", { type: "button", "aria-pressed": String(m === mode), onClick: () => { mode = m; if (m === "month") month = monday.slice(0, 7); draw(); } }, m === "week" ? "Semaine" : "Mois"))),
+          h("div", { class: "row" }, iconBtn("left", "Période précédente", () => move(-1)), h("b", { style: { "text-transform": mode === "month" ? "capitalize" : "none" } }, r.label), iconBtn("right", "Période suivante", () => move(1)))),
+        h("div", { class: "kpis" },
+          kpi("prévues au planning", C.fmtHours(x.planned)),
+          kpi("heures sup", x.extra ? "+" + C.fmtHours(x.extra) : "0 h", x.extra ? "var(--ok)" : ""),
+          kpi(`journée(s) en plus${x.extraDayCount ? " (" + x.extraDayCount + ")" : ""}`, x.extraDays ? "+" + C.fmtHours(x.extraDays) : "0 h", x.extraDays ? "var(--ok)" : ""),
+          kpi("retards", x.late ? "−" + C.fmtHours(x.late) : "0 h", x.late ? "var(--danger)" : ""),
+          kpi("total réel", C.fmtHours(x.total))),
+        ref ? h("p", { class: "small muted" }, `Planning modèle : ${C.fmtHours(ref)} par semaine.`) : null,
+        h("details", { open: mode === "week" }, h("summary", { class: "small" }, `${x.workedDays} jour(s) planifié(s)`),
+          h("div", { class: "list" }, x.days.map((d) => h("div", { class: "item" }, h("span", { class: "grow" }, C.fmtDate(d.date, "day")), h("span", { class: "small muted num" }, C.segLabel(d.segs)), h("b", { class: "num small" }, C.fmtHours(d.minutes)))))),
+        h("h3", {}, "Heures sup, journées en plus et retards"),
+        x.adjustments.length ? h("div", { class: "list" }, x.adjustments.map((a) => {
+          const t = C.ADJUST_TYPES[a.type];
+          return h("div", { class: "item" },
+            h("span", { class: t.sign > 0 ? "chip ok" : "chip err" }, t.label),
+            h("div", { class: "grow" }, h("div", {}, C.fmtDate(a.date, "day")), a.note ? h("div", { class: "small muted" }, a.note) : null),
+            h("b", { class: "num", style: { color: t.sign > 0 ? "var(--ok)" : "var(--danger)" } }, `${t.sign > 0 ? "+" : "−"}${C.fmtHours(a.minutes)}`),
+            Store.canWrite ? iconBtn("close", "Supprimer", async () => { if (await confirmDialog("Supprimer cette ligne ?", `${t.label} du ${C.fmtDate(a.date, "day")} (${C.fmtHours(a.minutes)}).`, "Supprimer", true)) { await this.commit([{ type: "removeAdjustment", id: a.id }]); draw(); } }) : null);
+        })) : h("p", { class: "small muted" }, "Rien sur cette période."),
+        Store.canWrite ? h("form", { class: "stack", onSubmit: async (ev) => {
+          ev.preventDefault();
+          const min = C.parseDuration(durIn.value);
+          if (!min) { toast("Durée illisible : écrivez par exemple 1h30, 0:20 ou 7h.", "err"); return; }
+          const res = await this.commit([{ type: "addAdjustment", adjustment: { emp: empId, date: dateIn.value, type: typeSel.value, minutes: min, note: noteIn.value } }]);
+          if (res.ok) { toast("Ajouté."); draw(); }
+        } },
+          h("div", { class: "form-grid" }, h("label", { class: "f" }, "Type", typeSel), h("label", { class: "f" }, "Date", dateIn), h("label", { class: "f" }, "Durée", durIn)),
+          h("label", { class: "f" }, "Note", noteIn),
+          h("div", {}, h("button", { type: "submit", class: "btn primary" }, "Ajouter"))) : null].filter(Boolean));
+    };
+    draw();
+    openDialog({ title: empName(this.state, empId), body, wide: true, actions: [{ label: "Fermer", primary: true }] });
   };
 
   // ---------- Plannings papier fournis avec l'appli ----------

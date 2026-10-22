@@ -73,6 +73,7 @@
           case "supprimer_absence": return { type: "removeAbsence", id: op.id };
           case "ajouter_employe": return { type: "addEmployee", employee: { name: op.prenom, role: op.role, zonesList: op.zones || [] } };
           case "modifier_zones": return { type: "setZones", emp: op.prenom, zones: Object.fromEntries((op.zones || []).map((z) => [String(z).toUpperCase(), "confirme"])) };
+          case "ajouter_heures": return { type: "addAdjustment", adjustment: { emp: op.prenom, date: op.date, type: op.genre || "heures_sup", minutes: C.parseDuration(op.duree), note: op.note } };
           case "valider_semaine": return { type: "setWeekStatus", monday: op.semaine, status: "validé", acknowledge: true };
           case "generer_semaine": {
             const monday = C.mondayOf(op.semaine);
@@ -154,7 +155,7 @@
         },
         {
           name: "proposer_modifications",
-          description: "Prépare des modifications SANS les appliquer : elles sont vérifiées puis montrées à la personne, qui clique sur « Appliquer ». Renvoie ok, erreurs (bloquantes) ou alertes. Types d'opérations : definir_creneau {prenom,date,segments:[{debut,fin,zone}]} (remplace le créneau du jour), supprimer_creneau {prenom,date}, deplacer_creneau {prenom,date,vers_prenom?,vers_date?,echanger?}, copier_jour {du,vers,remplacer?}, dupliquer_semaine {de,vers}, ajouter_absence {prenom ou \"*\",type_absence: conges|vacances|repos|arret|cours|indispo|fermeture,du,au,note?}, supprimer_absence {id}, ajouter_employe {prenom,role: salarie|alternant,zones:[ZP|ZR]}, modifier_zones {prenom,zones:[...]}, generer_semaine {semaine}, valider_semaine {semaine}, annuler_derniere {}.",
+          description: "Prépare des modifications SANS les appliquer : elles sont vérifiées puis montrées à la personne, qui clique sur « Appliquer ». Renvoie ok, erreurs (bloquantes) ou alertes. Types d'opérations : definir_creneau {prenom,date,segments:[{debut,fin,zone}]} (remplace le créneau du jour), supprimer_creneau {prenom,date}, deplacer_creneau {prenom,date,vers_prenom?,vers_date?,echanger?}, copier_jour {du,vers,remplacer?}, dupliquer_semaine {de,vers}, ajouter_absence {prenom ou \"*\",type_absence: conges|vacances|repos|arret|cours|indispo|fermeture,du,au,note?}, supprimer_absence {id}, ajouter_employe {prenom,role: salarie|alternant,zones:[ZP|ZR]}, modifier_zones {prenom,zones:[...]}, generer_semaine {semaine}, valider_semaine {semaine}, ajouter_heures {prenom,date,genre: heures_sup|journee_sup|retard,duree:\"1h30\",note?}, annuler_derniere {}.",
           inputSchema: {
             type: "object",
             properties: {

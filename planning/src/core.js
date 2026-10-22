@@ -17,6 +17,13 @@
     fermeture: "Fermeture",
   };
 
+  // Heures réellement faites en plus ou en moins du planning.
+  const ADJUST_TYPES = {
+    heures_sup: { label: "Heures sup", sign: 1 },
+    journee_sup: { label: "Journée en plus", sign: 1 },
+    retard: { label: "Retard", sign: -1 },
+  };
+
   const DEFAULT_SETTINGS = {
     checkRest: true, minRestHours: 11,
     checkMaxDay: true, maxDayHours: 10,
@@ -482,8 +489,8 @@
   function applyOps(state, ops, meta) {
     meta = meta || {};
     const s = clone(state);
-    s.weeks = s.weeks || {}; s.absences = s.absences || {};
-    const touched = { weeks: new Set(), absences: new Set(), config: new Set() };
+    s.weeks = s.weeks || {}; s.absences = s.absences || {}; s.adjustments = s.adjustments || {};
+    const touched = { weeks: new Set(), absences: new Set(), config: new Set(), adjustments: new Set() };
     const errors = [], messages = [], impacts = [];
     const shiftWeeks = new Set();
     const fail = (m) => { errors.push(m); };
@@ -635,6 +642,22 @@
           for (const w of Object.values(s.weeks)) for (const sh of w.shifts) if ((emp.id === "*" || sh.emp === emp.id) && sh.date >= a.from && sh.date <= to) impacts.push({ emp: sh.emp, date: sh.date, segs: sh.segs });
           break;
         }
+        case "addAdjustment": {
+          const a = op.adjustment || {};
+          const emp = empOf(a.emp); if (!emp || !dateOk(a.date)) break;
+          if (!ADJUST_TYPES[a.type]) { fail(`Type inconnu « ${a.type} ».`); break; }
+          const min = Math.round(Number(a.minutes));
+          if (!(min > 0 && min <= 16 * 60)) { fail("Durée invalide : entre 1 minute et 16 heures."); break; }
+          const id = a.id || uid("aj");
+          s.adjustments[id] = { id, emp: emp.id, date: a.date, type: a.type, minutes: min, note: String(a.note || "").slice(0, 200), createdAt: meta.now || null, by: meta.by || null };
+          touched.adjustments.add(id);
+          break;
+        }
+        case "removeAdjustment": {
+          if (!s.adjustments[op.id]) { fail("Ligne introuvable."); break; }
+          delete s.adjustments[op.id]; touched.adjustments.add(op.id);
+          break;
+        }
         case "removeAbsence": {
           if (!s.absences[op.id]) { fail("Absence introuvable."); break; }
           delete s.absences[op.id]; touched.absences.add(op.id);
@@ -760,6 +783,7 @@
 
     const changes = [];
     for (const m of touched.weeks) changes.push({ col: "weeks", id: m, before: clone((state.weeks || {})[m] || null), after: clone(s.weeks[m] || null) });
+    for (const id of touched.adjustments) changes.push({ col: "adjustments", id, before: clone((state.adjustments || {})[id] || null), after: clone(s.adjustments[id] || null) });
     for (const id of touched.absences) changes.push({ col: "absences", id, before: clone((state.absences || {})[id] || null), after: clone(s.absences[id] || null) });
     for (const k of touched.config) changes.push({ col: "config", id: k, before: clone(state[k]), after: clone(s[k]) });
     const issues = [];
@@ -769,11 +793,12 @@
 
   // Applique une liste de changements {col, id, after} sur un état (sans validation).
   function applyChanges(state, changes, which) {
-    const s = { ...state, weeks: { ...(state.weeks || {}) }, absences: { ...(state.absences || {}) } };
+    const s = { ...state, weeks: { ...(state.weeks || {}) }, absences: { ...(state.absences || {}) }, adjustments: { ...(state.adjustments || {}) } };
     for (const c of changes) {
       const v = which === "before" ? c.before : c.after;
       if (c.col === "weeks") { if (v) s.weeks[c.id] = v; else delete s.weeks[c.id]; }
       else if (c.col === "absences") { if (v) s.absences[c.id] = v; else delete s.absences[c.id]; }
+      else if (c.col === "adjustments") { if (v) s.adjustments[c.id] = v; else delete s.adjustments[c.id]; }
       else if (c.col === "config" && CONFIG_KEYS.includes(c.id)) s[c.id] = v;
     }
     return s;
@@ -788,11 +813,40 @@
       calendars: clone(ref.calendars),
       weeks: {},
       absences: {},
+      adjustments: {},
     };
   }
 
+  // Heures d'une personne sur une période : prévues au planning, + heures sup et journées en plus, − retards.
+  function hoursSummary(state, empId, from, to) {
+    const days = [];
+    let planned = 0;
+    for (let d = from; d <= to; d = addDays(d, 1)) {
+      const w = getWeek(state, mondayOf(d));
+      const sh = w && w.shifts.find((x) => x.emp === empId && x.date === d);
+      if (sh) { const m = shiftMinutes(sh.segs); planned += m; days.push({ date: d, minutes: m, segs: sh.segs }); }
+    }
+    const adj = Object.values(state.adjustments || {}).filter((a) => a.emp === empId && a.date >= from && a.date <= to).sort((a, b) => a.date.localeCompare(b.date));
+    const sum = (t) => adj.filter((a) => a.type === t).reduce((x, a) => x + a.minutes, 0);
+    const extra = sum("heures_sup"), extraDays = sum("journee_sup"), late = sum("retard");
+    return { planned, extra, extraDays, extraDayCount: adj.filter((a) => a.type === "journee_sup").length, late, total: planned + extra + extraDays - late, workedDays: days.length, days, adjustments: adj };
+  }
+  // « 1:30 », « 1h30 », « 1,5 », « 90 min », « 45 » (minutes) → minutes
+  function parseDuration(v) {
+    const t = String(v == null ? "" : v).trim().toLowerCase().replace(/\s/g, "");
+    if (!t) return null;
+    let m = t.match(/^(\d{1,2})[:h](\d{1,2})?$/);
+    if (m) return Number(m[1]) * 60 + Number(m[2] || 0);
+    m = t.match(/^(\d+)(?:min|mn|m)$/);
+    if (m) return Number(m[1]);
+    m = t.match(/^(\d+)[.,](\d+)$/);
+    if (m) return Math.round(parseFloat(m[1] + "." + m[2]) * 60);
+    if (/^\d+$/.test(t)) return Number(t) <= 12 ? Number(t) * 60 : Number(t);
+    return null;
+  }
+
   root.PlanningCore = {
-    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
+    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,

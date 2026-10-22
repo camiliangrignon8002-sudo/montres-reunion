@@ -47,13 +47,15 @@
     },
 
     async loadAll() {
-      const out = { config: {}, weeks: {}, absences: {} };
+      const out = { config: {}, weeks: {}, absences: {}, adjustments: {} };
       if (this.mode === "db") {
-        const [cfg, weeks, abs] = await Promise.all([
+        const [cfg, weeks, abs, adj] = await Promise.all([
           this.dbCall(() => this.db.collection("config").get()),
           this.dbCall(() => this.db.collection("weeks").get()),
           this.dbCall(() => this.db.collection("absences").get()),
+          this.dbCall(() => this.db.collection("adjustments").get()),
         ]);
+        for (const d of adj.docs) out.adjustments[d.id] = C.clone(d.data());
         for (const d of cfg.docs) out.config[d.id] = C.clone(d.data().value);
         for (const d of weeks.docs) out.weeks[d.id] = C.clone(d.data());
         for (const d of abs.docs) out.absences[d.id] = C.clone(d.data());
@@ -61,6 +63,7 @@
         for (const k of C.CONFIG_KEYS) { const v = lsGet("config/" + k); if (v != null) out.config[k] = v; }
         for (const k of lsKeys("weeks/")) out.weeks[k.slice(6)] = lsGet(k);
         for (const k of lsKeys("absences/")) out.absences[k.slice(9)] = lsGet(k);
+        for (const k of lsKeys("adjustments/")) out.adjustments[k.slice(12)] = lsGet(k);
       } else if (this.memory) return C.clone(this.memory);
       return out;
     },
@@ -69,14 +72,14 @@
     watch(onChange) {
       if (this.mode !== "db") return;
       this.unsubs.forEach((u) => u()); this.unsubs = [];
-      let first = { config: true, weeks: true, absences: true };
+      let first = { config: true, weeks: true, absences: true, adjustments: true };
       const sub = (col) => this.db.collection(col).onSnapshot((snap) => {
         if (first[col]) { first[col] = false; return; }
         if (snap.metadata && snap.metadata.hasPendingWrites) return;
         const changes = snap.docChanges().map((c) => ({ col, id: c.doc.id, removed: c.type === "removed", data: c.type === "removed" ? null : C.clone(c.doc.data()) }));
         if (changes.length) onChange(changes);
       }, () => {});
-      this.unsubs.push(sub("config"), sub("weeks"), sub("absences"));
+      this.unsubs.push(sub("config"), sub("weeks"), sub("absences"), sub("adjustments"));
     },
 
     async put(col, id, value) {
@@ -89,7 +92,7 @@
         }));
       }
       if (this.mode === "local") return lsSet(path, value);
-      this.memory = this.memory || { config: {}, weeks: {}, absences: {} };
+      this.memory = this.memory || { config: {}, weeks: {}, absences: {}, adjustments: {} };
       const bucket = this.memory[col];
       if (value == null) delete bucket[id]; else bucket[id] = C.clone(value);
     },

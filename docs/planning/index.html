@@ -180,8 +180,11 @@ table.plan { border-collapse: separate; border-spacing: 0; width: 100%; min-widt
 .plan thead th.name { z-index: 3; background: var(--surface-2); }
 .plan td.name { padding: 8px 10px; }
 .plan td.name b { display: block; font-size: 14px; }
+.name-btn { border: 0; background: none; padding: 0; margin: 0; text-align: left; cursor: pointer; color: inherit; font: inherit; display: block; width: 100%; }
+.name-btn:hover b, .name-btn.inline:hover { color: var(--accent); }
+.name-btn.inline { display: inline; width: auto; font-weight: 600; text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
 .plan td.name span { font-size: 12px; color: var(--fg-2); }
-.plan th.tot, .plan td.tot { width: 64px; text-align: right; padding: 8px 10px; font-variant-numeric: tabular-nums; font-size: 13px; }
+.plan th.tot, .plan td.tot { width: 78px; text-align: right; padding: 8px 10px; font-variant-numeric: tabular-nums; font-size: 13px; }
 .plan td.cell { padding: 4px; height: 64px; position: relative; cursor: pointer; }
 .plan td.cell:hover { background: var(--surface-2); }
 .plan td.cell.drop { background: var(--accent-soft); box-shadow: inset 0 0 0 2px var(--accent); }
@@ -531,6 +534,13 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
     cours: "Journée de cours",
     indispo: "Indisponibilité",
     fermeture: "Fermeture",
+  };
+
+  // Heures réellement faites en plus ou en moins du planning.
+  const ADJUST_TYPES = {
+    heures_sup: { label: "Heures sup", sign: 1 },
+    journee_sup: { label: "Journée en plus", sign: 1 },
+    retard: { label: "Retard", sign: -1 },
   };
 
   const DEFAULT_SETTINGS = {
@@ -998,8 +1008,8 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
   function applyOps(state, ops, meta) {
     meta = meta || {};
     const s = clone(state);
-    s.weeks = s.weeks || {}; s.absences = s.absences || {};
-    const touched = { weeks: new Set(), absences: new Set(), config: new Set() };
+    s.weeks = s.weeks || {}; s.absences = s.absences || {}; s.adjustments = s.adjustments || {};
+    const touched = { weeks: new Set(), absences: new Set(), config: new Set(), adjustments: new Set() };
     const errors = [], messages = [], impacts = [];
     const shiftWeeks = new Set();
     const fail = (m) => { errors.push(m); };
@@ -1151,6 +1161,22 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
           for (const w of Object.values(s.weeks)) for (const sh of w.shifts) if ((emp.id === "*" || sh.emp === emp.id) && sh.date >= a.from && sh.date <= to) impacts.push({ emp: sh.emp, date: sh.date, segs: sh.segs });
           break;
         }
+        case "addAdjustment": {
+          const a = op.adjustment || {};
+          const emp = empOf(a.emp); if (!emp || !dateOk(a.date)) break;
+          if (!ADJUST_TYPES[a.type]) { fail(`Type inconnu « ${a.type} ».`); break; }
+          const min = Math.round(Number(a.minutes));
+          if (!(min > 0 && min <= 16 * 60)) { fail("Durée invalide : entre 1 minute et 16 heures."); break; }
+          const id = a.id || uid("aj");
+          s.adjustments[id] = { id, emp: emp.id, date: a.date, type: a.type, minutes: min, note: String(a.note || "").slice(0, 200), createdAt: meta.now || null, by: meta.by || null };
+          touched.adjustments.add(id);
+          break;
+        }
+        case "removeAdjustment": {
+          if (!s.adjustments[op.id]) { fail("Ligne introuvable."); break; }
+          delete s.adjustments[op.id]; touched.adjustments.add(op.id);
+          break;
+        }
         case "removeAbsence": {
           if (!s.absences[op.id]) { fail("Absence introuvable."); break; }
           delete s.absences[op.id]; touched.absences.add(op.id);
@@ -1276,6 +1302,7 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
 
     const changes = [];
     for (const m of touched.weeks) changes.push({ col: "weeks", id: m, before: clone((state.weeks || {})[m] || null), after: clone(s.weeks[m] || null) });
+    for (const id of touched.adjustments) changes.push({ col: "adjustments", id, before: clone((state.adjustments || {})[id] || null), after: clone(s.adjustments[id] || null) });
     for (const id of touched.absences) changes.push({ col: "absences", id, before: clone((state.absences || {})[id] || null), after: clone(s.absences[id] || null) });
     for (const k of touched.config) changes.push({ col: "config", id: k, before: clone(state[k]), after: clone(s[k]) });
     const issues = [];
@@ -1285,11 +1312,12 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
 
   // Applique une liste de changements {col, id, after} sur un état (sans validation).
   function applyChanges(state, changes, which) {
-    const s = { ...state, weeks: { ...(state.weeks || {}) }, absences: { ...(state.absences || {}) } };
+    const s = { ...state, weeks: { ...(state.weeks || {}) }, absences: { ...(state.absences || {}) }, adjustments: { ...(state.adjustments || {}) } };
     for (const c of changes) {
       const v = which === "before" ? c.before : c.after;
       if (c.col === "weeks") { if (v) s.weeks[c.id] = v; else delete s.weeks[c.id]; }
       else if (c.col === "absences") { if (v) s.absences[c.id] = v; else delete s.absences[c.id]; }
+      else if (c.col === "adjustments") { if (v) s.adjustments[c.id] = v; else delete s.adjustments[c.id]; }
       else if (c.col === "config" && CONFIG_KEYS.includes(c.id)) s[c.id] = v;
     }
     return s;
@@ -1304,11 +1332,40 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
       calendars: clone(ref.calendars),
       weeks: {},
       absences: {},
+      adjustments: {},
     };
   }
 
+  // Heures d'une personne sur une période : prévues au planning, + heures sup et journées en plus, − retards.
+  function hoursSummary(state, empId, from, to) {
+    const days = [];
+    let planned = 0;
+    for (let d = from; d <= to; d = addDays(d, 1)) {
+      const w = getWeek(state, mondayOf(d));
+      const sh = w && w.shifts.find((x) => x.emp === empId && x.date === d);
+      if (sh) { const m = shiftMinutes(sh.segs); planned += m; days.push({ date: d, minutes: m, segs: sh.segs }); }
+    }
+    const adj = Object.values(state.adjustments || {}).filter((a) => a.emp === empId && a.date >= from && a.date <= to).sort((a, b) => a.date.localeCompare(b.date));
+    const sum = (t) => adj.filter((a) => a.type === t).reduce((x, a) => x + a.minutes, 0);
+    const extra = sum("heures_sup"), extraDays = sum("journee_sup"), late = sum("retard");
+    return { planned, extra, extraDays, extraDayCount: adj.filter((a) => a.type === "journee_sup").length, late, total: planned + extra + extraDays - late, workedDays: days.length, days, adjustments: adj };
+  }
+  // « 1:30 », « 1h30 », « 1,5 », « 90 min », « 45 » (minutes) → minutes
+  function parseDuration(v) {
+    const t = String(v == null ? "" : v).trim().toLowerCase().replace(/\s/g, "");
+    if (!t) return null;
+    let m = t.match(/^(\d{1,2})[:h](\d{1,2})?$/);
+    if (m) return Number(m[1]) * 60 + Number(m[2] || 0);
+    m = t.match(/^(\d+)(?:min|mn|m)$/);
+    if (m) return Number(m[1]);
+    m = t.match(/^(\d+)[.,](\d+)$/);
+    if (m) return Math.round(parseFloat(m[1] + "." + m[2]) * 60);
+    if (/^\d+$/.test(t)) return Number(t) <= 12 ? Number(t) * 60 : Number(t);
+    return null;
+  }
+
   root.PlanningCore = {
-    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
+    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
@@ -1370,13 +1427,15 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
     },
 
     async loadAll() {
-      const out = { config: {}, weeks: {}, absences: {} };
+      const out = { config: {}, weeks: {}, absences: {}, adjustments: {} };
       if (this.mode === "db") {
-        const [cfg, weeks, abs] = await Promise.all([
+        const [cfg, weeks, abs, adj] = await Promise.all([
           this.dbCall(() => this.db.collection("config").get()),
           this.dbCall(() => this.db.collection("weeks").get()),
           this.dbCall(() => this.db.collection("absences").get()),
+          this.dbCall(() => this.db.collection("adjustments").get()),
         ]);
+        for (const d of adj.docs) out.adjustments[d.id] = C.clone(d.data());
         for (const d of cfg.docs) out.config[d.id] = C.clone(d.data().value);
         for (const d of weeks.docs) out.weeks[d.id] = C.clone(d.data());
         for (const d of abs.docs) out.absences[d.id] = C.clone(d.data());
@@ -1384,6 +1443,7 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
         for (const k of C.CONFIG_KEYS) { const v = lsGet("config/" + k); if (v != null) out.config[k] = v; }
         for (const k of lsKeys("weeks/")) out.weeks[k.slice(6)] = lsGet(k);
         for (const k of lsKeys("absences/")) out.absences[k.slice(9)] = lsGet(k);
+        for (const k of lsKeys("adjustments/")) out.adjustments[k.slice(12)] = lsGet(k);
       } else if (this.memory) return C.clone(this.memory);
       return out;
     },
@@ -1392,14 +1452,14 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
     watch(onChange) {
       if (this.mode !== "db") return;
       this.unsubs.forEach((u) => u()); this.unsubs = [];
-      let first = { config: true, weeks: true, absences: true };
+      let first = { config: true, weeks: true, absences: true, adjustments: true };
       const sub = (col) => this.db.collection(col).onSnapshot((snap) => {
         if (first[col]) { first[col] = false; return; }
         if (snap.metadata && snap.metadata.hasPendingWrites) return;
         const changes = snap.docChanges().map((c) => ({ col, id: c.doc.id, removed: c.type === "removed", data: c.type === "removed" ? null : C.clone(c.doc.data()) }));
         if (changes.length) onChange(changes);
       }, () => {});
-      this.unsubs.push(sub("config"), sub("weeks"), sub("absences"));
+      this.unsubs.push(sub("config"), sub("weeks"), sub("absences"), sub("adjustments"));
     },
 
     async put(col, id, value) {
@@ -1412,7 +1472,7 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
         }));
       }
       if (this.mode === "local") return lsSet(path, value);
-      this.memory = this.memory || { config: {}, weeks: {}, absences: {} };
+      this.memory = this.memory || { config: {}, weeks: {}, absences: {}, adjustments: {} };
       const bucket = this.memory[col];
       if (value == null) delete bucket[id]; else bucket[id] = C.clone(value);
     },
@@ -1745,6 +1805,7 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
           case "supprimer_absence": return { type: "removeAbsence", id: op.id };
           case "ajouter_employe": return { type: "addEmployee", employee: { name: op.prenom, role: op.role, zonesList: op.zones || [] } };
           case "modifier_zones": return { type: "setZones", emp: op.prenom, zones: Object.fromEntries((op.zones || []).map((z) => [String(z).toUpperCase(), "confirme"])) };
+          case "ajouter_heures": return { type: "addAdjustment", adjustment: { emp: op.prenom, date: op.date, type: op.genre || "heures_sup", minutes: C.parseDuration(op.duree), note: op.note } };
           case "valider_semaine": return { type: "setWeekStatus", monday: op.semaine, status: "validé", acknowledge: true };
           case "generer_semaine": {
             const monday = C.mondayOf(op.semaine);
@@ -1826,7 +1887,7 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
         },
         {
           name: "proposer_modifications",
-          description: "Prépare des modifications SANS les appliquer : elles sont vérifiées puis montrées à la personne, qui clique sur « Appliquer ». Renvoie ok, erreurs (bloquantes) ou alertes. Types d'opérations : definir_creneau {prenom,date,segments:[{debut,fin,zone}]} (remplace le créneau du jour), supprimer_creneau {prenom,date}, deplacer_creneau {prenom,date,vers_prenom?,vers_date?,echanger?}, copier_jour {du,vers,remplacer?}, dupliquer_semaine {de,vers}, ajouter_absence {prenom ou \"*\",type_absence: conges|vacances|repos|arret|cours|indispo|fermeture,du,au,note?}, supprimer_absence {id}, ajouter_employe {prenom,role: salarie|alternant,zones:[ZP|ZR]}, modifier_zones {prenom,zones:[...]}, generer_semaine {semaine}, valider_semaine {semaine}, annuler_derniere {}.",
+          description: "Prépare des modifications SANS les appliquer : elles sont vérifiées puis montrées à la personne, qui clique sur « Appliquer ». Renvoie ok, erreurs (bloquantes) ou alertes. Types d'opérations : definir_creneau {prenom,date,segments:[{debut,fin,zone}]} (remplace le créneau du jour), supprimer_creneau {prenom,date}, deplacer_creneau {prenom,date,vers_prenom?,vers_date?,echanger?}, copier_jour {du,vers,remplacer?}, dupliquer_semaine {de,vers}, ajouter_absence {prenom ou \"*\",type_absence: conges|vacances|repos|arret|cours|indispo|fermeture,du,au,note?}, supprimer_absence {id}, ajouter_employe {prenom,role: salarie|alternant,zones:[ZP|ZR]}, modifier_zones {prenom,zones:[...]}, generer_semaine {semaine}, valider_semaine {semaine}, ajouter_heures {prenom,date,genre: heures_sup|journee_sup|retard,duree:\"1h30\",note?}, annuler_derniere {}.",
           inputSchema: {
             type: "object",
             properties: {
@@ -2062,6 +2123,8 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
         case "addAbsence": return `${C.ABSENCE_TYPES[o.absence.type]} : ${n(o.absence.emp)} du ${C.fmtDate(o.absence.from, "short")} au ${C.fmtDate(o.absence.to || o.absence.from, "short")}`;
         case "updateAbsence": return `Absence modifiée : ${n(o.absence.emp)}`;
         case "removeAbsence": return "Absence supprimée";
+        case "addAdjustment": return `${C.ADJUST_TYPES[o.adjustment.type].label} : ${n(o.adjustment.emp)} ${d(o.adjustment.date)} (${C.ADJUST_TYPES[o.adjustment.type].sign > 0 ? "+" : "−"}${C.fmtHours(Math.round(Number(o.adjustment.minutes)))})`;
+        case "removeAdjustment": return "Heures sup / retard supprimé";
         case "addEmployee": return `Ajout de ${o.employee.name}`;
         case "updateEmployee": return `Fiche de ${n(o.id)} modifiée`;
         case "removeEmployee": return `Suppression de ${n(o.id)}`;
@@ -2120,7 +2183,7 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
       if (!cfg.employees) { this.state = null; this.history = []; return; }
       this.state = {
         employees: cfg.employees || [], zones: cfg.zones || [], settings: { ...C.DEFAULT_SETTINGS, ...(cfg.settings || {}) },
-        template: cfg.template || { shifts: [] }, calendars: cfg.calendars || [], weeks: data.weeks || {}, absences: data.absences || {},
+        template: cfg.template || { shifts: [] }, calendars: cfg.calendars || [], weeks: data.weeks || {}, absences: data.absences || {}, adjustments: data.adjustments || {},
       };
       this.history = await Store.listLog("history", 150).catch(() => []);
       const ids = [...new Set(this.history.map((x) => x.by).filter((x) => x && x !== "cet appareil" && x !== "inconnu"))];
@@ -2147,6 +2210,7 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
       for (const c of changes) {
         if (c.col === "weeks") { if (c.removed) delete this.state.weeks[c.id]; else this.state.weeks[c.id] = c.data; n++; }
         else if (c.col === "absences") { if (c.removed) delete this.state.absences[c.id]; else this.state.absences[c.id] = c.data; n++; }
+        else if (c.col === "adjustments") { this.state.adjustments = this.state.adjustments || {}; if (c.removed) delete this.state.adjustments[c.id]; else this.state.adjustments[c.id] = c.data; n++; }
         else if (c.col === "config" && C.CONFIG_KEYS.includes(c.id) && !c.removed) { this.state[c.id] = c.id === "settings" ? { ...C.DEFAULT_SETTINGS, ...c.data.value } : c.data.value; n++; }
       }
       if (n) { this.render(); toast("Le planning vient d'être modifié par une autre personne."); }
@@ -2226,7 +2290,7 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
       entry = entry || this.describeUndo();
       if (!entry) { toast("Rien à annuler."); return; }
       if (!Store.canWrite) { toast(Store.readOnlyReason, "err"); return; }
-      const current = (c) => (c.col === "weeks" ? this.state.weeks[c.id] : c.col === "absences" ? this.state.absences[c.id] : this.state[c.id]) || null;
+      const current = (c) => (c.col === "weeks" ? this.state.weeks[c.id] : c.col === "absences" ? this.state.absences[c.id] : c.col === "adjustments" ? (this.state.adjustments || {})[c.id] : this.state[c.id]) || null;
       const drift = entry.changes.some((c) => JSON.stringify(current(c)) !== JSON.stringify(c.after));
       if (drift && !(await confirmDialog("Modifié depuis", "Ces éléments ont été modifiés après cette action. Revenir à l'état d'avant effacera aussi ces modifications plus récentes (elles restent dans l'historique). Continuer ?", "Revenir quand même", true))) return;
       const changes = entry.changes.map((c) => ({ col: c.col, id: c.id, before: current(c), after: c.before }));
@@ -2433,7 +2497,7 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
         }),
         h("th", { class: "tot" }, "Total"))),
       h("tbody", {}, grid.rows.map((row) => h("tr", { class: row.emp.active === false ? "inactive" : "" },
-        h("td", { class: "name" }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?")),
+        h("td", { class: "name" }, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"))),
         row.cells.map((cell) => {
           const k = row.emp.id + "|" + cell.date, lvl = cellIssue[k];
           const kids = [];
@@ -2490,7 +2554,7 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
               const lvl = cellIssue[x.emp + "|" + d];
               const p = C.pauses(x.segs);
               return h("div", { class: "shift-row", role: "button", tabindex: "0", onClick: () => this.openEditor(x.emp, d), onKeydown: (e) => { if (e.key === "Enter") this.openEditor(x.emp, d); } },
-                h("div", { class: "who" }, empName(s, x.emp), lvl ? h("span", { class: "chip " + (lvl === "erreur" ? "err" : "warn"), style: { "margin-left": "6px" } }, lvl === "erreur" ? "!" : "?") : null),
+                h("div", { class: "who" }, h("button", { type: "button", class: "name-btn inline", onClick: (ev) => { ev.stopPropagation(); this.openPerson(x.emp, "week"); }, title: "Heures de la semaine" }, empName(s, x.emp)), lvl ? h("span", { class: "chip " + (lvl === "erreur" ? "err" : "warn"), style: { "margin-left": "6px" } }, lvl === "erreur" ? "!" : "?") : null),
                 h("div", { class: "blocks" }, x.segs.map((g) => blk(s, g)), p.length ? h("span", { class: "pause" }, `Pause ${p.map((y) => `${y.s}–${y.e}`).join(", ")}`) : null),
                 h("span", { class: "small num muted" }, C.fmtHours(C.shiftMinutes(x.segs))));
             })]) : h("div", { class: "empty", style: { border: "0" } }, w ? "Personne ce jour-là." : "Aucun planning pour cette semaine.")),
@@ -2792,18 +2856,28 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
           abs.length ? h("span", { class: "bar tag-abs", title: abs.map((e) => e.name).join(", ") }, `Abs. ${abs.length}`) : null)));
     }
     const monthDays = Array.from({ length: last }, (_, i) => `${this.ui.month}-${String(i + 1).padStart(2, "0")}`);
-    const hours = s.employees.map((e) => {
-      let min = 0, days = 0;
-      for (const d of monthDays) { const w = C.getWeek(s, C.mondayOf(d)); const x = w && w.shifts.find((sh) => sh.emp === e.id && sh.date === d); if (x) { min += C.shiftMinutes(x.segs); days++; } }
-      return { e, min, days };
-    }).filter((x) => x.min || x.e.active !== false);
+    const hours = s.employees.map((e) => ({ e, h: C.hoursSummary(s, e.id, monthDays[0], monthDays[monthDays.length - 1]) })).filter((x) => x.h.total || x.h.planned || x.e.active !== false);
+    const exportHours = () => {
+      const lines = [["Mois", "Prénom", "Jours planifiés", "Heures prévues", "Heures sup", "Journées en plus", "Retards", "Total réel"].join(";")];
+      for (const x of hours) lines.push([this.ui.month, x.e.name, x.h.workedDays + x.h.extraDayCount, C.hoursDecimal(x.h.planned), C.hoursDecimal(x.h.extra), C.hoursDecimal(x.h.extraDays), C.hoursDecimal(x.h.late), C.hoursDecimal(x.h.total)].map((v) => String(v).replace(".", ",")).join(";"));
+      saveFile(`heures-${this.ui.month}.csv`, new Blob(["\ufeff" + lines.join("\r\n") + "\r\n"], { type: "text/csv;charset=utf-8" }));
+    };
     const move = (n) => { const d = new Date(Date.UTC(y, m - 1 + n, 1)); this.ui.month = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`; this.render(); };
     return h("div", { class: "stack", style: { gap: "16px" } },
       h("div", { class: "week-head" }, h("div", { class: "when" }, iconBtn("left", "Mois précédent", () => move(-1)), iconBtn("right", "Mois suivant", () => move(1))), h("h1", { style: { "text-transform": "capitalize" } }, `${C.MONTHS[m - 1]} ${y}`), h("div", { style: { flex: "1" } }), Store.canWrite ? btn([icon("wand"), "Générer le mois"], () => { this.ui.monday = C.mondayOf(first); this.openGenerate(); }, "sm primary") : null),
       legend(s),
       h("div", { class: "month" }, C.DAYS_SHORT.map((d) => h("div", { class: "dh" }, d)), cells),
-      h("section", { class: "card" }, h("h2", {}, "Heures du mois"), h("div", { class: "t-wrap" }, h("table", { class: "t" }, h("thead", {}, h("tr", {}, h("th", {}, "Personne"), h("th", {}, "Jours"), h("th", {}, "Heures"))),
-        h("tbody", {}, hours.map((x) => h("tr", {}, h("td", {}, x.e.name), h("td", { class: "num" }, x.days), h("td", { class: "num" }, C.fmtHours(x.min)))))))));
+      h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", {}, "Heures du mois"), btn("Exporter (CSV)", exportHours, "sm ghost")),
+        h("p", { class: "small muted" }, "Touchez un prénom pour voir le détail et ajouter des heures sup, une journée en plus ou un retard."),
+        h("div", { class: "t-wrap" }, h("table", { class: "t" }, h("thead", {}, h("tr", {}, h("th", {}, "Personne"), h("th", {}, "Jours"), h("th", {}, "Prévu"), h("th", {}, "Heures sup"), h("th", {}, "Jours en plus"), h("th", {}, "Retards"), h("th", {}, "Total"))),
+        h("tbody", {}, hours.map((x) => h("tr", {},
+          h("td", {}, h("button", { type: "button", class: "name-btn inline", onClick: () => this.openPerson(x.e.id, "month") }, x.e.name)),
+          h("td", { class: "num" }, x.h.workedDays + x.h.extraDayCount),
+          h("td", { class: "num" }, C.fmtHours(x.h.planned)),
+          h("td", { class: "num", style: { color: x.h.extra ? "var(--ok)" : "" } }, x.h.extra ? "+" + C.fmtHours(x.h.extra) : "—"),
+          h("td", { class: "num", style: { color: x.h.extraDays ? "var(--ok)" : "" } }, x.h.extraDays ? `+${C.fmtHours(x.h.extraDays)} (${x.h.extraDayCount} j)` : "—"),
+          h("td", { class: "num", style: { color: x.h.late ? "var(--danger)" : "" } }, x.h.late ? "−" + C.fmtHours(x.h.late) : "—"),
+          h("td", { class: "num" }, h("b", {}, C.fmtHours(x.h.total))))))))));
   } };
 
   // ---------- Calendrier des alternants ----------
@@ -2992,6 +3066,7 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
     const who = (id) => (id === "cet appareil" ? "Cet appareil" : this.names[id] || (id === Store.userId ? "Vous" : "Une autre personne"));
     const fmtAt = (at) => { const d = new Date(at); return isNaN(d) ? "" : `${C.fmtDate(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`, "num")} ${fmtTime(d)}`; };
     const detail = (c) => {
+      if (c.col === "adjustments") { const a = c.after || c.before; return h("div", { class: "small muted" }, a ? `${c.after ? "" : "Supprimé : "}${C.ADJUST_TYPES[a.type].label} ${empName(s, a.emp)} ${C.fmtDate(a.date, "short")} (${C.fmtHours(a.minutes)})` : ""); }
       if (c.col !== "weeks" || !("before" in c)) return h("div", { class: "small muted" }, c.col === "absences" ? (c.after ? `Absence : ${empName(s, c.after.emp)} ${C.fmtDate(c.after.from, "short")} → ${C.fmtDate(c.after.to, "short")}` : "Absence supprimée") : c.col === "config" ? `Paramètres : ${({ employees: "équipe", zones: "zones", settings: "règles", template: "modèle", calendars: "calendrier d'alternance" })[c.id] || c.id}` : "");
       const key = (x) => `${x.emp}|${x.date}`;
       const b = new Map(((c.before && c.before.shifts) || []).map((x) => [key(x), x])), a = new Map(((c.after && c.after.shifts) || []).map((x) => [key(x), x]));
@@ -3106,7 +3181,7 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
       changes.push(weekChange);
     }
     const prev = this.state;
-    this.state = { ...base, weeks: prev ? prev.weeks : {}, absences: prev ? prev.absences : {} };
+    this.state = { ...base, weeks: prev ? prev.weeks : {}, absences: prev ? prev.absences : {}, adjustments: prev ? prev.adjustments || {} : {} };
     if (weekChange) this.state.weeks[weekChange.id] = weekChange.after;
     const ok = await this.persist(changes, "import", existing ? "Réimport des calendriers analysés" : "Import initial des deux calendriers");
     if (!ok) { this.state = prev; this.render(); return; }
@@ -3191,6 +3266,70 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
         if (r.ok) { this.ui.calId = id; this.go("alternants"); }
         return r.ok;
       } }] });
+  };
+
+  // ---------- Fiche heures d'une personne (semaine ou mois) ----------
+  App.openPerson = function (empId, scope) {
+    let mode = scope === "month" ? "month" : "week";
+    let monday = this.ui.monday, month = this.ui.month;
+    if (mode === "week" && this.ui.screen === "month") monday = C.mondayOf(`${month}-01`);
+    const body = h("div", { class: "stack" });
+    const range = () => {
+      if (mode === "week") return { from: monday, to: C.addDays(monday, 6), label: `Semaine du ${C.fmtWeek(monday)}` };
+      const [y, m] = month.split("-").map(Number);
+      return { from: `${month}-01`, to: `${month}-${String(new Date(Date.UTC(y, m, 0)).getUTCDate()).padStart(2, "0")}`, label: `${C.MONTHS[m - 1]} ${y}` };
+    };
+    const move = (n) => {
+      if (mode === "week") monday = C.addDays(monday, 7 * n);
+      else { const [y, m] = month.split("-").map(Number); const d = new Date(Date.UTC(y, m - 1 + n, 1)); month = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`; }
+      draw();
+    };
+    const draw = () => {
+      const s = this.state, e = C.empById(s, empId);
+      if (!e) { body.replaceChildren(h("p", {}, "Personne introuvable.")); return; }
+      const r = range(), x = C.hoursSummary(s, empId, r.from, r.to);
+      const ref = mode === "week" ? C.templateMinutes(s, empId) : 0;
+      const kpi = (label, val, color) => h("div", { class: "kpi" }, h("b", { style: color ? { color } : {} }, val), h("span", {}, label));
+      const typeSel = h("select", { class: "input", id: "aj-type" }, Object.entries(C.ADJUST_TYPES).map(([k, v]) => h("option", { value: k }, v.label)));
+      const dateIn = h("input", { type: "date", class: "input", id: "aj-date", value: r.from <= this.today() && this.today() <= r.to ? this.today() : r.from });
+      const durIn = h("input", { class: "input", id: "aj-dur", placeholder: "ex. 1h30, 0:20, 7h", inputmode: "text" });
+      const noteIn = h("input", { class: "input", id: "aj-note", maxlength: "200", placeholder: "Facultatif" });
+      typeSel.addEventListener("change", () => { if (typeSel.value === "journee_sup" && !durIn.value) durIn.value = "7h"; });
+      body.replaceChildren(...[
+        h("div", { class: "row between" },
+          h("div", { class: "seg-ctl", role: "group", "aria-label": "Période" }, ["week", "month"].map((m) => h("button", { type: "button", "aria-pressed": String(m === mode), onClick: () => { mode = m; if (m === "month") month = monday.slice(0, 7); draw(); } }, m === "week" ? "Semaine" : "Mois"))),
+          h("div", { class: "row" }, iconBtn("left", "Période précédente", () => move(-1)), h("b", { style: { "text-transform": mode === "month" ? "capitalize" : "none" } }, r.label), iconBtn("right", "Période suivante", () => move(1)))),
+        h("div", { class: "kpis" },
+          kpi("prévues au planning", C.fmtHours(x.planned)),
+          kpi("heures sup", x.extra ? "+" + C.fmtHours(x.extra) : "0 h", x.extra ? "var(--ok)" : ""),
+          kpi(`journée(s) en plus${x.extraDayCount ? " (" + x.extraDayCount + ")" : ""}`, x.extraDays ? "+" + C.fmtHours(x.extraDays) : "0 h", x.extraDays ? "var(--ok)" : ""),
+          kpi("retards", x.late ? "−" + C.fmtHours(x.late) : "0 h", x.late ? "var(--danger)" : ""),
+          kpi("total réel", C.fmtHours(x.total))),
+        ref ? h("p", { class: "small muted" }, `Planning modèle : ${C.fmtHours(ref)} par semaine.`) : null,
+        h("details", { open: mode === "week" }, h("summary", { class: "small" }, `${x.workedDays} jour(s) planifié(s)`),
+          h("div", { class: "list" }, x.days.map((d) => h("div", { class: "item" }, h("span", { class: "grow" }, C.fmtDate(d.date, "day")), h("span", { class: "small muted num" }, C.segLabel(d.segs)), h("b", { class: "num small" }, C.fmtHours(d.minutes)))))),
+        h("h3", {}, "Heures sup, journées en plus et retards"),
+        x.adjustments.length ? h("div", { class: "list" }, x.adjustments.map((a) => {
+          const t = C.ADJUST_TYPES[a.type];
+          return h("div", { class: "item" },
+            h("span", { class: t.sign > 0 ? "chip ok" : "chip err" }, t.label),
+            h("div", { class: "grow" }, h("div", {}, C.fmtDate(a.date, "day")), a.note ? h("div", { class: "small muted" }, a.note) : null),
+            h("b", { class: "num", style: { color: t.sign > 0 ? "var(--ok)" : "var(--danger)" } }, `${t.sign > 0 ? "+" : "−"}${C.fmtHours(a.minutes)}`),
+            Store.canWrite ? iconBtn("close", "Supprimer", async () => { if (await confirmDialog("Supprimer cette ligne ?", `${t.label} du ${C.fmtDate(a.date, "day")} (${C.fmtHours(a.minutes)}).`, "Supprimer", true)) { await this.commit([{ type: "removeAdjustment", id: a.id }]); draw(); } }) : null);
+        })) : h("p", { class: "small muted" }, "Rien sur cette période."),
+        Store.canWrite ? h("form", { class: "stack", onSubmit: async (ev) => {
+          ev.preventDefault();
+          const min = C.parseDuration(durIn.value);
+          if (!min) { toast("Durée illisible : écrivez par exemple 1h30, 0:20 ou 7h.", "err"); return; }
+          const res = await this.commit([{ type: "addAdjustment", adjustment: { emp: empId, date: dateIn.value, type: typeSel.value, minutes: min, note: noteIn.value } }]);
+          if (res.ok) { toast("Ajouté."); draw(); }
+        } },
+          h("div", { class: "form-grid" }, h("label", { class: "f" }, "Type", typeSel), h("label", { class: "f" }, "Date", dateIn), h("label", { class: "f" }, "Durée", durIn)),
+          h("label", { class: "f" }, "Note", noteIn),
+          h("div", {}, h("button", { type: "submit", class: "btn primary" }, "Ajouter"))) : null].filter(Boolean));
+    };
+    draw();
+    openDialog({ title: empName(this.state, empId), body, wide: true, actions: [{ label: "Fermer", primary: true }] });
   };
 
   // ---------- Plannings papier fournis avec l'appli ----------

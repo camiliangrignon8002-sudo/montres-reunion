@@ -270,3 +270,25 @@ test("règles personnelles : horaires fixes et jours de repos signalés, respect
   assert.ok(!pm.includes("sebastien"));
   for (const id of ["fleur", "camilian", "lucas"]) assert.equal(C.empById(s, id).calendarId, "bts-mco1");
 });
+
+test("heures : semaine et mois, avec heures sup, journée en plus et retard", () => {
+  let s = withWeek1();
+  let x = C.hoursSummary(s, "fleur", W1, "2026-10-25");
+  assert.equal(x.planned, 35 * 60);
+  const r = apply(s, [
+    { type: "addAdjustment", adjustment: { emp: "Fleur", date: "2026-10-21", type: "heures_sup", minutes: C.parseDuration("1h30") } },
+    { type: "addAdjustment", adjustment: { emp: "fleur", date: "2026-10-22", type: "retard", minutes: C.parseDuration("0:20") } },
+    { type: "addAdjustment", adjustment: { emp: "fleur", date: "2026-10-19", type: "journee_sup", minutes: C.parseDuration("7h") } },
+  ]);
+  assert.ok(r.ok, r.errors && r.errors.join());
+  assert.equal(r.changes.filter((c) => c.col === "adjustments").length, 3);
+  s = r.state;
+  x = C.hoursSummary(s, "fleur", W1, "2026-10-25");
+  assert.deepEqual([x.extra, x.late, x.extraDays, x.extraDayCount, x.total], [90, 20, 420, 1, 35 * 60 + 90 + 420 - 20]);
+  const m = C.hoursSummary(s, "fleur", "2026-10-01", "2026-10-31");
+  assert.equal(m.total, x.total); // une seule semaine planifiée en octobre
+  assert.equal(apply(s, [{ type: "addAdjustment", adjustment: { emp: "fleur", date: "2026-10-21", type: "heures_sup", minutes: 0 } }]).ok, false);
+  const id = Object.keys(s.adjustments)[0];
+  const back = C.applyChanges(apply(s, [{ type: "removeAdjustment", id }]).state, [], "after");
+  assert.equal(Object.keys(back.adjustments).length, 2);
+});

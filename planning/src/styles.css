@@ -161,8 +161,11 @@ table.plan { border-collapse: separate; border-spacing: 0; width: 100%; min-widt
 .plan thead th.name { z-index: 3; background: var(--surface-2); }
 .plan td.name { padding: 8px 10px; }
 .plan td.name b { display: block; font-size: 14px; }
+.name-btn { border: 0; background: none; padding: 0; margin: 0; text-align: left; cursor: pointer; color: inherit; font: inherit; display: block; width: 100%; }
+.name-btn:hover b, .name-btn.inline:hover { color: var(--accent); }
+.name-btn.inline { display: inline; width: auto; font-weight: 600; text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
 .plan td.name span { font-size: 12px; color: var(--fg-2); }
-.plan th.tot, .plan td.tot { width: 64px; text-align: right; padding: 8px 10px; font-variant-numeric: tabular-nums; font-size: 13px; }
+.plan th.tot, .plan td.tot { width: 78px; text-align: right; padding: 8px 10px; font-variant-numeric: tabular-nums; font-size: 13px; }
 .plan td.cell { padding: 4px; height: 64px; position: relative; cursor: pointer; }
 .plan td.cell:hover { background: var(--surface-2); }
 .plan td.cell.drop { background: var(--accent-soft); box-shadow: inset 0 0 0 2px var(--accent); }
