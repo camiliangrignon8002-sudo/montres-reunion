@@ -148,6 +148,11 @@
       summary: "Sonia et Sylvie supprimées ; Lydia retirée de l'équipe à partir du 23/10/2026",
       remove: ["sonia", "sylvie"],
       leave: { lydia: "2026-10-23" },
+    }, {
+      id: "confirmation-2026-10-22",
+      summary: "Informations confirmées : zones, couleurs lues sur les photos, 35 h par semaine, journées de 7 h + 30 min de pause, 11 h de repos",
+      confirmAll: true,
+      settings: { contractHours: 35, maxWeekHours: 35, maxDayHours: 7, checkPause: true, minPauseMinutes: 30, minRestHours: 11, checkRest: true, checkMaxDay: true, checkMaxWeek: true, rulesConfirmed: true },
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
@@ -166,11 +171,8 @@
     }],
     totalsOnPaper: { camilian: 35, charlotte: 35, eric: 35, fleur: 35, lydia: 14, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35, amandine: 0, sonia: 0, sophie: 0, sylvie: 0 },
     questions: [
-      "Les fins de service surlignées vert + orange (Charlotte mar./mer., Eric jeu., Sebastien mar./mer./sam.) sont-elles en zone réservée ?",
       "Le planning indique « Page 1/2 » : la page 2 contient-elle une semaine 2 (rotation) ou d'autres employés ?",
-      "Amandine, Sonia, Sophie et Sylvie n'ont aucun horaire : sont-elles encore dans l'équipe, et dans quelle zone ?",
-      "Semaine du 26/10 : Lydia a un ajout manuscrit le samedi (« 06H / 13H » en orange). Faut-il l'ajouter ?",
-      "Les règles de repos et de durée (11 h de repos, 10 h/jour, 48 h/semaine) sont celles du Code du travail : y a-t-il des règles plus strictes (convention, contrat) ?",
+      "Amandine et Sophie n'ont aucun horaire : sont-elles encore dans l'équipe, et dans quelle zone ?",
     ],
   };
 })(typeof globalThis !== "undefined" ? globalThis : this);

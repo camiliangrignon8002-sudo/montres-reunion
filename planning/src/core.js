@@ -28,6 +28,8 @@
     checkRest: true, minRestHours: 11,
     checkMaxDay: true, maxDayHours: 10,
     checkMaxWeek: true, maxWeekHours: 48,
+    checkPause: true, minPauseMinutes: 30,
+    contractHours: 35,
     coverageFromTemplate: true,
     rulesConfirmed: false,
     appliedUpdates: [],
@@ -233,7 +235,7 @@
       const who = nameOf(sh.emp);
       const d = sh.date;
       if (!emp) { add("erreur", "UNKNOWN_EMP", sh.emp, d, `Créneau attribué à une personne inconnue (${sh.emp}).`); continue; }
-      if (emp.active === false) add("erreur", "INACTIVE", sh.emp, d, `${who} est désactivé(e) mais a un créneau le ${fmtDate(d, "day")}.`);
+      if (emp.active === false && !(emp.leftOn && d < emp.leftOn)) add("erreur", "INACTIVE", sh.emp, d, `${who} est désactivé(e) mais a un créneau le ${fmtDate(d, "day")}.`);
       if (!sh.segs || !sh.segs.length) add("erreur", "TIME_INVALID", sh.emp, d, `${who} : créneau vide le ${fmtDate(d, "day")}.`);
       let timesOk = true;
       for (const g of sh.segs || []) {
@@ -258,6 +260,10 @@
       else if (cs === "inconnu") add("alerte", "CAL_UNKNOWN", sh.emp, d, `${who} : statut d'alternance inconnu le ${fmtDate(d, "day")} (calendrier non renseigné).`);
       else if (cs === "ferie") add("info", "FERIE", sh.emp, d, `${fmtDate(d, "day")} est férié dans le calendrier d'alternance.`);
       if (timesOk) for (const x of personalRuleIssues(emp, d, sh.segs)) add("alerte", x.code, sh.emp, d, x.msg);
+      if (st.checkPause && timesOk && shiftMinutes(sh.segs) > 6 * 60) {
+        const pz = pauses(sh.segs).reduce((a, p) => a + p.min, 0);
+        if (pz < st.minPauseMinutes) add("alerte", "PAUSE", sh.emp, d, `${who} : ${pz ? pz + " min" : "aucune"} de pause le ${fmtDate(d, "day")} (${st.minPauseMinutes} min prévues).`);
+      }
       if (st.checkMaxDay && timesOk && shiftMinutes(sh.segs) > st.maxDayHours * 60) add("alerte", "DAY_MAX", sh.emp, d, `${who} : ${fmtHours(shiftMinutes(sh.segs))} le ${fmtDate(d, "day")} (plus de ${st.maxDayHours} h).`);
     }
 
@@ -297,14 +303,18 @@
     const w = getWeek(state, monday);
     if (!w) return [];
     const out = [];
+    // Semaine tirée d'un planning papier : le papier fait foi ; seuls les postes vidés depuis (départ, absence…) sont à pourvoir.
+    const paper = !!(w.refId || /papier/.test(w.source || ""));
+    // Un poste est couvert par un créneau qui a le même début, la même fin et les mêmes zones (la pause peut différer).
+    const spanKey = (segs) => `${segs[0].s}-${segs[segs.length - 1].e}-${[...new Set(segs.map((g) => g.z))].sort().join("/")}`;
     for (const date of weekDates(monday)) {
-      const posts = templateFor(state, date);
+      const posts = paper ? (w.vacated || []).filter((v) => v.date === date).map((v) => ({ emp: v.emp, segs: v.segs, vacated: v.reason })) : templateFor(state, date);
       if (!posts.length) continue;
-      const pool = w.shifts.filter((s) => s.date === date).map((s) => ({ s, key: segKey(s.segs.map(({ s: a, e, z }) => ({ s: a, e, z }))), used: false }));
+      const pool = w.shifts.filter((s) => s.date === date).map((s) => ({ s, key: spanKey(s.segs), used: false }));
       // D'abord la même personne, puis n'importe qui avec exactement le même poste.
       const pending = [];
       for (const p of posts) {
-        const key = segKey(p.segs.map(({ s, e, z }) => ({ s, e, z })));
+        const key = spanKey(p.segs);
         const same = pool.find((x) => !x.used && x.key === key && x.s.emp === p.emp);
         if (same) same.used = true; else pending.push({ p, key });
       }
@@ -313,7 +323,7 @@
         if (any) { any.used = true; continue; }
         const av = availability(state, p.emp, date, []);
         const working = w.shifts.find((s) => s.emp === p.emp && s.date === date);
-        const reason = av.block.length ? av.block[0] : working ? `affecté(e) à ${segLabel(working.segs)}` : av.warn.length ? av.warn[0] : "non planifié(e)";
+        const reason = p.vacated || (av.block.length ? av.block[0] : working ? `affecté(e) à ${segLabel(working.segs)}` : av.warn.length ? av.warn[0] : "non planifié(e)");
         out.push({ id: `${date}|${p.emp}|${key}`, date, segs: p.segs.map(({ s, e, z }) => ({ s, e, z })), templateEmp: p.emp, reason });
       }
     }
@@ -554,7 +564,10 @@
         }
         case "removeShift": {
           const emp = empOf(op.emp); if (!emp || !dateOk(op.date)) break;
-          if (!removeShiftRaw(emp.id, op.date)) fail(`${emp.name} n'a pas de créneau le ${fmtDate(op.date, "day")}.`);
+          const w0 = s.weeks[mondayOf(op.date)];
+          const old = w0 && w0.shifts.find((x) => x.emp === emp.id && x.date === op.date);
+          if (!removeShiftRaw(emp.id, op.date)) { fail(`${emp.name} n'a pas de créneau le ${fmtDate(op.date, "day")}.`); break; }
+          if (op.vacate) { w0.vacated = [...(w0.vacated || []), { date: op.date, emp: emp.id, segs: old.segs.map(({ s: a, e, z }) => ({ s: a, e, z })), reason: String(op.vacate) }]; }
           break;
         }
         case "moveShift": {
@@ -687,7 +700,7 @@
             if (s.employees.some((x) => x.id !== emp.id && norm(x.name) === norm(n))) { fail(`${n} existe déjà.`); break; }
             emp.name = n;
           }
-          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied"]) if (p[k] !== undefined) emp[k] = p[k];
+          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn"]) if (p[k] !== undefined) emp[k] = p[k];
           if (emp.role === "alternant" && !emp.calendarId && s.calendars[0]) emp.calendarId = s.calendars[0].id;
           if (p.rules) {
             const r = p.rules;
@@ -741,6 +754,15 @@
             s.settings[k] = typeof DEFAULT_SETTINGS[k] === "number" ? Number(v) : !!v;
           }
           conf("settings");
+          break;
+        }
+        case "confirmAll": {
+          // Tout ce qui était « déduit » ou « à confirmer » devient confirmé ; les doutes de lecture des photos sont levés.
+          for (const e of s.employees) for (const z of Object.keys(e.zones || {})) e.zones[z] = "confirme";
+          conf("employees");
+          const clean = (segs) => { let ch = false; for (const g of segs || []) if (g.doute) { delete g.doute; ch = true; } return ch; };
+          for (const [m, w] of Object.entries(s.weeks)) if (w.shifts.map((x) => clean(x.segs)).some(Boolean)) touched.weeks.add(m);
+          if ((s.template.shifts || []).map((t) => clean(t.segs)).some(Boolean)) conf("template");
           break;
         }
         case "setTemplate": {

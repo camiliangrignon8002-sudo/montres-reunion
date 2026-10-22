@@ -462,13 +462,13 @@
     const statusChip = (wk) => !wk || !wk.shifts.length ? h("span", { class: "chip" }, "Pas encore créée") : wk.status === "validé" ? h("span", { class: "chip ok" }, "Validée") : h("span", { class: "chip warn" }, "Brouillon");
     const absUp = Object.values(s.absences).filter((a) => a.to >= today && a.from <= C.addDays(today, 30)).sort((a, b) => a.from.localeCompare(b.from));
     const altern = s.employees.filter((e) => e.role === "alternant" && e.active !== false);
-    const pending = s.employees.filter((e) => Object.values(e.zones || {}).includes("incertain") || !Object.keys(e.zones || {}).length).length;
+    const pending = s.employees.filter((e) => e.active !== false && (Object.values(e.zones || {}).includes("incertain") || !Object.keys(e.zones || {}).length)).length;
 
     return h("div", { class: "stack", style: { gap: "20px" } },
       h("div", { class: "stack", style: { gap: "4px" } }, h("h1", {}, C.fmtDate(today, "day").replace(/^./, (c) => c.toUpperCase())), h("p", { class: "muted" }, `Semaine ${C.isoWeekNumber(today)} · ${C.fmtWeek(monday)}`)),
       (pending || !s.settings.rulesConfirmed) ? h("div", { class: "card", style: { "border-color": "var(--warn)" } }, h("div", { class: "row between" },
         h("div", { class: "stack", style: { gap: "4px" } }, h("h3", {}, "Informations à confirmer"),
-          h("p", { class: "small muted" }, `${pending ? pending + " personne(s) avec des zones à confirmer ou inconnues. " : ""}${!s.settings.rulesConfirmed ? "Les règles de repos et de durée sont des valeurs par défaut." : ""}`)),
+          h("p", { class: "small muted" }, `${pending ? `Zones à confirmer ou inconnues : ${s.employees.filter((e) => e.active !== false && (Object.values(e.zones || {}).includes("incertain") || !Object.keys(e.zones || {}).length)).map((e) => e.name).join(", ")}. ` : ""}${!s.settings.rulesConfirmed ? "Les règles de repos et de durée sont des valeurs par défaut." : ""}`)),
         h("div", { class: "row" }, btn("Voir les questions", () => this.go("import"), "sm"), btn("Zones et règles", () => this.go("zones"), "sm")))) : null,
       h("div", { class: "cards" },
         h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", {}, "Aujourd'hui"), h("span", { class: "chip" }, `${todayShifts.length} personne(s)`)),
@@ -1112,11 +1112,13 @@
             } }, LV.map(([v, l]) => h("option", { value: v, selected: (e.zones || {})[z.id] === v || (!v && !(e.zones || {})[z.id]) }, l))) : (LV.find(([v]) => v === (e.zones || {})[z.id]) || LV[0])[1])),
             h("td", {}, confidence(e)), h("td", { class: "small muted", style: { "min-width": "220px" } }, e.zoneNote || ""))))))),
       h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", {}, "Règles de repos et de durée"), st.rulesConfirmed ? h("span", { class: "chip ok" }, "Confirmées") : h("span", { class: "chip warn" }, "À confirmer")),
-        h("p", { class: "small muted" }, "Valeurs par défaut tirées du Code du travail (repos quotidien de 11 h, 10 h de travail par jour, 48 h par semaine). Elles produisent des alertes, pas des blocages. Votre convention collective ou les contrats peuvent prévoir d'autres limites : ajustez-les puis confirmez."),
+        h("p", { class: "small muted" }, "Règles de l'équipe : 35 h par semaine, journées de 7 h de travail avec 30 min de pause (7 h 30 sur place), 11 h de repos entre deux journées. Elles produisent des alertes, pas des blocages."),
         h("div", { class: "form-grid", style: { "margin-top": "10px" } },
           h("div", { class: "stack", style: { gap: "6px" } }, tog("checkRest", "Vérifier le repos entre deux services"), num("minRestHours", "Repos minimum", "heures")),
           h("div", { class: "stack", style: { gap: "6px" } }, tog("checkMaxDay", "Vérifier la durée par jour"), num("maxDayHours", "Maximum par jour", "heures")),
-          h("div", { class: "stack", style: { gap: "6px" } }, tog("checkMaxWeek", "Vérifier la durée par semaine"), num("maxWeekHours", "Maximum par semaine", "heures"))),
+          h("div", { class: "stack", style: { gap: "6px" } }, tog("checkMaxWeek", "Vérifier la durée par semaine"), num("maxWeekHours", "Maximum par semaine", "heures")),
+          h("div", { class: "stack", style: { gap: "6px" } }, tog("checkPause", "Vérifier la pause (journées de plus de 6 h)"), num("minPauseMinutes", "Pause minimum", "minutes")),
+          h("div", { class: "stack", style: { gap: "6px" } }, h("span", { class: "small muted" }, "Contrat de référence"), num("contractHours", "Heures par semaine", "heures"))),
         h("div", { class: "stack", style: { "margin-top": "12px", gap: "8px" } },
           tog("coverageFromTemplate", "Signaler les postes du modèle non pourvus (hypothèse : le modèle donne le besoin en personnel)"),
           tog("rulesConfirmed", "J'ai vérifié ces règles"))));
@@ -1239,7 +1241,7 @@
     const changes = C.CONFIG_KEYS.map((k) => ({ col: "config", id: k, before: existing ? C.clone(this.state[k]) : null, after: base[k] }));
     let weekChange = null;
     if (!existing || !C.getWeek(this.state, R.template.referenceWeek)) {
-      const wk = { week: R.template.referenceWeek, status: "brouillon", source: "planning papier (photo)", shifts: R.template.shifts.map((t, i) => ({ id: `ref-${i}`, emp: t.emp, date: C.addDays(R.template.referenceWeek, t.dow), segs: C.clone(t.segs) })) };
+      const wk = { week: R.template.referenceWeek, status: "brouillon", source: "planning papier (photo)", refId: "papier-" + R.template.referenceWeek, shifts: R.template.shifts.map((t, i) => ({ id: `ref-${i}`, emp: t.emp, date: C.addDays(R.template.referenceWeek, t.dow), segs: C.clone(t.segs) })) };
       weekChange = { col: "weeks", id: R.template.referenceWeek, before: null, after: wk };
       changes.push(weekChange);
     }
@@ -1368,7 +1370,7 @@
           kpi(`journée(s) en plus${x.extraDayCount ? " (" + x.extraDayCount + ")" : ""}`, x.extraDays ? "+" + C.fmtHours(x.extraDays) : "0 h", x.extraDays ? "var(--ok)" : ""),
           kpi("retards", x.late ? "−" + C.fmtHours(x.late) : "0 h", x.late ? "var(--danger)" : ""),
           kpi("total réel", C.fmtHours(x.total))),
-        ref ? h("p", { class: "small muted" }, `Planning modèle : ${C.fmtHours(ref)} par semaine.`) : null,
+        mode === "week" ? h("p", { class: "small muted" }, `Contrat : ${s.settings.contractHours || 35} h par semaine${x.total !== (s.settings.contractHours || 35) * 60 ? ` (${x.total > (s.settings.contractHours || 35) * 60 ? "+" : "−"}${C.fmtHours(Math.abs(x.total - (s.settings.contractHours || 35) * 60))})` : " ✓"}${ref ? ` · planning modèle : ${C.fmtHours(ref)}` : ""}.`) : null,
         h("details", { open: mode === "week" }, h("summary", { class: "small" }, `${x.workedDays} jour(s) planifié(s)`),
           h("div", { class: "list" }, x.days.map((d) => h("div", { class: "item" }, h("span", { class: "grow" }, C.fmtDate(d.date, "day")), h("span", { class: "small muted num" }, C.segLabel(d.segs)), h("b", { class: "num small" }, C.fmtHours(d.minutes)))))),
         h("h3", {}, "Heures sup, journées en plus et retards"),
@@ -1422,6 +1424,29 @@
     }
     // Départs de l'équipe : la personne est désactivée et ses créneaux à partir de la date sont retirés
     // (ses postes deviennent « à pourvoir », les jours passés restent dans l'historique des heures).
+    // Réparation : départ appliqué par une version antérieure (sans date de départ ni postes vidés).
+    for (const u of R.teamUpdates || []) {
+      if (!(this.state.settings.appliedUpdates || []).includes(u.id)) continue;
+      const ops = [];
+      for (const [id, from] of Object.entries(u.leave || {})) {
+        const e = C.empById(this.state, id);
+        if (!e || e.leftOn) continue;
+        ops.push({ type: "updateEmployee", id, patch: { leftOn: from } });
+        const refShifts = [
+          ...R.template.shifts.map((t) => ({ ...t, date: C.addDays(R.template.referenceWeek, t.dow) })),
+          ...(R.extraWeeks || []).flatMap((x) => x.shifts.map((t) => ({ ...t, date: C.addDays(x.monday, t.dow) }))),
+        ].filter((t) => t.emp === id && t.date >= from);
+        const byWeek = {};
+        for (const t of refShifts) (byWeek[C.mondayOf(t.date)] = byWeek[C.mondayOf(t.date)] || []).push(t);
+        for (const [m, list] of Object.entries(byWeek)) {
+          const w = this.state.weeks[m];
+          if (!w) continue;
+          const missing = list.filter((t) => !w.shifts.some((x) => x.emp === id && x.date === t.date) && !(w.vacated || []).some((v) => v.emp === id && v.date === t.date));
+          if (missing.length) ops.push({ type: "putWeek", monday: m, week: { ...C.clone(w), vacated: [...(w.vacated || []), ...missing.map((t) => ({ date: t.date, emp: id, segs: t.segs.map(({ s: a, e: b, z }) => ({ s: a, e: b, z })), reason: `départ de ${e.name}` }))] } });
+        }
+      }
+      if (ops.length) await this.commit(ops, { source: "import", summary: "Départ de l'équipe : date et postes à pourvoir complétés", quiet: true, noImpacts: true, allowErrors: true });
+    }
     for (const u of R.teamUpdates || []) {
       const done = this.state.settings.appliedUpdates || [];
       if (done.includes(u.id)) continue;
@@ -1432,10 +1457,13 @@
         const used = Object.values(this.state.weeks).some((w) => w.shifts.some((x) => x.emp === id)) || this.state.template.shifts.some((t) => t.emp === id);
         ops.push(used ? { type: "updateEmployee", id, patch: { active: false } } : { type: "removeEmployee", id });
       }
+      if (u.confirmAll) ops.push({ type: "confirmAll" });
+      if (u.settings) ops.push({ type: "setSettings", patch: u.settings });
       for (const [id, from] of Object.entries(u.leave || {})) {
         if (!C.empById(this.state, id)) continue;
-        ops.push({ type: "updateEmployee", id, patch: { active: false } });
-        for (const w of Object.values(this.state.weeks)) for (const x of w.shifts) if (x.emp === id && x.date >= from) ops.push({ type: "removeShift", emp: id, date: x.date });
+        ops.push({ type: "updateEmployee", id, patch: { active: false, leftOn: from } });
+        const nm = C.empById(this.state, id).name;
+        for (const w of Object.values(this.state.weeks)) for (const x of w.shifts) if (x.emp === id && x.date >= from) ops.push({ type: "removeShift", emp: id, date: x.date, vacate: `départ de ${nm}` });
       }
       ops.push({ type: "setSettings", patch: { appliedUpdates: [...done, u.id] } });
       await this.commit(ops, { source: "import", summary: u.summary, quiet: true, noImpacts: true, allowErrors: true });

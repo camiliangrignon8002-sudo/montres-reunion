@@ -296,3 +296,18 @@ test("heures : semaine et mois, avec heures sup, journée en plus et retard", ()
   const back = C.applyChanges(apply(s, [{ type: "removeAdjustment", id }]).state, [], "after");
   assert.equal(Object.keys(back.adjustments).length, 2);
 });
+
+test("confirmation : zones confirmées, doutes levés, pause vérifiée", () => {
+  let s = withWeek1();
+  assert.ok(s.weeks[W1].shifts.some(() => true));
+  s.weeks[W1].shifts[0].segs[0].doute = "test";
+  const r = apply(s, [{ type: "confirmAll" }, { type: "setSettings", patch: { maxDayHours: 7, maxWeekHours: 35, minPauseMinutes: 30, rulesConfirmed: true } }]);
+  assert.ok(r.ok);
+  s = r.state;
+  assert.ok(s.employees.every((e) => Object.values(e.zones).every((v) => v === "confirme")));
+  assert.ok(Object.values(s.weeks).every((w) => w.shifts.every((x) => x.segs.every((g) => !g.doute))));
+  assert.equal(C.validateWeek(s, W1).filter((i) => ["PAUSE", "DAY_MAX", "WEEK_MAX", "ZONE_UNCERTAIN", "SOURCE_DOUBT"].includes(i.code)).length, 0);
+  const r2 = apply(s, [{ type: "setShift", emp: "maelle", date: W1, segs: [{ s: "13:30", e: "21:00", z: "ZP" }] }]);
+  assert.ok(C.validateWeek(r2.state, W1).some((i) => i.code === "PAUSE" && i.emp === "maelle"));
+  assert.ok(C.validateWeek(r2.state, W1).some((i) => i.code === "DAY_MAX" && i.emp === "maelle"));
+});
