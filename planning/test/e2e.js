@@ -220,6 +220,17 @@ const MOCK = `
     await page.waitForTimeout(100);
     const scrollW = await page.evaluate(() => document.documentElement.scrollWidth);
     check("mobile : pas de défilement horizontal de la page", scrollW <= 390, String(scrollW));
+    // menu ☰ → Heures par personne
+    await page.click('.tabbar [data-screen="more"]');
+    await page.click('.dialog .nav:has-text("Heures par personne")');
+    await page.waitForSelector('h1:has-text("2026")');
+    const hw = await page.textContent('tr:has(button:text-is("Fleur"))');
+    await page.click('.seg-ctl button:text("Mois")');
+    await page.waitForTimeout(100);
+    const hm = await page.textContent('tr:has(button:text-is("Fleur"))');
+    check("menu ☰ : heures par personne, semaine et mois", /h/.test(hw) && /h/.test(hm) && hw !== hm, `${hw.replace(/\s+/g, " ")} | ${hm.replace(/\s+/g, " ")}`);
+    if (SHOTS) await page.screenshot({ path: `${SHOTS}/13-heures-mobile.png` });
+    await page.click('.tabbar [data-screen="week"]');
     await page.click('.seg-ctl button:text("Jour")');
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/6-mobile-jour.png` });
     await page.emulateMedia({ colorScheme: "dark" });

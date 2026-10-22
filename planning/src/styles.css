@@ -327,3 +327,4 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
 }
 @media (min-width: 861px) { .hide-lg { display: none !important; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+table.t td.num { white-space: nowrap; }

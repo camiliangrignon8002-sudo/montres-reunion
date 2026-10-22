@@ -43,6 +43,7 @@
     import: "M12 3v12 M7 10l5 5 5-5 M4 20h16",
     export: "M12 15V3 M7 8l5-5 5 5 M4 20h16",
     download: "M12 3.5v11.5 M7 10.5l5 5 5-5 M5 20h14",
+    clock: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 7.5V12l3.5 2",
     refresh: "M20 12a8 8 0 1 1-2.4-5.7 M20 4v5h-5",
     undo: "M9 14L4 9l5-5 M4 9h10.5a5.5 5.5 0 0 1 0 11H11",
     left: "M15 18l-6-6 6-6", right: "M9 6l6 6-6 6",
@@ -186,7 +187,7 @@
   // =====================================================================
   const App = {
     state: null, history: [], chat: [], names: {}, ready: false,
-    ui: { screen: "dashboard", monday: null, day: null, view: null, aiOpen: false, month: null, calEdit: false, calId: null, absMonth: null },
+    ui: { hoursMode: "week", hoursMonday: null, hoursMonth: null, screen: "dashboard", monday: null, day: null, view: null, aiOpen: false, month: null, calEdit: false, calId: null, absMonth: null },
 
     today() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; },
     userId() { return Store.userId || (Store.mode === "db" ? "inconnu" : "cet appareil"); },
@@ -374,7 +375,7 @@
       const nav = (id, label, ic) => h("button", { type: "button", class: "nav", "data-screen": id, onClick: () => this.go(id) }, icon(ic), h("span", {}, label));
       const side = h("nav", { class: "side", "aria-label": "Navigation" },
         h("div", { class: "brand" }, h("b", {}, "Planning équipe"), h("span", { class: "tiny muted" }, "Zone aéroportuaire")),
-        nav("dashboard", "Tableau de bord", "home"), nav("week", "Planning semaine", "week"), nav("month", "Planning du mois", "month"),
+        nav("dashboard", "Tableau de bord", "home"), nav("week", "Planning semaine", "week"), nav("month", "Planning du mois", "month"), nav("hours", "Heures par personne", "clock"),
         h("div", { class: "nav-group" }, "Organisation"),
         nav("absences", "Congés et absences", "leave"), nav("alternants", "Calendrier alternants", "school"), nav("team", "Équipe", "team"), nav("zones", "Zones et règles", "zones"),
         h("div", { class: "nav-group" }, "Données"),
@@ -400,7 +401,7 @@
       mount.replaceChildren(shell);
     },
     openMore() {
-      const items = [["month", "Planning du mois", "month"], ["alternants", "Calendrier alternants", "school"], ["team", "Équipe", "team"], ["zones", "Zones et règles", "zones"], ["history", "Historique", "history"], ["import", "Importation", "import"], ["export", "Exportation", "export"]];
+      const items = [["hours", "Heures par personne", "clock"], ["month", "Planning du mois", "month"], ["alternants", "Calendrier alternants", "school"], ["team", "Équipe", "team"], ["zones", "Zones et règles", "zones"], ["history", "Historique", "history"], ["import", "Importation", "import"], ["export", "Exportation", "export"]];
       const d = openDialog({ title: "Plus", body: h("div", { class: "list" }, items.map(([id, label, ic]) => h("button", { type: "button", class: "nav", onClick: () => { d.close(); this.go(id); } }, icon(ic), label))), actions: [] });
     },
 
@@ -941,6 +942,52 @@
           h("td", { class: "num", style: { color: x.h.extraDays ? "var(--ok)" : "" } }, x.h.extraDays ? `+${C.fmtHours(x.h.extraDays)} (${x.h.extraDayCount} j)` : "—"),
           h("td", { class: "num", style: { color: x.h.late ? "var(--danger)" : "" } }, x.h.late ? "−" + C.fmtHours(x.h.late) : "—"),
           h("td", { class: "num" }, h("b", {}, C.fmtHours(x.h.total))))))))));
+  } };
+
+  // ---------- Heures par personne (semaine ou mois) ----------
+  SCREENS.hours = { title: "Heures par personne", render() {
+    const s = this.state, mode = this.ui.hoursMode;
+    const monday = this.ui.hoursMonday || this.ui.monday;
+    const month = this.ui.hoursMonth || this.ui.month;
+    let from, to, label;
+    if (mode === "week") { from = monday; to = C.addDays(monday, 6); label = C.fmtWeek(monday); }
+    else { const [y, m] = month.split("-").map(Number); from = `${month}-01`; to = `${month}-${String(new Date(Date.UTC(y, m, 0)).getUTCDate()).padStart(2, "0")}`; label = monthName(month); }
+    const move = (n) => {
+      if (mode === "week") this.ui.hoursMonday = C.addDays(monday, 7 * n);
+      else { const [y, m] = month.split("-").map(Number); const d = new Date(Date.UTC(y, m - 1 + n, 1)); this.ui.hoursMonth = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`; }
+      this.render();
+    };
+    const contract = (s.settings.contractHours || 35) * 60;
+    const rows = s.employees.map((e) => ({ e, x: C.hoursSummary(s, e.id, from, to) })).filter((r) => r.e.active !== false || r.x.total || r.x.planned);
+    const sum = (k) => rows.reduce((a, r) => a + r.x[k], 0);
+    const exportCSV = () => {
+      const lines = [["Période", "Prénom", "Jours", "Heures prévues", "Heures sup", "Journées en plus", "Retards", "Total"].join(";")];
+      for (const r of rows) lines.push([label, r.e.name, r.x.workedDays + r.x.extraDayCount, C.hoursDecimal(r.x.planned), C.hoursDecimal(r.x.extra), C.hoursDecimal(r.x.extraDays), C.hoursDecimal(r.x.late), C.hoursDecimal(r.x.total)].map((v) => String(v).replace(".", ",")).join(";"));
+      saveFile(`heures-${mode === "week" ? monday : month}.csv`, new Blob(["\ufeff" + lines.join("\r\n") + "\r\n"], { type: "text/csv;charset=utf-8" }));
+    };
+    const plus = (v) => (v ? "+" + C.fmtHours(v) : "—"), minus = (v) => (v ? "−" + C.fmtHours(v) : "—");
+    return h("div", { class: "stack", style: { gap: "16px" } },
+      h("div", { class: "week-head" },
+        h("div", { class: "seg-ctl", role: "group", "aria-label": "Période" }, [["week", "Semaine"], ["month", "Mois"]].map(([k, l]) => h("button", { type: "button", "aria-pressed": String(mode === k), onClick: () => { this.ui.hoursMode = k; this.render(); } }, l))),
+        h("div", { class: "when" }, iconBtn("left", "Période précédente", () => move(-1)), iconBtn("right", "Période suivante", () => move(1))),
+        h("h1", { style: { "text-transform": mode === "month" ? "capitalize" : "none" } }, label),
+        h("div", { style: { flex: "1" } }),
+        btn([icon("download"), "CSV"], exportCSV, "sm")),
+      h("div", { class: "kpis" },
+        h("div", { class: "kpi" }, h("b", {}, C.fmtHours(sum("total"))), h("span", {}, "heures travaillées (équipe)")),
+        h("div", { class: "kpi" }, h("b", { style: { color: sum("extra") + sum("extraDays") ? "var(--ok)" : "" } }, plus(sum("extra") + sum("extraDays"))), h("span", {}, "heures sup et jours en plus")),
+        h("div", { class: "kpi" }, h("b", { style: { color: sum("late") ? "var(--danger)" : "" } }, minus(sum("late"))), h("span", {}, "retards"))),
+      h("section", { class: "card", style: { padding: "0" } }, h("div", { class: "t-wrap" }, h("table", { class: "t" },
+        h("thead", {}, h("tr", {}, h("th", {}, "Personne"), h("th", {}, "Jours"), h("th", {}, "Prévu"), h("th", {}, "Sup"), h("th", {}, "Retards"), h("th", {}, "Total"), mode === "week" ? h("th", {}, `Écart ${s.settings.contractHours || 35} h`) : null)),
+        h("tbody", {}, rows.map((r) => h("tr", {},
+          h("td", {}, h("button", { type: "button", class: "name-btn inline", onClick: () => this.openPerson(r.e.id, mode) }, r.e.name)),
+          h("td", { class: "num" }, r.x.workedDays + r.x.extraDayCount),
+          h("td", { class: "num" }, C.fmtHours(r.x.planned)),
+          h("td", { class: "num", style: { color: r.x.extra + r.x.extraDays ? "var(--ok)" : "" } }, plus(r.x.extra + r.x.extraDays)),
+          h("td", { class: "num", style: { color: r.x.late ? "var(--danger)" : "" } }, minus(r.x.late)),
+          h("td", { class: "num" }, h("b", {}, C.fmtHours(r.x.total))),
+          mode === "week" ? h("td", { class: "num small", style: { color: r.x.total > contract ? "var(--ok)" : r.x.total < contract ? "var(--fg-2)" : "" } }, r.x.total === contract ? "✓" : `${r.x.total > contract ? "+" : "−"}${C.fmtHours(Math.abs(r.x.total - contract))}`) : null)))))),
+      h("p", { class: "small muted" }, "Touchez un prénom pour le détail jour par jour et pour ajouter des heures sup, une journée en plus ou un retard."));
   } };
 
   // ---------- Calendrier des alternants ----------
