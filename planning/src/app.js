@@ -42,6 +42,7 @@
     history: "M3.5 12a8.5 8.5 0 1 0 2.6-6.1 M3 4v4.5h4.5 M12 7.5V12l3 2",
     import: "M12 3v12 M7 10l5 5 5-5 M4 20h16",
     export: "M12 15V3 M7 8l5-5 5 5 M4 20h16",
+    download: "M12 3.5v11.5 M7 10.5l5 5 5-5 M5 20h14",
     refresh: "M20 12a8 8 0 1 1-2.4-5.7 M20 4v5h-5",
     undo: "M9 14L4 9l5-5 M4 9h10.5a5.5 5.5 0 0 1 0 11H11",
     left: "M15 18l-6-6 6-6", right: "M9 6l6 6-6 6",
@@ -527,6 +528,7 @@
     const head = h("div", { class: "week-head" },
       h("div", { class: "when" }, iconBtn("left", "Semaine précédente", () => { this.ui.monday = C.addDays(monday, -7); this.render(); }), iconBtn("right", "Semaine suivante", () => { this.ui.monday = C.addDays(monday, 7); this.render(); })),
       h("div", { class: "stack", style: { gap: "0" } }, h("h1", {}, C.fmtWeek(monday)), h("span", { class: "small muted" }, `Semaine ${C.isoWeekNumber(monday)}${w && w.source ? " · " + w.source : ""}`)),
+      iconBtn("download", "Télécharger le planning de la semaine en PDF", () => this.downloadPDF([monday], `planning-semaine-${monday}.pdf`), { class: "icon-btn dl-btn", id: "dl-week" }),
       status,
       monday !== C.mondayOf(today) ? btn("Aujourd'hui", () => { this.ui.monday = C.mondayOf(today); this.ui.day = today; this.render(); }, "sm ghost") : null,
       h("div", { style: { flex: "1" } }),
@@ -923,7 +925,9 @@
     return h("div", { class: "stack", style: { gap: "16px" } },
       h("div", { class: "row" }, recent.map((k, i) => h("button", { type: "button", class: "btn sm" + (k === this.ui.month ? " primary" : ""), onClick: () => { this.ui.month = k; this.render(); } }, i === 0 ? "Ce mois-ci" : monthName(k)))),
       !hasShifts ? h("div", { class: "banner info small" }, this.ui.month < today.slice(0, 7) ? `Aucun planning enregistré pour ${monthName(this.ui.month)}. L'appli garde tous les plannings saisis, sans limite de durée, mais elle ne contient rien avant le 19/10/2026 : envoyez les photos des plannings de ce mois à Claude pour les ajouter, ou importez un CSV (écran Importation).` : `Aucun planning enregistré pour ${monthName(this.ui.month)}.`) : null,
-      h("div", { class: "week-head" }, h("div", { class: "when" }, iconBtn("left", "Mois précédent", () => move(-1)), iconBtn("right", "Mois suivant", () => move(1))), h("h1", { style: { "text-transform": "capitalize" } }, `${C.MONTHS[m - 1]} ${y}`), h("div", { style: { flex: "1" } }), Store.canWrite ? btn([icon("wand"), "Générer le mois"], () => { this.ui.monday = C.mondayOf(first); this.openGenerate(); }, "sm primary") : null),
+      h("div", { class: "week-head" }, h("div", { class: "when" }, iconBtn("left", "Mois précédent", () => move(-1)), iconBtn("right", "Mois suivant", () => move(1))), h("h1", { style: { "text-transform": "capitalize" } }, `${C.MONTHS[m - 1]} ${y}`),
+        iconBtn("download", "Télécharger le planning du mois en PDF", () => { const ms = []; for (let d = start; d <= end; d = C.addDays(d, 7)) ms.push(d); this.downloadPDF(ms, `planning-${this.ui.month}.pdf`); }, { class: "icon-btn dl-btn", id: "dl-month" }),
+        h("div", { style: { flex: "1" } }), Store.canWrite ? btn([icon("wand"), "Générer le mois"], () => { this.ui.monday = C.mondayOf(first); this.openGenerate(); }, "sm primary") : null),
       legend(s),
       h("div", { class: "month" }, C.DAYS_SHORT.map((d) => h("div", { class: "dh" }, d)), cells),
       h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", {}, "Heures du mois"), btn("Exporter (CSV)", exportHours, "sm ghost")),
@@ -1473,6 +1477,13 @@
       h("p", { class: "small muted" }, "Le téléchargement demande une confirmation. Les couleurs ne passent pas dans le CSV : les zones y sont écrites en toutes lettres (ZP, ZR)."));
   } };
 
+  App.downloadPDF = async function (mondays, filename) {
+    const ms = mondays.filter((m) => { const w = C.getWeek(this.state, m); return w && w.shifts.length; });
+    if (!ms.length) { toast("Aucun horaire à télécharger sur cette période.", "err"); return; }
+    const data = X.weeksToPDF(this.state, ms, "Planning équipe");
+    await saveFile(filename, new Blob([data], { type: "application/pdf" }));
+  };
+
   async function saveFile(filename, blob) {
     const claude = root.claude;
     const dl = claude && typeof claude.use === "function" ? await claude.use("downloads").catch(() => null) : null;
@@ -1480,6 +1491,14 @@
       try { const r = await dl.save({ filename, data: blob }); if (r && r.status === "saved") toast(`${filename} enregistré.`); }
       catch (e) { if (e && e.code !== "cancelled" && e.code !== "declined") toast("Le fichier n'a pas pu être enregistré.", "err"); }
       return;
+    }
+    // Téléphone : menu de partage (Imprimer, Enregistrer dans Fichiers, AirDrop…) ; ordinateur : téléchargement.
+    const touch = root.matchMedia && root.matchMedia("(pointer: coarse)").matches;
+    if (touch && navigator.canShare) {
+      try {
+        const file = new File([blob], filename, { type: blob.type });
+        if (navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: filename }); return; }
+      } catch (e) { if (e && e.name === "AbortError") return; }
     }
     const url = URL.createObjectURL(blob);
     const a = h("a", { href: url, download: filename });

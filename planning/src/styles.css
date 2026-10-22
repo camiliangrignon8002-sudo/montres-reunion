@@ -102,6 +102,7 @@ p { margin: 0; }
 .btn[disabled] { opacity: .45; cursor: not-allowed; }
 .icon-btn { width: 36px; height: 36px; padding: 0; border-radius: 50%; border: 0; background: none; display: inline-grid; place-items: center; cursor: pointer; color: var(--fg); flex: none; }
 .icon-btn:hover { background: var(--line); }
+.icon-btn.dl-btn { background: var(--accent-soft); color: var(--accent); }
 .icon-btn svg { width: 20px; height: 20px; }
 .icon-btn.spin svg { animation: spin .8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }

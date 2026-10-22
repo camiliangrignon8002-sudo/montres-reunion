@@ -193,6 +193,13 @@ const MOCK = `
     await page.click('.side [data-screen="week"]');
     check("nouvel employé : une ligne de plus dans le planning", await page.isVisible('td.name b:text-is("Inès")'));
 
+    // bouton de téléchargement à côté du titre
+    await page.click('.side [data-screen="week"]');
+    { const [dl] = await Promise.all([page.waitForEvent("download"), page.click("#dl-week")]); check("bouton ⬇︎ de la semaine : PDF", /^planning-semaine-.*\.pdf$/.test(dl.suggestedFilename()), dl.suggestedFilename()); }
+    await page.click('.side [data-screen="month"]');
+    await page.click('button:text-is("Ce mois-ci")');
+    { const [dl] = await Promise.all([page.waitForEvent("download"), page.click("#dl-month")]); const p = await dl.path(); check("bouton ⬇︎ du mois : PDF", dl.suggestedFilename() === "planning-2026-10.pdf" && require("fs").statSync(p).size > 2000, dl.suggestedFilename()); }
+
     // exports
     await page.click('.side [data-screen="export"]');
     for (const [label, ext] of [["Télécharger le PDF", "pdf"], ["Télécharger le fichier Excel", "xlsx"], ["Télécharger le CSV", "csv"]]) {
