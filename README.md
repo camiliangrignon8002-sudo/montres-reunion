@@ -101,3 +101,19 @@ automatique ; la rubrique « Aussi sur » de l'appli ouvre directement leur rech
 et Easy Cash refusent aussi les robots. Le prix affiché « dès » est celui de la
 version la moins chère. Pour Microstor et ParuVendu, la carte montre la commune, pas l'adresse exacte.
 
+
+---
+
+# 📅 Planning équipe
+
+Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/planning/
+
+Plannings de l'équipe (zone publique / zone réservée), jours de CFA des alternants, congés et absences,
+génération à partir du planning modèle, historique, exports PDF / Excel / CSV.
+
+- Au premier lancement, l'appli demande un **code d'accès** : les prénoms et horaires de l'équipe sont
+  chiffrés dans la page (le dépôt est public). Ensuite les données restent sur le téléphone.
+- L'**assistant IA** et le partage avec l'équipe sont dans la version Claude :
+  https://claude.ai/artifact/GqCvGUNogmGmept7ND8mdY
+- Installer : ouvrir le lien dans **Safari** → **Partager** → **Sur l'écran d'accueil**.
+- Code source, tests et détails : dossier `planning/` (voir `planning/README.md`).
