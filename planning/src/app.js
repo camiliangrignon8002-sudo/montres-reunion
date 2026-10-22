@@ -134,6 +134,9 @@
       h("span", {}, h("span", { class: "tag-abs" }, "Absent"), "Congé / absence"),
       h("span", {}, h("span", { class: "tag-unk" }, "?"), "Statut inconnu"));
   }
+  const monthName = (k) => `${C.MONTHS[Number(k.slice(5, 7)) - 1]} ${k.slice(0, 4)}`;
+  // Le mois en cours puis les précédents (« 2026-10 », « 2026-09 », …)
+  const lastMonths = (today, n) => Array.from({ length: n }, (_, i) => { const d = new Date(Date.UTC(+today.slice(0, 4), +today.slice(5, 7) - 1 - i, 1)); return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`; });
   function rulesText(e) {
     const r = e.rules || {}, out = [];
     if (e.role === "alternant") out.push(e.calendarId ? "Suit le calendrier du BTS" : "Calendrier d'alternance non défini");
@@ -480,6 +483,19 @@
             h("div", { class: "kpi" }, h("b", {}, open.length), h("span", {}, "postes à pourvoir"))),
           errs.slice(0, 3).map((i) => h("div", { class: "issue erreur" }, h("span", { class: "ico" }, "!"), h("span", { class: "small" }, i.msg))),
           h("div", { class: "row", style: { "margin-top": "12px" } }, btn("Ouvrir le planning", () => { this.ui.monday = monday; this.go("week"); }, "primary"))),
+        (() => {
+          const months = lastMonths(today, 3).slice(1);
+          return h("section", { class: "card" }, h("h2", {}, "Les 2 derniers mois"),
+            h("div", { class: "list" }, months.map((k) => {
+              const [yy, mm] = k.split("-").map(Number);
+              const to = `${k}-${String(new Date(Date.UTC(yy, mm, 0)).getUTCDate()).padStart(2, "0")}`;
+              const tot = s.employees.reduce((a, e) => a + C.hoursSummary(s, e.id, `${k}-01`, to).total, 0);
+              return h("button", { type: "button", class: "item name-btn", style: { display: "flex" }, onClick: () => { this.ui.month = k; this.go("month"); } },
+                h("b", { class: "grow", style: { "text-transform": "capitalize" } }, monthName(k)),
+                h("span", { class: "small muted num" }, tot ? `${C.fmtHours(tot)} au total` : "aucun planning enregistré"), icon("right"));
+            })),
+            h("p", { class: "small muted", style: { "margin-top": "8px" } }, "Plannings, horaires, heures sup et retards restent consultables sans limite de durée."));
+        })(),
         h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", {}, "Semaine prochaine"), statusChip(wn)),
           h("p", { class: "muted small" }, C.fmtWeek(next)),
           h("div", { class: "row", style: { "margin-top": "12px" } },
@@ -902,7 +918,11 @@
       saveFile(`heures-${this.ui.month}.csv`, new Blob(["\ufeff" + lines.join("\r\n") + "\r\n"], { type: "text/csv;charset=utf-8" }));
     };
     const move = (n) => { const d = new Date(Date.UTC(y, m - 1 + n, 1)); this.ui.month = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`; this.render(); };
+    const recent = lastMonths(today, 3);
+    const hasShifts = monthDays.some((d) => { const w = C.getWeek(s, C.mondayOf(d)); return w && w.shifts.some((x) => x.date === d); });
     return h("div", { class: "stack", style: { gap: "16px" } },
+      h("div", { class: "row" }, recent.map((k, i) => h("button", { type: "button", class: "btn sm" + (k === this.ui.month ? " primary" : ""), onClick: () => { this.ui.month = k; this.render(); } }, i === 0 ? "Ce mois-ci" : monthName(k)))),
+      !hasShifts ? h("div", { class: "banner info small" }, this.ui.month < today.slice(0, 7) ? `Aucun planning enregistré pour ${monthName(this.ui.month)}. L'appli garde tous les plannings saisis, sans limite de durée, mais elle ne contient rien avant le 19/10/2026 : envoyez les photos des plannings de ce mois à Claude pour les ajouter, ou importez un CSV (écran Importation).` : `Aucun planning enregistré pour ${monthName(this.ui.month)}.`) : null,
       h("div", { class: "week-head" }, h("div", { class: "when" }, iconBtn("left", "Mois précédent", () => move(-1)), iconBtn("right", "Mois suivant", () => move(1))), h("h1", { style: { "text-transform": "capitalize" } }, `${C.MONTHS[m - 1]} ${y}`), h("div", { style: { flex: "1" } }), Store.canWrite ? btn([icon("wand"), "Générer le mois"], () => { this.ui.monday = C.mondayOf(first); this.openGenerate(); }, "sm primary") : null),
       legend(s),
       h("div", { class: "month" }, C.DAYS_SHORT.map((d) => h("div", { class: "dh" }, d)), cells),

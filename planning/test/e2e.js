@@ -119,6 +119,15 @@ const MOCK = `
     check("mois : heures sup, retards et total de Fleur", /\+1 h 30/.test(row) && /−0 h 15/.test(row), row.replace(/\s+/g, " "));
     await page.click('.side [data-screen="week"]');
 
+    // accès aux 2 mois précédents
+    await page.click('.side [data-screen="dashboard"]');
+    await page.waitForSelector("text=Les 2 derniers mois");
+    await page.click(".card:has-text('Les 2 derniers mois') button:has-text('septembre 2026')");
+    await page.waitForSelector("text=Aucun planning enregistré pour septembre 2026");
+    const chips = await page.$$eval(".content > .stack > .row:first-child button", (b) => b.map((x) => x.textContent));
+    check("accès direct aux 2 mois précédents", chips.join("|") === "Ce mois-ci|septembre 2026|août 2026", chips.join("|"));
+    await page.click('.side [data-screen="week"]');
+
     // semaine du 26/10 : planning papier ajouté automatiquement
     await page.click('button[aria-label="Semaine suivante"]');
     await page.waitForSelector('td.cell[aria-label^="Lucas, Mercredi 28"]');

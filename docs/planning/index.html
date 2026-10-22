@@ -143,6 +143,7 @@ p { margin: 0; }
 .list > .item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line); min-width: 0; }
 .list > .item:first-child { border-top: 0; }
 .item .grow { flex: 1; min-width: 0; }
+.item.name-btn svg { width: 16px; height: 16px; color: var(--fg-3); flex: none; }
 .empty { padding: 28px; text-align: center; color: var(--fg-2); border: 1px dashed var(--line-strong); border-radius: var(--r); }
 
 /* ---------- Puces ---------- */
@@ -1385,6 +1386,9 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
   const C = root.PlanningCore;
   const LS = "planning-equipe:";
   const HISTORY_KEEP = 300, VERSIONS_KEEP = 120, CHAT_KEEP = 30;
+  // Le journal garde au moins 300 lignes ET tout ce qui a moins de 3 mois (les plannings eux-mêmes ne sont jamais effacés).
+  const KEEP_DAYS = 92;
+  const tooOld = (at) => !at || Date.now() - new Date(at).getTime() > KEEP_DAYS * 86400000;
 
   const lsGet = (k) => { try { const v = localStorage.getItem(LS + k); return v ? JSON.parse(v) : null; } catch (e) { return null; } };
   const lsSet = (k, v) => { try { if (v == null) localStorage.removeItem(LS + k); else localStorage.setItem(LS + k, JSON.stringify(v)); return true; } catch (e) { throw { code: "local_failed", message: "Le stockage du navigateur est plein ou bloqué." }; } };
@@ -1486,7 +1490,7 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
       } else if (this.mode === "local") {
         lsSet(`${col}/${id}`, entry);
         const keys = lsKeys(col + "/").map((k) => ({ k, at: (lsGet(k) || {}).at || "" })).sort((a, b) => (a.at < b.at ? 1 : -1));
-        keys.slice(col === "history" ? HISTORY_KEEP : VERSIONS_KEEP).forEach((x) => lsSet(x.k, null));
+        keys.slice(col === "history" ? HISTORY_KEEP : VERSIONS_KEEP).filter((x) => tooOld(x.at)).forEach((x) => lsSet(x.k, null));
       } else {
         this.logs = this.logs || { history: [], versions: [] };
         this.logs[col].unshift(entry);
@@ -1494,8 +1498,8 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
     },
     async prune(col) {
       const keep = col === "history" ? HISTORY_KEEP : VERSIONS_KEEP;
-      const snap = await this.db.collection(col).orderBy("at", "desc").limit(keep + 50).get();
-      for (const d of snap.docs.slice(keep)) await this.db.doc(`${col}/${d.id}`).delete();
+      const snap = await this.db.collection(col).orderBy("at", "desc").limit(1000).get();
+      for (const d of snap.docs.slice(keep)) if (tooOld(d.data().at)) await this.db.doc(`${col}/${d.id}`).delete();
     },
     async listLog(col, limit) {
       if (this.mode === "db") {
@@ -2095,6 +2099,9 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
       h("span", {}, h("span", { class: "tag-abs" }, "Absent"), "Congé / absence"),
       h("span", {}, h("span", { class: "tag-unk" }, "?"), "Statut inconnu"));
   }
+  const monthName = (k) => `${C.MONTHS[Number(k.slice(5, 7)) - 1]} ${k.slice(0, 4)}`;
+  // Le mois en cours puis les précédents (« 2026-10 », « 2026-09 », …)
+  const lastMonths = (today, n) => Array.from({ length: n }, (_, i) => { const d = new Date(Date.UTC(+today.slice(0, 4), +today.slice(5, 7) - 1 - i, 1)); return `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`; });
   function rulesText(e) {
     const r = e.rules || {}, out = [];
     if (e.role === "alternant") out.push(e.calendarId ? "Suit le calendrier du BTS" : "Calendrier d'alternance non défini");
@@ -2441,6 +2448,19 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
             h("div", { class: "kpi" }, h("b", {}, open.length), h("span", {}, "postes à pourvoir"))),
           errs.slice(0, 3).map((i) => h("div", { class: "issue erreur" }, h("span", { class: "ico" }, "!"), h("span", { class: "small" }, i.msg))),
           h("div", { class: "row", style: { "margin-top": "12px" } }, btn("Ouvrir le planning", () => { this.ui.monday = monday; this.go("week"); }, "primary"))),
+        (() => {
+          const months = lastMonths(today, 3).slice(1);
+          return h("section", { class: "card" }, h("h2", {}, "Les 2 derniers mois"),
+            h("div", { class: "list" }, months.map((k) => {
+              const [yy, mm] = k.split("-").map(Number);
+              const to = `${k}-${String(new Date(Date.UTC(yy, mm, 0)).getUTCDate()).padStart(2, "0")}`;
+              const tot = s.employees.reduce((a, e) => a + C.hoursSummary(s, e.id, `${k}-01`, to).total, 0);
+              return h("button", { type: "button", class: "item name-btn", style: { display: "flex" }, onClick: () => { this.ui.month = k; this.go("month"); } },
+                h("b", { class: "grow", style: { "text-transform": "capitalize" } }, monthName(k)),
+                h("span", { class: "small muted num" }, tot ? `${C.fmtHours(tot)} au total` : "aucun planning enregistré"), icon("right"));
+            })),
+            h("p", { class: "small muted", style: { "margin-top": "8px" } }, "Plannings, horaires, heures sup et retards restent consultables sans limite de durée."));
+        })(),
         h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", {}, "Semaine prochaine"), statusChip(wn)),
           h("p", { class: "muted small" }, C.fmtWeek(next)),
           h("div", { class: "row", style: { "margin-top": "12px" } },
@@ -2863,7 +2883,11 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
       saveFile(`heures-${this.ui.month}.csv`, new Blob(["\ufeff" + lines.join("\r\n") + "\r\n"], { type: "text/csv;charset=utf-8" }));
     };
     const move = (n) => { const d = new Date(Date.UTC(y, m - 1 + n, 1)); this.ui.month = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`; this.render(); };
+    const recent = lastMonths(today, 3);
+    const hasShifts = monthDays.some((d) => { const w = C.getWeek(s, C.mondayOf(d)); return w && w.shifts.some((x) => x.date === d); });
     return h("div", { class: "stack", style: { gap: "16px" } },
+      h("div", { class: "row" }, recent.map((k, i) => h("button", { type: "button", class: "btn sm" + (k === this.ui.month ? " primary" : ""), onClick: () => { this.ui.month = k; this.render(); } }, i === 0 ? "Ce mois-ci" : monthName(k)))),
+      !hasShifts ? h("div", { class: "banner info small" }, this.ui.month < today.slice(0, 7) ? `Aucun planning enregistré pour ${monthName(this.ui.month)}. L'appli garde tous les plannings saisis, sans limite de durée, mais elle ne contient rien avant le 19/10/2026 : envoyez les photos des plannings de ce mois à Claude pour les ajouter, ou importez un CSV (écran Importation).` : `Aucun planning enregistré pour ${monthName(this.ui.month)}.`) : null,
       h("div", { class: "week-head" }, h("div", { class: "when" }, iconBtn("left", "Mois précédent", () => move(-1)), iconBtn("right", "Mois suivant", () => move(1))), h("h1", { style: { "text-transform": "capitalize" } }, `${C.MONTHS[m - 1]} ${y}`), h("div", { style: { flex: "1" } }), Store.canWrite ? btn([icon("wand"), "Générer le mois"], () => { this.ui.monday = C.mondayOf(first); this.openGenerate(); }, "sm primary") : null),
       legend(s),
       h("div", { class: "month" }, C.DAYS_SHORT.map((d) => h("div", { class: "dh" }, d)), cells),

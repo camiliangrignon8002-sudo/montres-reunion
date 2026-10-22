@@ -124,6 +124,7 @@ p { margin: 0; }
 .list > .item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line); min-width: 0; }
 .list > .item:first-child { border-top: 0; }
 .item .grow { flex: 1; min-width: 0; }
+.item.name-btn svg { width: 16px; height: 16px; color: var(--fg-3); flex: none; }
 .empty { padding: 28px; text-align: center; color: var(--fg-2); border: 1px dashed var(--line-strong); border-radius: var(--r); }
 
 /* ---------- Puces ---------- */

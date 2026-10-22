@@ -5,6 +5,9 @@
   const C = root.PlanningCore;
   const LS = "planning-equipe:";
   const HISTORY_KEEP = 300, VERSIONS_KEEP = 120, CHAT_KEEP = 30;
+  // Le journal garde au moins 300 lignes ET tout ce qui a moins de 3 mois (les plannings eux-mêmes ne sont jamais effacés).
+  const KEEP_DAYS = 92;
+  const tooOld = (at) => !at || Date.now() - new Date(at).getTime() > KEEP_DAYS * 86400000;
 
   const lsGet = (k) => { try { const v = localStorage.getItem(LS + k); return v ? JSON.parse(v) : null; } catch (e) { return null; } };
   const lsSet = (k, v) => { try { if (v == null) localStorage.removeItem(LS + k); else localStorage.setItem(LS + k, JSON.stringify(v)); return true; } catch (e) { throw { code: "local_failed", message: "Le stockage du navigateur est plein ou bloqué." }; } };
@@ -106,7 +109,7 @@
       } else if (this.mode === "local") {
         lsSet(`${col}/${id}`, entry);
         const keys = lsKeys(col + "/").map((k) => ({ k, at: (lsGet(k) || {}).at || "" })).sort((a, b) => (a.at < b.at ? 1 : -1));
-        keys.slice(col === "history" ? HISTORY_KEEP : VERSIONS_KEEP).forEach((x) => lsSet(x.k, null));
+        keys.slice(col === "history" ? HISTORY_KEEP : VERSIONS_KEEP).filter((x) => tooOld(x.at)).forEach((x) => lsSet(x.k, null));
       } else {
         this.logs = this.logs || { history: [], versions: [] };
         this.logs[col].unshift(entry);
@@ -114,8 +117,8 @@
     },
     async prune(col) {
       const keep = col === "history" ? HISTORY_KEEP : VERSIONS_KEEP;
-      const snap = await this.db.collection(col).orderBy("at", "desc").limit(keep + 50).get();
-      for (const d of snap.docs.slice(keep)) await this.db.doc(`${col}/${d.id}`).delete();
+      const snap = await this.db.collection(col).orderBy("at", "desc").limit(1000).get();
+      for (const d of snap.docs.slice(keep)) if (tooOld(d.data().at)) await this.db.doc(`${col}/${d.id}`).delete();
     },
     async listLog(col, limit) {
       if (this.mode === "db") {
