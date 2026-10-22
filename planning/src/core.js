@@ -128,6 +128,18 @@
   const zoneById = (state, id) => state.zones.find((z) => z.id === id);
   const allowedZones = (emp) => Object.keys((emp && emp.zones) || {});
 
+  // ---------- Règles personnelles (horaires fixes, jours de repos fixes) ----------
+  const shiftSpan = (segs) => ({ s: segs[0].s, e: segs[segs.length - 1].e });
+  function personalRuleIssues(emp, date, segs) {
+    const out = [], r = (emp && emp.rules) || {};
+    if (r.fixedHours && segs && segs.length) {
+      const sp = shiftSpan(segs);
+      if (sp.s !== r.fixedHours.s || sp.e !== r.fixedHours.e) out.push({ code: "FIXED_HOURS", msg: `${emp.name} travaille toujours de ${r.fixedHours.s} à ${r.fixedHours.e} : ici ${sp.s}–${sp.e} (${fmtDate(date, "day")}).` });
+    }
+    if (Array.isArray(r.daysOff) && r.daysOff.includes(dow(date))) out.push({ code: "FIXED_DAYOFF", msg: `${emp.name} ne travaille jamais le ${DAYS[dow(date)].toLowerCase()} (jour de repos fixe) : créneau le ${fmtDate(date, "day")}.` });
+    return out;
+  }
+
   // ---------- Calendrier d'alternance et absences ----------
   const CAL_CODES = { E: "entreprise", P: "formation", W: "weekend", F: "ferie", "?": "inconnu" };
   const CAL_LABELS = { entreprise: "En entreprise", formation: "Formation (CFA)", weekend: "Week-end (pas de cours)", ferie: "Jour férié", inconnu: "Statut inconnu" };
@@ -237,6 +249,7 @@
       if (cs === "formation") add("erreur", "FORMATION", sh.emp, d, `${who} est en formation au CFA le ${fmtDate(d, "day")}.`);
       else if (cs === "inconnu") add("alerte", "CAL_UNKNOWN", sh.emp, d, `${who} : statut d'alternance inconnu le ${fmtDate(d, "day")} (calendrier non renseigné).`);
       else if (cs === "ferie") add("info", "FERIE", sh.emp, d, `${fmtDate(d, "day")} est férié dans le calendrier d'alternance.`);
+      if (timesOk) for (const x of personalRuleIssues(emp, d, sh.segs)) add("alerte", x.code, sh.emp, d, x.msg);
       if (st.checkMaxDay && timesOk && shiftMinutes(sh.segs) > st.maxDayHours * 60) add("alerte", "DAY_MAX", sh.emp, d, `${who} : ${fmtHours(shiftMinutes(sh.segs))} le ${fmtDate(d, "day")} (plus de ${st.maxDayHours} h).`);
     }
 
@@ -315,6 +328,7 @@
       if (!allowedZones(emp).length) continue;
       if (calStatus(state, emp, date) === "inconnu") continue; // jamais « disponible » par défaut
       if (w.shifts.some((s) => s.emp === emp.id && s.date === date)) continue;
+      if (personalRuleIssues(emp, date, segs).length) continue; // horaires ou jours de repos fixes
       // Repos avec les jours voisins
       const cand = { emp: emp.id, date, segs };
       const cr = absRanges(cand, monday);
@@ -649,8 +663,13 @@
             if (s.employees.some((x) => x.id !== emp.id && norm(x.name) === norm(n))) { fail(`${n} existe déjà.`); break; }
             emp.name = n;
           }
-          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote"]) if (p[k] !== undefined) emp[k] = p[k];
+          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied"]) if (p[k] !== undefined) emp[k] = p[k];
           if (emp.role === "alternant" && !emp.calendarId && s.calendars[0]) emp.calendarId = s.calendars[0].id;
+          if (p.rules) {
+            const r = p.rules;
+            if (r.fixedHours && !(isTime(r.fixedHours.s) && isTime(r.fixedHours.e) && r.fixedHours.s !== r.fixedHours.e)) { fail("Horaires fixes invalides."); break; }
+            if (r.daysOff && !(Array.isArray(r.daysOff) && r.daysOff.every((d) => d >= 0 && d <= 6))) { fail("Jours de repos invalides."); break; }
+          }
           conf("employees");
           break;
         }
@@ -778,7 +797,7 @@
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
     calendarCode, calStatus, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
-    availability, validateWeek, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
+    availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };
   if (typeof module !== "undefined" && module.exports) module.exports = root.PlanningCore;

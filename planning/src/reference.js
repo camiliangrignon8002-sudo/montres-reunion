@@ -47,7 +47,7 @@
   const employees = [
     E("amandine", "Amandine", "salarie", {}, "Aucun horaire sur la semaine 1 : zone inconnue."),
     E("camilian", "Camilian", "alternant", { ZP: "deduit", ZR: "deduit" }, "Vert la semaine du 19/10 ; orange le dimanche 1er novembre.",
-      { calendarId: "bts-mco1", aliases: ["Kamiliane", "Kamilian", "Camiliane"], aliasNote: "« Kamiliane » dans la demande, « CAMILIAN » sur le planning : même personne ? À confirmer." }),
+      { calendarId: "bts-mco1", aliases: ["Kamiliane", "Kamilian", "Camiliane", "Camilo"] }),
     E("charlotte", "Charlotte", "salarie", { ZP: "deduit", ZR: "incertain" }, "Vert partout ; fin de service mardi et mercredi surlignée en orange par-dessus le vert."),
     E("eric", "Eric", "salarie", { ZP: "deduit", ZR: "incertain" }, "Vert partout ; fin de service jeudi surlignée en orange par-dessus le vert."),
     E("fleur", "Fleur", "alternant", { ZR: "deduit" }, "5 jours sur 5 en orange (zone réservée).", { calendarId: "bts-mco1" }),
@@ -121,8 +121,21 @@
     notes: ["Lydia, samedi 31/10 : ajout manuscrit « 06H / 13H » surligné en orange, hors des totaux imprimés : non ajouté, à confirmer."],
   }];
 
+  // Règles données par le responsable le 22/10/2026.
+  const ruleUpdates = [{
+    id: "regles-2026-10-22",
+    rules: {
+      nathalie: { fixedHours: { s: "06:00", e: "13:30" }, sameWeekends: true, note: "Toujours les mêmes horaires et les mêmes week-ends." },
+      sebastien: { fixedHours: { s: "07:00", e: "14:30" }, sameWeekends: false, note: "Toujours les mêmes horaires, pas forcément les mêmes week-ends." },
+      eric: { daysOff: [5, 6], sameWeekends: true, note: "Toujours les mêmes horaires et les mêmes week-ends." },
+    },
+    calendars: { fleur: "bts-mco1", camilian: "bts-mco1", lucas: "bts-mco1" },
+  }];
+
+  for (const [id, r] of Object.entries(ruleUpdates[0].rules)) { const e = employees.find((x) => x.id === id); e.rules = { ...r }; e.rulesApplied = [ruleUpdates[0].id]; }
+
   root.PlanningReference = {
-    extraWeeks,
+    extraWeeks, ruleUpdates,
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
       alternance: "BTS MCO 1 – CFA Levavasseur – Calendrier d'alternance 2026-2027 (capture)",
@@ -140,12 +153,11 @@
     }],
     totalsOnPaper: { camilian: 35, charlotte: 35, eric: 35, fleur: 35, lydia: 14, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35, amandine: 0, sonia: 0, sophie: 0, sylvie: 0 },
     questions: [
-      "« Kamiliane » (alternante citée dans la demande) est-elle bien « CAMILIAN » sur le planning ?",
-      "Lucas n'apparaît pas sur le planning modèle : quelles zones et quels horaires habituels ?",
+      "Eric « toujours les mêmes horaires » : 07:00–14:30 (semaine du 19/10) ou 05:30–13:00 (lundi, jeudi, vendredi de la semaine du 26/10) ?",
+      "Nathalie « toujours les mêmes week-ends » : quels jours de repos ? (samedi-dimanche la semaine du 19/10, jeudi-vendredi la semaine du 26/10)",
       "Les fins de service surlignées vert + orange (Charlotte mar./mer., Eric jeu., Sebastien mar./mer./sam.) sont-elles en zone réservée ?",
       "Le planning indique « Page 1/2 » : la page 2 contient-elle une semaine 2 (rotation) ou d'autres employés ?",
       "Amandine, Sonia, Sophie et Sylvie n'ont aucun horaire : sont-elles encore dans l'équipe, et dans quelle zone ?",
-      "Le calendrier « BTS MCO 1 » vaut-il pour les trois alternants (Fleur, Camilian, Lucas) ?",
       "Semaine du 26/10 : Lydia a un ajout manuscrit le samedi (« 06H / 13H » en orange). Faut-il l'ajouter ?",
       "Les règles de repos et de durée (11 h de repos, 10 h/jour, 48 h/semaine) sont celles du Code du travail : y a-t-il des règles plus strictes (convention, contrat) ?",
     ],

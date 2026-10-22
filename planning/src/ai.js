@@ -37,7 +37,7 @@
     context(App) {
       const s = App.state, today = App.today();
       const days = Array.from({ length: 21 }, (_, i) => C.addDays(today, i - 3)).map((d) => `${d} = ${C.DAYS[C.dow(d)].toLowerCase()}${d === today ? " (aujourd'hui)" : ""}`);
-      const team = s.employees.map((e) => `- ${e.name} [id ${e.id}]${e.role === "alternant" ? " alternant(e)" : ""}${e.active === false ? " DÉSACTIVÉ(E)" : ""} · zones : ${Object.entries(e.zones || {}).map(([z, lv]) => z + (lv === "incertain" ? " (à confirmer)" : "")).join(", ") || "aucune définie"}${(e.aliases || []).length ? ` · aussi appelé(e) ${e.aliases.join(", ")}` : ""}`);
+      const team = s.employees.map((e) => `- ${e.name} [id ${e.id}]${e.role === "alternant" ? " alternant(e)" : ""}${e.active === false ? " DÉSACTIVÉ(E)" : ""} · zones : ${Object.entries(e.zones || {}).map(([z, lv]) => z + (lv === "incertain" ? " (à confirmer)" : "")).join(", ") || "aucune définie"}${(e.aliases || []).length ? ` · aussi appelé(e) ${e.aliases.join(", ")}` : ""}${e.rules && e.rules.fixedHours ? ` · toujours ${e.rules.fixedHours.s}-${e.rules.fixedHours.e}` : ""}${e.rules && e.rules.daysOff ? ` · jamais le ${e.rules.daysOff.map((d) => C.DAYS[d].toLowerCase()).join(", ")}` : ""}${e.rules && e.rules.note ? ` · consigne : ${e.rules.note}` : ""}`);
       return [
         "Tu es l'assistant de l'application « Planning équipe » d'un commerce en zone aéroportuaire. Tu parles français, simplement, en phrases courtes.",
         `Repères de dates (AAAA-MM-JJ) :\n${days.join("\n")}`,

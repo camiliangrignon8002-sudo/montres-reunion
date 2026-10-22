@@ -254,3 +254,19 @@ test("semaine du 26/10 (planning papier) : totaux de la feuille et aucune erreur
   for (const [emp, h] of Object.entries(x.totalsOnPaper)) assert.equal(C.weekMinutes(s, x.monday, emp) / 60, h, emp);
   assert.equal(C.blockingIssues(C.validateWeek(s, x.monday)).length, 0);
 });
+
+test("règles personnelles : horaires fixes et jours de repos signalés, respectés par les remplaçants", () => {
+  const s = withWeek1();
+  assert.deepEqual(C.empById(s, "sebastien").rules.fixedHours, { s: "07:00", e: "14:30" });
+  const r = apply(s, [{ type: "setShift", emp: "sebastien", date: "2026-10-19", segs: [{ s: "13:30", e: "21:00", z: "ZP" }] }]);
+  assert.ok(r.ok); // alerte, pas blocage
+  assert.ok(C.validateWeek(r.state, W1).some((i) => i.code === "FIXED_HOURS" && i.emp === "sebastien"));
+  const r2 = apply(s, [{ type: "setShift", emp: "eric", date: "2026-10-24", segs: [{ s: "07:00", e: "14:30", z: "ZP" }] }]);
+  assert.ok(C.validateWeek(r2.state, W1).some((i) => i.code === "FIXED_DAYOFF" && i.emp === "eric"));
+  // Eric (repos samedi-dimanche) jamais proposé un samedi ; Sebastien jamais sur un poste d'après-midi
+  const sat = C.findCandidates(s, "2026-10-24", [{ s: "07:00", e: "14:30", z: "ZP" }]).map((c) => c.emp);
+  assert.ok(!sat.includes("eric"));
+  const pm = C.findCandidates(s, "2026-10-19", [{ s: "13:30", e: "21:00", z: "ZP" }]).map((c) => c.emp);
+  assert.ok(!pm.includes("sebastien"));
+  for (const id of ["fleur", "camilian", "lucas"]) assert.equal(C.empById(s, id).calendarId, "bts-mco1");
+});

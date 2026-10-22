@@ -134,6 +134,15 @@
       h("span", {}, h("span", { class: "tag-abs" }, "Absent"), "Congé / absence"),
       h("span", {}, h("span", { class: "tag-unk" }, "?"), "Statut inconnu"));
   }
+  function rulesText(e) {
+    const r = e.rules || {}, out = [];
+    if (e.role === "alternant") out.push(e.calendarId ? "Suit le calendrier du BTS" : "Calendrier d'alternance non défini");
+    if (r.fixedHours) out.push(`Toujours ${r.fixedHours.s}–${r.fixedHours.e}`);
+    if (Array.isArray(r.daysOff) && r.daysOff.length) out.push(`Repos fixe : ${r.daysOff.map((d) => C.DAYS[d].toLowerCase()).join(", ")}`);
+    else if (r.sameWeekends) out.push("Mêmes week-ends (jours à préciser)");
+    if (r.sameWeekends === false) out.push("Week-ends variables");
+    return out.join(" · ");
+  }
   const empName = (state, id) => (id === "*" ? "Toute l'équipe" : (C.empById(state, id) || { name: id }).name);
 
   // ---------- Résumés des opérations (historique) ----------
@@ -991,12 +1000,13 @@
         } }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("div", { class: "row" }, h("span", { class: "small muted" }, "Zones autorisées :"), zc), h("div", {}, h("button", { type: "submit", class: "btn primary" }, "Ajouter"))),
       ) : null,
       h("section", { class: "card" }, h("h2", {}, `${s.employees.length} personnes`), h("div", { class: "t-wrap" }, h("table", { class: "t" },
-        h("thead", {}, h("tr", {}, h("th", {}, "Prénom"), h("th", {}, "Statut"), h("th", {}, "Zones"), h("th", {}, "Heures du modèle"), h("th", {}, "Active"), h("th", {}, ""))),
+        h("thead", {}, h("tr", {}, h("th", {}, "Prénom"), h("th", {}, "Statut"), h("th", {}, "Zones"), h("th", {}, "Heures du modèle"), h("th", {}, "Règles"), h("th", {}, "Active"), h("th", {}, ""))),
         h("tbody", {}, s.employees.map((e) => h("tr", {},
           h("td", {}, h("b", {}, e.name), (e.aliases || []).length ? h("div", { class: "tiny muted" }, `aussi : ${e.aliases.join(", ")}`) : null),
           h("td", {}, e.role === "alternant" ? h("span", { class: "chip cours" }, "Alternant(e)") : "Salarié(e)"),
           h("td", {}, h("div", { class: "row" }, Object.entries(e.zones || {}).map(([z, lv]) => h("span", { class: "row", style: { gap: "3px" } }, zoneTag(s, z), lv === "incertain" ? h("span", { class: "chip warn" }, "?") : null)), !Object.keys(e.zones || {}).length ? h("span", { class: "chip warn" }, "inconnue") : null)),
           h("td", { class: "num" }, C.fmtHours(C.templateMinutes(s, e.id))),
+          h("td", { class: "small" }, rulesText(e) || h("span", { class: "muted" }, "—")),
           h("td", {}, Store.canWrite ? h("input", { type: "checkbox", checked: e.active !== false, "aria-label": `${e.name} active`, onChange: (ev) => this.commit([{ type: "updateEmployee", id: e.id, patch: { active: ev.target.checked } }]) }) : (e.active !== false ? "Oui" : "Non")),
           h("td", {}, Store.canWrite ? btn("Modifier", () => this.openEmployee(e.id), "sm") : null))))))));
   } };
@@ -1005,12 +1015,28 @@
     const name = h("input", { class: "input", id: "emp-name", value: e.name });
     const aliases = h("input", { class: "input", id: "emp-alias", value: (e.aliases || []).join(", "), placeholder: "Autres façons d'écrire le prénom" });
     const role = h("select", { class: "input", id: "emp-role" }, h("option", { value: "salarie", selected: e.role !== "alternant" }, "Salarié(e)"), h("option", { value: "alternant", selected: e.role === "alternant" }, "Alternant(e)"));
+    const r = e.rules || {};
+    const fixOn = h("input", { type: "checkbox", id: "emp-fix", checked: !!r.fixedHours });
+    const fixS = h("input", { type: "time", class: "input", id: "emp-fix-s", value: r.fixedHours ? r.fixedHours.s : "" });
+    const fixE = h("input", { type: "time", class: "input", id: "emp-fix-e", value: r.fixedHours ? r.fixedHours.e : "" });
+    const offBoxes = C.DAYS.map((d, i) => h("label", { class: "check" }, h("input", { type: "checkbox", value: String(i), checked: (r.daysOff || []).includes(i) }), d));
+    const sameWe = h("input", { type: "checkbox", id: "emp-same-we", checked: !!r.sameWeekends });
     openDialog({ title: e.name, body: h("div", { class: "stack" }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("label", { class: "f" }, "Autres écritures (séparées par des virgules)", aliases),
+      h("h3", {}, "Règles personnelles"),
+      h("label", { class: "check" }, fixOn, "Toujours les mêmes horaires"), h("div", { class: "form-grid" }, h("label", { class: "f" }, "Début", fixS), h("label", { class: "f" }, "Fin", fixE)),
+      h("label", { class: "check" }, sameWe, "Toujours les mêmes week-ends"),
+      h("div", { class: "stack", style: { gap: "4px" } }, h("span", { class: "small muted" }, "Jours de repos fixes (jamais de créneau ces jours-là) :"), h("div", { class: "row" }, offBoxes)),
+      r.note ? h("p", { class: "small muted" }, `Consigne : ${r.note}`) : null,
       h("p", { class: "small muted" }, "Les zones se règlent dans « Zones et règles ». Une personne qui a des horaires ne peut pas être supprimée : désactivez-la pour garder l'historique.")),
       actions: [
         { label: "Supprimer", danger: true, onClick: async () => { if (!(await confirmDialog(`Supprimer ${e.name} ?`, "Possible seulement si la personne n'a aucun horaire enregistré ni dans le modèle.", "Supprimer", true))) return false; return (await this.commit([{ type: "removeEmployee", id }])).ok; } },
         { label: "Annuler" },
-        { label: "Enregistrer", primary: true, onClick: async () => (await this.commit([{ type: "updateEmployee", id, patch: { name: name.value, role: role.value, aliases: aliases.value.split(",").map((x) => x.trim()).filter(Boolean) } }])).ok },
+        { label: "Enregistrer", primary: true, onClick: async () => {
+          const daysOff = offBoxes.map((b) => b.querySelector("input")).filter((i) => i.checked).map((i) => Number(i.value));
+          if (fixOn.checked && (!C.isTime(fixS.value) || !C.isTime(fixE.value))) { toast("Indiquez le début et la fin des horaires fixes.", "err"); return false; }
+          const rules = { ...r, fixedHours: fixOn.checked ? { s: fixS.value, e: fixE.value } : null, daysOff: daysOff.length ? daysOff : null, sameWeekends: sameWe.checked };
+          return (await this.commit([{ type: "updateEmployee", id, patch: { name: name.value, role: role.value, aliases: aliases.value.split(",").map((x) => x.trim()).filter(Boolean), rules } }])).ok;
+        } },
       ] });
   };
 
@@ -1273,6 +1299,18 @@
     const R = root.PlanningReference;
     if (!R || !this.state || !Store.canWrite) return;
     this.pendingRef = [];
+    for (const u of R.ruleUpdates || []) {
+      const ops = [];
+      for (const [id, rules] of Object.entries(u.rules || {})) {
+        const e = C.empById(this.state, id);
+        if (e && !(e.rulesApplied || []).includes(u.id)) ops.push({ type: "updateEmployee", id, patch: { rules: { ...(e.rules || {}), ...rules }, rulesApplied: [...(e.rulesApplied || []), u.id] } });
+      }
+      for (const [id, cal] of Object.entries(u.calendars || {})) {
+        const e = C.empById(this.state, id);
+        if (e && (e.role !== "alternant" || e.calendarId !== cal)) ops.push({ type: "updateEmployee", id, patch: { role: "alternant", calendarId: cal } });
+      }
+      if (ops.length) await this.commit(ops, { source: "import", summary: "Règles personnelles : horaires et jours de repos fixes, calendrier BTS des alternants", quiet: true, noImpacts: true });
+    }
     for (const x of R.extraWeeks || []) {
       const cur = this.state.weeks[x.monday];
       if (cur && cur.refId === x.refId) continue;

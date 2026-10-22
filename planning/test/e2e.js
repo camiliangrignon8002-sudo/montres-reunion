@@ -257,6 +257,15 @@ const MOCK = `
     await page.reload();
     await page.waitForSelector(".daybar");
     check("appli téléphone : données gardées après rechargement", await page.isVisible(".shift-row"));
+    // Données importées avant l'ajout des règles : elles doivent les recevoir à l'ouverture
+    await page.evaluate(() => { const k = "planning-equipe:config/employees"; const v = JSON.parse(localStorage.getItem(k)); for (const e of v) { delete e.rules; delete e.rulesApplied; } localStorage.setItem(k, JSON.stringify(v)); });
+    await page.reload();
+    await page.waitForSelector(".daybar");
+    await page.waitForTimeout(300);
+    const rules = await page.evaluate(() => { const e = (id) => PlanningApp.state.employees.find((x) => x.id === id); return { seb: e("sebastien").rules, eric: e("eric").rules, nat: e("nathalie").rules }; });
+    check("règles ajoutées aux données déjà sur le téléphone", rules.seb && rules.seb.fixedHours.s === "07:00" && rules.eric.daysOff.join() === "5,6" && rules.nat.fixedHours.e === "13:30", JSON.stringify(rules).slice(0, 120));
+    await page.evaluate(() => PlanningApp.go("team"));
+    if (SHOTS) await page.screenshot({ path: `${SHOTS}/11-regles.png`, fullPage: true });
     const man = await page.evaluate(async () => (await fetch("manifest.webmanifest")).json());
     check("appli téléphone : manifeste installable", man.display === "standalone" && man.icons.length === 2);
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/10-pwa.png` });
