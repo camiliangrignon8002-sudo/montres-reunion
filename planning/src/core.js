@@ -167,9 +167,20 @@
     return CAL_CODES[calendarCode(cal, date)];
   }
   const absenceList = (state) => Object.values(state.absences || {});
-  function absencesOn(state, empId, date) {
-    return absenceList(state).filter((a) => (a.emp === empId || a.emp === "*") && a.from <= date && date <= a.to);
+  // Congé sans date de retour (ex. vacances « jusqu'à nouvel ordre ») : enregistré sur la fiche de la personne.
+  const OPEN_END = "9999-12-31";
+  function openLeave(state, empId) {
+    const e = (state.employees || []).find((x) => x.id === empId);
+    if (!e || !e.onLeave) return null;
+    return { id: "conge-" + e.id, emp: e.id, type: e.onLeave.type || "vacances", from: e.onLeave.since, to: OPEN_END, open: true };
   }
+  function absencesOn(state, empId, date) {
+    const out = absenceList(state).filter((a) => (a.emp === empId || a.emp === "*") && a.from <= date && date <= a.to);
+    const ol = openLeave(state, empId);
+    if (ol && ol.from <= date) out.push(ol);
+    return out;
+  }
+  const absenceDates = (a) => (a.open ? `depuis le ${fmtDate(a.from, "short")}, retour non renseigné` : `du ${fmtDate(a.from, "short")} au ${fmtDate(a.to, "short")}`);
 
   // ---------- Modèle ----------
   const templateFor = (state, date) => ((state.template && state.template.shifts) || []).filter((t) => t.dow === dow(date));
@@ -206,7 +217,7 @@
     const out = { ok: true, block: [], warn: [] };
     if (!emp) { out.block.push("employé inconnu"); out.ok = false; return out; }
     if (emp.active === false) out.block.push("employé désactivé");
-    for (const a of absencesOn(state, empId, date)) out.block.push(`${ABSENCE_TYPES[a.type] || "absence"} du ${fmtDate(a.from, "short")} au ${fmtDate(a.to, "short")}`);
+    for (const a of absencesOn(state, empId, date)) out.block.push(`${ABSENCE_TYPES[a.type] || "absence"} ${absenceDates(a)}`);
     const cs = calStatus(state, emp, date);
     if (cs === "formation") out.block.push("en formation au CFA ce jour-là");
     if (cs === "inconnu") out.warn.push("statut d'alternance inconnu ce jour-là");
@@ -700,7 +711,8 @@
             if (s.employees.some((x) => x.id !== emp.id && norm(x.name) === norm(n))) { fail(`${n} existe déjà.`); break; }
             emp.name = n;
           }
-          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn"]) if (p[k] !== undefined) emp[k] = p[k];
+          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave"]) if (p[k] !== undefined) emp[k] = p[k];
+          if (p.onLeave && !isISO(p.onLeave.since)) { fail("Date de début des vacances invalide."); break; }
           if (emp.role === "alternant" && !emp.calendarId && s.calendars[0]) emp.calendarId = s.calendars[0].id;
           if (p.rules) {
             const r = p.rules;
@@ -870,7 +882,7 @@
   }
 
   root.PlanningCore = {
-    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
+    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,

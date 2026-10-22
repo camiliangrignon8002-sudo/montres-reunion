@@ -152,6 +152,11 @@
       id: "patronne-lydia",
       summary: "Lydia (la patronne) retirée du planning : horaires, modèle, heures et équipe",
       purge: ["lydia"],
+    }, {
+      id: "equipe-2026-10-22c",
+      summary: "Sophie supprimée ; Amandine en vacances (retour non renseigné)",
+      remove: ["sophie"],
+      onLeave: { amandine: { type: "vacances", since: "2026-10-19" } },
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
@@ -171,7 +176,7 @@
     totalsOnPaper: { camilian: 35, charlotte: 35, eric: 35, fleur: 35, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35, amandine: 0, sonia: 0, sophie: 0, sylvie: 0 },
     questions: [
       "Le planning indique « Page 1/2 » : la page 2 contient-elle une semaine 2 (rotation) ou d'autres employés ?",
-      "Amandine et Sophie n'ont aucun horaire : sont-elles encore dans l'équipe, et dans quelle zone ?",
+      "Amandine (en vacances) : dans quelle zone travaille-t-elle, et quand revient-elle ?",
     ],
   };
 })(typeof globalThis !== "undefined" ? globalThis : this);

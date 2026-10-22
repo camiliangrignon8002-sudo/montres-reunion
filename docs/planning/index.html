@@ -506,6 +506,11 @@ table.t td.num { white-space: nowrap; }
       id: "patronne-lydia",
       summary: "Lydia (la patronne) retirée du planning : horaires, modèle, heures et équipe",
       purge: ["lydia"],
+    }, {
+      id: "equipe-2026-10-22c",
+      summary: "Sophie supprimée ; Amandine en vacances (retour non renseigné)",
+      remove: ["sophie"],
+      onLeave: { amandine: { type: "vacances", since: "2026-10-19" } },
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
@@ -525,7 +530,7 @@ table.t td.num { white-space: nowrap; }
     totalsOnPaper: { camilian: 35, charlotte: 35, eric: 35, fleur: 35, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35, amandine: 0, sonia: 0, sophie: 0, sylvie: 0 },
     questions: [
       "Le planning indique « Page 1/2 » : la page 2 contient-elle une semaine 2 (rotation) ou d'autres employés ?",
-      "Amandine et Sophie n'ont aucun horaire : sont-elles encore dans l'équipe, et dans quelle zone ?",
+      "Amandine (en vacances) : dans quelle zone travaille-t-elle, et quand revient-elle ?",
     ],
   };
 })(typeof globalThis !== "undefined" ? globalThis : this);
@@ -701,9 +706,20 @@ table.t td.num { white-space: nowrap; }
     return CAL_CODES[calendarCode(cal, date)];
   }
   const absenceList = (state) => Object.values(state.absences || {});
-  function absencesOn(state, empId, date) {
-    return absenceList(state).filter((a) => (a.emp === empId || a.emp === "*") && a.from <= date && date <= a.to);
+  // Congé sans date de retour (ex. vacances « jusqu'à nouvel ordre ») : enregistré sur la fiche de la personne.
+  const OPEN_END = "9999-12-31";
+  function openLeave(state, empId) {
+    const e = (state.employees || []).find((x) => x.id === empId);
+    if (!e || !e.onLeave) return null;
+    return { id: "conge-" + e.id, emp: e.id, type: e.onLeave.type || "vacances", from: e.onLeave.since, to: OPEN_END, open: true };
   }
+  function absencesOn(state, empId, date) {
+    const out = absenceList(state).filter((a) => (a.emp === empId || a.emp === "*") && a.from <= date && date <= a.to);
+    const ol = openLeave(state, empId);
+    if (ol && ol.from <= date) out.push(ol);
+    return out;
+  }
+  const absenceDates = (a) => (a.open ? `depuis le ${fmtDate(a.from, "short")}, retour non renseigné` : `du ${fmtDate(a.from, "short")} au ${fmtDate(a.to, "short")}`);
 
   // ---------- Modèle ----------
   const templateFor = (state, date) => ((state.template && state.template.shifts) || []).filter((t) => t.dow === dow(date));
@@ -740,7 +756,7 @@ table.t td.num { white-space: nowrap; }
     const out = { ok: true, block: [], warn: [] };
     if (!emp) { out.block.push("employé inconnu"); out.ok = false; return out; }
     if (emp.active === false) out.block.push("employé désactivé");
-    for (const a of absencesOn(state, empId, date)) out.block.push(`${ABSENCE_TYPES[a.type] || "absence"} du ${fmtDate(a.from, "short")} au ${fmtDate(a.to, "short")}`);
+    for (const a of absencesOn(state, empId, date)) out.block.push(`${ABSENCE_TYPES[a.type] || "absence"} ${absenceDates(a)}`);
     const cs = calStatus(state, emp, date);
     if (cs === "formation") out.block.push("en formation au CFA ce jour-là");
     if (cs === "inconnu") out.warn.push("statut d'alternance inconnu ce jour-là");
@@ -1234,7 +1250,8 @@ table.t td.num { white-space: nowrap; }
             if (s.employees.some((x) => x.id !== emp.id && norm(x.name) === norm(n))) { fail(`${n} existe déjà.`); break; }
             emp.name = n;
           }
-          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn"]) if (p[k] !== undefined) emp[k] = p[k];
+          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave"]) if (p[k] !== undefined) emp[k] = p[k];
+          if (p.onLeave && !isISO(p.onLeave.since)) { fail("Date de début des vacances invalide."); break; }
           if (emp.role === "alternant" && !emp.calendarId && s.calendars[0]) emp.calendarId = s.calendars[0].id;
           if (p.rules) {
             const r = p.rules;
@@ -1404,7 +1421,7 @@ table.t td.num { white-space: nowrap; }
   }
 
   root.PlanningCore = {
-    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
+    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
@@ -2145,6 +2162,7 @@ table.t td.num { white-space: nowrap; }
   function rulesText(e) {
     const r = e.rules || {}, out = [];
     if (e.role === "alternant") out.push(e.calendarId ? "Suit le calendrier du BTS" : "Calendrier d'alternance non défini");
+    if (e.onLeave) out.push(`En ${C.ABSENCE_TYPES[e.onLeave.type] ? C.ABSENCE_TYPES[e.onLeave.type].toLowerCase() : "congé"} depuis le ${C.fmtDate(e.onLeave.since, "short")}`);
     if (r.fixedHours) out.push(`Toujours ${r.fixedHours.s}–${r.fixedHours.e}`);
     if (Array.isArray(r.daysOff) && r.daysOff.length) out.push(`Repos fixe : ${r.daysOff.map((d) => C.DAYS[d].toLowerCase()).join(", ")}`);
     else if (r.sameWeekends) out.push("Mêmes week-ends (jours à préciser)");
@@ -2466,13 +2484,13 @@ table.t td.num { white-space: nowrap; }
     const statusChip = (wk) => !wk || !wk.shifts.length ? h("span", { class: "chip" }, "Pas encore créée") : wk.status === "validé" ? h("span", { class: "chip ok" }, "Validée") : h("span", { class: "chip warn" }, "Brouillon");
     const absUp = Object.values(s.absences).filter((a) => a.to >= today && a.from <= C.addDays(today, 30)).sort((a, b) => a.from.localeCompare(b.from));
     const altern = s.employees.filter((e) => e.role === "alternant" && e.active !== false);
-    const pending = s.employees.filter((e) => e.active !== false && (Object.values(e.zones || {}).includes("incertain") || !Object.keys(e.zones || {}).length)).length;
+    const pending = s.employees.filter((e) => e.active !== false && !e.onLeave && (Object.values(e.zones || {}).includes("incertain") || !Object.keys(e.zones || {}).length)).length;
 
     return h("div", { class: "stack", style: { gap: "20px" } },
       h("div", { class: "stack", style: { gap: "4px" } }, h("h1", {}, C.fmtDate(today, "day").replace(/^./, (c) => c.toUpperCase())), h("p", { class: "muted" }, `Semaine ${C.isoWeekNumber(today)} · ${C.fmtWeek(monday)}`)),
       (pending || !s.settings.rulesConfirmed) ? h("div", { class: "card", style: { "border-color": "var(--warn)" } }, h("div", { class: "row between" },
         h("div", { class: "stack", style: { gap: "4px" } }, h("h3", {}, "Informations à confirmer"),
-          h("p", { class: "small muted" }, `${pending ? `Zones à confirmer ou inconnues : ${s.employees.filter((e) => e.active !== false && (Object.values(e.zones || {}).includes("incertain") || !Object.keys(e.zones || {}).length)).map((e) => e.name).join(", ")}. ` : ""}${!s.settings.rulesConfirmed ? "Les règles de repos et de durée sont des valeurs par défaut." : ""}`)),
+          h("p", { class: "small muted" }, `${pending ? `Zones à confirmer ou inconnues : ${s.employees.filter((e) => e.active !== false && !e.onLeave && (Object.values(e.zones || {}).includes("incertain") || !Object.keys(e.zones || {}).length)).map((e) => e.name).join(", ")}. ` : ""}${!s.settings.rulesConfirmed ? "Les règles de repos et de durée sont des valeurs par défaut." : ""}`)),
         h("div", { class: "row" }, btn("Voir les questions", () => this.go("import"), "sm"), btn("Zones et règles", () => this.go("zones"), "sm")))) : null,
       h("div", { class: "cards" },
         h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", {}, "Aujourd'hui"), h("span", { class: "chip" }, `${todayShifts.length} personne(s)`)),
@@ -2741,7 +2759,7 @@ table.t td.num { white-space: nowrap; }
       const zones = C.allowedZones(emp);
       kids.push(h("div", { class: "row" },
         emp.role === "alternant" ? h("span", { class: cs === "formation" ? "chip cours" : cs === "inconnu" ? "chip warn" : "chip" }, C.CAL_LABELS[cs]) : null,
-        abs.map((a) => h("span", { class: "chip err" }, `${C.ABSENCE_TYPES[a.type]} (${C.fmtDate(a.from, "short")} → ${C.fmtDate(a.to, "short")})`)),
+        abs.map((a) => h("span", { class: "chip err" }, `${C.ABSENCE_TYPES[a.type]} (${C.absenceDates(a)})`)),
         h("span", { class: "small muted" }, "Zones autorisées :"), zones.length ? zones.map((z) => zoneTag(s, z)) : h("span", { class: "chip warn" }, "aucune — à définir dans Zones")));
       if (!canEdit) {
         kids.push(segs.length ? h("div", { class: "stack" }, segs.map((g) => blk(s, g))) : h("p", { class: "muted" }, "Pas de créneau."));
@@ -3067,6 +3085,21 @@ table.t td.num { white-space: nowrap; }
       h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", { style: { "text-transform": "capitalize" } }, `${C.MONTHS[m - 1]} ${y}`), h("div", { class: "row" }, iconBtn("left", "Mois précédent", () => moveM(-1)), iconBtn("right", "Mois suivant", () => moveM(1)))),
         h("div", { class: "legend", style: { margin: "8px 0" } }, h("span", {}, h("span", { class: "swatch", style: { background: "color-mix(in srgb, var(--accent) 35%, var(--surface))" } }), "Congés / vacances"), h("span", {}, h("span", { class: "swatch", style: { background: "color-mix(in srgb, var(--danger) 30%, var(--surface))" } }), "Arrêt"), h("span", {}, h("span", { class: "swatch", style: { background: "var(--absent-soft)" } }), "Autre"), h("span", {}, h("span", { class: "swatch", style: { background: "var(--cours-soft)" } }), "CFA")),
         timeline),
+      s.employees.some((e) => e.onLeave) ? h("section", { class: "card" }, h("h2", {}, "En congé, retour non renseigné"),
+        h("p", { class: "small muted" }, "Ces personnes ne sont jamais planifiées ni proposées en remplacement tant qu'elles sont en congé."),
+        h("div", { class: "list" }, s.employees.filter((e) => e.onLeave).map((e) => {
+          const back = h("input", { type: "date", class: "input", style: { width: "auto" }, "aria-label": `Date de retour de ${e.name}`, value: today });
+          return h("div", { class: "item", style: { "flex-wrap": "wrap" } },
+            h("div", { class: "grow" }, h("b", {}, e.name), h("div", { class: "small muted" }, `${C.ABSENCE_TYPES[e.onLeave.type] || "Congé"} depuis le ${C.fmtDate(e.onLeave.since, "num")}`)),
+            Store.canWrite ? h("span", { class: "row" }, h("span", { class: "small muted" }, "Revient le"), back,
+              btn("Enregistrer le retour", async () => {
+                if (!C.isISO(back.value) || back.value <= e.onLeave.since) { toast("Choisissez une date de retour après le début du congé.", "err"); return; }
+                await this.commit([
+                  { type: "addAbsence", absence: { emp: e.id, type: e.onLeave.type || "vacances", from: e.onLeave.since, to: C.addDays(back.value, -1), note: "" } },
+                  { type: "updateEmployee", id: e.id, patch: { onLeave: null } },
+                ], { summary: `${e.name} : retour de congé le ${C.fmtDate(back.value, "num")}` });
+              }, "sm primary")) : null);
+        }))) : null,
       h("section", { class: "card" }, h("h2", {}, "À venir et en cours"), upcoming.length ? h("div", { class: "list" }, upcoming.map(row)) : h("p", { class: "muted" }, "Aucune absence à venir.")),
       past.length ? h("details", { class: "card" }, h("summary", {}, `Passées (${past.length})`), h("div", { class: "list" }, past.slice(0, 60).map(row))) : null);
   } };
@@ -3519,6 +3552,7 @@ table.t td.num { white-space: nowrap; }
         for (const a of Object.values(st.absences || {})) if (a.emp === id) ops.push({ type: "removeAbsence", id: a.id });
         if (C.empById(st, id)) ops.push({ type: "removeEmployee", id });
       }
+      for (const [id, leave] of Object.entries(u.onLeave || {})) if (C.empById(this.state, id)) ops.push({ type: "updateEmployee", id, patch: { onLeave: leave } });
       if (u.confirmAll) ops.push({ type: "confirmAll" });
       if (u.settings) ops.push({ type: "setSettings", patch: u.settings });
       for (const [id, from] of Object.entries(u.leave || {})) {
