@@ -94,14 +94,20 @@ const MOCK = `
     await page.waitForTimeout(150);
     check("modification d'un horaire enregistrée", await page.isVisible('td.cell[aria-label*="Fleur, Mercredi 21 octobre : 14:30–17:00 · 17:30–21:30"]'));
 
-    // cours : Camilian ne peut pas être placé le 29
+    // semaine du 26/10 : planning papier ajouté automatiquement
+    await page.click('button[aria-label="Semaine suivante"]');
+    await page.waitForSelector('td.cell[aria-label^="Lucas, Mercredi 28"]');
+    const w2 = await page.evaluate(() => { const w = PlanningApp.state.weeks["2026-10-26"]; return { n: w.shifts.length, min: w.shifts.reduce((a, x) => a + PlanningCore.shiftMinutes(x.segs), 0), err: PlanningCore.validateWeek(PlanningApp.state, "2026-10-26").filter((i) => i.level === "erreur").length }; });
+    check("semaine du 26/10 ajoutée : 366 h, aucune erreur", w2.min === 366 * 60 && w2.err === 0, JSON.stringify(w2));
+    // cours : Camilian et Fleur ne peuvent pas être placés le 12 et le 13 novembre
+    await page.click('button[aria-label="Semaine suivante"]');
     await page.click('button[aria-label="Semaine suivante"]');
     await page.waitForSelector("text=Aucun horaire pour cette semaine.");
     await page.click(".empty >> text=Générer à partir du modèle");
     await page.click("text=Préparer la proposition");
     await page.waitForSelector("text=Proposition de planning");
     const notPlaced = await page.textContent(".dialog");
-    check("génération : 4 postes non attribués (CFA les 29 et 30)", /4 poste\(s\) non attribué/.test(notPlaced));
+    check("génération : 4 postes non attribués (CFA les 12 et 13 nov.)", /4 poste\(s\) non attribué/.test(notPlaced));
     await page.click(".dialog footer >> text=/Enregistrer 1 semaine/");
     await page.waitForSelector("text=Postes à pourvoir");
     const coursTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) .tag-cours', (x) => x.length);
@@ -109,7 +115,7 @@ const MOCK = `
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/3-generation.png`, fullPage: true });
 
     // tentative interdite : placer Fleur le 29
-    await page.click('td.cell[aria-label^="Fleur, Jeudi 29"]');
+    await page.click('td.cell[aria-label^="Fleur, Jeudi 12"]');
     await page.waitForSelector(".dialog");
     await page.click("text=Ajouter un horaire");
     await page.waitForTimeout(100);
@@ -122,7 +128,7 @@ const MOCK = `
     await page.click('.side [data-screen="absences"]');
     await page.selectOption("#abs-emp", "eric");
     await page.selectOption("#abs-type", "arret");
-    await page.fill("#abs-from", "2026-10-27"); await page.fill("#abs-to", "2026-10-28");
+    await page.fill("#abs-from", "2026-11-10"); await page.fill("#abs-to", "2026-11-11");
     await page.click("text=Enregistrer l'absence");
     await page.waitForSelector("text=Créneaux déjà planifiés pendant cette absence");
     const imp = await page.$$eval(".dialog .item", (x) => x.length);
@@ -132,16 +138,16 @@ const MOCK = `
     await page.click(".dialog footer >> text=Plus tard");
 
     // annulation
-    const before = await page.evaluate(() => PlanningApp.state.weeks["2026-10-26"].shifts.length);
+    const before = await page.evaluate(() => PlanningApp.state.weeks["2026-11-09"].shifts.length);
     await page.click("#undo-btn");
     await page.waitForTimeout(200);
-    const after = await page.evaluate(() => PlanningApp.state.weeks["2026-10-26"].shifts.length);
+    const after = await page.evaluate(() => PlanningApp.state.weeks["2026-11-09"].shifts.length);
     check("annuler la dernière modification", after === before + 1, `${before} → ${after}`);
 
     // rafraîchir
     await page.click("#refresh-btn");
     await page.waitForSelector("text=/Planning actualisé à/");
-    const persisted = await page.evaluate(() => PlanningApp.state.weeks["2026-10-26"].shifts.length);
+    const persisted = await page.evaluate(() => PlanningApp.state.weeks["2026-11-09"].shifts.length);
     check("bouton actualiser : données relues depuis le stockage", persisted === after);
 
     // ajout d'un employé

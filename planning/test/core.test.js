@@ -84,11 +84,11 @@ test("modifier un horaire, avec zone déduite quand une seule est autorisée", (
 
 test("zones : affectation interdite refusée, autorisée après changement explicite de règle", () => {
   let s = withWeek1();
-  let r = apply(s, [{ type: "setShift", emp: "camilian", date: "2026-10-21", segs: [{ s: "13:30", e: "21:00", z: "ZR" }] }]);
+  let r = apply(s, [{ type: "setShift", emp: "maelle", date: "2026-10-19", segs: [{ s: "13:30", e: "21:00", z: "ZR" }] }]);
   assert.equal(r.ok, false);
   assert.match(r.errors[0], /pas autorisé/);
-  s = apply(s, [{ type: "setZones", emp: "camilian", zones: { ZP: "confirme", ZR: "confirme" } }]).state;
-  r = apply(s, [{ type: "setShift", emp: "camilian", date: "2026-10-21", segs: [{ s: "13:30", e: "21:00", z: "ZR" }] }]);
+  s = apply(s, [{ type: "setZones", emp: "maelle", zones: { ZP: "confirme", ZR: "confirme" } }]).state;
+  r = apply(s, [{ type: "setShift", emp: "maelle", date: "2026-10-19", segs: [{ s: "13:30", e: "21:00", z: "ZR" }] }]);
   assert.ok(r.ok);
 });
 
@@ -243,4 +243,14 @@ test("remplaçants : jamais un alternant en cours, jamais une zone interdite, ja
     assert.ok(!s.weeks[W1].shifts.some((y) => y.emp === x.emp && y.date === "2026-10-21"));
   }
   assert.ok(!C.findCandidates(s, "2026-10-29", segs).some((x) => x.emp === "fleur"));
+});
+
+test("semaine du 26/10 (planning papier) : totaux de la feuille et aucune erreur bloquante", () => {
+  const x = REF.extraWeeks[0];
+  let s = withWeek1();
+  const ops = Object.entries(x.zonesAdd).map(([emp, zs]) => ({ type: "setZones", emp, zones: { ...C.empById(s, emp).zones, ...Object.fromEntries(zs.map((z) => [z, "deduit"])) } }));
+  s = apply(s, ops).state;
+  s.weeks[x.monday] = { week: x.monday, status: "brouillon", shifts: x.shifts.map((t, i) => ({ id: "t" + i, emp: t.emp, date: C.addDays(x.monday, t.dow), segs: t.segs })) };
+  for (const [emp, h] of Object.entries(x.totalsOnPaper)) assert.equal(C.weekMinutes(s, x.monday, emp) / 60, h, emp);
+  assert.equal(C.blockingIssues(C.validateWeek(s, x.monday)).length, 0);
 });

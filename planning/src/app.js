@@ -199,6 +199,7 @@
       this.ready = true;
       if (!this.state) this.ui.screen = "import";
       this.render();
+      await this.syncReference();
       Store.watch((changes) => this.onRemote(changes));
       this.chat = await Store.loadChat();
       this.renderAI();
@@ -401,6 +402,9 @@
       if (!Store.canWrite) nodes.push(h("div", { class: "banner info" }, Store.readOnlyReason || "Lecture seule."));
       if (Store.mode === "local" && this.state) nodes.push(h("div", { class: "banner info small" }, "Données enregistrées sur ce téléphone. L'assistant IA et le partage avec l'équipe sont dans la ", h("a", { href: CLAUDE_URL, target: "_blank", rel: "noopener" }, "version Claude"), "."));
       if (Store.mode === "memoire") nodes.push(h("div", { class: "banner" }, "Le navigateur bloque l'enregistrement : vos modifications seront perdues en fermant la page."));
+      for (const p of this.pendingRef || []) nodes.push(h("div", { class: "banner info row between" },
+        h("span", {}, `Le planning papier de la semaine du ${C.fmtWeek(p.x.monday)} est disponible, mais cette semaine contient déjà des horaires.`),
+        h("span", { class: "row" }, btn("Voir", () => { this.ui.monday = p.x.monday; this.go("week"); }, "sm ghost"), btn("Remplacer par le planning papier", () => this.applyRefWeek(p, true), "sm primary"), btn("Ignorer", () => { this.pendingRef = this.pendingRef.filter((y) => y !== p); this.render(); }, "sm"))));
       if (!this.ready) nodes.push(h("div", { class: "empty" }, "Chargement du planning…"));
       else if (!this.state && screen !== "import") nodes.push(h("div", { class: "empty" }, "Aucune donnée. ", btn("Importer les calendriers", () => this.go("import"), "primary")));
       else nodes.push(def.render.call(this));
@@ -1182,6 +1186,7 @@
     if (!ok) { this.state = prev; this.render(); return; }
     this.loadError = null;
     toast("Calendriers importés. Vérifiez les points « à confirmer ».");
+    await this.syncReference();
     this.ui.monday = R.template.referenceWeek;
     this.go("week");
   };
@@ -1260,6 +1265,40 @@
         if (r.ok) { this.ui.calId = id; this.go("alternants"); }
         return r.ok;
       } }] });
+  };
+
+  // ---------- Plannings papier fournis avec l'appli ----------
+  // Ajoutés d'office si la semaine est vide ; sinon proposés (jamais de remplacement silencieux).
+  App.syncReference = async function () {
+    const R = root.PlanningReference;
+    if (!R || !this.state || !Store.canWrite) return;
+    this.pendingRef = [];
+    for (const x of R.extraWeeks || []) {
+      const cur = this.state.weeks[x.monday];
+      if (cur && cur.refId === x.refId) continue;
+      const p = { x };
+      if (!cur || !cur.shifts.length) await this.applyRefWeek(p, false);
+      else this.pendingRef.push(p);
+    }
+    this.render();
+  };
+  App.applyRefWeek = async function (p, replacing) {
+    const x = p.x, s = this.state;
+    const week = { week: x.monday, status: "brouillon", source: x.source, refId: x.refId, shifts: x.shifts.map((t, i) => ({ id: `${x.refId}-${i}`, emp: t.emp, date: C.addDays(x.monday, t.dow), segs: C.clone(t.segs) })) };
+    const ops = [];
+    for (const [emp, zs] of Object.entries(x.zonesAdd || {})) {
+      const e = C.empById(s, emp); if (!e) continue;
+      const missing = zs.filter((z) => !(e.zones || {})[z]);
+      if (missing.length) ops.push({ type: "setZones", emp, zones: { ...(e.zones || {}), ...Object.fromEntries(missing.map((z) => [z, "deduit"])) } });
+    }
+    ops.push({ type: "putWeek", monday: x.monday, week });
+    if (replacing) await this.saveVersion(x.monday, "Avant remplacement par le planning papier");
+    const r = await this.commit(ops, { source: "import", summary: `Planning papier de la semaine du ${C.fmtWeek(x.monday)}`, allowErrors: true, quiet: true, noImpacts: true });
+    if (r.ok) {
+      this.pendingRef = (this.pendingRef || []).filter((y) => y !== p);
+      toast(`Planning de la semaine du ${C.fmtWeek(x.monday)} ajouté.`, "", { label: "Voir", fn: () => { this.ui.monday = x.monday; this.go("week"); } });
+      this.render();
+    }
   };
 
   // ---------- Exportation ----------

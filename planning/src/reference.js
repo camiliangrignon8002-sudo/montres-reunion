@@ -46,12 +46,12 @@
   });
   const employees = [
     E("amandine", "Amandine", "salarie", {}, "Aucun horaire sur la semaine 1 : zone inconnue."),
-    E("camilian", "Camilian", "alternant", { ZP: "deduit" }, "5 jours sur 5 en vert (zone publique).",
+    E("camilian", "Camilian", "alternant", { ZP: "deduit", ZR: "deduit" }, "Vert la semaine du 19/10 ; orange le dimanche 1er novembre.",
       { calendarId: "bts-mco1", aliases: ["Kamiliane", "Kamilian", "Camiliane"], aliasNote: "« Kamiliane » dans la demande, « CAMILIAN » sur le planning : même personne ? À confirmer." }),
     E("charlotte", "Charlotte", "salarie", { ZP: "deduit", ZR: "incertain" }, "Vert partout ; fin de service mardi et mercredi surlignée en orange par-dessus le vert."),
     E("eric", "Eric", "salarie", { ZP: "deduit", ZR: "incertain" }, "Vert partout ; fin de service jeudi surlignée en orange par-dessus le vert."),
     E("fleur", "Fleur", "alternant", { ZR: "deduit" }, "5 jours sur 5 en orange (zone réservée).", { calendarId: "bts-mco1" }),
-    E("lydia", "Lydia", "salarie", { ZP: "deduit" }, "2 jours seulement, en vert : à confirmer."),
+    E("lydia", "Lydia", "salarie", { ZP: "deduit", ZR: "deduit" }, "Vert (ouverture 05:30) ; orange jeudi et vendredi de la semaine du 26/10 (06:00)."),
     E("maelle", "Maelle", "salarie", { ZP: "deduit" }, "5 jours sur 5 en vert."),
     E("mathilde", "Mathilde", "salarie", { ZR: "deduit", ZP: "deduit" }, "Orange lundi, mardi, jeudi, vendredi ; vert samedi."),
     E("murielle", "Murielle", "salarie", { ZP: "deduit", ZR: "deduit" }, "Vert lundi et mardi ; orange mercredi, samedi, dimanche."),
@@ -61,7 +61,7 @@
     E("sonia", "Sonia", "salarie", {}, "Aucun horaire sur la semaine 1 : zone inconnue."),
     E("sophie", "Sophie", "salarie", {}, "Aucun horaire sur la semaine 1 : zone inconnue."),
     E("sylvie", "Sylvie", "salarie", {}, "Aucun horaire sur la semaine 1 : zone inconnue."),
-    E("lucas", "Lucas", "alternant", {}, "Absent du planning modèle : zones et horaires inconnus.", { calendarId: "bts-mco1" }),
+    E("lucas", "Lucas", "alternant", { ZP: "deduit" }, "Absent de la semaine du 19/10 ; en vert les 3 jours de la semaine du 26/10.", { calendarId: "bts-mco1" }),
   ];
 
   // Calendrier d'alternance, un caractère par jour du mois :
@@ -81,7 +81,48 @@
     "2027-07": "PPWWPPPPPWWEEFEEWWEEEEEWWEEEEEW",
   };
 
+  // Semaine du 26/10/2026 (photo du planning papier). Totaux relus : 366 h, identiques à la feuille.
+  const W2 = [];
+  const put2 = (emp, dows, segs) => dows.forEach((d) => W2.push({ emp, dow: d, segs }));
+  const OLIVE = "Case entièrement vert foncé/orange sur la photo : zone publique probable, à confirmer.";
+  const soirB = (z) => day("13:30", "17:30", z, "18:00", "21:00", z);
+  const ouvB = (z) => day("05:30", "10:30", z, "11:00", "13:00", z);
+  const aubeB = (z) => day("06:00", "11:00", z, "11:30", "13:30", z);
+  const nuitB = (z) => day("14:30", "17:30", z, "18:00", "22:00", z);
+  const withDoubt = (segs, d) => segs.map((g) => ({ ...g, doute: d }));
+  put2("camilian", [0], withDoubt(soir7(ZP), OLIVE));
+  put2("camilian", [1], soir7(ZP));
+  put2("camilian", [6], mat7(ZR).map((g) => ({ ...g, z: ZR })));
+  put2("charlotte", [0], withDoubt(soirB(ZP), OLIVE));
+  put2("charlotte", [1, 3], soirB(ZP));
+  put2("charlotte", [5, 6], ouvB(ZP));
+  put2("eric", [0, 3, 4], ouvB(ZP));
+  put2("eric", [1, 2], mat7(ZP));
+  put2("fleur", [0, 1, 2], nuit7(ZR));
+  put2("lucas", [2], soir7(ZP));
+  put2("lucas", [5, 6], aubeB(ZP));
+  put2("lydia", [1, 2], ouvB(ZP));
+  put2("lydia", [3, 4], aubeB(ZR));
+  put2("maelle", [2], soirB(ZP));
+  put2("maelle", [3, 4, 5, 6], soir7(ZP));
+  put2("mathilde", [2, 3, 4, 5, 6], soir6(ZR));
+  put2("murielle", [0], mat7(ZR).map((g) => ({ ...g, z: ZR })));
+  put2("murielle", [1], nuitB(ZR));
+  put2("murielle", [4, 5, 6], soir7(ZP));
+  put2("nathalie", [0, 1, 2, 5, 6], aubeB(ZR));
+  put2("reine-claude", [0], nuitB(ZR));
+  put2("reine-claude", [3, 4, 5, 6], nuit7(ZR));
+  put2("sebastien", [0], mat7(ZP).map((g) => ({ ...g, z: ZP })));
+  put2("sebastien", [1, 2, 3, 4], mat7(ZR));
+  const extraWeeks = [{
+    refId: "papier-2026-10-26", monday: "2026-10-26", source: "planning papier (photo)", shifts: W2,
+    zonesAdd: { camilian: ["ZR"], lucas: ["ZP"], lydia: ["ZR"] },
+    totalsOnPaper: { camilian: 21, charlotte: 35, eric: 35, fleur: 21, lucas: 21, lydia: 28, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35 },
+    notes: ["Lydia, samedi 31/10 : ajout manuscrit « 06H / 13H » surligné en orange, hors des totaux imprimés : non ajouté, à confirmer."],
+  }];
+
   root.PlanningReference = {
+    extraWeeks,
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
       alternance: "BTS MCO 1 – CFA Levavasseur – Calendrier d'alternance 2026-2027 (capture)",
@@ -105,6 +146,7 @@
       "Le planning indique « Page 1/2 » : la page 2 contient-elle une semaine 2 (rotation) ou d'autres employés ?",
       "Amandine, Sonia, Sophie et Sylvie n'ont aucun horaire : sont-elles encore dans l'équipe, et dans quelle zone ?",
       "Le calendrier « BTS MCO 1 » vaut-il pour les trois alternants (Fleur, Camilian, Lucas) ?",
+      "Semaine du 26/10 : Lydia a un ajout manuscrit le samedi (« 06H / 13H » en orange). Faut-il l'ajouter ?",
       "Les règles de repos et de durée (11 h de repos, 10 h/jour, 48 h/semaine) sont celles du Code du travail : y a-t-il des règles plus strictes (convention, contrat) ?",
     ],
   };

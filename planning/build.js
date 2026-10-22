@@ -42,7 +42,7 @@ async function main() {
     const data = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, k, new TextEncoder().encode(JSON.stringify(payload))));
     locked = { v: 1, iter: ITER, salt: b64(salt), iv: b64(iv), data: b64(data) };
     fs.writeFileSync(S("reference.enc.json"), JSON.stringify(locked) + "\n");
-  } else locked = JSON.parse(src("reference.enc.json"));
+  }
 
   const tag = (code) => `<script>\n${code.replace(/<\/script/gi, "<\\/script")}\n</script>`;
   const appScripts = ["core.js", "store.js", "exports.js", "ai.js", "app.js"].map((f) => tag(src(f))).join("\n");
@@ -58,7 +58,6 @@ ${refScript}
 ${appScripts}
 `;
   const plainTag = tag(refJs);
-  const lockedTag = tag(`globalThis.PlanningReferenceLocked = ${JSON.stringify({ iter: locked.iter, salt: locked.salt, iv: locked.iv, data: locked.data })};`);
   const reset = `<style>:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>`;
 
   fs.mkdirSync(path.join(__dirname, "dist"), { recursive: true });
