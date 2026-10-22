@@ -319,3 +319,14 @@ test("semaines du 05/10 et du 12/10 (plannings papier) : totaux des feuilles", (
     assert.deepEqual(day, x.dayTotals, x.monday);
   }
 });
+
+test("fermeture : après-midi ZP 14:30–22:00 et ZR 15:30–23:00, matin inchangé", () => {
+  const cl = { ZP: "22:00", ZR: "23:00" };
+  const k = (segs) => segs.map((g) => `${g.s}-${g.e}`).join(" ");
+  assert.equal(k(C.applyClosing([{ s: "13:30", e: "17:00", z: "ZP" }, { s: "17:30", e: "21:00", z: "ZP" }], cl)), "14:30-18:00 18:30-22:00");
+  assert.equal(k(C.applyClosing([{ s: "14:30", e: "17:00", z: "ZR" }, { s: "17:30", e: "22:00", z: "ZR" }], cl)), "15:30-18:00 18:30-23:00");
+  const m = [{ s: "07:00", e: "12:00", z: "ZP" }, { s: "12:30", e: "14:30", z: "ZR" }];
+  assert.equal(C.applyClosing(m, cl), m);
+  const late = C.applyClosing([{ s: "14:30", e: "17:00", z: "ZR" }, { s: "17:30", e: "22:00", z: "ZR" }], cl);
+  assert.equal(C.shiftMinutes(late), 7 * 60);
+});

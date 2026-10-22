@@ -709,6 +709,11 @@ table.t td.num { white-space: nowrap; }
       id: "amandine-vacances-0930",
       summary: "Amandine en vacances depuis le 30/09/2026",
       onLeave: { amandine: { type: "vacances", since: "2026-09-30" } },
+    }, {
+      id: "apres-midi-2026-10-26",
+      summary: "Nouveaux horaires d'après-midi à partir du 26/10/2026 : ZP 14:30–22:00, ZR 15:30–23:00",
+      closing: { from: "2026-10-26", ZP: "22:00", ZR: "23:00" },
+      validatePaperWeeks: true,
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
@@ -767,6 +772,7 @@ table.t td.num { white-space: nowrap; }
     checkMaxWeek: true, maxWeekHours: 48,
     checkPause: true, minPauseMinutes: 30,
     contractHours: 35,
+    closingZP: "", closingZR: "",
     coverageFromTemplate: true,
     rulesConfirmed: false,
     appliedUpdates: [],
@@ -851,6 +857,20 @@ table.t td.num { white-space: nowrap; }
     const r = shiftRanges(segs || []); const out = [];
     for (let i = 1; i < r.length; i++) if (r[i][0] > r[i - 1][1]) out.push({ s: fromMin(r[i - 1][1]), e: fromMin(r[i][0]), min: r[i][0] - r[i - 1][1] });
     return out;
+  }
+
+  // ---------- Horaires d'après-midi (fermeture) ----------
+  // Un service d'après-midi (début ≥ 12:00, fin ≥ 21:00) est décalé pour finir à l'heure de fermeture de sa zone
+  // (zone du dernier bloc), en gardant sa durée et la place de sa pause. Ex. ZP 13:30–21:00 → 14:30–22:00.
+  function applyClosing(segs, closing) {
+    if (!segs || !segs.length || !closing) return segs;
+    const last = segs[segs.length - 1];
+    if (toMin(segs[0].s) < 12 * 60 || segRange(last)[1] < 21 * 60) return segs;
+    const target = closing[last.z];
+    if (!target) return segs;
+    const delta = toMin(target) - toMin(last.e);
+    if (!delta) return segs;
+    return segs.map((g) => ({ ...g, s: fromMin(toMin(g.s) + delta), e: fromMin(toMin(g.e) + delta) }));
   }
 
   // ---------- Recherche ----------
@@ -1499,6 +1519,7 @@ table.t td.num { white-space: nowrap; }
           for (const [k, v] of Object.entries(p)) {
             if (!(k in DEFAULT_SETTINGS)) continue;
             if (Array.isArray(DEFAULT_SETTINGS[k])) { if (!Array.isArray(v)) { fail(`Valeur invalide pour ${k}.`); continue; } s.settings[k] = v.map(String).slice(0, 200); continue; }
+            if (typeof DEFAULT_SETTINGS[k] === "string") { s.settings[k] = String(v).slice(0, 10); continue; }
             if (typeof DEFAULT_SETTINGS[k] === "number" && !(Number(v) > 0)) { fail(`Valeur invalide pour ${k}.`); continue; }
             s.settings[k] = typeof DEFAULT_SETTINGS[k] === "number" ? Number(v) : !!v;
           }
@@ -1619,7 +1640,7 @@ table.t td.num { white-space: nowrap; }
   }
 
   root.PlanningCore = {
-    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
+    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, applyClosing, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
@@ -2032,6 +2053,7 @@ table.t td.num { white-space: nowrap; }
         `Repères de dates (AAAA-MM-JJ) :\n${days.join("\n")}`,
         `Semaine affichée à l'écran : lundi ${App.ui.monday}.`,
         `Zones : ${s.zones.map((z) => `${z.id} = ${z.name}`).join(" ; ")}.`,
+        s.settings.closingZP ? `Depuis le 26/10/2026, le service d'après-midi finit à ${s.settings.closingZP} en ZP (14:30–22:00) et à ${s.settings.closingZR} en ZR (15:30–23:00) ; journées de 7 h + 30 min de pause.` : "",
         `Équipe :\n${team.join("\n")}`,
         "Règles impératives :",
         "1. Pour lire le planning, les absences ou les disponibilités, utilise les outils. N'invente jamais un horaire, une personne ou une règle.",
@@ -3759,6 +3781,19 @@ table.t td.num { white-space: nowrap; }
         if (C.empById(st, id)) ops.push({ type: "removeEmployee", id });
       }
       for (const [id, leave] of Object.entries(u.onLeave || {})) if (C.empById(this.state, id)) ops.push({ type: "updateEmployee", id, patch: { onLeave: leave } });
+      if (u.closing) {
+        // Nouvelle heure de fermeture : services d'après-midi décalés à partir de la date, dans les semaines et le modèle.
+        const cl = u.closing, st = this.state;
+        for (const w of Object.values(st.weeks)) {
+          if (C.addDays(w.week, 6) < cl.from) continue;
+          let changed = false;
+          const shifts = w.shifts.map((x) => { if (x.date < cl.from) return x; const segs = C.applyClosing(x.segs, cl); if (segs !== x.segs) changed = true; return { ...x, segs }; });
+          if (changed) ops.push({ type: "putWeek", monday: w.week, week: { ...C.clone(w), shifts } });
+        }
+        const tpl = st.template.shifts.map((t) => ({ ...t, segs: C.applyClosing(t.segs, cl) }));
+        if (tpl.some((t, i) => t.segs !== st.template.shifts[i].segs)) ops.push({ type: "setTemplate", template: { ...C.clone(st.template), shifts: tpl } });
+        ops.push({ type: "setSettings", patch: { closingZP: cl.ZP, closingZR: cl.ZR } });
+      }
       if (u.confirmAll) ops.push({ type: "confirmAll" });
       if (u.validatePaperWeeks) for (const w of Object.values(this.state.weeks)) {
         if (!(w.refId || /papier/.test(w.source || "")) || w.status === "validé" || !w.shifts.length) continue;

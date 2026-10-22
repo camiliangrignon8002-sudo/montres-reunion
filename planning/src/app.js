@@ -1541,6 +1541,19 @@
         if (C.empById(st, id)) ops.push({ type: "removeEmployee", id });
       }
       for (const [id, leave] of Object.entries(u.onLeave || {})) if (C.empById(this.state, id)) ops.push({ type: "updateEmployee", id, patch: { onLeave: leave } });
+      if (u.closing) {
+        // Nouvelle heure de fermeture : services d'après-midi décalés à partir de la date, dans les semaines et le modèle.
+        const cl = u.closing, st = this.state;
+        for (const w of Object.values(st.weeks)) {
+          if (C.addDays(w.week, 6) < cl.from) continue;
+          let changed = false;
+          const shifts = w.shifts.map((x) => { if (x.date < cl.from) return x; const segs = C.applyClosing(x.segs, cl); if (segs !== x.segs) changed = true; return { ...x, segs }; });
+          if (changed) ops.push({ type: "putWeek", monday: w.week, week: { ...C.clone(w), shifts } });
+        }
+        const tpl = st.template.shifts.map((t) => ({ ...t, segs: C.applyClosing(t.segs, cl) }));
+        if (tpl.some((t, i) => t.segs !== st.template.shifts[i].segs)) ops.push({ type: "setTemplate", template: { ...C.clone(st.template), shifts: tpl } });
+        ops.push({ type: "setSettings", patch: { closingZP: cl.ZP, closingZR: cl.ZR } });
+      }
       if (u.confirmAll) ops.push({ type: "confirmAll" });
       if (u.validatePaperWeeks) for (const w of Object.values(this.state.weeks)) {
         if (!(w.refId || /papier/.test(w.source || "")) || w.status === "validé" || !w.shifts.length) continue;

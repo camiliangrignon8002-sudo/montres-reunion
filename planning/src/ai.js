@@ -43,6 +43,7 @@
         `Repères de dates (AAAA-MM-JJ) :\n${days.join("\n")}`,
         `Semaine affichée à l'écran : lundi ${App.ui.monday}.`,
         `Zones : ${s.zones.map((z) => `${z.id} = ${z.name}`).join(" ; ")}.`,
+        s.settings.closingZP ? `Depuis le 26/10/2026, le service d'après-midi finit à ${s.settings.closingZP} en ZP (14:30–22:00) et à ${s.settings.closingZR} en ZR (15:30–23:00) ; journées de 7 h + 30 min de pause.` : "",
         `Équipe :\n${team.join("\n")}`,
         "Règles impératives :",
         "1. Pour lire le planning, les absences ou les disponibilités, utilise les outils. N'invente jamais un horaire, une personne ou une règle.",

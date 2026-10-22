@@ -352,6 +352,11 @@
       id: "amandine-vacances-0930",
       summary: "Amandine en vacances depuis le 30/09/2026",
       onLeave: { amandine: { type: "vacances", since: "2026-09-30" } },
+    }, {
+      id: "apres-midi-2026-10-26",
+      summary: "Nouveaux horaires d'après-midi à partir du 26/10/2026 : ZP 14:30–22:00, ZR 15:30–23:00",
+      closing: { from: "2026-10-26", ZP: "22:00", ZR: "23:00" },
+      validatePaperWeeks: true,
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",

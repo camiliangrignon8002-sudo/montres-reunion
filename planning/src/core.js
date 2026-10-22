@@ -30,6 +30,7 @@
     checkMaxWeek: true, maxWeekHours: 48,
     checkPause: true, minPauseMinutes: 30,
     contractHours: 35,
+    closingZP: "", closingZR: "",
     coverageFromTemplate: true,
     rulesConfirmed: false,
     appliedUpdates: [],
@@ -114,6 +115,20 @@
     const r = shiftRanges(segs || []); const out = [];
     for (let i = 1; i < r.length; i++) if (r[i][0] > r[i - 1][1]) out.push({ s: fromMin(r[i - 1][1]), e: fromMin(r[i][0]), min: r[i][0] - r[i - 1][1] });
     return out;
+  }
+
+  // ---------- Horaires d'après-midi (fermeture) ----------
+  // Un service d'après-midi (début ≥ 12:00, fin ≥ 21:00) est décalé pour finir à l'heure de fermeture de sa zone
+  // (zone du dernier bloc), en gardant sa durée et la place de sa pause. Ex. ZP 13:30–21:00 → 14:30–22:00.
+  function applyClosing(segs, closing) {
+    if (!segs || !segs.length || !closing) return segs;
+    const last = segs[segs.length - 1];
+    if (toMin(segs[0].s) < 12 * 60 || segRange(last)[1] < 21 * 60) return segs;
+    const target = closing[last.z];
+    if (!target) return segs;
+    const delta = toMin(target) - toMin(last.e);
+    if (!delta) return segs;
+    return segs.map((g) => ({ ...g, s: fromMin(toMin(g.s) + delta), e: fromMin(toMin(g.e) + delta) }));
   }
 
   // ---------- Recherche ----------
@@ -762,6 +777,7 @@
           for (const [k, v] of Object.entries(p)) {
             if (!(k in DEFAULT_SETTINGS)) continue;
             if (Array.isArray(DEFAULT_SETTINGS[k])) { if (!Array.isArray(v)) { fail(`Valeur invalide pour ${k}.`); continue; } s.settings[k] = v.map(String).slice(0, 200); continue; }
+            if (typeof DEFAULT_SETTINGS[k] === "string") { s.settings[k] = String(v).slice(0, 10); continue; }
             if (typeof DEFAULT_SETTINGS[k] === "number" && !(Number(v) > 0)) { fail(`Valeur invalide pour ${k}.`); continue; }
             s.settings[k] = typeof DEFAULT_SETTINGS[k] === "number" ? Number(v) : !!v;
           }
@@ -882,7 +898,7 @@
   }
 
   root.PlanningCore = {
-    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
+    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, applyClosing, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
