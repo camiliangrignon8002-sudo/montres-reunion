@@ -269,6 +269,10 @@ test("règles personnelles : horaires fixes et jours de repos signalés, respect
   const pm = C.findCandidates(s, "2026-10-19", [{ s: "13:30", e: "21:00", z: "ZP" }]).map((c) => c.emp);
   assert.ok(!pm.includes("sebastien"));
   for (const id of ["fleur", "camilian", "lucas"]) assert.equal(C.empById(s, id).calendarId, "bts-mco1");
+  assert.deepEqual(C.empById(s, "eric").rules.fixedHours, { s: "07:00", e: "14:30" });
+  assert.deepEqual(C.empById(s, "nathalie").rules.daysOff, [5, 6]);
+  // le modèle (semaine du 19/10) respecte ces règles : aucune alerte de règle personnelle
+  assert.equal(C.validateWeek(s, W1).filter((i) => i.code === "FIXED_HOURS" || i.code === "FIXED_DAYOFF").length, 0);
 });
 
 test("heures : semaine et mois, avec heures sup, journée en plus et retard", () => {

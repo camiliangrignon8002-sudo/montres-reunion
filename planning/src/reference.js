@@ -130,9 +130,15 @@
       eric: { daysOff: [5, 6], sameWeekends: true, note: "Toujours les mêmes horaires et les mêmes week-ends." },
     },
     calendars: { fleur: "bts-mco1", camilian: "bts-mco1", lucas: "bts-mco1" },
+  }, {
+    id: "regles-2026-10-22b",
+    rules: {
+      eric: { fixedHours: { s: "07:00", e: "14:30" }, daysOff: [5, 6], sameWeekends: true, note: "Toujours 07:00–14:30, repos samedi et dimanche." },
+      nathalie: { fixedHours: { s: "06:00", e: "13:30" }, daysOff: [5, 6], sameWeekends: true, note: "De l'ouverture de la zone réservée (06:00) à 13:30, repos samedi et dimanche." },
+    },
   }];
 
-  for (const [id, r] of Object.entries(ruleUpdates[0].rules)) { const e = employees.find((x) => x.id === id); e.rules = { ...r }; e.rulesApplied = [ruleUpdates[0].id]; }
+  for (const u of ruleUpdates) for (const [id, r] of Object.entries(u.rules)) { const e = employees.find((x) => x.id === id); e.rules = { ...(e.rules || {}), ...r }; e.rulesApplied = [...(e.rulesApplied || []), u.id]; }
 
   root.PlanningReference = {
     extraWeeks, ruleUpdates,
@@ -153,8 +159,6 @@
     }],
     totalsOnPaper: { camilian: 35, charlotte: 35, eric: 35, fleur: 35, lydia: 14, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35, amandine: 0, sonia: 0, sophie: 0, sylvie: 0 },
     questions: [
-      "Eric « toujours les mêmes horaires » : 07:00–14:30 (semaine du 19/10) ou 05:30–13:00 (lundi, jeudi, vendredi de la semaine du 26/10) ?",
-      "Nathalie « toujours les mêmes week-ends » : quels jours de repos ? (samedi-dimanche la semaine du 19/10, jeudi-vendredi la semaine du 26/10)",
       "Les fins de service surlignées vert + orange (Charlotte mar./mer., Eric jeu., Sebastien mar./mer./sam.) sont-elles en zone réservée ?",
       "Le planning indique « Page 1/2 » : la page 2 contient-elle une semaine 2 (rotation) ou d'autres employés ?",
       "Amandine, Sonia, Sophie et Sylvie n'ont aucun horaire : sont-elles encore dans l'équipe, et dans quelle zone ?",
