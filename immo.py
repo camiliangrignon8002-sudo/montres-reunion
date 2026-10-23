@@ -28,8 +28,10 @@ ROOT = Path(__file__).parent
 JSON_FILE = ROOT / "docs" / "immo" / "biens.json"
 REUNION = timezone(timedelta(hours=4))
 PRIX_MAX = int(os.environ.get("PRIX_MAX", "600000"))
-SELECTION = 30     # biens mis en avant dans « La sélection du mois »
-GARDER = 300       # biens gardés au total (filtrables dans l'appli)
+SELECTION = 30     # maisons et appartements mis en avant dans « La sélection du mois »
+GARDER = 300       # maisons et appartements gardés au total (filtrables dans l'appli)
+SELECTION_TERRAINS = 20
+GARDER_TERRAINS = 200
 # Les 24 communes : leurs zones Bien'ici sont cherchées à chaque passage (suggest.json).
 # Si la recherche ne donne rien, on se rabat sur les communes du nord, dont les zones sont connues.
 COMMUNES = ["Saint-Denis", "Sainte-Marie", "Sainte-Suzanne", "Saint-André", "Bras-Panon", "Saint-Benoît",
@@ -37,7 +39,7 @@ COMMUNES = ["Saint-Denis", "Sainte-Marie", "Sainte-Suzanne", "Saint-André", "Br
             "Le Tampon", "Entre-Deux", "Saint-Louis", "Cilaos", "L'Étang-Salé", "Les Avirons", "Saint-Leu",
             "Les Trois-Bassins", "Saint-Paul", "Le Port", "La Possession", "Salazie"]
 ZONES_NORD = ["-192468", "-280212", "-280102", "-278304", "-278311"]
-TYPES = {"house": "Maison", "flat": "Appartement", "land": "Terrain"}
+TYPES = {"house": "Maison", "flat": "Appartement", "terrain": "Terrain"}
 
 
 def norm(s):
@@ -140,7 +142,7 @@ def classer(biens):
     """Ajoute le prix au m² et l'écart avec la moyenne de la commune, du moins cher au plus cher."""
     par_commune = {}
     for b in biens:
-        if b["prix"] and b["surface"] and b["type"] != "Terrain":
+        if b["prix"] and b["surface"]:
             b["m2"] = round(b["prix"] / b["surface"])
             par_commune.setdefault((b["commune"], b["type"]), []).append(b["m2"])
     for b in biens:
@@ -174,12 +176,14 @@ def main():
     if not biens:
         print("Aucun bien lu : on garde la liste du mois précédent.", file=sys.stderr)
         return
-    bons, autres = classer(biens)
     maintenant = datetime.now(REUNION)
-    selection = bons[:SELECTION]
-    for b in selection:
-        b["selection"] = True
-    garde = (bons + autres)[:GARDER]
+    garde = []
+    for genre, nb_sel, nb_garde in ((None, SELECTION, GARDER), ("Terrain", SELECTION_TERRAINS, GARDER_TERRAINS)):
+        bons, autres = classer([b for b in biens if (b["type"] == "Terrain") == (genre == "Terrain")])
+        for b in bons[:nb_sel]:
+            b["selection"] = True
+        garde += (bons + autres)[:nb_garde]
+    print(f"{sum(b['type'] == 'Terrain' for b in garde)} terrains gardés", file=sys.stderr)
     JSON_FILE.parent.mkdir(parents=True, exist_ok=True)
     JSON_FILE.write_text(json.dumps({
         "mois": maintenant.strftime("%Y-%m"),
@@ -187,7 +191,7 @@ def main():
         "total_lus": len(biens),
         "biens": garde,
     }, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(f"{len(selection)} biens dans la sélection, {len(garde)} gardés", file=sys.stderr)
+    print(f"{sum(1 for b in garde if b.get('selection'))} biens dans la sélection, {len(garde)} gardés", file=sys.stderr)
 
 
 if __name__ == "__main__":

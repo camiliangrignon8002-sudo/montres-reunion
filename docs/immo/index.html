@@ -230,6 +230,26 @@ tr.cliquable:hover td { background: var(--surface-2); }
 @media (min-width: 960px) { .flottant { display: none; } }
 .toast { position: fixed; z-index: 60; left: 50%; transform: translateX(-50%); bottom: calc(84px + env(safe-area-inset-bottom, 0px));
   background: var(--fg); color: var(--bg); padding: 10px 18px; border-radius: 99px; font-weight: 700; max-width: calc(100vw - 32px); text-align: center; }
+/* ---- assistant ---- */
+.chat { display: flex; flex-direction: column; gap: 12px; }
+.bulle { scroll-margin-bottom: 110px; max-width: min(680px, 92%); padding: 12px 14px; border-radius: 16px; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.5; }
+.bulle.moi { align-self: flex-end; background: var(--accent); color: var(--accent-fg); border-bottom-right-radius: 6px; }
+.bulle.ia { align-self: flex-start; background: var(--surface); border: 1px solid var(--line); border-bottom-left-radius: 6px; }
+.bulle.ia.attente { color: var(--fg-2); font-style: italic; }
+.bulle .action { display: block; margin-top: 8px; font-size: .85rem; color: var(--ok); font-weight: 700; font-style: normal; }
+.saisie { position: sticky; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); display: flex; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 8px; box-shadow: var(--shadow); }
+.saisie textarea { flex: 1; min-width: 0; border: 0; background: none; resize: none; min-height: 46px; max-height: 160px; padding: 10px; }
+.saisie textarea:focus-visible { outline: none; }
+.saisie:focus-within { border-color: var(--accent); }
+.puces { display: flex; flex-wrap: wrap; gap: 8px; }
+.puces button { border: 1px solid var(--line); background: var(--surface); border-radius: 99px; padding: 8px 14px; cursor: pointer; min-height: 42px; text-align: left; }
+.puces button:hover { border-color: var(--accent); color: var(--accent); }
+.aide { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+.aide details { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 4px 16px; }
+.aide summary { cursor: pointer; font-weight: 700; min-height: 48px; display: flex; align-items: center; list-style-position: inside; }
+.aide details[open] summary { color: var(--accent); }
+.aide details p, .aide details ol { margin: 0 0 14px; color: var(--fg); }
+.aide details ol { padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
 @media (prefers-reduced-motion: reduce) { .side { transition: none; } }
 </style>
 
@@ -247,10 +267,14 @@ tr.cliquable:hover td { background: var(--surface-2); }
   <button class="lien" data-vue="tous">Tous les dossiers<span class="compte" id="c-tous">0</span></button>
   <div class="groupe">Biens</div>
   <button class="lien" data-vue="achetables">Biens achetables<span class="compte" id="c-achetables">–</span></button>
+  <button class="lien" data-vue="terrains">Terrains à acheter<span class="compte" id="c-terrains">–</span></button>
   <button class="lien" data-vue="argent">Mes biens et mon argent</button>
   <div class="groupe">Appli</div>
   <button class="lien" data-vue="auto">Relances automatiques<span class="compte" id="c-auto">Non</span></button>
   <button class="lien" data-vue="reglages">Réglages et sauvegarde</button>
+  <div class="groupe">Aide</div>
+  <button class="lien" data-vue="assistant">Assistant IA</button>
+  <button class="lien" data-vue="aide">Aide : comment faire</button>
   <div style="flex:1"></div>
   <button class="btn plein" id="nouveau-menu" style="margin:10px 4px 0">+ Nouveau dossier</button>
 </nav>
@@ -417,7 +441,7 @@ const ICONES = {
 
 // ---------------------------------------------------------------- navigation
 const TITRES = { accueil: "Accueil", traiter: "Dossiers à traiter", encours: "Dossiers en cours", finis: "Dossiers finis", tous: "Tous les dossiers",
-  achetables: "Biens achetables", argent: "Mes biens et mon argent", auto: "Relances automatiques", reglages: "Réglages et sauvegarde" };
+  achetables: "Biens achetables", argent: "Mes biens et mon argent", auto: "Relances automatiques", reglages: "Réglages et sauvegarde", terrains: "Terrains à acheter", assistant: "Assistant IA", aide: "Aide" };
 let vue = "accueil", dossierOuvert = null;
 function aller(v, id) {
   vue = v; dossierOuvert = id || null;
@@ -431,10 +455,11 @@ function rendre() {
   const d = dossierOuvert && D.dossiers.find(x => x.id === dossierOuvert);
   if (dossierOuvert && !d) { dossierOuvert = null; vue = "accueil"; }
   $("#titre").textContent = d ? nomClient(d) : TITRES[vue];
+  $("#nouveau-flottant").hidden = vue === "assistant" && !d;
   const m = $("#vue");
   if (d) return vueDossier(m, d);
   ({ accueil: vueAccueil, traiter: m => vueListe(m, "traiter"), encours: m => vueListe(m, "encours"), finis: m => vueListe(m, "fini"),
-     tous: m => vueListe(m, null), achetables: vueAchetables, argent: vueArgent, auto: vueAuto, reglages: vueReglages }[vue] || vueAccueil)(m);
+     tous: m => vueListe(m, null), achetables: m => vueAchetables(m, false), terrains: m => vueAchetables(m, true), argent: vueArgent, auto: vueAuto, reglages: vueReglages, assistant: vueAssistant, aide: vueAide }[vue] || vueAccueil)(m);
 }
 function compter() {
   const n = { traiter: 0, encours: 0, fini: 0 };
@@ -744,36 +769,39 @@ async function chargerBiens() {
   if (BIENS) return BIENS;
   try { const r = await fetch("biens.json", { cache: "no-store" }); BIENS = r.ok ? await r.json() : { biens: [] }; }
   catch (e) { BIENS = { biens: [] }; }
-  const sel = (BIENS.biens || []).filter(b => b.selection).length;
-  $("#c-achetables").textContent = sel || (BIENS.biens || []).length || "–";
+  const l = BIENS.biens || [], terr = l.filter(b => b.type === "Terrain"), maisons = l.filter(b => b.type !== "Terrain");
+  $("#c-achetables").textContent = maisons.filter(b => b.selection).length || maisons.length || "–";
+  $("#c-terrains").textContent = terr.filter(b => b.selection).length || terr.length || "–";
   return BIENS;
 }
-async function vueAchetables(m) {
+async function vueAchetables(m, terrains) {
   m.innerHTML = `<p class="muted">Chargement de la liste du mois…</p>`;
   const data = await chargerBiens();
-  if (vue !== "achetables" || dossierOuvert) return;
-  const tous = data.biens || [];
+  if (vue !== (terrains ? "terrains" : "achetables") || dossierOuvert) return;
+  const tous = (data.biens || []).filter(b => (b.type === "Terrain") === terrains);
   const moisTxt = data.mois ? new Date(data.mois + "-01T12:00:00").toLocaleDateString("fr-FR", { month: "long", year: "numeric" }) : "";
   if (!tous.length) {
-    m.innerHTML = `<section class="bloc vide"><h2>La liste du mois arrive bientôt</h2>
+    m.innerHTML = terrains ? `<section class="bloc vide"><h2>Les terrains arrivent avec la prochaine recherche</h2>
+      <p>Le 1er de chaque mois, l'appli cherche les terrains à vendre partout à La Réunion et met en tête les moins chers au m²
+      par rapport à leur commune.</p></section>` : `<section class="bloc vide"><h2>La liste du mois arrive bientôt</h2>
       <p>Le 1er de chaque mois, l'appli cherche les maisons, appartements et terrains à vendre partout à La Réunion,
       et met en tête ceux qui sont les moins chers au m² par rapport à leur commune.</p>
       <p class="small">La première liste apparaîtra ici après la prochaine recherche.</p></section>`;
     return;
   }
   const communes = [...new Set(tous.map(b => b.commune).filter(Boolean))].sort((a, b) => a.localeCompare(b, "fr"));
-  m.innerHTML = `<div class="tete"><div><h2>Biens à vendre à La Réunion</h2><p class="muted small">Liste de ${esc(moisTxt)} · ${tous.length} biens · mise à jour le ${dateFr(data.maj)}</p></div>
+  m.innerHTML = `<div class="tete"><div><h2>${terrains ? "Terrains à vendre à La Réunion" : "Maisons et appartements à vendre"}</h2><p class="muted small">Liste de ${esc(moisTxt)} · ${tous.length} ${terrains ? "terrains" : "biens"} · mise à jour le ${dateFr(data.maj)}</p></div>
       <div class="onglets" role="tablist"><button data-onglet="selection">Sélection du mois</button><button data-onglet="tout">Tous les biens</button></div></div>
     <div class="filtres">
-      <div class="champ"><label for="f-budget">Budget maximum</label><select id="f-budget"><option value="">Tous les prix</option>${[100000, 150000, 200000, 250000, 300000, 400000, 500000].map(v => `<option value="${v}"${+fBudget === v ? " selected" : ""}>${euros(v)}</option>`).join("")}</select></div>
-      <div class="champ"><label for="f-type">Type</label><select id="f-type"><option value="">Tous</option>${["Maison", "Appartement", "Terrain"].map(t => `<option${fType === t ? " selected" : ""}>${t}</option>`).join("")}</select></div>
+      <div class="champ"><label for="f-budget">Budget maximum</label><select id="f-budget"><option value="">Tous les prix</option>${(terrains ? [50000, 80000, 100000, 150000, 200000, 300000] : [100000, 150000, 200000, 250000, 300000, 400000, 500000]).map(v => `<option value="${v}"${+fBudget === v ? " selected" : ""}>${euros(v)}</option>`).join("")}</select></div>
+      <div class="champ"${terrains ? " hidden" : ""}><label for="f-type">Type</label><select id="f-type"><option value="">Tous</option>${["Maison", "Appartement"].map(t => `<option${fType === t ? " selected" : ""}>${t}</option>`).join("")}</select></div>
       <div class="champ"><label for="f-commune">Commune</label><select id="f-commune"><option value="">Toute l'île</option>${communes.map(c => `<option${fCommune === c ? " selected" : ""}>${esc(c)}</option>`).join("")}</select></div>
     </div>
     <div id="annonces"></div>
     <p class="muted small">Prix et disponibilité à vérifier sur l'annonce d'origine : un bien a pu être vendu depuis la recherche.</p>`;
   const remplir = () => {
     m.querySelectorAll("[data-onglet]").forEach(b => b.classList.toggle("actif", b.dataset.onglet === ongletBiens));
-    const l = tous.filter(b => (ongletBiens === "tout" || b.selection) && (!fBudget || (b.prix || 0) <= +fBudget) && (!fType || b.type === fType) && (!fCommune || b.commune === fCommune));
+    const l = tous.filter(b => (ongletBiens === "tout" || b.selection) && (!fBudget || (b.prix || 0) <= +fBudget) && (terrains || !fType || b.type === fType) && (!fCommune || b.commune === fCommune));
     const z = m.querySelector("#annonces");
     z.innerHTML = l.length ? `<div class="annonces">${l.map((b, i) => `<article class="annonce">
         <div class="photo">${b.photo ? `<img src="${esc(b.photo)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : esc(b.type)}</div>
@@ -1011,6 +1039,168 @@ function vueAuto(m) {
     const a2 = Object.assign({}, a); a.de = 0; a.a = 24; a.dimanche = true;
     try { await relancesAuto(); } finally { Object.assign(a, { de: a2.de, a: a2.a, dimanche: a2.dimanche }); sauver(); rendre(); }
   };
+}
+
+// ---------------------------------------------------------------- assistant IA (version Claude)
+const LIEN_CLAUDE = "https://claude.ai/artifact/2Bg3yFCpd15pLLDdHewmzm";
+const GUIDE = `Seb Immo est une appli simple pour gérer des dossiers immobiliers à La Réunion.
+- Menu ☰ (en haut à gauche sur téléphone, toujours visible à gauche sur PC) : Accueil, Dossiers à traiter / en cours / finis, Tous les dossiers, Biens achetables, Terrains à acheter, Mes biens et mon argent, Relances automatiques, Réglages et sauvegarde, Assistant IA, Aide.
+- Créer un dossier : bouton « + Nouveau dossier » (en bas à droite sur téléphone, en bas du menu sur PC). Choisir Achat, Vente ou Location : la liste des papiers se crée toute seule.
+- Dans un dossier : toucher le carré d'un papier quand il est reçu ; le trombone range une photo ou un PDF (le papier se coche tout seul) ; la poubelle retire un papier ; « Ajouter un papier » en bas de la liste.
+- Statut : à traiter = rien reçu ; en cours = une partie reçue ; fini = tout reçu ou dossier clôturé (bouton « Clôturer le dossier »).
+- Relancer : dans le dossier, boutons SMS, WhatsApp, Email qui ouvrent un message prêt avec les papiers manquants. L'accueil liste les clients sans nouvelles depuis le délai choisi (7 jours par défaut, dans Réglages).
+- Relances automatiques : menu ☰ → Relances automatiques. Avec un compte Brevo (clé API collée dans l'appli), les SMS partent tout seuls quand l'appli est ouverte sur l'adresse github.io. Les mails partiront quand une adresse d'envoi sera remplie. 3 relances au plus par client, de 8h à 19h, pas le dimanche.
+- Mes biens et mon argent : prix affiché, prix d'achat, frais, prix de vente, commission ; ce que chaque vente rapporte = commission, sinon vente − achat − frais.
+- Biens achetables / Terrains à acheter : liste refaite le 1er de chaque mois depuis Bien'ici, les moins chers au m² par rapport à leur commune en tête. Bouton « Créer un dossier » sur chaque annonce.
+- Sauvegarde : Réglages → Copier / Télécharger la sauvegarde, puis Restaurer sur l'autre appareil (téléphone ↔ PC). Les photos et PDF ne sont pas dans la sauvegarde. Les dossiers restent sur l'appareil où on les crée.
+- Installer : iPhone → Safari, Partager, Sur l'écran d'accueil. Android → Chrome, ⋮, Ajouter à l'écran d'accueil.`;
+let chat = [], chatCtl = null, sampleFn;
+function resumeDossiers() {
+  return D.dossiers.map(d => ({ id: d.id, client: nomClient(d), exemple: !!d.exemple, type: TYPES[d.type], statut: STATUTS[statut(d)],
+    bien: [d.bien.adresse, d.bien.commune].filter(Boolean).join(", "), prix: d.bien.prixAffiche, vendu: !!d.bien.vendu, gain: gain(d),
+    tel: d.client.tel ? "oui" : "non", email: d.client.email ? "oui" : "non",
+    manquants: manquantes(d).map(p => p.nom), recus: d.pieces.filter(p => p.recu).map(p => p.nom),
+    derniere_relance: derniereRelance(d) ? derniereRelance(d).slice(0, 10) : null, a_relancer: aRelancer(d), notes: (d.notes || "").slice(0, 200) }));
+}
+function regles() {
+  return `Tu es l'assistant de l'appli Seb Immo. Tu aides Seb, agent immobilier à La Réunion, qui n'est pas à l'aise avec l'informatique.
+Réponds en français, en vouvoyant, avec des phrases courtes et simples, sans jargon. Pas de Markdown (ni astérisques ni dièses) : texte simple, listes avec des tirets.
+Quand il demande comment faire quelque chose, explique les étapes une par une avec les noms exacts des boutons du guide.
+Tu peux agir dans l'appli avec les outils : cocher un papier reçu, ajouter un papier, noter quelque chose, créer un dossier, ouvrir un dossier, chercher des biens ou des terrains à vendre, écrire un message de relance. Avant de créer un dossier, il te faut au moins le prénom ou le nom du client. Dis toujours ce que tu as fait.
+Tu ne peux pas envoyer de SMS ni de mail toi-même, ni supprimer quoi que ce soit : explique comment le faire.
+Les dossiers marqués exemple ne sont pas de vrais clients.
+Aujourd'hui : ${new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}.
+
+GUIDE DE L'APPLI
+${GUIDE}
+
+SES DOSSIERS (JSON)
+${JSON.stringify(resumeDossiers()).slice(0, 60000)}`;
+}
+const trouver = id => { const d = D.dossiers.find(x => x.id === String(id)); if (!d) throw new Error("Dossier introuvable : " + id); return d; };
+const trouverPiece = (d, nom) => {
+  const n = String(nom || "").toLowerCase();
+  const p = d.pieces.find(x => x.nom.toLowerCase() === n) || d.pieces.find(x => x.nom.toLowerCase().includes(n) || n.includes(x.nom.toLowerCase()));
+  if (!p) throw new Error("Papier introuvable. Papiers du dossier : " + d.pieces.map(x => x.nom).join(", "));
+  return p;
+};
+let actionsFaites = [];
+const OUTILS = [
+  { name: "cocher_piece", description: "Marque un papier d'un dossier comme reçu (recu=true) ou pas encore reçu (recu=false). Renvoie le nouvel état du dossier.",
+    inputSchema: { type: "object", properties: { dossier_id: { type: "string" }, piece: { type: "string", description: "nom du papier" }, recu: { type: "boolean" } }, required: ["dossier_id", "piece"] },
+    execute(i) { const d = trouver(i.dossier_id), p = trouverPiece(d, i.piece); p.recu = i.recu !== false; p.date = p.recu ? new Date().toISOString() : null; sauver();
+      actionsFaites.push(`${p.nom} ${p.recu ? "coché" : "décoché"} pour ${nomClient(d)}`); return { statut: STATUTS[statut(d)], manquants: manquantes(d).map(x => x.nom) }; } },
+  { name: "ajouter_piece", description: "Ajoute un papier à réunir dans un dossier.",
+    inputSchema: { type: "object", properties: { dossier_id: { type: "string" }, nom: { type: "string" } }, required: ["dossier_id", "nom"] },
+    execute(i) { const d = trouver(i.dossier_id), nom = String(i.nom).trim(); if (!nom) throw new Error("Nom vide"); d.pieces.push({ id: uid(), nom, recu: false, date: null, fichiers: [] }); sauver();
+      actionsFaites.push(`« ${nom} » ajouté au dossier de ${nomClient(d)}`); return "ajouté"; } },
+  { name: "noter", description: "Ajoute une ligne datée dans les notes d'un dossier (rendez-vous, banque, notaire…).",
+    inputSchema: { type: "object", properties: { dossier_id: { type: "string" }, texte: { type: "string" } }, required: ["dossier_id", "texte"] },
+    execute(i) { const d = trouver(i.dossier_id); d.notes = ((d.notes ? d.notes + "\n" : "") + new Date().toLocaleDateString("fr-FR") + " : " + String(i.texte).trim()).slice(0, 5000); sauver();
+      actionsFaites.push(`Note ajoutée au dossier de ${nomClient(d)}`); return "noté"; } },
+  { name: "creer_dossier", description: "Crée un nouveau dossier client. type = achat, vente ou location. La liste des papiers se crée toute seule. Renvoie l'id.",
+    inputSchema: { type: "object", properties: { prenom: { type: "string" }, nom: { type: "string" }, tel: { type: "string" }, email: { type: "string" },
+      type: { type: "string", enum: ["achat", "vente", "location"] }, bien: { type: "string" }, commune: { type: "string" }, prix: { type: "number" } }, required: ["type"] },
+    execute(i) { const type = PIECES[i.type] ? i.type : "achat", s = v => String(v ?? "").trim();
+      if (!s(i.prenom) && !s(i.nom)) throw new Error("Il faut le prénom ou le nom du client");
+      const d = { id: uid(), type, client: { prenom: s(i.prenom), nom: s(i.nom), tel: s(i.tel), email: s(i.email) },
+        bien: { adresse: s(i.bien), commune: s(i.commune), prixAffiche: nombre(i.prix), prixAchat: null, frais: null, prixVente: null, commission: null, vendu: false, dateVente: "" },
+        pieces: PIECES[type].map(n => ({ id: uid(), nom: n, recu: false, date: null, fichiers: [] })), relances: [], relanceAuto: true, cloture: false, notes: "", cree: new Date().toISOString() };
+      D.dossiers.push(d); sauver(); actionsFaites.push(`Dossier créé pour ${nomClient(d)}`); return { id: d.id, papiers: d.pieces.map(p => p.nom) }; } },
+  { name: "ouvrir_dossier", description: "Ouvre la fiche d'un dossier à l'écran, une fois la réponse finie.",
+    inputSchema: { type: "object", properties: { dossier_id: { type: "string" } }, required: ["dossier_id"] },
+    execute(i) { const d = trouver(i.dossier_id); actionsFaites.push({ ouvrir: d.id, txt: `Ouvrir le dossier de ${nomClient(d)}` }); return "s'ouvrira après la réponse"; } },
+  { name: "message_relance", description: "Renvoie le message de relance prêt à envoyer (mail et SMS) pour un dossier, avec les papiers manquants.",
+    inputSchema: { type: "object", properties: { dossier_id: { type: "string" } }, required: ["dossier_id"] },
+    execute(i) { const d = trouver(i.dossier_id); return { mail: message(d), sms: messageSms(d) }; } },
+  { name: "chercher_biens", description: "Cherche dans la liste du mois des biens à vendre à La Réunion. type = Maison, Appartement ou Terrain. Renvoie au plus 8 annonces (prix, surface, commune, prix au m², écart avec la moyenne, lien).",
+    inputSchema: { type: "object", properties: { type: { type: "string", enum: ["Maison", "Appartement", "Terrain"] }, commune: { type: "string" }, budget_max: { type: "number" }, surface_min: { type: "number" } } },
+    async execute(i) { const data = await chargerBiens(), c = String(i.commune || "").toLowerCase();
+      const l = (data.biens || []).filter(b => (!i.type || b.type === i.type) && (!c || (b.commune || "").toLowerCase().includes(c)) && (!i.budget_max || (b.prix || 0) <= +i.budget_max) && (!i.surface_min || (b.surface || 0) >= +i.surface_min));
+      if (!l.length) return "Aucun bien ne correspond dans la liste du mois (" + (data.biens || []).length + " biens au total).";
+      return l.slice(0, 8).map(b => ({ type: b.type, prix: b.prix, surface: b.surface, pieces: b.pieces, commune: b.commune, prix_m2: b.m2, ecart_pourcent: b.ecart, lien: b.url })); } }
+];
+async function vueAssistant(m) {
+  m.innerHTML = `<p class="muted">Chargement de l'assistant…</p>`;
+  if (sampleFn === undefined) sampleFn = window.claude && typeof window.claude.use === "function" ? await window.claude.use("sample").catch(() => null) : null;
+  if (vue !== "assistant" || dossierOuvert) return;
+  if (!sampleFn) {
+    m.innerHTML = `<section class="bloc"><h2>L'assistant est dans la version Claude</h2>
+      <p>Ici, l'assistant ne peut pas répondre. Ouvrez la version Claude de l'appli pour lui parler :</p>
+      <p><a class="btn plein" href="${LIEN_CLAUDE}" target="_blank" rel="noopener">Ouvrir Seb Immo dans Claude</a></p>
+      <p class="muted small">Les dossiers ne passent pas tout seuls d'une version à l'autre : utilisez la sauvegarde (Réglages) pour les copier.
+      En attendant, la page « Aide : comment faire » répond aux questions les plus courantes.</p>
+      <button class="btn" data-aller="aide">Voir l'aide</button></section>`;
+    m.querySelector("[data-aller]").onclick = () => aller("aide");
+    return;
+  }
+  const PROPOS = ["Qui dois-je relancer aujourd'hui ?", "Comment je crée un dossier ?", "Résume mes dossiers en cours",
+    "Trouve-moi un terrain à moins de 150 000 € à Saint-Paul", "Comment mettre l'appli sur mon téléphone ?", "Combien j'ai gagné cette année ?"];
+  m.innerHTML = `<section class="bloc"><h2>Posez votre question</h2>
+      <p class="muted small">L'assistant connaît l'appli et vos dossiers. Il peut cocher un papier, ajouter un papier, créer un dossier, noter un rendez-vous ou chercher un bien. Il ne supprime rien et n'envoie aucun message.</p>
+      <div class="puces">${PROPOS.map(t => `<button data-propos>${esc(t)}</button>`).join("")}</div></section>
+    <div class="chat" id="chat"></div>
+    <div class="saisie"><textarea id="question" rows="1" placeholder="Écrivez ici, par ex. « Sandrine a envoyé son RIB »"></textarea>
+      <button class="btn plein" id="envoyer">Envoyer</button><button class="btn" id="stop" hidden>Stop</button></div>
+    ${chat.length ? `<button class="btn petit" id="effacer" style="align-self:flex-start">Nouvelle conversation</button>` : ""}`;
+  const zone = m.querySelector("#chat"), q = m.querySelector("#question"), env = m.querySelector("#envoyer"), stop = m.querySelector("#stop");
+  const bulle = (role, txt, cls) => { const b = document.createElement("div"); b.className = "bulle " + role + (cls ? " " + cls : ""); b.textContent = txt; zone.appendChild(b); return b; };
+  chat.forEach(t => bulle(t.role === "user" ? "moi" : "ia", t.content));
+  const eff = m.querySelector("#effacer"); if (eff) eff.onclick = () => { chat = []; rendre(); };
+  q.oninput = () => { q.style.height = "auto"; q.style.height = Math.min(160, q.scrollHeight) + "px"; };
+  q.onkeydown = e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); env.click(); } };
+  m.querySelectorAll("[data-propos]").forEach(b => b.onclick = () => { q.value = b.textContent; env.click(); });
+  stop.onclick = () => chatCtl && chatCtl.abort();
+  env.onclick = async () => {
+    const texte = q.value.trim(); if (!texte || chatCtl) return;
+    q.value = ""; q.oninput();
+    chat.push({ role: "user", content: texte }); bulle("moi", texte);
+    const rep = bulle("ia", "Je réfléchis…", "attente");
+    rep.scrollIntoView({ block: "end", behavior: "smooth" });
+    chatCtl = new AbortController(); env.disabled = true; stop.hidden = false; actionsFaites = [];
+    try {
+      const { text } = await sampleFn([{ role: "user", content: regles() }, ...chat.slice(-12)], {
+        cache: false, signal: chatCtl.signal, tools: OUTILS,
+        onText: ({ text }) => { rep.classList.remove("attente"); rep.textContent = text; } });
+      rep.classList.remove("attente"); rep.textContent = text;
+      chat.push({ role: "assistant", content: text });
+    } catch (e) {
+      rep.classList.remove("attente");
+      const msg = { not_granted: "Vous n'avez pas autorisé l'assistant. Rechargez la page et acceptez pour l'utiliser.",
+        rate_limited: "Trop de questions d'un coup : réessayez dans un moment.", cancelled: "Arrêté.",
+        sampling_disabled: "L'assistant n'est pas disponible sur ce compte.", tools_unavailable: "L'assistant ne peut pas agir dans l'appli ici : posez seulement des questions." }[e && e.code] || "L'assistant n'a pas pu répondre. Réessayez.";
+      rep.textContent = (e && e.text ? e.text + "\n\n" : "") + msg;
+      chat.pop();
+    } finally {
+      chatCtl = null; env.disabled = false; stop.hidden = true;
+      const ouvrir = actionsFaites.find(a => a.ouvrir);
+      const faits = actionsFaites.filter(a => typeof a === "string");
+      if (faits.length) { const s = document.createElement("span"); s.className = "action"; s.textContent = "✓ " + faits.join(" · "); rep.appendChild(s); compter(); }
+      if (ouvrir) { const b = document.createElement("button"); b.className = "btn petit"; b.style.marginTop = "8px"; b.textContent = ouvrir.txt; b.onclick = () => aller("tous", ouvrir.ouvrir); rep.appendChild(b); }
+      rep.scrollIntoView({ block: "end", behavior: "smooth" }); q.focus();
+    }
+  };
+}
+
+function vueAide(m) {
+  const Q = [
+    ["Créer un dossier", `<ol><li>Touchez <b>+ Nouveau dossier</b> (en bas à droite sur téléphone, en bas du menu sur PC).</li><li>Choisissez <b>Achat</b>, <b>Vente</b> ou <b>Location</b>.</li><li>Remplissez le nom, le téléphone, l'email et le bien, puis <b>Créer le dossier</b>.</li></ol><p>La liste des papiers à réunir se crée toute seule.</p>`],
+    ["Cocher un papier reçu", `<ol><li>Ouvrez le dossier.</li><li>Touchez le <b>carré</b> à gauche du papier : il devient vert.</li></ol><p>Le dossier passe tout seul de « À traiter » à « En cours », puis à « Fini » quand tout est reçu.</p>`],
+    ["Ranger une photo ou un PDF", `<ol><li>Dans le dossier, touchez le <b>trombone</b> à droite du papier.</li><li>Choisissez la photo ou le PDF.</li></ol><p>Le papier se coche tout seul. Touchez le nom du fichier pour le revoir.</p>`],
+    ["Ajouter ou retirer un papier", `<p>En bas de la liste des papiers : écrivez le nom puis <b>Ajouter</b>. La <b>poubelle</b> à droite d'un papier le retire de la liste.</p>`],
+    ["Relancer un client", `<ol><li>Ouvrez le dossier.</li><li>Dans « Relancer », touchez <b>SMS</b>, <b>WhatsApp</b> ou <b>Email</b>.</li><li>Le message est déjà écrit avec les papiers qui manquent : il reste à appuyer sur Envoyer.</li></ol><p>L'accueil montre les clients sans nouvelles depuis 7 jours.</p>`],
+    ["Relances automatiques", `<p>Menu ☰ → <b>Relances automatiques</b>. Collez la clé Brevo, cochez <b>Activer</b>, puis faites un <b>SMS d'essai</b>. Les SMS partent tout seuls quand l'appli est ouverte sur l'adresse github.io (pas dans Claude).</p>`],
+    ["Noter un prix ou une vente", `<p>Dans le dossier, partie <b>Le bien</b> : prix affiché, prix d'achat, frais, commission. Mettez <b>Vendu ? → Oui</b> et le prix de vente. Le total apparaît dans <b>Mes biens et mon argent</b>.</p>`],
+    ["Trouver un bien ou un terrain", `<p>Menu ☰ → <b>Biens achetables</b> ou <b>Terrains à acheter</b>. La liste est refaite le 1er de chaque mois. Les moins chers au m² sont en tête. Filtrez par budget et par commune, puis <b>Créer un dossier</b> si un bien vous intéresse.</p>`],
+    ["Passer du téléphone au PC", `<ol><li>Sur le téléphone : Réglages → <b>Copier la sauvegarde</b> (ou Télécharger).</li><li>Envoyez-vous le texte (mail, WhatsApp).</li><li>Sur le PC : Réglages → collez le texte → <b>Restaurer</b>.</li></ol><p>Les photos et PDF ne passent pas : rangez-les sur l'appareil principal.</p>`],
+    ["Mettre l'appli sur l'écran d'accueil", `<p>iPhone : ouvrez l'adresse dans <b>Safari</b>, <b>Partager</b>, <b>Sur l'écran d'accueil</b>. Android : <b>Chrome</b>, menu <b>⋮</b>, <b>Ajouter à l'écran d'accueil</b>. PC : icône d'installation à droite de la barre d'adresse.</p>`],
+    ["Supprimer les exemples", `<p>À l'accueil, touchez <b>Supprimer les exemples</b> dans le bandeau jaune.</p>`],
+    ["Supprimer un dossier", `<p>En bas du dossier, <b>Supprimer le dossier</b>, puis touchez une deuxième fois pour confirmer. Ça ne s'annule pas.</p>`]
+  ];
+  m.innerHTML = `<section class="bloc"><div class="tete"><h2>Comment faire ?</h2><button class="btn plein petit" data-aller="assistant">Poser une question à l'assistant</button></div>
+      <p class="muted small">Touchez une question pour voir la réponse.</p></section>
+    <div class="aide">${Q.map(([t, r]) => `<details><summary>${t}</summary>${r}</details>`).join("")}</div>`;
+  m.querySelector("[data-aller]").onclick = () => aller("assistant");
 }
 
 // ---------------------------------------------------------------- démarrage
