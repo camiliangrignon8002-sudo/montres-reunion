@@ -23,6 +23,8 @@
   --cours-soft: #fbf1d2;
   --ok: #1c7240;
   --ok-soft: #e0f3e7;
+  --attente: #4b5b8c;
+  --attente-soft: #e6e9f5;
   --shadow: 0 1px 2px rgba(10,40,44,.06), 0 6px 20px rgba(10,40,44,.07);
   --font: "Atkinson Hyperlegible", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-display: "Bricolage Grotesque", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -33,14 +35,14 @@
   :root:not([data-theme="light"]) {
     --bg: #0c1617; --surface: #142224; --surface-2: #1b2d30; --line: #284044; --fg: #e8f1f1; --fg-2: #9fb5b8;
     --accent: #4cc3cc; --accent-fg: #062326; --accent-soft: #143a3e; --todo: #ff9b66; --todo-soft: #3a2014;
-    --cours: #f0c64a; --cours-soft: #352a0c; --ok: #5fd58e; --ok-soft: #12321f; --shadow: 0 1px 2px rgba(0,0,0,.5);
+    --cours: #f0c64a; --cours-soft: #352a0c; --ok: #5fd58e; --ok-soft: #12321f; --attente: #a9b6e8; --attente-soft: #1f2640; --shadow: 0 1px 2px rgba(0,0,0,.5);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #0c1617; --surface: #142224; --surface-2: #1b2d30; --line: #284044; --fg: #e8f1f1; --fg-2: #9fb5b8;
   --accent: #4cc3cc; --accent-fg: #062326; --accent-soft: #143a3e; --todo: #ff9b66; --todo-soft: #3a2014;
-  --cours: #f0c64a; --cours-soft: #352a0c; --ok: #5fd58e; --ok-soft: #12321f; --shadow: 0 1px 2px rgba(0,0,0,.5);
+  --cours: #f0c64a; --cours-soft: #352a0c; --ok: #5fd58e; --ok-soft: #12321f; --attente: #a9b6e8; --attente-soft: #1f2640; --shadow: 0 1px 2px rgba(0,0,0,.5);
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -123,6 +125,7 @@ main { padding-block: 18px 96px; padding-left: max(16px, env(safe-area-inset-lef
 .s-traiter { background: var(--todo-soft); color: var(--todo); }
 .s-encours { background: var(--cours-soft); color: var(--cours); }
 .s-fini { background: var(--ok-soft); color: var(--ok); }
+.s-attente { background: var(--attente-soft); color: var(--attente); }
 .pill.relance { background: var(--todo); color: var(--surface); }
 .pill.relance::before { display: none; }
 .pill.exemple { background: var(--surface-2); color: var(--fg-2); }
@@ -236,6 +239,17 @@ tr.cliquable:hover td { background: var(--surface-2); }
 .aide details[open] summary { color: var(--accent); }
 .aide details p, .aide details ol { margin: 0 0 14px; color: var(--fg); }
 .aide details ol { padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
+/* ---- import ---- */
+.depot { border: 2px dashed var(--line); border-radius: var(--r); padding: 28px 16px; text-align: center; display: flex; flex-direction: column; gap: 12px; align-items: center; background: var(--surface); }
+.depot.survol { border-color: var(--accent); background: var(--accent-soft); }
+.depot .gros { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; }
+.plan { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px; }
+.plan .bloc { gap: 10px; }
+.rang { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; align-items: center; font-size: .92rem; padding-top: 8px; border-top: 1px solid var(--line); }
+.rang .nomf { overflow-wrap: anywhere; color: var(--fg-2); }
+.rang select, .plan .bloc select, .plan .bloc input { min-height: 42px; border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px; background: var(--bg); width: 100%; }
+.progres { height: 10px; border-radius: 99px; background: var(--surface-2); overflow: hidden; }
+.progres i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s; }
 @media (prefers-reduced-motion: reduce) { .side { transition: none; } }
 </style>
 
@@ -249,8 +263,10 @@ tr.cliquable:hover td { background: var(--surface-2); }
   <div class="groupe">Mes dossiers</div>
   <button class="lien" data-vue="traiter"><i class="pt" style="background:var(--todo)"></i>Dossiers à traiter<span class="compte" id="c-traiter">0</span></button>
   <button class="lien" data-vue="encours"><i class="pt" style="background:var(--cours)"></i>Dossiers en cours<span class="compte" id="c-encours">0</span></button>
+  <button class="lien" data-vue="attente"><i class="pt" style="background:var(--attente)"></i>Dossiers en attente<span class="compte" id="c-attente">0</span></button>
   <button class="lien" data-vue="finis"><i class="pt" style="background:var(--ok)"></i>Dossiers finis<span class="compte" id="c-finis">0</span></button>
   <button class="lien" data-vue="tous">Tous les dossiers<span class="compte" id="c-tous">0</span></button>
+  <button class="lien" data-vue="importer">Importer mes dossiers</button>
   <div class="groupe">Biens</div>
   <button class="lien" data-vue="achetables">Biens achetables<span class="compte" id="c-achetables">–</span></button>
   <button class="lien" data-vue="terrains">Terrains à acheter<span class="compte" id="c-terrains">–</span></button>
@@ -293,7 +309,7 @@ const PIECES = {
     "Contrat de travail", "RIB", "Attestation CAF", "Pièces du garant (identité, revenus)"]
 };
 const TYPES = { achat: "Achat", vente: "Vente", location: "Location" };
-const STATUTS = { traiter: "À traiter", encours: "En cours", fini: "Fini" };
+const STATUTS = { traiter: "À traiter", encours: "En cours", attente: "En attente", fini: "Fini" };
 const MESSAGE_SMS = "Bonjour {prénom}, c'est {mon nom}. Pour votre dossier il me manque encore : {pièces courtes}. Vous pouvez me les envoyer en photo par SMS ou WhatsApp. Merci !";
 const AUTO = { actif: false, canal: "les2", max: 3, de: 8, a: 19, dimanche: false, expediteur: "", nomSms: "SebImmo", sms: MESSAGE_SMS };
 const MESSAGE = "Bonjour {prénom},\n\nC'est {mon nom}. Pour avancer sur votre dossier ({bien}), il me manque encore :\n{pièces}\n\nVous pouvez me les envoyer par mail ({mon email}) ou en photo par SMS / WhatsApp.\n\nMerci beaucoup et bonne journée !";
@@ -370,6 +386,7 @@ const nomClient = d => [d.client.prenom, d.client.nom].filter(Boolean).join(" ")
 const nombre = v => { const n = parseFloat(String(v).replace(/\s/g, "").replace(",", ".")); return isNaN(n) ? null : n; };
 function statut(d) {
   if (d.cloture) return "fini";
+  if (d.attente) return "attente";
   const recus = d.pieces.filter(p => p.recu).length;
   if (d.pieces.length && recus === d.pieces.length) return "fini";
   return recus ? "encours" : "traiter";
@@ -377,7 +394,7 @@ function statut(d) {
 const manquantes = d => d.pieces.filter(p => !p.recu);
 function derniereRelance(d) { return d.relances.length ? d.relances[d.relances.length - 1].date : null; }
 function aRelancer(d) {
-  if (statut(d) === "fini" || !d.relanceAuto || !manquantes(d).length) return false;
+  if (statut(d) === "fini" || statut(d) === "attente" || !d.relanceAuto || !manquantes(d).length) return false;
   const depuis = derniereRelance(d) || d.cree;
   return Date.now() - new Date(depuis).getTime() >= (D.reglages.delai || 7) * JOUR;
 }
@@ -426,8 +443,8 @@ const ICONES = {
 };
 
 // ---------------------------------------------------------------- navigation
-const TITRES = { accueil: "Accueil", traiter: "Dossiers à traiter", encours: "Dossiers en cours", finis: "Dossiers finis", tous: "Tous les dossiers",
-  achetables: "Biens achetables", argent: "Mes biens et mon argent", auto: "Relances automatiques", reglages: "Réglages et sauvegarde", terrains: "Terrains à acheter", assistant: "Assistant IA", aide: "Aide" };
+const TITRES = { accueil: "Accueil", traiter: "Dossiers à traiter", encours: "Dossiers en cours", finis: "Dossiers finis", attente: "Dossiers en attente", tous: "Tous les dossiers",
+  achetables: "Biens achetables", argent: "Mes biens et mon argent", auto: "Relances automatiques", reglages: "Réglages et sauvegarde", terrains: "Terrains à acheter", assistant: "Assistant IA", aide: "Aide", importer: "Importer mes dossiers" };
 let vue = "accueil", dossierOuvert = null;
 function aller(v, id) {
   vue = v; dossierOuvert = id || null;
@@ -444,13 +461,13 @@ function rendre() {
   $("#nouveau-flottant").hidden = vue === "assistant" && !d;
   const m = $("#vue");
   if (d) return vueDossier(m, d);
-  ({ accueil: vueAccueil, traiter: m => vueListe(m, "traiter"), encours: m => vueListe(m, "encours"), finis: m => vueListe(m, "fini"),
-     tous: m => vueListe(m, null), achetables: m => vueAchetables(m, false), terrains: m => vueAchetables(m, true), argent: vueArgent, auto: vueAuto, reglages: vueReglages, assistant: vueAssistant, aide: vueAide }[vue] || vueAccueil)(m);
+  ({ accueil: vueAccueil, traiter: m => vueListe(m, "traiter"), encours: m => vueListe(m, "encours"), finis: m => vueListe(m, "fini"), attente: m => vueListe(m, "attente"),
+     tous: m => vueListe(m, null), achetables: m => vueAchetables(m, false), terrains: m => vueAchetables(m, true), argent: vueArgent, auto: vueAuto, reglages: vueReglages, assistant: vueAssistant, aide: vueAide, importer: vueImporter }[vue] || vueAccueil)(m);
 }
 function compter() {
-  const n = { traiter: 0, encours: 0, fini: 0 };
+  const n = { traiter: 0, encours: 0, attente: 0, fini: 0 };
   D.dossiers.forEach(d => n[statut(d)]++);
-  $("#c-traiter").textContent = n.traiter; $("#c-encours").textContent = n.encours; $("#c-finis").textContent = n.fini;
+  $("#c-traiter").textContent = n.traiter; $("#c-encours").textContent = n.encours; $("#c-finis").textContent = n.fini; $("#c-attente").textContent = n.attente;
   $("#c-tous").textContent = D.dossiers.length;
   $("#c-auto").textContent = D.reglages.auto.actif && cleBrevo() ? "Oui" : "Non";
 }
@@ -469,6 +486,7 @@ function carte(d) {
   return `<button class="carte" data-ouvrir="${d.id}">
     <div class="ligne"><span class="pill s-${s}">${STATUTS[s]}</span>${aRelancer(d) ? '<span class="pill relance">À relancer</span>' : ""}${d.exemple ? '<span class="pill exemple">Exemple</span>' : ""}</div>
     <div class="nom">${esc(nomClient(d))}</div>
+    ${d.attente && !d.cloture ? `<div class="small" style="color:var(--attente)">En attente${d.attente.raison ? " : " + esc(d.attente.raison) : ""}${d.attente.reprise ? " · reprendre le " + dateFr(d.attente.reprise) : ""}</div>` : ""}
     <div class="muted">${esc(TYPES[d.type])} · ${esc(d.bien.adresse || "Bien à préciser")}${d.bien.commune ? " · " + esc(d.bien.commune) : ""}</div>
     <div class="barre" aria-hidden="true"><i style="width:${total ? Math.round(100 * recus / total) : 0}%"></i></div>
     <div class="ligne small muted"><span class="num">${recus} / ${total} pièces reçues</span>${d.bien.prixAffiche ? `<span style="margin-left:auto" class="num">${euros(d.bien.prixAffiche)}</span>` : ""}</div>
@@ -487,9 +505,11 @@ function brancherExemples(m) {
 
 // ---------------------------------------------------------------- accueil
 function vueAccueil(m) {
-  const n = { traiter: 0, encours: 0, fini: 0 };
+  const n = { traiter: 0, encours: 0, attente: 0, fini: 0 };
   D.dossiers.forEach(d => n[statut(d)]++);
   const relancer = D.dossiers.filter(aRelancer);
+  const aujourdhui = new Date().toISOString().slice(0, 10);
+  const reprendre = D.dossiers.filter(d => statut(d) === "attente" && d.attente.reprise && d.attente.reprise <= aujourdhui);
   const vendus = D.dossiers.filter(d => d.bien.vendu);
   const annee = new Date().getFullYear();
   const gagneAn = vendus.filter(d => (d.bien.dateVente || "").startsWith(annee)).reduce((s, d) => s + (gain(d) || 0), 0);
@@ -497,9 +517,12 @@ function vueAccueil(m) {
     <div class="tuiles">
       <button class="tuile" data-aller="traiter"><span class="val num" style="color:var(--todo)">${n.traiter}</span><span class="lib">Dossiers à traiter</span></button>
       <button class="tuile" data-aller="encours"><span class="val num" style="color:var(--cours)">${n.encours}</span><span class="lib">Dossiers en cours</span></button>
+      <button class="tuile" data-aller="attente"><span class="val num" style="color:var(--attente)">${n.attente}</span><span class="lib">Dossiers en attente</span></button>
       <button class="tuile" data-aller="finis"><span class="val num" style="color:var(--ok)">${n.fini}</span><span class="lib">Dossiers finis</span></button>
       <button class="tuile" data-aller="argent"><span class="val num">${euros(gagneAn)}</span><span class="lib">Gagné en ${annee}</span></button>
     </div>
+    ${reprendre.length ? `<section class="bloc"><div class="tete"><h2>Dossiers à reprendre</h2><span class="muted small">Mis en attente, la date de reprise est arrivée</span></div>
+      <div class="cartes">${reprendre.map(carte).join("")}</div></section>` : ""}
     <section class="bloc">
       <div class="tete"><h2>À relancer aujourd'hui</h2><span class="muted small">Sans nouvelles depuis ${D.reglages.delai} jours ou plus</span></div>
       ${D.reglages.auto.actif && cleBrevo() ? `<p class="small"><span class="pill s-fini">Relances automatiques activées</span> Les clients ci-dessous sont relancés tout seuls (${{ les2: "mail et SMS", email: "mail", sms: "SMS" }[D.reglages.auto.canal]}).</p>`
@@ -520,7 +543,8 @@ function vueAccueil(m) {
 let filtreTexte = "";
 function vueListe(m, s) {
   const tous = D.dossiers.filter(d => !s || statut(d) === s);
-  const aide = { traiter: "Aucune pièce reçue pour l'instant.", encours: "Une partie des pièces est arrivée.", fini: "Toutes les pièces sont reçues, ou le dossier est clôturé." }[s] || "Tous vos dossiers, quel que soit leur état.";
+  const aide = { traiter: "Aucune pièce reçue pour l'instant.", encours: "Une partie des pièces est arrivée.", fini: "Toutes les pièces sont reçues, ou le dossier est clôturé.",
+    attente: "Dossiers mis de côté : le client a mis le projet en pause, on attend la banque, le notaire… Ils ne sont pas relancés." }[s] || "Tous vos dossiers, quel que soit leur état.";
   m.innerHTML = `${bandeauExemples()}<p class="muted">${aide}</p>
     <input class="recherche" id="cherche" type="search" placeholder="Chercher un client, un bien, une commune…" value="${esc(filtreTexte)}">
     <div id="liste"></div>`;
@@ -654,10 +678,16 @@ function vueDossier(m, d) {
         <section class="bloc">
           <h2>Dossier</h2>
           <div class="rangee">
+            <button class="btn" id="attente">${d.attente ? "Reprendre le dossier" : "Mettre en attente"}</button>
             <button class="btn" id="cloturer">${d.cloture ? "Rouvrir le dossier" : "Clôturer le dossier"}</button>
             <button class="btn danger" id="supprimer">Supprimer le dossier</button>
           </div>
-          <p class="muted small">Créé le ${dateFr(d.cree)}. Clôturer range le dossier dans « Dossiers finis » même s'il manque des papiers.</p>
+          ${d.attente ? `<div class="champs">
+            <div class="champ"><label for="att-raison">Pourquoi en attente ?</label><input id="att-raison" value="${esc(d.attente.raison)}" placeholder="ex. attend l'accord de la banque"></div>
+            <div class="champ"><label for="att-reprise">Reprendre le (facultatif)</label><input id="att-reprise" type="date" value="${esc(d.attente.reprise)}"></div>
+          </div>` : ""}
+          <p class="muted small">Créé le ${dateFr(d.cree)}. « Mettre en attente » range le dossier dans « Dossiers en attente » et arrête les relances ; il revient sur l'accueil à la date de reprise.
+          Clôturer range le dossier dans « Dossiers finis » même s'il manque des papiers.</p>
         </section>
       </div>
     </div>`;
@@ -705,6 +735,14 @@ function vueDossier(m, d) {
   const cm = m.querySelector("#copier-msg"); if (cm) cm.onclick = () => copier(message(d), "Message");
   m.querySelector("#relance-faite").onclick = () => { d.relances.push({ date: new Date().toISOString(), canal: "Relance (appel ou autre)" }); enreg(true); toast("Relance notée"); };
   m.querySelectorAll("[data-copie]").forEach(bt => bt.onclick = () => copier(bt.dataset.copie, bt.dataset.quoi));
+  m.querySelector("#attente").onclick = () => {
+    d.attente = d.attente ? null : { raison: "", reprise: "", depuis: new Date().toISOString() };
+    enreg(true); toast(d.attente ? "Dossier mis en attente" : "Dossier repris");
+    if (d.attente) { const i = $("#att-raison"); if (i) i.focus(); }
+  };
+  const ar = m.querySelector("#att-raison"), ad = m.querySelector("#att-reprise");
+  if (ar) ar.onchange = () => { d.attente.raison = ar.value.trim(); enreg(false); };
+  if (ad) ad.onchange = () => { d.attente.reprise = ad.value; enreg(false); };
   m.querySelector("#cloturer").onclick = () => { d.cloture = !d.cloture; enreg(true); toast(d.cloture ? "Dossier rangé dans les dossiers finis" : "Dossier rouvert"); };
   const sup = m.querySelector("#supprimer");
   sup.onclick = () => {
@@ -1033,12 +1071,13 @@ const GUIDE = `Seb Immo est une appli simple pour gérer des dossiers immobilier
 - Menu ☰ (en haut à gauche sur téléphone, toujours visible à gauche sur PC) : Accueil, Dossiers à traiter / en cours / finis, Tous les dossiers, Biens achetables, Terrains à acheter, Mes biens et mon argent, Relances automatiques, Réglages et sauvegarde, Assistant IA, Aide.
 - Créer un dossier : bouton « + Nouveau dossier » (en bas à droite sur téléphone, en bas du menu sur PC). Choisir Achat, Vente ou Location : la liste des papiers se crée toute seule.
 - Dans un dossier : toucher le carré d'un papier quand il est reçu ; le trombone range une photo ou un PDF (le papier se coche tout seul) ; la poubelle retire un papier ; « Ajouter un papier » en bas de la liste.
-- Statut : à traiter = rien reçu ; en cours = une partie reçue ; fini = tout reçu ou dossier clôturé (bouton « Clôturer le dossier »).
+- Statut : à traiter = rien reçu ; en cours = une partie reçue ; en attente = mis de côté avec le bouton « Mettre en attente » (raison et date de reprise, plus de relances, revient sur l'accueil à la date de reprise ; « Reprendre le dossier » le remet en route) ; fini = tout reçu ou dossier clôturé (bouton « Clôturer le dossier »).
 - Relancer : dans le dossier, boutons SMS, WhatsApp, Email qui ouvrent un message prêt avec les papiers manquants. L'accueil liste les clients sans nouvelles depuis le délai choisi (7 jours par défaut, dans Réglages).
 - Relances automatiques : menu ☰ → Relances automatiques. Avec un compte Brevo (clé API collée dans l'appli), les SMS partent tout seuls quand l'appli est ouverte sur l'adresse github.io. Les mails partiront quand une adresse d'envoi sera remplie. 3 relances au plus par client, de 8h à 19h, pas le dimanche.
 - Mes biens et mon argent : prix affiché, prix d'achat, frais, prix de vente, commission ; ce que chaque vente rapporte = commission, sinon vente − achat − frais.
 - Biens achetables / Terrains à acheter : liste refaite le 1er de chaque mois depuis Bien'ici, les moins chers au m² par rapport à leur commune en tête. Bouton « Créer un dossier » sur chaque annonce.
 - Sauvegarde : Réglages → Copier / Télécharger la sauvegarde, puis Restaurer sur l'autre appareil (téléphone ↔ PC). Les photos et PDF ne sont pas dans la sauvegarde. Les dossiers restent sur l'appareil où on les crée.
+- Importer : menu ☰ → Importer mes dossiers. On dépose son dossier clients (sous-dossiers, photos, PDF, tableau Excel en CSV) : l'appli range chaque fichier dans le bon client et le bon papier, montre le résultat à vérifier, puis « Tout ranger » crée les dossiers. Ils se classent tout seuls en à traiter / en cours / finis.
 - Installer : iPhone → Safari, Partager, Sur l'écran d'accueil. Android → Chrome, ⋮, Ajouter à l'écran d'accueil.`;
 let chat = [], chatCtl = null, sampleFn;
 function resumeDossiers() {
@@ -1046,13 +1085,13 @@ function resumeDossiers() {
     bien: [d.bien.adresse, d.bien.commune].filter(Boolean).join(", "), prix: d.bien.prixAffiche, vendu: !!d.bien.vendu, gain: gain(d),
     tel: d.client.tel ? "oui" : "non", email: d.client.email ? "oui" : "non",
     manquants: manquantes(d).map(p => p.nom), recus: d.pieces.filter(p => p.recu).map(p => p.nom),
-    derniere_relance: derniereRelance(d) ? derniereRelance(d).slice(0, 10) : null, a_relancer: aRelancer(d), notes: (d.notes || "").slice(0, 200) }));
+    en_attente: d.attente || null, derniere_relance: derniereRelance(d) ? derniereRelance(d).slice(0, 10) : null, a_relancer: aRelancer(d), notes: (d.notes || "").slice(0, 200) }));
 }
 function regles() {
   return `Tu es l'assistant de l'appli Seb Immo. Tu aides Seb, agent immobilier à La Réunion, qui n'est pas à l'aise avec l'informatique.
 Réponds en français, en vouvoyant, avec des phrases courtes et simples, sans jargon. Pas de Markdown (ni astérisques ni dièses) : texte simple, listes avec des tirets.
 Quand il demande comment faire quelque chose, explique les étapes une par une avec les noms exacts des boutons du guide.
-Tu peux agir dans l'appli avec les outils : cocher un papier reçu, ajouter un papier, noter quelque chose, créer un dossier, ouvrir un dossier, chercher des biens ou des terrains à vendre, écrire un message de relance. Avant de créer un dossier, il te faut au moins le prénom ou le nom du client. Dis toujours ce que tu as fait.
+Tu peux agir dans l'appli avec les outils : cocher un papier reçu, mettre un dossier en attente ou le reprendre, ajouter un papier, noter quelque chose, créer un dossier, ouvrir un dossier, chercher des biens ou des terrains à vendre, écrire un message de relance. Avant de créer un dossier, il te faut au moins le prénom ou le nom du client. Dis toujours ce que tu as fait.
 Tu ne peux pas envoyer de SMS ni de mail toi-même, ni supprimer quoi que ce soit : explique comment le faire.
 Les dossiers marqués exemple ne sont pas de vrais clients.
 Aujourd'hui : ${new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}.
@@ -1080,6 +1119,11 @@ const OUTILS = [
     inputSchema: { type: "object", properties: { dossier_id: { type: "string" }, nom: { type: "string" } }, required: ["dossier_id", "nom"] },
     execute(i) { const d = trouver(i.dossier_id), nom = String(i.nom).trim(); if (!nom) throw new Error("Nom vide"); d.pieces.push({ id: uid(), nom, recu: false, date: null, fichiers: [] }); sauver();
       actionsFaites.push(`« ${nom} » ajouté au dossier de ${nomClient(d)}`); return "ajouté"; } },
+  { name: "mettre_en_attente", description: "Met un dossier en attente (en_attente=true, avec raison et date de reprise AAAA-MM-JJ facultatives) ou le reprend (en_attente=false). Un dossier en attente n'est plus relancé.",
+    inputSchema: { type: "object", properties: { dossier_id: { type: "string" }, en_attente: { type: "boolean" }, raison: { type: "string" }, reprise: { type: "string" } }, required: ["dossier_id", "en_attente"] },
+    execute(i) { const d = trouver(i.dossier_id);
+      d.attente = i.en_attente === false ? null : { raison: String(i.raison || "").trim(), reprise: /^\d{4}-\d{2}-\d{2}$/.test(String(i.reprise || "")) ? String(i.reprise) : "", depuis: new Date().toISOString() };
+      sauver(); actionsFaites.push(`Dossier de ${nomClient(d)} ${d.attente ? "mis en attente" : "repris"}`); return { statut: STATUTS[statut(d)] }; } },
   { name: "noter", description: "Ajoute une ligne datée dans les notes d'un dossier (rendez-vous, banque, notaire…).",
     inputSchema: { type: "object", properties: { dossier_id: { type: "string" }, texte: { type: "string" } }, required: ["dossier_id", "texte"] },
     execute(i) { const d = trouver(i.dossier_id); d.notes = ((d.notes ? d.notes + "\n" : "") + new Date().toLocaleDateString("fr-FR") + " : " + String(i.texte).trim()).slice(0, 5000); sauver();
@@ -1180,6 +1224,8 @@ function vueAide(m) {
     ["Trouver un bien ou un terrain", `<p>Menu ☰ → <b>Biens achetables</b> ou <b>Terrains à acheter</b>. La liste est refaite le 1er de chaque mois. Les moins chers au m² sont en tête. Filtrez par budget et par commune, puis <b>Créer un dossier</b> si un bien vous intéresse.</p>`],
     ["Passer du téléphone au PC", `<ol><li>Sur le téléphone : Réglages → <b>Copier la sauvegarde</b> (ou Télécharger).</li><li>Envoyez-vous le texte (mail, WhatsApp).</li><li>Sur le PC : Réglages → collez le texte → <b>Restaurer</b>.</li></ol><p>Les photos et PDF ne passent pas : rangez-les sur l'appareil principal.</p>`],
     ["Mettre l'appli sur l'écran d'accueil", `<p>iPhone : ouvrez l'adresse dans <b>Safari</b>, <b>Partager</b>, <b>Sur l'écran d'accueil</b>. Android : <b>Chrome</b>, menu <b>⋮</b>, <b>Ajouter à l'écran d'accueil</b>. PC : icône d'installation à droite de la barre d'adresse.</p>`],
+    ["Importer mes anciens dossiers", `<ol><li>Menu ☰ → <b>Importer mes dossiers</b>.</li><li>Touchez <b>Choisir un dossier</b> et prenez le dossier qui contient vos clients (un sous-dossier par client, c'est l'idéal). Ou glissez-le dans le cadre sur PC.</li><li>Touchez <b>Ranger avec l'IA</b> (version Claude) ou <b>Ranger automatiquement</b>.</li><li>Vérifiez le résultat, corrigez si besoin, puis <b>Tout ranger</b>.</li></ol><p>Un tableau Excel enregistré en CSV avec les noms, téléphones et emails aide à compléter les fiches.</p>`],
+    ["Mettre un dossier en attente", `<p>Dans le dossier, en bas : <b>Mettre en attente</b>. Notez pourquoi (banque, notaire, client en pause) et, si vous voulez, la date où le reprendre. Le dossier va dans <b>Dossiers en attente</b>, n'est plus relancé, et revient sur l'accueil à cette date. <b>Reprendre le dossier</b> le remet en route.</p>`],
     ["Supprimer les exemples", `<p>À l'accueil, touchez <b>Supprimer les exemples</b> dans le bandeau jaune.</p>`],
     ["Supprimer un dossier", `<p>En bas du dossier, <b>Supprimer le dossier</b>, puis touchez une deuxième fois pour confirmer. Ça ne s'annule pas.</p>`]
   ];
@@ -1187,6 +1233,256 @@ function vueAide(m) {
       <p class="muted small">Touchez une question pour voir la réponse.</p></section>
     <div class="aide">${Q.map(([t, r]) => `<details><summary>${t}</summary>${r}</details>`).join("")}</div>`;
   m.querySelector("[data-aller]").onclick = () => aller("assistant");
+}
+
+// ---------------------------------------------------------------- importer des dossiers existants
+// 1. on réunit les fichiers (dossier choisi ou glissé) ; 2. tri par l'IA, sinon par les noms ;
+// 3. on montre le résultat à corriger ; 4. « Tout ranger » crée les dossiers et range les fichiers.
+const MOTS = [
+  [/carte.?d.?identit|\bcni\b|passeport|titre.?de.?s[ée]jour|identit[ée]/i, "Carte d'identité"],
+  [/livret.?de.?famille|livret/i, "Livret de famille"],
+  [/domicile|\bedf\b|facture|quittance|eau\b|t[ée]l[ée]phone|internet/i, "Justificatif de domicile"],
+  [/bulletin|salaire|fiche.?de.?paie|paie|payslip/i, "bulletins de salaire"],
+  [/imp[oô]t|imposition|avis.?d.?imp/i, "avis d'imposition"],
+  [/relev[ée]|bancaire|compte/i, "relevés de compte"],
+  [/contrat.?de.?travail|cdi|cdd|attestation.?employeur/i, "Contrat de travail"],
+  [/\brib\b|iban/i, "RIB"],
+  [/pr[eê]t|financement|banque|offre.?de.?pr|simulation/i, "financement"],
+  [/mariage|pacs|divorce/i, "Contrat de mariage ou PACS"],
+  [/titre.?de.?propri|acte.?de.?vente|acte.?notari|propri[ée]t[ée]/i, "Titre de propriété"],
+  [/diagnostic|\bdpe\b|amiante|termite|plomb|\bddt\b|[ée]lectricit/i, "Diagnostics"],
+  [/taxe.?fonci|fonci[eè]re/i, "taxe foncière"],
+  [/cadastr|plan/i, "Plan cadastral"],
+  [/copro|r[eè]glement|\bpv\b|assembl[ée]e|\bag\b/i, "copropriété"],
+  [/charges|appel.?de.?fonds/i, "appels de charges"],
+  [/\bcaf\b|allocation/i, "Attestation CAF"],
+  [/garant|caution/i, "garant"],
+  [/compromis|promesse/i, "Compromis de vente"]
+];
+let IMP = { fichiers: [], textes: [], plan: null, etape: "" };
+const extension = n => (n.split(".").pop() || "").toLowerCase();
+const estTexte = f => /^(csv|txt|tsv)$/.test(extension(f.name));
+const estImage = f => /^image\//.test(f.type) || /^(jpe?g|png|heic|webp|gif)$/.test(extension(f.name));
+async function lireDepot(items) {
+  const out = [];
+  const parcourir = (entree, chemin) => new Promise(ok => {
+    if (entree.isFile) entree.file(f => { out.push({ f, chemin: chemin + f.name }); ok(); }, () => ok());
+    else if (entree.isDirectory) {
+      const r = entree.createReader(), tout = [];
+      const lot = () => r.readEntries(async l => { if (!l.length) { for (const e of tout) await parcourir(e, chemin + entree.name + "/"); ok(); } else { tout.push(...l); lot(); } }, () => ok());
+      lot();
+    } else ok();
+  });
+  for (const it of items) { const e = it.webkitGetAsEntry && it.webkitGetAsEntry(); if (e) await parcourir(e, ""); else if (it.getAsFile) { const f = it.getAsFile(); if (f) out.push({ f, chemin: f.name }); } }
+  return out;
+}
+async function ajouterFichiers(liste) {
+  for (const { f, chemin } of liste) {
+    if (/^\.|thumbs\.db|desktop\.ini/i.test(f.name)) continue;
+    if (estTexte(f)) { try { IMP.textes.push({ nom: chemin, contenu: (await f.text()).slice(0, 20000) }); } catch (e) {} }
+    else IMP.fichiers.push({ f, chemin, i: IMP.fichiers.length });
+  }
+  IMP.plan = null; rendre();
+}
+function pieceParNom(nomFichier, type) {
+  for (const [re, cle] of MOTS) if (re.test(nomFichier)) {
+    const p = (PIECES[type] || []).find(x => x.toLowerCase().includes(cle.toLowerCase())) || Object.values(PIECES).flat().find(x => x.toLowerCase().includes(cle.toLowerCase()));
+    return p || cle;
+  }
+  return null;
+}
+function triSimple() {
+  const groupes = new Map();
+  for (const x of IMP.fichiers) {
+    const parties = x.chemin.split("/");
+    const client = parties.length >= 3 ? parties[parties.length - 2] : parties.length === 2 ? parties[0] : "Sans client";
+    if (!groupes.has(client)) groupes.set(client, []);
+    groupes.get(client).push(x);
+  }
+  const clients = [], nonClasses = [];
+  for (const [nom, l] of groupes) {
+    const tout = l.map(x => x.chemin).join(" ");
+    const type = /titre.?de.?propri|diagnostic|dpe|taxe.?fonci|cadastr/i.test(tout) ? "vente" : /\bcaf\b|garant|caution/i.test(tout) ? "location" : "achat";
+    const mots = nom.replace(/[_.]+/g, " ").trim().split(/\s+/);
+    const existant = D.dossiers.find(d => !d.exemple && nomClient(d).toLowerCase() === nom.replace(/[_.]+/g, " ").trim().toLowerCase());
+    const fichiers = l.map(x => ({ i: x.i, piece: pieceParNom(x.chemin.split("/").pop(), type) || "Autres documents" }));
+    if (nom === "Sans client") { nonClasses.push(...l.map(x => x.i)); continue; }
+    clients.push({ dossier_id: existant ? existant.id : null, nom: mots.slice(0, 1).join(" "), prenom: mots.slice(1).join(" "), tel: "", email: "", type, bien: "", commune: "", prix: null, fichiers });
+  }
+  // un tableau CSV peut compléter téléphones et emails
+  for (const t of IMP.textes) for (const ligne of t.contenu.split(/\r?\n/)) {
+    const tel = (ligne.match(/(?:\+?262|0)\s?\d(?:[\s.]?\d){8}/) || [])[0], mail = (ligne.match(/[\w.+-]+@[\w-]+\.[\w.]+/) || [])[0];
+    if (!tel && !mail) continue;
+    const c = clients.find(c => [c.nom, c.prenom].filter(Boolean).every(m => ligne.toLowerCase().includes(m.toLowerCase())));
+    if (c) { c.tel = c.tel || tel || ""; c.email = c.email || mail || ""; }
+  }
+  return { clients, non_classes: nonClasses, par: "noms" };
+}
+async function triIA(etat) {
+  const listes = Object.entries(PIECES).map(([k, v]) => k + " : " + v.join(" | ")).join("\n");
+  const existants = D.dossiers.filter(d => !d.exemple).map(d => ({ id: d.id, client: nomClient(d), type: d.type, papiers: d.pieces.map(p => p.nom) }));
+  const prompt = `Tu ranges les fichiers de dossiers clients d'un agent immobilier à La Réunion dans son appli.
+Regroupe les fichiers par client. Le nom du sous-dossier, puis le nom du fichier, indiquent le plus souvent le client (nom de famille et prénom, dans un ordre ou l'autre). Les tableaux donnent parfois téléphone, email, bien, commune, prix.
+Pour chaque client : type de dossier (achat = le client achète, vente = il vend, location = il loue), et pour chaque fichier le papier qu'il représente.
+"piece" doit être EXACTEMENT un nom de la liste du type choisi ; si aucun ne convient, mets un nom court et clair et ajoute-le dans "papiers_en_plus". Si un fichier ne dit rien (IMG_1234.jpg, scan001.pdf), mets "piece": null.
+Si un client correspond à un dossier déjà dans l'appli, mets son id dans "dossier_id" (et son type), sinon null.
+Mets dans "non_classes" les index des fichiers qu'on ne peut rattacher à aucun client.
+
+PAPIERS PAR TYPE
+${listes}
+
+DOSSIERS DÉJÀ DANS L'APPLI
+${JSON.stringify(existants).slice(0, 20000)}
+
+TABLEAUX ET TEXTES
+${IMP.textes.map(t => "--- " + t.nom + "\n" + t.contenu).join("\n").slice(0, 40000) || "(aucun)"}
+
+FICHIERS (index | chemin)
+${IMP.fichiers.map(x => x.i + " | " + x.chemin).join("\n")}
+
+Réponds uniquement avec ce JSON :
+{"clients":[{"dossier_id":null,"prenom":"","nom":"","tel":"","email":"","type":"achat","bien":"","commune":"","prix":null,"fichiers":[{"i":0,"piece":"Carte d'identité"}],"papiers_en_plus":[]}],"non_classes":[]}`;
+  etat("L'IA lit les noms de vos fichiers…");
+  const plan = await sampleFn.json(prompt, { cache: false });
+  if (!plan || !Array.isArray(plan.clients)) throw { code: "invalid_json" };
+  plan.par = "ia";
+  // photos sans nom parlant : l'IA les regarde, par petits paquets
+  const lim = await sampleFn.limits().catch(() => null);
+  const flous = [];
+  plan.clients.forEach((c, ci) => (c.fichiers || []).forEach(x => { const f = IMP.fichiers[x.i]; if (!x.piece && f && estImage(f.f)) flous.push({ ci, x, f }); }));
+  if (lim && lim.images && flous.length) {
+    const n = Math.max(1, lim.images.maxCount);
+    for (let k = 0; k < flous.length && k < 60; k += n) {
+      const lot = flous.slice(k, k + n);
+      etat(`L'IA regarde les photos sans nom (${Math.min(k + n, flous.length)} / ${flous.length})…`);
+      try {
+        const r = await sampleFn.json(`Voici ${lot.length} photo(s) de papiers d'un dossier immobilier, dans l'ordre. Pour chacune, dis quel papier c'est, en choisissant si possible dans : ${Object.values(PIECES).flat().join(" | ")}. Si tu ne sais pas, null.
+Réponds uniquement avec un tableau JSON de ${lot.length} éléments, par exemple ["Carte d'identité", null].`, { cache: false, images: lot.map(z => z.f.f) });
+        if (Array.isArray(r)) lot.forEach((z, j) => { if (typeof r[j] === "string" && r[j].trim()) z.x.piece = r[j].trim(); });
+      } catch (e) { if (e && (e.code === "not_granted" || e.code === "rate_limited")) break; }
+    }
+  }
+  plan.clients.forEach(c => (c.fichiers || []).forEach(x => { if (!x.piece) x.piece = "Autres documents"; }));
+  return plan;
+}
+function nettoyerPlan(plan) {
+  const vus = new Set();
+  plan.clients = (plan.clients || []).filter(c => c && (c.prenom || c.nom || c.dossier_id)).map(c => {
+    const d = c.dossier_id && D.dossiers.find(x => x.id === c.dossier_id);
+    return { dossier_id: d ? d.id : null, prenom: String(c.prenom || ""), nom: String(c.nom || ""), tel: String(c.tel || ""), email: String(c.email || ""),
+      type: PIECES[c.type] ? c.type : d ? d.type : "achat", bien: String(c.bien || ""), commune: String(c.commune || ""), prix: nombre(c.prix),
+      papiers_en_plus: Array.isArray(c.papiers_en_plus) ? c.papiers_en_plus.map(String) : [],
+      fichiers: (c.fichiers || []).filter(x => IMP.fichiers[+x.i] && !vus.has(+x.i) && vus.add(+x.i)).map(x => ({ i: +x.i, piece: String(x.piece || "Autres documents") })) };
+  });
+  plan.non_classes = IMP.fichiers.map(x => x.i).filter(i => !vus.has(i));
+  return plan;
+}
+async function toutRanger(m) {
+  const plan = IMP.plan, bouton = m.querySelector("#ranger"); bouton.disabled = true;
+  const barre = m.querySelector("#barre-rangement"); barre.hidden = false;
+  const total = plan.clients.reduce((s, c) => s + c.fichiers.length, 0) || 1; let faits = 0, crees = 0, maj = 0, rates = 0;
+  for (const c of plan.clients) {
+    let d = c.dossier_id && D.dossiers.find(x => x.id === c.dossier_id);
+    if (d) maj++;
+    else {
+      d = { id: uid(), type: c.type, client: { prenom: c.prenom.trim(), nom: c.nom.trim(), tel: c.tel.trim(), email: c.email.trim() },
+        bien: { adresse: c.bien, commune: c.commune, prixAffiche: c.prix, prixAchat: null, frais: null, prixVente: null, commission: null, vendu: false, dateVente: "" },
+        pieces: PIECES[c.type].map(n => ({ id: uid(), nom: n, recu: false, date: null, fichiers: [] })), relances: [], relanceAuto: true, cloture: false, notes: "Importé le " + new Date().toLocaleDateString("fr-FR"), cree: new Date().toISOString() };
+      D.dossiers.push(d); crees++;
+    }
+    for (const n of c.papiers_en_plus) if (n && !d.pieces.some(p => p.nom.toLowerCase() === n.toLowerCase())) d.pieces.push({ id: uid(), nom: n, recu: false, date: null, fichiers: [] });
+    for (const x of c.fichiers) {
+      if (x.piece === "__ignorer") { faits++; continue; }
+      let p = d.pieces.find(q => q.nom.toLowerCase() === x.piece.toLowerCase()) || d.pieces.find(q => q.nom.toLowerCase().includes(x.piece.toLowerCase()));
+      if (!p) { p = { id: uid(), nom: x.piece, recu: false, date: null, fichiers: [] }; d.pieces.push(p); }
+      const f = IMP.fichiers[x.i].f;
+      try { const id = uid(); await fichierEcrire(id, { nom: f.name, type: f.type, blob: f }); p.fichiers.push({ id, nom: f.name, type: f.type }); p.recu = true; p.date = p.date || new Date(f.lastModified || Date.now()).toISOString(); }
+      catch (e) { rates++; }
+      faits++; barre.firstElementChild.style.width = Math.round(100 * faits / total) + "%";
+    }
+  }
+  sauver();
+  IMP = { fichiers: [], textes: [], plan: null, etape: "" };
+  toast(`${crees} dossier${crees > 1 ? "s" : ""} créé${crees > 1 ? "s" : ""}${maj ? `, ${maj} complété${maj > 1 ? "s" : ""}` : ""}${rates ? ` · ${rates} fichier(s) non gardé(s)` : ""}`);
+  aller("tous");
+}
+async function vueImporter(m) {
+  if (sampleFn === undefined) sampleFn = window.claude && typeof window.claude.use === "function" ? await window.claude.use("sample").catch(() => null) : null;
+  if (vue !== "importer" || dossierOuvert) return;
+  const n = IMP.fichiers.length, plan = IMP.plan;
+  if (!plan) {
+    m.innerHTML = `<section class="bloc"><h2>Mettre vos anciens dossiers dans l'appli</h2>
+        <p>Déposez le dossier où sont rangés vos clients : sous-dossiers, photos, PDF, et si vous en avez un, un tableau (Excel enregistré en CSV) avec noms, téléphones et emails.
+        L'appli range chaque fichier dans le bon client et le bon papier, puis vous montre le résultat avant de tout ranger.</p></section>
+      <div class="depot" id="depot">
+        <span class="gros">${n ? `${n} fichier${n > 1 ? "s" : ""} prêt${n > 1 ? "s" : ""}${IMP.textes.length ? ` + ${IMP.textes.length} tableau${IMP.textes.length > 1 ? "x" : ""}` : ""}` : "Glissez votre dossier ici"}</span>
+        <span class="muted small">${n ? "Vous pouvez en ajouter d'autres." : "ou choisissez-le :"}</span>
+        <div class="rangee" style="justify-content:center">
+          <label class="btn">Choisir un dossier<input type="file" id="choix-dossier" webkitdirectory directory multiple hidden></label>
+          <label class="btn">Choisir des fichiers<input type="file" id="choix-fichiers" multiple hidden></label>
+        </div>
+      </div>
+      ${n ? `<section class="bloc"><h2>Ranger</h2>
+        <div class="rangee">${sampleFn ? `<button class="btn plein" id="tri-ia">Ranger avec l'IA</button>` : ""}<button class="btn${sampleFn ? "" : " plein"}" id="tri-simple">Ranger automatiquement${sampleFn ? " (sans IA)" : ""}</button><button class="btn danger" id="vider">Tout enlever</button></div>
+        <p class="muted small">${sampleFn ? "L'IA lit les noms des dossiers et des fichiers, et regarde les photos mal nommées. Elle ne range rien tant que vous n'avez pas vérifié." :
+          `Le tri automatique utilise les noms des dossiers et des fichiers (un sous-dossier par client, c'est l'idéal). Pour un tri plus fin par l'IA, ouvrez <a href="${LIEN_CLAUDE}" target="_blank" rel="noopener">la version Claude</a>.`}</p>
+        <p class="small" id="etat" aria-live="polite">${esc(IMP.etape)}</p>
+        <ul class="histo">${IMP.fichiers.slice(0, 8).map(x => `<li>${esc(x.chemin)}</li>`).join("")}${n > 8 ? `<li>… et ${n - 8} autres</li>` : ""}</ul></section>` : ""}`;
+    const depot = m.querySelector("#depot");
+    depot.ondragover = e => { e.preventDefault(); depot.classList.add("survol"); };
+    depot.ondragleave = () => depot.classList.remove("survol");
+    depot.ondrop = async e => { e.preventDefault(); depot.classList.remove("survol"); await ajouterFichiers(await lireDepot([...e.dataTransfer.items])); };
+    m.querySelector("#choix-dossier").onchange = e => ajouterFichiers([...e.target.files].map(f => ({ f, chemin: f.webkitRelativePath || f.name })));
+    m.querySelector("#choix-fichiers").onchange = e => ajouterFichiers([...e.target.files].map(f => ({ f, chemin: f.name })));
+    if (!n) return;
+    m.querySelector("#vider").onclick = () => { IMP = { fichiers: [], textes: [], plan: null, etape: "" }; rendre(); };
+    m.querySelector("#tri-simple").onclick = () => { IMP.plan = nettoyerPlan(triSimple()); rendre(); };
+    const bia = m.querySelector("#tri-ia");
+    if (bia) bia.onclick = async () => {
+      bia.disabled = true; const etat = t => { IMP.etape = t; const e = m.querySelector("#etat"); if (e) e.textContent = t; };
+      try { IMP.plan = nettoyerPlan(await triIA(etat)); IMP.etape = ""; rendre(); }
+      catch (e) {
+        etat({ not_granted: "Vous n'avez pas autorisé l'IA. Utilisez « Ranger automatiquement ».", rate_limited: "L'IA est occupée : réessayez dans un moment ou rangez automatiquement.",
+          prompt_too_large: "Trop de fichiers d'un coup pour l'IA : importez une partie, ou rangez automatiquement." }[e && e.code] || "L'IA n'a pas pu ranger. Réessayez, ou utilisez « Ranger automatiquement ».");
+        bia.disabled = false;
+      }
+    };
+    return;
+  }
+  const nbF = plan.clients.reduce((s, c) => s + c.fichiers.length, 0);
+  const optionsPieces = (c, choisi) => {
+    const noms = [...new Set([...PIECES[c.type], ...c.papiers_en_plus, ...c.fichiers.map(x => x.piece), "Autres documents"])];
+    return noms.map(nm => `<option${nm === choisi ? " selected" : ""}>${esc(nm)}</option>`).join("") + `<option value="__ignorer"${choisi === "__ignorer" ? " selected" : ""}>Ne pas ranger</option>`;
+  };
+  m.innerHTML = `<section class="bloc"><div class="tete"><h2>Vérifiez avant de ranger</h2><span class="muted small">${plan.par === "ia" ? "Rangé par l'IA" : "Rangé d'après les noms"}</span></div>
+      <p>${plan.clients.length} client${plan.clients.length > 1 ? "s" : ""}, ${nbF} fichier${nbF > 1 ? "s" : ""}${plan.non_classes.length ? `, ${plan.non_classes.length} fichier${plan.non_classes.length > 1 ? "s" : ""} sans client` : ""}.
+      Corrigez ce qui ne va pas (nom, type, papier), puis touchez <b>Tout ranger</b>. Les papiers reçus seront cochés, et chaque dossier ira tout seul dans « à traiter », « en cours » ou « finis ».</p>
+      <div class="rangee"><button class="btn plein" id="ranger">Tout ranger</button><button class="btn" id="recommencer">Recommencer</button></div>
+      <div class="progres" id="barre-rangement" hidden><i></i></div></section>
+    <div class="plan">${plan.clients.map((c, ci) => `<section class="bloc" data-c="${ci}">
+        <div class="champs">
+          <div class="champ"><label>Prénom</label><input data-k="prenom" value="${esc(c.prenom)}"></div>
+          <div class="champ"><label>Nom</label><input data-k="nom" value="${esc(c.nom)}"></div>
+          <div class="champ"><label>Téléphone</label><input data-k="tel" value="${esc(c.tel)}"></div>
+          <div class="champ"><label>Email</label><input data-k="email" value="${esc(c.email)}"></div>
+          <div class="champ"><label>Type</label><select data-k="type"${c.dossier_id ? " disabled" : ""}>${Object.entries(TYPES).map(([k, v]) => `<option value="${k}"${c.type === k ? " selected" : ""}>${v}</option>`).join("")}</select></div>
+        </div>
+        ${c.dossier_id ? `<span class="pill s-encours">Complète le dossier existant</span>` : ""}
+        ${c.fichiers.map((x, fi) => `<div class="rang"><span class="nomf">${esc(IMP.fichiers[x.i].chemin.split("/").pop())}</span><select data-f="${fi}" aria-label="Papier">${optionsPieces(c, x.piece)}</select></div>`).join("")}
+      </section>`).join("")}</div>
+    ${plan.non_classes.length ? `<section class="bloc"><h2>Fichiers sans client</h2><p class="muted small">Choisissez le client de chaque fichier, ou laissez « Ne pas ranger ».</p>
+      ${plan.non_classes.map(i => `<div class="rang"><span class="nomf">${esc(IMP.fichiers[i].chemin)}</span><select data-nc="${i}"><option value="">Ne pas ranger</option>${plan.clients.map((c, ci) => `<option value="${ci}">${esc([c.prenom, c.nom].filter(Boolean).join(" ") || "Client " + (ci + 1))}</option>`).join("")}</select></div>`).join("")}</section>` : ""}`;
+  m.querySelectorAll("[data-c]").forEach(sec => {
+    const c = plan.clients[+sec.dataset.c];
+    sec.querySelectorAll("[data-k]").forEach(i => i.onchange = () => { c[i.dataset.k] = i.value; if (i.dataset.k === "type") rendre(); });
+    sec.querySelectorAll("[data-f]").forEach(sl => sl.onchange = () => { c.fichiers[+sl.dataset.f].piece = sl.value; });
+  });
+  m.querySelectorAll("[data-nc]").forEach(sl => sl.onchange = () => {
+    const i = +sl.dataset.nc; plan.clients.forEach(c => { c.fichiers = c.fichiers.filter(x => x.i !== i); });
+    if (sl.value !== "") { const c = plan.clients[+sl.value]; c.fichiers.push({ i, piece: pieceParNom(IMP.fichiers[i].chemin, c.type) || "Autres documents" }); plan.non_classes = plan.non_classes.filter(x => x !== i); rendre(); }
+  });
+  m.querySelector("#recommencer").onclick = () => { IMP.plan = null; rendre(); };
+  m.querySelector("#ranger").onclick = () => toutRanger(m);
 }
 
 // ---------------------------------------------------------------- démarrage
