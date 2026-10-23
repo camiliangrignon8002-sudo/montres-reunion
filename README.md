@@ -180,7 +180,7 @@ menu fixe à gauche sur PC).
 - **Aide** : les questions courantes, réponse en un appui.
 - **Agent de maintenance** : une tâche planifiée Claude vérifie chaque lundi que la recherche des biens marche,
   répare `immo.py` si besoin et propose la correction.
-- **Mes biens et mon argent** : prix affiché, prix d'achat, frais, prix de vente, commission, ce que chaque
+- **Mes biens** : prix affiché, prix d'achat, frais, prix de vente, commission, ce que chaque
   vente a rapporté, total de l'année.
 - **Biens achetables** : le 1er de chaque mois, `immo.py` lit les maisons, appartements et terrains à vendre à
   La Réunion sur Bien'ici et met en tête les moins chers au m² par rapport à leur commune (`docs/immo/biens.json`).

@@ -7,9 +7,9 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Seb Immo">
 <meta name="robots" content="noindex">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest?v=2">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 <style>:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
 </head><body>
 <title>Seb Immo</title>
@@ -287,7 +287,7 @@ tr.cliquable:hover td { background: var(--surface-2); }
   <div class="groupe">Biens</div>
   <button class="lien" data-vue="achetables">Biens achetables<span class="compte" id="c-achetables">–</span></button>
   <button class="lien" data-vue="terrains">Terrains à acheter<span class="compte" id="c-terrains">–</span></button>
-  <button class="lien" data-vue="argent">Mes biens et mon argent</button>
+  <button class="lien" data-vue="argent">Mes biens</button>
   <div class="groupe">Appli</div>
   <button class="lien" data-vue="auto">Relances automatiques<span class="compte" id="c-auto">Non</span></button>
   <button class="lien" data-vue="reglages">Réglages et sauvegarde</button>
@@ -461,7 +461,7 @@ const ICONES = {
 
 // ---------------------------------------------------------------- navigation
 const TITRES = { accueil: "Accueil", traiter: "Dossiers à traiter", encours: "Dossiers en cours", finis: "Dossiers finis", attente: "Dossiers en attente", tous: "Tous les dossiers",
-  achetables: "Biens achetables", argent: "Mes biens et mon argent", auto: "Relances automatiques", reglages: "Réglages et sauvegarde", terrains: "Terrains à acheter", assistant: "Assistant IA", aide: "Aide", importer: "Importer mes dossiers" };
+  achetables: "Biens achetables", argent: "Mes biens", auto: "Relances automatiques", reglages: "Réglages et sauvegarde", terrains: "Terrains à acheter", assistant: "Assistant IA", aide: "Aide", importer: "Importer mes dossiers" };
 let vue = "accueil", dossierOuvert = null;
 function aller(v, id) {
   vue = v; dossierOuvert = id || null;
@@ -1089,13 +1089,13 @@ const tete = k => TETE.replaceAll("url(#peau)", `url(#peau-${k})`).replaceAll("u
 document.querySelectorAll("[data-tete]").forEach(e => { e.innerHTML = tete(e.dataset.tete); });
 const LIEN_CLAUDE = "https://claude.ai/artifact/2Bg3yFCpd15pLLDdHewmzm";
 const GUIDE = `Seb Immo est une appli simple pour gérer des dossiers immobiliers à La Réunion.
-- Menu ☰ (en haut à gauche sur téléphone, toujours visible à gauche sur PC) : Accueil, Dossiers à traiter / en cours / finis, Tous les dossiers, Biens achetables, Terrains à acheter, Mes biens et mon argent, Relances automatiques, Réglages et sauvegarde, Assistant IA, Aide.
+- Menu ☰ (en haut à gauche sur téléphone, toujours visible à gauche sur PC) : Accueil, Dossiers à traiter / en cours / finis, Tous les dossiers, Biens achetables, Terrains à acheter, Mes biens, Relances automatiques, Réglages et sauvegarde, Assistant IA, Aide.
 - Créer un dossier : bouton « + Nouveau dossier » (en bas à droite sur téléphone, en bas du menu sur PC). Choisir Achat, Vente ou Location : la liste des papiers se crée toute seule.
 - Dans un dossier : toucher le carré d'un papier quand il est reçu ; le trombone range une photo ou un PDF (le papier se coche tout seul) ; la poubelle retire un papier ; « Ajouter un papier » en bas de la liste.
 - Statut : à traiter = rien reçu ; en cours = une partie reçue ; en attente = mis de côté avec le bouton « Mettre en attente » (raison et date de reprise, plus de relances, revient sur l'accueil à la date de reprise ; « Reprendre le dossier » le remet en route) ; fini = tout reçu ou dossier clôturé (bouton « Clôturer le dossier »).
 - Relancer : dans le dossier, boutons SMS, WhatsApp, Email qui ouvrent un message prêt avec les papiers manquants. L'accueil liste les clients sans nouvelles depuis le délai choisi (7 jours par défaut, dans Réglages).
 - Relances automatiques : menu ☰ → Relances automatiques. Avec un compte Brevo (clé API collée dans l'appli), les SMS partent tout seuls quand l'appli est ouverte sur l'adresse github.io. Les mails partiront quand une adresse d'envoi sera remplie. 3 relances au plus par client, de 8h à 19h, pas le dimanche.
-- Mes biens et mon argent : prix affiché, prix d'achat, frais, prix de vente, commission ; ce que chaque vente rapporte = commission, sinon vente − achat − frais.
+- Mes biens : prix affiché, prix d'achat, frais, prix de vente, commission ; ce que chaque vente rapporte = commission, sinon vente − achat − frais.
 - Biens achetables / Terrains à acheter : liste refaite le 1er de chaque mois depuis Bien'ici, les moins chers au m² par rapport à leur commune en tête. Bouton « Créer un dossier » sur chaque annonce.
 - Sauvegarde : Réglages → Copier / Télécharger la sauvegarde, puis Restaurer sur l'autre appareil (téléphone ↔ PC). Les photos et PDF ne sont pas dans la sauvegarde. Les dossiers restent sur l'appareil où on les crée.
 - Importer : menu ☰ → Importer mes dossiers. On dépose son dossier clients (sous-dossiers, photos, PDF, tableau Excel en CSV) : l'appli range chaque fichier dans le bon client et le bon papier, montre le résultat à vérifier, puis « Tout ranger » crée les dossiers. Ils se classent tout seuls en à traiter / en cours / finis.
@@ -1241,7 +1241,7 @@ function vueAide(m) {
     ["Ajouter ou retirer un papier", `<p>En bas de la liste des papiers : écrivez le nom puis <b>Ajouter</b>. La <b>poubelle</b> à droite d'un papier le retire de la liste.</p>`],
     ["Relancer un client", `<ol><li>Ouvrez le dossier.</li><li>Dans « Relancer », touchez <b>SMS</b>, <b>WhatsApp</b> ou <b>Email</b>.</li><li>Le message est déjà écrit avec les papiers qui manquent : il reste à appuyer sur Envoyer.</li></ol><p>L'accueil montre les clients sans nouvelles depuis 7 jours.</p>`],
     ["Relances automatiques", `<p>Menu ☰ → <b>Relances automatiques</b>. Collez la clé Brevo, cochez <b>Activer</b>, puis faites un <b>SMS d'essai</b>. Les SMS partent tout seuls quand l'appli est ouverte sur l'adresse github.io (pas dans Claude).</p>`],
-    ["Noter un prix ou une vente", `<p>Dans le dossier, partie <b>Le bien</b> : prix affiché, prix d'achat, frais, commission. Mettez <b>Vendu ? → Oui</b> et le prix de vente. Le total apparaît dans <b>Mes biens et mon argent</b>.</p>`],
+    ["Noter un prix ou une vente", `<p>Dans le dossier, partie <b>Le bien</b> : prix affiché, prix d'achat, frais, commission. Mettez <b>Vendu ? → Oui</b> et le prix de vente. Le total apparaît dans <b>Mes biens</b>.</p>`],
     ["Trouver un bien ou un terrain", `<p>Menu ☰ → <b>Biens achetables</b> ou <b>Terrains à acheter</b>. La liste est refaite le 1er de chaque mois. Les moins chers au m² sont en tête. Filtrez par budget et par commune, puis <b>Créer un dossier</b> si un bien vous intéresse.</p>`],
     ["Passer du téléphone au PC", `<ol><li>Sur le téléphone : Réglages → <b>Copier la sauvegarde</b> (ou Télécharger).</li><li>Envoyez-vous le texte (mail, WhatsApp).</li><li>Sur le PC : Réglages → collez le texte → <b>Restaurer</b>.</li></ol><p>Les photos et PDF ne passent pas : rangez-les sur l'appareil principal.</p>`],
     ["Mettre l'appli sur l'écran d'accueil", `<p>iPhone : ouvrez l'adresse dans <b>Safari</b>, <b>Partager</b>, <b>Sur l'écran d'accueil</b>. Android : <b>Chrome</b>, menu <b>⋮</b>, <b>Ajouter à l'écran d'accueil</b>. PC : icône d'installation à droite de la barre d'adresse.</p>`],
