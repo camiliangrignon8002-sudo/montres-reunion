@@ -1,0 +1,392 @@
+<title>Dossiers clients immobiliers</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout : bandeau de synthèse, puis liste des dossiers à gauche et fiche du dossier à droite (empilés sur téléphone). */
+:root {
+  --bg: #f3f5f4;
+  --surface: #ffffff;
+  --ink: #17231f;
+  --muted: #5c6b66;
+  --line: #d9e0dd;
+  --accent: #1d5c52;
+  --accent-soft: #e2efec;
+  --late: #b3261e;
+  --late-soft: #fbe7e5;
+  --due: #8a5a00;
+  --due-soft: #fdf1d6;
+  --ok: #2c6b2f;
+  --ok-soft: #e4f2e2;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101715; --surface: #18211e; --ink: #e6ecea; --muted: #9aaba5; --line: #2b3733;
+    --accent: #6fc2b2; --accent-soft: #1d332e; --late: #ff8a80; --late-soft: #3a1d1b;
+    --due: #f0c060; --due-soft: #352a12; --ok: #8fd18f; --ok-soft: #1b3020; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101715; --surface: #18211e; --ink: #e6ecea; --muted: #9aaba5; --line: #2b3733;
+  --accent: #6fc2b2; --accent-soft: #1d332e; --late: #ff8a80; --late-soft: #3a1d1b;
+  --due: #f0c060; --due-soft: #352a12; --ok: #8fd18f; --ok-soft: #1b3020; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 40px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 18px; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; }
+h1 { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.35rem; font-weight: 700; }
+h3 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: 0.86em; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+header.top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px; }
+.sub { color: var(--muted); margin: 2px 0 0; }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 7px 12px; font-weight: 600; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.btn.small { padding: 4px 9px; font-size: 0.88rem; }
+.btn.danger { color: var(--late); }
+.btn.danger.confirm { background: var(--late); border-color: var(--late); color: var(--bg); }
+.linkish { background: none; border: 0; padding: 0; color: var(--accent); font-weight: 600; }
+
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; text-align: left; display: grid; gap: 2px; }
+.stat b { font-family: var(--f-display); font-size: 1.6rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--muted); font-size: 0.9rem; }
+.stat.is-late b { color: var(--late); }
+.stat.is-due b { color: var(--due); }
+.stat.active { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+@media (max-width: 640px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.banner { padding: 9px 12px; border-radius: 8px; background: var(--due-soft); color: var(--due); font-size: 0.92rem; }
+
+.main { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 860px) { .main { grid-template-columns: minmax(0, 1fr); } .main.has-sel .list-col { display: none; } }
+@media (min-width: 861px) { .back { display: none !important; } }
+
+.list-col { display: grid; gap: 10px; }
+.search { width: 100%; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.list { display: grid; gap: 8px; }
+.item { width: 100%; text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 11px 13px; display: grid; gap: 6px; }
+.item:hover { border-color: var(--accent); }
+.item.sel { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+.item .row1 { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.item .name { font-weight: 600; font-size: 1.02rem; min-width: 0; overflow-wrap: anywhere; }
+.item .meta { color: var(--muted); font-size: 0.88rem; display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; }
+.bar { height: 5px; border-radius: 3px; background: var(--line); overflow: hidden; width: 70px; }
+.bar i { display: block; height: 100%; background: var(--ok); }
+.pill { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 99px; font-size: 0.78rem; font-weight: 600; white-space: nowrap; }
+.pill.late { background: var(--late-soft); color: var(--late); }
+.pill.due { background: var(--due-soft); color: var(--due); }
+.pill.later { background: var(--accent-soft); color: var(--accent); }
+.pill.none { background: var(--line); color: var(--muted); }
+.pill.example { background: var(--line); color: var(--muted); font-weight: 600; }
+.empty { color: var(--muted); padding: 18px; border: 1px dashed var(--line); border-radius: var(--r); text-align: center; }
+
+.detail { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 18px; display: grid; gap: 20px; min-width: 0; }
+.dhead { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: start; }
+.dhead .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.field { display: grid; gap: 4px; min-width: 0; }
+.field label { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+.field input, .field select, .field textarea { width: 100%; padding: 7px 10px; border: 1px solid var(--line); border-radius: 7px; background: var(--bg); }
+.field textarea { min-height: 60px; resize: vertical; }
+.withcopy { display: flex; gap: 6px; }
+.withcopy input { flex: 1; min-width: 0; }
+section.block { display: grid; gap: 10px; }
+.bhead { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.pieces { display: grid; gap: 6px; }
+.piece { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; }
+.piece.recue { background: var(--ok-soft); border-color: transparent; }
+.piece .pname { overflow-wrap: anywhere; }
+.piece .pdate { color: var(--muted); font-size: 0.82rem; }
+.toggle { border: 1px solid var(--line); border-radius: 99px; padding: 3px 10px; font-size: 0.82rem; font-weight: 600; background: var(--late-soft); color: var(--late); white-space: nowrap; }
+.piece.recue .toggle { background: var(--ok); color: var(--bg); border-color: var(--ok); }
+.x { background: none; border: 0; color: var(--muted); font-size: 1.1rem; line-height: 1; padding: 2px 6px; }
+.x:hover { color: var(--late); }
+.addrow { display: flex; gap: 6px; flex-wrap: wrap; }
+.addrow input { flex: 1 1 180px; min-width: 0; padding: 7px 10px; border: 1px solid var(--line); border-radius: 7px; background: var(--bg); }
+
+.next { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 8px; background: var(--accent-soft); }
+.next input { padding: 5px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+.rform { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; align-items: end; padding: 12px; border: 1px dashed var(--line); border-radius: 8px; }
+.rform .wide { grid-column: 1 / -1; }
+.timeline { display: grid; gap: 0; }
+.rel { display: grid; grid-template-columns: 92px minmax(0, 1fr) auto; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line); align-items: start; }
+.rel:first-child { border-top: 0; }
+.rel .canal { font-weight: 600; }
+.rel .note { color: var(--muted); overflow-wrap: anywhere; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 8px; font-weight: 600; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.toast.show { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Dossiers clients</h1>
+      <p class="sub">Pièces à réunir et relances de chaque client.</p>
+    </div>
+    <button class="btn primary" id="btn-new" type="button">+ Nouveau dossier</button>
+  </header>
+
+  <div class="stats" id="stats"></div>
+  <div class="banner" id="banner" hidden></div>
+
+  <div class="main" id="main">
+    <div class="list-col">
+      <input class="search" id="q" type="search" placeholder="Rechercher un nom, un téléphone, un bien…" aria-label="Rechercher">
+      <div class="list" id="list"><div class="empty">Chargement des dossiers…</div></div>
+    </div>
+    <div id="detail-col"></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const PIECES_DEFAUT = ["Carte d'identité", "Livret de famille", "Justificatif de domicile", "Dernier avis d'imposition", "3 derniers bulletins de salaire", "RIB"];
+const CANAUX = ["Téléphone", "Email", "SMS", "Rendez-vous"];
+const ETAPES = ["Nouveau contact", "Constitution du dossier", "Dossier complet", "Offre / compromis", "Signé", "Abandonné"];
+
+let db = null, dossiers = [], selId = null, filtre = "tous", query = "", confirmDel = false;
+const writing = {}, pending = {};
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const uid = () => Math.random().toString(36).slice(2, 10);
+function today() { const d = new Date(); return iso(d); }
+function iso(d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+function plusDays(n) { const d = new Date(); d.setDate(d.getDate() + n); return iso(d); }
+function fr(s) { if (!s) return ""; const [y, m, d] = s.split("-"); return d + "/" + m + "/" + y; }
+function daysFrom(s) { const a = new Date(s + "T00:00:00"), b = new Date(today() + "T00:00:00"); return Math.round((a - b) / 86400000); }
+
+function relanceEtat(d) {
+  if (!d.prochaineRelance || d.etape === "Signé" || d.etape === "Abandonné") return { cls: "none", txt: "Pas de relance prévue", k: "none" };
+  const n = daysFrom(d.prochaineRelance);
+  if (n < 0) return { cls: "late", txt: "Relance en retard de " + (-n) + " j", k: "late" };
+  if (n === 0) return { cls: "due", txt: "À relancer aujourd'hui", k: "due" };
+  return { cls: "later", txt: "Relance le " + fr(d.prochaineRelance), k: "later" };
+}
+function manquantes(d) { return (d.pieces || []).filter(p => p.statut !== "recue").length; }
+
+let toastT;
+function toast(msg) { const t = $("#toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("show"), 1800); }
+
+/* ---------- stockage ---------- */
+const LS = "dossiers-immo-local";
+function loadLocal() { try { return JSON.parse(localStorage.getItem(LS) || "[]"); } catch { return []; } }
+function saveLocal() { try { localStorage.setItem(LS, JSON.stringify(dossiers)); } catch {} }
+
+async function persist(d) {
+  if (!db) { saveLocal(); return; }
+  pending[d.id] = JSON.parse(JSON.stringify(d));
+  if (writing[d.id]) return;
+  writing[d.id] = true;
+  try {
+    while (pending[d.id]) {
+      const body = pending[d.id]; delete pending[d.id];
+      const { id, ...rest } = body;
+      await db.collection("dossiers").doc(id).set(rest);
+    }
+  } catch (e) {
+    toast(e && e.code === "quota_exceeded" ? "Espace plein : supprimez d'anciens dossiers." : "Enregistrement impossible, réessayez.");
+  } finally { writing[d.id] = false; }
+}
+async function remove(id) {
+  dossiers = dossiers.filter(d => d.id !== id);
+  if (!db) { saveLocal(); return; }
+  try { await db.collection("dossiers").doc(id).delete(); } catch { toast("Suppression impossible, réessayez."); }
+}
+function cur() { return dossiers.find(d => d.id === selId); }
+function change(fn, msg) { const d = cur(); if (!d) return; fn(d); d.maj = new Date().toISOString(); persist(d); render(); if (msg) toast(msg); }
+
+/* ---------- rendu ---------- */
+function render() { renderStats(); renderList(); renderDetail(); }
+
+function renderStats() {
+  const actifs = dossiers.filter(d => d.etape !== "Signé" && d.etape !== "Abandonné");
+  const late = dossiers.filter(d => relanceEtat(d).k === "late").length;
+  const due = dossiers.filter(d => relanceEtat(d).k === "due").length;
+  const manq = dossiers.filter(d => manquantes(d) > 0 && d.etape !== "Abandonné").length;
+  const s = [
+    ["tous", actifs.length, "Dossiers en cours", ""],
+    ["late", late, "Relances en retard", late ? "is-late" : ""],
+    ["due", due, "À relancer aujourd'hui", due ? "is-due" : ""],
+    ["manq", manq, "Dossiers incomplets", ""],
+  ];
+  $("#stats").innerHTML = s.map(([k, n, l, c]) => `<button type="button" class="stat ${c} ${filtre === k ? "active" : ""}" data-f="${k}"><b>${n}</b><span>${l}</span></button>`).join("");
+}
+
+function visibles() {
+  const q = query.trim().toLowerCase();
+  return dossiers.filter(d => {
+    if (filtre === "late" && relanceEtat(d).k !== "late") return false;
+    if (filtre === "due" && relanceEtat(d).k !== "due") return false;
+    if (filtre === "manq" && !(manquantes(d) > 0 && d.etape !== "Abandonné")) return false;
+    if (!q) return true;
+    return [d.nom, d.telephone, d.email, d.bien].some(v => String(v || "").toLowerCase().includes(q));
+  }).sort((a, b) => {
+    const ra = a.prochaineRelance || "9999", rb = b.prochaineRelance || "9999";
+    return ra.localeCompare(rb) || String(a.nom).localeCompare(String(b.nom));
+  });
+}
+
+function renderList() {
+  const v = visibles();
+  if (!dossiers.length) { $("#list").innerHTML = `<div class="empty">Aucun dossier pour l'instant.<br>Cliquez sur <b>+ Nouveau dossier</b> pour ajouter votre premier client.</div>`; return; }
+  if (!v.length) { $("#list").innerHTML = `<div class="empty">Aucun dossier ne correspond. <button class="linkish" type="button" data-f="tous">Tout afficher</button></div>`; return; }
+  $("#list").innerHTML = v.map(d => {
+    const tot = (d.pieces || []).length, ok = tot - manquantes(d), r = relanceEtat(d);
+    return `<button type="button" class="item ${d.id === selId ? "sel" : ""}" data-id="${esc(d.id)}">
+      <div class="row1"><span class="name">${esc(d.nom || "Sans nom")}</span>${d.exemple ? '<span class="pill example">Exemple</span>' : ""}</div>
+      <div class="meta"><span>${esc(d.etape || "")}</span><span style="display:inline-flex;gap:6px;align-items:center"><span class="bar"><i style="width:${tot ? (ok / tot * 100) : 0}%"></i></span><span class="mono">${ok}/${tot} pièces</span></span></div>
+      <div><span class="pill ${r.cls}">${r.txt}</span></div>
+    </button>`;
+  }).join("");
+}
+
+function renderDetail() {
+  const d = cur(); const col = $("#detail-col");
+  $("#main").classList.toggle("has-sel", !!d);
+  if (!d) { col.innerHTML = dossiers.length ? `<div class="detail"><div class="empty">Choisissez un dossier dans la liste pour voir ses pièces et ses relances.</div></div>` : ""; return; }
+  const r = relanceEtat(d), tot = (d.pieces || []).length, manq = manquantes(d);
+  const rels = [...(d.relances || [])].sort((a, b) => b.date.localeCompare(a.date));
+  col.innerHTML = `<div class="detail">
+    <button class="linkish back" type="button" data-act="back">← Tous les dossiers</button>
+    <div class="dhead">
+      <div><h2>${esc(d.nom || "Sans nom")}</h2><p class="sub">${esc(d.bien || "Bien non renseigné")} ${d.exemple ? ' · <span class="pill example">Exemple</span>' : ""}</p></div>
+      <div class="actions"><button class="btn small danger ${confirmDel ? "confirm" : ""}" type="button" data-act="del">${confirmDel ? "Confirmer la suppression" : "Supprimer"}</button></div>
+    </div>
+
+    <section class="block">
+      <h3>Client</h3>
+      <div class="contact">
+        <div class="field"><label for="f-nom">Nom</label><input id="f-nom" data-k="nom" value="${esc(d.nom)}"></div>
+        <div class="field"><label for="f-tel">Téléphone</label><div class="withcopy"><input id="f-tel" type="tel" data-k="telephone" value="${esc(d.telephone)}"><button class="btn small" type="button" data-copy="telephone">Copier</button></div></div>
+        <div class="field"><label for="f-mail">Email</label><div class="withcopy"><input id="f-mail" type="email" data-k="email" value="${esc(d.email)}"><button class="btn small" type="button" data-copy="email">Copier</button></div></div>
+        <div class="field"><label for="f-bien">Bien / projet</label><input id="f-bien" data-k="bien" value="${esc(d.bien)}" placeholder="Ex. T3 Saint-Denis, achat"></div>
+        <div class="field"><label for="f-etape">Étape</label><select id="f-etape" data-k="etape">${ETAPES.map(e => `<option ${e === d.etape ? "selected" : ""}>${e}</option>`).join("")}</select></div>
+      </div>
+      <div class="field"><label for="f-notes">Notes</label><textarea id="f-notes" data-k="notes">${esc(d.notes)}</textarea></div>
+    </section>
+
+    <section class="block">
+      <div class="bhead"><h3>Pièces du dossier · <span class="mono">${tot - manq}/${tot} reçues</span></h3>${manq ? `<span class="pill late">${manq} manquante${manq > 1 ? "s" : ""}</span>` : (tot ? '<span class="pill later" style="background:var(--ok-soft);color:var(--ok)">Dossier complet</span>' : "")}</div>
+      <div class="pieces">${(d.pieces || []).map(p => `<div class="piece ${p.statut === "recue" ? "recue" : ""}">
+          <button class="toggle" type="button" data-piece="${esc(p.id)}" aria-pressed="${p.statut === "recue"}">${p.statut === "recue" ? "✓ Reçue" : "Manquante"}</button>
+          <div><div class="pname">${esc(p.nom)}</div>${p.statut === "recue" && p.date ? `<div class="pdate">Reçue le ${fr(p.date)}</div>` : ""}</div>
+          <button class="x" type="button" data-rmpiece="${esc(p.id)}" aria-label="Retirer ${esc(p.nom)}">×</button>
+        </div>`).join("") || '<div class="empty">Aucune pièce demandée.</div>'}</div>
+      <form class="addrow" id="add-piece"><input id="f-newpiece" placeholder="Ajouter une pièce (ex. Compromis de vente)"><button class="btn small" type="submit">Ajouter</button></form>
+    </section>
+
+    <section class="block">
+      <div class="bhead"><h3>Relances</h3><span class="pill ${r.cls}">${r.txt}</span></div>
+      <div class="next"><label for="f-next">Prochaine relance</label><input id="f-next" type="date" value="${esc(d.prochaineRelance || "")}"><button class="btn small" type="button" data-act="clearnext">Aucune</button></div>
+      <form class="rform" id="add-rel">
+        <div class="field"><label for="r-date">Date</label><input id="r-date" type="date" value="${today()}" required></div>
+        <div class="field"><label for="r-canal">Canal</label><select id="r-canal">${CANAUX.map(c => `<option>${c}</option>`).join("")}</select></div>
+        <div class="field"><label for="r-next">Relancer à nouveau le</label><input id="r-next" type="date" value="${plusDays(7)}"></div>
+        <div class="field wide"><label for="r-note">Ce qui a été dit</label><input id="r-note" placeholder="Ex. Envoie le livret de famille cette semaine"></div>
+        <div class="wide"><button class="btn primary" type="submit">Enregistrer la relance</button></div>
+      </form>
+      <div class="timeline">${rels.map(x => `<div class="rel"><span class="mono">${fr(x.date)}</span><div><div class="canal">${esc(x.canal)}</div>${x.note ? `<div class="note">${esc(x.note)}</div>` : ""}</div><button class="x" type="button" data-rmrel="${esc(x.id)}" aria-label="Supprimer cette relance">×</button></div>`).join("") || '<div class="empty">Aucune relance enregistrée.</div>'}</div>
+    </section>
+  </div>`;
+}
+
+/* ---------- actions ---------- */
+function nouveau() {
+  const d = { id: "d-" + Date.now().toString(36) + uid().slice(0, 4), nom: "Nouveau client", telephone: "", email: "", bien: "", etape: "Nouveau contact", notes: "",
+    pieces: PIECES_DEFAUT.map(n => ({ id: uid(), nom: n, statut: "manquante" })), relances: [], prochaineRelance: plusDays(2), cree: new Date().toISOString() };
+  dossiers.push(d); selId = d.id; filtre = "tous"; query = ""; $("#q").value = "";
+  persist(d); render();
+  const n = $("#f-nom"); if (n) { n.focus(); n.select(); }
+}
+
+document.addEventListener("click", async (e) => {
+  const t = e.target.closest("button"); if (!t) return;
+  if (t.id === "btn-new") return nouveau();
+  if (t.dataset.f) { filtre = filtre === t.dataset.f ? "tous" : t.dataset.f; render(); return; }
+  if (t.dataset.id) { selId = t.dataset.id; confirmDel = false; render(); if (innerWidth <= 860) scrollTo(0, 0); return; }
+  if (t.dataset.piece) return change(d => { const p = d.pieces.find(x => x.id === t.dataset.piece); p.statut = p.statut === "recue" ? "manquante" : "recue"; p.date = p.statut === "recue" ? today() : null; });
+  if (t.dataset.rmpiece) return change(d => { d.pieces = d.pieces.filter(x => x.id !== t.dataset.rmpiece); }, "Pièce retirée");
+  if (t.dataset.rmrel) return change(d => { d.relances = d.relances.filter(x => x.id !== t.dataset.rmrel); }, "Relance supprimée");
+  if (t.dataset.copy) {
+    const v = cur()?.[t.dataset.copy] || ""; if (!v) return;
+    try { await navigator.clipboard.writeText(v); toast("Copié : " + v); }
+    catch { const i = t.parentElement.querySelector("input"); i.focus(); i.select(); toast("Faites Ctrl+C pour copier"); }
+    return;
+  }
+  const act = t.dataset.act;
+  if (act === "back") { selId = null; render(); }
+  if (act === "clearnext") change(d => { d.prochaineRelance = ""; }, "Plus de relance prévue");
+  if (act === "del") {
+    if (!confirmDel) { confirmDel = true; renderDetail(); return; }
+    const id = selId; confirmDel = false; selId = null; await remove(id); render(); toast("Dossier supprimé");
+  }
+});
+
+let typingT;
+document.addEventListener("input", (e) => {
+  const el = e.target;
+  if (el.id === "q") { query = el.value; renderList(); return; }
+  if (el.dataset.k && el.tagName !== "SELECT") {
+    const d = cur(); if (!d) return; d[el.dataset.k] = el.value;
+    clearTimeout(typingT); typingT = setTimeout(() => { d.maj = new Date().toISOString(); persist(d); renderList(); renderStats(); }, 600);
+  }
+});
+document.addEventListener("change", (e) => {
+  const el = e.target;
+  if (el.id === "f-etape") return change(d => { d.etape = el.value; });
+  if (el.id === "f-next") return change(d => { d.prochaineRelance = el.value; }, el.value ? "Relance prévue le " + fr(el.value) : "");
+});
+document.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (e.target.id === "add-piece") {
+    const v = $("#f-newpiece").value.trim(); if (!v) return;
+    change(d => { d.pieces.push({ id: uid(), nom: v, statut: "manquante" }); }, "Pièce ajoutée");
+    $("#f-newpiece")?.focus();
+  }
+  if (e.target.id === "add-rel") {
+    const date = $("#r-date").value || today(), canal = $("#r-canal").value, note = $("#r-note").value.trim(), next = $("#r-next").value;
+    change(d => { d.relances = d.relances || []; d.relances.push({ id: uid(), date, canal, note }); d.prochaineRelance = next || ""; }, "Relance enregistrée");
+  }
+});
+
+/* ---------- démarrage ---------- */
+function useLocal(msg) {
+  dossiers = loadLocal(); render();
+  const b = $("#banner"); b.textContent = msg; b.hidden = false;
+}
+(async () => {
+  render();
+  try { db = await (window.claude?.use ? window.claude.use("db") : null); } catch { db = null; }
+  if (!db) { useLocal("Sauvegarde en ligne indisponible ici : vos dossiers sont gardés seulement dans ce navigateur. Connectez-vous à claude.ai pour les retrouver partout."); return; }
+  db.collection("dossiers").onSnapshot((snap) => {
+    const fresh = snap.docs.map(s => ({ id: s.id, ...s.data() }));
+    // garde la version locale d'un dossier en cours d'enregistrement
+    dossiers = fresh.map(f => (writing[f.id] || pending[f.id]) ? (dossiers.find(x => x.id === f.id) || f) : f);
+    dossiers.forEach(x => { if (!x.pieces) x.pieces = []; if (!x.relances) x.relances = []; });
+    for (const local of Object.keys(writing)) if (writing[local] && !dossiers.find(x => x.id === local)) { const l = cur(); if (l && l.id === local) dossiers.push(l); }
+    if (selId && !dossiers.find(x => x.id === selId)) selId = null;
+    const active = document.activeElement;
+    if (active && active.dataset && active.dataset.k && cur()) { renderList(); renderStats(); }
+    else render();
+  }, () => useLocal("La connexion à la sauvegarde a été coupée. Rechargez la page."));
+})();
+</script>
