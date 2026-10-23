@@ -41,6 +41,14 @@ def norm(s):
     return s.lower().strip()
 
 
+def valeur(v):
+    """Les programmes neufs donnent une fourchette [min, max] : on garde le plus petit nombre."""
+    if isinstance(v, (list, tuple)):
+        v = [x for x in v if isinstance(x, (int, float))]
+        return min(v) if v else None
+    return v if isinstance(v, (int, float)) else None
+
+
 def get(url):
     for essai in range(3):
         try:
@@ -73,10 +81,10 @@ def bienici(zones):
                 continue
             ville = x.get("city", "")
             genre = TYPES.get(x.get("propertyType"), "Bien")
-            pieces = x.get("roomsQuantity")
+            pieces = valeur(x.get("roomsQuantity"))
             slug = re.sub(r"[^a-z0-9]+", "-", norm(ville)).strip("-")
             categorie = {"Maison": "maison", "Appartement": "appartement", "Terrain": "terrain"}.get(genre, "maison")
-            surface = x.get("surfaceArea") if genre != "Terrain" else x.get("landSurfaceArea") or x.get("surfaceArea")
+            surface = valeur(x.get("surfaceArea")) if genre != "Terrain" else valeur(x.get("landSurfaceArea")) or valeur(x.get("surfaceArea"))
             photos = [p["url"] for p in x.get("photos", []) if p.get("url")]
             res.append({
                 "id": "bienici-" + x["id"],
@@ -84,14 +92,15 @@ def bienici(zones):
                 "url": f"https://www.bienici.com/annonce/vente/{slug}/{categorie}/{pieces or 1}pieces/{x['id']}",
                 "titre": (x.get("title") or "").strip(),
                 "type": genre,
-                "prix": x.get("price"),
+                "prix": valeur(x.get("price")),
                 "surface": surface,
-                "terrain": x.get("landSurfaceArea"),
+                "terrain": valeur(x.get("landSurfaceArea")),
                 "pieces": pieces,
-                "chambres": x.get("bedroomsQuantity"),
+                "chambres": valeur(x.get("bedroomsQuantity")),
                 "commune": ville,
                 "cp": cp,
                 "photo": photos[0] if photos else "",
+                "neuf": bool(x.get("newProperty")),
                 "dpe": x.get("energyClassification") if x.get("energyClassification") not in ("NS", "VI") else None,
                 "annonceur": x.get("accountDisplayName") or ("Agence" if x.get("adCreatedByPro") else "Particulier"),
                 "date": (x.get("publicationDate") or "")[:10],
