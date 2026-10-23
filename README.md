@@ -166,6 +166,9 @@ menu fixe à gauche sur PC).
 - Classement automatique : **à traiter** (rien reçu), **en cours** (une partie reçue), **finis** (tout reçu ou clôturé).
 - **Relances** : message prêt avec la liste des papiers manquants, envoyé en un appui par SMS, WhatsApp ou email.
   L'accueil liste les clients à relancer (sans nouvelles depuis 7 jours, réglable).
+- **Relances automatiques** (menu ☰) : avec un compte **Brevo** (clé API collée dans l'appli), l'appli envoie elle-même
+  les SMS (et les mails une fois l'adresse d'envoi remplie) aux clients à qui il manque des papiers, quand elle est ouverte
+  sur l'adresse github.io. 3 relances au plus par client, de 8h à 19h, pas le dimanche (réglable).
 - **Mes biens et mon argent** : prix affiché, prix d'achat, frais, prix de vente, commission, ce que chaque
   vente a rapporté, total de l'année.
 - **Biens achetables** : le 1er de chaque mois, `immo.py` lit les maisons, appartements et terrains à vendre à

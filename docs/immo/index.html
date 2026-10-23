@@ -249,6 +249,7 @@ tr.cliquable:hover td { background: var(--surface-2); }
   <button class="lien" data-vue="achetables">Biens achetables<span class="compte" id="c-achetables">–</span></button>
   <button class="lien" data-vue="argent">Mes biens et mon argent</button>
   <div class="groupe">Appli</div>
+  <button class="lien" data-vue="auto">Relances automatiques<span class="compte" id="c-auto">Non</span></button>
   <button class="lien" data-vue="reglages">Réglages et sauvegarde</button>
   <div style="flex:1"></div>
   <button class="btn plein" id="nouveau-menu" style="margin:10px 4px 0">+ Nouveau dossier</button>
@@ -283,6 +284,8 @@ const PIECES = {
 };
 const TYPES = { achat: "Achat", vente: "Vente", location: "Location" };
 const STATUTS = { traiter: "À traiter", encours: "En cours", fini: "Fini" };
+const MESSAGE_SMS = "Bonjour {prénom}, c'est {mon nom}. Pour votre dossier il me manque encore : {pièces courtes}. Vous pouvez me les envoyer en photo par SMS ou WhatsApp. Merci !";
+const AUTO = { actif: false, canal: "les2", max: 3, de: 8, a: 19, dimanche: false, expediteur: "", nomSms: "SebImmo", sms: MESSAGE_SMS };
 const MESSAGE = "Bonjour {prénom},\n\nC'est {mon nom}. Pour avancer sur votre dossier ({bien}), il me manque encore :\n{pièces}\n\nVous pouvez me les envoyer par mail ({mon email}) ou en photo par SMS / WhatsApp.\n\nMerci beaucoup et bonne journée !";
 
 // ---------------------------------------------------------------- données
@@ -314,6 +317,8 @@ function charger() {
 }
 let D = charger();
 D.reglages = Object.assign({ nom: "", email: "", tel: "", delai: 7, message: MESSAGE }, D.reglages || {});
+D.reglages.auto = Object.assign({}, AUTO, D.reglages.auto || {});
+D.journal = D.journal || [];
 D.dossiers = D.dossiers || [];
 function sauver() {
   try { localStorage.setItem(CLE, JSON.stringify(D)); } catch (e) { toast("Enregistrement impossible sur cet appareil"); }
@@ -412,7 +417,7 @@ const ICONES = {
 
 // ---------------------------------------------------------------- navigation
 const TITRES = { accueil: "Accueil", traiter: "Dossiers à traiter", encours: "Dossiers en cours", finis: "Dossiers finis", tous: "Tous les dossiers",
-  achetables: "Biens achetables", argent: "Mes biens et mon argent", reglages: "Réglages et sauvegarde" };
+  achetables: "Biens achetables", argent: "Mes biens et mon argent", auto: "Relances automatiques", reglages: "Réglages et sauvegarde" };
 let vue = "accueil", dossierOuvert = null;
 function aller(v, id) {
   vue = v; dossierOuvert = id || null;
@@ -429,13 +434,14 @@ function rendre() {
   const m = $("#vue");
   if (d) return vueDossier(m, d);
   ({ accueil: vueAccueil, traiter: m => vueListe(m, "traiter"), encours: m => vueListe(m, "encours"), finis: m => vueListe(m, "fini"),
-     tous: m => vueListe(m, null), achetables: vueAchetables, argent: vueArgent, reglages: vueReglages }[vue] || vueAccueil)(m);
+     tous: m => vueListe(m, null), achetables: vueAchetables, argent: vueArgent, auto: vueAuto, reglages: vueReglages }[vue] || vueAccueil)(m);
 }
 function compter() {
   const n = { traiter: 0, encours: 0, fini: 0 };
   D.dossiers.forEach(d => n[statut(d)]++);
   $("#c-traiter").textContent = n.traiter; $("#c-encours").textContent = n.encours; $("#c-finis").textContent = n.fini;
   $("#c-tous").textContent = D.dossiers.length;
+  $("#c-auto").textContent = D.reglages.auto.actif && cleBrevo() ? "Oui" : "Non";
 }
 function ouvrirMenu() { $("#menu").classList.add("open"); $("#voile").hidden = false; $("#burger").setAttribute("aria-expanded", "true"); }
 function fermerMenu() { $("#menu").classList.remove("open"); $("#voile").hidden = true; $("#burger").setAttribute("aria-expanded", "false"); }
@@ -485,6 +491,8 @@ function vueAccueil(m) {
     </div>
     <section class="bloc">
       <div class="tete"><h2>À relancer aujourd'hui</h2><span class="muted small">Sans nouvelles depuis ${D.reglages.delai} jours ou plus</span></div>
+      ${D.reglages.auto.actif && cleBrevo() ? `<p class="small"><span class="pill s-fini">Relances automatiques activées</span> Les clients ci-dessous sont relancés tout seuls (${{ les2: "mail et SMS", email: "mail", sms: "SMS" }[D.reglages.auto.canal]}).</p>`
+        : `<p class="small muted">Les relances partent à la main. <button class="btn petit" data-aller="auto">Activer les relances automatiques</button></p>`}
       ${relancer.length ? `<div class="cartes">${relancer.map(carte).join("")}</div>` : `<p class="muted">Personne à relancer. Les clients apparaissent ici quand des pièces manquent depuis ${D.reglages.delai} jours.</p>`}
     </section>
     <section class="bloc">
@@ -562,7 +570,7 @@ function nouveauDossier(bien) {
 // ---------------------------------------------------------------- fiche dossier
 function vueDossier(m, d) {
   const s = statut(d), manque = manquantes(d), b = d.bien, g = gain(d);
-  const relancesTxt = d.relances.slice().reverse().slice(0, 6).map(r => `<li>${esc(r.canal)} préparé le ${dateFr(r.date)}</li>`).join("");
+  const relancesTxt = d.relances.slice().reverse().slice(0, 6).map(r => `<li>${esc(r.canal)} ${r.auto ? "envoyé tout seul" : "préparé"} le ${dateFr(r.date)}</li>`).join("");
   m.innerHTML = `
     <div class="rangee"><button class="btn petit" id="retour">← Retour</button>
       <span class="pill s-${s}">${STATUTS[s]}</span>${aRelancer(d) ? '<span class="pill relance">À relancer</span>' : ""}${d.exemple ? '<span class="pill exemple">Exemple</span>' : ""}
@@ -615,7 +623,7 @@ function vueDossier(m, d) {
             <button class="btn" id="copier-msg">Copier le message</button>
           </div>
           <div class="message" id="msg">${esc(message(d))}</div>` : `<p>Tous les papiers sont reçus. Rien à relancer.</p>`}
-          <label class="rangee small"><input type="checkbox" id="auto"${d.relanceAuto ? " checked" : ""} style="width:22px;height:22px"> Me rappeler de relancer tous les ${D.reglages.delai} jours tant qu'il manque des papiers</label>
+          <label class="rangee small"><input type="checkbox" id="auto"${d.relanceAuto ? " checked" : ""} style="width:22px;height:22px"> ${D.reglages.auto.actif && cleBrevo() ? "Relancer automatiquement" : "Me rappeler de relancer"} tous les ${D.reglages.delai} jours tant qu'il manque des papiers${D.reglages.auto.actif ? ` (${nbAuto(d)} / ${D.reglages.auto.max} relances automatiques faites)` : ""}</label>
           ${relancesTxt ? `<div><h3>Dernières relances</h3><ul class="histo">${relancesTxt}</ul></div>` : ""}
           <button class="btn petit" id="relance-faite">J'ai relancé autrement (appel…)</button>
         </section>
@@ -832,11 +840,177 @@ function vueReglages(m) {
       const v = JSON.parse(txt);
       if (!v || !Array.isArray(v.dossiers)) throw 0;
       D = v; D.reglages = Object.assign({ nom: "", email: "", tel: "", delai: 7, message: MESSAGE }, D.reglages || {});
+      D.reglages.auto = Object.assign({}, AUTO, D.reglages.auto || {}); D.journal = D.journal || [];
       sauver(); toast(D.dossiers.length + " dossiers restaurés"); aller("accueil");
     } catch (e) { toast("Ce texte n'est pas une sauvegarde de l'appli"); }
   };
   m.querySelector("#restaurer").onclick = () => restaurer(m.querySelector("#coller").value);
   m.querySelector("#fichier-sauv").onchange = async e => { const f = e.target.files[0]; if (f) restaurer(await f.text()); };
+}
+
+// ---------------------------------------------------------------- relances automatiques (Brevo)
+// La clé Brevo reste à part : elle n'entre pas dans la sauvegarde qu'on copie ou envoie.
+function cleBrevo() { try { return localStorage.getItem(CLE + "-brevo") || ""; } catch (e) { return ""; } }
+function dansCadre() { try { return window.top !== window.self; } catch (e) { return true; } }
+const nbAuto = d => d.relances.filter(r => r.auto).length;
+function messageSms(d) {
+  const r = D.reglages;
+  return (r.auto.sms || MESSAGE_SMS)
+    .replaceAll("{prénom}", d.client.prenom || "")
+    .replaceAll("{nom}", d.client.nom || "")
+    .replaceAll("{mon nom}", r.nom || "votre conseiller")
+    .replaceAll("{mon email}", r.email || r.auto.expediteur || "")
+    .replaceAll("{bien}", d.bien.adresse || TYPES[d.type].toLowerCase())
+    .replaceAll("{pièces courtes}", manquantes(d).map(p => p.nom.replace(/\s*\(.*\)$/, "")).join(", "))
+    .replaceAll("{pièces}", manquantes(d).map(p => p.nom).join(", "));
+}
+async function brevo(chemin, corps) {
+  const r = await fetch("https://api.brevo.com/v3/" + chemin, {
+    method: "POST", headers: { "api-key": cleBrevo(), "content-type": "application/json", accept: "application/json" }, body: JSON.stringify(corps) });
+  if (!r.ok) {
+    let txt = ""; try { txt = (await r.json()).message || ""; } catch (e) {}
+    const err = new Error(txt || "erreur " + r.status); err.code = r.status; throw err;
+  }
+  return true;
+}
+async function envoyerEmail(a, nom, sujet, texte) {
+  const r = D.reglages;
+  return brevo("smtp/email", { sender: { name: r.nom || "Seb Immo", email: r.auto.expediteur }, to: [{ email: a, name: nom || a }],
+    replyTo: { email: r.auto.expediteur }, subject: sujet, textContent: texte });
+}
+async function envoyerSms(tel, texte) {
+  const corps = { sender: (D.reglages.auto.nomSms || "SebImmo").replace(/[^A-Za-z0-9]/g, "").slice(0, 11) || "SebImmo",
+    recipient: international(tel), content: texte, type: "transactional" };
+  try { return await brevo("transactionalSMS/sms", corps); }
+  catch (e) { if (e.code === 404) return brevo("transactionalSMS/send", corps); throw e; }
+}
+function noter(txt, ok) {
+  D.journal.unshift({ date: new Date().toISOString(), txt, ok });
+  D.journal = D.journal.slice(0, 60);
+}
+function erreurLisible(e) {
+  if (e instanceof TypeError) return "connexion à Brevo impossible (pas d'internet, ou appli ouverte dans Claude au lieu du navigateur)";
+  if (e.code === 401) return "clé Brevo refusée : vérifiez la clé dans Relances automatiques";
+  if (e.code === 402) return "plus de crédit SMS sur le compte Brevo";
+  return e.message;
+}
+let enCours = false;
+async function relancesAuto() {
+  const a = D.reglages.auto;
+  if (enCours || !a.actif || !cleBrevo() || dansCadre()) return;
+  const now = new Date();
+  if (now.getHours() < a.de || now.getHours() >= a.a || (!a.dimanche && now.getDay() === 0)) return;
+  enCours = true;
+  let envoyes = 0;
+  try {
+    for (const d of D.dossiers) {
+      if (d.exemple || !aRelancer(d) || nbAuto(d) >= a.max) continue;
+      const canaux = [];
+      if (a.canal !== "sms" && d.client.email && a.expediteur) canaux.push("Email");
+      if (a.canal !== "email" && d.client.tel) canaux.push("SMS");
+      if (!canaux.length) continue;
+      let reussi = false;
+      for (const c of canaux) {
+        try {
+          if (c === "Email") await envoyerEmail(d.client.email, nomClient(d), "Votre dossier – papiers manquants", message(d));
+          else await envoyerSms(d.client.tel, messageSms(d));
+          noter(`${c} envoyé à ${nomClient(d)}`, true); reussi = true; envoyes++;
+        } catch (e) {
+          noter(`${c} non envoyé à ${nomClient(d)} : ${erreurLisible(e)}`, false);
+          if (e instanceof TypeError || e.code === 401) { sauver(); return; }
+        }
+      }
+      if (reussi) d.relances.push({ date: new Date().toISOString(), canal: canaux.join(" + "), auto: true });
+    }
+  } finally {
+    enCours = false;
+    sauver();
+    if (envoyes) { toast(envoyes > 1 ? envoyes + " relances envoyées" : "1 relance envoyée"); rendre(); }
+  }
+}
+
+function vueAuto(m) {
+  const a = D.reglages.auto, cle = cleBrevo(), cadre = dansCadre();
+  const prochaines = D.dossiers.filter(d => !d.exemple && aRelancer(d) && nbAuto(d) < a.max);
+  m.innerHTML = `
+    ${cadre ? `<div class="bandeau"><p>Ici, dans Claude, l'appli ne peut pas envoyer de messages. Les relances automatiques marchent sur l'adresse de l'appli :
+      <b>camiliangrignon8002-sudo.github.io/montres-reunion/immo</b>, ouverte dans Safari, Chrome ou depuis l'écran d'accueil.</p></div>` : ""}
+    <section class="bloc">
+      <div class="tete"><h2>Envoyer les relances tout seul</h2><span class="pill ${a.actif && cle ? "s-fini" : "s-traiter"}">${a.actif && cle ? "Activé" : "Désactivé"}</span></div>
+      <p>Quand l'appli est ouverte, elle envoie elle-même un mail et/ou un SMS aux clients à qui il manque des papiers depuis
+      <b>${D.reglages.delai} jours</b> (réglable dans Réglages). Le message liste les papiers qui manquent.
+      Elle vérifie à l'ouverture, puis tous les quarts d'heure tant qu'elle reste ouverte.</p>
+      <label class="rangee"><input type="checkbox" id="a-actif"${a.actif ? " checked" : ""} style="width:24px;height:24px"> <b>Activer les relances automatiques</b></label>
+      <div class="champs">
+        <div class="champ"><label for="a-canal">Envoyer par</label><select id="a-canal" data-a="canal">
+          <option value="les2"${a.canal === "les2" ? " selected" : ""}>Mail et SMS</option><option value="email"${a.canal === "email" ? " selected" : ""}>Mail seulement</option><option value="sms"${a.canal === "sms" ? " selected" : ""}>SMS seulement</option></select></div>
+        <div class="champ"><label for="a-max">Nombre de relances automatiques au plus</label><input id="a-max" data-a="max" data-n inputmode="numeric" value="${a.max}"></div>
+        <div class="champ"><label for="a-de">Pas avant (heure)</label><input id="a-de" data-a="de" data-n inputmode="numeric" value="${a.de}"></div>
+        <div class="champ"><label for="a-a">Pas après (heure)</label><input id="a-a" data-a="a" data-n inputmode="numeric" value="${a.a}"></div>
+      </div>
+      <label class="rangee small"><input type="checkbox" id="a-dimanche"${a.dimanche ? " checked" : ""} style="width:22px;height:22px"> Envoyer aussi le dimanche</label>
+      <p class="muted small">Après ${a.max} relances automatiques, l'appli arrête et le client reste dans « À relancer » : mieux vaut l'appeler.
+      Les dossiers marqués Exemple ne reçoivent jamais rien. Dans un dossier, décochez « Relancer automatiquement » pour ne pas relancer ce client.</p>
+    </section>
+    <section class="bloc">
+      <h2>Compte Brevo</h2>
+      <ol class="histo" style="color:var(--fg)">
+        <li>Créez un compte gratuit sur <a href="https://www.brevo.com/fr/" target="_blank" rel="noopener">brevo.com</a>.</li>
+        <li>Menu <b>Expéditeurs, domaines et IP dédiées</b> : ajoutez votre adresse mail et validez le mail reçu.</li>
+        <li>Menu <b>SMTP et API → Clés API</b> : créez une clé et collez-la ci-dessous.</li>
+        <li>Pour les SMS : achetez quelques crédits SMS dans Brevo (quelques centimes par SMS).</li>
+      </ol>
+      <div class="champs">
+        <div class="champ"><label for="a-cle">Clé API Brevo</label><input id="a-cle" type="password" autocomplete="off" placeholder="xkeysib-…" value="${esc(cle)}"></div>
+        <div class="champ"><label for="a-exp">Adresse d'envoi validée dans Brevo</label><input id="a-exp" data-a="expediteur" type="email" value="${esc(a.expediteur)}" placeholder="à remplir quand votre boîte mail sera branchée"></div>
+        <div class="champ"><label for="a-nomsms">Nom affiché sur les SMS (11 lettres max)</label><input id="a-nomsms" data-a="nomSms" maxlength="11" value="${esc(a.nomSms)}"></div>
+      </div>
+      <p class="muted small">Tant que l'adresse d'envoi est vide, aucun mail ne part : seuls les SMS sont envoyés.
+      La clé reste sur cet appareil et n'est pas copiée dans la sauvegarde. Les réponses des clients arrivent sur votre adresse mail habituelle.</p>
+      <div class="rangee"><button class="btn" id="test-mail">M'envoyer un mail d'essai</button><button class="btn" id="test-sms">M'envoyer un SMS d'essai</button></div>
+      <p class="muted small">Les essais partent vers votre email et votre téléphone notés dans Réglages.</p>
+    </section>
+    <section class="bloc">
+      <h2>Message SMS</h2>
+      <p class="muted small">Le mail utilise le message de Réglages. Le SMS est plus court pour ne pas coûter plusieurs SMS.
+      {pièces courtes} = la liste des papiers manquants, {prénom}, {mon nom}, {mon email}.</p>
+      <div class="champ"><label for="a-sms">Texte du SMS</label><textarea id="a-sms" data-a="sms">${esc(a.sms)}</textarea></div>
+      <p class="small muted" id="a-taille"></p>
+    </section>
+    <section class="bloc">
+      <div class="tete"><h2>Prochaines relances</h2><button class="btn petit plein" id="maintenant"${a.actif && cle && !cadre ? "" : " disabled"}>Envoyer maintenant</button></div>
+      ${prochaines.length ? `<ul class="histo" style="color:var(--fg)">${prochaines.map(d => `<li>${esc(nomClient(d))} · ${manquantes(d).length} papier${manquantes(d).length > 1 ? "s" : ""} manquant${manquantes(d).length > 1 ? "s" : ""}</li>`).join("")}</ul>`
+        : `<p class="muted">Personne à relancer pour l'instant.</p>`}
+    </section>
+    <section class="bloc">
+      <h2>Ce qui a été envoyé</h2>
+      ${D.journal.length ? `<ul class="histo" style="color:var(--fg)">${D.journal.slice(0, 25).map(j => `<li><span class="${j.ok ? "plus" : "moins"}">${j.ok ? "✓" : "✕"}</span> ${dateFr(j.date)} ${new Date(j.date).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })} · ${esc(j.txt)}</li>`).join("")}</ul>`
+        : `<p class="muted">Rien encore.</p>`}
+    </section>`;
+  const taille = () => { const n = messageSms(D.dossiers.find(d => manquantes(d).length) || { client: {}, bien: {}, type: "achat", pieces: [] }).length; m.querySelector("#a-taille").textContent = `Exemple : ${n} caractères, soit ${Math.max(1, Math.ceil(n / 153))} SMS par envoi.`; };
+  taille();
+  m.querySelector("#a-actif").onchange = e => { a.actif = e.target.checked; sauver(); rendre(); if (a.actif) relancesAuto(); };
+  m.querySelector("#a-dimanche").onchange = e => { a.dimanche = e.target.checked; sauver(); };
+  m.querySelectorAll("[data-a]").forEach(i => i.onchange = () => {
+    const k = i.dataset.a;
+    a[k] = i.dataset.n !== undefined ? Math.max(0, parseInt(i.value, 10) || AUTO[k]) : i.value.trim();
+    sauver(); toast("Enregistré"); if (k === "sms") taille();
+  });
+  m.querySelector("#a-cle").onchange = e => { try { localStorage.setItem(CLE + "-brevo", e.target.value.trim()); } catch (err) {} compter(); toast("Clé enregistrée"); rendre(); };
+  const essai = async (bouton, fn) => {
+    if (cadre) return toast("Les essais marchent sur l'adresse de l'appli, pas dans Claude");
+    if (!cleBrevo()) return toast("Collez d'abord la clé Brevo");
+    bouton.disabled = true;
+    try { await fn(); noter(bouton.textContent.replace("M'envoyer", "Essai :"), true); toast("Essai envoyé, regardez votre téléphone"); }
+    catch (e) { noter("Essai raté : " + erreurLisible(e), false); toast("Essai raté : " + erreurLisible(e)); }
+    sauver(); rendre();
+  };
+  m.querySelector("#test-mail").onclick = e => !a.expediteur ? toast("Ajoutez d'abord l'adresse d'envoi (quand votre boîte mail sera branchée)") : D.reglages.email ? essai(e.target, () => envoyerEmail(D.reglages.email, D.reglages.nom, "Essai Seb Immo", "Ceci est un essai des relances automatiques de Seb Immo. Tout marche !")) : toast("Notez votre email dans Réglages");
+  m.querySelector("#test-sms").onclick = e => D.reglages.tel ? essai(e.target, () => envoyerSms(D.reglages.tel, "Essai Seb Immo : les relances automatiques marchent !")) : toast("Notez votre téléphone dans Réglages");
+  m.querySelector("#maintenant").onclick = async () => {
+    const a2 = Object.assign({}, a); a.de = 0; a.a = 24; a.dimanche = true;
+    try { await relancesAuto(); } finally { Object.assign(a, { de: a2.de, a: a2.a, dimanche: a2.dimanche }); sauver(); rendre(); }
+  };
 }
 
 // ---------------------------------------------------------------- démarrage
@@ -846,6 +1020,9 @@ const h = (location.hash || "").slice(1);
 if (h.startsWith("d") && D.dossiers.some(d => d.id === h.slice(1))) { vue = "tous"; dossierOuvert = h.slice(1); }
 else if (TITRES[h]) vue = h;
 rendre();
+relancesAuto();
+setInterval(relancesAuto, 15 * 60000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) relancesAuto(); });
 })();
 </script>
 </body></html>
