@@ -312,6 +312,13 @@
 
   for (const u of ruleUpdates) for (const [id, r] of Object.entries(u.rules)) { const e = employees.find((x) => x.id === id); e.rules = { ...(e.rules || {}), ...r }; e.rulesApplied = [...(e.rulesApplied || []), u.id]; }
 
+  // Horaires de cours (planning CFA de la semaine 41) : appliqués à chaque jour « formation » du calendrier.
+  const COURSE_TT = {
+        source: "Emploi du temps CFA, semaine 41 (5–9 octobre 2026) : 30 h de cours",
+        days: { 0: [["09:30", "12:30"], ["13:30", "16:30"]], 1: [["08:30", "12:30"]], 2: [["08:30", "12:30"]], 3: [["07:30", "12:30"], ["13:30", "17:30"]], 4: [["08:30", "12:30"], ["13:30", "16:30"]] },
+        weeks: {},
+      };
+
   root.PlanningReference = {
     extraWeeks, ruleUpdates,
     // Changements d'équipe demandés par le responsable (appliqués une seule fois, à l'ouverture).
@@ -357,6 +364,10 @@
       summary: "Nouveaux horaires d'après-midi à partir du 26/10/2026 : ZP 14:30–22:00, ZR 15:30–23:00",
       closing: { from: "2026-10-26", ZP: "22:00", ZR: "23:00" },
       validatePaperWeeks: true,
+    }, {
+      id: "horaires-cours-s41",
+      summary: "Horaires de cours du CFA ajoutés pour Fleur, Lucas et Camilian (30 h la semaine 41) : cours + travail = 35 h",
+      timetables: { "bts-mco1": COURSE_TT },
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
@@ -372,6 +383,7 @@
     calendars: [{
       id: "bts-mco1", name: "BTS MCO 1 – CFA Levavasseur 2026-2027", from: "2026-08-01", to: "2027-07-31", months,
       note: "Rose = formation au CFA, blanc « ENTREPRISE » = en entreprise, gris foncé = week-end, gris clair = jour férié.",
+      timetable: COURSE_TT,
     }],
     totalsOnPaper: { camilian: 35, charlotte: 35, eric: 35, fleur: 35, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sebastien: 35, amandine: 0, sonia: 0, sophie: 0, sylvie: 0 },
     questions: [

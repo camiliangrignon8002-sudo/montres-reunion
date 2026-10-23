@@ -51,7 +51,7 @@ test("génération : jamais d'alternant pendant les cours (29 et 30 octobre)", (
   const bad = week.shifts.filter((x) => ["fleur", "camilian"].includes(x.emp) && ["2026-10-29", "2026-10-30"].includes(x.date));
   assert.equal(bad.length, 0);
   assert.equal(report.notPlaced.length, 4);
-  assert.ok(report.notPlaced.every((n) => /formation/.test(n.reason)));
+  assert.ok(report.notPlaced.every((n) => /formation|cours au CFA/.test(n.reason)));
   // les postes non pourvus restent signalés, jamais remplis d'office
   s.weeks[W2] = week;
   assert.equal(C.uncoveredPosts(s, W2).length, 4);
@@ -105,7 +105,7 @@ test("cours : impossible de placer un alternant un jour de formation", () => {
   const s = fresh();
   const r = apply(s, [{ type: "setShift", emp: "fleur", date: "2026-10-29", segs: [{ s: "14:30", e: "22:00", z: "ZR" }] }]);
   assert.equal(r.ok, false);
-  assert.match(r.errors.join(), /formation/);
+  assert.match(r.errors.join(), /formation|cours au CFA/);
 });
 
 test("absence ajoutée après coup : créneaux identifiés, rien modifié en silence", () => {

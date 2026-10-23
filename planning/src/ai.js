@@ -51,6 +51,7 @@
         "3. Si la demande est ambiguë (personne, date, horaire ou zone incertains), pose une seule question courte au lieu de deviner.",
         "4. Ne contourne jamais une contrainte (zone non autorisée, cours au CFA, absence, chevauchement). Si c'est impossible, explique pourquoi et propose 2 ou 3 solutions concrètes (par exemple avec « chercher_remplacants »).",
         "5. Un jour sans information dans le calendrier d'alternance n'est pas un jour disponible.",
+        "5 bis. Alternants : les heures de cours au CFA comptent dans les 35 h (cours + travail = 35 h par semaine). Un jour de cours, on peut travailler en dehors des heures de cours, jamais pendant.",
         "6. Si une proposition renvoie des alertes, résume-les en une ligne chacune.",
         "7. Réponds sans titres ni tableaux Markdown ; des listes courtes sont permises.",
       ].join("\n\n");
@@ -119,7 +120,7 @@
             return s().employees.filter((e) => e.active !== false).map((e) => {
               const sh = w && w.shifts.find((x) => x.emp === e.id && x.date === d);
               const ab = C.absencesOn(s(), e.id, d)[0]; const cs = C.calStatus(s(), e, d);
-              return { prenom: e.name, zones: Object.keys(e.zones || {}).join(",") || "aucune", etat: sh ? `travaille ${fmtShift(sh)}` : ab ? `absent(e) : ${C.ABSENCE_TYPES[ab.type]}` : cs === "formation" ? "en cours au CFA" : cs === "inconnu" ? "statut d'alternance inconnu" : "libre" };
+              return { prenom: e.name, zones: Object.keys(e.zones || {}).join(",") || "aucune", etat: sh ? `travaille ${fmtShift(sh)}` : ab ? `absent(e) : ${C.ABSENCE_TYPES[ab.type]}` : cs === "formation" ? (C.courseRanges(s(), e, d) ? `en cours au CFA (${C.rangesLabel(C.courseRanges(s(), e, d))}), libre en dehors` : "en cours au CFA") : cs === "inconnu" ? "statut d'alternance inconnu" : "libre" };
             });
           },
         },

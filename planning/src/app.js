@@ -567,11 +567,11 @@
             kids.push(h("div", { class: "stack" }, cell.shift.segs.map((g) => blk(s, g))));
           } else {
             if (cell.absences.length) kids.push(h("span", { class: "tag-abs" }, C.ABSENCE_TYPES[cell.absences[0].type]));
-            if (cell.cal === "formation") kids.push(h("span", { class: "tag-cours" }, "Cours CFA"));
+            if (cell.cal === "formation") kids.push(h("span", { class: "tag-cours", title: cell.course ? `Cours : ${C.rangesLabel(cell.course)}` : "Journée au CFA" }, cell.course ? `Cours ${C.courseSpanLabel(cell.course)}` : "Cours CFA"));
             else if (cell.cal === "inconnu") kids.push(h("span", { class: "tag-unk", title: "Statut d'alternance inconnu ce jour-là" }, "?"));
-            if (canEdit && !cell.absences.length && cell.cal !== "formation") kids.push(h("span", { class: "add", "aria-hidden": "true" }, "+"));
+            if (canEdit && !cell.absences.length && (cell.cal !== "formation" || cell.course)) kids.push(h("span", { class: "add", "aria-hidden": "true" }, "+"));
           }
-          if (cell.shift && cell.cal === "formation") kids.push(h("span", { class: "tag-cours" }, "Cours CFA !"));
+          if (cell.shift && cell.cal === "formation") kids.push(h("span", { class: "tag-cours", title: cell.course ? `Cours : ${C.rangesLabel(cell.course)}` : "Journée au CFA" }, cell.course ? `Cours ${C.courseSpanLabel(cell.course)}` : "Cours CFA !"));
           if (cell.shift && cell.absences.length) kids.push(h("span", { class: "tag-abs" }, C.ABSENCE_TYPES[cell.absences[0].type] + " !"));
           if (lvl) kids.push(h("span", { class: "flag" + (lvl === "alerte" ? " warn" : ""), title: issues.filter((i) => i.emp === row.emp.id && i.date === cell.date).map((i) => i.msg).join("\n") }, lvl === "erreur" ? "!" : "?"));
           const td = h("td", {
@@ -597,7 +597,7 @@
           }, kids);
           return td;
         }),
-        h("td", { class: "tot" }, row.minutes ? C.fmtHours(row.minutes) : "—")))));
+        h("td", { class: "tot" }, row.courseMinutes ? h("span", { title: `${C.fmtHours(row.minutes)} de travail + ${C.fmtHours(row.courseMinutes)} de cours` }, C.fmtHours(row.minutes + row.courseMinutes), h("div", { class: "small muted", style: { "font-weight": "400" } }, `dont ${C.fmtHours(row.courseMinutes)} cours`)) : row.minutes ? C.fmtHours(row.minutes) : "—")))));
 
     // Vue jour
     const dayView = () => {
@@ -964,9 +964,10 @@
     const contract = (s.settings.contractHours || 35) * 60;
     const rows = s.employees.map((e) => ({ e, x: C.hoursSummary(s, e.id, from, to) })).filter((r) => r.e.active !== false || r.x.total || r.x.planned);
     const sum = (k) => rows.reduce((a, r) => a + r.x[k], 0);
+    const hasCourse = rows.some((r) => r.x.course);
     const exportCSV = () => {
-      const lines = [["Période", "Prénom", "Jours", "Heures prévues", "Heures sup", "Journées en plus", "Retards", "Total"].join(";")];
-      for (const r of rows) lines.push([label, r.e.name, r.x.workedDays + r.x.extraDayCount, C.hoursDecimal(r.x.planned), C.hoursDecimal(r.x.extra), C.hoursDecimal(r.x.extraDays), C.hoursDecimal(r.x.late), C.hoursDecimal(r.x.total)].map((v) => String(v).replace(".", ",")).join(";"));
+      const lines = [["Période", "Prénom", "Jours", "Heures prévues", "Heures sup", "Journées en plus", "Retards", "Total travail", "Cours CFA", "Total avec cours"].join(";")];
+      for (const r of rows) lines.push([label, r.e.name, r.x.workedDays + r.x.extraDayCount, C.hoursDecimal(r.x.planned), C.hoursDecimal(r.x.extra), C.hoursDecimal(r.x.extraDays), C.hoursDecimal(r.x.late), C.hoursDecimal(r.x.total), C.hoursDecimal(r.x.course), C.hoursDecimal(r.x.total + r.x.course)].map((v) => String(v).replace(".", ",")).join(";"));
       saveFile(`heures-${mode === "week" ? monday : month}.csv`, new Blob(["\ufeff" + lines.join("\r\n") + "\r\n"], { type: "text/csv;charset=utf-8" }));
     };
     const plus = (v) => (v ? "+" + C.fmtHours(v) : "—"), minus = (v) => (v ? "−" + C.fmtHours(v) : "—");
@@ -982,7 +983,7 @@
         h("div", { class: "kpi" }, h("b", { style: { color: sum("extra") + sum("extraDays") ? "var(--ok)" : "" } }, plus(sum("extra") + sum("extraDays"))), h("span", {}, "heures sup et jours en plus")),
         h("div", { class: "kpi" }, h("b", { style: { color: sum("late") ? "var(--danger)" : "" } }, minus(sum("late"))), h("span", {}, "retards"))),
       h("section", { class: "card", style: { padding: "0" } }, h("div", { class: "t-wrap" }, h("table", { class: "t" },
-        h("thead", {}, h("tr", {}, h("th", {}, "Personne"), h("th", {}, "Jours"), h("th", {}, "Prévu"), h("th", {}, "Sup"), h("th", {}, "Retards"), h("th", {}, "Total"), mode === "week" ? h("th", {}, `Écart ${s.settings.contractHours || 35} h`) : null)),
+        h("thead", {}, h("tr", {}, h("th", {}, "Personne"), h("th", {}, "Jours"), h("th", {}, "Prévu"), h("th", {}, "Sup"), h("th", {}, "Retards"), h("th", {}, "Total"), hasCourse ? h("th", {}, "Cours CFA") : null, mode === "week" ? h("th", {}, `Écart ${s.settings.contractHours || 35} h`) : null)),
         h("tbody", {}, rows.map((r) => h("tr", {},
           h("td", {}, h("button", { type: "button", class: "name-btn inline", onClick: () => this.openPerson(r.e.id, mode) }, r.e.name)),
           h("td", { class: "num" }, r.x.workedDays + r.x.extraDayCount),
@@ -990,8 +991,9 @@
           h("td", { class: "num", style: { color: r.x.extra + r.x.extraDays ? "var(--ok)" : "" } }, plus(r.x.extra + r.x.extraDays)),
           h("td", { class: "num", style: { color: r.x.late ? "var(--danger)" : "" } }, minus(r.x.late)),
           h("td", { class: "num" }, h("b", {}, C.fmtHours(r.x.total))),
-          mode === "week" ? h("td", { class: "num small", style: { color: r.x.total > contract ? "var(--ok)" : r.x.total < contract ? "var(--fg-2)" : "" } }, r.x.total === contract ? "✓" : `${r.x.total > contract ? "+" : "−"}${C.fmtHours(Math.abs(r.x.total - contract))}`) : null)))))),
-      h("p", { class: "small muted" }, "Touchez un prénom pour le détail jour par jour et pour ajouter des heures sup, une journée en plus ou un retard."));
+          hasCourse ? h("td", { class: "num" }, r.x.course ? h("span", { class: "chip cours" }, C.fmtHours(r.x.course)) : "—") : null,
+          mode === "week" ? (() => { const t = r.x.total + r.x.course; return h("td", { class: "num small", title: r.x.course ? `${C.fmtHours(r.x.total)} de travail + ${C.fmtHours(r.x.course)} de cours` : "", style: { color: t > contract ? "var(--ok)" : t < contract ? "var(--fg-2)" : "" } }, t === contract ? "✓" : `${t > contract ? "+" : "−"}${C.fmtHours(Math.abs(t - contract))}`); })() : null)))))),
+      h("p", { class: "small muted" }, hasCourse ? "Pour les alternants, l'écart compte les heures de cours au CFA : cours + travail = contrat. Touchez un prénom pour le détail jour par jour et pour ajouter des heures sup, une journée en plus ou un retard." : "Touchez un prénom pour le détail jour par jour et pour ajouter des heures sup, une journée en plus ou un retard."));
   } };
 
   // ---------- Calendrier des alternants ----------
@@ -1012,6 +1014,14 @@
           Store.canWrite ? btn(edit ? "Terminer" : "Corriger des jours", () => { this.ui.calEdit = !this.ui.calEdit; this.render(); }, edit ? "primary sm" : "sm") : null)),
       h("div", { class: "card" }, h("h3", {}, "Alternants rattachés"), h("div", { class: "list" }, alts.map((e) => h("div", { class: "item" }, h("b", { class: "grow" }, e.name, e.aliasNote ? h("div", { class: "small muted", style: { "font-weight": "400" } }, e.aliasNote) : null),
         Store.canWrite ? h("select", { class: "input", style: { width: "auto" }, "aria-label": `Calendrier de ${e.name}`, onChange: (ev) => this.commit([{ type: "updateEmployee", id: e.id, patch: { calendarId: ev.target.value || null } }]) }, h("option", { value: "" }, "Aucun (statut inconnu)"), s.calendars.map((c) => h("option", { value: c.id, selected: c.id === e.calendarId }, c.name))) : h("span", {}, (s.calendars.find((c) => c.id === e.calendarId) || {}).name || "Aucun"))))),
+      cal.timetable ? (() => {
+        const tt = cal.timetable.days || {};
+        const dur = (l) => (l || []).reduce((a, [x, y]) => a + C.toMin(y) - C.toMin(x), 0);
+        const total = [0, 1, 2, 3, 4, 5, 6].reduce((a, d) => a + dur(tt[d]), 0);
+        return h("div", { class: "card" }, h("div", { class: "row between" }, h("h3", {}, "Horaires de cours"), h("span", { class: "chip cours" }, `${C.fmtHours(total)} par semaine complète`)),
+          h("div", { class: "list", style: { "margin-top": "8px" } }, [0, 1, 2, 3, 4, 5, 6].filter((d) => (tt[d] || []).length).map((d) => h("div", { class: "item" }, h("b", { class: "grow" }, C.DAYS[d]), h("span", {}, tt[d].map(([x, y]) => `${x}–${y}`).join(" · ")), h("span", { class: "small muted", style: { "min-width": "48px", "text-align": "right" } }, C.fmtHours(dur(tt[d])))))),
+          h("p", { class: "small muted", style: { "margin-top": "8px" } }, `${cal.timetable.source || "Emploi du temps du CFA"}. Appliqués à chaque jour rose du calendrier. Cours + travail = ${s.settings.contractHours || 35} h par semaine ; on peut travailler un jour de cours en dehors de ces heures, jamais pendant.`));
+      })() : null,
       h("div", { class: "legend" }, h("span", {}, h("span", { class: "yday E", style: { width: "18px" } }, ""), "Entreprise"), h("span", {}, h("span", { class: "yday P", style: { width: "18px" } }, ""), "Formation CFA"), h("span", {}, h("span", { class: "yday W", style: { width: "18px" } }, ""), "Week-end (pas de cours)"), h("span", {}, h("span", { class: "yday F", style: { width: "18px" } }, ""), "Férié"), h("span", {}, h("span", { class: "yday Q", style: { width: "18px" } }, ""), "Inconnu")),
       edit ? h("p", { class: "banner info small" }, "Touchez un jour pour changer son statut : Entreprise → Formation → Week-end → Férié → Inconnu. Chaque changement est enregistré dans l'historique.") : null,
       h("div", { class: "yeargrid" + (edit ? " editing" : "") }, months.map((k) => {
@@ -1576,6 +1586,10 @@
         const tpl = st.template.shifts.map((t) => ({ ...t, segs: C.applyClosing(t.segs, cl) }));
         if (tpl.some((t, i) => t.segs !== st.template.shifts[i].segs)) ops.push({ type: "setTemplate", template: { ...C.clone(st.template), shifts: tpl } });
         ops.push({ type: "setSettings", patch: { closingZP: cl.ZP, closingZR: cl.ZR } });
+      }
+      for (const [cid, tt] of Object.entries(u.timetables || {})) {
+        const cal = this.state.calendars.find((c) => c.id === cid);
+        if (cal) ops.push({ type: "putCalendar", replace: true, calendar: { ...C.clone(cal), timetable: C.clone(tt) } });
       }
       if (u.confirmAll) ops.push({ type: "confirmAll" });
       if (u.validatePaperWeeks) for (const w of Object.values(this.state.weeks)) {

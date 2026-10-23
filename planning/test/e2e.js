@@ -161,7 +161,7 @@ const MOCK = `
     await page.click("text=Préparer la proposition");
     await page.waitForSelector("text=Proposition de planning");
     const notPlaced = await page.textContent(".dialog");
-    check("génération : 4 postes non attribués (CFA les 12-13 nov.)", /4 poste\(s\) non attribué/.test(notPlaced) && (notPlaced.match(/formation au CFA/g) || []).length === 4);
+    check("génération : 4 postes non attribués (CFA les 12-13 nov.)", /4 poste\(s\) non attribué/.test(notPlaced) && (notPlaced.match(/(formation|cours) au CFA/g) || []).length === 4);
     await page.click(".dialog footer >> text=/Enregistrer 1 semaine/");
     await page.waitForSelector("text=Postes à pourvoir");
     const coursTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) .tag-cours', (x) => x.length);
@@ -175,7 +175,7 @@ const MOCK = `
     await page.waitForTimeout(100);
     const saveDisabled = await page.$eval(".dialog footer button.primary", (b) => b.disabled);
     const why = await page.textContent("#ed-check");
-    check("pendant les cours : enregistrement bloqué avec explication", saveDisabled && /formation/.test(why), why.slice(0, 80));
+    check("pendant les cours : enregistrement bloqué avec explication", saveDisabled && /formation|cours au CFA/.test(why), why.slice(0, 80));
     await page.keyboard.press("Escape");
 
     // absence ajoutée après coup
@@ -299,7 +299,7 @@ const MOCK = `
     await page.keyboard.press("Enter");
     await page.waitForSelector(".msg.assistant >> text=/Impossible/");
     const refused = await page.textContent(".msg.assistant >> nth=-1");
-    check("IA : contrainte des cours non contournable", /formation/.test(refused), refused.slice(0, 100));
+    check("IA : contrainte des cours non contournable", /formation|cours au CFA/.test(refused), refused.slice(0, 100));
     const calls = await page.evaluate(() => window.__aiCalls);
     check("IA : outils fournis au modèle", calls[0].tools.includes("proposer_modifications") && calls[0].tools.length >= 6, calls[0].tools.join(","));
     const chat = await page.evaluate(() => window.__mockStore.get("data/users/user-test/chat"));

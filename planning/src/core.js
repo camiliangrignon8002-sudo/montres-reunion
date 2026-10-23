@@ -196,6 +196,48 @@
     if (ol && ol.from <= date) out.push(ol);
     return out;
   }
+  // ---------- Heures de cours (emploi du temps du CFA) ----------
+  // Un jour « formation » avec des horaires : seules ces heures sont prises ; sans horaires, toute la journée.
+  function courseRanges(state, emp, date) {
+    if (calStatus(state, emp, date) !== "formation") return null;
+    const cal = (state.calendars || []).find((c) => c.id === emp.calendarId);
+    const tt = cal && cal.timetable;
+    if (!tt) return null;
+    const wk = tt.weeks && tt.weeks[mondayOf(date)];
+    const list = wk ? wk[dow(date)] : tt.days && tt.days[dow(date)];
+    if (!list || !list.length) return null;
+    return list.map(([s, e]) => ({ s, e }));
+  }
+  const rangesLabel = (r) => (r || []).map((x) => `${x.s}–${x.e}`).join(", ");
+  const courseSpanLabel = (r) => (r && r.length ? `${r[0].s}–${r[r.length - 1].e}` : "");
+  function courseMinutesOn(state, emp, date) {
+    const r = courseRanges(state, emp, date);
+    return r ? r.reduce((a, x) => a + toMin(x.e) - toMin(x.s), 0) : 0;
+  }
+  function weekCourseMinutes(state, monday, empId) {
+    const emp = empById(state, empId);
+    if (!emp || emp.role !== "alternant") return 0;
+    return weekDates(monday).reduce((a, d) => a + courseMinutesOn(state, emp, d), 0);
+  }
+  // Heures de cours qui chevauchent un créneau de travail le même jour.
+  function courseOverlap(ranges, segs) {
+    const work = (segs || []).filter((g) => isTime(g.s) && isTime(g.e));
+    if (!work.length) return [];
+    const wr = shiftRanges(work);
+    return (ranges || []).filter((c) => { const a = toMin(c.s), b = toMin(c.e); return wr.some(([x, y]) => x < b && a < y); });
+  }
+  // Cours d'une personne sur trois semaines (pour le repos entre deux journées).
+  function courseShiftsAround(state, monday, empId) {
+    const out = [];
+    for (const emp of state.employees) {
+      if (emp.role !== "alternant" || (empId && emp.id !== empId)) continue;
+      for (const m of [addDays(monday, -7), monday, addDays(monday, 7)]) for (const d of weekDates(m)) {
+        const r = courseRanges(state, emp, d);
+        if (r) out.push({ emp: emp.id, date: d, segs: r, course: true });
+      }
+    }
+    return out;
+  }
   const absenceDates = (a) => (a.open ? `depuis le ${fmtDate(a.from, "short")}, retour non renseigné` : `du ${fmtDate(a.from, "short")} au ${fmtDate(a.to, "short")}`);
 
   // ---------- Modèle ----------
@@ -235,7 +277,14 @@
     if (emp.active === false) out.block.push("employé désactivé");
     for (const a of absencesOn(state, empId, date)) out.block.push(`${ABSENCE_TYPES[a.type] || "absence"} ${absenceDates(a)}`);
     const cs = calStatus(state, emp, date);
-    if (cs === "formation") out.block.push("en formation au CFA ce jour-là");
+    if (cs === "formation") {
+      const cr = courseRanges(state, emp, date);
+      const ov = cr ? courseOverlap(cr, segs) : [];
+      if (!cr) out.block.push("en formation au CFA ce jour-là");
+      else if (ov.length) out.block.push(`en cours au CFA de ${rangesLabel(ov)}`);
+      else if (!segs || !segs.length) out.block.push(`en cours au CFA (${rangesLabel(cr)})`);
+      else out.warn.push(`jour de cours au CFA (${rangesLabel(cr)})`);
+    }
     if (cs === "inconnu") out.warn.push("statut d'alternance inconnu ce jour-là");
     for (const g of segs || []) {
       const lv = zoneLevel(emp, g.z);
@@ -283,7 +332,16 @@
       if (!allowedZones(emp).length) add("alerte", "ZONE_UNKNOWN_EMP", sh.emp, d, `${who} n'a aucune zone enregistrée : à définir dans « Zones ».`);
       for (const a of absencesOn(state, sh.emp, d)) add("erreur", "ABSENCE", sh.emp, d, `${who} est absent(e) le ${fmtDate(d, "day")} (${ABSENCE_TYPES[a.type] || a.type}).`);
       const cs = calStatus(state, emp, d);
-      if (cs === "formation") add("erreur", "FORMATION", sh.emp, d, `${who} est en formation au CFA le ${fmtDate(d, "day")}.`);
+      if (cs === "formation") {
+        const cr = courseRanges(state, emp, d);
+        const ov = cr ? courseOverlap(cr, sh.segs) : [];
+        if (!cr) add("erreur", "FORMATION", sh.emp, d, `${who} est en formation au CFA le ${fmtDate(d, "day")}.`);
+        else if (ov.length) add("erreur", "FORMATION", sh.emp, d, `${who} est en cours au CFA le ${fmtDate(d, "day")} de ${rangesLabel(ov)} : le créneau chevauche les cours.`);
+        else if (st.checkMaxDay && timesOk) {
+          const c = courseMinutesOn(state, emp, d), w = shiftMinutes(sh.segs);
+          if (c + w > st.maxDayHours * 60) add("alerte", "DAY_MAX_COURSE", sh.emp, d, `${who} : ${fmtHours(c + w)} le ${fmtDate(d, "day")} en comptant les cours (${fmtHours(c)} de cours + ${fmtHours(w)} de travail, plus de ${st.maxDayHours} h).`);
+        }
+      }
       else if (cs === "inconnu") add("alerte", "CAL_UNKNOWN", sh.emp, d, `${who} : statut d'alternance inconnu le ${fmtDate(d, "day")} (calendrier non renseigné).`);
       else if (cs === "ferie") add("info", "FERIE", sh.emp, d, `${fmtDate(d, "day")} est férié dans le calendrier d'alternance.`);
       if (timesOk) for (const x of personalRuleIssues(emp, d, sh.segs)) add("alerte", x.code, sh.emp, d, x.msg);
@@ -296,6 +354,7 @@
 
     // Chevauchements et repos (avec les semaines voisines).
     const around = shiftsAround(state, monday).filter((s) => (s.segs || []).every((g) => isTime(g.s) && isTime(g.e)));
+    for (const c of courseShiftsAround(state, monday)) if (around.some((x) => x.emp === c.emp)) around.push(c);
     const byEmp = {};
     for (const s of around) (byEmp[s.emp] = byEmp[s.emp] || []).push(s);
     const inWeek = new Set(weekDates(monday));
@@ -304,6 +363,12 @@
       for (let i = 1; i < spans.length; i++) {
         const p = spans[i - 1], c = spans[i];
         if (!inWeek.has(c.s.date) && !inWeek.has(p.s.date)) continue;
+        if (c.s.course || p.s.course) {
+          // Cours : chevauchement déjà signalé (FORMATION) ; seul compte le repos entre deux journées différentes.
+          if ((c.s.course && p.s.course) || c.s.date === p.s.date || c.a < p.b) continue;
+          if (st.checkRest && c.a - p.b < st.minRestHours * 60) add("alerte", "REST", empId, c.s.date, `${nameOf(empId)} : ${fmtHours(c.a - p.b)} de repos seulement ${c.s.course ? "avant les cours du" : "après les cours, avant le travail du"} ${fmtDate(c.s.date, "day")} (minimum réglé : ${st.minRestHours} h).`);
+          continue;
+        }
         if (c.a < p.b) add("erreur", "SHIFT_OVERLAP", empId, c.s.date, `${nameOf(empId)} : créneaux qui se chevauchent (${fmtDate(p.s.date, "short")} et ${fmtDate(c.s.date, "short")}).`);
         else if (st.checkRest && c.a - p.b < st.minRestHours * 60) add("alerte", "REST", empId, c.s.date, `${nameOf(empId)} : ${fmtHours(c.a - p.b)} de repos seulement avant le ${fmtDate(c.s.date, "day")} (minimum réglé : ${st.minRestHours} h).`);
       }
@@ -311,6 +376,15 @@
     // Durée hebdomadaire
     for (const emp of state.employees) {
       const m = weekMinutes(state, monday, emp.id);
+      const cm = emp.active === false ? 0 : weekCourseMinutes(state, monday, emp.id);
+      if (cm) {
+        // Alternant(e) en semaine de cours : cours + travail = durée du contrat.
+        const tot = m + cm, target = (st.contractHours || 35) * 60;
+        const detail = `${fmtHours(cm)} de cours + ${fmtHours(m)} de travail = ${fmtHours(tot)}`;
+        if (tot > Math.min(target, st.checkMaxWeek ? st.maxWeekHours * 60 : Infinity)) add("alerte", "WEEK_MAX", emp.id, null, `${emp.name} : ${detail}, plus que les ${fmtHours(Math.min(target, st.maxWeekHours * 60))} prévues sur la semaine.`);
+        else if (tot < target) add("info", "COURSE_TOTAL", emp.id, null, `${emp.name} : ${detail} ; il reste ${fmtHours(target - tot)} à placer pour arriver à ${fmtHours(target)}.`);
+        continue;
+      }
       if (!m) continue;
       if (st.checkMaxWeek && m > st.maxWeekHours * 60) add("alerte", "WEEK_MAX", emp.id, null, `${emp.name} : ${fmtHours(m)} sur la semaine (plus de ${st.maxWeekHours} h).`);
       const ref = templateMinutes(state, emp.id);
@@ -379,7 +453,8 @@
       const cr = absRanges(cand, monday);
       const cStart = Math.min(...cr.map((x) => x[0])), cEnd = Math.max(...cr.map((x) => x[1]));
       let restOk = true, overlap = false;
-      for (const s of shiftsAround(state, monday).filter((s) => s.emp === emp.id)) {
+      for (const s of [...shiftsAround(state, monday).filter((s) => s.emp === emp.id), ...courseShiftsAround(state, monday, emp.id)]) {
+        if (s.course && s.date === date) continue; // chevauchement avec les cours déjà vérifié
         const r = absRanges(s, monday); const a = Math.min(...r.map((x) => x[0])), b = Math.max(...r.map((x) => x[1]));
         if (a < cEnd && cStart < b) overlap = true;
         const gap = a >= cEnd ? a - cEnd : cStart - b;
@@ -388,9 +463,13 @@
       if (overlap) continue;
       if (!restOk) { notes.push(`repos < ${st.minRestHours} h avec un autre service`); }
       const weekMin = weekMinutes(state, monday, emp.id);
-      if (st.checkMaxWeek && weekMin + newMin > st.maxWeekHours * 60) continue;
-      if (st.checkMaxDay && newMin > st.maxDayHours * 60) notes.push(`plus de ${st.maxDayHours} h dans la journée`);
-      const ref = templateMinutes(state, emp.id);
+      const courseMin = weekCourseMinutes(state, monday, emp.id);
+      if (st.checkMaxWeek && weekMin + courseMin + newMin > st.maxWeekHours * 60) continue;
+      if (courseMin && weekMin + courseMin + newMin > (st.contractHours || 35) * 60) continue; // cours + travail ≤ contrat
+      const dayCourse = courseMinutesOn(state, emp, date);
+      if (st.checkMaxDay && newMin + dayCourse > st.maxDayHours * 60) notes.push(dayCourse ? `plus de ${st.maxDayHours} h dans la journée avec les cours` : `plus de ${st.maxDayHours} h dans la journée`);
+      if (courseMin) notes.push(`${fmtHours(courseMin)} de cours cette semaine`);
+      const ref = courseMin ? Math.max(0, (st.contractHours || 35) * 60 - courseMin) : templateMinutes(state, emp.id);
       const deficit = ref - weekMin;
       let score = 0;
       if (ref > 0) score += deficit >= newMin ? 30 : deficit > 0 ? 15 : -10;
@@ -425,6 +504,7 @@
         else {
           const av = availability(state, emp.id, date, segs);
           if (!av.ok) reason = av.block[0];
+          else if (calStatus(state, emp, date) === "formation") reason = `jour de cours au CFA (${rangesLabel(courseRanges(state, emp, date))})`;
           else if (emp.role === "alternant" && calStatus(state, emp, date) === "inconnu") reason = "statut d'alternance inconnu (jamais considéré comme disponible)";
         }
         if (reason) notPlaced.push({ emp: t.emp, date, segs, reason });
@@ -453,8 +533,9 @@
         shift: shifts.find((s) => s.date === date) || null,
         absences: absencesOn(state, emp.id, date),
         cal: calStatus(state, emp, date),
+        course: courseRanges(state, emp, date),
       }));
-      rows.push({ emp, cells, minutes: shifts.reduce((a, s) => a + shiftMinutes(s.segs), 0) });
+      rows.push({ emp, cells, minutes: shifts.reduce((a, s) => a + shiftMinutes(s.segs), 0), courseMinutes: emp.role === "alternant" ? weekCourseMinutes(state, monday, emp.id) : 0 });
     }
     return { monday, days, rows, week: w };
   }
@@ -891,8 +972,10 @@
   // Heures d'une personne sur une période : prévues au planning, + heures sup et journées en plus, − retards.
   function hoursSummary(state, empId, from, to) {
     const days = [];
-    let planned = 0;
+    let planned = 0, course = 0;
+    const empC = empById(state, empId);
     for (let d = from; d <= to; d = addDays(d, 1)) {
+      if (empC && empC.role === "alternant") course += courseMinutesOn(state, empC, d);
       const w = getWeek(state, mondayOf(d));
       const sh = w && w.shifts.find((x) => x.emp === empId && x.date === d);
       if (sh) { const m = shiftMinutes(sh.segs); planned += m; days.push({ date: d, minutes: m, segs: sh.segs }); }
@@ -900,7 +983,7 @@
     const adj = Object.values(state.adjustments || {}).filter((a) => a.emp === empId && a.date >= from && a.date <= to).sort((a, b) => a.date.localeCompare(b.date));
     const sum = (t) => adj.filter((a) => a.type === t).reduce((x, a) => x + a.minutes, 0);
     const extra = sum("heures_sup"), extraDays = sum("journee_sup"), late = sum("retard");
-    return { planned, extra, extraDays, extraDayCount: adj.filter((a) => a.type === "journee_sup").length, late, total: planned + extra + extraDays - late, workedDays: days.length, days, adjustments: adj };
+    return { course, planned, extra, extraDays, extraDayCount: adj.filter((a) => a.type === "journee_sup").length, late, total: planned + extra + extraDays - late, workedDays: days.length, days, adjustments: adj };
   }
   // « 1:30 », « 1h30 », « 1,5 », « 90 min », « 45 » (minutes) → minutes
   function parseDuration(v) {
@@ -921,7 +1004,7 @@
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, courseRanges, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };
