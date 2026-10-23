@@ -101,6 +101,7 @@ h1{font-size:32px;line-height:1.1;margin:4px 0 6px;letter-spacing:-.02em}
 .jour .p{font-size:11px;font-weight:600}
 .jour.vide{background:transparent}
 .jour.rien{opacity:.45}
+.jour.top{background:var(--bleu);color:#fff}
 .jour.bas{background:var(--vert-doux);color:var(--vert)}
 .jour.moyen{background:var(--orange-doux);color:var(--orange)}
 .jour.haut{background:var(--rouge-doux);color:var(--rouge)}
@@ -347,7 +348,7 @@ h1{font-size:32px;line-height:1.1;margin:4px 0 6px;letter-spacing:-.02em}
       <button id="cal-apres" aria-label="Mois suivant"><svg class="ic"><use href="#i-droite"/></svg></button>
     </div>
     <div class="cal" id="cal"></div>
-    <div class="legende"><span><i style="background:var(--vert)"></i>moins cher</span><span><i style="background:var(--orange)"></i>moyen</span><span><i style="background:var(--rouge)"></i>plus cher</span><span>Prix total du groupe, vol le moins cher du jour</span></div>
+    <div class="legende"><span><i style="background:var(--bleu)"></i>vraiment pas cher</span><span><i style="background:var(--vert)"></i>moins cher</span><span><i style="background:var(--orange)"></i>moyen</span><span><i style="background:var(--rouge)"></i>plus cher</span><span>Prix total du groupe, vol le moins cher du jour</span></div>
   </section>
 
   <div class="tri">
@@ -573,11 +574,12 @@ function calendrier() {
   $("#cal-titre").textContent = `${MOIS[m - 1]} ${a}`;
   const prix = Object.values(parJour).sort((x, y) => x - y);
   const q1 = prix[Math.floor(prix.length / 3)] ?? 0, q2 = prix[Math.floor(prix.length * 2 / 3)] ?? 0;
+  const top = (prix[0] ?? 0) * 1.15;  // vraiment pas cher : au plus 15 % au-dessus du jour le moins cher
   const premier = (new Date(a, m - 1, 1).getDay() + 6) % 7, nb = new Date(a, m, 0).getDate();
   let h = JS.map(j => `<div class="js">${j}</div>`).join("") + `<div class="jour vide"></div>`.repeat(premier);
   for (let d = 1; d <= nb; d++) {
     const j = `${moisCal}-${String(d).padStart(2, "0")}`, p = parJour[j];
-    const cl = p == null ? "rien" : p <= q1 ? "bas" : p <= q2 ? "moyen" : "haut";
+    const cl = p == null ? "rien" : p <= top ? "top" : p <= q1 ? "bas" : p <= q2 ? "moyen" : "haut";
     h += `<button class="jour ${cl}${F.jour === j ? " choisi" : ""}" data-jour="${j}"${p == null ? " disabled" : ""}><span class="n">${d}</span><span class="p">${p == null ? "–" : Math.round(p)}</span></button>`;
   }
   $("#cal").innerHTML = h;
