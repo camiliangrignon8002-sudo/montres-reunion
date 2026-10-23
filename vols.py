@@ -36,7 +36,7 @@ DEPARTS = {
 }
 PARIS = {"CDG", "ORY"}  # vols tous les jours : relus plus souvent
 JOURS = int(os.environ.get("JOURS", "330"))                 # les compagnies vendent environ 11 mois à l'avance
-REQUETES_MAX = int(os.environ.get("REQUETES_MAX", "450"))   # questions à Google par passage
+REQUETES_MAX = int(os.environ.get("REQUETES_MAX", "1000"))   # questions à Google par passage
 DUREE_MAX = int(os.environ.get("DUREE_MAX", "35")) * 60     # secondes
 TRAVAILLEURS = 3
 ERREURS_MAX = 25  # erreurs d'affilée : Google nous bloque, on s'arrête là

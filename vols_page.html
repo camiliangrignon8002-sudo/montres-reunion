@@ -435,7 +435,9 @@ function calendrier() {
   const mois = [...new Set(VOLS.map(v => v.jour.slice(0, 7)))].sort();
   if (!mois.length) { $("#bloc-cal").hidden = true; return; }
   $("#bloc-cal").hidden = false;
-  if (!moisCal || !mois.includes(moisCal)) moisCal = F.mois !== "tous" ? F.mois : (Object.keys(parJour).sort()[0] || mois[0]).slice(0, 7);
+  // par défaut, le mois du vol le moins cher
+  const moinsCher = Object.keys(parJour).sort((x, y) => parJour[x] - parJour[y])[0];
+  if (!moisCal || !mois.includes(moisCal)) moisCal = F.mois !== "tous" ? F.mois : (moinsCher || mois[0]).slice(0, 7);
   const i = mois.indexOf(moisCal);
   $("#cal-avant").disabled = i <= 0; $("#cal-apres").disabled = i >= mois.length - 1;
   $("#cal-avant").onclick = () => { moisCal = mois[i - 1]; calendrier(); };

@@ -3,14 +3,11 @@ name: Vols Réunion
 on:
   schedule:
     - cron: "40 */3 * * *"   # toutes les 3 h, jour et nuit : relève les prix des vols directs France → La Réunion
-  push:                      # TEMPORAIRE : essai sur la branche de travail
-    branches: [claude/vols-reunion]
-    paths: [vols.py, vols_page.html, .github/workflows/vols.yml]
   workflow_dispatch:         # bouton "Run workflow" pour lancer à la main
     inputs:
       requetes:
         description: "Nombre de jours à relire sur Google Flights (plus = plus long)"
-        default: "450"
+        default: "1000"
 
 permissions:
   contents: write
@@ -31,7 +28,7 @@ jobs:
       - run: pip install fast-flights==3.1.0 typing_extensions
       - run: python vols.py
         env:
-          REQUETES_MAX: ${{ inputs.requetes || '450' }}
+          REQUETES_MAX: ${{ inputs.requetes || '1000' }}
       - name: Publier la page
         if: always()
         run: |
