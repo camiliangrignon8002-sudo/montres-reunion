@@ -2961,10 +2961,6 @@
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/ag340369-551086409"
    },
    {
-    "source": "Figaro Immobilier",
-    "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html"
-   },
-   {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a0cf1e-21a7-7b69-bfcb-d74b3312e7ae"
    }
@@ -3613,45 +3609,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "figaro-108951759",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108951759.html",
-  "titre": "Location  appartement 3 pièces 60 m² à Sainte Marie (97438), 675 €",
-  "prix": 675.0,
-  "commune": "Sainte-Marie",
-  "quartier": "Sainte Marie",
-  "pieces": 3,
-  "type": "T3",
-  "surface": 60.0,
-  "meuble": null,
-  "photos": [
-   "https://lh3.googleusercontent.com/33LdqtdD8mAVDh3u1n72wO_PkDZFRWoZn5bmToKysGjWaAhB2CpZoftVHVu-6OAk01AK6TPLwrfbTTLppQF-o4_nG8mn7Kgh_OKb=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/KnhEFIzA_b5ndp4kZxrwO26Nh9Sc-ENBV3p4a6vXNjBZqiow9_oXeQwBVb6SmBSBCyNtzRl3MF-rGWozbaTCKcUv-QqkEfdKmGec=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/DUTunALmROIk8VvAmZemFpZj_pyTY00mjdeg4R5sbiZpzVj6zrEdcvH96yYGdQ9fC1iLEtDlVVElvhZWbKN1GYjeyCbMUOgYOvKT=rw-w940-h605-l80"
-  ],
-  "description": "L'Agence RUN INVEST vous propose cet appartement T3 à louer à Sainte Marie.\nDécouvrez cet agréable appartement T3 situé au 5ième étage, au sein d'une résidence sécurisée avec portail et portillon.\nL'appartement se compose :\n- séjour / cuisine équipée,\n- 1 chambre avec placard et climatisation\n- 1 bureau climatisé\n- 1 salle de bain avec baignoire\n- 1 balcon\n- 2 places de parking au sous-sol\nProximité : centre-ville, commerces\nenvironnement : maisons individuelles\nCertaines photos ont été modifiées à des fins de projection. Visuels non contractuels.\nDisponible à partir du 25 septembre 2026\nLoyer : 675,60 EUR / mensuel (dont 80 EUR charges de copropriété + 30 EUR provisions pour TEOM)\nDepôt de garantie : 675,60 EUR\nFrais d'agence : 666,71 EUR - Loi ALUR - 11 EUR / m2 habitable - honoraires de visite, constitution du dossier, et d'état des lieux d'entrée\nPour visites et information, appelez au 02 62 46 90 26\nLien vers notre barême d'honoraires : https://www.runinvest.fr/i/redac/honoraires Ou cliquez sur ' Nos honoraires ' à partir de la page d'accueil de notre site internet.\n.Informations LOI ALUR :\nCharges : 110 € /mois. Surface (arrondie) : 60 m². (gedeon_90742_33833428)",
-  "caracteristiques": [
-   "Varangue / balcon",
-   "Parking",
-   "Climatisation",
-   "Cuisine équipée",
-   "Résidence sécurisée"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0262 46 90 26",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
   "id": "immotransac-1333",
   "source": "Immo Transac",
   "url": "https://immotransac.re/annonces/location/appartement/appartement-1p-sainte-clotilde-1333",
@@ -3694,51 +3651,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T18:51+04:00"
- },
- {
-  "id": "superimmo-annonces-location-appartement-60m-sainte-marie-97438-x122axc",
-  "source": "Superimmo",
-  "url": "https://www.superimmo.com/annonces/location-appartement-60m-sainte-marie-97438-x122axc",
-  "titre": "Location appartement 3 pièces 60,61 m² Sainte-Marie (97438)",
-  "prix": 675.6,
-  "commune": "Sainte-Marie",
-  "quartier": "",
-  "pieces": 3,
-  "type": "T3",
-  "surface": 60.61,
-  "meuble": null,
-  "photos": [
-   "https://photo.superimmo.com/58nut4no7sfzz2q622rzhn4dtsir",
-   "https://photo.superimmo.com/gnh39fewqzrp1hcpcy1rzhu4srmr",
-   "https://photo.superimmo.com/e5lwsssrodyn8gmju2apz04u1xwj",
-   "https://photo.superimmo.com/uhjg7qvd0mnyononjvhqchpw7405",
-   "https://photo.superimmo.com/wcwr0zmxhq8fyt8nqhxd5wlwxwai",
-   "https://photo.superimmo.com/5z2bz3li16eebff39jepy5sr9xpi",
-   "https://photo.superimmo.com/w2vmdiq8rmdnfqupuods5c67hpj1",
-   "https://photo.superimmo.com/k9ckxs9kx84b6rsp9jg4bdag23bw",
-   "https://photo.superimmo.com/ihb42zjaz7xcwt6krz8xnbdkv09o",
-   "https://photo.superimmo.com/i78xcf19lzbm3aig0r27nsjd76qz",
-   "https://photo.superimmo.com/5o0gwvo1tkf0ytyfrh53ggs4k6as",
-   "https://photo.superimmo.com/x05grs6zsbt9xcsd8xhh8cijmo2t",
-   "https://photo.superimmo.com/0viezz019eg76yvdybdeqsf86o2t",
-   "https://photo.superimmo.com/9sng1alyd9snf6rmgplan1p76l0x",
-   "https://photo.superimmo.com/5gkwb8d2pahty7vpxw1k0uksg9f5"
-  ],
-  "description": "Annonce appartement location 60,61 m² 3 pièces à Sainte-Marie L'Agence RUN INVEST vous propose cet appartement",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Superimmo",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
  },
  {
   "id": "zimo-01a15489-9004-7edf-8010-59939018b533",
@@ -4768,10 +4680,6 @@
   "caf": false,
   "aussi": [
    {
-    "source": "Figaro Immobilier",
-    "url": "https://immobilier.lefigaro.fr/annonces/annonce-108075429.html"
-   },
-   {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/spacieux-t2/019fec0b-0419-728a-82e5-d4e908bf0441"
    }
@@ -4844,6 +4752,44 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "figaro-108777541",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108777541.html",
+  "titre": "Location  appartement 1 pièce 42.61 m² à Sainte Clotilde (97490), 730 €",
+  "prix": 730.0,
+  "commune": "Saint-Denis",
+  "quartier": "Sainte Clotilde",
+  "pieces": 1,
+  "type": "T1",
+  "surface": null,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/d3N08dL52FH6uZyCKhYuIeLDR2L5fkzA462jkgQdEE-MkswFdYwY7Wq-Gf9yhSNUaO5-HMTsMUw86Z6egMgWZ1lCxRYy32hnk-Ud3w=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/0QoeYFQILXBQHaW_ZDPy9hAjdNqmx9KsG_1JPRZf0QkMy4MIvbXt2tPM2vVyuPdfVl4QFxdBntBOFCFlFEuqOkg3OA_6SGx3-XBXkQ=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/ztz7NrDN2TZ6VMi6g2ajpkqw0Bz-eXaDGsu6ZkQArho8wSgvJVrc4dQSw59jrntNGpE1JEOBXs4mACeD8hddGQmhxdH-O3q19T5Qjg=rw-w940-h605-l80"
+  ],
+  "description": "Découvrez ce T1 bis de 42 m²Meublé rénové situé dans une résidence sécurisée, offrant un agencement fonctionnel et de nombreux équipements pour un confort au quotidien.\nce logement rénové comprend une entrée , donnant sur une Cuisine aménagée de meubles hauts et bas et équipée plaque vitrocéramique, hotte, four, réfrigérateur et autres équipements.Un cellier avec étagères , machine à laver et chauffe eau, d'un coin chambre avec lit 160 X 200 brasseur d'air et dressing\nd'un coin séjour climatisé avec canapé convertible, table basse, pouf.d'un espace bureau, d'un coin repas avec table pour 4 personnes, d'une salle d'eau avec douche à l'italienne, WC, meuble vasque et miroir\nLes atouts\nRésidence sécurisée\n42 m² parfaitement agencés\nLogement meublé\nCoin chambre avec dressing\nSéjour climatisé\nCuisine équipée\nEspace bureau\nDouche à l'italienne\nNombreux rangements\nLoyer hors charges : 700 € / mois\nProvision sur charges de copropriété : 20 € / mois soumis à régularisation annuelle\nProvision pour TEOM : 10 € / mois soumis à régularisation annuelle\nTotal mensuel : 730 €\nDisponible de suite\nDépôt de garantie : 1400 € soit deux mois de loyer hors charges.\nHonoraires de mise en location à la charge du locataire 13 € par m2 soit 553,93 euros dont 127,83 euros pour l'état des lieux (soit 3euro/M2).\nBarème consultable sur le lien : http://www.tekaimmo.fr/pdf/honoraires.pdf .\nPour toute demande de visite ou complément d'information veuillez contacter David agent mandataire E.I.Teka Immo inscrit au rsac de saint denis sous le numéro 445345937 au 0692 14 60 00 ou david.teka@tekaimmo.fr ou le 0262 41 88 88\nAnnonce rédigée sous la responsabilité éditoriale de l'agent.\nVous pouvez retrouver toutes les informations sur les risques auxquels ce bien pourrait être exposé sur : www.georisques.gouv.fr\n\\r",
+  "caracteristiques": [
+   "Meublé",
+   "Climatisation",
+   "Cuisine équipée",
+   "Résidence sécurisée"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 14 60 00",
+  "email": "david.teka@tekaimmo.fr",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T12:07+04:00"
  },
  {
   "id": "zimo-01a152cd-c740-7666-bde6-114b192f5824",
