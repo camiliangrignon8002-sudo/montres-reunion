@@ -350,3 +350,14 @@ test("retards et heures sup comptés à partir de 5 min", () => {
   assert.equal(add("heures_sup", 5), true);
   assert.equal(add("journee_sup", 3), true);
 });
+
+test("alternants : pause déjeuner au CFA 12:30–13:30 non comptée et bloquée", () => {
+  const s = fresh();
+  const fleur = C.empById(s, "fleur");
+  const day = "2026-10-29"; // jeudi de cours : 07:30–12:30 et 13:30–17:30
+  assert.equal(C.courseMinutesOn(s, fleur, day), 9 * 60);
+  assert.ok(C.courseBusy(s, fleur, day).some((x) => x.lunch && x.s === "12:30" && x.e === "13:30"));
+  const r = apply(s, [{ type: "setShift", emp: "fleur", date: day, segs: [{ s: "12:40", e: "13:20", z: "ZR" }] }]);
+  assert.equal(r.ok, false);
+  assert.match(r.errors.join(), /pause déjeuner/);
+});

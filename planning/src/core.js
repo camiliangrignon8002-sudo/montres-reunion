@@ -208,7 +208,16 @@
     if (!list || !list.length) return null;
     return list.map(([s, e]) => ({ s, e }));
   }
-  const rangesLabel = (r) => (r || []).map((x) => `${x.s}–${x.e}`).join(", ");
+  // Cours + pause déjeuner au CFA (12:30–13:30) : on ne peut pas travailler sur ces plages.
+  function courseBusy(state, emp, date) {
+    const r = courseRanges(state, emp, date);
+    if (!r) return null;
+    const cal = (state.calendars || []).find((c) => c.id === emp.calendarId);
+    const l = cal && cal.timetable && cal.timetable.lunch;
+    if (!l) return r;
+    return [...r, { s: l[0], e: l[1], lunch: true }].sort((a, b) => toMin(a.s) - toMin(b.s));
+  }
+  const rangesLabel = (r) => (r || []).map((x) => `${x.s}–${x.e}${x.lunch ? " (pause déjeuner)" : ""}`).join(", ");
   const courseSpanLabel = (r) => (r && r.length ? `${r[0].s}–${r[r.length - 1].e}` : "");
   function courseMinutesOn(state, emp, date) {
     const r = courseRanges(state, emp, date);
@@ -232,7 +241,7 @@
     for (const emp of state.employees) {
       if (emp.role !== "alternant" || (empId && emp.id !== empId)) continue;
       for (const m of [addDays(monday, -7), monday, addDays(monday, 7)]) for (const d of weekDates(m)) {
-        const r = courseRanges(state, emp, d);
+        const r = courseBusy(state, emp, d);
         if (r) out.push({ emp: emp.id, date: d, segs: r, course: true });
       }
     }
@@ -279,7 +288,7 @@
     const cs = calStatus(state, emp, date);
     if (cs === "formation") {
       const cr = courseRanges(state, emp, date);
-      const ov = cr ? courseOverlap(cr, segs) : [];
+      const ov = cr ? courseOverlap(courseBusy(state, emp, date), segs) : [];
       if (!cr) out.block.push("en formation au CFA ce jour-là");
       else if (ov.length) out.block.push(`en cours au CFA de ${rangesLabel(ov)}`);
       else if (!segs || !segs.length) out.block.push(`en cours au CFA (${rangesLabel(cr)})`);
@@ -334,9 +343,9 @@
       const cs = calStatus(state, emp, d);
       if (cs === "formation") {
         const cr = courseRanges(state, emp, d);
-        const ov = cr ? courseOverlap(cr, sh.segs) : [];
+        const ov = cr ? courseOverlap(courseBusy(state, emp, d), sh.segs) : [];
         if (!cr) add("erreur", "FORMATION", sh.emp, d, `${who} est en formation au CFA le ${fmtDate(d, "day")}.`);
-        else if (ov.length) add("erreur", "FORMATION", sh.emp, d, `${who} est en cours au CFA le ${fmtDate(d, "day")} de ${rangesLabel(ov)} : le créneau chevauche les cours.`);
+        else if (ov.length) add("erreur", "FORMATION", sh.emp, d, `${who} est en cours au CFA le ${fmtDate(d, "day")} de ${rangesLabel(ov)}  : le créneau chevauche ${ov.every((x) => x.lunch) ? "la pause déjeuner au CFA" : "les cours"}.`);
         else if (st.checkMaxDay && timesOk) {
           const c = courseMinutesOn(state, emp, d), w = shiftMinutes(sh.segs);
           if (c + w > st.maxDayHours * 60) add("alerte", "DAY_MAX_COURSE", sh.emp, d, `${who} : ${fmtHours(c + w)} le ${fmtDate(d, "day")} en comptant les cours (${fmtHours(c)} de cours + ${fmtHours(w)} de travail, plus de ${st.maxDayHours} h).`);
@@ -1004,7 +1013,7 @@
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, courseRanges, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };

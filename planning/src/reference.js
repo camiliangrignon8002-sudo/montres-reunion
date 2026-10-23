@@ -316,6 +316,7 @@
   const COURSE_TT = {
         source: "Emploi du temps CFA, semaine 41 (5–9 octobre 2026) : 30 h de cours",
         days: { 0: [["09:30", "12:30"], ["13:30", "16:30"]], 1: [["08:30", "12:30"]], 2: [["08:30", "12:30"]], 3: [["07:30", "12:30"], ["13:30", "17:30"]], 4: [["08:30", "12:30"], ["13:30", "16:30"]] },
+        lunch: ["12:30", "13:30"], // pause déjeuner au CFA, tous les midis (non comptée dans les heures de cours)
         weeks: {},
       };
 
@@ -367,6 +368,10 @@
     }, {
       id: "horaires-cours-s41",
       summary: "Horaires de cours du CFA ajoutés pour Fleur, Lucas et Camilian (30 h la semaine 41) : cours + travail = 35 h",
+      timetables: { "bts-mco1": COURSE_TT },
+    }, {
+      id: "pause-midi-cfa",
+      summary: "Alternants : pause déjeuner au CFA de 12:30 à 13:30 chaque jour de cours (non comptée, pas de travail sur ce créneau)",
       timetables: { "bts-mco1": COURSE_TT },
     }],
     source: {

@@ -673,6 +673,7 @@ table.t td.num { white-space: nowrap; }
   const COURSE_TT = {
         source: "Emploi du temps CFA, semaine 41 (5–9 octobre 2026) : 30 h de cours",
         days: { 0: [["09:30", "12:30"], ["13:30", "16:30"]], 1: [["08:30", "12:30"]], 2: [["08:30", "12:30"]], 3: [["07:30", "12:30"], ["13:30", "17:30"]], 4: [["08:30", "12:30"], ["13:30", "16:30"]] },
+        lunch: ["12:30", "13:30"], // pause déjeuner au CFA, tous les midis (non comptée dans les heures de cours)
         weeks: {},
       };
 
@@ -724,6 +725,10 @@ table.t td.num { white-space: nowrap; }
     }, {
       id: "horaires-cours-s41",
       summary: "Horaires de cours du CFA ajoutés pour Fleur, Lucas et Camilian (30 h la semaine 41) : cours + travail = 35 h",
+      timetables: { "bts-mco1": COURSE_TT },
+    }, {
+      id: "pause-midi-cfa",
+      summary: "Alternants : pause déjeuner au CFA de 12:30 à 13:30 chaque jour de cours (non comptée, pas de travail sur ce créneau)",
       timetables: { "bts-mco1": COURSE_TT },
     }],
     source: {
@@ -962,7 +967,16 @@ table.t td.num { white-space: nowrap; }
     if (!list || !list.length) return null;
     return list.map(([s, e]) => ({ s, e }));
   }
-  const rangesLabel = (r) => (r || []).map((x) => `${x.s}–${x.e}`).join(", ");
+  // Cours + pause déjeuner au CFA (12:30–13:30) : on ne peut pas travailler sur ces plages.
+  function courseBusy(state, emp, date) {
+    const r = courseRanges(state, emp, date);
+    if (!r) return null;
+    const cal = (state.calendars || []).find((c) => c.id === emp.calendarId);
+    const l = cal && cal.timetable && cal.timetable.lunch;
+    if (!l) return r;
+    return [...r, { s: l[0], e: l[1], lunch: true }].sort((a, b) => toMin(a.s) - toMin(b.s));
+  }
+  const rangesLabel = (r) => (r || []).map((x) => `${x.s}–${x.e}${x.lunch ? " (pause déjeuner)" : ""}`).join(", ");
   const courseSpanLabel = (r) => (r && r.length ? `${r[0].s}–${r[r.length - 1].e}` : "");
   function courseMinutesOn(state, emp, date) {
     const r = courseRanges(state, emp, date);
@@ -986,7 +1000,7 @@ table.t td.num { white-space: nowrap; }
     for (const emp of state.employees) {
       if (emp.role !== "alternant" || (empId && emp.id !== empId)) continue;
       for (const m of [addDays(monday, -7), monday, addDays(monday, 7)]) for (const d of weekDates(m)) {
-        const r = courseRanges(state, emp, d);
+        const r = courseBusy(state, emp, d);
         if (r) out.push({ emp: emp.id, date: d, segs: r, course: true });
       }
     }
@@ -1033,7 +1047,7 @@ table.t td.num { white-space: nowrap; }
     const cs = calStatus(state, emp, date);
     if (cs === "formation") {
       const cr = courseRanges(state, emp, date);
-      const ov = cr ? courseOverlap(cr, segs) : [];
+      const ov = cr ? courseOverlap(courseBusy(state, emp, date), segs) : [];
       if (!cr) out.block.push("en formation au CFA ce jour-là");
       else if (ov.length) out.block.push(`en cours au CFA de ${rangesLabel(ov)}`);
       else if (!segs || !segs.length) out.block.push(`en cours au CFA (${rangesLabel(cr)})`);
@@ -1088,9 +1102,9 @@ table.t td.num { white-space: nowrap; }
       const cs = calStatus(state, emp, d);
       if (cs === "formation") {
         const cr = courseRanges(state, emp, d);
-        const ov = cr ? courseOverlap(cr, sh.segs) : [];
+        const ov = cr ? courseOverlap(courseBusy(state, emp, d), sh.segs) : [];
         if (!cr) add("erreur", "FORMATION", sh.emp, d, `${who} est en formation au CFA le ${fmtDate(d, "day")}.`);
-        else if (ov.length) add("erreur", "FORMATION", sh.emp, d, `${who} est en cours au CFA le ${fmtDate(d, "day")} de ${rangesLabel(ov)} : le créneau chevauche les cours.`);
+        else if (ov.length) add("erreur", "FORMATION", sh.emp, d, `${who} est en cours au CFA le ${fmtDate(d, "day")} de ${rangesLabel(ov)}  : le créneau chevauche ${ov.every((x) => x.lunch) ? "la pause déjeuner au CFA" : "les cours"}.`);
         else if (st.checkMaxDay && timesOk) {
           const c = courseMinutesOn(state, emp, d), w = shiftMinutes(sh.segs);
           if (c + w > st.maxDayHours * 60) add("alerte", "DAY_MAX_COURSE", sh.emp, d, `${who} : ${fmtHours(c + w)} le ${fmtDate(d, "day")} en comptant les cours (${fmtHours(c)} de cours + ${fmtHours(w)} de travail, plus de ${st.maxDayHours} h).`);
@@ -1758,7 +1772,7 @@ table.t td.num { white-space: nowrap; }
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, courseRanges, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };
@@ -3375,7 +3389,7 @@ table.t td.num { white-space: nowrap; }
         const total = [0, 1, 2, 3, 4, 5, 6].reduce((a, d) => a + dur(tt[d]), 0);
         return h("div", { class: "card" }, h("div", { class: "row between" }, h("h3", {}, "Horaires de cours"), h("span", { class: "chip cours" }, `${C.fmtHours(total)} par semaine complète`)),
           h("div", { class: "list", style: { "margin-top": "8px" } }, [0, 1, 2, 3, 4, 5, 6].filter((d) => (tt[d] || []).length).map((d) => h("div", { class: "item" }, h("b", { class: "grow" }, C.DAYS[d]), h("span", {}, tt[d].map(([x, y]) => `${x}–${y}`).join(" · ")), h("span", { class: "small muted", style: { "min-width": "48px", "text-align": "right" } }, C.fmtHours(dur(tt[d])))))),
-          h("p", { class: "small muted", style: { "margin-top": "8px" } }, `${cal.timetable.source || "Emploi du temps du CFA"}. Appliqués à chaque jour rose du calendrier. Cours + travail = ${s.settings.contractHours || 35} h par semaine ; on peut travailler un jour de cours en dehors de ces heures, jamais pendant.`));
+          h("p", { class: "small muted", style: { "margin-top": "8px" } }, `${cal.timetable.source || "Emploi du temps du CFA"}. Appliqués à chaque jour rose du calendrier.${cal.timetable.lunch ? ` Pause déjeuner ${cal.timetable.lunch[0]}–${cal.timetable.lunch[1]} tous les midis (non comptée, pas de travail sur ce créneau).` : ""} Cours + travail = ${s.settings.contractHours || 35} h par semaine ; on peut travailler un jour de cours en dehors de ces heures, jamais pendant.`));
       })() : null,
       h("div", { class: "legend" }, h("span", {}, h("span", { class: "yday E", style: { width: "18px" } }, ""), "Entreprise"), h("span", {}, h("span", { class: "yday P", style: { width: "18px" } }, ""), "Formation CFA"), h("span", {}, h("span", { class: "yday W", style: { width: "18px" } }, ""), "Week-end (pas de cours)"), h("span", {}, h("span", { class: "yday F", style: { width: "18px" } }, ""), "Férié"), h("span", {}, h("span", { class: "yday Q", style: { width: "18px" } }, ""), "Inconnu")),
       edit ? h("p", { class: "banner info small" }, "Touchez un jour pour changer son statut : Entreprise → Formation → Week-end → Férié → Inconnu. Chaque changement est enregistré dans l'historique.") : null,
