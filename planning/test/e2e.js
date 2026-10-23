@@ -164,7 +164,7 @@ const MOCK = `
     check("génération : 4 postes non attribués (CFA les 12-13 nov.)", /4 poste\(s\) non attribué/.test(notPlaced) && (notPlaced.match(/(formation|cours) au CFA/g) || []).length === 4);
     await page.click(".dialog footer >> text=/Enregistrer 1 semaine/");
     await page.waitForSelector("text=Postes à pourvoir");
-    const coursTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) td', (tds) => tds.filter((t) => t.querySelector(".tag-cours:not(.pause)")).length);
+    const coursTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) td', (tds) => tds.filter((t) => t.querySelector(".seg-cours")).length);
     const pauseTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) td', (tds) => tds.map((t) => [...t.querySelectorAll(".seg-cours > span:first-child")].map((e) => e.textContent).join("|")).filter(Boolean));
     check("Fleur affichée en cours jeudi et vendredi", coursTags === 2, String(coursTags));
     check("cours affichés en blocs, sans le midi", pauseTags.length === 2 && pauseTags.every((t) => /^\d\d:\d\d–12:30\|13:30–\d\d:\d\d$/.test(t)), pauseTags.join(","));

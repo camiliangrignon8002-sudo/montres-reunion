@@ -33,7 +33,7 @@
   // Jour de cours : un bloc par plage de cours, comme les créneaux de travail.
   function courseTags(ranges, mark) {
     if (!ranges) return [h("span", { class: "tag-cours", title: "Journée au CFA" }, "Cours CFA" + mark)];
-    return ranges.filter((x) => !x.lunch).map((x) => h("span", { class: "tag-cours seg-cours", title: "Cours au CFA" }, h("span", {}, `${x.s}–${x.e}`), h("span", { class: "z" }, "CFA" + mark)));
+    return ranges.filter((x) => !x.lunch).map((x) => h("div", { class: "blk seg-cours", style: { "--z": "var(--cours)" }, title: "Cours au CFA" }, h("span", {}, `${x.s}–${x.e}`), h("small", {}, "CFA" + mark)));
   }
   const ICONS = {
     home: "M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z",
