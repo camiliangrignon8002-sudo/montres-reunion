@@ -1496,25 +1496,24 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "figaro-109954321",
+  "id": "figaro-108474953",
   "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-109954321.html",
-  "titre": "Location meublée appartement 1 pièce 23.13 m² à Moufia (97490), 556 €",
-  "prix": 556.0,
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108474953.html",
+  "titre": "Location  appartement 1 pièce 20 m² à Sainte Clotilde (97490), 560 €",
+  "prix": 560.0,
   "commune": "Saint-Denis",
-  "quartier": "Moufia",
+  "quartier": "Sainte Clotilde",
   "pieces": 1,
-  "type": "T1",
-  "surface": null,
-  "meuble": true,
+  "type": "Studio",
+  "surface": 20.0,
+  "meuble": null,
   "photos": [
-   "https://lh3.googleusercontent.com/5KLsLsg_37-fA48xSgivrqeJcTOfmGsKP9LOeAJlvT_1DsHKEqpNnzPE89g28ee4aFhru18vQO8MO5EMyOKmGO6OPOBplcGOgrbc=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/WyRpiuEWX2zXJNGl4h-lnXcTIJEP6TfypUF9F8y51xjYK3UqX2kX4GlwrPIV21QL3rUvQqiExyxCFvPotjTrgHgF5pNAmLADSVfJ1rk=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/99_cdZohfbED3PkP5TdL-gDHLMN7J6nzyBv-5XhVXzxXvTbvrUDzbESdeE2ZOGmTtDkDKGY6IDI9h88lQ22c-Bqroob4D8szOhnThZQ=rw-w940-h605-l80"
+   "https://lh3.googleusercontent.com/_iSkscS_gOnoXD01xYSvEWVke0vg5OR59ZmYqUm0Nob9NhE3B9xhBATm3PQuKnrYvgFqNdC6OzVGe9QHWsaEGDqW1URx9lBr93olQQ=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/qFt1jcimHPczAQdviKz9tnK8ypRpWNrmtTyD0C2VzVwsF1ony0Eg4YzO5dp16z8WRrmta-hZes2Bp624XJydhQBIw2FPq2aZYHPHNg=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/cK-Xt2OPKTJ4SL_TUXKOe6pirLWOyi6ZpDxogju3IeuD7fZ--61mGSfICtOvl3Wdi1WOJsJTi_AUDvVbDcz4eQoqKZM3bnnJLI4kTw=rw-w940-h605-l80"
   ],
-  "description": "Runimmo vous propose en location ce charmant appartement T1 entièrement meublé pour étudiant qui recherchent un nid douillet et fonctionnel. Cet appartement de 23,13 m² vous offre tout le confort nécessaire, situé au 7 rue des Jacinthes - résidence 'Central Fac 9 '. Réservé uniquement aux étudiants.\nÀ l'intérieur, La pièce à vivre, baignée de lumière naturelle, est spacieuse et accueillante.. La salle de bains, moderne et fonctionnelle. Ce bien est proche des commodités, et des commerces.\nPour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 301 € TTC à la charge du locataire comprenant 69 € TTC pour l'état des lieux. Loyer de base 521 €/mois. Provision sur charges 35 €/mois, régularisation annuelle. Dépôt de garantie 1 042 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
+  "description": "RUNIMMO vous propose en location un studio de 20m2 dans la résidence Central Fac 9 situé rue des jacinthes à SAINTE CLOTILDE.\nIl se compose d'une entrée avec kitchenette aménagée et équipée, un séjour/chambre, salle d'eau avec WC.\nDisponible de suite\nN'hésitez pas à recontacter Anaïs pour une visite 0692359521.\nHonoraires de 260 € TTC à la charge du locataire comprenant 60 € TTC pour l'état des lieux. Loyer de base 530 €/mois. Provision sur charges 30 €/mois, régularisation annuelle. Dépôt de garantie 530 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.\nCarte pro. CP175012018000034249",
   "caracteristiques": [
-   "Meublé",
    "Proche université"
   ],
   "date": "",
@@ -1523,43 +1522,17 @@
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "0692 26 92 05",
+  "tel": "0692 35 95 21",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:07+04:00"
- },
- {
-  "id": "zimo-01a07c45-39b7-7bdc-96fd-e6e30e960043",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-20-m2/01a07c45-39b7-7bdc-96fd-e6e30e960043",
-  "titre": "Appartement 1 pièce 20 m²",
-  "prix": 560.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 20.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/_iNM3UNwniCXAi69P5DiRlZNPsoo-4AjlUdXcxkRftg/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fimmo-cdn.fr%2Fimages%2Ffigaro%2F6a9eaecca223ac14e09cb538-1.jpg"
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-1-piece-20-m2/01a07c45-39b7-7bdc-96fd-e6e30e960043"
+   }
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via Figaro Immobilier",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -1804,6 +1777,42 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "figaro-89244115",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-89244115.html",
+  "titre": "Location meublée appartement 1 pièce 19.18 m² à Sainte Clotilde (97490), 587 €",
+  "prix": 587.0,
+  "commune": "Saint-Denis",
+  "quartier": "Sainte Clotilde",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 19.18,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/fdFBhBTe85ECPAn1cPI_CKjfV96VPxhMGQzimys0MJ-ntyj8Z2pquYK0K8-DihO6WE6E3R-kWiSlZ0ke2LxoMWXIFPbOKyJWE_U9lw=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/-89jw3ppFh5lTjhQZxphbcdKtwdF1hzf26RqagFii4h6DBIHOegSVOjw-Zn87wqVIz_PYjAfoMPPbr7HIb83t2TCaS3zBpYsN3zwFoE=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/kRUYRC0hX2M7u-rlqNbWIG4eSAwJVUqMLEQ_h3HXNIgaboxQOWPp3fG4JkSnxvCjtOjC2Bj-elxL6tnjloyUzNhrAMF0L5EuXtiGKw=rw-w940-h605-l80"
+  ],
+  "description": "ENEZ Immobilier vous propose ce studio meublé de 19m2 situé au 7 rue des Jacinthes à ST DENIS.\nIl se compose d'un séjour chambre avec placard, d'une kitchenette équipée, d'une salle d'eau avec WC.\nVous disposerez également d'un parking en sous-sol.\nDisponibilité : DE SUITE\nN'hésitez pas à nous contacter au 0693228334 pour le visiter rapidement",
+  "caracteristiques": [
+   "Meublé",
+   "Parking"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0693 22 83 34",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T15:50+04:00"
  },
  {
   "id": "zimo-01a1670c-1122-7920-b81b-5e35854fd3b9",
@@ -2176,41 +2185,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "figaro-108377217",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108377217.html",
-  "titre": "Location meublée appartement 1 pièce 16 m² à Saint paul (97460), 600 €",
-  "prix": 600.0,
-  "commune": "Le Port",
-  "quartier": "Saint paul",
-  "pieces": 1,
-  "type": "T1",
-  "surface": 16.0,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/V8t4jUk9JOvqxHSjYks6F7CN9MvRnXUGC132I-P3EIYqJPmfXuLA5YYetKpgRay9KcGpCXfmQBwaxt3R94YwhpT7R4ZOePzbPZJIQw=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/a3tW_AOl9sAEI0RzegVvKUjVKI3HDOfC8YHBOMUDl_V1AVGdF8NL1R5mwFIA62-4oGYlkr80SKNA5e_iUe7UH1AKZkhzguB2jvHo=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/xyr8KWNJjo-adpsxY5w1bUkbtUYw1AnwJc48_Glu8RNe0A7fGnIBJgA2dlu2ouU54maNbkxRgQtAbu7llYtoYk_f3XMs-5h_YOWAjQ=rw-w940-h605-l80"
-  ],
-  "description": "Nous vous proposons à la location cette chambre meublée d'une surface de 16m2, située à Saint Gilles les Hauts.\nLe locataire aura à sa disposition sa propre SDB personnelle ainsi que son WC (type chambre parentale)\nEn commun tous le reste de la maison et les extérieurs.\nLoyer 600EUR\nEau, électricité et internet inclus dans le loyer - le logement est loué meublé - le ménage est fait dans les espaces personnels (et compris dans le loyer) tous les 15 jours\nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www.georisques.gouv.fr",
-  "caracteristiques": [
-   "Meublé"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord-Ouest",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T17:56+04:00"
  },
  {
   "id": "zimo-01a11734-78a6-7892-b7d4-6b5051050245",
@@ -3426,6 +3400,46 @@
   "vu": "2026-10-21T22:59+04:00"
  },
  {
+  "id": "figaro-108763619",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108763619.html",
+  "titre": "Location  appartement 1 pièce 22.88 m² à Sainte Clotilde (97490), 660 €",
+  "prix": 660.0,
+  "commune": "Saint-Denis",
+  "quartier": "Sainte Clotilde",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 22.88,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/QWqeT3VAHwJ0LkPn9OPQIzFhFEaBvkg_odmzK9ElOkQoKxEuFInsf5YsGj-9TgaOpg0GxgPrjsfvhyWWQXfEBu5GpVSnyTCU9rXm0sc=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/L4lJ-wVPt78puF_t46BOeMKDM1_xLffzcBWmBQTxcSou4ik79XimYC-tYYzBsm8MNnS-g1UDyjPClHcbUDkPjCzpG1n93m8YVWKjpw=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/xEaKqjza4PaiwR0B_GQUKG_LrTHah88_DgwbvVvpyRKDMVqKP8vi21sOzcg0qT_rp8bssrhC0oPhKkWnJUblkDc2-iJqUDFpqP0W=rw-w940-h605-l80"
+  ],
+  "description": "Venez visiter ce charmant studio meublé très bien agencé situé dans la résidence le Rembrand proche de la clinique et de la faculté comprenant une entrée, une pièce à vivre climatisée, une cuisine aménagée avec placards haut et bas et équipée d'un réfrigérateur, micro ondes, évier, plaque de cuisson...... , une salle d'eau avec douche et toilette et une varangue donnant sur le jardin de la résidence.\nUne place de parking est attribuée à ce logement.\nce logement est disponible de suite.\nLoyer mensuel 660 € dont 20 € de provision pour charges de copropriété\nDépôt de garantie 1260 € soit deux mois de loyer hors charges\nHonoraires locataires 13 € du m2 soit 286 € dont 66 € pour état des lieux soit 3 € du m2\nPour toute visite contactez David agent commercial du réseau teka Immo au 0692 14 60 00 ou ou par é-mail :david.teka@tekaimmo.fr\nlien vers notre barème :http://www.teka Immo.com/pdf/honoraires.pdf.Annonce rédigée sous la responsabilité éditoriale de l'agent.\n\\r",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Climatisation",
+   "Jardin",
+   "Cuisine équipée"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 14 60 00",
+  "email": "david.teka@tekaimmo.fr",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T17:56+04:00"
+ },
+ {
   "id": "zimo-01a13baa-4600-7a22-9963-2e8441f489b3",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-meuble-st-denis-clim-varangue-parking-libre-le-5-novembre/01a13baa-4600-7a22-9963-2e8441f489b3",
@@ -4285,6 +4299,40 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "zimo-01a167e2-67cb-7a5a-bcdd-4b35325e77d2",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/t1bis-meuble-de-32m2-terrasse-15-m2/01a167e2-67cb-7a5a-bcdd-4b35325e77d2",
+  "titre": "T1bis meublé de 32m2 + terrasse 15 m2",
+  "prix": 700.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 32.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/A5rby5Cff_vMW8DjlACdYU7B7NSdXwc4qqAyQ7fW5YQ/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_6edd17a0-7c23-4469-8521-b473453750f9.jpg"
+  ],
+  "description": "Location T1 bis Saint-Denis (974) 1 pièces 32 m²",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-23T12:52+04:00"
+ },
+ {
   "id": "zimo-01a15566-b238-7e7c-8ba6-ba6930d8ed04",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/location-studio-meuble/01a15566-b238-7e7c-8ba6-ba6930d8ed04",
@@ -4870,10 +4918,6 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
-   {
-    "source": "Figaro Immobilier",
-    "url": "https://immobilier.lefigaro.fr/annonces/annonce-108075429.html"
-   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/spacieux-t2/019fec0b-0419-728a-82e5-d4e908bf0441"
