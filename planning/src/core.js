@@ -542,7 +542,7 @@
         shift: shifts.find((s) => s.date === date) || null,
         absences: absencesOn(state, emp.id, date),
         cal: calStatus(state, emp, date),
-        course: courseRanges(state, emp, date),
+        course: courseBusy(state, emp, date),
       }));
       rows.push({ emp, cells, minutes: shifts.reduce((a, s) => a + shiftMinutes(s.segs), 0), courseMinutes: emp.role === "alternant" ? weekCourseMinutes(state, monday, emp.id) : 0 });
     }

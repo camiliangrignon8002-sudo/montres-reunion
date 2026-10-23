@@ -198,6 +198,8 @@ table.plan { border-collapse: separate; border-spacing: 0; width: 100%; min-widt
 .plan tr.inactive td.name b { text-decoration: line-through; color: var(--fg-3); }
 .tag-cours, .tag-abs, .tag-unk { display: block; font-size: 11.5px; font-weight: 600; padding: 3px 6px; border-radius: 6px; }
 .tag-cours { background: var(--cours-soft); color: var(--cours); }
+.tag-cours + .tag-cours { margin-top: 3px; }
+.tag-cours.pause { background: rgba(120,120,128,.14); color: var(--fg-2); font-weight: 500; }
 .tag-abs { background: var(--absent-soft); color: var(--fg-2); }
 .tag-unk { color: var(--fg-3); border: 1px dashed var(--line-strong); }
 .pause { font-size: 10.5px; color: var(--fg-3); padding-left: 4px; }
@@ -1301,7 +1303,7 @@ table.t td.num { white-space: nowrap; }
         shift: shifts.find((s) => s.date === date) || null,
         absences: absencesOn(state, emp.id, date),
         cal: calStatus(state, emp, date),
-        course: courseRanges(state, emp, date),
+        course: courseBusy(state, emp, date),
       }));
       rows.push({ emp, cells, minutes: shifts.reduce((a, s) => a + shiftMinutes(s.segs), 0), courseMinutes: emp.role === "alternant" ? weekCourseMinutes(state, monday, emp.id) : 0 });
     }
@@ -2399,6 +2401,11 @@ table.t td.num { white-space: nowrap; }
     for (const kid of kids.flat(Infinity)) if (kid != null && kid !== false) el.append(kid instanceof Node ? kid : String(kid));
     return el;
   }
+  // Jour de cours : une ligne par plage (cours, pause déjeuner au CFA).
+  function courseTags(ranges, mark) {
+    if (!ranges) return [h("span", { class: "tag-cours", title: "Journée au CFA" }, "Cours CFA" + mark)];
+    return ranges.map((x) => h("span", { class: "tag-cours" + (x.lunch ? " pause" : ""), title: x.lunch ? "Pause déjeuner au CFA" : "Cours au CFA" }, `${x.lunch ? "Pause" : "Cours"} ${x.s}–${x.e}${x.lunch ? "" : mark}`));
+  }
   const ICONS = {
     home: "M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z",
     week: "M4 5h16v15H4z M4 9.5h16 M8 3v4 M16 3v4 M8 13h2 M12 13h2 M16 13h1 M8 16.5h2 M12 16.5h2",
@@ -2936,11 +2943,11 @@ table.t td.num { white-space: nowrap; }
             kids.push(h("div", { class: "stack" }, cell.shift.segs.map((g) => blk(s, g))));
           } else {
             if (cell.absences.length) kids.push(h("span", { class: "tag-abs" }, C.ABSENCE_TYPES[cell.absences[0].type]));
-            if (cell.cal === "formation") kids.push(h("span", { class: "tag-cours", title: cell.course ? `Cours : ${C.rangesLabel(cell.course)}` : "Journée au CFA" }, cell.course ? `Cours ${C.courseSpanLabel(cell.course)}` : "Cours CFA"));
+            if (cell.cal === "formation") kids.push(...courseTags(cell.course, ""));
             else if (cell.cal === "inconnu") kids.push(h("span", { class: "tag-unk", title: "Statut d'alternance inconnu ce jour-là" }, "?"));
             if (canEdit && !cell.absences.length && (cell.cal !== "formation" || cell.course)) kids.push(h("span", { class: "add", "aria-hidden": "true" }, "+"));
           }
-          if (cell.shift && cell.cal === "formation") kids.push(h("span", { class: "tag-cours", title: cell.course ? `Cours : ${C.rangesLabel(cell.course)}` : "Journée au CFA" }, cell.course ? `Cours ${C.courseSpanLabel(cell.course)}` : "Cours CFA !"));
+          if (cell.shift && cell.cal === "formation") kids.push(...courseTags(cell.course, " !"));
           if (cell.shift && cell.absences.length) kids.push(h("span", { class: "tag-abs" }, C.ABSENCE_TYPES[cell.absences[0].type] + " !"));
           if (lvl) kids.push(h("span", { class: "flag" + (lvl === "alerte" ? " warn" : ""), title: issues.filter((i) => i.emp === row.emp.id && i.date === cell.date).map((i) => i.msg).join("\n") }, lvl === "erreur" ? "!" : "?"));
           const td = h("td", {

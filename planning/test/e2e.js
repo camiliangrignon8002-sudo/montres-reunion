@@ -164,8 +164,10 @@ const MOCK = `
     check("génération : 4 postes non attribués (CFA les 12-13 nov.)", /4 poste\(s\) non attribué/.test(notPlaced) && (notPlaced.match(/(formation|cours) au CFA/g) || []).length === 4);
     await page.click(".dialog footer >> text=/Enregistrer 1 semaine/");
     await page.waitForSelector("text=Postes à pourvoir");
-    const coursTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) .tag-cours', (x) => x.length);
+    const coursTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) td', (tds) => tds.filter((t) => t.querySelector(".tag-cours:not(.pause)")).length);
+    const pauseTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) .tag-cours.pause', (x) => x.map((e) => e.textContent));
     check("Fleur affichée en cours jeudi et vendredi", coursTags === 2, String(coursTags));
+    check("pause déjeuner du CFA affichée (12:30–13:30)", pauseTags.length === 2 && pauseTags.every((t) => t === "Pause 12:30–13:30"), pauseTags.join(","));
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/3-generation.png`, fullPage: true });
 
     // tentative interdite : placer Fleur le 29
