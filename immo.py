@@ -1,4 +1,4 @@
-"""Biens à vendre à La Réunion : la petite liste du mois pour l'appli Dossiers immo.
+"""Biens à vendre à La Réunion : la petite liste du mois pour l'appli Seb Immo.
 
 Lit les annonces de vente (maisons et appartements) de Bien'ici sur toute l'île, calcule le prix
 moyen au m² de chaque commune, puis garde en tête de liste les biens les moins chers au m² par

@@ -151,7 +151,7 @@ génération à partir du planning modèle, historique, exports PDF / Excel / CS
 
 ---
 
-# 🏡 Dossiers Immo 974
+# 🏡 Seb Immo
 
 Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/immo/
 (version Claude : https://claude.ai/artifact/2Bg3yFCpd15pLLDdHewmzm)
