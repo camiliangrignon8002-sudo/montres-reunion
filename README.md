@@ -169,6 +169,11 @@ menu fixe à gauche sur PC).
 - **Relances automatiques** (menu ☰) : avec un compte **Brevo** (clé API collée dans l'appli), l'appli envoie elle-même
   les SMS (et les mails une fois l'adresse d'envoi remplie) aux clients à qui il manque des papiers, quand elle est ouverte
   sur l'adresse github.io. 3 relances au plus par client, de 8h à 19h, pas le dimanche (réglable).
+- **Importer mes dossiers** (menu ☰) : on dépose son dossier clients existant (sous-dossiers, photos, PDF, tableau CSV).
+  L'appli range chaque fichier dans le bon client et le bon papier (par l'IA dans la version Claude, sinon d'après les noms),
+  montre le résultat à corriger, puis « Tout ranger » crée les dossiers, qui se classent tout seuls.
+- **Dossiers en attente** : bouton « Mettre en attente » dans un dossier (raison, date de reprise) ; plus de relances,
+  le dossier revient sur l'accueil à la date de reprise.
 - **Terrains à acheter** (menu ☰) : les terrains à vendre du mois, à part des maisons et appartements.
 - **Assistant IA** (version Claude) : répond aux questions sur l'appli et les dossiers, et peut cocher un papier,
   ajouter un papier, noter un rendez-vous, créer un dossier ou chercher un bien. Il ne supprime rien et n'envoie rien.
