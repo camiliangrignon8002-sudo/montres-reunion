@@ -108,7 +108,7 @@ version la moins chère. Pour Microstor et ParuVendu, la carte montre la commune
 
 Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/vols/
 
-**Toutes les 3 heures, jour et nuit**, GitHub relève sur **Google Flights** les **vols sans escale** de la France
+**Toutes les 2 heures, jour et nuit**, GitHub relève sur **Google Flights** les **vols sans escale** de la France
 vers La Réunion (Saint-Denis Roland-Garros), **aller simple**, sur toutes les compagnies (Air France, Air Austral,
 Corsair, French bee…), jour par jour sur environ 11 mois, au départ de Paris-CDG, Paris-Orly, Lyon, Marseille,
 Bordeaux, Toulouse, Nantes, Montpellier, Nice, Lille et Strasbourg. Les prix demandés comprennent
