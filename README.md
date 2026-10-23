@@ -169,6 +169,12 @@ menu fixe à gauche sur PC).
 - **Relances automatiques** (menu ☰) : avec un compte **Brevo** (clé API collée dans l'appli), l'appli envoie elle-même
   les SMS (et les mails une fois l'adresse d'envoi remplie) aux clients à qui il manque des papiers, quand elle est ouverte
   sur l'adresse github.io. 3 relances au plus par client, de 8h à 19h, pas le dimanche (réglable).
+- **Terrains à acheter** (menu ☰) : les terrains à vendre du mois, à part des maisons et appartements.
+- **Assistant IA** (version Claude) : répond aux questions sur l'appli et les dossiers, et peut cocher un papier,
+  ajouter un papier, noter un rendez-vous, créer un dossier ou chercher un bien. Il ne supprime rien et n'envoie rien.
+- **Aide** : les questions courantes, réponse en un appui.
+- **Agent de maintenance** : une tâche planifiée Claude vérifie chaque lundi que la recherche des biens marche,
+  répare `immo.py` si besoin et propose la correction.
 - **Mes biens et mon argent** : prix affiché, prix d'achat, frais, prix de vente, commission, ce que chaque
   vente a rapporté, total de l'année.
 - **Biens achetables** : le 1er de chaque mois, `immo.py` lit les maisons, appartements et terrains à vendre à
