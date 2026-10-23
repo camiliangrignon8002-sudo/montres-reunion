@@ -359,7 +359,7 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
 <main class="page">
   <!-- Accueil -->
   <section id="vue-produits">
-    <div class="grand-titre"><h1>Produits</h1><div class="maj">Mis à jour<br><span id="maj">vendredi 23/10 à 16h23</span></div></div>
+    <div class="grand-titre"><h1>Produits</h1><div class="maj">Mis à jour<br><span id="maj">vendredi 23/10 à 19h27</span></div></div>
 
     <div class="rail" id="rail-cats" aria-label="Catégories"></div>
 
@@ -443,7 +443,7 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
     <a href="https://ntfy.sh/apple974-hcmkgo9gki" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:13px 16px;color:var(--texte)"><svg class="ic" style="color:var(--bleu)"><use href="#i-cloche"/></svg>Notification de midi</a>
   </nav>
   <p class="info">Chaque jour vers 12h, une notification donne le nombre de produits Apple sortis en vente dans les 24 h et les liste. Pour la recevoir : installe l'appli gratuite <b>ntfy</b>, touche <b>+</b> et abonne-toi au sujet <b>apple974-hcmkgo9gki</b>.</p>
-  <p class="info">Annonces lues plusieurs fois par jour sur les sites des magasins de La Réunion et sur ParuVendu. Leboncoin et Facebook Marketplace bloquent les robots : la rubrique « Aussi sur » ouvre directement leur recherche à La Réunion. Les prix et le stock peuvent changer : vérifie sur le site du vendeur avant de te déplacer.<br><br>Sources lues au dernier passage : <span id="sources">Microstor, Phenix Store, Darty, Cash Express, ParuVendu, Delbos Informatique, Leclerc (Leclic), TelROI, OrdiROI, Isleden, Zeop Store, smart974, Pineapple</span></p>
+  <p class="info">Annonces lues plusieurs fois par jour sur les sites des magasins de La Réunion et sur ParuVendu. Leboncoin et Facebook Marketplace bloquent les robots : la rubrique « Aussi sur » ouvre directement leur recherche à La Réunion. Les prix et le stock peuvent changer : vérifie sur le site du vendeur avant de te déplacer.<br><br>Sources lues au dernier passage : <span id="sources">Microstor, Phenix Store, Darty, ParuVendu, Delbos Informatique, Leclerc (Leclic), TelROI, OrdiROI, Isleden, Zeop Store, smart974, Pineapple</span></p>
 </aside>
 
 <!-- Fiche produit -->
@@ -1073,7 +1073,7 @@ function ajouterComparaison(a) {
 }
 async function chargerSpecs() {
   if (SPECS) return SPECS;
-  try { const r = await fetch("specs.json?v=202610231623"); SPECS = await r.json(); } catch (e) { SPECS = {puces: {}, modeles: {}}; }
+  try { const r = await fetch("specs.json?v=202610231927"); SPECS = await r.json(); } catch (e) { SPECS = {puces: {}, modeles: {}}; }
   return SPECS;
 }
 const ORDRE_ETAT = {"Neuf": 3, "Reconditionné": 2, "Occasion": 1};
@@ -1327,7 +1327,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden && Da
 
 $("#grille").innerHTML = Array.from({length: 6}, () => `<div class="squelette"></div>`).join("");
 compteurs();
-fetch("annonces.json?v=202610231623").then(r => r.json()).then(charger).catch(() => actualiser(true));
+fetch("annonces.json?v=202610231927").then(r => r.json()).then(charger).catch(() => actualiser(true));
 if (location.hash) history.replaceState(null, "", location.pathname);
 </script>
 </body>
