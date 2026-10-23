@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Vols 974</title>
+<title>Réunion de famille</title>
 <meta name="description" content="Les vols directs les moins chers de la France vers La Réunion, aller simple, avec une valise en soute et une valise cabine.">
 <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
@@ -18,7 +18,7 @@
 :root{
   --fond:#f2f2f7;--carte:#fff;--texte:#1d1d1f;--doux:#6e6e73;--ligne:#e3e3e8;--champ:#e9e9ee;
   --bleu:#0071e3;--bleu-doux:#e8f1fc;--rouge:#e30000;--rouge-doux:#fdeaea;--vert:#1a7f37;--vert-doux:#e3f4e8;
-  --orange:#b25000;--orange-doux:#fdf0e3;
+  --orange:#b25000;--orange-doux:#fdf0e3;--logo:#c8102e;
   --verre:rgba(255,255,255,.72);--verre-bord:rgba(0,0,0,.06);
   --ombre:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.06);
   --r:20px;
@@ -26,7 +26,7 @@
 @media (prefers-color-scheme:dark){:root{
   --fond:#000;--carte:#1c1c1e;--texte:#f5f5f7;--doux:#98989d;--ligne:#2c2c2e;--champ:#2c2c2e;
   --bleu:#2997ff;--bleu-doux:#0d2540;--rouge:#ff453a;--rouge-doux:#3a1312;--vert:#30d158;--vert-doux:#0f2e18;
-  --orange:#ff9f0a;--orange-doux:#33210a;
+  --orange:#ff9f0a;--orange-doux:#33210a;--logo:#ff5a6a;
   --verre:rgba(30,30,32,.72);--verre-bord:rgba(255,255,255,.08);
   --ombre:0 1px 2px rgba(0,0,0,.5);
 }}
@@ -43,9 +43,14 @@ svg.ic{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-wid
 /* En-tête */
 .entete{position:sticky;top:0;z-index:20;padding-top:env(safe-area-inset-top);transition:background .2s}
 .entete.colle{background:var(--verre);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:.5px solid var(--verre-bord)}
-.entete-in{max-width:900px;margin:auto;display:flex;align-items:center;gap:8px;padding:8px 16px;min-height:56px}
-.petit-titre{flex:1;font-weight:600;font-size:17px;opacity:0;transition:opacity .2s;white-space:nowrap}
-.entete.colle .petit-titre{opacity:1}
+.entete-in{max-width:900px;margin:auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:8px 16px}
+.entete-in .gauche{display:flex;gap:8px}
+.entete-in .droite{display:flex;gap:8px;justify-content:flex-end}
+/* Logo : la famille en dessin, au-dessus du nom, comme le logo d'une marque */
+.logo{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
+.logo .famille{width:124px;height:67px;display:block}
+@media (prefers-color-scheme:dark){.logo .famille > g{stroke:#a39790}}
+.logo .nom{color:var(--logo);font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
 .rond{border:0;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--carte);box-shadow:var(--ombre);position:relative;flex:none}
 .rond:active{transform:scale(.94)}
 .pastille{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--rouge);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
@@ -185,10 +190,94 @@ h1{font-size:32px;line-height:1.1;margin:4px 0 6px;letter-spacing:-.02em}
 
 <header class="entete" id="entete">
   <div class="entete-in">
-    <div class="petit-titre">Vols 974</div>
-    <button class="rond" id="btn-favoris" aria-label="Favoris"><svg class="ic"><use href="#i-coeur"/></svg><span class="pastille" id="nb-favoris" hidden></span></button>
-    <button class="rond" id="btn-panier" aria-label="Panier"><svg class="ic"><use href="#i-panier"/></svg><span class="pastille" id="nb-panier" hidden></span></button>
-    <button class="rond" id="btn-maj" aria-label="Actualiser"><svg class="ic"><use href="#i-maj"/></svg></button>
+    <div class="gauche">
+      <button class="rond" id="btn-maj" aria-label="Actualiser"><svg class="ic"><use href="#i-maj"/></svg></button>
+    </div>
+    <div class="logo">
+      <svg class="famille" viewBox="0 0 240 130" role="img" aria-label="La famille : quatre personnes et deux chats">
+        <defs>
+          <linearGradient id="lunettes-papa" x1="0" x2="1"><stop offset="0" stop-color="#2346d8"/><stop offset=".55" stop-color="#1f8fd0"/><stop offset="1" stop-color="#1fbf86"/></linearGradient>
+          <clipPath id="cadre-famille"><rect width="240" height="130"/></clipPath>
+        </defs>
+        <g clip-path="url(#cadre-famille)" stroke="#2d211c" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+          <!-- maman à gauche : longs cheveux bruns, chemise rayée bleu clair -->
+          <ellipse cx="58" cy="50" rx="22" ry="30" fill="#5a3420"/>
+          <path d="M22 130 Q24 82 58 76 Q92 82 94 130 Z" fill="#c4d8f0"/>
+          <path d="M38 88 L34 130 M48 80 L46 130 M68 80 L70 130 M78 88 L82 130" stroke="#fff" stroke-width="2.2"/>
+          <rect x="52" y="54" width="12" height="16" fill="#e9b48c"/>
+          <circle cx="58" cy="42" r="16" fill="#f0c19c"/>
+          <path d="M42 41 Q42 24 59 24 Q76 25 75 42 Q68 30 52 33 Q46 35 42 41 Z" fill="#5a3420"/>
+          <circle cx="52" cy="43" r="1.8" fill="#2d211c" stroke="none"/><circle cx="64" cy="43" r="1.8" fill="#2d211c" stroke="none"/>
+          <ellipse cx="59" cy="51" rx="3" ry="2.3" fill="#e0707a"/>
+          <circle cx="42" cy="48" r="2.3" fill="#f2c94c" stroke-width="1"/>
+      
+          <!-- papa au centre : cheveux bouclés, lunettes de soleil, bouc -->
+          <path d="M84 130 Q86 70 120 64 Q154 70 156 130 Z" fill="#7189b8"/>
+          <rect x="114" y="46" width="12" height="16" fill="#e9b48c"/>
+          <circle cx="120" cy="34" r="17" fill="#f0c19c"/>
+          <g fill="#4a2c1c">
+            <circle cx="104" cy="26" r="6"/><circle cx="110" cy="18" r="7"/><circle cx="120" cy="14" r="7.5"/>
+            <circle cx="130" cy="17" r="7"/><circle cx="137" cy="25" r="6"/><circle cx="115" cy="22" r="5"/><circle cx="126" cy="22" r="5"/>
+          </g>
+          <rect x="102" y="29" width="36" height="9" rx="4.5" fill="url(#lunettes-papa)"/>
+          <path d="M111 43 Q120 52 129 43 Z" fill="#fff"/>
+          <path d="M114 42 Q120 40 126 42" fill="none" stroke="#4a2c1c" stroke-width="1.4"/>
+          <path d="M117 50 Q120 55 123 50" fill="#4a2c1c" stroke-width="1"/>
+      
+          <!-- maman à droite : chignon, sweat noir tout doux -->
+          <path d="M148 130 Q150 82 184 76 Q218 82 220 130 Z" fill="#2b2b30"/>
+          <path d="M168 84 Q184 96 200 84" fill="none" stroke="#55555c" stroke-width="2.4"/>
+          <rect x="178" y="54" width="12" height="16" fill="#e9b48c"/>
+          <circle cx="184" cy="22" r="8" fill="#a8743f"/>
+          <ellipse cx="184" cy="40" rx="18" ry="19" fill="#a8743f"/>
+          <circle cx="184" cy="43" r="15.5" fill="#f0c19c"/>
+          <path d="M168 40 Q170 27 184 27 Q199 27 200 40 Q192 32 182 33 Q174 34 168 40 Z" fill="#a8743f"/>
+          <circle cx="178" cy="44" r="1.8" fill="#2d211c" stroke="none"/><circle cx="190" cy="44" r="1.8" fill="#2d211c" stroke="none"/>
+          <path d="M178 51 Q184 55 190 51" fill="none"/>
+      
+          <!-- chat noir (maine coon) à gauche -->
+          <path d="M26 130 Q24 98 62 92 Q100 98 98 130 Z" fill="#2b2220"/>
+          <path d="M44 100 L48 108 L52 100 L56 109 L60 101 L64 109 L68 101 L72 109 L76 100 L80 108" fill="none" stroke="#5a4a44" stroke-width="1.3"/>
+          <path d="M47 80 L44 60 L59 72 Z M77 80 L80 60 L65 72 Z" fill="#2b2220"/>
+          <path d="M44 60 L42 54 M80 60 L82 54" stroke-width="1.3"/>
+          <ellipse cx="62" cy="84" rx="18" ry="15" fill="#2b2220"/>
+          <ellipse cx="55" cy="83" rx="3.6" ry="3" fill="#9ad44f" stroke-width="1"/><ellipse cx="69" cy="83" rx="3.6" ry="3" fill="#9ad44f" stroke-width="1"/>
+          <path d="M55 81 L55 85 M69 81 L69 85" stroke="#111" stroke-width="1.2"/>
+          <path d="M60 90 L64 90 L62 92 Z" fill="#7a5a55" stroke-width="1"/>
+          <path d="M50 92 L38 90 M50 94 L38 96 M74 92 L86 90 M74 94 L86 96" stroke="#9a908a" stroke-width=".8"/>
+      
+          <!-- la petite au centre : bonnet rose, débardeur rose -->
+          <path d="M96 130 Q98 100 120 96 Q142 100 144 130 Z" fill="#f6a8bd"/>
+          <path d="M107 100 L109 112 M133 100 L131 112" stroke="#e57f9c" stroke-width="2"/>
+          <rect x="115" y="86" width="10" height="12" fill="#e9b48c"/>
+          <circle cx="120" cy="80" r="14" fill="#f0c19c"/>
+          <path d="M100 74 Q100 56 120 56 Q140 56 140 74 Z" fill="#f29bb6"/>
+          <g fill="#f29bb6"><circle cx="102" cy="74" r="3.2"/><circle cx="108" cy="75" r="3.2"/><circle cx="114" cy="75.5" r="3.2"/><circle cx="120" cy="75.5" r="3.2"/><circle cx="126" cy="75.5" r="3.2"/><circle cx="132" cy="75" r="3.2"/><circle cx="138" cy="74" r="3.2"/></g>
+          <circle cx="115" cy="82" r="1.7" fill="#2d211c" stroke="none"/><circle cx="125" cy="82" r="1.7" fill="#2d211c" stroke="none"/>
+          <path d="M116 88 Q120 91 124 88" fill="none"/>
+      
+          <!-- chat tigré écaille (maine coon) à droite -->
+          <path d="M142 130 Q140 98 178 92 Q216 98 214 130 Z" fill="#8d8780"/>
+          <path d="M166 100 Q178 120 190 100 Q184 112 178 114 Q172 112 166 100 Z" fill="#f2ece4" stroke-width="1"/>
+          <path d="M196 104 Q206 108 210 122 Q202 114 194 112 Z" fill="#d9893a" stroke="none"/>
+          <path d="M163 80 L160 60 L175 72 Z M193 80 L196 60 L181 72 Z" fill="#8d8780"/>
+          <path d="M160 60 L158 54 M196 60 L198 54" stroke-width="1.3"/>
+          <ellipse cx="178" cy="84" rx="18" ry="15" fill="#8d8780"/>
+          <path d="M172 72 Q178 69 184 72 Q182 78 178 80 Q174 78 172 72 Z" fill="#d9893a" stroke="none"/>
+          <path d="M190 76 Q195 80 194 88 Q190 84 188 80 Z" fill="#d9893a" stroke="none"/>
+          <ellipse cx="178" cy="92" rx="8" ry="5.5" fill="#f2ece4" stroke="none"/>
+          <ellipse cx="171" cy="83" rx="3.6" ry="3" fill="#cdd25a" stroke-width="1"/><ellipse cx="185" cy="83" rx="3.6" ry="3" fill="#cdd25a" stroke-width="1"/>
+          <path d="M171 81 L171 85 M185 81 L185 85" stroke="#111" stroke-width="1.2"/>
+          <path d="M176 89 L180 89 L178 91 Z" fill="#e28a8a" stroke-width="1"/>
+          <path d="M166 92 L154 90 M166 94 L154 96 M190 92 L202 90 M190 94 L202 96" stroke="#5c5752" stroke-width=".8"/>
+        </g>
+      </svg>
+      <span class="nom">Réunion de famille</span>
+    </div>
+    <div class="droite">
+      <button class="rond" id="btn-favoris" aria-label="Favoris"><svg class="ic"><use href="#i-coeur"/></svg><span class="pastille" id="nb-favoris" hidden></span></button>
+      <button class="rond" id="btn-panier" aria-label="Panier"><svg class="ic"><use href="#i-panier"/></svg><span class="pastille" id="nb-panier" hidden></span></button>
+    </div>
   </div>
 </header>
 
