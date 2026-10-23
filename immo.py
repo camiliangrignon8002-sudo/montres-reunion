@@ -30,8 +30,12 @@ REUNION = timezone(timedelta(hours=4))
 PRIX_MAX = int(os.environ.get("PRIX_MAX", "600000"))
 SELECTION = 30     # biens mis en avant dans « La sélection du mois »
 GARDER = 300       # biens gardés au total (filtrables dans l'appli)
-# Zone Bien'ici de l'île entière, puis les communes du nord si la zone de l'île ne répond pas
-ZONE_ILE = ["-1785276"]
+# Les 24 communes : leurs zones Bien'ici sont cherchées à chaque passage (suggest.json).
+# Si la recherche ne donne rien, on se rabat sur les communes du nord, dont les zones sont connues.
+COMMUNES = ["Saint-Denis", "Sainte-Marie", "Sainte-Suzanne", "Saint-André", "Bras-Panon", "Saint-Benoît",
+            "La Plaine-des-Palmistes", "Sainte-Rose", "Saint-Philippe", "Saint-Joseph", "Petite-Île", "Saint-Pierre",
+            "Le Tampon", "Entre-Deux", "Saint-Louis", "Cilaos", "L'Étang-Salé", "Les Avirons", "Saint-Leu",
+            "Les Trois-Bassins", "Saint-Paul", "Le Port", "La Possession", "Salazie"]
 ZONES_NORD = ["-192468", "-280212", "-280102", "-278304", "-278311"]
 TYPES = {"house": "Maison", "flat": "Appartement", "land": "Terrain"}
 
@@ -62,6 +66,27 @@ def get(url):
             print(f"  erreur {url}: {e}", file=sys.stderr)
         time.sleep(3 * (essai + 1))
     return None
+
+
+def zones_ile():
+    zones = []
+    for commune in COMMUNES:
+        r = get("https://res.bienici.com/suggest.json?q=" + quote(commune))
+        if not r:
+            continue
+        try:
+            d = r.json()
+        except ValueError:
+            continue
+        for x in d if isinstance(d, list) else d.get("suggestions", []):
+            cps = x.get("postalCodes") or ([x["postalCode"]] if x.get("postalCode") else [])
+            if any(str(cp).startswith("974") for cp in cps) and norm(commune) in norm(x.get("name", "")):
+                zones += [z for z in x.get("zoneIds", []) if z not in zones]
+                break
+        else:
+            print(f"  zone introuvable : {commune}", file=sys.stderr)
+    print(f"{len(zones)} zones Bien'ici trouvées pour {len(COMMUNES)} communes", file=sys.stderr)
+    return zones
 
 
 def bienici(zones):
@@ -106,7 +131,7 @@ def bienici(zones):
                 "date": (x.get("publicationDate") or "")[:10],
             })
         debut += 100
-        if debut >= d.get("total", 0) or debut >= 2000:
+        if debut >= d.get("total", 0) or debut >= 6000:
             break
     return res
 
@@ -132,7 +157,13 @@ def classer(biens):
 
 def main():
     vus, biens = set(), []
-    for zones in (ZONE_ILE, ZONES_NORD):
+    ile = zones_ile()
+    for zones in ([ile[i:i + 8] for i in range(0, len(ile), 8)] or [ZONES_NORD]):
+        for b in bienici(zones):
+            if b["id"] not in vus:
+                vus.add(b["id"])
+                biens.append(b)
+    for zones in ([] if biens else [ZONES_NORD]):
         for b in bienici(zones):
             if b["id"] not in vus:
                 vus.add(b["id"])
