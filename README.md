@@ -174,7 +174,9 @@ menu fixe à gauche sur PC).
   montre le résultat à corriger, puis « Tout ranger » crée les dossiers, qui se classent tout seuls.
 - **Dossiers en attente** : bouton « Mettre en attente » dans un dossier (raison, date de reprise) ; plus de relances,
   le dossier revient sur l'accueil à la date de reprise.
-- **Terrains à acheter** (menu ☰) : les terrains à vendre du mois, à part des maisons et appartements.
+- **Terrains à acheter** (menu ☰) : les terrains à vendre de la semaine, à part des maisons et appartements.
+- Filtres des biens et des terrains : zone (Nord, Ouest, Sud, Est, d'après le code postal), commune, prix minimum et maximum,
+  surface, pièces, tri (bonnes affaires, prix, prix au m², plus récentes). Les filtres restent en mémoire sur l'appareil.
 - **Assistant IA** (version Claude) : répond aux questions sur l'appli et les dossiers, et peut cocher un papier,
   ajouter un papier, noter un rendez-vous, créer un dossier ou chercher un bien. Il ne supprime rien et n'envoie rien.
 - **Aide** : les questions courantes, réponse en un appui.
@@ -182,7 +184,7 @@ menu fixe à gauche sur PC).
   répare `immo.py` si besoin et propose la correction.
 - **Mes biens** : prix affiché, prix d'achat, frais, prix de vente, commission, ce que chaque
   vente a rapporté, total de l'année.
-- **Biens achetables** : le 1er de chaque mois, `immo.py` lit les maisons, appartements et terrains à vendre à
+- **Biens achetables** : chaque lundi vers 10h, `immo.py` lit les maisons, appartements et terrains à vendre à
   La Réunion sur Bien'ici et met en tête les moins chers au m² par rapport à leur commune (`docs/immo/biens.json`).
   Lancer tout de suite : onglet **Actions → Biens à vendre Réunion → Run workflow**.
 

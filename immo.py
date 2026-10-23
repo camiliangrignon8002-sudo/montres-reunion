@@ -1,9 +1,10 @@
-"""Biens à vendre à La Réunion : la petite liste du mois pour l'appli Seb Immo.
+"""Biens à vendre à La Réunion : la liste de la semaine pour l'appli Seb Immo.
 
 Lit les annonces de vente (maisons et appartements) de Bien'ici sur toute l'île, calcule le prix
 moyen au m² de chaque commune, puis garde en tête de liste les biens les moins chers au m² par
 rapport à leur commune. Écrit docs/immo/biens.json, que l'appli affiche dans le menu ☰ →
-« Biens achetables ». Lancé le 1er de chaque mois par GitHub Actions (.github/workflows/immo.yml).
+« Biens achetables » et « Terrains à acheter ». Lancé chaque lundi vers 10h (heure de La Réunion)
+par GitHub Actions (.github/workflows/immo.yml).
 """
 
 import json
@@ -27,11 +28,11 @@ except ImportError:  # pragma: no cover
 ROOT = Path(__file__).parent
 JSON_FILE = ROOT / "docs" / "immo" / "biens.json"
 REUNION = timezone(timedelta(hours=4))
-PRIX_MAX = int(os.environ.get("PRIX_MAX", "600000"))
-SELECTION = 30     # maisons et appartements mis en avant dans « La sélection du mois »
-GARDER = 300       # maisons et appartements gardés au total (filtrables dans l'appli)
+PRIX_MAX = int(os.environ.get("PRIX_MAX", "1000000"))
+SELECTION = 30     # maisons et appartements mis en avant dans « Sélection de la semaine »
+GARDER = 600       # maisons et appartements gardés au total (filtrables dans l'appli)
 SELECTION_TERRAINS = 20
-GARDER_TERRAINS = 200
+GARDER_TERRAINS = 300
 # Les 24 communes : leurs zones Bien'ici sont cherchées à chaque passage (suggest.json).
 # Si la recherche ne donne rien, on se rabat sur les communes du nord, dont les zones sont connues.
 COMMUNES = ["Saint-Denis", "Sainte-Marie", "Sainte-Suzanne", "Saint-André", "Bras-Panon", "Saint-Benoît",
@@ -174,7 +175,7 @@ def main():
             break
     print(f"{len(biens)} biens à vendre lus", file=sys.stderr)
     if not biens:
-        print("Aucun bien lu : on garde la liste du mois précédent.", file=sys.stderr)
+        print("Aucun bien lu : on garde la liste précédente.", file=sys.stderr)
         return
     maintenant = datetime.now(REUNION)
     garde = []

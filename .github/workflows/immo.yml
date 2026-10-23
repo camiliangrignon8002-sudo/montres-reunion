@@ -2,7 +2,7 @@ name: Biens à vendre Réunion
 
 on:
   schedule:
-    - cron: "17 4 1 * *"   # le 1er de chaque mois vers 8h (heure de La Réunion) : la liste du mois
+    - cron: "7 6 * * 1"    # chaque lundi vers 10h (heure de La Réunion) : la liste de la semaine
   workflow_dispatch:       # bouton "Run workflow" pour lancer à la main
 
 permissions:
@@ -29,7 +29,7 @@ jobs:
           git config user.name "immo-bot"
           git config user.email "immo-bot@users.noreply.github.com"
           git add docs/immo/biens.json
-          git diff --cached --quiet || git commit -m "Biens à vendre du mois $(date -u +%Y-%m)"
+          git diff --cached --quiet || git commit -m "Biens à vendre de la semaine $(date -u +%F)"
           for essai in 1 2 3; do
             git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break
             sleep 5

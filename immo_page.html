@@ -792,61 +792,113 @@ function vueArgent(m) {
 }
 
 // ---------------------------------------------------------------- biens achetables
-let BIENS = null, ongletBiens = "selection", fBudget = "", fType = "", fCommune = "";
+// Zones de l'île d'après le code postal (puis le nom de la commune si le code manque)
+const ZONES = {
+  Nord: ["97400", "97490", "97417", "97438", "97441"],
+  Est: ["97440", "97412", "97470", "97431", "97439", "97433"],
+  Ouest: ["97419", "97420", "97460", "97411", "97422", "97423", "97434", "97435", "97426", "97436", "97416", "97424"],
+  Sud: ["97425", "97427", "97450", "97421", "97413", "97414", "97410", "97432", "97430", "97418", "97429", "97480", "97442"]
+};
+const ZONES_NOMS = { Nord: /denis|clotilde|montagne|marie|suzanne|brul|moufia|chaudron/, Est: /andr|bras.?panon|beno|palmistes|rose|salazie|hell/,
+  Ouest: /possession|port|paul|gilles|saline|hermitage|trois.?bassins|leu|bernica|guillaume|plateau caillou|chaloupe/,
+  Sud: /avirons|etang|louis|riviere|cilaos|entre.?deux|pierre|tampon|cafres|petite.?ile|joseph|philippe|ravine des cabris|terre.?sainte/ };
+function zoneDe(b) {
+  for (const [z, cps] of Object.entries(ZONES)) if (cps.includes(String(b.cp || ""))) return z;
+  const n = String(b.commune || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  for (const [z, re] of Object.entries(ZONES_NOMS)) if (re.test(n)) return z;
+  return "";
+}
+const PRIX = { biens: [50000, 100000, 150000, 200000, 250000, 300000, 400000, 500000, 750000, 1000000], terrains: [30000, 50000, 80000, 100000, 150000, 200000, 300000, 500000] };
+const SURFACES = { biens: [20, 30, 50, 70, 90, 120, 150], terrains: [200, 300, 500, 800, 1000, 2000, 5000] };
+const FILTRES0 = () => ({ onglet: "selection", zone: "", commune: "", min: "", max: "", surface: "", pieces: "", type: "", tri: "affaire" });
+let BIENS = null, FILTRES = { biens: FILTRES0(), terrains: FILTRES0() };
+try { const f = JSON.parse(localStorage.getItem(CLE + "-filtres") || "null"); if (f && f.biens && f.terrains) FILTRES = { biens: Object.assign(FILTRES0(), f.biens), terrains: Object.assign(FILTRES0(), f.terrains) }; } catch (e) {}
+const garderFiltres = () => { try { localStorage.setItem(CLE + "-filtres", JSON.stringify(FILTRES)); } catch (e) {} };
 async function chargerBiens() {
   if (BIENS) return BIENS;
   try { const r = await fetch("biens.json", { cache: "no-store" }); BIENS = r.ok ? await r.json() : { biens: [] }; }
   catch (e) { BIENS = { biens: [] }; }
+  (BIENS.biens || []).forEach(b => { b.zone = zoneDe(b); });
   const l = BIENS.biens || [], terr = l.filter(b => b.type === "Terrain"), maisons = l.filter(b => b.type !== "Terrain");
   $("#c-achetables").textContent = maisons.filter(b => b.selection).length || maisons.length || "–";
   $("#c-terrains").textContent = terr.filter(b => b.selection).length || terr.length || "–";
   return BIENS;
 }
+function filtrerBiens(tous, f, terrains) {
+  const l = tous.filter(b => (f.onglet === "tout" || b.selection)
+    && (!f.zone || b.zone === f.zone) && (!f.commune || b.commune === f.commune)
+    && (!f.min || (b.prix || 0) >= +f.min) && (!f.max || (b.prix || 0) <= +f.max)
+    && (!f.surface || (b.surface || 0) >= +f.surface)
+    && (terrains || !f.type || b.type === f.type) && (terrains || !f.pieces || (b.pieces || 0) >= +f.pieces));
+  const tri = { affaire: (a, b) => (a.ecart ?? 999) - (b.ecart ?? 999), prix: (a, b) => (a.prix || 0) - (b.prix || 0),
+    prixd: (a, b) => (b.prix || 0) - (a.prix || 0), m2: (a, b) => (a.m2 || 1e9) - (b.m2 || 1e9), recent: (a, b) => (b.date || "").localeCompare(a.date || "") }[f.tri];
+  return tri ? l.sort(tri) : l;
+}
 async function vueAchetables(m, terrains) {
-  m.innerHTML = `<p class="muted">Chargement de la liste du mois…</p>`;
+  m.innerHTML = `<p class="muted">Chargement de la liste de la semaine…</p>`;
   const data = await chargerBiens();
   if (vue !== (terrains ? "terrains" : "achetables") || dossierOuvert) return;
+  const cle = terrains ? "terrains" : "biens", f = FILTRES[cle];
   const tous = (data.biens || []).filter(b => (b.type === "Terrain") === terrains);
-  const moisTxt = data.mois ? new Date(data.mois + "-01T12:00:00").toLocaleDateString("fr-FR", { month: "long", year: "numeric" }) : "";
   if (!tous.length) {
-    m.innerHTML = terrains ? `<section class="bloc vide"><h2>Les terrains arrivent avec la prochaine recherche</h2>
-      <p>Le 1er de chaque mois, l'appli cherche les terrains à vendre partout à La Réunion et met en tête les moins chers au m²
-      par rapport à leur commune.</p></section>` : `<section class="bloc vide"><h2>La liste du mois arrive bientôt</h2>
-      <p>Le 1er de chaque mois, l'appli cherche les maisons, appartements et terrains à vendre partout à La Réunion,
-      et met en tête ceux qui sont les moins chers au m² par rapport à leur commune.</p>
-      <p class="small">La première liste apparaîtra ici après la prochaine recherche.</p></section>`;
+    m.innerHTML = `<section class="bloc vide"><h2>${terrains ? "Les terrains arrivent avec la prochaine recherche" : "La liste arrive bientôt"}</h2>
+      <p>Chaque lundi vers 10h, l'appli cherche les ${terrains ? "terrains" : "maisons et appartements"} à vendre partout à La Réunion
+      et met en tête les moins chers au m² par rapport à leur commune.</p></section>`;
     return;
   }
-  const communes = [...new Set(tous.map(b => b.commune).filter(Boolean))].sort((a, b) => a.localeCompare(b, "fr"));
-  m.innerHTML = `<div class="tete"><div><h2>${terrains ? "Terrains à vendre à La Réunion" : "Maisons et appartements à vendre"}</h2><p class="muted small">Liste de ${esc(moisTxt)} · ${tous.length} ${terrains ? "terrains" : "biens"} · mise à jour le ${dateFr(data.maj)}</p></div>
-      <div class="onglets" role="tablist"><button data-onglet="selection">Sélection du mois</button><button data-onglet="tout">Tous les biens</button></div></div>
-    <div class="filtres">
-      <div class="champ"><label for="f-budget">Budget maximum</label><select id="f-budget"><option value="">Tous les prix</option>${(terrains ? [50000, 80000, 100000, 150000, 200000, 300000] : [100000, 150000, 200000, 250000, 300000, 400000, 500000]).map(v => `<option value="${v}"${+fBudget === v ? " selected" : ""}>${euros(v)}</option>`).join("")}</select></div>
-      <div class="champ"${terrains ? " hidden" : ""}><label for="f-type">Type</label><select id="f-type"><option value="">Tous</option>${["Maison", "Appartement"].map(t => `<option${fType === t ? " selected" : ""}>${t}</option>`).join("")}</select></div>
-      <div class="champ"><label for="f-commune">Commune</label><select id="f-commune"><option value="">Toute l'île</option>${communes.map(c => `<option${fCommune === c ? " selected" : ""}>${esc(c)}</option>`).join("")}</select></div>
-    </div>
+  const opt = (liste, val, fmt) => liste.map(v => `<option value="${v}"${String(val) === String(v) ? " selected" : ""}>${fmt(v)}</option>`).join("");
+  const communesDe = z => [...new Set(tous.filter(b => !z || b.zone === z).map(b => b.commune).filter(Boolean))].sort((a, b) => a.localeCompare(b, "fr"));
+  const nbZone = z => tous.filter(b => b.zone === z).length;
+  m.innerHTML = `<div class="tete"><div><h2>${terrains ? "Terrains à vendre à La Réunion" : "Maisons et appartements à vendre"}</h2>
+      <p class="muted small">${tous.length} ${terrains ? "terrains" : "biens"} · mis à jour le ${dateFr(data.maj)} · nouvelle liste chaque lundi vers 10h</p></div>
+      <div class="onglets" role="tablist"><button data-onglet="selection">Sélection de la semaine</button><button data-onglet="tout">Tous les ${terrains ? "terrains" : "biens"}</button></div></div>
+    <section class="bloc">
+      <div class="tete"><h3>Filtres</h3><button class="btn petit" id="f-raz">Effacer les filtres</button></div>
+      <div class="filtres">
+        <div class="champ"><label for="f-zone">Zone</label><select id="f-zone"><option value="">Toute l'île</option>${["Nord", "Ouest", "Sud", "Est"].map(z => `<option value="${z}"${f.zone === z ? " selected" : ""}>${z} (${nbZone(z)})</option>`).join("")}</select></div>
+        <div class="champ"><label for="f-commune">Commune</label><select id="f-commune"></select></div>
+        <div class="champ"><label for="f-min">Prix minimum</label><select id="f-min"><option value="">Pas de minimum</option>${opt(PRIX[cle], f.min, euros)}</select></div>
+        <div class="champ"><label for="f-max">Prix maximum</label><select id="f-max"><option value="">Pas de maximum</option>${opt(PRIX[cle], f.max, euros)}</select></div>
+        <div class="champ"><label for="f-surface">${terrains ? "Surface du terrain" : "Surface habitable"}</label><select id="f-surface"><option value="">Toutes</option>${opt(SURFACES[cle], f.surface, v => "au moins " + v.toLocaleString("fr-FR") + " m²")}</select></div>
+        ${terrains ? "" : `<div class="champ"><label for="f-type">Type</label><select id="f-type"><option value="">Maisons et appartements</option>${["Maison", "Appartement"].map(t => `<option${f.type === t ? " selected" : ""}>${t}</option>`).join("")}</select></div>
+        <div class="champ"><label for="f-pieces">Pièces</label><select id="f-pieces"><option value="">Toutes</option>${opt([1, 2, 3, 4, 5], f.pieces, v => "au moins " + v)}</select></div>`}
+        <div class="champ"><label for="f-tri">Trier par</label><select id="f-tri">${opt(["affaire", "prix", "prixd", "m2", "recent"], f.tri, v => ({ affaire: "Bonnes affaires d'abord", prix: "Prix le plus bas", prixd: "Prix le plus haut", m2: "Prix au m² le plus bas", recent: "Plus récentes" }[v]))}</select></div>
+      </div>
+      <p class="small" id="f-compte" aria-live="polite"></p>
+    </section>
     <div id="annonces"></div>
     <p class="muted small">Prix et disponibilité à vérifier sur l'annonce d'origine : un bien a pu être vendu depuis la recherche.</p>`;
+  const selCommune = m.querySelector("#f-commune");
+  const remplirCommunes = () => {
+    const l = communesDe(f.zone); if (f.commune && !l.includes(f.commune)) f.commune = "";
+    selCommune.innerHTML = `<option value="">${f.zone ? "Tout le " + f.zone : "Toutes"}</option>` + l.map(c => `<option${f.commune === c ? " selected" : ""}>${esc(c)}</option>`).join("");
+  };
   const remplir = () => {
-    m.querySelectorAll("[data-onglet]").forEach(b => b.classList.toggle("actif", b.dataset.onglet === ongletBiens));
-    const l = tous.filter(b => (ongletBiens === "tout" || b.selection) && (!fBudget || (b.prix || 0) <= +fBudget) && (terrains || !fType || b.type === fType) && (!fCommune || b.commune === fCommune));
+    garderFiltres();
+    m.querySelectorAll("[data-onglet]").forEach(b => b.classList.toggle("actif", b.dataset.onglet === f.onglet));
+    const l = filtrerBiens(tous, f, terrains);
+    m.querySelector("#f-compte").textContent = `${l.length} ${terrains ? "terrain" : "bien"}${l.length > 1 ? "s" : ""} ${f.onglet === "selection" ? "dans la sélection" : "trouvé" + (l.length > 1 ? "s" : "")}${f.onglet === "selection" && l.length < 5 ? " · touchez « Tous les " + (terrains ? "terrains" : "biens") + " » pour en voir plus" : ""}`;
     const z = m.querySelector("#annonces");
-    z.innerHTML = l.length ? `<div class="annonces">${l.map((b, i) => `<article class="annonce">
+    z.innerHTML = l.length ? `<div class="annonces">${l.slice(0, 120).map((b, i) => `<article class="annonce">
         <div class="photo">${b.photo ? `<img src="${esc(b.photo)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : esc(b.type)}</div>
         <div class="infos">
-          <div class="rangee" style="gap:6px">${b.ecart !== undefined && b.ecart < 0 ? `<span class="pill affaire">${b.ecart} % sous le prix moyen</span>` : ""}${b.dpe ? `<span class="pill exemple">DPE ${esc(b.dpe)}</span>` : ""}</div>
+          <div class="rangee" style="gap:6px">${b.ecart !== undefined && b.ecart < 0 ? `<span class="pill affaire">${b.ecart} % sous le prix moyen</span>` : ""}${b.zone ? `<span class="pill exemple">${b.zone}</span>` : ""}${b.dpe ? `<span class="pill exemple">DPE ${esc(b.dpe)}</span>` : ""}</div>
           <span class="prix num">${euros(b.prix)}</span>
-          <b>${esc(b.type)}${b.pieces ? " " + b.pieces + " pièce" + (b.pieces > 1 ? "s" : "") : ""}${b.surface ? " · " + Math.round(b.surface) + " m²" : ""}</b>
+          <b>${esc(b.type)}${b.pieces ? " " + b.pieces + " pièce" + (b.pieces > 1 ? "s" : "") : ""}${b.surface ? " · " + Math.round(b.surface).toLocaleString("fr-FR") + " m²" : ""}</b>
           <span class="muted">${esc(b.commune)}${b.m2 ? ` · <span class="num">${euros(b.m2)}/m²</span>` : ""}${b.m2_commune ? ` (moyenne ${euros(b.m2_commune)}/m²)` : ""}</span>
           <span class="small muted">${esc(b.annonceur || b.source)}</span>
           <div class="actions"><a class="btn petit" href="${esc(b.url)}" target="_blank" rel="noopener">Voir l'annonce</a><button class="btn petit plein" data-dossier="${i}">Créer un dossier</button></div>
-        </div></article>`).join("")}</div>` : `<div class="vide bloc"><p>Aucun bien ne correspond à ces filtres.</p></div>`;
+        </div></article>`).join("")}</div>${l.length > 120 ? `<p class="muted small">Les 120 premiers sont affichés : précisez les filtres pour voir les autres.</p>` : ""}`
+      : `<div class="vide bloc"><p>Aucun ${terrains ? "terrain" : "bien"} ne correspond à ces filtres.</p>${f.onglet === "selection" ? `<button class="btn" id="voir-tout">Chercher dans tous les ${terrains ? "terrains" : "biens"}</button>` : ""}</div>`;
     z.querySelectorAll("[data-dossier]").forEach(bt => bt.onclick = () => nouveauDossier(l[+bt.dataset.dossier]));
+    const vt = z.querySelector("#voir-tout"); if (vt) vt.onclick = () => { f.onglet = "tout"; remplir(); };
   };
-  m.querySelectorAll("[data-onglet]").forEach(b => b.onclick = () => { ongletBiens = b.dataset.onglet; remplir(); });
-  m.querySelector("#f-budget").onchange = e => { fBudget = e.target.value; remplir(); };
-  m.querySelector("#f-type").onchange = e => { fType = e.target.value; remplir(); };
-  m.querySelector("#f-commune").onchange = e => { fCommune = e.target.value; remplir(); };
+  remplirCommunes();
+  m.querySelectorAll("[data-onglet]").forEach(b => b.onclick = () => { f.onglet = b.dataset.onglet; remplir(); });
+  m.querySelector("#f-zone").onchange = e => { f.zone = e.target.value; remplirCommunes(); remplir(); };
+  selCommune.onchange = e => { f.commune = e.target.value; remplir(); };
+  for (const k of ["min", "max", "surface", "type", "pieces", "tri"]) { const s = m.querySelector("#f-" + k); if (s) s.onchange = e => { f[k] = e.target.value; remplir(); }; }
+  m.querySelector("#f-raz").onclick = () => { FILTRES[cle] = Object.assign(FILTRES0(), { onglet: f.onglet }); rendre(); };
   remplir();
 }
 
@@ -1082,7 +1134,7 @@ const GUIDE = `Seb Immo est une appli simple pour gérer des dossiers immobilier
 - Relancer : dans le dossier, boutons SMS, WhatsApp, Email qui ouvrent un message prêt avec les papiers manquants. L'accueil liste les clients sans nouvelles depuis le délai choisi (7 jours par défaut, dans Réglages).
 - Relances automatiques : menu ☰ → Relances automatiques. Avec un compte Brevo (clé API collée dans l'appli), les SMS partent tout seuls quand l'appli est ouverte sur l'adresse github.io. Les mails partiront quand une adresse d'envoi sera remplie. 3 relances au plus par client, de 8h à 19h, pas le dimanche.
 - Mes biens : prix affiché, prix d'achat, frais, prix de vente, commission ; ce que chaque vente rapporte = commission, sinon vente − achat − frais.
-- Biens achetables / Terrains à acheter : liste refaite le 1er de chaque mois depuis Bien'ici, les moins chers au m² par rapport à leur commune en tête. Bouton « Créer un dossier » sur chaque annonce.
+- Biens achetables / Terrains à acheter : liste refaite chaque lundi vers 10h depuis Bien'ici, les moins chers au m² par rapport à leur commune en tête ; filtres zone (Nord, Ouest, Sud, Est), commune, prix minimum et maximum, surface, pièces, tri. Bouton « Créer un dossier » sur chaque annonce.
 - Sauvegarde : Réglages → Copier / Télécharger la sauvegarde, puis Restaurer sur l'autre appareil (téléphone ↔ PC). Les photos et PDF ne sont pas dans la sauvegarde. Les dossiers restent sur l'appareil où on les crée.
 - Importer : menu ☰ → Importer mes dossiers. On dépose son dossier clients (sous-dossiers, photos, PDF, tableau Excel en CSV) : l'appli range chaque fichier dans le bon client et le bon papier, montre le résultat à vérifier, puis « Tout ranger » crée les dossiers. Ils se classent tout seuls en à traiter / en cours / finis.
 - Installer : iPhone → Safari, Partager, Sur l'écran d'accueil. Android → Chrome, ⋮, Ajouter à l'écran d'accueil.`;
@@ -1150,12 +1202,13 @@ const OUTILS = [
   { name: "message_relance", description: "Renvoie le message de relance prêt à envoyer (mail et SMS) pour un dossier, avec les papiers manquants.",
     inputSchema: { type: "object", properties: { dossier_id: { type: "string" } }, required: ["dossier_id"] },
     execute(i) { const d = trouver(i.dossier_id); return { mail: message(d), sms: messageSms(d) }; } },
-  { name: "chercher_biens", description: "Cherche dans la liste du mois des biens à vendre à La Réunion. type = Maison, Appartement ou Terrain. Renvoie au plus 8 annonces (prix, surface, commune, prix au m², écart avec la moyenne, lien).",
-    inputSchema: { type: "object", properties: { type: { type: "string", enum: ["Maison", "Appartement", "Terrain"] }, commune: { type: "string" }, budget_max: { type: "number" }, surface_min: { type: "number" } } },
+  { name: "chercher_biens", description: "Cherche dans la liste de la semaine des biens à vendre à La Réunion. type = Maison, Appartement ou Terrain ; zone = Nord, Ouest, Sud ou Est. Renvoie au plus 8 annonces, les bonnes affaires d'abord (prix, surface, commune, prix au m², écart avec la moyenne, lien).",
+    inputSchema: { type: "object", properties: { type: { type: "string", enum: ["Maison", "Appartement", "Terrain"] }, zone: { type: "string", enum: ["Nord", "Ouest", "Sud", "Est"] }, commune: { type: "string" }, budget_min: { type: "number" }, budget_max: { type: "number" }, surface_min: { type: "number" } } },
     async execute(i) { const data = await chargerBiens(), c = String(i.commune || "").toLowerCase();
-      const l = (data.biens || []).filter(b => (!i.type || b.type === i.type) && (!c || (b.commune || "").toLowerCase().includes(c)) && (!i.budget_max || (b.prix || 0) <= +i.budget_max) && (!i.surface_min || (b.surface || 0) >= +i.surface_min));
-      if (!l.length) return "Aucun bien ne correspond dans la liste du mois (" + (data.biens || []).length + " biens au total).";
-      return l.slice(0, 8).map(b => ({ type: b.type, prix: b.prix, surface: b.surface, pieces: b.pieces, commune: b.commune, prix_m2: b.m2, ecart_pourcent: b.ecart, lien: b.url })); } }
+      const l = (data.biens || []).filter(b => (!i.type || b.type === i.type) && (!i.zone || b.zone === i.zone) && (!i.budget_min || (b.prix || 0) >= +i.budget_min) && (!c || (b.commune || "").toLowerCase().includes(c)) && (!i.budget_max || (b.prix || 0) <= +i.budget_max) && (!i.surface_min || (b.surface || 0) >= +i.surface_min));
+      l.sort((a, b) => (a.ecart ?? 999) - (b.ecart ?? 999));
+      if (!l.length) return "Aucun bien ne correspond dans la liste de la semaine (" + (data.biens || []).length + " biens au total).";
+      return l.slice(0, 8).map(b => ({ type: b.type, prix: b.prix, surface: b.surface, pieces: b.pieces, commune: b.commune, zone: b.zone, prix_m2: b.m2, ecart_pourcent: b.ecart, lien: b.url })); } }
 ];
 async function vueAssistant(m) {
   m.innerHTML = `<p class="muted">Chargement de l'assistant…</p>`;
@@ -1228,7 +1281,7 @@ function vueAide(m) {
     ["Relancer un client", `<ol><li>Ouvrez le dossier.</li><li>Dans « Relancer », touchez <b>SMS</b>, <b>WhatsApp</b> ou <b>Email</b>.</li><li>Le message est déjà écrit avec les papiers qui manquent : il reste à appuyer sur Envoyer.</li></ol><p>L'accueil montre les clients sans nouvelles depuis 7 jours.</p>`],
     ["Relances automatiques", `<p>Menu ☰ → <b>Relances automatiques</b>. Collez la clé Brevo, cochez <b>Activer</b>, puis faites un <b>SMS d'essai</b>. Les SMS partent tout seuls quand l'appli est ouverte sur l'adresse github.io (pas dans Claude).</p>`],
     ["Noter un prix ou une vente", `<p>Dans le dossier, partie <b>Le bien</b> : prix affiché, prix d'achat, frais, commission. Mettez <b>Vendu ? → Oui</b> et le prix de vente. Le total apparaît dans <b>Mes biens</b>.</p>`],
-    ["Trouver un bien ou un terrain", `<p>Menu ☰ → <b>Biens achetables</b> ou <b>Terrains à acheter</b>. La liste est refaite le 1er de chaque mois. Les moins chers au m² sont en tête. Filtrez par budget et par commune, puis <b>Créer un dossier</b> si un bien vous intéresse.</p>`],
+    ["Trouver un bien ou un terrain", `<p>Menu ☰ → <b>Biens achetables</b> ou <b>Terrains à acheter</b>. La liste est refaite chaque lundi vers 10h. Choisissez la zone (Nord, Ouest, Sud, Est) et la commune, le prix minimum et maximum, la surface, puis le tri. Les moins chers au m² sont en tête. Filtrez par budget et par commune, puis <b>Créer un dossier</b> si un bien vous intéresse.</p>`],
     ["Passer du téléphone au PC", `<ol><li>Sur le téléphone : Réglages → <b>Copier la sauvegarde</b> (ou Télécharger).</li><li>Envoyez-vous le texte (mail, WhatsApp).</li><li>Sur le PC : Réglages → collez le texte → <b>Restaurer</b>.</li></ol><p>Les photos et PDF ne passent pas : rangez-les sur l'appareil principal.</p>`],
     ["Mettre l'appli sur l'écran d'accueil", `<p>iPhone : ouvrez l'adresse dans <b>Safari</b>, <b>Partager</b>, <b>Sur l'écran d'accueil</b>. Android : <b>Chrome</b>, menu <b>⋮</b>, <b>Ajouter à l'écran d'accueil</b>. PC : icône d'installation à droite de la barre d'adresse.</p>`],
     ["Importer mes anciens dossiers", `<ol><li>Menu ☰ → <b>Importer mes dossiers</b>.</li><li>Touchez <b>Choisir un dossier</b> et prenez le dossier qui contient vos clients (un sous-dossier par client, c'est l'idéal). Ou glissez-le dans le cadre sur PC.</li><li>Touchez <b>Ranger avec l'IA</b> (version Claude) ou <b>Ranger automatiquement</b>.</li><li>Vérifiez le résultat, corrigez si besoin, puis <b>Tout ranger</b>.</li></ol><p>Un tableau Excel enregistré en CSV avec les noms, téléphones et emails aide à compléter les fiches.</p>`],
