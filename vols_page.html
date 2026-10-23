@@ -48,7 +48,8 @@ svg.ic{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-wid
 .entete-in .droite{display:flex;gap:8px;justify-content:flex-end}
 /* Logo : la famille en dessin, au-dessus du nom, comme le logo d'une marque */
 .logo{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
-.logo .famille{width:124px;height:67px;display:block}
+.logo .famille{width:146px;height:67px;display:block}
+.logo:active{transform:scale(.97)}
 @media (prefers-color-scheme:dark){.logo .famille > g{stroke:#a39790}}
 .logo .nom{color:var(--logo);font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
 .rond{border:0;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--carte);box-shadow:var(--ombre);position:relative;flex:none}
@@ -193,11 +194,11 @@ h1{font-size:32px;line-height:1.1;margin:4px 0 6px;letter-spacing:-.02em}
     <div class="gauche">
       <button class="rond" id="btn-maj" aria-label="Actualiser"><svg class="ic"><use href="#i-maj"/></svg></button>
     </div>
-    <div class="logo">
-      <svg class="famille" viewBox="0 0 240 130" role="img" aria-label="La famille : quatre personnes et deux chats">
+    <a class="logo" href="./" id="logo" aria-label="Réunion de famille : retour à l'accueil">
+      <svg class="famille" viewBox="8 0 284 130" aria-hidden="true">
         <defs>
           <linearGradient id="lunettes-papa" x1="0" x2="1"><stop offset="0" stop-color="#2346d8"/><stop offset=".55" stop-color="#1f8fd0"/><stop offset="1" stop-color="#1fbf86"/></linearGradient>
-          <clipPath id="cadre-famille"><rect width="240" height="130"/></clipPath>
+          <clipPath id="cadre-famille"><rect x="8" width="284" height="130"/></clipPath>
         </defs>
         <g clip-path="url(#cadre-famille)" stroke="#2d211c" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
           <!-- maman à gauche : longs cheveux bruns, chemise rayée bleu clair -->
@@ -224,6 +225,20 @@ h1{font-size:32px;line-height:1.1;margin:4px 0 6px;letter-spacing:-.02em}
           <path d="M114 42 Q120 40 126 42" fill="none" stroke="#4a2c1c" stroke-width="1.4"/>
           <path d="M117 50 Q120 55 123 50" fill="#4a2c1c" stroke-width="1"/>
       
+          <!-- le garçon à droite : cheveux bruns en bataille, lunettes rondes, barbe de quelques jours, t-shirt noir -->
+          <path d="M216 130 Q218 82 252 76 Q286 82 288 130 Z" fill="#1f1f22"/>
+          <path d="M240 82 Q252 90 264 82" fill="none" stroke="#3a3a40" stroke-width="2"/>
+          <rect x="246" y="54" width="12" height="16" fill="#e9b48c"/>
+          <circle cx="252" cy="42" r="16" fill="#f0c19c"/>
+          <path d="M237 48 Q239 61 252 62 Q265 61 267 48 Q260 56 252 56 Q244 56 237 48 Z" fill="#6b5446" fill-opacity=".55" stroke="none"/>
+          <path d="M235 42 Q233 24 252 22 Q270 23 269 40 Q264 32 258 36 Q254 30 248 35 Q242 31 235 42 Z" fill="#3b2a20"/>
+          <circle cx="246" cy="44" r="5.2" fill="#fff" fill-opacity=".25" stroke="#1a1a1a" stroke-width="1.8"/>
+          <circle cx="258" cy="44" r="5.2" fill="#fff" fill-opacity=".25" stroke="#1a1a1a" stroke-width="1.8"/>
+          <path d="M251.2 43.5 L252.8 43.5" stroke="#1a1a1a" stroke-width="1.6"/>
+          <circle cx="246" cy="44.5" r="1.5" fill="#2d211c" stroke="none"/><circle cx="258" cy="44.5" r="1.5" fill="#2d211c" stroke="none"/>
+          <path d="M248 52 Q252 53.5 256 52" fill="none" stroke-width="1.3"/>
+          <circle cx="236" cy="49" r="1.3" fill="#c9ccd1" stroke-width=".8"/>
+
           <!-- maman à droite : chignon, sweat noir tout doux -->
           <path d="M148 130 Q150 82 184 76 Q218 82 220 130 Z" fill="#2b2b30"/>
           <path d="M168 84 Q184 96 200 84" fill="none" stroke="#55555c" stroke-width="2.4"/>
@@ -273,7 +288,7 @@ h1{font-size:32px;line-height:1.1;margin:4px 0 6px;letter-spacing:-.02em}
         </g>
       </svg>
       <span class="nom">Réunion de famille</span>
-    </div>
+    </a>
     <div class="droite">
       <button class="rond" id="btn-favoris" aria-label="Favoris"><svg class="ic"><use href="#i-coeur"/></svg><span class="pastille" id="nb-favoris" hidden></span></button>
       <button class="rond" id="btn-panier" aria-label="Panier"><svg class="ic"><use href="#i-panier"/></svg><span class="pastille" id="nb-panier" hidden></span></button>
@@ -659,6 +674,17 @@ function ouvrir(id) { ouverte = $(id); ouverte.classList.add("ouvert"); $("#voil
 function fermer() { if (!ouverte) return; ouverte.classList.remove("ouvert"); $("#voile").classList.remove("ouvert"); document.body.style.overflow = ""; ouverte = null; }
 $("#voile").onclick = fermer;
 document.querySelectorAll("[data-fermer]").forEach(b => b.onclick = fermer);
+// toucher la famille en haut : retour à l'accueil (feuille fermée, tous les jours, haut de page)
+function accueil() {
+  fermer(); F.jour = null; moisCal = null; nbAffiches = 30;
+  tout(); scrollTo({top: 0, behavior: "smooth"});
+}
+$("#logo").onclick = e => { e.preventDefault(); accueil(); };
+// quand une feuille est ouverte, le voile recouvre le logo : un toucher dessus compte quand même
+$("#voile").addEventListener("click", e => {
+  const r = $("#logo").getBoundingClientRect();
+  if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) accueil();
+});
 $("#ouvrir-voy").onclick = () => { rendreVoyageurs(); ouvrir("#f-voy"); };
 
 function sauves(stock) {
