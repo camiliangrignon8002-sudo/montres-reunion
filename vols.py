@@ -92,7 +92,9 @@ def jour_iso(valeur):
 def lire_page(page, aeroport):
     script = LexborHTMLParser(page).css_first(r"script.ds\:1")
     if script is None:
-        raise PageIllisible("pas de résultats dans la page")
+        titre = LexborHTMLParser(page).css_first("title")
+        raise PageIllisible(f"pas de résultats dans la page ({len(page)} caractères, titre "
+                            f"{titre.text() if titre else '?'!r}, début {page[:150]!r})")
     js = script.text()
     donnees = js.split("data:", 1)[1].rsplit(",", 1)[0]
     if "errorHasStatus: true" in js:
