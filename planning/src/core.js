@@ -30,6 +30,7 @@
     checkMaxWeek: true, maxWeekHours: 48,
     checkPause: true, minPauseMinutes: 30,
     contractHours: 35,
+    lateThreshold: 5, extraThreshold: 5,
     closingZP: "", closingZR: "",
     coverageFromTemplate: true,
     rulesConfirmed: false,
@@ -688,6 +689,9 @@
           if (!ADJUST_TYPES[a.type]) { fail(`Type inconnu « ${a.type} ».`); break; }
           const min = Math.round(Number(a.minutes));
           if (!(min > 0 && min <= 16 * 60)) { fail("Durée invalide : entre 1 minute et 16 heures."); break; }
+          const stx = { ...DEFAULT_SETTINGS, ...(s.settings || {}) };
+          if (a.type === "retard" && min < stx.lateThreshold) { fail(`Moins de ${stx.lateThreshold} min de retard : ce n'est pas compté.`); break; }
+          if (a.type === "heures_sup" && min < stx.extraThreshold) { fail(`Moins de ${stx.extraThreshold} min après l'heure : ce n'est pas compté en heures sup.`); break; }
           const id = a.id || uid("aj");
           s.adjustments[id] = { id, emp: emp.id, date: a.date, type: a.type, minutes: min, note: String(a.note || "").slice(0, 200), createdAt: meta.now || null, by: meta.by || null };
           touched.adjustments.add(id);
@@ -869,6 +873,21 @@
     };
   }
 
+  // Retard / heures sup à partir de l'heure réelle d'arrivée ou de départ, comparée au planning du jour.
+  // Compté seulement à partir du seuil (5 min par défaut) ; au-delà, la totalité de l'écart est comptée.
+  function deviationFromTimes(state, empId, date, actual) {
+    const st = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
+    const w = getWeek(state, mondayOf(date));
+    const sh = w && w.shifts.find((x) => x.emp === empId && x.date === date);
+    if (!sh) return { error: "Pas d'horaire prévu ce jour-là : utilisez « Journée en plus »." };
+    const r = shiftRanges(sh.segs);
+    const start = r[0][0], end = r[r.length - 1][1];
+    const out = { planned: { s: fromMin(start), e: fromMin(end) }, late: 0, extra: 0 };
+    if (actual.arrive) { let a = toMin(actual.arrive); if (a < start - 720) a += 1440; const d = a - start; out.lateRaw = Math.max(0, d); if (d >= st.lateThreshold) out.late = d; }
+    if (actual.depart) { let b = toMin(actual.depart); if (b < end - 720) b += 1440; const d = b - end; out.extraRaw = Math.max(0, d); if (d >= st.extraThreshold) out.extra = d; }
+    return out;
+  }
+
   // Heures d'une personne sur une période : prévues au planning, + heures sup et journées en plus, − retards.
   function hoursSummary(state, empId, from, to) {
     const days = [];
@@ -898,7 +917,7 @@
   }
 
   root.PlanningCore = {
-    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, applyClosing, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
+    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, deviationFromTimes, applyClosing, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,

@@ -330,3 +330,23 @@ test("fermeture : après-midi ZP 14:30–22:00 et ZR 15:30–23:00, matin inchan
   const late = C.applyClosing([{ s: "14:30", e: "17:00", z: "ZR" }, { s: "17:30", e: "22:00", z: "ZR" }], cl);
   assert.equal(C.shiftMinutes(late), 7 * 60);
 });
+
+test("retards et heures sup comptés à partir de 5 min", () => {
+  const s = withWeek1();
+  // Eric lundi 19/10 : prévu 07:00–14:30
+  const at = (o) => C.deviationFromTimes(s, "eric", W1, o);
+  assert.equal(at({ arrive: "07:04" }).late, 0);
+  assert.equal(at({ arrive: "07:05" }).late, 5);
+  assert.equal(at({ arrive: "07:20" }).late, 20);
+  assert.equal(at({ depart: "14:34" }).extra, 0);
+  assert.equal(at({ depart: "14:35" }).extra, 5);
+  assert.equal(at({ depart: "15:30" }).extra, 60);
+  assert.equal(at({ arrive: "06:50" }).late, 0);
+  assert.ok(C.deviationFromTimes(s, "eric", "2026-10-24", { arrive: "07:30" }).error);
+  const add = (type, minutes) => apply(s, [{ type: "addAdjustment", adjustment: { emp: "eric", date: W1, type, minutes } }]).ok;
+  assert.equal(add("retard", 4), false);
+  assert.equal(add("retard", 5), true);
+  assert.equal(add("heures_sup", 3), false);
+  assert.equal(add("heures_sup", 5), true);
+  assert.equal(add("journee_sup", 3), true);
+});

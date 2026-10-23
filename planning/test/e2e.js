@@ -116,7 +116,13 @@ const MOCK = `
     await page.click('.dialog button[type="submit"]:text("Ajouter")');
     await page.waitForSelector(".dialog >> text=+1 h 30");
     await page.selectOption("#aj-type", "retard");
-    await page.fill("#aj-date", "2026-10-22"); await page.fill("#aj-dur", "0:15");
+    await page.fill("#aj-date", "2026-10-22"); await page.dispatchEvent("#aj-date", "change");
+    await page.fill("#aj-real", "14:33");
+    await page.click('.dialog button[type="submit"]:text("Ajouter")');
+    await page.waitForSelector("text=/rien n'est compté/");
+    check("retard de 3 min : pas compté (seuil 5 min)", true);
+    await page.fill("#aj-real", "");
+    await page.fill("#aj-dur", "0:15");
     await page.click('.dialog button[type="submit"]:text("Ajouter")');
     await page.waitForSelector(".dialog >> text=−0 h 15");
     await page.waitForTimeout(100);

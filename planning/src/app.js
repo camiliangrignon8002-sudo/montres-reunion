@@ -1184,6 +1184,7 @@
           h("div", { class: "stack", style: { gap: "6px" } }, tog("checkMaxDay", "Vérifier la durée par jour"), num("maxDayHours", "Maximum par jour", "heures")),
           h("div", { class: "stack", style: { gap: "6px" } }, tog("checkMaxWeek", "Vérifier la durée par semaine"), num("maxWeekHours", "Maximum par semaine", "heures")),
           h("div", { class: "stack", style: { gap: "6px" } }, tog("checkPause", "Vérifier la pause (journées de plus de 6 h)"), num("minPauseMinutes", "Pause minimum", "minutes")),
+          h("div", { class: "stack", style: { gap: "6px" } }, num("lateThreshold", "Retard compté à partir de", "minutes"), num("extraThreshold", "Heures sup comptées à partir de", "minutes")),
           h("div", { class: "stack", style: { gap: "6px" } }, h("span", { class: "small muted" }, "Contrat de référence"), num("contractHours", "Heures par semaine", "heures"))),
         h("div", { class: "stack", style: { "margin-top": "12px", gap: "8px" } },
           tog("coverageFromTemplate", "Signaler les postes du modèle non pourvus (hypothèse : le modèle donne le besoin en personnel)"),
@@ -1430,7 +1431,19 @@
       const dateIn = h("input", { type: "date", class: "input", id: "aj-date", value: r.from <= this.today() && this.today() <= r.to ? this.today() : r.from });
       const durIn = h("input", { class: "input", id: "aj-dur", placeholder: "ex. 1h30, 0:20, 7h", inputmode: "text" });
       const noteIn = h("input", { class: "input", id: "aj-note", maxlength: "200", placeholder: "Facultatif" });
-      typeSel.addEventListener("change", () => { if (typeSel.value === "journee_sup" && !durIn.value) durIn.value = "7h"; });
+      const realIn = h("input", { type: "time", class: "input", id: "aj-real", "aria-label": "Heure réelle" });
+      const realLbl = h("span", {}, "ou heure réelle d'arrivée");
+      const hint = h("p", { class: "small muted", id: "aj-hint" });
+      const refresh = () => {
+        realLbl.textContent = typeSel.value === "retard" ? "ou heure réelle d'arrivée" : typeSel.value === "heures_sup" ? "ou heure réelle de départ" : "";
+        realIn.parentElement && (realIn.parentElement.hidden = typeSel.value === "journee_sup");
+        const st = this.state.settings;
+        const w = C.getWeek(this.state, C.mondayOf(dateIn.value));
+        const sh = w && w.shifts.find((x) => x.emp === empId && x.date === dateIn.value);
+        hint.textContent = typeSel.value === "journee_sup" ? "" : `${sh ? `Prévu ce jour : ${sh.segs[0].s}–${sh.segs[sh.segs.length - 1].e}. ` : "Pas d'horaire prévu ce jour-là. "}${typeSel.value === "retard" ? `Un retard compte à partir de ${st.lateThreshold || 5} min.` : `Les heures sup comptent à partir de ${st.extraThreshold || 5} min après l'heure.`}`;
+      };
+      typeSel.addEventListener("change", () => { if (typeSel.value === "journee_sup" && !durIn.value) durIn.value = "7h"; refresh(); });
+      dateIn.addEventListener("change", refresh);
       body.replaceChildren(...[
         h("div", { class: "row between" },
           h("div", { class: "seg-ctl", role: "group", "aria-label": "Période" }, ["week", "month"].map((m) => h("button", { type: "button", "aria-pressed": String(m === mode), onClick: () => { mode = m; if (m === "month") month = monday.slice(0, 7); draw(); } }, m === "week" ? "Semaine" : "Mois"))),
@@ -1455,14 +1468,24 @@
         })) : h("p", { class: "small muted" }, "Rien sur cette période."),
         Store.canWrite ? h("form", { class: "stack", onSubmit: async (ev) => {
           ev.preventDefault();
-          const min = C.parseDuration(durIn.value);
-          if (!min) { toast("Durée illisible : écrivez par exemple 1h30, 0:20 ou 7h.", "err"); return; }
-          const res = await this.commit([{ type: "addAdjustment", adjustment: { emp: empId, date: dateIn.value, type: typeSel.value, minutes: min, note: noteIn.value } }]);
+          let min = C.parseDuration(durIn.value), note = noteIn.value;
+          if (realIn.value && typeSel.value !== "journee_sup") {
+            const dv = C.deviationFromTimes(this.state, empId, dateIn.value, typeSel.value === "retard" ? { arrive: realIn.value } : { depart: realIn.value });
+            if (dv.error) { toast(dv.error, "err"); return; }
+            const got = typeSel.value === "retard" ? dv.late : dv.extra, raw = typeSel.value === "retard" ? dv.lateRaw : dv.extraRaw;
+            if (!got) { toast(raw ? `${raw} min seulement : rien n'est compté (seuil de 5 min).` : "Pas d'écart avec l'horaire prévu : rien n'est compté.", ""); return; }
+            min = got;
+            note = [`${typeSel.value === "retard" ? "Arrivée" : "Départ"} à ${realIn.value} (prévu ${typeSel.value === "retard" ? dv.planned.s : dv.planned.e})`, note].filter(Boolean).join(" · ");
+          }
+          if (!min) { toast("Durée illisible : écrivez par exemple 1h30, 0:20 ou 7h, ou indiquez l'heure réelle.", "err"); return; }
+          const res = await this.commit([{ type: "addAdjustment", adjustment: { emp: empId, date: dateIn.value, type: typeSel.value, minutes: min, note } }]);
           if (res.ok) { toast("Ajouté."); draw(); }
         } },
-          h("div", { class: "form-grid" }, h("label", { class: "f" }, "Type", typeSel), h("label", { class: "f" }, "Date", dateIn), h("label", { class: "f" }, "Durée", durIn)),
+          h("div", { class: "form-grid" }, h("label", { class: "f" }, "Type", typeSel), h("label", { class: "f" }, "Date", dateIn), h("label", { class: "f" }, "Durée", durIn), h("label", { class: "f" }, realLbl, realIn)),
+          hint,
           h("label", { class: "f" }, "Note", noteIn),
           h("div", {}, h("button", { type: "submit", class: "btn primary" }, "Ajouter"))) : null].filter(Boolean));
+      refresh();
     };
     draw();
     openDialog({ title: empName(this.state, empId), body, wide: true, actions: [{ label: "Fermer", primary: true }] });
