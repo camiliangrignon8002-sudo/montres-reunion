@@ -1496,42 +1496,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "figaro-109954321",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-109954321.html",
-  "titre": "Location meublée appartement 1 pièce 23.13 m² à Moufia (97490), 556 €",
-  "prix": 556.0,
-  "commune": "Saint-Denis",
-  "quartier": "Moufia",
-  "pieces": 1,
-  "type": "T1",
-  "surface": null,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/5KLsLsg_37-fA48xSgivrqeJcTOfmGsKP9LOeAJlvT_1DsHKEqpNnzPE89g28ee4aFhru18vQO8MO5EMyOKmGO6OPOBplcGOgrbc=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/WyRpiuEWX2zXJNGl4h-lnXcTIJEP6TfypUF9F8y51xjYK3UqX2kX4GlwrPIV21QL3rUvQqiExyxCFvPotjTrgHgF5pNAmLADSVfJ1rk=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/99_cdZohfbED3PkP5TdL-gDHLMN7J6nzyBv-5XhVXzxXvTbvrUDzbESdeE2ZOGmTtDkDKGY6IDI9h88lQ22c-Bqroob4D8szOhnThZQ=rw-w940-h605-l80"
-  ],
-  "description": "Runimmo vous propose en location ce charmant appartement T1 entièrement meublé pour étudiant qui recherchent un nid douillet et fonctionnel. Cet appartement de 23,13 m² vous offre tout le confort nécessaire, situé au 7 rue des Jacinthes - résidence 'Central Fac 9 '. Réservé uniquement aux étudiants.\nÀ l'intérieur, La pièce à vivre, baignée de lumière naturelle, est spacieuse et accueillante.. La salle de bains, moderne et fonctionnelle. Ce bien est proche des commodités, et des commerces.\nPour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 301 € TTC à la charge du locataire comprenant 69 € TTC pour l'état des lieux. Loyer de base 521 €/mois. Provision sur charges 35 €/mois, régularisation annuelle. Dépôt de garantie 1 042 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
-  "caracteristiques": [
-   "Meublé",
-   "Proche université"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0692 26 92 05",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:07+04:00"
- },
- {
   "id": "zimo-01a07c45-39b7-7bdc-96fd-e6e30e960043",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-1-piece-20-m2/01a07c45-39b7-7bdc-96fd-e6e30e960043",
