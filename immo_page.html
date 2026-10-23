@@ -1,0 +1,836 @@
+<title>Dossiers Immo 974</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Dossiers clients, pièces à réunir, relances, prix des biens et biens à vendre à La Réunion.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+/* Mise en page : téléphone = barre du haut + menu ☰ qui glisse ; PC (≥ 960 px) = menu fixe à gauche,
+   fiche dossier sur deux colonnes. Grosses cibles tactiles et texte à 17 px pour rester lisible. */
+:root {
+  --bg: #f3f6f6;
+  --surface: #ffffff;
+  --surface-2: #e9efef;
+  --line: #d5dfdf;
+  --fg: #142426;
+  --fg-2: #4d6266;
+  --accent: #0b6f78;
+  --accent-fg: #ffffff;
+  --accent-soft: #dcefef;
+  --todo: #a3410f;
+  --todo-soft: #fbe9dd;
+  --cours: #8a6200;
+  --cours-soft: #fbf1d2;
+  --ok: #1c7240;
+  --ok-soft: #e0f3e7;
+  --shadow: 0 1px 2px rgba(10,40,44,.06), 0 6px 20px rgba(10,40,44,.07);
+  --font: "Atkinson Hyperlegible", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Bricolage Grotesque", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --r: 14px;
+  --side: 264px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c1617; --surface: #142224; --surface-2: #1b2d30; --line: #284044; --fg: #e8f1f1; --fg-2: #9fb5b8;
+    --accent: #4cc3cc; --accent-fg: #062326; --accent-soft: #143a3e; --todo: #ff9b66; --todo-soft: #3a2014;
+    --cours: #f0c64a; --cours-soft: #352a0c; --ok: #5fd58e; --ok-soft: #12321f; --shadow: 0 1px 2px rgba(0,0,0,.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0c1617; --surface: #142224; --surface-2: #1b2d30; --line: #284044; --fg: #e8f1f1; --fg-2: #9fb5b8;
+  --accent: #4cc3cc; --accent-fg: #062326; --accent-soft: #143a3e; --todo: #ff9b66; --todo-soft: #3a2014;
+  --cours: #f0c64a; --cours-soft: #352a0c; --ok: #5fd58e; --ok-soft: #12321f; --shadow: 0 1px 2px rgba(0,0,0,.5);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { background: var(--bg); color: var(--fg); }
+body { font: 17px/1.45 var(--font); -webkit-text-size-adjust: 100%; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--surface); }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; margin: 0; text-wrap: balance; }
+h1 { font-size: 1.55rem; font-weight: 800; }
+h2 { font-size: 1.2rem; font-weight: 600; }
+h3 { font-size: 1.02rem; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; }
+.muted { color: var(--fg-2); }
+.small { font-size: .88rem; }
+
+/* ---- barre du haut et menu ---- */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; display: flex; align-items: center; gap: 10px;
+  background: var(--surface); border-bottom: 1px solid var(--line); padding-block: 10px;
+  padding-left: max(12px, env(safe-area-inset-left, 0px)); padding-right: max(12px, env(safe-area-inset-right, 0px)); }
+.top h1 { flex: 1; min-width: 0; font-size: 1.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.burger { width: 48px; height: 48px; border: 0; border-radius: 12px; background: var(--surface-2); display: grid; place-items: center; cursor: pointer; flex: none; }
+.burger span, .burger span::before, .burger span::after { display: block; width: 22px; height: 2.5px; border-radius: 2px; background: var(--fg); position: relative; content: ""; }
+.burger span::before { position: absolute; top: -7px; } .burger span::after { position: absolute; top: 7px; }
+.side { position: fixed; z-index: 40; top: 0; bottom: 0; left: 0; width: min(86vw, var(--side)); background: var(--surface);
+  border-right: 1px solid var(--line); transform: translateX(-102%); transition: transform .22s ease; overflow-y: auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 16px) 12px calc(env(safe-area-inset-bottom, 0px) + 16px) max(12px, env(safe-area-inset-left, 0px));
+  display: flex; flex-direction: column; gap: 4px; }
+.side.open { transform: none; box-shadow: var(--shadow); }
+.voile { position: fixed; inset: 0; z-index: 35; background: rgba(5,20,22,.45); }
+.marque { display: flex; align-items: center; gap: 10px; padding: 4px 8px 14px; }
+.marque svg { flex: none; }
+.marque b { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; display: block; }
+.side .groupe { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-2); padding: 14px 10px 4px; }
+.lien { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 8px 10px; border-radius: 10px; border: 0;
+  background: none; text-align: left; cursor: pointer; width: 100%; text-decoration: none; color: var(--fg); }
+.lien:hover { background: var(--surface-2); }
+.lien.actif { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.lien .pt { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.lien .compte { margin-left: auto; font-size: .85rem; min-width: 26px; text-align: center; border-radius: 99px; padding: 1px 7px; background: var(--surface-2); color: var(--fg-2); font-weight: 700; }
+.lien.actif .compte { background: var(--surface); }
+main { padding-block: 18px 96px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+@media (min-width: 960px) {
+  .side { transform: none; width: var(--side); }
+  .voile, .burger { display: none; }
+  .appli { margin-left: var(--side); }
+  .top { padding-left: 28px; padding-right: 28px; }
+  main { padding-left: 28px; padding-right: 28px; }
+}
+
+/* ---- boutons ---- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 10px 16px;
+  border-radius: 12px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; font-weight: 700; text-decoration: none; color: var(--fg); }
+.btn:hover { border-color: var(--accent); }
+.btn.plein { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.btn.danger { color: var(--todo); }
+.btn.danger.arme { background: var(--todo); color: var(--surface); border-color: var(--todo); }
+.btn.petit { min-height: 40px; padding: 6px 12px; font-size: .92rem; }
+.rangee { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+/* ---- blocs ---- */
+.bloc { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.tete { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.tuiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.tuile { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; display: flex; flex-direction: column; gap: 2px;
+  text-decoration: none; color: var(--fg); cursor: pointer; text-align: left; }
+.tuile:hover { border-color: var(--accent); }
+.tuile .val { font-family: var(--font-display); font-size: 1.9rem; font-weight: 800; line-height: 1.1; }
+.tuile .lib { color: var(--fg-2); font-size: .92rem; }
+.bandeau { border-radius: var(--r); padding: 12px 16px; background: var(--cours-soft); color: var(--fg); display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.bandeau p { flex: 1; min-width: 200px; }
+.vide { text-align: center; padding: 28px 16px; color: var(--fg-2); display: flex; flex-direction: column; gap: 12px; align-items: center; }
+
+/* ---- statut ---- */
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: .82rem; font-weight: 700; padding: 3px 10px; border-radius: 99px; white-space: nowrap; }
+.pill::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.s-traiter { background: var(--todo-soft); color: var(--todo); }
+.s-encours { background: var(--cours-soft); color: var(--cours); }
+.s-fini { background: var(--ok-soft); color: var(--ok); }
+.pill.relance { background: var(--todo); color: var(--surface); }
+.pill.relance::before { display: none; }
+.pill.exemple { background: var(--surface-2); color: var(--fg-2); }
+.pill.exemple::before { display: none; }
+
+/* ---- liste de dossiers ---- */
+.cartes { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; }
+.carte { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px;
+  cursor: pointer; text-align: left; min-width: 0; }
+.carte:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+.carte .nom { font-family: var(--font-display); font-weight: 600; font-size: 1.12rem; }
+.carte .ligne { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.barre { height: 8px; border-radius: 99px; background: var(--surface-2); overflow: hidden; }
+.barre i { display: block; height: 100%; background: var(--accent); border-radius: 99px; }
+.recherche { width: 100%; min-height: 48px; border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; background: var(--surface); }
+
+/* ---- fiche dossier ---- */
+.fiche { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 1100px) { .fiche { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: start; } }
+.colonne { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.champs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px 12px; }
+.champ { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.champ label { font-size: .86rem; color: var(--fg-2); font-weight: 700; }
+.champ input, .champ select, .champ textarea { min-height: 46px; border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; background: var(--bg); width: 100%; }
+.champ textarea { min-height: 90px; resize: vertical; }
+.piece { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--line); }
+.piece:first-child { border-top: 0; }
+.coche { width: 44px; height: 44px; flex: none; border-radius: 12px; border: 2px solid var(--line); background: var(--bg); cursor: pointer; display: grid; place-items: center; }
+.coche svg { opacity: 0; }
+.coche.ok { background: var(--ok); border-color: var(--ok); }
+.coche.ok svg { opacity: 1; }
+.piece .corps { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.piece .titre { font-weight: 700; overflow-wrap: anywhere; }
+.piece.recu .titre { color: var(--fg-2); }
+.fichiers { display: flex; flex-wrap: wrap; gap: 6px; }
+.fichier { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; font-size: .86rem; background: var(--bg); cursor: pointer; max-width: 100%; }
+.fichier span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 180px; }
+.fichier img { width: 28px; height: 28px; object-fit: cover; border-radius: 4px; }
+.outils { display: flex; gap: 6px; flex: none; }
+.ico { width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); cursor: pointer; display: grid; place-items: center; color: var(--fg-2); }
+.ico:hover { color: var(--accent); border-color: var(--accent); }
+.ajout { display: flex; gap: 8px; }
+.ajout input { flex: 1; min-width: 0; min-height: 46px; border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; background: var(--bg); }
+.message { white-space: pre-wrap; background: var(--bg); border: 1px dashed var(--line); border-radius: 10px; padding: 12px; font-size: .95rem; overflow-wrap: anywhere; }
+.canaux { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.contact { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.contact .val { font-weight: 700; user-select: all; overflow-wrap: anywhere; }
+.histo { display: flex; flex-direction: column; gap: 4px; font-size: .92rem; color: var(--fg-2); margin: 0; padding-left: 18px; }
+.types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.types button { min-height: 64px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); cursor: pointer; font-weight: 700; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+.types button small { font-weight: 400; color: var(--fg-2); font-size: .78rem; }
+.types button.choisi { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.enregistre { font-size: .86rem; color: var(--ok); font-weight: 700; }
+
+/* ---- argent ---- */
+.tableau { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 620px; }
+th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: .82rem; text-transform: uppercase; letter-spacing: .06em; color: var(--fg-2); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr.cliquable { cursor: pointer; }
+tr.cliquable:hover td { background: var(--surface-2); }
+.plus { color: var(--ok); font-weight: 700; }
+.moins { color: var(--todo); font-weight: 700; }
+
+/* ---- biens achetables ---- */
+.filtres { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+.annonces { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.annonce { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.annonce .photo { aspect-ratio: 4 / 3; max-width: 100%; background: var(--surface-2); display: grid; place-items: center; color: var(--fg-2); }
+.annonce .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.annonce .infos { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.annonce .prix { font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; }
+.annonce .actions { display: flex; gap: 8px; margin-top: auto; padding-top: 6px; flex-wrap: wrap; }
+.annonce .actions .btn { flex: 1; }
+.affaire { background: var(--ok-soft); color: var(--ok); }
+.affaire::before { display: none; }
+.onglets { display: flex; gap: 6px; background: var(--surface-2); padding: 4px; border-radius: 12px; width: fit-content; max-width: 100%; flex-wrap: wrap; }
+.onglets button { min-height: 42px; border: 0; border-radius: 9px; background: none; padding: 6px 14px; cursor: pointer; font-weight: 700; color: var(--fg-2); }
+.onglets button.actif { background: var(--surface); color: var(--fg); box-shadow: var(--shadow); }
+
+/* ---- fenêtre ---- */
+.fenetre-fond { position: fixed; inset: 0; z-index: 50; background: rgba(5,20,22,.5); display: flex; align-items: flex-end; justify-content: center; }
+.fenetre { background: var(--surface); width: 100%; max-width: 620px; max-height: 92vh; overflow-y: auto; border-radius: 18px 18px 0 0;
+  padding: 18px max(16px, env(safe-area-inset-right, 0px)) calc(18px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  display: flex; flex-direction: column; gap: 14px; }
+@media (min-width: 700px) { .fenetre-fond { align-items: center; } .fenetre { border-radius: 18px; padding: 22px; } }
+.fenetre img.apercu { max-height: 70vh; object-fit: contain; border-radius: 10px; background: var(--bg); }
+.flottant { position: fixed; z-index: 15; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 6px 24px rgba(11,111,120,.35); border-radius: 99px; padding-inline: 20px; }
+@media (min-width: 960px) { .flottant { display: none; } }
+.toast { position: fixed; z-index: 60; left: 50%; transform: translateX(-50%); bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  background: var(--fg); color: var(--bg); padding: 10px 18px; border-radius: 99px; font-weight: 700; max-width: calc(100vw - 32px); text-align: center; }
+@media (prefers-reduced-motion: reduce) { .side { transition: none; } }
+</style>
+
+<div class="voile" id="voile" hidden></div>
+<nav class="side" id="menu" aria-label="Menu">
+  <div class="marque">
+    <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="var(--accent)"/><path d="M9 20.5 20 11l11 9.5V30a1 1 0 0 1-1 1h-6.5v-6.5h-7V31H10a1 1 0 0 1-1-1z" fill="var(--accent-fg)"/></svg>
+    <div><b>Dossiers Immo</b><span class="muted small">La Réunion</span></div>
+  </div>
+  <button class="lien" data-vue="accueil">Accueil</button>
+  <div class="groupe">Mes dossiers</div>
+  <button class="lien" data-vue="traiter"><i class="pt" style="background:var(--todo)"></i>Dossiers à traiter<span class="compte" id="c-traiter">0</span></button>
+  <button class="lien" data-vue="encours"><i class="pt" style="background:var(--cours)"></i>Dossiers en cours<span class="compte" id="c-encours">0</span></button>
+  <button class="lien" data-vue="finis"><i class="pt" style="background:var(--ok)"></i>Dossiers finis<span class="compte" id="c-finis">0</span></button>
+  <button class="lien" data-vue="tous">Tous les dossiers<span class="compte" id="c-tous">0</span></button>
+  <div class="groupe">Biens</div>
+  <button class="lien" data-vue="achetables">Biens achetables<span class="compte" id="c-achetables">–</span></button>
+  <button class="lien" data-vue="argent">Mes biens et mon argent</button>
+  <div class="groupe">Appli</div>
+  <button class="lien" data-vue="reglages">Réglages et sauvegarde</button>
+  <div style="flex:1"></div>
+  <button class="btn plein" id="nouveau-menu" style="margin:10px 4px 0">+ Nouveau dossier</button>
+</nav>
+
+<div class="appli">
+  <header class="top">
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-controls="menu" aria-expanded="false"><span></span></button>
+    <h1 id="titre">Accueil</h1>
+  </header>
+  <main id="vue"></main>
+</div>
+<button class="btn plein flottant" id="nouveau-flottant">+ Nouveau dossier</button>
+<div id="fenetre"></div>
+
+<script>
+(() => {
+"use strict";
+const CLE = "immo974";
+const JOUR = 86400000;
+
+// ---------------------------------------------------------------- listes de pièces
+const PIECES = {
+  achat: ["Carte d'identité", "Livret de famille", "Justificatif de domicile (moins de 3 mois)",
+    "3 derniers bulletins de salaire", "2 derniers avis d'imposition", "3 derniers relevés de compte",
+    "Contrat de travail", "RIB", "Attestation de financement / accord de prêt", "Contrat de mariage ou PACS"],
+  vente: ["Carte d'identité", "Livret de famille", "Titre de propriété", "Diagnostics (DPE, amiante, termites…)",
+    "Dernière taxe foncière", "Plan cadastral", "Règlement de copropriété et 3 derniers PV d'AG",
+    "Derniers appels de charges", "Justificatif de domicile", "RIB"],
+  location: ["Carte d'identité", "Justificatif de domicile", "3 derniers bulletins de salaire", "Dernier avis d'imposition",
+    "Contrat de travail", "RIB", "Attestation CAF", "Pièces du garant (identité, revenus)"]
+};
+const TYPES = { achat: "Achat", vente: "Vente", location: "Location" };
+const STATUTS = { traiter: "À traiter", encours: "En cours", fini: "Fini" };
+const MESSAGE = "Bonjour {prénom},\n\nC'est {mon nom}. Pour avancer sur votre dossier ({bien}), il me manque encore :\n{pièces}\n\nVous pouvez me les envoyer par mail ({mon email}) ou en photo par SMS / WhatsApp.\n\nMerci beaucoup et bonne journée !";
+
+// ---------------------------------------------------------------- données
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const ilYa = j => new Date(Date.now() - j * JOUR).toISOString();
+function exemples() {
+  const d = (prenom, nom, tel, email, type, bien, recus, extra) => {
+    const pieces = PIECES[type].map((n, i) => ({ id: uid(), nom: n, recu: recus.includes(i), date: recus.includes(i) ? ilYa(3) : null, fichiers: [] }));
+    return Object.assign({ id: uid(), exemple: true, type, client: { prenom, nom, tel, email }, bien, pieces, relances: [], relanceAuto: true, cloture: false, notes: "", cree: ilYa(12) }, extra);
+  };
+  return [
+    d("Sandrine", "Payet", "0692 41 27 88", "sandrine.payet@exemple.re", "achat",
+      { adresse: "T3 résidence Les Flamboyants", commune: "Saint-Denis", prixAffiche: 215000, prixAchat: null, frais: null, prixVente: null, commission: 9000, vendu: false, dateVente: "" },
+      [0, 1, 7], { relances: [{ date: ilYa(9), canal: "SMS" }] }),
+    d("Jean-Marc", "Hoarau", "0693 12 54 30", "jm.hoarau@exemple.re", "vente",
+      { adresse: "Maison créole, chemin Bellevue", commune: "Saint-Pierre", prixAffiche: 345000, prixAchat: 238000, frais: 21000, prixVente: null, commission: null, vendu: false, dateVente: "" },
+      [], { cree: ilYa(2) }),
+    d("Nadia", "Grondin", "0692 88 03 17", "nadia.grondin@exemple.re", "vente",
+      { adresse: "Villa F4 avec piscine", commune: "Saint-Paul", prixAffiche: 489000, prixAchat: 352000, frais: 18500, prixVente: 472000, commission: null, vendu: true, dateVente: ilYa(40).slice(0, 10) },
+      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+  ];
+}
+function charger() {
+  try {
+    const t = localStorage.getItem(CLE);
+    if (t) return JSON.parse(t);
+  } catch (e) {}
+  return { reglages: { nom: "", email: "", tel: "", delai: 7, message: MESSAGE }, dossiers: exemples() };
+}
+let D = charger();
+D.reglages = Object.assign({ nom: "", email: "", tel: "", delai: 7, message: MESSAGE }, D.reglages || {});
+D.dossiers = D.dossiers || [];
+function sauver() {
+  try { localStorage.setItem(CLE, JSON.stringify(D)); } catch (e) { toast("Enregistrement impossible sur cet appareil"); }
+  compter();
+}
+
+// fichiers (photos, PDF) dans IndexedDB : trop gros pour le stockage simple
+let base = null;
+function ouvrirBase() {
+  if (base) return base;
+  base = new Promise((ok, ko) => {
+    try {
+      const r = indexedDB.open("immo974-fichiers", 1);
+      r.onupgradeneeded = () => r.result.createObjectStore("f");
+      r.onsuccess = () => ok(r.result);
+      r.onerror = () => ko(r.error);
+    } catch (e) { ko(e); }
+  });
+  return base;
+}
+async function fichierEcrire(id, valeur) {
+  const db = await ouvrirBase();
+  return new Promise((ok, ko) => { const t = db.transaction("f", "readwrite"); t.objectStore("f").put(valeur, id); t.oncomplete = ok; t.onerror = () => ko(t.error); });
+}
+async function fichierLire(id) {
+  const db = await ouvrirBase();
+  return new Promise((ok, ko) => { const r = db.transaction("f").objectStore("f").get(id); r.onsuccess = () => ok(r.result); r.onerror = () => ko(r.error); });
+}
+async function fichierSuppr(id) {
+  try { const db = await ouvrirBase(); db.transaction("f", "readwrite").objectStore("f").delete(id); } catch (e) {}
+}
+
+// ---------------------------------------------------------------- outils
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const euros = n => (n || n === 0) && !isNaN(n) ? Number(n).toLocaleString("fr-FR", { maximumFractionDigits: 0 }) + " €" : "—";
+const dateFr = iso => iso ? new Date(iso).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" }) : "";
+const nomClient = d => [d.client.prenom, d.client.nom].filter(Boolean).join(" ") || "Client sans nom";
+const nombre = v => { const n = parseFloat(String(v).replace(/\s/g, "").replace(",", ".")); return isNaN(n) ? null : n; };
+function statut(d) {
+  if (d.cloture) return "fini";
+  const recus = d.pieces.filter(p => p.recu).length;
+  if (d.pieces.length && recus === d.pieces.length) return "fini";
+  return recus ? "encours" : "traiter";
+}
+const manquantes = d => d.pieces.filter(p => !p.recu);
+function derniereRelance(d) { return d.relances.length ? d.relances[d.relances.length - 1].date : null; }
+function aRelancer(d) {
+  if (statut(d) === "fini" || !d.relanceAuto || !manquantes(d).length) return false;
+  const depuis = derniereRelance(d) || d.cree;
+  return Date.now() - new Date(depuis).getTime() >= (D.reglages.delai || 7) * JOUR;
+}
+function gain(d) {
+  const b = d.bien;
+  if (!b.vendu) return null;
+  if (b.commission) return b.commission;
+  if (b.prixVente && b.prixAchat) return b.prixVente - b.prixAchat - (b.frais || 0);
+  return null;
+}
+function message(d) {
+  const r = D.reglages;
+  const liste = manquantes(d).map(p => "– " + p.nom).join("\n") || "– (rien, tout est reçu)";
+  return (r.message || MESSAGE)
+    .replaceAll("{prénom}", d.client.prenom || "")
+    .replaceAll("{nom}", d.client.nom || "")
+    .replaceAll("{mon nom}", r.nom || "votre conseiller")
+    .replaceAll("{mon email}", r.email || "mon adresse mail")
+    .replaceAll("{bien}", d.bien.adresse || TYPES[d.type].toLowerCase())
+    .replaceAll("{pièces}", liste);
+}
+// 0692 / 0693 / 0262 → indicatif de La Réunion, sinon métropole
+function international(tel) {
+  let t = String(tel || "").replace(/[^\d+]/g, "");
+  if (t.startsWith("+")) return t.slice(1);
+  if (t.startsWith("00")) return t.slice(2);
+  if (/^0(69[23]|262|263)/.test(t)) return "262" + t.slice(1);
+  if (t.startsWith("0")) return "33" + t.slice(1);
+  return t;
+}
+let toastT;
+function toast(txt) {
+  let el = $(".toast");
+  if (!el) { el = document.createElement("div"); el.className = "toast"; el.setAttribute("role", "status"); document.body.appendChild(el); }
+  el.textContent = txt; el.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(() => { el.hidden = true; }, 2600);
+}
+async function copier(txt, quoi) {
+  try { await navigator.clipboard.writeText(txt); toast((quoi || "Texte") + " copié"); }
+  catch (e) { toast("Copie refusée : sélectionnez le texte à la main"); }
+}
+const ICONES = {
+  coche: '<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="var(--surface)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  trombone: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5 12 19.5a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7L9.7 17.2a1.7 1.7 0 0 1-2.4-2.4l7.6-7.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  poubelle: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+// ---------------------------------------------------------------- navigation
+const TITRES = { accueil: "Accueil", traiter: "Dossiers à traiter", encours: "Dossiers en cours", finis: "Dossiers finis", tous: "Tous les dossiers",
+  achetables: "Biens achetables", argent: "Mes biens et mon argent", reglages: "Réglages et sauvegarde" };
+let vue = "accueil", dossierOuvert = null;
+function aller(v, id) {
+  vue = v; dossierOuvert = id || null;
+  try { history.replaceState(null, "", "#" + (id ? "d" + id : v)); } catch (e) {}
+  fermerMenu();
+  rendre();
+  window.scrollTo(0, 0);
+}
+function rendre() {
+  document.querySelectorAll(".lien[data-vue]").forEach(b => b.classList.toggle("actif", b.dataset.vue === vue && !dossierOuvert));
+  const d = dossierOuvert && D.dossiers.find(x => x.id === dossierOuvert);
+  if (dossierOuvert && !d) { dossierOuvert = null; vue = "accueil"; }
+  $("#titre").textContent = d ? nomClient(d) : TITRES[vue];
+  const m = $("#vue");
+  if (d) return vueDossier(m, d);
+  ({ accueil: vueAccueil, traiter: m => vueListe(m, "traiter"), encours: m => vueListe(m, "encours"), finis: m => vueListe(m, "fini"),
+     tous: m => vueListe(m, null), achetables: vueAchetables, argent: vueArgent, reglages: vueReglages }[vue] || vueAccueil)(m);
+}
+function compter() {
+  const n = { traiter: 0, encours: 0, fini: 0 };
+  D.dossiers.forEach(d => n[statut(d)]++);
+  $("#c-traiter").textContent = n.traiter; $("#c-encours").textContent = n.encours; $("#c-finis").textContent = n.fini;
+  $("#c-tous").textContent = D.dossiers.length;
+}
+function ouvrirMenu() { $("#menu").classList.add("open"); $("#voile").hidden = false; $("#burger").setAttribute("aria-expanded", "true"); }
+function fermerMenu() { $("#menu").classList.remove("open"); $("#voile").hidden = true; $("#burger").setAttribute("aria-expanded", "false"); }
+$("#burger").onclick = ouvrirMenu;
+$("#voile").onclick = fermerMenu;
+document.querySelectorAll(".lien[data-vue]").forEach(b => b.onclick = () => aller(b.dataset.vue));
+$("#nouveau-menu").onclick = () => { fermerMenu(); nouveauDossier(); };
+$("#nouveau-flottant").onclick = () => nouveauDossier();
+document.addEventListener("keydown", e => { if (e.key === "Escape") { fermerFenetre(); fermerMenu(); } });
+
+// ---------------------------------------------------------------- cartes
+function carte(d) {
+  const s = statut(d), total = d.pieces.length, recus = total - manquantes(d).length;
+  return `<button class="carte" data-ouvrir="${d.id}">
+    <div class="ligne"><span class="pill s-${s}">${STATUTS[s]}</span>${aRelancer(d) ? '<span class="pill relance">À relancer</span>' : ""}${d.exemple ? '<span class="pill exemple">Exemple</span>' : ""}</div>
+    <div class="nom">${esc(nomClient(d))}</div>
+    <div class="muted">${esc(TYPES[d.type])} · ${esc(d.bien.adresse || "Bien à préciser")}${d.bien.commune ? " · " + esc(d.bien.commune) : ""}</div>
+    <div class="barre" aria-hidden="true"><i style="width:${total ? Math.round(100 * recus / total) : 0}%"></i></div>
+    <div class="ligne small muted"><span class="num">${recus} / ${total} pièces reçues</span>${d.bien.prixAffiche ? `<span style="margin-left:auto" class="num">${euros(d.bien.prixAffiche)}</span>` : ""}</div>
+  </button>`;
+}
+function brancherCartes(m) { m.querySelectorAll("[data-ouvrir]").forEach(b => b.onclick = () => aller(vue, b.dataset.ouvrir)); }
+function bandeauExemples() {
+  if (!D.dossiers.some(d => d.exemple)) return "";
+  return `<div class="bandeau"><p>Les dossiers marqués <b>Exemple</b> servent à découvrir l'appli. Supprimez-les quand vous créez les vôtres.</p>
+    <button class="btn petit" id="suppr-exemples">Supprimer les exemples</button></div>`;
+}
+function brancherExemples(m) {
+  const b = m.querySelector("#suppr-exemples");
+  if (b) b.onclick = () => { D.dossiers = D.dossiers.filter(d => !d.exemple); sauver(); rendre(); toast("Exemples supprimés"); };
+}
+
+// ---------------------------------------------------------------- accueil
+function vueAccueil(m) {
+  const n = { traiter: 0, encours: 0, fini: 0 };
+  D.dossiers.forEach(d => n[statut(d)]++);
+  const relancer = D.dossiers.filter(aRelancer);
+  const vendus = D.dossiers.filter(d => d.bien.vendu);
+  const annee = new Date().getFullYear();
+  const gagneAn = vendus.filter(d => (d.bien.dateVente || "").startsWith(annee)).reduce((s, d) => s + (gain(d) || 0), 0);
+  m.innerHTML = `${bandeauExemples()}
+    <div class="tuiles">
+      <button class="tuile" data-aller="traiter"><span class="val num" style="color:var(--todo)">${n.traiter}</span><span class="lib">Dossiers à traiter</span></button>
+      <button class="tuile" data-aller="encours"><span class="val num" style="color:var(--cours)">${n.encours}</span><span class="lib">Dossiers en cours</span></button>
+      <button class="tuile" data-aller="finis"><span class="val num" style="color:var(--ok)">${n.fini}</span><span class="lib">Dossiers finis</span></button>
+      <button class="tuile" data-aller="argent"><span class="val num">${euros(gagneAn)}</span><span class="lib">Gagné en ${annee}</span></button>
+    </div>
+    <section class="bloc">
+      <div class="tete"><h2>À relancer aujourd'hui</h2><span class="muted small">Sans nouvelles depuis ${D.reglages.delai} jours ou plus</span></div>
+      ${relancer.length ? `<div class="cartes">${relancer.map(carte).join("")}</div>` : `<p class="muted">Personne à relancer. Les clients apparaissent ici quand des pièces manquent depuis ${D.reglages.delai} jours.</p>`}
+    </section>
+    <section class="bloc">
+      <div class="tete"><h2>Derniers dossiers</h2><button class="btn petit" data-aller="tous">Tout voir</button></div>
+      ${D.dossiers.length ? `<div class="cartes">${D.dossiers.slice().sort((a, b) => b.cree.localeCompare(a.cree)).slice(0, 6).map(carte).join("")}</div>`
+        : `<div class="vide"><p>Aucun dossier pour l'instant.</p><button class="btn plein" id="premier">+ Créer mon premier dossier</button></div>`}
+    </section>`;
+  m.querySelectorAll("[data-aller]").forEach(b => b.onclick = () => aller(b.dataset.aller));
+  const p = m.querySelector("#premier"); if (p) p.onclick = () => nouveauDossier();
+  brancherCartes(m); brancherExemples(m);
+}
+
+// ---------------------------------------------------------------- listes
+let filtreTexte = "";
+function vueListe(m, s) {
+  const tous = D.dossiers.filter(d => !s || statut(d) === s);
+  const aide = { traiter: "Aucune pièce reçue pour l'instant.", encours: "Une partie des pièces est arrivée.", fini: "Toutes les pièces sont reçues, ou le dossier est clôturé." }[s] || "Tous vos dossiers, quel que soit leur état.";
+  m.innerHTML = `${bandeauExemples()}<p class="muted">${aide}</p>
+    <input class="recherche" id="cherche" type="search" placeholder="Chercher un client, un bien, une commune…" value="${esc(filtreTexte)}">
+    <div id="liste"></div>`;
+  const remplir = () => {
+    const q = filtreTexte.toLowerCase();
+    const l = tous.filter(d => !q || [nomClient(d), d.bien.adresse, d.bien.commune, d.client.tel, d.client.email].join(" ").toLowerCase().includes(q))
+      .sort((a, b) => (aRelancer(b) - aRelancer(a)) || b.cree.localeCompare(a.cree));
+    const z = m.querySelector("#liste");
+    z.innerHTML = l.length ? `<div class="cartes">${l.map(carte).join("")}</div>`
+      : `<div class="vide bloc"><p>${tous.length ? "Aucun dossier ne correspond à la recherche." : "Aucun dossier ici pour le moment."}</p><button class="btn plein" id="creer">+ Nouveau dossier</button></div>`;
+    const c = z.querySelector("#creer"); if (c) c.onclick = () => nouveauDossier();
+    brancherCartes(z);
+  };
+  m.querySelector("#cherche").oninput = e => { filtreTexte = e.target.value; remplir(); };
+  remplir(); brancherExemples(m);
+}
+
+// ---------------------------------------------------------------- nouveau dossier
+function fenetre(html) {
+  $("#fenetre").innerHTML = `<div class="fenetre-fond" id="fond"><div class="fenetre" role="dialog" aria-modal="true">${html}</div></div>`;
+  $("#fond").onclick = e => { if (e.target.id === "fond") fermerFenetre(); };
+  const f = $("#fenetre input, #fenetre button"); if (f) f.focus();
+  return $("#fenetre .fenetre");
+}
+function fermerFenetre() { $("#fenetre").innerHTML = ""; }
+function nouveauDossier(bien) {
+  let type = bien ? "achat" : "achat";
+  const f = fenetre(`<div class="tete"><h2>Nouveau dossier</h2><button class="btn petit" id="annuler">Annuler</button></div>
+    <div class="champ"><label>Type de dossier</label>
+      <div class="types">
+        <button data-type="achat" class="choisi">Achat<small>le client achète</small></button>
+        <button data-type="vente">Vente<small>le client vend</small></button>
+        <button data-type="location">Location<small>le client loue</small></button>
+      </div></div>
+    <div class="champs">
+      <div class="champ"><label for="n-prenom">Prénom</label><input id="n-prenom" autocomplete="off"></div>
+      <div class="champ"><label for="n-nom">Nom</label><input id="n-nom" autocomplete="off"></div>
+      <div class="champ"><label for="n-tel">Téléphone</label><input id="n-tel" type="tel" inputmode="tel" placeholder="0692 00 00 00"></div>
+      <div class="champ"><label for="n-email">Email</label><input id="n-email" type="email" inputmode="email" placeholder="nom@exemple.re"></div>
+      <div class="champ"><label for="n-bien">Le bien</label><input id="n-bien" placeholder="ex. T3 Les Flamboyants" value="${esc(bien ? bien.titre || bien.type : "")}"></div>
+      <div class="champ"><label for="n-commune">Commune</label><input id="n-commune" value="${esc(bien ? bien.commune : "")}"></div>
+      <div class="champ"><label for="n-prix">Prix du bien (€)</label><input id="n-prix" inputmode="decimal" value="${bien && bien.prix ? bien.prix : ""}"></div>
+    </div>
+    <p class="muted small">La liste des papiers à réunir se crée toute seule selon le type de dossier. Vous pourrez en ajouter ou en retirer.</p>
+    <button class="btn plein" id="creer-ok">Créer le dossier</button>`);
+  f.querySelectorAll("[data-type]").forEach(b => b.onclick = () => { type = b.dataset.type; f.querySelectorAll("[data-type]").forEach(x => x.classList.toggle("choisi", x === b)); });
+  f.querySelector("#annuler").onclick = fermerFenetre;
+  f.querySelector("#n-prenom").focus();
+  f.querySelector("#creer-ok").onclick = () => {
+    const v = id => f.querySelector(id).value.trim();
+    const d = { id: uid(), type, client: { prenom: v("#n-prenom"), nom: v("#n-nom"), tel: v("#n-tel"), email: v("#n-email") },
+      bien: { adresse: v("#n-bien"), commune: v("#n-commune"), prixAffiche: nombre(v("#n-prix")), prixAchat: null, frais: null, prixVente: null, commission: null, vendu: false, dateVente: "", annonce: bien ? bien.url : "" },
+      pieces: PIECES[type].map(n => ({ id: uid(), nom: n, recu: false, date: null, fichiers: [] })), relances: [], relanceAuto: true, cloture: false, notes: "", cree: new Date().toISOString() };
+    D.dossiers.push(d); sauver(); fermerFenetre(); toast("Dossier créé"); aller(vue === "achetables" ? "tous" : vue, d.id);
+  };
+}
+
+// ---------------------------------------------------------------- fiche dossier
+function vueDossier(m, d) {
+  const s = statut(d), manque = manquantes(d), b = d.bien, g = gain(d);
+  const relancesTxt = d.relances.slice().reverse().slice(0, 6).map(r => `<li>${esc(r.canal)} préparé le ${dateFr(r.date)}</li>`).join("");
+  m.innerHTML = `
+    <div class="rangee"><button class="btn petit" id="retour">← Retour</button>
+      <span class="pill s-${s}">${STATUTS[s]}</span>${aRelancer(d) ? '<span class="pill relance">À relancer</span>' : ""}${d.exemple ? '<span class="pill exemple">Exemple</span>' : ""}
+      <span class="enregistre" id="ok" hidden>Enregistré ✓</span></div>
+    <div class="fiche">
+      <div class="colonne">
+        <section class="bloc">
+          <div class="tete"><h2>Papiers à réunir</h2><span class="muted num">${d.pieces.length - manque.length} / ${d.pieces.length} reçus</span></div>
+          <div class="barre" aria-hidden="true"><i style="width:${d.pieces.length ? Math.round(100 * (d.pieces.length - manque.length) / d.pieces.length) : 0}%"></i></div>
+          <p class="muted small">Touchez le carré quand vous avez reçu le papier. Le trombone range la photo ou le PDF dans le dossier (le papier est alors coché tout seul).</p>
+          <div id="pieces">${d.pieces.map(p => `
+            <div class="piece${p.recu ? " recu" : ""}" data-piece="${p.id}">
+              <button class="coche${p.recu ? " ok" : ""}" data-coche aria-pressed="${p.recu}" aria-label="${p.recu ? "Reçu" : "Pas encore reçu"} : ${esc(p.nom)}">${ICONES.coche}</button>
+              <div class="corps"><span class="titre">${esc(p.nom)}</span>
+                <span class="small muted">${p.recu ? "Reçu" + (p.date ? " le " + dateFr(p.date) : "") : "En attente"}</span>
+                ${p.fichiers.length ? `<div class="fichiers">${p.fichiers.map(f => `<button class="fichier" data-voir="${f.id}"><span>${esc(f.nom)}</span></button>`).join("")}</div>` : ""}
+              </div>
+              <div class="outils">
+                <label class="ico" title="Ajouter une photo ou un PDF">${ICONES.trombone}<input type="file" accept="image/*,application/pdf" multiple hidden data-fichier></label>
+                <button class="ico" data-suppr title="Retirer ce papier de la liste" aria-label="Retirer ${esc(p.nom)}">${ICONES.poubelle}</button>
+              </div>
+            </div>`).join("")}</div>
+          <div class="ajout"><input id="nouvelle-piece" placeholder="Ajouter un papier (ex. Permis de construire)"><button class="btn" id="ajouter-piece">Ajouter</button></div>
+        </section>
+        <section class="bloc">
+          <h2>Le bien</h2>
+          <div class="champs">
+            <div class="champ"><label for="b-adresse">Bien / adresse</label><input id="b-adresse" data-b="adresse" value="${esc(b.adresse)}"></div>
+            <div class="champ"><label for="b-commune">Commune</label><input id="b-commune" data-b="commune" value="${esc(b.commune)}"></div>
+            <div class="champ"><label for="b-prixAffiche">Prix affiché (€)</label><input id="b-prixAffiche" data-b="prixAffiche" data-n inputmode="decimal" value="${b.prixAffiche ?? ""}"></div>
+            <div class="champ"><label for="b-prixAchat">Prix d'achat (€)</label><input id="b-prixAchat" data-b="prixAchat" data-n inputmode="decimal" value="${b.prixAchat ?? ""}"></div>
+            <div class="champ"><label for="b-frais">Frais et travaux (€)</label><input id="b-frais" data-b="frais" data-n inputmode="decimal" value="${b.frais ?? ""}"></div>
+            <div class="champ"><label for="b-commission">Ma commission (€)</label><input id="b-commission" data-b="commission" data-n inputmode="decimal" value="${b.commission ?? ""}"></div>
+            <div class="champ"><label for="b-vendu">Vendu ?</label><select id="b-vendu" data-b="vendu"><option value="">Pas encore</option><option value="1"${b.vendu ? " selected" : ""}>Oui, vendu</option></select></div>
+            <div class="champ"${b.vendu ? "" : " hidden"}><label for="b-prixVente">Vendu pour (€)</label><input id="b-prixVente" data-b="prixVente" data-n inputmode="decimal" value="${b.prixVente ?? ""}"></div>
+            <div class="champ"${b.vendu ? "" : " hidden"}><label for="b-dateVente">Vendu le</label><input id="b-dateVente" data-b="dateVente" type="date" value="${esc(b.dateVente)}"></div>
+          </div>
+          ${b.vendu ? `<p>Ce que ça m'a rapporté : <b class="${g >= 0 ? "plus" : "moins"} num">${g === null ? "—" : euros(g)}</b> <span class="muted small">${b.commission ? "(ma commission)" : "(prix de vente − prix d'achat − frais)"}</span></p>` : ""}
+          ${b.annonce ? `<a href="${esc(b.annonce)}" target="_blank" rel="noopener">Voir l'annonce d'origine</a>` : ""}
+        </section>
+      </div>
+      <div class="colonne">
+        <section class="bloc">
+          <h2>Relancer ${esc(d.client.prenom || "le client")}</h2>
+          ${manque.length ? `<p class="muted small">Message prêt avec les ${manque.length} papier${manque.length > 1 ? "s" : ""} qui manque${manque.length > 1 ? "nt" : ""}. Un appui ouvre votre appli de SMS, de mail ou WhatsApp : il ne reste qu'à envoyer.</p>
+          <div class="canaux">
+            <a class="btn plein" data-canal="SMS" href="${d.client.tel ? "sms:" + esc(d.client.tel.replace(/\s/g, "")) + "?&body=" + encodeURIComponent(message(d)) : "#"}">SMS</a>
+            <a class="btn plein" data-canal="WhatsApp" target="_blank" rel="noopener" href="${d.client.tel ? "https://wa.me/" + international(d.client.tel) + "?text=" + encodeURIComponent(message(d)) : "#"}">WhatsApp</a>
+            <a class="btn plein" data-canal="Email" href="${d.client.email ? "mailto:" + esc(d.client.email) + "?subject=" + encodeURIComponent("Votre dossier – papiers manquants") + "&body=" + encodeURIComponent(message(d)) : "#"}">Email</a>
+            <button class="btn" id="copier-msg">Copier le message</button>
+          </div>
+          <div class="message" id="msg">${esc(message(d))}</div>` : `<p>Tous les papiers sont reçus. Rien à relancer.</p>`}
+          <label class="rangee small"><input type="checkbox" id="auto"${d.relanceAuto ? " checked" : ""} style="width:22px;height:22px"> Me rappeler de relancer tous les ${D.reglages.delai} jours tant qu'il manque des papiers</label>
+          ${relancesTxt ? `<div><h3>Dernières relances</h3><ul class="histo">${relancesTxt}</ul></div>` : ""}
+          <button class="btn petit" id="relance-faite">J'ai relancé autrement (appel…)</button>
+        </section>
+        <section class="bloc">
+          <h2>Le client</h2>
+          <div class="champs">
+            <div class="champ"><label for="c-prenom">Prénom</label><input id="c-prenom" data-c="prenom" value="${esc(d.client.prenom)}"></div>
+            <div class="champ"><label for="c-nom">Nom</label><input id="c-nom" data-c="nom" value="${esc(d.client.nom)}"></div>
+            <div class="champ"><label for="c-tel">Téléphone</label><input id="c-tel" data-c="tel" type="tel" inputmode="tel" value="${esc(d.client.tel)}"></div>
+            <div class="champ"><label for="c-email">Email</label><input id="c-email" data-c="email" type="email" value="${esc(d.client.email)}"></div>
+            <div class="champ"><label for="c-type">Type de dossier</label><select id="c-type">${Object.entries(TYPES).map(([k, v]) => `<option value="${k}"${d.type === k ? " selected" : ""}>${v}</option>`).join("")}</select></div>
+          </div>
+          <div class="rangee">${d.client.tel ? `<a class="btn petit" href="tel:${esc(d.client.tel.replace(/\s/g, ""))}">Appeler</a><button class="btn petit" data-copie="${esc(d.client.tel)}" data-quoi="Numéro">Copier le numéro</button>` : ""}
+            ${d.client.email ? `<button class="btn petit" data-copie="${esc(d.client.email)}" data-quoi="Email">Copier l'email</button>` : ""}</div>
+          <div class="champ"><label for="notes">Notes</label><textarea id="notes" placeholder="Rendez-vous, banque, notaire…">${esc(d.notes)}</textarea></div>
+        </section>
+        <section class="bloc">
+          <h2>Dossier</h2>
+          <div class="rangee">
+            <button class="btn" id="cloturer">${d.cloture ? "Rouvrir le dossier" : "Clôturer le dossier"}</button>
+            <button class="btn danger" id="supprimer">Supprimer le dossier</button>
+          </div>
+          <p class="muted small">Créé le ${dateFr(d.cree)}. Clôturer range le dossier dans « Dossiers finis » même s'il manque des papiers.</p>
+        </section>
+      </div>
+    </div>`;
+
+  const ok = () => { const e = m.querySelector("#ok"); e.hidden = false; clearTimeout(e.t); e.t = setTimeout(() => e.hidden = true, 1500); };
+  const enreg = (redessiner) => { sauver(); ok(); if (redessiner) rendre(); };
+  m.querySelector("#retour").onclick = () => aller(vue);
+  m.querySelectorAll("[data-piece]").forEach(el => {
+    const p = d.pieces.find(x => x.id === el.dataset.piece);
+    el.querySelector("[data-coche]").onclick = () => { p.recu = !p.recu; p.date = p.recu ? new Date().toISOString() : null; enreg(true); };
+    el.querySelector("[data-fichier]").onchange = async e => {
+      const fichiers = [...e.target.files];
+      try {
+        for (const f of fichiers) {
+          const id = uid();
+          await fichierEcrire(id, { nom: f.name, type: f.type, blob: f });
+          p.fichiers.push({ id, nom: f.name, type: f.type });
+        }
+        if (fichiers.length && !p.recu) { p.recu = true; p.date = new Date().toISOString(); }
+        enreg(true); toast(fichiers.length > 1 ? "Fichiers rangés" : "Fichier rangé");
+      } catch (err) { toast("Impossible de garder ce fichier sur cet appareil"); }
+    };
+    el.querySelector("[data-suppr]").onclick = () => { p.fichiers.forEach(f => fichierSuppr(f.id)); d.pieces = d.pieces.filter(x => x !== p); enreg(true); };
+    el.querySelectorAll("[data-voir]").forEach(bt => bt.onclick = () => voirFichier(d, p, p.fichiers.find(f => f.id === bt.dataset.voir)));
+  });
+  const ajouterPiece = () => { const i = m.querySelector("#nouvelle-piece"), v = i.value.trim(); if (!v) return i.focus(); d.pieces.push({ id: uid(), nom: v, recu: false, date: null, fichiers: [] }); enreg(true); $("#nouvelle-piece").focus(); };
+  m.querySelector("#ajouter-piece").onclick = ajouterPiece;
+  m.querySelector("#nouvelle-piece").onkeydown = e => { if (e.key === "Enter") ajouterPiece(); };
+  m.querySelectorAll("[data-b]").forEach(i => i.onchange = () => {
+    const k = i.dataset.b;
+    b[k] = k === "vendu" ? !!i.value : i.dataset.n !== undefined ? nombre(i.value) : i.value.trim();
+    if (k === "vendu" && b.vendu && !b.dateVente) b.dateVente = new Date().toISOString().slice(0, 10);
+    enreg(k === "vendu" || ["prixVente", "prixAchat", "frais", "commission"].includes(k));
+  });
+  m.querySelectorAll("[data-c]").forEach(i => i.onchange = () => { d.client[i.dataset.c] = i.value.trim(); enreg(true); });
+  m.querySelector("#c-type").onchange = e => { d.type = e.target.value; enreg(false); };
+  m.querySelector("#notes").onchange = e => { d.notes = e.target.value; enreg(false); };
+  m.querySelector("#auto").onchange = e => { d.relanceAuto = e.target.checked; enreg(false); };
+  m.querySelectorAll("[data-canal]").forEach(a => a.onclick = e => {
+    const besoin = a.dataset.canal === "Email" ? d.client.email : d.client.tel;
+    if (!besoin) { e.preventDefault(); toast(a.dataset.canal === "Email" ? "Ajoutez l'email du client plus bas" : "Ajoutez le téléphone du client plus bas"); return; }
+    d.relances.push({ date: new Date().toISOString(), canal: a.dataset.canal }); sauver();
+    setTimeout(rendre, 400);
+  });
+  const cm = m.querySelector("#copier-msg"); if (cm) cm.onclick = () => copier(message(d), "Message");
+  m.querySelector("#relance-faite").onclick = () => { d.relances.push({ date: new Date().toISOString(), canal: "Relance (appel ou autre)" }); enreg(true); toast("Relance notée"); };
+  m.querySelectorAll("[data-copie]").forEach(bt => bt.onclick = () => copier(bt.dataset.copie, bt.dataset.quoi));
+  m.querySelector("#cloturer").onclick = () => { d.cloture = !d.cloture; enreg(true); toast(d.cloture ? "Dossier rangé dans les dossiers finis" : "Dossier rouvert"); };
+  const sup = m.querySelector("#supprimer");
+  sup.onclick = () => {
+    if (!sup.classList.contains("arme")) { sup.classList.add("arme"); sup.textContent = "Toucher encore pour supprimer"; setTimeout(() => { sup.classList.remove("arme"); sup.textContent = "Supprimer le dossier"; }, 4000); return; }
+    d.pieces.forEach(p => p.fichiers.forEach(f => fichierSuppr(f.id)));
+    D.dossiers = D.dossiers.filter(x => x !== d); sauver(); toast("Dossier supprimé"); aller(vue);
+  };
+}
+async function voirFichier(d, p, f) {
+  let url = null;
+  try { const v = await fichierLire(f.id); if (v) url = URL.createObjectURL(v.blob); } catch (e) {}
+  const w = fenetre(`<div class="tete"><h2>${esc(p.nom)}</h2><button class="btn petit" id="fermer">Fermer</button></div>
+    ${!url ? `<p>Ce fichier n'est plus sur cet appareil.</p>` : (f.type || "").startsWith("image/") ? `<img class="apercu" src="${url}" alt="${esc(f.nom)}">` : `<p>${esc(f.nom)}</p><a class="btn plein" href="${url}" target="_blank" rel="noopener">Ouvrir le PDF</a>`}
+    <button class="btn danger" id="retirer">Retirer ce fichier</button>`);
+  w.querySelector("#fermer").onclick = () => { fermerFenetre(); if (url) URL.revokeObjectURL(url); };
+  w.querySelector("#retirer").onclick = () => { fichierSuppr(f.id); p.fichiers = p.fichiers.filter(x => x !== f); sauver(); fermerFenetre(); rendre(); };
+}
+
+// ---------------------------------------------------------------- argent
+function vueArgent(m) {
+  const avecBien = D.dossiers.filter(d => d.bien.prixAffiche || d.bien.prixVente || d.bien.prixAchat || d.bien.commission);
+  const enVente = avecBien.filter(d => !d.bien.vendu), vendus = avecBien.filter(d => d.bien.vendu);
+  const annee = new Date().getFullYear();
+  const total = vendus.reduce((s, d) => s + (gain(d) || 0), 0);
+  const an = vendus.filter(d => (d.bien.dateVente || "").startsWith(annee)).reduce((s, d) => s + (gain(d) || 0), 0);
+  const ligne = d => { const g = gain(d); return `<tr class="cliquable" data-ouvrir="${d.id}">
+    <td><b>${esc(d.bien.adresse || "Bien")}</b><br><span class="muted small">${esc(d.bien.commune || "")}${d.exemple ? " · Exemple" : ""}</span></td>
+    <td>${esc(nomClient(d))}</td><td class="n">${euros(d.bien.prixAffiche)}</td><td class="n">${euros(d.bien.prixAchat)}</td>
+    <td class="n">${d.bien.vendu ? euros(d.bien.prixVente) : "—"}</td><td>${d.bien.vendu ? dateFr(d.bien.dateVente) : '<span class="muted">En vente</span>'}</td>
+    <td class="n ${g === null ? "" : g >= 0 ? "plus" : "moins"}">${g === null ? "—" : euros(g)}</td></tr>`; };
+  m.innerHTML = `<div class="tuiles">
+      <div class="tuile"><span class="val num">${enVente.length}</span><span class="lib">Biens en cours</span></div>
+      <div class="tuile"><span class="val num">${euros(enVente.reduce((s, d) => s + (d.bien.prixAffiche || 0), 0))}</span><span class="lib">Valeur des biens en cours</span></div>
+      <div class="tuile"><span class="val num" style="color:var(--ok)">${euros(an)}</span><span class="lib">Gagné en ${annee}</span></div>
+      <div class="tuile"><span class="val num">${euros(total)}</span><span class="lib">Gagné au total (${vendus.length} vente${vendus.length > 1 ? "s" : ""})</span></div>
+    </div>
+    <section class="bloc"><div class="tete"><h2>Tous mes biens</h2><span class="muted small">Touchez une ligne pour ouvrir le dossier</span></div>
+    ${avecBien.length ? `<div class="tableau"><table><thead><tr><th>Bien</th><th>Client</th><th class="n">Prix affiché</th><th class="n">Prix d'achat</th><th class="n">Vendu pour</th><th>Vente</th><th class="n">Ce que ça rapporte</th></tr></thead>
+      <tbody>${[...enVente, ...vendus.sort((a, b) => (b.bien.dateVente || "").localeCompare(a.bien.dateVente || ""))].map(ligne).join("")}</tbody></table></div>`
+      : `<p class="muted">Ajoutez un prix dans la partie « Le bien » d'un dossier pour le voir ici.</p>`}
+    <p class="muted small">« Ce que ça rapporte » = votre commission si vous l'avez notée, sinon prix de vente − prix d'achat − frais et travaux.</p></section>`;
+  m.querySelectorAll("[data-ouvrir]").forEach(r => r.onclick = () => aller("argent", r.dataset.ouvrir));
+}
+
+// ---------------------------------------------------------------- biens achetables
+let BIENS = null, ongletBiens = "selection", fBudget = "", fType = "", fCommune = "";
+async function chargerBiens() {
+  if (BIENS) return BIENS;
+  try { const r = await fetch("biens.json", { cache: "no-store" }); BIENS = r.ok ? await r.json() : { biens: [] }; }
+  catch (e) { BIENS = { biens: [] }; }
+  const sel = (BIENS.biens || []).filter(b => b.selection).length;
+  $("#c-achetables").textContent = sel || (BIENS.biens || []).length || "–";
+  return BIENS;
+}
+async function vueAchetables(m) {
+  m.innerHTML = `<p class="muted">Chargement de la liste du mois…</p>`;
+  const data = await chargerBiens();
+  if (vue !== "achetables" || dossierOuvert) return;
+  const tous = data.biens || [];
+  const moisTxt = data.mois ? new Date(data.mois + "-01T12:00:00").toLocaleDateString("fr-FR", { month: "long", year: "numeric" }) : "";
+  if (!tous.length) {
+    m.innerHTML = `<section class="bloc vide"><h2>La liste du mois arrive bientôt</h2>
+      <p>Le 1er de chaque mois, l'appli cherche les maisons, appartements et terrains à vendre partout à La Réunion,
+      et met en tête ceux qui sont les moins chers au m² par rapport à leur commune.</p>
+      <p class="small">La première liste apparaîtra ici après la prochaine recherche.</p></section>`;
+    return;
+  }
+  const communes = [...new Set(tous.map(b => b.commune).filter(Boolean))].sort((a, b) => a.localeCompare(b, "fr"));
+  m.innerHTML = `<div class="tete"><div><h2>Biens à vendre à La Réunion</h2><p class="muted small">Liste de ${esc(moisTxt)} · ${tous.length} biens · mise à jour le ${dateFr(data.maj)}</p></div>
+      <div class="onglets" role="tablist"><button data-onglet="selection">Sélection du mois</button><button data-onglet="tout">Tous les biens</button></div></div>
+    <div class="filtres">
+      <div class="champ"><label for="f-budget">Budget maximum</label><select id="f-budget"><option value="">Tous les prix</option>${[100000, 150000, 200000, 250000, 300000, 400000, 500000].map(v => `<option value="${v}"${+fBudget === v ? " selected" : ""}>${euros(v)}</option>`).join("")}</select></div>
+      <div class="champ"><label for="f-type">Type</label><select id="f-type"><option value="">Tous</option>${["Maison", "Appartement", "Terrain"].map(t => `<option${fType === t ? " selected" : ""}>${t}</option>`).join("")}</select></div>
+      <div class="champ"><label for="f-commune">Commune</label><select id="f-commune"><option value="">Toute l'île</option>${communes.map(c => `<option${fCommune === c ? " selected" : ""}>${esc(c)}</option>`).join("")}</select></div>
+    </div>
+    <div id="annonces"></div>
+    <p class="muted small">Prix et disponibilité à vérifier sur l'annonce d'origine : un bien a pu être vendu depuis la recherche.</p>`;
+  const remplir = () => {
+    m.querySelectorAll("[data-onglet]").forEach(b => b.classList.toggle("actif", b.dataset.onglet === ongletBiens));
+    const l = tous.filter(b => (ongletBiens === "tout" || b.selection) && (!fBudget || (b.prix || 0) <= +fBudget) && (!fType || b.type === fType) && (!fCommune || b.commune === fCommune));
+    const z = m.querySelector("#annonces");
+    z.innerHTML = l.length ? `<div class="annonces">${l.map((b, i) => `<article class="annonce">
+        <div class="photo">${b.photo ? `<img src="${esc(b.photo)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : esc(b.type)}</div>
+        <div class="infos">
+          <div class="rangee" style="gap:6px">${b.ecart !== undefined && b.ecart < 0 ? `<span class="pill affaire">${b.ecart} % sous le prix moyen</span>` : ""}${b.dpe ? `<span class="pill exemple">DPE ${esc(b.dpe)}</span>` : ""}</div>
+          <span class="prix num">${euros(b.prix)}</span>
+          <b>${esc(b.type)}${b.pieces ? " " + b.pieces + " pièce" + (b.pieces > 1 ? "s" : "") : ""}${b.surface ? " · " + Math.round(b.surface) + " m²" : ""}</b>
+          <span class="muted">${esc(b.commune)}${b.m2 ? ` · <span class="num">${euros(b.m2)}/m²</span>` : ""}${b.m2_commune ? ` (moyenne ${euros(b.m2_commune)}/m²)` : ""}</span>
+          <span class="small muted">${esc(b.annonceur || b.source)}</span>
+          <div class="actions"><a class="btn petit" href="${esc(b.url)}" target="_blank" rel="noopener">Voir l'annonce</a><button class="btn petit plein" data-dossier="${i}">Créer un dossier</button></div>
+        </div></article>`).join("")}</div>` : `<div class="vide bloc"><p>Aucun bien ne correspond à ces filtres.</p></div>`;
+    z.querySelectorAll("[data-dossier]").forEach(bt => bt.onclick = () => nouveauDossier(l[+bt.dataset.dossier]));
+  };
+  m.querySelectorAll("[data-onglet]").forEach(b => b.onclick = () => { ongletBiens = b.dataset.onglet; remplir(); });
+  m.querySelector("#f-budget").onchange = e => { fBudget = e.target.value; remplir(); };
+  m.querySelector("#f-type").onchange = e => { fType = e.target.value; remplir(); };
+  m.querySelector("#f-commune").onchange = e => { fCommune = e.target.value; remplir(); };
+  remplir();
+}
+
+// ---------------------------------------------------------------- réglages
+function vueReglages(m) {
+  const r = D.reglages;
+  let horsCadre = true; try { horsCadre = window.top === window.self; } catch (e) { horsCadre = false; }
+  m.innerHTML = `<section class="bloc"><h2>Moi</h2>
+      <p class="muted small">Votre nom et votre email s'affichent dans les messages de relance.</p>
+      <div class="champs">
+        <div class="champ"><label for="r-nom">Mon nom</label><input id="r-nom" data-r="nom" value="${esc(r.nom)}" placeholder="ex. Christophe, agence du Nord"></div>
+        <div class="champ"><label for="r-email">Mon email</label><input id="r-email" data-r="email" type="email" value="${esc(r.email)}"></div>
+        <div class="champ"><label for="r-tel">Mon téléphone</label><input id="r-tel" data-r="tel" type="tel" value="${esc(r.tel)}"></div>
+        <div class="champ"><label for="r-delai">Relancer au bout de (jours)</label><input id="r-delai" data-r="delai" inputmode="numeric" value="${esc(r.delai)}"></div>
+      </div></section>
+    <section class="bloc"><h2>Message de relance</h2>
+      <p class="muted small">Les mots entre accolades sont remplacés tout seuls : {prénom}, {nom}, {bien}, {pièces} (la liste des papiers qui manquent), {mon nom}, {mon email}.</p>
+      <div class="champ"><label for="r-message">Message</label><textarea id="r-message" data-r="message" style="min-height:200px">${esc(r.message)}</textarea></div>
+      <div class="rangee"><button class="btn petit" id="msg-defaut">Remettre le message d'origine</button></div></section>
+    <section class="bloc"><h2>Sauvegarde</h2>
+      <p class="muted small">Vos dossiers restent sur cet appareil. Faites une sauvegarde de temps en temps pour ne rien perdre, ou pour passer du téléphone au PC.
+      Les photos et PDF rangés ne sont pas dans la sauvegarde.</p>
+      <div class="rangee">${horsCadre ? `<button class="btn plein" id="telecharger">Télécharger la sauvegarde</button>` : ""}<button class="btn" id="copier-sauv">Copier la sauvegarde</button>
+        <label class="btn">Restaurer un fichier<input type="file" accept="application/json,.json,.txt" hidden id="fichier-sauv"></label></div>
+      <div class="champ"><label for="coller">Ou collez une sauvegarde ici</label><textarea id="coller" placeholder='{"reglages":…'></textarea></div>
+      <div class="rangee"><button class="btn" id="restaurer">Restaurer le texte collé</button></div></section>
+    <section class="bloc"><h2>Installer sur l'écran d'accueil</h2>
+      <p>iPhone : ouvrez l'appli dans <b>Safari</b>, touchez <b>Partager</b> puis <b>Sur l'écran d'accueil</b>.<br>
+      Android : dans <b>Chrome</b>, menu <b>⋮</b> puis <b>Ajouter à l'écran d'accueil</b>.<br>
+      PC : dans Chrome ou Edge, l'icône d'installation à droite de la barre d'adresse.</p></section>`;
+  m.querySelectorAll("[data-r]").forEach(i => i.onchange = () => {
+    r[i.dataset.r] = i.dataset.r === "delai" ? Math.max(1, parseInt(i.value, 10) || 7) : i.value.trim();
+    sauver(); toast("Enregistré");
+  });
+  m.querySelector("#msg-defaut").onclick = () => { r.message = MESSAGE; sauver(); rendre(); toast("Message d'origine remis"); };
+  const texte = () => JSON.stringify(D);
+  const t = m.querySelector("#telecharger");
+  if (t) t.onclick = () => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([texte()], { type: "application/json" }));
+    a.download = "dossiers-immo-" + new Date().toISOString().slice(0, 10) + ".json";
+    document.body.appendChild(a); a.click(); a.remove();
+  };
+  m.querySelector("#copier-sauv").onclick = () => copier(texte(), "Sauvegarde");
+  const restaurer = txt => {
+    try {
+      const v = JSON.parse(txt);
+      if (!v || !Array.isArray(v.dossiers)) throw 0;
+      D = v; D.reglages = Object.assign({ nom: "", email: "", tel: "", delai: 7, message: MESSAGE }, D.reglages || {});
+      sauver(); toast(D.dossiers.length + " dossiers restaurés"); aller("accueil");
+    } catch (e) { toast("Ce texte n'est pas une sauvegarde de l'appli"); }
+  };
+  m.querySelector("#restaurer").onclick = () => restaurer(m.querySelector("#coller").value);
+  m.querySelector("#fichier-sauv").onchange = async e => { const f = e.target.files[0]; if (f) restaurer(await f.text()); };
+}
+
+// ---------------------------------------------------------------- démarrage
+compter();
+chargerBiens();
+const h = (location.hash || "").slice(1);
+if (h.startsWith("d") && D.dossiers.some(d => d.id === h.slice(1))) { vue = "tous"; dossierOuvert = h.slice(1); }
+else if (TITRES[h]) vue = h;
+rendre();
+})();
+</script>

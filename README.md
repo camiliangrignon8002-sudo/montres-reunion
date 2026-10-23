@@ -148,3 +148,29 @@ génération à partir du planning modèle, historique, exports PDF / Excel / CS
   https://claude.ai/artifact/GqCvGUNogmGmept7ND8mdY
 - Installer : ouvrir le lien dans **Safari** → **Partager** → **Sur l'écran d'accueil**.
 - Code source, tests et détails : dossier `planning/` (voir `planning/README.md`).
+
+---
+
+# 🏡 Dossiers Immo 974
+
+Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/immo/
+(version Claude : https://claude.ai/artifact/2Bg3yFCpd15pLLDdHewmzm)
+
+Gestion des dossiers clients en immobilier, sur téléphone et sur PC (menu ☰ en haut à gauche sur téléphone,
+menu fixe à gauche sur PC).
+
+- **Dossiers** à l'infini : client (téléphone, email), type (achat, vente, location), le bien. La liste des
+  papiers à réunir (carte d'identité, livret de famille, bulletins de salaire, titre de propriété…) se crée
+  toute seule selon le type ; on peut en ajouter ou en retirer.
+- **Cocher** un papier quand il est reçu, ou le ranger en photo / PDF avec le trombone (il se coche tout seul).
+- Classement automatique : **à traiter** (rien reçu), **en cours** (une partie reçue), **finis** (tout reçu ou clôturé).
+- **Relances** : message prêt avec la liste des papiers manquants, envoyé en un appui par SMS, WhatsApp ou email.
+  L'accueil liste les clients à relancer (sans nouvelles depuis 7 jours, réglable).
+- **Mes biens et mon argent** : prix affiché, prix d'achat, frais, prix de vente, commission, ce que chaque
+  vente a rapporté, total de l'année.
+- **Biens achetables** : le 1er de chaque mois, `immo.py` lit les maisons, appartements et terrains à vendre à
+  La Réunion sur Bien'ici et met en tête les moins chers au m² par rapport à leur commune (`docs/immo/biens.json`).
+  Lancer tout de suite : onglet **Actions → Biens à vendre Réunion → Run workflow**.
+
+Les dossiers restent sur l'appareil (menu Réglages → Sauvegarde pour les copier vers un autre appareil).
+Page dans `immo_page.html` ; `docs/immo/index.html` est la même page avec l'en-tête de l'appli installable.

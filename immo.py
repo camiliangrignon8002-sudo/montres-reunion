@@ -1,0 +1,154 @@
+"""Biens à vendre à La Réunion : la petite liste du mois pour l'appli Dossiers immo.
+
+Lit les annonces de vente (maisons et appartements) de Bien'ici sur toute l'île, calcule le prix
+moyen au m² de chaque commune, puis garde en tête de liste les biens les moins chers au m² par
+rapport à leur commune. Écrit docs/immo/biens.json, que l'appli affiche dans le menu ☰ →
+« Biens achetables ». Lancé le 1er de chaque mois par GitHub Actions (.github/workflows/immo.yml).
+"""
+
+import json
+import os
+import re
+import statistics
+import sys
+import time
+import unicodedata
+from datetime import datetime, timezone, timedelta
+from pathlib import Path
+from urllib.parse import quote
+
+try:
+    from curl_cffi import requests  # imite un vrai navigateur
+    IMPERSONATE = {"impersonate": "chrome"}
+except ImportError:  # pragma: no cover
+    import requests
+    IMPERSONATE = {}
+
+ROOT = Path(__file__).parent
+JSON_FILE = ROOT / "docs" / "immo" / "biens.json"
+REUNION = timezone(timedelta(hours=4))
+PRIX_MAX = int(os.environ.get("PRIX_MAX", "600000"))
+SELECTION = 30     # biens mis en avant dans « La sélection du mois »
+GARDER = 300       # biens gardés au total (filtrables dans l'appli)
+# Zone Bien'ici de l'île entière, puis les communes du nord si la zone de l'île ne répond pas
+ZONE_ILE = ["-1785276"]
+ZONES_NORD = ["-192468", "-280212", "-280102", "-278304", "-278311"]
+TYPES = {"house": "Maison", "flat": "Appartement", "land": "Terrain"}
+
+
+def norm(s):
+    s = unicodedata.normalize("NFD", s or "").encode("ascii", "ignore").decode()
+    return s.lower().strip()
+
+
+def get(url):
+    for essai in range(3):
+        try:
+            r = requests.get(url, timeout=40, **IMPERSONATE)
+            if r.status_code == 200:
+                return r
+            print(f"  {r.status_code} {url}", file=sys.stderr)
+            if r.status_code in (403, 404, 410):
+                return None
+        except Exception as e:  # réseau
+            print(f"  erreur {url}: {e}", file=sys.stderr)
+        time.sleep(3 * (essai + 1))
+    return None
+
+
+def bienici(zones):
+    res, debut = [], 0
+    while True:
+        filtres = {"size": 100, "from": debut, "showAllModels": False, "filterType": "buy",
+                   "propertyType": list(TYPES), "maxPrice": PRIX_MAX, "page": debut // 100 + 1,
+                   "sortBy": "publicationDate", "sortOrder": "desc", "onTheMarket": [True],
+                   "zoneIdsByTypes": {"zoneIds": zones}}
+        r = get("https://www.bienici.com/realEstateAds.json?filters=" + quote(json.dumps(filtres, separators=(",", ":"))))
+        if not r:
+            break
+        d = r.json()
+        for x in d.get("realEstateAds", []):
+            cp = x.get("postalCode") or ""
+            if not cp.startswith("974"):
+                continue
+            ville = x.get("city", "")
+            genre = TYPES.get(x.get("propertyType"), "Bien")
+            pieces = x.get("roomsQuantity")
+            slug = re.sub(r"[^a-z0-9]+", "-", norm(ville)).strip("-")
+            categorie = {"Maison": "maison", "Appartement": "appartement", "Terrain": "terrain"}.get(genre, "maison")
+            surface = x.get("surfaceArea") if genre != "Terrain" else x.get("landSurfaceArea") or x.get("surfaceArea")
+            photos = [p["url"] for p in x.get("photos", []) if p.get("url")]
+            res.append({
+                "id": "bienici-" + x["id"],
+                "source": "Bien'ici",
+                "url": f"https://www.bienici.com/annonce/vente/{slug}/{categorie}/{pieces or 1}pieces/{x['id']}",
+                "titre": (x.get("title") or "").strip(),
+                "type": genre,
+                "prix": x.get("price"),
+                "surface": surface,
+                "terrain": x.get("landSurfaceArea"),
+                "pieces": pieces,
+                "chambres": x.get("bedroomsQuantity"),
+                "commune": ville,
+                "cp": cp,
+                "photo": photos[0] if photos else "",
+                "dpe": x.get("energyClassification") if x.get("energyClassification") not in ("NS", "VI") else None,
+                "annonceur": x.get("accountDisplayName") or ("Agence" if x.get("adCreatedByPro") else "Particulier"),
+                "date": (x.get("publicationDate") or "")[:10],
+            })
+        debut += 100
+        if debut >= d.get("total", 0) or debut >= 2000:
+            break
+    return res
+
+
+def classer(biens):
+    """Ajoute le prix au m² et l'écart avec la moyenne de la commune, du moins cher au plus cher."""
+    par_commune = {}
+    for b in biens:
+        if b["prix"] and b["surface"] and b["type"] != "Terrain":
+            b["m2"] = round(b["prix"] / b["surface"])
+            par_commune.setdefault((b["commune"], b["type"]), []).append(b["m2"])
+    for b in biens:
+        ref = par_commune.get((b["commune"], b["type"]), [])
+        if b.get("m2") and len(ref) >= 3:
+            b["m2_commune"] = round(statistics.median(ref))
+            b["ecart"] = round(100 * (b["m2"] - b["m2_commune"]) / b["m2_commune"])
+    # un bien très en dessous de sa commune (plus de 60 %) est souvent une erreur ou un viager
+    bons = [b for b in biens if b.get("ecart") is not None and -60 <= b["ecart"]]
+    bons.sort(key=lambda b: b["ecart"])
+    autres = [b for b in biens if b not in bons]
+    return bons, autres
+
+
+def main():
+    vus, biens = set(), []
+    for zones in (ZONE_ILE, ZONES_NORD):
+        for b in bienici(zones):
+            if b["id"] not in vus:
+                vus.add(b["id"])
+                biens.append(b)
+        if biens:
+            break
+    print(f"{len(biens)} biens à vendre lus", file=sys.stderr)
+    if not biens:
+        print("Aucun bien lu : on garde la liste du mois précédent.", file=sys.stderr)
+        return
+    bons, autres = classer(biens)
+    maintenant = datetime.now(REUNION)
+    selection = bons[:SELECTION]
+    for b in selection:
+        b["selection"] = True
+    garde = (bons + autres)[:GARDER]
+    JSON_FILE.parent.mkdir(parents=True, exist_ok=True)
+    JSON_FILE.write_text(json.dumps({
+        "mois": maintenant.strftime("%Y-%m"),
+        "maj": maintenant.isoformat(timespec="minutes"),
+        "total_lus": len(biens),
+        "biens": garde,
+    }, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"{len(selection)} biens dans la sélection, {len(garde)} gardés", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()
