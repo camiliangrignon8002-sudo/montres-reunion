@@ -1622,34 +1622,43 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a07c45-39b7-7bdc-96fd-e6e30e960043",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-20-m2/01a07c45-39b7-7bdc-96fd-e6e30e960043",
-  "titre": "Appartement 1 pièce 20 m²",
+  "id": "figaro-108474953",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108474953.html",
+  "titre": "Location  appartement 1 pièce 20 m² à Sainte Clotilde (97490), 560 €",
   "prix": 560.0,
   "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
+  "quartier": "Sainte Clotilde",
   "pieces": 1,
   "type": "Studio",
   "surface": 20.0,
   "meuble": null,
   "photos": [
-   "https://img.e-xiste.com/_iNM3UNwniCXAi69P5DiRlZNPsoo-4AjlUdXcxkRftg/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fimmo-cdn.fr%2Fimages%2Ffigaro%2F6a9eaecca223ac14e09cb538-1.jpg"
+   "https://lh3.googleusercontent.com/_iSkscS_gOnoXD01xYSvEWVke0vg5OR59ZmYqUm0Nob9NhE3B9xhBATm3PQuKnrYvgFqNdC6OzVGe9QHWsaEGDqW1URx9lBr93olQQ=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/qFt1jcimHPczAQdviKz9tnK8ypRpWNrmtTyD0C2VzVwsF1ony0Eg4YzO5dp16z8WRrmta-hZes2Bp624XJydhQBIw2FPq2aZYHPHNg=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/cK-Xt2OPKTJ4SL_TUXKOe6pirLWOyi6ZpDxogju3IeuD7fZ--61mGSfICtOvl3Wdi1WOJsJTi_AUDvVbDcz4eQoqKZM3bnnJLI4kTw=rw-w940-h605-l80"
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
-  "caracteristiques": [],
+  "description": "RUNIMMO vous propose en location un studio de 20m2 dans la résidence Central Fac 9 situé rue des jacinthes à SAINTE CLOTILDE.\nIl se compose d'une entrée avec kitchenette aménagée et équipée, un séjour/chambre, salle d'eau avec WC.\nDisponible de suite\nN'hésitez pas à recontacter Anaïs pour une visite 0692359521.\nHonoraires de 260 € TTC à la charge du locataire comprenant 60 € TTC pour l'état des lieux. Loyer de base 530 €/mois. Provision sur charges 30 €/mois, régularisation annuelle. Dépôt de garantie 530 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.\nCarte pro. CP175012018000034249",
+  "caracteristiques": [
+   "Proche université"
+  ],
   "date": "",
-  "annonceur": "Pro · via Figaro Immobilier",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0692 35 95 21",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-1-piece-20-m2/01a07c45-39b7-7bdc-96fd-e6e30e960043"
+   }
+  ],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -1889,42 +1898,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "figaro-89244115",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-89244115.html",
-  "titre": "Location meublée appartement 1 pièce 19.18 m² à Sainte Clotilde (97490), 587 €",
-  "prix": 587.0,
-  "commune": "Saint-Denis",
-  "quartier": "Sainte Clotilde",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 19.18,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/fdFBhBTe85ECPAn1cPI_CKjfV96VPxhMGQzimys0MJ-ntyj8Z2pquYK0K8-DihO6WE6E3R-kWiSlZ0ke2LxoMWXIFPbOKyJWE_U9lw=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/-89jw3ppFh5lTjhQZxphbcdKtwdF1hzf26RqagFii4h6DBIHOegSVOjw-Zn87wqVIz_PYjAfoMPPbr7HIb83t2TCaS3zBpYsN3zwFoE=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/kRUYRC0hX2M7u-rlqNbWIG4eSAwJVUqMLEQ_h3HXNIgaboxQOWPp3fG4JkSnxvCjtOjC2Bj-elxL6tnjloyUzNhrAMF0L5EuXtiGKw=rw-w940-h605-l80"
-  ],
-  "description": "ENEZ Immobilier vous propose ce studio meublé de 19m2 situé au 7 rue des Jacinthes à ST DENIS.\nIl se compose d'un séjour chambre avec placard, d'une kitchenette équipée, d'une salle d'eau avec WC.\nVous disposerez également d'un parking en sous-sol.\nDisponibilité : DE SUITE\nN'hésitez pas à nous contacter au 0693228334 pour le visiter rapidement",
-  "caracteristiques": [
-   "Meublé",
-   "Parking"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0693 22 83 34",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T15:50+04:00"
  },
  {
   "id": "zimo-01a1670c-1122-7920-b81b-5e35854fd3b9",
@@ -3032,6 +3005,10 @@
    {
     "source": "Bien'ici",
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/ag340369-551086409"
+   },
+   {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html"
    },
    {
     "source": "Zimo",
@@ -4836,6 +4813,10 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
+   {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-108075429.html"
+   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/spacieux-t2/019fec0b-0419-728a-82e5-d4e908bf0441"
