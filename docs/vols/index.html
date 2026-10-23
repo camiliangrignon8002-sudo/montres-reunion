@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vols 974</title>
+<meta name="description" content="Les vols directs les moins chers de la France vers La Réunion, aller simple, avec une valise en soute et une valise cabine.">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Vols 974">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root{
+  --fond:#f2f2f7;--carte:#fff;--texte:#1d1d1f;--doux:#6e6e73;--ligne:#e3e3e8;--champ:#e9e9ee;
+  --bleu:#0071e3;--bleu-doux:#e8f1fc;--rouge:#e30000;--rouge-doux:#fdeaea;--vert:#1a7f37;--vert-doux:#e3f4e8;
+  --orange:#b25000;--orange-doux:#fdf0e3;
+  --verre:rgba(255,255,255,.72);--verre-bord:rgba(0,0,0,.06);
+  --ombre:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.06);
+  --r:20px;
+}
+@media (prefers-color-scheme:dark){:root{
+  --fond:#000;--carte:#1c1c1e;--texte:#f5f5f7;--doux:#98989d;--ligne:#2c2c2e;--champ:#2c2c2e;
+  --bleu:#2997ff;--bleu-doux:#0d2540;--rouge:#ff453a;--rouge-doux:#3a1312;--vert:#30d158;--vert-doux:#0f2e18;
+  --orange:#ff9f0a;--orange-doux:#33210a;
+  --verre:rgba(30,30,32,.72);--verre-bord:rgba(255,255,255,.08);
+  --ombre:0 1px 2px rgba(0,0,0,.5);
+}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fond);color:var(--texte);font:16px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding-bottom:calc(40px + env(safe-area-inset-bottom));overflow-x:hidden}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--bleu);text-decoration:none}
+[hidden]{display:none!important}
+svg.ic{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.page{max-width:900px;margin:auto;padding:0 16px}
+
+/* En-tête */
+.entete{position:sticky;top:0;z-index:20;padding-top:env(safe-area-inset-top);transition:background .2s}
+.entete.colle{background:var(--verre);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:.5px solid var(--verre-bord)}
+.entete-in{max-width:900px;margin:auto;display:flex;align-items:center;gap:8px;padding:8px 16px;min-height:56px}
+.petit-titre{flex:1;font-weight:600;font-size:17px;opacity:0;transition:opacity .2s;white-space:nowrap}
+.entete.colle .petit-titre{opacity:1}
+.rond{border:0;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--carte);box-shadow:var(--ombre);position:relative;flex:none}
+.rond:active{transform:scale(.94)}
+.pastille{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--rouge);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
+.tourne svg{animation:tourne 1s linear infinite}
+@keyframes tourne{to{transform:rotate(360deg)}}
+#tirer{position:fixed;top:calc(10px + env(safe-area-inset-top));left:50%;z-index:30;opacity:0;transform:translate(-50%,-70px);pointer-events:none}
+
+h1{font-size:32px;line-height:1.1;margin:4px 0 6px;letter-spacing:-.02em}
+.sous{color:var(--doux);margin:0 0 16px;font-size:15px}
+.maj{color:var(--doux);font-size:13px}
+
+/* Cartes */
+.bloc{background:var(--carte);border-radius:var(--r);box-shadow:var(--ombre);padding:16px;margin:0 0 14px}
+.bloc h2{font-size:17px;margin:0 0 10px}
+.ligne-voy{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;padding:0;text-align:left}
+.ligne-voy .txt{flex:1;min-width:0}
+.ligne-voy b{display:block;font-size:17px}
+.ligne-voy span{color:var(--doux);font-size:14px}
+.inclus{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.inclus span{font-size:13px;background:var(--vert-doux);color:var(--vert);border-radius:999px;padding:4px 10px;font-weight:600}
+
+/* Le moins cher */
+.meilleur{display:flex;gap:14px;align-items:center;background:linear-gradient(135deg,#0a84ff,#30b0c7);color:#fff;border-radius:var(--r);padding:16px;margin:0 0 14px;box-shadow:var(--ombre);border:0;width:100%;text-align:left}
+.meilleur .gros{font-size:30px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.meilleur small{display:block;opacity:.9;font-size:14px}
+
+/* Puces de filtre */
+.puces{display:flex;gap:8px;overflow-x:auto;padding:2px 16px 10px;margin:0 -16px;scrollbar-width:none}
+.puces::-webkit-scrollbar{display:none}
+.puce{flex:none;border:0;border-radius:999px;padding:8px 14px;background:var(--carte);box-shadow:var(--ombre);font-size:14px;white-space:nowrap}
+.puce.on{background:var(--texte);color:var(--fond)}
+.titre-puces{font-size:13px;color:var(--doux);margin:4px 0 6px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.tri{display:flex;align-items:center;gap:10px;justify-content:space-between;margin:6px 0 12px;flex-wrap:wrap}
+.tri select{border:0;background:var(--carte);box-shadow:var(--ombre);border-radius:12px;padding:8px 12px;font-size:14px}
+.compte{color:var(--doux);font-size:14px}
+
+/* Calendrier */
+.cal-tete{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cal-tete b{font-size:17px;text-transform:capitalize}
+.cal-tete button{border:0;background:var(--champ);width:36px;height:36px;border-radius:50%;display:grid;place-items:center}
+.cal-tete button:disabled{opacity:.3}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal .js{font-size:11px;color:var(--doux);text-align:center;padding-bottom:2px}
+.jour{border:0;border-radius:10px;background:var(--champ);min-height:50px;padding:4px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+.jour .n{font-size:13px;font-weight:600}
+.jour .p{font-size:11px;font-weight:600}
+.jour.vide{background:transparent}
+.jour.rien{opacity:.45}
+.jour.bas{background:var(--vert-doux);color:var(--vert)}
+.jour.moyen{background:var(--orange-doux);color:var(--orange)}
+.jour.haut{background:var(--rouge-doux);color:var(--rouge)}
+.jour.choisi{outline:2.5px solid var(--bleu);outline-offset:-2.5px}
+.legende{display:flex;gap:12px;font-size:12px;color:var(--doux);margin-top:8px;flex-wrap:wrap}
+.legende i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+
+/* Vols */
+.vol{background:var(--carte);border-radius:var(--r);box-shadow:var(--ombre);margin:0 0 12px;overflow:hidden;position:relative}
+.vol::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--cie)}
+.vol-in{padding:14px 14px 12px 18px}
+.vol-haut{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.date{font-weight:700;font-size:15px}
+.date::first-letter{text-transform:uppercase}
+.cie{font-size:13px;color:var(--doux)}
+.prix{text-align:right;flex:none}
+.prix b{font-size:24px;letter-spacing:-.02em;display:block;line-height:1.1}
+.prix small{color:var(--doux);font-size:12px}
+.baisse{display:inline-block;font-size:12px;font-weight:700;color:var(--vert);background:var(--vert-doux);border-radius:6px;padding:1px 6px;margin-top:3px}
+.hausse{display:inline-block;font-size:12px;font-weight:700;color:var(--rouge);background:var(--rouge-doux);border-radius:6px;padding:1px 6px;margin-top:3px}
+.trajet{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;margin:12px 0 4px}
+.trajet .h{font-size:22px;font-weight:600;letter-spacing:-.01em}
+.trajet .a{font-size:13px;color:var(--doux)}
+.trajet .milieu{text-align:center;font-size:12px;color:var(--doux)}
+.trajet .milieu hr{border:0;border-top:1.5px dashed var(--ligne);margin:4px 0}
+.plus1{font-size:12px;color:var(--orange);font-weight:700;vertical-align:super}
+.infos{font-size:13px;color:var(--doux)}
+.alerte{font-size:13px;color:var(--rouge);background:var(--rouge-doux);border-radius:10px;padding:6px 10px;margin-top:8px}
+.actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.btn{border:0;border-radius:12px;padding:9px 12px;background:var(--champ);font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.btn svg.ic{width:18px;height:18px}
+.btn.bleu{background:var(--bleu);color:#fff}
+.btn.on{background:var(--bleu-doux);color:var(--bleu)}
+.btn.coeur.on{background:var(--rouge-doux);color:var(--rouge)}
+.btn.coeur.on svg{fill:currentColor}
+.detail{border-top:.5px solid var(--ligne);margin-top:12px;padding-top:10px;font-size:14px}
+.detail div{display:flex;justify-content:space-between;gap:10px;padding:2px 0}
+.detail .tot{font-weight:700;border-top:.5px solid var(--ligne);margin-top:4px;padding-top:6px}
+.detail p{color:var(--doux);font-size:12px;margin:6px 0 0}
+.voir-plus{display:block;width:100%;border:0;border-radius:14px;padding:14px;background:var(--carte);box-shadow:var(--ombre);font-weight:600;color:var(--bleu)}
+.squelette{height:150px;border-radius:var(--r);margin-bottom:12px;background:linear-gradient(90deg,var(--carte),var(--champ),var(--carte));background-size:200% 100%;animation:sq 1.4s infinite}
+@keyframes sq{to{background-position:-200% 0}}
+.vide-msg{text-align:center;color:var(--doux);padding:30px 10px}
+
+/* Feuilles (voyageurs, favoris, panier) */
+.voile{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s}
+.voile.ouvert{opacity:1;pointer-events:auto}
+.feuille{position:fixed;left:0;right:0;bottom:0;z-index:41;max-height:92vh;background:var(--fond);border-radius:22px 22px 0 0;transform:translateY(105%);transition:transform .3s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;max-width:900px;margin:auto}
+.feuille.ouvert{transform:none}
+.feuille-tete{display:flex;align-items:center;justify-content:space-between;padding:16px 16px 8px}
+.feuille-tete h2{margin:0;font-size:20px}
+.feuille-corps{overflow-y:auto;padding:0 16px calc(24px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
+.fermer{border:0;background:var(--champ);border-radius:999px;padding:8px 14px;font-weight:600}
+.pers{background:var(--carte);border-radius:16px;padding:12px;margin-bottom:10px;box-shadow:var(--ombre)}
+.pers-tete{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.pers-tete b{font-size:15px}
+.pers-tete .cat{font-size:12px;font-weight:700;border-radius:6px;padding:2px 8px;background:var(--bleu-doux);color:var(--bleu)}
+.champs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.champs label{font-size:13px;color:var(--doux);display:flex;flex-direction:column;gap:4px}
+.champs input,.champs select{border:0;background:var(--champ);border-radius:10px;padding:10px;font-size:16px;width:100%;min-width:0}
+.pas{display:flex;align-items:center;background:var(--champ);border-radius:10px;overflow:hidden}
+.pas button{border:0;background:none;width:40px;height:42px;font-size:20px;font-weight:600}
+.pas output{flex:1;text-align:center;font-weight:600}
+.suppr{border:0;background:none;color:var(--rouge);font-size:14px;font-weight:600;padding:4px}
+.ajouter{width:100%;border:1.5px dashed var(--ligne);background:none;border-radius:14px;padding:12px;font-weight:600;color:var(--bleu);margin-bottom:16px}
+.aide{font-size:13px;color:var(--doux);margin:-4px 0 14px}
+.recap-panier{position:sticky;bottom:0;background:var(--fond);padding:12px 0 4px;border-top:.5px solid var(--ligne);display:flex;justify-content:space-between;font-size:18px;font-weight:700}
+
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,40px);opacity:0;background:var(--texte);color:var(--fond);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;z-index:60;transition:all .25s;pointer-events:none;max-width:90vw;text-align:center}
+.toast.vu{opacity:1;transform:translate(-50%,0)}
+.pied{color:var(--doux);font-size:13px;line-height:1.5;margin-top:24px}
+.pied b{color:var(--texte)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-maj" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></symbol>
+  <symbol id="i-coeur" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9.2-8.6C1.3 8.5 3 5 6.4 5c2 0 3.3 1.1 4.1 2.4h3C14.3 6.1 15.6 5 17.6 5 21 5 22.7 8.5 21.2 11.4 19 15.6 12 20 12 20z"/></symbol>
+  <symbol id="i-panier" viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H6.2"/><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></symbol>
+  <symbol id="i-gens" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M16 14.2c2.8.3 5 2.6 5 5.8"/></symbol>
+  <symbol id="i-avion" viewBox="0 0 24 24"><path d="M10.5 13.5 3 11l1.5-1.5 8 1 4-4.5c1-1 2.6-1.4 3.2-.8.6.6.2 2.2-.8 3.2l-4.5 4 1 8L14 22l-2.5-7.5-3.5 3v2.5L6.5 21.5 5 18l-3.5-1.5L3 15h2.5z"/></symbol>
+  <symbol id="i-gauche" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></symbol>
+  <symbol id="i-droite" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="i-lien" viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></symbol>
+</svg>
+
+<div id="tirer" class="rond tourne"><svg class="ic"><use href="#i-maj"/></svg></div>
+
+<header class="entete" id="entete">
+  <div class="entete-in">
+    <div class="petit-titre">Vols 974</div>
+    <button class="rond" id="btn-favoris" aria-label="Favoris"><svg class="ic"><use href="#i-coeur"/></svg><span class="pastille" id="nb-favoris" hidden></span></button>
+    <button class="rond" id="btn-panier" aria-label="Panier"><svg class="ic"><use href="#i-panier"/></svg><span class="pastille" id="nb-panier" hidden></span></button>
+    <button class="rond" id="btn-maj" aria-label="Actualiser"><svg class="ic"><use href="#i-maj"/></svg></button>
+  </div>
+</header>
+
+<main class="page">
+  <h1>France → La Réunion</h1>
+  <p class="sous">Vols directs, aller simple, toutes compagnies. Les prix comprennent <b>1 valise en soute et 1 valise cabine</b> par personne.<br><span class="maj">Relevé : <span id="maj">vendredi 23/10 à 13h06 (heure de La Réunion)</span></span></p>
+
+  <section class="bloc">
+    <button class="ligne-voy" id="ouvrir-voy">
+      <span class="rond" style="box-shadow:none;background:var(--bleu-doux);color:var(--bleu)"><svg class="ic"><use href="#i-gens"/></svg></span>
+      <span class="txt"><b id="resume-voy">1 adulte</b><span id="resume-plus">Toucher pour ajouter des voyageurs, des bagages ou des animaux</span></span>
+      <svg class="ic" style="color:var(--doux)"><use href="#i-droite"/></svg>
+    </button>
+    <div class="inclus"><span>✓ Sans escale</span><span>✓ Valise soute 23 kg</span><span>✓ Valise cabine</span><span>✓ Aller simple</span></div>
+  </section>
+
+  <button class="meilleur" id="meilleur" hidden></button>
+
+  <div class="titre-puces">Départ</div>
+  <div class="puces" id="f-depart"></div>
+  <div class="titre-puces">Compagnie</div>
+  <div class="puces" id="f-cie"></div>
+  <div class="titre-puces">Mois</div>
+  <div class="puces" id="f-mois"></div>
+  <div class="titre-puces">Heure de départ</div>
+  <div class="puces" id="f-moment"></div>
+
+  <section class="bloc" id="bloc-cal">
+    <div class="cal-tete">
+      <button id="cal-avant" aria-label="Mois précédent"><svg class="ic"><use href="#i-gauche"/></svg></button>
+      <b id="cal-titre"></b>
+      <button id="cal-apres" aria-label="Mois suivant"><svg class="ic"><use href="#i-droite"/></svg></button>
+    </div>
+    <div class="cal" id="cal"></div>
+    <div class="legende"><span><i style="background:var(--vert)"></i>moins cher</span><span><i style="background:var(--orange)"></i>moyen</span><span><i style="background:var(--rouge)"></i>plus cher</span><span>Prix total du groupe, vol le moins cher du jour</span></div>
+  </section>
+
+  <div class="tri">
+    <span class="compte" id="compte"></span>
+    <select id="tri" aria-label="Trier">
+      <option value="prix">Les moins chers</option>
+      <option value="date">Par date</option>
+      <option value="heure">Par heure de départ</option>
+      <option value="duree">Les plus rapides</option>
+    </select>
+  </div>
+  <div id="liste"></div>
+
+  <div class="pied">
+    <p><b>D'où viennent les prix ?</b> De Google Flights, qui compare toutes les compagnies (Air France, Air Austral, Corsair, French bee…). Les prix sont demandés pour 1 adulte, en classe économique, avec les frais estimés d'une valise en soute et d'une valise cabine. Ils sont relevés plusieurs fois par jour : un prix peut avoir changé depuis. Le bouton <b>Prix exact</b> ouvre Google Flights avec tes voyageurs pour voir le montant au centime près.</p>
+    <p><b>Enfants, bébés, bagages en plus, animaux :</b> ce sont des estimations d'après les règles connues de chaque compagnie (enfant de 2 à 11 ans ≈ 85 % du prix adulte, bébé de moins de 2 ans sur les genoux ≈ 15 %). Un animal voyage en cabine s'il pèse 8 kg au plus avec son sac, sinon en soute. Vérifie toujours auprès de la compagnie avant de payer, et pense aux papiers de l'animal (puce, passeport, vaccin contre la rage).</p>
+    <p id="couverture"></p>
+  </div>
+</main>
+
+<div class="voile" id="voile"></div>
+
+<section class="feuille" id="f-voy" aria-label="Voyageurs">
+  <div class="feuille-tete"><h2>Qui part ?</h2><button class="fermer" data-fermer>OK</button></div>
+  <div class="feuille-corps">
+    <p class="aide">Indique l'âge de chaque voyageur. Une valise en soute et une valise cabine sont déjà comptées pour chacun : ajoute ici les valises en plus.</p>
+    <div id="liste-pers"></div>
+    <button class="ajouter" id="ajout-pers">+ Ajouter un voyageur</button>
+    <h2 style="font-size:17px;margin:4px 0 6px">Animaux</h2>
+    <p class="aide">Poids avec le sac ou la caisse. Jusqu'à 8 kg : en cabine. Au-delà : en soute.</p>
+    <div id="liste-animaux"></div>
+    <button class="ajouter" id="ajout-animal">+ Ajouter un animal</button>
+  </div>
+</section>
+
+<section class="feuille" id="f-favoris" aria-label="Favoris">
+  <div class="feuille-tete"><h2>Favoris</h2><button class="fermer" data-fermer>Fermer</button></div>
+  <div class="feuille-corps" id="corps-favoris"></div>
+</section>
+
+<section class="feuille" id="f-panier" aria-label="Panier">
+  <div class="feuille-tete"><h2>Panier</h2><button class="fermer" data-fermer>Fermer</button></div>
+  <div class="feuille-corps" id="corps-panier"></div>
+</section>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const euros = n => Math.round(n).toLocaleString("fr-FR") + " €";
+const MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+const JS = ["lun", "mar", "mer", "jeu", "ven", "sam", "dim"];
+const MOMENTS = {matin: ["Matin", 5, 12], aprem: ["Après-midi", 12, 18], soir: ["Soir", 18, 24], nuit: ["Nuit", 0, 5]};
+
+function lire(cle, defaut) { try { const v = localStorage.getItem(cle); return v ? JSON.parse(v) : defaut; } catch (e) { return defaut; } }
+function ecrire(cle, v) { try { localStorage.setItem(cle, JSON.stringify(v)); } catch (e) {} }
+
+let D = {vols: [], compagnies: {}, aeroports: {}};
+let VOLS = [], PAR_ID = new Map();
+let voyageurs = lire("vols974:voyageurs", [{age: 30, bagages: 0}]);
+let animaux = lire("vols974:animaux", []);
+let favoris = lire("vols974:favoris", {});
+let panier = lire("vols974:panier", {});
+const F = Object.assign({depart: "tous", cie: "toutes", mois: "tous", moment: "tous", jour: null, tri: "prix"}, lire("vols974:filtres", {}));
+F.jour = null;
+let nbAffiches = 30, moisCal = null;
+
+function toast(t) { const e = $("#toast"); e.textContent = t; e.classList.add("vu"); clearTimeout(toast.m); toast.m = setTimeout(() => e.classList.remove("vu"), 2200); }
+
+// ---------------------------------------------------------------- calcul du prix total
+
+function categorie(age) { return age < 2 ? "bebe" : age < 12 ? "enfant" : "adulte"; }
+const NOM_CAT = {adulte: "Adulte", enfant: "Enfant 2-11 ans", bebe: "Bébé -2 ans"};
+function regles(v) { return D.compagnies[v.cie || v.compagnie] || {enfant: .85, bebe: .15, bagage_sup: 70, animal_cabine: null, animal_soute: null}; }
+function modeAnimal(a) { return a.mode && a.mode !== "auto" ? a.mode : (Number(a.poids) <= 8 ? "cabine" : "soute"); }
+
+function calcul(v) {
+  const r = regles(v), lignes = [], alertes = [];
+  let total = 0;
+  voyageurs.forEach((p, i) => {
+    const cat = categorie(Number(p.age));
+    const prix = Math.round(v.prix * (cat === "adulte" ? 1 : r[cat]));
+    lignes.push([`Voyageur ${i + 1} · ${NOM_CAT[cat]}${cat === "adulte" ? "" : " (estimé)"}`, prix]);
+    total += prix;
+    if (p.bagages > 0) {
+      const b = p.bagages * r.bagage_sup;
+      lignes.push([`  ${p.bagages} valise${p.bagages > 1 ? "s" : ""} en soute en plus (estimé)`, b]);
+      total += b;
+    }
+  });
+  animaux.forEach(a => {
+    const mode = modeAnimal(a), prix = r["animal_" + mode];
+    const nom = `${a.espece === "chat" ? "Chat" : a.espece === "chien" ? "Chien" : "Animal"} en ${mode} (estimé)`;
+    if (prix == null) { alertes.push(`${regles(v).nom || v.compagnie} ne prend pas d'animal en ${mode} sur ce vol, ou ne publie pas de tarif : à vérifier.`); lignes.push([nom, null]); }
+    else { lignes.push([nom, prix]); total += prix; }
+  });
+  return {total, lignes, alertes};
+}
+
+// ---------------------------------------------------------------- lien Google Flights avec les vrais voyageurs
+
+function pb() {
+  const o = [];
+  const varint = n => { while (n > 127) { o.push((n & 127) | 128); n >>>= 7; } o.push(n); };
+  return {
+    o, varint,
+    cle(champ, type) { varint(champ << 3 | type); },
+    nombre(champ, n) { this.cle(champ, 0); varint(n); },
+    octets(champ, octets) { this.cle(champ, 2); varint(octets.length); o.push(...octets); },
+    texte(champ, s) { this.octets(champ, [...new TextEncoder().encode(s)]); },
+  };
+}
+function lienGoogle(v) {
+  const aero = code => { const m = pb(); m.texte(2, code); return m.o; };
+  const vol = pb();
+  vol.texte(2, v.jour); vol.nombre(5, 0); vol.octets(13, aero(v.de)); vol.octets(14, aero("RUN"));
+  const cats = voyageurs.map(p => categorie(Number(p.age)));
+  let adultes = cats.filter(c => c === "adulte").length;
+  const passagers = cats.map(c => c === "adulte" ? 1 : c === "enfant" ? 2 : (adultes-- > 0 ? 4 : 3)).slice(0, 9);
+  const bag = pb(); bag.nombre(2, 1); bag.nombre(3, 1);
+  const info = pb();
+  info.octets(3, vol.o); info.octets(8, passagers.length ? passagers : [1]); info.nombre(9, 1); info.octets(13, bag.o); info.nombre(19, 2);
+  const b64 = btoa(String.fromCharCode(...info.o));
+  return `https://www.google.com/travel/flights/search?tfs=${encodeURIComponent(b64)}&hl=fr&curr=EUR`;
+}
+
+// ---------------------------------------------------------------- affichage
+
+function dateLongue(j) { const d = new Date(j + "T12:00:00"); return d.toLocaleDateString("fr-FR", {weekday: "short", day: "numeric", month: "short"}); }
+function duree(m) { return `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, "0")}`; }
+function nomAero(c) { return D.aeroports[c] || c; }
+
+function carteVol(v, opts = {}) {
+  const r = regles(v), c = calcul(v), id = v.id;
+  const fav = !!favoris[id], pan = !!panier[id];
+  const plus1 = v.jarr !== v.jour ? `<span class="plus1">+1</span>` : "";
+  const evol = v.avant ? (v.avant > v.prix ? `<span class="baisse">↓ ${euros(v.avant - v.prix)}</span>` : `<span class="hausse">↑ ${euros(v.prix - v.avant)}</span>`) : "";
+  const groupe = voyageurs.length > 1 || animaux.length || voyageurs.some(p => p.bagages || categorie(Number(p.age)) !== "adulte");
+  const detail = c.lignes.map(([t, p]) => `<div><span>${esc(t)}</span><span>${p == null ? "?" : euros(p)}</span></div>`).join("");
+  return `<article class="vol" style="--cie:${esc(r.couleur || "#888")}" data-id="${esc(id)}">
+    <div class="vol-in">
+      <div class="vol-haut">
+        <div><div class="date">${esc(dateLongue(v.jour))}</div><div class="cie">${esc(v.compagnie)} · ${esc(v.num)}</div></div>
+        <div class="prix"><b>${euros(c.total)}</b><small>${groupe ? `total · ${euros(v.prix)} / adulte` : "par personne"}</small>${evol ? "<br>" + evol : ""}</div>
+      </div>
+      <div class="trajet">
+        <div><div class="h">${esc(v.dep)}</div><div class="a">${esc(v.de)}</div></div>
+        <div class="milieu">${duree(v.duree)}<hr>sans escale</div>
+        <div style="text-align:right"><div class="h">${esc(v.arr)}${plus1}</div><div class="a">RUN</div></div>
+      </div>
+      <div class="infos">${esc(nomAero(v.de))} → Saint-Denis Roland-Garros${v.avion ? " · " + esc(v.avion) : ""}</div>
+      ${c.alertes.map(a => `<div class="alerte">${esc(a)}</div>`).join("")}
+      ${opts.disparu ? `<div class="alerte">Ce vol n'apparaît plus dans le dernier relevé : il est peut-être complet ou son prix a changé.</div>` : ""}
+      <div class="actions">
+        <button class="btn coeur${fav ? " on" : ""}" data-fav="${esc(id)}" aria-label="Favori"><svg class="ic"><use href="#i-coeur"/></svg></button>
+        <button class="btn${pan ? " on" : ""}" data-pan="${esc(id)}"><svg class="ic"><use href="#i-panier"/></svg>${pan ? "Dans le panier" : "Panier"}</button>
+        <button class="btn" data-detail><svg class="ic"><use href="#i-calc"/></svg>Détail</button>
+        <a class="btn" href="${esc(lienGoogle(v))}" target="_blank" rel="noopener">Prix exact</a>
+        ${r.site ? `<a class="btn bleu" href="${esc(r.site)}" target="_blank" rel="noopener">Réserver<svg class="ic"><use href="#i-lien"/></svg></a>` : ""}
+      </div>
+      <div class="detail" hidden>${detail}<div class="tot"><span>Total</span><span>${euros(c.total)}</span></div>
+        <p>Relevé le ${esc(new Date(v.lu + "Z").toLocaleString("fr-FR", {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"}))}.${animaux.length && r.animaux ? ` <a href="${esc(r.animaux)}" target="_blank" rel="noopener">Règles animaux ${esc(r.nom || v.compagnie)}</a>` : ""}</p></div>
+    </div>
+  </article>`;
+}
+
+function filtres(sansJour) {
+  return VOLS.filter(v => {
+    if (F.depart === "paris" ? !["CDG", "ORY"].includes(v.de) : F.depart !== "tous" && v.de !== F.depart) return false;
+    if (F.cie !== "toutes" && (v.cie || v.compagnie) !== F.cie) return false;
+    if (F.mois !== "tous" && v.jour.slice(0, 7) !== F.mois) return false;
+    if (F.moment !== "tous") { const [, a, b] = MOMENTS[F.moment], h = parseInt(v.dep); if (h < a || h >= b) return false; }
+    if (!sansJour && F.jour && v.jour !== F.jour) return false;
+    return true;
+  });
+}
+
+function puces(id, options, cle) {
+  $(id).innerHTML = options.map(([val, txt]) => `<button class="puce${F[cle] === val ? " on" : ""}" data-val="${esc(val)}">${esc(txt)}</button>`).join("");
+  $(id).onclick = e => {
+    const b = e.target.closest(".puce"); if (!b) return;
+    F[cle] = b.dataset.val; F.jour = null;
+    if (cle === "mois" && F.mois !== "tous") moisCal = F.mois;
+    ecrire("vols974:filtres", {...F, jour: null}); nbAffiches = 30; tout();
+  };
+}
+
+function construirePuces() {
+  const deps = [...new Set(VOLS.map(v => v.de))].sort((a, b) => (["CDG", "ORY"].includes(b) - ["CDG", "ORY"].includes(a)) || a.localeCompare(b));
+  const optsDep = [["tous", "Tous"]];
+  if (deps.includes("CDG") && deps.includes("ORY")) optsDep.push(["paris", "Paris (CDG + Orly)"]);
+  deps.forEach(d => optsDep.push([d, nomAero(d)]));
+  if (!optsDep.some(o => o[0] === F.depart)) F.depart = "tous";
+  puces("#f-depart", optsDep, "depart");
+  const cies = [...new Set(VOLS.map(v => v.cie || v.compagnie))];
+  if (!cies.includes(F.cie)) F.cie = "toutes";
+  puces("#f-cie", [["toutes", "Toutes"], ...cies.map(c => [c, (D.compagnies[c] || {}).nom || c])], "cie");
+  const mois = [...new Set(VOLS.map(v => v.jour.slice(0, 7)))].sort();
+  if (!mois.includes(F.mois)) F.mois = "tous";
+  puces("#f-mois", [["tous", "Tous"], ...mois.map(m => [m, MOIS[+m.slice(5) - 1] + " " + m.slice(0, 4)])], "mois");
+  puces("#f-moment", [["tous", "Toute la journée"], ...Object.entries(MOMENTS).map(([k, [t, a, b]]) => [k, `${t} (${a}h-${b}h)`])], "moment");
+}
+
+function calendrier() {
+  const liste = filtres(true);
+  const parJour = {};
+  liste.forEach(v => { const t = calcul(v).total; if (!(v.jour in parJour) || t < parJour[v.jour]) parJour[v.jour] = t; });
+  const mois = [...new Set(VOLS.map(v => v.jour.slice(0, 7)))].sort();
+  if (!mois.length) { $("#bloc-cal").hidden = true; return; }
+  $("#bloc-cal").hidden = false;
+  if (!moisCal || !mois.includes(moisCal)) moisCal = F.mois !== "tous" ? F.mois : (Object.keys(parJour).sort()[0] || mois[0]).slice(0, 7);
+  const i = mois.indexOf(moisCal);
+  $("#cal-avant").disabled = i <= 0; $("#cal-apres").disabled = i >= mois.length - 1;
+  $("#cal-avant").onclick = () => { moisCal = mois[i - 1]; calendrier(); };
+  $("#cal-apres").onclick = () => { moisCal = mois[i + 1]; calendrier(); };
+  const [a, m] = moisCal.split("-").map(Number);
+  $("#cal-titre").textContent = `${MOIS[m - 1]} ${a}`;
+  const prix = Object.values(parJour).sort((x, y) => x - y);
+  const q1 = prix[Math.floor(prix.length / 3)] ?? 0, q2 = prix[Math.floor(prix.length * 2 / 3)] ?? 0;
+  const premier = (new Date(a, m - 1, 1).getDay() + 6) % 7, nb = new Date(a, m, 0).getDate();
+  let h = JS.map(j => `<div class="js">${j}</div>`).join("") + `<div class="jour vide"></div>`.repeat(premier);
+  for (let d = 1; d <= nb; d++) {
+    const j = `${moisCal}-${String(d).padStart(2, "0")}`, p = parJour[j];
+    const cl = p == null ? "rien" : p <= q1 ? "bas" : p <= q2 ? "moyen" : "haut";
+    h += `<button class="jour ${cl}${F.jour === j ? " choisi" : ""}" data-jour="${j}"${p == null ? " disabled" : ""}><span class="n">${d}</span><span class="p">${p == null ? "–" : Math.round(p)}</span></button>`;
+  }
+  $("#cal").innerHTML = h;
+}
+$("#cal").onclick = e => {
+  const b = e.target.closest(".jour[data-jour]"); if (!b) return;
+  F.jour = F.jour === b.dataset.jour ? null : b.dataset.jour; nbAffiches = 30;
+  calendrier(); liste();
+  if (F.jour) $("#tri").scrollIntoView({behavior: "smooth", block: "start"});
+};
+
+function trier(l) {
+  const t = {prix: (a, b) => a._t - b._t || a.jour.localeCompare(b.jour),
+    date: (a, b) => a.jour.localeCompare(b.jour) || a.dep.localeCompare(b.dep),
+    heure: (a, b) => a.dep.localeCompare(b.dep) || a._t - b._t,
+    duree: (a, b) => a.duree - b.duree || a._t - b._t}[F.tri];
+  return l.map(v => Object.assign(v, {_t: calcul(v).total})).sort(t);
+}
+
+function liste() {
+  const l = trier(filtres());
+  const n = l.length;
+  $("#compte").textContent = !VOLS.length ? "" : `${n} vol${n > 1 ? "s" : ""} direct${n > 1 ? "s" : ""}${F.jour ? " le " + dateLongue(F.jour) : ""}`;
+  if (F.jour) $("#compte").innerHTML += ` · <a href="#" id="tous-jours">tous les jours</a>`;
+  const t = $("#tous-jours"); if (t) t.onclick = e => { e.preventDefault(); F.jour = null; calendrier(); liste(); };
+  if (!VOLS.length) { $("#liste").innerHTML = `<div class="vide-msg">Les vols sont en cours de relevé. Reviens dans quelques minutes et tire la page vers le bas.</div>`; return; }
+  if (!n) { $("#liste").innerHTML = `<div class="vide-msg">Aucun vol direct avec ces filtres.</div>`; return; }
+  $("#liste").innerHTML = l.slice(0, nbAffiches).map(v => carteVol(v)).join("") +
+    (n > nbAffiches ? `<button class="voir-plus" id="voir-plus">Voir ${Math.min(30, n - nbAffiches)} vols de plus</button>` : "");
+  const p = $("#voir-plus"); if (p) p.onclick = () => { nbAffiches += 30; liste(); };
+}
+
+function meilleur() {
+  const l = trier(filtres(true));
+  const b = $("#meilleur");
+  if (!l.length) { b.hidden = true; return; }
+  const v = l.slice().sort((a, b) => a._t - b._t)[0];
+  b.hidden = false;
+  b.innerHTML = `<svg class="ic" style="width:34px;height:34px"><use href="#i-avion"/></svg><span style="flex:1"><small>Le moins cher${F.mois !== "tous" ? " en " + MOIS[+F.mois.slice(5) - 1] : ""}</small><b style="font-size:17px">${esc(dateLongue(v.jour))} · ${esc(v.dep)} · ${esc(v.de === "ORY" ? "Orly" : v.de === "CDG" ? "Roissy CDG" : nomAero(v.de))}</b><small>${esc(v.compagnie)} ${esc(v.num)}</small></span><span class="gros">${euros(v._t)}</span>`;
+  b.onclick = () => { F.jour = v.jour; moisCal = v.jour.slice(0, 7); calendrier(); liste(); $("#tri").scrollIntoView({behavior: "smooth", block: "start"}); };
+}
+
+function resume() {
+  const cats = {adulte: 0, enfant: 0, bebe: 0};
+  voyageurs.forEach(p => cats[categorie(Number(p.age))]++);
+  const t = [];
+  if (cats.adulte) t.push(`${cats.adulte} adulte${cats.adulte > 1 ? "s" : ""}`);
+  if (cats.enfant) t.push(`${cats.enfant} enfant${cats.enfant > 1 ? "s" : ""}`);
+  if (cats.bebe) t.push(`${cats.bebe} bébé${cats.bebe > 1 ? "s" : ""}`);
+  $("#resume-voy").textContent = t.join(", ") || "Aucun voyageur";
+  const plus = [];
+  const bag = voyageurs.reduce((s, p) => s + (p.bagages || 0), 0);
+  if (bag) plus.push(`${bag} valise${bag > 1 ? "s" : ""} en plus`);
+  animaux.forEach(a => plus.push(`${a.espece === "chat" ? "chat" : a.espece === "chien" ? "chien" : "animal"} en ${modeAnimal(a)}`));
+  $("#resume-plus").textContent = plus.length ? plus.join(" · ") : "Toucher pour ajouter des voyageurs, des bagages ou des animaux";
+}
+
+function compteurs() {
+  const nf = Object.keys(favoris).length, np = Object.keys(panier).length;
+  $("#nb-favoris").hidden = !nf; $("#nb-favoris").textContent = nf;
+  $("#nb-panier").hidden = !np; $("#nb-panier").textContent = np;
+}
+
+function tout() { construirePuces(); resume(); meilleur(); calendrier(); liste(); compteurs(); }
+
+// ---------------------------------------------------------------- voyageurs et animaux
+
+function rendreVoyageurs() {
+  $("#liste-pers").innerHTML = voyageurs.map((p, i) => `<div class="pers">
+    <div class="pers-tete"><b>Voyageur ${i + 1}</b><span><span class="cat">${NOM_CAT[categorie(Number(p.age))]}</span>${voyageurs.length > 1 ? ` <button class="suppr" data-suppr-pers="${i}">Retirer</button>` : ""}</span></div>
+    <div class="champs">
+      <label>Âge (ans)<input type="number" inputmode="numeric" min="0" max="110" value="${esc(p.age)}" data-age="${i}"></label>
+      <label>Valises soute en plus<div class="pas"><button data-bag="${i}" data-d="-1">−</button><output>${p.bagages || 0}</output><button data-bag="${i}" data-d="1">+</button></div></label>
+    </div></div>`).join("");
+  $("#ajout-pers").hidden = voyageurs.length >= 9;
+  $("#liste-animaux").innerHTML = animaux.map((a, i) => `<div class="pers">
+    <div class="pers-tete"><b>Animal ${i + 1}</b><span><span class="cat">en ${modeAnimal(a)}</span> <button class="suppr" data-suppr-animal="${i}">Retirer</button></span></div>
+    <div class="champs">
+      <label>Espèce<select data-espece="${i}"><option value="chat"${a.espece === "chat" ? " selected" : ""}>Chat</option><option value="chien"${a.espece === "chien" ? " selected" : ""}>Chien</option><option value="autre"${a.espece === "autre" ? " selected" : ""}>Autre</option></select></label>
+      <label>Poids avec le sac (kg)<input type="number" inputmode="decimal" min="0" max="100" step="0.5" value="${esc(a.poids)}" data-poids="${i}"></label>
+      <label style="grid-column:1/-1">Voyage<select data-mode="${i}"><option value="auto"${!a.mode || a.mode === "auto" ? " selected" : ""}>Automatique selon le poids</option><option value="cabine"${a.mode === "cabine" ? " selected" : ""}>En cabine</option><option value="soute"${a.mode === "soute" ? " selected" : ""}>En soute</option></select></label>
+    </div></div>`).join("");
+}
+function voyageursChanges(redessiner) {
+  const bebes = voyageurs.filter(p => categorie(Number(p.age)) === "bebe").length;
+  const adultes = voyageurs.filter(p => categorie(Number(p.age)) === "adulte").length;
+  if (bebes > adultes) toast("Chaque bébé doit voyager avec un adulte");
+  ecrire("vols974:voyageurs", voyageurs); ecrire("vols974:animaux", animaux);
+  if (redessiner) rendreVoyageurs();
+  tout();
+}
+$("#ajout-pers").onclick = () => { voyageurs.push({age: 30, bagages: 0}); voyageursChanges(true); };
+$("#ajout-animal").onclick = () => { animaux.push({espece: "chat", poids: 6, mode: "auto"}); voyageursChanges(true); };
+$("#f-voy").addEventListener("click", e => {
+  const t = e.target.closest("button"); if (!t) return;
+  if (t.dataset.bag != null) { const p = voyageurs[t.dataset.bag]; p.bagages = Math.max(0, Math.min(5, (p.bagages || 0) + Number(t.dataset.d))); voyageursChanges(true); }
+  else if (t.dataset.supprPers != null) { voyageurs.splice(t.dataset.supprPers, 1); voyageursChanges(true); }
+  else if (t.dataset.supprAnimal != null) { animaux.splice(t.dataset.supprAnimal, 1); voyageursChanges(true); }
+});
+$("#f-voy").addEventListener("change", e => {
+  const t = e.target, d = t.dataset;
+  if (d.age != null) voyageurs[d.age].age = Math.max(0, Math.min(110, Number(t.value) || 0));
+  else if (d.espece != null) animaux[d.espece].espece = t.value;
+  else if (d.poids != null) animaux[d.poids].poids = Math.max(0, Number(t.value) || 0);
+  else if (d.mode != null) animaux[d.mode].mode = t.value;
+  else return;
+  voyageursChanges(true);
+});
+
+// ---------------------------------------------------------------- feuilles, favoris, panier
+
+let ouverte = null;
+function ouvrir(id) { ouverte = $(id); ouverte.classList.add("ouvert"); $("#voile").classList.add("ouvert"); document.body.style.overflow = "hidden"; }
+function fermer() { if (!ouverte) return; ouverte.classList.remove("ouvert"); $("#voile").classList.remove("ouvert"); document.body.style.overflow = ""; ouverte = null; }
+$("#voile").onclick = fermer;
+document.querySelectorAll("[data-fermer]").forEach(b => b.onclick = fermer);
+$("#ouvrir-voy").onclick = () => { rendreVoyageurs(); ouvrir("#f-voy"); };
+
+function sauves(stock) {
+  // le vol à jour s'il est encore dans le relevé, sinon la copie gardée au moment de l'ajout
+  return Object.entries(stock).map(([id, copie]) => PAR_ID.get(id) ? [PAR_ID.get(id), false] : [copie, true])
+    .sort((a, b) => a[0].jour.localeCompare(b[0].jour));
+}
+function afficherFavoris() {
+  const l = sauves(favoris);
+  $("#corps-favoris").innerHTML = l.length ? l.map(([v, d]) => carteVol(v, {disparu: d})).join("") : `<div class="vide-msg">Touche le cœur d'un vol pour le garder ici.</div>`;
+}
+function afficherPanier() {
+  const l = sauves(panier);
+  if (!l.length) { $("#corps-panier").innerHTML = `<div class="vide-msg">Ajoute des vols au panier pour comparer le prix total. La réservation se fait ensuite sur le site de la compagnie.</div>`; return; }
+  const total = l.reduce((s, [v]) => s + calcul(v).total, 0);
+  $("#corps-panier").innerHTML = l.map(([v, d]) => carteVol(v, {disparu: d})).join("") +
+    `<div class="recap-panier"><span>${l.length > 1 ? `Total des ${l.length} vols` : "Total"}</span><span>${euros(total)}</span></div>`;
+}
+$("#btn-favoris").onclick = () => { afficherFavoris(); ouvrir("#f-favoris"); };
+$("#btn-panier").onclick = () => { afficherPanier(); ouvrir("#f-panier"); };
+
+function basculer(stock, cle, id, oui, non) {
+  const v = PAR_ID.get(id) || stock[id];
+  if (stock[id]) { delete stock[id]; toast(non); }
+  else { const {_t, ...copie} = v; stock[id] = copie; toast(oui); }
+  ecrire(cle, stock); compteurs();
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.fav) basculer(favoris, "vols974:favoris", b.dataset.fav, "Ajouté aux favoris", "Retiré des favoris");
+  else if (b.dataset.pan) basculer(panier, "vols974:panier", b.dataset.pan, "Ajouté au panier", "Retiré du panier");
+  else if (b.dataset.detail != null) { b.closest(".vol").querySelector(".detail").hidden ^= 1; return; }
+  else return;
+  // on redessine la carte touchée partout où elle est affichée
+  liste();
+  if (ouverte && ouverte.id === "f-favoris") afficherFavoris();
+  if (ouverte && ouverte.id === "f-panier") afficherPanier();
+});
+$("#tri").value = F.tri;
+$("#tri").onchange = () => { F.tri = $("#tri").value; ecrire("vols974:filtres", {...F, jour: null}); nbAffiches = 30; liste(); };
+
+// ---------------------------------------------------------------- données et actualisation
+
+function charger(d) {
+  D = d; VOLS = d.vols || []; PAR_ID = new Map(VOLS.map(v => [v.id, v]));
+  if (d.maj) $("#maj").textContent = d.maj;
+  const vides = Object.entries(d.couverture || {}).filter(([a, c]) => !c.vols && c.lus >= c.total * .8).map(([a]) => nomAero(a));
+  const encours = Object.entries(d.couverture || {}).filter(([a, c]) => c.lus < c.total * .8).map(([a]) => nomAero(a));
+  $("#couverture").innerHTML = (vides.length ? `<b>Pas de vol direct trouvé</b> au départ de : ${esc(vides.join(", "))}. ` : "") +
+    (encours.length ? `<b>Calendrier encore en cours de relevé</b> pour : ${esc(encours.join(", "))}.` : "");
+  tout();
+  if (ouverte && ouverte.id === "f-favoris") afficherFavoris();
+  if (ouverte && ouverte.id === "f-panier") afficherPanier();
+}
+let enCours = false;
+async function actualiser(silencieux) {
+  if (enCours) return; enCours = true;
+  $("#btn-maj").classList.add("tourne");
+  try {
+    const r = await fetch("vols.json?t=" + Date.now(), {cache: "no-store"});
+    if (!r.ok) throw new Error(r.status);
+    const avant = D.maj_iso;
+    const d = await r.json();
+    charger(d);
+    if (silencieux !== true) toast(d.maj_iso !== avant ? "Nouveaux prix chargés" : "Les prix sont à jour");
+  } catch (e) { if (silencieux !== true) toast("Pas de connexion, réessaie dans un instant"); }
+  $("#btn-maj").classList.remove("tourne"); enCours = false;
+}
+$("#btn-maj").onclick = actualiser;
+
+// Tirer la page vers le bas pour actualiser
+let y0 = null, tire = 0;
+const rond = $("#tirer");
+addEventListener("touchstart", e => { y0 = scrollY <= 0 && !ouverte ? e.touches[0].clientY : null; tire = 0; }, {passive: true});
+addEventListener("touchmove", e => {
+  if (y0 === null) return;
+  tire = Math.max(0, Math.min(120, e.touches[0].clientY - y0));
+  rond.style.opacity = Math.min(1, tire / 70);
+  rond.style.transform = `translate(-50%, ${tire - 70}px) rotate(${tire * 3}deg)`;
+}, {passive: true});
+addEventListener("touchend", () => {
+  if (y0 !== null && tire > 80) actualiser();
+  y0 = null; rond.style.opacity = 0; rond.style.transform = "translate(-50%,-70px)";
+});
+addEventListener("scroll", () => $("#entete").classList.toggle("colle", scrollY > 40), {passive: true});
+let dernier = Date.now();
+document.addEventListener("visibilitychange", () => { if (!document.hidden && Date.now() - dernier > 15 * 60e3) { dernier = Date.now(); actualiser(true); } });
+
+$("#liste").innerHTML = `<div class="squelette"></div>`.repeat(4);
+resume(); compteurs();
+fetch("vols.json?v=202610231306").then(r => r.json()).then(charger).catch(() => actualiser(true));
+</script>
+</body>
+</html>
