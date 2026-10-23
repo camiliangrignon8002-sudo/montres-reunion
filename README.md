@@ -104,6 +104,36 @@ version la moins chère. Pour Microstor et ParuVendu, la carte montre la commune
 
 ---
 
+# ✈️ Vols 974 – vols directs France → La Réunion
+
+Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/vols/
+
+**Toutes les 3 heures, jour et nuit**, GitHub relève sur **Google Flights** les **vols sans escale** de la France
+vers La Réunion (Saint-Denis Roland-Garros), **aller simple**, sur toutes les compagnies (Air France, Air Austral,
+Corsair, French bee…), jour par jour sur environ 11 mois, au départ de Paris-CDG, Paris-Orly, Lyon, Marseille,
+Bordeaux, Toulouse, Nantes, Montpellier, Nice, Lille et Strasbourg. Les prix demandés comprennent
+**1 valise en soute et 1 valise cabine** par personne.
+
+- Chaque vol : date, heures de départ et d'arrivée, aéroport, compagnie et numéro de vol, durée, avion, prix,
+  et la baisse ou la hausse depuis le relevé précédent.
+- **Qui part ?** : âge de chaque voyageur (adulte, enfant 2-11 ans, bébé), valises en plus, animaux (chat, chien,
+  poids : cabine jusqu'à 8 kg avec le sac, soute au-delà). L'appli calcule le **prix total** pour tout le groupe.
+- **Calendrier** des prix (vert = moins cher), « le moins cher » en haut, filtres départ, compagnie, mois,
+  heure de départ, tri par prix, date, heure ou durée.
+- **Favoris** (cœur) et **panier** (total des vols choisis), gardés sur le téléphone. **Actualiser** avec le bouton
+  ou en tirant la page vers le bas.
+- **Prix exact** ouvre Google Flights avec les vrais voyageurs et les valises ; **Réserver** ouvre le site de la compagnie.
+
+Réglages dans `vols.py` : aéroports `DEPARTS`, règles des compagnies `COMPAGNIES` (part enfant et bébé,
+prix d'une valise en plus, animal en cabine ou en soute), nombre de jours `JOURS`. Page dans `vols_page.html`.
+Lancer un relevé tout de suite : onglet **Actions → Vols Réunion → Run workflow**.
+
+Limites : les prix viennent de Google Flights et peuvent avoir changé depuis le relevé. Les montants
+enfants, bébés, valises en plus et animaux sont des **estimations** d'après les règles des compagnies, à vérifier
+avant de payer. Le premier relevé complet du calendrier prend quelques passages (Paris d'abord).
+
+---
+
 # 📅 Planning équipe
 
 Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/planning/

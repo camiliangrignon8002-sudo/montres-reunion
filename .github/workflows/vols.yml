@@ -1,0 +1,43 @@
+name: Vols Réunion
+
+on:
+  schedule:
+    - cron: "40 */3 * * *"   # toutes les 3 h, jour et nuit : relève les prix des vols directs France → La Réunion
+  workflow_dispatch:         # bouton "Run workflow" pour lancer à la main
+    inputs:
+      requetes:
+        description: "Nombre de jours à relire sur Google Flights (plus = plus long)"
+        default: "1000"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vols
+  cancel-in-progress: false
+
+jobs:
+  recherche:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install fast-flights==3.1.0 typing_extensions
+      - run: python vols.py
+        env:
+          REQUETES_MAX: ${{ inputs.requetes || '1000' }}
+      - name: Publier la page
+        if: always()
+        run: |
+          git config user.name "vols-bot"
+          git config user.email "vols-bot@users.noreply.github.com"
+          git add docs/vols data
+          git diff --cached --quiet || git commit -m "Mise à jour des vols $(date -u +%F)"
+          # le code a pu changer pendant la recherche : on se remet à jour avant de publier
+          for essai in 1 2 3; do
+            git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break
+            sleep 5
+          done

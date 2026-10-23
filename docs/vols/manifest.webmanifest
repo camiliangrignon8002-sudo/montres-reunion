@@ -1,0 +1,14 @@
+{
+  "name": "Vols 974 – vols directs France → La Réunion",
+  "short_name": "Vols 974",
+  "description": "Les vols directs les moins chers de la France vers La Réunion, avec valise en soute et valise cabine",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0a84ff",
+  "theme_color": "#f2f2f7",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}
