@@ -288,7 +288,10 @@ let voyageurs = lire("vols974:voyageurs", [{age: 30, bagages: 0}]);
 let animaux = lire("vols974:animaux", []);
 let favoris = lire("vols974:favoris", {});
 let panier = lire("vols974:panier", {});
-const F = Object.assign({depart: "tous", cie: "toutes", mois: "tous", moment: "tous", jour: null, tri: "prix"}, lire("vols974:filtres", {}));
+// French bee est la compagnie choisie par défaut (v: 2 = réglages enregistrés après ce choix)
+const anciens = lire("vols974:filtres", {});
+if (!anciens.v) anciens.cie = "BF";
+const F = Object.assign({depart: "tous", cie: "BF", mois: "tous", moment: "tous", jour: null, tri: "prix"}, anciens, {v: 2});
 F.jour = null;
 let nbAffiches = 30, moisCal = null;
 
@@ -419,7 +422,7 @@ function construirePuces() {
   deps.forEach(d => optsDep.push([d, nomAero(d)]));
   if (!optsDep.some(o => o[0] === F.depart)) F.depart = "tous";
   puces("#f-depart", optsDep, "depart");
-  const cies = [...new Set(VOLS.map(v => v.cie || v.compagnie))];
+  const cies = [...new Set(VOLS.map(v => v.cie || v.compagnie))].sort((x, y) => (y === "BF") - (x === "BF"));
   if (!cies.includes(F.cie)) F.cie = "toutes";
   puces("#f-cie", [["toutes", "Toutes"], ...cies.map(c => [c, (D.compagnies[c] || {}).nom || c])], "cie");
   const mois = [...new Set(VOLS.map(v => v.jour.slice(0, 7)))].sort();

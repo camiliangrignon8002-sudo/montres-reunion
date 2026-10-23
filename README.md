@@ -118,6 +118,7 @@ Bordeaux, Toulouse, Nantes, Montpellier, Nice, Lille et Strasbourg. Les prix dem
   et la baisse ou la hausse depuis le relevé précédent.
 - **Qui part ?** : âge de chaque voyageur (adulte, enfant 2-11 ans, bébé), valises en plus, animaux (chat, chien,
   poids : cabine jusqu'à 8 kg avec le sac, soute au-delà). L'appli calcule le **prix total** pour tout le groupe.
+- **French bee** est la compagnie affichée par défaut (puce « Toutes » pour voir les autres).
 - **Calendrier** des prix (vert = moins cher), « le moins cher » en haut, filtres départ, compagnie, mois,
   heure de départ, tri par prix, date, heure ou durée.
 - **Favoris** (cœur) et **panier** (total des vols choisis), gardés sur le téléphone. **Actualiser** avec le bouton
