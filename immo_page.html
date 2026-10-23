@@ -78,6 +78,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .marque { display: flex; align-items: center; gap: 10px; padding: 4px 8px 14px; }
 .marque svg { flex: none; }
 .marque b { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; display: block; }
+/* logo : le « o » de Immo est la tête de Seb en dessin */
+.o-tete { display: inline-block; width: 1.12em; height: 1.12em; vertical-align: -.2em; margin-left: .02em; }
+.o-tete svg { width: 100%; height: 100%; display: block; }
 .side .groupe { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-2); padding: 14px 10px 4px; }
 .lien { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 8px 10px; border-radius: 10px; border: 0;
   background: none; text-align: left; cursor: pointer; width: 100%; text-decoration: none; color: var(--fg); }
@@ -257,7 +260,7 @@ tr.cliquable:hover td { background: var(--surface-2); }
 <nav class="side" id="menu" aria-label="Menu">
   <div class="marque">
     <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="var(--accent)"/><path d="M9 20.5 20 11l11 9.5V30a1 1 0 0 1-1 1h-6.5v-6.5h-7V31H10a1 1 0 0 1-1-1z" fill="var(--accent-fg)"/></svg>
-    <div><b>Seb Immo</b><span class="muted small">La Réunion</span></div>
+    <div><b class="logo" aria-label="Seb Immo">Seb Imm<span class="o-tete" data-tete="m"></span></b><span class="muted small">La Réunion</span></div>
   </div>
   <button class="lien" data-vue="accueil">Accueil</button>
   <div class="groupe">Mes dossiers</div>
@@ -457,7 +460,8 @@ function rendre() {
   document.querySelectorAll(".lien[data-vue]").forEach(b => b.classList.toggle("actif", b.dataset.vue === vue && !dossierOuvert));
   const d = dossierOuvert && D.dossiers.find(x => x.id === dossierOuvert);
   if (dossierOuvert && !d) { dossierOuvert = null; vue = "accueil"; }
-  $("#titre").textContent = d ? nomClient(d) : TITRES[vue];
+  if (!d && vue === "accueil") $("#titre").innerHTML = `<span class="logo" aria-label="Seb Immo">Seb Imm<span class="o-tete">${tete("h")}</span></span>`;
+  else $("#titre").textContent = d ? nomClient(d) : TITRES[vue];
   $("#nouveau-flottant").hidden = vue === "assistant" && !d;
   const m = $("#vue");
   if (d) return vueDossier(m, d);
@@ -1066,6 +1070,9 @@ function vueAuto(m) {
 }
 
 // ---------------------------------------------------------------- assistant IA (version Claude)
+const TETE = `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"> <defs> <radialGradient id="peau" cx="40%" cy="30%" r="70%"><stop offset="0" stop-color="#e2ab84"/><stop offset=".7" stop-color="#c98a62"/><stop offset="1" stop-color="#a86c48"/></radialGradient> <linearGradient id="verre" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a1f1a"/><stop offset=".55" stop-color="#6b3a2c"/><stop offset="1" stop-color="#a0614a"/></linearGradient> </defs> <ellipse cx="7.6" cy="25" rx="3.2" ry="4.4" fill="#b97a55"/> <ellipse cx="40.4" cy="25" rx="3.2" ry="4.4" fill="#b97a55"/> <circle cx="7.4" cy="27" r="1.6" fill="#1d1d1f"/> <path d="M24 3.5c10.4 0 17 7.6 17 18.2 0 11.6-7.4 22.8-17 22.8S7 33.3 7 21.7C7 11.1 13.6 3.5 24 3.5z" fill="url(#peau)"/> <ellipse cx="17.5" cy="10" rx="5.5" ry="2.6" fill="#fff" opacity=".35" transform="rotate(-20 17.5 10)"/> <path d="M18.2 31.6c1.6-1.2 3.6-1.8 5.8-1.8s4.2.6 5.8 1.8c.6 2.6.8 5 .2 7-1.4 3-3.4 4.4-6 4.4s-4.6-1.4-6-4.4c-.6-2-.4-4.4.2-7z" fill="#2b1d17"/> <path d="M20.8 34.2c1 .6 2.1.9 3.2.9s2.2-.3 3.2-.9c-.4 1.2-1.6 2-3.2 2s-2.8-.8-3.2-2z" fill="#8a4f3c"/> <path d="M20.6 34.1c1.1.5 2.2.7 3.4.7s2.3-.2 3.4-.7" fill="none" stroke="#5e3326" stroke-width=".6" stroke-linecap="round"/> <path d="M22.4 25.2c.6 2.4.6 3.8-.2 4.6h3.6c-.8-.8-.8-2.2-.2-4.6" fill="#b97a55"/> <path d="M9.6 18.4h28.8" stroke="#c9a24a" stroke-width="1.4" stroke-linecap="round"/> <path d="M10.6 18.6h10.6c.6 0 1 .5.9 1.1l-.9 5.4c-.3 1.7-1.7 2.9-3.4 2.9h-3.1c-1.7 0-3.2-1.2-3.5-2.9l-1-5.4c-.1-.6.3-1.1.9-1.1z" fill="url(#verre)" stroke="#c9a24a" stroke-width="1"/> <path d="M26.8 18.6h10.6c.6 0 1 .5.9 1.1l-1 5.4c-.3 1.7-1.8 2.9-3.5 2.9h-3.1c-1.7 0-3.1-1.2-3.4-2.9l-.9-5.4c-.1-.6.3-1.1.9-1.1z" fill="url(#verre)" stroke="#c9a24a" stroke-width="1"/> <path d="M12.6 20.4l3 3.6M28.8 20.4l3 3.6" stroke="#fff" stroke-width="1" stroke-linecap="round" opacity=".45"/> </svg>`;
+const tete = k => TETE.replaceAll("url(#peau)", `url(#peau-${k})`).replaceAll("url(#verre)", `url(#verre-${k})`).replace('id="peau"', `id="peau-${k}"`).replace('id="verre"', `id="verre-${k}"`);
+document.querySelectorAll("[data-tete]").forEach(e => { e.innerHTML = tete(e.dataset.tete); });
 const LIEN_CLAUDE = "https://claude.ai/artifact/2Bg3yFCpd15pLLDdHewmzm";
 const GUIDE = `Seb Immo est une appli simple pour gérer des dossiers immobiliers à La Réunion.
 - Menu ☰ (en haut à gauche sur téléphone, toujours visible à gauche sur PC) : Accueil, Dossiers à traiter / en cours / finis, Tous les dossiers, Biens achetables, Terrains à acheter, Mes biens et mon argent, Relances automatiques, Réglages et sauvegarde, Assistant IA, Aide.
