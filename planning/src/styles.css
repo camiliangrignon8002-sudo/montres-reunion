@@ -180,7 +180,8 @@ table.plan { border-collapse: separate; border-spacing: 0; width: 100%; min-widt
 .tag-cours, .tag-abs, .tag-unk { display: block; font-size: 11.5px; font-weight: 600; padding: 3px 6px; border-radius: 6px; }
 .tag-cours { background: var(--cours-soft); color: var(--cours); }
 .tag-cours + .tag-cours { margin-top: 3px; }
-.tag-cours.pause { background: rgba(120,120,128,.14); color: var(--fg-2); font-weight: 500; }
+.tag-cours.seg-cours { display: flex; justify-content: space-between; gap: 6px; font-size: 12.5px; font-variant-numeric: tabular-nums; padding: 4px 8px; }
+.tag-cours.seg-cours .z { font-size: 10.5px; font-weight: 700; }
 .tag-abs { background: var(--absent-soft); color: var(--fg-2); }
 .tag-unk { color: var(--fg-3); border: 1px dashed var(--line-strong); }
 .pause { font-size: 10.5px; color: var(--fg-3); padding-left: 4px; }

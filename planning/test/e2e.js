@@ -165,9 +165,9 @@ const MOCK = `
     await page.click(".dialog footer >> text=/Enregistrer 1 semaine/");
     await page.waitForSelector("text=Postes à pourvoir");
     const coursTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) td', (tds) => tds.filter((t) => t.querySelector(".tag-cours:not(.pause)")).length);
-    const pauseTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) .tag-cours.pause', (x) => x.map((e) => e.textContent));
+    const pauseTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) td', (tds) => tds.map((t) => [...t.querySelectorAll(".seg-cours > span:first-child")].map((e) => e.textContent).join("|")).filter(Boolean));
     check("Fleur affichée en cours jeudi et vendredi", coursTags === 2, String(coursTags));
-    check("pause déjeuner du CFA affichée (12:30–13:30)", pauseTags.length === 2 && pauseTags.every((t) => t === "Pause 12:30–13:30"), pauseTags.join(","));
+    check("cours affichés en blocs, sans le midi", pauseTags.length === 2 && pauseTags.every((t) => /^\d\d:\d\d–12:30\|13:30–\d\d:\d\d$/.test(t)), pauseTags.join(","));
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/3-generation.png`, fullPage: true });
 
     // tentative interdite : placer Fleur le 29
