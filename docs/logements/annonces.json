@@ -961,39 +961,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "figaro-98661035",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-98661035.html",
-  "titre": "Location  appartement 1 pièce 20 m² à Moufia (97490), 500 €",
-  "prix": 500.0,
-  "commune": "Saint-Denis",
-  "quartier": "Moufia",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 20.0,
-  "meuble": null,
-  "photos": [
-   "https://lh3.googleusercontent.com/4AmR21oczw3d0xwlGeqTEe3VHkaEfugPmyOtPv01WvX2-UFQUQEW6BuTRJgF2j-X-KNoI38Fn2lfPo2SbofEZd9WLgAqD1pSSGmqGA=rw-w700-h660-l80"
-  ],
-  "description": "A louer studio comprenant :\n1 kitchenette\n1 pièce principale climatisée\n1 SDE + WC\nPlacards aménagés",
-  "caracteristiques": [
-   "Climatisation"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T13:51+04:00"
- },
- {
   "id": "superimmo--annonces-location-appartement-23m-saint-denis-97490-x10jbs8",
   "source": "Superimmo",
   "url": "https://www.superimmo.com/annonces/location-appartement-23m-saint-denis-97490-x10jbs8",
@@ -4787,44 +4754,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "figaro-108777541",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108777541.html",
-  "titre": "Location  appartement 1 pièce 42.61 m² à Sainte Clotilde (97490), 730 €",
-  "prix": 730.0,
-  "commune": "Saint-Denis",
-  "quartier": "Sainte Clotilde",
-  "pieces": 1,
-  "type": "T1",
-  "surface": null,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/d3N08dL52FH6uZyCKhYuIeLDR2L5fkzA462jkgQdEE-MkswFdYwY7Wq-Gf9yhSNUaO5-HMTsMUw86Z6egMgWZ1lCxRYy32hnk-Ud3w=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/0QoeYFQILXBQHaW_ZDPy9hAjdNqmx9KsG_1JPRZf0QkMy4MIvbXt2tPM2vVyuPdfVl4QFxdBntBOFCFlFEuqOkg3OA_6SGx3-XBXkQ=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/ztz7NrDN2TZ6VMi6g2ajpkqw0Bz-eXaDGsu6ZkQArho8wSgvJVrc4dQSw59jrntNGpE1JEOBXs4mACeD8hddGQmhxdH-O3q19T5Qjg=rw-w940-h605-l80"
-  ],
-  "description": "Découvrez ce T1 bis de 42 m²Meublé rénové situé dans une résidence sécurisée, offrant un agencement fonctionnel et de nombreux équipements pour un confort au quotidien.\nce logement rénové comprend une entrée , donnant sur une Cuisine aménagée de meubles hauts et bas et équipée plaque vitrocéramique, hotte, four, réfrigérateur et autres équipements.Un cellier avec étagères , machine à laver et chauffe eau, d'un coin chambre avec lit 160 X 200 brasseur d'air et dressing\nd'un coin séjour climatisé avec canapé convertible, table basse, pouf.d'un espace bureau, d'un coin repas avec table pour 4 personnes, d'une salle d'eau avec douche à l'italienne, WC, meuble vasque et miroir\nLes atouts\nRésidence sécurisée\n42 m² parfaitement agencés\nLogement meublé\nCoin chambre avec dressing\nSéjour climatisé\nCuisine équipée\nEspace bureau\nDouche à l'italienne\nNombreux rangements\nLoyer hors charges : 700 € / mois\nProvision sur charges de copropriété : 20 € / mois soumis à régularisation annuelle\nProvision pour TEOM : 10 € / mois soumis à régularisation annuelle\nTotal mensuel : 730 €\nDisponible de suite\nDépôt de garantie : 1400 € soit deux mois de loyer hors charges.\nHonoraires de mise en location à la charge du locataire 13 € par m2 soit 553,93 euros dont 127,83 euros pour l'état des lieux (soit 3euro/M2).\nBarème consultable sur le lien : http://www.tekaimmo.fr/pdf/honoraires.pdf .\nPour toute demande de visite ou complément d'information veuillez contacter David agent mandataire E.I.Teka Immo inscrit au rsac de saint denis sous le numéro 445345937 au 0692 14 60 00 ou david.teka@tekaimmo.fr ou le 0262 41 88 88\nAnnonce rédigée sous la responsabilité éditoriale de l'agent.\nVous pouvez retrouver toutes les informations sur les risques auxquels ce bien pourrait être exposé sur : www.georisques.gouv.fr\n\\r",
-  "caracteristiques": [
-   "Meublé",
-   "Climatisation",
-   "Cuisine équipée",
-   "Résidence sécurisée"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0692 14 60 00",
-  "email": "david.teka@tekaimmo.fr",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:07+04:00"
  },
  {
   "id": "zimo-01a152cd-c740-7666-bde6-114b192f5824",
