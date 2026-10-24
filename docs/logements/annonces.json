@@ -1924,36 +1924,46 @@
   "vu": "2026-10-22T20:52+04:00"
  },
  {
-  "id": "bienici-citya-immobilier-501991-GES79160003-34",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/sainte-marie/appartement/1pieces/citya-immobilier-501991-GES79160003-34",
-  "titre": "T1 10 m²",
-  "prix": 600,
+  "id": "pv-1296583026",
+  "source": "ParuVendu",
+  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296583026A1KILHAP000",
+  "titre": "Location appartement 1 pièce de 10m2 à Sainte marie (97438)",
+  "prix": 600.0,
   "commune": "Sainte-Marie",
-  "quartier": "Bois Rouge - Ravine des Figues - Beauséjour",
+  "quartier": "Sainte-Marie",
   "pieces": 1,
   "type": "T1",
-  "surface": 10,
-  "meuble": false,
-  "photos": [],
-  "description": "Disponibilité immédiate, \nChambre à louer dans très belle villa avec jardin, place de parking.\nEau et Edf inclus, à visiter rapidement. \n Loyer de 600,00 euros par mois charges comprises Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 619,23 euros. \n Les honoraires charge locataire sont de 130,00 euros ( soit 13,00 euros/m² ) dont 30,00 euros pour état des lieux ( soit 3,00 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
+  "surface": 10.0,
+  "meuble": null,
+  "photos": [
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/8c/60/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS0xMDA3MTctMTk2NjQyLTQ4NDIzNzIxOTQ2MzUzNTQ5OTcuanBnPzIwMjYxMDIzMTEzODU5_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/2d/f8/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS1kb21haW5lX2RlLTE1Mjg5Mjk4MzczODA2NDMyODg0LmpwZz8yMDI2MTAyMzExMzg1OA_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/cd/fc/L2NpdF9DSVRZQV9TVEdJTExFU190aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLWphZGUtMTc2NzY2MzYxNzMyMzQ5NDEyOS5qcGc_MjAyNjEwMjMxMTM4MDk_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/d8/b5/L3dhL2ltYWdlcy9iaWVucy8xLzFhYTQ1MTFkNDUzMjkyMWEwYzVkMmZiNjNkNGU1OTliL3Bob3RvX2VkZmQzMjJmMWFiYjAxN2I2YTQwY2VkZjE0ZWEzNTVhLmpwZz8yMDI2MTAyMzA3MjI1NQ_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/0d/29/L3dhL2ltYWdlcy9iaWVucy8xL2UwOWE4ZjM5OTdiNWRjZDAxZjJlN2EzNGM5MWQ3Y2VkL3Bob3RvXzhkZjQyODk5ZWFmMjc4ZWQ3YWY3Mjg5YmE0ZWQ4YjA5LmpwZz8yMDI2MTAyMzAyNTI0NQ_rct?func=crop&w=1000&gravity=auto"
+  ],
+  "description": "Disponibilité immédiate, Chambre à louer dans très belle villa avec jardin, place de parking. Eau et Edf inclus, à visiter rapidement. Loyer de 600,00 euros par mois charges comprises Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 619,23 euros. Les honoraires charge locataire sont de 130,00 euros ( soit 13,00 euros/m² ) dont 30,00 euros pour état des lieux ( soit 3,00 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
   "caracteristiques": [
-   "Rez-de-chaussée",
    "Parking",
    "Jardin"
   ],
-  "date": "2026-10-22T15:06:07.811Z",
+  "date": "",
   "annonceur": "Citya Saint Denis",
-  "lat": -20.922554,
-  "lon": 55.536068,
+  "lat": null,
+  "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "0262 32 43 24",
+  "tel": "02 57 54 91 17",
   "email": "",
-  "adresse": "45 rue de Paris, 97400 Saint-Denis",
+  "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Bien'ici",
+    "url": "https://www.bienici.com/annonce/location/sainte-marie/appartement/1pieces/citya-immobilier-501991-GES79160003-34"
+   }
+  ],
   "vu": "2026-10-22T20:52+04:00"
  },
  {
