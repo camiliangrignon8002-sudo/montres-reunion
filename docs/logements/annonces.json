@@ -1743,42 +1743,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "figaro-89244115",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-89244115.html",
-  "titre": "Location meublée appartement 1 pièce 19.18 m² à Sainte Clotilde (97490), 587 €",
-  "prix": 587.0,
-  "commune": "Saint-Denis",
-  "quartier": "Sainte Clotilde",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 19.18,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/fdFBhBTe85ECPAn1cPI_CKjfV96VPxhMGQzimys0MJ-ntyj8Z2pquYK0K8-DihO6WE6E3R-kWiSlZ0ke2LxoMWXIFPbOKyJWE_U9lw=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/-89jw3ppFh5lTjhQZxphbcdKtwdF1hzf26RqagFii4h6DBIHOegSVOjw-Zn87wqVIz_PYjAfoMPPbr7HIb83t2TCaS3zBpYsN3zwFoE=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/kRUYRC0hX2M7u-rlqNbWIG4eSAwJVUqMLEQ_h3HXNIgaboxQOWPp3fG4JkSnxvCjtOjC2Bj-elxL6tnjloyUzNhrAMF0L5EuXtiGKw=rw-w940-h605-l80"
-  ],
-  "description": "ENEZ Immobilier vous propose ce studio meublé de 19m2 situé au 7 rue des Jacinthes à ST DENIS.\nIl se compose d'un séjour chambre avec placard, d'une kitchenette équipée, d'une salle d'eau avec WC.\nVous disposerez également d'un parking en sous-sol.\nDisponibilité : DE SUITE\nN'hésitez pas à nous contacter au 0693228334 pour le visiter rapidement",
-  "caracteristiques": [
-   "Meublé",
-   "Parking"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0693 22 83 34",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T15:50+04:00"
- },
- {
   "id": "zimo-01a1670c-1122-7920-b81b-5e35854fd3b9",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-sainte-clotilde/01a1670c-1122-7920-b81b-5e35854fd3b9",
@@ -1980,6 +1944,39 @@
   "vu": "2026-10-22T20:52+04:00"
  },
  {
+  "id": "zimo-01a17302-4fc7-7361-bf48-afca430c812d",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/a-louer-bel-appartement-a-saint-denis-974-ideal-etudiant/01a17302-4fc7-7361-bf48-afca430c812d",
+  "titre": "À louer - bel appartement à saint-denis (974) - idéal étudiant",
+  "prix": 600.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 32.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/XW3wsfyY6ttb3HDEUqhQRtRlf0mMa9jNdeo_pXdKgLE/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_9fe4219e-ffda-4165-ac5c-4a8ec308ad08.jpg"
+  ],
+  "description": "Location T2 Saint-Denis (974) 1 pièces 32 m²",
+  "caracteristiques": [
+   "Proche université"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-25T16:56+04:00"
+ },
+ {
   "id": "zimo-01a15d1a-4444-7537-9e1e-4ec6f5f62126",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-meuble-avec-terrasse-a-louer/01a15d1a-4444-7537-9e1e-4ec6f5f62126",
@@ -2074,41 +2071,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "figaro-108377217",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108377217.html",
-  "titre": "Location meublée appartement 1 pièce 16 m² à Saint paul (97460), 600 €",
-  "prix": 600.0,
-  "commune": "Le Port",
-  "quartier": "Saint paul",
-  "pieces": 1,
-  "type": "T1",
-  "surface": 16.0,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/V8t4jUk9JOvqxHSjYks6F7CN9MvRnXUGC132I-P3EIYqJPmfXuLA5YYetKpgRay9KcGpCXfmQBwaxt3R94YwhpT7R4ZOePzbPZJIQw=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/a3tW_AOl9sAEI0RzegVvKUjVKI3HDOfC8YHBOMUDl_V1AVGdF8NL1R5mwFIA62-4oGYlkr80SKNA5e_iUe7UH1AKZkhzguB2jvHo=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/xyr8KWNJjo-adpsxY5w1bUkbtUYw1AnwJc48_Glu8RNe0A7fGnIBJgA2dlu2ouU54maNbkxRgQtAbu7llYtoYk_f3XMs-5h_YOWAjQ=rw-w940-h605-l80"
-  ],
-  "description": "Nous vous proposons à la location cette chambre meublée d'une surface de 16m2, située à Saint Gilles les Hauts.\nLe locataire aura à sa disposition sa propre SDB personnelle ainsi que son WC (type chambre parentale)\nEn commun tous le reste de la maison et les extérieurs.\nLoyer 600EUR\nEau, électricité et internet inclus dans le loyer - le logement est loué meublé - le ménage est fait dans les espaces personnels (et compris dans le loyer) tous les 15 jours\nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www.georisques.gouv.fr",
-  "caracteristiques": [
-   "Meublé"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord-Ouest",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T17:56+04:00"
  },
  {
   "id": "zimo-01a11734-78a6-7892-b7d4-6b5051050245",
