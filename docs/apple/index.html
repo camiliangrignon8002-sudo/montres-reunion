@@ -359,7 +359,7 @@ input[type=range]{width:100%;accent-color:var(--bleu);margin:8px 0 0}
 <main class="page">
   <!-- Accueil -->
   <section id="vue-produits">
-    <div class="grand-titre"><h1>Produits</h1><div class="maj">Mis à jour<br><span id="maj">dimanche 25/10 à 19h09</span></div></div>
+    <div class="grand-titre"><h1>Produits</h1><div class="maj">Mis à jour<br><span id="maj">dimanche 25/10 à 22h08</span></div></div>
 
     <div class="rail" id="rail-cats" aria-label="Catégories"></div>
 
@@ -1073,7 +1073,7 @@ function ajouterComparaison(a) {
 }
 async function chargerSpecs() {
   if (SPECS) return SPECS;
-  try { const r = await fetch("specs.json?v=202610251909"); SPECS = await r.json(); } catch (e) { SPECS = {puces: {}, modeles: {}}; }
+  try { const r = await fetch("specs.json?v=202610252208"); SPECS = await r.json(); } catch (e) { SPECS = {puces: {}, modeles: {}}; }
   return SPECS;
 }
 const ORDRE_ETAT = {"Neuf": 3, "Reconditionné": 2, "Occasion": 1};
@@ -1327,7 +1327,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden && Da
 
 $("#grille").innerHTML = Array.from({length: 6}, () => `<div class="squelette"></div>`).join("");
 compteurs();
-fetch("annonces.json?v=202610251909").then(r => r.json()).then(charger).catch(() => actualiser(true));
+fetch("annonces.json?v=202610252208").then(r => r.json()).then(charger).catch(() => actualiser(true));
 if (location.hash) history.replaceState(null, "", location.pathname);
 </script>
 </body>
