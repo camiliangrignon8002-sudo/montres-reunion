@@ -2073,6 +2073,39 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "zimo-01a17370-14ce-700b-bbe5-dd7bbb557d31",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-meuble-pret-a-habiter-ste-marie-grande-montee/01a17370-14ce-700b-bbe5-dd7bbb557d31",
+  "titre": "Studio meublé prêt à habiter - ste marie grande montée",
+  "prix": 600.0,
+  "commune": "Sainte-Marie",
+  "quartier": "Sainte-Marie",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 21.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/LpW4dReb91xjx_N66XKKXGg8t_zbIBZ9o4mwMrhAqhQ/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_b45a9c61-0bb6-402c-b4db-7591462450a8.jpg"
+  ],
+  "description": "Location Studio Sainte-Marie (974) 1 pièces 21 m²",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-25T18:46+04:00"
+ },
+ {
   "id": "zimo-01a11734-78a6-7892-b7d4-6b5051050245",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-meuble-19-m2-sainte-clotilde/01a11734-78a6-7892-b7d4-6b5051050245",
