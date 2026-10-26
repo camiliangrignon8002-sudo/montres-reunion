@@ -1,36 +1,5 @@
 [
  {
-  "id": "zimo-01a15866-a008-766b-91d0-2eae90439e54",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-20-m2/01a15866-a008-766b-91d0-2eae90439e54",
-  "titre": "Appartement 1 pièce 20 m²",
-  "prix": 363.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 20.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/KPsiQfYIn3r_2s7ItO1LUKRMS_WST5HBsUV7lfBnXW4/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_9176aae5-9adc-4d49-8d0a-c945c6bd574e.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
   "id": "superimmo-o-com-annonces-location-appartement-23m-moufia-97490-x129k38",
   "source": "Superimmo",
   "url": "https://www.superimmo.com/annonces/location-appartement-23m-moufia-97490-x129k38",
@@ -204,10 +173,6 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
-   {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-501991-GES10620077-34"
-   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-1-piece-21-m2/01a14584-ef28-7851-8c48-4a9a4061351d"
@@ -1913,40 +1878,6 @@
   "vu": "2026-10-25T16:56+04:00"
  },
  {
-  "id": "zimo-01a15d1a-4444-7537-9e1e-4ec6f5f62126",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-meuble-avec-terrasse-a-louer/01a15d1a-4444-7537-9e1e-4ec6f5f62126",
-  "titre": "Studio meublé avec terrasse à louer",
-  "prix": 600.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 20.0,
-  "meuble": true,
-  "photos": [
-   "https://img.e-xiste.com/tTHLS1MN4c-0XA4NJAvmEJx9EIfATSTU5aoJgecUoOM/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_e6f53f24-71d3-41bb-9864-445f55316804.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon"
-  ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
   "id": "zimo-01a159b9-8869-7b71-9385-4dc11318ac42",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-moufia-les-hauts/01a159b9-8869-7b71-9385-4dc11318ac42",
@@ -2007,6 +1938,37 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "zimo-01a052a8-3f9f-74a3-937a-71e9a16503ef",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/location-meublee/01a052a8-3f9f-74a3-937a-71e9a16503ef",
+  "titre": "Location meublée",
+  "prix": 600.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 20.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/2VA5HDWZIePHm_F0dUu5GIaPS-_3ig8H4CFfUCSMuUc/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_5d1f8a5d-e0c6-435b-9f4c-693938cb2f61.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-26T21:00+04:00"
  },
  {
   "id": "zimo-01a17370-14ce-700b-bbe5-dd7bbb557d31",
@@ -2245,12 +2207,7 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/2pieces/citya-immobilier-501991-GES04260068-34"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-21T19:53+04:00"
  },
  {
@@ -2525,37 +2482,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:59+04:00"
- },
- {
-  "id": "zimo-01a15e77-1d49-76ee-99a1-bb3f837ccc20",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/f2-mazagran/01a15e77-1d49-76ee-99a1-bb3f837ccc20",
-  "titre": "F2 Mazagran",
-  "prix": 630.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 42.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/H25FoO2EXraE-usyKIaUXmp3DTn-OKstYO25RLX6-go/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_c5b036d9-bf29-4026-988a-32ba26ef02f1.jpg"
-  ],
-  "description": "Location T2 Saint-Denis (974) 2 pièces 42 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T17:02+04:00"
  },
  {
   "id": "zimo-01a10ce5-e522-7c85-9063-6cdea57a0204",
@@ -3293,39 +3219,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-25T20:48+04:00"
- },
- {
-  "id": "zimo-01a15fb7-7760-7b14-857a-4dad42a49560",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/t1-vue-mer-ste-clotilde/01a15fb7-7760-7b14-857a-4dad42a49560",
-  "titre": "T1 vue mer ste clotilde",
-  "prix": 660.0,
-  "commune": "Saint-Denis",
-  "quartier": "Sainte-Clotilde",
-  "pieces": 1,
-  "type": "T1",
-  "surface": 35.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/8m1KZI3yCstxqbP-DERdFt6R8jtvgIlRmNj7OXWdMRU/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_980e4e49-0fe7-4a96-9dc3-7026446ea1bc.jpg"
-  ],
-  "description": "Location T1 Saint-Denis (974) 1 pièces 35 m²",
-  "caracteristiques": [
-   "Vue mer"
-  ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T22:59+04:00"
  },
  {
   "id": "zimo-01a13baa-4600-7a22-9963-2e8441f489b3",
@@ -4070,37 +3963,6 @@
   "vu": "2026-10-26T19:45+04:00"
  },
  {
-  "id": "zimo-01a143c8-94e5-77bb-b830-6302a436d451",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/location-meublee-f2-libre-700/01a143c8-94e5-77bb-b830-6302a436d451",
-  "titre": "Location meublée F2 Libre 700",
-  "prix": 700.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 30.0,
-  "meuble": true,
-  "photos": [
-   "https://img.e-xiste.com/C8NBxfeIvj9uvmVYngm-AZ4W89qe5UZy6IYlnFYIKuM/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_6270dc11-b1c1-4e70-8b38-529e0d6ab8de.jpg"
-  ],
-  "description": "Location T2 Saint-Denis (974) 2 pièces 30 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
   "id": "zimo-01a10d4b-a9dd-733c-86a6-5c9c6ebc994e",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-1-piece-19-m2/01a10d4b-a9dd-733c-86a6-5c9c6ebc994e",
@@ -4249,39 +4111,6 @@
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "zimo-01a0fdd8-7617-7717-9f5e-e4c3533973c3",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-charmant-avec-une-grande-terrasse-dans-un-environnement-calme/01a0fdd8-7617-7717-9f5e-e4c3533973c3",
-  "titre": "Studio charmant avec une grande terrasse dans un environnement calme",
-  "prix": 700.0,
-  "commune": "Sainte-Marie",
-  "quartier": "Sainte-Marie",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 22.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/vzeW808Fc9UMGGrOa-xijqpa2Yuxqyo97L3y-s8ta0U/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_9cc4d67d-f1e5-4d9f-9f53-6a17bf5bf86a.jpg"
-  ],
-  "description": "Location Studio Sainte-Marie (974) 1 pièces 22 m²",
-  "caracteristiques": [
-   "Varangue / balcon"
-  ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
   "tel": "",
   "email": "",
   "adresse": "",
