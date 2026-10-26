@@ -2285,6 +2285,39 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "zimo-01a177c4-2d74-7be9-8ce9-0d31e25eb9b9",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/magnifique-studio-meuble-avec-gout-25-m2/01a177c4-2d74-7be9-8ce9-0d31e25eb9b9",
+  "titre": "Magnifique studio meublé avec goût 25 m2",
+  "prix": 620.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 25.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/VaN-umN6g2yaEXCX1O6PTb8x3Pgi9VIiYgUtifLCDXs/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_5150aa84-2371-4cb8-be89-f1203bd99adc.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 25 m²",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-26T14:56+04:00"
+ },
+ {
   "id": "zimo-01a155d4-7df5-7858-ac69-d1abcf35119e",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-1-piece-35-m2/01a155d4-7df5-7858-ac69-d1abcf35119e",
