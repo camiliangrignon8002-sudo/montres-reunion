@@ -2715,6 +2715,61 @@
   "vu": "2026-10-21T12:59+04:00"
  },
  {
+  "id": "bienici-netty-company51942hxz-appt-2082",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/2pieces/netty-company51942hxz-appt-2082",
+  "titre": "A LOUER T2 STE CLOTILDE AVEC PETIT JARDIN",
+  "prix": 639,
+  "commune": "Saint-Denis",
+  "quartier": "Le Butor - Champ-Fleuri - Sainte-Clotilde",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 43.2,
+  "meuble": false,
+  "photos": [
+   "https://file.bienici.com/photo/netty-company51942hxz-appt-2082_img.netty.immo_productw_company51942hxz_2_LA2082_1733824298_LA2082_1_original.jpg",
+   "https://file.bienici.com/photo/netty-company51942hxz-appt-2082_img.netty.immo_productw_company51942hxz_2_LA2082_1792565078_LA2082_9_original.jpg",
+   "https://file.bienici.com/photo/netty-company51942hxz-appt-2082_img.netty.immo_productw_company51942hxz_2_LA2082_1792565080_LA2082_12_original.jpg",
+   "https://file.bienici.com/photo/netty-company51942hxz-appt-2082_img.netty.immo_productw_company51942hxz_2_LA2082_1792565077_LA2082_8_original.jpg",
+   "https://file.bienici.com/photo/netty-company51942hxz-appt-2082_img.netty.immo_productw_company51942hxz_2_LA2082_1792565084_LA2082_15_original.jpg",
+   "https://file.bienici.com/photo/netty-company51942hxz-appt-2082_img.netty.immo_productw_company51942hxz_2_LA2082_1792565078_LA2082_10_original.jpg",
+   "https://file.bienici.com/photo/netty-company51942hxz-appt-2082_img.netty.immo_productw_company51942hxz_2_LA2082_1792565081_LA2082_13_original.jpg",
+   "https://file.bienici.com/photo/netty-company51942hxz-appt-2082_img.netty.immo_productw_company51942hxz_2_LA2082_1792565083_LA2082_14_original.jpg",
+   "https://file.bienici.com/photo/netty-company51942hxz-appt-2082_img.netty.immo_productw_company51942hxz_2_LA2082_1792565085_LA2082_16_original.jpg",
+   "https://file.bienici.com/photo/netty-company51942hxz-appt-2082_img.netty.immo_productw_company51942hxz_2_LA2082_1792565086_LA2082_17_original.jpg"
+  ],
+  "description": "SAINTE CLOTILDE - Résidence sécurisée avec gardien PAILLE EN QUEUE, 86 rue Lory les Hauts, appartement de type F2 en RDC, d'une surface habitable de 43,20 m² + varangue de 14,25 m² et jardinet de 27 m², comprenant: 1 séjour avec placard, 1 cuisine ouverte équipée, 1 chambre climatisée avec placard, 1 salle de bains, 1 wc, 1 place de parking souterrain.<br>Contact commerciale : Gilda RICHÉ - Tél <span class=\"importDescriptionDecorator\" data-type=\"phone\">06.92.76.23.42</span> - Mail: <span class=\"importDescriptionDecorator\" data-type=\"email\">locationnord@arhimmobilier.com</span><br>Honoraires charge locataire (ou HCL): 566 € TTC (13,12€ du m2 dont états des lieux 3,03 € du m2) - D. de garantie: 597 € - Loyer mensuel de 639 € CC dont provisions pour charges de copropriété 42 € Nos honoraires sur : <span class=\"importDescriptionDecorator\" data-url=\"https://www.arhimmobilier.com/honoraires.html\" data-type=\"failingUrl\">https://www.arhimmobilier.com/honoraires.html</span><br>Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site www.georisques.gouv.fr<br>Honoraires de 566 € TTC  à la charge du locataire comprenant  131 € TTC  pour l'état des lieux. Loyer de base 597 €/mois. Provision sur charges 42 €/mois, régularisation annuelle. Dépôt de garantie 597 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr. <br>",
+  "caracteristiques": [
+   "Ascenseur",
+   "Climatisation",
+   "WC séparés",
+   "Rez-de-chaussée",
+   "1 chambre",
+   "Varangue / balcon",
+   "Parking",
+   "Jardin",
+   "Résidence sécurisée"
+  ],
+  "date": "2026-10-26T07:36:02.827Z",
+  "annonceur": "ARH Immobilier Réunion",
+  "lat": -20.897415065462567,
+  "lon": 55.48021238354292,
+  "charges": 42,
+  "pro": true,
+  "tel": "0262 22 14 23",
+  "email": "locationnord@arhimmobilier.com",
+  "adresse": "1  - Résidence Claire 1 - 26, rue du St-Alexis, 97434 Saint-Gilles-les-Bains",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-2-pieces-43-m2/01a17747-dd06-745d-9798-28d09eafa3fa"
+   }
+  ],
+  "vu": "2026-10-26T13:01+04:00"
+ },
+ {
   "id": "superimmo-onces-location-appartement-49m-sainte-clotilde-97490-x126c5m",
   "source": "Superimmo",
   "url": "https://www.superimmo.com/annonces/location-appartement-49m-sainte-clotilde-97490-x126c5m",
