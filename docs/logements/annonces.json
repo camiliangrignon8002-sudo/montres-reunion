@@ -646,39 +646,6 @@
   "vu": "2026-10-21T13:51+04:00"
  },
  {
-  "id": "bienici-citya-immobilier-501991-GES03180022-34",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/citya-immobilier-501991-GES03180022-34",
-  "titre": "T1",
-  "prix": 487.09,
-  "commune": "Saint-Denis",
-  "quartier": "Petite-Ile - Bas de la Rivière",
-  "pieces": 1,
-  "type": "T1",
-  "surface": null,
-  "meuble": false,
-  "photos": [
-   "https://file.bienici.com/photo/citya-immobilier-501991-GES03180022-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_4772-14697923794858753159.jpg"
-  ],
-  "description": "APT 38\n\n Loyer de 487,09 euros par mois charges comprises dont 28,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). \n Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 506,32 euros. \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
-  "caracteristiques": [
-   "1e étage"
-  ],
-  "date": "2026-10-22T15:07:23.194Z",
-  "annonceur": "Citya Saint Denis",
-  "lat": -20.877661,
-  "lon": 55.445446,
-  "charges": 28,
-  "pro": true,
-  "tel": "0262 32 43 24",
-  "email": "",
-  "adresse": "45 rue de Paris, 97400 Saint-Denis",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
   "id": "gti-partement-f1-a-l-etat-irreprochable-proche-toutes-commodites",
   "source": "GTI",
   "url": "https://www.gti.re/location/1-st-denis/appartement/847-appartement-f1-a-l-etat-irreprochable-proche-toutes-commodites",
@@ -1866,87 +1833,90 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "pv-1296583025",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296583025A1KILHAP000",
-  "titre": "Location appartement 1 pièce de 12m2 à Sainte marie (97438)",
-  "prix": 600.0,
+  "id": "bienici-citya-immobilier-501991-GES79160002-34",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/sainte-marie/appartement/1pieces/citya-immobilier-501991-GES79160002-34",
+  "titre": "T1 12 m²",
+  "prix": 600,
   "commune": "Sainte-Marie",
-  "quartier": "Sainte-Marie",
+  "quartier": "Bois Rouge - Ravine des Figues - Beauséjour",
   "pieces": 1,
   "type": "T1",
-  "surface": 12.0,
-  "meuble": null,
+  "surface": 12,
+  "meuble": false,
   "photos": [
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/8c/60/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS0xMDA3MTctMTk2NjQyLTQ4NDIzNzIxOTQ2MzUzNTQ5OTcuanBnPzIwMjYxMDIzMTEzODU5_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/2d/f8/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS1kb21haW5lX2RlLTE1Mjg5Mjk4MzczODA2NDMyODg0LmpwZz8yMDI2MTAyMzExMzg1OA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/cd/fc/L2NpdF9DSVRZQV9TVEdJTExFU190aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLWphZGUtMTc2NzY2MzYxNzMyMzQ5NDEyOS5qcGc_MjAyNjEwMjMxMTM4MDk_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/d8/b5/L3dhL2ltYWdlcy9iaWVucy8xLzFhYTQ1MTFkNDUzMjkyMWEwYzVkMmZiNjNkNGU1OTliL3Bob3RvX2VkZmQzMjJmMWFiYjAxN2I2YTQwY2VkZjE0ZWEzNTVhLmpwZz8yMDI2MTAyMzA3MjI1NQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/0d/29/L3dhL2ltYWdlcy9iaWVucy8xL2UwOWE4ZjM5OTdiNWRjZDAxZjJlN2EzNGM5MWQ3Y2VkL3Bob3RvXzhkZjQyODk5ZWFmMjc4ZWQ3YWY3Mjg5YmE0ZWQ4YjA5LmpwZz8yMDI2MTAyMzAyNTI0NQ_rct?func=crop&w=1000&gravity=auto"
+   "https://file.bienici.com/photo/citya-immobilier-501991-GES79160002-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_4735-17339133815140093438.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-501991-GES79160002-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_4731-15105666413438629055.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-501991-GES79160002-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_4738-15667425484712674816.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-501991-GES79160002-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_4739-4658145338301430688.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-501991-GES79160002-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_4744-4399015148004307885.jpg"
   ],
-  "description": "Disponibilité immédiate, Chambre à louer dans très belle villa avec jardin, place de parking. Eau et Edf inclus, à visiter rapidement. Loyer de 600,00 euros par mois charges comprises Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 619,23 euros. Les honoraires charge locataire sont de 156,00 euros ( soit 13,00 euros/m² ) dont 36,00 euros pour état des lieux ( soit 3,00 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
+  "description": "Disponibilité immédiate, \nChambre à louer dans très belle villa avec jardin, place de parking.\nEau et Edf inclus, à visiter rapidement. \n Loyer de 600,00 euros par mois charges comprises Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 619,23 euros. \n Les honoraires charge locataire sont de 156,00 euros ( soit 13,00 euros/m² ) dont 36,00 euros pour état des lieux ( soit 3,00 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
   "caracteristiques": [
+   "Rez-de-chaussée",
    "Parking",
    "Jardin"
   ],
-  "date": "",
+  "date": "2026-10-27T16:06:43.265Z",
   "annonceur": "Citya Saint Denis",
-  "lat": null,
-  "lon": null,
+  "lat": -20.922554,
+  "lon": 55.536068,
   "charges": null,
   "pro": true,
-  "tel": "02 57 54 91 17",
+  "tel": "0262 32 43 24",
   "email": "",
-  "adresse": "",
+  "adresse": "45 rue de Paris, 97400 Saint-Denis",
   "secteur": "Nord",
   "caf": false,
   "aussi": [
    {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/sainte-marie/appartement/1pieces/citya-immobilier-501991-GES79160002-34"
+    "source": "ParuVendu",
+    "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296583025A1KILHAP000"
    }
   ],
   "vu": "2026-10-22T20:52+04:00"
  },
  {
-  "id": "pv-1296583026",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296583026A1KILHAP000",
-  "titre": "Location appartement 1 pièce de 10m2 à Sainte marie (97438)",
-  "prix": 600.0,
+  "id": "bienici-citya-immobilier-501991-GES79160003-34",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/sainte-marie/appartement/1pieces/citya-immobilier-501991-GES79160003-34",
+  "titre": "T1 10 m²",
+  "prix": 600,
   "commune": "Sainte-Marie",
-  "quartier": "Sainte-Marie",
+  "quartier": "Bois Rouge - Ravine des Figues - Beauséjour",
   "pieces": 1,
   "type": "T1",
-  "surface": 10.0,
-  "meuble": null,
+  "surface": 10,
+  "meuble": false,
   "photos": [
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/8c/60/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS0xMDA3MTctMTk2NjQyLTQ4NDIzNzIxOTQ2MzUzNTQ5OTcuanBnPzIwMjYxMDIzMTEzODU5_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/2d/f8/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS1kb21haW5lX2RlLTE1Mjg5Mjk4MzczODA2NDMyODg0LmpwZz8yMDI2MTAyMzExMzg1OA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/cd/fc/L2NpdF9DSVRZQV9TVEdJTExFU190aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLWphZGUtMTc2NzY2MzYxNzMyMzQ5NDEyOS5qcGc_MjAyNjEwMjMxMTM4MDk_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/d8/b5/L3dhL2ltYWdlcy9iaWVucy8xLzFhYTQ1MTFkNDUzMjkyMWEwYzVkMmZiNjNkNGU1OTliL3Bob3RvX2VkZmQzMjJmMWFiYjAxN2I2YTQwY2VkZjE0ZWEzNTVhLmpwZz8yMDI2MTAyMzA3MjI1NQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/0d/29/L3dhL2ltYWdlcy9iaWVucy8xL2UwOWE4ZjM5OTdiNWRjZDAxZjJlN2EzNGM5MWQ3Y2VkL3Bob3RvXzhkZjQyODk5ZWFmMjc4ZWQ3YWY3Mjg5YmE0ZWQ4YjA5LmpwZz8yMDI2MTAyMzAyNTI0NQ_rct?func=crop&w=1000&gravity=auto"
+   "https://file.bienici.com/photo/citya-immobilier-501991-GES79160003-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_4742-5779871022859335299.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-501991-GES79160003-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_4741-3144812844061924578.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-501991-GES79160003-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_4738-4583499656401547224.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-501991-GES79160003-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_4739-15464093505812425732.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-501991-GES79160003-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_4731-2697150962734253671.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-501991-GES79160003-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_4735-3129239555386931546.jpg"
   ],
-  "description": "Disponibilité immédiate, Chambre à louer dans très belle villa avec jardin, place de parking. Eau et Edf inclus, à visiter rapidement. Loyer de 600,00 euros par mois charges comprises Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 619,23 euros. Les honoraires charge locataire sont de 130,00 euros ( soit 13,00 euros/m² ) dont 30,00 euros pour état des lieux ( soit 3,00 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
+  "description": "Disponibilité immédiate, \nChambre à louer dans très belle villa avec jardin, place de parking.\nEau et Edf inclus, à visiter rapidement. \n Loyer de 600,00 euros par mois charges comprises Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 619,23 euros. \n Les honoraires charge locataire sont de 130,00 euros ( soit 13,00 euros/m² ) dont 30,00 euros pour état des lieux ( soit 3,00 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
   "caracteristiques": [
+   "Rez-de-chaussée",
    "Parking",
    "Jardin"
   ],
-  "date": "",
+  "date": "2026-10-27T16:06:43.302Z",
   "annonceur": "Citya Saint Denis",
-  "lat": null,
-  "lon": null,
+  "lat": -20.922554,
+  "lon": 55.536068,
   "charges": null,
   "pro": true,
-  "tel": "02 57 54 91 17",
+  "tel": "0262 32 43 24",
   "email": "",
-  "adresse": "",
+  "adresse": "45 rue de Paris, 97400 Saint-Denis",
   "secteur": "Nord",
   "caf": false,
   "aussi": [
    {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/sainte-marie/appartement/1pieces/citya-immobilier-501991-GES79160003-34"
+    "source": "ParuVendu",
+    "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296583026A1KILHAP000"
    }
   ],
   "vu": "2026-10-22T20:52+04:00"
@@ -2337,34 +2307,46 @@
   "vu": "2026-10-26T14:56+04:00"
  },
  {
-  "id": "zimo-01a155d4-7df5-7858-ac69-d1abcf35119e",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-1-piece-35-m2/01a155d4-7df5-7858-ac69-d1abcf35119e",
-  "titre": "Studio 1 pièce 35 m²",
+  "id": "figaro-110025017",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025017.html",
+  "titre": "Location meublée appartement 1 pièce 35 m² à Saint-Denis (97400), 620 €",
   "prix": 620.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
   "surface": 35.0,
-  "meuble": null,
+  "meuble": true,
   "photos": [
-   "https://img.e-xiste.com/wGxDnUV-p9nzp7imBPRFv0sO6Vn1NXMnxRV9wGmrCqU/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_5b98b023-b52d-44b2-ae1d-b6c076c073da.jpg"
+   "https://lh3.googleusercontent.com/9x9ldaQiNtBs5m4oO1RH1ej4jM20PQxcnoHiVR2IWNSEwS1UaKy9wE91EZd1dyxvxGiOVvVM5RnFphkMp7XYTe6eXK7tofrhVuzvTQ=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/7KdItYX7bTMMUQLGzNaWlow6W2p0rzAjizbOZpZqwDTOW7_xz18tGJEYeoTgPk6X9d33j-erp1g_9ZFJA63ZT2BhQQvuxPYFwXPoJQ=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/hBEHql9QUyNfhmdWYv24eVlsLM4zsMsD6BhhHtcdGpif1GVpCSrSAFaaiA35b-dkz1VLHpBUXKIfXGkffg8KmoNAicsp664zRevcmQ=rw-w940-h605-l80"
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 35 m²",
-  "caracteristiques": [],
+  "description": "RUNIMMO vous présente en location un studio meublé de 35m2 situé à la Trinité à Saint-Denis (97400), comprenant une belle pièce principale lumineuse, un coin cuisine tout équipée, une belle salle de bains, un balcon et une place de parking privative.\nLe bien est idéalement bien situé, à 2 minutes à pied du parc de la Trinité, proche des transports en commun et des commerces.\nPour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 455 € TTC à la charge du locataire comprenant 350 € TTC pour l'état des lieux. Loyer de base 580 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 160 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Proche transports"
+  ],
   "date": "",
-  "annonceur": "Pro · via leboncoin",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0692 26 92 05",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/studio-1-piece-35-m2/01a155d4-7df5-7858-ac69-d1abcf35119e"
+   }
+  ],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -2781,6 +2763,10 @@
    {
     "source": "Bien'ici",
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/2pieces/netty-company51942hxz-appt-2082"
+   },
+   {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-110257171.html"
    },
    {
     "source": "Zimo",
@@ -3849,6 +3835,46 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:07+04:00"
+ },
+ {
+  "id": "figaro-110025019",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025019.html",
+  "titre": "Location meublée appartement 1 pièce 24.72 m² à Saint-Denis (97400), 680 €",
+  "prix": 680.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": null,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/yuCmIU2VVliHTLDaZhVC7dQKHEkgKEF6DHQ-ttgsVhQAPLGwNA5tAPiqMUtHx_Fi20T2kJ4msyZlSZU0puhHAbG_czetMbLgPw9a1Q=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/yaXvVs2WqRwgODHf5qBPzomBUey_xX2i128B7aL_lfg_OPyLKOcWN2eLsJR12XoYVeArIB6vvQhyx9LafbnkKMuk-aMmTyiaifvvRg=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/7UCEdPc8N0qDHp3URGOPM4ulUFrJfLTgQrpB_Ytl0J4qbV1esvf4iJe_shR9VajkSduyLpxJij9rLgzo6KTia6_brGJTRoy5dn7QP94=rw-w940-h605-l80"
+  ],
+  "description": "RUNIMMO vous propose en location un studio joliment meublé de 24,72 m2, situé dans la rue monthyon à Saint-Denis (97400), résidence ' LA GOELETTE '. Ce bien se compose d'une pièce principale lumineuse et climatisée, une cuisine aménagée et équipée, une belle salle d'eau avec wc et une grande terrasse. Une place de parking privative est disponible en sous-sol. Ce bien se situe proche du jardin de l'état, et du centre ville de Saint-Denis. Pour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 321 € TTC à la charge du locataire comprenant 74 € TTC pour l'état des lieux. Loyer de base 640 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 280 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Climatisation",
+   "Jardin",
+   "Cuisine équipée"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 26 92 05",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T12:04+04:00"
  },
  {
   "id": "zimo-01a05377-8d6f-7c5c-a2cf-6d36c4eae793",
