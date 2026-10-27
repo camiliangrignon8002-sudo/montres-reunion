@@ -1,0 +1,1807 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Nanas Vanille, l'art et le terroir de l'île de la Réunion : boutiques à Saint-Denis et Saint-Pierre.">
+<style>[hidden]{display:none!important}img{max-width:100%}body{margin:0}</style>
+</head>
+<body>
+<title>Nanas:Vanille</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Satisfy&family=Montserrat:wght@600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
+<style>
+/* Layout : charte actuelle de Nanas Vanille (blanc, feuillages tropicaux, bleu nuit, turquoise, ananas jaune), en plus aéré : bandeau feuillage + logo centré, produits 2 par rangée, boutiques + carte, compte. Thème clair assumé, comme la marque. */
+:root {
+  --bg: #ffffff;
+  --mist: #f2f9f9;        /* turquoise très pâle pour les bandes */
+  --navy: #0b3a52;        /* bleu nuit du logo et des titres */
+  --ink: #1d3442;
+  --muted: #5d7380;
+  --teal: #24aaa8;        /* turquoise du mot « Vanille » */
+  --teal-soft: #a9dedc;
+  --sun: #e9c21b;         /* jaune ananas */
+  --line: #dcebeb;
+  --font-brand: "Fredoka", "Montserrat", system-ui, sans-serif;
+  --font-script: "Satisfy", "Brush Script MT", cursive;
+  --font-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.65; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a { color: var(--teal); }
+:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--font-display); color: var(--navy); text-wrap: balance; margin: 0; line-height: 1.2; }
+h2 { font-size: clamp(1.5rem, 3.6vw, 2.2rem); font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
+h3 { font-weight: 700; }
+.eyebrow { font-family: var(--font-script); font-size: 1.6rem; color: var(--teal); line-height: 1; }
+
+/* Logo reconstruit : NANAS en capitales rondes, les deux A en pastilles ananas, deux points turquoise, Vanille en script */
+.logo { display: inline-flex; align-items: flex-end; text-decoration: none; color: var(--navy); line-height: 1; white-space: nowrap; }
+.logo .nanas { font-family: var(--font-brand); font-weight: 700; letter-spacing: 0.01em; display: inline-flex; align-items: flex-end; }
+.logo .a { display: inline-block; width: 0.96em; height: 0.8em; margin: 0 0.02em; position: relative; }
+.logo .a svg { width: 100%; height: 100%; display: block; }
+.logo .a.crown::before { content: ""; position: absolute; left: 40%; bottom: 84%; width: 1em; height: 0.9em; transform: translateX(-50%); background: no-repeat center bottom / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 36'%3E%3Cg fill='%2324aaa8'%3E%3Cpath d='M20 36 C19 22 19 10 20 0 C21 10 21 22 20 36Z'/%3E%3Cpath d='M20 36 C16 26 11 18 4 10 C12 15 17 24 20 36Z'/%3E%3Cpath d='M20 36 C24 26 29 18 36 10 C28 15 23 24 20 36Z'/%3E%3Cpath d='M20 36 C14 30 7 27 0 26 C8 25 15 28 20 36Z'/%3E%3Cpath d='M20 36 C26 30 33 27 40 26 C32 25 25 28 20 36Z'/%3E%3Cpath d='M20 36 C17 24 14 15 11 4 C16 12 19 23 20 36Z'/%3E%3Cpath d='M20 36 C23 24 26 15 29 4 C24 12 21 23 20 36Z'/%3E%3C/g%3E%3C/svg%3E"); }
+.logo .colon { display: inline-flex; flex-direction: column; justify-content: center; gap: 0.12em; margin: 0 0.12em 0.18em 0.1em; }
+.logo .colon i { width: 0.14em; height: 0.14em; border-radius: 50%; background: var(--teal); display: block; }
+.logo .vanille { font-family: var(--font-script); color: var(--teal); font-size: 1.28em; line-height: 0.8; padding-right: 0.1em; transform: translateY(0.06em); }
+.logo.small { font-size: 1.55rem; }
+.logo.big { font-size: clamp(2.6rem, 9vw, 4.6rem); }
+.logo.footer-logo { font-size: 1.7rem; color: #fff; }
+.logo.footer-logo .vanille { color: var(--teal-soft); }
+.logo.footer-logo .colon i { background: var(--teal-soft); }
+
+/* En-tête */
+header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: rgba(255,255,255,0.94); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 10px 18px; padding-block: 12px 10px; flex-wrap: wrap; }
+.header-actions { display: flex; align-items: center; gap: 10px; }
+.burger-wrap { position: relative; }
+.burger { position: relative; width: 44px; height: 44px; border: 1.5px solid var(--line); border-radius: 50%; background: var(--bg); cursor: pointer; display: grid; place-content: center; gap: 4px; padding: 0; }
+.burger:hover { border-color: var(--teal); }
+.burger span { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--navy); transition: transform .2s, opacity .2s; }
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.burger .dot { position: absolute; top: 6px; right: 6px; width: 9px; height: 9px; border-radius: 50%; background: #e0465a; border: 2px solid var(--bg); }
+.menu-panel { position: absolute; right: 0; top: calc(100% + 10px); min-width: 230px; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 18px 40px -18px rgba(11,58,82,0.45); padding: 8px; display: grid; z-index: 6; }
+.menu-panel a { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-radius: 4px; color: var(--navy); text-decoration: none; font: 700 0.8rem var(--font-display); letter-spacing: 0.12em; text-transform: uppercase; }
+.menu-panel a:hover, .menu-panel a:focus-visible { background: var(--mist); color: var(--teal); }
+.menu-panel a + a { border-top: 1px solid var(--line); }
+[data-view][hidden], .menu-panel[hidden], .burger .dot[hidden], .fav-count[hidden], .searchbar[hidden], .search-info[hidden] { display: none; }
+.icon-btn { width: 44px; height: 44px; border: 1.5px solid var(--line); border-radius: 50%; background: var(--bg); color: var(--navy); cursor: pointer; display: grid; place-items: center; padding: 0; }
+.icon-btn svg { width: 19px; height: 19px; }
+.icon-btn:hover, .icon-btn[aria-expanded="true"] { border-color: var(--teal); color: var(--teal); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.searchbar { border-top: 1px solid var(--line); background: var(--bg); }
+header.top .searchbar .wrap { display: block; padding-block: 12px 14px; }
+.search-form { display: flex; align-items: center; gap: 10px; border: 1.5px solid var(--teal); border-radius: 999px; padding: 0 8px 0 16px; max-width: 640px; margin: 0 auto; background: var(--bg); }
+.search-form > svg { width: 18px; height: 18px; color: var(--teal); flex: none; }
+.search-form input { border: none; background: transparent; padding: 12px 0; font-size: 1rem; flex: 1; min-width: 0; box-shadow: none; }
+.search-form input:focus { box-shadow: none; }
+.search-form input::-webkit-search-cancel-button { display: none; }
+.search-clear { border: none; background: var(--mist); color: var(--navy); width: 30px; height: 30px; border-radius: 50%; font-size: 1.2rem; line-height: 1; cursor: pointer; flex: none; }
+.search-suggest { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 640px; margin: 10px auto 0; }
+.search-suggest button { border: 1px solid var(--line); background: var(--bg); color: var(--muted); border-radius: 999px; padding: 4px 12px; font: 600 0.82rem var(--font-body); cursor: pointer; }
+.search-suggest button:hover { border-color: var(--teal); color: var(--teal); }
+.search-info { text-align: center; color: var(--navy); margin: -8px 0 22px; font-weight: 600; }
+.search-info button { border: none; background: none; color: var(--teal); font: 700 0.9rem var(--font-body); cursor: pointer; text-decoration: underline; margin-left: 6px; }
+mark { background: #fdf0b5; color: inherit; border-radius: 2px; padding: 0 1px; }
+@media (prefers-reduced-motion: reduce) { .burger span { transition: none; } }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1.5px solid transparent; border-radius: 999px; padding: 11px 22px; font: 700 0.8rem var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; text-decoration: none; transition: background .2s, color .2s, border-color .2s; }
+.btn-refresh { background: transparent; color: var(--navy); border-color: var(--line); padding: 7px 14px; font-size: 0.72rem; }
+.btn-refresh:hover { border-color: var(--teal); color: var(--teal); }
+.btn-refresh svg { width: 15px; height: 15px; }
+.btn-refresh.spin svg { animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.btn-primary { background: var(--navy); color: #fff; }
+.btn-primary:hover { background: var(--teal); }
+.btn-ghost { background: transparent; color: var(--navy); border-color: var(--navy); }
+.btn-ghost:hover { background: var(--navy); color: #fff; }
+
+/* Accueil */
+.hero { position: relative; overflow: hidden; text-align: center; }
+.foliage { position: absolute; inset: 0 0 auto 0; height: 300px; pointer-events: none; }
+.foliage svg { position: absolute; overflow: visible; }
+.foliage .l1 { left: -120px; top: -170px; width: 430px; transform: rotate(-38deg); }
+.foliage .l2 { left: 25%; top: -130px; width: 400px; }
+.foliage .l3 { right: 17%; top: -130px; width: 280px; transform: rotate(-155deg); }
+.foliage .l4 { right: -120px; top: -150px; width: 400px; transform: rotate(40deg); }
+.hero .wrap { position: relative; padding-block: 190px 70px; display: grid; justify-items: center; gap: 18px; }
+.hero h1 { font-size: clamp(1.35rem, 3.6vw, 2.4rem); font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 26px; }
+.hero .lead { color: var(--muted); font-size: 1.1rem; max-width: 58ch; margin: 0; }
+.hero .actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 44px; width: 100%; max-width: 760px; border-block: 1px solid var(--line); }
+.facts div { padding: 16px 10px; display: grid; gap: 2px; }
+.facts div + div { border-left: 1px solid var(--line); }
+.facts b { font: 800 1.5rem var(--font-display); color: var(--navy); font-variant-numeric: tabular-nums; }
+.facts span { font-size: 0.85rem; color: var(--muted); }
+
+section { padding-block: 72px; scroll-margin-top: 70px; }
+.back { display: inline-block; margin-bottom: 18px; color: var(--navy); font: 700 0.75rem var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
+.back:hover { color: var(--teal); }
+/* Histoire */
+.story-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 48px; align-items: start; }
+.story-text { min-width: 0; }
+.story-text p { margin: 0 0 16px; font-size: 1.05rem; max-width: 62ch; }
+.dropcap::first-letter { float: left; font: 400 4.2rem/0.8 var(--font-script); color: var(--teal); padding: 8px 10px 0 0; }
+.story blockquote { margin: 26px 0 0; padding: 4px 0 4px 20px; border-left: 3px solid var(--sun); font: 400 1.7rem/1.3 var(--font-script); color: var(--navy); }
+.timeline { list-style: none; margin: 0; padding: 24px 26px; background: var(--bg); border-radius: 4px; display: grid; gap: 22px; position: relative; min-width: 0; }
+.timeline li { display: grid; gap: 2px; padding-left: 26px; position: relative; }
+.timeline li::before { content: ""; position: absolute; left: 0; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--sun); box-shadow: 0 0 0 4px #fdf3c4; }
+.timeline li + li::after { content: ""; position: absolute; left: 5px; top: -18px; height: 22px; border-left: 2px dotted var(--teal-soft); }
+.timeline .when { font: 400 1.2rem var(--font-script); color: var(--teal); line-height: 1.1; }
+.timeline b { font: 700 1rem var(--font-display); color: var(--navy); }
+.timeline li > span:last-child { color: var(--muted); font-size: 0.93rem; }
+.values { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 44px; }
+.values div { background: var(--bg); padding: 22px; border-radius: 4px; text-align: center; border-top: 3px solid var(--teal); }
+.values h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.values p { margin: 6px 0 0; color: var(--muted); font-size: 0.93rem; }
+/* Horaires */
+#boutiques .facts { margin: 0 auto 30px; background: var(--bg); border: none; border-radius: 4px; }
+.hours { background: var(--bg); border-radius: 4px; padding: 22px 26px; max-width: 760px; margin: 0 auto 26px; }
+.hours-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.hours-head h3 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.open-badge { font: 700 0.75rem var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; }
+.open-badge.is-open { background: #e1f5ec; color: #1d7a4c; }
+.open-badge.is-closed { background: #fbe9e6; color: #9a2f1f; }
+.hours-table { width: 100%; border-collapse: collapse; }
+.hours-table th, .hours-table td { padding: 9px 4px; border-bottom: 1px dashed var(--line); text-align: left; font: 400 0.98rem var(--font-body); color: var(--ink); text-transform: none; letter-spacing: 0; white-space: normal; }
+.hours-table td { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; color: var(--navy); }
+.hours-table td.closed { color: var(--muted); font-weight: 400; }
+.hours-table tr.today th, .hours-table tr.today td { font-weight: 800; color: var(--teal); }
+.gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.gallery figure { margin: 0; position: relative; aspect-ratio: 1; max-width: 100%; overflow: hidden; border-radius: 4px; background: var(--bg); }
+.gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+.gallery figure:hover img { transform: scale(1.04); }
+@media (prefers-reduced-motion: reduce) { .gallery img, .gallery figure:hover img { transition: none; transform: none; } }
+.gallery figcaption { position: absolute; inset: auto 0 0 0; padding: 26px 12px 10px; background: linear-gradient(transparent, rgba(11,58,82,0.85)); color: #fff; font-size: 0.85rem; }
+.gallery .del { position: absolute; top: 8px; right: 8px; border: none; border-radius: 999px; background: rgba(255,255,255,0.92); color: #9a2f1f; font: 700 0.72rem var(--font-body); padding: 5px 10px; cursor: pointer; }
+.gallery .gal-empty { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.gallery .gal-empty a { aspect-ratio: 1; border-radius: 4px; display: grid; place-items: center; text-align: center; padding: 16px; text-decoration: none; color: var(--navy); background: var(--bg); border: 1.5px dashed var(--teal-soft); font: 400 1.3rem var(--font-script); }
+.gallery .gal-empty a svg { width: 34px; height: 34px; color: var(--teal); display: block; margin: 0 auto 8px; }
+.gallery-admin { background: var(--bg); border: 1.5px dashed var(--teal); border-radius: 4px; padding: 18px 20px; margin-bottom: 20px; }
+.gallery-admin p { margin: 6px 0 12px; color: var(--muted); }
+.gallery-form { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.gallery-form label.btn { cursor: pointer; }
+.gallery-form input[type="text"] { flex: 1; min-width: 200px; }
+.gal-status { margin: 10px 0 0 !important; font-weight: 600; color: var(--navy) !important; }
+.insta-cta { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 26px; }
+@media (max-width: 560px) { .gallery, .gallery .gal-empty { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; } .gallery .gal-empty a:nth-child(3) { display: none; } }
+[hidden].gallery-admin, .gal-status[hidden] { display: none; }
+.product { cursor: pointer; }
+.see-btn { margin-top: 10px; border: 1.5px solid var(--navy); background: transparent; color: var(--navy); border-radius: 999px; padding: 7px 16px; font: 700 0.7rem var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; }
+.product:hover .see-btn, .see-btn:focus-visible { background: var(--navy); color: #fff; }
+@media (max-width: 560px) { .see-btn { font-size: 0.56rem; padding: 6px 8px; letter-spacing: 0.04em; } }
+.modal { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: calc(16px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.modal[hidden] { display: none; }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(11,58,82,0.55); }
+.modal-panel { position: relative; width: 100%; max-width: 760px; max-height: 100%; overflow-y: auto; background: var(--bg); border-radius: 6px; padding: 26px; box-shadow: 0 30px 60px -20px rgba(0,0,0,0.4); }
+.modal-close { position: absolute; top: 12px; right: 12px; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--bg); font-size: 1.4rem; line-height: 1; color: var(--navy); cursor: pointer; z-index: 1; }
+.modal-head { display: grid; grid-template-columns: 220px 1fr; gap: 20px; align-items: center; margin-bottom: 18px; padding-right: 30px; }
+.modal-art { aspect-ratio: 16 / 10; max-width: 100%; position: relative; overflow: hidden; border-radius: 4px; }
+.modal-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.modal-head h2 { font-size: 1.5rem; margin-top: 4px; }
+.modal-head p { margin: 6px 0 0; color: var(--muted); }
+.articles { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.articles li { display: grid; grid-template-columns: 64px 1fr auto; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.articles .thumb { width: 64px; height: 64px; border-radius: 4px; object-fit: cover; background: var(--mist); display: grid; place-items: center; color: var(--teal); font: 400 1.4rem var(--font-script); }
+.articles .info { min-width: 0; }
+.articles .info b { display: block; color: var(--navy); font: 700 1rem var(--font-display); }
+.articles .info span { display: block; color: var(--muted); font-size: 0.9rem; }
+.articles .info .shop { font-size: 0.78rem; color: var(--teal); font-weight: 700; }
+.articles .price { font: 800 1.15rem var(--font-display); color: var(--navy); font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
+.articles .tools { display: flex; gap: 6px; justify-content: flex-end; margin-top: 6px; }
+.articles .tools button { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 2px 10px; font: 600 0.75rem var(--font-body); cursor: pointer; color: var(--navy); }
+.articles .tools button.danger { color: #9a2f1f; }
+.articles .none { display: block; text-align: center; color: var(--muted); padding: 26px 10px; }
+.articles-note { color: var(--muted); font-size: 0.85rem; margin: 14px 0 0; }
+.article-form { margin-top: 22px; border: 1.5px dashed var(--teal); border-radius: 4px; padding: 18px; display: grid; gap: 12px; }
+.article-form[hidden] { display: none; }
+.article-form h3 { font-size: 1.05rem; }
+.form-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+@media (max-width: 560px) {
+  .modal { padding-left: 0; padding-right: 0; padding-bottom: 0; align-items: end; }
+  .modal-panel { border-radius: 14px 14px 0 0; padding: 20px max(16px, env(safe-area-inset-left, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)); max-height: 92%; }
+  .modal-head { grid-template-columns: 1fr; padding-right: 0; }
+  .modal-art { display: none; }
+  .articles li { grid-template-columns: 52px 1fr auto; gap: 10px; }
+  .articles .thumb { width: 52px; height: 52px; }
+}
+body.modal-open { overflow: hidden; }
+.prod-tools { display: grid; gap: 14px; justify-items: center; margin-bottom: 22px; }
+.prod-tools input[type="search"] { max-width: 520px; border-radius: 999px; padding: 12px 18px; border-color: var(--teal); }
+.prod-tools .filters { margin: 0; }
+.prod-count { margin: 0; color: var(--muted); font-size: 0.9rem; }
+.prod-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.prod-card { background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 18px; display: grid; gap: 4px; align-content: start; min-width: 0; position: relative; }
+.prod-card .initial { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--mist); color: var(--teal); font: 400 1.6rem var(--font-script); margin-bottom: 6px; }
+.prod-card h3 { font-size: 1.02rem; overflow-wrap: anywhere; }
+.prod-card .cat { font: 400 1.1rem var(--font-script); color: var(--teal); line-height: 1.1; }
+.prod-card .commune { font-size: 0.82rem; color: var(--navy); font-weight: 700; letter-spacing: 0.04em; }
+.prod-card p { margin: 4px 0 0; color: var(--muted); font-size: 0.92rem; }
+.prod-card a.link { margin-top: 8px; font-weight: 700; font-size: 0.88rem; overflow-wrap: anywhere; }
+.prod-card .tools { display: flex; gap: 6px; margin-top: 10px; }
+.prod-card .tools button { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 2px 10px; font: 600 0.75rem var(--font-body); cursor: pointer; color: var(--navy); }
+.prod-card .tools button.danger { color: #9a2f1f; }
+.prod-empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 30px 16px; border: 1px dashed var(--line); border-radius: 4px; background: var(--bg); }
+.prod-form { margin-top: 28px; background: var(--bg); }
+@media (max-width: 820px) { .prod-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .prod-list { grid-template-columns: 1fr; } }
+.hours-note { margin: 12px 0 0; color: var(--muted); font-size: 0.88rem; }
+.section-head { text-align: center; display: grid; justify-items: center; gap: 6px; margin-bottom: 34px; }
+.section-head p { margin: 6px 0 0; color: var(--muted); max-width: 60ch; }
+.section-head .rule { width: 46px; height: 3px; background: var(--sun); border-radius: 2px; margin-top: 8px; }
+
+/* Produits : 2 par rangée */
+.filters { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 28px; }
+.chip { border: 1.5px solid var(--line); background: var(--bg); color: var(--navy); border-radius: 999px; padding: 6px 16px; font: 600 0.88rem var(--font-body); cursor: pointer; }
+.chip:hover { border-color: var(--teal); }
+.chip[aria-pressed="true"] { background: var(--teal); border-color: var(--teal); color: #fff; }
+.products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; }
+.product { background: var(--bg); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; transition: box-shadow .25s, transform .25s; }
+.product:hover { box-shadow: 0 14px 34px -18px rgba(11,58,82,0.35); transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .product, .product:hover { transition: none; transform: none; } }
+.product .art { aspect-ratio: 16 / 10; max-width: 100%; background: var(--mist); position: relative; overflow: hidden; }
+.product .art::after { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(255,255,255,0.7); pointer-events: none; }
+.fav { position: absolute; top: 14px; right: 14px; z-index: 1; width: 40px; height: 40px; border-radius: 50%; border: none; background: rgba(255,255,255,0.92); display: grid; place-items: center; cursor: pointer; box-shadow: 0 4px 12px -4px rgba(11,58,82,0.35); transition: transform .15s; }
+.fav:hover { transform: scale(1.08); }
+.fav svg { position: static !important; width: 20px !important; height: 20px !important; fill: none; stroke: var(--navy); stroke-width: 2; }
+.fav[aria-pressed="true"] svg { fill: #e0465a; stroke: #e0465a; }
+.fav.pop { animation: pop .35s ease; }
+@keyframes pop { 50% { transform: scale(1.25); } }
+@media (prefers-reduced-motion: reduce) { .fav, .fav.pop { transition: none; animation: none; } }
+.fav-count { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: #e0465a; color: #fff; font-size: 0.65rem; letter-spacing: 0; margin-left: 4px; vertical-align: 1px; }
+.empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 40px 16px; border: 1px dashed var(--line); border-radius: 4px; }
+@media (max-width: 560px) { .fav { top: 8px; right: 8px; width: 32px; height: 32px; } .fav svg { width: 16px !important; height: 16px !important; } }
+.product .art svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* Style dessin : contour à l'encre sur chaque forme pleine, puis un second trait de crayon décalé */
+.art .ink :is(path, rect, ellipse, circle):not([fill="none"]):not([filter]):not(.nk):not([fill="#fff"]):not([fill$="glassHi)"]) { stroke: #22313a; stroke-width: 1.15; stroke-linejoin: round; stroke-linecap: round; }
+.art .ink .edge { stroke: #22313a; stroke-width: 1.2; }
+.art .sketch * { fill: none !important; }
+.art .sketch :is(path, rect, ellipse, circle) { stroke: #22313a; stroke-width: 0.55; opacity: 0.45; }
+.art .sketch text, .art .sketch .nk, .art .sketch [filter], .art .sketch [fill="#fff"], .art .sketch [fill$="glassHi)"] { display: none; }
+.product .body { padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 6px; flex: 1; text-align: center; align-items: center; }
+.product h3 { font-size: 1.12rem; letter-spacing: 0.03em; }
+.product p { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 42ch; }
+.tag { font-family: var(--font-script); font-size: 1.25rem; color: var(--teal); line-height: 1; }
+.product .where { margin-top: auto; padding-top: 12px; font: 700 0.68rem var(--font-display); letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); opacity: 0.7; }
+@media (max-width: 560px) {
+  .products { gap: 10px; }
+  .product .body { padding: 12px 10px 14px; }
+  .product h3 { font-size: 0.92rem; }
+  .product p { font-size: 0.82rem; }
+  .product .where { font-size: 0.58rem; }
+  .tag { font-size: 1.05rem; }
+}
+
+/* Boutiques */
+.alt { background: var(--mist); }
+.store-list { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-bottom: 26px; }
+.store { background: var(--bg); padding: 26px; text-align: center; border-radius: 4px; min-width: 0; }
+.store h3 { font-size: 1.25rem; }
+.store h3 span { color: var(--teal); }
+.store .addr { margin: 10px 0 2px; color: var(--ink); }
+.store .tel { font: 700 1.15rem var(--font-display); color: var(--navy); font-variant-numeric: tabular-nums; }
+.store .hours { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+.store .links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 16px; }
+.store .links .btn { padding: 8px 16px; font-size: 0.7rem; }
+.copy { background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 999px; font: 600 0.72rem var(--font-body); padding: 1px 10px; margin-left: 8px; cursor: pointer; vertical-align: middle; }
+.copy:hover { color: var(--navy); border-color: var(--teal); }
+.map { background: #cfeaf0; border-radius: 4px; padding: 10px; }
+.map svg { width: 100%; height: auto; display: block; max-height: 520px; }
+.map .island { fill: #f7f3e3; stroke: #8cc9c4; stroke-width: 1.5; }
+.map .relief { fill: #d9ecd2; }
+.map .relief2 { fill: #c6e2bf; }
+.map .town { fill: var(--muted); font: 600 11px var(--font-body); }
+.map .shop circle.dot { fill: var(--sun); stroke: var(--navy); stroke-width: 2.5; cursor: pointer; }
+.map .shop circle.halo { fill: var(--sun); opacity: 0.3; }
+.map .shop text { fill: var(--navy); font: 800 14px var(--font-display); }
+.map .shop text.sub { font: italic 600 11px var(--font-body); fill: var(--teal); }
+.map .sea { fill: #6aa9b9; font: 700 12px var(--font-display); letter-spacing: 0.3em; }
+.gmaps { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 16px; }
+.map-note { font-size: 0.85rem; color: var(--muted); margin: 10px 0 0; text-align: center; }
+.contact-row { display: flex; flex-wrap: wrap; gap: 12px 26px; justify-content: center; align-items: center; margin-top: 26px; }
+.contact-row .mail { font-weight: 700; color: var(--navy); }
+.social { display: inline-flex; align-items: center; gap: 8px; color: var(--navy); text-decoration: none; font-weight: 700; }
+.social svg { width: 22px; height: 22px; }
+.social:hover { color: var(--teal); }
+
+/* Compte */
+.account { display: grid; grid-template-columns: 1fr 1.15fr; gap: 44px; align-items: start; }
+.account .intro h2 { margin-top: 6px; }
+.account .intro p { color: var(--muted); max-width: 46ch; }
+.account .perks { display: grid; gap: 10px; padding: 0; margin: 18px 0 0; list-style: none; }
+.account .perks li { padding-left: 26px; position: relative; }
+.account .perks li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 12px; height: 12px; border-radius: 50%; background: var(--sun); box-shadow: inset 0 0 0 3px #fff, 0 0 0 1.5px var(--sun); }
+form.card { background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 28px; display: grid; gap: 16px; min-width: 0; box-shadow: 0 20px 40px -30px rgba(11,58,82,0.4); }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+label { display: grid; gap: 5px; font: 700 0.72rem var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); }
+input, select { font: 400 1rem var(--font-body); color: var(--ink); background: var(--bg); border: 1.5px solid var(--line); border-radius: 4px; padding: 11px 12px; width: 100%; min-width: 0; text-transform: none; letter-spacing: 0; }
+input:focus, select:focus { border-color: var(--teal); outline: none; box-shadow: 0 0 0 3px rgba(36,170,168,0.18); }
+.check { display: flex; gap: 10px; align-items: flex-start; font: 400 0.92rem var(--font-body); text-transform: none; letter-spacing: 0; color: var(--ink); }
+.check input { width: auto; margin-top: 5px; accent-color: var(--teal); }
+.status { font-size: 0.92rem; border-radius: 4px; padding: 10px 12px; }
+.status.ok { background: #e4f5f4; color: var(--navy); }
+.status.err { background: #fbe9e6; color: #7a2418; }
+.status.info { background: #fdf6d8; color: #5c4a05; }
+
+/* Espace gérantes */
+.admin { margin-top: 40px; border: 1.5px dashed var(--teal); border-radius: 4px; padding: 22px; background: var(--mist); }
+.admin h3 { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.table-wrap { overflow-x: auto; margin-top: 12px; background: var(--bg); }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { color: var(--muted); font: 700 0.7rem var(--font-display); text-transform: uppercase; letter-spacing: 0.1em; }
+td.num { font-variant-numeric: tabular-nums; }
+
+footer { background: var(--navy); color: #cfe3ea; }
+/* Feuillages décoratifs dans toutes les sections, sur les bords */
+section, footer { position: relative; overflow: hidden; }
+section > .wrap, footer > .wrap { position: relative; z-index: 1; }
+.deco { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.deco svg { position: absolute; overflow: visible; }
+.deco .d-tl { width: 260px; left: -120px; top: -90px; transform: rotate(-35deg); }
+.deco .d-tr { width: 270px; right: -120px; top: -100px; transform: rotate(38deg); }
+.deco .d-ml { width: 220px; left: -130px; top: 45%; transform: rotate(-70deg); }
+.deco .d-ml2 { width: 240px; left: -120px; top: 50%; transform: rotate(-80deg); }
+.deco .d-l30 { width: 250px; left: -120px; top: 28%; transform: rotate(-60deg); }
+.deco .d-r48 { width: 250px; right: -120px; top: 46%; transform: rotate(70deg); }
+.deco .d-l66-palm { width: 270px; left: -150px; top: 64%; transform: rotate(95deg); }
+.deco .d-r78 { width: 240px; right: -115px; top: 76%; transform: rotate(100deg); }
+.deco .d-l90 { width: 230px; left: -110px; top: 88%; transform: rotate(-110deg); }
+.deco .d-mr { width: 230px; right: -130px; top: 40%; transform: rotate(75deg); }
+.deco .d-br { width: 260px; right: -120px; bottom: -110px; transform: rotate(150deg); }
+.deco .d-mr-palm { width: 260px; right: -150px; top: 22%; transform: rotate(-100deg); }
+.deco .d-bl-palm { width: 280px; left: -110px; bottom: -150px; transform: rotate(40deg); }
+.deco .d-br-palm { width: 280px; right: -110px; bottom: -150px; transform: rotate(-40deg); }
+footer .deco svg { opacity: 0.55; }
+.deco .f-l { width: 220px; left: -90px; top: -60px; transform: rotate(-30deg); }
+.deco .f-r { width: 220px; right: -90px; bottom: -110px; transform: rotate(150deg); }
+.deco .f-palm { width: 240px; left: 42%; bottom: -160px; }
+@media (max-width: 820px) {
+  .deco svg { transform-origin: center; }
+  .deco .d-tl, .deco .d-tr, .deco .d-br { width: 170px; }
+  .deco .d-ml, .deco .d-ml2, .deco .d-mr, .deco .d-l30, .deco .d-r48, .deco .d-r78, .deco .d-l90, .deco .d-l66-palm { width: 150px; }
+  .deco .d-l30, .deco .d-l90, .deco .d-l66-palm { left: -95px; } .deco .d-r48, .deco .d-r78 { right: -95px; }
+  .deco .d-mr-palm, .deco .d-bl-palm, .deco .d-br-palm { width: 190px; }
+  .deco .d-tl { left: -90px; top: -70px; } .deco .d-tr { right: -90px; top: -75px; }
+  .deco .d-ml, .deco .d-ml2 { left: -100px; } .deco .d-mr { right: -100px; }
+}
+
+footer .wrap { padding-block: 34px; display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: center; font-size: 0.9rem; }
+footer a { color: var(--teal-soft); }
+
+.toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--navy); color: #fff; padding: 10px 18px; border-radius: 999px; font-size: 0.9rem; z-index: 20; max-width: calc(100% - 32px); }
+
+@media (max-width: 820px) {
+  .account, .story-grid { grid-template-columns: 1fr; }
+  .story-grid { gap: 28px; }
+  .values { grid-template-columns: 1fr; gap: 12px; }
+  .foliage .l2, .foliage .l3 { display: none; }
+  .foliage .l1 { width: 280px; left: -90px; top: -135px; }
+  .foliage .l4 { width: 270px; right: -100px; top: -125px; }
+  .hero .wrap { padding-block: 150px 56px; }
+}
+@media (max-width: 560px) {
+  .store-list, .row2 { grid-template-columns: 1fr; }
+  .facts b { font-size: 1.1rem; }
+  .facts span { font-size: 0.75rem; }
+  header.top .wrap { flex-wrap: nowrap; }
+  .logo.small { font-size: 1.3rem; }
+  .icon-btn, .burger { width: 40px; height: 40px; }
+  .btn-refresh { width: 40px; height: 40px; padding: 0; font-size: 0; gap: 0; border-radius: 50%; }
+  .btn-refresh svg { width: 17px; height: 17px; }
+  .header-actions { gap: 8px; flex: none; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <mask id="monstera-holes" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+      <rect width="200" height="200" fill="#fff"/>
+      <g fill="#000"><path d="M8 63 Q46.0 81.0 84 96 Q46.0 86.0 8 77 Z"/><path d="M6 103 Q46.0 117.0 86 128 Q46.0 122.0 6 117 Z"/><path d="M22 143 Q56.0 153.0 90 160 Q56.0 158.0 22 157 Z"/><path d="M32 29 Q59.0 51.0 86 70 Q59.0 56.0 32 43 Z"/><path d="M192 63 Q154.0 81.0 116 96 Q154.0 86.0 192 77 Z"/><path d="M194 103 Q154.0 117.0 114 128 Q154.0 122.0 194 117 Z"/><path d="M178 143 Q144.0 153.0 110 160 Q144.0 158.0 178 157 Z"/><path d="M168 29 Q141.0 51.0 114 70 Q141.0 56.0 168 43 Z"/><ellipse cx="66" cy="146" rx="4" ry="7" transform="rotate(-30 66 146)"/><ellipse cx="134" cy="146" rx="4" ry="7" transform="rotate(30 134 146)"/><ellipse cx="70" cy="104" rx="3.5" ry="6" transform="rotate(-30 70 104)"/><ellipse cx="130" cy="104" rx="3.5" ry="6" transform="rotate(30 130 104)"/></g>
+    </mask>
+    <filter id="paint" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="3" seed="7" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="paint-soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="3" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="6" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="0.6"/>
+    </filter>
+    <symbol id="monstera" viewBox="0 0 200 200" overflow="visible">
+      <g filter="url(#paint)">
+        <g mask="url(#monstera-holes)">
+          <path d="M100 198 C58 186 8 154 6 96 C4 44 48 8 94 22 L100 34 L106 22 C152 8 196 44 194 96 C192 154 142 186 100 198Z" fill="currentColor"/>
+          <g fill="#06243a" opacity="0.32">
+            <path d="M58 30 C36 56 26 92 40 128 C56 104 66 70 58 30Z"/>
+            <path d="M150 56 C172 88 174 122 160 156 C148 124 144 90 150 56Z"/>
+            <path d="M88 150 C78 170 84 186 100 194 C100 176 97 162 88 150Z"/>
+            <path d="M14 92 C18 110 26 122 36 130 C30 116 22 104 14 92Z"/>
+          </g>
+          <g fill="#ffffff" opacity="0.32">
+            <path d="M110 28 C142 32 168 56 172 84 C150 72 126 56 110 28Z"/>
+            <path d="M28 104 C24 134 40 162 72 178 C56 152 42 128 28 104Z"/>
+            <path d="M120 118 C142 128 152 150 146 172 C132 156 124 140 120 118Z"/>
+            <path d="M44 40 C56 34 68 34 76 40 C64 44 54 46 44 40Z"/>
+          </g>
+          <g fill="#ffffff" opacity="0.55">
+            <path d="M68 70 C80 58 96 56 102 64 C92 72 80 76 68 70Z"/>
+            <path d="M132 92 C144 88 156 92 162 100 C150 102 140 100 132 92Z"/>
+            <path d="M40 150 C48 156 58 160 66 160 C58 152 50 150 40 150Z"/>
+          </g>
+        </g>
+        <path d="M100 196 C99 150 99 90 100 34" stroke="#ffffff" stroke-width="3" opacity="0.45" fill="none" stroke-linecap="round"/>
+      </g>
+    </symbol>
+    <symbol id="palm" viewBox="-110 -10 220 170" overflow="visible">
+      <g filter="url(#paint-soft)">
+        <g transform="rotate(-62)"><path d="M0 0 C11 45 9 105 0 158 C-9 105 -11 45 0 0Z" fill="#c9a514"/><path d="M0 4 C4 50 3 105 0 150 C-1 105 -2 50 0 4Z" fill="#8a6f0c" opacity="0.55"/><path d="M-4 30 C-3 70 -3 100 -2 130" stroke="#fff" stroke-width="1.6" opacity="0.5" fill="none"/></g>
+        <g transform="rotate(-44)"><path d="M0 0 C11 45 9 105 0 158 C-9 105 -11 45 0 0Z" fill="#f3e08e"/><path d="M0 4 C4 50 3 105 0 150 C-1 105 -2 50 0 4Z" fill="#c9a514" opacity="0.55"/><path d="M-4 30 C-3 70 -3 100 -2 130" stroke="#fff" stroke-width="1.6" opacity="0.5" fill="none"/></g>
+        <g transform="rotate(-27)"><path d="M0 0 C11 45 9 105 0 158 C-9 105 -11 45 0 0Z" fill="#e9c21b"/><path d="M0 4 C4 50 3 105 0 150 C-1 105 -2 50 0 4Z" fill="#9c7d0e" opacity="0.55"/><path d="M-4 30 C-3 70 -3 100 -2 130" stroke="#fff" stroke-width="1.6" opacity="0.5" fill="none"/></g>
+        <g transform="rotate(-10)"><path d="M0 0 C11 45 9 105 0 158 C-9 105 -11 45 0 0Z" fill="#8f7d1c"/><path d="M0 4 C4 50 3 105 0 150 C-1 105 -2 50 0 4Z" fill="#5e510f" opacity="0.55"/><path d="M-4 30 C-3 70 -3 100 -2 130" stroke="#fff" stroke-width="1.6" opacity="0.5" fill="none"/></g>
+        <g transform="rotate(8)"><path d="M0 0 C11 45 9 105 0 158 C-9 105 -11 45 0 0Z" fill="#f7eab0"/><path d="M0 4 C4 50 3 105 0 150 C-1 105 -2 50 0 4Z" fill="#d4b84a" opacity="0.55"/><path d="M-4 30 C-3 70 -3 100 -2 130" stroke="#fff" stroke-width="1.6" opacity="0.5" fill="none"/></g>
+        <g transform="rotate(26)"><path d="M0 0 C11 45 9 105 0 158 C-9 105 -11 45 0 0Z" fill="#e9c21b"/><path d="M0 4 C4 50 3 105 0 150 C-1 105 -2 50 0 4Z" fill="#a8860f" opacity="0.55"/><path d="M-4 30 C-3 70 -3 100 -2 130" stroke="#fff" stroke-width="1.6" opacity="0.5" fill="none"/></g>
+        <g transform="rotate(44)"><path d="M0 0 C11 45 9 105 0 158 C-9 105 -11 45 0 0Z" fill="#d8b62a"/><path d="M0 4 C4 50 3 105 0 150 C-1 105 -2 50 0 4Z" fill="#7d6a12" opacity="0.55"/><path d="M-4 30 C-3 70 -3 100 -2 130" stroke="#fff" stroke-width="1.6" opacity="0.5" fill="none"/></g>
+        <g transform="rotate(62)"><path d="M0 0 C11 45 9 105 0 158 C-9 105 -11 45 0 0Z" fill="#f3e08e"/><path d="M0 4 C4 50 3 105 0 150 C-1 105 -2 50 0 4Z" fill="#b8971a" opacity="0.55"/><path d="M-4 30 C-3 70 -3 100 -2 130" stroke="#fff" stroke-width="1.6" opacity="0.5" fill="none"/></g>
+      </g>
+    </symbol>
+    <symbol id="pine-a" viewBox="0 0 48 40">
+      <rect x="35" y="1" width="9" height="39" rx="4.5" fill="currentColor"/>
+      <circle cx="19" cy="21" r="18.5" fill="currentColor"/>
+      <g stroke="#fff" stroke-width="2.2" stroke-linecap="round" opacity="0.95">
+        <path d="M11 13 L27 29 M27 13 L11 29"/>
+        <path d="M19 7 L19 10 M19 32 L19 35 M5 21 L8 21 M30 21 L33 21"/>
+      </g>
+      <circle cx="19" cy="21" r="3" fill="#fff"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="top" id="haut">
+  <div class="wrap">
+    <a class="logo small" href="#accueil" aria-label="Nanas Vanille, retour à l'accueil">
+      <span class="nanas">N<span class="a" style="color:var(--sun)"><svg><use href="#pine-a"/></svg></span>N<span class="a" style="color:var(--navy)"><svg><use href="#pine-a"/></svg></span>S</span><span class="colon"><i></i><i></i></span><span class="vanille">Vanille</span>
+    </a>
+    <div class="header-actions">
+      <button class="icon-btn" id="search-btn" type="button" aria-expanded="false" aria-controls="searchbar" aria-label="Rechercher">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 L21 21"/></svg>
+      </button>
+      <button class="btn btn-refresh" id="refresh" type="button" title="Rafraîchir la page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>
+        Rafraîchir
+      </button>
+      <div class="burger-wrap">
+        <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu-panel" aria-label="Ouvrir le menu">
+          <span></span><span></span><span></span>
+          <i class="dot" id="burger-dot" hidden></i>
+        </button>
+        <nav class="menu-panel" id="menu-panel" aria-label="Navigation principale" hidden>
+          <a href="#produits">Produits</a>
+          <a href="#produits" id="fav-link">Favoris<span class="fav-count" id="fav-count" hidden>0</span></a>
+          <a href="#producteurs">Nos producteurs</a>
+          <a href="#histoire">Notre histoire</a>
+          <a href="#compte">Mon compte</a>
+          <a href="#boutiques">Nos 2 boutiques</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="searchbar" id="searchbar" hidden>
+    <div class="wrap">
+      <form class="search-form" id="search-form" role="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 L21 21"/></svg>
+        <label for="search-input" class="sr-only">Rechercher un produit</label>
+        <input id="search-input" type="search" placeholder="Rechercher : vanille, rhum, savon, bijoux…" autocomplete="off" enterkeyhint="search">
+        <button type="button" class="search-clear" id="search-clear" aria-label="Effacer la recherche">×</button>
+      </form>
+      <div class="search-suggest" id="search-suggest"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="hero" id="accueil" data-view="accueil">
+    <div class="foliage" aria-hidden="true">
+      <svg class="l1" viewBox="0 0 200 200" style="color:#1f5f8b"><use href="#monstera"/></svg>
+      <svg class="l2" viewBox="-110 -10 220 160"><use href="#palm"/></svg>
+      <svg class="l3" viewBox="0 0 200 200" style="color:#9fdad6"><use href="#monstera"/></svg>
+      <svg class="l4" viewBox="0 0 200 200" style="color:#3fb9b3"><use href="#monstera"/></svg>
+    </div>
+    <div class="wrap">
+      <a class="logo big" href="#accueil" aria-label="Nanas Vanille">
+        <span class="nanas">N<span class="a crown" style="color:var(--sun)"><svg><use href="#pine-a"/></svg></span>N<span class="a" style="color:var(--navy)"><svg><use href="#pine-a"/></svg></span>S</span><span class="colon"><i></i><i></i></span><span class="vanille">Vanille</span>
+      </a>
+      <h1>L'art &amp; le terroir de l'île de la Réunion</h1>
+      <p class="lead">Épicerie fine, décoration, bien-être, mode, bijoux, librairie… Les créations de plus de 200 artistes, artisans et producteurs de l'île, dans nos deux boutiques de Saint-Denis et Saint-Pierre.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#produits">Découvrir les produits</a>
+        <a class="btn btn-ghost" href="#histoire">Notre histoire</a>
+      </div>
+    </div>
+  </div>
+
+  <section id="histoire" class="alt story" data-view="histoire" hidden>
+    <div class="deco" aria-hidden="true"><svg class="d-tl" viewBox="0 0 200 200" style="color:#3fb9b3"><use href="#monstera"/></svg><svg class="d-br-palm" viewBox="-110 -10 220 170"><use href="#palm"/></svg><svg class="d-ml" viewBox="0 0 200 200" style="color:#9fdad6"><use href="#monstera"/></svg></div>
+    <div class="wrap">
+      <a class="back" href="#accueil">← Retour aux produits</a>
+      <div class="section-head">
+        <span class="eyebrow">notre histoire</span>
+        <h2>Deux nanas, une île, mille talents</h2>
+        <div class="rule"></div>
+      </div>
+      <div class="story-grid">
+        <div class="story-text">
+          <p class="dropcap">Nanas Vanille, c'est d'abord l'histoire de Justine et de son amie Kat, amoureuses de leur île et de celles et ceux qui la font vivre. En novembre 2019, elles ouvrent leur première boutique au cœur de Saint-Pierre, rue Victor le Vigoureux, avec une idée simple : réunir sous un même toit le meilleur de ce que La Réunion crée et produit.</p>
+          <p>Le nom dit tout. Des « nanas », et la vanille, trésor de l'île et symbole d'un savoir-faire patient, transmis de génération en génération.</p>
+          <p>Très vite, la boutique devient un lieu de rencontre. Les artistes, créateurs, artisans et producteurs y trouvent une vitrine. Les clients y trouvent des produits authentiques, faits ici, avec une histoire derrière chaque objet. Une deuxième boutique ouvre ensuite à Saint-Denis, rue de Paris.</p>
+          <p>Aujourd'hui, on y vient pour un pot de confiture, un bijou, un livre ou un cadeau, et on y revient pour les dégustations, les dédicaces d'auteurs et les expositions, avec un nouvel artiste mis à l'honneur chaque mois à Saint-Pierre.</p>
+          <blockquote>« Tout ce que vous trouvez chez nous est fait à La Réunion. »</blockquote>
+        </div>
+        <ol class="timeline" aria-label="Les grandes étapes">
+          <li><span class="when">Novembre 2019</span><b>Ouverture à Saint-Pierre</b><span>La première boutique Nanas Vanille, rue Victor le Vigoureux.</span></li>
+          <li><span class="when">Ensuite</span><b>Arrivée à Saint-Denis</b><span>Une deuxième boutique dans le nord, rue de Paris.</span></li>
+          <li><span class="when">Aujourd'hui</span><b>Un lieu vivant</b><span>Créateurs, producteurs, dégustations, dédicaces et expositions toute l'année.</span></li>
+        </ol>
+      </div>
+      <div class="values">
+        <div><h3>100 % péi</h3><p>Chaque article est fait ou produit à La Réunion.</p></div>
+        <div><h3>Les créateurs à l'honneur</h3><p>Une vitrine pour les talents de l'île, connus ou à découvrir.</p></div>
+        <div><h3>Un lieu de rencontres</h3><p>Dégustations, dédicaces et expositions dans les deux boutiques.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="produits" data-view="accueil">
+    <div class="deco" aria-hidden="true"><svg class="d-l30" viewBox="0 0 200 200" style="color:#1f5f8b"><use href="#monstera"/></svg><svg class="d-r48" viewBox="0 0 200 200" style="color:#3fb9b3"><use href="#monstera"/></svg><svg class="d-l66-palm" viewBox="-110 -10 220 170"><use href="#palm"/></svg><svg class="d-r78" viewBox="0 0 200 200" style="color:#9fdad6"><use href="#monstera"/></svg><svg class="d-l90" viewBox="0 0 200 200" style="color:#3fb9b3"><use href="#monstera"/></svg><svg class="d-tl" viewBox="0 0 200 200" style="color:#9fdad6"><use href="#monstera"/></svg><svg class="d-mr-palm" viewBox="-110 -10 220 170"><use href="#palm"/></svg><svg class="d-ml2" viewBox="0 0 200 200" style="color:#1f5f8b"><use href="#monstera"/></svg><svg class="d-br" viewBox="0 0 200 200" style="color:#3fb9b3"><use href="#monstera"/></svg><svg class="d-bl-palm" viewBox="-110 -10 220 170"><use href="#palm"/></svg></div>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">fait à La Réunion</span>
+        <h2>Nos produits</h2>
+        <div class="rule"></div>
+        <p>Une sélection qui change au fil des arrivages et des créateurs. Pour connaître la disponibilité et le prix d'un article, appelez la boutique la plus proche.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filtrer par rayon" id="filters"></div>
+      <p class="search-info" id="search-info" hidden></p>
+      <div class="products" id="product-grid"></div>
+    </div>
+  </section>
+
+  <section id="galerie" class="alt" data-view="accueil">
+    <div class="deco" aria-hidden="true"><svg class="d-tr" viewBox="0 0 200 200" style="color:#1f5f8b"><use href="#monstera"/></svg><svg class="d-bl-palm" viewBox="-110 -10 220 170"><use href="#palm"/></svg><svg class="d-mr" viewBox="0 0 200 200" style="color:#9fdad6"><use href="#monstera"/></svg></div>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">sur nos réseaux</span>
+        <h2>La vie des boutiques</h2>
+        <div class="rule"></div>
+        <p>Nouveautés, créateurs, dégustations et coulisses : suivez-nous sur Instagram <a href="https://www.instagram.com/nanasvanille/" target="_blank" rel="noopener">@nanasvanille</a>.</p>
+      </div>
+      <div class="gallery-admin" id="gallery-admin" hidden>
+        <span class="eyebrow">réservé aux gérantes</span>
+        <p>Ajoutez ici les photos de vos publications Instagram ou Facebook. Elles apparaissent tout de suite pour tous les visiteurs.</p>
+        <div class="gallery-form">
+          <label for="gal-files" class="btn btn-primary">Ajouter des photos</label>
+          <input id="gal-files" type="file" accept="image/*" multiple class="sr-only">
+          <label for="gal-caption" class="sr-only">Légende (facultatif)</label>
+          <input id="gal-caption" type="text" maxlength="120" placeholder="Légende (facultatif), par ex. Dégustation de rhums arrangés">
+        </div>
+        <p class="gal-status" id="gal-status" hidden></p>
+      </div>
+      <div class="gallery" id="gallery"></div>
+      <div class="insta-cta">
+        <a class="btn btn-ghost" href="https://www.instagram.com/nanasvanille/" target="_blank" rel="noopener">Voir tout sur Instagram</a>
+        <a class="btn btn-ghost" href="https://www.facebook.com/p/Nanas-Vanille-100046685299030/" target="_blank" rel="noopener">Voir sur Facebook</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="producteurs" data-view="producteurs" hidden>
+    <div class="deco" aria-hidden="true"><svg class="d-tl" viewBox="0 0 200 200" style="color:#3fb9b3"><use href="#monstera"/></svg><svg class="d-r48" viewBox="0 0 200 200" style="color:#1f5f8b"><use href="#monstera"/></svg><svg class="d-bl-palm" viewBox="-110 -10 220 170"><use href="#palm"/></svg><svg class="d-br" viewBox="0 0 200 200" style="color:#9fdad6"><use href="#monstera"/></svg></div>
+    <div class="wrap">
+      <a class="back" href="#accueil">← Retour aux produits</a>
+      <div class="section-head">
+        <span class="eyebrow">ils font Nanas Vanille</span>
+        <h2>Nos producteurs &amp; créateurs</h2>
+        <div class="rule"></div>
+        <p>Artistes, artisans, créateurs et producteurs de l'île : ce sont eux que vous retrouvez dans nos deux boutiques.</p>
+      </div>
+      <div class="prod-tools">
+        <label for="prod-search" class="sr-only">Chercher un producteur</label>
+        <input id="prod-search" type="search" placeholder="Chercher un nom, une commune, un savoir-faire…" autocomplete="off">
+        <div class="filters" id="prod-filters" role="group" aria-label="Filtrer par savoir-faire"></div>
+        <p class="prod-count" id="prod-count"></p>
+      </div>
+      <div class="prod-list" id="prod-list"></div>
+      <form class="article-form prod-form" id="prod-form" hidden novalidate>
+        <span class="eyebrow">réservé aux gérantes</span>
+        <h3 id="prod-form-title">Ajouter un producteur ou un créateur</h3>
+        <div class="row2">
+          <label for="pf-nom">Nom<input id="pf-nom" maxlength="80" required placeholder="Ex. Escale Bleue"></label>
+          <label for="pf-cat">Savoir-faire
+            <select id="pf-cat"><option>Épicerie fine</option><option>Boissons</option><option>Bien-être</option><option>Bijoux</option><option>Mode</option><option>Décoration &amp; art</option><option>Librairie</option><option>Autre</option></select>
+          </label>
+        </div>
+        <div class="row2">
+          <label for="pf-commune">Commune (facultatif)<input id="pf-commune" maxlength="60" placeholder="Ex. Saint-Philippe"></label>
+          <label for="pf-lien">Site ou Instagram (facultatif)<input id="pf-lien" type="url" maxlength="200" placeholder="https://…"></label>
+        </div>
+        <label for="pf-desc">Ce qu'il ou elle propose (facultatif)<input id="pf-desc" maxlength="200" placeholder="Ex. Vanille bleue, vieillie deux ans"></label>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="pf-submit">Ajouter</button>
+          <button type="button" class="btn btn-ghost" id="pf-cancel" hidden>Annuler la modification</button>
+        </div>
+        <p class="status" id="pf-status" hidden></p>
+      </form>
+    </div>
+  </section>
+
+  <section id="boutiques" class="alt" data-view="boutiques" hidden>
+    <div class="deco" aria-hidden="true"><svg class="d-tr" viewBox="0 0 200 200" style="color:#3fb9b3"><use href="#monstera"/></svg><svg class="d-ml" viewBox="0 0 200 200" style="color:#1f5f8b"><use href="#monstera"/></svg><svg class="d-br-palm" viewBox="-110 -10 220 170"><use href="#palm"/></svg></div>
+    <div class="wrap">
+      <a class="back" href="#accueil">← Retour à l'accueil</a>
+      <div class="section-head">
+        <span class="eyebrow">venez nous voir</span>
+        <h2>Nos 2 boutiques</h2>
+        <div class="rule"></div>
+      </div>
+      <div class="facts">
+        <div><b>200+</b><span>créateurs péi</span></div>
+        <div><b>2</b><span>boutiques, nord &amp; sud</span></div>
+        <div><b>9h30–18h30</b><span>du lundi au samedi</span></div>
+      </div>
+      <div class="hours">
+        <div class="hours-head"><h3>Horaires</h3><span class="open-badge" id="open-badge"></span></div>
+        <table class="hours-table" id="hours-table"><caption class="sr-only">Horaires d'ouverture des deux boutiques</caption><tbody></tbody></table>
+        <p class="hours-note">Les mêmes horaires à Saint-Denis et à Saint-Pierre, sans fermeture le midi. Ils peuvent changer les jours fériés : pensez à appeler avant de venir.</p>
+      </div>
+      <div class="store-list" id="store-list"></div>
+      <div class="map" id="map" role="img" aria-label="Carte de La Réunion avec les boutiques de Saint-Denis et Saint-Pierre"></div>
+      <div class="gmaps">
+        <a class="btn btn-primary" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Nanas%20Vanille%2017%20rue%20de%20Paris%2097400%20Saint-Denis">Saint-Denis sur Google Maps</a>
+        <a class="btn btn-primary" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Nanas%20Vanille%2013%20rue%20Victor%20le%20Vigoureux%2097410%20Saint-Pierre">Saint-Pierre sur Google Maps</a>
+      </div>
+      <p class="map-note">Les boutons ouvrent Google Maps dans un nouvel onglet, avec l'itinéraire jusqu'à la boutique.</p>
+      <div class="contact-row">
+        <span>E-mail : <span class="mail">contact@nanasvanille.re</span><button class="copy" type="button" data-copy="contact@nanasvanille.re">Copier</button></span>
+        <a class="social" href="https://www.instagram.com/nanasvanille/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          @nanasvanille
+        </a>
+        <a class="social" href="https://www.facebook.com/p/Nanas-Vanille-100046685299030/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8h3V4h-3c-2.8 0-5 2.2-5 5v2H7v4h2v7h4v-7h3l1-4h-4V9c0-.6.4-1 1-1z"/></svg>
+          Facebook
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="compte" data-view="compte" hidden>
+    <div class="deco" aria-hidden="true"><svg class="d-tr" viewBox="0 0 200 200" style="color:#9fdad6"><use href="#monstera"/></svg><svg class="d-bl-palm" viewBox="-110 -10 220 170"><use href="#palm"/></svg><svg class="d-br" viewBox="0 0 200 200" style="color:#1f5f8b"><use href="#monstera"/></svg></div>
+    <div class="wrap">
+      <a class="back" href="#accueil">← Retour à l'accueil</a>
+      <div class="account">
+        <div class="intro">
+          <span class="eyebrow">espace client</span>
+          <h2>Créer mon compte</h2>
+          <p>Inscrivez-vous pour être prévenu des nouveaux créateurs, des dégustations, des dédicaces et des expositions dans nos boutiques. Votre inscription est transmise aux gérantes.</p>
+          <ul class="perks">
+            <li>Les nouveautés des créateurs en avant-première</li>
+            <li>Les invitations aux dégustations et dédicaces</li>
+            <li>L'artiste du mois à Saint-Pierre</li>
+          </ul>
+        </div>
+        <form class="card" id="signup" novalidate>
+          <div class="row2">
+            <label for="prenom">Prénom<input id="prenom" name="prenom" autocomplete="given-name" required maxlength="60"></label>
+            <label for="nom">Nom<input id="nom" name="nom" autocomplete="family-name" required maxlength="60"></label>
+          </div>
+          <label for="email">E-mail<input id="email" name="email" type="email" autocomplete="email" required maxlength="120"></label>
+          <div class="row2">
+            <label for="tel">Téléphone (facultatif)<input id="tel" name="tel" type="tel" autocomplete="tel" maxlength="30"></label>
+            <label for="boutique">Ma boutique
+              <select id="boutique" name="boutique">
+                <option value="Saint-Denis">Saint-Denis</option>
+                <option value="Saint-Pierre">Saint-Pierre</option>
+                <option value="Les deux">Les deux</option>
+              </select>
+            </label>
+          </div>
+          <label class="check" for="news"><input id="news" name="news" type="checkbox" checked> Je veux recevoir les nouveautés et les invitations.</label>
+          <label class="check" for="rgpd"><input id="rgpd" name="rgpd" type="checkbox" required> J'accepte que Nanas Vanille conserve ces informations pour me contacter.</label>
+          <button class="btn btn-primary" type="submit" id="submit-btn">Créer mon compte</button>
+          <div class="status" id="status" hidden></div>
+        </form>
+      </div>
+
+      <div class="admin" id="admin" hidden>
+        <span class="eyebrow">réservé aux gérantes</span>
+        <h3>Inscriptions reçues <span id="admin-count"></span></h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Date</th><th>Prénom</th><th>Nom</th><th>E-mail</th><th>Téléphone</th><th>Boutique</th><th>Nouveautés</th></tr></thead>
+            <tbody id="admin-rows"></tbody>
+          </table>
+        </div>
+        <p style="margin-top:14px"><button class="btn btn-ghost" type="button" id="copy-emails">Copier tous les e-mails</button></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="modal" id="rayon-modal" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="rayon-title">
+    <button type="button" class="modal-close" data-close aria-label="Fermer">×</button>
+    <div class="modal-head">
+      <div class="modal-art" id="rayon-art" aria-hidden="true"></div>
+      <div>
+        <span class="eyebrow" id="rayon-cat"></span>
+        <h2 id="rayon-title"></h2>
+        <p id="rayon-text"></p>
+      </div>
+    </div>
+    <ul class="articles" id="rayon-list"></ul>
+    <p class="articles-note">Prix en boutique, susceptibles d'évoluer selon les arrivages. Pour réserver un article, appelez Saint-Denis au 02 62 20 41 41 ou Saint-Pierre au 02 62 87 01 19.</p>
+    <form class="article-form" id="article-form" hidden novalidate>
+      <span class="eyebrow">réservé aux gérantes</span>
+      <h3 id="article-form-title">Ajouter un article dans ce rayon</h3>
+      <div class="row2">
+        <label for="art-nom">Nom de l'article<input id="art-nom" maxlength="80" required placeholder="Ex. Gousses de vanille Bourbon, 10 g"></label>
+        <label for="art-prix">Prix (€)<input id="art-prix" type="number" min="0" step="0.01" inputmode="decimal" required placeholder="12,50"></label>
+      </div>
+      <label for="art-desc">Description (facultatif)<input id="art-desc" maxlength="200" placeholder="Ex. Producteur de Saint-Philippe, gousses de 16 cm"></label>
+      <div class="row2">
+        <label for="art-boutique">Disponible à
+          <select id="art-boutique"><option>Les deux boutiques</option><option>Saint-Denis</option><option>Saint-Pierre</option></select>
+        </label>
+        <label for="art-photo">Photo (facultatif)<input id="art-photo" type="file" accept="image/*"></label>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" id="art-submit">Ajouter l'article</button>
+        <button type="button" class="btn btn-ghost" id="art-cancel" hidden>Annuler la modification</button>
+      </div>
+      <p class="status" id="art-status" hidden></p>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="deco" aria-hidden="true"><svg class="f-l" viewBox="0 0 200 200" style="color:#2b7aa8"><use href="#monstera"/></svg><svg class="f-palm" viewBox="-110 -10 220 170"><use href="#palm"/></svg><svg class="f-r" viewBox="0 0 200 200" style="color:#3fb9b3"><use href="#monstera"/></svg></div>
+  <div class="wrap">
+    <a class="logo footer-logo" href="#accueil" aria-label="Nanas Vanille, retour à l'accueil">
+      <span class="nanas">N<span class="a" style="color:var(--sun)"><svg><use href="#pine-a"/></svg></span>N<span class="a" style="color:var(--teal-soft)"><svg><use href="#pine-a"/></svg></span>S</span><span class="colon"><i></i><i></i></span><span class="vanille">Vanille</span>
+    </a>
+    <div>Saint-Denis · 17, rue de Paris · 02 62 20 41 41<br>Saint-Pierre · 13, rue Victor le Vigoureux · 02 62 87 01 19</div>
+    <div><a href="https://www.instagram.com/nanasvanille/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/p/Nanas-Vanille-100046685299030/" target="_blank" rel="noopener">Facebook</a></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function () {
+  "use strict";
+  var toastEl = document.getElementById("toast"), toastTimer;
+  function toast(msg) {
+    toastEl.textContent = msg; toastEl.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { toastEl.hidden = true; }, 2600);
+  }
+  function copyText(text) {
+    try {
+      navigator.clipboard.writeText(text).then(function () { toast("Copié : " + text); }, function () { toast(text); });
+    } catch (e) { toast(text); }
+  }
+
+  // ---------- Illustrations réalistes des produits (SVG, « $ » = préfixe d'ids propre à chaque visuel) ----------
+  var BASE_DEFS =
+    '<linearGradient id="$wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdfaf2"/><stop offset="1" stop-color="#eef4ef"/></linearGradient>' +
+    '<filter id="$rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="3.4"/></filter>' +
+    '<filter id="$rough2" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="11"/><feDisplacementMap in="SourceGraphic" scale="5"/></filter>' +
+    '<filter id="$paper" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" seed="4"/><feColorMatrix type="luminanceToAlpha"/></filter>' +
+    '<radialGradient id="$light" cx="0.3" cy="0.1" r="0.9"><stop offset="0" stop-color="#fff" stop-opacity="0.9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>' +
+    '<linearGradient id="$table" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eadcc4"/><stop offset="1" stop-color="#cdb48e"/></linearGradient>' +
+    '<filter id="$blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>' +
+    '<filter id="$soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.4"/></filter>' +
+    '<linearGradient id="$gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbeaa0"/><stop offset="0.45" stop-color="#c8961e"/><stop offset="0.7" stop-color="#f3d36b"/><stop offset="1" stop-color="#9c7414"/></linearGradient>' +
+    '<linearGradient id="$glassHi" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>';
+
+  function scene(defs, body) {
+    var grain = '';
+    for (var i = 0; i < 7; i++) {
+      var y = 146 + i * 8 + (i % 3);
+      grain += '<path d="M0 ' + y + ' C80 ' + (y - 2) + ' 160 ' + (y + 3) + ' 320 ' + (y - 1) + '" stroke="#a88a5c" stroke-width="0.7" opacity="0.25" fill="none"/>';
+    }
+    return '<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs>' + BASE_DEFS + defs + '</defs>' +
+      '<rect width="320" height="200" fill="url(#$wall)"/><rect width="320" height="140" fill="url(#$light)"/>' +
+      '<g class="ink" filter="url(#$rough)"><rect y="138" width="320" height="62" fill="url(#$table)"/>' + grain +
+      '<path d="M0 138.5 H320" class="edge" fill="none"/>' + body + '</g>' +
+      '<g class="sketch" filter="url(#$rough2)" transform="translate(1.4 -1)">' + body + '</g>' +
+      '<rect width="320" height="200" fill="#5a4a32" filter="url(#$paper)" opacity="0.11" style="mix-blend-mode:multiply"/></svg>';
+  }
+  function shadow(cx, cy, rx, ry, o) {
+    return '<ellipse cx="' + cx + '" cy="' + cy + '" rx="' + rx + '" ry="' + ry + '" fill="#3b2a1a" opacity="' + (o || 0.35) + '" filter="url(#$blur)"/>';
+  }
+  // Petits points pseudo-aléatoires (grains d'épices, pores, bulles)
+  function speckles(seed, n, x, y, w, h, colors, rmax) {
+    var s = seed, out = '';
+    function rnd() { s = (s * 9301 + 49297) % 233280; return s / 233280; }
+    for (var i = 0; i < n; i++) {
+      out += '<circle cx="' + (x + rnd() * w).toFixed(1) + '" cy="' + (y + rnd() * h).toFixed(1) + '" r="' + (0.4 + rnd() * rmax).toFixed(2) + '" fill="' + colors[i % colors.length] + '" class="nk"/>';
+    }
+    return out;
+  }
+  function pod(cx, cy, len, ang, w) {
+    var h = len / 2;
+    return '<g transform="translate(' + cx + ' ' + cy + ') rotate(' + ang + ')">' +
+      '<path d="M' + (-h) + ' 0 C' + (-h / 2) + ' ' + (-w * 1.15) + ' ' + (h / 2) + ' ' + (-w * 1.2) + ' ' + h + ' -1 C' + (h / 2) + ' ' + (w * 0.9) + ' ' + (-h / 2) + ' ' + w + ' ' + (-h) + ' 0Z" fill="url(#$pod)"/>' +
+      '<path d="M' + (-h + 8) + ' ' + (-w * 0.35) + ' C' + (-h / 2) + ' ' + (-w * 0.8) + ' ' + (h / 2) + ' ' + (-w * 0.85) + ' ' + (h - 8) + ' ' + (-w * 0.4) + '" stroke="#c99a6a" stroke-width="1" opacity="0.45" fill="none"/>' +
+      '<path d="M' + (-h + 12) + ' ' + (w * 0.15) + ' C' + (-h / 2) + ' ' + (w * 0.3) + ' ' + (h / 2) + ' ' + (w * 0.25) + ' ' + (h - 12) + ' ' + (w * 0.1) + '" stroke="#0d0704" stroke-width="0.8" opacity="0.6" fill="none"/>' +
+      '</g>';
+  }
+  function frangipani(cx, cy, r, rot) {
+    var g = '<g transform="translate(' + cx + ' ' + cy + ') rotate(' + (rot || 0) + ')">';
+    for (var i = 0; i < 5; i++) {
+      g += '<path transform="rotate(' + (i * 72) + ')" d="M0 0 C' + (-r * 0.55) + ' ' + (-r * 0.3) + ' ' + (-r * 0.5) + ' ' + (-r * 1.05) + ' ' + (r * 0.05) + ' ' + (-r) + ' C' + (r * 0.45) + ' ' + (-r * 0.95) + ' ' + (r * 0.35) + ' ' + (-r * 0.3) + ' 0 0Z" fill="url(#$petal)" stroke="#e8dcc0" stroke-width="0.5"/>';
+    }
+    return g + '<circle r="' + (r * 0.18) + '" fill="#f2c230"/></g>';
+  }
+  var PETAL = '<radialGradient id="$petal" cx="0.5" cy="1" r="1"><stop offset="0" stop-color="#f5c534"/><stop offset="0.35" stop-color="#fff6d6"/><stop offset="1" stop-color="#ffffff"/></radialGradient>';
+  function leaf(x, y, len, ang, col) {
+    return '<g transform="translate(' + x + ' ' + y + ') rotate(' + ang + ')"><path d="M0 0 C' + (len * 0.3) + ' ' + (-len * 0.22) + ' ' + (len * 0.75) + ' ' + (-len * 0.2) + ' ' + len + ' 0 C' + (len * 0.75) + ' ' + (len * 0.2) + ' ' + (len * 0.3) + ' ' + (len * 0.22) + ' 0 0Z" fill="' + col + '"/><path d="M2 0 L' + (len - 4) + ' 0" stroke="#fff" stroke-width="0.8" opacity="0.4"/></g>';
+  }
+
+  var ICONS = {};
+
+  ICONS.vanille = scene(
+    '<linearGradient id="$pod" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b4528"/><stop offset="0.45" stop-color="#3a2212"/><stop offset="1" stop-color="#140b05"/></linearGradient>' + PETAL +
+    '<linearGradient id="$raffia" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#cdb07a"/><stop offset="0.5" stop-color="#efdcae"/><stop offset="1" stop-color="#b8975c"/></linearGradient>',
+    shadow(150, 172, 120, 10, 0.4) +
+    pod(150, 150, 230, -9, 6.5) + pod(152, 157, 236, -7, 6.5) + pod(148, 164, 226, -10, 6) + pod(155, 170, 232, -6, 6.5) + pod(146, 176, 220, -8, 6) +
+    '<g transform="translate(138 163) rotate(-8)"><rect x="-7" y="-26" width="14" height="52" rx="3" fill="url(#$raffia)"/><path d="M-5 -24 L-5 24 M0 -25 L0 25 M5 -24 L5 24" stroke="#a88a52" stroke-width="0.6" opacity="0.6"/>' +
+    '<path d="M6 -6 C24 -16 30 -4 18 2 C30 8 26 20 6 8" fill="none" stroke="url(#$raffia)" stroke-width="4" stroke-linecap="round"/></g>' +
+    leaf(222, 118, 62, -20, '#3f8a5a') + leaf(230, 124, 50, 14, '#2f6b45') +
+    shadow(262, 136, 26, 5, 0.25) + frangipani(262, 112, 24, 12)
+  );
+
+  function bowl(x, y, heapCol, heapDark, seed, spk) {
+    return shadow(x, y + 8, 44, 8, 0.4) +
+      '<path d="M' + (x - 40) + ' ' + (y - 16) + ' Q' + x + ' ' + (y + 30) + ' ' + (x + 40) + ' ' + (y - 16) + 'Z" fill="url(#$wood)"/>' +
+      '<ellipse cx="' + x + '" cy="' + (y - 16) + '" rx="40" ry="10" fill="#6d4524"/>' +
+      '<path d="M' + (x - 34) + ' ' + (y - 16) + ' Q' + (x - 16) + ' ' + (y - 44) + ' ' + x + ' ' + (y - 46) + ' Q' + (x + 16) + ' ' + (y - 44) + ' ' + (x + 34) + ' ' + (y - 16) + ' Q' + x + ' ' + (y - 8) + ' ' + (x - 34) + ' ' + (y - 16) + 'Z" fill="' + heapCol + '"/>' +
+      '<path d="M' + (x + 4) + ' ' + (y - 44) + ' Q' + (x + 18) + ' ' + (y - 40) + ' ' + (x + 34) + ' ' + (y - 16) + ' Q' + (x + 16) + ' ' + (y - 11) + ' ' + (x + 4) + ' ' + (y - 12) + 'Z" fill="' + heapDark + '" opacity="0.5"/>' +
+      speckles(seed, 40, x - 28, y - 40, 56, 26, spk, 0.9) +
+      '<path d="M' + (x - 36) + ' ' + (y - 12) + ' Q' + x + ' ' + (y + 22) + ' ' + (x + 36) + ' ' + (y - 12) + '" stroke="#fff" stroke-width="1.2" opacity="0.18" fill="none"/>';
+  }
+  function star(x, y, r) {
+    var g = '<g transform="translate(' + x + ' ' + y + ')">';
+    for (var i = 0; i < 8; i++) g += '<path transform="rotate(' + (i * 45) + ')" d="M0 0 C' + (-r * 0.28) + ' ' + (-r * 0.4) + ' ' + (-r * 0.15) + ' ' + (-r * 0.9) + ' 0 ' + (-r) + ' C' + (r * 0.15) + ' ' + (-r * 0.9) + ' ' + (r * 0.28) + ' ' + (-r * 0.4) + ' 0 0Z" fill="#7a3f1d" stroke="#4a230e" stroke-width="0.6"/><circle transform="rotate(' + (i * 45) + ')" cy="' + (-r * 0.55) + '" r="' + (r * 0.12) + '" fill="#c98a4a"/>';
+    return g + '<circle r="' + (r * 0.15) + '" fill="#4a230e"/></g>';
+  }
+  ICONS.epices = scene(
+    '<linearGradient id="$wood" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7a4a24"/><stop offset="0.4" stop-color="#b87a42"/><stop offset="1" stop-color="#5e3517"/></linearGradient>' +
+    '<linearGradient id="$cin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b06a35"/><stop offset="0.5" stop-color="#8a4a20"/><stop offset="1" stop-color="#5a2e12"/></linearGradient>',
+    bowl(78, 150, "#e6a81a", "#a8710a", 11, ["#c88a0c", "#f7cf4a"]) +
+    bowl(162, 146, "#b8341c", "#6e1a0c", 23, ["#8a220f", "#e0583a"]) +
+    bowl(246, 150, "#8a5a2e", "#4c2c12", 37, ["#5a3418", "#c38b52"]) +
+    shadow(160, 186, 70, 4, 0.35) +
+    '<g transform="translate(122 182) rotate(-4)"><rect x="0" y="-5" width="86" height="10" rx="5" fill="url(#$cin)"/><ellipse cx="86" cy="0" rx="3.5" ry="5" fill="#d79b62"/><path d="M86 -3 a2 2 0 1 1 -1 4" stroke="#6b3414" fill="none"/></g>' +
+    '<g transform="translate(130 191) rotate(-2)"><rect x="0" y="-4" width="74" height="8" rx="4" fill="url(#$cin)"/><ellipse cx="74" cy="0" rx="3" ry="4" fill="#d79b62"/></g>' +
+    star(40, 186, 11) + star(282, 184, 9) +
+    speckles(5, 14, 200, 176, 60, 16, ["#e6a81a", "#b8341c"], 0.8)
+  );
+
+  ICONS.confiture = scene(
+    '<linearGradient id="$jam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7a1508"/><stop offset="0.35" stop-color="#d9481e"/><stop offset="0.6" stop-color="#c23812"/><stop offset="1" stop-color="#6a1206"/></linearGradient>' +
+    '<pattern id="$ging" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#fff"/><rect width="5" height="10" fill="#24aaa8" opacity="0.55"/><rect width="10" height="5" fill="#24aaa8" opacity="0.55"/></pattern>' +
+    '<linearGradient id="$spoon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9b384"/><stop offset="1" stop-color="#8e6236"/></linearGradient>',
+    shadow(150, 160, 56, 8, 0.45) +
+    '<rect x="108" y="60" width="84" height="98" rx="16" fill="url(#$jam)"/>' +
+    '<rect x="112" y="50" width="76" height="16" rx="4" fill="#e9d8cf" opacity="0.9"/>' +
+    '<path d="M98 56 Q150 26 202 56 L208 74 Q197 69 186 76 Q173 69 161 77 Q149 69 137 77 Q125 69 113 76 Q102 69 92 74Z" fill="url(#$ging)"/>' +
+    '<path d="M98 56 Q150 26 202 56" stroke="#1d7f7d" stroke-width="0.8" fill="none" opacity="0.5"/>' +
+    '<path d="M96 64 Q150 70 204 64" stroke="#c9a77a" stroke-width="2.5" fill="none"/><path d="M178 66 q8 10 2 18 M182 66 q-2 12 8 16" stroke="#c9a77a" stroke-width="1.8" fill="none"/>' +
+    '<rect x="122" y="94" width="56" height="38" rx="3" fill="#f6ecd6"/><rect x="125" y="97" width="50" height="32" rx="2" fill="none" stroke="#b88a2c" stroke-width="0.8"/>' +
+    '<text x="150" y="112" text-anchor="middle" font-family="Satisfy, cursive" font-size="12" fill="#0b3a52">Confiture</text><text x="150" y="124" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700" font-size="6.5" letter-spacing="1" fill="#24aaa8">FRUITS PÉI</text>' +
+    '<rect x="114" y="70" width="7" height="80" rx="3.5" fill="url(#$glassHi)" opacity="0.7"/><rect x="180" y="76" width="3" height="60" rx="1.5" fill="#fff" opacity="0.25"/>' +
+    shadow(240, 168, 34, 5, 0.35) +
+    '<path d="M208 154 Q240 184 272 154Z" fill="#f4f4f2"/><ellipse cx="240" cy="154" rx="32" ry="8" fill="#ecebe6"/><ellipse cx="240" cy="155" rx="25" ry="5.5" fill="#b8341c"/><ellipse cx="234" cy="154" rx="8" ry="1.6" fill="#fff" opacity="0.35"/>' +
+    '<g transform="translate(232 150) rotate(-28)"><ellipse cx="0" cy="0" rx="9" ry="5" fill="url(#$spoon)"/><rect x="7" y="-1.8" width="62" height="3.6" rx="1.8" fill="url(#$spoon)"/></g>' +
+    shadow(62, 176, 30, 4, 0.3) +
+    '<g>' + [[50, 170], [62, 166], [74, 172], [58, 178], [70, 180], [44, 180]].map(function (p) {
+      return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="7" fill="#b51e1e"/><circle cx="' + (p[0] - 2) + '" cy="' + (p[1] - 2.5) + '" r="2" fill="#fff" opacity="0.45"/><path d="M' + p[0] + ' ' + (p[1] + 6) + ' l-1.5 2 m1.5 -2 l1.5 2" stroke="#3b1a0a" stroke-width="0.8"/>';
+    }).join('') + '</g>' + leaf(80, 160, 26, -30, '#3f8a5a')
+  );
+
+  ICONS.rhum = scene(
+    '<radialGradient id="$rum" cx="0.42" cy="0.45" r="0.65"><stop offset="0" stop-color="#f7c55a"/><stop offset="0.6" stop-color="#d8871c"/><stop offset="1" stop-color="#8a4a0c"/></radialGradient>' +
+    '<clipPath id="$jar"><path d="M128 54 Q86 70 86 112 Q86 160 150 160 Q214 160 214 112 Q214 70 172 54Z"/></clipPath>' +
+    '<linearGradient id="$cork" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a77b4c"/><stop offset="0.5" stop-color="#d9b27c"/><stop offset="1" stop-color="#8e6236"/></linearGradient>',
+    shadow(150, 164, 70, 8, 0.45) +
+    '<path d="M128 54 Q86 70 86 112 Q86 160 150 160 Q214 160 214 112 Q214 70 172 54Z" fill="url(#$rum)"/>' +
+    '<g clip-path="url(#$jar)" opacity="0.92">' +
+      '<path d="M104 120 l22 -8 l8 20 l-22 8z" fill="#f4d04a" stroke="#c99a1a" stroke-width="1"/><path d="M150 132 l20 -10 l10 18 l-20 10z" fill="#f1c93a" stroke="#c99a1a" stroke-width="1"/><path d="M124 92 l18 -4 l4 18 l-18 4z" fill="#f6d65a" stroke="#c99a1a" stroke-width="1"/>' +
+      '<path d="M168 86 C170 110 168 130 172 156" stroke="#2a170b" stroke-width="5" stroke-linecap="round" fill="none"/><path d="M178 92 C176 112 180 134 178 156" stroke="#3a2212" stroke-width="4" stroke-linecap="round" fill="none"/>' +
+      '<rect x="98" y="138" width="40" height="8" rx="4" fill="#7a3f1d" transform="rotate(-18 118 142)"/>' +
+      '<circle cx="190" cy="124" r="11" fill="#9fc94a" stroke="#5c8a1c" stroke-width="1.5"/><path d="M190 113 v22 M179 124 h22 M182 116 l16 16 M198 116 l-16 16" stroke="#e8f3c8" stroke-width="0.8"/>' +
+      speckles(77, 26, 92, 70, 116, 86, ["#fff"], 1.1) +
+    '</g>' +
+    '<path d="M128 54 Q86 70 86 112 Q86 160 150 160 Q214 160 214 112 Q214 70 172 54Z" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="1.5"/>' +
+    '<path d="M100 84 Q92 104 96 130" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity="0.4" fill="none"/>' +
+    '<rect x="128" y="40" width="44" height="16" rx="3" fill="#e8d6b4" opacity="0.6"/><rect x="132" y="24" width="36" height="20" rx="4" fill="url(#$cork)"/>' +
+    speckles(9, 18, 134, 27, 32, 14, ["#7a5530"], 0.7) +
+    '<path d="M150 62 C170 70 176 82 168 92" stroke="#c9a77a" stroke-width="1.5" fill="none"/><rect x="160" y="88" width="20" height="14" rx="2" fill="#f6ecd6" transform="rotate(14 170 95)"/>' +
+    shadow(254, 168, 24, 4, 0.35) +
+    '<path d="M232 118 L276 118 L272 164 Q254 168 236 164Z" fill="#fff" opacity="0.35" stroke="#fff" stroke-width="1"/>' +
+    '<path d="M234 138 L274 138 L272 162 Q254 166 236 162Z" fill="url(#$rum)" opacity="0.9"/>' +
+    '<rect x="242" y="128" width="16" height="16" rx="3" fill="#fff" opacity="0.55" transform="rotate(12 250 136)"/>' +
+    '<rect x="236" y="122" width="4" height="38" rx="2" fill="#fff" opacity="0.5"/>'
+  );
+
+  ICONS.biere = scene(
+    '<linearGradient id="$bottle" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2b1606"/><stop offset="0.3" stop-color="#7a4314"/><stop offset="0.55" stop-color="#4a2709"/><stop offset="1" stop-color="#1e0f04"/></linearGradient>' +
+    '<linearGradient id="$beer" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8cf4c"/><stop offset="1" stop-color="#d8860f"/></linearGradient>',
+    shadow(110, 168, 34, 6, 0.45) +
+    '<path d="M102 22 h16 v36 Q138 72 138 94 V158 Q138 166 130 166 H90 Q82 166 82 158 V94 Q82 72 102 58Z" fill="url(#$bottle)"/>' +
+    '<rect x="99" y="16" width="22" height="9" rx="2" fill="url(#$gold)"/><path d="M99 25 h22" stroke="#7a5a10" stroke-width="1"/>' +
+    '<rect x="82" y="100" width="56" height="40" fill="#0b3a52"/><rect x="82" y="100" width="56" height="3" fill="url(#$gold)"/><rect x="82" y="137" width="56" height="3" fill="url(#$gold)"/>' +
+    '<text x="110" y="118" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="800" font-size="8" letter-spacing="1.2" fill="#fff">BIÈRE</text><text x="110" y="131" text-anchor="middle" font-family="Satisfy, cursive" font-size="10" fill="#e9c21b">péi</text>' +
+    '<rect x="88" y="66" width="5" height="96" rx="2.5" fill="#fff" opacity="0.22"/><rect x="104" y="26" width="3" height="30" rx="1.5" fill="#fff" opacity="0.25"/>' +
+    shadow(212, 170, 32, 5, 0.4) +
+    '<path d="M182 72 L242 72 L232 162 Q212 168 192 162Z" fill="url(#$beer)"/>' +
+    speckles(41, 30, 192, 80, 40, 78, ["#fff7d0"], 0.9) +
+    '<path d="M178 74 Q180 56 196 60 Q202 48 216 54 Q230 46 238 58 Q250 60 246 74 Q212 80 178 74Z" fill="#fffdf4"/><path d="M182 74 Q212 79 244 74" stroke="#e8dfc4" stroke-width="2" fill="none"/>' +
+    speckles(53, 10, 186, 60, 56, 12, ["#efe6cc"], 1.6) +
+    '<path d="M186 82 L194 158" stroke="#fff" stroke-width="4" opacity="0.4" stroke-linecap="round"/>' +
+    speckles(64, 12, 222, 90, 14, 60, ["#ffffff"], 1.4)
+  );
+
+  function soap(x, y, w, h, top, side, rot) {
+    return '<g transform="translate(' + x + ' ' + y + ') rotate(' + (rot || 0) + ')"><rect x="' + (-w / 2) + '" y="0" width="' + w + '" height="' + h + '" rx="9" fill="' + side + '"/>' +
+      '<rect x="' + (-w / 2) + '" y="-3" width="' + w + '" height="' + (h - 6) + '" rx="9" fill="' + top + '"/>' +
+      '<rect x="' + (-w / 2 + 6) + '" y="0" width="' + (w - 12) + '" height="4" rx="2" fill="#fff" opacity="0.45"/></g>';
+  }
+  ICONS.savon = scene(
+    PETAL + '<radialGradient id="$bub" cx="0.35" cy="0.3" r="0.7"><stop offset="0" stop-color="#fff" stop-opacity="0.95"/><stop offset="0.6" stop-color="#d9f1f0" stop-opacity="0.4"/><stop offset="1" stop-color="#a9dedc" stop-opacity="0.7"/></radialGradient>',
+    shadow(140, 166, 70, 8, 0.4) +
+    soap(140, 138, 112, 28, "#f3e3c3", "#d8c29a", 0) +
+    soap(142, 112, 104, 28, "#a9dedc", "#7cc3c0", -2) +
+    soap(138, 86, 96, 28, "#f4d6d0", "#ddb3ab", 2) +
+    '<g transform="translate(138 92) rotate(2)"><path d="M-14 4 C-6 -6 6 -6 14 4 C6 10 -6 10 -14 4Z" fill="none" stroke="#c9958c" stroke-width="1.6"/><path d="M-12 4 H12" stroke="#c9958c" stroke-width="1"/></g>' +
+    speckles(3, 22, 98, 112, 86, 18, ["#5f9e9b"], 0.6) +
+    shadow(246, 170, 32, 5, 0.35) +
+    '<g transform="translate(246 150) rotate(-8)"><rect x="-30" y="-16" width="60" height="32" rx="7" fill="#f3e3c3"/><rect x="-30" y="8" width="60" height="8" rx="4" fill="#d8c29a"/><text x="0" y="4" text-anchor="middle" font-family="Satisfy, cursive" font-size="11" fill="#a08356">savon</text></g>' +
+    frangipani(68, 150, 22, -20) + leaf(40, 168, 40, -10, '#3f8a5a') +
+    '<circle cx="214" cy="96" r="12" fill="url(#$bub)" stroke="#fff" stroke-width="0.8"/><circle cx="236" cy="78" r="7" fill="url(#$bub)" stroke="#fff" stroke-width="0.6"/><circle cx="200" cy="70" r="5" fill="url(#$bub)" stroke="#fff" stroke-width="0.6"/>'
+  );
+
+  ICONS.cosmetique = scene(
+    '<linearGradient id="$amber" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5a2a06"/><stop offset="0.35" stop-color="#b8661a"/><stop offset="0.6" stop-color="#7a3c0a"/><stop offset="1" stop-color="#3a1a04"/></linearGradient>' +
+    '<linearGradient id="$porc" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#d9dcd8"/><stop offset="0.35" stop-color="#ffffff"/><stop offset="1" stop-color="#c8ccc8"/></linearGradient>' +
+    '<linearGradient id="$lid" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#14706e"/><stop offset="0.4" stop-color="#2fc0bd"/><stop offset="1" stop-color="#0e5654"/></linearGradient>',
+    shadow(104, 166, 30, 6, 0.45) +
+    '<path d="M86 84 Q86 74 96 72 H112 Q122 74 122 84 V158 Q122 164 116 164 H92 Q86 164 86 158Z" fill="url(#$amber)"/>' +
+    '<rect x="96" y="56" width="16" height="18" rx="2" fill="url(#$gold)"/><path d="M98 56 Q98 30 104 28 Q110 30 110 56Z" fill="#1d1d1d"/><path d="M101 52 Q101 36 104 33" stroke="#fff" stroke-width="1.2" opacity="0.35" fill="none"/>' +
+    '<rect x="88" y="104" width="32" height="34" fill="#f6efe2"/><text x="104" y="119" text-anchor="middle" font-family="Satisfy, cursive" font-size="8" fill="#0b3a52">huile</text><text x="104" y="129" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700" font-size="4.5" letter-spacing="0.6" fill="#24aaa8">NATURELLE</text>' +
+    '<rect x="91" y="80" width="4" height="78" rx="2" fill="#fff" opacity="0.28"/>' +
+    shadow(176, 166, 42, 6, 0.4) +
+    '<path d="M138 126 V156 Q138 166 176 166 Q214 166 214 156 V126Z" fill="url(#$porc)"/><ellipse cx="176" cy="126" rx="38" ry="8" fill="#e9ece8"/>' +
+    '<path d="M136 112 V124 Q136 132 176 132 Q216 132 216 124 V112Z" fill="url(#$lid)"/><ellipse cx="176" cy="112" rx="40" ry="8.5" fill="#3cc8c5"/><ellipse cx="166" cy="110" rx="16" ry="2.5" fill="#fff" opacity="0.35"/>' +
+    '<rect x="152" y="140" width="48" height="14" rx="2" fill="#f6efe2"/><text x="176" y="150" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700" font-size="5.5" letter-spacing="1" fill="#0b3a52">CRÈME PÉI</text>' +
+    shadow(262, 178, 40, 4, 0.35) +
+    '<g transform="translate(224 172) rotate(-6)"><path d="M0 -9 H66 L76 -6 V6 L66 9 H0Z" fill="url(#$porc)"/><rect x="76" y="-7" width="10" height="14" rx="2" fill="url(#$lid)"/><rect x="14" y="-6" width="40" height="12" fill="#a9dedc" opacity="0.6"/><path d="M2 -6 H64" stroke="#fff" stroke-width="1.5" opacity="0.8"/></g>' +
+    leaf(236, 128, 46, -34, '#3f8a5a') + leaf(244, 136, 36, -4, '#2f6b45') + leaf(60, 160, 34, -150, '#3f8a5a')
+  );
+
+  ICONS.bijoux = scene(
+    '<radialGradient id="$dish" cx="0.5" cy="0.4" r="0.6"><stop offset="0" stop-color="#ffffff"/><stop offset="0.8" stop-color="#eef3f2"/><stop offset="1" stop-color="#cfd8d6"/></radialGradient>' +
+    '<radialGradient id="$turq" cx="0.35" cy="0.3" r="0.7"><stop offset="0" stop-color="#bff3ef"/><stop offset="0.5" stop-color="#2fb8b3"/><stop offset="1" stop-color="#0d5e5b"/></radialGradient>' +
+    '<radialGradient id="$navyb" cx="0.35" cy="0.3" r="0.7"><stop offset="0" stop-color="#8fb8d0"/><stop offset="0.5" stop-color="#1c5a7d"/><stop offset="1" stop-color="#0b2a3c"/></radialGradient>',
+    shadow(150, 170, 92, 10, 0.4) +
+    '<ellipse cx="150" cy="156" rx="94" ry="22" fill="#d7dfdd"/><ellipse cx="150" cy="152" rx="92" ry="20" fill="url(#$dish)"/><ellipse cx="150" cy="153" rx="74" ry="13" fill="#f4f7f6" stroke="#e1e8e6"/>' +
+    '<ellipse cx="118" cy="146" rx="22" ry="12" fill="none" stroke="url(#$gold)" stroke-width="3"/><ellipse cx="140" cy="152" rx="22" ry="12" fill="none" stroke="url(#$gold)" stroke-width="3" transform="rotate(14 140 152)"/>' +
+    '<circle cx="118" cy="158" r="5" fill="url(#$turq)"/><circle cx="146" cy="164" r="5" fill="url(#$turq)"/>' +
+    '<path d="M176 140 C190 160 210 160 222 140" stroke="url(#$gold)" stroke-width="1.4" fill="none" stroke-dasharray="2 1.2"/>' +
+    '<path d="M199 154 l-6 10 l6 9 l6 -9z" fill="url(#$navyb)" stroke="url(#$gold)" stroke-width="1"/>' +
+    speckles(17, 6, 168, 146, 30, 10, ["url(#$turq)"], 2.6) +
+    shadow(66, 134, 12, 3, 0.3) + shadow(250, 134, 12, 3, 0.3) +
+    '<g transform="translate(66 72)"><path d="M0 0 v18" stroke="url(#$gold)" stroke-width="1.6"/><circle r="3" fill="url(#$gold)"/><path d="M0 18 L-12 40 L0 62 L12 40Z" fill="url(#$turq)" stroke="url(#$gold)" stroke-width="1.5"/><circle cy="40" r="4" fill="url(#$gold)"/></g>' +
+    '<g transform="translate(250 72)"><path d="M0 0 v18" stroke="url(#$gold)" stroke-width="1.6"/><circle r="3" fill="url(#$gold)"/><path d="M0 18 L-12 40 L0 62 L12 40Z" fill="url(#$navyb)" stroke="url(#$gold)" stroke-width="1.5"/><circle cy="40" r="4" fill="url(#$gold)"/></g>' +
+    '<path d="M40 70 H92 M224 70 H276" stroke="#c8b48a" stroke-width="2"/>'
+  );
+
+  ICONS.mode = scene(
+    '<pattern id="$print" width="22" height="16" patternUnits="userSpaceOnUse"><rect width="22" height="16" fill="#0b3a52"/><path d="M3 12 C5 6 10 4 14 6 C11 9 8 12 3 12Z" fill="#2fb8b3"/><circle cx="17" cy="4" r="1.6" fill="#e9c21b"/></pattern>' +
+    '<pattern id="$stripe" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#fbf7ee"/><rect width="8" height="3" fill="#e9c21b" opacity="0.7"/></pattern>' +
+    '<linearGradient id="$foldsh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0.18"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>',
+    shadow(118, 166, 70, 7, 0.4) +
+    '<rect x="56" y="134" width="124" height="28" rx="6" fill="#a9dedc"/><rect x="56" y="134" width="124" height="8" rx="4" fill="url(#$foldsh)"/><path d="M60 156 H176" stroke="#7cc3c0" stroke-width="1"/>' +
+    '<rect x="60" y="108" width="118" height="28" rx="6" fill="url(#$stripe)"/><rect x="60" y="108" width="118" height="8" rx="4" fill="url(#$foldsh)"/>' +
+    '<rect x="64" y="82" width="110" height="28" rx="6" fill="url(#$print)"/><rect x="64" y="82" width="110" height="6" rx="3" fill="#fff" opacity="0.15"/><path d="M92 82 v28 M146 82 v28" stroke="#000" stroke-opacity="0.15" stroke-width="1"/>' +
+    '<rect x="108" y="96" width="22" height="10" rx="1" fill="#f6ecd6"/><path d="M119 96 v-4" stroke="#c9a77a"/>' +
+    shadow(244, 172, 52, 6, 0.35) +
+    '<path d="M212 104 Q226 112 244 104 Q262 112 276 104 L294 116 L286 130 L274 124 L276 168 Q270 176 256 172 L244 166 L232 172 Q218 176 212 168 L214 124 L202 130 L194 116Z" fill="#fbf7ee" stroke="#e2d8c2" stroke-width="1"/>' +
+    '<path d="M228 106 Q244 118 260 106" fill="none" stroke="#2fb8b3" stroke-width="2"/>' +
+    '<circle cx="244" cy="134" r="2" fill="#2fb8b3"/><circle cx="244" cy="146" r="2" fill="#2fb8b3"/><circle cx="244" cy="158" r="2" fill="#2fb8b3"/>' +
+    '<path d="M222 130 C226 122 234 120 238 124 C234 128 228 130 222 130Z" fill="#2fb8b3" opacity="0.8"/>' +
+    '<path d="M214 124 Q230 132 214 160" stroke="#000" stroke-opacity="0.06" stroke-width="6" fill="none"/>'
+  );
+
+  ICONS.deco = scene(
+    '<linearGradient id="$frame" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9b27c"/><stop offset="0.5" stop-color="#a77b4c"/><stop offset="1" stop-color="#7a5530"/></linearGradient>' +
+    '<linearGradient id="$sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7e3b0"/><stop offset="1" stop-color="#f4c9a0"/></linearGradient>' +
+    '<linearGradient id="$pot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9a4e2a"/><stop offset="0.4" stop-color="#d07a4a"/><stop offset="1" stop-color="#7a3a1c"/></linearGradient>' +
+    '<pattern id="$weave" width="8" height="6" patternUnits="userSpaceOnUse"><rect width="8" height="6" fill="#d9bd88"/><path d="M0 3 Q2 0 4 3 T8 3" stroke="#b8975c" fill="none" stroke-width="1.2"/></pattern>',
+    shadow(130, 146, 70, 6, 0.4) +
+    '<g transform="rotate(-3 130 90)"><rect x="66" y="26" width="128" height="116" fill="url(#$frame)"/><rect x="74" y="34" width="112" height="100" fill="#fbfaf6"/><rect x="84" y="44" width="92" height="80" fill="url(#$sky)"/>' +
+    '<circle cx="150" cy="70" r="12" fill="#e9c21b" opacity="0.9"/>' +
+    '<path d="M84 124 L84 100 Q110 78 130 96 Q150 80 176 98 L176 124Z" fill="#2f6b45"/><path d="M84 124 L84 110 Q120 96 176 112 L176 124Z" fill="#24aaa8"/>' +
+    '<path d="M100 124 C100 96 104 76 112 62" stroke="#0b3a52" stroke-width="2" fill="none"/><path d="M112 62 C100 56 92 60 88 66 M112 62 C120 52 132 54 136 60 M112 62 C104 50 106 42 112 38 M112 62 C124 62 128 70 128 76" stroke="#0b3a52" stroke-width="3" stroke-linecap="round" fill="none"/>' +
+    '<rect x="68" y="28" width="124" height="3" fill="#fff" opacity="0.35"/></g>' +
+    shadow(240, 172, 34, 5, 0.4) +
+    '<path d="M214 130 H266 L260 170 Q240 176 220 170Z" fill="url(#$weave)"/><rect x="212" y="126" width="56" height="8" rx="3" fill="#c9a874"/>' +
+    '<path d="M240 128 C238 100 230 84 214 72" stroke="#2f6b45" stroke-width="2" fill="none"/><path d="M240 128 C244 96 256 80 270 70" stroke="#2f6b45" stroke-width="2" fill="none"/><path d="M240 128 C240 96 242 70 244 52" stroke="#2f6b45" stroke-width="2" fill="none"/>' +
+    leaf(214, 72, 34, -150, '#3f8a5a') + leaf(270, 70, 34, -30, '#2f6b45') + leaf(244, 52, 30, -95, '#4a9a66') + leaf(228, 96, 26, -160, '#2f6b45') + leaf(256, 92, 26, -20, '#3f8a5a') +
+    shadow(38, 172, 18, 4, 0.35) + '<rect x="26" y="140" width="24" height="32" rx="3" fill="#fbf7ee"/><ellipse cx="38" cy="140" rx="12" ry="3" fill="#eee6d4"/><path d="M38 138 v-6" stroke="#333" stroke-width="1"/><path d="M38 132 C34 124 38 118 38 114 C40 120 42 126 38 132Z" fill="#f6b73c"/><rect x="26" y="152" width="24" height="10" fill="#a9dedc"/>'
+  );
+
+  function book(x, y, w, h, col, dark) {
+    return '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="2" fill="' + col + '"/>' +
+      '<rect x="' + (x + w - 6) + '" y="' + (y + 2) + '" width="5" height="' + (h - 4) + '" fill="#f6efdc"/>' +
+      '<path d="M' + (x + w - 5) + ' ' + (y + 4) + ' V' + (y + h - 4) + ' M' + (x + w - 3) + ' ' + (y + 4) + ' V' + (y + h - 4) + '" stroke="#d8ccb0" stroke-width="0.5"/>' +
+      '<rect x="' + (x + 10) + '" y="' + (y + h / 2 - 1.5) + '" width="' + (w * 0.45) + '" height="3" fill="' + dark + '" opacity="0.6"/>' +
+      '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="2" fill="#fff" opacity="0.2"/>';
+  }
+  ICONS.livre = scene(
+    '<linearGradient id="$page" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e9dfc6"/><stop offset="0.5" stop-color="#fffaf0"/><stop offset="1" stop-color="#e9dfc6"/></linearGradient>',
+    shadow(110, 168, 72, 7, 0.4) +
+    book(44, 146, 136, 18, "#0b3a52", "#e9c21b") + book(50, 128, 124, 18, "#24aaa8", "#fff") + book(40, 110, 132, 18, "#e9c21b", "#0b3a52") + book(56, 92, 112, 18, "#b8341c", "#f6efdc") +
+    '<g transform="translate(112 84)"><circle cx="-16" cy="0" r="11" fill="#fff" fill-opacity="0.25" stroke="#1d1d1d" stroke-width="2.5"/><circle cx="16" cy="0" r="11" fill="#fff" fill-opacity="0.25" stroke="#1d1d1d" stroke-width="2.5"/><path d="M-5 -1 Q0 -5 5 -1" stroke="#1d1d1d" stroke-width="2" fill="none"/><path d="M-27 -2 L-40 6 M27 -2 L40 6" stroke="#1d1d1d" stroke-width="2"/></g>' +
+    shadow(248, 172, 56, 6, 0.35) +
+    '<path d="M248 164 L196 152 L196 104 L248 116Z" fill="url(#$page)" stroke="#d8ccb0"/><path d="M248 164 L300 152 L300 104 L248 116Z" fill="url(#$page)" stroke="#d8ccb0"/>' +
+    '<path d="M194 154 L248 167 L302 154" stroke="#0b3a52" stroke-width="3" fill="none"/>' +
+    '<path d="M204 116 L240 124 M204 124 L240 132 M204 132 L232 138 M256 124 L292 116 M256 132 L292 124" stroke="#9aa6ab" stroke-width="1.2"/>' +
+    '<path d="M258 140 C266 132 276 132 284 138 C278 146 266 148 258 140Z" fill="#24aaa8"/><circle cx="272" cy="128" r="4" fill="#e9c21b"/>' +
+    '<path d="M248 116 V164" stroke="#c9bb98" stroke-width="1"/>'
+  );
+
+  ICONS.cadeau = scene(
+    '<linearGradient id="$kraft" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a8804e"/><stop offset="0.4" stop-color="#d1a96f"/><stop offset="1" stop-color="#93683a"/></linearGradient>' +
+    '<linearGradient id="$pod" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b4528"/><stop offset="1" stop-color="#140b05"/></linearGradient>' +
+    '<linearGradient id="$jam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7a1508"/><stop offset="0.4" stop-color="#d9481e"/><stop offset="1" stop-color="#6a1206"/></linearGradient>' +
+    '<linearGradient id="$rum" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8a4a0c"/><stop offset="0.4" stop-color="#f0b544"/><stop offset="1" stop-color="#8a4a0c"/></linearGradient>',
+    shadow(160, 170, 104, 9, 0.45) +
+    '<path d="M64 92 L256 92 L246 82 L74 82Z" fill="#5e4022"/>' +
+    '<path d="M86 92 L108 50 L128 92Z" fill="#a9dedc"/><path d="M180 92 L214 46 L236 92Z" fill="#a9dedc"/><path d="M118 92 L150 56 L176 92Z" fill="#d9f1f0"/>' +
+    '<rect x="120" y="44" width="24" height="44" rx="5" fill="url(#$jam)"/><rect x="118" y="38" width="28" height="9" rx="2" fill="url(#$gold)"/><rect x="124" y="58" width="16" height="12" fill="#f6ecd6"/>' +
+    '<path d="M174 92 V40 Q174 34 180 32 V22 H188 V32 Q194 34 194 40 V92Z" fill="url(#$rum)"/><rect x="179" y="16" width="10" height="8" rx="1" fill="#a77b4c"/><rect x="176" y="56" width="16" height="14" fill="#0b3a52"/>' +
+    pod(156, 66, 80, -62, 3.2) + pod(162, 68, 84, -58, 3.2) + pod(150, 70, 76, -66, 3) +
+    '<path d="M56 92 H264 V162 Q264 168 258 168 H62 Q56 168 56 162Z" fill="url(#$kraft)"/>' +
+    '<rect x="56" y="92" width="208" height="6" fill="#000" opacity="0.12"/>' +
+    '<rect x="146" y="92" width="22" height="76" fill="#e9c21b"/><rect x="146" y="92" width="22" height="76" fill="url(#$glassHi)" opacity="0.35"/>' +
+    '<path d="M157 110 C130 90 124 120 157 114 C190 120 184 90 157 110Z" fill="#e9c21b" stroke="#c9a514" stroke-width="1"/><circle cx="157" cy="112" r="5" fill="#d4ad12"/>' +
+    '<path d="M150 116 L138 140 M164 116 L176 140" stroke="#e9c21b" stroke-width="6" stroke-linecap="round"/>' +
+    '<g transform="translate(212 118) rotate(10)"><rect x="-18" y="-11" width="36" height="22" rx="3" fill="#fbf7ee"/><circle cx="-12" cy="0" r="2" fill="#a8804e"/><text x="3" y="3" text-anchor="middle" font-family="Satisfy, cursive" font-size="8" fill="#0b3a52">Nanas</text></g>' +
+    '<path d="M196 112 Q204 116 196 118" stroke="#c9a77a" fill="none"/>' +
+    frangipani(80, 160, 14, 30)
+  );
+
+  var PRODUCTS = [
+    { cat: "Épicerie fine", icon: "vanille", name: "Vanille de La Réunion", text: "Gousses de vanille Bourbon préparées sur l'île, la spécialité qui donne son nom à la maison." },
+    { cat: "Épicerie fine", icon: "epices", name: "Épices & mélanges", text: "Les épices des producteurs locaux pour les caris, rougails et la cuisine de tous les jours." },
+    { cat: "Épicerie fine", icon: "confiture", name: "Confitures péi", text: "Confitures artisanales aux fruits de l'île, à tartiner ou à offrir." },
+    { cat: "Boissons", icon: "rhum", name: "Rhums arrangés", text: "Rhums arrangés de producteurs réunionnais, aux fruits et aux épices." },
+    { cat: "Boissons", icon: "biere", name: "Bières locales", text: "Bières brassées à La Réunion par des brasseurs indépendants." },
+    { cat: "Bien-être", icon: "savon", name: "Savons parfumés", text: "Savons artisanaux faits main, aux senteurs de l'île." },
+    { cat: "Bien-être", icon: "cosmetique", name: "Cosmétiques naturels", text: "Soins et cosmétiques de créatrices locales, pour le visage et le corps." },
+    { cat: "Bijoux", icon: "bijoux", name: "Bijoux & boucles d'oreilles", text: "Bijoux de créateurs réunionnais, pièces uniques et petites séries." },
+    { cat: "Mode", icon: "mode", name: "Mode & vêtements bébé", text: "Vêtements, accessoires et créations textiles, pour les grands et les tout-petits." },
+    { cat: "Décoration", icon: "deco", name: "Décoration & art", text: "Objets déco, illustrations et œuvres des artistes exposés en boutique." },
+    { cat: "Librairie", icon: "livre", name: "Livres réunionnais", text: "Livres d'auteurs et d'illustrateurs de l'île, avec des séances de dédicaces." },
+    { cat: "Cadeaux", icon: "cadeau", name: "Coffrets cadeaux", text: "Des assortiments de produits péi composés en boutique pour faire plaisir." }
+  ];
+
+  var grid = document.getElementById("product-grid");
+  var filters = document.getElementById("filters");
+  var FAV_LABEL = "♥ Mes favoris";
+  var query = "";
+  function norm(t) { return String(t || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim(); }
+  var KEYWORDS = {
+    vanille: "gousse gousses bourbon igp patisserie",
+    epices: "curcuma safran massale piment cannelle anis poivre cari rougail",
+    confiture: "pot fruits goyavier letchi ananas mangue tartiner",
+    rhum: "punch alcool spiritueux aperitif",
+    biere: "biere alcool brasserie aperitif",
+    savon: "savon toilette douche parfum",
+    cosmetique: "creme huile soin beaute visage corps",
+    bijoux: "collier bague bracelet boucles oreilles",
+    mode: "vetement vetements bebe enfant tshirt habits textile",
+    deco: "tableau cadre art affiche plante maison illustration",
+    livre: "livre livres roman bd auteur dedicace lecture",
+    cadeau: "coffret cadeau offrir panier anniversaire noel"
+  };
+  var current = "Tout";
+  var cats = ["Tout"];
+  PRODUCTS.forEach(function (p) { p.id = p.icon; if (cats.indexOf(p.cat) === -1) cats.push(p.cat); });
+  cats.push(FAV_LABEL);
+
+  // Favoris : enregistrés dans le compte de la personne connectée, sinon dans ce navigateur
+  var favs = [];
+  try { favs = JSON.parse(localStorage.getItem("nv-favoris") || "[]") || []; } catch (e) { favs = []; }
+  var favDoc = null;
+  function isFav(id) { return favs.indexOf(id) !== -1; }
+  function saveFavs() {
+    try { localStorage.setItem("nv-favoris", JSON.stringify(favs)); } catch (e) {}
+    if (favDoc) favDoc.set({ ids: favs.slice(), updatedAt: new Date().toISOString() }).catch(function () {});
+  }
+  function updateFavCount() {
+    var c = document.getElementById("fav-count");
+    c.textContent = String(favs.length); c.hidden = favs.length === 0;
+    document.getElementById("burger-dot").hidden = favs.length === 0;
+  }
+  function toggleFav(id, btn) {
+    var i = favs.indexOf(id);
+    if (i === -1) favs.push(id); else favs.splice(i, 1);
+    saveFavs(); updateFavCount();
+    toast(i === -1 ? "Ajouté à vos favoris" : "Retiré de vos favoris");
+    if (current === FAV_LABEL) { renderProducts(); return; }
+    btn.setAttribute("aria-pressed", String(i === -1));
+    btn.setAttribute("aria-label", (i === -1 ? "Retirer des favoris : " : "Ajouter aux favoris : ") + btn.getAttribute("data-name"));
+    btn.classList.remove("pop"); void btn.offsetWidth; btn.classList.add("pop");
+  }
+  document.getElementById("fav-link").addEventListener("click", function () { current = FAV_LABEL; renderFilters(); renderProducts(); });
+
+  function renderFilters() {
+    filters.innerHTML = "";
+    cats.forEach(function (c) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "chip"; b.textContent = c;
+      b.setAttribute("aria-pressed", String(c === current));
+      b.addEventListener("click", function () { current = c; renderFilters(); renderProducts(); });
+      filters.appendChild(b);
+    });
+  }
+  function renderProducts() {
+    grid.innerHTML = "";
+    var q = norm(query);
+    var shown = PRODUCTS.filter(function (p) {
+      if (q && norm(p.name + " " + p.text + " " + p.cat + " " + (KEYWORDS[p.icon] || "") + " " + articleText(p.id)).indexOf(q) === -1) return false;
+      if (current === FAV_LABEL) return isFav(p.id);
+      return current === "Tout" || p.cat === current;
+    });
+    var info = document.getElementById("search-info");
+    info.hidden = !q;
+    if (q) {
+      info.textContent = shown.length + (shown.length > 1 ? " résultats" : " résultat") + " pour « " + query.trim() + " »";
+      var clr = document.createElement("button"); clr.type = "button"; clr.textContent = "Tout afficher";
+      clr.addEventListener("click", function () { setQuery(""); });
+      info.appendChild(clr);
+    }
+    if (!shown.length && q) {
+      grid.innerHTML = '<p class="empty">Aucun produit ne correspond à votre recherche. Essayez un autre mot, ou appelez la boutique : elle a bien plus d\'articles que cette sélection.</p>';
+      return;
+    }
+    if (!shown.length) {
+      grid.innerHTML = '<p class="empty">Vous n\'avez pas encore de favoris. Touchez le cœur sur un produit pour le retrouver ici.</p>';
+      return;
+    }
+    shown.forEach(function (p) {
+      var el = document.createElement("article");
+      el.className = "product";
+      el.innerHTML = '<div class="art">' + ICONS[p.icon].replace(/\$/g, "nv-" + p.icon + "-") +
+        '<button class="fav" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 8 3.4 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.6 0 5.6 3.5 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg></button></div>' +
+        '<div class="body"><span class="tag"></span><h3></h3><p></p><div class="where"></div><button type="button" class="see-btn">Voir les articles et les prix</button></div>';
+      el.querySelector(".art svg").setAttribute("aria-hidden", "true");
+      var fb = el.querySelector(".fav");
+      fb.setAttribute("data-name", p.name);
+      fb.setAttribute("aria-pressed", String(isFav(p.id)));
+      fb.setAttribute("aria-label", (isFav(p.id) ? "Retirer des favoris : " : "Ajouter aux favoris : ") + p.name);
+      fb.addEventListener("click", function (e) { e.stopPropagation(); toggleFav(p.id, fb); });
+      el.querySelector(".where").textContent = articleSummary(p.id);
+      el.addEventListener("click", function (e) { if (!e.target.closest(".fav")) openRayon(p); });
+      el.querySelector(".tag").textContent = p.cat.toLowerCase();
+      el.querySelector("h3").textContent = p.name;
+      el.querySelector("p").textContent = p.text;
+      grid.appendChild(el);
+    });
+  }
+  renderFilters(); renderProducts(); updateFavCount();
+
+  // ---------- Boutiques ----------
+  var STORES = [
+    { id: "sd", city: "Saint-Denis", addr: "17, rue de Paris", cp: "97400 Saint-Denis", tel: "02 62 20 41 41", lon: 55.4507, lat: -20.8782 },
+    { id: "sp", city: "Saint-Pierre", addr: "13, rue Victor le Vigoureux", cp: "97410 Saint-Pierre", tel: "02 62 87 01 19", lon: 55.4778, lat: -21.3405 }
+  ];
+  function mapsUrl(s) { return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent("Nanas Vanille " + s.addr + " " + s.cp); }
+  var list = document.getElementById("store-list");
+  STORES.forEach(function (s) {
+    var el = document.createElement("article");
+    el.className = "store"; el.id = "boutique-" + s.id;
+    el.innerHTML = '<h3>Nanas Vanille <span class="c"></span></h3>' +
+      '<p class="addr"></p><div><span class="tel"></span><button class="copy" type="button">Copier</button></div>' +
+      '<div class="hours">Lun – Sam · 9h30 – 18h30</div>' +
+      '<div class="links"><a class="btn btn-primary" target="_blank" rel="noopener">Itinéraire</a><a class="btn btn-ghost call">Appeler</a></div>';
+    el.querySelector(".c").textContent = s.city;
+    el.querySelector(".addr").textContent = s.addr + ", " + s.cp;
+    el.querySelector(".tel").textContent = s.tel;
+    el.querySelector(".copy").setAttribute("data-copy", s.tel);
+    el.querySelector(".links a").href = mapsUrl(s);
+    el.querySelector(".call").href = "tel:+262" + s.tel.replace(/\s/g, "").slice(1);
+    list.appendChild(el);
+  });
+
+  // Carte de La Réunion dessinée à partir de points du littoral (lon, lat)
+  var COAST = [[55.45,-20.875],[55.52,-20.885],[55.57,-20.895],[55.62,-20.91],[55.67,-20.95],[55.70,-20.99],[55.73,-21.04],[55.77,-21.09],[55.80,-21.14],[55.84,-21.20],[55.83,-21.26],[55.80,-21.33],[55.77,-21.37],[55.70,-21.385],[55.62,-21.385],[55.55,-21.37],[55.50,-21.355],[55.46,-21.335],[55.42,-21.305],[55.39,-21.28],[55.34,-21.22],[55.29,-21.17],[55.25,-21.11],[55.22,-21.05],[55.25,-21.00],[55.28,-20.96],[55.30,-20.93],[55.36,-20.915],[55.41,-20.89]];
+  var TOWNS = [["Saint-Paul",55.27,-21.01],["Saint-Benoît",55.71,-21.04],["Saint-Leu",55.29,-21.17],["Saint-Joseph",55.62,-21.37],["Saint-André",55.66,-20.96]];
+  var W = 720, H = 440, minLon = 55.2, maxLon = 55.86, minLat = -21.40, maxLat = -20.86;
+  var sc = (H - 80) / (maxLat - minLat);
+  var offX = (W - (maxLon - minLon) * sc) / 2;
+  function px(lon) { return offX + (lon - minLon) * sc; }
+  function py(lat) { return 40 + (maxLat - lat) * sc; }
+  // Lissage du littoral avec des courbes passant par les points
+  function smooth(pts) {
+    var p = pts.map(function (q) { return [px(q[0]), py(q[1])]; }), n = p.length, s = "M" + p[0][0].toFixed(1) + " " + p[0][1].toFixed(1);
+    for (var i = 0; i < n; i++) {
+      var p0 = p[(i - 1 + n) % n], p1 = p[i], p2 = p[(i + 1) % n], p3 = p[(i + 2) % n];
+      var c1x = p1[0] + (p2[0] - p0[0]) / 6, c1y = p1[1] + (p2[1] - p0[1]) / 6;
+      var c2x = p2[0] - (p3[0] - p1[0]) / 6, c2y = p2[1] - (p3[1] - p1[1]) / 6;
+      s += " C" + c1x.toFixed(1) + " " + c1y.toFixed(1) + " " + c2x.toFixed(1) + " " + c2y.toFixed(1) + " " + p2[0].toFixed(1) + " " + p2[1].toFixed(1);
+    }
+    return s + " Z";
+  }
+  var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg">' +
+    '<text class="sea" x="24" y="34">OCÉAN INDIEN</text>' +
+    '<path class="island" d="' + smooth(COAST) + '"/>' +
+    '<ellipse class="relief" cx="' + px(55.48) + '" cy="' + py(-21.10) + '" rx="70" ry="54"/>' +
+    '<ellipse class="relief2" cx="' + px(55.48) + '" cy="' + py(-21.10) + '" rx="38" ry="28"/>' +
+    '<ellipse class="relief" cx="' + px(55.71) + '" cy="' + py(-21.24) + '" rx="38" ry="32"/>' +
+    '<text class="town" x="' + (px(55.48) - 24) + '" y="' + (py(-21.10) + 4) + '">Cirques</text>' +
+    '<text class="town" x="' + (px(55.71) - 20) + '" y="' + (py(-21.24) + 4) + '">Volcan</text>';
+  TOWNS.forEach(function (t) {
+    svg += '<circle cx="' + px(t[1]) + '" cy="' + py(t[2]) + '" r="2.5" class="town"/>' +
+      '<text class="town" x="' + (px(t[1]) + 6) + '" y="' + (py(t[2]) + 4) + '">' + t[0] + '</text>';
+  });
+  STORES.forEach(function (s) {
+    var x = px(s.lon), y = py(s.lat), north = s.id === "sd";
+    svg += '<a href="' + mapsUrl(s) + '" target="_blank" rel="noopener" class="shop" aria-label="Itinéraire vers Nanas Vanille ' + s.city + '">' +
+      '<circle class="halo" cx="' + x + '" cy="' + y + '" r="18"/><circle class="dot" cx="' + x + '" cy="' + y + '" r="8"/>' +
+      '<text x="' + (x - 44) + '" y="' + (north ? y - 24 : y + 34) + '">' + s.city.toUpperCase() + '</text>' +
+      '<text class="sub" x="' + (x - 44) + '" y="' + (north ? y - 10 : y + 48) + '">Nanas Vanille · ' + s.addr + '</text></a>';
+  });
+  svg += '</svg>';
+  document.getElementById("map").innerHTML = svg;
+
+  // ---------- Utilitaires ----------
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-copy]");
+    if (b) copyText(b.getAttribute("data-copy"));
+  });
+
+  // Pages : l'accueil (histoire + produits), les boutiques, le compte. Le nom en haut ramène à l'accueil.
+  var VIEW_OF = { producteurs: "producteurs", accueil: "accueil", galerie: "accueil", histoire: "histoire", produits: "accueil", boutiques: "boutiques", compte: "compte" };
+  function showView(target, smooth) {
+    var view = VIEW_OF[target] || "accueil";
+    document.querySelectorAll("[data-view]").forEach(function (el) { el.hidden = el.getAttribute("data-view") !== view; });
+    var anchor = (target === view) ? null : document.getElementById(target);
+    var behavior = smooth && !matchMedia("(prefers-reduced-motion: reduce)").matches ? "smooth" : "auto";
+    if (anchor) anchor.scrollIntoView({ behavior: behavior }); else window.scrollTo({ top: 0, behavior: behavior });
+    try { history.replaceState(null, "", "#" + target); } catch (err) {}
+  }
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var t = a.getAttribute("href").slice(1);
+    if (!Object.prototype.hasOwnProperty.call(VIEW_OF, t)) return;
+    e.preventDefault();
+    showView(t, true);
+  });
+  window.addEventListener("hashchange", function () {
+    var t = location.hash.slice(1);
+    if (Object.prototype.hasOwnProperty.call(VIEW_OF, t)) showView(t, false);
+  });
+  (function () {
+    var t = location.hash.slice(1);
+    if (Object.prototype.hasOwnProperty.call(VIEW_OF, t) && t !== "accueil") showView(t, false);
+  })();
+
+  // Horaires (heure de La Réunion, UTC+4)
+  (function () {
+    var DAYS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
+    var re = new Date(Date.now() + 4 * 3600 * 1000);
+    var today = (re.getUTCDay() + 6) % 7;
+    var minutes = re.getUTCHours() * 60 + re.getUTCMinutes();
+    var tbody = document.querySelector("#hours-table tbody");
+    DAYS.forEach(function (d, i) {
+      var tr = document.createElement("tr");
+      if (i === today) tr.className = "today";
+      var th = document.createElement("th"); th.scope = "row"; th.textContent = d + (i === today ? " (aujourd'hui)" : "");
+      var td = document.createElement("td"); td.textContent = i === 6 ? "Fermé" : "9h30 – 18h30";
+      if (i === 6) td.className = "closed";
+      tr.appendChild(th); tr.appendChild(td); tbody.appendChild(tr);
+    });
+    var open = today !== 6 && minutes >= 570 && minutes < 1110;
+    var badge = document.getElementById("open-badge");
+    badge.textContent = open ? "Ouvert en ce moment" : (today === 6 ? "Fermé aujourd'hui" : (minutes < 570 ? "Ouvre à 9h30" : "Fermé pour aujourd'hui"));
+    badge.className = "open-badge " + (open ? "is-open" : "is-closed");
+  })();
+
+  // Loupe de recherche
+  var searchBtn = document.getElementById("search-btn"), searchbar = document.getElementById("searchbar"), searchInput = document.getElementById("search-input");
+  var SUGGEST = ["vanille", "rhum", "épices", "savon", "bijoux", "livres", "cadeau"];
+  var sugg = document.getElementById("search-suggest");
+  SUGGEST.forEach(function (w) {
+    var b = document.createElement("button"); b.type = "button"; b.textContent = w;
+    b.addEventListener("click", function () { setQuery(w); goToProducts(); });
+    sugg.appendChild(b);
+  });
+  function goToProducts() { showView("produits", true); }
+  function setQuery(v) {
+    query = v; searchInput.value = v;
+    if (v && current !== FAV_LABEL) { current = "Tout"; renderFilters(); }
+    renderProducts();
+    if (v && document.getElementById("produits").hidden) showView("produits", false);
+  }
+  function setSearch(open) {
+    searchbar.hidden = !open;
+    searchBtn.setAttribute("aria-expanded", String(open));
+    searchBtn.setAttribute("aria-label", open ? "Fermer la recherche" : "Rechercher");
+    if (open) { setMenu(false); searchInput.focus(); }
+  }
+  searchBtn.addEventListener("click", function () { setSearch(searchbar.hidden); });
+  var searchTimer;
+  searchInput.addEventListener("input", function () {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(function () { setQuery(searchInput.value); }, 120);
+  });
+  document.getElementById("search-form").addEventListener("submit", function (e) { e.preventDefault(); setQuery(searchInput.value); goToProducts(); searchInput.blur(); });
+  document.getElementById("search-clear").addEventListener("click", function () { setQuery(""); searchInput.focus(); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !searchbar.hidden) { setSearch(false); searchBtn.focus(); }
+    if (e.key === "/" && searchbar.hidden && !/input|textarea|select/i.test((document.activeElement || {}).tagName || "")) { e.preventDefault(); setSearch(true); }
+  });
+
+  // Menu des trois traits
+  var burger = document.getElementById("burger"), panel = document.getElementById("menu-panel");
+  function setMenu(open) {
+    panel.hidden = !open;
+    burger.setAttribute("aria-expanded", String(open));
+    burger.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+    if (open) { setSearch(false); var first = panel.querySelector("a"); if (first) first.focus(); }
+  }
+  burger.addEventListener("click", function (e) { e.stopPropagation(); setMenu(panel.hidden); });
+  panel.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+  document.addEventListener("click", function (e) { if (!panel.hidden && !e.target.closest(".burger-wrap")) setMenu(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) { setMenu(false); burger.focus(); } });
+
+  // Bouton Rafraîchir
+  var refreshBtn = document.getElementById("refresh");
+  refreshBtn.addEventListener("click", function () {
+    refreshBtn.classList.add("spin");
+    try { location.reload(); } catch (e) {}
+    setTimeout(function () {
+      refreshBtn.classList.remove("spin");
+      current = "Tout"; renderFilters(); renderProducts();
+      loadAccounts();
+    }, 900);
+  });
+
+  // ---------- Comptes (base partagée) ----------
+  var form = document.getElementById("signup");
+  var statusEl = document.getElementById("status");
+  var submitBtn = document.getElementById("submit-btn");
+  var db = null, user = null, uid = null, adminUnsub = null;
+  function setStatus(kind, msg) { statusEl.className = "status " + kind; statusEl.textContent = msg; statusEl.hidden = false; }
+
+  function fmtDate(iso) {
+    try { return new Date(iso).toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "short" }); } catch (e) { return iso || ""; }
+  }
+
+  function loadAccounts() {
+    if (!db || !user) return;
+    Promise.resolve(user.canEdit()).then(function (isAdmin) {
+      if (!isAdmin) return;
+      document.getElementById("admin").hidden = false;
+      if (adminUnsub) adminUnsub();
+      adminUnsub = db.collection("comptes").orderBy("createdAt", "desc").onSnapshot(function (snap) {
+        var rows = document.getElementById("admin-rows");
+        rows.innerHTML = "";
+        var emails = [];
+        snap.docs.forEach(function (doc) {
+          var c = doc.data() || {};
+          if (c.email) emails.push(String(c.email));
+          var tr = document.createElement("tr");
+          [fmtDate(c.createdAt), c.prenom, c.nom, c.email, c.tel || "—", c.boutique, c.news ? "Oui" : "Non"].forEach(function (v, i) {
+            var td = document.createElement("td"); td.textContent = v == null ? "" : String(v);
+            if (i === 0) td.className = "num";
+            tr.appendChild(td);
+          });
+          rows.appendChild(tr);
+        });
+        if (!snap.docs.length) {
+          rows.innerHTML = '<tr><td colspan="7">Aucune inscription pour le moment. Elles apparaîtront ici dès qu\'un client crée son compte.</td></tr>';
+        }
+        document.getElementById("admin-count").textContent = "(" + snap.docs.length + ")";
+        document.getElementById("copy-emails").onclick = function () { copyText(emails.join(", ")); };
+      }, function () {});
+    });
+  }
+
+  function prefill() {
+    if (!db || !uid) return;
+    db.doc("comptes/" + uid).get().then(function (s) {
+      if (!s.exists) return;
+      var c = s.data() || {};
+      ["prenom", "nom", "email", "tel", "boutique"].forEach(function (k) { if (c[k] != null) form.elements[k].value = c[k]; });
+      form.elements.news.checked = !!c.news;
+      form.elements.rgpd.checked = true;
+      submitBtn.textContent = "Mettre à jour mon compte";
+      setStatus("ok", "Votre compte existe déjà. Vous pouvez modifier vos informations.");
+    }, function () {});
+  }
+
+  // ---------- Articles en vente (saisis par les gérantes, avec leur prix) ----------
+  var ARTICLES = {}, articlesUnsub = null, openedRayon = null, editingId = null;
+  var EUR = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" });
+  function articleText(rayon) { return ((ARTICLES || {})[rayon] || []).map(function (a) { return a.nom + " " + (a.description || ""); }).join(" "); }
+  function articleSummary(rayon) {
+    var list = (ARTICLES || {})[rayon] || [];
+    if (!list.length) return "Saint-Denis · Saint-Pierre";
+    var min = Math.min.apply(null, list.map(function (a) { return a.prix; }));
+    return list.length + (list.length > 1 ? " articles" : " article") + " · dès " + EUR.format(min);
+  }
+  function startArticles() {
+    if (!db || articlesUnsub) return;
+    articlesUnsub = db.collection("articles").limit(1000).onSnapshot(function (snap) {
+      var next = {};
+      snap.docs.forEach(function (d) {
+        var a = d.data() || {};
+        if (!a.rayon || typeof a.nom !== "string" || typeof a.prix !== "number") return;
+        (next[a.rayon] = next[a.rayon] || []).push({ id: d.id, ref: d.ref, nom: a.nom, prix: a.prix, description: a.description || "", boutique: a.boutique || "", assetId: a.assetId || "" });
+      });
+      Object.keys(next).forEach(function (k) { next[k].sort(function (x, y) { return x.nom.localeCompare(y.nom, "fr"); }); });
+      ARTICLES = next;
+      renderProducts();
+      if (openedRayon) renderArticles();
+    }, function () {});
+  }
+  var modal = document.getElementById("rayon-modal"), lastFocus = null;
+  function openRayon(p) {
+    openedRayon = p; lastFocus = document.activeElement;
+    document.getElementById("rayon-art").innerHTML = ICONS[p.icon].replace(/\$/g, "nv-m-" + p.icon + "-");
+    document.getElementById("rayon-cat").textContent = p.cat.toLowerCase();
+    document.getElementById("rayon-title").textContent = p.name;
+    document.getElementById("rayon-text").textContent = p.text;
+    document.getElementById("article-form").hidden = !canManage;
+    resetArticleForm();
+    renderArticles();
+    modal.hidden = false; document.body.classList.add("modal-open");
+    modal.querySelector(".modal-close").focus();
+  }
+  function closeRayon() {
+    modal.hidden = true; document.body.classList.remove("modal-open"); openedRayon = null;
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  modal.addEventListener("click", function (e) { if (e.target.closest("[data-close]")) closeRayon(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !modal.hidden) closeRayon(); });
+  function renderArticles() {
+    var ul = document.getElementById("rayon-list"); ul.innerHTML = "";
+    var list = ARTICLES[openedRayon.id] || [];
+    if (!list.length) {
+      ul.innerHTML = '<li class="none">Les articles de ce rayon et leurs prix arrivent bientôt sur le site. En attendant, appelez la boutique pour connaître ce qui est disponible.</li>';
+      return;
+    }
+    list.forEach(function (a) {
+      var li = document.createElement("li");
+      var thumb;
+      if (a.assetId) { thumb = document.createElement("img"); thumb.src = "/_blob/" + encodeURIComponent(a.assetId); thumb.alt = ""; thumb.loading = "lazy"; }
+      else { thumb = document.createElement("div"); thumb.textContent = "nv"; thumb.setAttribute("aria-hidden", "true"); }
+      thumb.className = "thumb";
+      var info = document.createElement("div"); info.className = "info";
+      var b = document.createElement("b"); b.textContent = a.nom; info.appendChild(b);
+      if (a.description) { var d = document.createElement("span"); d.textContent = a.description; info.appendChild(d); }
+      if (a.boutique) { var sh = document.createElement("span"); sh.className = "shop"; sh.textContent = a.boutique; info.appendChild(sh); }
+      var right = document.createElement("div");
+      var pr = document.createElement("div"); pr.className = "price"; pr.textContent = EUR.format(a.prix); right.appendChild(pr);
+      if (canManage) {
+        var tools = document.createElement("div"); tools.className = "tools";
+        var ed = document.createElement("button"); ed.type = "button"; ed.textContent = "Modifier";
+        ed.addEventListener("click", function () { editArticle(a); });
+        var del = document.createElement("button"); del.type = "button"; del.className = "danger"; del.textContent = "Supprimer";
+        del.addEventListener("click", function () {
+          if (del.dataset.confirm !== "1") { del.dataset.confirm = "1"; del.textContent = "Confirmer ?"; return; }
+          del.disabled = true;
+          a.ref.delete().then(function () {
+            if (a.assetId && assetsApi) assetsApi.delete(a.assetId).catch(function () {});
+            toast("Article supprimé");
+          }, function () { del.disabled = false; toast("La suppression n'a pas abouti. Réessayez."); });
+        });
+        tools.appendChild(ed); tools.appendChild(del); right.appendChild(tools);
+      }
+      li.appendChild(thumb); li.appendChild(info); li.appendChild(right);
+      ul.appendChild(li);
+    });
+  }
+  function artStatus(kind, msg) { var el = document.getElementById("art-status"); el.className = "status " + kind; el.textContent = msg; el.hidden = !msg; }
+  function resetArticleForm() {
+    editingId = null;
+    ["art-nom", "art-prix", "art-desc", "art-photo"].forEach(function (id) { document.getElementById(id).value = ""; });
+    document.getElementById("art-boutique").selectedIndex = 0;
+    document.getElementById("article-form-title").textContent = "Ajouter un article dans ce rayon";
+    document.getElementById("art-submit").textContent = "Ajouter l'article";
+    document.getElementById("art-cancel").hidden = true;
+    artStatus("", "");
+  }
+  function editArticle(a) {
+    editingId = a;
+    document.getElementById("art-nom").value = a.nom;
+    document.getElementById("art-prix").value = String(a.prix);
+    document.getElementById("art-desc").value = a.description;
+    document.getElementById("art-boutique").value = a.boutique || "Les deux boutiques";
+    document.getElementById("article-form-title").textContent = "Modifier « " + a.nom + " »";
+    document.getElementById("art-submit").textContent = "Enregistrer";
+    document.getElementById("art-cancel").hidden = false;
+    document.getElementById("art-nom").focus();
+  }
+  document.getElementById("art-cancel").addEventListener("click", resetArticleForm);
+  document.getElementById("article-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!db || !openedRayon) return;
+    var nom = document.getElementById("art-nom").value.trim();
+    var prix = parseFloat(String(document.getElementById("art-prix").value).replace(",", "."));
+    if (!nom) { artStatus("err", "Indiquez le nom de l'article."); return; }
+    if (!isFinite(prix) || prix < 0) { artStatus("err", "Indiquez un prix valide, par exemple 12.50"); return; }
+    var data = { rayon: openedRayon.id, nom: nom, prix: Math.round(prix * 100) / 100, description: document.getElementById("art-desc").value.trim(), boutique: document.getElementById("art-boutique").value, updatedAt: new Date().toISOString() };
+    var file = document.getElementById("art-photo").files[0];
+    var btn = document.getElementById("art-submit"); btn.disabled = true;
+    artStatus("info", "Enregistrement…");
+    var editing = editingId;
+    Promise.resolve(file && assetsApi ? assetsApi.upload(file) : null).then(function (res) {
+      if (res) data.assetId = res.id; else if (editing && editing.assetId) data.assetId = editing.assetId;
+      if (editing) return editing.ref.set(Object.assign({ createdAt: data.updatedAt }, data));
+      data.createdAt = data.updatedAt;
+      return db.collection("articles").add(data);
+    }).then(function () {
+      var wasEdit = !!editing;
+      resetArticleForm();
+      artStatus("ok", wasEdit ? "Article modifié." : "Article ajouté. Il est visible tout de suite pour les visiteurs.");
+    }, function (err) {
+      artStatus("err", err && err.code === "too_large" ? "La photo est trop lourde (20 Mo maximum)." : "L'enregistrement n'a pas abouti. Vérifiez la photo et réessayez.");
+    }).then(function () { btn.disabled = false; });
+  });
+
+  // ---------- Producteurs & créateurs (liste tenue par les gérantes) ----------
+  // Producteurs confirmés, affichés aussi quand la liste partagée n'est pas disponible (site hors claude.ai)
+  var PRODUCERS = [
+    { id: "corinne-granger", nom: "Corinne Granger", categorie: "Décoration & art", commune: "", lien: "https://www.corinnegranger.com/", description: "Créatrice présente en boutique à Saint-Pierre." },
+    { id: "escale-bleue", nom: "Escale Bleue", categorie: "Épicerie fine", commune: "Saint-Philippe", lien: "https://shop.escale-bleue.fr/", description: "Vanille Bleue, vanille vieillie deux ans. Atelier vanille fondé en 1986 au Tremblet." }
+  ], prodUnsub = null, prodCat = "Tous", prodEditing = null;
+  var PROD_CATS = ["Tous", "Épicerie fine", "Boissons", "Bien-être", "Bijoux", "Mode", "Décoration & art", "Librairie", "Autre"];
+  function renderProdFilters() {
+    var box = document.getElementById("prod-filters"); box.innerHTML = "";
+    PROD_CATS.forEach(function (c) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = c;
+      b.setAttribute("aria-pressed", String(c === prodCat));
+      b.addEventListener("click", function () { prodCat = c; renderProdFilters(); renderProducers(); });
+      box.appendChild(b);
+    });
+  }
+  function safeUrl(u) { return /^https?:\/\//i.test(u || "") ? u : ""; }
+  function renderProducers() {
+    var list = document.getElementById("prod-list"); list.innerHTML = "";
+    var q = norm(document.getElementById("prod-search").value);
+    var shown = PRODUCERS.filter(function (p) {
+      if (prodCat !== "Tous" && p.categorie !== prodCat) return false;
+      return !q || norm(p.nom + " " + p.categorie + " " + p.commune + " " + p.description).indexOf(q) !== -1;
+    });
+    document.getElementById("prod-count").textContent = PRODUCERS.length
+      ? shown.length + " sur " + PRODUCERS.length + (PRODUCERS.length > 1 ? " producteurs et créateurs listés" : " producteur listé")
+      : "";
+    if (!shown.length) {
+      list.innerHTML = '<p class="prod-empty"></p>';
+      list.firstChild.textContent = PRODUCERS.length ? "Aucun producteur ne correspond à cette recherche." : "La liste de nos producteurs et créateurs arrive très bientôt. En attendant, découvrez-les en boutique ou sur Instagram @nanasvanille.";
+      return;
+    }
+    shown.forEach(function (p) {
+      var c = document.createElement("article"); c.className = "prod-card";
+      var ini = document.createElement("div"); ini.className = "initial"; ini.setAttribute("aria-hidden", "true"); ini.textContent = (p.nom.trim()[0] || "?").toUpperCase(); c.appendChild(ini);
+      var cat = document.createElement("span"); cat.className = "cat"; cat.textContent = p.categorie.toLowerCase(); c.appendChild(cat);
+      var h = document.createElement("h3"); h.textContent = p.nom; c.appendChild(h);
+      if (p.commune) { var co = document.createElement("span"); co.className = "commune"; co.textContent = p.commune; c.appendChild(co); }
+      if (p.description) { var d = document.createElement("p"); d.textContent = p.description; c.appendChild(d); }
+      var url = safeUrl(p.lien);
+      if (url) { var a = document.createElement("a"); a.className = "link"; a.href = url; a.target = "_blank"; a.rel = "noopener"; a.textContent = /instagram\.com/i.test(url) ? "Voir sur Instagram" : "Voir son site"; c.appendChild(a); }
+      if (canManage) {
+        var tools = document.createElement("div"); tools.className = "tools";
+        var ed = document.createElement("button"); ed.type = "button"; ed.textContent = "Modifier";
+        ed.addEventListener("click", function () { editProducer(p); });
+        var del = document.createElement("button"); del.type = "button"; del.className = "danger"; del.textContent = "Supprimer";
+        del.addEventListener("click", function () {
+          if (del.dataset.confirm !== "1") { del.dataset.confirm = "1"; del.textContent = "Confirmer ?"; return; }
+          del.disabled = true;
+          p.ref.delete().then(function () { toast("Producteur retiré de la liste"); }, function () { del.disabled = false; toast("La suppression n'a pas abouti. Réessayez."); });
+        });
+        tools.appendChild(ed); tools.appendChild(del); c.appendChild(tools);
+      }
+      list.appendChild(c);
+    });
+  }
+  renderProdFilters(); renderProducers();
+  document.getElementById("prod-search").addEventListener("input", renderProducers);
+  function startProducers() {
+    if (!db || prodUnsub) return;
+    prodUnsub = db.collection("producteurs").limit(1000).onSnapshot(function (snap) {
+      PRODUCERS = snap.docs.map(function (d) {
+        var x = d.data() || {};
+        return { id: d.id, ref: d.ref, nom: String(x.nom || ""), categorie: PROD_CATS.indexOf(x.categorie) > 0 ? x.categorie : "Autre", commune: String(x.commune || ""), lien: String(x.lien || ""), description: String(x.description || "") };
+      }).filter(function (p) { return p.nom; }).sort(function (a, b) { return a.nom.localeCompare(b.nom, "fr"); });
+      renderProducers();
+    }, function () {});
+  }
+  function pfStatus(kind, msg) { var el = document.getElementById("pf-status"); el.className = "status " + kind; el.textContent = msg; el.hidden = !msg; }
+  function resetProdForm() {
+    prodEditing = null;
+    ["pf-nom", "pf-commune", "pf-lien", "pf-desc"].forEach(function (id) { document.getElementById(id).value = ""; });
+    document.getElementById("pf-cat").selectedIndex = 0;
+    document.getElementById("prod-form-title").textContent = "Ajouter un producteur ou un créateur";
+    document.getElementById("pf-submit").textContent = "Ajouter";
+    document.getElementById("pf-cancel").hidden = true;
+  }
+  function editProducer(p) {
+    prodEditing = p;
+    document.getElementById("pf-nom").value = p.nom;
+    document.getElementById("pf-cat").value = p.categorie;
+    document.getElementById("pf-commune").value = p.commune;
+    document.getElementById("pf-lien").value = p.lien;
+    document.getElementById("pf-desc").value = p.description;
+    document.getElementById("prod-form-title").textContent = "Modifier « " + p.nom + " »";
+    document.getElementById("pf-submit").textContent = "Enregistrer";
+    document.getElementById("pf-cancel").hidden = false;
+    document.getElementById("prod-form").scrollIntoView({ block: "center" });
+    document.getElementById("pf-nom").focus();
+  }
+  document.getElementById("pf-cancel").addEventListener("click", function () { resetProdForm(); pfStatus("", ""); });
+  document.getElementById("prod-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!db) return;
+    var nom = document.getElementById("pf-nom").value.trim();
+    var lien = document.getElementById("pf-lien").value.trim();
+    if (!nom) { pfStatus("err", "Indiquez le nom du producteur ou du créateur."); return; }
+    if (lien && !safeUrl(lien)) { pfStatus("err", "Le lien doit commencer par https://"); return; }
+    var data = { nom: nom, categorie: document.getElementById("pf-cat").value, commune: document.getElementById("pf-commune").value.trim(), lien: lien, description: document.getElementById("pf-desc").value.trim(), updatedAt: new Date().toISOString() };
+    var editing = prodEditing, btn = document.getElementById("pf-submit"); btn.disabled = true;
+    (editing ? editing.ref.set(data) : db.collection("producteurs").add(data)).then(function () {
+      resetProdForm(); pfStatus("ok", editing ? "Fiche modifiée." : nom + " a été ajouté à la liste.");
+    }, function () { pfStatus("err", "L'enregistrement n'a pas abouti. Réessayez."); }).then(function () { btn.disabled = false; });
+  });
+
+  // ---------- Galerie des réseaux (photos ajoutées par les gérantes) ----------
+  var galleryEl = document.getElementById("gallery"), galUnsub = null, lastGalDocs = [], assetsApi = null, canManage = false;
+  var INSTA_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>';
+  function renderGalleryEmpty() {
+    galleryEl.innerHTML = '<div class="gal-empty">' + ["Nos nouveautés", "Nos créateurs", "Nos événements"].map(function (t) {
+      return '<a href="https://www.instagram.com/nanasvanille/" target="_blank" rel="noopener"><span>' + INSTA_ICON + t + '</span></a>';
+    }).join("") + '</div>';
+  }
+  renderGalleryEmpty();
+  function galStatus(msg) { var el = document.getElementById("gal-status"); el.textContent = msg; el.hidden = !msg; }
+  function renderGallery(docs) {
+    if (!docs.length) { renderGalleryEmpty(); return; }
+    galleryEl.innerHTML = "";
+    docs.forEach(function (d) {
+      var c = d.data() || {};
+      if (!c.assetId) return;
+      var fig = document.createElement("figure");
+      var img = document.createElement("img");
+      img.src = "/_blob/" + encodeURIComponent(String(c.assetId));
+      img.alt = c.legende ? String(c.legende) : "Photo Nanas Vanille";
+      img.loading = "lazy";
+      fig.appendChild(img);
+      if (c.legende) { var cap = document.createElement("figcaption"); cap.textContent = String(c.legende); fig.appendChild(cap); }
+      if (canManage) {
+        var del = document.createElement("button"); del.type = "button"; del.className = "del"; del.textContent = "Retirer";
+        del.addEventListener("click", function () {
+          del.disabled = true;
+          Promise.resolve(assetsApi ? assetsApi.delete(String(c.assetId)).catch(function () {}) : null)
+            .then(function () { return d.ref ? d.ref.delete() : db.doc("galerie/" + d.id).delete(); })
+            .then(function () { toast("Photo retirée"); }, function () { del.disabled = false; toast("La photo n'a pas pu être retirée. Réessayez."); });
+        });
+        fig.appendChild(del);
+      }
+      galleryEl.appendChild(fig);
+    });
+  }
+  function startGallery() {
+    if (!db) return;
+    if (galUnsub) galUnsub();
+    galUnsub = db.collection("galerie").orderBy("createdAt", "desc").limit(30).onSnapshot(function (snap) { lastGalDocs = snap.docs; renderGallery(lastGalDocs); }, function () {});
+    Promise.all([window.claude.use("assets"), user ? Promise.resolve(user.canEdit()) : false]).then(function (r) {
+      assetsApi = r[0]; canManage = !!(r[0] && r[1]);
+      if (!canManage) return;
+      document.getElementById("gallery-admin").hidden = false;
+      document.getElementById("prod-form").hidden = false;
+      renderProducers();
+      renderGallery(lastGalDocs);
+    }).catch(function () {});
+  }
+  document.getElementById("gal-files").addEventListener("change", function (e) {
+    var files = Array.prototype.slice.call(e.target.files || []);
+    e.target.value = "";
+    if (!files.length || !assetsApi || !db) return;
+    var caption = document.getElementById("gal-caption").value.trim();
+    var done = 0, failed = 0;
+    galStatus("Envoi de " + files.length + " photo" + (files.length > 1 ? "s" : "") + "…");
+    files.reduce(function (chain, f) {
+      return chain.then(function () {
+        if (!/^image\//.test(f.type)) { failed++; return; }
+        return assetsApi.upload(f).then(function (res) {
+          return db.collection("galerie").add({ assetId: res.id, legende: caption, createdAt: new Date().toISOString() });
+        }).then(function () { done++; }, function () { failed++; });
+      });
+    }, Promise.resolve()).then(function () {
+      document.getElementById("gal-caption").value = "";
+      galStatus(done + " photo" + (done > 1 ? "s ajoutées" : " ajoutée") + (failed ? ", " + failed + " refusée" + (failed > 1 ? "s" : "") + " (format ou taille, 20 Mo maximum)" : "") + ".");
+    });
+  });
+
+  if (window.claude && typeof window.claude.use === "function") {
+    Promise.all([window.claude.use("db"), window.claude.use("user")]).then(function (r) {
+      db = r[0]; user = r[1];
+      startGallery(); startArticles(); startProducers();
+      if (!user) return;
+      return Promise.resolve(user.id()).then(function (id) {
+        uid = id; prefill(); loadAccounts();
+        if (db && uid) {
+          favDoc = db.doc("data/users/" + uid + "/favoris");
+          favDoc.get().then(function (snap) {
+            var saved = snap.exists ? ((snap.data() || {}).ids || []) : [];
+            saved.forEach(function (x) { if (typeof x === "string" && favs.indexOf(x) === -1) favs.push(x); });
+            if (saved.length !== favs.length) saveFavs();
+            updateFavCount(); renderProducts();
+          }, function () {});
+        }
+      });
+    }).catch(function () {});
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var f = form.elements;
+    var data = {
+      prenom: f.prenom.value.trim(), nom: f.nom.value.trim(), email: f.email.value.trim(),
+      tel: f.tel.value.trim(), boutique: f.boutique.value, news: f.news.checked
+    };
+    if (!data.prenom || !data.nom) { setStatus("err", "Indiquez votre prénom et votre nom."); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) { setStatus("err", "L'adresse e-mail n'est pas valide. Vérifiez-la, par exemple : prenom@exemple.re"); return; }
+    if (!f.rgpd.checked) { setStatus("err", "Cochez la case d'accord pour que nous puissions vous contacter."); return; }
+    if (!db || !uid) {
+      setStatus("info", "Connectez-vous pour créer votre compte. Vous pouvez aussi écrire à contact@nanasvanille.re ou passer en boutique.");
+      return;
+    }
+    submitBtn.disabled = true;
+    db.doc("comptes/" + uid).get().then(function (s) {
+      var prev = s.exists ? (s.data() || {}) : {};
+      data.createdAt = prev.createdAt || new Date().toISOString();
+      data.updatedAt = new Date().toISOString();
+      data.notifie = prev.notifie || false;
+      return db.doc("comptes/" + uid).set(data);
+    }).then(function () {
+      submitBtn.textContent = "Mettre à jour mon compte";
+      setStatus("ok", "Merci " + data.prenom + ", votre compte est créé. Votre inscription est transmise aux gérantes de Nanas Vanille.");
+    }).catch(function (err) {
+      var code = err && err.code;
+      if (code === "invalid_argument") setStatus("err", "Votre accès à cette page ne permet pas d'enregistrer un compte. Écrivez à contact@nanasvanille.re pour vous inscrire.");
+      else setStatus("err", "L'enregistrement n'a pas abouti. Réessayez dans un instant.");
+    }).then(function () { submitBtn.disabled = false; });
+  });
+})();
+</script>
+
+</body>
+</html>

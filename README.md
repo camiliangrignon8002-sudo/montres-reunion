@@ -190,3 +190,18 @@ menu fixe à gauche sur PC).
 
 Les dossiers restent sur l'appareil (menu Réglages → Sauvegarde pour les copier vers un autre appareil).
 Page dans `immo_page.html` ; `docs/immo/index.html` est la même page avec l'en-tête de l'appli installable.
+
+---
+
+# 🌺 Nanas:Vanille
+
+Site : https://camiliangrignon8002-sudo.github.io/montres-reunion/nanas-vanille/
+(version Claude, avec comptes, galerie, articles et prix, liste des producteurs : https://claude.ai/artifact/Ufv6VwoTMugUXX9cYMEmKs)
+
+Site vitrine des boutiques Nanas Vanille (Saint-Denis et Saint-Pierre), l'art et le terroir de La Réunion.
+
+- Produits 2 par rangée, recherche (loupe), favoris (cœur), fiche de chaque rayon.
+- Menu ☰ : produits, favoris, mon compte, nos producteurs, notre histoire, nos 2 boutiques (horaires, carte, Google Maps).
+- Sur l'adresse github.io, les favoris restent dans le navigateur. Les comptes, la galerie photo, les articles avec
+  leurs prix et la liste partagée des producteurs ne fonctionnent que dans la version Claude.
+- Fichier : `docs/nanas-vanille/index.html`.
