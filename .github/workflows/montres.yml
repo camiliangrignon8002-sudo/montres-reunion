@@ -28,7 +28,7 @@ jobs:
           NOTIFIER: ${{ (github.event_name == 'workflow_dispatch' && inputs.notifier) || github.event.schedule == '0 6 * * *' }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC || 'montres974-ut9qstgpdc' }}
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
-          PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          PAGE_URL: https://cam-grignon.pages.dev/
       - name: Publier la page
         if: always()
         run: |

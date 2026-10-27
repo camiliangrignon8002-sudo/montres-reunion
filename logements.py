@@ -34,7 +34,7 @@ REUNION = timezone(timedelta(hours=4))
 # Notifications : appli gratuite ntfy, abonnement au sujet ci-dessous
 NTFY_TOPIC = os.environ.get("NTFY_TOPIC", "logements974-w9y80xhxga")
 NOTIFIER = os.environ.get("NOTIFIER", "true") == "true"
-PAGE_URL = os.environ.get("PAGE_URL", "https://camiliangrignon8002-sudo.github.io/montres-reunion/logements/")
+PAGE_URL = os.environ.get("PAGE_URL", "https://cam-grignon.pages.dev/logements/")
 NOTIFS_MAX = 15  # au-delà, une seule notification résume le reste
 
 # ---------------------------------------------------------------- zone

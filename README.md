@@ -4,7 +4,7 @@ Chaque matin vers **10h (heure de La Réunion)**, GitHub cherche (puis toutes le
 à moins de 250 € sur **ParuVendu** (.re et .fr) et dans les magasins **Cash Express** de Saint-Pierre et Sainte-Clotilde. Il écarte les montres connectées, les montres de
 sport, les montres pour femme ou enfant et les accessoires, puis :
 
-- met à jour l'appli (onglets « Sélection 974 » et « Omega » : toutes les Omega homme en vente à La Réunion et en métropole, sur ParuVendu, Cash Express et Collector Square) : https://camiliangrignon8002-sudo.github.io/montres-reunion/
+- met à jour l'appli (onglets « Sélection 974 » et « Omega » : toutes les Omega homme en vente à La Réunion et en métropole, sur ParuVendu, Cash Express et Collector Square) : https://cam-grignon.pages.dev/
 - envoie une **notification sur le téléphone** (appli ntfy, sujet `montres974-ut9qstgpdc`) :
   un résumé, puis une notification par nouvelle montre avec sa photo et deux boutons,
   **Contacter le vendeur** et **Google Maps**.
@@ -34,7 +34,7 @@ sport, les montres pour femme ou enfant et les accessoires, puis :
 
 # 🏠 Logements Nord Réunion (studio à T3, jusqu'à 740 €)
 
-Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/logements/
+Appli : https://cam-grignon.pages.dev/logements/
 
 **Toutes les heures, jour et nuit**, GitHub cherche les **appartements à louer**
 (studio, T1, T2, T3) à **740 € maximum** à Saint-Denis (avec Sainte-Clotilde et La Montagne), Sainte-Marie,
@@ -68,7 +68,7 @@ sujet `logements974-w9y80xhxga`), avec la photo, le prix et les boutons « Voir 
 
 # 🍏 Apple 974 – produits Apple à La Réunion
 
-Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/apple/
+Appli : https://cam-grignon.pages.dev/apple/
 
 **Toutes les 3 heures, de 6h à 22h (heure de La Réunion)**, GitHub relève les produits Apple **neufs,
 reconditionnés et d'occasion** en vente **à La Réunion**, sur 14 sites de l'île : **iShop**, **Microstor**, **Phenix Store**,
@@ -106,7 +106,7 @@ version la moins chère. Pour Microstor et ParuVendu, la carte montre la commune
 
 # ✈️ Vols 974 – vols directs France → La Réunion
 
-Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/vols/
+Appli : https://cam-grignon.pages.dev/vols/
 
 **Toutes les 2 heures, jour et nuit**, GitHub relève sur **Google Flights** les **vols sans escale** de la France
 vers La Réunion (Saint-Denis Roland-Garros), **aller simple**, sur toutes les compagnies (Air France, Air Austral,
@@ -137,7 +137,7 @@ avant de payer. Le premier relevé complet du calendrier prend quelques passages
 
 # 📅 Planning équipe
 
-Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/planning/
+Appli : https://cam-grignon.pages.dev/planning/
 
 Plannings de l'équipe (zone publique / zone réservée), jours de CFA des alternants, congés et absences,
 génération à partir du planning modèle, historique, exports PDF / Excel / CSV.
@@ -153,7 +153,7 @@ génération à partir du planning modèle, historique, exports PDF / Excel / CS
 
 # 🏡 Seb Immo
 
-Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/immo/
+Appli : https://cam-grignon.pages.dev/immo/
 (version Claude : https://claude.ai/artifact/2Bg3yFCpd15pLLDdHewmzm)
 
 Gestion des dossiers clients en immobilier, sur téléphone et sur PC (menu ☰ en haut à gauche sur téléphone,
@@ -168,7 +168,7 @@ menu fixe à gauche sur PC).
   L'accueil liste les clients à relancer (sans nouvelles depuis 7 jours, réglable).
 - **Relances automatiques** (menu ☰) : avec un compte **Brevo** (clé API collée dans l'appli), l'appli envoie elle-même
   les SMS (et les mails une fois l'adresse d'envoi remplie) aux clients à qui il manque des papiers, quand elle est ouverte
-  sur l'adresse github.io. 3 relances au plus par client, de 8h à 19h, pas le dimanche (réglable).
+  sur l'adresse cam-grignon.pages.dev. 3 relances au plus par client, de 8h à 19h, pas le dimanche (réglable).
 - **Importer mes dossiers** (menu ☰) : on dépose son dossier clients existant (sous-dossiers, photos, PDF, tableau CSV).
   L'appli range chaque fichier dans le bon client et le bon papier (par l'IA dans la version Claude, sinon d'après les noms),
   montre le résultat à corriger, puis « Tout ranger » crée les dossiers, qui se classent tout seuls.

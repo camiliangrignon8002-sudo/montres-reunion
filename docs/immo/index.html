@@ -1056,7 +1056,7 @@ function vueAuto(m) {
   const prochaines = D.dossiers.filter(d => !d.exemple && aRelancer(d) && nbAuto(d) < a.max);
   m.innerHTML = `
     ${cadre ? `<div class="bandeau"><p>Ici, dans Claude, l'appli ne peut pas envoyer de messages. Les relances automatiques marchent sur l'adresse de l'appli :
-      <b>camiliangrignon8002-sudo.github.io/montres-reunion/immo</b>, ouverte dans Safari, Chrome ou depuis l'écran d'accueil.</p></div>` : ""}
+      <b>cam-grignon.pages.dev/immo</b>, ouverte dans Safari, Chrome ou depuis l'écran d'accueil.</p></div>` : ""}
     <section class="bloc">
       <div class="tete"><h2>Envoyer les relances tout seul</h2><span class="pill ${a.actif && cle ? "s-fini" : "s-traiter"}">${a.actif && cle ? "Activé" : "Désactivé"}</span></div>
       <p>Quand l'appli est ouverte, elle envoie elle-même un mail et/ou un SMS aux clients à qui il manque des papiers depuis
@@ -1146,7 +1146,7 @@ const GUIDE = `Seb Immo est une appli simple pour gérer des dossiers immobilier
 - Dans un dossier : toucher le carré d'un papier quand il est reçu ; le trombone range une photo ou un PDF (le papier se coche tout seul) ; la poubelle retire un papier ; « Ajouter un papier » en bas de la liste.
 - Statut : à traiter = rien reçu ; en cours = une partie reçue ; en attente = mis de côté avec le bouton « Mettre en attente » (raison et date de reprise, plus de relances, revient sur l'accueil à la date de reprise ; « Reprendre le dossier » le remet en route) ; fini = tout reçu ou dossier clôturé (bouton « Clôturer le dossier »).
 - Relancer : dans le dossier, boutons SMS, WhatsApp, Email qui ouvrent un message prêt avec les papiers manquants. L'accueil liste les clients sans nouvelles depuis le délai choisi (7 jours par défaut, dans Réglages).
-- Relances automatiques : menu ☰ → Relances automatiques. Avec un compte Brevo (clé API collée dans l'appli), les SMS partent tout seuls quand l'appli est ouverte sur l'adresse github.io. Les mails partiront quand une adresse d'envoi sera remplie. 3 relances au plus par client, de 8h à 19h, pas le dimanche.
+- Relances automatiques : menu ☰ → Relances automatiques. Avec un compte Brevo (clé API collée dans l'appli), les SMS partent tout seuls quand l'appli est ouverte sur l'adresse cam-grignon.pages.dev. Les mails partiront quand une adresse d'envoi sera remplie. 3 relances au plus par client, de 8h à 19h, pas le dimanche.
 - Mes biens : prix affiché, prix d'achat, frais, prix de vente, commission ; ce que chaque vente rapporte = commission, sinon vente − achat − frais.
 - Biens achetables / Terrains à acheter : liste refaite chaque lundi vers 10h depuis Bien'ici, les moins chers au m² par rapport à leur commune en tête ; filtres zone (Nord, Ouest, Sud, Est), commune, prix minimum et maximum, surface, pièces, tri. Bouton « Créer un dossier » sur chaque annonce.
 - Sauvegarde : Réglages → Copier / Télécharger la sauvegarde, puis Restaurer sur l'autre appareil (téléphone ↔ PC). Les photos et PDF ne sont pas dans la sauvegarde. Les dossiers restent sur l'appareil où on les crée.
@@ -1293,7 +1293,7 @@ function vueAide(m) {
     ["Ranger une photo ou un PDF", `<ol><li>Dans le dossier, touchez le <b>trombone</b> à droite du papier.</li><li>Choisissez la photo ou le PDF.</li></ol><p>Le papier se coche tout seul. Touchez le nom du fichier pour le revoir.</p>`],
     ["Ajouter ou retirer un papier", `<p>En bas de la liste des papiers : écrivez le nom puis <b>Ajouter</b>. La <b>poubelle</b> à droite d'un papier le retire de la liste.</p>`],
     ["Relancer un client", `<ol><li>Ouvrez le dossier.</li><li>Dans « Relancer », touchez <b>SMS</b>, <b>WhatsApp</b> ou <b>Email</b>.</li><li>Le message est déjà écrit avec les papiers qui manquent : il reste à appuyer sur Envoyer.</li></ol><p>L'accueil montre les clients sans nouvelles depuis 7 jours.</p>`],
-    ["Relances automatiques", `<p>Menu ☰ → <b>Relances automatiques</b>. Collez la clé Brevo, cochez <b>Activer</b>, puis faites un <b>SMS d'essai</b>. Les SMS partent tout seuls quand l'appli est ouverte sur l'adresse github.io (pas dans Claude).</p>`],
+    ["Relances automatiques", `<p>Menu ☰ → <b>Relances automatiques</b>. Collez la clé Brevo, cochez <b>Activer</b>, puis faites un <b>SMS d'essai</b>. Les SMS partent tout seuls quand l'appli est ouverte sur l'adresse cam-grignon.pages.dev (pas dans Claude).</p>`],
     ["Noter un prix ou une vente", `<p>Dans le dossier, partie <b>Le bien</b> : prix affiché, prix d'achat, frais, commission. Mettez <b>Vendu ? → Oui</b> et le prix de vente. Le total apparaît dans <b>Mes biens</b>.</p>`],
     ["Trouver un bien ou un terrain", `<p>Menu ☰ → <b>Biens achetables</b> ou <b>Terrains à acheter</b>. La liste est refaite chaque lundi vers 10h. Choisissez la zone (Nord, Ouest, Sud, Est) et la commune, le prix minimum et maximum, la surface, puis le tri. Les moins chers au m² sont en tête. Filtrez par budget et par commune, puis <b>Créer un dossier</b> si un bien vous intéresse.</p>`],
     ["Passer du téléphone au PC", `<ol><li>Sur le téléphone : Réglages → <b>Copier la sauvegarde</b> (ou Télécharger).</li><li>Envoyez-vous le texte (mail, WhatsApp).</li><li>Sur le PC : Réglages → collez le texte → <b>Restaurer</b>.</li></ol><p>Les photos et PDF ne passent pas : rangez-les sur l'appareil principal.</p>`],

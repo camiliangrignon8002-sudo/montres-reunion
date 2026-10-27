@@ -31,7 +31,7 @@ jobs:
         env:
           NOTIFIER: ${{ github.event_name == 'schedule' || inputs.notifier }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC_LOGEMENTS || 'logements974-w9y80xhxga' }}
-          PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/logements/
+          PAGE_URL: https://cam-grignon.pages.dev/logements/
       - name: Publier la page
         if: always()
         run: |

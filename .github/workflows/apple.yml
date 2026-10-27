@@ -36,7 +36,7 @@ jobs:
           SOURCES: ${{ inputs.sources }}
           NOTIFIER: ${{ github.event.schedule == '45 7 * * *' || inputs.notifier == true }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC_APPLE || 'apple974-hcmkgo9gki' }}
-          PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/apple/
+          PAGE_URL: https://cam-grignon.pages.dev/apple/
       - name: Publier la page
         if: always()
         run: |

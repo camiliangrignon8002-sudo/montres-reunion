@@ -37,7 +37,7 @@ VERSION_FICHE = 2
 # Notification de midi : appli gratuite ntfy, abonnement au sujet ci-dessous
 NTFY_TOPIC = os.environ.get("NTFY_TOPIC", "apple974-hcmkgo9gki")
 NOTIFIER = os.environ.get("NOTIFIER", "false") == "true"
-PAGE_URL = os.environ.get("PAGE_URL", "https://camiliangrignon8002-sudo.github.io/montres-reunion/apple/")  # à augmenter quand lire_fiche apprend à lire une nouvelle information
+PAGE_URL = os.environ.get("PAGE_URL", "https://cam-grignon.pages.dev/apple/")  # à augmenter quand lire_fiche apprend à lire une nouvelle information
 
 # ---------------------------------------------------------------- communes (centre approximatif)
 
