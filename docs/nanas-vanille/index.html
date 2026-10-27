@@ -77,6 +77,12 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 [data-view][hidden], .menu-panel[hidden], .burger .dot[hidden], .fav-count[hidden], .searchbar[hidden], .search-info[hidden] { display: none; }
 .icon-btn { width: 44px; height: 44px; border: 1.5px solid var(--line); border-radius: 50%; background: var(--bg); color: var(--navy); cursor: pointer; display: grid; place-items: center; padding: 0; }
 .icon-btn svg { width: 19px; height: 19px; }
+/* Loupe mise en avant, bouton Rafraîchir discret */
+#search-btn { width: auto; height: 48px; padding: 0 20px 0 16px; border-radius: 999px; display: inline-flex; gap: 9px; background: var(--navy); border-color: var(--navy); color: #fff; font: 700 0.78rem var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; }
+#search-btn svg { width: 22px; height: 22px; }
+#search-btn:hover, #search-btn[aria-expanded="true"] { background: var(--teal); border-color: var(--teal); color: #fff; }
+#refresh { width: 32px; height: 32px; padding: 0; gap: 0; border-radius: 50%; justify-content: center; align-items: center; font-size: 0; }
+#refresh svg { width: 15px; height: 15px; flex: none; display: block; }
 .icon-btn:hover, .icon-btn[aria-expanded="true"] { border-color: var(--teal); color: var(--teal); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .searchbar { border-top: 1px solid var(--line); background: var(--bg); }
@@ -396,8 +402,9 @@ footer a { color: var(--teal-soft); }
   header.top .wrap { flex-wrap: nowrap; }
   .logo.small { font-size: 1.3rem; }
   .icon-btn, .burger { width: 40px; height: 40px; }
-  .btn-refresh { width: 40px; height: 40px; padding: 0; font-size: 0; gap: 0; border-radius: 50%; }
-  .btn-refresh svg { width: 17px; height: 17px; }
+  #search-btn { width: 48px; height: 48px; padding: 0; justify-content: center; }
+  #search-btn .search-label { display: none; }
+  #refresh { width: 30px; height: 30px; }
   .header-actions { gap: 8px; flex: none; }
 }
 </style>
@@ -474,10 +481,11 @@ footer a { color: var(--teal-soft); }
     <div class="header-actions">
       <button class="icon-btn" id="search-btn" type="button" aria-expanded="false" aria-controls="searchbar" aria-label="Rechercher">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 L21 21"/></svg>
+        <span class="search-label">Rechercher</span>
       </button>
       <button class="btn btn-refresh" id="refresh" type="button" title="Rafraîchir la page">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>
-        Rafraîchir
+        <span class="sr-only">Rafraîchir</span>
       </button>
       <div class="burger-wrap">
         <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu-panel" aria-label="Ouvrir le menu">
