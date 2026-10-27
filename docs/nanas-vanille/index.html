@@ -521,7 +521,6 @@ footer a { color: var(--teal-soft); }
         <span class="nanas">N<span class="a crown" style="color:var(--sun)"><svg><use href="#pine-a"/></svg></span>N<span class="a" style="color:var(--navy)"><svg><use href="#pine-a"/></svg></span>S</span><span class="colon"><i></i><i></i></span><span class="vanille">Vanille</span>
       </a>
       <h1>L'art &amp; le terroir de l'île de la Réunion</h1>
-      <p class="lead">Épicerie fine, décoration, bien-être, mode, bijoux, librairie… Les créations de plus de 200 artistes, artisans et producteurs de l'île, dans nos deux boutiques de Saint-Denis et Saint-Pierre.</p>
       <div class="actions">
         <a class="btn btn-primary" href="#produits">Découvrir les produits</a>
         <a class="btn btn-ghost" href="#histoire">Notre histoire</a>
@@ -567,7 +566,6 @@ footer a { color: var(--teal-soft); }
         <span class="eyebrow">fait à La Réunion</span>
         <h2>Nos produits</h2>
         <div class="rule"></div>
-        <p>Une sélection qui change au fil des arrivages et des créateurs. Pour connaître la disponibilité et le prix d'un article, appelez la boutique la plus proche.</p>
       </div>
       <div class="filters" role="group" aria-label="Filtrer par rayon" id="filters"></div>
       <p class="search-info" id="search-info" hidden></p>
@@ -1579,8 +1577,18 @@ footer a { color: var(--teal-soft); }
   // ---------- Producteurs & créateurs (liste tenue par les gérantes) ----------
   // Producteurs confirmés, affichés aussi quand la liste partagée n'est pas disponible (site hors claude.ai)
   var PRODUCERS = [
-    { id: "corinne-granger", nom: "Corinne Granger", categorie: "Décoration & art", commune: "", lien: "https://www.corinnegranger.com/", description: "Créatrice présente en boutique à Saint-Pierre." },
-    { id: "escale-bleue", nom: "Escale Bleue", categorie: "Épicerie fine", commune: "Saint-Philippe", lien: "https://shop.escale-bleue.fr/", description: "Vanille Bleue, vanille vieillie deux ans. Atelier vanille fondé en 1986 au Tremblet." }
+    {"id": "bflower", "nom": "bflower", "categorie": "Autre", "commune": "", "lien": "https://www.bflower-shop.com/nos-revendeurs", "description": "Créatrice qui compte les deux boutiques parmi ses revendeurs."},
+    {"id": "atelier-frize", "nom": "Atelier Frize", "categorie": "Autre", "commune": "", "lien": "https://atelierfrize.com/boutiques-partenaires/", "description": "Atelier partenaire, présent en boutique."},
+    {"id": "candle-island", "nom": "Candle Island", "categorie": "Décoration & art", "commune": "", "lien": "https://www.cetanou.com/annuaire974/wpbdp_category/artisanat-artisans-createurs/", "description": "Bougies artisanales."},
+    {"id": "corinne-granger", "nom": "Corinne Granger", "categorie": "Autre", "commune": "", "lien": "https://www.corinnegranger.com/", "description": "Créatrice présente en boutique à Saint-Pierre."},
+    {"id": "couleur-mafate", "nom": "Couleur Mafate", "categorie": "Épicerie fine", "commune": "", "lien": "https://www.cetanou.com/annuaire974/wpbdp_category/produits-pei-artisanaux/", "description": "Charcuterie péi artisanale, en vente à Saint-Pierre."},
+    {"id": "escale-bleue", "nom": "Escale Bleue", "categorie": "Épicerie fine", "commune": "Saint-Philippe", "lien": "https://shop.escale-bleue.fr/", "description": "Vanille Bleue, vanille vieillie deux ans. Atelier vanille fondé en 1986 au Tremblet."},
+    {"id": "laurence-kreater", "nom": "Laurence Kréater", "categorie": "Autre", "commune": "", "lien": "https://www.cetanou.com/annuaire974/wpbdp_category/artisanat-artisans-createurs/page/3/", "description": "Créations faites main, en vente à Saint-Pierre."},
+    {"id": "lefilariane", "nom": "lefilariane", "categorie": "Décoration & art", "commune": "", "lien": "https://lefilariane.com/pages/ou-trouver-lefilariane", "description": "Affiches et illustrations, dans les deux boutiques."},
+    {"id": "majik-bandeau", "nom": "Majik Bandeau", "categorie": "Mode", "commune": "", "lien": "https://www.cetanou.com/annuaire974/wpbdp_category/confection/", "description": "Bandeaux pour cheveux créés par Fabienne Michel depuis 2015."},
+    {"id": "maison-louis-leichnig", "nom": "Maison Louis Leichnig", "categorie": "Épicerie fine", "commune": "", "lien": "https://www.maisonlouisleichnig.re/nous-contacter/", "description": "Vanille givrée, dans les deux boutiques."},
+    {"id": "papapang", "nom": "Papapang", "categorie": "Autre", "commune": "", "lien": "https://papapang.re/ou-nous-retrouver/", "description": "Jouets, dans les deux boutiques."},
+    {"id": "reione", "nom": "Reione", "categorie": "Boissons", "commune": "", "lien": "https://reione.fr/points-de-vente/", "description": "Thés et infusions, dans les deux boutiques."}
   ], prodUnsub = null, prodCat = "Tous", prodEditing = null;
   var PROD_CATS = ["Tous", "Épicerie fine", "Boissons", "Bien-être", "Bijoux", "Mode", "Décoration & art", "Librairie", "Autre"];
   function renderProdFilters() {
