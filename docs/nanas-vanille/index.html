@@ -77,6 +77,10 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 [data-view][hidden], .menu-panel[hidden], .burger .dot[hidden], .fav-count[hidden], .searchbar[hidden], .search-info[hidden] { display: none; }
 .icon-btn { width: 44px; height: 44px; border: 1.5px solid var(--line); border-radius: 50%; background: var(--bg); color: var(--navy); cursor: pointer; display: grid; place-items: center; padding: 0; }
 .icon-btn svg { width: 19px; height: 19px; }
+/* Bouton Nos boutiques dans la barre du haut */
+.shops-btn { height: 48px; padding: 0 18px 0 14px; border: 1.5px solid var(--navy); border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; color: var(--navy); text-decoration: none; font: 700 0.78rem var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; background: var(--bg); }
+.shops-btn svg { width: 20px; height: 20px; color: var(--teal); }
+.shops-btn:hover { border-color: var(--teal); color: var(--teal); }
 /* Loupe mise en avant, bouton Rafraîchir discret */
 #search-btn { width: auto; height: 48px; padding: 0 20px 0 16px; border-radius: 999px; display: inline-flex; gap: 9px; background: var(--navy); border-color: var(--navy); color: #fff; font: 700 0.78rem var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; }
 #search-btn svg { width: 22px; height: 22px; }
@@ -404,6 +408,8 @@ footer a { color: var(--teal-soft); }
   .icon-btn, .burger { width: 40px; height: 40px; }
   #search-btn { width: 48px; height: 48px; padding: 0; justify-content: center; }
   #search-btn .search-label { display: none; }
+  .shops-btn { width: 44px; height: 44px; padding: 0; justify-content: center; }
+  .shops-btn .shops-label { display: none; }
   #refresh { width: 30px; height: 30px; }
   .header-actions { gap: 8px; flex: none; }
 }
@@ -479,6 +485,10 @@ footer a { color: var(--teal-soft); }
       <span class="nanas">N<span class="a" style="color:var(--sun)"><svg><use href="#pine-a"/></svg></span>N<span class="a" style="color:var(--navy)"><svg><use href="#pine-a"/></svg></span>S</span><span class="colon"><i></i><i></i></span><span class="vanille">Vanille</span>
     </a>
     <div class="header-actions">
+      <a class="shops-btn" href="#boutiques" aria-label="Nos boutiques">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        <span class="shops-label">Nos boutiques</span>
+      </a>
       <button class="icon-btn" id="search-btn" type="button" aria-expanded="false" aria-controls="searchbar" aria-label="Rechercher">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 L21 21"/></svg>
         <span class="search-label">Rechercher</span>
@@ -498,7 +508,6 @@ footer a { color: var(--teal-soft); }
           <a href="#producteurs">Nos producteurs</a>
           <a href="#histoire">Notre histoire</a>
           <a href="#compte">Mon compte</a>
-          <a href="#boutiques">Nos 2 boutiques</a>
         </nav>
       </div>
     </div>
