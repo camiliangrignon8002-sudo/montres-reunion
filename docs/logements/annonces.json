@@ -136,48 +136,34 @@
   "vu": "2026-10-21T12:07+04:00"
  },
  {
-  "id": "pv-1296365980",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296365980A1KILHAP000",
-  "titre": "Location appartement 1 pièce de 21m2 à Sainte clotilde (97490)",
+  "id": "zimo-01a14584-ef28-7851-8c48-4a9a4061351d",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-1-piece-21-m2/01a14584-ef28-7851-8c48-4a9a4061351d",
+  "titre": "Appartement 1 pièce 21 m²",
   "prix": 398.0,
   "commune": "Saint-Denis",
-  "quartier": "Sainte-Clotilde",
+  "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
   "surface": 21.0,
   "meuble": null,
   "photos": [
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/c2/8c/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtcGhvdG9zX3Jfc2lkZW5jZS0xMjY5Njk2NzAxMDAzNTA3MDgxMy5qcGc_MjAyNjEwMTcyMDE4MzE_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/9b/df/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLUlNR180ODc0LTE4MDc4MjU1Nzk0ODAxMTY5NzgwLmpwZz8yMDI2MTAyMDExNDAzNA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/18/ec/L3dhL2ltYWdlcy9iaWVucy8xLzczYjQ2MDE1ZDA0YmQyMjAyZjVjMjEyY2UxOGJhMGNhL3Bob3RvXzEyZjQ0YTkzYzM4YmFlMjZjYzJlOTgzNmFkMGQ0NWJmLmpwZz8yMDI2MTAyMDA3MjEyOA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/lanouvelleagence.staticlbi.com/c5/92/L3dhL2ltYWdlcy9iaWVucy8xLzhlM2ZkMmJhZWE2MDkyZDQ4ODQzM2UzMGVjYTE0YjI3L3Bob3RvXzEzYjU0MTIzZjdkNTUxNGRjMmI0YzExZTNhNmM0NWI3X0luY18wLmpwZz8yMDI2MTAyMDA3MjA1Mg_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/photos.exportadapt.com/8a/16/LzY5MDA0LzY5MDA0MTA0NjhfNzYuanBnPzIwMjYxMDIwMDEwMDIx_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/91/e6/L3dhL2ltYWdlcy9iaWVucy8xL2U0MDljY2EyMjdmNmNkMTg2NzAyMGY0NDM1NWQ1ZjdmL3Bob3RvXzM0YjFhM2MwMzc5ZTkyY2ZmNmRlNTBkNmJjYzM5YjEzLmpwZz8yMDI2MTAxOTIzMTYxNA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/2b/d0/L3dhL2ltYWdlcy9iaWVucy8xLzUyODg0OTk3MGQ2NjE5ZmI1ZGU3MWY2ZmUzNWNjMWUzL3Bob3RvX2YzODIwNDdmYmQ1ZTQ2Yzg4MjFhMzY3MTk0MjNiOWQxLmpwZz8yMDI2MTAxODIzMTI0Mw_rct?func=crop&w=1000&gravity=auto"
+   "https://img.e-xiste.com/-xSYbG7w1RS4jNckHaGuv33qIcEYLRyxm14pvngQdZY/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_c9c8caa5-4205-4741-b9bd-41cf414f8426.jpg"
   ],
-  "description": "RESIDENCE BLUE BAY - 5 RUE DE L'ANJOU Dans une résidence sécurisée studio d'une superficie de 21.26m² comprenant une pièce de vie principale avec kitchenette aménagée, une salle d'eau avec wc. A deux pas de l'université, à visiter rapidement! Disponibilité au 15 Novembre 2026. Loyer de 397,93 euros par mois charges comprises dont 25,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 417,16 euros. Les honoraires charge locataire sont de 278,93 euros ( soit 13,12 euros/m² ) dont 64,42 euros pour état des lieux ( soit 3,03 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
-  "caracteristiques": [
-   "Résidence sécurisée",
-   "Proche université"
-  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 21 m²",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "Citya Saint Denis",
+  "annonceur": "Pro · via bien'ici",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "02 57 54 91 17",
+  "tel": "",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-1-piece-21-m2/01a14584-ef28-7851-8c48-4a9a4061351d"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -1839,14 +1825,14 @@
   "surface": 26,
   "meuble": true,
   "photos": [
+   "https://file.bienici.com/photo/gedeon-33833975_media.studio-net.fr_biens_33833975_6aabcad853121",
+   "https://file.bienici.com/photo/gedeon-33833975_media.studio-net.fr_biens_33833975_6aabcad6b2ea0",
+   "https://file.bienici.com/photo/gedeon-33833975_media.studio-net.fr_biens_33833975_6aabcadacfd87",
+   "https://file.bienici.com/photo/gedeon-33833975_media.studio-net.fr_biens_33833975_6aabcae48cfc1",
    "https://file.bienici.com/photo/gedeon-33833975_media.studio-net.fr_biens_33833975_6aabcad1ce00f",
    "https://file.bienici.com/photo/gedeon-33833975_media.studio-net.fr_biens_33833975_6aabcad493c07",
-   "https://file.bienici.com/photo/gedeon-33833975_media.studio-net.fr_biens_33833975_6aabcad6b2ea0",
-   "https://file.bienici.com/photo/gedeon-33833975_media.studio-net.fr_biens_33833975_6aabcad853121",
-   "https://file.bienici.com/photo/gedeon-33833975_media.studio-net.fr_biens_33833975_6aabcadacfd87",
    "https://file.bienici.com/photo/gedeon-33833975_media.studio-net.fr_biens_33833975_6aabcaddae6f1",
-   "https://file.bienici.com/photo/gedeon-33833975_media.studio-net.fr_biens_33833975_6aabcae085254",
-   "https://file.bienici.com/photo/gedeon-33833975_media.studio-net.fr_biens_33833975_6aabcae48cfc1"
+   "https://file.bienici.com/photo/gedeon-33833975_media.studio-net.fr_biens_33833975_6aabcae085254"
   ],
   "description": "À louer – Studio meublé de 26 m² avec jardin privatif  – Sainte-Clotilde (Moufia)\n\nallée Alfred de Musset, 97490 Sainte-Clotilde – secteur Moufia, ce charmant studio meublé de 26 m² habitables bénéficie d’un agréable espace extérieur avec un jardin privatif\n\nLe logement est idéal pour une personne seule ou un couple et offre un cadre de vie agréable et pratique.\n\nStudio meublé\n26 m² de surface habitable\nJardin privatif \nChauffe-eau solaire, pour une consommation d’énergie maîtrisée\n1 place de stationnement dans la cour\nSitué dans le secteur recherché du Moufia à Sainte-Clotilde\nProximité des commerces, transports et commodités\n\nDisponible de suite\nLoyer mensuel : 599,37 €\nDépôt de garantie: 599€\n\nFrais d'agence charge locataire 338€, dont 78€ pour le réalisation des états des lieux.\n\nLes informations sur les risques auxquels ce bien est exposé, sont disponibles sur le site Géorisques : www.georisques.gouv.fr",
   "caracteristiques": [
@@ -1860,7 +1846,7 @@
    "Chauffe-eau solaire",
    "Proche transports"
   ],
-  "date": "2026-10-15T05:57:56.667Z",
+  "date": "2026-10-27T10:15:54.036Z",
   "annonceur": "REUNION OUEST IMMOBILIER",
   "lat": -20.899099019187357,
   "lon": 55.487852813982734,
@@ -2285,51 +2271,6 @@
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "pv-1295939827",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1295939827A1KILHAP000",
-  "titre": "Location appartement 2 pièces de 31m2 à Saint denis (97400)",
-  "prix": 618.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 31.0,
-  "meuble": true,
-  "photos": [
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/27/25/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ2OTctMTQzODQzNTEzMjc2NzQ3MTEwMDMuanBnPzIwMjYxMDIyMTE0NDUw_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/8a/59/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ2OTgtMzIxNTI5NjUxMjg3MTM2MTg4My5qcGc_MjAyNjEwMjIxMTQ0NTA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/bd/dc/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ2OTktMTQ1MDMzNDQ3NDAxMDc0NDkyLmpwZz8yMDI2MTAyMjExNDQ1MA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/3c/3a/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ3MDAtNDQxNDMxMDcwOTMzODQ5OTM0NC5qcGc_MjAyNjEwMjIxMTQ0NTA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/e3/bc/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ3MDEtMTA2MTU0OTEwNTUzMTA3OTI5MzQuanBnPzIwMjYxMDIyMTE0NDUw_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/44/b8/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQxMDAtNDEzMjg4MTY4Nzk2NTI5ODg4Ny5qcGc_MjAyNjEwMTUxMTQ4NDU_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/bc/d9/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE0NzQtNTgwNzAyODc5NzAwMTY4MjkyOS5qcGc_MjAyNjEwMjAxMTQ0NDQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/ed/cc/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9hdmlzaXRlcnJhcGlkZW1lbnQtZmlsaWdyYW5lLUlNR180MzEzLTEyNjgxMDYxMzAzNzIwODY2MzY5LmpwZz8yMDI2MTAxNjIwMTY1Mg_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/6d/88/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE0ODAtMTQ2OTI0NjA5NDc5ODQwOTYzOTcuanBnPzIwMjYxMDIwMTE0NDQ0_rct?func=crop&w=1000&gravity=auto"
-  ],
-  "description": "EXCLUSIVITÉ À louer : découvrez à SAINT DENIS (97400) cet appartement de 2 pièces MEUBLE de 31,09 m². Il est composé d'une cuisine équipée et d'une salle de bains. Le chauffage est réversible en climatisation pour un confort thermique été comme hiver. Cet appartement est situé dans un immeuble de bon standing avec ascenseur. Il est loué avec une place de parking. Le bien est soumis au statut de la copropriété. Loyer de 618,12 euros par mois charges comprises dont 20,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). Soit avec Assurance Habitation et Assistance* ( 22.42 euros ) : 640,54 euros. Les honoraires charge locataire sont de 407,90 euros ( soit 13,12 euros/m² ) dont 94,20 euros pour état des lieux ( soit 3,03 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
-  "caracteristiques": [
-   "Meublé",
-   "Parking",
-   "Climatisation",
-   "Ascenseur",
-   "Cuisine équipée"
-  ],
-  "date": "",
-  "annonceur": "Citya Saint Denis",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "02 57 54 91 17",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T19:53+04:00"
  },
  {
   "id": "zimo-01a11b76-7d75-74fa-a98f-8a3512c9608e",
@@ -2946,6 +2887,37 @@
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "zimo-01a17ce1-459e-72e5-9e9f-98dbd52da647",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-a-louer-champ-fleury-tribunal/01a17ce1-459e-72e5-9e9f-98dbd52da647",
+  "titre": "Studio a louer champ Fleury/ tribunal",
+  "prix": 650.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 33.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/H15pDRjLbL1Ye8v_FPqyNbclMvaiUw_1jhL5x2-yQx0/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_2b9b4913-125f-49d4-bed9-f9c41ea84502.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 33 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-27T14:54+04:00"
  },
  {
   "id": "zimo-01a162af-147e-7f9d-a647-1c59982872e8",
