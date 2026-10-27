@@ -3313,6 +3313,39 @@
   "vu": "2026-10-25T20:48+04:00"
  },
  {
+  "id": "zimo-01a17dbc-f94d-7c46-8bea-05d3a4989ebb",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/a-louer-grand-f1-bis-duplex-60-m2-montgaillard-saint-denis-parking-privatif/01a17dbc-f94d-7c46-8bea-05d3a4989ebb",
+  "titre": "À LOUER - GRAND F1 BIS DUPLEX 60 m² - MONTGAILLARD - SAINT-DENIS - PARKING PRIVATIF",
+  "prix": 670.0,
+  "commune": "Saint-Denis",
+  "quartier": "Montgaillard",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 60.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/CfC4OjsNrlC1ZEkETHm_mceWrxDMQ9PtWqxAjnD51XA/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_6104d06e-1d7f-4ca9-917d-5c90ee3f7326.jpg"
+  ],
+  "description": "Location T1 bis Saint-Denis (974) 2 pièces 60 m²",
+  "caracteristiques": [
+   "Parking"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-27T19:03+04:00"
+ },
+ {
   "id": "zimo-01a13baa-4600-7a22-9963-2e8441f489b3",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-meuble-st-denis-clim-varangue-parking-libre-le-5-novembre/01a13baa-4600-7a22-9963-2e8441f489b3",
