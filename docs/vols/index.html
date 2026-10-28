@@ -319,7 +319,7 @@ h1{font-size:32px;line-height:1.1;margin:4px 0 6px;letter-spacing:-.02em}
 
 <main class="page">
   <h1>France → La Réunion</h1>
-  <p class="sous">Vols directs, aller simple, toutes compagnies. Les prix comprennent <b>1 valise en soute et 1 valise cabine</b> par personne.<br><span class="maj">Relevé : <span id="maj">mercredi 28/10 à 19h28 (heure de La Réunion)</span></span></p>
+  <p class="sous">Vols directs, aller simple, toutes compagnies. Les prix comprennent <b>1 valise en soute et 1 valise cabine</b> par personne.<br><span class="maj">Relevé : <span id="maj">mercredi 28/10 à 21h27 (heure de La Réunion)</span></span></p>
 
   <section class="bloc">
     <button class="ligne-voy" id="ouvrir-voy">
@@ -797,7 +797,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden && Da
 
 $("#liste").innerHTML = `<div class="squelette"></div>`.repeat(4);
 resume(); compteurs();
-fetch("vols.json?v=202610281928").then(r => r.json()).then(charger).catch(() => actualiser(true));
+fetch("vols.json?v=202610282127").then(r => r.json()).then(charger).catch(() => actualiser(true));
 </script>
 </body>
 </html>
