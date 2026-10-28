@@ -1350,47 +1350,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "bienici-century-21-202_2780_15963",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/century-21-202_2780_15963",
-  "titre": "Studio 21 m²",
-  "prix": 550,
-  "commune": "Saint-Denis",
-  "quartier": "Vauban",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 21,
-  "meuble": true,
-  "photos": [
-   "https://file.bienici.com/photo/century-21-202_2780_15963_images.century21.fr_202_2780_c21_202_2780_15963_1_3125FD63-736B-474D-B6C7-8C812745F36B.jpg",
-   "https://file.bienici.com/photo/century-21-202_2780_15963_images.century21.fr_202_2780_c21_202_2780_15963_1_6ACF9361-81E1-4D0B-A99B-C23C32FB98B1.jpg",
-   "https://file.bienici.com/photo/century-21-202_2780_15963_images.century21.fr_202_2780_c21_202_2780_15963_1_8BE3B7F3-76EC-4E90-BBDD-E89C0A11C99F.jpg",
-   "https://file.bienici.com/photo/century-21-202_2780_15963_images.century21.fr_202_2780_c21_202_2780_15963_1_C451A3FC-7109-4B06-B476-786D9A35F347.jpg",
-   "https://file.bienici.com/photo/century-21-202_2780_15963_images.century21.fr_202_2780_c21_202_2780_15963_1_3D8E0065-7910-4F5A-88C4-36F102CB90AA.jpg",
-   "https://file.bienici.com/photo/century-21-202_2780_15963_images.century21.fr_202_2780_c21_202_2780_15963_1_149B6CC6-A828-4224-8717-4A7B4FEA47CB.jpg"
-  ],
-  "description": "Century 21 Chaussée Royale vous propose à la location ce studio meublé de 21 m² à 5 min du centre-ville !<br>Idéalement situé, ce charmant studio meublé vous offre un cadre de vie pratique et agréable, à proximité de toutes les commodités.<br>Parfait pour un étudiant ou un jeune actif, ce bien fonctionnel et bien agencé se compose d'une pièce de vie lumineuse, aménagée avec soin pour optimiser l'espace, d'un coin cuisine équipé, ainsi que d'une salle d'eau avec WC.<br>Le logement est loué entièrement meublé, prêt à vous accueillir immédiatement. Vous n'avez plus qu'à poser vos valises et profiter d'un intérieur confortable et pratique au quotidien.<br>Bien que le studio ne dispose pas de place de parking privative, des possibilités de stationnement sont disponibles dans l'allée à proximité.<br>Un bien rare sur le secteur, idéal pour celles et ceux qui recherchent un logement clé en main, proche du centre tout en bénéficiant d'un environnement accessible.<br> Contactez-nous dès maintenant pour organiser une visite !",
-  "caracteristiques": [
-   "2e étage",
-   "Meublé",
-   "Parking",
-   "Proche université"
-  ],
-  "date": "2026-10-23T00:20:55.706Z",
-  "annonceur": "CENTURY 21 Lancastel",
-  "lat": -20.886077601428987,
-  "lon": 55.46268925742307,
-  "charges": 85,
-  "pro": true,
-  "tel": "0693 93 69 69",
-  "email": "",
-  "adresse": "362 rue du Maréchal Leclerc, 97400 ST DENIS",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-23T05:05+04:00"
- },
- {
   "id": "zimo-01a1594f-9b9d-792d-8e68-9a13bcc77293",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/t1-bis-a-louer-bellepierre/01a1594f-9b9d-792d-8e68-9a13bcc77293",
@@ -3166,10 +3125,6 @@
    {
     "source": "ParuVendu",
     "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296212967A1KILHAP000"
-   },
-   {
-    "source": "EntreParticuliers",
-    "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-3-pieces-70-m2/ref-22674243"
    },
    {
     "source": "Zimo",
