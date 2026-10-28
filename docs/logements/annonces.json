@@ -1628,22 +1628,25 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a1670c-1122-7920-b81b-5e35854fd3b9",
+  "id": "zimo-01a182f6-6985-7ec3-ab98-7165af081a94",
   "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-sainte-clotilde/01a1670c-1122-7920-b81b-5e35854fd3b9",
-  "titre": "Studio Sainte Clotilde",
+  "url": "https://www.zimo.fr/annonce/studio-meuble-universite/01a182f6-6985-7ec3-ab98-7165af081a94",
+  "titre": "Studio meublé UNIVERSITÉ",
   "prix": 590.0,
   "commune": "Saint-Denis",
-  "quartier": "Sainte-Clotilde",
+  "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
   "surface": 22.0,
-  "meuble": null,
+  "meuble": true,
   "photos": [
-   "https://img.e-xiste.com/C-TPcOG6aUE3_X8B8nnBB9jPDSebC7neJeU10rIbWY0/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_0a521c12-c798-495d-8598-087238d1aeab.jpg"
+   "https://img.e-xiste.com/lsKHSjgXKCTuevBTH9_UMRQm-ROlUvwxSMt9SrwNd7Y/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_616ff9e7-1271-4338-a088-3845d792a978.jpg"
   ],
   "description": "Location Studio Saint-Denis (974) 1 pièces 22 m²",
-  "caracteristiques": [],
+  "caracteristiques": [
+   "Meublé",
+   "Proche université"
+  ],
   "date": "",
   "annonceur": "Particulier · via leboncoin",
   "lat": null,
@@ -2771,10 +2774,6 @@
    {
     "source": "Bien'ici",
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/ag340369-551086409"
-   },
-   {
-    "source": "Figaro Immobilier",
-    "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html"
    },
    {
     "source": "Zimo",
