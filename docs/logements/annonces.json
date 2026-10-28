@@ -2018,34 +2018,43 @@
   "vu": "2026-10-25T18:46+04:00"
  },
  {
-  "id": "zimo-01a1676c-1203-7ab7-ad18-f0a5235f54af",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-1-piece-20-m2/01a1676c-1203-7ab7-ad18-f0a5235f54af",
-  "titre": "Appartement Saint Denis 1 pièce - BELLEPIERRE -",
+  "id": "ep-22730000",
+  "source": "EntreParticuliers",
+  "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-saint-denis-1-piece-bellepierre/ref-22730000",
+  "titre": "Appartement Saint Denis 1 pièce - BELLEPIERRE - — Saint-Denis",
   "prix": 605.0,
   "commune": "Saint-Denis",
-  "quartier": "Bellepierre",
+  "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
   "surface": 19.0,
-  "meuble": null,
+  "meuble": true,
   "photos": [
-   "https://img.e-xiste.com/5Tqwj2TmnFu2Lw6cKXHfiE91hxCNfYrq0-dRQQBJr7g/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_5f8e1dcf-f6ee-4771-b95d-6041631f2361.jpg"
+   "https://www.entreparticuliers.com/media/epc-photos/photo_fe2e8b34-bd72-4ecd-baed-5c04a59b2e8e.jpg"
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 19 m²",
-  "caracteristiques": [],
+  "description": "LOGER LOUE A BELLEPIERRE, UN STUDIO MEUBLE SITUE AU 2EME ETAGE D'UNE RESIDENCE CALME ET SECURISEE, COMPRENANT : UNE PIECE PRINCIPALE EQUIPEE D'UN CLIC CLAC, ET DIVERS RANGEMENTS, UNE CUISINE AVEC PLAQUES DE CUISSON, FRIGO, FOUR, LAVE LINGE, UNE SALLE DE BAINS ET UNE VARANGUE AVEC UNE VUE DONNANT SUR LA MONTAGNE.\nET UNE PLACE DE P.K.\nContactez-nous dès maintenant pour plus de renseignements et visites au 06.92.65.22.76\nRISEE A BELLEPIERRE .",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Résidence sécurisée"
+  ],
   "date": "",
-  "annonceur": "Pro · via DOMimmo",
+  "annonceur": "Particulier",
   "lat": null,
   "lon": null,
   "charges": null,
-  "pro": true,
-  "tel": "",
+  "pro": false,
+  "tel": "0692 65 22 76",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/studio-1-piece-20-m2/01a1676c-1203-7ab7-ad18-f0a5235f54af"
+   }
+  ],
   "vu": "2026-10-23T11:03+04:00"
  },
  {
@@ -2627,51 +2636,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "superimmo--annonces-location-appartement-48m-saint-denis-97400-x1282pr",
-  "source": "Superimmo",
-  "url": "https://www.superimmo.com/annonces/location-appartement-48m-saint-denis-97400-x1282pr",
-  "titre": "Location appartement 2 pièces 48 m² Saint-Denis (97400)",
-  "prix": 636.0,
-  "commune": "Saint-Denis",
-  "quartier": "",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 48.0,
-  "meuble": null,
-  "photos": [
-   "https://photo.superimmo.com/w5bp8sm0r2asverbj0hl4l1gn99j",
-   "https://photo.superimmo.com/6k29jm0eckwofkc8duue4rod98av",
-   "https://photo.superimmo.com/i43ntxo8xf55cpk726pl2keaqh7v",
-   "https://photo.superimmo.com/3wd6lcgwph22omfvx9kzsqtk8uiy",
-   "https://photo.superimmo.com/gsn0t2ftivyuf7f0y256oy2cetij",
-   "https://photo.superimmo.com/abnw6f9914rl54l813wt0m51tjjw",
-   "https://photo.superimmo.com/w5db78gorlq4zyp68x7kpl8xhx2j",
-   "https://photo.superimmo.com/0skupzdu0xokfj3iknwtia80rish",
-   "https://photo.superimmo.com/8985jlutub4iv0jhzhqjxv11jwei",
-   "https://photo.superimmo.com/u92lyuaugl43ad76n9knxzze53zz",
-   "https://photo.superimmo.com/amm3wmoj71i0scfcw2z72bpga8by",
-   "https://photo.superimmo.com/xxkb559obn20lndpmtbfglw2wl3j",
-   "https://photo.superimmo.com/bqodk9u969tafow87q1qhlzxn03f",
-   "https://photo.superimmo.com/5pee4mx161v88vcyptcezth4hesc",
-   "https://photo.superimmo.com/kjvnpyoadesfvmagwlh6xwuuczys"
-  ],
-  "description": "Annonce appartement location 48 m² 2 pièces à Saint-Denis Beau F2 sur La Providence Spacieux 2",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Superimmo",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0262 94 85 95",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:59+04:00"
  },
  {
   "id": "superimmo--annonces-location-appartement-43m-saint-denis-97490-x12c8gz",
