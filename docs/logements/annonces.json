@@ -1348,34 +1348,43 @@
   "vu": "2026-10-27T11:04+04:00"
  },
  {
-  "id": "zimo-01a07c45-39b7-7bdc-96fd-e6e30e960043",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-20-m2/01a07c45-39b7-7bdc-96fd-e6e30e960043",
-  "titre": "Appartement 1 pièce 20 m²",
+  "id": "figaro-108474953",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108474953.html",
+  "titre": "Location  appartement 1 pièce 20 m² à Sainte Clotilde (97490), 560 €",
   "prix": 560.0,
   "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
+  "quartier": "Sainte Clotilde",
   "pieces": 1,
   "type": "Studio",
   "surface": 20.0,
   "meuble": null,
   "photos": [
-   "https://img.e-xiste.com/_iNM3UNwniCXAi69P5DiRlZNPsoo-4AjlUdXcxkRftg/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fimmo-cdn.fr%2Fimages%2Ffigaro%2F6a9eaecca223ac14e09cb538-1.jpg"
+   "https://lh3.googleusercontent.com/_iSkscS_gOnoXD01xYSvEWVke0vg5OR59ZmYqUm0Nob9NhE3B9xhBATm3PQuKnrYvgFqNdC6OzVGe9QHWsaEGDqW1URx9lBr93olQQ=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/qFt1jcimHPczAQdviKz9tnK8ypRpWNrmtTyD0C2VzVwsF1ony0Eg4YzO5dp16z8WRrmta-hZes2Bp624XJydhQBIw2FPq2aZYHPHNg=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/cK-Xt2OPKTJ4SL_TUXKOe6pirLWOyi6ZpDxogju3IeuD7fZ--61mGSfICtOvl3Wdi1WOJsJTi_AUDvVbDcz4eQoqKZM3bnnJLI4kTw=rw-w940-h605-l80"
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
-  "caracteristiques": [],
+  "description": "RUNIMMO vous propose en location un studio de 20m2 dans la résidence Central Fac 9 situé rue des jacinthes à SAINTE CLOTILDE.\nIl se compose d'une entrée avec kitchenette aménagée et équipée, un séjour/chambre, salle d'eau avec WC.\nDisponible de suite\nN'hésitez pas à recontacter Anaïs pour une visite 0692359521.\nHonoraires de 260 € TTC à la charge du locataire comprenant 60 € TTC pour l'état des lieux. Loyer de base 530 €/mois. Provision sur charges 30 €/mois, régularisation annuelle. Dépôt de garantie 530 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.\nCarte pro. CP175012018000034249",
+  "caracteristiques": [
+   "Proche université"
+  ],
   "date": "",
-  "annonceur": "Pro · via Figaro Immobilier",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0692 35 95 21",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-1-piece-20-m2/01a07c45-39b7-7bdc-96fd-e6e30e960043"
+   }
+  ],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -2647,6 +2656,10 @@
    {
     "source": "Bien'ici",
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/2pieces/netty-company51942hxz-appt-2082"
+   },
+   {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-110257171.html"
    },
    {
     "source": "Zimo",
@@ -4155,6 +4168,49 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "superimmo-onces-location-appartement-47m-sainte-clotilde-97490-x129mms",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-47m-sainte-clotilde-97490-x129mms",
+  "titre": "Location appartement  47,7 m² Sainte-Clotilde (97490)",
+  "prix": 700.0,
+  "commune": "Saint-Denis",
+  "quartier": "",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 47.7,
+  "meuble": null,
+  "photos": [
+   "https://photo.superimmo.com/liwh5ztljdh49dp4nsrhpsokojyw",
+   "https://photo.superimmo.com/6m48p5zt8slg36qbqt12kk7t7k5t",
+   "https://photo.superimmo.com/nqmvgoz42e4mfzkkjjqaq6mzz3q5",
+   "https://photo.superimmo.com/vz2523976j6xzgf3evxx7v7mb5o5",
+   "https://photo.superimmo.com/al3kpphov0yv6rkpi1wgmh1zq6x5",
+   "https://photo.superimmo.com/uq1kmwz2vygzbrjvdztw8aiah9yt",
+   "https://photo.superimmo.com/zyf22r2rw59910hgalg14as5u35p",
+   "https://photo.superimmo.com/negm9k9ooa7v5sq6fycze3o7fbv7",
+   "https://photo.superimmo.com/u63yqyj0gwcrcblq1et48ogvejge",
+   "https://photo.superimmo.com/zn1wu5y9c3o3x6exau5no4mhyfna",
+   "https://photo.superimmo.com/koea1spqsd85p4hxa4uoarfiy8ac",
+   "https://photo.superimmo.com/z86ig52043s39zzdncs9pgd1ysgr",
+   "https://photo.superimmo.com/710wwack3mk06p6cdvillheh33vi"
+  ],
+  "description": "Annonce appartement location 47,7 m²  à Sainte-Clotilde Domenjod – | Réf. G517 Disponible à",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Superimmo",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0262 21 48 48",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T12:59+04:00"
+ },
+ {
   "id": "superimmo--annonces-location-appartement-63m-saint-denis-97400-x12bwih",
   "source": "Superimmo",
   "url": "https://www.superimmo.com/annonces/location-appartement-63m-saint-denis-97400-x12bwih",
@@ -4198,49 +4254,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-24T23:41+04:00"
- },
- {
-  "id": "superimmo-onces-location-appartement-47m-sainte-clotilde-97490-x129mms",
-  "source": "Superimmo",
-  "url": "https://www.superimmo.com/annonces/location-appartement-47m-sainte-clotilde-97490-x129mms",
-  "titre": "Location appartement  47,7 m² Sainte-Clotilde (97490)",
-  "prix": 700.0,
-  "commune": "Saint-Denis",
-  "quartier": "",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 47.7,
-  "meuble": null,
-  "photos": [
-   "https://photo.superimmo.com/liwh5ztljdh49dp4nsrhpsokojyw",
-   "https://photo.superimmo.com/6m48p5zt8slg36qbqt12kk7t7k5t",
-   "https://photo.superimmo.com/nqmvgoz42e4mfzkkjjqaq6mzz3q5",
-   "https://photo.superimmo.com/vz2523976j6xzgf3evxx7v7mb5o5",
-   "https://photo.superimmo.com/al3kpphov0yv6rkpi1wgmh1zq6x5",
-   "https://photo.superimmo.com/uq1kmwz2vygzbrjvdztw8aiah9yt",
-   "https://photo.superimmo.com/zyf22r2rw59910hgalg14as5u35p",
-   "https://photo.superimmo.com/negm9k9ooa7v5sq6fycze3o7fbv7",
-   "https://photo.superimmo.com/u63yqyj0gwcrcblq1et48ogvejge",
-   "https://photo.superimmo.com/zn1wu5y9c3o3x6exau5no4mhyfna",
-   "https://photo.superimmo.com/koea1spqsd85p4hxa4uoarfiy8ac",
-   "https://photo.superimmo.com/z86ig52043s39zzdncs9pgd1ysgr",
-   "https://photo.superimmo.com/710wwack3mk06p6cdvillheh33vi"
-  ],
-  "description": "Annonce appartement location 47,7 m²  à Sainte-Clotilde Domenjod – | Réf. G517 Disponible à",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Superimmo",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0262 21 48 48",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:59+04:00"
  },
  {
   "id": "zimo-01a09f00-e6b4-75c1-8cd1-d20485a8993e",
