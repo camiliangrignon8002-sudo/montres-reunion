@@ -1,6 +1,6 @@
 {
-  "name": "Montres Réunion",
-  "short_name": "Montres",
+  "name": "App",
+  "short_name": "App",
   "description": "Montres homme d'occasion à La Réunion, moins de 250 €",
   "start_url": "./",
   "scope": "./",
