@@ -442,7 +442,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 /* fenêtres : grands panneaux de verre flottants, ouverture avec effet ressort */
 .voile{background:rgba(10,20,15,.22);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 .feuille{background:var(--v-fond-fort);box-shadow:var(--v-lentille),0 30px 80px -20px rgba(0,0,0,.45);
-  margin:0 8px calc(8px + env(safe-area-inset-bottom));border-radius:34px;animation:surgit .5s var(--ressort);max-height:calc(100vh - 24px)}
+  margin:0 8px calc(8px + env(safe-area-inset-bottom));border-radius:34px;animation:none;max-height:calc(100vh - 24px);will-change:transform,clip-path}
 @keyframes surgit{from{transform:translateY(30px) scale(.96);opacity:0}}
 @media (min-width:760px){.feuille{margin:0;border-radius:34px}}
 .feuille .bloc{background:rgba(255,255,255,.8);box-shadow:inset 0 0 0 .5px rgba(0,0,0,.04);border-radius:22px}
@@ -466,6 +466,45 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
 .filtres button,.dom .carre,.actifs button,.suggestions button{box-shadow:var(--v-lentille),0 3px 10px -6px rgba(16,40,28,.25)}
 .filtres{padding-left:8px;padding-right:8px;margin:0 -8px}
 .rail-dom{padding-left:8px;padding-right:8px;margin:0 -8px}
+
+/* goutte de verre de la barre du bas : elle glisse et s'étire entre les onglets */
+.goutte{display:none}
+@media (max-width:760px){
+  .goutte{display:block;position:absolute;left:5px;top:5px;border-radius:26px;z-index:0;pointer-events:none;
+    background:rgba(120,120,128,.17);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 -1px 0 rgba(255,255,255,.35),0 2px 8px -4px rgba(0,0,0,.2);
+    transition:left .55s var(--ressort),width .55s var(--ressort),top .4s var(--ressort),height .4s var(--ressort)}
+  .onglets-bas button{z-index:1;background:none!important}
+  .onglets-bas button.actif::after{display:none}
+}
+@media (max-width:760px) and (prefers-color-scheme:dark){.goutte{background:rgba(255,255,255,.13);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}}
+@media (prefers-reduced-motion:reduce){.goutte{transition:none}}
+
+/* ---------- en-tête, onglets et domaines : verre et mouvement liquide ---------- */
+.rail-dom{position:relative}
+.goutte-dom{position:absolute;z-index:0;border-radius:26px;pointer-events:none;
+  background:linear-gradient(180deg,rgba(18,119,73,.13),rgba(18,119,73,.07));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85),inset 0 -1px 0 rgba(255,255,255,.4),inset 0 0 0 1px rgba(18,119,73,.14),0 10px 24px -14px rgba(18,119,73,.5);
+  transition:left .6s var(--ressort),width .6s var(--ressort)}
+.dom{position:relative;z-index:1}
+/* reflet qui suit la souris ou le doigt */
+.dom .carre,.nu,.onglets,.filtres button{position:relative;isolation:isolate;overflow:hidden}
+.offre .fav{position:absolute;isolation:isolate;overflow:hidden}
+.dom .carre::after,.nu::after,.onglets::after,.filtres button::after,.offre .fav::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:0;transition:opacity .4s;
+  background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.9),rgba(255,255,255,0) 62%)}
+.dom:hover .carre::after,.nu:hover::after,.onglets:hover::after,.filtres button:hover::after,.offre .fav:hover::after{opacity:1}
+@media (prefers-color-scheme:dark){.dom .carre::after,.nu::after,.onglets::after,.filtres button::after,.offre .fav::after{background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.18),rgba(255,255,255,0) 62%)}}
+.onglets button{z-index:1}
+/* goutte qui se soulève au survol, s'écrase au toucher et rebondit */
+.dom .carre,.nu{transition:transform .55s var(--ressort),box-shadow .35s,background .3s}
+.dom:hover .carre{transform:translateY(-4px) scale(1.045);box-shadow:var(--v-lentille),0 16px 30px -14px rgba(16,40,28,.35)}
+.dom:active .carre{transform:scale(.9,.86);transition:transform .12s}
+.nu:hover{transform:scale(1.07)}
+.nu:active{transform:scale(.88,.84);transition:transform .12s}
+.filtres button:active,.actifs button:active,.offre .fav:active{transform:scale(.9,.86);transition:transform .12s}
+.dom.actif .carre{background:rgba(255,255,255,.92)}
+@media (prefers-color-scheme:dark){.goutte-dom{background:linear-gradient(180deg,rgba(76,195,138,.2),rgba(76,195,138,.1));box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 0 0 1px rgba(76,195,138,.25)}}
+@media (prefers-reduced-motion:reduce){.goutte-dom{transition:none}.dom:hover .carre,.nu:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -586,6 +625,7 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
 </main>
 
 <nav class="onglets-bas" aria-label="Navigation">
+  <span class="goutte" aria-hidden="true"></span>
   <button data-nav="offres" class="actif"><svg class="ic" aria-hidden="true"><use href="#i-d-tout"/></svg><span>Offres</span></button>
   <button data-nav="chercher"><svg class="ic" aria-hidden="true"><use href="#i-loupe"/></svg><span>Rechercher</span></button>
   <button data-nav="favoris"><svg class="ic" aria-hidden="true"><use href="#i-coeur"/></svg><span>Favoris</span><b id="nb-fav"></b></button>
@@ -601,7 +641,7 @@ const COMMUNES = {"Saint-Denis": [-20.8823, 55.4504], "Sainte-Clotilde": [-20.89
 const CENTRE = [-21.13, 55.53];
 const SOURCES = "HelloWork, Domtomemploi";
 let OFFRES = OFFRES0;
-const VERSION = "1793251942";
+const VERSION = "1793254349";
 let DETAILS = null, DETAILS_P = null, FICHE_ID = null;
 function chargerDetails() {  // descriptifs complets, chargés en arrière-plan après l'affichage
   if (!DETAILS_P) DETAILS_P = fetch("details.json?v=" + VERSION).then(r => r.ok ? r.json() : {}).then(d => {
@@ -687,7 +727,11 @@ const dansSection = a => (a.categorie || "alternance") === F.section;
 const TRIS = [["recent", "Plus récentes"], ["proche", "Plus proches"], ["salaire", "Salaire le plus élevé"]];
 function puces() {  // onglets, titre et barre de filtres
   document.querySelectorAll("#p-section button").forEach(b => { const on = b.dataset.section === F.section; b.classList.toggle("actif", on); b.setAttribute("aria-selected", on); });
-  $("#p-section").style.setProperty("--i", F.section === "emploi" ? 1 : 0);
+  const ps = $("#p-section"), i = F.section === "emploi" ? 1 : 0;
+  if (ps.style.getPropertyValue("--i") !== "" && +ps.style.getPropertyValue("--i") !== i && !DOUX.matches && ps.animate) {
+    try { ps.animate([{scale: "1 1"}, {scale: "1.22 .86", offset: .35}, {scale: ".96 1.04", offset: .7}, {scale: "1 1"}], {duration: 560, easing: "ease-out", pseudoElement: "::before"}); } catch (e) {}
+  }
+  ps.style.setProperty("--i", i);
   $("#titre").textContent = F.section === "emploi" ? "Offres d'emploi" : "Offres d'alternance";
   const chev = ic("chevron");
   const lab = (t, v) => v ? `${esc(t)} : ${esc(v)}` : esc(t);
@@ -706,8 +750,10 @@ function puces() {  // onglets, titre et barre de filtres
   const comptes = {};
   for (const a of OFFRES) if (dansSection(a)) comptes[a.domaine || "Autres"] = (comptes[a.domaine || "Autres"] || 0) + 1;
   const doms = Object.keys(comptes).sort((x, y) => (x === "Autres") - (y === "Autres") || comptes[y] - comptes[x]);
+  const rail = $("#rail-dom"), avantG = rail.querySelector(".goutte-dom"), depart = avantG ? {l: avantG.offsetLeft, w: avantG.offsetWidth} : null;
   $("#rail-dom").innerHTML = [`<button class="dom ${F.domaine ? "" : "actif"}" data-dom=""><span class="carre"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-d-tout"/></svg></span><b>Tous</b><i></i></button>`,
     ...doms.map(d => `<button class="dom ${F.domaine === d ? "actif" : ""}" data-dom="${esc(d)}" title="${esc(d)} (${comptes[d]})"><span class="carre"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-${ICONES[d] || "d-mallette"}"/></svg></span><b>${esc(COURT[d] || d)}</b><i></i></button>`)].join("");
+  placerGoutteDom(depart);
   $("#b-favs").classList.toggle("actif", F.type === "fav");
   filtresActifs();
   const nf = Object.keys(FAV).length; $("#nb-fav").textContent = nf ? nf : "";
@@ -744,12 +790,13 @@ let dernierY = scrollY;
 addEventListener("scroll", () => {
   $(".bandeau").classList.toggle("colle", scrollY > 4);
   const bas = $(".onglets-bas"), d = scrollY - dernierY;
-  if (Math.abs(d) > 6) { bas.classList.toggle("reduite", d > 0 && scrollY > 260); dernierY = scrollY; }
+  if (Math.abs(d) > 6) { const avant = bas.classList.contains("reduite"); bas.classList.toggle("reduite", d > 0 && scrollY > 260); dernierY = scrollY;
+    if (avant !== bas.classList.contains("reduite")) { placerGoutte(false); setTimeout(() => placerGoutte(false), 470); } }
 }, {passive: true});
 // Liquid Glass : le reflet du verre suit le doigt ou la souris
-const VERRE = ".btn:not(.gris):not(.leger),.segments button,.onglets-bas button";
+const VERRE = ".btn:not(.gris):not(.leger),.segments button,.onglets-bas button,.dom .carre,.nu,.onglets,.filtres button,.offre .fav";
 addEventListener("pointermove", e => {
-  const el = e.target.closest && e.target.closest(VERRE); if (!el) return;
+  const el = e.target.closest && (e.target.closest(".dom") ? e.target.closest(".dom").querySelector(".carre") : e.target.closest(VERRE)); if (!el) return;
   const r = el.getBoundingClientRect();
   el.style.setProperty("--gx", ((e.clientX - r.left) / r.width * 100).toFixed(0) + "%");
   el.style.setProperty("--gy", ((e.clientY - r.top) / r.height * 100 - 60).toFixed(0) + "%");
@@ -990,7 +1037,30 @@ function suggestions() {
 }
 $("#suggestions").onclick = e => { const b = e.target.closest("[data-idee]"); if (!b) return;
   if (b.dataset.idee === "Ma formation") { panneauBts(); return; } $("#q").value = F.q = b.dataset.idee; sauver(); afficher(); suggestions(); $("#liste").scrollIntoView({block: "start"}); };
-function ongletBas(n) { document.querySelectorAll(".onglets-bas button").forEach(b => b.classList.toggle("actif", b.dataset.nav === n)); }
+// rangée des domaines : une goutte de verre vert clair glisse vers le domaine choisi en s'étirant
+function placerGoutteDom(depart) {
+  const rail = $("#rail-dom"), a = rail.querySelector(".dom.actif .carre"); if (!a) return;
+  const g = document.createElement("span"); g.className = "goutte-dom"; g.setAttribute("aria-hidden", "true"); rail.prepend(g);
+  const ra = a.getBoundingClientRect(), rr = rail.getBoundingClientRect();
+  const cible = {l: ra.left - rr.left + rail.scrollLeft - 6, t: ra.top - rr.top + rail.scrollTop - 6, w: ra.width + 12, h: ra.height + 12};
+  Object.assign(g.style, {top: cible.t + "px", height: cible.h + "px", width: cible.w + "px", left: (depart ? depart.l : cible.l) + "px"});
+  if (depart && Math.abs(depart.l - cible.l) > 2 && !DOUX.matches && g.animate) {
+    g.getBoundingClientRect();
+    g.style.left = cible.l + "px";
+    g.animate([{scale: "1 1"}, {scale: "1.35 .84", offset: .35}, {scale: ".95 1.05", offset: .7}, {scale: "1 1"}], {duration: 600, easing: "ease-out"});
+  }
+}
+function placerGoutte(animer) {
+  const g = $(".goutte"), a = $(".onglets-bas button.actif"); if (!g || !a) return;
+  const avant = parseFloat(g.style.left) || 0;
+  g.style.left = a.offsetLeft + "px"; g.style.top = a.offsetTop + "px"; g.style.width = a.offsetWidth + "px"; g.style.height = a.offsetHeight + "px";
+  if (animer && !DOUX.matches && g.animate && Math.abs(avant - a.offsetLeft) > 2) {
+    g.animate([{scale: "1 1"}, {scale: "1.32 .82", offset: .35}, {scale: ".94 1.06", offset: .7}, {scale: "1 1"}], {duration: 560, easing: "ease-out"});
+  }
+}
+function ongletBas(n) { document.querySelectorAll(".onglets-bas button").forEach(b => b.classList.toggle("actif", b.dataset.nav === n)); placerGoutte(true); }
+addEventListener("resize", () => placerGoutte(false));
+requestAnimationFrame(() => placerGoutte(false));
 document.querySelector(".onglets-bas").onclick = e => {
   const b = e.target.closest("[data-nav]"); if (!b) return;
   const n = b.dataset.nav;
@@ -1062,7 +1132,11 @@ function afficher(suite) {
   } else {
     SUITE.disconnect();
     if (suite) $("#liste").insertAdjacentHTML("beforeend", res.slice(LIMITE - 30, LIMITE).map(carteOffre).join(""));
-    else $("#liste").innerHTML = res.slice(0, LIMITE).map(carteOffre).join("");
+    else {
+      $("#liste").innerHTML = res.slice(0, LIMITE).map(carteOffre).join("");
+      if (!DOUX.matches && document.body.animate) [...$("#liste").children].slice(0, 6).forEach((el, i) =>
+        el.animate([{opacity: 0, transform: "translateY(18px) scale(.985)"}, {opacity: 1, transform: "none"}], {duration: 460, delay: i * 45, easing: "cubic-bezier(.2,.9,.3,1)", fill: "backwards"}));
+    }
     const vieux = $("#suite"); if (vieux) vieux.remove();
     if (res.length > LIMITE) { $("#liste").insertAdjacentHTML("beforeend", '<div id="suite" aria-hidden="true"></div>'); SUITE.observe($("#suite")); }
   }
@@ -1143,8 +1217,73 @@ async function carteMaj(res) {
 }
 
 /* ---------- feuilles ---------- */
-function ouvrir(h) { $("#feuille").innerHTML = h; $("#voile").hidden = false; $("#feuille").scrollTop = 0; document.body.style.overflow = "hidden"; }
-function fermer() { FICHE_ID = null; $("#voile").hidden = true; document.body.style.overflow = ""; }
+/* ---------- fenêtres : effet « Génie » de macOS (aspirée depuis / vers l'élément touché) ---------- */
+const DOUX = matchMedia("(prefers-reduced-motion: reduce)");
+let ORIGINE_EL = null, FERMETURE = null;
+addEventListener("pointerdown", e => {
+  const el = e.target.closest && e.target.closest("button, a, .offre, [role=button], label");
+  if (el && !el.closest("#voile")) ORIGINE_EL = el;
+}, {capture: true, passive: true});
+addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && document.activeElement && !document.activeElement.closest("#voile")) ORIGINE_EL = document.activeElement; }, {capture: true});
+function rectOrigine() {
+  const el = ORIGINE_EL && ORIGINE_EL.isConnected ? ORIGINE_EL : null;
+  const r = el && el.getBoundingClientRect();
+  if (r && r.width && r.bottom > 0 && r.top < innerHeight) return r;
+  return {left: innerWidth / 2 - 30, top: innerHeight - 70, width: 60, height: 40};  // par défaut : depuis le bas, comme le Dock
+}
+// formes de l'entonnoir (8 points : haut gauche, haut droit, droite 35 %, droite 70 %, bas droit, bas gauche, gauche 70 %, gauche 35 %)
+function formesGenie(cx, e, versBas) {
+  const c = v => Math.max(0, Math.min(100, v)).toFixed(1) + "%";
+  const pts = l => "polygon(" + l.map(([x, y]) => `${c(x)} ${c(versBas ? y : 100 - y)}`).join(",") + ")";
+  return [
+    pts([[cx - 26, 0], [cx + 26, 0], [cx + 17, 35], [cx + 9, 70], [cx + e, 100], [cx - e, 100], [cx - 9, 70], [cx - 17, 35]]),
+    pts([[0, 0], [100, 0], [100, 35], [cx + e + (100 - cx - e) * .5, 70], [cx + e * 2.2, 100], [cx - e * 2.2, 100], [(cx - e) * .5, 70], [0, 35]]),
+    pts([[0, 0], [100, 0], [100, 35], [100, 70], [100, 100], [0, 100], [0, 70], [0, 35]]),
+  ];
+}
+function genie(f, entree) {
+  const r = f.getBoundingClientRect(), o = rectOrigine();
+  const ox = o.left + o.width / 2 - r.left, oy = o.top + o.height / 2 - r.top;
+  const versBas = oy > r.height / 2, cx = ox / r.width * 100, e = Math.max(3, Math.min(14, o.width / r.width * 50));
+  const [entonnoir, courbe, plein] = formesGenie(cx, e, versBas);
+  const dx = ox - r.width / 2, dy = oy - r.height / 2;
+  const k = [
+    {transform: `translate(${dx}px, ${dy}px) scale(.22, .06)`, clipPath: entonnoir, opacity: .35, filter: "blur(2px)"},
+    {transform: `translate(${dx * .32}px, ${dy * .32}px) scale(.78, .8)`, clipPath: courbe, opacity: 1, filter: "blur(0)", offset: .45},
+    {transform: "translate(0, 0) scale(1.012, 1.012)", clipPath: plein, opacity: 1, filter: "blur(0)", offset: .82},
+    {transform: "none", clipPath: plein, opacity: 1, filter: "blur(0)"},
+  ];
+  return f.animate(entree ? k : k.slice().reverse().map((x, i, l) => ({...x, offset: x.offset != null ? 1 - x.offset : undefined})),
+    entree ? {duration: 560, easing: "cubic-bezier(.22,.9,.3,1)"} : {duration: 430, easing: "cubic-bezier(.55,0,.75,.2)"});
+}
+function cascade(f) {  // le contenu arrive bloc par bloc, en douceur
+  [...f.children].slice(0, 9).forEach((el, i) => el.animate([{opacity: 0, transform: "translateY(14px)"}, {opacity: 1, transform: "none"}],
+    {duration: 420, delay: 140 + i * 35, easing: "cubic-bezier(.2,.9,.3,1)", fill: "backwards"}));
+}
+function ouvrir(h) {
+  const v = $("#voile"), f = $("#feuille"), dejaOuverte = !v.hidden && !FERMETURE;
+  if (FERMETURE) { FERMETURE.cancel(); FERMETURE = null; }
+  f.innerHTML = h; v.hidden = false; f.scrollTop = 0; document.body.style.overflow = "hidden";
+  if (DOUX.matches || !f.animate) return;
+  if (dejaOuverte) {  // une fenêtre en remplace une autre : le verre se reforme, comme un liquide
+    f.animate([{transform: "scale(.965)", filter: "blur(6px)", opacity: .55}, {transform: "scale(1.006)", filter: "blur(0)", opacity: 1, offset: .7}, {transform: "none", opacity: 1}],
+      {duration: 380, easing: "cubic-bezier(.2,.9,.3,1)"});
+  } else {
+    v.animate([{opacity: 0}, {opacity: 1}], {duration: 300, easing: "ease-out"});
+    genie(f, true);
+  }
+  cascade(f);
+}
+function fermer() {
+  FICHE_ID = null;
+  const v = $("#voile"), f = $("#feuille");
+  if (v.hidden || FERMETURE) return;
+  const fin = () => { FERMETURE = null; v.hidden = true; document.body.style.overflow = ""; };
+  if (DOUX.matches || !f.animate) return fin();
+  v.animate([{opacity: 1}, {opacity: 0}], {duration: 420, easing: "ease-in", fill: "forwards"}).finished.then(a => a.cancel()).catch(() => {});
+  FERMETURE = genie(f, false);
+  FERMETURE.finished.then(fin).catch(() => {});
+}
 $("#voile").onclick = e => { if (e.target.id === "voile" || e.target.closest("[data-fermer]")) fermer(); };
 document.addEventListener("keydown", e => { if (e.key === "Escape") fermer(); });
 const barre = t => `<div class="barre"><h2>${t}</h2><button class="rond" data-fermer aria-label="Fermer">${ic("croix")}</button></div>`;
