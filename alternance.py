@@ -698,7 +698,60 @@ def sites_emploi():
     FICHES_FILE.parent.mkdir(exist_ok=True)
     FICHES_FILE.write_text(json.dumps(cache, ensure_ascii=False))
     print(f"  Sites d'emploi : {lectures} annonces lues, {sum(not c['lu'] for c in cache.values())} restent à lire")
-    return [json.loads(json.dumps(a)) for c in cache.values() for a in c["offres"]]
+    return [affiner(json.loads(json.dumps(a))) for c in cache.values() for a in c["offres"]]
+
+
+# ---------------------------------------------------------------- nettoyage des descriptifs
+
+CODE_PAGE = re.compile(r"->|data-[a-z-]+=|^[a-z-]+=\"|=\"|^>$|^\"?>$|#\w+[ \"]|^type=|^class=")
+PUB_SITE = re.compile(r"^(?:• )?(?:Entretien avec un coach virtuel|Gagnez du temps avec l.app|Recevez une notification|"
+                      r"Salaire (?:alternance|fourni par le recruteur)|La rémunération en alternance varie|Ce recruteur joue le jeu|"
+                      r"C'est noté|Le job|L'entreprise|Postuler(?: sur le site du recruteur)?|Lire dans l'app|Agence d'intérim|"
+                      r"Envoyez votre candidature|dès maintenant|envoyez votre candidature|Finalisez votre candidature|"
+                      r"sur le site du|recruteur ?!?|Détail du poste|Vous avez ces compétences|Les étapes de recrutement peuvent varier|"
+                      r"Ce poste comporte des spécificités|Cette information vous semble|Merci pour votre retour|"
+                      r"Hellowork a estimé le salaire|offres similaires et aux données de l.INSEE|Cette fourchette est variable|Voir plus|Voir moins|Signaler cette offre|Partager)\b", re.I)
+FIN_TEXTE = re.compile(r"^(?:Publiée le|Finalisez votre candidature|• (?:Job|Offre|Entreprises|Emploi) )", re.I)
+
+
+def affiner(a):
+    """Retire de la description le code de la page et les boutons du site, et en tire salaire, expérience, date…"""
+    lignes = [l.strip() for l in (a.get("description") or "").split("\n") if l.strip()]
+    if not lignes:
+        return a
+    texte = "\n".join(lignes)
+    m = re.search(r"Publiée le (\d\d)/(\d\d)/(\d{4})", texte)
+    if m and not a.get("publie"):
+        a["publie"] = f"{m.group(3)}-{m.group(2)}-{m.group(1)}"
+    # en-tête HelloWork : titre, entreprise, « Commune - 974 », contrat, salaire, niveau, secteur, expérience
+    if "Lire dans l'app" in lignes:
+        i = lignes.index("Lire dans l'app")
+        for l in lignes[max(0, i - 12):i]:
+            if re.search(r"€\s*/\s*(?:mois|an|heure|jour)", l) and not a.get("salaire"):
+                a["salaire"] = l
+            elif l.startswith("Exp.") and not a.get("experience"):
+                a["experience"] = l.replace("Exp. ", "")
+            elif re.fullmatch(r".+ - 974", l):
+                c = commune_de(l[:-6])
+                if c and (a.get("commune") in ("", "La Réunion") or a.get("position_approx")):
+                    a["commune"] = c
+                    if c in COMMUNES:
+                        a["lat"], a["lon"] = COMMUNES[c]
+                        a["position_approx"] = True
+            elif re.fullmatch(r"(?:CAP|BEP|Bac(?: \+\d)?|Bac\+\d|Master|Doctorat)[^,]{0,20}", l) and a.get("categorie") == "alternance" and not a.get("niveau"):
+                a["niveau"] = niveau_de(None, l)
+        lignes = lignes[i + 1:]
+    garde = []
+    for l in lignes:
+        if FIN_TEXTE.search(l):
+            break
+        if CODE_PAGE.search(l) or PUB_SITE.match(l) or len(l) < 3:
+            continue
+        garde.append(l)
+    texte = "\n".join(garde)
+    texte = re.sub(r"(?<=[;:.!])\s+[-–•]\s+", "\n• ", texte)  # « … ; - Installer … ; - Assurer » : une puce par ligne
+    a["description"] = texte[:4000]
+    return a
 
 
 # ---------------------------------------------------------------- tri et page
