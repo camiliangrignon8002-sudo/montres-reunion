@@ -33,7 +33,10 @@ ROOT = Path(__file__).parent
 VUS_FILE = ROOT / "data" / "alternance_vus.json"
 FICHES_FILE = ROOT / "data" / "alternance_fiches.json"  # annonces des sites d'emploi déjà lues   # id -> date où l'appli a vu l'offre la 1re fois
 JSON_FILE = ROOT / "docs" / "alternance" / "annonces.json"
-META_FILE = ROOT / "docs" / "alternance" / "meta.json"   # date de mise à jour et sources, pour reconstruire la page
+META_FILE = ROOT / "docs" / "alternance" / "meta.json"
+DETAILS_FILE = ROOT / "docs" / "alternance" / "details.json"  # descriptifs, chargés après l'affichage de la page
+DETAILS = ("description", "a_propos", "attendu", "a_apprendre")
+LISTE_FILE = ROOT / "docs" / "alternance" / "liste.json"  # la liste légère, pour actualiser sans recharger la page   # date de mise à jour et sources, pour reconstruire la page
 OUT_FILE = ROOT / "docs" / "alternance" / "index.html"
 REUNION = timezone(timedelta(hours=4))
 
@@ -1086,13 +1089,18 @@ def notifier(nouvelles):
 
 
 def page_html(offres, maj, sources_ok):
-    donnees = json.dumps(offres, ensure_ascii=False).replace("</", "<\\/")
+    # la page n'embarque que la liste ; les descriptifs sont dans details.json (chargé juste après)
+    legeres = [{k: v for k, v in a.items() if k not in DETAILS and v not in ("", None, [], False)} for a in offres]
+    DETAILS_FILE.write_text(json.dumps({a["id"]: {k: a[k] for k in DETAILS if a.get(k)} for a in offres},
+                                       ensure_ascii=False, separators=(",", ":")))
+    LISTE_FILE.write_text(json.dumps(legeres, ensure_ascii=False, separators=(",", ":")))
+    donnees = json.dumps(legeres, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     communes = json.dumps(COMMUNES, ensure_ascii=False)
     z = ZONES[0]
     gabarit = (ROOT / "alternance_page.html").read_text(encoding="utf-8")
     return (gabarit.replace("__DONNEES__", donnees).replace("__COMMUNES__", communes)
             .replace("__CENTRE__", json.dumps([z["lat"], z["lon"]])).replace("__ZONE__", html.escape(z["nom"]))
-            .replace("__VAPID__", VAPID_PUBLIQUE).replace("__TOPIC__", TOPIC_ABONNEMENTS)
+            .replace("__VERSION__", str(int(time.time()))).replace("__VAPID__", VAPID_PUBLIQUE).replace("__TOPIC__", TOPIC_ABONNEMENTS)
             .replace("__MAJ__", html.escape(maj)).replace("__SOURCES__", html.escape(", ".join(sources_ok) or "aucune")))
 
 
