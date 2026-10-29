@@ -755,7 +755,7 @@ const COMMUNES = {"Saint-Denis": [-20.8823, 55.4504], "Sainte-Clotilde": [-20.89
 const CENTRE = [-21.13, 55.53];
 const SOURCES = "HelloWork";
 let OFFRES = OFFRES0;
-const VERSION = "1793255419";
+const VERSION = "1793255421";
 let DETAILS = null, DETAILS_P = null, FICHE_ID = null;
 function chargerDetails() {  // descriptifs complets, chargés en arrière-plan après l'affichage
   if (!DETAILS_P) DETAILS_P = fetch("details.json?v=" + VERSION).then(r => r.ok ? r.json() : {}).then(d => {
