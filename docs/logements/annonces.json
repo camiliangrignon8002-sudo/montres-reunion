@@ -1673,7 +1673,12 @@
   "adresse": "",
   "secteur": "Nord-Ouest",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/a-louer-bel-appartement-f2-vue-mer-a-la-possession/01a185fa-e0ba-76e9-a37b-55bc676d8dbd"
+   }
+  ],
   "vu": "2026-10-29T08:02+04:00"
  },
  {
@@ -2270,6 +2275,45 @@
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "superimmo--com-annonces-location-appartement-saint-denis-97490-x12ct6o",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-saint-denis-97490-x12ct6o",
+  "titre": "Location appartement 1 pièce  Saint-Denis (97490)",
+  "prix": 620.0,
+  "commune": "Saint-Denis",
+  "quartier": "",
+  "pieces": 1,
+  "type": "T1",
+  "surface": null,
+  "meuble": true,
+  "photos": [
+   "https://photo.superimmo.com/hedohs5irk4atsbi06nk2a68rs8i",
+   "https://photo.superimmo.com/fi3jdhfa9tl0bvamcs1qgf9wpjj2",
+   "https://photo.superimmo.com/k2xlnikw8zvx9wji6gyqj7bz2u1r",
+   "https://photo.superimmo.com/hw186f8c1a9y5tbvhul9m9luhrbk",
+   "https://photo.superimmo.com/6esygsl13g3jjzlz5xrn1nzt457j",
+   "https://photo.superimmo.com/055o5h38q42c7tu9ou6n5zv14x9u",
+   "https://photo.superimmo.com/zfeq1sfmaxduk2g02lvmez4lvljt"
+  ],
+  "description": "Annonce appartement location  1 pièce à Saint-Denis Découvrez ce charmant T1 meublé, idéal pour",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "Superimmo",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 53 38 57",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-29T09:01+04:00"
  },
  {
   "id": "pv-1295397318",
