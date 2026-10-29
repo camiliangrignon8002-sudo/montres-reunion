@@ -1,0 +1,43 @@
+name: Alternance Réunion
+
+on:
+  schedule:
+    - cron: "40 1,5,9,13 * * *"   # 4 fois par jour : 5h40, 9h40, 13h40 et 17h40 à La Réunion
+  workflow_dispatch:              # bouton "Run workflow" pour lancer à la main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: alternance
+  cancel-in-progress: false
+
+jobs:
+  recherche:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python alternance.py
+        env:
+          LBA_API_TOKEN: ${{ secrets.LBA_API_TOKEN }}
+          FT_CLIENT_ID: ${{ secrets.FT_CLIENT_ID }}
+          FT_CLIENT_SECRET: ${{ secrets.FT_CLIENT_SECRET }}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/alternance/
+      - name: Publier la page
+        if: always()
+        run: |
+          git config user.name "alternance-bot"
+          git config user.email "alternance-bot@users.noreply.github.com"
+          git add docs/alternance data/alternance_*.json
+          git diff --cached --quiet || git commit -m "Mise à jour des offres d'alternance $(date -u +%F)"
+          # le code a pu changer pendant la recherche : on se remet à jour avant de publier
+          for essai in 1 2 3; do
+            git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break
+            sleep 5
+          done

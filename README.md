@@ -135,6 +135,58 @@ avant de payer. Le premier relevé complet du calendrier prend quelques passages
 
 ---
 
+# 🎓 Alternance 974 – alternance et emploi à La Réunion
+
+Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/alternance/
+
+**4 fois par jour** (5h40, 9h40, 13h40, 17h40, heure de La Réunion), GitHub relève les offres à La Réunion :
+
+- **Alternance** (apprentissage, contrat de professionnalisation) : **La Bonne Alternance** (le site de l'État, qui reprend
+  aussi France Travail, Hellowork, Jobteaser et d'autres), l'**API France Travail**, et les sites **HelloWork**, **Domtomjob**,
+  **Meteojob**, **ParuVendu**, **StudentJob** et **l'Étudiant**. Les **entreprises qui recrutent souvent des alternants**
+  apparaissent aussi, en « candidature spontanée ».
+- **Emploi** (CDI, CDD, intérim, saisonnier) : API France Travail et les mêmes sites.
+
+Une offre publiée sur plusieurs sites n'apparaît qu'une fois.
+
+Dans l'appli :
+- Onglets **Alternance / Emploi**, **barre de recherche** (métier, domaine, entreprise, commune), puces **domaine**
+  (commerce, BTP, santé, informatique…), type (offre, candidature spontanée, CDI, CDD, intérim…), niveau (CAP à Bac+5).
+- **Autour de moi** : position du téléphone ou commune, et **rayon** de 2 km à toute l'île. **Carte** de toutes les
+  offres avec le cercle du rayon.
+- **Fiche** de chaque offre : contrat, début, durée, niveau, salaire, description, compétences, entreprise,
+  **téléphone, email, site, lien pour postuler**, carte **Google Maps** de l'entreprise et **itinéraire**.
+- **Mon CV** (bouton 📄) : on dépose son CV une fois, il reste sur le téléphone. **Envoyer mon CV** le joint au mail
+  ou au message (Mail, Gmail, WhatsApp…) avec le texte de candidature. Sinon, « Postuler » ouvre le formulaire du site.
+- **Lettre de motivation** (menu ☰ ou dans une fiche) : on remplit poste, formation, CFA, rythme, qualités et
+  expériences, la lettre s'écrit toute seule (3 versions), on la modifie, la copie, la partage ou l'enregistre en PDF.
+  Gardée pour une offre, elle part avec le CV.
+- **Notifications** (bouton 🔔) : alerte sur le téléphone à chaque nouvelle offre qui correspond aux choix
+  (alternance et/ou emploi, domaines, rayon). Sur iPhone, installer d'abord l'appli sur l'écran d'accueil.
+- **Mes candidatures** (envoyée, relancée, entretien…), **favoris**, **actualiser** avec ↻ ou en tirant la page vers le bas.
+- **Aussi sur** (menu ☰) : Indeed, LinkedIn, Leboncoin, Facebook, Welcome to the Jungle, Jobteaser, Apec…
+  s'ouvrent directement sur la recherche à La Réunion (ces sites bloquent la lecture automatique).
+
+## Clés à ajouter (gratuites) — sans elles, seuls les sites d'emploi sont lus
+
+Dans GitHub : **Settings → Secrets and variables → Actions → New repository secret**.
+
+1. `LBA_API_TOKEN` : créer un compte sur https://api.apprentissage.beta.gouv.fr, puis « Obtenir un jeton ».
+   C'est la source principale pour l'alternance.
+2. `FT_CLIENT_ID` et `FT_CLIENT_SECRET` : créer une application sur https://francetravail.io et y ajouter
+   l'API **« Offres d'emploi v2 »**. C'est la source principale pour l'emploi.
+3. Les notifications utilisent la clé `VAPID_PRIVATE_KEY` déjà en place pour l'appli Montres.
+
+Puis **Actions → Alternance Réunion → Run workflow** pour lancer la première recherche.
+
+Réglages dans `alternance.py` : zone (`ZONES`), sites d'emploi (`SITES`), domaines (`DOMAINES`). Page dans `alternance_page.html`.
+
+Limites : les CV et lettres restent sur le téléphone (rien n'est envoyé sans toi). La plupart des offres ne donnent pas
+l'email du recruteur : on passe alors par « Postuler ». Quand une offre n'a que la commune, la carte montre le centre
+de la commune.
+
+---
+
 # 📅 Planning équipe
 
 Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/planning/

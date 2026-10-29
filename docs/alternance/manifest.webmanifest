@@ -1,0 +1,14 @@
+{
+  "name": "Alternance 974",
+  "short_name": "Alternance 974",
+  "description": "Offres d'alternance et d'emploi à La Réunion, avec la carte, le CV et la lettre de motivation",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b6e4f",
+  "theme_color": "#0b6e4f",
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}
