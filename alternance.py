@@ -971,6 +971,40 @@ BTS.update({
     "BUT Chimie": rf"{U}chimie",
     "BUT Science des données": rf"{U}(?:sd\b|science des donnees|stid)",
 })
+# CAP, bac pro, licence / bachelor, master / ingénieur
+C = r"\bcap\W{1,3}(?:[^.;\n]{0,20}?\W)?"
+B = r"\bbac\W?pro(?:fessionnel)?\W{1,3}(?:[^.;\n]{0,20}?\W)?"
+L = r"\b(?:licence(?: pro\w*)?|bachelor|bac ?\+ ?3)\W{1,3}(?:[^.;\n]{0,24}?\W)?"
+M = r"\b(?:master|mba|msc|mastere|bac ?\+ ?5|diplome d.ingenieur|ecole d.ingenieur)\W{1,3}(?:[^.;\n]{0,24}?\W)?"
+BTS.update({
+    "CAP Cuisine": rf"{C}cuisin", "CAP Pâtissier": rf"{C}patiss", "CAP Boulanger": rf"{C}boulang",
+    "CAP Coiffure": rf"{C}coiff", "CAP Esthétique": rf"{C}esthet", "CAP Petite enfance (AEPE)": rf"{C}(?:aepe|petite enfance|accompagnant educatif)",
+    "CAP Équipier polyvalent du commerce": rf"{C}(?:epc|equipier polyvalent|employe de (?:commerce|vente))",
+    "CAP Service en restauration": rf"{C}(?:cshcr|commercialisation et services|service en (?:hotel|restau)|serveur)",
+    "CAP Électricien": rf"{C}electri", "CAP Maçon": rf"{C}macon", "CAP Plombier, chauffagiste": rf"{C}(?:plomb|chauffag|monteur en installations? (?:sanitaires|thermiques))",
+    "CAP Menuisier": rf"{C}menuis", "CAP Peintre": rf"{C}peint", "CAP Maintenance des véhicules": rf"{C}(?:maintenance des vehicules|mecani)",
+    "CAP Boucher": rf"{C}bouch", "CAP Agent de sécurité": rf"{C}(?:agent de securite|securite)",
+    "Bac pro Commerce et vente": rf"{B}(?:mcv|commerce|vente)", "Bac pro Accueil": rf"{B}(?:accueil|arcu)",
+    "Bac pro AGOrA (gestion administrative)": rf"{B}(?:agora|gestion administrative|gestion.administration|ga\b)",
+    "Bac pro Logistique": rf"{B}logisti", "Bac pro Cuisine": rf"{B}cuisin", "Bac pro Service en restauration": rf"{B}(?:csr|commercialisation et services|restauration)",
+    "Bac pro MELEC (électricité)": rf"{B}(?:melec|electri)", "Bac pro Maintenance des véhicules": rf"{B}(?:maintenance des vehicules|mv\b|automobile)",
+    "Bac pro MSPC (maintenance industrielle)": rf"{B}(?:mspc|mei\b|maintenance des (?:systemes|equipements))",
+    "Bac pro ASSP (soins, services à la personne)": rf"{B}(?:assp|accompagnement.{{0,5}}soins|services aux personnes)",
+    "Bac pro Bâtiment": rf"{B}(?:tborgo|technicien du batiment|batiment|travaux publics|menuiserie|ouvrages)",
+    "Bac pro Énergie (TISEC, TMSEC)": rf"{B}(?:tisec|tmsec|installateur en chauffage|systemes energetiques|froid)",
+    "Bac pro Sécurité": rf"{B}(?:securite|metiers de la securite)", "Bac pro Transport": rf"{B}(?:transport|conducteur)",
+    "Licence Commerce et vente": rf"{L}(?:commerce|vente|commercial|business)", "Licence Marketing et communication": rf"{L}(?:marketing|communication|digital)",
+    "Licence Gestion et comptabilité": rf"{L}(?:gestion|compta|controle|finance|paie|dcg)", "Licence Ressources humaines": rf"{L}(?:ressources humaines|\brh\b|paie)",
+    "Licence Banque et assurance": rf"{L}(?:banque|assurance|bancaire)", "Licence Immobilier": rf"{L}immobili",
+    "Licence Informatique et numérique": rf"{L}(?:informatique|developp|numerique|reseau|cyber|web)", "Licence Logistique et transport": rf"{L}(?:logisti|transport|supply)",
+    "Licence BTP et énergie": rf"{L}(?:btp|batiment|genie civil|construction|energie|travaux)", "Licence Tourisme et hôtellerie": rf"{L}(?:touris|hotel|restauration)",
+    "Licence Social et santé": rf"{L}(?:social|sante|sanitaire|intervention sociale)", "Licence Droit": rf"{L}(?:droit|juridique|notari)",
+    "Master Commerce et marketing": rf"{M}(?:commerce|marketing|vente|business|communication)", "Master Finance et comptabilité": rf"{M}(?:finance|compta|cca|audit|controle|dscg)",
+    "Master Ressources humaines": rf"{M}(?:ressources humaines|\brh\b)", "Master Informatique et data": rf"{M}(?:informatique|data|developp|cyber|numerique|reseau)",
+    "Master Droit": rf"{M}(?:droit|juridique|juriste)", "Master Management et gestion": rf"{M}(?:management|gestion|administration des entreprises|\bmae\b)",
+    "Master / Ingénieur BTP et énergie": rf"{M}(?:btp|batiment|genie civil|construction|energie|travaux)", "Master / Ingénieur Industrie": rf"{M}(?:industri|mecani|electri|production|maintenance|qualite)",
+    "Master Social et santé": rf"{M}(?:social|sante|sanitaire)",
+})
 ARNAQUE = re.compile(r"frais d.(?:inscription|dossier|formation) (?:à|a) (?:votre|ta) charge|western union|mandat cash|"
                      r"transcash|carte (?:pcs|neosurf)|virement (?:préalable|avant)|chèque de caution|caution à verser|"
                      r"achat (?:de|du) (?:kit|matériel) (?:à|a) (?:vos|tes) frais|payer (?:pour|avant) (?:commencer|travailler)|"

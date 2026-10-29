@@ -764,7 +764,8 @@
   "permis": false,
   "vigilance": false,
   "diplomes": [
-   "BTS MEC (économiste de la construction)"
+   "BTS MEC (économiste de la construction)",
+   "Master / Ingénieur BTP et énergie"
   ]
  },
  {
@@ -1709,7 +1710,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Master Informatique et data"
+  ]
  },
  {
   "categorie": "emploi",
@@ -1751,7 +1754,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Master / Ingénieur BTP et énergie"
+  ]
  },
  {
   "categorie": "emploi",
@@ -2542,7 +2547,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "CAP Maintenance des véhicules"
+  ]
  },
  {
   "categorie": "emploi",
@@ -3199,7 +3206,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Master Finance et comptabilité"
+  ]
  },
  {
   "categorie": "emploi",
@@ -3488,7 +3497,9 @@
   "temps_partiel": false,
   "permis": true,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Licence Droit"
+  ]
  },
  {
   "categorie": "alternance",
@@ -3530,7 +3541,8 @@
   "permis": false,
   "vigilance": false,
   "diplomes": [
-   "BTS Maintenance des véhicules"
+   "BTS Maintenance des véhicules",
+   "Bac pro Maintenance des véhicules"
   ]
  },
  {
@@ -3997,7 +4009,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Master / Ingénieur BTP et énergie"
+  ]
  },
  {
   "categorie": "emploi",
@@ -4406,7 +4420,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Licence Ressources humaines"
+  ]
  },
  {
   "categorie": "emploi",
@@ -4939,7 +4955,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Master Finance et comptabilité"
+  ]
  },
  {
   "categorie": "emploi",
@@ -4980,7 +4998,11 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Licence Gestion et comptabilité",
+   "Master Commerce et marketing",
+   "Master Finance et comptabilité"
+  ]
  },
  {
   "categorie": "emploi",
@@ -5021,7 +5043,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Master Finance et comptabilité"
+  ]
  },
  {
   "categorie": "emploi",
@@ -6501,7 +6525,10 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Licence Ressources humaines",
+   "Master Ressources humaines"
+  ]
  },
  {
   "categorie": "emploi",
@@ -6667,7 +6694,9 @@
   "temps_partiel": false,
   "permis": true,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Master / Ingénieur BTP et énergie"
+  ]
  },
  {
   "categorie": "emploi",
@@ -6707,7 +6736,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Master / Ingénieur BTP et énergie"
+  ]
  },
  {
   "categorie": "alternance",
@@ -9343,7 +9374,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Master Finance et comptabilité"
+  ]
  },
  {
   "categorie": "emploi",
@@ -10111,7 +10144,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Master Finance et comptabilité"
+  ]
  },
  {
   "categorie": "emploi",
@@ -10152,7 +10187,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Master Finance et comptabilité"
+  ]
  },
  {
   "categorie": "emploi",
@@ -11058,7 +11095,9 @@
   "temps_partiel": false,
   "permis": true,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "CAP Plombier, chauffagiste"
+  ]
  },
  {
   "categorie": "emploi",
@@ -12072,7 +12111,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Licence Banque et assurance"
+  ]
  },
  {
   "categorie": "emploi",
@@ -16501,7 +16542,11 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Licence Marketing et communication",
+   "Master Commerce et marketing",
+   "Master Informatique et data"
+  ]
  },
  {
   "categorie": "alternance",
@@ -18832,7 +18877,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Bac pro Service en restauration"
+  ]
  },
  {
   "categorie": "alternance",
@@ -19601,7 +19648,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "CAP Maintenance des véhicules"
+  ]
  },
  {
   "categorie": "emploi",
@@ -22295,7 +22344,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Master / Ingénieur Industrie"
+  ]
  },
  {
   "categorie": "emploi",
@@ -22714,7 +22765,9 @@
   "temps_partiel": false,
   "permis": false,
   "vigilance": false,
-  "diplomes": []
+  "diplomes": [
+   "Master / Ingénieur BTP et énergie"
+  ]
  },
  {
   "categorie": "emploi",
