@@ -278,72 +278,92 @@ textarea{min-height:170px;resize:vertical}
 .cand select{border:1px solid var(--ligne);background:var(--champ);border-radius:8px;padding:6px}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#16201b;color:#fff;padding:11px 16px;border-radius:12px;z-index:90;max-width:90vw;font-size:14.5px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 
-/* ---------- Verre liquide vert : le vert reste, avec transparence, reflet et liseré de lumière ---------- */
+/* ---------- Liquid Glass (style Apple, iOS 26 / 27) ----------
+   Verre clair et lisse, flou du contenu derrière, lumière sur les bords (liseré), aucune bande brillante.
+   Le vert reste la teinte des boutons principaux. */
 :root{
-  --verre-vert:linear-gradient(180deg,rgba(74,196,136,.78) 0%,rgba(24,138,86,.82) 46%,rgba(12,100,61,.9) 100%);
-  --verre-ombre:inset 0 1px 1px rgba(255,255,255,.65),inset 0 -1px 1.5px rgba(0,45,22,.3),inset 0 0 0 .6px rgba(255,255,255,.32),
-    0 10px 22px -8px rgba(18,119,73,.6),0 2px 5px rgba(18,119,73,.2);
+  --lg-vert:rgba(18,119,73,.86);
+  --lg-clair:rgba(255,255,255,.52);
+  --lg-flou:blur(16px) saturate(185%);
+  --lg-ombre:0 8px 24px -10px rgba(0,0,0,.25),0 1px 3px rgba(0,0,0,.08);
+  --lg-bord:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.18) 32%,rgba(255,255,255,0) 50%,rgba(255,255,255,.14) 72%,rgba(255,255,255,.6));
 }
 @media (prefers-color-scheme:dark){:root{
-  --verre-vert:linear-gradient(180deg,rgba(92,214,152,.62) 0%,rgba(36,156,100,.66) 46%,rgba(16,110,68,.78) 100%);
-  --verre-ombre:inset 0 1px 1px rgba(255,255,255,.4),inset 0 -1px 1.5px rgba(0,0,0,.45),inset 0 0 0 .6px rgba(255,255,255,.22),
-    0 10px 24px -8px rgba(30,170,105,.45),0 2px 5px rgba(0,0,0,.4);
+  --lg-vert:rgba(48,170,110,.62);
+  --lg-clair:rgba(44,44,46,.5);
+  --lg-ombre:0 10px 28px -10px rgba(0,0,0,.7),0 1px 3px rgba(0,0,0,.5);
+  --lg-bord:linear-gradient(135deg,rgba(255,255,255,.5),rgba(255,255,255,.08) 32%,rgba(255,255,255,0) 50%,rgba(255,255,255,.06) 72%,rgba(255,255,255,.3));
 }}
-.btn:not(.gris):not(.leger),.segments button.actif,.puce.actif,.section button.actif,.bascule input:checked + i{
-  position:relative;isolation:isolate;overflow:hidden;
-  background:var(--verre-vert);color:#fff;
-  -webkit-backdrop-filter:blur(14px) saturate(190%);backdrop-filter:blur(14px) saturate(190%);
-  border-color:rgba(255,255,255,.3);box-shadow:var(--verre-ombre);text-shadow:0 1px 1px rgba(0,50,25,.28);
-  transition:background .3s,box-shadow .3s,transform .15s;
+/* surfaces vertes : boutons principaux, choix actifs */
+.btn:not(.gris):not(.leger),.segments button.actif,.puce.actif{
+  position:relative;isolation:isolate;background:var(--lg-vert);color:#fff;border-color:transparent;
+  -webkit-backdrop-filter:var(--lg-flou);backdrop-filter:var(--lg-flou);
+  box-shadow:inset 0 0 14px rgba(255,255,255,.14),var(--lg-ombre);
+  transition:transform .45s cubic-bezier(.2,1.6,.4,1),box-shadow .3s,background .3s;
 }
-.btn:not(.gris):not(.leger)::before,.segments button.actif::before,.puce.actif::before{
-  content:"";position:absolute;left:6%;right:6%;top:1px;height:52%;border-radius:999px;z-index:-1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,.08) 85%,rgba(255,255,255,0));
+/* liseré de lumière sur le bord (la tranche du verre) */
+.lg-bord::after,.btn:not(.gris):not(.leger)::after,.segments button.actif::after,.puce.actif::after,
+.btn.leger::after,.onglets-bas::after,.onglets-bas button.actif::after,.segments::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:1;
+  background:var(--lg-bord);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
 }
-.btn:not(.gris):not(.leger)::after,.segments button.actif::after{
-  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;
-  background:radial-gradient(120% 90% at 18% -10%,rgba(255,255,255,.4),transparent 48%),radial-gradient(90% 70% at 90% 120%,rgba(160,255,210,.25),transparent 55%);
-  transition:transform .5s ease;
+/* lumière qui naît sous le doigt ou la souris, et goutte qui gonfle au toucher */
+.btn:not(.gris):not(.leger)::before,.segments button.actif::before,.onglets-bas button::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:0;transition:opacity .35s;
+  background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.38),rgba(255,255,255,0) 60%);
 }
-.btn:not(.gris):not(.leger):hover::after,.segments button.actif:hover::after{transform:translateX(8%)}
-.btn:not(.gris):not(.leger):active{transform:scale(.97)}
-.btn.leger{position:relative;background:linear-gradient(180deg,rgba(18,119,73,.07),rgba(18,119,73,.14));color:var(--vert);
-  -webkit-backdrop-filter:blur(14px) saturate(180%);backdrop-filter:blur(14px) saturate(180%);
-  box-shadow:inset 0 1px 1px rgba(255,255,255,.9),inset 0 0 0 1px rgba(18,119,73,.18),0 6px 16px -10px rgba(18,119,73,.45)}
-.segments{background:rgba(255,255,255,.55);-webkit-backdrop-filter:blur(18px) saturate(180%);backdrop-filter:blur(18px) saturate(180%);
-  border-color:rgba(0,0,0,.06);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 4px 14px -6px rgba(0,0,0,.08)}
-@media (prefers-color-scheme:dark){.segments{background:rgba(40,40,40,.5);border-color:rgba(255,255,255,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
-  .btn.leger{box-shadow:inset 0 1px 1px rgba(255,255,255,.12),inset 0 0 0 1px rgba(76,195,138,.25)}}
-.segments button{transition:background .3s,color .3s,box-shadow .3s}
-.bascule i::after{background:linear-gradient(180deg,#fff,#f1f1f1);box-shadow:0 2px 5px rgba(0,0,0,.22),inset 0 -1px 1px rgba(0,0,0,.06),inset 0 1px 0 #fff}
-.puce.actif{border-color:rgba(255,255,255,.3)}
-@media (prefers-reduced-transparency:reduce){
-  .btn:not(.gris):not(.leger),.segments button.actif,.puce.actif,.bascule input:checked + i{background:var(--vert);-webkit-backdrop-filter:none;backdrop-filter:none}
-}
-
-/* ---------- barre du bas en verre liquide (téléphone) ---------- */
+.btn:not(.gris):not(.leger):hover::before,.segments button.actif:hover::before{opacity:.6}
+.btn:not(.gris):not(.leger):active,.onglets-bas button:active,.segments button:active{transform:scale(1.04)}
+.btn:not(.gris):not(.leger):active::before,.onglets-bas button:active::before,.segments button:active::before{opacity:1;transition:opacity .08s}
+/* boutons secondaires : verre teinté de vert */
+.btn.leger{position:relative;isolation:isolate;background:rgba(18,119,73,.12);color:var(--vert);
+  -webkit-backdrop-filter:var(--lg-flou);backdrop-filter:var(--lg-flou);box-shadow:var(--lg-ombre)}
+/* cadres des choix : verre clair, curseur vert */
+.segments{position:relative;isolation:isolate;background:var(--lg-clair);border-color:transparent;
+  -webkit-backdrop-filter:var(--lg-flou);backdrop-filter:var(--lg-flou);box-shadow:inset 0 0 0 .5px rgba(0,0,0,.04),0 4px 14px -8px rgba(0,0,0,.18)}
+.segments button{position:relative;transition:color .3s,background .3s,transform .45s cubic-bezier(.2,1.6,.4,1)}
+/* interrupteur : rail vert uni, bouton blanc comme une perle de verre */
+.bascule input:checked + i{background:var(--vert);box-shadow:none}
+.bascule i::after{background:#fff;box-shadow:0 3px 8px rgba(0,0,0,.18),0 0 0 .5px rgba(0,0,0,.04)}
+.bascule:active i::after{transform:scale(1.15,1.08)}
+.bascule input:checked + i::after{transform:translateX(18px)}
+.bascule:active input:checked + i::after{transform:translateX(18px) scale(1.15,1.08)}
+/* barre du bas (téléphone) : capsule de verre clair flottante ; onglet actif = capsule légère, icône verte */
 @media (max-width:760px){
-  .onglets-bas{left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));padding:6px;border-radius:30px;border:0;
-    background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.42));
-    -webkit-backdrop-filter:blur(22px) saturate(200%);backdrop-filter:blur(22px) saturate(200%);
-    box-shadow:inset 0 1px 1px rgba(255,255,255,.95),inset 0 -1px 1px rgba(0,0,0,.06),inset 0 0 0 .6px rgba(255,255,255,.6),
-      0 12px 30px -10px rgba(0,0,0,.28),0 2px 6px rgba(0,0,0,.08)}
-  .onglets-bas::before{content:"";position:absolute;left:10%;right:10%;top:1px;height:45%;border-radius:30px;pointer-events:none;
-    background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0))}
-  .onglets-bas button{border-radius:24px;padding:6px 0 5px;transition:color .25s,background .3s,box-shadow .3s;color:#3c3c3c}
-  .onglets-bas button.actif{position:relative;isolation:isolate;overflow:hidden;color:#fff;background:var(--verre-vert);box-shadow:var(--verre-ombre);text-shadow:0 1px 1px rgba(0,50,25,.28)}
-  .onglets-bas button.actif::before{content:"";position:absolute;left:8%;right:8%;top:1px;height:50%;border-radius:24px;z-index:-1;
-    background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,.06))}
-  .onglets-bas button.actif svg.ic{stroke-width:1.9}
-  .onglets-bas b{top:2px;background:var(--verre-vert);box-shadow:0 1px 3px rgba(18,119,73,.4),inset 0 1px 0 rgba(255,255,255,.5)}
+  .onglets-bas{left:14px;right:14px;bottom:calc(10px + env(safe-area-inset-bottom));padding:5px;border-radius:32px;border:0;isolation:isolate;
+    background:var(--lg-clair);-webkit-backdrop-filter:blur(14px) saturate(190%);backdrop-filter:blur(14px) saturate(190%);box-shadow:var(--lg-ombre);
+    transition:left .45s cubic-bezier(.3,.8,.2,1),right .45s cubic-bezier(.3,.8,.2,1),padding .45s}
+  .onglets-bas button{border-radius:26px;padding:6px 0 5px;color:var(--texte);position:relative;isolation:isolate;
+    transition:color .25s,background .35s,transform .45s cubic-bezier(.2,1.6,.4,1)}
+  .onglets-bas button.actif{color:var(--vert);background:rgba(120,120,128,.16);text-shadow:none}
+  .onglets-bas button.actif svg.ic{stroke-width:2}
+  .onglets-bas b{top:1px;background:var(--vert);box-shadow:0 0 0 1.5px var(--fond)}
+  .onglets-bas.reduite{left:24%;right:24%;padding:4px}
+  .onglets-bas.reduite button span{display:none}
+  .onglets-bas.reduite button{padding:8px 0}
   body{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
   .toast{bottom:calc(96px + env(safe-area-inset-bottom))}
 }
-@media (max-width:760px) and (prefers-color-scheme:dark){
-  .onglets-bas{background:linear-gradient(180deg,rgba(40,40,40,.62),rgba(20,20,20,.5));box-shadow:inset 0 1px 1px rgba(255,255,255,.14),inset 0 0 0 .6px rgba(255,255,255,.1),0 12px 30px -10px rgba(0,0,0,.7)}
-  .onglets-bas::before{background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,0))}
-  .onglets-bas button{color:#cfcfcf}
+@media (max-width:760px) and (prefers-color-scheme:dark){.onglets-bas button.actif{background:rgba(255,255,255,.12)}}
+/* en-tête collé : verre clair */
+.bandeau.colle{background:rgba(255,255,255,.72);-webkit-backdrop-filter:var(--lg-flou);backdrop-filter:var(--lg-flou)}
+@media (prefers-color-scheme:dark){.bandeau.colle{background:rgba(0,0,0,.6)}}
+/* mode « Teinté » (iOS 26.1) : verre plus opaque et plus lisible */
+html.teinte{--lg-vert:#127749;--lg-clair:rgba(246,246,246,.96)}
+html.teinte .bandeau.colle{background:var(--fond)}
+@media (prefers-color-scheme:dark){html.teinte{--lg-vert:#1c8a57;--lg-clair:rgba(28,28,30,.97)}}
+/* réglages du téléphone : « Réduire la transparence », « Augmenter le contraste » */
+@media (prefers-reduced-transparency:reduce){
+  :root{--lg-vert:var(--vert);--lg-clair:var(--fond)}
+  .btn,.segments,.onglets-bas,.bandeau.colle{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 }
+@media (prefers-contrast:more){
+  :root{--lg-vert:#0b5a36;--lg-clair:var(--fond);--lg-bord:linear-gradient(var(--texte),var(--texte))}
+  .btn,.segments,.onglets-bas{-webkit-backdrop-filter:none;backdrop-filter:none}
+}
+@media (prefers-reduced-motion:reduce){.btn:active,.onglets-bas button:active,.segments button:active{transform:none}}
 
 /* ---------- ordinateur : 2 annonces par ligne, comme un catalogue ---------- */
 @media (min-width:900px){
@@ -353,7 +373,6 @@ textarea{min-height:170px;resize:vertical}
   .offre .carre svg{width:40px;height:40px}
   .offre h3{font-size:22px}
 }
-.btn.large:not(.gris):not(.leger)::before{height:44%;left:3%;right:3%;opacity:.8}
 @media (prefers-color-scheme:dark){
   .feuille{box-shadow:0 0 0 1px rgba(255,255,255,.1),0 30px 80px rgba(0,0,0,.6)}
   .voile{background:rgba(0,0,0,.6)}
@@ -493,7 +512,7 @@ const COMMUNES = {"Saint-Denis": [-20.8823, 55.4504], "Sainte-Clotilde": [-20.89
 const CENTRE = [-21.13, 55.53];
 const SOURCES = "HelloWork, Domtomemploi";
 let OFFRES = OFFRES0;
-const VERSION = "1793251332";
+const VERSION = "1793251688";
 let DETAILS = null, DETAILS_P = null, FICHE_ID = null;
 function chargerDetails() {  // descriptifs complets, chargés en arrière-plan après l'affichage
   if (!DETAILS_P) DETAILS_P = fetch("details.json?v=" + VERSION).then(r => r.ok ? r.json() : {}).then(d => {
@@ -631,7 +650,29 @@ $("#b-loupe").onclick = () => { $("#cherche").hidden = false; suggestions(); $("
 $("#q-fermer").onclick = () => { $("#cherche").hidden = true; ongletBas("offres"); if (F.q) { F.q = ""; $("#q").value = ""; sauver(); afficher(); } };
 $("#b-favs").onclick = () => { F.type = F.type === "fav" ? "" : "fav"; sauver(); puces(); afficher(); };
 $("#b-lieu").onclick = () => panneauLieu();
-addEventListener("scroll", () => $(".bandeau").classList.toggle("colle", scrollY > 4), {passive: true});
+let dernierY = scrollY;
+addEventListener("scroll", () => {
+  $(".bandeau").classList.toggle("colle", scrollY > 4);
+  const bas = $(".onglets-bas"), d = scrollY - dernierY;
+  if (Math.abs(d) > 6) { bas.classList.toggle("reduite", d > 0 && scrollY > 260); dernierY = scrollY; }
+}, {passive: true});
+// Liquid Glass : le reflet du verre suit le doigt ou la souris
+const VERRE = ".btn:not(.gris):not(.leger),.segments button,.onglets-bas button";
+addEventListener("pointermove", e => {
+  const el = e.target.closest && e.target.closest(VERRE); if (!el) return;
+  const r = el.getBoundingClientRect();
+  el.style.setProperty("--gx", ((e.clientX - r.left) / r.width * 100).toFixed(0) + "%");
+  el.style.setProperty("--gy", ((e.clientY - r.top) / r.height * 100 - 60).toFixed(0) + "%");
+}, {passive: true});
+addEventListener("pointerleave", () => document.querySelectorAll("[style*='--gx']").forEach(el => { el.style.removeProperty("--gx"); el.style.removeProperty("--gy"); }), {passive: true});
+// sur téléphone, en inclinant l'appareil, le reflet de la barre du bas bouge légèrement
+addEventListener("deviceorientation", e => {
+  if (e.gamma == null) return;
+  const a = $(".onglets-bas button.actif"); if (!a) return;
+  a.style.setProperty("--gx", (50 + Math.max(-30, Math.min(30, e.gamma))).toFixed(0) + "%");
+}, {passive: true});
+let TEINTE = lire("alt974-teinte", false);
+document.documentElement.classList.toggle("teinte", !!TEINTE);
 $("#q").value = F.q; if (F.q) $("#cherche").hidden = false;
 let qMinuterie;
 $("#q").oninput = e => { clearTimeout(qMinuterie); qMinuterie = setTimeout(() => {
@@ -1496,6 +1537,7 @@ function menu() {
     <button class="entree" id="m-cv">${ic("doc")}Mon CV et mes infos</button>
     <button class="entree" id="m-notif">${ic("cloche")}Notifications ${NOTIF.actif ? "(activées)" : ""}</button>
     <button class="entree" id="m-lm">${ic("stylo")}Écrire une lettre de motivation</button>
+    <button class="entree" id="m-verre">${ic("reglages")}Effet verre : ${TEINTE ? "Teinté (plus lisible)" : "Transparent"}</button>
     <button class="entree" id="m-maj">${ic("maj")}Actualiser les offres</button>
     <button class="entree" id="m-guide">${ic("doc")}Le guide de l'alternance et du job</button>
     <button class="entree" id="m-simu">${ic("d-barres")}Simulateur de salaire d'apprenti</button>
@@ -1516,6 +1558,7 @@ function menu() {
   $("#m-lm").onclick = () => panneauLettre(null);
   $("#m-notif").onclick = panneauNotifs;
   $("#m-maj").onclick = () => { fermer(); actualiser(); };
+  $("#m-verre").onclick = () => { TEINTE = !TEINTE; ecrire("alt974-teinte", TEINTE); document.documentElement.classList.toggle("teinte", TEINTE); toast(TEINTE ? "Verre teinté : plus opaque et plus lisible" : "Verre transparent"); menu(); };
   $("#m-fav").onclick = () => { F.type = "fav"; sauver(); puces(); afficher(); fermer(); };
 }
 $("#b-menu").onclick = menu;
