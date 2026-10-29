@@ -199,7 +199,7 @@
   "source": "HelloWork",
   "publie": "2026-10-02",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84024556.html",
   "vu": "2026-10-29T08:36+04:00"
  },
@@ -268,7 +268,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Commerce, vente",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84528760.html",
   "vu": "2026-10-29T08:36+04:00"
  },
@@ -302,7 +302,7 @@
   "source": "HelloWork",
   "publie": "2026-09-29",
   "position_approx": true,
-  "domaine": "Commerce, vente",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/83894855.html",
   "vu": "2026-10-29T08:36+04:00"
  },
@@ -370,7 +370,7 @@
   "source": "HelloWork",
   "publie": "2026-09-29",
   "position_approx": true,
-  "domaine": "Commerce, vente",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/83894724.html",
   "vu": "2026-10-29T08:36+04:00"
  },
@@ -411,7 +411,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "Offre d'Alternance Conseiller·ère de Vente en Librairie",
+  "titre": "Conseiller·ère de Vente en Librairie",
   "entreprise": "Emploi DomTom",
   "secteur": "",
   "taille": "",
@@ -438,14 +438,14 @@
   "source": "HelloWork",
   "publie": "2026-09-29",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/83896188.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "Offre d'Alternance Assistant·e Responsable de Magasin de Sport",
+  "titre": "Assistant·e Responsable de Magasin de Sport",
   "entreprise": "Emploi DomTom",
   "secteur": "",
   "taille": "",
@@ -479,7 +479,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "Offre d'Alternance Négociateur·trice Technico-Commercial·e en Centre de Formation",
+  "titre": "Négociateur·trice Technico-Commercial·e en Centre de Formation",
   "entreprise": "Emploi DomTom",
   "secteur": "",
   "taille": "",
@@ -514,7 +514,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "Offre d'Alternance Responsable d'Établissement Marchand en Hôtellerie",
+  "titre": "Responsable d'Établissement Marchand en Hôtellerie",
   "entreprise": "Emploi DomTom",
   "secteur": "",
   "taille": "",
@@ -548,7 +548,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "Offre d'Alternance Employé Polyvalent Station-Service",
+  "titre": "Employé Polyvalent Station-Service",
   "entreprise": "Emploi DomTom",
   "secteur": "",
   "taille": "",
@@ -576,14 +576,14 @@
   "source": "HelloWork",
   "publie": "2026-09-29",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/83894351.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "Offre d'Alternance Vendeur·se Conseiller·ère Polyvalent·e",
+  "titre": "Vendeur·se Conseiller·ère Polyvalent·e",
   "entreprise": "Emploi DomTom",
   "secteur": "",
   "taille": "",
@@ -618,7 +618,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Économiste de la Construction",
+  "titre": "Économiste de la Construction",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -646,7 +646,7 @@
   "source": "HelloWork",
   "publie": "2026-10-27",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82710879.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "10 ans min."
@@ -654,7 +654,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Ingénieur Systèmes et Réseaux",
+  "titre": "Ingénieur Systèmes et Réseaux",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -690,7 +690,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Technique Informatique",
+  "titre": "Responsable Technique Informatique",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -725,7 +725,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDI Conducteur de Travaux Charpente Métal",
+  "titre": "Conducteur de Travaux Charpente Métal",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -759,7 +759,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Delivery Informatique",
+  "titre": "Responsable Delivery Informatique",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -794,7 +794,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable d'Affaires Industrielles",
+  "titre": "Responsable d'Affaires Industrielles",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -830,7 +830,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Psychologue Clinicien CDI Île de la Réunion",
+  "titre": "Psychologue Clinicien",
   "entreprise": "Croix-Rouge française",
   "secteur": "",
   "taille": "",
@@ -857,14 +857,14 @@
   "source": "HelloWork",
   "publie": "2026-10-24",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/83683969.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chargé d'Affaires Electricité Tertiaire La Réunion - 974 (Le)",
+  "titre": "Chargé d'Affaires Electricité Tertiaire",
   "entreprise": "FAYAT ENERGIES SERVICES",
   "secteur": "",
   "taille": "",
@@ -891,7 +891,7 @@
   "source": "HelloWork",
   "publie": "2026-10-24",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/70531331.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "3 ans min."
@@ -899,7 +899,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Manager Boulangerie Patisserie La Réunion (47)",
+  "titre": "Manager Boulangerie Patisserie La Réunion (47)",
   "entreprise": "GBH",
   "secteur": "",
   "taille": "",
@@ -932,7 +932,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable du Support des Applications La Réunion (47)",
+  "titre": "Responsable du Support des Applications La Réunion (47)",
   "entreprise": "GBH",
   "secteur": "",
   "taille": "",
@@ -958,7 +958,7 @@
   "postuler": "https://www.hellowork.com/fr-fr/emplois/84760685.html",
   "source": "HelloWork",
   "publie": "2026-10-23",
-  "domaine": "Autres",
+  "domaine": "Informatique, numérique",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84760685.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "7 ans min."
@@ -966,7 +966,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Chantier CVC Plomberie",
+  "titre": "Chef de Chantier CVC Plomberie",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -1002,7 +1002,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commercial Grands Comptes",
+  "titre": "Commercial Grands Comptes",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -1038,7 +1038,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Demonstrateur Vendeur en Telephonie La Réunion (97) - Recrutement en Intérim pour Optimark",
+  "titre": "Demonstrateur Vendeur en Telephonie La Réunion (97) - Recrutement en Intérim pour Optimark",
   "entreprise": "Optimark",
   "secteur": "",
   "taille": "",
@@ -1072,7 +1072,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Infirmier de Bloc Opératoire",
+  "titre": "Infirmier de Bloc Opératoire",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -1108,7 +1108,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Un·e Gestionnaire Administration des Ventes la Possession",
+  "titre": "Un·e Gestionnaire Administration des Ventes la Possession",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -1145,7 +1145,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commercial Terrain B To B",
+  "titre": "Commercial Terrain B To B",
   "entreprise": "KONSULTING RH",
   "secteur": "",
   "taille": "",
@@ -1180,7 +1180,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Mission Portefeuille Grands Groupes Pennylane",
+  "titre": "Chef de Mission Portefeuille Grands Groupes Pennylane",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -1207,7 +1207,7 @@
   "source": "HelloWork",
   "publie": "2026-10-28",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84909128.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -1215,7 +1215,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Pâtissier Pâtissière",
+  "titre": "Pâtissier Pâtissière",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -1251,7 +1251,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Gestionnaire de Paie Silae et Semaine de 4.",
+  "titre": "Gestionnaire de Paie Silae et Semaine de 4.",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -1286,7 +1286,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Aide-Soignant Asg Saint-Denis (97) La Réunion",
+  "titre": "Aide-Soignant Asg",
   "entreprise": "Croix-Rouge française",
   "secteur": "",
   "taille": "",
@@ -1320,7 +1320,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "EHPAD Clovis Hoarau -IDE -CDD Ile de la Réunion",
+  "titre": "EHPAD Clovis Hoarau -IDE -CDD",
   "entreprise": "Croix-Rouge française",
   "secteur": "",
   "taille": "",
@@ -1347,14 +1347,14 @@
   "source": "HelloWork",
   "publie": "2026-10-24",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/83670014.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDI Mécanicien",
+  "titre": "Mécanicien",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -1389,7 +1389,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDI Réviseur de Dossiers Comptables",
+  "titre": "Réviseur de Dossiers Comptables",
   "entreprise": "PAGO PARTNERS",
   "secteur": "",
   "taille": "",
@@ -1424,7 +1424,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Data Scientist",
+  "titre": "Data Scientist",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -1460,7 +1460,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Ingénieur Études de Prix TCE",
+  "titre": "Ingénieur Études de Prix TCE",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -1488,7 +1488,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/83691700.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "5 à 7 ans"
@@ -1496,7 +1496,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Contrôleur de Gestion",
+  "titre": "Contrôleur de Gestion",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -1532,7 +1532,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Maintenance",
+  "titre": "Responsable Maintenance",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -1568,7 +1568,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chargé de Coordination en Assurance",
+  "titre": "Chargé de Coordination en Assurance",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -1604,7 +1604,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Médecin Généraliste ou Gériatre en Clinique à la Réunion 974",
+  "titre": "Médecin Généraliste ou Gériatre en Clinique à",
   "entreprise": "Harry Hope",
   "secteur": "",
   "taille": "",
@@ -1631,7 +1631,7 @@
   "source": "HelloWork",
   "publie": "2026-10-26",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84806735.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -1639,7 +1639,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Département Univers Bricolage",
+  "titre": "Chef de Département Univers Bricolage",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -1667,7 +1667,7 @@
   "source": "HelloWork",
   "publie": "2026-10-26",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84806691.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -1675,7 +1675,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Département Alimentaire",
+  "titre": "Chef de Département Alimentaire",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -1703,7 +1703,7 @@
   "source": "HelloWork",
   "publie": "2026-10-26",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84806657.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -1711,7 +1711,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Paie",
+  "titre": "Responsable Paie",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -1747,7 +1747,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Collaborateur Comptable en Cabinet",
+  "titre": "Collaborateur Comptable en Cabinet",
   "entreprise": "PAGO PARTNERS",
   "secteur": "",
   "taille": "",
@@ -1782,7 +1782,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDI Chef de Mission en Cabinet",
+  "titre": "Chef de Mission en Cabinet",
   "entreprise": "PAGO PARTNERS",
   "secteur": "",
   "taille": "",
@@ -1809,7 +1809,7 @@
   "source": "HelloWork",
   "publie": "2026-10-26",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84793772.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "2 ans min."
@@ -1817,7 +1817,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDI Comptable Confirmé en Cabinet",
+  "titre": "Comptable Confirmé en Cabinet",
   "entreprise": "PAGO PARTNERS",
   "secteur": "",
   "taille": "",
@@ -1852,7 +1852,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Merchandiser La Réunion (97) - Recrutement en Intérim pour Optimark",
+  "titre": "Merchandiser La Réunion (97) - Recrutement en Intérim pour Optimark",
   "entreprise": "Optimark",
   "secteur": "",
   "taille": "",
@@ -1886,7 +1886,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Garde d'Enfant·s à Domicile Secteur",
+  "titre": "Garde d'Enfant·s à Domicile Secteur",
   "entreprise": "Assadia",
   "secteur": "",
   "taille": "",
@@ -1914,7 +1914,7 @@
   "source": "HelloWork",
   "publie": "2026-10-22",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Social, services à la personne",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84682585.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "2 ans"
@@ -1922,7 +1922,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Collaborateur Comptable",
+  "titre": "Collaborateur Comptable",
   "entreprise": "Adsearch",
   "secteur": "",
   "taille": "",
@@ -1957,7 +1957,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable d'Exploitation Logistique",
+  "titre": "Responsable d'Exploitation Logistique",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -1993,7 +1993,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Directeur Logistique et Transport",
+  "titre": "Directeur Logistique et Transport",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -2029,7 +2029,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable de Production",
+  "titre": "Responsable de Production",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -2065,7 +2065,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Conducteur de Travaux Métallerie",
+  "titre": "Conducteur de Travaux Métallerie",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -2101,7 +2101,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Technicien Maintenance Site Agro",
+  "titre": "Technicien Maintenance Site Agro",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -2137,7 +2137,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Mécanicien PL",
+  "titre": "Mécanicien PL",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -2173,7 +2173,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Technicien Support Réseau",
+  "titre": "Technicien Support Réseau",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -2208,7 +2208,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chargé d'Etudes Transport",
+  "titre": "Chargé d'Etudes Transport",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -2243,7 +2243,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Coordinateur Projets Elevage",
+  "titre": "Coordinateur Projets Elevage",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -2278,7 +2278,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Automaticien",
+  "titre": "Automaticien",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -2314,7 +2314,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Mécanicien Industriel",
+  "titre": "Mécanicien Industriel",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -2349,7 +2349,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Technicien Industriel",
+  "titre": "Technicien Industriel",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -2384,7 +2384,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef d'Atelier Métallerie",
+  "titre": "Chef d'Atelier Métallerie",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -2412,7 +2412,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84739817.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "3 ans min."
@@ -2420,7 +2420,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chargé d'Affaires Electricité Tertiaire",
+  "titre": "Chargé d'Affaires Electricité Tertiaire",
   "entreprise": "FAYAT ENERGIES SERVICES",
   "secteur": "",
   "taille": "",
@@ -2446,7 +2446,7 @@
   "postuler": "https://www.hellowork.com/fr-fr/emplois/70502299.html",
   "source": "HelloWork",
   "publie": "2026-10-22",
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/70502299.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "3 ans min."
@@ -2454,7 +2454,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Manager de Rayon Alimentaire la Réunion",
+  "titre": "Manager de Rayon Alimentaire",
   "entreprise": "Carrefour",
   "secteur": "",
   "taille": "",
@@ -2482,14 +2482,14 @@
   "source": "HelloWork",
   "publie": "2026-10-22",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/75917726.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDI Auxiliaire de Vie",
+  "titre": "Auxiliaire de Vie",
   "entreprise": "Groupe DESTIA",
   "secteur": "",
   "taille": "",
@@ -2523,7 +2523,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Directeur Adjoint Hypermarché",
+  "titre": "Directeur Adjoint Hypermarché",
   "entreprise": "Team.is",
   "secteur": "",
   "taille": "",
@@ -2550,7 +2550,7 @@
   "source": "HelloWork",
   "publie": "2026-10-23",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84722663.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "3 à 15 ans"
@@ -2558,7 +2558,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Manager de Département Marché",
+  "titre": "Manager de Département Marché",
   "entreprise": "Team.is",
   "secteur": "",
   "taille": "",
@@ -2585,7 +2585,7 @@
   "source": "HelloWork",
   "publie": "2026-10-23",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84722662.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "3 à 15 ans"
@@ -2593,7 +2593,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Directeur d'Hypermarché",
+  "titre": "Directeur d'Hypermarché",
   "entreprise": "Team.is",
   "secteur": "",
   "taille": "",
@@ -2620,7 +2620,7 @@
   "source": "HelloWork",
   "publie": "2026-10-23",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84721976.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "3 à 15 ans"
@@ -2628,7 +2628,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Directeur d'Hypermarché",
+  "titre": "Directeur d'Hypermarché",
   "entreprise": "Team.is",
   "secteur": "",
   "taille": "",
@@ -2655,7 +2655,7 @@
   "source": "HelloWork",
   "publie": "2026-10-23",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84720097.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "3 à 15 ans"
@@ -2663,7 +2663,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Formateur Technique Automobile",
+  "titre": "Formateur Technique Automobile",
   "entreprise": "Auto Consultant",
   "secteur": "",
   "taille": "",
@@ -2696,7 +2696,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Collaborateur Comptable",
+  "titre": "Collaborateur Comptable",
   "entreprise": "Prime Match Recruiting",
   "secteur": "",
   "taille": "",
@@ -2731,7 +2731,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Architecte",
+  "titre": "Architecte",
   "entreprise": "Groupe Philippe Marraud",
   "secteur": "",
   "taille": "",
@@ -2758,7 +2758,7 @@
   "source": "HelloWork",
   "publie": "2026-10-20",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84622004.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -2766,7 +2766,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Gestionnaire Middle Office Prêts & Crédits Particuliers",
+  "titre": "Gestionnaire Middle Office Prêts & Crédits Particuliers",
   "entreprise": "BRED Banque Populaire",
   "secteur": "",
   "taille": "",
@@ -2801,7 +2801,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Ingénieur Systèmes et Réseaux N2 N3",
+  "titre": "Ingénieur Systèmes et Réseaux N2 N3",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -2837,7 +2837,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Dessinateur Projeteur Traitement de l'Eau F M X la Réunion 974",
+  "titre": "Dessinateur Projeteur Traitement de l'Eau F M X",
   "entreprise": "Groupe Saur",
   "secteur": "",
   "taille": "",
@@ -2864,14 +2864,14 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84652293.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Infirmier de Bloc Opératoire",
+  "titre": "Infirmier de Bloc Opératoire",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -2907,7 +2907,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Complément de Revenus Garde d'Enfant a Domicile",
+  "titre": "Complément de Revenus Garde d'Enfant a Domicile",
   "entreprise": "Assadia",
   "secteur": "",
   "taille": "",
@@ -2935,7 +2935,7 @@
   "source": "HelloWork",
   "publie": "2026-10-21",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Social, services à la personne",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84646340.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "0 - 1 an (débutants acceptés)"
@@ -2943,7 +2943,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Agent Socio-Judiciaire",
+  "titre": "Agent Socio-Judiciaire",
   "entreprise": "SCJE",
   "secteur": "",
   "taille": "",
@@ -2970,7 +2970,7 @@
   "source": "HelloWork",
   "publie": "2026-10-22",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Social, services à la personne",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84686955.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -2978,7 +2978,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDD Chef d'Atelier",
+  "titre": "Chef d'Atelier",
   "entreprise": "Réseau AD",
   "secteur": "",
   "taille": "",
@@ -3013,7 +3013,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Infirmier",
+  "titre": "Infirmier",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -3049,7 +3049,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Technicien de l'Information Médicale",
+  "titre": "Technicien de l'Information Médicale",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -3085,7 +3085,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Infirmier de Bloc Opératoire de",
+  "titre": "Infirmier de Bloc Opératoire de",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -3121,7 +3121,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Infirmier en Pratique Avancée",
+  "titre": "Infirmier en Pratique Avancée",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -3157,7 +3157,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Technicien Industriel",
+  "titre": "Technicien Industriel",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -3193,7 +3193,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Technicien de Manutention",
+  "titre": "Technicien de Manutention",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -3228,7 +3228,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Laborantin Industriel",
+  "titre": "Laborantin Industriel",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -3264,7 +3264,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Électricien Industriel",
+  "titre": "Électricien Industriel",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -3300,7 +3300,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Préventeur Sécurité Environnement",
+  "titre": "Préventeur Sécurité Environnement",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -3336,7 +3336,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Collaborateur Comptable Semaine",
+  "titre": "Collaborateur Comptable Semaine",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -3371,7 +3371,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Expert Construction",
+  "titre": "Expert Construction",
   "entreprise": "Stelliant",
   "secteur": "",
   "taille": "",
@@ -3398,7 +3398,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/81485853.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "4 ans min."
@@ -3406,7 +3406,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable de Portefeuille",
+  "titre": "Responsable de Portefeuille",
   "entreprise": "Nextep HR",
   "secteur": "",
   "taille": "",
@@ -3434,7 +3434,7 @@
   "source": "HelloWork",
   "publie": "2026-10-23",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84735672.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -3442,7 +3442,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Collaborateur Comptable",
+  "titre": "Collaborateur Comptable",
   "entreprise": "Nextep HR",
   "secteur": "",
   "taille": "",
@@ -3477,7 +3477,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Aide Comptable",
+  "titre": "Aide Comptable",
   "entreprise": "Nextep HR",
   "secteur": "",
   "taille": "",
@@ -3512,7 +3512,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable de Dossiers",
+  "titre": "Responsable de Dossiers",
   "entreprise": "Nextep HR",
   "secteur": "",
   "taille": "",
@@ -3539,7 +3539,7 @@
   "source": "HelloWork",
   "publie": "2026-10-23",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84735225.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -3547,7 +3547,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Assistant en Tenue de Comptes",
+  "titre": "Assistant en Tenue de Comptes",
   "entreprise": "Nextep HR",
   "secteur": "",
   "taille": "",
@@ -3582,7 +3582,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Directeur de Mission",
+  "titre": "Directeur de Mission",
   "entreprise": "Nextep HR",
   "secteur": "",
   "taille": "",
@@ -3617,7 +3617,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Technicien Comptable",
+  "titre": "Technicien Comptable",
   "entreprise": "Nextep HR",
   "secteur": "",
   "taille": "",
@@ -3652,7 +3652,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef Comptable",
+  "titre": "Chef Comptable",
   "entreprise": "Nextep HR",
   "secteur": "",
   "taille": "",
@@ -3687,7 +3687,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Femme de Ménage chez des Particuliers",
+  "titre": "Femme de Ménage chez des Particuliers",
   "entreprise": "SHIVA",
   "secteur": "",
   "taille": "",
@@ -3721,7 +3721,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chargé des Ressources Humaines",
+  "titre": "Chargé des Ressources Humaines",
   "entreprise": "Croix-Rouge française",
   "secteur": "",
   "taille": "",
@@ -3755,7 +3755,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Garde d'Enfant Diplomé",
+  "titre": "Garde d'Enfant Diplomé",
   "entreprise": "Assadia",
   "secteur": "",
   "taille": "",
@@ -3783,7 +3783,7 @@
   "source": "HelloWork",
   "publie": "2026-10-20",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Social, services à la personne",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84618622.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 an"
@@ -3791,7 +3791,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Garde d'Enfant Périscolaire Bellepierre",
+  "titre": "Garde d'Enfant Périscolaire Bellepierre",
   "entreprise": "Assadia",
   "secteur": "",
   "taille": "",
@@ -3819,7 +3819,7 @@
   "source": "HelloWork",
   "publie": "2026-10-20",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Social, services à la personne",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84618613.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 an"
@@ -3862,7 +3862,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Secretaire Commercial",
+  "titre": "Secretaire Commercial",
   "entreprise": "GBH",
   "secteur": "",
   "taille": "",
@@ -3896,7 +3896,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Conducteur de Travaux Industriel Le Port (97) - Recrutement en Intérim pour Shock",
+  "titre": "Conducteur de Travaux Industriel Le Port (97) - Recrutement en Intérim pour Shock",
   "entreprise": "Shock",
   "secteur": "",
   "taille": "",
@@ -3931,7 +3931,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Magasinier Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Magasinier Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -3966,7 +3966,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Poseur de Sol Saint-Pierre (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Poseur de Sol Saint-Pierre (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -3993,7 +3993,7 @@
   "source": "HelloWork",
   "publie": "2026-10-29",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/77294393.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -4036,7 +4036,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Couvreur La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Couvreur La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -4071,7 +4071,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Chef d'Équipe Fondations & Planchers",
+  "titre": "Chef d'Équipe Fondations & Planchers",
   "entreprise": "Entreprise (voir l'annonce)",
   "secteur": "",
   "taille": "",
@@ -4098,7 +4098,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/81796928.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "3 ans"
@@ -4106,7 +4106,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Vendeur Conseil Jardin",
+  "titre": "Vendeur Conseil Jardin",
   "entreprise": "GBH",
   "secteur": "",
   "taille": "",
@@ -4140,7 +4140,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Installateur-Poseur",
+  "titre": "Installateur-Poseur",
   "entreprise": "Schmidt",
   "secteur": "",
   "taille": "",
@@ -4167,7 +4167,7 @@
   "source": "HelloWork",
   "publie": "2026-10-20",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84606066.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "2 à 5 ans"
@@ -4175,7 +4175,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Mission Comptable de Cabinet",
+  "titre": "Chef de Mission Comptable de Cabinet",
   "entreprise": "PAGO PARTNERS",
   "secteur": "",
   "taille": "",
@@ -4210,7 +4210,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Collaborateur Comptable Autonome en Cabinet",
+  "titre": "Collaborateur Comptable Autonome en Cabinet",
   "entreprise": "PAGO PARTNERS",
   "secteur": "",
   "taille": "",
@@ -4245,7 +4245,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Auditeur Financier en Cabinet",
+  "titre": "Auditeur Financier en Cabinet",
   "entreprise": "PAGO PARTNERS",
   "secteur": "",
   "taille": "",
@@ -4272,7 +4272,7 @@
   "source": "HelloWork",
   "publie": "2026-10-22",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84703142.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "3 ans min."
@@ -4280,7 +4280,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Monteur Panneaux Photovoltaïques Charpente Métallique La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Monteur Panneaux Photovoltaïques Charpente Métallique La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -4315,7 +4315,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Chauffeur Poids Lourd La Réunion (97) - Recrutement en Intérim pour Shock",
+  "titre": "Chauffeur Poids Lourd La Réunion (97) - Recrutement en Intérim pour Shock",
   "entreprise": "Shock",
   "secteur": "",
   "taille": "",
@@ -4349,7 +4349,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Mécanicien Automobile La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Mécanicien Automobile La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -4384,7 +4384,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Ouvrier Polyvalent BTP Saint-Denis (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Ouvrier Polyvalent BTP Saint-Denis (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -4419,7 +4419,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Électromécanicien Saint-Pierre (97) - Recrutement en Intérim pour Shock",
+  "titre": "Électromécanicien Saint-Pierre (97) - Recrutement en Intérim pour Shock",
   "entreprise": "Shock",
   "secteur": "",
   "taille": "",
@@ -4454,7 +4454,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Cariste Le Port (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Cariste Le Port (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -4490,7 +4490,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Serveur·se La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Serveur·se La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -4526,7 +4526,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Barman Maid La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Barman Maid La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -4562,7 +4562,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Boucher Bouchère Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Boucher Bouchère Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -4589,7 +4589,7 @@
   "source": "HelloWork",
   "publie": "2026-10-27",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82691757.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "0 - 1 an (débutants acceptés)"
@@ -4597,7 +4597,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Peintre Etancheur Saint-Pierre (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Peintre Etancheur Saint-Pierre (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -4632,7 +4632,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Secrétaire Commercial Automobile La Réunion (97) - Recrutement en Intérim pour Shock",
+  "titre": "Secrétaire Commercial Automobile La Réunion (97) - Recrutement en Intérim pour Shock",
   "entreprise": "Shock",
   "secteur": "",
   "taille": "",
@@ -4666,7 +4666,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Electricien La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Electricien La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -4701,7 +4701,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Monteur Panneaux Photovoltaïques Saint-Pierre (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Monteur Panneaux Photovoltaïques Saint-Pierre (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -4728,7 +4728,7 @@
   "source": "HelloWork",
   "publie": "2026-10-27",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/80652897.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -4736,7 +4736,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Assistant QHSE Saint-André (97) - Recrutement en Intérim pour Sponsor Job - La Réunion",
+  "titre": "Assistant QHSE Saint-André (97) - Recrutement en Intérim pour Sponsor Job",
   "entreprise": "Sponsor Job - La Réunion",
   "secteur": "",
   "taille": "",
@@ -4770,7 +4770,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Infirmier de Bloc Opératoire",
+  "titre": "Infirmier de Bloc Opératoire",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -4806,7 +4806,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Infirmier de Bloc Opératoire de",
+  "titre": "Infirmier de Bloc Opératoire de",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -4842,7 +4842,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Collaborateur Comptable Cabinet Digitalisé et Structuré",
+  "titre": "Collaborateur Comptable Cabinet Digitalisé et Structuré",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -4877,7 +4877,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Expert-Comptable Stagiaire Accompagnement et Conseil Clients",
+  "titre": "Expert-Comptable Stagiaire Accompagnement et Conseil Clients",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -4912,7 +4912,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Collaborateur Comptable Cabinet en Développement Pennylane",
+  "titre": "Collaborateur Comptable Cabinet en Développement Pennylane",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -4948,7 +4948,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Mission Expertise Cabinet Tourné Vers l'Avenir",
+  "titre": "Chef de Mission Expertise Cabinet Tourné Vers l'Avenir",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -4975,7 +4975,7 @@
   "source": "HelloWork",
   "publie": "2026-10-22",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84690026.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -4983,7 +4983,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Collaborateur Comptable Cabinet Digitalisé Missions de Conseils",
+  "titre": "Collaborateur Comptable Cabinet Digitalisé Missions de Conseils",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -5018,7 +5018,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Assistant Comptable Cabinet Digitalisé Pennylane",
+  "titre": "Assistant Comptable Cabinet Digitalisé Pennylane",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -5053,7 +5053,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Mission Expertise Management et Portefeuille Varié",
+  "titre": "Chef de Mission Expertise Management et Portefeuille Varié",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -5080,7 +5080,7 @@
   "source": "HelloWork",
   "publie": "2026-10-22",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84689989.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -5088,7 +5088,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Mission Audit Management et Accompagnement Clients",
+  "titre": "Chef de Mission Audit Management et Accompagnement Clients",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -5115,7 +5115,7 @@
   "source": "HelloWork",
   "publie": "2026-10-22",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84689969.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -5123,7 +5123,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Collaborateur Comptable Cabinet à Taille Humaine Rythme Flexible",
+  "titre": "Collaborateur Comptable Cabinet à Taille Humaine Rythme Flexible",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -5158,7 +5158,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Gestionnaire de Paie Cabinet Structuré Silae",
+  "titre": "Gestionnaire de Paie Cabinet Structuré Silae",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -5193,7 +5193,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Mission Audit Conseils Stratégiques Management",
+  "titre": "Chef de Mission Audit Conseils Stratégiques Management",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -5220,7 +5220,7 @@
   "source": "HelloWork",
   "publie": "2026-10-22",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84689830.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -5228,7 +5228,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Auditeur Cabinet Tourné Vers l'Avenir",
+  "titre": "Auditeur Cabinet Tourné Vers l'Avenir",
   "entreprise": "Entreprise (voir l'annonce)",
   "secteur": "",
   "taille": "",
@@ -5255,7 +5255,7 @@
   "source": "HelloWork",
   "publie": "2026-10-22",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84689816.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -5263,7 +5263,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Mission Comptable Conseils aux Clients Pennylane",
+  "titre": "Chef de Mission Comptable Conseils aux Clients Pennylane",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -5298,7 +5298,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Collaborateur Comptable Tpe Pme Environnement Digital",
+  "titre": "Collaborateur Comptable Tpe Pme Environnement Digital",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -5333,7 +5333,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Assistant Comptable Cabinet à Taille Humaine Poste Évolutif",
+  "titre": "Assistant Comptable Cabinet à Taille Humaine Poste Évolutif",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -5368,7 +5368,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Gestionnaire de Paie Silae et Télétravail",
+  "titre": "Gestionnaire de Paie Silae et Télétravail",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -5403,7 +5403,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Assistant Comptable Pennylane Cabinet en Croissance",
+  "titre": "Assistant Comptable Pennylane Cabinet en Croissance",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -5438,7 +5438,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Juriste Droit des Affaires Portefeuille Tpe Pme",
+  "titre": "Juriste Droit des Affaires Portefeuille Tpe Pme",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -5465,7 +5465,7 @@
   "source": "HelloWork",
   "publie": "2026-10-22",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84689479.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -5473,7 +5473,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Vendeur Polyvalent Produits de la Mer",
+  "titre": "Vendeur Polyvalent Produits de la Mer",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -5544,7 +5544,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Préparateur de Commande La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Préparateur de Commande La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -5571,7 +5571,7 @@
   "source": "HelloWork",
   "publie": "2026-10-26",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Transport, logistique",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/77231960.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -5579,7 +5579,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Manutentionnaire Aide-Monteur La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Manutentionnaire Aide-Monteur La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -5651,7 +5651,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable de Groupe Contrôle Technique de la Construction Sainte Clotilde -",
+  "titre": "Responsable de Groupe Contrôle Technique de la Construction Sainte Clotilde",
   "entreprise": "Apave",
   "secteur": "",
   "taille": "",
@@ -5678,7 +5678,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/79149089.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "3 à 4 ans"
@@ -5686,7 +5686,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Projets en Maitrise d'Oeuvre La Réunion (47)",
+  "titre": "Chef de Projets en Maitrise d'Oeuvre La Réunion (47)",
   "entreprise": "SCP – Société du canal de Provence",
   "secteur": "",
   "taille": "",
@@ -5712,7 +5712,7 @@
   "postuler": "https://www.hellowork.com/fr-fr/emplois/83510792.html",
   "source": "HelloWork",
   "publie": "",
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/83510792.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "5 ans min."
@@ -5720,7 +5720,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDI Ingénieur Système Réseau et Sécurité",
+  "titre": "Ingénieur Système Réseau et Sécurité",
   "entreprise": "SM CONSEIL ET RECRUTEMENT",
   "secteur": "",
   "taille": "",
@@ -5755,7 +5755,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Assistant Ingénieur",
+  "titre": "Assistant Ingénieur",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -5791,7 +5791,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Comptable Général",
+  "titre": "Comptable Général",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -5827,7 +5827,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Carreleur Confirmé Saint-André (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Carreleur Confirmé Saint-André (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -5862,7 +5862,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Vendeur en Quincaillerie St Joseph Saint-Joseph (97) - Recrutement en Intérim pour Shock",
+  "titre": "Vendeur en Quincaillerie St Joseph Saint-Joseph (97) - Recrutement en Intérim pour Shock",
   "entreprise": "Shock",
   "secteur": "",
   "taille": "",
@@ -5896,7 +5896,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Médecin Had",
+  "titre": "Médecin Had",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -5924,14 +5924,14 @@
   "source": "HelloWork",
   "publie": "2026-10-21",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84663587.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Conducteur de Travaux Corps d'État Techniques CFA CFO",
+  "titre": "Conducteur de Travaux Corps d'État Techniques CFA CFO",
   "entreprise": "Demathieu Bard",
   "secteur": "",
   "taille": "",
@@ -5965,7 +5965,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Conducteur de Travaux Corps d'État Techniques Vcp",
+  "titre": "Conducteur de Travaux Corps d'État Techniques Vcp",
   "entreprise": "Demathieu Bard",
   "secteur": "",
   "taille": "",
@@ -5999,7 +5999,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Attaché Technico-Commercial la Réunion",
+  "titre": "Attaché Technico-Commercial",
   "entreprise": "Sorepro",
   "secteur": "",
   "taille": "",
@@ -6170,7 +6170,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Médecin Pédiatre en CDI",
+  "titre": "Médecin Pédiatre",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -6197,7 +6197,7 @@
   "source": "HelloWork",
   "publie": "2026-10-21",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84655722.html",
   "vu": "2026-10-29T08:36+04:00"
  },
@@ -6782,7 +6782,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commis de Cuisine Sushi",
+  "titre": "Commis de Cuisine Sushi",
   "entreprise": "Wasabi Corner",
   "secteur": "",
   "taille": "",
@@ -6817,7 +6817,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable des Ventes en Assurance",
+  "titre": "Responsable des Ventes en Assurance",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -6854,7 +6854,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Coordinateur de Projet Amo",
+  "titre": "Coordinateur de Projet Amo",
   "entreprise": "Croix-Rouge française",
   "secteur": "",
   "taille": "",
@@ -6922,7 +6922,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commercial Terrain Btoc",
+  "titre": "Commercial Terrain Btoc",
   "entreprise": "Circet Distribution",
   "secteur": "",
   "taille": "",
@@ -6957,7 +6957,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commercial Terrain Btoc",
+  "titre": "Commercial Terrain Btoc",
   "entreprise": "Circet Distribution",
   "secteur": "",
   "taille": "",
@@ -6992,7 +6992,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commercial Terrain Btoc",
+  "titre": "Commercial Terrain Btoc",
   "entreprise": "Circet Distribution",
   "secteur": "",
   "taille": "",
@@ -7062,7 +7062,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Métallier Soudeur Expérimenté Fabrication de Mobilier Urbain Le Port (97) - Recrutement en Intérim pour Aquila RH",
+  "titre": "Métallier Soudeur Expérimenté Fabrication de Mobilier Urbain Le Port (97) - Recrutement en Intérim pour Aquila RH",
   "entreprise": "Aquila RH",
   "secteur": "",
   "taille": "",
@@ -7097,7 +7097,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commercial Terrain Btoc",
+  "titre": "Commercial Terrain Btoc",
   "entreprise": "Circet Distribution",
   "secteur": "",
   "taille": "",
@@ -7130,7 +7130,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Gestionnaire Copropriété",
+  "titre": "Gestionnaire Copropriété",
   "entreprise": "Citya Immobilier",
   "secteur": "",
   "taille": "",
@@ -7165,7 +7165,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Préparateur de Commandes La Réunion (97) - Recrutement en Intérim pour Shock",
+  "titre": "Préparateur de Commandes La Réunion (97) - Recrutement en Intérim pour Shock",
   "entreprise": "Shock",
   "secteur": "",
   "taille": "",
@@ -7199,7 +7199,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Technicien Agricole La Réunion (97) - Recrutement en Intérim pour Shock",
+  "titre": "Technicien Agricole La Réunion (97) - Recrutement en Intérim pour Shock",
   "entreprise": "Shock",
   "secteur": "",
   "taille": "",
@@ -7232,7 +7232,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Chauffeur de Collecte Poids Lourd Nord et Sud Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Chauffeur de Collecte Poids Lourd Nord et Sud Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -7304,7 +7304,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Technicien Qualité",
+  "titre": "Technicien Qualité",
   "entreprise": "Croix-Rouge française",
   "secteur": "",
   "taille": "",
@@ -7338,7 +7338,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Assistant Sic Aéronautique",
+  "titre": "Assistant Sic Aéronautique",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -7373,7 +7373,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDD Ouvrier Mécanicien Matériel Environnement Aéro",
+  "titre": "Ouvrier Mécanicien Matériel Environnement Aéro",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -7408,7 +7408,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Contrôleur de Gestion Planning Manager",
+  "titre": "Contrôleur de Gestion Planning Manager",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -7444,7 +7444,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Electricien Sainte-Marie (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Electricien Sainte-Marie (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -7479,7 +7479,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Vendeur Magasinier Experimente",
+  "titre": "Vendeur Magasinier Experimente",
   "entreprise": "Quincaillerie Angles",
   "secteur": "",
   "taille": "",
@@ -7514,7 +7514,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Gériatre du 02.11 au 30.11",
+  "titre": "Gériatre du 02.11 au 30.11",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -7542,14 +7542,14 @@
   "source": "HelloWork",
   "publie": "2026-10-22",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/81580636.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Directeur Adjoint Hypermarché Réunion",
+  "titre": "Directeur Adjoint Hypermarché",
   "entreprise": "Carrefour",
   "secteur": "",
   "taille": "",
@@ -7576,7 +7576,7 @@
   "source": "HelloWork",
   "publie": "2026-10-19",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/81433284.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "5 ans min."
@@ -7584,7 +7584,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Manager de Rayon Boulangerie-Patisserie la Réunion",
+  "titre": "Manager de Rayon Boulangerie-Patisserie",
   "entreprise": "Carrefour",
   "secteur": "",
   "taille": "",
@@ -7619,7 +7619,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chargé d'Affaires Bâtiments Existants et Patrimoine",
+  "titre": "Chargé d'Affaires Bâtiments Existants et Patrimoine",
   "entreprise": "Apave",
   "secteur": "",
   "taille": "",
@@ -7646,7 +7646,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/80293702.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "4 à 5 ans"
@@ -7654,7 +7654,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Médecin Had du 28.12 au 22.01",
+  "titre": "Médecin Had du 28.12 au 22.01",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -7682,14 +7682,14 @@
   "source": "HelloWork",
   "publie": "2026-10-21",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84663605.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Médecin Généraliste 09.11- 27.11",
+  "titre": "Médecin Généraliste 09.11- 27.11",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -7716,14 +7716,14 @@
   "source": "HelloWork",
   "publie": "2026-10-21",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84663460.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Médecin Généraliste 21.12-10.01",
+  "titre": "Médecin Généraliste 21.12-10.01",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -7750,14 +7750,14 @@
   "source": "HelloWork",
   "publie": "2026-10-21",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84663406.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Médecin Had du 11.01 au 07.02",
+  "titre": "Médecin Had du 11.01 au 07.02",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -7784,14 +7784,14 @@
   "source": "HelloWork",
   "publie": "2026-10-21",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84663401.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Pharmacien BPDO",
+  "titre": "Pharmacien BPDO",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -7825,7 +7825,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Métallier-Soudeur Le Port (97) - Recrutement en Intérim pour Shock",
+  "titre": "Métallier-Soudeur Le Port (97) - Recrutement en Intérim pour Shock",
   "entreprise": "Shock",
   "secteur": "",
   "taille": "",
@@ -7860,7 +7860,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Chargé de Production Audiovisuelle",
+  "titre": "Chargé de Production Audiovisuelle",
   "entreprise": "Orange",
   "secteur": "",
   "taille": "",
@@ -7896,7 +7896,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Data Scientist",
+  "titre": "Data Scientist",
   "entreprise": "Orange",
   "secteur": "",
   "taille": "",
@@ -7931,7 +7931,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDI Auditeur Senior en Cabinet Comptable",
+  "titre": "Auditeur Senior en Cabinet Comptable",
   "entreprise": "PAGO PARTNERS",
   "secteur": "",
   "taille": "",
@@ -7966,7 +7966,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Auditeur Externe de Cabinet",
+  "titre": "Auditeur Externe de Cabinet",
   "entreprise": "PAGO PARTNERS",
   "secteur": "",
   "taille": "",
@@ -7993,7 +7993,7 @@
   "source": "HelloWork",
   "publie": "2026-10-20",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84619670.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "3 à 10 ans"
@@ -8001,7 +8001,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Superviseur Audit",
+  "titre": "Superviseur Audit",
   "entreprise": "PAGO PARTNERS",
   "secteur": "",
   "taille": "",
@@ -8028,7 +8028,7 @@
   "source": "HelloWork",
   "publie": "2026-10-20",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84619171.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "2 ans min."
@@ -8036,7 +8036,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Médecin Pédiatre CDD",
+  "titre": "Médecin Pédiatre",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -8063,14 +8063,14 @@
   "source": "HelloWork",
   "publie": "2026-10-21",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84655715.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Médecin Pédiatre CDD",
+  "titre": "Médecin Pédiatre",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -8097,14 +8097,14 @@
   "source": "HelloWork",
   "publie": "2026-10-21",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84655683.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Pédiatre du 04.01 au 31.01",
+  "titre": "Pédiatre du 04.01 au 31.01",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -8131,14 +8131,14 @@
   "source": "HelloWork",
   "publie": "2026-10-21",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84655659.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Médecin Pédiatre du 04.01 au 31.01",
+  "titre": "Médecin Pédiatre du 04.01 au 31.01",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -8165,7 +8165,7 @@
   "source": "HelloWork",
   "publie": "2026-10-21",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84655583.html",
   "vu": "2026-10-29T08:36+04:00"
  },
@@ -8199,7 +8199,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84851531.html",
   "vu": "2026-10-29T08:36+04:00"
  },
@@ -8233,7 +8233,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84851529.html",
   "vu": "2026-10-29T08:36+04:00"
  },
@@ -8267,7 +8267,7 @@
   "source": "HelloWork",
   "publie": "2026-10-27",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84847254.html",
   "vu": "2026-10-29T08:36+04:00"
  },
@@ -8301,7 +8301,7 @@
   "source": "HelloWork",
   "publie": "2026-10-27",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84847220.html",
   "vu": "2026-10-29T08:36+04:00"
  },
@@ -8335,7 +8335,7 @@
   "source": "HelloWork",
   "publie": "2026-10-27",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84847181.html",
   "vu": "2026-10-29T08:36+04:00"
  },
@@ -8369,7 +8369,7 @@
   "source": "HelloWork",
   "publie": "2026-10-27",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84847171.html",
   "vu": "2026-10-29T08:36+04:00"
  },
@@ -8403,14 +8403,14 @@
   "source": "HelloWork",
   "publie": "2026-10-27",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84846408.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Moniteur Éducateur Île de la Réunion",
+  "titre": "Moniteur Éducateur",
   "entreprise": "Croix-Rouge française",
   "secteur": "",
   "taille": "",
@@ -8444,7 +8444,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Médecin Généraliste en Hc la Réunion",
+  "titre": "Médecin Généraliste en Hc",
   "entreprise": "Talents Santé",
   "secteur": "",
   "taille": "",
@@ -8471,7 +8471,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84608709.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 an min."
@@ -8479,7 +8479,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef d'Agence BTP",
+  "titre": "Chef d'Agence BTP",
   "entreprise": "Noviac",
   "secteur": "",
   "taille": "",
@@ -8514,7 +8514,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Comptable",
+  "titre": "Responsable Comptable",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -8550,7 +8550,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDI Chef de Projet ERP Sage X3 la Réunion",
+  "titre": "Chef de Projet ERP Sage X3",
   "entreprise": "Skaelia",
   "secteur": "",
   "taille": "",
@@ -8585,7 +8585,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Gestionnaire de Paie",
+  "titre": "Gestionnaire de Paie",
   "entreprise": "Prime Match Recruiting",
   "secteur": "",
   "taille": "",
@@ -8620,7 +8620,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Gestionnaire de Paie",
+  "titre": "Gestionnaire de Paie",
   "entreprise": "Prime Match Recruiting",
   "secteur": "",
   "taille": "",
@@ -8655,7 +8655,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Mission Audit",
+  "titre": "Chef de Mission Audit",
   "entreprise": "Prime Match Recruiting",
   "secteur": "",
   "taille": "",
@@ -8682,7 +8682,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82469050.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "4 ans min."
@@ -8690,7 +8690,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Mission Audit",
+  "titre": "Chef de Mission Audit",
   "entreprise": "Prime Match Recruiting",
   "secteur": "",
   "taille": "",
@@ -8717,7 +8717,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82469045.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "4 ans min."
@@ -8725,7 +8725,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Manutentionnaire La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Manutentionnaire La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -8761,7 +8761,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Monteur Panneaux-Photovoltaïques La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Monteur Panneaux-Photovoltaïques La Possession (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -8788,7 +8788,7 @@
   "source": "HelloWork",
   "publie": "2026-10-22",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/75862640.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -8796,7 +8796,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Diététicien",
+  "titre": "Diététicien",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -8831,7 +8831,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Pharmacien BPDO",
+  "titre": "Pharmacien BPDO",
   "entreprise": "Adecco Medical",
   "secteur": "",
   "taille": "",
@@ -8865,7 +8865,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Coordinateur de Projet Digital",
+  "titre": "Coordinateur de Projet Digital",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -8900,7 +8900,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Electrotechnicien",
+  "titre": "Electrotechnicien",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -8935,7 +8935,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Collaborateur Comptable Tpe Pme Cabinet à Taille Humaine",
+  "titre": "Collaborateur Comptable Tpe Pme Cabinet à Taille Humaine",
   "entreprise": "FAB Group",
   "secteur": "",
   "taille": "",
@@ -8970,7 +8970,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Gestionnaire Technique",
+  "titre": "Gestionnaire Technique",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -9006,7 +9006,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Conducteur de Travaux",
+  "titre": "Conducteur de Travaux",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -9042,7 +9042,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Contrôleur de Gestion Achats Senior",
+  "titre": "Contrôleur de Gestion Achats Senior",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -9078,7 +9078,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable d'Agences en Assurance",
+  "titre": "Responsable d'Agences en Assurance",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -9114,7 +9114,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable de Magasin Automobile",
+  "titre": "Responsable de Magasin Automobile",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -9150,7 +9150,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chargé de Marketing & Communication Externe",
+  "titre": "Chargé de Marketing & Communication Externe",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -9186,7 +9186,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Chantier",
+  "titre": "Chef de Chantier",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -9222,7 +9222,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Directeur d'Agence Gmf",
+  "titre": "Directeur d'Agence Gmf",
   "entreprise": "GMF Assurances",
   "secteur": "",
   "taille": "",
@@ -9249,7 +9249,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/80238622.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "3 ans min."
@@ -9257,7 +9257,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "EHPAD- Medecin Coordonnateur CDI- Île de la Réunion",
+  "titre": "EHPAD- Medecin Coordonnateur",
   "entreprise": "Croix-Rouge française",
   "secteur": "",
   "taille": "",
@@ -9284,14 +9284,14 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/83464441.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Carreleur·euse Saint-André (97) - Recrutement en Intérim pour Aquila RH",
+  "titre": "Carreleur·euse Saint-André (97) - Recrutement en Intérim pour Aquila RH",
   "entreprise": "Aquila RH",
   "secteur": "",
   "taille": "",
@@ -9325,7 +9325,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Tuyauteur·se Soudeur·se Expérimenté·e Saint-Paul (97) - Recrutement en Intérim pour Aquila RH",
+  "titre": "Tuyauteur·se Soudeur·se Expérimenté·e Saint-Paul (97) - Recrutement en Intérim pour Aquila RH",
   "entreprise": "Aquila RH",
   "secteur": "",
   "taille": "",
@@ -9360,7 +9360,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Carreleur Saint-André (97) - Recrutement en Intérim pour Aquila RH",
+  "titre": "Carreleur Saint-André (97) - Recrutement en Intérim pour Aquila RH",
   "entreprise": "Aquila RH",
   "secteur": "",
   "taille": "",
@@ -9394,7 +9394,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Plombier Saint-Paul (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Plombier Saint-Paul (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -9429,7 +9429,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Secrétaire Médicale Saint-Pierre (97) - Recrutement en Intérim pour Shock",
+  "titre": "Secrétaire Médicale Saint-Pierre (97) - Recrutement en Intérim pour Shock",
   "entreprise": "Shock",
   "secteur": "",
   "taille": "",
@@ -9838,7 +9838,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Mission Audit",
+  "titre": "Chef de Mission Audit",
   "entreprise": "Adsearch",
   "secteur": "",
   "taille": "",
@@ -9865,7 +9865,7 @@
   "source": "HelloWork",
   "publie": "2026-10-19",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82447746.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -9873,7 +9873,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Attache·e Commercial·e",
+  "titre": "Attache·e Commercial·e",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -9909,7 +9909,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Charge de Recrutement Eperon",
+  "titre": "Charge de Recrutement Eperon",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -9945,7 +9945,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Collaborateur Comptable",
+  "titre": "Collaborateur Comptable",
   "entreprise": "Adsearch",
   "secteur": "",
   "taille": "",
@@ -9980,7 +9980,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Technicien Itinérant",
+  "titre": "Technicien Itinérant",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -10016,7 +10016,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Ingénieur Industriel",
+  "titre": "Ingénieur Industriel",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -10052,7 +10052,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Professeur de Mathematiques pour Cours Particuliers",
+  "titre": "Professeur de Mathematiques pour Cours Particuliers",
   "entreprise": "Anacours",
   "secteur": "",
   "taille": "",
@@ -10086,7 +10086,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "Offre d'Alternance Conseiller en Insertion Professionnelle",
+  "titre": "Conseiller en Insertion Professionnelle",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -10120,7 +10120,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "Offre d'Alternance Conseiller en Insertion Professionnelle",
+  "titre": "Conseiller en Insertion Professionnelle",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -10154,7 +10154,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "Offre d'Alternance Conseiller en Insertion Professionnelle",
+  "titre": "Conseiller en Insertion Professionnelle",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -10188,7 +10188,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Technicien en Automatisme Saint-Denis (97) - Recrutement en Intérim pour Aquila RH",
+  "titre": "Technicien en Automatisme Saint-Denis (97) - Recrutement en Intérim pour Aquila RH",
   "entreprise": "Aquila RH",
   "secteur": "",
   "taille": "",
@@ -10223,7 +10223,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Clientèle Entreprises",
+  "titre": "Responsable Clientèle Entreprises",
   "entreprise": "BRED Banque Populaire",
   "secteur": "",
   "taille": "",
@@ -10258,7 +10258,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Candidatures Spontanées CDD CDI la Réunion",
+  "titre": "Candidatures Spontanées CDD",
   "entreprise": "BRED Banque Populaire",
   "secteur": "",
   "taille": "",
@@ -10293,7 +10293,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Technicien·ne CVC Plomberie",
+  "titre": "Technicien·ne CVC Plomberie",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -10329,7 +10329,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commercial Terrain Btoc",
+  "titre": "Commercial Terrain Btoc",
   "entreprise": "Circet Distribution",
   "secteur": "",
   "taille": "",
@@ -10363,7 +10363,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commercial Terrain Btoc",
+  "titre": "Commercial Terrain Btoc",
   "entreprise": "Circet Distribution",
   "secteur": "",
   "taille": "",
@@ -10397,7 +10397,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commercial Terrain Btoc",
+  "titre": "Commercial Terrain Btoc",
   "entreprise": "Circet Distribution",
   "secteur": "",
   "taille": "",
@@ -10431,7 +10431,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commercial Terrain Btoc",
+  "titre": "Commercial Terrain Btoc",
   "entreprise": "Circet Distribution",
   "secteur": "",
   "taille": "",
@@ -10465,7 +10465,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commercial Terrain Btoc",
+  "titre": "Commercial Terrain Btoc",
   "entreprise": "Circet Distribution",
   "secteur": "",
   "taille": "",
@@ -10499,7 +10499,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commercial Terrain Btoc",
+  "titre": "Commercial Terrain Btoc",
   "entreprise": "Circet Distribution",
   "secteur": "",
   "taille": "",
@@ -10533,7 +10533,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Manager Enseigne Promocash",
+  "titre": "Manager Enseigne Promocash",
   "entreprise": "GBH",
   "secteur": "",
   "taille": "",
@@ -10567,7 +10567,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Garde d'Enfant Diplômé la Montagne",
+  "titre": "Garde d'Enfant Diplômé la Montagne",
   "entreprise": "Assadia",
   "secteur": "",
   "taille": "",
@@ -10595,7 +10595,7 @@
   "source": "HelloWork",
   "publie": "2026-10-16",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Social, services à la personne",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84509319.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 an"
@@ -10603,7 +10603,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Adjoint de Boutique",
+  "titre": "Responsable Adjoint de Boutique",
   "entreprise": "Orange",
   "secteur": "",
   "taille": "",
@@ -10705,7 +10705,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Soudeur à l'Arc Saint-Paul (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Soudeur à l'Arc Saint-Paul (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -10740,7 +10740,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commercial",
+  "titre": "Commercial",
   "entreprise": "GBH",
   "secteur": "",
   "taille": "",
@@ -10774,7 +10774,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Electricien Saint-Paul (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT 974",
+  "titre": "Electricien Saint-Paul (97) - Recrutement en Intérim pour NORMAN RECRUTEMENT",
   "entreprise": "NORMAN RECRUTEMENT 974",
   "secteur": "",
   "taille": "",
@@ -10809,7 +10809,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission de Freelance Reprise de Clinique Vétérinaire Sainte-Clothilde 974",
+  "titre": "Mission de Freelance Reprise de Clinique Vétérinaire Sainte-Clothilde",
   "entreprise": "Jober Group",
   "secteur": "",
   "taille": "",
@@ -10836,14 +10836,14 @@
   "source": "HelloWork",
   "publie": "2026-10-22",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84683175.html",
   "vu": "2026-10-29T08:36+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Un·e Hôte·sse de Caisse Saint-Paul (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Un·e Hôte·sse de Caisse Saint-Paul (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -10870,7 +10870,7 @@
   "source": "HelloWork",
   "publie": "2026-10-19",
   "position_approx": true,
-  "domaine": "Commerce, vente",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82438622.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "0 - 1 an (débutants acceptés)"
@@ -10878,7 +10878,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Technicien de Maintenance Engins de Manutention Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Technicien de Maintenance Engins de Manutention Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -10913,7 +10913,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Employe·e Libre Service Sainte-Marie (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Employe·e Libre Service Sainte-Marie (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -10940,7 +10940,7 @@
   "source": "HelloWork",
   "publie": "2026-10-19",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82438390.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "0 - 1 an (débutants acceptés)"
@@ -10948,7 +10948,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Conducteur de Nacelle Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Conducteur de Nacelle Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -10983,7 +10983,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Vendeur·se en Produits de Beaute Le Tampon (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Vendeur·se en Produits de Beaute Le Tampon (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11018,7 +11018,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Macon·ne Finisseur·euse Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Macon·ne Finisseur·euse Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11053,7 +11053,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Carreleur Saint-Paul (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Carreleur Saint-Paul (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11088,7 +11088,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Inventoriste Le Tampon (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Inventoriste Le Tampon (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11123,7 +11123,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Grutier Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Grutier Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11158,7 +11158,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Infirmier Coordinateur de Suivi Had Obstetrique Sud et Ouest Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Infirmier Coordinateur de Suivi Had Obstetrique Sud et Ouest Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11195,7 +11195,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Électromécanicien Industriel Bras-Panon (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Électromécanicien Industriel Bras-Panon (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11230,7 +11230,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Chef d'Equipe Atelier Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Chef d'Equipe Atelier Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11265,7 +11265,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Monteur Echafaudeur Saint-André (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Monteur Echafaudeur Saint-André (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11292,7 +11292,7 @@
   "source": "HelloWork",
   "publie": "2026-10-19",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82438376.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -11300,7 +11300,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Manutentionnaire Sainte-Marie (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Manutentionnaire Sainte-Marie (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11335,7 +11335,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Infirmier Coordinateur de Suivi Had Obstetrique Nord Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Infirmier Coordinateur de Suivi Had Obstetrique Nord Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11372,7 +11372,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Conducteur de Gerbeur Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Conducteur de Gerbeur Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11407,7 +11407,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Sage Femme Coordinateur Had Obstetrique Nord Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Sage Femme Coordinateur Had Obstetrique Nord Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11436,7 +11436,7 @@
   "source": "HelloWork",
   "publie": "2026-10-19",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82439198.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -11444,7 +11444,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Technicien de Maintenance Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Technicien de Maintenance Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11479,7 +11479,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Un·e Vendeur·se Sainte-Marie (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Un·e Vendeur·se Sainte-Marie (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11516,7 +11516,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Technicien Plombier Climatisation Saint-Denis (97) - Recrutement en Intérim pour Shock",
+  "titre": "Technicien Plombier Climatisation Saint-Denis (97) - Recrutement en Intérim pour Shock",
   "entreprise": "Shock",
   "secteur": "",
   "taille": "",
@@ -11551,7 +11551,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Vendeur Véhicules Neufs Saint-Paul (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Vendeur Véhicules Neufs Saint-Paul (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11586,7 +11586,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Conducteur·trice d'Engins Saint-Benoît (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Conducteur·trice d'Engins Saint-Benoît (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11621,7 +11621,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Mecanicien PL Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Mecanicien PL Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11656,7 +11656,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Manoeuvre Bancheur Saint-André (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Manoeuvre Bancheur Saint-André (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11691,7 +11691,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Employé Employée de Libre-Service Saint-Louis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Employé Employée de Libre-Service Saint-Louis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11720,7 +11720,7 @@
   "source": "HelloWork",
   "publie": "2026-10-19",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82442530.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "0 - 1 an (débutants acceptés)"
@@ -11728,7 +11728,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Menuisier·e Saint-André (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Menuisier·e Saint-André (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11763,7 +11763,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Technicien·ne de Maintenance Sainte-Suzanne (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Technicien·ne de Maintenance Sainte-Suzanne (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11798,7 +11798,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Technicien·ne de Maintenance Frigoriste Saint-André (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Technicien·ne de Maintenance Frigoriste Saint-André (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11833,7 +11833,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Agents.Es de Trie des Déchets Sainte-Suzanne (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Agents.Es de Trie des Déchets Sainte-Suzanne (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11868,7 +11868,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Boucher Bouchère Saint-Paul (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Boucher Bouchère Saint-Paul (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11895,7 +11895,7 @@
   "source": "HelloWork",
   "publie": "2026-10-19",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82438503.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "0 - 1 an (débutants acceptés)"
@@ -11903,7 +11903,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Soudeur Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Soudeur Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11938,7 +11938,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Vendeur·se en Produits de Beaute Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Vendeur·se en Produits de Beaute Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -11973,7 +11973,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Conseiller·e de Vente Magasin de Bricolage Le Tampon (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Conseiller·e de Vente Magasin de Bricolage Le Tampon (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12008,7 +12008,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Chef.Fe d'Equipe Canalisateur·trice Saint-André (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Chef.Fe d'Equipe Canalisateur·trice Saint-André (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12043,7 +12043,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Macon Finisseur Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Macon Finisseur Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12078,7 +12078,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Metallier Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Metallier Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12113,7 +12113,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Mecanicien VL Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Mecanicien VL Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12148,7 +12148,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Vendeur·se en Produits de Beaute Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Vendeur·se en Produits de Beaute Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12183,7 +12183,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Preparateur Preparatrice de Commande Sainte-Marie (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Preparateur Preparatrice de Commande Sainte-Marie (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12218,7 +12218,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Technicien·ne de Travaux CVC Saint-André (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Technicien·ne de Travaux CVC Saint-André (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12253,7 +12253,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Preparateur de Commande Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Preparateur de Commande Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12280,7 +12280,7 @@
   "source": "HelloWork",
   "publie": "2026-10-19",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Transport, logistique",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/83516709.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -12288,7 +12288,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Manoeuvre BTP Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Manoeuvre BTP Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12323,7 +12323,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Plombier Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Plombier Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12358,7 +12358,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Conducteur de Chargeuse Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Conducteur de Chargeuse Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12393,7 +12393,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Electricien Electricienne La Possession (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Electricien Electricienne La Possession (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12428,7 +12428,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Charpentier Charpentiere Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Charpentier Charpentiere Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12463,7 +12463,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Inventoriste Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Inventoriste Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12498,7 +12498,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Electricien Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Electricien Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12533,7 +12533,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Technicien·ne en Installation et Maintenance de Chauffe-Eau Solaires Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Technicien·ne en Installation et Maintenance de Chauffe-Eau Solaires Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12568,7 +12568,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Cariste Sainte-Marie (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Cariste Sainte-Marie (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12603,7 +12603,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Employe·e de Rayon Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Employe·e de Rayon Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12630,7 +12630,7 @@
   "source": "HelloWork",
   "publie": "2026-10-19",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82438763.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "0 - 1 an (débutants acceptés)"
@@ -12638,7 +12638,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Mecanicien Mecanicienne SAV Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Mecanicien Mecanicienne SAV Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12673,7 +12673,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Electrotechnicien Electrotechnicienne de Maintenance Industrielle Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Electrotechnicien Electrotechnicienne de Maintenance Industrielle Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12708,7 +12708,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Carreleur Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Carreleur Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12743,7 +12743,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Agents.Es de Trie des Déchets Sainte-Marie (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Agents.Es de Trie des Déchets Sainte-Marie (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12778,7 +12778,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Magasinier Pr Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Magasinier Pr Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12813,7 +12813,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Conducteur d'Engins Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Conducteur d'Engins Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12848,7 +12848,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Electricien Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Electricien Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12883,7 +12883,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Technicien·ne Pare Brise Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Technicien·ne Pare Brise Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12918,7 +12918,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Coffreur Bancheur Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Coffreur Bancheur Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12953,7 +12953,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Un·e Vendeur·se Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Un·e Vendeur·se Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -12990,7 +12990,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Sage Femme Coordinateur Had Obstetrique Sud et Ouest Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Sage Femme Coordinateur Had Obstetrique Sud et Ouest Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13019,7 +13019,7 @@
   "source": "HelloWork",
   "publie": "2026-10-19",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82439032.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "1 à 7 ans"
@@ -13027,7 +13027,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Menuisier Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Menuisier Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13062,7 +13062,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Boulanger Boulangère Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Boulanger Boulangère Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13097,7 +13097,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Un·e Hôte·sse de Caisse Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Un·e Hôte·sse de Caisse Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13124,7 +13124,7 @@
   "source": "HelloWork",
   "publie": "2026-10-19",
   "position_approx": true,
-  "domaine": "Commerce, vente",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82438555.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "0 - 1 an (débutants acceptés)"
@@ -13132,7 +13132,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Employé·e Commercial de Cave à Vin Saint-Louis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Employé·e Commercial de Cave à Vin Saint-Louis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13167,7 +13167,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Plaquiste Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Plaquiste Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13202,7 +13202,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Serveur.Euses Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Serveur.Euses Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13237,7 +13237,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Coffreur·euse Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Coffreur·euse Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13272,7 +13272,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Vendeur Véhicules Neufs Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Vendeur Véhicules Neufs Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13307,7 +13307,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Vendeur·se en Produits de Beaute Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Vendeur·se en Produits de Beaute Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13342,7 +13342,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Hôte Hôtesse d'Accueil Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Hôte Hôtesse d'Accueil Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13379,7 +13379,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Magasinier Vendeur Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Magasinier Vendeur Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13414,7 +13414,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Equipier·e de Collectes Sainte-Marie (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Equipier·e de Collectes Sainte-Marie (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13449,7 +13449,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Charpentier Couvreur Saint-Paul (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Charpentier Couvreur Saint-Paul (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13484,7 +13484,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Inventoriste Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Inventoriste Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13519,7 +13519,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Technicien·ne Frigoriste Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Technicien·ne Frigoriste Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13554,7 +13554,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Mecanicien Mecanicienne Engin de Chantier Le Port (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Mecanicien Mecanicienne Engin de Chantier Le Port (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13589,7 +13589,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Coffreur·euse Bancheur·euse Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Coffreur·euse Bancheur·euse Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13624,7 +13624,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Aide Tuyauteur Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Aide Tuyauteur Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13659,7 +13659,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Technicien·ne de Maintenance La Possession (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Technicien·ne de Maintenance La Possession (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13694,7 +13694,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Un·e Hôte·sse de Caisse Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Un·e Hôte·sse de Caisse Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13721,7 +13721,7 @@
   "source": "HelloWork",
   "publie": "2026-10-19",
   "position_approx": true,
-  "domaine": "Commerce, vente",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82438451.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "0 - 1 an (débutants acceptés)"
@@ -13729,7 +13729,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Coffreur Bancheur Saint-André (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Coffreur Bancheur Saint-André (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13764,7 +13764,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Employe·e de Rayon Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Employe·e de Rayon Saint-Pierre (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13791,7 +13791,7 @@
   "source": "HelloWork",
   "publie": "2026-10-19",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82438667.html",
   "vu": "2026-10-29T08:36+04:00",
   "experience": "0 - 1 an (débutants acceptés)"
@@ -13799,7 +13799,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Coffreur Bancheur Le Tampon (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Coffreur Bancheur Le Tampon (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13834,7 +13834,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "Mission d'Intérim Conducteur de Bus Saint-Denis (97) - Recrutement en Intérim pour Actual group",
+  "titre": "Conducteur de Bus Saint-Denis (97) - Recrutement en Intérim pour Actual group",
   "entreprise": "Actual group",
   "secteur": "",
   "taille": "",
@@ -13964,7 +13964,7 @@
   "source": "HelloWork",
   "publie": "2026-10-27",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Gestion, administration",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/81762364.html",
   "vu": "2026-10-29T08:26+04:00"
  },
@@ -14816,7 +14816,7 @@
   "source": "HelloWork",
   "publie": "2026-10-15",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84449740.html",
   "vu": "2026-10-29T08:26+04:00"
  },
@@ -14850,7 +14850,7 @@
   "source": "HelloWork",
   "publie": "2026-10-15",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84449860.html",
   "vu": "2026-10-29T08:26+04:00"
  },
@@ -14884,7 +14884,7 @@
   "source": "HelloWork",
   "publie": "2026-10-15",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84448859.html",
   "vu": "2026-10-29T08:26+04:00"
  },
@@ -14994,7 +14994,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "Alternance Canalisateur F M X Saint-André 97",
+  "titre": "Alternance Canalisateur F M X",
   "entreprise": "Groupe Saur",
   "secteur": "",
   "taille": "",
@@ -15130,7 +15130,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "Alternance Conseiller Relation Client F M X Saint-André 97",
+  "titre": "Alternance Conseiller Relation Client F M X",
   "entreprise": "Groupe Saur",
   "secteur": "",
   "taille": "",
@@ -15198,7 +15198,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "Alternance Agent Production Traitement Eaux F M X Saint-André 974",
+  "titre": "Alternance Agent Production Traitement Eaux F M X",
   "entreprise": "Groupe Saur",
   "secteur": "",
   "taille": "",
@@ -15233,7 +15233,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "Alternance Technicien Exploitation Maintenance F M X-Saint-Denis (97) 974",
+  "titre": "Alternance Technicien Exploitation Maintenance F M X-Saint-Denis",
   "entreprise": "Groupe Saur",
   "secteur": "",
   "taille": "",
@@ -15499,7 +15499,7 @@
   "source": "HelloWork",
   "publie": "2026-10-23",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84735731.html",
   "vu": "2026-10-29T08:26+04:00"
  },
@@ -15808,7 +15808,7 @@
   "source": "HelloWork",
   "publie": "2026-10-22",
   "position_approx": true,
-  "domaine": "Commerce, vente",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84675487.html",
   "vu": "2026-10-29T08:26+04:00"
  },
@@ -15842,7 +15842,7 @@
   "source": "HelloWork",
   "publie": "2026-10-20",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84596729.html",
   "vu": "2026-10-29T08:26+04:00"
  },
@@ -16012,7 +16012,7 @@
   "source": "HelloWork",
   "publie": "2026-10-16",
   "position_approx": true,
-  "domaine": "Commerce, vente",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84528752.html",
   "vu": "2026-10-29T08:26+04:00"
  },
@@ -16493,7 +16493,7 @@
   "source": "HelloWork",
   "publie": "2026-10-05",
   "position_approx": true,
-  "domaine": "Commerce, vente",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84097407.html",
   "vu": "2026-10-29T08:26+04:00"
  },
@@ -16527,7 +16527,7 @@
   "source": "HelloWork",
   "publie": "2026-10-06",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84149501.html",
   "vu": "2026-10-29T08:26+04:00"
  },
@@ -16561,7 +16561,7 @@
   "source": "HelloWork",
   "publie": "2026-10-06",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Commerce, vente",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84148822.html",
   "vu": "2026-10-29T08:26+04:00"
  },
@@ -16595,14 +16595,14 @@
   "source": "HelloWork",
   "publie": "2026-10-06",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Grande distribution",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84148818.html",
   "vu": "2026-10-29T08:26+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Aide Ménager",
+  "titre": "Aide Ménager",
   "entreprise": "Générale des Services",
   "secteur": "",
   "taille": "",
@@ -16637,7 +16637,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Auxiliaire de Vie",
+  "titre": "Auxiliaire de Vie",
   "entreprise": "Générale des Services",
   "secteur": "",
   "taille": "",
@@ -16673,7 +16673,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Mécanicien",
+  "titre": "Mécanicien",
   "entreprise": "Piriou",
   "secteur": "",
   "taille": "",
@@ -16708,7 +16708,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chargé d'Affaire Électricité",
+  "titre": "Chargé d'Affaire Électricité",
   "entreprise": "Bureau Veritas",
   "secteur": "",
   "taille": "",
@@ -16735,7 +16735,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84804039.html",
   "vu": "2026-10-29T08:26+04:00",
   "experience": "3 ans min."
@@ -16743,7 +16743,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef d'Équipe Chaudronnerie",
+  "titre": "Chef d'Équipe Chaudronnerie",
   "entreprise": "Piriou",
   "secteur": "",
   "taille": "",
@@ -16778,7 +16778,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Agent de Propreté",
+  "titre": "Agent de Propreté",
   "entreprise": "Aprolliance",
   "secteur": "",
   "taille": "",
@@ -16814,7 +16814,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Attache Commercial Societes La Réunion (47)",
+  "titre": "Attache Commercial Societes La Réunion (47)",
   "entreprise": "GBH",
   "secteur": "",
   "taille": "",
@@ -16847,7 +16847,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Comptable General La Réunion (47)",
+  "titre": "Comptable General La Réunion (47)",
   "entreprise": "GBH",
   "secteur": "",
   "taille": "",
@@ -16880,7 +16880,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Ssiad Sud Aide Soignant Île de la Réunion",
+  "titre": "Ssiad Sud Aide Soignant",
   "entreprise": "Croix-Rouge française",
   "secteur": "",
   "taille": "",
@@ -16914,7 +16914,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Opérateur Gestion des Réseaux F M X Saint-André la Réunion 974",
+  "titre": "Opérateur Gestion des Réseaux F M X Saint-André",
   "entreprise": "Groupe Saur",
   "secteur": "",
   "taille": "",
@@ -16948,7 +16948,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Ingénieur Spécialiste Calcul Performances sur A400m Atlas",
+  "titre": "Ingénieur Spécialiste Calcul Performances sur A400m Atlas",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -16983,7 +16983,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef d'Atelier La Réunion (47)",
+  "titre": "Chef d'Atelier La Réunion (47)",
   "entreprise": "GBH",
   "secteur": "",
   "taille": "",
@@ -17016,7 +17016,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Pilote de Chasse",
+  "titre": "Pilote de Chasse",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -17051,7 +17051,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Garde d'Enfants",
+  "titre": "Garde d'Enfants",
   "entreprise": "Assadia",
   "secteur": "",
   "taille": "",
@@ -17079,7 +17079,7 @@
   "source": "HelloWork",
   "publie": "2026-10-29",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "Social, services à la personne",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82791310.html",
   "vu": "2026-10-29T08:26+04:00",
   "experience": "2 ans"
@@ -17087,7 +17087,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Ingénieur Exploitation et Maintenance de Centrales Photovoltaïques",
+  "titre": "Ingénieur Exploitation et Maintenance de Centrales Photovoltaïques",
   "entreprise": "SUNZIL",
   "secteur": "",
   "taille": "",
@@ -17122,7 +17122,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDI Dessinateur Construction Métallique",
+  "titre": "Dessinateur Construction Métallique",
   "entreprise": "Groupe Briand",
   "secteur": "",
   "taille": "",
@@ -17149,7 +17149,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/83871076.html",
   "vu": "2026-10-29T08:26+04:00",
   "experience": "2 ans min."
@@ -17157,7 +17157,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Projet Hydraulique Urbaine",
+  "titre": "Chef de Projet Hydraulique Urbaine",
   "entreprise": "Oteis Conseil & Ingénierie",
   "secteur": "",
   "taille": "",
@@ -17192,7 +17192,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Sortie d'École Saint Paul 974",
+  "titre": "Sortie d'École Saint Paul",
   "entreprise": "Assadia",
   "secteur": "",
   "taille": "",
@@ -17228,7 +17228,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Pilote de Transport",
+  "titre": "Pilote de Transport",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -17263,7 +17263,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Pilote d'Hélicoptère",
+  "titre": "Pilote d'Hélicoptère",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -17298,7 +17298,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Navigateur",
+  "titre": "Navigateur",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -17333,7 +17333,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Infrastructure",
+  "titre": "Responsable Infrastructure",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -17368,7 +17368,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDI Gestionnaire RH",
+  "titre": "Gestionnaire RH",
   "entreprise": "BRED Banque Populaire",
   "secteur": "",
   "taille": "",
@@ -17402,7 +17402,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Projet Applicatif Si",
+  "titre": "Chef de Projet Applicatif Si",
   "entreprise": "GBH",
   "secteur": "",
   "taille": "",
@@ -17437,7 +17437,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef d'Atelier",
+  "titre": "Chef d'Atelier",
   "entreprise": "GBH",
   "secteur": "",
   "taille": "",
@@ -17472,7 +17472,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Commercial Terrain Btob 974",
+  "titre": "Commercial Terrain Btob",
   "entreprise": "Plus que pro",
   "secteur": "",
   "taille": "",
@@ -17506,7 +17506,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Médecin de Prélèvement Responsable Régional Prélèvement",
+  "titre": "Médecin de Prélèvement Responsable Régional Prélèvement",
   "entreprise": "EFS Etablissement Français du Sang",
   "secteur": "",
   "taille": "",
@@ -17532,14 +17532,14 @@
   "postuler": "https://www.hellowork.com/fr-fr/emplois/80615574.html",
   "source": "HelloWork",
   "publie": "2026-10-27",
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/80615574.html",
   "vu": "2026-10-29T08:26+04:00"
  },
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDI Chef de Projet ERP la Réunion",
+  "titre": "Chef de Projet ERP",
   "entreprise": "Externatic",
   "secteur": "",
   "taille": "",
@@ -17574,7 +17574,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Conseiller Commercial",
+  "titre": "Conseiller Commercial",
   "entreprise": "Groupement Interprofessionnel Européen d'Assurances (GIEA)",
   "secteur": "",
   "taille": "",
@@ -17607,7 +17607,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Comptable General",
+  "titre": "Comptable General",
   "entreprise": "GBH",
   "secteur": "",
   "taille": "",
@@ -17641,7 +17641,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Aide Ménager la Saline les Bains Poste Régulier",
+  "titre": "Aide Ménager la Saline les Bains Poste Régulier",
   "entreprise": "Assadia",
   "secteur": "",
   "taille": "",
@@ -17676,7 +17676,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Assistant Commercial",
+  "titre": "Assistant Commercial",
   "entreprise": "GBH",
   "secteur": "",
   "taille": "",
@@ -17710,7 +17710,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDI Responsable Réalisation Projet SIRH",
+  "titre": "Responsable Réalisation Projet SIRH",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -17745,7 +17745,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef d'Équipe Photovoltaïque",
+  "titre": "Chef d'Équipe Photovoltaïque",
   "entreprise": "SUNZIL",
   "secteur": "",
   "taille": "",
@@ -17772,7 +17772,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/81661363.html",
   "vu": "2026-10-29T08:26+04:00",
   "experience": "1 à 7 ans"
@@ -17780,7 +17780,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Secrétaire de Prestation",
+  "titre": "Secrétaire de Prestation",
   "entreprise": "Bastide Le Confort Médical",
   "secteur": "",
   "taille": "",
@@ -17815,7 +17815,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Aide Ménager",
+  "titre": "Aide Ménager",
   "entreprise": "Maison et Services",
   "secteur": "",
   "taille": "",
@@ -17851,7 +17851,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Femme de Ménage chez des Particuliers",
+  "titre": "Femme de Ménage chez des Particuliers",
   "entreprise": "SHIVA",
   "secteur": "",
   "taille": "",
@@ -17885,7 +17885,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Femme de Ménage chez des Particuliers",
+  "titre": "Femme de Ménage chez des Particuliers",
   "entreprise": "SHIVA",
   "secteur": "",
   "taille": "",
@@ -17919,7 +17919,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Femme de Ménage chez des Particuliers",
+  "titre": "Femme de Ménage chez des Particuliers",
   "entreprise": "SHIVA",
   "secteur": "",
   "taille": "",
@@ -17953,7 +17953,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Femme de Ménage chez des Particuliers",
+  "titre": "Femme de Ménage chez des Particuliers",
   "entreprise": "SHIVA",
   "secteur": "",
   "taille": "",
@@ -17987,7 +17987,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDD Equipier Parachutiste de l'Air",
+  "titre": "Equipier Parachutiste de l'Air",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -18022,7 +18022,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Ouvrier Électrotechnicien",
+  "titre": "Ouvrier Électrotechnicien",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -18057,7 +18057,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Femme de Ménage chez des Particuliers",
+  "titre": "Femme de Ménage chez des Particuliers",
   "entreprise": "SHIVA",
   "secteur": "",
   "taille": "",
@@ -18091,7 +18091,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Technico Commercial Interne",
+  "titre": "Technico Commercial Interne",
   "entreprise": "Vivre en Bois",
   "secteur": "",
   "taille": "",
@@ -18126,7 +18126,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDD Ouvrier de Maintenance Armement",
+  "titre": "Ouvrier de Maintenance Armement",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -18161,7 +18161,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDD Technicien Défense Sol-Air",
+  "titre": "Technicien Défense Sol-Air",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -18196,7 +18196,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDD Acheteur Public",
+  "titre": "Acheteur Public",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -18231,7 +18231,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDD Opérateur Planification et Conduite des Opérations Aériennes",
+  "titre": "Opérateur Planification et Conduite des Opérations Aériennes",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -18266,7 +18266,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Femme de Ménage chez des Particuliers",
+  "titre": "Femme de Ménage chez des Particuliers",
   "entreprise": "SHIVA",
   "secteur": "",
   "taille": "",
@@ -18300,7 +18300,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDD Gestionnaire RH",
+  "titre": "Gestionnaire RH",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -18336,7 +18336,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Technicien Systèmes Numériques",
+  "titre": "Technicien Systèmes Numériques",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -18371,7 +18371,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Conducteur de Travaux",
+  "titre": "Conducteur de Travaux",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -18406,7 +18406,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Femme de Ménage chez des Particuliers",
+  "titre": "Femme de Ménage chez des Particuliers",
   "entreprise": "SHIVA",
   "secteur": "",
   "taille": "",
@@ -18440,7 +18440,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDD Technicien Logistique",
+  "titre": "Technicien Logistique",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -18475,7 +18475,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDD Teleconseiller Assistance",
+  "titre": "Teleconseiller Assistance",
   "entreprise": "Allianz Partners",
   "secteur": "",
   "taille": "",
@@ -18509,7 +18509,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Achats",
+  "titre": "Responsable Achats",
   "entreprise": "GVH Partners",
   "secteur": "",
   "taille": "",
@@ -18543,7 +18543,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Dessinateur Projeteur Expérimenté",
+  "titre": "Dessinateur Projeteur Expérimenté",
   "entreprise": "Groupe Philippe Marraud",
   "secteur": "",
   "taille": "",
@@ -18569,7 +18569,7 @@
   "postuler": "https://www.hellowork.com/fr-fr/emplois/84699908.html",
   "source": "HelloWork",
   "publie": "2026-10-22",
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/84699908.html",
   "vu": "2026-10-29T08:26+04:00",
   "experience": "1 à 7 ans"
@@ -18577,7 +18577,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Gestionnaire Paie & ADP",
+  "titre": "Gestionnaire Paie & ADP",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -18613,7 +18613,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Adjoint de Production",
+  "titre": "Responsable Adjoint de Production",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -18649,7 +18649,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable de Production Industrielle",
+  "titre": "Responsable de Production Industrielle",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -18685,7 +18685,7 @@
  {
   "categorie": "alternance",
   "type": "offre",
-  "titre": "CDD Equipier Pompier de l'Air",
+  "titre": "Equipier Pompier de l'Air",
   "entreprise": "ARMEE DE L'AIR ET DE L'ESPACE",
   "secteur": "",
   "taille": "",
@@ -18719,7 +18719,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDD Médecin de Prélèvement",
+  "titre": "Médecin de Prélèvement",
   "entreprise": "EFS Etablissement Français du Sang",
   "secteur": "",
   "taille": "",
@@ -18745,14 +18745,14 @@
   "postuler": "https://www.hellowork.com/fr-fr/emplois/80615561.html",
   "source": "HelloWork",
   "publie": "2026-10-27",
-  "domaine": "Autres",
+  "domaine": "Santé",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/80615561.html",
   "vu": "2026-10-29T08:26+04:00"
  },
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Station d'Épuration",
+  "titre": "Responsable Station d'Épuration",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -18788,7 +18788,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Mécanicien Poids Lourds",
+  "titre": "Mécanicien Poids Lourds",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -18824,7 +18824,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable d'Affaires Électricité",
+  "titre": "Responsable d'Affaires Électricité",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -18852,7 +18852,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82710965.html",
   "vu": "2026-10-29T08:26+04:00",
   "experience": "5 ans min."
@@ -18860,7 +18860,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Directeur BE Structures & VRD",
+  "titre": "Directeur BE Structures & VRD",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -18888,7 +18888,7 @@
   "source": "HelloWork",
   "publie": "",
   "position_approx": true,
-  "domaine": "Autres",
+  "domaine": "BTP, construction",
   "id": "url:https://www.hellowork.com/fr-fr/emplois/82750065.html",
   "vu": "2026-10-29T08:26+04:00",
   "experience": "10 ans min."
@@ -18896,7 +18896,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Ingénieur Process Industriels",
+  "titre": "Ingénieur Process Industriels",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -18931,7 +18931,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable d'Affaires CVC",
+  "titre": "Responsable d'Affaires CVC",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -18967,7 +18967,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Service Mécanique",
+  "titre": "Responsable Service Mécanique",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -19003,7 +19003,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Conducteur Travaux Menuiserie Intérieure",
+  "titre": "Conducteur Travaux Menuiserie Intérieure",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -19039,7 +19039,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Supply Chain",
+  "titre": "Responsable Supply Chain",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -19075,7 +19075,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Adjoint Réseau & Toip",
+  "titre": "Responsable Adjoint Réseau & Toip",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -19111,7 +19111,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable des Opérations Informatiques",
+  "titre": "Responsable des Opérations Informatiques",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -19147,7 +19147,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Integration Lead",
+  "titre": "Integration Lead",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -19183,7 +19183,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Ingénieur Structure",
+  "titre": "Ingénieur Structure",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -19219,7 +19219,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Ingénieur Fluides",
+  "titre": "Ingénieur Fluides",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -19255,7 +19255,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Chef de Carrière Travaux Publics",
+  "titre": "Chef de Carrière Travaux Publics",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -19291,7 +19291,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Conducteur de Travaux Bâtiment",
+  "titre": "Conducteur de Travaux Bâtiment",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -19326,7 +19326,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Ingénieur Structure TCE",
+  "titre": "Ingénieur Structure TCE",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",
@@ -19362,7 +19362,7 @@
  {
   "categorie": "emploi",
   "type": "offre",
-  "titre": "CDI Responsable Services aux Adhérents",
+  "titre": "Responsable Services aux Adhérents",
   "entreprise": "LHH Recruitment Solutions",
   "secteur": "",
   "taille": "",

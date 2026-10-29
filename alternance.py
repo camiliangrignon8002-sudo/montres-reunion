@@ -206,17 +206,28 @@ DOMAINES = {
     "L": "Spectacle, sport", "M": "Gestion, administration", "N": "Transport, logistique",
 }
 INFORMATIQUE = "Informatique, numérique"
+GRANDE_DISTRIBUTION = "Grande distribution"
 MOTS_DOMAINES = [
-    (INFORMATIQUE, r"developpeur|informati|devops|reseau|cyber|web|logiciel|data|numerique|\bit\b|systeme"),
+    (GRANDE_DISTRIBUTION, r"caiss|libre.service|mise en rayon|grande surface|hypermarch|supermarch|employe commercial|"
+                          r"employe polyvalent de magasin|drive|leclerc|carrefour|super u|jumbo|score|leader price|run market|rayon|"
+                          r"chef de departement|manager de departement|boucher|charcut|poissonn"),
+    ("Santé", r"medecin|pediatre|geriatre|psycholog|\bide\b|ehpad|clinique|kinesi|orthophon|sage.femme|radiolog|ambulanc"),
+    (INFORMATIQUE, r"developpeur|informati|devops|reseau|cyber|web|logiciel|data|numerique|\bit\b|systeme|support des applications|"
+                   r"technicien support|administrateur sys"),
     ("Hôtellerie, restauration, tourisme", r"cuisin|serveu|restaura|hotel|barman|boulang|patiss|commis|plonge|receptionn|touris"),
-    ("Commerce, vente", r"vend|commerc|caiss|magasin|employe libre|boutique|conseiller client|e.commerce|merchand"),
-    ("BTP, construction", r"macon|electricien|plomb|btp|chantier|charpent|menuisi|peintre|carrel|couvreur|conducteur de travaux|genie civil"),
+    ("Commerce, vente", r"vend|vente|station.service|franchis|commerc|caiss|magasin|employe libre|boutique|conseiller client|e.commerce|merchand"),
+    ("BTP, construction", r"macon|electricien|electricite|plomb|btp|chantier|charpent|menuisi|peintre|carrel|couvreur|conducteur de travaux|genie civil|"
+                          r"construction|architect|dessinateur|projeteur|poseur|photovolta|fondation|maitrise d.oeuvre|"
+                          r"renovation|installateur|metallerie|etudes de prix|monteur|terrassi|vrd|geometre"),
     ("Mécanique, maintenance", r"mecani|maintenance|carross|vehicule|automobile|garage|technicien de maintenance|frigorist|climatisation"),
-    ("Transport, logistique", r"chauffeur|livreu|logisti|cariste|preparateur de commandes|entrepot|transport|manutention"),
+    ("Transport, logistique", r"chauffeur|livreu|logisti|cariste|preparateur de commande|entrepot|transport|manutention|magasinier"),
     ("Santé", r"infirmi|aide.soignant|pharmac|medical|sante|kine|dentaire|opticien|laborantin"),
-    ("Social, services à la personne", r"aide a domicile|auxiliaire de vie|educat|animat|petite enfance|aesh|atsem|nettoyage|menage|agent d.entretien|coiff|esthetic|securite|agent de surete"),
+    ("Social, services à la personne", r"aide a domicile|auxiliaire de vie|educat|animat|petite enfance|aesh|atsem|nettoyage|menage|agent d.entretien|coiff|esthetic|"
+                                         r"securite|agent de surete|garde d.enfant|socio|social|accompagnant"),
     ("Banque, assurance, immobilier", r"banque|bancaire|assuran|immobili|credit|conseiller financier"),
-    ("Gestion, administration", r"comptab|assistant|administrati|ressources humaines|\brh\b|secretair|gestion|paie|juridique|accueil|marketing|achat"),
+    ("Gestion, administration", r"comptab|assistant|administrati|ressources humaines|\brh\b|secretair|gestion|paie|juridique|juriste|accueil|marketing|achat|"
+                                  r"audit|chef de mission|cabinet|expertise|portefeuille|dossiers|directeur d.agence|charge d.affaires|"
+                                  r"commercial|business developer|controle de gestion"),
     ("Communication, médias", r"communication|graphis|journalis|community manager|audiovisu|redact"),
     ("Agriculture, nature", r"agricol|agricult|paysag|jardin|espaces verts|elevage|horticul|maraich"),
     ("Industrie", r"industri|production|operateur|usine|soudeu|chaudronn|agroalimentaire|qualite"),
@@ -230,6 +241,8 @@ def domaine_de(romes, *textes):
         r = str(r).upper()
         if r.startswith("M18"):  # systèmes d'information
             return INFORMATIQUE
+        if r.startswith(("D1505", "D1507", "D1106")):  # caisse, mise en rayon, vente en alimentation
+            return GRANDE_DISTRIBUTION
         if r[:1] in DOMAINES:
             return DOMAINES[r[:1]]
     n = norm(" ".join(t or "" for t in textes))
@@ -612,16 +625,23 @@ def texte_principal(h):
     return texte[:4000] if len(texte) > 150 else ""
 
 
+def nettoyer_titre(titre):
+    t = re.sub(r"\s+-\s+Recrutement (?:par|en [^-]+ par)\s+.+$", "", titre)
+    t = re.sub(r"^(?:Offre (?:d.)?(?:[Ee]mploi|[Aa]lternance|[Ss]tage)|Mission d.[Ii]ntérim|CDI|CDD|Job|Intérim)\s+", "", t)
+    noms = sorted(list(COMMUNES) + ["Sainte-Clotilde", "Saint-Gilles", "La Réunion", "Réunion", "Le Tampon", "Tampon", "Île de la Réunion", "Ile de la Réunion"], key=len, reverse=True)
+    t = re.sub(r"\s+(?:" + "|".join(re.escape(c) for c in noms) + r")?\s*[-–]?\s*\(?97\d*\)?\s*(?:\(Le\))?$", "", t, flags=re.I)
+    t = re.sub(r"\s+(?:en )?(?:Île|Ile) de la Réunion$|\s+(?:à |sur |en )?(?:la )?Réunion(?: 974)?$", "", t, flags=re.I)
+    t = re.sub(r"\s+(?:en )?(?:CDI|CDD)$", "", t)
+    return t.strip(" -–") or titre
+
+
 def depuis_page(h, url, site):
     """Offre lue sans JobPosting : titre et description de la page, commune d'après le texte."""
     titre = meta_page(h, "og:title") or propre((re.search(r"<title>(.*?)</title>", h or "", re.S | re.I) or [None, ""])[1])
     titre = re.split(r"\s+[|–-]\s+(?:HelloWork|Meteojob|ParuVendu|Domtomemploi|la-mairie|La Mairie)", titre, flags=re.I)[0]
     titre_brut = titre
     ent_titre = re.search(r"\s+-\s+Recrutement par\s+(.+)$", titre)
-    titre = re.sub(r"\s+-\s+Recrutement par\s+.+$", "", titre)
-    titre = re.sub(r"^Offre (?:d.)?[Ee]mploi\s+", "", titre)
-    noms = sorted(list(COMMUNES) + ["Sainte-Clotilde", "Saint-Gilles", "La Réunion", "Réunion", "Le Tampon", "Tampon"], key=len, reverse=True)
-    titre = re.sub(r"\s+(?:" + "|".join(re.escape(c) for c in noms) + r")?\s*\(97\d*\)\s*$", "", titre, flags=re.I).strip()  # « … Saint-Paul (97) »
+    titre = nettoyer_titre(titre)
     description = meta_page(h, "og:description") or meta_page(h, "description")
     if re.match(r"D[ée]couvrez l.offre", description):
         description = ""
@@ -849,6 +869,7 @@ FIN_TEXTE = re.compile(r"^(?:Publiée le|Finalisez votre candidature|• (?:Job|
 
 def affiner(a):
     """Retire de la description le code de la page et les boutons du site, et en tire salaire, expérience, date…"""
+    a["titre"] = nettoyer_titre(a["titre"])
     lignes = [l.strip() for l in (a.get("description") or "").split("\n") if l.strip()]
     if not lignes:
         return a
@@ -1047,6 +1068,9 @@ def main():
             sources_ok += sorted({a["source"] for a in trouvees} - set(sources_ok)) if fonction in (sites_emploi, alertes_email) else [nom]
         toutes += trouvees
     gardees = sans_doublons([a for a in toutes if a["titre"] and a["entreprise"] and dans_une_zone(a)])
+    for a in gardees:
+        if a["type"] == "offre" and a["domaine"] in ("Commerce, vente", "Autres"):
+            a["domaine"] = domaine_de(None, a["titre"], a["secteur"]) if domaine_de(None, a["titre"], a["secteur"]) != "Autres" else a["domaine"]
     maintenant = datetime.now(REUNION)
     premiere_fois = not vus  # au tout premier passage, tout est « nouveau » : on ne notifie pas
     en_ligne = set()
