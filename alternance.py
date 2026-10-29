@@ -914,6 +914,63 @@ def affiner(a):
 # ---------------------------------------------------------------- informations utiles à la recherche
 
 HEURES_MOIS = 151.67
+# BTS cités dans une annonce (texte sans accents, en minuscules)
+G = r"\W(?:[^.;\n]{0,28}?\W)?"  # « bts », « bts en », « bts/dut en », « bts (option) »…
+BTS = {
+    "BTS MCO": rf"bts{G}(?:mco|muc|management commercial)|management commercial operationnel",
+    "BTS NDRC": rf"bts{G}(?:ndrc|nrc|negociation)|negociation et digitalisation de la relation client",
+    "BTS GPME": rf"bts{G}(?:gpme|pme)\b|gestion de la pme",
+    "BTS SAM": rf"bts{G}(?:sam\b|assistant manager|support a l.action)|support a l.action manageriale",
+    "BTS CG": rf"bts{G}(?:cg\b|compta)|comptabilite et gestion",
+    "BTS SIO": rf"bts{G}(?:sio\b|informatique)|services informatiques aux organisations",
+    "BTS CIEL (électronique)": rf"bts{G}(?:ciel|electronique|systemes numeriques|\bsn\b)",
+    "BTS Banque": rf"bts{G}(?:banque|bancaire|conseiller de clientele)",
+    "BTS Assurance": rf"bts{G}assurance",
+    "BTS Professions immobilières": rf"bts{G}(?:pi\b|immobili)|professions immobilieres",
+    "BTS Tourisme": rf"bts{G}tourisme",
+    "BTS MHR": rf"bts{G}(?:mhr|hotel|restauration)|management en hotellerie.restauration",
+    "BTS Commerce international": rf"bts{G}(?:ci\b|commerce international)",
+    "BTS GTLA": rf"bts{G}(?:gtla|transport|logistique)|gestion des transports et logistique",
+    "BTS Maintenance des systèmes": rf"bts{G}(?:ms\b|crsa|maintenance (?:des systemes|industrielle))",
+    "BTS Électrotechnique": rf"bts{G}electrotechni",
+    "BTS FED (fluides, énergies)": rf"bts{G}(?:fed\b|fluides|genie climatique|energie)",
+    "BTS CPRP (mécanique)": rf"bts{G}(?:cprp|cpi\b|mecanique|productique|conception)",
+    "BTS Bâtiment et travaux publics": rf"bts{G}(?:batiment|travaux publics|tp\b|smb|etude et realisation|construction)",
+    "BTS MEC (économiste de la construction)": rf"bts{G}(?:mec\b|eec\b|economi\w* de la construction)",
+    "BTS Maintenance des véhicules": rf"bts{G}(?:mv\b|maintenance des vehicules|apres.vente auto)",
+    "BTS Métiers de l'eau": rf"bts{G}(?:gemeau|metiers de l.eau)",
+    "BTS ABM (analyses biologiques)": rf"bts{G}(?:abm|analyses? biologi|bioanalyses)",
+    "BTS SP3S": rf"bts{G}sp3s|services et prestations des secteurs sanitaire",
+    "BTS ESF": rf"bts{G}esf\b|economie sociale familiale",
+    "BTS Communication": rf"bts{G}communication",
+    "BTS Audiovisuel": rf"bts{G}audiovisuel",
+    "BTS Opticien lunetier": rf"bts{G}opticien|opticien.lunetier",
+    "BTS Diététique": rf"bts{G}dietetique",
+}
+# BUT (bachelor universitaire de technologie) : « but » est aussi un mot courant, d'où un écart plus court
+U = r"\b(?:but|dut|b\.u\.t\.?|bachelor universitaire de technologie)\W{1,3}(?:en |de |specialite |parcours |mention )?"
+BTS.update({
+    "BUT GEA": rf"{U}(?:gea\b|gestion des entreprises)",
+    "BUT TC": rf"{U}(?:tc\b|techniques de commercialisation)",
+    "BUT GACO": rf"{U}(?:gaco\b|gestion administrative et commerciale)",
+    "BUT Informatique": rf"{U}informatique",
+    "BUT R&T": rf"{U}(?:r\W?t\b|reseaux et telecom)",
+    "BUT GEII": rf"{U}(?:geii\b|genie electrique)",
+    "BUT GMP": rf"{U}(?:gmp\b|genie mecanique)",
+    "BUT GIM": rf"{U}(?:gim\b|genie industriel et maintenance)",
+    "BUT GCCD": rf"{U}(?:gccd\b|genie civil)",
+    "BUT MT2E": rf"{U}(?:mt2e\b|transition et (?:de l.)?efficacite energetique|genie (?:thermique|climatique))",
+    "BUT QLIO": rf"{U}(?:qlio\b|qualite.{{0,5}}logistique industrielle)",
+    "BUT MLT": rf"{U}(?:mlt\b|management de la logistique)",
+    "BUT HSE": rf"{U}(?:hse\b|hygiene.{{0,5}}securite)",
+    "BUT MMI": rf"{U}(?:mmi\b|metiers du multimedia)",
+    "BUT Info-Com": rf"{U}(?:info.?com\b|information.communication)",
+    "BUT Carrières juridiques": rf"{U}(?:cj\b|carrieres juridiques)",
+    "BUT Carrières sociales": rf"{U}(?:cs\b|carrieres sociales)",
+    "BUT Génie biologique": rf"{U}(?:gb\b|genie biologique)",
+    "BUT Chimie": rf"{U}chimie",
+    "BUT Science des données": rf"{U}(?:sd\b|science des donnees|stid)",
+})
 ARNAQUE = re.compile(r"frais d.(?:inscription|dossier|formation) (?:à|a) (?:votre|ta) charge|western union|mandat cash|"
                      r"transcash|carte (?:pcs|neosurf)|virement (?:préalable|avant)|chèque de caution|caution à verser|"
                      r"achat (?:de|du) (?:kit|matériel) (?:à|a) (?:vos|tes) frais|payer (?:pour|avant) (?:commencer|travailler)|"
@@ -951,6 +1008,7 @@ def enrichir(a):
         not re.search(r"\b35 ?h", texte)
     a["permis"] = bool(re.search(r"permis b (?:obligatoire|exige|indispensable|requis)|permis (?:obligatoire|exige|indispensable)|vehicule (?:obligatoire|exige|indispensable)|etre vehicule", texte))
     a["vigilance"] = bool(ARNAQUE.search(" ".join([a["titre"], a.get("description") or ""])))
+    a["diplomes"] = [k for k, motif in BTS.items() if re.search(motif, texte)]
     return a
 
 

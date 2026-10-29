@@ -159,6 +159,8 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 @media (prefers-color-scheme:dark){.dom:hover .carre{background:#1f1f1f}}
 .offre .salaire{font-size:15px;font-weight:600;color:var(--texte)}
 .offre .atout{font-size:13.5px;color:var(--vert);display:flex;align-items:center;gap:4px}
+.offre .atout.bts{color:var(--or);font-weight:600}
+.offre .atout.bts.doux{font-weight:500}
 .offre.vue h3{color:#4a4a4a}
 @media (prefers-color-scheme:dark){.offre.vue h3{color:#bdbdbd}}
 .compte{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;justify-content:space-between}
@@ -427,7 +429,7 @@ function ecrire(cle, v) { try { localStorage.setItem(cle, JSON.stringify(v)); } 
 function toast(t) { document.querySelectorAll(".toast").forEach(x => x.remove()); const d = document.createElement("div"); d.className = "toast"; d.textContent = t; document.body.append(d); setTimeout(() => d.remove(), 3200); }
 
 const F = Object.assign({section: "alternance", type: "", niveau: "", domaine: "", rayon: 70, q: "", tri: "recent",
-  debutant: false, salaire: false, teletravail: false, sansPermis: false, partiel: false, depuis: 0, salMin: 0}, lire("alt974-filtres", {}));
+  debutant: false, salaire: false, teletravail: false, sansPermis: false, partiel: false, depuis: 0, salMin: 0, bts: ""}, lire("alt974-filtres", {}));
 let MASQUEES = lire("alt974-masquees", {});
 let VUES = lire("alt974-vues", {});
 const nbFiltres = () => [F.debutant, F.salaire, F.teletravail, F.sansPermis, F.partiel, F.depuis, F.salMin].filter(Boolean).length;
@@ -500,6 +502,7 @@ function puces() {  // onglets, titre et barre de filtres
   const typeLab = (TYPES[F.section].find(x => x[0] === F.type) || [])[1];
   $("#filtres").innerHTML = [
     `<button data-f="domaine" class="${F.domaine ? "actif" : ""}">${lab("Domaine", F.domaine)} ${chev}</button>`,
+    `<button data-f="bts" class="${F.bts ? "actif" : ""}">${F.bts ? esc(F.bts) : "Mon diplôme"} ${chev}</button>`,
     `<button data-f="type" class="${F.type ? "actif" : ""}">${F.type ? typeLab.replace(/<svg.*?<\/svg>\s*/g, "") : "Type"} ${chev}</button>`,
     F.section === "alternance" ? `<button data-f="niveau" class="${F.niveau ? "actif" : ""}">${lab("Niveau", F.niveau)} ${chev}</button>` : "",
     `<button data-f="lieu" class="${POS && F.rayon < 70 ? "actif" : ""}">${POS && F.rayon < 70 ? `${F.rayon} km · ${esc(POS.nom)}` : "Autour de moi"} ${chev}</button>`,
@@ -535,6 +538,7 @@ $("#filtres").onclick = e => {
   else if (f === "tri") choix("Trier par", TRIS, F.tri, v => { if (v === "proche" && !POS) { toast("Choisis d'abord ta position ou ta commune"); return; } F.tri = v; });
   else if (f === "lieu") panneauLieu();
   else if (f === "filtres") panneauFiltres();
+  else if (f === "bts") panneauBts();
   else if (f === "vue") { VUE = VUE === "carte" ? "liste" : "carte"; $("#liste").hidden = VUE !== "liste"; $("#carte").hidden = VUE !== "carte"; puces(); afficher(); }
 };
 document.querySelector(".guide-cartes").onclick = e => { const b = e.target.closest("[data-g]"); if (b) panneauGuide(b.dataset.g); };
@@ -547,7 +551,10 @@ $("#b-lieu").onclick = () => panneauLieu();
 addEventListener("scroll", () => $(".bandeau").classList.toggle("colle", scrollY > 4), {passive: true});
 $("#q").value = F.q; if (F.q) $("#cherche").hidden = false;
 let qMinuterie;
-$("#q").oninput = e => { clearTimeout(qMinuterie); qMinuterie = setTimeout(() => { F.q = e.target.value; LIMITE = 30; sauver(); afficher(); suggestions(); }, 140); };
+$("#q").oninput = e => { clearTimeout(qMinuterie); qMinuterie = setTimeout(() => {
+  const m = BTS.find(([k]) => norm(k.replace(/ \(.*\)/, "")) === norm(e.target.value.trim()));
+  if (m) { F.bts = m[0]; F.q = ""; e.target.value = ""; sauver(); puces(); afficher(); suggestions(); toast(`Offres pour le ${m[0]}`); return; }
+  F.q = e.target.value; LIMITE = 30; sauver(); afficher(); suggestions(); }, 140); };
 
 function panneauFiltres() {
   const ligne = (k, t, sous) => `<label class="bascule"><span><b>${t}</b>${sous ? `<small>${sous}</small>` : ""}</span><input type="checkbox" data-k="${k}" ${F[k] ? "checked" : ""}><i></i></label>`;
@@ -589,6 +596,7 @@ function filtrees() {
     if (F.partiel && !a.temps_partiel) continue;
     if (F.sansPermis && a.permis) continue;
     if (F.depuis && joursDepuis(a) > F.depuis) continue;
+    if (F.bts && !(a._bts = scoreBts(a, F.bts))) continue;
     if (F.type === "masquees" ? false : F.type === "fav" ? !FAV[a.id] : F.type === "cand" ? !CAND[a.id] :
         F.type && (F.section === "emploi" ? !a.contrats.includes(F.type) : a.type !== F.type)) continue;
     if (F.domaine && (a.domaine || "Autres") !== F.domaine) continue;
@@ -602,9 +610,83 @@ function filtrees() {
   }
   // les offres d'abord ; les plus récentes en tête (ou les plus proches si choisi)
   const quand = a => (a.publie || (a.vu || "").slice(0, 10)) + (a.vu || "");
-  res.sort((x, y) => (x.type !== "offre") - (y.type !== "offre") ||
+  res.sort((x, y) => (x.type !== "offre") - (y.type !== "offre") || (F.bts ? (y._bts || 0) - (x._bts || 0) : 0) ||
     (F.tri === "proche" && POS ? (x._d ?? 999) - (y._d ?? 999) : F.tri === "salaire" ? (y.salaire_mois || 0) - (x.salaire_mois || 0) || quand(y).localeCompare(quand(x)) : quand(y).localeCompare(quand(x))));
   return res;
+}
+
+/* ---------- mon BTS : offres qui le citent, puis métiers qui y correspondent ---------- */
+const BTS = [
+  ["BTS MCO", "Management commercial opérationnel", /vend|conseill\w* (?:de |en )?vente|employe commercial|employe libre|rayon|adjoint\w* (?:de |au )?(?:magasin|responsable|manager)|manager (?:de |d.)?(?:magasin|rayon|boutique|departement|univers)|responsable (?:de )?(?:magasin|boutique|rayon|point de vente|secteur)|chef de (?:rayon|departement|secteur)|commerce|merchandis|e.commerce|drive/],
+  ["BTS NDRC", "Négociation et digitalisation de la relation client", /commercial|negociat|charge\w* de clientele|conseiller client|relation client|technico.commercial|business developer|prospect|teleconseil|televend|account|charge\w* d.affaires|attache commercial/],
+  ["BTS GPME", "Gestion de la PME", /assistant\w* (?:de )?gestion|assistant\w* administrati|gestionnaire administrati|assistant\w* (?:de )?direction|secretair|assistant\w* (?:polyvalent|de pme|commercial)|agent administrati|office manager|accueil/],
+  ["BTS SAM", "Support à l'action managériale", /assistant\w* (?:de )?(?:direction|manager|ressources humaines|rh)|office manager|secretair|assistant\w* administrati|charge\w* (?:de )?(?:recrutement|rh)|gestionnaire rh/],
+  ["BTS CG", "Comptabilité et gestion", /compta|paie|gestionnaire (?:de )?paie|collaborateur comptable|aide.comptable|controle de gestion|tresorer|audit|fiscal|facturation|recouvrement/],
+  ["BTS SIO", "Services informatiques aux organisations", /develop|informati|support (?:informatique|technique|utilisateur)|helpdesk|technicien (?:systeme|reseau|informatique|support)|administrateur (?:systeme|reseau)|devops|cyber|web|data|logiciel|applicati/],
+  ["BTS CIEL (électronique)", "Cybersécurité, informatique et réseaux, électronique", /electroni|reseau|telecom|fibre|domoti|cyber|technicien (?:informatique|reseau|systeme)|courant faible|alarme|videosurveillance/],
+  ["BTS Banque", "Conseiller de clientèle (particuliers)", /bancaire|banque|conseiller (?:de )?clientele|charge\w* de clientele|conseiller financier|guichet|credit/],
+  ["BTS Assurance", "Assurance", /assuran|sinistre|mutuelle|prevoyance|souscript|courtier/],
+  ["BTS Professions immobilières", "Professions immobilières", /immobili|negociat\w* immobili|gestionnaire locati|syndic|agent immobili|transaction|etats? des lieux|copropriet|bailleur/],
+  ["BTS Tourisme", "Tourisme", /touris|voyage|reception|accueil|guide|animat\w* (?:touristique|de loisirs)|billet|croisiere|evenement/],
+  ["BTS MHR", "Management en hôtellerie-restauration", /cuisin|commis|serveu|chef de rang|maitre d.hotel|reception|hotel|restaura|barman|patiss|plonge|room service|gouvernant|employe polyvalent de restauration/],
+  ["BTS Commerce international", "Commerce international", /export|import|international|transit|douane|achat|approvisionn|supply/],
+  ["BTS GTLA", "Gestion des transports et logistique", /logisti|transport|exploitant|transit|entrepot|magasinier|preparateur de commande|cariste|supply|flux|affreteur|planificat/],
+  ["BTS Maintenance des systèmes", "Maintenance des systèmes", /maintenance|electromecani|technicien (?:de )?(?:maintenance|industriel)|automatisme|automaticien|frigorist|depannage|mecanicien industriel/],
+  ["BTS Électrotechnique", "Électrotechnique", /electri|electrotech|cablage|courant fort|photovolta|automaticien|technicien (?:electrique|industriel)|tableautier/],
+  ["BTS FED (fluides, énergies)", "Fluides, énergies, domotique", /cvc|climati|chauffag|plomb|fluide|energi|frigorist|thermique|ventilation|photovolta|solaire/],
+  ["BTS CPRP (mécanique)", "Conception des processus de réalisation de produits", /mecani\w* (?:industriel|generale)|usinage|fraiseur|tourneur|soud|chaudronn|methodes|production|technicien industriel|metallerie/],
+  ["BTS Bâtiment et travaux publics", "Bâtiment, travaux publics", /conducteur de travaux|chef de chantier|chantier|btp|batiment|travaux publics|metreur|dessinateur|projeteur|macon|coffreur|terrassi|vrd|genie civil|chef d.equipe/],
+  ["BTS MEC (économiste de la construction)", "Management économique de la construction", /econom\w* de la construction|metreur|etudes? de prix|chiffr|devis|conducteur de travaux/],
+  ["BTS Maintenance des véhicules", "Maintenance des véhicules", /mecani|automobile|vehicule|garag|carross|technicien (?:apres.vente|auto)|poids lourds?|pneu|controle technique|reception\w* atelier|chef d.atelier/],
+  ["BTS Métiers de l'eau", "Métiers de l'eau", /\beau\b|eaux|assainissement|station d.epuration|traitement des eaux|hydraul|canalisat|reseaux humides/],
+  ["BTS ABM (analyses biologiques)", "Analyses de biologie médicale", /laboratoire|laborantin|analyses?|biolog|technicien de laboratoire|qualite|controle qualite/],
+  ["BTS SP3S", "Services et prestations des secteurs sanitaire et social", /social|sanitaire|accueil (?:social|sante)|mediat|conseiller (?:en )?insertion|secretair\w* medical|assistant\w* medical|coordinat\w* (?:social|sante)|mutuelle|ehpad/],
+  ["BTS ESF", "Économie sociale familiale", /social|famil|insertion|accompagn|conseiller en economie|logement social|aide a domicile/],
+  ["BTS Communication", "Communication", /communication|community manager|marketing|graphis|redact|evenement|reseaux sociaux|chargee? de projet digital|webmarketing/],
+  ["BTS Audiovisuel", "Métiers de l'audiovisuel", /audiovisuel|video|montage|cadreur|son\b|production|realisat|motion design/],
+  ["BTS Opticien lunetier", "Opticien lunetier", /optic|lunet|lentill/],
+  ["BTS Diététique", "Diététique", /dieteti|nutrition|restauration collective|cuisine centrale/],
+  ["BUT GEA", "Gestion des entreprises et des administrations", /compta|paie|gestion|assistant\w* (?:de )?(?:gestion|direction|administrati)|ressources humaines|\brh\b|controle de gestion|audit|tresorer|finance|charge\w* de recrutement/],
+  ["BUT TC", "Techniques de commercialisation", /commercial|vend|vente|marketing|charge\w* de clientele|business developer|negociat|chef de (?:rayon|secteur|produit)|manager (?:de )?(?:magasin|rayon)|e.commerce|account|achat/],
+  ["BUT GACO", "Gestion administrative et commerciale des organisations", /assistant\w* (?:de )?(?:gestion|direction|administrati|commercial)|gestionnaire|commercial|office manager|secretair|accueil|adjoint\w* (?:de )?(?:magasin|direction)/],
+  ["BUT Informatique", "Informatique", /develop|informati|logiciel|web|data|devops|applicati|cyber|support|systeme|integrat/],
+  ["BUT R&T", "Réseaux et télécommunications", /reseau|telecom|fibre|cyber|technicien (?:reseau|systeme|informatique)|administrateur|infrastructure|support/],
+  ["BUT GEII", "Génie électrique et informatique industrielle", /electri|electroni|automatism|automaticien|informatique industriel|technicien (?:industriel|electrique|maintenance)|photovolta|domoti/],
+  ["BUT GMP", "Génie mécanique et productique", /mecani\w* (?:industriel|generale)|conception|dessinateur|bureau d.etudes|methodes|production|usinage|industrialisation|technicien industriel/],
+  ["BUT GIM", "Génie industriel et maintenance", /maintenance|electromecani|technicien (?:de )?(?:maintenance|industriel)|automaticien|frigorist|depannage/],
+  ["BUT GCCD", "Génie civil, construction durable", /conducteur de travaux|chef de chantier|chantier|btp|batiment|genie civil|travaux publics|metreur|economiste de la construction|etudes? de prix|projeteur|dessinateur|vrd|bureau d.etudes/],
+  ["BUT MT2E", "Transition et efficacité énergétiques", /energi|thermique|cvc|climati|chauffag|photovolta|solaire|fluide|efficacite|renovation energetique/],
+  ["BUT QLIO", "Qualité, logistique industrielle et organisation", /qualite|logisti|supply|planificat|approvisionn|methodes|production|amelioration continue|lean/],
+  ["BUT MLT", "Management de la logistique et des transports", /logisti|transport|exploitant|transit|entrepot|supply|affreteur|planificat|flux|magasinier|douane/],
+  ["BUT HSE", "Hygiène, sécurité, environnement", /\bhse\b|\bqse\b|securite|prevention|environnement|hygiene|qualite|risques/],
+  ["BUT MMI", "Métiers du multimédia et de l'internet", /web|graphis|communication|community manager|ux|ui\b|design|video|montage|motion|developpeur web|marketing digital|reseaux sociaux/],
+  ["BUT Info-Com", "Information-communication", /communication|journalis|redact|community manager|marketing|evenement|relations presse|documentali|chargee? de projet/],
+  ["BUT Carrières juridiques", "Carrières juridiques", /juridi|juriste|notari|clerc|droit|contentieux|assistant\w* (?:juridique|de justice)|huissier|commissaire de justice|recouvrement/],
+  ["BUT Carrières sociales", "Carrières sociales", /social|animat|educat|insertion|mediat|accompagn|jeunesse|coordinat|socio/],
+  ["BUT Génie biologique", "Génie biologique", /laborat|biolog|analyses?|agroalimentaire|qualite|environnement|dieteti|hygiene/],
+  ["BUT Chimie", "Chimie", /chimi|laborat|analyses?|qualite|traitement des eaux|production/],
+  ["BUT Science des données", "Science des données", /data|donnees|statisti|analyste|business intelligence|\bbi\b|reporting/],
+];
+const BTS_RX = Object.fromEntries(BTS.map(([k, , rx]) => [k, rx]));
+// 2 : l'offre cite le BTS ; 1 : le métier correspond au BTS ; 0 : rien
+function scoreBts(a, bts) {
+  if ((a.diplomes || []).includes(bts)) return 2;
+  return BTS_RX[bts] && BTS_RX[bts].test(a._tn || (a._tn = norm(a.titre))) ? 1 : 0;
+}
+function panneauBts(groupe) {
+  const comptes = {};
+  for (const a of OFFRES) if (dansSection(a) && !MASQUEES[a.id]) for (const [k] of BTS) if (scoreBts(a, k)) comptes[k] = (comptes[k] || 0) + 1;
+  groupe = groupe || (F.bts.startsWith("BUT") ? "BUT" : "BTS");
+  const opt = ([k, nom]) => `<button class="opt ${F.bts === k ? "actif" : ""}" data-v="${esc(k)}"><span>${esc(k)}<br><small style="font-size:13px">${esc(nom)}</small></span><small>${comptes[k] || 0}</small>${ic("coche", "marque")}</button>`;
+  ouvrir(`${barre("Mon diplôme")}
+    <div class="segments" id="d-groupe" style="margin-bottom:12px"><button data-g="BTS" class="${groupe === "BTS" ? "actif" : ""}">BTS</button><button data-g="BUT" class="${groupe === "BUT" ? "actif" : ""}">BUT</button></div>
+    <p class="aide" style="margin:0 2px 10px">Choisis ton ${groupe} : tu verras d'abord les offres qui le demandent, puis les ${F.section === "emploi" ? "emplois" : "alternances"} dont le métier lui correspond.</p>
+    <div class="opts">
+      <button class="opt ${F.bts ? "" : "actif"}" data-v=""><span>Tous les diplômes</span>${ic("coche", "marque")}</button>
+      ${BTS.filter(([k]) => k.startsWith(groupe)).map(opt).join("")}
+    </div>`);
+  $("#d-groupe").onclick = e => { const b = e.target.closest("[data-g]"); if (b) panneauBts(b.dataset.g); };
+  $("#feuille").querySelector(".opts").onclick = e => { const b = e.target.closest("[data-v]"); if (!b) return; F.bts = b.dataset.v; sauver(); puces(); afficher(); fermer(); };
 }
 
 /* ---------- filtres actifs, suggestions, onglets du bas, mon espace ---------- */
@@ -612,6 +694,7 @@ function filtresActifs() {
   const x = ic("croix");
   const l = [];
   if (F.q) l.push(["q", `« ${esc(F.q)} »`]);
+  if (F.bts) l.push(["bts", esc(F.bts)]);
   if (F.domaine) l.push(["domaine", esc(COURT[F.domaine] || F.domaine)]);
   if (F.type) l.push(["type", F.type === "masquees" ? "Offres masquées" : esc(((TYPES[F.section].find(t => t[0] === F.type) || [])[1] || F.type).replace(/<svg.*?<\/svg>\s*/g, ""))]);
   if (F.niveau && F.section === "alternance") l.push(["niveau", esc(F.niveau)]);
@@ -627,18 +710,19 @@ function filtresActifs() {
 }
 $("#actifs").onclick = e => {
   const b = e.target.closest("[data-retirer]"); if (!b) return;
-  const k = b.dataset.retirer, vide = {q: "", domaine: "", type: "", niveau: "", debutant: false, salaire: false, salMin: 0, teletravail: false, partiel: false, sansPermis: false, depuis: 0};
+  const k = b.dataset.retirer, vide = {q: "", bts: "", domaine: "", type: "", niveau: "", debutant: false, salaire: false, salMin: 0, teletravail: false, partiel: false, sansPermis: false, depuis: 0};
   if (k === "tout") { Object.assign(F, vide, {rayon: 70}); $("#q").value = ""; }
   else if (k === "lieu") F.rayon = 70;
   else { F[k] = vide[k]; if (k === "q") $("#q").value = ""; }
   sauver(); puces(); afficher();
 };
-const IDEES = ["Vendeur", "Commercial", "Assistant", "Comptable", "Cuisine", "Serveur", "Mécanicien", "Aide-soignant", "Informatique", "Électricien", "Accueil", "Logistique", "Coiffure", "Petite enfance"];
+const IDEES = ["Mon BTS", "Mon BUT", "Vendeur", "Commercial", "Assistant", "Comptable", "Cuisine", "Serveur", "Mécanicien", "Aide-soignant", "Informatique", "Électricien", "Accueil", "Logistique", "Coiffure", "Petite enfance"];
 function suggestions() {
   const z = $("#suggestions"); if (!z) return;
   z.innerHTML = F.q ? "" : IDEES.map(t => `<button data-idee="${esc(t)}">${esc(t)}</button>`).join("");
 }
-$("#suggestions").onclick = e => { const b = e.target.closest("[data-idee]"); if (!b) return; $("#q").value = F.q = b.dataset.idee; sauver(); afficher(); suggestions(); $("#liste").scrollIntoView({block: "start"}); };
+$("#suggestions").onclick = e => { const b = e.target.closest("[data-idee]"); if (!b) return;
+  if (b.dataset.idee === "Mon BTS" || b.dataset.idee === "Mon BUT") { panneauBts(b.dataset.idee.slice(4)); return; } $("#q").value = F.q = b.dataset.idee; sauver(); afficher(); suggestions(); $("#liste").scrollIntoView({block: "start"}); };
 function ongletBas(n) { document.querySelectorAll(".onglets-bas button").forEach(b => b.classList.toggle("actif", b.dataset.nav === n)); }
 document.querySelector(".onglets-bas").onclick = e => {
   const b = e.target.closest("[data-nav]"); if (!b) return;
@@ -685,6 +769,7 @@ function carteOffre(a) {
       <div class="sous">${esc(sous)}${esc(loin)}</div>
       <div class="meta">${esc(meta)}</div>
       ${sal ? `<div class="salaire">${esc(sal)}</div>` : ""}
+      ${F.bts && a._bts === 2 ? `<div class="atout bts">${ic("toque", "p")} Demande ton ${esc(F.bts.replace(/ \(.*\)/, ""))}</div>` : F.bts && a._bts === 1 ? `<div class="atout bts doux">${ic("toque", "p")} Métier accessible avec ton ${esc(F.bts.replace(/ \(.*\)/, ""))}</div>` : ""}
       ${!spont && a.debutant ? `<div class="atout">${ic("coche", "p")} Débutants acceptés</div>` : ""}
       <div class="quand">${spont ? "" : depuis(a) ? `Publiée ${esc(depuis(a))}` : ""}${CAND[a.id] ? `${spont ? "" : " · "}Postulé` : VUES[a.id] ? `${spont ? "" : " · "}Déjà vue` : ""}</div>
     </div>
@@ -706,7 +791,7 @@ function afficher(suite) {
     $("#liste").innerHTML = `<div class="vide"><b>Pas encore d'offres</b><br>La première recherche n'a pas encore eu lieu, ou les sources n'ont pas répondu. En attendant, le menu ${ic("menu", "p")} → <b>Aussi sur</b> pour chercher sur les autres sites.</div>`;
   } else if (!res.length) {
     $("#liste").innerHTML = `<div class="vide">Aucune offre avec ces filtres.<br><br><button class="btn gris" id="b-tout">Tout afficher</button></div>`;
-    $("#b-tout").onclick = () => { Object.assign(F, {type: "", niveau: "", domaine: "", rayon: 70, q: "", debutant: false, salaire: false, teletravail: false, sansPermis: false, partiel: false, depuis: 0, salMin: 0}); $("#q").value = ""; sauver(); puces(); afficher(); };
+    $("#b-tout").onclick = () => { Object.assign(F, {bts: "", type: "", niveau: "", domaine: "", rayon: 70, q: "", debutant: false, salaire: false, teletravail: false, sansPermis: false, partiel: false, depuis: 0, salMin: 0}); $("#q").value = ""; sauver(); puces(); afficher(); };
   } else {
     SUITE.disconnect();
     if (suite) $("#liste").insertAdjacentHTML("beforeend", res.slice(LIMITE - 30, LIMITE).map(carteOffre).join(""));
@@ -811,7 +896,7 @@ function fiche(id) {
   const iti = `https://www.google.com/maps/dir/?api=1${POS ? `&origin=${POS.lat},${POS.lon}` : ""}&destination=${a.lat != null ? `${a.lat},${a.lon}` : encodeURIComponent(a.adresse || a.commune)}`;
   const postuler = sur(a.postuler), site = sur(a.site);
   const liste_ = l => l && l.length ? `<ul>${l.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
-  const infos = [["Salaire", a.salaire], ["Débutants", a.debutant && !spont ? "Acceptés" : ""], ["Permis", a.permis ? "Demandé (ou véhicule)" : ""], ["Contrat", a.contrats.join(", ")], ["Domaine", a.domaine !== "Autres" && a.domaine], ["Niveau", a.niveau], ["Expérience", a.experience], ["Horaires", a.horaires], ["Début", date(a.debut)], ["Durée", a.duree], ["Postes", a.postes],
+  const infos = [["Diplôme cité", (a.diplomes || []).join(", ")], ["Salaire", a.salaire], ["Débutants", a.debutant && !spont ? "Acceptés" : ""], ["Permis", a.permis ? "Demandé (ou véhicule)" : ""], ["Contrat", a.contrats.join(", ")], ["Domaine", a.domaine !== "Autres" && a.domaine], ["Niveau", a.niveau], ["Expérience", a.experience], ["Horaires", a.horaires], ["Début", date(a.debut)], ["Durée", a.duree], ["Postes", a.postes],
     ["Télétravail", a.teletravail], ["Publiée le", date(a.publie)], ["Source", a.source]].filter(x => x[1]);
   const quand = !spont && depuis(a) ? `Publiée ${depuis(a)}` : "";
   if (!VUES[a.id]) { VUES[a.id] = 1; ecrire("alt974-vues", VUES); }

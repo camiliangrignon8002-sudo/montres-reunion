@@ -167,6 +167,9 @@ Dans l'appli :
 - **Mes candidatures** (envoyée, relancée, entretien…), **favoris**, **actualiser** avec ↻ ou en tirant la page vers le bas.
 - **Salaire** affiché sur chaque annonce, tri par salaire, **Filtres** : débutants acceptés, salaire indiqué, salaire minimum,
   télétravail, temps partiel, sans permis exigé, publiées depuis 24 h / 7 jours / 30 jours.
+- **Mon diplôme** : choisir son BTS (MCO, NDRC, GPME, SAM, CG, SIO…) ou son BUT (GEA, TC, GACO, Informatique…). L'appli
+  montre d'abord les offres qui citent ce diplôme, puis les alternances et les emplois dont le métier lui correspond.
+  Taper « BTS MCO » dans la recherche active aussi le filtre.
 - **Masquer** une offre, offres **déjà vues** signalées, **partager** une offre, **créer une alerte** depuis sa recherche.
 - Dans chaque offre : **avis sur l'entreprise**, **vérifier l'entreprise** (annuaire officiel), trajet **en voiture ou en bus**,
   et un avertissement quand l'annonce ressemble à une arnaque (argent à verser…).

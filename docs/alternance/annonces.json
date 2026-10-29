@@ -36,7 +36,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -75,7 +76,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -114,7 +116,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -153,7 +156,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -192,7 +196,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -231,7 +236,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -270,7 +276,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -310,7 +317,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -349,7 +357,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -388,7 +397,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -427,7 +437,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -466,7 +477,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -505,7 +517,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -544,7 +557,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -584,7 +598,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -623,7 +638,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -663,7 +679,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -703,7 +720,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -744,7 +762,10 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": [
+   "BTS MEC (économiste de la construction)"
+  ]
  },
  {
   "categorie": "emploi",
@@ -785,7 +806,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -825,7 +847,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -864,7 +887,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -904,7 +928,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -945,7 +970,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -984,7 +1010,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1024,7 +1051,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1062,7 +1090,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1101,7 +1130,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1142,7 +1172,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1183,7 +1214,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1222,7 +1254,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1263,7 +1296,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1305,7 +1339,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1345,7 +1380,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1385,7 +1421,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1426,7 +1463,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1466,7 +1504,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1505,7 +1544,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1544,7 +1584,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -1584,7 +1625,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -1624,7 +1666,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1665,7 +1708,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1706,7 +1750,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1747,7 +1792,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1788,7 +1834,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1829,7 +1876,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1869,7 +1917,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1910,7 +1959,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1951,7 +2001,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -1992,7 +2043,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2032,7 +2084,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -2072,7 +2125,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -2112,7 +2166,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2151,7 +2206,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2192,7 +2248,8 @@
   "debutant": false,
   "temps_partiel": true,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2232,7 +2289,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2273,7 +2331,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2314,7 +2373,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2355,7 +2415,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2396,7 +2457,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2437,7 +2499,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2478,7 +2541,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2518,7 +2582,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2558,7 +2623,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2598,7 +2664,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2639,7 +2706,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2679,7 +2747,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2719,7 +2788,11 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": [
+   "BTS Maintenance des systèmes",
+   "BTS Électrotechnique"
+  ]
  },
  {
   "categorie": "emploi",
@@ -2760,7 +2833,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2799,7 +2873,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2839,7 +2914,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -2878,7 +2954,8 @@
   "debutant": true,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2918,7 +2995,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2958,7 +3036,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -2998,7 +3077,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3038,7 +3118,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3076,7 +3157,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3116,7 +3198,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3156,7 +3239,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3196,7 +3280,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3237,7 +3322,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3276,7 +3362,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3317,7 +3404,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3358,7 +3446,8 @@
   "debutant": true,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3398,7 +3487,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -3438,7 +3528,10 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": [
+   "BTS Maintenance des véhicules"
+  ]
  },
  {
   "categorie": "emploi",
@@ -3479,7 +3572,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3520,7 +3614,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3561,7 +3656,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3602,7 +3698,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3643,7 +3740,10 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": [
+   "BTS CPRP (mécanique)"
+  ]
  },
  {
   "categorie": "emploi",
@@ -3683,7 +3783,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3724,7 +3825,10 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": [
+   "BTS ABM (analyses biologiques)"
+  ]
  },
  {
   "categorie": "emploi",
@@ -3765,7 +3869,11 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": [
+   "BTS CIEL (électronique)",
+   "BTS Électrotechnique"
+  ]
  },
  {
   "categorie": "emploi",
@@ -3806,7 +3914,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3846,7 +3955,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3886,7 +3996,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3927,7 +4038,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -3967,7 +4079,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4007,7 +4120,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4047,7 +4161,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4087,7 +4202,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4127,7 +4243,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4167,7 +4284,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4207,7 +4325,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4246,7 +4365,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4285,7 +4405,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4326,7 +4447,8 @@
   "debutant": false,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4367,7 +4489,8 @@
   "debutant": false,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4407,7 +4530,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4446,7 +4570,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4486,7 +4611,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4526,7 +4652,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4566,7 +4693,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4606,7 +4734,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4646,7 +4775,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4686,7 +4816,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4725,7 +4856,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4765,7 +4897,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4805,7 +4938,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4845,7 +4979,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4885,7 +5020,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4925,7 +5061,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -4964,7 +5101,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5004,7 +5142,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5044,7 +5183,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5084,7 +5224,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5125,7 +5266,8 @@
   "debutant": false,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5166,7 +5308,8 @@
   "debutant": true,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5207,7 +5350,8 @@
   "debutant": true,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5247,7 +5391,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5287,7 +5432,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5326,7 +5472,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5366,7 +5513,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5406,7 +5554,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5445,7 +5594,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5486,7 +5636,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5527,7 +5678,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5567,7 +5719,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5607,7 +5760,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5648,7 +5802,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5688,7 +5843,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5728,7 +5884,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5768,7 +5925,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5808,7 +5966,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5848,7 +6007,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5888,7 +6048,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5928,7 +6089,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -5968,7 +6130,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6008,7 +6171,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6048,7 +6212,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6088,7 +6253,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6128,7 +6294,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6168,7 +6335,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6208,7 +6376,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6248,7 +6417,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6289,7 +6459,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -6329,7 +6500,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6369,7 +6541,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6409,7 +6582,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6451,7 +6625,8 @@
   "debutant": true,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6491,7 +6666,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6530,7 +6706,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -6570,7 +6747,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6611,7 +6789,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6652,7 +6831,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6692,7 +6872,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6731,7 +6912,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6771,7 +6953,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6810,7 +6993,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6849,7 +7033,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6889,7 +7074,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6928,7 +7114,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -6967,7 +7154,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7006,7 +7194,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7045,7 +7234,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7084,7 +7274,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7123,7 +7314,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7162,7 +7354,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7201,7 +7394,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7240,7 +7434,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7279,7 +7474,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7318,7 +7514,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7357,7 +7554,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7396,7 +7594,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7435,7 +7634,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7474,7 +7674,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7513,7 +7714,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7552,7 +7754,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7591,7 +7794,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7630,7 +7834,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7669,7 +7874,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7708,7 +7914,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7747,7 +7954,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7787,7 +7995,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7829,7 +8038,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7868,7 +8078,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7907,7 +8118,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7947,7 +8159,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -7987,7 +8200,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8027,7 +8241,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8067,7 +8282,8 @@
   "debutant": false,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8107,7 +8323,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8145,7 +8362,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8185,7 +8403,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8224,7 +8443,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8262,7 +8482,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8304,7 +8525,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8344,7 +8566,8 @@
   "debutant": true,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8383,7 +8606,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8423,7 +8647,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -8463,7 +8688,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8504,7 +8730,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8544,7 +8771,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8584,7 +8812,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8624,7 +8853,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8664,7 +8894,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8704,7 +8935,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8744,7 +8976,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8784,7 +9017,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8823,7 +9057,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8862,7 +9097,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8901,7 +9137,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8940,7 +9177,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -8980,7 +9218,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9021,7 +9260,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9061,7 +9301,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -9101,7 +9342,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9141,7 +9383,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9181,7 +9424,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9220,7 +9464,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9259,7 +9504,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9298,7 +9544,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9337,7 +9584,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9376,7 +9624,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9415,7 +9664,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9454,7 +9704,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9493,7 +9744,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9532,7 +9784,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9571,7 +9824,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9610,7 +9864,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9649,7 +9904,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9689,7 +9945,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9729,7 +9986,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9770,7 +10028,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -9810,7 +10069,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9850,7 +10110,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9890,7 +10151,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9930,7 +10192,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -9970,7 +10233,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10011,7 +10275,8 @@
   "debutant": false,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10051,7 +10316,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10091,7 +10357,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10130,7 +10397,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10170,7 +10438,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10210,7 +10479,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10250,7 +10520,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10291,7 +10562,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10332,7 +10604,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10373,7 +10646,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10414,7 +10688,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10455,7 +10730,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10496,7 +10772,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10537,7 +10814,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10577,7 +10855,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10616,7 +10895,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10655,7 +10935,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10695,7 +10976,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10734,7 +11016,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10774,7 +11057,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -10814,7 +11098,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -10853,7 +11138,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -10892,7 +11178,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -10931,7 +11218,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -10970,7 +11258,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -11009,7 +11298,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -11048,7 +11338,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -11087,7 +11378,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -11126,7 +11418,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -11165,7 +11458,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -11204,7 +11498,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -11243,7 +11538,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11283,7 +11579,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11324,7 +11621,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11365,7 +11663,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11405,7 +11704,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11446,7 +11746,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11487,7 +11788,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11526,7 +11828,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -11565,7 +11868,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -11604,7 +11908,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -11643,7 +11948,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11683,7 +11989,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11723,7 +12030,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11763,7 +12071,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11804,7 +12113,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11843,7 +12153,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11882,7 +12193,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11921,7 +12233,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11960,7 +12273,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -11999,7 +12313,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12038,7 +12353,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12077,7 +12393,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12118,7 +12435,8 @@
   "debutant": false,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12157,7 +12475,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12196,7 +12515,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12235,7 +12555,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12275,7 +12596,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12314,7 +12636,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12354,7 +12677,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12393,7 +12717,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12433,7 +12758,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12473,7 +12799,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12513,7 +12840,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12553,7 +12881,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12593,7 +12922,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12633,7 +12963,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12673,7 +13004,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12713,7 +13045,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12753,7 +13086,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12795,7 +13129,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12835,7 +13170,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12875,7 +13211,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12915,7 +13252,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12955,7 +13293,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -12997,7 +13336,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13037,7 +13377,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13079,7 +13420,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13119,7 +13461,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13161,7 +13504,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13201,7 +13545,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13241,7 +13586,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13281,7 +13627,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13321,7 +13668,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13361,7 +13709,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13403,7 +13752,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13443,7 +13793,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13483,7 +13834,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13523,7 +13875,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13563,7 +13916,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13603,7 +13957,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13643,7 +13998,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13683,7 +14039,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13723,7 +14080,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13763,7 +14121,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13803,7 +14162,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13843,7 +14203,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13883,7 +14244,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13923,7 +14285,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -13963,7 +14326,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14003,7 +14367,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14043,7 +14408,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14083,7 +14449,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14123,7 +14490,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14163,7 +14531,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14203,7 +14572,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14243,7 +14613,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14283,7 +14654,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14323,7 +14695,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14363,7 +14736,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14403,7 +14777,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14443,7 +14818,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14483,7 +14859,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14523,7 +14900,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14563,7 +14941,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14603,7 +14982,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14643,7 +15023,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14683,7 +15064,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14723,7 +15105,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14763,7 +15146,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14803,7 +15187,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14845,7 +15230,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14887,7 +15273,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14927,7 +15314,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -14967,7 +15355,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15007,7 +15396,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15047,7 +15437,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15087,7 +15478,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15127,7 +15519,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15167,7 +15560,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15207,7 +15601,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15247,7 +15642,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15289,7 +15685,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15329,7 +15726,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15369,7 +15767,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15409,7 +15808,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15449,7 +15849,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15489,7 +15890,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15529,7 +15931,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15569,7 +15972,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15609,7 +16013,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15649,7 +16054,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15689,7 +16095,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15729,7 +16136,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15769,7 +16177,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15809,7 +16218,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -15849,7 +16259,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -15888,7 +16299,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -15927,7 +16339,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -15966,7 +16379,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16005,7 +16419,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16044,7 +16459,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16084,7 +16500,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16123,7 +16540,10 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": [
+   "BTS CG"
+  ]
  },
  {
   "categorie": "alternance",
@@ -16162,7 +16582,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16201,7 +16622,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16240,7 +16662,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16279,7 +16702,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16318,7 +16742,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16357,7 +16782,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16397,7 +16823,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16437,7 +16864,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16476,7 +16904,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16515,7 +16944,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16554,7 +16984,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16593,7 +17024,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16632,7 +17064,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16671,7 +17104,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16710,7 +17144,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16749,7 +17184,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16788,7 +17224,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16827,7 +17264,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16866,7 +17304,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16904,7 +17343,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16943,7 +17383,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -16982,7 +17423,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17021,7 +17463,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17060,7 +17503,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17099,7 +17543,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17139,7 +17584,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17178,7 +17624,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17217,7 +17664,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17256,7 +17704,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17295,7 +17744,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17334,7 +17784,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17373,7 +17824,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17413,7 +17865,10 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": [
+   "BTS Métiers de l'eau"
+  ]
  },
  {
   "categorie": "alternance",
@@ -17453,7 +17908,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17492,7 +17948,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17531,7 +17988,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17570,7 +18028,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17609,7 +18068,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17648,7 +18108,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17687,7 +18148,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17726,7 +18188,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17765,7 +18228,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17804,7 +18268,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17844,7 +18309,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17884,7 +18350,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17923,7 +18390,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -17962,7 +18430,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18001,7 +18470,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18041,7 +18511,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18080,7 +18551,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18119,7 +18591,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18158,7 +18631,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18197,7 +18671,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18236,7 +18711,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18275,7 +18751,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18314,7 +18791,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18353,7 +18831,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18392,7 +18871,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18431,7 +18911,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18470,7 +18951,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18509,7 +18991,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18549,7 +19032,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18589,7 +19073,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18629,7 +19114,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18669,7 +19155,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18708,7 +19195,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18747,7 +19235,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18787,7 +19276,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18826,7 +19316,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18865,7 +19356,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18904,7 +19396,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18943,7 +19436,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -18982,7 +19476,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19022,7 +19517,8 @@
   "debutant": false,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19063,7 +19559,8 @@
   "debutant": false,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19103,7 +19600,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19143,7 +19641,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19183,7 +19682,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19224,7 +19724,8 @@
   "debutant": true,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19262,7 +19763,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19300,7 +19802,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19339,7 +19842,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19378,7 +19882,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19418,7 +19923,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19456,7 +19962,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19496,7 +20003,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19537,7 +20045,8 @@
   "debutant": false,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19577,7 +20086,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -19617,7 +20127,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19657,7 +20168,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19698,7 +20210,8 @@
   "debutant": false,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19738,7 +20251,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19778,7 +20292,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19818,7 +20333,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19858,7 +20374,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -19897,7 +20414,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19937,7 +20455,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -19977,7 +20496,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20016,7 +20536,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20054,7 +20575,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -20094,7 +20616,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20132,7 +20655,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20171,7 +20695,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20211,7 +20736,8 @@
   "debutant": true,
   "temps_partiel": true,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20250,7 +20776,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -20290,7 +20817,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20330,7 +20858,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20370,7 +20899,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20411,7 +20941,8 @@
   "debutant": false,
   "temps_partiel": true,
   "permis": true,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20450,7 +20981,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20489,7 +21021,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20528,7 +21061,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20567,7 +21101,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -20607,7 +21142,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20647,7 +21183,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20686,7 +21223,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20726,7 +21264,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -20766,7 +21305,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -20806,7 +21346,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -20846,7 +21387,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -20886,7 +21428,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -20925,7 +21468,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -20966,7 +21510,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21006,7 +21551,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21046,7 +21592,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21085,7 +21632,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -21125,7 +21673,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -21164,7 +21713,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21203,7 +21753,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21242,7 +21793,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21283,7 +21835,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21324,7 +21877,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21365,7 +21919,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "alternance",
@@ -21404,7 +21959,8 @@
   "debutant": true,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21442,7 +21998,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21483,7 +22040,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21524,7 +22082,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21565,7 +22124,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21606,7 +22166,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21646,7 +22207,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21687,7 +22249,11 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": [
+   "BTS FED (fluides, énergies)",
+   "BUT MT2E"
+  ]
  },
  {
   "categorie": "emploi",
@@ -21728,7 +22294,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21769,7 +22336,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21810,7 +22378,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21851,7 +22420,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21892,7 +22462,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21933,7 +22504,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -21974,7 +22546,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -22015,7 +22588,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -22056,7 +22630,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -22096,7 +22671,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -22137,7 +22713,8 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  },
  {
   "categorie": "emploi",
@@ -22178,6 +22755,7 @@
   "debutant": false,
   "temps_partiel": false,
   "permis": false,
-  "vigilance": false
+  "vigilance": false,
+  "diplomes": []
  }
 ]
