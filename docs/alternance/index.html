@@ -533,6 +533,92 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
 html.teinte{--lg-vert:#127749}
 @media (prefers-contrast:more){:root{--lg-vert:#0b5a36;--lg-vert-lentille:linear-gradient(transparent,transparent)}}
 @media (prefers-reduced-transparency:reduce){:root{--lg-vert:#127749}}
+
+/* ================= Liquid Glass partout : annonces, fenêtres, champs, menus, réglages ================= */
+:root{
+  --v-carte:rgba(255,255,255,.6);
+  --v-carte-survol:rgba(255,255,255,.78);
+  --v-champ:rgba(255,255,255,.55);
+  --v-rail:rgba(120,120,128,.2);
+}
+@media (prefers-color-scheme:dark){:root{
+  --v-carte:rgba(40,40,44,.55);--v-carte-survol:rgba(54,54,58,.66);--v-champ:rgba(255,255,255,.06);--v-rail:rgba(120,120,128,.32);
+}}
+/* annonces : tuiles de verre arrondies, lumière qui suit le doigt, soulèvement au survol */
+.offre,.hero{border-radius:30px!important}
+.offre{isolation:isolate;overflow:hidden;background:var(--v-carte);box-shadow:var(--v-lentille),var(--v-ombre);
+  transition:transform .55s var(--ressort),box-shadow .35s,background .3s}
+.offre::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:0;transition:opacity .45s;
+  background:radial-gradient(70% 90% at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.95),rgba(255,255,255,0) 70%)}
+.offre:hover{background:var(--v-carte-survol);transform:translateY(-3px);box-shadow:var(--v-lentille),0 22px 44px -18px rgba(16,40,28,.32),0 2px 6px rgba(16,40,28,.06)}
+.offre:hover::before{opacity:.75}
+.offre:active{transform:scale(.975,.965);transition:transform .14s}
+@media (prefers-color-scheme:dark){
+  .offre::before{background:radial-gradient(70% 90% at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.14),rgba(255,255,255,0) 70%)}
+  .offre:hover{background:var(--v-carte-survol)}
+}
+.liste{gap:14px}
+.vide{background:var(--v-carte);box-shadow:var(--v-lentille),var(--v-ombre);border-radius:30px}
+#carte{border-radius:30px;box-shadow:var(--v-lentille),var(--v-ombre)}
+/* annonces qui émergent du verre en défilant */
+@supports (animation-timeline:view()){
+  .offre{animation:emerge linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+  @keyframes emerge{from{opacity:.2;transform:translateY(28px) scale(.955)}to{opacity:1;transform:none}}
+}
+/* fenêtres : blocs de verre */
+.feuille .bloc,.feuille .hero{background:var(--v-carte);box-shadow:var(--v-lentille),0 6px 20px -14px rgba(16,40,28,.25);border-radius:26px!important}
+@media (prefers-color-scheme:dark){.feuille .bloc,.feuille .hero{background:rgba(255,255,255,.07)}}
+.replie::after{background:linear-gradient(transparent,rgba(255,255,255,.92))}
+@media (prefers-color-scheme:dark){.replie::after{background:linear-gradient(transparent,rgba(40,40,44,.95))}}
+/* champs : verre creusé, lueur verte au focus */
+label.champ input:not([type=range]):not([type=checkbox]):not([type=radio]),label.champ textarea,label.champ select,.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])){
+  border:0;border-radius:16px;padding:12px 14px;background:var(--v-champ);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.06),inset 0 0 0 .5px rgba(0,0,0,.08),0 1px 0 rgba(255,255,255,.9);
+  transition:box-shadow .35s,background .3s,transform .45s var(--ressort);outline:0}
+label.champ input:focus,label.champ textarea:focus,label.champ select:focus,.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])):focus{
+  background:rgba(255,255,255,.85);transform:scale(1.01);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 0 0 4px rgba(18,119,73,.16),0 0 0 1px rgba(18,119,73,.45),0 10px 24px -14px rgba(18,119,73,.5)}
+@media (prefers-color-scheme:dark){
+  label.champ input:not([type=range]):not([type=checkbox]):not([type=radio]),label.champ textarea,label.champ select,.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])){box-shadow:inset 0 0 0 .5px rgba(255,255,255,.1)}
+  label.champ input:focus,label.champ textarea:focus,label.champ select:focus,.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])):focus{background:rgba(255,255,255,.1)}
+}
+/* interrupteurs : rail de verre, perle qui s'étire comme une goutte */
+.bascule i{background:var(--v-rail);box-shadow:inset 0 1px 2px rgba(0,0,0,.08);transition:background .35s}
+.bascule input:checked + i{background:var(--lg-vert-lentille),var(--lg-vert);box-shadow:var(--lg-vert-ombre)}
+.bascule i::after{transition:transform .5s var(--ressort),width .35s var(--ressort);
+  background:radial-gradient(circle at 50% 25%,#fff,rgba(255,255,255,.9) 60%,rgba(235,240,238,.95));
+  box-shadow:inset 0 -1px 1px rgba(0,0,0,.06),0 3px 8px rgba(0,0,0,.2),0 0 0 .5px rgba(0,0,0,.05)}
+.bascule:active i::after{width:28px;transform:scale(1.08)}
+.bascule:active input:checked + i::after{transform:translateX(12px) scale(1.08)}
+/* curseur de salaire : piste de verre, poignée en perle */
+input[type=range]{-webkit-appearance:none;appearance:none;height:28px;background:transparent}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:var(--v-rail);box-shadow:inset 0 1px 2px rgba(0,0,0,.08)}
+input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:var(--v-rail)}
+input[type=range]::-moz-range-progress{height:6px;border-radius:3px;background:var(--lg-vert)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-10px;border-radius:50%;
+  background:radial-gradient(circle at 50% 25%,#fff,rgba(255,255,255,.9) 60%,rgba(235,240,238,.95));
+  box-shadow:0 3px 9px rgba(0,0,0,.22),0 0 0 .5px rgba(0,0,0,.06);transition:transform .45s var(--ressort)}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radius:50%;background:#fff;box-shadow:0 3px 9px rgba(0,0,0,.22)}
+input[type=range]:active::-webkit-slider-thumb{transform:scale(1.3,1.18)}
+/* menus et listes de choix : rangées qui s'allument en verre au toucher */
+.menu a,.menu button.entree,.opt{border-radius:16px;padding-left:12px;padding-right:12px;border-bottom-color:transparent;
+  position:relative;transition:background .3s,transform .45s var(--ressort),box-shadow .3s}
+.menu a:hover,.menu button.entree:hover,.opt:hover{background:var(--v-carte);box-shadow:var(--v-lentille)}
+.menu a:active,.menu button.entree:active,.opt:active{transform:scale(.97)}
+.opt.actif{background:rgba(18,119,73,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 0 0 1px rgba(18,119,73,.18)}
+.cv-etat{border-radius:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.7),inset 0 0 0 1px rgba(18,119,73,.15)}
+.cand{border-bottom-color:rgba(0,0,0,.06)}
+/* pied de page */
+.pied{opacity:.85}
+/* onde liquide au toucher */
+.onde{position:absolute;border-radius:50%;pointer-events:none;z-index:2;width:16px;height:16px;margin:-8px 0 0 -8px;
+  background:radial-gradient(circle,rgba(255,255,255,.75),rgba(255,255,255,.25) 45%,rgba(255,255,255,0) 70%)}
+@media (prefers-color-scheme:dark){.onde{background:radial-gradient(circle,rgba(255,255,255,.3),rgba(255,255,255,.08) 45%,rgba(255,255,255,0) 70%)}}
+/* teinté et accessibilité */
+html.teinte{--v-carte:rgba(250,250,250,.95);--v-champ:rgba(240,240,240,.97)}
+@media (prefers-reduced-transparency:reduce){:root{--v-carte:var(--carte);--v-carte-survol:var(--carte);--v-champ:var(--champ)}}
+@media (prefers-contrast:more){:root{--v-carte:var(--carte)}.offre,.feuille .bloc{box-shadow:inset 0 0 0 1px var(--texte)}}
+@media (prefers-reduced-motion:reduce){.offre{animation:none!important}.offre:hover{transform:none}.onde{display:none}}
 </style>
 </head>
 <body>
@@ -669,7 +755,7 @@ const COMMUNES = {"Saint-Denis": [-20.8823, 55.4504], "Sainte-Clotilde": [-20.89
 const CENTRE = [-21.13, 55.53];
 const SOURCES = "HelloWork, Domtomemploi";
 let OFFRES = OFFRES0;
-const VERSION = "1793254442";
+const VERSION = "1793254703";
 let DETAILS = null, DETAILS_P = null, FICHE_ID = null;
 function chargerDetails() {  // descriptifs complets, chargés en arrière-plan après l'affichage
   if (!DETAILS_P) DETAILS_P = fetch("details.json?v=" + VERSION).then(r => r.ok ? r.json() : {}).then(d => {
@@ -822,7 +908,18 @@ addEventListener("scroll", () => {
     if (avant !== bas.classList.contains("reduite")) { placerGoutte(false); setTimeout(() => placerGoutte(false), 470); } }
 }, {passive: true});
 // Liquid Glass : le reflet du verre suit le doigt ou la souris
-const VERRE = ".btn:not(.gris):not(.leger),.segments button,.onglets-bas button,.dom .carre,.nu,.onglets,.filtres button,.offre .fav";
+const VERRE = ".btn:not(.gris):not(.leger),.segments button,.onglets-bas button,.dom .carre,.nu,.onglets,.filtres button,.offre .fav,.offre";
+// onde liquide : au toucher, une goutte de lumière s'étale dans le verre
+const ONDE = ".offre,.btn,.opt,.menu a,.menu button.entree,.filtres button,.segments button,.feuille .bloc button,.nu";
+addEventListener("pointerdown", e => {
+  if (DOUX.matches) return;
+  const el = e.target.closest && e.target.closest(ONDE); if (!el || !el.animate) return;
+  const r = el.getBoundingClientRect(), o = document.createElement("span"), t = Math.max(r.width, r.height) * 2.4 / 16;
+  if (getComputedStyle(el).position === "static") el.style.position = "relative";
+  el.style.overflow = "hidden";
+  o.className = "onde"; o.style.left = (e.clientX - r.left) + "px"; o.style.top = (e.clientY - r.top) + "px"; el.appendChild(o);
+  o.animate([{transform: "scale(0)", opacity: 1}, {transform: `scale(${t})`, opacity: 0}], {duration: 650, easing: "cubic-bezier(.2,.8,.3,1)"}).finished.then(() => o.remove(), () => o.remove());
+}, {passive: true});
 addEventListener("pointermove", e => {
   const el = e.target.closest && (e.target.closest(".dom") ? e.target.closest(".dom").querySelector(".carre") : e.target.closest(VERRE)); if (!el) return;
   const r = el.getBoundingClientRect();
