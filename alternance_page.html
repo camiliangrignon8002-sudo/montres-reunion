@@ -16,14 +16,14 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <style>
 :root{
-  --fond:#f3f5f4;--carte:#fff;--texte:#16201b;--doux:#5f6b65;--ligne:#e1e6e3;--champ:#e8ecea;
-  --vert:#0b6e4f;--vert-doux:#e2f1eb;--orange:#b25000;--orange-doux:#fdf0e3;--bleu:#1f5fbf;--bleu-doux:#e6eefb;
-  --rouge:#d1242f;--ombre:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(0,0,0,.06);--r:18px;
+  --fond:#fff;--carte:#f4f4f4;--texte:#1a1a1a;--doux:#6b6b6b;--ligne:#e6e6e6;--champ:#f4f4f4;
+  --vert:#127749;--vert-doux:#e8f2ec;--orange:#b25000;--orange-doux:#fdf0e3;--bleu:#1f5fbf;--bleu-doux:#e6eefb;
+  --rouge:#d1242f;--ombre:none;--r:6px;
 }
 @media (prefers-color-scheme:dark){:root{
-  --fond:#0d1110;--carte:#1a201e;--texte:#eef3f0;--doux:#9aa6a0;--ligne:#2a322f;--champ:#252c29;
-  --vert:#3ccf96;--vert-doux:#12302a;--orange:#ff9f0a;--orange-doux:#33210a;--bleu:#6ea8ff;--bleu-doux:#14243d;
-  --rouge:#ff6b6b;--ombre:0 1px 2px rgba(0,0,0,.5);
+  --fond:#000;--carte:#151515;--texte:#f2f2f2;--doux:#9a9a9a;--ligne:#262626;--champ:#151515;
+  --vert:#4cc38a;--vert-doux:#0f2a1d;--orange:#ff9f0a;--orange-doux:#33210a;--bleu:#6ea8ff;--bleu-doux:#14243d;
+  --rouge:#ff6b6b;--ombre:none;
 }}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%}
@@ -32,58 +32,77 @@ button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
 a{color:var(--vert);text-decoration:none}
 [hidden]{display:none!important}
+svg.ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-4px}
+svg.ic.p{width:16px;height:16px;vertical-align:-3px}
+svg.ic.plein{fill:currentColor}
+.rond svg.ic{width:21px;height:21px}
 .page{max-width:1000px;margin:auto;padding:0 16px}
 
-header{position:sticky;top:0;z-index:30;background:var(--fond);padding:calc(env(safe-area-inset-top) + 10px) 0 8px}
+header{position:sticky;top:0;z-index:30;background:var(--fond);border-bottom:1px solid var(--ligne);padding:calc(env(safe-area-inset-top) + 10px) 0 8px}
 .haut{display:flex;align-items:center;gap:6px}
-.haut h1{flex:1;min-width:0;margin:0 0 0 4px;font-size:22px;letter-spacing:-.02em}
+.haut h1{flex:1;min-width:0;margin:0 0 0 4px;font-size:22px;font-weight:700;letter-spacing:-.01em}
 .haut h1 small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px;font-weight:400;color:var(--doux);letter-spacing:0}
-.rond{border:0;width:42px;height:42px;border-radius:50%;background:var(--carte);box-shadow:var(--ombre);display:grid;place-items:center;flex:none;font-size:19px}
+.rond{border:0;width:40px;height:40px;border-radius:50%;background:transparent;color:var(--texte);display:grid;place-items:center;flex:none;font-size:19px}
 .rond:active{transform:scale(.94)}
 .tourne{animation:tourne .8s linear infinite}@keyframes tourne{to{transform:rotate(360deg)}}
 .cherche{margin-top:10px;display:flex;align-items:center;gap:8px;background:var(--champ);border-radius:12px;padding:0 12px}
 .cherche input{flex:1;border:0;background:transparent;padding:11px 0;outline:none;min-width:0}
 .puces{display:flex;gap:8px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
 .puces::-webkit-scrollbar{display:none}
-.puce{border:1px solid var(--ligne);background:var(--carte);border-radius:999px;padding:7px 13px;white-space:nowrap;font-size:14px}
+.puce{border:1px solid var(--ligne);background:var(--fond);border-radius:999px;padding:7px 14px;white-space:nowrap;font-size:14px;display:inline-flex;align-items:center;gap:6px}
 .puce.actif{background:var(--vert);border-color:var(--vert);color:#fff}
 
-.autour{background:var(--carte);border-radius:var(--r);box-shadow:var(--ombre);padding:12px 14px;margin:10px 0}
+.autour{background:var(--carte);border-radius:var(--r);padding:16px 18px;margin:14px 0}
 .autour .ligne{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.autour select{flex:1;min-width:150px;border:1px solid var(--ligne);background:var(--champ);border-radius:10px;padding:8px}
-.btn{border:0;border-radius:12px;padding:10px 14px;background:var(--vert);color:#fff;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-align:center}
+.autour select{flex:1;min-width:150px;border:1px solid var(--ligne);background:var(--fond);border-radius:10px;padding:8px}
+.btn{border:0;border-radius:999px;padding:10px 14px;background:var(--vert);color:#fff;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-align:center}
 .btn.leger{background:var(--vert-doux);color:var(--vert)}
-.btn.gris{background:var(--champ);color:var(--texte)}
+.btn.gris{background:var(--fond);color:var(--texte);border:1px solid var(--ligne)}
 .btn:active{transform:scale(.97)}
 input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .aide{font-size:13px;color:var(--doux)}
 
-.vues{display:flex;background:var(--champ);border-radius:12px;padding:3px;margin:6px 0 10px}
-.vues button{flex:1;border:0;background:transparent;border-radius:10px;padding:8px;font-weight:600;color:var(--doux)}
-.vues button.actif{background:var(--carte);color:var(--texte);box-shadow:var(--ombre)}
+.vues{display:flex;border-bottom:1px solid var(--ligne);margin:8px 0 12px}
+.vues button{flex:1;border:0;background:transparent;padding:10px;font-weight:500;color:var(--doux);border-bottom:2px solid transparent;margin-bottom:-1px}
+.vues button.actif{color:var(--texte);border-bottom-color:var(--vert);font-weight:600}
 .compte{font-size:14px;color:var(--doux);margin:4px 2px 10px}
 
-.liste{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
-.offre{background:var(--carte);border-radius:var(--r);box-shadow:var(--ombre);padding:14px 15px;border:0;text-align:left;width:100%;display:flex;flex-direction:column;gap:6px}
-.offre h3{margin:0;font-size:16.5px;line-height:1.3}
-.offre .ent{font-weight:600;color:var(--vert)}
-.offre .lieu{font-size:14px;color:var(--doux)}
+.liste{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+@media (max-width:400px){.liste{grid-template-columns:1fr}}
+@media (max-width:520px){.offre{grid-template-columns:1fr 84px!important;padding:22px 16px 20px 22px!important;min-height:0!important}.offre .dessin svg{width:72px!important;height:72px!important}.offre h3{font-size:19px!important}}
+.offre{position:relative;background:var(--carte);border-radius:var(--r);padding:26px 22px 24px 26px;cursor:pointer;display:grid;grid-template-columns:1fr 112px;gap:14px;align-items:center;min-height:230px;transition:background .15s}
+.offre:hover{background:#efefef}
+@media (prefers-color-scheme:dark){.offre:hover{background:#1c1c1c}}
+.offre:focus-visible{outline:2px solid var(--vert);outline-offset:2px}
+.offre .txt{display:flex;flex-direction:column;gap:5px;min-width:0;padding-top:30px}
+.offre h3{margin:0;font-size:21px;line-height:1.2;font-weight:700;letter-spacing:-.01em}
+.offre .sous{font-size:15.5px;color:var(--doux);line-height:1.35}
+.offre .meta{font-size:15px;color:var(--texte);margin-top:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.offre .quand{font-size:13.5px;color:var(--doux)}
+.offre .neuf{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--vert)}
+.offre .fav{position:absolute;top:20px;left:20px;border:0;background:none;color:var(--vert);padding:6px;border-radius:50%}
+.offre .fav svg.ic{width:22px;height:22px}
+.offre .dessin{display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--vert)}
+.offre .dessin svg{width:92px;height:92px;stroke-width:1.1;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+.offre .dessin i{display:block;width:70px;height:10px;border-radius:50%;background:radial-gradient(rgba(0,0,0,.14),transparent 70%)}
+@media (prefers-color-scheme:dark){.offre .dessin i{background:radial-gradient(rgba(255,255,255,.08),transparent 70%)}}
+.offre .info{display:inline-grid;place-items:center;width:20px;height:20px;border:1.4px solid currentColor;border-radius:50%;font:italic 600 12px Georgia,serif}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font-size:12px;padding:3px 8px;border-radius:999px;background:var(--champ);color:var(--doux)}
+.tag{font-size:12px;padding:3px 9px;border-radius:999px;background:var(--fond);border:1px solid var(--ligne);color:var(--doux);display:inline-flex;align-items:center;gap:4px}
 .tag.neuf{background:var(--rouge);color:#fff}
 .tag.spont{background:var(--orange-doux);color:var(--orange)}
 .tag.off{background:var(--bleu-doux);color:var(--bleu)}
 .tag.ok{background:var(--vert-doux);color:var(--vert)}
-.section{display:flex;background:var(--champ);border-radius:14px;padding:3px;margin-top:10px}
-.section button{flex:1;border:0;background:transparent;border-radius:11px;padding:9px 6px;font-weight:700;color:var(--doux);font-size:15px}
-.section button.actif{background:var(--vert);color:#fff}
+.section{display:flex;gap:6px;margin-top:10px}
+.section button{flex:1;border:1px solid var(--ligne);background:var(--fond);border-radius:999px;padding:9px 6px;font-weight:600;color:var(--doux);font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.section button.actif{background:var(--vert);border-color:var(--vert);color:#fff}
 .puces.dom .puce{font-size:13px;padding:6px 11px}
 .puce b{font-weight:600;opacity:.7;margin-left:4px}
-#tirer{position:fixed;top:calc(env(safe-area-inset-top) + 8px);left:50%;transform:translate(-50%,-60px);z-index:40;background:var(--carte);box-shadow:var(--ombre);border-radius:50%;width:38px;height:38px;display:grid;place-items:center;font-size:19px;transition:transform .15s}
+#tirer{color:var(--vert);position:fixed;top:calc(env(safe-area-inset-top) + 8px);left:50%;transform:translate(-50%,-60px);z-index:40;background:var(--carte);box-shadow:var(--ombre);border-radius:50%;width:38px;height:38px;display:grid;place-items:center;font-size:19px;transition:transform .15s}
 .qualites{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
 .qualites .puce{font-size:13.5px}
 #lm-texte{min-height:340px;font-family:Georgia,"Times New Roman",serif;font-size:15px;line-height:1.5}
-.vide{text-align:center;color:var(--doux);padding:40px 16px;background:var(--carte);border-radius:var(--r)}
+.vide{text-align:center;color:var(--doux);padding:48px 20px;background:var(--carte);border-radius:var(--r);grid-column:1/-1}
 #carte{height:calc(100vh - 330px);min-height:360px;border-radius:var(--r);overflow:hidden;box-shadow:var(--ombre);z-index:1}
 .leaflet-popup-content{font:14px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
 .leaflet-popup-content b{display:block}
@@ -94,9 +113,9 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .feuille{background:var(--fond);width:100%;max-width:720px;max-height:92vh;overflow-y:auto;border-radius:22px 22px 0 0;padding:14px 16px calc(24px + env(safe-area-inset-bottom));animation:monte .22s ease-out}
 @keyframes monte{from{transform:translateY(40px);opacity:.5}}
 @media (min-width:760px){.voile{align-items:center}.feuille{border-radius:22px;max-height:88vh}}
-.feuille .barre{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.feuille .barre{display:flex;align-items:center;gap:10px;margin-bottom:8px;min-height:40px}
 .feuille .barre h2{flex:1;margin:0;font-size:20px;line-height:1.25}
-.bloc{background:var(--carte);border-radius:var(--r);padding:14px;margin:10px 0;box-shadow:var(--ombre)}
+.bloc{background:var(--carte);border-radius:var(--r);padding:18px;margin:10px 0}
 .bloc h4{margin:0 0 8px;font-size:15px}
 .bloc p{margin:0 0 6px;white-space:pre-line}
 .bloc ul{margin:0;padding-left:20px}
@@ -104,6 +123,17 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .actions .large{grid-column:1/-1}
 .infos{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14.5px}
 .infos dt{color:var(--doux)}.infos dd{margin:0}
+.hero{background:var(--carte);border-radius:var(--r);padding:24px 20px 22px 24px;display:grid;grid-template-columns:1fr 96px;gap:12px;align-items:center}
+.hero .txt{display:flex;flex-direction:column;gap:5px;min-width:0}
+.hero h2{margin:0;font-size:24px;line-height:1.2;letter-spacing:-.01em}
+.hero .sous{color:var(--doux);font-size:15.5px}
+.hero .meta{font-size:15px;margin-top:4px}
+.hero .neuf{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--vert)}
+.hero .dessin{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--vert)}
+.hero .dessin svg{width:80px;height:80px;stroke-width:1.1;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+.hero .dessin i{display:block;width:60px;height:9px;border-radius:50%;background:radial-gradient(rgba(0,0,0,.14),transparent 70%)}
+.desc{white-space:pre-line;line-height:1.6;font-size:15.5px}
+.bloc ul{line-height:1.6}
 .carte-map{width:100%;height:220px;border:0;border-radius:12px;margin-top:10px}
 .replie{max-height:9.5em;overflow:hidden;position:relative}
 .replie::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3em;background:linear-gradient(transparent,var(--carte))}
@@ -114,7 +144,7 @@ textarea{min-height:170px;resize:vertical}
 .cv-etat{display:flex;align-items:center;gap:10px;padding:12px;border-radius:12px;background:var(--vert-doux);color:var(--vert);font-weight:600}
 .cv-etat.manque{background:var(--orange-doux);color:var(--orange)}
 .menu a,.menu button.entree{display:flex;align-items:center;gap:12px;width:100%;padding:13px 4px;border:0;border-bottom:1px solid var(--ligne);background:none;text-align:left;color:var(--texte)}
-.menu .ic{width:30px;text-align:center;font-size:19px}
+.menu svg.ic{width:22px;height:22px;margin:0 4px;color:var(--vert)}
 .cand{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--ligne)}
 .cand div{flex:1;min-width:0}
 .cand small{color:var(--doux)}
@@ -123,30 +153,72 @@ textarea{min-height:170px;resize:vertical}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-cloche" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-maj" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></symbol>
+  <symbol id="i-toque" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+  <symbol id="i-mallette" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/></symbol>
+  <symbol id="i-loupe" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-cible" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
+  <symbol id="i-coeur" viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/></symbol>
+  <symbol id="i-coche" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-horloge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-croix" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></symbol>
+  <symbol id="i-carte" viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><path d="m3 11 19-9-9 19-2-8-8-2z"/></symbol>
+  <symbol id="i-trombone" viewBox="0 0 24 24"><path d="m21.4 11.1-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"/></symbol>
+  <symbol id="i-stylo" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+  <symbol id="i-copier" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-imprimante" viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+  <symbol id="i-partager" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8M16 6l-4-4-4 4M12 2v13"/></symbol>
+  <symbol id="i-lien" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+  <symbol id="i-sac" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></symbol>
+  <symbol id="i-couverts" viewBox="0 0 24 24"><path d="M3 2v7a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V2M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3v7"/></symbol>
+  <symbol id="i-casque" viewBox="0 0 24 24"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5M4 15v-3a6 6 0 0 1 6-6M14 6a6 6 0 0 1 6 6v3"/></symbol>
+  <symbol id="i-cle" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></symbol>
+  <symbol id="i-camion" viewBox="0 0 24 24"><path d="M10 17h4V5H2v12h3M14 9h4l4 4v4h-2"/><circle cx="7.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
+  <symbol id="i-sante" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></symbol>
+  <symbol id="i-gens" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+  <symbol id="i-banque" viewBox="0 0 24 24"><path d="M3 22h18M6 18v-7M10 18v-7M14 18v-7M18 18v-7M12 2l8 5H4z"/></symbol>
+  <symbol id="i-graphe" viewBox="0 0 24 24"><path d="M3 3v18h18M7 16v-4M12 16V8M17 16V9"/></symbol>
+  <symbol id="i-ordi" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="11" rx="2"/><path d="M2 20h20"/></symbol>
+  <symbol id="i-porte_voix" viewBox="0 0 24 24"><path d="M3 11v3a1 1 0 0 0 1 1h3l5 4V6l-5 4H4a1 1 0 0 0-1 1z"/><path d="M16 8a5 5 0 0 1 0 8M19 5a9 9 0 0 1 0 14"/></symbol>
+  <symbol id="i-feuille_v" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.1-6 2.4-.5 4.9-2 5.9-3"/></symbol>
+  <symbol id="i-usine" viewBox="0 0 24 24"><path d="M2 20V9l6 4V9l6 4V4h6v16zM2 20h20"/></symbol>
+  <symbol id="i-coupe" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 22a10 10 0 1 1 10-10c0 2.8-2.2 4-4 4h-2a2 2 0 0 0-1 3.7A1.5 1.5 0 0 1 12 22z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10.5" cy="7.5" r="1"/><circle cx="15.5" cy="8" r="1"/></symbol>
+  <symbol id="i-point" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/></symbol>
+</svg>
 <header>
   <div class="page">
     <div class="haut">
-      <button class="rond" id="b-menu" aria-label="Menu">☰</button>
+      <button class="rond" id="b-menu" aria-label="Menu"><svg class="ic " aria-hidden="true"><use href="#i-menu"/></svg></button>
       <h1>Alternance 974<small>Mis à jour __MAJ__</small></h1>
-      <button class="rond" id="b-notif" aria-label="Notifications">🔔</button>
-      <button class="rond" id="b-cv" aria-label="Mon CV">📄</button>
-      <button class="rond" id="b-maj" aria-label="Actualiser">↻</button>
+      <button class="rond" id="b-notif" aria-label="Notifications"><svg class="ic " aria-hidden="true"><use href="#i-cloche"/></svg></button>
+      <button class="rond" id="b-cv" aria-label="Mon CV"><svg class="ic " aria-hidden="true"><use href="#i-doc"/></svg></button>
+      <button class="rond" id="b-maj" aria-label="Actualiser"><svg class="ic " aria-hidden="true"><use href="#i-maj"/></svg></button>
     </div>
     <div class="section" role="tablist" id="p-section">
-      <button data-section="alternance">🎓 Alternance</button>
-      <button data-section="emploi">💼 Emploi</button>
+      <button data-section="alternance"><svg class="ic " aria-hidden="true"><use href="#i-toque"/></svg> Alternance</button>
+      <button data-section="emploi"><svg class="ic " aria-hidden="true"><use href="#i-mallette"/></svg> Emploi</button>
     </div>
-    <div class="cherche">🔎<input id="q" type="search" placeholder="Métier, domaine, entreprise, commune…" aria-label="Rechercher"></div>
-    <div class="puces dom" id="p-domaine"></div>
-    <div class="puces" id="p-type"></div>
-    <div class="puces" id="p-niveau"></div>
+    <div class="cherche"><svg class="ic " aria-hidden="true"><use href="#i-loupe"/></svg><input id="q" type="search" placeholder="Métier, domaine, entreprise, commune…" aria-label="Rechercher"></div>
   </div>
 </header>
 
 <main class="page">
+  <div class="puces dom" id="p-domaine" style="padding-top:12px"></div>
+  <div class="puces" id="p-type"></div>
+  <div class="puces" id="p-niveau"></div>
   <section class="autour" aria-label="Autour de moi">
     <div class="ligne">
-      <button class="btn leger" id="b-pos">📍 Ma position</button>
+      <button class="btn leger" id="b-pos"><svg class="ic " aria-hidden="true"><use href="#i-cible"/></svg> Ma position</button>
       <select id="commune" aria-label="Ou choisis ta commune"><option value="">ou choisis ta commune…</option></select>
     </div>
     <input type="range" id="rayon" min="2" max="70" step="1" value="70" aria-label="Rayon en kilomètres">
@@ -163,7 +235,7 @@ textarea{min-height:170px;resize:vertical}
   <div id="carte" hidden></div>
 </main>
 
-<div id="tirer" aria-hidden="true">↻</div>
+<div id="tirer" aria-hidden="true"><svg class="ic " aria-hidden="true"><use href="#i-maj"/></svg></div>
 <div class="voile" id="voile" hidden><div class="feuille" id="feuille" role="dialog" aria-modal="true"></div></div>
 
 <script>
@@ -174,6 +246,7 @@ const SOURCES = "__SOURCES__";
 let OFFRES = OFFRES0;
 
 const $ = s => document.querySelector(s);
+const ic = (n, c = "") => `<svg class="ic ${c}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
 const sur = u => /^https?:\/\//i.test(u || "") ? u : "";
 const norm = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
@@ -226,14 +299,15 @@ const date = s => s ? new Date(s).toLocaleDateString("fr-FR", {day: "numeric", m
 
 /* ---------- filtres ---------- */
 const TYPES = {
-  alternance: [["", "Tout"], ["offre", "Offres"], ["spontanee", "Candidature spontanée"], ["fav", "♥ Favoris"], ["cand", "✓ Déjà postulé"]],
-  emploi: [["", "Tout"], ["CDI", "CDI"], ["CDD", "CDD"], ["Intérim", "Intérim"], ["Saisonnier", "Saisonnier"], ["Temps partiel", "Temps partiel"], ["fav", "♥ Favoris"], ["cand", "✓ Déjà postulé"]],
+  alternance: [["", "Tout"], ["offre", "Offres"], ["spontanee", "Candidature spontanée"], ["fav", `${ic("coeur", "p")} Favoris`], ["cand", `${ic("coche", "p")} Déjà postulé`]],
+  emploi: [["", "Tout"], ["CDI", "CDI"], ["CDD", "CDD"], ["Intérim", "Intérim"], ["Saisonnier", "Saisonnier"], ["Temps partiel", "Temps partiel"], ["fav", `${ic("coeur", "p")} Favoris`], ["cand", `${ic("coche", "p")} Déjà postulé`]],
 };
 const NIVEAUX = ["CAP, BEP", "Bac", "Bac+2", "Bac+3", "Bac+5"];
-const ICONES = {"Commerce, vente": "🛍️", "Hôtellerie, restauration, tourisme": "🍽️", "BTP, construction": "🏗️", "Mécanique, maintenance": "🔧",
-  "Transport, logistique": "🚚", "Santé": "🩺", "Social, services à la personne": "🤝", "Banque, assurance, immobilier": "🏦",
-  "Gestion, administration": "📊", "Informatique, numérique": "💻", "Communication, médias": "📣", "Agriculture, nature": "🌱",
-  "Industrie": "🏭", "Spectacle, sport": "⚽", "Artisanat d'art": "🎨", "Autres": "•"};
+const ICONES = {"Commerce, vente": "sac", "Hôtellerie, restauration, tourisme": "couverts", "BTP, construction": "casque", "Mécanique, maintenance": "cle",
+  "Transport, logistique": "camion", "Santé": "sante", "Social, services à la personne": "gens", "Banque, assurance, immobilier": "banque",
+  "Gestion, administration": "graphe", "Informatique, numérique": "ordi", "Communication, médias": "porte_voix", "Agriculture, nature": "feuille_v",
+  "Industrie": "usine", "Spectacle, sport": "coupe", "Artisanat d'art": "palette", "Autres": "point"};
+const icDom = (d, c = "p") => ic(ICONES[d] || "point", c);
 const dansSection = a => (a.categorie || "alternance") === F.section;
 function puces() {
   document.querySelectorAll("#p-section button").forEach(b => b.classList.toggle("actif", b.dataset.section === F.section));
@@ -242,10 +316,10 @@ function puces() {
   const doms = Object.keys(comptes).sort((x, y) => (x === "Autres") - (y === "Autres") || comptes[y] - comptes[x]);
   if (F.domaine && !comptes[F.domaine]) doms.unshift(F.domaine);
   $("#p-domaine").innerHTML = `<button class="puce ${F.domaine ? "" : "actif"}" data-domaine="">Tous les domaines</button>` +
-    doms.map(d => `<button class="puce ${F.domaine === d ? "actif" : ""}" data-domaine="${esc(d)}">${ICONES[d] || "•"} ${esc(d)}<b>${comptes[d] || 0}</b></button>`).join("");
+    doms.map(d => `<button class="puce ${F.domaine === d ? "actif" : ""}" data-domaine="${esc(d)}">${icDom(d)} ${esc(d)}<b>${comptes[d] || 0}</b></button>`).join("");
   $("#p-type").innerHTML = TYPES[F.section].map(([v, t]) => `<button class="puce ${F.type === v ? "actif" : ""}" data-type="${esc(v)}">${t}</button>`).join("");
   $("#p-niveau").hidden = F.section !== "alternance";
-  $("#p-tri").innerHTML = [["recent", "🕒 Plus récentes"], ["proche", "📍 Plus proches"]].map(([v, t]) => `<button class="puce ${F.tri === v ? "actif" : ""}" data-tri="${v}">${t}</button>`).join("");
+  $("#p-tri").innerHTML = [["recent", `${ic("horloge", "p")} Plus récentes`], ["proche", `${ic("pin", "p")} Plus proches`]].map(([v, t]) => `<button class="puce ${F.tri === v ? "actif" : ""}" data-tri="${v}">${t}</button>`).join("");
   $("#p-niveau").innerHTML = [["", "Tous niveaux"], ...NIVEAUX.map(n => [n, n])].map(([v, t]) => `<button class="puce ${F.niveau === v ? "actif" : ""}" data-niveau="${esc(v)}">${esc(t)}</button>`).join("");
 }
 $("#p-section").onclick = e => { const b = e.target.closest("[data-section]"); if (!b || b.dataset.section === F.section) return; Object.assign(F, {section: b.dataset.section, type: "", domaine: ""}); LIMITE = 60; sauver(); puces(); afficher(); };
@@ -282,13 +356,21 @@ function filtrees() {
 
 /* ---------- liste ---------- */
 function carteOffre(a) {
-  return `<button class="offre" data-id="${esc(a.id)}">
-    <div class="tags">${neuf(a) ? '<span class="tag neuf">Nouveau</span>' : ""}${a.type === "spontanee" ? '<span class="tag spont">Candidature spontanée</span>' : `<span class="tag off">${esc(a.contrats.join(" · "))}</span>`}${a.niveau ? `<span class="tag">${esc(a.niveau)}</span>` : ""}${a.domaine && a.domaine !== "Autres" ? `<span class="tag">${ICONES[a.domaine] || ""} ${esc(a.domaine)}</span>` : ""}${CAND[a.id] ? '<span class="tag ok">✓ Postulé</span>' : ""}${FAV[a.id] ? '<span class="tag">♥</span>' : ""}</div>
-    <h3>${esc(a.type === "spontanee" ? a.entreprise : a.titre)}</h3>
-    ${a.type === "spontanee" ? (a.secteur ? `<div class="lieu">${esc(a.secteur)}</div>` : "") : `<div class="ent">${esc(a.entreprise)}</div>`}
-    <div class="lieu">📍 ${esc(a.commune || a.adresse || "La Réunion")}${a._d != null ? ` · ${kmTexte(a._d)}` : ""}${a.debut ? ` · début ${esc(date(a.debut))}` : ""}</div>
-    ${a.type === "offre" && depuis(a) ? `<div class="aide">🕒 Publiée ${esc(depuis(a))}</div>` : ""}
-  </button>`;
+  const spont = a.type === "spontanee";
+  const sous = spont ? [a.secteur, a.commune].filter(Boolean).join(", ") : [a.entreprise, a.commune || "La Réunion"].filter(Boolean).join(", ");
+  const meta = spont ? "Candidature spontanée" : [a.contrats.join(" · "), a.niveau].filter(Boolean).join(" · ");
+  const loin = a._d != null ? ` · ${kmTexte(a._d)}` : "";
+  return `<div class="offre" role="button" tabindex="0" data-id="${esc(a.id)}">
+    <button class="fav" data-fav="${esc(a.id)}" aria-label="${FAV[a.id] ? "Retirer des favoris" : "Ajouter aux favoris"}">${ic("coeur", FAV[a.id] ? "plein" : "")}</button>
+    <div class="txt">
+      ${neuf(a) ? '<span class="neuf">Nouveau</span>' : ""}
+      <h3>${esc(spont ? a.entreprise : a.titre)}</h3>
+      <div class="sous">${esc(sous)}${esc(loin)}</div>
+      <div class="meta">${esc(meta)}</div>
+      <div class="quand">${spont ? "" : depuis(a) ? `Publiée ${esc(depuis(a))}` : ""}${CAND[a.id] ? `${spont ? "" : " · "}Postulé` : ""}</div>
+    </div>
+    <div class="dessin">${`<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-${a.domaine && a.domaine !== "Autres" && ICONES[a.domaine] || "mallette"}"/></svg>`}<i></i></div>
+  </div>`;
 }
 let LIMITE = 60;
 function afficher() {
@@ -296,7 +378,7 @@ function afficher() {
   const nbOffres = res.filter(a => a.type === "offre").length, nbSp = res.length - nbOffres;
   $("#compte").textContent = OFFRES.length ? `${nbOffres} offre${nbOffres > 1 ? "s" : ""} ${F.section === "emploi" ? "d'emploi" : "d'alternance"}${nbSp ? ` · ${nbSp} entreprise${nbSp > 1 ? "s" : ""} en candidature spontanée` : ""}${SOURCES && SOURCES !== "aucune" ? " · sources : " + SOURCES : ""}` : "";
   if (!OFFRES.length) {
-    $("#liste").innerHTML = `<div class="vide"><b>Pas encore d'offres</b><br>La première recherche n'a pas encore eu lieu, ou les sources n'ont pas répondu. En attendant, menu ☰ → <b>Aussi sur</b> pour chercher sur les autres sites.</div>`;
+    $("#liste").innerHTML = `<div class="vide"><b>Pas encore d'offres</b><br>La première recherche n'a pas encore eu lieu, ou les sources n'ont pas répondu. En attendant, le menu ${ic("menu", "p")} → <b>Aussi sur</b> pour chercher sur les autres sites.</div>`;
   } else if (!res.length) {
     $("#liste").innerHTML = `<div class="vide">Aucune offre avec ces filtres.<br><br><button class="btn gris" id="b-tout">Tout afficher</button></div>`;
     $("#b-tout").onclick = () => { Object.assign(F, {type: "", niveau: "", domaine: "", rayon: 70, q: ""}); $("#q").value = ""; sauver(); puces(); rayonUI(); afficher(); };
@@ -307,7 +389,12 @@ function afficher() {
   }
   if (VUE === "carte") carteMaj(res);
 }
-$("#liste").onclick = e => { const b = e.target.closest(".offre"); if (b) fiche(b.dataset.id); };
+$("#liste").onclick = e => {
+  const f = e.target.closest("[data-fav]");
+  if (f) { const id = f.dataset.fav; FAV[id] ? delete FAV[id] : FAV[id] = 1; ecrire("alt974-fav", FAV); afficher(); return; }
+  const b = e.target.closest(".offre"); if (b) fiche(b.dataset.id);
+};
+$("#liste").onkeydown = e => { const b = e.target.closest(".offre"); if (b && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); fiche(b.dataset.id); } };
 
 /* ---------- autour de moi ---------- */
 const sel = $("#commune");
@@ -376,8 +463,10 @@ function ouvrir(h) { $("#feuille").innerHTML = h; $("#voile").hidden = false; $(
 function fermer() { $("#voile").hidden = true; document.body.style.overflow = ""; }
 $("#voile").onclick = e => { if (e.target.id === "voile" || e.target.closest("[data-fermer]")) fermer(); };
 document.addEventListener("keydown", e => { if (e.key === "Escape") fermer(); });
-const barre = t => `<div class="barre"><h2>${t}</h2><button class="rond" data-fermer aria-label="Fermer">✕</button></div>`;
+const barre = t => `<div class="barre"><h2>${t}</h2><button class="rond" data-fermer aria-label="Fermer">${ic("croix")}</button></div>`;
 
+const favTxt = a => FAV[a.id] ? `${ic("coeur", "plein")} Favori` : `${ic("coeur")} Favori`;
+const candTxt = a => CAND[a.id] ? `${ic("coche")} Postulé` : "J'ai postulé";
 function fiche(id) {
   const a = OFFRES.find(x => x.id === id); if (!a) return;
   const d = km(a), spont = a.type === "spontanee";
@@ -387,42 +476,53 @@ function fiche(id) {
   const liste_ = l => l && l.length ? `<ul>${l.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
   const infos = [["Contrat", a.contrats.join(", ")], ["Domaine", a.domaine !== "Autres" && a.domaine], ["Niveau", a.niveau], ["Expérience", a.experience], ["Horaires", a.horaires], ["Début", date(a.debut)], ["Durée", a.duree], ["Postes", a.postes],
     ["Rémunération", a.salaire], ["Télétravail", a.teletravail], ["Publiée le", date(a.publie)], ["Source", a.source]].filter(x => x[1]);
-  ouvrir(`${barre(esc(spont ? a.entreprise : a.titre))}
-    <div class="tags">${spont ? '<span class="tag spont">Candidature spontanée</span>' : `<span class="tag off">${esc(a.contrats.join(" · "))}</span>`}${a.niveau ? `<span class="tag">${esc(a.niveau)}</span>` : ""}${neuf(a) ? '<span class="tag neuf">Nouveau</span>' : ""}</div>
-    <div class="bloc">
-      <h4>${esc(a.entreprise)}</h4>
-      <div class="lieu">📍 ${esc(a.adresse || a.commune)}${d != null ? ` · ${kmTexte(d)}` : ""}${a.position_approx ? " (centre de la commune)" : ""}</div>
-      ${a.secteur ? `<div class="aide">${esc(a.secteur)}${a.taille ? " · " + esc(a.taille) + " salariés" : ""}</div>` : ""}
+  const dessin = a.domaine && a.domaine !== "Autres" && ICONES[a.domaine] || "mallette";
+  const quand = !spont && depuis(a) ? `Publiée ${depuis(a)}` : "";
+  ouvrir(`${barre("")}
+    <div class="hero">
+      <div class="txt">
+        ${neuf(a) ? '<span class="neuf">Nouveau</span>' : ""}
+        <h2>${esc(spont ? a.entreprise : a.titre)}</h2>
+        <div class="sous">${esc(spont ? (a.secteur || "Candidature spontanée") : a.entreprise)}</div>
+        <div class="sous">${ic("pin", "p")} ${esc(a.adresse || a.commune || "La Réunion")}${d != null ? ` · ${kmTexte(d)}` : ""}</div>
+        <div class="meta">${esc([spont ? "Candidature spontanée" : a.contrats.join(" · "), a.niveau, quand].filter(Boolean).join(" · "))}</div>
+      </div>
+      <div class="dessin"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-${dessin}"/></svg><i></i></div>
     </div>
+    <div class="actions" style="margin:14px 0 4px">
+      <button class="btn large" id="f-cv">${ic("doc")} Envoyer mon CV${LETTRES[a.id] ? " et ma lettre" : ""}</button>
+      ${postuler ? `<a class="btn gris large" href="${esc(postuler)}" target="_blank" rel="noopener" id="f-postuler">${ic("lien")} Postuler sur ${esc(a.source)}</a>` : ""}
+    </div>
+    <div class="bloc"><h4>${spont ? "À savoir" : "Le poste"}</h4>
+      ${a.description ? `<p class="desc">${esc(a.description)}</p>`
+        : `<p class="aide">Le descriptif complet est sur le site d'origine${postuler ? ` : <a href="${esc(postuler)}" target="_blank" rel="noopener">voir l'annonce complète</a>` : ""}.</p>`}
+    </div>
+    ${a.a_apprendre && a.a_apprendre.length ? `<div class="bloc"><h4>Ce que tu vas apprendre</h4>${liste_(a.a_apprendre)}</div>` : ""}
+    ${a.attendu && a.attendu.length ? `<div class="bloc"><h4>Le profil recherché</h4>${liste_(a.attendu)}</div>` : ""}
+    ${infos.length ? `<div class="bloc"><h4>L'essentiel</h4><dl class="infos">${infos.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl></div>` : ""}
     <div class="bloc">
-      <h4>Contacter l'entreprise</h4>
+      <h4>Contacter ${esc(a.entreprise)}</h4>
       <div class="actions">
-        <button class="btn large" id="f-cv">📄 Envoyer mon CV${LETTRES[a.id] ? " et ma lettre" : ""}</button>
-        <button class="btn leger large" id="f-lm">✍️ ${LETTRES[a.id] ? "Revoir ma lettre de motivation" : "Écrire ma lettre de motivation"}</button>
-        ${postuler ? `<a class="btn leger large" href="${esc(postuler)}" target="_blank" rel="noopener" id="f-postuler">Postuler sur ${esc(a.source)}</a>` : ""}
-        ${a.tel ? `<a class="btn gris" href="tel:${esc(a.tel.replace(/\s/g, ""))}">📞 ${esc(a.tel)}</a>` : ""}
-        ${a.email ? `<a class="btn gris" href="mailto:${esc(a.email)}">✉️ Email</a>` : ""}
-        ${site ? `<a class="btn gris" href="${esc(site)}" target="_blank" rel="noopener">🌐 Site</a>` : ""}
-        <button class="btn gris" id="f-fav">${FAV[a.id] ? "♥ Favori" : "♡ Favori"}</button>
-        <button class="btn gris" id="f-cand">${CAND[a.id] ? "✓ Postulé" : "J'ai postulé"}</button>
+        ${a.tel ? `<a class="btn gris" href="tel:${esc(a.tel.replace(/\s/g, ""))}">${ic("tel")} ${esc(a.tel)}</a>` : ""}
+        ${a.email ? `<a class="btn gris" href="mailto:${esc(a.email)}">${ic("mail")} Email</a>` : ""}
+        ${site ? `<a class="btn gris" href="${esc(site)}" target="_blank" rel="noopener">${ic("globe")} Site</a>` : ""}
+        <button class="btn gris" id="f-lm">${ic("stylo")} ${LETTRES[a.id] ? "Ma lettre" : "Lettre de motivation"}</button>
+        <button class="btn gris" id="f-fav">${favTxt(a)}</button>
+        <button class="btn gris" id="f-cand">${candTxt(a)}</button>
       </div>
       ${a.email ? `<div class="aide" style="margin-top:8px">${esc(a.email)}</div>` : ""}
       ${!a.tel && !a.email ? `<div class="aide" style="margin-top:8px">${spont ? "Le formulaire « Postuler » envoie ton CV directement à l'entreprise." : "Pas de téléphone ni d'email publiés : passe par « Postuler »."}</div>` : ""}
     </div>
-    ${infos.length ? `<div class="bloc"><h4>L'essentiel</h4><dl class="infos">${infos.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl></div>` : ""}
-    ${a.description ? `<div class="bloc"><h4>${spont ? "À savoir" : "L'offre"}</h4><p class="${a.description.length > 500 ? "replie" : ""}" id="f-desc">${esc(a.description)}</p>${a.description.length > 500 ? '<button class="lien-plus" id="f-plus">Lire la suite</button>' : ""}</div>` : ""}
-    ${a.a_apprendre && a.a_apprendre.length ? `<div class="bloc"><h4>Ce que tu vas apprendre</h4>${liste_(a.a_apprendre)}</div>` : ""}
-    ${a.attendu && a.attendu.length ? `<div class="bloc"><h4>Ce qui est attendu</h4>${liste_(a.attendu)}</div>` : ""}
-    ${a.a_propos ? `<div class="bloc"><h4>L'entreprise</h4><p>${esc(a.a_propos)}</p></div>` : ""}
+    ${a.a_propos ? `<div class="bloc"><h4>L'entreprise</h4><p>${esc(a.a_propos)}</p>${a.secteur ? `<p class="aide">${esc(a.secteur)}${a.taille ? " · " + esc(a.taille) + " salariés" : ""}</p>` : ""}</div>` : ""}
     <div class="bloc"><h4>Où se trouve l'entreprise</h4>
-      <div class="actions"><a class="btn gris" href="${esc(gm)}" target="_blank" rel="noopener">🗺️ Google Maps</a><a class="btn gris" href="${esc(iti)}" target="_blank" rel="noopener">🚗 Itinéraire</a></div>
+      ${a.position_approx && !/\d/.test(a.adresse || "") ? '<p class="aide">Adresse exacte non publiée : la carte montre le centre de la commune.</p>' : ""}
+      <div class="actions"><a class="btn gris" href="${esc(gm)}" target="_blank" rel="noopener">${ic("carte")} Google Maps</a><a class="btn gris" href="${esc(iti)}" target="_blank" rel="noopener">${ic("route")} Itinéraire</a></div>
       ${a.lat != null ? `<iframe class="carte-map" loading="lazy" title="Carte Google Maps" src="https://maps.google.com/maps?q=${a.lat},${a.lon}&z=${a.position_approx ? 13 : 16}&output=embed"></iframe>` : ""}
     </div>`);
   $("#f-cv").onclick = () => envoyerCV(a);
   $("#f-lm").onclick = () => panneauLettre(a);
-  $("#f-fav").onclick = e => { FAV[a.id] ? delete FAV[a.id] : FAV[a.id] = 1; ecrire("alt974-fav", FAV); e.target.textContent = FAV[a.id] ? "♥ Favori" : "♡ Favori"; afficher(); };
-  $("#f-cand").onclick = e => { CAND[a.id] ? delete CAND[a.id] : noter(a); ecrire("alt974-cand", CAND); e.target.textContent = CAND[a.id] ? "✓ Postulé" : "J'ai postulé"; afficher(); };
-  const p = $("#f-plus"); if (p) p.onclick = () => { $("#f-desc").classList.remove("replie"); p.remove(); };
+  $("#f-fav").onclick = e => { FAV[a.id] ? delete FAV[a.id] : FAV[a.id] = 1; ecrire("alt974-fav", FAV); e.currentTarget.innerHTML = favTxt(a); afficher(); };
+  $("#f-cand").onclick = e => { CAND[a.id] ? delete CAND[a.id] : noter(a); ecrire("alt974-cand", CAND); e.currentTarget.innerHTML = candTxt(a); afficher(); };
   const po = $("#f-postuler"); if (po) po.addEventListener("click", () => setTimeout(() => { if (!CAND[a.id]) toast("Une fois envoyé, touche « J'ai postulé » pour le suivre"); }, 800));
 }
 function noter(a, statut = "Envoyée") { CAND[a.id] = {date: new Date().toISOString().slice(0, 10), statut, titre: a.titre, entreprise: a.entreprise}; ecrire("alt974-cand", CAND); }
@@ -449,7 +549,7 @@ async function envoyerCV(a) {
       try { await navigator.clipboard.writeText((a.email ? a.email + "\n\n" : "") + texte); } catch (e) {}
       await navigator.share({files: [fichier], title: sujet, text: texte});
       noter(a); afficher();
-      toast(a.email ? `CV partagé. Adresse de l'entreprise copiée : ${a.email}` : "CV partagé ✓");
+      toast(a.email ? `CV partagé. Adresse de l'entreprise copiée : ${a.email}` : "CV partagé");
       return;
     } catch (e) { if (e.name === "AbortError") return; }
   }
@@ -471,9 +571,9 @@ async function panneauCV(apres) {
   const cv = await cvLire();
   ouvrir(`${barre("Mon CV")}
     <div class="bloc">
-      <div class="cv-etat ${cv ? "" : "manque"}" id="cv-etat">${cv ? `✓ ${esc(cv.name || "CV")} · ${Math.round(cv.size / 1024)} Ko` : "Pas encore de CV"}</div>
+      <div class="cv-etat ${cv ? "" : "manque"}" id="cv-etat">${cv ? `${ic("coche")} ${esc(cv.name || "CV")} · ${Math.round(cv.size / 1024)} Ko` : "Pas encore de CV"}</div>
       <div class="actions" style="margin-top:10px">
-        <label class="btn large">📎 ${cv ? "Changer de CV" : "Déposer mon CV"}<input type="file" id="cv-fichier" accept=".pdf,.doc,.docx,.odt,image/*" hidden></label>
+        <label class="btn large">${ic("trombone")} ${cv ? "Changer de CV" : "Déposer mon CV"}<input type="file" id="cv-fichier" accept=".pdf,.doc,.docx,.odt,image/*" hidden></label>
         ${cv ? '<button class="btn gris" id="cv-voir">Voir</button><button class="btn gris" id="cv-suppr">Supprimer</button>' : ""}
       </div>
       <p class="aide" style="margin-top:8px">Ton CV reste sur ce téléphone. « Envoyer mon CV » le joint au mail ou au message pour l'entreprise choisie.</p>
@@ -491,14 +591,14 @@ async function panneauCV(apres) {
   $("#cv-fichier").onchange = async e => {
     const f = e.target.files[0]; if (!f) return;
     if (f.size > 10 * 1024 * 1024) return toast("Fichier trop lourd (10 Mo au plus)");
-    try { await cvEcrire(f); toast("CV enregistré ✓"); } catch (err) { return toast("Impossible d'enregistrer le CV sur ce téléphone"); }
+    try { await cvEcrire(f); toast("CV enregistré"); } catch (err) { return toast("Impossible d'enregistrer le CV sur ce téléphone"); }
     apres ? fiche(apres.id) : panneauCV();
   };
   const v = $("#cv-voir"); if (v) v.onclick = () => window.open(URL.createObjectURL(cv), "_blank");
   const s = $("#cv-suppr"); if (s) s.onclick = async () => { await cvEcrire(null); panneauCV(); };
   $("#pr-ok").onclick = () => {
     for (const k of ["prenom", "nom", "email", "tel", "formation", "lettre"]) PROFIL[k] = $("#pr-" + k).value.trim();
-    ecrire("alt974-profil", PROFIL); toast("Enregistré ✓"); apres ? fiche(apres.id) : fermer();
+    ecrire("alt974-profil", PROFIL); toast("Enregistré"); apres ? fiche(apres.id) : fermer();
   };
 }
 $("#b-cv").onclick = () => panneauCV();
@@ -578,7 +678,7 @@ function panneauLettre(a) {
   const o = {poste: a ? (a.type === "spontanee" ? "" : a.titre) : LM.poste || "", entreprise: a ? a.entreprise : LM.entreprise || "",
     commune: a ? a.commune : "", domaine: a ? a.domaine : LM.domaine || "", categorie: a ? a.categorie : F.section};
   const champ = (id, t, v, extra = "") => `<label class="champ">${t}<input id="lm-${id}" value="${esc(v)}" ${extra}></label>`;
-  ouvrir(`${barre("✍️ Lettre de motivation")}
+  ouvrir(`${barre(`${ic("stylo")} Lettre de motivation`)}
     <div class="bloc">
       <p class="aide">Remplis ce que tu peux, la lettre s'écrit toute seule. Tu peux ensuite la modifier.</p>
       ${champ("poste", "Poste visé (vide = candidature spontanée)", o.poste)}
@@ -598,16 +698,16 @@ function panneauLettre(a) {
       <div class="qualites" id="lm-qualites">${QUALITES.map(([m, f]) => `<button class="puce ${LM.qualites.includes(m) ? "actif" : ""}" data-q="${esc(m)}">${esc(LM.genre === "f" ? f : m)}</button>`).join("")}</div>
       <label class="champ">Mes expériences (stages, jobs d'été, bénévolat, sport…)<textarea id="lm-experiences" style="min-height:70px">${esc(LM.experiences)}</textarea></label>
       <label class="champ">Pourquoi cette entreprise ? (facultatif)<textarea id="lm-pourquoi" style="min-height:60px">${esc(LM.pourquoi)}</textarea></label>
-      ${PROFIL.prenom ? "" : '<p class="aide">Astuce : ton nom, ton téléphone et ton email viennent de « Mon CV » (bouton 📄).</p>'}
+      ${PROFIL.prenom ? "" : `<p class="aide">Astuce : ton nom, ton téléphone et ton email viennent de « Mon CV » (bouton ${ic("doc", "p")} en haut).</p>`}
     </div>
     <div class="bloc"><h4>Ta lettre</h4>
       <textarea id="lm-texte"></textarea>
       <div class="actions" style="margin-top:10px">
-        <button class="btn gris" id="lm-autre">🔄 Autre version</button>
-        <button class="btn gris" id="lm-copier">📋 Copier</button>
-        <button class="btn gris" id="lm-pdf">🖨️ PDF / imprimer</button>
-        <button class="btn gris" id="lm-partager">↗ Partager</button>
-        ${a ? '<button class="btn large" id="lm-ok">✓ Garder pour cette offre</button>' : '<button class="btn large" id="lm-defaut">✓ Utiliser comme message d\'envoi du CV</button>'}
+        <button class="btn gris" id="lm-autre">${ic("maj")} Autre version</button>
+        <button class="btn gris" id="lm-copier">${ic("copier")} Copier</button>
+        <button class="btn gris" id="lm-pdf">${ic("imprimante")} PDF / imprimer</button>
+        <button class="btn gris" id="lm-partager">${ic("partager")} Partager</button>
+        ${a ? `<button class="btn large" id="lm-ok">${ic("coche")} Garder pour cette offre</button>` : `<button class="btn large" id="lm-defaut">${ic("coche")} Utiliser comme message d'envoi du CV</button>`}
       </div>
       <p class="aide" id="lm-aide" style="margin-top:8px">${a && LETTRES[a.id] ? "Lettre déjà gardée pour cette offre : elle partira avec ton CV." : ""}</p>
     </div>`);
@@ -636,7 +736,7 @@ function panneauLettre(a) {
     b.classList.toggle("actif", i < 0); regen();
   };
   $("#lm-autre").onclick = () => { LM.variante++; regen(); };
-  $("#lm-copier").onclick = async () => { try { await navigator.clipboard.writeText(t.value); toast("Lettre copiée ✓"); } catch (e) { t.select(); toast("Sélectionne et copie le texte"); } };
+  $("#lm-copier").onclick = async () => { try { await navigator.clipboard.writeText(t.value); toast("Lettre copiée"); } catch (e) { t.select(); toast("Sélectionne et copie le texte"); } };
   $("#lm-pdf").onclick = () => {
     const f = document.createElement("iframe"); f.style.cssText = "position:fixed;width:0;height:0;border:0";
     f.srcdoc = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Lettre de motivation</title><style>@page{margin:2.2cm}body{font:12pt/1.55 Georgia,"Times New Roman",serif;color:#000;white-space:pre-wrap}</style></head><body>${esc(t.value)}</body></html>`;
@@ -648,7 +748,7 @@ function panneauLettre(a) {
     if (navigator.share) { try { await navigator.share({title: "Lettre de motivation", text: t.value}); } catch (e) {} }
     else { try { await navigator.clipboard.writeText(t.value); toast("Partage indisponible : lettre copiée"); } catch (e) {} }
   };
-  const ok = $("#lm-ok"); if (ok) ok.onclick = () => { LETTRES[a.id] = t.value; ecrire("alt974-lettres", LETTRES); toast("Lettre gardée : elle partira avec ton CV ✓"); fiche(a.id); };
+  const ok = $("#lm-ok"); if (ok) ok.onclick = () => { LETTRES[a.id] = t.value; ecrire("alt974-lettres", LETTRES); toast("Lettre gardée : elle partira avec ton CV"); fiche(a.id); };
   const def = $("#lm-defaut"); if (def) def.onclick = () => {
     let modele = t.value;
     if (o.entreprise && o.entreprise !== "votre entreprise") modele = modele.split(o.entreprise).join("{entreprise}");
@@ -682,7 +782,7 @@ async function activerNotifs() {
     const abo = (await SW.pushManager.getSubscription()) || await SW.pushManager.subscribe({userVisibleOnly: true, applicationServerKey: cleVapid(VAPID)});
     await deposer(abo.toJSON ? abo.toJSON() : abo, false);
     NOTIF.actif = true; ecrire("alt974-notif", NOTIF);
-    toast("Notifications activées ✓ Tu seras prévenu(e) des nouvelles offres");
+    toast("Notifications activées. Tu seras prévenu(e) des nouvelles offres");
   } catch (e) { toast("Activation impossible pour l'instant, réessaie plus tard"); }
   panneauNotifs();
 }
@@ -696,22 +796,22 @@ async function couperNotifs() {
 function panneauNotifs() {
   const doms = Object.keys(METIER);
   const coche = (id, on, t) => `<label style="display:flex;gap:10px;align-items:center;padding:8px 0"><input type="checkbox" id="${id}" ${on ? "checked" : ""} style="width:20px;height:20px;accent-color:var(--vert)">${t}</label>`;
-  ouvrir(`${barre("🔔 Notifications")}
+  ouvrir(`${barre(`${ic("cloche")} Notifications`)}
     <div class="bloc">
-      <div class="cv-etat ${NOTIF.actif ? "" : "manque"}">${NOTIF.actif ? "✓ Notifications activées" : "Notifications désactivées"}</div>
+      <div class="cv-etat ${NOTIF.actif ? "" : "manque"}">${NOTIF.actif ? `${ic("coche")} Notifications activées` : "Notifications désactivées"}</div>
       <p class="aide" style="margin-top:8px">Une notification arrive sur ton téléphone dès qu'une nouvelle offre qui te correspond est publiée (une recherche toutes les 5 heures).</p>
       ${iosHorsAppli ? '<p class="aide"><b>Sur iPhone</b> : installe d\'abord l\'appli (bouton Partager → « Sur l\'écran d\'accueil »), puis ouvre-la depuis son icône pour activer les notifications.</p>' : ""}
     </div>
     <div class="bloc"><h4>Me prévenir pour</h4>
-      ${coche("n-alt", NOTIF.sections.includes("alternance"), "🎓 Les offres d'alternance")}
-      ${coche("n-emp", NOTIF.sections.includes("emploi"), "💼 Les offres d'emploi (CDI, CDD, intérim…)")}
+      ${coche("n-alt", NOTIF.sections.includes("alternance"), `${ic("toque")} Les offres d'alternance`)}
+      ${coche("n-emp", NOTIF.sections.includes("emploi"), `${ic("mallette")} Les offres d'emploi (CDI, CDD, intérim…)`)}
       ${coche("n-spont", NOTIF.spontanees, "Les entreprises qui recrutent en candidature spontanée")}
       <label class="champ">Domaines (aucun choisi = tous)</label>
-      <div class="qualites" id="n-doms">${doms.map(d => `<button class="puce ${NOTIF.domaines.includes(d) ? "actif" : ""}" data-d="${esc(d)}">${ICONES[d] || ""} ${esc(d)}</button>`).join("")}</div>
+      <div class="qualites" id="n-doms">${doms.map(d => `<button class="puce ${NOTIF.domaines.includes(d) ? "actif" : ""}" data-d="${esc(d)}">${icDom(d)} ${esc(d)}</button>`).join("")}</div>
       <p class="aide">Lieu : ${POS && F.rayon < 70 ? `dans un rayon de ${F.rayon} km autour de ${esc(POS.nom)}` : "toute l'île"} (réglable dans « Ma position » sur l'accueil).</p>
     </div>
     <div class="actions">
-      <button class="btn large" id="n-ok">${NOTIF.actif ? "Enregistrer mes choix" : "🔔 Activer les notifications"}</button>
+      <button class="btn large" id="n-ok">${NOTIF.actif ? "Enregistrer mes choix" : `${ic("cloche")} Activer les notifications`}</button>
       ${NOTIF.actif ? '<button class="btn gris large" id="n-stop">Désactiver</button>' : ""}
     </div>`);
   const lireChoix = () => {
@@ -756,14 +856,14 @@ function panneauCandidatures() {
 }
 function menu() {
   ouvrir(`${barre("Menu")}<div class="bloc menu">
-    <button class="entree" id="m-cv"><span class="ic">📄</span>Mon CV et mes infos</button>
-    <button class="entree" id="m-notif"><span class="ic">🔔</span>Notifications ${NOTIF.actif ? "(activées)" : ""}</button>
-    <button class="entree" id="m-lm"><span class="ic">✍️</span>Écrire une lettre de motivation</button>
-    <button class="entree" id="m-cand"><span class="ic">✓</span>Mes candidatures (${Object.keys(CAND).length})</button>
-    <button class="entree" id="m-fav"><span class="ic">♥</span>Mes favoris (${Object.keys(FAV).length})</button>
+    <button class="entree" id="m-cv">${ic("doc")}Mon CV et mes infos</button>
+    <button class="entree" id="m-notif">${ic("cloche")}Notifications ${NOTIF.actif ? "(activées)" : ""}</button>
+    <button class="entree" id="m-lm">${ic("stylo")}Écrire une lettre de motivation</button>
+    <button class="entree" id="m-cand">${ic("coche")}Mes candidatures (${Object.keys(CAND).length})</button>
+    <button class="entree" id="m-fav">${ic("coeur")}Mes favoris (${Object.keys(FAV).length})</button>
   </div>
   <div class="bloc menu"><h4>Aussi sur</h4><p class="aide">Ces sites et applis refusent la lecture automatique : la recherche « ${F.section === "emploi" ? "emploi" : "alternance"} à La Réunion » s'ouvre directement.</p>
-    ${AUSSI(F.section === "emploi" ? "" : "alternance").map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener"><span class="ic">↗</span>${esc(n)}</a>`).join("")}
+    ${AUSSI(F.section === "emploi" ? "" : "alternance").map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${ic("lien")}${esc(n)}</a>`).join("")}
   </div>
   <p class="aide" style="text-align:center">Offres relevées : ${esc(SOURCES)}.<br>Installer : Partager → « Sur l'écran d'accueil ».</p>`);
   $("#m-cv").onclick = () => panneauCV();
@@ -800,7 +900,7 @@ async function actualiser(silence) {
     OFFRES = await r.json();
     const nouv = OFFRES.filter(a => !avant.has(a.id)).length;
     puces(); afficher();
-    toast(nouv ? `${nouv} nouvelle${nouv > 1 ? "s" : ""} offre${nouv > 1 ? "s" : ""}` : "Tout est à jour ✓");
+    toast(nouv ? `${nouv} nouvelle${nouv > 1 ? "s" : ""} offre${nouv > 1 ? "s" : ""}` : "Tout est à jour");
   } catch (e) { toast(navigator.onLine === false ? "Pas de connexion" : "Rechargement de la page…"); if (navigator.onLine !== false) setTimeout(() => location.reload(), 600); }
   b.classList.remove("tourne"); $("#tirer").classList.remove("tourne"); $("#tirer").style.transform = ""; MAJ_EN_COURS = false;
 }
