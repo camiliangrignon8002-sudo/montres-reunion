@@ -1285,34 +1285,43 @@
   "vu": "2026-10-27T11:04+04:00"
  },
  {
-  "id": "zimo-01a07c45-39b7-7bdc-96fd-e6e30e960043",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-20-m2/01a07c45-39b7-7bdc-96fd-e6e30e960043",
-  "titre": "Appartement 1 pièce 20 m²",
+  "id": "figaro-108474953",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108474953.html",
+  "titre": "Location  appartement 1 pièce 20 m² à Sainte Clotilde (97490), 560 €",
   "prix": 560.0,
   "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
+  "quartier": "Sainte Clotilde",
   "pieces": 1,
   "type": "Studio",
   "surface": 20.0,
   "meuble": null,
   "photos": [
-   "https://img.e-xiste.com/_iNM3UNwniCXAi69P5DiRlZNPsoo-4AjlUdXcxkRftg/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fimmo-cdn.fr%2Fimages%2Ffigaro%2F6a9eaecca223ac14e09cb538-1.jpg"
+   "https://lh3.googleusercontent.com/_iSkscS_gOnoXD01xYSvEWVke0vg5OR59ZmYqUm0Nob9NhE3B9xhBATm3PQuKnrYvgFqNdC6OzVGe9QHWsaEGDqW1URx9lBr93olQQ=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/qFt1jcimHPczAQdviKz9tnK8ypRpWNrmtTyD0C2VzVwsF1ony0Eg4YzO5dp16z8WRrmta-hZes2Bp624XJydhQBIw2FPq2aZYHPHNg=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/cK-Xt2OPKTJ4SL_TUXKOe6pirLWOyi6ZpDxogju3IeuD7fZ--61mGSfICtOvl3Wdi1WOJsJTi_AUDvVbDcz4eQoqKZM3bnnJLI4kTw=rw-w940-h605-l80"
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
-  "caracteristiques": [],
+  "description": "RUNIMMO vous propose en location un studio de 20m2 dans la résidence Central Fac 9 situé rue des jacinthes à SAINTE CLOTILDE.\nIl se compose d'une entrée avec kitchenette aménagée et équipée, un séjour/chambre, salle d'eau avec WC.\nDisponible de suite\nN'hésitez pas à recontacter Anaïs pour une visite 0692359521.\nHonoraires de 260 € TTC à la charge du locataire comprenant 60 € TTC pour l'état des lieux. Loyer de base 530 €/mois. Provision sur charges 30 €/mois, régularisation annuelle. Dépôt de garantie 530 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.\nCarte pro. CP175012018000034249",
+  "caracteristiques": [
+   "Proche université"
+  ],
   "date": "",
-  "annonceur": "Pro · via Figaro Immobilier",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0692 35 95 21",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-1-piece-20-m2/01a07c45-39b7-7bdc-96fd-e6e30e960043"
+   }
+  ],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -1707,43 +1716,26 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "ofim-nion-A-LOUER-bel-appartement-F2-vue-mer-a-LA-POSSESSION-html",
-  "source": "OFIM",
-  "url": "https://www.ofim.fr/73787/Location-Appartement-POSSESSION-ile-de-la-Reunion-A-LOUER-bel-appartement-F2-vue-mer-a-LA-POSSESSION.html",
+  "id": "zimo-01a185fa-e0ba-76e9-a37b-55bc676d8dbd",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/a-louer-bel-appartement-f2-vue-mer-a-la-possession/01a185fa-e0ba-76e9-a37b-55bc676d8dbd",
   "titre": "A LOUER bel appartement F2 vue mer à LA POSSESSION",
-  "prix": 599.43,
+  "prix": 599.0,
   "commune": "La Possession",
-  "quartier": "",
+  "quartier": "La Possession",
   "pieces": 2,
   "type": "T2",
-  "surface": 36.59,
+  "surface": 37.0,
   "meuble": null,
   "photos": [
-   "https://www.ofim.fr/media/m/327279/vue-mer-possession.jpg",
-   "https://www.ofim.fr/media/l-resize/327278/immeuble-possession.jpg",
-   "https://www.ofim.fr/media/l-resize/327280/escalier-possession.jpg",
-   "https://www.ofim.fr/media/l-resize/327282/sejour-lumineux-possession.jpg",
-   "https://www.ofim.fr/media/l-resize/327283/location-appartement-possession.jpg",
-   "https://www.ofim.fr/media/l-resize/327284/salle-de-bains-possession.jpg",
-   "https://www.ofim.fr/media/l-resize/327285/entree-possession.jpg",
-   "https://www.ofim.fr/media/l-resize/327287/balcon-possession.jpg",
-   "https://www.ofim.fr/media/l-resize/327290/degagement-possession.jpg",
-   "https://www.ofim.fr/media/l-resize/327293/wc-possession.jpg",
-   "https://www.ofim.fr/media/l-resize/327295/parking-possession.jpg",
-   "https://www.ofim.fr/media/sm/319109/Location-Appartement-TROIS-BASSINS-A-LOUER-spacieux-appartement-de-type-F2-a-TROIS-BASSINS.jpg",
-   "https://www.ofim.fr/media/sm/326547/Location-Appartement-SAINTE-CLOTILDE-A-louer-appartement-de-type-F1-sur-la-residence-Les-Orangelles-appt-n-29-a-Sainte-Clotilde.jpg",
-   "https://www.ofim.fr/media/sm/327035/chambre-tampon.jpg",
-   "https://www.ofim.fr/media/sm/323874/Location-Appartement-SAINT-DENIS-A-louer-T1-meuble-a-l-annee-Bd-St-Francois-residence-Macadamia.jpg"
+   "https://img.e-xiste.com/oN6O1hy0YW-aFsNgv9hRtf57-dj8Hw58LoRwQZG4cVo/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_40a97539-8c9e-4b28-91f8-38ba7b75fa3f.jpg"
   ],
-  "description": "A louer appartement F2 à La Possession avec vue mer. Séjour, chambre, cuisine, salle de bain, WC, balcons. Calme, parking privé, ascenseur. Proche accès 4…",
+  "description": "Location T2 La Possession (974) 2 pièces 37 m²",
   "caracteristiques": [
-   "Varangue / balcon",
-   "Parking",
-   "Ascenseur",
    "Vue mer"
   ],
   "date": "",
-  "annonceur": "OFIM",
+  "annonceur": "Pro · via leboncoin",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -1753,13 +1745,8 @@
   "adresse": "",
   "secteur": "Nord-Ouest",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/a-louer-bel-appartement-f2-vue-mer-a-la-possession/01a185fa-e0ba-76e9-a37b-55bc676d8dbd"
-   }
-  ],
-  "vu": "2026-10-29T08:02+04:00"
+  "aussi": [],
+  "vu": "2026-10-29T15:57+04:00"
  },
  {
   "id": "bienici-citya-immobilier-501991-GES79160002-34",
@@ -2276,34 +2263,46 @@
   "vu": "2026-10-26T14:56+04:00"
  },
  {
-  "id": "zimo-01a155d4-7df5-7858-ac69-d1abcf35119e",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-1-piece-35-m2/01a155d4-7df5-7858-ac69-d1abcf35119e",
-  "titre": "Studio 1 pièce 35 m²",
+  "id": "figaro-110025017",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025017.html",
+  "titre": "Location meublée appartement 1 pièce 35 m² à Saint-Denis (97400), 620 €",
   "prix": 620.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
   "surface": 35.0,
-  "meuble": null,
+  "meuble": true,
   "photos": [
-   "https://img.e-xiste.com/wGxDnUV-p9nzp7imBPRFv0sO6Vn1NXMnxRV9wGmrCqU/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_5b98b023-b52d-44b2-ae1d-b6c076c073da.jpg"
+   "https://lh3.googleusercontent.com/9x9ldaQiNtBs5m4oO1RH1ej4jM20PQxcnoHiVR2IWNSEwS1UaKy9wE91EZd1dyxvxGiOVvVM5RnFphkMp7XYTe6eXK7tofrhVuzvTQ=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/7KdItYX7bTMMUQLGzNaWlow6W2p0rzAjizbOZpZqwDTOW7_xz18tGJEYeoTgPk6X9d33j-erp1g_9ZFJA63ZT2BhQQvuxPYFwXPoJQ=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/hBEHql9QUyNfhmdWYv24eVlsLM4zsMsD6BhhHtcdGpif1GVpCSrSAFaaiA35b-dkz1VLHpBUXKIfXGkffg8KmoNAicsp664zRevcmQ=rw-w940-h605-l80"
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 35 m²",
-  "caracteristiques": [],
+  "description": "RUNIMMO vous présente en location un studio meublé de 35m2 situé à la Trinité à Saint-Denis (97400), comprenant une belle pièce principale lumineuse, un coin cuisine tout équipée, une belle salle de bains, un balcon et une place de parking privative.\nLe bien est idéalement bien situé, à 2 minutes à pied du parc de la Trinité, proche des transports en commun et des commerces.\nPour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 455 € TTC à la charge du locataire comprenant 350 € TTC pour l'état des lieux. Loyer de base 580 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 160 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Proche transports"
+  ],
   "date": "",
-  "annonceur": "Pro · via leboncoin",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0692 26 92 05",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/studio-1-piece-35-m2/01a155d4-7df5-7858-ac69-d1abcf35119e"
+   }
+  ],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -2714,6 +2713,10 @@
    {
     "source": "Bien'ici",
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/2pieces/netty-company51942hxz-appt-2082"
+   },
+   {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-110257171.html"
    },
    {
     "source": "Zimo",
@@ -3677,6 +3680,46 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "figaro-110025019",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025019.html",
+  "titre": "Location meublée appartement 1 pièce 24.72 m² à Saint-Denis (97400), 680 €",
+  "prix": 680.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": null,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/yuCmIU2VVliHTLDaZhVC7dQKHEkgKEF6DHQ-ttgsVhQAPLGwNA5tAPiqMUtHx_Fi20T2kJ4msyZlSZU0puhHAbG_czetMbLgPw9a1Q=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/yaXvVs2WqRwgODHf5qBPzomBUey_xX2i128B7aL_lfg_OPyLKOcWN2eLsJR12XoYVeArIB6vvQhyx9LafbnkKMuk-aMmTyiaifvvRg=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/7UCEdPc8N0qDHp3URGOPM4ulUFrJfLTgQrpB_Ytl0J4qbV1esvf4iJe_shR9VajkSduyLpxJij9rLgzo6KTia6_brGJTRoy5dn7QP94=rw-w940-h605-l80"
+  ],
+  "description": "RUNIMMO vous propose en location un studio joliment meublé de 24,72 m2, situé dans la rue monthyon à Saint-Denis (97400), résidence ' LA GOELETTE '. Ce bien se compose d'une pièce principale lumineuse et climatisée, une cuisine aménagée et équipée, une belle salle d'eau avec wc et une grande terrasse. Une place de parking privative est disponible en sous-sol. Ce bien se situe proche du jardin de l'état, et du centre ville de Saint-Denis. Pour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 321 € TTC à la charge du locataire comprenant 74 € TTC pour l'état des lieux. Loyer de base 640 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 280 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Climatisation",
+   "Jardin",
+   "Cuisine équipée"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 26 92 05",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T12:04+04:00"
+ },
+ {
   "id": "zimo-01a05377-8d6f-7c5c-a2cf-6d36c4eae793",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/f2-rez-de-jardin-ste-clotilde/01a05377-8d6f-7c5c-a2cf-6d36c4eae793",
@@ -4408,6 +4451,41 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-27T17:05+04:00"
+ },
+ {
+  "id": "figaro-110318603",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110318603.html",
+  "titre": "Location meublée appartement 2 pièces 52.01 m² à Saint denis chaudron (97490), 707 €",
+  "prix": 707.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint denis chaudron",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 52.01,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/j87SLVmjrRuXbBXyVK84YkfIIzm4u6KZg4bGv6LVoTRbyQwTWu1KUCNfGagj-lrHrtZbEJMHu1A4Oc55-Zh3ebGIM4gelO16ymFW=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/VOxJ8mYBmC6VEG1sNcrojWnho8tlgNNw_MpVpthz4VjbKlpVrACp6zDARwGAlaBjOdg6FcWUFliy6QcvYrUsIGL5dBLGS6MBIYRoGA=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/v6JfpetS2o3-9ibTyQETvKr2s0-aNkMjWxt5uzmQRvveUEapzJD_-uL1t22dKPIwKJ5szofXRZNAfTt2YZFMr7h4xzHcrgMiR-d7gA=rw-w940-h605-l80"
+  ],
+  "description": "Grand T2 meublé à louer à Saint-Denis \n\nEmplacement idéal dans le Nord de\nl'île de La Réunion !\n\n\nDisponible à partir du 15/11/2026\n\nVisite à partir du 31/10/2026 selon disponibilités de la locataire en place\n\n\nNous vous proposons en exclusivité ce superbe appartement T2\nen RDC de 59.36 m2 total (52",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-28T21:05+04:00"
  },
  {
   "id": "zimo-01a12c9b-f30a-7ee1-bd28-b6b09399d139",
