@@ -27,7 +27,8 @@ except ImportError:  # pragma: no cover
     import requests
 
 ROOT = Path(__file__).parent
-VUS_FILE = ROOT / "data" / "alternance_vus.json"   # id -> date où l'appli a vu l'offre la 1re fois
+VUS_FILE = ROOT / "data" / "alternance_vus.json"
+FICHES_FILE = ROOT / "data" / "alternance_fiches.json"  # annonces des sites d'emploi déjà lues   # id -> date où l'appli a vu l'offre la 1re fois
 JSON_FILE = ROOT / "docs" / "alternance" / "annonces.json"
 OUT_FILE = ROOT / "docs" / "alternance" / "index.html"
 REUNION = timezone(timedelta(hours=4))
@@ -493,8 +494,9 @@ SITES = [
     for c in ("saint-denis", "saint-pierre", "saint-paul", "le-port", "saint-andre", "le-tampon", "saint-louis",
               "sainte-marie", "saint-benoit", "la-possession")
 ]
-PAGES_PAR_SITE = 3
-OFFRES_PAR_SITE = {"La Mairie": 25}  # offres lues au plus par recherche (80 par défaut)
+PAGES_PAR_SITE = 40      # pages de résultats parcourues au plus par recherche
+LECTURES_MAX = 600       # annonces nouvelles lues au plus par passage (la suite au passage suivant)
+DUREE_MAX = 30 * 60      # secondes
 ALTERNANCE = re.compile(r"alternan|apprenti|professionnalisation|\bcfa\b", re.I)
 
 
@@ -614,46 +616,58 @@ def sites_emploi():
             recherches += [(site, recherche.replace("{q}", q), motif) for q in ("alternance", "")]
         else:
             recherches.append((site, recherche, motif))
-    deja = set()  # une annonce trouvée par deux recherches n'est lue qu'une fois
+    # Annonces déjà lues (url -> offres) : seules les nouvelles sont lues. Une annonce reste tant qu'elle
+    # figure dans les résultats du site (ou 3 jours au plus si le site ne répond pas).
+    cache = json.loads(FICHES_FILE.read_text()) if FICHES_FILE.exists() else {}
+    maintenant = datetime.now(timezone.utc)
+    debut, lectures = time.time(), 0
     for site, recherche, motif in recherches:
+        hote = re.match(r"https?://[^/]+", recherche).group()
         liens = []
-        for page in range(1, PAGES_PAR_SITE + 1):
+        for page in range(1, PAGES_PAR_SITE + 1):  # toutes les pages de résultats
             h = get(recherche.format(page=page))
             if not h:
                 break
-            hote = re.match(r"https?://[^/]+", recherche).group()
-            nouveaux = [hote + l if l.startswith("/") else l for l in re.findall(r'href="((?:https?://[^"/]+)?' + motif + ')"', h)]
-            nouveaux = [l for l in dict.fromkeys(nouveaux) if l not in liens and l not in deja]
-            # certaines pages de recherche contiennent déjà les fiches JobPosting
-            for j in job_postings(h):
-                a = depuis_jobposting(j, j.get("url") or recherche.format(page=page), site)
-                if a and a["commune"]:
-                    res.append(a)
+            trouves = [hote + l if l.startswith("/") else l for l in re.findall(r'href="((?:https?://[^"/]+)?' + motif + ')"', h)]
+            nouveaux = [l for l in dict.fromkeys(trouves) if l not in liens]
             if page == 1 and not nouveaux:
                 print(f"  {site} : aucun lien d'offre sur {recherche.format(page=1)} ({len(h)} caractères)")
             if not nouveaux:
                 break
             liens += nouveaux
-        trouvees = 0
-        liens = liens[:OFFRES_PAR_SITE.get(site, 80)]
-        deja.update(liens)
-        for n, url in enumerate(liens):
+            time.sleep(0.3)
+        for url in liens:
+            cache.setdefault(url, {"site": site, "offres": [], "lu": ""})["vu_liste"] = maintenant.isoformat()
+        a_lire = [u for u in liens if not cache[u]["lu"] or cache[u]["lu"] < (maintenant - timedelta(days=30)).isoformat()]
+        lues_ici = 0
+        for n, url in enumerate(a_lire):
+            if lectures >= LECTURES_MAX or time.time() - debut > DUREE_MAX:
+                break  # la suite au prochain passage
             h = get(url)
+            lectures += 1
+            if h is None:
+                continue
             fiches = job_postings(h)
             if n == 0:  # pour le rapport : ce que la première page contient
                 adr = json.dumps(dig(fiches[0], "jobLocation") if fiches else None, ensure_ascii=False)[:160]
-                print(f"  {site} 1re offre : {len(h or '')} caractères, {len(fiches)} JobPosting, lieu {adr}")
-            lues = [depuis_jobposting(j, url, site) for j in fiches] or [depuis_page(h, url, site)]
-            for a in lues:
+                print(f"  {site} 1re offre lue : {len(h)} caractères, {len(fiches)} JobPosting, lieu {adr}")
+            offres_url = []
+            for a in [depuis_jobposting(j, url, site) for j in fiches] or [depuis_page(h, url, site)]:
                 if a and not a["commune"]:  # la recherche était limitée à La Réunion
-                    texte_page = propre(h or "")[:5000]
+                    texte_page = propre(h)[:5000]
                     a["commune"] = commune_de(texte_page) or ("La Réunion" if re.search(r"r[ée]union|\b974", texte_page, re.I) else "")
                 if a and a["commune"]:
-                    res.append(a)
-                    trouvees += 1
-            time.sleep(0.4)
-        print(f"  {site} : {len(liens)} liens, {trouvees} offres à La Réunion ({recherche.split('?')[0]})")
-    return res
+                    offres_url.append(a)
+            cache[url].update(offres=offres_url, lu=maintenant.isoformat())
+            lues_ici += 1
+            time.sleep(0.3)
+        print(f"  {site} : {len(liens)} annonces en ligne, {lues_ici} lues ce passage ({recherche.split('?')[0]})")
+    limite = (maintenant - timedelta(days=3)).isoformat()
+    cache = {u: c for u, c in cache.items() if c.get("vu_liste", "") > limite}
+    FICHES_FILE.parent.mkdir(exist_ok=True)
+    FICHES_FILE.write_text(json.dumps(cache, ensure_ascii=False))
+    print(f"  Sites d'emploi : {lectures} annonces lues, {sum(not c['lu'] for c in cache.values())} restent à lire")
+    return [json.loads(json.dumps(a)) for c in cache.values() for a in c["offres"]]
 
 
 # ---------------------------------------------------------------- tri et page
@@ -818,12 +832,14 @@ def main():
     gardees = sans_doublons([a for a in toutes if a["titre"] and a["entreprise"] and dans_une_zone(a)])
     maintenant = datetime.now(REUNION)
     premiere_fois = not vus  # au tout premier passage, tout est « nouveau » : on ne notifie pas
+    en_ligne = set()
     for a in gardees:
         deja = [vus[i] for i in a["ids"] if i in vus]
         a["id"] = a["ids"][0]
         a["vu"] = min(deja) if deja else maintenant.isoformat(timespec="minutes")
         for i in a.pop("ids"):
             vus[i] = a["vu"]
+            en_ligne.add(i)
         a.pop("siret", None)
     # les offres d'abord, les plus récentes en tête ; puis les candidatures spontanées
     offres_ = sorted((a for a in gardees if a["type"] == "offre"), key=lambda a: (a["publie"] or a["vu"][:10], a["vu"]), reverse=True)
@@ -837,9 +853,9 @@ def main():
     if not toutes and JSON_FILE.exists():
         print("Aucune source n'a répondu : les offres ne sont pas modifiées.")
         return
-    # on oublie les offres vues il y a plus de 180 jours
-    limite = (maintenant - timedelta(days=180)).isoformat()
-    vus = {i: d for i, d in vus.items() if d > limite}
+    # on garde la date de 1re vue des offres encore en ligne (même anciennes), et 60 jours pour les autres
+    limite = (maintenant - timedelta(days=60)).isoformat()
+    vus = {i: d for i, d in vus.items() if i in en_ligne or d > limite}
     VUS_FILE.parent.mkdir(exist_ok=True)
     VUS_FILE.write_text(json.dumps(vus, ensure_ascii=False))
     JSON_FILE.write_text(json.dumps(gardees, ensure_ascii=False, indent=1))
