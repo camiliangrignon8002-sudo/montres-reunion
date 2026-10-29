@@ -26,6 +26,9 @@
   --rouge:#ff6b6b;--ombre:none;
 }}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+button,a,.offre,label{touch-action:manipulation}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--fond);color:var(--texte);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Helvetica Neue","Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding-bottom:calc(40px + env(safe-area-inset-bottom));overflow-x:hidden}
 button,input,select,textarea{font:inherit;color:inherit}
@@ -35,6 +38,7 @@ a{color:var(--vert);text-decoration:none}
 svg.ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-4px}
 svg.ic.p{width:16px;height:16px;vertical-align:-3px}
 svg.ic.plein{fill:currentColor}
+.onglets-bas button.actif[data-nav=favoris] svg.ic{fill:currentColor}
 .rond svg.ic{width:21px;height:21px}
 .page{max-width:1200px;margin:auto;padding:0 16px}
 
@@ -70,8 +74,10 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .liste{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
 @media (max-width:400px){.liste{grid-template-columns:1fr}}
 @media (max-width:520px){.offre{grid-template-columns:1fr 84px!important;padding:22px 16px 20px 22px!important;min-height:0!important}.offre h3{font-size:19px!important}}
-.offre{position:relative;background:var(--carte);border-radius:var(--r);padding:26px 22px 24px 26px;cursor:pointer;display:grid;grid-template-columns:1fr 112px;gap:14px;align-items:center;min-height:230px;transition:background .15s}
+.offre{content-visibility:auto;contain-intrinsic-size:auto 280px;position:relative;background:var(--carte);border-radius:var(--r);padding:26px 22px 24px 26px;cursor:pointer;display:grid;grid-template-columns:1fr 112px;gap:14px;align-items:center;min-height:230px;transition:background .15s}
 .offre:hover{background:#efefef}
+.offre:active{transform:scale(.992);transition:transform .08s}
+#suite{grid-column:1/-1;height:1px}
 @media (prefers-color-scheme:dark){.offre:hover{background:#1c1c1c}}
 .offre:focus-visible{outline:2px solid var(--vert);outline-offset:2px}
 .offre .txt{display:flex;flex-direction:column;gap:5px;min-width:0;padding-top:30px}
@@ -120,7 +126,9 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .embleme span{font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--texte);font-weight:600;margin-right:-.32em}
 .embleme em{font-style:normal;font-size:8.5px;letter-spacing:.42em;text-transform:uppercase;color:var(--doux);margin-right:-.42em;position:relative;padding-top:7px}
 .embleme em::before{content:"";position:absolute;top:0;left:50%;width:16px;height:1.5px;margin-left:-8px;background:var(--or);border-radius:2px}
-.cherche{border-top:1px solid var(--ligne);margin:0;border-radius:0;background:var(--fond);padding:0}
+.cherche{border-top:1px solid var(--ligne);margin:0;border-radius:0;background:var(--fond);padding:0;flex-direction:column;align-items:stretch;gap:0}
+.cherche-in{width:100%}
+.suggestions{max-width:1200px;margin:0 auto;width:100%}
 .cherche-in{display:flex;align-items:center;gap:10px;padding:6px 16px}
 .cherche input{font-size:17px;padding:12px 0}
 .hero-page{text-align:center;padding:clamp(28px,6vw,64px) 0 8px}
@@ -183,6 +191,33 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .guide-cartes .carre{margin-bottom:8px}
 .guide-cartes b{font-size:17px}
 .guide-cartes small{color:var(--doux);font-size:14px}
+.onglets-bas{display:none}
+@media (max-width:760px){
+  .onglets-bas{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.94);-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);border-top:1px solid var(--ligne);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+  .onglets-bas button{flex:1;border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--doux);font-size:11px;font-weight:500;padding:4px 0;position:relative}
+  .onglets-bas svg.ic{width:23px;height:23px;stroke-width:1.6}
+  .onglets-bas button.actif{color:var(--vert)}
+  .onglets-bas b{position:absolute;top:0;left:calc(50% + 6px);min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--vert);color:#fff;font-size:10px;display:grid;place-items:center}
+  .onglets-bas b:empty{display:none}
+  body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+  .droite #b-loupe,.droite #b-favs{display:none}
+  .toast{bottom:calc(84px + env(safe-area-inset-bottom))}
+}
+@media (max-width:760px) and (prefers-color-scheme:dark){.onglets-bas{background:rgba(10,10,10,.92)}}
+.actifs{display:flex;flex-wrap:wrap;gap:8px;margin:-6px 0 14px}
+.actifs:empty{display:none}
+.actifs button{border:1px solid var(--ligne);background:var(--fond);border-radius:999px;padding:6px 10px 6px 13px;font-size:13.5px;display:inline-flex;align-items:center;gap:6px;color:var(--texte)}
+.actifs button svg.ic{width:14px;height:14px;color:var(--doux)}
+.actifs .tout{border:0;color:var(--vert);font-weight:600;padding-left:4px}
+.suggestions{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:0 16px 12px}
+.suggestions::-webkit-scrollbar{display:none}
+.suggestions button{flex:none;border:1px solid var(--ligne);background:var(--fond);border-radius:999px;padding:7px 13px;font-size:14px;color:var(--texte)}
+.suggestions:empty{display:none}
+.espace{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.espace button{border:0;background:var(--carte);border-radius:18px;padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--texte);font-size:14.5px;font-weight:600}
+.espace button small{color:var(--doux);font-weight:400;font-size:12.5px}
+.espace .carre{width:56px;height:56px;border-radius:14px}
+.espace .carre svg{width:26px;height:26px}
 .opts{display:flex;flex-direction:column}
 .opt{display:flex;align-items:center;gap:12px;border:0;border-bottom:1px solid var(--ligne);background:none;padding:15px 4px;text-align:left;font-size:16px;color:var(--texte)}
 .opt span{flex:1}
@@ -327,7 +362,7 @@ textarea{min-height:170px;resize:vertical}
       <button class="nu" id="b-favs" aria-label="Mes favoris"><svg class="ic " aria-hidden="true"><use href="#i-coeur"/></svg></button>
     </div>
   </div>
-  <div class="cherche" id="cherche" hidden><div class="page cherche-in"><svg class="ic " aria-hidden="true"><use href="#i-loupe"/></svg><input id="q" type="search" placeholder="Métier, domaine, entreprise, commune" aria-label="Rechercher"><button class="nu" id="q-fermer" aria-label="Fermer la recherche"><svg class="ic " aria-hidden="true"><use href="#i-croix"/></svg></button></div></div>
+  <div class="cherche" id="cherche" hidden><div class="page cherche-in"><svg class="ic " aria-hidden="true"><use href="#i-loupe"/></svg><input id="q" type="search" placeholder="Métier, domaine, entreprise, commune" aria-label="Rechercher"><button class="nu" id="q-fermer" aria-label="Fermer la recherche"><svg class="ic " aria-hidden="true"><use href="#i-croix"/></svg></button></div><div class="suggestions" id="suggestions"></div></div>
 </header>
 
 <main class="page">
@@ -341,6 +376,7 @@ textarea{min-height:170px;resize:vertical}
   </section>
   <div class="rail-dom" id="rail-dom" aria-label="Domaines"></div>
   <nav class="filtres" id="filtres" aria-label="Filtres"></nav>
+  <div class="actifs" id="actifs"></div>
   <div class="compte" id="compte"></div>
   <div class="liste" id="liste"></div>
   <div id="carte" hidden></div>
@@ -356,6 +392,13 @@ textarea{min-height:170px;resize:vertical}
   <footer class="pied">Mis à jour __MAJ__<br><span id="pied-sources"></span></footer>
 </main>
 
+<nav class="onglets-bas" aria-label="Navigation">
+  <button data-nav="offres" class="actif"><svg class="ic" aria-hidden="true"><use href="#i-d-tout"/></svg><span>Offres</span></button>
+  <button data-nav="chercher"><svg class="ic" aria-hidden="true"><use href="#i-loupe"/></svg><span>Rechercher</span></button>
+  <button data-nav="favoris"><svg class="ic" aria-hidden="true"><use href="#i-coeur"/></svg><span>Favoris</span><b id="nb-fav"></b></button>
+  <button data-nav="alertes"><svg class="ic" aria-hidden="true"><use href="#i-cloche"/></svg><span>Alertes</span></button>
+  <button data-nav="espace"><svg class="ic" aria-hidden="true"><use href="#i-gens"/></svg><span>Mon espace</span></button>
+</nav>
 <div id="tirer" aria-hidden="true"><svg class="ic " aria-hidden="true"><use href="#i-maj"/></svg></div>
 <div class="voile" id="voile" hidden><div class="feuille" id="feuille" role="dialog" aria-modal="true"></div></div>
 
@@ -365,6 +408,14 @@ const COMMUNES = __COMMUNES__;
 const CENTRE = __CENTRE__;
 const SOURCES = "__SOURCES__";
 let OFFRES = OFFRES0;
+const VERSION = "__VERSION__";
+let DETAILS = null, DETAILS_P = null, FICHE_ID = null;
+function chargerDetails() {  // descriptifs complets, chargés en arrière-plan après l'affichage
+  if (!DETAILS_P) DETAILS_P = fetch("details.json?v=" + VERSION).then(r => r.ok ? r.json() : {}).then(d => {
+    DETAILS = d; for (const a of OFFRES) { Object.assign(a, d[a.id] || {}); a._t = null; }
+  }).catch(() => { DETAILS_P = null; });
+  return DETAILS_P;
+}
 
 const $ = s => document.querySelector(s);
 const ic = (n, c = "") => `<svg class="ic ${c}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
@@ -463,6 +514,8 @@ function puces() {  // onglets, titre et barre de filtres
   $("#rail-dom").innerHTML = [`<button class="dom ${F.domaine ? "" : "actif"}" data-dom=""><span class="carre"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-d-tout"/></svg></span><b>Tous</b><i></i></button>`,
     ...doms.map(d => `<button class="dom ${F.domaine === d ? "actif" : ""}" data-dom="${esc(d)}" title="${esc(d)} (${comptes[d]})"><span class="carre"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-${ICONES[d] || "d-mallette"}"/></svg></span><b>${esc(COURT[d] || d)}</b><i></i></button>`)].join("");
   $("#b-favs").classList.toggle("actif", F.type === "fav");
+  filtresActifs();
+  const nf = Object.keys(FAV).length; $("#nb-fav").textContent = nf ? nf : "";
   $("#b-lieu").classList.toggle("actif", !!POS && F.rayon < 70);
 }
 function choix(titre, options, actuel, choisir) {
@@ -487,13 +540,14 @@ $("#filtres").onclick = e => {
 document.querySelector(".guide-cartes").onclick = e => { const b = e.target.closest("[data-g]"); if (b) panneauGuide(b.dataset.g); };
 $("#rail-dom").onclick = e => { const b = e.target.closest("[data-dom]"); if (!b) return; F.domaine = F.domaine === b.dataset.dom ? "" : b.dataset.dom; sauver(); puces(); afficher(); };
 $("#p-section").onclick = e => { const b = e.target.closest("[data-section]"); if (!b || b.dataset.section === F.section) return; Object.assign(F, {section: b.dataset.section, type: "", domaine: ""}); LIMITE = 60; sauver(); puces(); afficher(); };
-$("#b-loupe").onclick = () => { $("#cherche").hidden = false; $("#q").focus(); };
-$("#q-fermer").onclick = () => { $("#cherche").hidden = true; if (F.q) { F.q = ""; $("#q").value = ""; sauver(); afficher(); } };
+$("#b-loupe").onclick = () => { $("#cherche").hidden = false; suggestions(); $("#q").focus(); };
+$("#q-fermer").onclick = () => { $("#cherche").hidden = true; ongletBas("offres"); if (F.q) { F.q = ""; $("#q").value = ""; sauver(); afficher(); } };
 $("#b-favs").onclick = () => { F.type = F.type === "fav" ? "" : "fav"; sauver(); puces(); afficher(); };
 $("#b-lieu").onclick = () => panneauLieu();
 addEventListener("scroll", () => $(".bandeau").classList.toggle("colle", scrollY > 4), {passive: true});
 $("#q").value = F.q; if (F.q) $("#cherche").hidden = false;
-$("#q").oninput = e => { F.q = e.target.value; sauver(); afficher(); };
+let qMinuterie;
+$("#q").oninput = e => { clearTimeout(qMinuterie); qMinuterie = setTimeout(() => { F.q = e.target.value; LIMITE = 30; sauver(); afficher(); suggestions(); }, 140); };
 
 function panneauFiltres() {
   const ligne = (k, t, sous) => `<label class="bascule"><span><b>${t}</b>${sous ? `<small>${sous}</small>` : ""}</span><input type="checkbox" data-k="${k}" ${F[k] ? "checked" : ""}><i></i></label>`;
@@ -541,7 +595,7 @@ function filtrees() {
     if (F.section === "alternance" && F.niveau && a.niveau !== F.niveau) continue;
     if (POS && F.rayon < 70 && (a._d == null || a._d > F.rayon)) continue;
     if (mots.length) {
-      const t = norm([a.titre, a.entreprise, a.commune, a.secteur, a.domaine, a.contrats.join(" "), a.description].join(" "));
+      const t = a._t || (a._t = norm([a.titre, a.entreprise, a.commune, a.secteur, a.domaine, a.contrats.join(" "), a.description].join(" ")));
       if (!mots.every(m => t.includes(m))) continue;
     }
     res.push(a);
@@ -551,6 +605,69 @@ function filtrees() {
   res.sort((x, y) => (x.type !== "offre") - (y.type !== "offre") ||
     (F.tri === "proche" && POS ? (x._d ?? 999) - (y._d ?? 999) : F.tri === "salaire" ? (y.salaire_mois || 0) - (x.salaire_mois || 0) || quand(y).localeCompare(quand(x)) : quand(y).localeCompare(quand(x))));
   return res;
+}
+
+/* ---------- filtres actifs, suggestions, onglets du bas, mon espace ---------- */
+function filtresActifs() {
+  const x = ic("croix");
+  const l = [];
+  if (F.q) l.push(["q", `« ${esc(F.q)} »`]);
+  if (F.domaine) l.push(["domaine", esc(COURT[F.domaine] || F.domaine)]);
+  if (F.type) l.push(["type", F.type === "masquees" ? "Offres masquées" : esc(((TYPES[F.section].find(t => t[0] === F.type) || [])[1] || F.type).replace(/<svg.*?<\/svg>\s*/g, ""))]);
+  if (F.niveau && F.section === "alternance") l.push(["niveau", esc(F.niveau)]);
+  if (POS && F.rayon < 70) l.push(["lieu", `${F.rayon} km · ${esc(POS.nom)}`]);
+  if (F.debutant) l.push(["debutant", "Débutants acceptés"]);
+  if (F.salaire) l.push(["salaire", "Salaire indiqué"]);
+  if (F.salMin) l.push(["salMin", `Dès ${F.salMin.toLocaleString("fr-FR")} €`]);
+  if (F.teletravail) l.push(["teletravail", "Télétravail"]);
+  if (F.partiel) l.push(["partiel", "Temps partiel"]);
+  if (F.sansPermis) l.push(["sansPermis", "Sans permis"]);
+  if (F.depuis) l.push(["depuis", F.depuis === 1 ? "Dernières 24 h" : `${F.depuis} derniers jours`]);
+  $("#actifs").innerHTML = l.length ? l.map(([k, t]) => `<button data-retirer="${k}" aria-label="Retirer le filtre ${t}">${t} ${x}</button>`).join("") + (l.length > 1 ? `<button class="tout" data-retirer="tout">Tout effacer</button>` : "") : "";
+}
+$("#actifs").onclick = e => {
+  const b = e.target.closest("[data-retirer]"); if (!b) return;
+  const k = b.dataset.retirer, vide = {q: "", domaine: "", type: "", niveau: "", debutant: false, salaire: false, salMin: 0, teletravail: false, partiel: false, sansPermis: false, depuis: 0};
+  if (k === "tout") { Object.assign(F, vide, {rayon: 70}); $("#q").value = ""; }
+  else if (k === "lieu") F.rayon = 70;
+  else { F[k] = vide[k]; if (k === "q") $("#q").value = ""; }
+  sauver(); puces(); afficher();
+};
+const IDEES = ["Vendeur", "Commercial", "Assistant", "Comptable", "Cuisine", "Serveur", "Mécanicien", "Aide-soignant", "Informatique", "Électricien", "Accueil", "Logistique", "Coiffure", "Petite enfance"];
+function suggestions() {
+  const z = $("#suggestions"); if (!z) return;
+  z.innerHTML = F.q ? "" : IDEES.map(t => `<button data-idee="${esc(t)}">${esc(t)}</button>`).join("");
+}
+$("#suggestions").onclick = e => { const b = e.target.closest("[data-idee]"); if (!b) return; $("#q").value = F.q = b.dataset.idee; sauver(); afficher(); suggestions(); $("#liste").scrollIntoView({block: "start"}); };
+function ongletBas(n) { document.querySelectorAll(".onglets-bas button").forEach(b => b.classList.toggle("actif", b.dataset.nav === n)); }
+document.querySelector(".onglets-bas").onclick = e => {
+  const b = e.target.closest("[data-nav]"); if (!b) return;
+  const n = b.dataset.nav;
+  if (n === "offres") { if (F.type === "fav" || F.type === "masquees") { F.type = ""; sauver(); puces(); afficher(); } scrollTo({top: 0}); ongletBas("offres"); }
+  else if (n === "chercher") { $("#cherche").hidden = false; suggestions(); $("#q").focus(); scrollTo({top: 0}); ongletBas("chercher"); }
+  else if (n === "favoris") { F.type = F.type === "fav" ? "" : "fav"; sauver(); puces(); afficher(); scrollTo({top: $("#rail-dom").offsetTop - 80}); ongletBas(F.type === "fav" ? "favoris" : "offres"); if (F.type === "fav" && !Object.keys(FAV).length) toast("Touche le cœur d'une offre pour la garder ici"); }
+  else if (n === "alertes") panneauNotifs();
+  else if (n === "espace") panneauEspace();
+};
+function panneauEspace() {
+  const t = (id, icone, titre, sous) => `<button data-e="${id}"><span class="carre"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-${icone}"/></svg></span>${titre}<small>${sous}</small></button>`;
+  ouvrir(`${barre("Mon espace")}
+    <div class="espace">
+      ${t("cv", "doc", "Mon CV", "Déposer, modifier")}
+      ${t("lettre", "stylo", "Ma lettre", "Lettre de motivation")}
+      ${t("cand", "coche", "Mes candidatures", `${Object.keys(CAND).length} suivie${Object.keys(CAND).length > 1 ? "s" : ""}`)}
+      ${t("fav", "coeur", "Mes favoris", `${Object.keys(FAV).length} offre${Object.keys(FAV).length > 1 ? "s" : ""}`)}
+      ${t("alertes", "cloche", "Mes alertes", NOTIF.actif ? "Activées" : "Désactivées")}
+      ${t("guide", "d-barres", "Le guide", "Salaire, aides, conseils")}
+    </div>
+    <p class="aide" style="text-align:center;margin-top:14px">Tout reste sur ce téléphone, sans compte ni mot de passe.</p>`);
+  $("#feuille").querySelector(".espace").onclick = e => {
+    const b = e.target.closest("[data-e]"); if (!b) return;
+    const k = b.dataset.e;
+    if (k === "cv") panneauCV(); else if (k === "lettre") panneauLettre(null); else if (k === "cand") panneauCandidatures();
+    else if (k === "alertes") panneauNotifs(); else if (k === "guide") panneauGuide();
+    else { F.type = "fav"; sauver(); puces(); afficher(); fermer(); ongletBas("favoris"); }
+  };
 }
 
 /* ---------- liste ---------- */
@@ -574,8 +691,11 @@ function carteOffre(a) {
     <div class="dessin">${dessin(a.domaine)}</div>
   </div>`;
 }
-let LIMITE = 60;
-function afficher() {
+let LIMITE = 30;
+const SUITE = new IntersectionObserver(e => { if (e[0].isIntersecting) { LIMITE += 30; afficher(true); } }, {rootMargin: "900px 0px"});
+function afficher(suite) {
+  if (!suite) filtresActifs();
+  if (!suite) LIMITE = Math.max(30, Math.min(LIMITE, 30));
   const res = filtrees();
   const nbOffres = res.filter(a => a.type === "offre").length, nbSp = res.length - nbOffres;
   const nouv = res.filter(a => a.type === "offre" && joursDepuis(a) < 1).length;
@@ -588,15 +708,17 @@ function afficher() {
     $("#liste").innerHTML = `<div class="vide">Aucune offre avec ces filtres.<br><br><button class="btn gris" id="b-tout">Tout afficher</button></div>`;
     $("#b-tout").onclick = () => { Object.assign(F, {type: "", niveau: "", domaine: "", rayon: 70, q: "", debutant: false, salaire: false, teletravail: false, sansPermis: false, partiel: false, depuis: 0, salMin: 0}); $("#q").value = ""; sauver(); puces(); afficher(); };
   } else {
-    $("#liste").innerHTML = res.slice(0, LIMITE).map(carteOffre).join("") +
-      (res.length > LIMITE ? `<button class="btn gris" id="b-plus" style="grid-column:1/-1">Voir ${Math.min(60, res.length - LIMITE)} de plus</button>` : "");
-    const p = $("#b-plus"); if (p) p.onclick = () => { LIMITE += 60; afficher(); };
+    SUITE.disconnect();
+    if (suite) $("#liste").insertAdjacentHTML("beforeend", res.slice(LIMITE - 30, LIMITE).map(carteOffre).join(""));
+    else $("#liste").innerHTML = res.slice(0, LIMITE).map(carteOffre).join("");
+    const vieux = $("#suite"); if (vieux) vieux.remove();
+    if (res.length > LIMITE) { $("#liste").insertAdjacentHTML("beforeend", '<div id="suite" aria-hidden="true"></div>'); SUITE.observe($("#suite")); }
   }
   if (VUE === "carte") carteMaj(res);
 }
 $("#liste").onclick = e => {
   const f = e.target.closest("[data-fav]");
-  if (f) { const id = f.dataset.fav; FAV[id] ? delete FAV[id] : FAV[id] = 1; ecrire("alt974-fav", FAV); afficher(); return; }
+  if (f) { const id = f.dataset.fav; FAV[id] ? delete FAV[id] : FAV[id] = 1; ecrire("alt974-fav", FAV); f.innerHTML = ic("coeur", FAV[id] ? "plein" : ""); f.setAttribute("aria-label", FAV[id] ? "Retirer des favoris" : "Ajouter aux favoris"); const nf = Object.keys(FAV).length; $("#nb-fav").textContent = nf || ""; if (F.type === "fav") afficher(); else if ($("#voile").hidden) toast(FAV[id] ? "Ajoutée aux favoris" : "Retirée des favoris"); return; }
   const b = e.target.closest(".offre"); if (b) fiche(b.dataset.id);
 };
 $("#liste").onkeydown = e => { const b = e.target.closest(".offre"); if (b && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); fiche(b.dataset.id); } };
@@ -670,7 +792,7 @@ async function carteMaj(res) {
 
 /* ---------- feuilles ---------- */
 function ouvrir(h) { $("#feuille").innerHTML = h; $("#voile").hidden = false; $("#feuille").scrollTop = 0; document.body.style.overflow = "hidden"; }
-function fermer() { $("#voile").hidden = true; document.body.style.overflow = ""; }
+function fermer() { FICHE_ID = null; $("#voile").hidden = true; document.body.style.overflow = ""; }
 $("#voile").onclick = e => { if (e.target.id === "voile" || e.target.closest("[data-fermer]")) fermer(); };
 document.addEventListener("keydown", e => { if (e.key === "Escape") fermer(); });
 const barre = t => `<div class="barre"><h2>${t}</h2><button class="rond" data-fermer aria-label="Fermer">${ic("croix")}</button></div>`;
@@ -682,6 +804,8 @@ const INTERTITRE = /^(?:Présentation du poste|Les missions du poste|Missions|Vo
 const descHtml = t => t.split("\n").map(l => INTERTITRE.test(l.trim()) ? `<strong class="intertitre">${esc(l)}</strong>` : esc(l)).join("\n");
 function fiche(id) {
   const a = OFFRES.find(x => x.id === id); if (!a) return;
+  FICHE_ID = id;
+  if (!DETAILS) chargerDetails().then(() => { if (FICHE_ID === id && !$("#voile").hidden && a.description) fiche(id); });
   const d = km(a), spont = a.type === "spontanee";
   const gm = a.lat != null ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.entreprise + " " + (a.adresse || a.commune))}` : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.entreprise + " " + a.commune + " La Réunion")}`;
   const iti = `https://www.google.com/maps/dir/?api=1${POS ? `&origin=${POS.lat},${POS.lon}` : ""}&destination=${a.lat != null ? `${a.lat},${a.lon}` : encodeURIComponent(a.adresse || a.commune)}`;
@@ -712,7 +836,7 @@ function fiche(id) {
     ${a.vigilance ? `<div class="bloc alerte-arnaque"><h4>${ic("croix")} Prudence avec cette annonce</h4><p>Elle parle d'argent à verser ou de paiement. Un vrai employeur ne te demande jamais de payer pour travailler. Vérifie l'entreprise avant de répondre.</p></div>` : ""}
     <div class="bloc"><h4>${spont ? "À savoir" : "Le poste"}</h4>
       ${a.description ? `<p class="desc">${descHtml(a.description)}</p>`
-        : `<p class="aide">Le descriptif complet est sur le site d'origine${postuler ? ` : <a href="${esc(postuler)}" target="_blank" rel="noopener">voir l'annonce complète</a>` : ""}.</p>`}
+        : !DETAILS ? `<p class="aide">Chargement du descriptif…</p>` : `<p class="aide">Le descriptif complet est sur le site d'origine${postuler ? ` : <a href="${esc(postuler)}" target="_blank" rel="noopener">voir l'annonce complète</a>` : ""}.</p>`}
     </div>
     ${a.a_apprendre && a.a_apprendre.length ? `<div class="bloc"><h4>Ce que tu vas apprendre</h4>${liste_(a.a_apprendre)}</div>` : ""}
     ${a.attendu && a.attendu.length ? `<div class="bloc"><h4>Le profil recherché</h4>${liste_(a.attendu)}</div>` : ""}
@@ -740,8 +864,9 @@ function fiche(id) {
     <div class="bloc"><h4>Où se trouve l'entreprise</h4>
       ${a.position_approx && !/\d/.test(a.adresse || "") ? '<p class="aide">Adresse exacte non publiée : la carte montre le centre de la commune.</p>' : ""}
       <div class="actions"><a class="btn gris" href="${esc(gm)}" target="_blank" rel="noopener">${ic("carte")} Google Maps</a><a class="btn gris" href="${esc(iti)}" target="_blank" rel="noopener">${ic("route")} En voiture</a><a class="btn gris large" href="${esc(bus)}" target="_blank" rel="noopener">${ic("camion")} En bus (Car Jaune, Citalis, Alterneo…)</a></div>
-      ${a.lat != null ? `<iframe class="carte-map" loading="lazy" title="Carte Google Maps" src="https://maps.google.com/maps?q=${a.lat},${a.lon}&z=${a.position_approx ? 13 : 16}&output=embed"></iframe>` : ""}
+      ${a.lat != null ? `<div class="carte-map" id="f-carte" data-src="https://maps.google.com/maps?q=${a.lat},${a.lon}&z=${a.position_approx ? 13 : 16}&output=embed"></div>` : ""}
     </div>`);
+  setTimeout(() => { const c = $("#f-carte"); if (c && FICHE_ID === id) c.outerHTML = `<iframe class="carte-map" loading="lazy" title="Carte Google Maps" src="${esc(c.dataset.src)}"></iframe>`; }, 450);
   $("#f-cv").onclick = () => envoyerCV(a);
   $("#f-lm").onclick = () => panneauLettre(a);
   $("#f-fav").onclick = e => { FAV[a.id] ? delete FAV[a.id] : FAV[a.id] = 1; ecrire("alt974-fav", FAV); e.currentTarget.innerHTML = favTxt(a); afficher(); };
@@ -1178,12 +1303,12 @@ async function actualiser(silence) {
   if (MAJ_EN_COURS) return; MAJ_EN_COURS = true; DERNIERE_MAJ = Date.now();
   if (silence === true) {  // à l'ouverture et au retour sur l'appli : sans bruit
     try {
-      const r = await fetch("annonces.json?t=" + Date.now(), {cache: "no-store"});
+      const r = await fetch("liste.json?t=" + Date.now(), {cache: "no-store"});
       if (r.ok) {
         const avant = new Set(OFFRES.map(a => a.id)), liste = await r.json();
         if (Array.isArray(liste) && (liste.length !== OFFRES.length || liste.some(a => !avant.has(a.id)))) {
           const nouv = liste.filter(a => !avant.has(a.id)).length;
-          OFFRES = liste; puces(); afficher();
+          OFFRES = liste; DETAILS = DETAILS_P = null; chargerDetails(); puces(); afficher();
           if (nouv && avant.size) toast(`${nouv} nouvelle${nouv > 1 ? "s" : ""} offre${nouv > 1 ? "s" : ""} ajoutée${nouv > 1 ? "s" : ""}`);
         }
       }
@@ -1192,10 +1317,10 @@ async function actualiser(silence) {
   }
   $("#tirer").classList.add("tourne");
   try {
-    const r = await fetch("annonces.json?t=" + Date.now(), {cache: "no-store"});
+    const r = await fetch("liste.json?t=" + Date.now(), {cache: "no-store"});
     if (!r.ok) throw new Error(r.status);
     const avant = new Set(OFFRES.map(a => a.id));
-    OFFRES = await r.json();
+    OFFRES = await r.json(); DETAILS = DETAILS_P = null; chargerDetails();
     const nouv = OFFRES.filter(a => !avant.has(a.id)).length;
     puces(); afficher();
     toast(nouv ? `${nouv} nouvelle${nouv > 1 ? "s" : ""} offre${nouv > 1 ? "s" : ""}` : "Tout est à jour");
@@ -1220,6 +1345,7 @@ puces(); afficher();
 function depuisLien() { const id = decodeURIComponent(location.hash.slice(1)); const a = id && OFFRES.find(x => x.id === id); if (a) { F.section = a.categorie || "alternance"; puces(); afficher(); fiche(id); } }
 addEventListener("hashchange", depuisLien); depuisLien();
 actualiser(true);
+(window.requestIdleCallback || (f => setTimeout(f, 300)))(() => chargerDetails());
 </script>
 </body>
 </html>
