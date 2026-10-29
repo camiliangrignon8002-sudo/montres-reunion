@@ -1196,9 +1196,12 @@ def page_html(offres, maj, sources_ok):
     communes = json.dumps(COMMUNES, ensure_ascii=False)
     z = ZONES[0]
     gabarit = (ROOT / "alternance_page.html").read_text(encoding="utf-8")
+    version = str(int(time.time()))
+    # lu par la page ouverte : si une version plus récente est en ligne, elle se recharge toute seule
+    (LISTE_FILE.parent / "version.txt").write_text(version)
     return (gabarit.replace("__DONNEES__", donnees).replace("__COMMUNES__", communes)
             .replace("__CENTRE__", json.dumps([z["lat"], z["lon"]])).replace("__ZONE__", html.escape(z["nom"]))
-            .replace("__VERSION__", str(int(time.time()))).replace("__VAPID__", VAPID_PUBLIQUE).replace("__TOPIC__", TOPIC_ABONNEMENTS)
+            .replace("__VERSION__", version).replace("__VAPID__", VAPID_PUBLIQUE).replace("__TOPIC__", TOPIC_ABONNEMENTS)
             .replace("__MAJ__", html.escape(maj)).replace("__SOURCES__", html.escape(", ".join(sources_ok) or "aucune")))
 
 

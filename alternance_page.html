@@ -783,6 +783,18 @@ const CENTRE = __CENTRE__;
 const SOURCES = "__SOURCES__";
 let OFFRES = OFFRES0;
 const VERSION = "__VERSION__";
+async function verifierVersion() {
+  try {
+    const v = (await (await fetch("version.txt?" + Date.now(), {cache: "no-store"})).text()).trim();
+    if (!/^\d+$/.test(v) || +v <= +VERSION || sessionStorage.getItem("alt974-recharge") === v) return;
+    sessionStorage.setItem("alt974-recharge", v);
+    if (window.caches) for (const k of await caches.keys()) if (k.startsWith("alternance974")) await caches.delete(k);
+    location.reload();
+  } catch (e) {}
+}
+verifierVersion();
+addEventListener("focus", verifierVersion);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) verifierVersion(); });
 let DETAILS = null, DETAILS_P = null, FICHE_ID = null;
 function chargerDetails() {  // descriptifs complets, chargés en arrière-plan après l'affichage
   if (!DETAILS_P) DETAILS_P = fetch("details.json?v=" + VERSION).then(r => r.ok ? r.json() : {}).then(d => {
@@ -982,7 +994,8 @@ addEventListener("deviceorientation", e => {
   const a = $(".onglets-bas button.actif"); if (!a) return;
   a.style.setProperty("--gx", (50 + Math.max(-30, Math.min(30, e.gamma))).toFixed(0) + "%");
 }, {passive: true});
-let TEINTE = lire("alt974-teinte", false), ANIM_DOUCES = lire("alt974-doux", false);
+let VERRE_ACTIF = lire("alt974-verre-liquide", true), ANIM_ACTIVES = lire("alt974-animations", true);
+let TEINTE = !VERRE_ACTIF, ANIM_DOUCES = !ANIM_ACTIVES;
 document.documentElement.classList.toggle("doux", !!ANIM_DOUCES);
 document.documentElement.classList.toggle("teinte", !!TEINTE);
 $("#q").value = F.q; if (F.q) $("#cherche").hidden = false;
@@ -1947,8 +1960,8 @@ function menu() {
     <button class="entree" id="m-cv">${ic("doc")}Mon CV et mes infos</button>
     <button class="entree" id="m-notif">${ic("cloche")}Notifications ${NOTIF.actif ? "(activées)" : ""}</button>
     <button class="entree" id="m-lm">${ic("stylo")}Écrire une lettre de motivation</button>
-    <button class="entree" id="m-anim">${ic("reglages")}Animations : ${ANIM_DOUCES ? "réduites" : "liquides (actives)"}</button>
-    <button class="entree" id="m-verre">${ic("reglages")}Effet verre : ${TEINTE ? "Teinté (plus lisible)" : "Transparent"}</button>
+    <button class="entree" id="m-verre">${ic("reglages")}Liquid Glass : ${VERRE_ACTIF ? "activé" : "désactivé"}</button>
+    <button class="entree" id="m-anim">${ic("reglages")}Animations : ${ANIM_ACTIVES ? "activées" : "désactivées"}</button>
     <button class="entree" id="m-maj">${ic("maj")}Actualiser les offres</button>
     <button class="entree" id="m-guide">${ic("doc")}Le guide de l'alternance et du job</button>
     <button class="entree" id="m-simu">${ic("d-barres")}Simulateur de salaire d'apprenti</button>
@@ -1970,6 +1983,8 @@ function menu() {
   $("#m-notif").onclick = panneauNotifs;
   $("#m-maj").onclick = () => { fermer(); actualiser(); };
   $("#m-verre").onclick = () => { TEINTE = !TEINTE; ecrire("alt974-teinte", TEINTE); document.documentElement.classList.toggle("teinte", TEINTE); toast(TEINTE ? "Verre teinté : plus opaque et plus lisible" : "Verre transparent"); menu(); };
+  $("#m-anim").onclick = () => { ANIM_ACTIVES = !ANIM_ACTIVES; ANIM_DOUCES = !ANIM_ACTIVES; ecrire("alt974-animations", ANIM_ACTIVES); document.documentElement.classList.toggle("doux", ANIM_DOUCES); toast(ANIM_ACTIVES ? "Animations activées" : "Animations désactivées"); menu(); };
+  $("#m-verre").onclick = () => { VERRE_ACTIF = !VERRE_ACTIF; TEINTE = !VERRE_ACTIF; ecrire("alt974-verre-liquide", VERRE_ACTIF); document.documentElement.classList.toggle("teinte", TEINTE); toast(VERRE_ACTIF ? "Liquid Glass activé" : "Liquid Glass désactivé : surfaces opaques"); menu(); };
   $("#m-anim").onclick = () => { ANIM_DOUCES = !ANIM_DOUCES; ecrire("alt974-doux", ANIM_DOUCES); document.documentElement.classList.toggle("doux", ANIM_DOUCES); toast(ANIM_DOUCES ? "Animations réduites" : "Animations liquides activées"); menu(); };
   $("#m-fav").onclick = () => { F.type = "fav"; sauver(); puces(); afficher(); fermer(); };
 }
