@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alternance 974</title>
+<meta name="description" content="Toutes les offres d'alternance et d'emploi à La Réunion : apprentissage, contrat pro, CDI, CDD, intérim, contacts, carte, CV et lettre de motivation.">
+<meta name="theme-color" content="#0b6e4f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Alternance 974">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<style>
+:root{
+  --fond:#f3f5f4;--carte:#fff;--texte:#16201b;--doux:#5f6b65;--ligne:#e1e6e3;--champ:#e8ecea;
+  --vert:#0b6e4f;--vert-doux:#e2f1eb;--orange:#b25000;--orange-doux:#fdf0e3;--bleu:#1f5fbf;--bleu-doux:#e6eefb;
+  --rouge:#d1242f;--ombre:0 1px 2px rgba(0,0,0,.04),0 6px 18px rgba(0,0,0,.06);--r:18px;
+}
+@media (prefers-color-scheme:dark){:root{
+  --fond:#0d1110;--carte:#1a201e;--texte:#eef3f0;--doux:#9aa6a0;--ligne:#2a322f;--champ:#252c29;
+  --vert:#3ccf96;--vert-doux:#12302a;--orange:#ff9f0a;--orange-doux:#33210a;--bleu:#6ea8ff;--bleu-doux:#14243d;
+  --rouge:#ff6b6b;--ombre:0 1px 2px rgba(0,0,0,.5);
+}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--fond);color:var(--texte);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding-bottom:calc(40px + env(safe-area-inset-bottom));overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--vert);text-decoration:none}
+[hidden]{display:none!important}
+.page{max-width:1000px;margin:auto;padding:0 16px}
+
+header{position:sticky;top:0;z-index:30;background:var(--fond);padding:calc(env(safe-area-inset-top) + 10px) 0 8px}
+.haut{display:flex;align-items:center;gap:6px}
+.haut h1{flex:1;min-width:0;margin:0 0 0 4px;font-size:22px;letter-spacing:-.02em}
+.haut h1 small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px;font-weight:400;color:var(--doux);letter-spacing:0}
+.rond{border:0;width:42px;height:42px;border-radius:50%;background:var(--carte);box-shadow:var(--ombre);display:grid;place-items:center;flex:none;font-size:19px}
+.rond:active{transform:scale(.94)}
+.tourne{animation:tourne .8s linear infinite}@keyframes tourne{to{transform:rotate(360deg)}}
+.cherche{margin-top:10px;display:flex;align-items:center;gap:8px;background:var(--champ);border-radius:12px;padding:0 12px}
+.cherche input{flex:1;border:0;background:transparent;padding:11px 0;outline:none;min-width:0}
+.puces{display:flex;gap:8px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
+.puces::-webkit-scrollbar{display:none}
+.puce{border:1px solid var(--ligne);background:var(--carte);border-radius:999px;padding:7px 13px;white-space:nowrap;font-size:14px}
+.puce.actif{background:var(--vert);border-color:var(--vert);color:#fff}
+
+.autour{background:var(--carte);border-radius:var(--r);box-shadow:var(--ombre);padding:12px 14px;margin:10px 0}
+.autour .ligne{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.autour select{flex:1;min-width:150px;border:1px solid var(--ligne);background:var(--champ);border-radius:10px;padding:8px}
+.btn{border:0;border-radius:12px;padding:10px 14px;background:var(--vert);color:#fff;font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-align:center}
+.btn.leger{background:var(--vert-doux);color:var(--vert)}
+.btn.gris{background:var(--champ);color:var(--texte)}
+.btn:active{transform:scale(.97)}
+input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
+.aide{font-size:13px;color:var(--doux)}
+
+.vues{display:flex;background:var(--champ);border-radius:12px;padding:3px;margin:6px 0 10px}
+.vues button{flex:1;border:0;background:transparent;border-radius:10px;padding:8px;font-weight:600;color:var(--doux)}
+.vues button.actif{background:var(--carte);color:var(--texte);box-shadow:var(--ombre)}
+.compte{font-size:14px;color:var(--doux);margin:4px 2px 10px}
+
+.liste{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.offre{background:var(--carte);border-radius:var(--r);box-shadow:var(--ombre);padding:14px 15px;border:0;text-align:left;width:100%;display:flex;flex-direction:column;gap:6px}
+.offre h3{margin:0;font-size:16.5px;line-height:1.3}
+.offre .ent{font-weight:600;color:var(--vert)}
+.offre .lieu{font-size:14px;color:var(--doux)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12px;padding:3px 8px;border-radius:999px;background:var(--champ);color:var(--doux)}
+.tag.neuf{background:var(--rouge);color:#fff}
+.tag.spont{background:var(--orange-doux);color:var(--orange)}
+.tag.off{background:var(--bleu-doux);color:var(--bleu)}
+.tag.ok{background:var(--vert-doux);color:var(--vert)}
+.section{display:flex;background:var(--champ);border-radius:14px;padding:3px;margin-top:10px}
+.section button{flex:1;border:0;background:transparent;border-radius:11px;padding:9px 6px;font-weight:700;color:var(--doux);font-size:15px}
+.section button.actif{background:var(--vert);color:#fff}
+.puces.dom .puce{font-size:13px;padding:6px 11px}
+.puce b{font-weight:600;opacity:.7;margin-left:4px}
+#tirer{position:fixed;top:calc(env(safe-area-inset-top) + 8px);left:50%;transform:translate(-50%,-60px);z-index:40;background:var(--carte);box-shadow:var(--ombre);border-radius:50%;width:38px;height:38px;display:grid;place-items:center;font-size:19px;transition:transform .15s}
+.qualites{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.qualites .puce{font-size:13.5px}
+#lm-texte{min-height:340px;font-family:Georgia,"Times New Roman",serif;font-size:15px;line-height:1.5}
+.vide{text-align:center;color:var(--doux);padding:40px 16px;background:var(--carte);border-radius:var(--r)}
+#carte{height:calc(100vh - 330px);min-height:360px;border-radius:var(--r);overflow:hidden;box-shadow:var(--ombre);z-index:1}
+.leaflet-popup-content{font:14px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.leaflet-popup-content b{display:block}
+.leaflet-popup-content button{margin-top:6px;border:0;border-radius:8px;background:#0b6e4f;color:#fff;padding:6px 10px;font-weight:600}
+
+/* Feuilles (fiche, CV, menu) */
+.voile{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:50;display:flex;align-items:flex-end;justify-content:center}
+.feuille{background:var(--fond);width:100%;max-width:720px;max-height:92vh;overflow-y:auto;border-radius:22px 22px 0 0;padding:14px 16px calc(24px + env(safe-area-inset-bottom));animation:monte .22s ease-out}
+@keyframes monte{from{transform:translateY(40px);opacity:.5}}
+@media (min-width:760px){.voile{align-items:center}.feuille{border-radius:22px;max-height:88vh}}
+.feuille .barre{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.feuille .barre h2{flex:1;margin:0;font-size:20px;line-height:1.25}
+.bloc{background:var(--carte);border-radius:var(--r);padding:14px;margin:10px 0;box-shadow:var(--ombre)}
+.bloc h4{margin:0 0 8px;font-size:15px}
+.bloc p{margin:0 0 6px;white-space:pre-line}
+.bloc ul{margin:0;padding-left:20px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.actions .large{grid-column:1/-1}
+.infos{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14.5px}
+.infos dt{color:var(--doux)}.infos dd{margin:0}
+.carte-map{width:100%;height:220px;border:0;border-radius:12px;margin-top:10px}
+.replie{max-height:9.5em;overflow:hidden;position:relative}
+.replie::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3em;background:linear-gradient(transparent,var(--carte))}
+.lien-plus{border:0;background:none;color:var(--vert);font-weight:600;padding:4px 0}
+label.champ{display:block;margin:8px 0;font-size:14px;color:var(--doux)}
+label.champ input,label.champ textarea,label.champ select{display:block;width:100%;margin-top:4px;border:1px solid var(--ligne);background:var(--carte);border-radius:10px;padding:10px;color:var(--texte)}
+textarea{min-height:170px;resize:vertical}
+.cv-etat{display:flex;align-items:center;gap:10px;padding:12px;border-radius:12px;background:var(--vert-doux);color:var(--vert);font-weight:600}
+.cv-etat.manque{background:var(--orange-doux);color:var(--orange)}
+.menu a,.menu button.entree{display:flex;align-items:center;gap:12px;width:100%;padding:13px 4px;border:0;border-bottom:1px solid var(--ligne);background:none;text-align:left;color:var(--texte)}
+.menu .ic{width:30px;text-align:center;font-size:19px}
+.cand{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--ligne)}
+.cand div{flex:1;min-width:0}
+.cand small{color:var(--doux)}
+.cand select{border:1px solid var(--ligne);background:var(--champ);border-radius:8px;padding:6px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#16201b;color:#fff;padding:11px 16px;border-radius:12px;z-index:90;max-width:90vw;font-size:14.5px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+</style>
+</head>
+<body>
+<header>
+  <div class="page">
+    <div class="haut">
+      <button class="rond" id="b-menu" aria-label="Menu">☰</button>
+      <h1>Alternance 974<small>Mis à jour jeudi 29/10 à 08h09</small></h1>
+      <button class="rond" id="b-notif" aria-label="Notifications">🔔</button>
+      <button class="rond" id="b-cv" aria-label="Mon CV">📄</button>
+      <button class="rond" id="b-maj" aria-label="Actualiser">↻</button>
+    </div>
+    <div class="section" role="tablist" id="p-section">
+      <button data-section="alternance">🎓 Alternance</button>
+      <button data-section="emploi">💼 Emploi</button>
+    </div>
+    <div class="cherche">🔎<input id="q" type="search" placeholder="Métier, domaine, entreprise, commune…" aria-label="Rechercher"></div>
+    <div class="puces dom" id="p-domaine"></div>
+    <div class="puces" id="p-type"></div>
+    <div class="puces" id="p-niveau"></div>
+  </div>
+</header>
+
+<main class="page">
+  <section class="autour" aria-label="Autour de moi">
+    <div class="ligne">
+      <button class="btn leger" id="b-pos">📍 Ma position</button>
+      <select id="commune" aria-label="Ou choisis ta commune"><option value="">ou choisis ta commune…</option></select>
+    </div>
+    <input type="range" id="rayon" min="2" max="70" step="1" value="70" aria-label="Rayon en kilomètres">
+    <div class="aide" id="rayon-aide">Rayon : toute l'île</div>
+  </section>
+
+  <div class="vues" role="tablist">
+    <button class="actif" data-vue="liste">Liste</button>
+    <button data-vue="carte">Carte</button>
+  </div>
+  <div class="compte" id="compte"></div>
+  <div class="liste" id="liste"></div>
+  <div id="carte" hidden></div>
+</main>
+
+<div id="tirer" aria-hidden="true">↻</div>
+<div class="voile" id="voile" hidden><div class="feuille" id="feuille" role="dialog" aria-modal="true"></div></div>
+
+<script>
+const OFFRES0 = [];
+const COMMUNES = {"Saint-Denis": [-20.8823, 55.4504], "Sainte-Clotilde": [-20.8986, 55.4911], "Sainte-Marie": [-20.8969, 55.5495], "Sainte-Suzanne": [-20.9064, 55.607], "Saint-André": [-20.9633, 55.6503], "Bras-Panon": [-21.0016, 55.6773], "Saint-Benoît": [-21.0339, 55.7128], "La Plaine-des-Palmistes": [-21.1366, 55.6272], "Sainte-Rose": [-21.1273, 55.7963], "Saint-Philippe": [-21.359, 55.7672], "Saint-Joseph": [-21.3779, 55.6192], "Petite-Île": [-21.3539, 55.5652], "Saint-Pierre": [-21.3393, 55.4781], "Le Tampon": [-21.2779, 55.5177], "Entre-Deux": [-21.247, 55.472], "Saint-Louis": [-21.2862, 55.4114], "L'Étang-Salé": [-21.265, 55.3664], "Les Avirons": [-21.2413, 55.3392], "Saint-Leu": [-21.1706, 55.2884], "Les Trois-Bassins": [-21.105, 55.301], "Saint-Paul": [-21.0096, 55.2707], "Saint-Gilles-les-Bains": [-21.0539, 55.2253], "Le Port": [-20.9373, 55.2919], "La Possession": [-20.9253, 55.3361], "Cilaos": [-21.134, 55.4718], "Salazie": [-21.0272, 55.539]};
+const CENTRE = [-21.13, 55.53];
+const SOURCES = "aucune";
+let OFFRES = OFFRES0;
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const sur = u => /^https?:\/\//i.test(u || "") ? u : "";
+const norm = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+function lire(cle, def) { try { const v = localStorage.getItem(cle); return v ? JSON.parse(v) : def; } catch (e) { return def; } }
+function ecrire(cle, v) { try { localStorage.setItem(cle, JSON.stringify(v)); } catch (e) {} }
+function toast(t) { document.querySelectorAll(".toast").forEach(x => x.remove()); const d = document.createElement("div"); d.className = "toast"; d.textContent = t; document.body.append(d); setTimeout(() => d.remove(), 3200); }
+
+const F = Object.assign({section: "alternance", type: "", niveau: "", domaine: "", rayon: 70, q: ""}, lire("alt974-filtres", {}));
+let LETTRES = lire("alt974-lettres", {});   // id de l'offre -> lettre de motivation écrite pour elle
+let POS = lire("alt974-pos", null);   // {lat, lon, nom}
+let FAV = lire("alt974-fav", {});
+let CAND = lire("alt974-cand", {});   // id -> {date, statut, titre, entreprise}
+const LETTRE_ALT = "Bonjour,\n\nJe m'appelle {prenom} {nom} et je recherche une alternance pour préparer {formation}. Votre offre « {poste} » chez {entreprise} m'intéresse beaucoup.\n\nVous trouverez mon CV en pièce jointe. Je suis disponible pour un entretien quand vous le souhaitez.\n\nBien cordialement,\n{prenom} {nom}\n{tel}";
+let PROFIL = Object.assign({prenom: "", nom: "", email: "", tel: "", formation: "", lettre: LETTRE_ALT}, lire("alt974-profil", {}));
+let VUE = "liste";
+const sauver = () => ecrire("alt974-filtres", F);
+
+/* ---------- CV gardé sur le téléphone (IndexedDB) ---------- */
+function base() {
+  return new Promise((ok, ko) => {
+    const r = indexedDB.open("alt974", 1);
+    r.onupgradeneeded = () => r.result.createObjectStore("fichiers");
+    r.onsuccess = () => ok(r.result); r.onerror = () => ko(r.error);
+  });
+}
+async function cvLire() {
+  try { const db = await base(); return await new Promise(ok => { const q = db.transaction("fichiers").objectStore("fichiers").get("cv"); q.onsuccess = () => ok(q.result || null); q.onerror = () => ok(null); }); }
+  catch (e) { return null; }
+}
+async function cvEcrire(f) {
+  const db = await base();
+  return new Promise((ok, ko) => { const t = db.transaction("fichiers", "readwrite"); f ? t.objectStore("fichiers").put(f, "cv") : t.objectStore("fichiers").delete("cv"); t.oncomplete = ok; t.onerror = () => ko(t.error); });
+}
+
+/* ---------- distances ---------- */
+function km(a) {
+  if (!POS || a.lat == null || a.lon == null) return null;
+  const R = 6371, r = Math.PI / 180, dLat = (a.lat - POS.lat) * r, dLon = (a.lon - POS.lon) * r;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(POS.lat * r) * Math.cos(a.lat * r) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+const kmTexte = d => d == null ? "" : d < 1 ? "à moins d'1 km" : `à ${Math.round(d)} km`;
+const neuf = a => a.vu && (Date.now() - new Date(a.vu)) < 3 * 864e5;
+const date = s => s ? new Date(s).toLocaleDateString("fr-FR", {day: "numeric", month: "long", year: "numeric"}) : "";
+
+/* ---------- filtres ---------- */
+const TYPES = {
+  alternance: [["", "Tout"], ["offre", "Offres"], ["spontanee", "Candidature spontanée"], ["fav", "♥ Favoris"], ["cand", "✓ Déjà postulé"]],
+  emploi: [["", "Tout"], ["CDI", "CDI"], ["CDD", "CDD"], ["Intérim", "Intérim"], ["Saisonnier", "Saisonnier"], ["Temps partiel", "Temps partiel"], ["fav", "♥ Favoris"], ["cand", "✓ Déjà postulé"]],
+};
+const NIVEAUX = ["CAP, BEP", "Bac", "Bac+2", "Bac+3", "Bac+5"];
+const ICONES = {"Commerce, vente": "🛍️", "Hôtellerie, restauration, tourisme": "🍽️", "BTP, construction": "🏗️", "Mécanique, maintenance": "🔧",
+  "Transport, logistique": "🚚", "Santé": "🩺", "Social, services à la personne": "🤝", "Banque, assurance, immobilier": "🏦",
+  "Gestion, administration": "📊", "Informatique, numérique": "💻", "Communication, médias": "📣", "Agriculture, nature": "🌱",
+  "Industrie": "🏭", "Spectacle, sport": "⚽", "Artisanat d'art": "🎨", "Autres": "•"};
+const dansSection = a => (a.categorie || "alternance") === F.section;
+function puces() {
+  document.querySelectorAll("#p-section button").forEach(b => b.classList.toggle("actif", b.dataset.section === F.section));
+  const comptes = {};
+  for (const a of OFFRES) if (dansSection(a)) comptes[a.domaine || "Autres"] = (comptes[a.domaine || "Autres"] || 0) + 1;
+  const doms = Object.keys(comptes).sort((x, y) => (x === "Autres") - (y === "Autres") || comptes[y] - comptes[x]);
+  if (F.domaine && !comptes[F.domaine]) doms.unshift(F.domaine);
+  $("#p-domaine").innerHTML = `<button class="puce ${F.domaine ? "" : "actif"}" data-domaine="">Tous les domaines</button>` +
+    doms.map(d => `<button class="puce ${F.domaine === d ? "actif" : ""}" data-domaine="${esc(d)}">${ICONES[d] || "•"} ${esc(d)}<b>${comptes[d] || 0}</b></button>`).join("");
+  $("#p-type").innerHTML = TYPES[F.section].map(([v, t]) => `<button class="puce ${F.type === v ? "actif" : ""}" data-type="${esc(v)}">${t}</button>`).join("");
+  $("#p-niveau").hidden = F.section !== "alternance";
+  $("#p-niveau").innerHTML = [["", "Tous niveaux"], ...NIVEAUX.map(n => [n, n])].map(([v, t]) => `<button class="puce ${F.niveau === v ? "actif" : ""}" data-niveau="${esc(v)}">${esc(t)}</button>`).join("");
+}
+$("#p-section").onclick = e => { const b = e.target.closest("[data-section]"); if (!b || b.dataset.section === F.section) return; Object.assign(F, {section: b.dataset.section, type: "", domaine: ""}); LIMITE = 60; sauver(); puces(); afficher(); };
+$("#p-domaine").onclick = e => { const b = e.target.closest("[data-domaine]"); if (!b) return; F.domaine = b.dataset.domaine; sauver(); puces(); afficher(); };
+$("#p-type").onclick = e => { const b = e.target.closest("[data-type]"); if (!b) return; F.type = b.dataset.type; sauver(); puces(); afficher(); };
+$("#p-niveau").onclick = e => { const b = e.target.closest("[data-niveau]"); if (!b) return; F.niveau = b.dataset.niveau; sauver(); puces(); afficher(); };
+$("#q").value = F.q;
+$("#q").oninput = e => { F.q = e.target.value; sauver(); afficher(); };
+
+function filtrees() {
+  const mots = norm(F.q).split(/\s+/).filter(Boolean);
+  const res = [];
+  for (const a of OFFRES) {
+    a._d = km(a);
+    if (!dansSection(a)) continue;
+    if (F.type === "fav" ? !FAV[a.id] : F.type === "cand" ? !CAND[a.id] :
+        F.type && (F.section === "emploi" ? !a.contrats.includes(F.type) : a.type !== F.type)) continue;
+    if (F.domaine && (a.domaine || "Autres") !== F.domaine) continue;
+    if (F.section === "alternance" && F.niveau && a.niveau !== F.niveau) continue;
+    if (POS && F.rayon < 70 && (a._d == null || a._d > F.rayon)) continue;
+    if (mots.length) {
+      const t = norm([a.titre, a.entreprise, a.commune, a.secteur, a.domaine, a.contrats.join(" "), a.description].join(" "));
+      if (!mots.every(m => t.includes(m))) continue;
+    }
+    res.push(a);
+  }
+  if (POS) res.sort((x, y) => (x.type !== "offre") - (y.type !== "offre") || (x._d ?? 999) - (y._d ?? 999));
+  return res;
+}
+
+/* ---------- liste ---------- */
+function carteOffre(a) {
+  return `<button class="offre" data-id="${esc(a.id)}">
+    <div class="tags">${neuf(a) ? '<span class="tag neuf">Nouveau</span>' : ""}${a.type === "spontanee" ? '<span class="tag spont">Candidature spontanée</span>' : `<span class="tag off">${esc(a.contrats.join(" · "))}</span>`}${a.niveau ? `<span class="tag">${esc(a.niveau)}</span>` : ""}${a.domaine && a.domaine !== "Autres" ? `<span class="tag">${ICONES[a.domaine] || ""} ${esc(a.domaine)}</span>` : ""}${CAND[a.id] ? '<span class="tag ok">✓ Postulé</span>' : ""}${FAV[a.id] ? '<span class="tag">♥</span>' : ""}</div>
+    <h3>${esc(a.type === "spontanee" ? a.entreprise : a.titre)}</h3>
+    ${a.type === "spontanee" ? (a.secteur ? `<div class="lieu">${esc(a.secteur)}</div>` : "") : `<div class="ent">${esc(a.entreprise)}</div>`}
+    <div class="lieu">📍 ${esc(a.commune || a.adresse || "La Réunion")}${a._d != null ? ` · ${kmTexte(a._d)}` : ""}${a.debut ? ` · début ${esc(date(a.debut))}` : ""}</div>
+  </button>`;
+}
+let LIMITE = 60;
+function afficher() {
+  const res = filtrees();
+  const nbOffres = res.filter(a => a.type === "offre").length, nbSp = res.length - nbOffres;
+  $("#compte").textContent = OFFRES.length ? `${nbOffres} offre${nbOffres > 1 ? "s" : ""} ${F.section === "emploi" ? "d'emploi" : "d'alternance"}${nbSp ? ` · ${nbSp} entreprise${nbSp > 1 ? "s" : ""} en candidature spontanée` : ""}${SOURCES && SOURCES !== "aucune" ? " · sources : " + SOURCES : ""}` : "";
+  if (!OFFRES.length) {
+    $("#liste").innerHTML = `<div class="vide"><b>Pas encore d'offres</b><br>La première recherche n'a pas encore eu lieu, ou les sources n'ont pas répondu. En attendant, menu ☰ → <b>Aussi sur</b> pour chercher sur les autres sites.</div>`;
+  } else if (!res.length) {
+    $("#liste").innerHTML = `<div class="vide">Aucune offre avec ces filtres.<br><br><button class="btn gris" id="b-tout">Tout afficher</button></div>`;
+    $("#b-tout").onclick = () => { Object.assign(F, {type: "", niveau: "", domaine: "", rayon: 70, q: ""}); $("#q").value = ""; sauver(); puces(); rayonUI(); afficher(); };
+  } else {
+    $("#liste").innerHTML = res.slice(0, LIMITE).map(carteOffre).join("") +
+      (res.length > LIMITE ? `<button class="btn gris" id="b-plus" style="grid-column:1/-1">Voir ${Math.min(60, res.length - LIMITE)} de plus</button>` : "");
+    const p = $("#b-plus"); if (p) p.onclick = () => { LIMITE += 60; afficher(); };
+  }
+  if (VUE === "carte") carteMaj(res);
+}
+$("#liste").onclick = e => { const b = e.target.closest(".offre"); if (b) fiche(b.dataset.id); };
+
+/* ---------- autour de moi ---------- */
+const sel = $("#commune");
+Object.keys(COMMUNES).sort((a, b) => a.localeCompare(b, "fr")).forEach(c => sel.add(new Option(c, c)));
+function rayonUI() {
+  $("#rayon").value = F.rayon;
+  sel.value = POS && COMMUNES[POS.nom] ? POS.nom : "";
+  $("#rayon-aide").textContent = !POS ? "Choisis ta position ou ta commune pour voir les offres autour de toi."
+    : `Rayon : ${F.rayon >= 70 ? "toute l'île" : F.rayon + " km"} autour de ${POS.nom} (à vol d'oiseau)`;
+}
+function placer(p) { POS = p; ecrire("alt974-pos", POS); if (F.rayon >= 70) F.rayon = 15; sauver(); rayonUI(); afficher(); }
+sel.onchange = () => { const c = COMMUNES[sel.value]; if (!c) { POS = null; ecrire("alt974-pos", null); rayonUI(); afficher(); return; } placer({lat: c[0], lon: c[1], nom: sel.value}); };
+$("#b-pos").onclick = () => {
+  if (!navigator.geolocation) return toast("La localisation n'est pas disponible sur cet appareil");
+  toast("Recherche de ta position…");
+  navigator.geolocation.getCurrentPosition(p => placer({lat: p.coords.latitude, lon: p.coords.longitude, nom: "ma position"}),
+    () => toast("Position refusée : choisis ta commune dans la liste"), {enableHighAccuracy: true, timeout: 15000});
+};
+$("#rayon").oninput = e => { F.rayon = +e.target.value; if (!POS && F.rayon < 70) toast("Choisis d'abord ta position ou ta commune"); sauver(); rayonUI(); afficher(); };
+
+/* ---------- carte (Leaflet + OpenStreetMap) ---------- */
+let CARTE = null, COUCHE = null, CERCLE = null, MOI = null, LEAFLET = null;
+function chargerLeaflet() {
+  if (window.L) return Promise.resolve();
+  if (LEAFLET) return LEAFLET;
+  LEAFLET = new Promise((ok, ko) => { const s = document.createElement("script"); s.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"; s.crossOrigin = ""; s.onload = ok; s.onerror = ko; document.head.append(s); });
+  return LEAFLET;
+}
+async function carteMaj(res) {
+  try { await chargerLeaflet(); } catch (e) { $("#carte").innerHTML = '<div class="vide">La carte ne se charge pas (pas de connexion ?).</div>'; return; }
+  if (!CARTE) {
+    CARTE = L.map("carte", {zoomControl: true}).setView(CENTRE, 10);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom: 19, attribution: "© OpenStreetMap"}).addTo(CARTE);
+    COUCHE = L.layerGroup().addTo(CARTE);
+  }
+  setTimeout(() => CARTE.invalidateSize(), 50);
+  COUCHE.clearLayers();
+  if (CERCLE) { CERCLE.remove(); CERCLE = null; }
+  if (MOI) { MOI.remove(); MOI = null; }
+  const pts = [];
+  for (const a of res) {
+    if (a.lat == null || a.lon == null) continue;
+    const spont = a.type === "spontanee";
+    const m = L.circleMarker([a.lat, a.lon], {radius: spont ? 6 : 8, color: "#fff", weight: 2, fillColor: spont ? "#e07a00" : "#0b6e4f", fillOpacity: .95});
+    const d = document.createElement("div");
+    d.innerHTML = `<b>${esc(spont ? a.entreprise : a.titre)}</b>${spont ? "Candidature spontanée" : esc(a.entreprise)}<br><small>${esc(a.commune)}${a._d != null ? " · " + kmTexte(a._d) : ""}</small><br>`;
+    const b = document.createElement("button"); b.textContent = "Voir la fiche"; b.onclick = () => fiche(a.id); d.append(b);
+    m.bindPopup(d); COUCHE.addLayer(m); pts.push([a.lat, a.lon]);
+  }
+  if (POS) {
+    MOI = L.circleMarker([POS.lat, POS.lon], {radius: 9, color: "#fff", weight: 3, fillColor: "#1f5fbf", fillOpacity: 1}).addTo(CARTE).bindPopup("Toi");
+    if (F.rayon < 70) { CERCLE = L.circle([POS.lat, POS.lon], {radius: F.rayon * 1000, color: "#1f5fbf", weight: 1.5, fillOpacity: .07}).addTo(CARTE); CARTE.fitBounds(CERCLE.getBounds(), {padding: [10, 10]}); return; }
+  }
+  if (pts.length) CARTE.fitBounds(pts, {padding: [24, 24], maxZoom: 13});
+}
+document.querySelector(".vues").onclick = e => {
+  const b = e.target.closest("[data-vue]"); if (!b) return;
+  VUE = b.dataset.vue;
+  document.querySelectorAll(".vues button").forEach(x => x.classList.toggle("actif", x === b));
+  $("#liste").hidden = VUE !== "liste"; $("#carte").hidden = VUE !== "carte";
+  afficher();
+};
+
+/* ---------- feuilles ---------- */
+function ouvrir(h) { $("#feuille").innerHTML = h; $("#voile").hidden = false; $("#feuille").scrollTop = 0; document.body.style.overflow = "hidden"; }
+function fermer() { $("#voile").hidden = true; document.body.style.overflow = ""; }
+$("#voile").onclick = e => { if (e.target.id === "voile" || e.target.closest("[data-fermer]")) fermer(); };
+document.addEventListener("keydown", e => { if (e.key === "Escape") fermer(); });
+const barre = t => `<div class="barre"><h2>${t}</h2><button class="rond" data-fermer aria-label="Fermer">✕</button></div>`;
+
+function fiche(id) {
+  const a = OFFRES.find(x => x.id === id); if (!a) return;
+  const d = km(a), spont = a.type === "spontanee";
+  const gm = a.lat != null ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.entreprise + " " + (a.adresse || a.commune))}` : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.entreprise + " " + a.commune + " La Réunion")}`;
+  const iti = `https://www.google.com/maps/dir/?api=1${POS ? `&origin=${POS.lat},${POS.lon}` : ""}&destination=${a.lat != null ? `${a.lat},${a.lon}` : encodeURIComponent(a.adresse || a.commune)}`;
+  const postuler = sur(a.postuler), site = sur(a.site);
+  const liste_ = l => l && l.length ? `<ul>${l.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
+  const infos = [["Contrat", a.contrats.join(", ")], ["Domaine", a.domaine !== "Autres" && a.domaine], ["Niveau", a.niveau], ["Expérience", a.experience], ["Horaires", a.horaires], ["Début", date(a.debut)], ["Durée", a.duree], ["Postes", a.postes],
+    ["Rémunération", a.salaire], ["Télétravail", a.teletravail], ["Publiée le", date(a.publie)], ["Source", a.source]].filter(x => x[1]);
+  ouvrir(`${barre(esc(spont ? a.entreprise : a.titre))}
+    <div class="tags">${spont ? '<span class="tag spont">Candidature spontanée</span>' : `<span class="tag off">${esc(a.contrats.join(" · "))}</span>`}${a.niveau ? `<span class="tag">${esc(a.niveau)}</span>` : ""}${neuf(a) ? '<span class="tag neuf">Nouveau</span>' : ""}</div>
+    <div class="bloc">
+      <h4>${esc(a.entreprise)}</h4>
+      <div class="lieu">📍 ${esc(a.adresse || a.commune)}${d != null ? ` · ${kmTexte(d)}` : ""}${a.position_approx ? " (centre de la commune)" : ""}</div>
+      ${a.secteur ? `<div class="aide">${esc(a.secteur)}${a.taille ? " · " + esc(a.taille) + " salariés" : ""}</div>` : ""}
+    </div>
+    <div class="bloc">
+      <h4>Contacter l'entreprise</h4>
+      <div class="actions">
+        <button class="btn large" id="f-cv">📄 Envoyer mon CV${LETTRES[a.id] ? " et ma lettre" : ""}</button>
+        <button class="btn leger large" id="f-lm">✍️ ${LETTRES[a.id] ? "Revoir ma lettre de motivation" : "Écrire ma lettre de motivation"}</button>
+        ${postuler ? `<a class="btn leger large" href="${esc(postuler)}" target="_blank" rel="noopener" id="f-postuler">Postuler sur ${esc(a.source)}</a>` : ""}
+        ${a.tel ? `<a class="btn gris" href="tel:${esc(a.tel.replace(/\s/g, ""))}">📞 ${esc(a.tel)}</a>` : ""}
+        ${a.email ? `<a class="btn gris" href="mailto:${esc(a.email)}">✉️ Email</a>` : ""}
+        ${site ? `<a class="btn gris" href="${esc(site)}" target="_blank" rel="noopener">🌐 Site</a>` : ""}
+        <button class="btn gris" id="f-fav">${FAV[a.id] ? "♥ Favori" : "♡ Favori"}</button>
+        <button class="btn gris" id="f-cand">${CAND[a.id] ? "✓ Postulé" : "J'ai postulé"}</button>
+      </div>
+      ${a.email ? `<div class="aide" style="margin-top:8px">${esc(a.email)}</div>` : ""}
+      ${!a.tel && !a.email ? `<div class="aide" style="margin-top:8px">${spont ? "Le formulaire « Postuler » envoie ton CV directement à l'entreprise." : "Pas de téléphone ni d'email publiés : passe par « Postuler »."}</div>` : ""}
+    </div>
+    ${infos.length ? `<div class="bloc"><h4>L'essentiel</h4><dl class="infos">${infos.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl></div>` : ""}
+    ${a.description ? `<div class="bloc"><h4>${spont ? "À savoir" : "L'offre"}</h4><p class="${a.description.length > 500 ? "replie" : ""}" id="f-desc">${esc(a.description)}</p>${a.description.length > 500 ? '<button class="lien-plus" id="f-plus">Lire la suite</button>' : ""}</div>` : ""}
+    ${a.a_apprendre && a.a_apprendre.length ? `<div class="bloc"><h4>Ce que tu vas apprendre</h4>${liste_(a.a_apprendre)}</div>` : ""}
+    ${a.attendu && a.attendu.length ? `<div class="bloc"><h4>Ce qui est attendu</h4>${liste_(a.attendu)}</div>` : ""}
+    ${a.a_propos ? `<div class="bloc"><h4>L'entreprise</h4><p>${esc(a.a_propos)}</p></div>` : ""}
+    <div class="bloc"><h4>Où se trouve l'entreprise</h4>
+      <div class="actions"><a class="btn gris" href="${esc(gm)}" target="_blank" rel="noopener">🗺️ Google Maps</a><a class="btn gris" href="${esc(iti)}" target="_blank" rel="noopener">🚗 Itinéraire</a></div>
+      ${a.lat != null ? `<iframe class="carte-map" loading="lazy" title="Carte Google Maps" src="https://maps.google.com/maps?q=${a.lat},${a.lon}&z=${a.position_approx ? 13 : 16}&output=embed"></iframe>` : ""}
+    </div>`);
+  $("#f-cv").onclick = () => envoyerCV(a);
+  $("#f-lm").onclick = () => panneauLettre(a);
+  $("#f-fav").onclick = e => { FAV[a.id] ? delete FAV[a.id] : FAV[a.id] = 1; ecrire("alt974-fav", FAV); e.target.textContent = FAV[a.id] ? "♥ Favori" : "♡ Favori"; afficher(); };
+  $("#f-cand").onclick = e => { CAND[a.id] ? delete CAND[a.id] : noter(a); ecrire("alt974-cand", CAND); e.target.textContent = CAND[a.id] ? "✓ Postulé" : "J'ai postulé"; afficher(); };
+  const p = $("#f-plus"); if (p) p.onclick = () => { $("#f-desc").classList.remove("replie"); p.remove(); };
+  const po = $("#f-postuler"); if (po) po.addEventListener("click", () => setTimeout(() => { if (!CAND[a.id]) toast("Une fois envoyé, touche « J'ai postulé » pour le suivre"); }, 800));
+}
+function noter(a, statut = "Envoyée") { CAND[a.id] = {date: new Date().toISOString().slice(0, 10), statut, titre: a.titre, entreprise: a.entreprise}; ecrire("alt974-cand", CAND); }
+
+/* ---------- envoyer mon CV ---------- */
+function lettre(a) {
+  if (LETTRES[a.id]) return LETTRES[a.id];
+  const r = {prenom: PROFIL.prenom, nom: PROFIL.nom, tel: PROFIL.tel, email: PROFIL.email, formation: PROFIL.formation || "ma formation",
+    poste: a.type === "spontanee" ? "alternance" : a.titre, entreprise: a.entreprise};
+  if (a.categorie === "emploi" && PROFIL.lettre === LETTRE_ALT) return `Bonjour,\n\nJe m'appelle ${r.prenom} ${r.nom} et votre offre « ${r.poste} » chez ${r.entreprise} m'intéresse beaucoup.\n\nVous trouverez mon CV en pièce jointe. Je suis disponible pour un entretien quand vous le souhaitez.\n\nBien cordialement,\n${r.prenom} ${r.nom}\n${r.tel}`;
+  let t = PROFIL.lettre.replace(/\{(\w+)\}/g, (m, k) => r[k] ?? m);
+  if (a.type === "spontanee") t = t.replace(/Votre offre « alternance » chez ([^.]+) m'intéresse beaucoup\./, "Je souhaite rejoindre $1 en alternance.");
+  return t;
+}
+async function envoyerCV(a) {
+  const cv = await cvLire();
+  if (!cv) { toast("Ajoute d'abord ton CV"); return panneauCV(a); }
+  const sujet = `Candidature${a.categorie === "emploi" ? "" : " en alternance"} – ${a.type === "spontanee" ? "candidature spontanée" : a.titre}`;
+  const texte = lettre(a);
+  const fichier = new File([cv], cv.name || "CV.pdf", {type: cv.type || "application/pdf"});
+  // sur téléphone : partage du CV en pièce jointe (Mail, Gmail, WhatsApp…)
+  if (navigator.canShare && navigator.canShare({files: [fichier]})) {
+    try {
+      try { await navigator.clipboard.writeText((a.email ? a.email + "\n\n" : "") + texte); } catch (e) {}
+      await navigator.share({files: [fichier], title: sujet, text: texte});
+      noter(a); afficher();
+      toast(a.email ? `CV partagé. Adresse de l'entreprise copiée : ${a.email}` : "CV partagé ✓");
+      return;
+    } catch (e) { if (e.name === "AbortError") return; }
+  }
+  if (a.email) {
+    location.href = `mailto:${encodeURIComponent(a.email)}?subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(texte)}`;
+    const lien = document.createElement("a"); lien.href = URL.createObjectURL(fichier); lien.download = fichier.name; lien.click();
+    toast("Le mail est prêt : ajoute ton CV en pièce jointe (il vient d'être téléchargé)");
+    noter(a); afficher();
+  } else if (sur(a.postuler)) {
+    try { await navigator.clipboard.writeText(texte); } catch (e) {}
+    window.open(sur(a.postuler), "_blank", "noopener");
+    toast("Ta lettre est copiée : colle-la dans le formulaire et ajoute ton CV");
+  } else {
+    toast("Pas d'email pour cette entreprise : appelle-la ou passe par Google Maps");
+  }
+}
+
+async function panneauCV(apres) {
+  const cv = await cvLire();
+  ouvrir(`${barre("Mon CV")}
+    <div class="bloc">
+      <div class="cv-etat ${cv ? "" : "manque"}" id="cv-etat">${cv ? `✓ ${esc(cv.name || "CV")} · ${Math.round(cv.size / 1024)} Ko` : "Pas encore de CV"}</div>
+      <div class="actions" style="margin-top:10px">
+        <label class="btn large">📎 ${cv ? "Changer de CV" : "Déposer mon CV"}<input type="file" id="cv-fichier" accept=".pdf,.doc,.docx,.odt,image/*" hidden></label>
+        ${cv ? '<button class="btn gris" id="cv-voir">Voir</button><button class="btn gris" id="cv-suppr">Supprimer</button>' : ""}
+      </div>
+      <p class="aide" style="margin-top:8px">Ton CV reste sur ce téléphone. « Envoyer mon CV » le joint au mail ou au message pour l'entreprise choisie.</p>
+    </div>
+    <div class="bloc"><h4>Mes infos</h4>
+      <label class="champ">Prénom<input id="pr-prenom" autocomplete="given-name" value="${esc(PROFIL.prenom)}"></label>
+      <label class="champ">Nom<input id="pr-nom" autocomplete="family-name" value="${esc(PROFIL.nom)}"></label>
+      <label class="champ">Email<input id="pr-email" type="email" autocomplete="email" value="${esc(PROFIL.email)}"></label>
+      <label class="champ">Téléphone<input id="pr-tel" type="tel" autocomplete="tel" value="${esc(PROFIL.tel)}"></label>
+      <label class="champ">Formation préparée (ex. un BTS MCO)<input id="pr-formation" value="${esc(PROFIL.formation)}"></label>
+      <label class="champ">Message envoyé avec le CV<textarea id="pr-lettre">${esc(PROFIL.lettre)}</textarea></label>
+      <p class="aide">{entreprise}, {poste}, {prenom}, {nom}, {tel} et {formation} sont remplacés tout seuls.</p>
+      <button class="btn" id="pr-ok" style="width:100%;margin-top:6px">Enregistrer</button>
+    </div>`);
+  $("#cv-fichier").onchange = async e => {
+    const f = e.target.files[0]; if (!f) return;
+    if (f.size > 10 * 1024 * 1024) return toast("Fichier trop lourd (10 Mo au plus)");
+    try { await cvEcrire(f); toast("CV enregistré ✓"); } catch (err) { return toast("Impossible d'enregistrer le CV sur ce téléphone"); }
+    apres ? fiche(apres.id) : panneauCV();
+  };
+  const v = $("#cv-voir"); if (v) v.onclick = () => window.open(URL.createObjectURL(cv), "_blank");
+  const s = $("#cv-suppr"); if (s) s.onclick = async () => { await cvEcrire(null); panneauCV(); };
+  $("#pr-ok").onclick = () => {
+    for (const k of ["prenom", "nom", "email", "tel", "formation", "lettre"]) PROFIL[k] = $("#pr-" + k).value.trim();
+    ecrire("alt974-profil", PROFIL); toast("Enregistré ✓"); apres ? fiche(apres.id) : fermer();
+  };
+}
+$("#b-cv").onclick = () => panneauCV();
+
+/* ---------- lettre de motivation ---------- */
+const QUALITES = [["sérieux", "sérieuse"], ["motivé", "motivée"], ["ponctuel", "ponctuelle"], ["dynamique", "dynamique"], ["autonome", "autonome"],
+  ["curieux", "curieuse"], ["organisé", "organisée"], ["rigoureux", "rigoureuse"], ["souriant", "souriante"], ["créatif", "créative"],
+  ["à l'écoute", "à l'écoute"], ["polyvalent", "polyvalente"], ["patient", "patiente"], ["persévérant", "persévérante"]];
+const METIER = {  // [ce qui attire dans le domaine, ce que demande le métier]
+  "Commerce, vente": ["le contact avec la clientèle et le conseil", "accueillir, conseiller et fidéliser les clients"],
+  "Hôtellerie, restauration, tourisme": ["l'accueil et le service, qui font la réputation de l'île", "travailler en équipe à un rythme soutenu tout en gardant le sourire"],
+  "BTP, construction": ["les métiers concrets où l'on voit le résultat de son travail", "respecter les règles de sécurité et soigner chaque finition"],
+  "Mécanique, maintenance": ["la mécanique et la recherche de pannes", "diagnostiquer avec méthode et travailler avec précision"],
+  "Transport, logistique": ["l'organisation et le bon acheminement des marchandises", "être fiable, organisé et respecter les délais"],
+  "Santé": ["le soin et l'accompagnement des patients", "faire preuve d'écoute, de rigueur et de discrétion"],
+  "Social, services à la personne": ["l'aide aux autres et le lien humain", "être à l'écoute, patient et bienveillant"],
+  "Banque, assurance, immobilier": ["le conseil et la relation de confiance avec les clients", "être rigoureux, discret et pédagogue"],
+  "Gestion, administration": ["l'organisation et la gestion au cœur de l'entreprise", "être rigoureux, organisé et à l'aise avec les outils bureautiques"],
+  "Informatique, numérique": ["le numérique et la résolution de problèmes", "apprendre vite, être logique et travailler en équipe"],
+  "Communication, médias": ["la création et la communication", "être créatif, curieux et à l'aise à l'écrit"],
+  "Agriculture, nature": ["la nature et le travail en extérieur", "être endurant, attentif et respectueux de l'environnement"],
+  "Industrie": ["la production et la qualité", "être précis, attentif aux consignes de sécurité et à la qualité"],
+  "Spectacle, sport": ["le sport et l'animation", "être dynamique, pédagogue et rassembleur"],
+};
+let LM = Object.assign({genre: "", formation: "", ecole: "", rythme: "", debut: "", qualites: ["motivé", "sérieux", "ponctuel"], experiences: "", pourquoi: "", commune: "", variante: 0}, lire("alt974-lm", {}));
+
+function accord(m) {
+  const q = QUALITES.find(x => x[0] === m) || [m, m];
+  return LM.genre === "f" ? q[1] : LM.genre === "m" || q[0] === q[1] ? q[0] : q[1].startsWith(q[0]) ? `${q[0]}(${q[1].slice(q[0].length)})` : `${q[0]}/${q[1]}`;
+}
+const e_ = () => LM.genre === "f" ? "e" : LM.genre === "m" ? "" : "(e)";
+const a_ = c => /^Le /.test(c) ? "au " + c.slice(3) : /^Les /.test(c) ? "aux " + c.slice(4) : "à " + c;  // à Saint-Denis, au Port
+const joli = l => l.length < 2 ? l.join("") : l.slice(0, -1).join(", ") + " et " + l[l.length - 1];
+
+function ecrireLettre(o) {
+  const alt = o.categorie !== "emploi", spont = !o.poste || /candidature spontan/i.test(o.poste);
+  const nom = [PROFIL.prenom, PROFIL.nom].filter(Boolean).join(" ") || "Prénom Nom";
+  const [attire, demande] = METIER[o.domaine] || ["ce métier", "être fiable, motivé et prêt à apprendre"];
+  const poste = spont ? (alt ? "un poste en alternance" : "un poste") : `le poste de ${o.poste}`;
+  const formation = LM.formation ? `${LM.formation}${LM.ecole ? ` à ${LM.ecole}` : ""}` : "ma formation";
+  const v = LM.variante % 3;
+  const ouverture = alt ? [
+    `Actuellement à la recherche d'un contrat en alternance pour préparer ${formation}, je souhaite vivement rejoindre ${o.entreprise} pour ${poste.replace(/^le poste/, "occuper le poste").replace(/^un poste/, "occuper un poste")}.`,
+    `Je prépare ${formation} et je recherche une entreprise d'accueil en alternance. C'est avec beaucoup d'intérêt que je vous propose ma candidature pour ${poste}.`,
+    `Passionné${e_()} par ${attire}, je souhaite me former en alternance au sein de ${o.entreprise}, en préparant ${formation}.`,
+  ][v] : [
+    `Votre annonce pour ${poste} a retenu toute mon attention, et je souhaite vivement rejoindre ${o.entreprise}.`,
+    `C'est avec un grand intérêt que je vous adresse ma candidature pour ${poste} au sein de ${o.entreprise}.`,
+    `Attiré${e_()} depuis longtemps par ${attire}, je souhaite mettre mon énergie au service de ${o.entreprise}${spont ? "" : ` en tant que ${o.poste}`}.`,
+  ][v];
+  const pourquoi = LM.pourquoi ? LM.pourquoi.replace(/\s*$/, "").replace(/([^.!?])$/, "$1.") :
+    `Votre entreprise, implantée ${a_(o.commune || "La Réunion")}, correspond à ce que je recherche : un cadre où je pourrai apprendre et progresser dans ${attire}.`;
+  const quals = joli((LM.qualites.length ? LM.qualites : ["motivé"]).map(accord));
+  const exp = LM.experiences.trim() ? `Mes expériences (${LM.experiences.trim().replace(/[.\s]+$/, "").replace(/\n+/g, ", ")}) m'ont appris à m'adapter et à prendre mes responsabilités.`
+    : alt ? "Même si je débute dans le monde du travail, j'ai à cœur d'apprendre vite et de m'investir pleinement." : "J'ai à cœur de m'investir pleinement et d'apprendre rapidement les méthodes de votre entreprise.";
+  const qualites = `Je suis ${quals}, des qualités essentielles pour ${demande}.`;
+  const dispo = LM.debut ? `à partir du ${new Date(LM.debut).toLocaleDateString("fr-FR", {day: "numeric", month: "long", year: "numeric"})}` : "dès que possible";
+  const rythme = alt ? `${LM.rythme ? `Ma formation se déroule au rythme suivant : ${LM.rythme}. ` : ""}Je suis disponible ${dispo} pour commencer mon contrat.`
+    : `Je suis disponible ${dispo}.`;
+  const lieu = LM.commune || (POS && COMMUNES[POS.nom] ? POS.nom : "");
+  const auj = new Date().toLocaleDateString("fr-FR", {day: "numeric", month: "long", year: "numeric"});
+  return [
+    nom, lieu ? `${lieu}, La Réunion` : "", [PROFIL.tel, PROFIL.email].filter(Boolean).join(" · "), "",
+    o.entreprise, o.commune || "", "",
+    `${lieu ? `${a_(lieu).replace(/^./, c => c.toUpperCase())}, le` : "Le"} ${auj}`, "",
+    `Objet : ${alt ? "candidature en alternance" : "candidature"}${spont ? (alt ? " (candidature spontanée)" : " spontanée") : ` – ${o.poste}`}${alt && LM.formation ? ` – ${LM.formation}` : ""}`, "",
+    "Madame, Monsieur,", "",
+    `${ouverture} ${pourquoi}`, "",
+    `${exp} ${qualites}`, "",
+    rythme, "",
+    `Je serais ravi${e_()} de vous rencontrer lors d'un entretien pour vous présenter plus en détail ma motivation. Dans l'attente de votre réponse, je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées.`, "",
+    nom,
+  ].join("\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+
+function panneauLettre(a) {
+  const o = {poste: a ? (a.type === "spontanee" ? "" : a.titre) : LM.poste || "", entreprise: a ? a.entreprise : LM.entreprise || "",
+    commune: a ? a.commune : "", domaine: a ? a.domaine : LM.domaine || "", categorie: a ? a.categorie : F.section};
+  const champ = (id, t, v, extra = "") => `<label class="champ">${t}<input id="lm-${id}" value="${esc(v)}" ${extra}></label>`;
+  ouvrir(`${barre("✍️ Lettre de motivation")}
+    <div class="bloc">
+      <p class="aide">Remplis ce que tu peux, la lettre s'écrit toute seule. Tu peux ensuite la modifier.</p>
+      ${champ("poste", "Poste visé (vide = candidature spontanée)", o.poste)}
+      ${champ("entreprise", "Entreprise", o.entreprise)}
+      <label class="champ">Type<select id="lm-categorie"><option value="alternance">Alternance</option><option value="emploi" ${o.categorie === "emploi" ? "selected" : ""}>Emploi (CDI, CDD…)</option></select></label>
+      <label class="champ">Domaine<select id="lm-domaine"><option value="">—</option>${Object.keys(METIER).map(d => `<option ${d === o.domaine ? "selected" : ""}>${esc(d)}</option>`).join("")}</select></label>
+      <label class="champ">Accords<select id="lm-genre"><option value="">motivé(e)</option><option value="f" ${LM.genre === "f" ? "selected" : ""}>au féminin (motivée)</option><option value="m" ${LM.genre === "m" ? "selected" : ""}>au masculin (motivé)</option></select></label>
+      <div id="lm-alt">
+        ${champ("formation", "Formation préparée (ex. BTS MCO, CAP cuisine)", LM.formation || PROFIL.formation)}
+        ${champ("ecole", "École ou CFA (ex. CFA de Saint-Pierre)", LM.ecole)}
+        ${champ("rythme", "Rythme (ex. 2 semaines en entreprise, 1 semaine en cours)", LM.rythme)}
+      </div>
+      ${champ("debut", "Disponible à partir du", LM.debut, 'type="date"')}
+      ${champ("commune", "Ma commune", LM.commune || (POS && COMMUNES[POS.nom] ? POS.nom : ""), 'list="lm-communes"')}
+      <datalist id="lm-communes">${Object.keys(COMMUNES).map(c => `<option value="${esc(c)}">`).join("")}</datalist>
+      <label class="champ">Mes qualités (3 ou 4)</label>
+      <div class="qualites" id="lm-qualites">${QUALITES.map(([m, f]) => `<button class="puce ${LM.qualites.includes(m) ? "actif" : ""}" data-q="${esc(m)}">${esc(LM.genre === "f" ? f : m)}</button>`).join("")}</div>
+      <label class="champ">Mes expériences (stages, jobs d'été, bénévolat, sport…)<textarea id="lm-experiences" style="min-height:70px">${esc(LM.experiences)}</textarea></label>
+      <label class="champ">Pourquoi cette entreprise ? (facultatif)<textarea id="lm-pourquoi" style="min-height:60px">${esc(LM.pourquoi)}</textarea></label>
+      ${PROFIL.prenom ? "" : '<p class="aide">Astuce : ton nom, ton téléphone et ton email viennent de « Mon CV » (bouton 📄).</p>'}
+    </div>
+    <div class="bloc"><h4>Ta lettre</h4>
+      <textarea id="lm-texte"></textarea>
+      <div class="actions" style="margin-top:10px">
+        <button class="btn gris" id="lm-autre">🔄 Autre version</button>
+        <button class="btn gris" id="lm-copier">📋 Copier</button>
+        <button class="btn gris" id="lm-pdf">🖨️ PDF / imprimer</button>
+        <button class="btn gris" id="lm-partager">↗ Partager</button>
+        ${a ? '<button class="btn large" id="lm-ok">✓ Garder pour cette offre</button>' : '<button class="btn large" id="lm-defaut">✓ Utiliser comme message d\'envoi du CV</button>'}
+      </div>
+      <p class="aide" id="lm-aide" style="margin-top:8px">${a && LETTRES[a.id] ? "Lettre déjà gardée pour cette offre : elle partira avec ton CV." : ""}</p>
+    </div>`);
+  const t = $("#lm-texte");
+  let modifiee = false;
+  const lireChamps = () => {
+    for (const k of ["formation", "ecole", "rythme", "debut", "commune", "experiences", "pourquoi", "genre"]) LM[k] = $("#lm-" + k).value.trim();
+    Object.assign(o, {poste: $("#lm-poste").value.trim(), entreprise: $("#lm-entreprise").value.trim() || "votre entreprise",
+      categorie: $("#lm-categorie").value, domaine: $("#lm-domaine").value});
+    if (!a) Object.assign(LM, {poste: o.poste, entreprise: $("#lm-entreprise").value.trim(), domaine: o.domaine});
+    $("#lm-alt").hidden = o.categorie === "emploi";
+    ecrire("alt974-lm", LM);
+  };
+  const regen = () => { lireChamps(); t.value = ecrireLettre(o); modifiee = false; };
+  if (a && LETTRES[a.id]) { lireChamps(); t.value = LETTRES[a.id]; } else regen();
+  $("#feuille").querySelectorAll("input,select,textarea:not(#lm-texte)").forEach(c => c.addEventListener("input", () => {
+    if (modifiee && !confirm("Tu as modifié la lettre à la main. La réécrire avec les nouvelles infos ?")) { lireChamps(); return; }
+    regen();
+    if (c.id === "lm-genre") $("#lm-qualites").querySelectorAll("[data-q]").forEach(b => b.textContent = LM.genre === "f" ? QUALITES.find(q => q[0] === b.dataset.q)[1] : b.dataset.q);
+  }));
+  t.oninput = () => { modifiee = true; };
+  $("#lm-qualites").onclick = e => {
+    const b = e.target.closest("[data-q]"); if (!b) return;
+    const q = b.dataset.q, i = LM.qualites.indexOf(q);
+    if (i >= 0) LM.qualites.splice(i, 1); else if (LM.qualites.length >= 5) return toast("5 qualités au plus"); else LM.qualites.push(q);
+    b.classList.toggle("actif", i < 0); regen();
+  };
+  $("#lm-autre").onclick = () => { LM.variante++; regen(); };
+  $("#lm-copier").onclick = async () => { try { await navigator.clipboard.writeText(t.value); toast("Lettre copiée ✓"); } catch (e) { t.select(); toast("Sélectionne et copie le texte"); } };
+  $("#lm-pdf").onclick = () => {
+    const f = document.createElement("iframe"); f.style.cssText = "position:fixed;width:0;height:0;border:0";
+    f.srcdoc = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Lettre de motivation</title><style>@page{margin:2.2cm}body{font:12pt/1.55 Georgia,"Times New Roman",serif;color:#000;white-space:pre-wrap}</style></head><body>${esc(t.value)}</body></html>`;
+    f.onload = () => { f.contentWindow.focus(); f.contentWindow.print(); setTimeout(() => f.remove(), 60000); };
+    document.body.append(f);
+    toast("Choisis « Enregistrer en PDF » pour garder la lettre");
+  };
+  $("#lm-partager").onclick = async () => {
+    if (navigator.share) { try { await navigator.share({title: "Lettre de motivation", text: t.value}); } catch (e) {} }
+    else { try { await navigator.clipboard.writeText(t.value); toast("Partage indisponible : lettre copiée"); } catch (e) {} }
+  };
+  const ok = $("#lm-ok"); if (ok) ok.onclick = () => { LETTRES[a.id] = t.value; ecrire("alt974-lettres", LETTRES); toast("Lettre gardée : elle partira avec ton CV ✓"); fiche(a.id); };
+  const def = $("#lm-defaut"); if (def) def.onclick = () => {
+    let modele = t.value;
+    if (o.entreprise && o.entreprise !== "votre entreprise") modele = modele.split(o.entreprise).join("{entreprise}");
+    if (o.poste) modele = modele.split(o.poste).join("{poste}");
+    PROFIL.lettre = modele; ecrire("alt974-profil", PROFIL);
+    toast("Ce message accompagnera ton CV (nom de l'entreprise et poste remplacés à chaque envoi)");
+  };
+}
+
+/* ---------- notifications (Web Push) ---------- */
+const VAPID = "BELW2vkzh_ExmwyQlA4tQNi6rSXtBDZPDX2i1g-mXCFM2n5sHz6Rw4y065ax3IUcMbcmlRtCNEeXtWAVgpsAsbE", TOPIC = "alternance974-k3v8qz2m-abonnements";
+let SW = null;
+let NOTIF = Object.assign({actif: false, sections: ["alternance", "emploi"], spontanees: false, domaines: []}, lire("alt974-notif", {}));
+const cleVapid = b => Uint8Array.from(atob(b.replace(/-/g, "+").replace(/_/g, "/") + "=".repeat((4 - b.length % 4) % 4)), c => c.charCodeAt(0));
+const iosHorsAppli = /iPhone|iPad|iPod/.test(navigator.userAgent) && !navigator.standalone && !matchMedia("(display-mode: standalone)").matches;
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").then(r => { SW = r; if (navigator.clearAppBadge) navigator.clearAppBadge().catch(() => {}); }).catch(() => {});
+
+async function deposer(abo, stop) {
+  // lieu arrondi (~1 km) : seul le rayon compte pour choisir les offres
+  const choix = {sections: NOTIF.sections, spontanees: NOTIF.spontanees, domaines: NOTIF.domaines,
+    ...(POS && F.rayon < 70 ? {lat: +POS.lat.toFixed(2), lon: +POS.lon.toFixed(2), rayon: F.rayon, lieu: POS.nom} : {rayon: 70})};
+  const r = await fetch("https://ntfy.sh/" + TOPIC, {method: "POST", body: JSON.stringify(stop ? {abo, stop: true} : {abo, choix})});
+  if (!r.ok) throw new Error(r.status);
+}
+async function activerNotifs() {
+  if (iosHorsAppli) return toast("Sur iPhone : installe d'abord l'appli (Partager → Sur l'écran d'accueil), puis ouvre-la depuis l'icône");
+  if (!("PushManager" in window) || !("Notification" in window)) return toast("Ce navigateur ne gère pas les notifications");
+  if (!SW) SW = await navigator.serviceWorker.ready;
+  if (await Notification.requestPermission() !== "granted") return toast("Notifications refusées : autorise-les dans les réglages du téléphone");
+  try {
+    const abo = (await SW.pushManager.getSubscription()) || await SW.pushManager.subscribe({userVisibleOnly: true, applicationServerKey: cleVapid(VAPID)});
+    await deposer(abo.toJSON ? abo.toJSON() : abo, false);
+    NOTIF.actif = true; ecrire("alt974-notif", NOTIF);
+    toast("Notifications activées ✓ Tu seras prévenu(e) des nouvelles offres");
+  } catch (e) { toast("Activation impossible pour l'instant, réessaie plus tard"); }
+  panneauNotifs();
+}
+async function couperNotifs() {
+  try {
+    const abo = SW && await SW.pushManager.getSubscription();
+    if (abo) { await deposer(abo.toJSON(), true); await abo.unsubscribe(); }
+  } catch (e) {}
+  NOTIF.actif = false; ecrire("alt974-notif", NOTIF); toast("Notifications désactivées"); panneauNotifs();
+}
+function panneauNotifs() {
+  const doms = Object.keys(METIER);
+  const coche = (id, on, t) => `<label style="display:flex;gap:10px;align-items:center;padding:8px 0"><input type="checkbox" id="${id}" ${on ? "checked" : ""} style="width:20px;height:20px;accent-color:var(--vert)">${t}</label>`;
+  ouvrir(`${barre("🔔 Notifications")}
+    <div class="bloc">
+      <div class="cv-etat ${NOTIF.actif ? "" : "manque"}">${NOTIF.actif ? "✓ Notifications activées" : "Notifications désactivées"}</div>
+      <p class="aide" style="margin-top:8px">Une notification arrive sur ton téléphone dès qu'une nouvelle offre qui te correspond est publiée (4 recherches par jour).</p>
+      ${iosHorsAppli ? '<p class="aide"><b>Sur iPhone</b> : installe d\'abord l\'appli (bouton Partager → « Sur l\'écran d\'accueil »), puis ouvre-la depuis son icône pour activer les notifications.</p>' : ""}
+    </div>
+    <div class="bloc"><h4>Me prévenir pour</h4>
+      ${coche("n-alt", NOTIF.sections.includes("alternance"), "🎓 Les offres d'alternance")}
+      ${coche("n-emp", NOTIF.sections.includes("emploi"), "💼 Les offres d'emploi (CDI, CDD, intérim…)")}
+      ${coche("n-spont", NOTIF.spontanees, "Les entreprises qui recrutent en candidature spontanée")}
+      <label class="champ">Domaines (aucun choisi = tous)</label>
+      <div class="qualites" id="n-doms">${doms.map(d => `<button class="puce ${NOTIF.domaines.includes(d) ? "actif" : ""}" data-d="${esc(d)}">${ICONES[d] || ""} ${esc(d)}</button>`).join("")}</div>
+      <p class="aide">Lieu : ${POS && F.rayon < 70 ? `dans un rayon de ${F.rayon} km autour de ${esc(POS.nom)}` : "toute l'île"} (réglable dans « Ma position » sur l'accueil).</p>
+    </div>
+    <div class="actions">
+      <button class="btn large" id="n-ok">${NOTIF.actif ? "Enregistrer mes choix" : "🔔 Activer les notifications"}</button>
+      ${NOTIF.actif ? '<button class="btn gris large" id="n-stop">Désactiver</button>' : ""}
+    </div>`);
+  const lireChoix = () => {
+    NOTIF.sections = [$("#n-alt").checked && "alternance", $("#n-emp").checked && "emploi"].filter(Boolean);
+    NOTIF.spontanees = $("#n-spont").checked; ecrire("alt974-notif", NOTIF);
+  };
+  $("#n-doms").onclick = e => { const b = e.target.closest("[data-d]"); if (!b) return; const i = NOTIF.domaines.indexOf(b.dataset.d); i >= 0 ? NOTIF.domaines.splice(i, 1) : NOTIF.domaines.push(b.dataset.d); b.classList.toggle("actif", i < 0); ecrire("alt974-notif", NOTIF); };
+  $("#n-ok").onclick = () => { lireChoix(); if (!NOTIF.sections.length) return toast("Coche l'alternance, l'emploi, ou les deux"); activerNotifs(); };
+  const st = $("#n-stop"); if (st) st.onclick = couperNotifs;
+}
+
+/* ---------- menu ---------- */
+const AUSSI = q => [  // q = « alternance » ou rien (emploi)
+  ["Indeed", `https://fr.indeed.com/emplois?q=${q}&l=La+R%C3%A9union`],
+  ["LinkedIn", `https://www.linkedin.com/jobs/search/?keywords=${q}&location=La%20R%C3%A9union`],
+  ["Leboncoin", `https://www.leboncoin.fr/recherche?category=71&text=${q}&locations=r_26`],
+  ["Facebook (groupes emploi 974)", `https://www.facebook.com/search/groups/?q=emploi%20${q}%20974`],
+  ...(q ? [["La Bonne Alternance", "https://labonnealternance.apprentissage.beta.gouv.fr/recherche?lat=-21.13&lon=55.53&radius=60&address=La%20R%C3%A9union"],
+           ["1jeune1solution", "https://www.1jeune1solution.gouv.fr/apprentissage?libelleCommune=La%20R%C3%A9union"]]
+       : [["1jeune1solution (emplois)", "https://www.1jeune1solution.gouv.fr/emplois?libelleLocalisation=La%20R%C3%A9union"]]),
+  ["France Travail", `https://candidat.francetravail.fr/offres/recherche?lieux=974D${q ? "&natureOffre=E2,FS" : ""}`],
+  ["HelloWork", `https://www.hellowork.com/fr-fr/emploi/recherche.html?k=${q}&l=La+R%C3%A9union`],
+  ["Welcome to the Jungle", `https://www.welcometothejungle.com/fr/jobs?query=${q}&aroundQuery=La%20R%C3%A9union`],
+  ["Jobteaser", `https://www.jobteaser.com/fr/job-offers?q=${q}&location=La%20R%C3%A9union`],
+  ["Domtomjob", `https://www.domtomjob.com/emploi/offres-emploi-la-reunion.html?q=${q}`],
+  ["Meteojob", `https://www.meteojob.com/jobs?what=${q}&where=La%20R%C3%A9union`],
+  ["StudentJob", q ? "https://www.studentjob.fr/alternance/la-reunion" : "https://www.studentjob.fr/job-etudiant/la-reunion"],
+  ...(q ? [["l'Étudiant", "https://jobs-stages.letudiant.fr/stages-etudiants/offres/contrat-alternance/region-la-reunion.html"]] : []),
+  ["ParuVendu", `https://www.paruvendu.fr/emploi/annonces/?r=${q}&lo=974`],
+  ["Apec (cadres, Bac+3 et plus)", `https://www.apec.fr/candidat/recherche-emploi.html/emploi?motsCles=${q}&lieux=974`],
+  ["Intérim : agences de La Réunion", "https://www.google.com/maps/search/agence+int%C3%A9rim+La+R%C3%A9union"],
+  ["Mission locale (aide à la recherche)", "https://www.google.com/maps/search/mission+locale+La+R%C3%A9union"],
+];
+function panneauCandidatures() {
+  const l = Object.entries(CAND).sort((x, y) => y[1].date.localeCompare(x[1].date));
+  const statuts = ["Envoyée", "Relancée", "Entretien", "Acceptée", "Refusée"];
+  ouvrir(`${barre("Mes candidatures")}<div class="bloc">${l.length ? l.map(([id, c]) => `<div class="cand"><div><b>${esc(c.entreprise)}</b><br><small>${esc(c.titre)} · ${esc(date(c.date))}</small></div><select data-id="${esc(id)}">${statuts.map(s => `<option ${s === c.statut ? "selected" : ""}>${s}</option>`).join("")}</select></div>`).join("")
+    : '<p class="aide">Aucune candidature notée. Dans une fiche, touche « J\'ai postulé » ou « Envoyer mon CV ».</p>'}</div>
+    ${l.length ? `<p class="aide">Relance les entreprises sans réponse après une semaine environ.</p>` : ""}`);
+  document.querySelectorAll(".cand select").forEach(s => s.onchange = () => { CAND[s.dataset.id].statut = s.value; ecrire("alt974-cand", CAND); });
+  document.querySelectorAll(".cand div").forEach(d => d.onclick = () => { const id = d.nextElementSibling.dataset.id; if (OFFRES.find(a => a.id === id)) fiche(id); });
+}
+function menu() {
+  ouvrir(`${barre("Menu")}<div class="bloc menu">
+    <button class="entree" id="m-cv"><span class="ic">📄</span>Mon CV et mes infos</button>
+    <button class="entree" id="m-notif"><span class="ic">🔔</span>Notifications ${NOTIF.actif ? "(activées)" : ""}</button>
+    <button class="entree" id="m-lm"><span class="ic">✍️</span>Écrire une lettre de motivation</button>
+    <button class="entree" id="m-cand"><span class="ic">✓</span>Mes candidatures (${Object.keys(CAND).length})</button>
+    <button class="entree" id="m-fav"><span class="ic">♥</span>Mes favoris (${Object.keys(FAV).length})</button>
+  </div>
+  <div class="bloc menu"><h4>Aussi sur</h4><p class="aide">Ces sites et applis refusent la lecture automatique : la recherche « ${F.section === "emploi" ? "emploi" : "alternance"} à La Réunion » s'ouvre directement.</p>
+    ${AUSSI(F.section === "emploi" ? "" : "alternance").map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener"><span class="ic">↗</span>${esc(n)}</a>`).join("")}
+  </div>
+  <p class="aide" style="text-align:center">Offres relevées : ${esc(SOURCES)}.<br>Installer : Partager → « Sur l'écran d'accueil ».</p>`);
+  $("#m-cv").onclick = () => panneauCV();
+  $("#m-cand").onclick = panneauCandidatures;
+  $("#m-lm").onclick = () => panneauLettre(null);
+  $("#m-notif").onclick = panneauNotifs;
+  $("#m-fav").onclick = () => { F.type = "fav"; sauver(); puces(); afficher(); fermer(); };
+}
+$("#b-menu").onclick = menu;
+
+/* ---------- actualiser ---------- */
+let MAJ_EN_COURS = false;
+async function actualiser() {
+  if (MAJ_EN_COURS) return; MAJ_EN_COURS = true;
+  const b = $("#b-maj"); b.classList.add("tourne"); $("#tirer").classList.add("tourne");
+  try {
+    const r = await fetch("annonces.json?t=" + Date.now(), {cache: "no-store"});
+    if (!r.ok) throw new Error(r.status);
+    const avant = new Set(OFFRES.map(a => a.id));
+    OFFRES = await r.json();
+    const nouv = OFFRES.filter(a => !avant.has(a.id)).length;
+    puces(); afficher();
+    toast(nouv ? `${nouv} nouvelle${nouv > 1 ? "s" : ""} offre${nouv > 1 ? "s" : ""}` : "Tout est à jour ✓");
+  } catch (e) { toast(navigator.onLine === false ? "Pas de connexion" : "Rechargement de la page…"); if (navigator.onLine !== false) setTimeout(() => location.reload(), 600); }
+  b.classList.remove("tourne"); $("#tirer").classList.remove("tourne"); $("#tirer").style.transform = ""; MAJ_EN_COURS = false;
+}
+$("#b-maj").onclick = actualiser;
+// tirer la page vers le bas pour actualiser
+let tirY = null, tirD = 0;
+addEventListener("touchstart", e => { tirY = scrollY <= 0 && $("#voile").hidden && !e.target.closest("#carte") ? e.touches[0].clientY : null; tirD = 0; }, {passive: true});
+addEventListener("touchmove", e => {
+  if (tirY == null) return;
+  tirD = Math.max(0, e.touches[0].clientY - tirY);
+  $("#tirer").style.transform = `translate(-50%, ${Math.min(tirD, 110) - 60}px) rotate(${tirD * 3}deg)`;
+}, {passive: true});
+addEventListener("touchend", () => { if (tirY == null) return; tirY = null; if (tirD > 90) actualiser(); else $("#tirer").style.transform = ""; });
+
+$("#b-notif").onclick = panneauNotifs;
+puces(); rayonUI(); afficher();
+// ouverture depuis une notification : #id de l'offre
+function depuisLien() { const id = decodeURIComponent(location.hash.slice(1)); const a = id && OFFRES.find(x => x.id === id); if (a) { F.section = a.categorie || "alternance"; puces(); afficher(); fiche(id); } }
+addEventListener("hashchange", depuisLien); depuisLien();
+</script>
+</body>
+</html>
