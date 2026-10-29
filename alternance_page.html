@@ -83,10 +83,10 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .offre .fav{position:absolute;top:20px;left:20px;border:0;background:none;color:var(--vert);padding:6px;border-radius:50%}
 .offre .fav svg.ic{width:22px;height:22px}
 .offre .dessin,.hero .dessin{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--texte)}
-.carre{width:96px;height:96px;border-radius:22px;background:var(--fond);display:grid;place-items:center;box-shadow:0 10px 26px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04)}
-.carre svg{width:46px;height:46px;fill:none;stroke:currentColor;stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round}
+.carre{width:78px;height:78px;border-radius:18px;background:var(--fond);display:grid;place-items:center;box-shadow:0 10px 26px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04)}
+.carre svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round}
 .dessin i{display:block;width:22px;height:2px;border-radius:2px;background:var(--or)}
-@media (max-width:520px){.offre .carre{width:76px;height:76px;border-radius:18px}.offre .carre svg{width:38px;height:38px}}
+@media (max-width:520px){.offre .carre{width:64px;height:64px;border-radius:16px}.offre .carre svg{width:28px;height:28px}}
 .offre .info{display:inline-grid;place-items:center;width:20px;height:20px;border:1.4px solid currentColor;border-radius:50%;font:italic 600 12px Georgia,serif}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
 .tag{font-size:12px;padding:3px 9px;border-radius:999px;background:var(--fond);border:1px solid var(--ligne);color:var(--doux);display:inline-flex;align-items:center;gap:4px}
@@ -139,16 +139,50 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .pied{text-align:center;color:var(--doux);font-size:13px;padding:48px 16px 20px;line-height:1.6}
 .rail-dom{display:flex;gap:clamp(10px,2vw,22px);overflow-x:auto;scrollbar-width:none;padding:clamp(26px,4vw,44px) 2px 4px;scroll-snap-type:x proximity}
 .rail-dom::-webkit-scrollbar{display:none}
-.dom{flex:none;width:clamp(92px,11vw,128px);border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:10px;scroll-snap-align:start;color:var(--texte);padding:0}
-.dom .carre{width:clamp(84px,10vw,112px);height:clamp(84px,10vw,112px);border-radius:22px;background:var(--carte);box-shadow:none;transition:background .2s,box-shadow .2s}
-.dom .carre svg{width:clamp(34px,4vw,44px);height:clamp(34px,4vw,44px)}
+.dom{flex:none;width:clamp(76px,8.4vw,98px);border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:10px;scroll-snap-align:start;color:var(--texte);padding:0}
+.dom .carre{width:clamp(60px,6.4vw,74px);height:clamp(60px,6.4vw,74px);border-radius:18px;background:var(--carte);box-shadow:none;transition:background .2s,box-shadow .2s}
+.dom .carre svg{width:clamp(24px,2.6vw,30px);height:clamp(24px,2.6vw,30px)}
 .dom:hover .carre{background:#ececec}
-.dom b{font-weight:500;font-size:14px;line-height:1.25;text-align:center;min-height:2.5em}
+.dom b{font-weight:500;font-size:12.5px;line-height:1.25;text-align:center;min-height:2.5em}
 .dom i{display:block;width:18px;height:2px;border-radius:2px;background:var(--or);opacity:.8;transition:width .2s}
 .dom.actif b{color:var(--vert);font-weight:600}
 .dom.actif i{width:34px;opacity:1}
 .dom.actif .carre{background:var(--fond);box-shadow:0 10px 26px rgba(0,0,0,.07),inset 0 0 0 1px var(--ligne)}
 @media (prefers-color-scheme:dark){.dom:hover .carre{background:#1f1f1f}}
+.offre .salaire{font-size:15px;font-weight:600;color:var(--texte)}
+.offre .atout{font-size:13.5px;color:var(--vert);display:flex;align-items:center;gap:4px}
+.offre.vue h3{color:#4a4a4a}
+@media (prefers-color-scheme:dark){.offre.vue h3{color:#bdbdbd}}
+.compte{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;justify-content:space-between}
+.compte b{color:var(--vert);font-weight:600}
+.lien-alerte{border:0;background:none;color:var(--vert);font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px;padding:4px 0}
+.bascule{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--ligne);cursor:pointer}
+.bascule:last-child{border-bottom:0}
+.bascule span{flex:1;display:flex;flex-direction:column}
+.bascule small{color:var(--doux);font-size:13px}
+.bascule input{position:absolute;opacity:0;pointer-events:none}
+.bascule i{width:46px;height:28px;border-radius:14px;background:#d5d5d5;position:relative;transition:background .2s;flex:none}
+.bascule i::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.bascule input:checked + i{background:var(--vert)}
+.bascule input:checked + i::after{transform:translateX(18px)}
+.bascule input:focus-visible + i{outline:2px solid var(--vert);outline-offset:2px}
+.segments{display:flex;border:1px solid var(--ligne);border-radius:999px;padding:3px;gap:2px;background:var(--fond)}
+.segments button{flex:1;border:0;background:none;border-radius:999px;padding:8px 6px;font-weight:600;font-size:14px;color:var(--doux)}
+.segments button.actif{background:var(--vert);color:#fff}
+.simu-res{display:flex;flex-direction:column;align-items:center;padding:18px 0 6px}
+.simu-res span{font-size:30px;font-weight:700;letter-spacing:-.01em}
+.simu-res small{color:var(--or);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:12px;margin-top:4px}
+.alerte-arnaque{background:#fdf2f2;color:#8a1c1c}
+@media (prefers-color-scheme:dark){.alerte-arnaque{background:#2a1212;color:#ffb4b4}}
+.guide-acc{padding:56px 0 8px}
+.guide-acc h2{text-align:center;font-size:clamp(28px,4vw,44px);letter-spacing:-.02em;margin:0 0 28px}
+.guide-cartes{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.guide-cartes button{border:0;background:var(--carte);padding:28px 18px 24px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--texte);text-align:center}
+.guide-cartes button:hover{background:#efefef}
+@media (prefers-color-scheme:dark){.guide-cartes button:hover{background:#1c1c1c}}
+.guide-cartes .carre{margin-bottom:8px}
+.guide-cartes b{font-size:17px}
+.guide-cartes small{color:var(--doux);font-size:14px}
 .opts{display:flex;flex-direction:column}
 .opt{display:flex;align-items:center;gap:12px;border:0;border-bottom:1px solid var(--ligne);background:none;padding:15px 4px;text-align:left;font-size:16px;color:var(--texte)}
 .opt span{flex:1}
@@ -310,6 +344,15 @@ textarea{min-height:170px;resize:vertical}
   <div class="compte" id="compte"></div>
   <div class="liste" id="liste"></div>
   <div id="carte" hidden></div>
+  <section class="guide-acc" aria-label="Le guide">
+    <h2>Le guide</h2>
+    <div class="guide-cartes">
+      <button data-g="simu"><span class="carre"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-d-barres"/></svg></span><b>Mon salaire d'apprenti</b><small>Simulateur selon ton âge</small></button>
+      <button data-g="aides"><span class="carre"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-d-mallette"/></svg></span><b>Les aides</b><small>Permis, logement, CAF</small></button>
+      <button data-g="cv"><span class="carre"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-doc"/></svg></span><b>CV et entretien</b><small>Les conseils qui marchent</small></button>
+      <button data-g="arnaques"><span class="carre"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-coche"/></svg></span><b>Éviter les arnaques</b><small>Les signes qui doivent alerter</small></button>
+    </div>
+  </section>
   <footer class="pied">Mis à jour __MAJ__<br><span id="pied-sources"></span></footer>
 </main>
 
@@ -332,7 +375,11 @@ function lire(cle, def) { try { const v = localStorage.getItem(cle); return v ? 
 function ecrire(cle, v) { try { localStorage.setItem(cle, JSON.stringify(v)); } catch (e) {} }
 function toast(t) { document.querySelectorAll(".toast").forEach(x => x.remove()); const d = document.createElement("div"); d.className = "toast"; d.textContent = t; document.body.append(d); setTimeout(() => d.remove(), 3200); }
 
-const F = Object.assign({section: "alternance", type: "", niveau: "", domaine: "", rayon: 70, q: "", tri: "recent"}, lire("alt974-filtres", {}));
+const F = Object.assign({section: "alternance", type: "", niveau: "", domaine: "", rayon: 70, q: "", tri: "recent",
+  debutant: false, salaire: false, teletravail: false, sansPermis: false, partiel: false, depuis: 0, salMin: 0}, lire("alt974-filtres", {}));
+let MASQUEES = lire("alt974-masquees", {});
+let VUES = lire("alt974-vues", {});
+const nbFiltres = () => [F.debutant, F.salaire, F.teletravail, F.sansPermis, F.partiel, F.depuis, F.salMin].filter(Boolean).length;
 let LETTRES = lire("alt974-lettres", {});   // id de l'offre -> lettre de motivation écrite pour elle
 let POS = lire("alt974-pos", null);   // {lat, lon, nom}
 let FAV = lire("alt974-fav", {});
@@ -393,7 +440,7 @@ const COURT = {"Commerce, vente": "Commerce", "Grande distribution": "Grande dis
 const dessin = d => `<span class="carre"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-${ICONES[d] || "d-mallette"}"/></svg></span><i></i>`;
 const icDom = (d, c = "p") => ic(ICONES[d] || "point", c);
 const dansSection = a => (a.categorie || "alternance") === F.section;
-const TRIS = [["recent", "Plus récentes"], ["proche", "Plus proches"]];
+const TRIS = [["recent", "Plus récentes"], ["proche", "Plus proches"], ["salaire", "Salaire le plus élevé"]];
 function puces() {  // onglets, titre et barre de filtres
   document.querySelectorAll("#p-section button").forEach(b => { const on = b.dataset.section === F.section; b.classList.toggle("actif", on); b.setAttribute("aria-selected", on); });
   $("#titre").textContent = F.section === "emploi" ? "Offres d'emploi" : "Offres d'alternance";
@@ -406,6 +453,7 @@ function puces() {  // onglets, titre et barre de filtres
     F.section === "alternance" ? `<button data-f="niveau" class="${F.niveau ? "actif" : ""}">${lab("Niveau", F.niveau)} ${chev}</button>` : "",
     `<button data-f="lieu" class="${POS && F.rayon < 70 ? "actif" : ""}">${POS && F.rayon < 70 ? `${F.rayon} km · ${esc(POS.nom)}` : "Autour de moi"} ${chev}</button>`,
     `<button data-f="vue">${VUE === "carte" ? `Liste ${ic("liste")}` : `Carte ${ic("carte")}`}</button>`,
+    `<button data-f="filtres" class="${nbFiltres() ? "actif" : ""}">Filtres${nbFiltres() ? ` (${nbFiltres()})` : ""} ${ic("reglages")}</button>`,
     `<span class="ressort"></span>`,
     `<button data-f="tri">Trier par ${chev}</button>`,
   ].join("");
@@ -433,8 +481,10 @@ $("#filtres").onclick = e => {
   else if (f === "niveau") choix("Niveau visé", [["", "Tous les niveaux"], ...NIVEAUX.map(n => [n, esc(n)])], F.niveau, v => F.niveau = v);
   else if (f === "tri") choix("Trier par", TRIS, F.tri, v => { if (v === "proche" && !POS) { toast("Choisis d'abord ta position ou ta commune"); return; } F.tri = v; });
   else if (f === "lieu") panneauLieu();
+  else if (f === "filtres") panneauFiltres();
   else if (f === "vue") { VUE = VUE === "carte" ? "liste" : "carte"; $("#liste").hidden = VUE !== "liste"; $("#carte").hidden = VUE !== "carte"; puces(); afficher(); }
 };
+document.querySelector(".guide-cartes").onclick = e => { const b = e.target.closest("[data-g]"); if (b) panneauGuide(b.dataset.g); };
 $("#rail-dom").onclick = e => { const b = e.target.closest("[data-dom]"); if (!b) return; F.domaine = F.domaine === b.dataset.dom ? "" : b.dataset.dom; sauver(); puces(); afficher(); };
 $("#p-section").onclick = e => { const b = e.target.closest("[data-section]"); if (!b || b.dataset.section === F.section) return; Object.assign(F, {section: b.dataset.section, type: "", domaine: ""}); LIMITE = 60; sauver(); puces(); afficher(); };
 $("#b-loupe").onclick = () => { $("#cherche").hidden = false; $("#q").focus(); };
@@ -445,13 +495,47 @@ addEventListener("scroll", () => $(".bandeau").classList.toggle("colle", scrollY
 $("#q").value = F.q; if (F.q) $("#cherche").hidden = false;
 $("#q").oninput = e => { F.q = e.target.value; sauver(); afficher(); };
 
+function panneauFiltres() {
+  const ligne = (k, t, sous) => `<label class="bascule"><span><b>${t}</b>${sous ? `<small>${sous}</small>` : ""}</span><input type="checkbox" data-k="${k}" ${F[k] ? "checked" : ""}><i></i></label>`;
+  ouvrir(`${barre("Filtres")}
+    <div class="bloc">
+      ${ligne("debutant", "Débutants acceptés", "Sans expérience demandée")}
+      ${ligne("salaire", "Salaire indiqué", "Seulement les offres qui affichent le salaire")}
+      ${ligne("teletravail", "Télétravail possible")}
+      ${ligne("partiel", "Temps partiel")}
+      ${ligne("sansPermis", "Sans permis exigé", "Retire les offres qui demandent le permis ou un véhicule")}
+    </div>
+    <div class="bloc"><h4>Publiées depuis</h4>
+      <div class="segments" id="f-depuis">${[[0, "Toutes"], [1, "24 h"], [7, "7 jours"], [30, "30 jours"]].map(([v, t]) => `<button data-v="${v}" class="${F.depuis === v ? "actif" : ""}">${t}</button>`).join("")}</div>
+    </div>
+    <div class="bloc"><div style="display:flex;justify-content:space-between"><h4>Salaire minimum</h4><span id="f-salval"></span></div>
+      <input type="range" id="f-salmin" min="0" max="4000" step="100" value="${F.salMin}" aria-label="Salaire brut mensuel minimum">
+      <p class="aide">Brut par mois. Les offres sans salaire indiqué sont retirées quand un minimum est choisi.</p>
+    </div>
+    <div class="actions"><button class="btn gris" id="f-effacer">Tout effacer</button><button class="btn" data-fermer id="f-voir"></button></div>`);
+  const maj = () => { sauver(); puces(); afficher(); $("#f-salval").textContent = F.salMin ? `${F.salMin.toLocaleString("fr-FR")} €` : "Aucun"; const n = filtrees().filter(a => a.type === "offre").length; $("#f-voir").textContent = `Voir ${n} offre${n > 1 ? "s" : ""}`; };
+  $("#feuille").querySelectorAll("[data-k]").forEach(c => c.onchange = () => { F[c.dataset.k] = c.checked; maj(); });
+  $("#f-depuis").onclick = e => { const b = e.target.closest("[data-v]"); if (!b) return; F.depuis = +b.dataset.v; $("#f-depuis").querySelectorAll("button").forEach(x => x.classList.toggle("actif", x === b)); maj(); };
+  $("#f-salmin").oninput = e => { F.salMin = +e.target.value; maj(); };
+  $("#f-effacer").onclick = () => { Object.assign(F, {debutant: false, salaire: false, teletravail: false, sansPermis: false, partiel: false, depuis: 0, salMin: 0}); maj(); panneauFiltres(); };
+  maj();
+}
+const joursDepuis = a => { const s = a.publie || (a.vu || "").slice(0, 10); return s ? (Date.now() - new Date(s + "T00:00:00")) / 864e5 : 999; };
 function filtrees() {
   const mots = norm(F.q).split(/\s+/).filter(Boolean);
   const res = [];
   for (const a of OFFRES) {
     a._d = km(a);
     if (!dansSection(a)) continue;
-    if (F.type === "fav" ? !FAV[a.id] : F.type === "cand" ? !CAND[a.id] :
+    if (F.type === "masquees" ? !MASQUEES[a.id] : MASQUEES[a.id]) continue;
+    if (F.debutant && !a.debutant) continue;
+    if ((F.salaire || F.salMin) && !a.salaire_mois) continue;
+    if (F.salMin && a.salaire_mois < F.salMin) continue;
+    if (F.teletravail && !a.teletravail) continue;
+    if (F.partiel && !a.temps_partiel) continue;
+    if (F.sansPermis && a.permis) continue;
+    if (F.depuis && joursDepuis(a) > F.depuis) continue;
+    if (F.type === "masquees" ? false : F.type === "fav" ? !FAV[a.id] : F.type === "cand" ? !CAND[a.id] :
         F.type && (F.section === "emploi" ? !a.contrats.includes(F.type) : a.type !== F.type)) continue;
     if (F.domaine && (a.domaine || "Autres") !== F.domaine) continue;
     if (F.section === "alternance" && F.niveau && a.niveau !== F.niveau) continue;
@@ -465,7 +549,7 @@ function filtrees() {
   // les offres d'abord ; les plus récentes en tête (ou les plus proches si choisi)
   const quand = a => (a.publie || (a.vu || "").slice(0, 10)) + (a.vu || "");
   res.sort((x, y) => (x.type !== "offre") - (y.type !== "offre") ||
-    (F.tri === "proche" && POS ? (x._d ?? 999) - (y._d ?? 999) : quand(y).localeCompare(quand(x))));
+    (F.tri === "proche" && POS ? (x._d ?? 999) - (y._d ?? 999) : F.tri === "salaire" ? (y.salaire_mois || 0) - (x.salaire_mois || 0) || quand(y).localeCompare(quand(x)) : quand(y).localeCompare(quand(x))));
   return res;
 }
 
@@ -474,15 +558,18 @@ function carteOffre(a) {
   const spont = a.type === "spontanee";
   const sous = spont ? [a.secteur, a.commune].filter(Boolean).join(", ") : [a.entreprise, a.commune || "La Réunion"].filter(Boolean).join(", ");
   const meta = spont ? "Candidature spontanée" : [a.contrats.join(" · "), a.niveau].filter(Boolean).join(" · ");
+  const sal = a.salaire ? a.salaire.replace(/\s*\/\s*/g, " / ") : "";
   const loin = a._d != null ? ` · ${kmTexte(a._d)}` : "";
-  return `<div class="offre" role="button" tabindex="0" data-id="${esc(a.id)}">
+  return `<div class="offre ${VUES[a.id] ? "vue" : ""}" role="button" tabindex="0" data-id="${esc(a.id)}">
     <button class="fav" data-fav="${esc(a.id)}" aria-label="${FAV[a.id] ? "Retirer des favoris" : "Ajouter aux favoris"}">${ic("coeur", FAV[a.id] ? "plein" : "")}</button>
     <div class="txt">
       ${neuf(a) ? '<span class="neuf">Nouveau</span>' : ""}
       <h3>${esc(spont ? a.entreprise : a.titre)}</h3>
       <div class="sous">${esc(sous)}${esc(loin)}</div>
       <div class="meta">${esc(meta)}</div>
-      <div class="quand">${spont ? "" : depuis(a) ? `Publiée ${esc(depuis(a))}` : ""}${CAND[a.id] ? `${spont ? "" : " · "}Postulé` : ""}</div>
+      ${sal ? `<div class="salaire">${esc(sal)}</div>` : ""}
+      ${!spont && a.debutant ? `<div class="atout">${ic("coche", "p")} Débutants acceptés</div>` : ""}
+      <div class="quand">${spont ? "" : depuis(a) ? `Publiée ${esc(depuis(a))}` : ""}${CAND[a.id] ? `${spont ? "" : " · "}Postulé` : VUES[a.id] ? `${spont ? "" : " · "}Déjà vue` : ""}</div>
     </div>
     <div class="dessin">${dessin(a.domaine)}</div>
   </div>`;
@@ -491,13 +578,15 @@ let LIMITE = 60;
 function afficher() {
   const res = filtrees();
   const nbOffres = res.filter(a => a.type === "offre").length, nbSp = res.length - nbOffres;
-  $("#compte").textContent = OFFRES.length ? `${nbOffres} offre${nbOffres > 1 ? "s" : ""} ${F.section === "emploi" ? "d'emploi" : "d'alternance"}${nbSp ? ` · ${nbSp} entreprise${nbSp > 1 ? "s" : ""} en candidature spontanée` : ""}` : "";
+  const nouv = res.filter(a => a.type === "offre" && joursDepuis(a) < 1).length;
+  $("#compte").innerHTML = OFFRES.length ? `<span>${nbOffres} offre${nbOffres > 1 ? "s" : ""} ${F.section === "emploi" ? "d'emploi" : "d'alternance"}${nouv ? ` · <b>${nouv} publiée${nouv > 1 ? "s" : ""} aujourd'hui</b>` : ""}${nbSp ? ` · ${nbSp} entreprise${nbSp > 1 ? "s" : ""} en candidature spontanée` : ""}</span><button class="lien-alerte" id="b-alerte">${ic("cloche", "p")} Créer une alerte pour cette recherche</button>` : "";
+  const ba = $("#b-alerte"); if (ba) ba.onclick = () => { NOTIF.sections = [F.section]; NOTIF.domaines = F.domaine ? [F.domaine] : []; ecrire("alt974-notif", NOTIF); panneauNotifs(); };
   $("#pied-sources").textContent = SOURCES && SOURCES !== "aucune" ? "Offres de " + SOURCES : "";
   if (!OFFRES.length) {
     $("#liste").innerHTML = `<div class="vide"><b>Pas encore d'offres</b><br>La première recherche n'a pas encore eu lieu, ou les sources n'ont pas répondu. En attendant, le menu ${ic("menu", "p")} → <b>Aussi sur</b> pour chercher sur les autres sites.</div>`;
   } else if (!res.length) {
     $("#liste").innerHTML = `<div class="vide">Aucune offre avec ces filtres.<br><br><button class="btn gris" id="b-tout">Tout afficher</button></div>`;
-    $("#b-tout").onclick = () => { Object.assign(F, {type: "", niveau: "", domaine: "", rayon: 70, q: ""}); $("#q").value = ""; sauver(); puces(); afficher(); };
+    $("#b-tout").onclick = () => { Object.assign(F, {type: "", niveau: "", domaine: "", rayon: 70, q: "", debutant: false, salaire: false, teletravail: false, sansPermis: false, partiel: false, depuis: 0, salMin: 0}); $("#q").value = ""; sauver(); puces(); afficher(); };
   } else {
     $("#liste").innerHTML = res.slice(0, LIMITE).map(carteOffre).join("") +
       (res.length > LIMITE ? `<button class="btn gris" id="b-plus" style="grid-column:1/-1">Voir ${Math.min(60, res.length - LIMITE)} de plus</button>` : "");
@@ -598,9 +687,13 @@ function fiche(id) {
   const iti = `https://www.google.com/maps/dir/?api=1${POS ? `&origin=${POS.lat},${POS.lon}` : ""}&destination=${a.lat != null ? `${a.lat},${a.lon}` : encodeURIComponent(a.adresse || a.commune)}`;
   const postuler = sur(a.postuler), site = sur(a.site);
   const liste_ = l => l && l.length ? `<ul>${l.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
-  const infos = [["Contrat", a.contrats.join(", ")], ["Domaine", a.domaine !== "Autres" && a.domaine], ["Niveau", a.niveau], ["Expérience", a.experience], ["Horaires", a.horaires], ["Début", date(a.debut)], ["Durée", a.duree], ["Postes", a.postes],
-    ["Rémunération", a.salaire], ["Télétravail", a.teletravail], ["Publiée le", date(a.publie)], ["Source", a.source]].filter(x => x[1]);
+  const infos = [["Salaire", a.salaire], ["Débutants", a.debutant && !spont ? "Acceptés" : ""], ["Permis", a.permis ? "Demandé (ou véhicule)" : ""], ["Contrat", a.contrats.join(", ")], ["Domaine", a.domaine !== "Autres" && a.domaine], ["Niveau", a.niveau], ["Expérience", a.experience], ["Horaires", a.horaires], ["Début", date(a.debut)], ["Durée", a.duree], ["Postes", a.postes],
+    ["Télétravail", a.teletravail], ["Publiée le", date(a.publie)], ["Source", a.source]].filter(x => x[1]);
   const quand = !spont && depuis(a) ? `Publiée ${depuis(a)}` : "";
+  if (!VUES[a.id]) { VUES[a.id] = 1; ecrire("alt974-vues", VUES); }
+  const avis = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.entreprise + " " + (a.commune || "La Réunion") + " avis")}`;
+  const bus = `https://www.google.com/maps/dir/?api=1${POS ? `&origin=${POS.lat},${POS.lon}` : ""}&destination=${a.lat != null ? `${a.lat},${a.lon}` : encodeURIComponent(a.adresse || a.commune)}&travelmode=transit`;
+  const verifier = `https://annuaire-entreprises.data.gouv.fr/rechercher?terme=${encodeURIComponent(a.entreprise)}`;
   ouvrir(`${barre("")}
     <div class="hero">
       <div class="txt">
@@ -616,6 +709,7 @@ function fiche(id) {
       <button class="btn large" id="f-cv">${ic("doc")} Envoyer mon CV${LETTRES[a.id] ? " et ma lettre" : ""}</button>
       ${postuler ? `<a class="btn gris large" href="${esc(postuler)}" target="_blank" rel="noopener" id="f-postuler">${ic("lien")} Postuler sur ${esc(a.source)}</a>` : ""}
     </div>
+    ${a.vigilance ? `<div class="bloc alerte-arnaque"><h4>${ic("croix")} Prudence avec cette annonce</h4><p>Elle parle d'argent à verser ou de paiement. Un vrai employeur ne te demande jamais de payer pour travailler. Vérifie l'entreprise avant de répondre.</p></div>` : ""}
     <div class="bloc"><h4>${spont ? "À savoir" : "Le poste"}</h4>
       ${a.description ? `<p class="desc">${descHtml(a.description)}</p>`
         : `<p class="aide">Le descriptif complet est sur le site d'origine${postuler ? ` : <a href="${esc(postuler)}" target="_blank" rel="noopener">voir l'annonce complète</a>` : ""}.</p>`}
@@ -632,19 +726,32 @@ function fiche(id) {
         <button class="btn gris" id="f-lm">${ic("stylo")} ${LETTRES[a.id] ? "Ma lettre" : "Lettre de motivation"}</button>
         <button class="btn gris" id="f-fav">${favTxt(a)}</button>
         <button class="btn gris" id="f-cand">${candTxt(a)}</button>
+        <button class="btn gris" id="f-partager">${ic("partager")} Partager</button>
+        <button class="btn gris" id="f-masquer">${MASQUEES[a.id] ? "Ne plus masquer" : "Masquer l'offre"}</button>
       </div>
       ${a.email ? `<div class="aide" style="margin-top:8px">${esc(a.email)}</div>` : ""}
       ${!a.tel && !a.email ? `<div class="aide" style="margin-top:8px">${spont ? "Le formulaire « Postuler » envoie ton CV directement à l'entreprise." : "Pas de téléphone ni d'email publiés : passe par « Postuler »."}</div>` : ""}
     </div>
     ${a.a_propos ? `<div class="bloc"><h4>L'entreprise</h4><p>${esc(a.a_propos)}</p>${a.secteur ? `<p class="aide">${esc(a.secteur)}${a.taille ? " · " + esc(a.taille) + " salariés" : ""}</p>` : ""}</div>` : ""}
+    <div class="bloc"><h4>Avant de postuler</h4>
+      <div class="actions"><a class="btn gris" href="${esc(avis)}" target="_blank" rel="noopener">${ic("coeur")} Avis sur l'entreprise</a><a class="btn gris" href="${esc(verifier)}" target="_blank" rel="noopener">${ic("coche")} Vérifier l'entreprise</a></div>
+      <p class="aide" style="margin-top:8px">Un employeur sérieux ne demande jamais d'argent, de virement ou tes codes bancaires.</p>
+    </div>
     <div class="bloc"><h4>Où se trouve l'entreprise</h4>
       ${a.position_approx && !/\d/.test(a.adresse || "") ? '<p class="aide">Adresse exacte non publiée : la carte montre le centre de la commune.</p>' : ""}
-      <div class="actions"><a class="btn gris" href="${esc(gm)}" target="_blank" rel="noopener">${ic("carte")} Google Maps</a><a class="btn gris" href="${esc(iti)}" target="_blank" rel="noopener">${ic("route")} Itinéraire</a></div>
+      <div class="actions"><a class="btn gris" href="${esc(gm)}" target="_blank" rel="noopener">${ic("carte")} Google Maps</a><a class="btn gris" href="${esc(iti)}" target="_blank" rel="noopener">${ic("route")} En voiture</a><a class="btn gris large" href="${esc(bus)}" target="_blank" rel="noopener">${ic("camion")} En bus (Car Jaune, Citalis, Alterneo…)</a></div>
       ${a.lat != null ? `<iframe class="carte-map" loading="lazy" title="Carte Google Maps" src="https://maps.google.com/maps?q=${a.lat},${a.lon}&z=${a.position_approx ? 13 : 16}&output=embed"></iframe>` : ""}
     </div>`);
   $("#f-cv").onclick = () => envoyerCV(a);
   $("#f-lm").onclick = () => panneauLettre(a);
   $("#f-fav").onclick = e => { FAV[a.id] ? delete FAV[a.id] : FAV[a.id] = 1; ecrire("alt974-fav", FAV); e.currentTarget.innerHTML = favTxt(a); afficher(); };
+  $("#f-partager").onclick = async () => {
+    const lien = location.href.split("#")[0] + "#" + encodeURIComponent(a.id);
+    const texte = `${spont ? a.entreprise + " recrute en alternance" : a.titre + " – " + a.entreprise}${a.commune ? " (" + a.commune + ")" : ""}`;
+    if (navigator.share) { try { await navigator.share({title: texte, text: texte, url: lien}); } catch (e) {} }
+    else { try { await navigator.clipboard.writeText(lien); toast("Lien de l'offre copié"); } catch (e) { toast(lien); } }
+  };
+  $("#f-masquer").onclick = () => { MASQUEES[a.id] ? delete MASQUEES[a.id] : MASQUEES[a.id] = 1; ecrire("alt974-masquees", MASQUEES); fermer(); afficher(); toast(MASQUEES[a.id] ? "Offre masquée. Menu → Offres masquées pour la revoir" : "L'offre est de nouveau visible"); };
   $("#f-cand").onclick = e => { CAND[a.id] ? delete CAND[a.id] : noter(a); ecrire("alt974-cand", CAND); e.currentTarget.innerHTML = candTxt(a); afficher(); };
   const po = $("#f-postuler"); if (po) po.addEventListener("click", () => setTimeout(() => { if (!CAND[a.id]) toast("Une fois envoyé, touche « J'ai postulé » pour le suivre"); }, 800));
 }
@@ -946,6 +1053,66 @@ function panneauNotifs() {
   const st = $("#n-stop"); if (st) st.onclick = couperNotifs;
 }
 
+/* ---------- guide : salaire d'apprenti, aides, droits, conseils ---------- */
+const SMIC = 1823.03;  // SMIC brut mensuel 35 h au 1er janvier 2026
+const TAUX_APPRENTI = {"16-17": [27, 39, 55], "18-20": [43, 51, 67], "21-25": [53, 61, 78], "26+": [100, 100, 100]};
+const TAUX_PRO = {"16-20": [55, 65], "21-25": [70, 80], "26+": [100, 100]};  // [sans bac pro, avec bac pro ou plus]
+function panneauGuide(ancre) {
+  const sec = (id, t, corps) => `<div class="bloc" id="g-${id}"><h4>${t}</h4>${corps}</div>`;
+  ouvrir(`${barre("Le guide")}
+    ${sec("simu", "Simulateur de salaire", `
+      <div class="segments" id="s-contrat"><button data-v="app" class="actif">Apprentissage</button><button data-v="pro">Contrat pro</button></div>
+      <label class="champ">Ton âge<select id="s-age"><option value="16-17">16 ou 17 ans</option><option value="18-20" selected>18 à 20 ans</option><option value="21-25">21 à 25 ans</option><option value="26+">26 ans et plus</option></select></label>
+      <label class="champ" id="s-annee-l">Année de contrat<select id="s-annee"><option value="0">1re année</option><option value="1">2e année</option><option value="2">3e année</option></select></label>
+      <label class="champ" id="s-bac-l" hidden>Ton diplôme<select id="s-bac"><option value="0">Sans bac pro</option><option value="1">Bac pro, bac techno ou plus</option></select></label>
+      <div class="simu-res"><span id="s-res"></span><small id="s-pct"></small></div>
+      <p class="aide">Minimum légal brut par mois pour 35 h, calculé sur le SMIC de 2026 (1 823,03 €). L'entreprise ou la convention collective peut prévoir plus. À partir de 26 ans, c'est au moins le SMIC.</p>`)}
+    ${sec("aides", "Les aides pour les alternants", `<ul>
+      <li><b>Aide au permis</b> : 500 € pour les apprentis d'au moins 18 ans qui passent le permis B.</li>
+      <li><b>Mobili-Jeune</b> (Action Logement) : jusqu'à 100 € par mois pour le loyer des alternants de moins de 30 ans.</li>
+      <li><b>APL / ALS</b> de la CAF : possibles en alternance, même avec un salaire.</li>
+      <li><b>Carte d'étudiant des métiers</b> : réductions au cinéma, au restaurant universitaire et dans les transports.</li>
+      <li><b>Mission locale</b> : aide gratuite pour le CV, la recherche et les démarches (moins de 26 ans).</li></ul>
+      <div class="actions"><a class="btn gris" href="https://www.service-public.fr/particuliers/vosdroits/F2918" target="_blank" rel="noopener">${ic("lien")} L'apprentissage</a><a class="btn gris" href="https://www.service-public.fr/particuliers/vosdroits/F15478" target="_blank" rel="noopener">${ic("lien")} Le contrat pro</a></div>`)}
+    ${sec("droits", "Tes droits en alternance", `<ul>
+      <li>Un vrai contrat de travail, de 6 mois à 3 ans, de 16 à 29 ans (sans limite d'âge pour certains cas).</li>
+      <li>Les heures en école ou au CFA sont du temps de travail payé.</li>
+      <li>5 semaines de congés payés par an, comme les autres salariés.</li>
+      <li>Un maître d'apprentissage ou un tuteur pour te former.</li>
+      <li>Les frais de formation sont pris en charge : tu ne paies pas l'école.</li></ul>`)}
+    ${sec("cv", "Réussir son CV", `<ul>
+      <li>Une page, une photo souriante et neutre, ton numéro et ton e-mail bien visibles.</li>
+      <li>En haut : le poste ou la formation visée (ex. « Alternance BTS MCO, septembre 2026 »).</li>
+      <li>Expériences : jobs d'été, stages, bénévolat, sport. Tout compte, avec un verbe d'action.</li>
+      <li>Envoie-le en PDF, nommé « CV-Prénom-Nom.pdf ».</li></ul>`)}
+    ${sec("entretien", "Réussir l'entretien", `<ul>
+      <li>Renseigne-toi sur l'entreprise (site, Google Maps, réseaux).</li>
+      <li>Prépare : « Présente-toi », « Pourquoi nous ? », « Tes qualités et défauts », « Ton rythme d'école ».</li>
+      <li>Arrive 10 minutes en avance, avec ton CV imprimé et le calendrier de ton école.</li>
+      <li>Pose une question à la fin (missions, tuteur, horaires). Envoie un message de remerciement le jour même.</li></ul>`)}
+    ${sec("arnaques", "Éviter les arnaques", `<ul>
+      <li>Ne paie jamais pour obtenir un emploi, une formation ou du matériel.</li>
+      <li>Ne donne pas tes codes bancaires ni de photo de ta carte avant un contrat signé.</li>
+      <li>Méfie-toi des recruteurs qui ne parlent que par WhatsApp et des salaires trop beaux.</li>
+      <li>Vérifie l'entreprise sur l'annuaire officiel (bouton « Vérifier l'entreprise » dans chaque offre).</li></ul>`)}
+    ${sec("ecoles", "Trouver une école ou un CFA", `<p>Pas encore d'école ? Cherche les formations en alternance près de chez toi, puis postule en entreprise avec la formation visée.</p>
+      <div class="actions"><a class="btn gris large" href="https://labonnealternance.apprentissage.beta.gouv.fr/recherche-formation?lat=-21.13&lon=55.53&radius=60" target="_blank" rel="noopener">${ic("lien")} Formations en alternance à La Réunion</a></div>`)}`);
+  let contrat = "app";
+  const calc = () => {
+    const age = $("#s-age").value;
+    let pct;
+    if (contrat === "app") pct = TAUX_APPRENTI[age][+$("#s-annee").value];
+    else pct = TAUX_PRO[age === "16-17" || age === "18-20" ? "16-20" : age][+$("#s-bac").value];
+    $("#s-res").textContent = `${Math.round(SMIC * pct / 100).toLocaleString("fr-FR")} € brut / mois`;
+    $("#s-pct").textContent = `${pct} % du SMIC`;
+    $("#s-annee-l").hidden = contrat !== "app"; $("#s-bac-l").hidden = contrat !== "pro";
+  };
+  $("#s-contrat").onclick = e => { const b = e.target.closest("[data-v]"); if (!b) return; contrat = b.dataset.v; $("#s-contrat").querySelectorAll("button").forEach(x => x.classList.toggle("actif", x === b)); calc(); };
+  ["#s-age", "#s-annee", "#s-bac"].forEach(k => $(k).onchange = calc);
+  calc();
+  if (ancre) setTimeout(() => { const el = $("#g-" + ancre); if (el) el.scrollIntoView({block: "start"}); }, 50);
+}
+
 /* ---------- menu ---------- */
 const AUSSI = q => [  // q = « alternance » ou rien (emploi)
   ["Indeed", `https://fr.indeed.com/emplois?q=${q}&l=La+R%C3%A9union`],
@@ -983,6 +1150,9 @@ function menu() {
     <button class="entree" id="m-notif">${ic("cloche")}Notifications ${NOTIF.actif ? "(activées)" : ""}</button>
     <button class="entree" id="m-lm">${ic("stylo")}Écrire une lettre de motivation</button>
     <button class="entree" id="m-maj">${ic("maj")}Actualiser les offres</button>
+    <button class="entree" id="m-guide">${ic("doc")}Le guide de l'alternance et du job</button>
+    <button class="entree" id="m-simu">${ic("barres")}Simulateur de salaire d'apprenti</button>
+    <button class="entree" id="m-masq">${ic("croix")}Offres masquées (${Object.keys(MASQUEES).length})</button>
     <button class="entree" id="m-cand">${ic("coche")}Mes candidatures (${Object.keys(CAND).length})</button>
     <button class="entree" id="m-fav">${ic("coeur")}Mes favoris (${Object.keys(FAV).length})</button>
   </div>
@@ -992,6 +1162,9 @@ function menu() {
   <p class="aide" style="text-align:center">Offres relevées : ${esc(SOURCES)}.<br>Installer : Partager → « Sur l'écran d'accueil ».</p>`);
   $("#m-cv").onclick = () => panneauCV();
   $("#m-cand").onclick = panneauCandidatures;
+  $("#m-guide").onclick = () => panneauGuide();
+  $("#m-simu").onclick = () => panneauGuide("simu");
+  $("#m-masq").onclick = () => { F.type = "masquees"; sauver(); puces(); afficher(); fermer(); toast("Offres masquées : ouvre une offre pour la rendre visible"); };
   $("#m-lm").onclick = () => panneauLettre(null);
   $("#m-notif").onclick = panneauNotifs;
   $("#m-maj").onclick = () => { fermer(); actualiser(); };

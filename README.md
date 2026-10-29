@@ -165,6 +165,13 @@ Dans l'appli :
 - **Notifications** (bouton 🔔) : alerte sur le téléphone à chaque nouvelle offre qui correspond aux choix
   (alternance et/ou emploi, domaines, rayon). Sur iPhone, installer d'abord l'appli sur l'écran d'accueil.
 - **Mes candidatures** (envoyée, relancée, entretien…), **favoris**, **actualiser** avec ↻ ou en tirant la page vers le bas.
+- **Salaire** affiché sur chaque annonce, tri par salaire, **Filtres** : débutants acceptés, salaire indiqué, salaire minimum,
+  télétravail, temps partiel, sans permis exigé, publiées depuis 24 h / 7 jours / 30 jours.
+- **Masquer** une offre, offres **déjà vues** signalées, **partager** une offre, **créer une alerte** depuis sa recherche.
+- Dans chaque offre : **avis sur l'entreprise**, **vérifier l'entreprise** (annuaire officiel), trajet **en voiture ou en bus**,
+  et un avertissement quand l'annonce ressemble à une arnaque (argent à verser…).
+- **Le guide** : simulateur de salaire d'apprenti et de contrat pro (SMIC 2026), aides (permis, Mobili-Jeune, CAF),
+  droits, conseils CV et entretien, arnaques, formations en alternance. L'appli marche aussi hors connexion.
 - **Aussi sur** (menu ☰) : Indeed, LinkedIn, Leboncoin, Facebook, Welcome to the Jungle, Jobteaser, Apec…
   s'ouvrent directement sur la recherche à La Réunion (ces sites bloquent la lecture automatique).
 

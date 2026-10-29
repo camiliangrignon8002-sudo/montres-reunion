@@ -626,12 +626,12 @@ def texte_principal(h):
 
 
 def nettoyer_titre(titre):
-    t = re.sub(r"\s+-\s+Recrutement (?:par|en [^-]+ par)\s+.+$", "", titre)
+    t = re.sub(r"\s+-\s+Recrutement (?:en [^-]+? )?(?:par|pour)\s+.+$", "", titre)
     t = re.sub(r"^(?:Offre (?:d.)?(?:[Ee]mploi|[Aa]lternance|[Ss]tage)|Mission d.[Ii]ntérim|CDI|CDD|Job|Intérim)\s+", "", t)
     noms = sorted(list(COMMUNES) + ["Sainte-Clotilde", "Saint-Gilles", "La Réunion", "Réunion", "Le Tampon", "Tampon", "Île de la Réunion", "Ile de la Réunion"], key=len, reverse=True)
     t = re.sub(r"\s+(?:" + "|".join(re.escape(c) for c in noms) + r")?\s*[-–]?\s*\(?97\d*\)?\s*(?:\(Le\))?$", "", t, flags=re.I)
     t = re.sub(r"\s+(?:en )?(?:Île|Ile) de la Réunion$|\s+(?:à |sur |en )?(?:la )?Réunion(?: 974)?$", "", t, flags=re.I)
-    t = re.sub(r"\s+(?:en )?(?:CDI|CDD)$", "", t)
+    t = re.sub(r"\s+(?:en )?(?:CDI|CDD|Intérim)$", "", t)
     return t.strip(" -–") or titre
 
 
@@ -908,6 +908,49 @@ def affiner(a):
     return a
 
 
+# ---------------------------------------------------------------- informations utiles à la recherche
+
+HEURES_MOIS = 151.67
+ARNAQUE = re.compile(r"frais d.(?:inscription|dossier|formation) (?:à|a) (?:votre|ta) charge|western union|mandat cash|"
+                     r"transcash|carte (?:pcs|neosurf)|virement (?:préalable|avant)|chèque de caution|caution à verser|"
+                     r"achat (?:de|du) (?:kit|matériel) (?:à|a) (?:vos|tes) frais|payer (?:pour|avant) (?:commencer|travailler)|"
+                     r"gagnez \d[\d\s]* ?€ par (?:jour|semaine) sans|whatsapp uniquement|recharge (?:pcs|transcash)", re.I)
+
+
+def salaire_mensuel(texte):
+    """Salaire brut mensuel le plus bas cité (€), ou None. « 1 824 - 4 630 € / mois », « 25 k€ / an », « 12 € de l'heure »."""
+    t = (texte or "").replace("\u202f", " ").replace("\xa0", " ")
+    m = re.search(r"(\d[\d .]*(?:,\d+)?)\s*(k)?\s*€?(?:\s*[-–à]\s*\d[\d .]*(?:,\d+)?\s*k?)?\s*€\s*(?:brut\s*)?(?:/|par|de l.|l.)\s*(mois|an|année|heure|h\b)", t, re.I)
+    if not m:
+        return None
+    try:
+        v = float(m.group(1).replace(" ", "").replace(".", "").replace(",", "."))
+    except ValueError:
+        return None
+    if m.group(2):
+        v *= 1000
+    unite = m.group(3).lower()
+    v = v / 12 if unite in ("an", "année") else v * HEURES_MOIS if unite in ("heure", "h") else v
+    return round(v) if 300 <= v <= 20000 else None
+
+
+def enrichir(a):
+    """Ajoute ce que les candidats cherchent en premier : salaire chiffré, débutants acceptés, télétravail, permis, arnaque."""
+    texte = norm(" ".join([a["titre"], a.get("description") or "", a.get("experience") or "", " ".join(a.get("attendu") or [])]))
+    a["salaire_mois"] = salaire_mensuel(a.get("salaire")) or salaire_mensuel(a.get("description"))
+    exige = re.search(r"(?:[2-9]|\d\d) ?(?:ans?|annees?) (?:d.experience |minimum|d.experience minimum)|experience (?:exigee|obligatoire|significative|confirmee) "
+                      r"|experience (?:de|d.au moins|minimum) (?:[2-9]|\d\d)|confirme\b|senior", texte)
+    a["debutant"] = bool(re.search(r"debutant|sans experience|aucune experience|premiere experience|0 ?- ?1 an|junior", texte)) or \
+        (a["categorie"] == "alternance" and not exige)
+    if not a.get("teletravail") and re.search(r"teletravail|remote|hybride", texte):
+        a["teletravail"] = "Télétravail partiel"
+    a["temps_partiel"] = "Temps partiel" in a["contrats"] or bool(re.search(r"temps partiel|mi.temps|\b\d{2}h ?/ ?semaine", texte)) and \
+        not re.search(r"\b35 ?h", texte)
+    a["permis"] = bool(re.search(r"permis b (?:obligatoire|exige|indispensable|requis)|permis (?:obligatoire|exige|indispensable)|vehicule (?:obligatoire|exige|indispensable)|etre vehicule", texte))
+    a["vigilance"] = bool(ARNAQUE.search(" ".join([a["titre"], a.get("description") or ""])))
+    return a
+
+
 # ---------------------------------------------------------------- tri et page
 
 def dans_une_zone(a):
@@ -1069,6 +1112,7 @@ def main():
         toutes += trouvees
     gardees = sans_doublons([a for a in toutes if a["titre"] and a["entreprise"] and dans_une_zone(a)])
     for a in gardees:
+        enrichir(a)
         if a["type"] == "offre" and a["domaine"] in ("Commerce, vente", "Autres"):
             a["domaine"] = domaine_de(None, a["titre"], a["secteur"]) if domaine_de(None, a["titre"], a["secteur"]) != "Autres" else a["domaine"]
     maintenant = datetime.now(REUNION)
