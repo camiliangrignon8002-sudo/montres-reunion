@@ -727,7 +727,7 @@ def main():
             vus[i] = a["vu"]
         a.pop("siret", None)
     # les offres d'abord, les plus récentes en tête ; puis les candidatures spontanées
-    offres_ = sorted((a for a in gardees if a["type"] == "offre"), key=lambda a: a["publie"] or a["vu"][:10], reverse=True)
+    offres_ = sorted((a for a in gardees if a["type"] == "offre"), key=lambda a: (a["publie"] or a["vu"][:10], a["vu"]), reverse=True)
     gardees = offres_ + [a for a in gardees if a["type"] != "offre"]
     nb_emploi = sum(a["categorie"] == "emploi" for a in offres_)
     print(f"Gardées : {len(offres_) - nb_emploi} offres d'alternance, {nb_emploi} offres d'emploi, "

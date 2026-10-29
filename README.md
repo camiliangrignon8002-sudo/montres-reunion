@@ -139,7 +139,8 @@ avant de payer. Le premier relevé complet du calendrier prend quelques passages
 
 Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/alternance/
 
-**4 fois par jour** (5h40, 9h40, 13h40, 17h40, heure de La Réunion), GitHub relève les offres à La Réunion :
+**Toutes les 5 heures** (4h40, 9h40, 14h40, 19h40 et 0h40, heure de La Réunion), GitHub relève les offres à La Réunion,
+les plus récentes en tête. L'appli se met à jour toute seule à l'ouverture :
 
 - **Alternance** (apprentissage, contrat de professionnalisation) : **La Bonne Alternance** (le site de l'État, qui reprend
   aussi France Travail, Hellowork, Jobteaser et d'autres), l'**API France Travail**, et les sites **HelloWork**, **Domtomjob**,

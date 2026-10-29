@@ -157,6 +157,7 @@ textarea{min-height:170px;resize:vertical}
     <button class="actif" data-vue="liste">Liste</button>
     <button data-vue="carte">Carte</button>
   </div>
+  <div class="puces" id="p-tri" style="padding-top:0"></div>
   <div class="compte" id="compte"></div>
   <div class="liste" id="liste"></div>
   <div id="carte" hidden></div>
@@ -180,7 +181,7 @@ function lire(cle, def) { try { const v = localStorage.getItem(cle); return v ? 
 function ecrire(cle, v) { try { localStorage.setItem(cle, JSON.stringify(v)); } catch (e) {} }
 function toast(t) { document.querySelectorAll(".toast").forEach(x => x.remove()); const d = document.createElement("div"); d.className = "toast"; d.textContent = t; document.body.append(d); setTimeout(() => d.remove(), 3200); }
 
-const F = Object.assign({section: "alternance", type: "", niveau: "", domaine: "", rayon: 70, q: ""}, lire("alt974-filtres", {}));
+const F = Object.assign({section: "alternance", type: "", niveau: "", domaine: "", rayon: 70, q: "", tri: "recent"}, lire("alt974-filtres", {}));
 let LETTRES = lire("alt974-lettres", {});   // id de l'offre -> lettre de motivation écrite pour elle
 let POS = lire("alt974-pos", null);   // {lat, lon, nom}
 let FAV = lire("alt974-fav", {});
@@ -216,6 +217,11 @@ function km(a) {
 }
 const kmTexte = d => d == null ? "" : d < 1 ? "à moins d'1 km" : `à ${Math.round(d)} km`;
 const neuf = a => a.vu && (Date.now() - new Date(a.vu)) < 3 * 864e5;
+function depuis(a) {
+  const s = a.publie || (a.vu || "").slice(0, 10); if (!s) return "";
+  const j = Math.floor((new Date().setHours(0, 0, 0, 0) - new Date(s + "T00:00:00")) / 864e5);
+  return j <= 0 ? "aujourd'hui" : j === 1 ? "hier" : j < 30 ? `il y a ${j} jours` : `le ${new Date(s).toLocaleDateString("fr-FR", {day: "numeric", month: "short"})}`;
+}
 const date = s => s ? new Date(s).toLocaleDateString("fr-FR", {day: "numeric", month: "long", year: "numeric"}) : "";
 
 /* ---------- filtres ---------- */
@@ -239,9 +245,11 @@ function puces() {
     doms.map(d => `<button class="puce ${F.domaine === d ? "actif" : ""}" data-domaine="${esc(d)}">${ICONES[d] || "•"} ${esc(d)}<b>${comptes[d] || 0}</b></button>`).join("");
   $("#p-type").innerHTML = TYPES[F.section].map(([v, t]) => `<button class="puce ${F.type === v ? "actif" : ""}" data-type="${esc(v)}">${t}</button>`).join("");
   $("#p-niveau").hidden = F.section !== "alternance";
+  $("#p-tri").innerHTML = [["recent", "🕒 Plus récentes"], ["proche", "📍 Plus proches"]].map(([v, t]) => `<button class="puce ${F.tri === v ? "actif" : ""}" data-tri="${v}">${t}</button>`).join("");
   $("#p-niveau").innerHTML = [["", "Tous niveaux"], ...NIVEAUX.map(n => [n, n])].map(([v, t]) => `<button class="puce ${F.niveau === v ? "actif" : ""}" data-niveau="${esc(v)}">${esc(t)}</button>`).join("");
 }
 $("#p-section").onclick = e => { const b = e.target.closest("[data-section]"); if (!b || b.dataset.section === F.section) return; Object.assign(F, {section: b.dataset.section, type: "", domaine: ""}); LIMITE = 60; sauver(); puces(); afficher(); };
+$("#p-tri").onclick = e => { const b = e.target.closest("[data-tri]"); if (!b) return; if (b.dataset.tri === "proche" && !POS) { toast("Choisis d'abord ta position ou ta commune"); return; } F.tri = b.dataset.tri; sauver(); puces(); afficher(); };
 $("#p-domaine").onclick = e => { const b = e.target.closest("[data-domaine]"); if (!b) return; F.domaine = b.dataset.domaine; sauver(); puces(); afficher(); };
 $("#p-type").onclick = e => { const b = e.target.closest("[data-type]"); if (!b) return; F.type = b.dataset.type; sauver(); puces(); afficher(); };
 $("#p-niveau").onclick = e => { const b = e.target.closest("[data-niveau]"); if (!b) return; F.niveau = b.dataset.niveau; sauver(); puces(); afficher(); };
@@ -265,7 +273,10 @@ function filtrees() {
     }
     res.push(a);
   }
-  if (POS) res.sort((x, y) => (x.type !== "offre") - (y.type !== "offre") || (x._d ?? 999) - (y._d ?? 999));
+  // les offres d'abord ; les plus récentes en tête (ou les plus proches si choisi)
+  const quand = a => (a.publie || (a.vu || "").slice(0, 10)) + (a.vu || "");
+  res.sort((x, y) => (x.type !== "offre") - (y.type !== "offre") ||
+    (F.tri === "proche" && POS ? (x._d ?? 999) - (y._d ?? 999) : quand(y).localeCompare(quand(x))));
   return res;
 }
 
@@ -276,6 +287,7 @@ function carteOffre(a) {
     <h3>${esc(a.type === "spontanee" ? a.entreprise : a.titre)}</h3>
     ${a.type === "spontanee" ? (a.secteur ? `<div class="lieu">${esc(a.secteur)}</div>` : "") : `<div class="ent">${esc(a.entreprise)}</div>`}
     <div class="lieu">📍 ${esc(a.commune || a.adresse || "La Réunion")}${a._d != null ? ` · ${kmTexte(a._d)}` : ""}${a.debut ? ` · début ${esc(date(a.debut))}` : ""}</div>
+    ${a.type === "offre" && depuis(a) ? `<div class="aide">🕒 Publiée ${esc(depuis(a))}</div>` : ""}
   </button>`;
 }
 let LIMITE = 60;
@@ -687,7 +699,7 @@ function panneauNotifs() {
   ouvrir(`${barre("🔔 Notifications")}
     <div class="bloc">
       <div class="cv-etat ${NOTIF.actif ? "" : "manque"}">${NOTIF.actif ? "✓ Notifications activées" : "Notifications désactivées"}</div>
-      <p class="aide" style="margin-top:8px">Une notification arrive sur ton téléphone dès qu'une nouvelle offre qui te correspond est publiée (4 recherches par jour).</p>
+      <p class="aide" style="margin-top:8px">Une notification arrive sur ton téléphone dès qu'une nouvelle offre qui te correspond est publiée (une recherche toutes les 5 heures).</p>
       ${iosHorsAppli ? '<p class="aide"><b>Sur iPhone</b> : installe d\'abord l\'appli (bouton Partager → « Sur l\'écran d\'accueil »), puis ouvre-la depuis son icône pour activer les notifications.</p>' : ""}
     </div>
     <div class="bloc"><h4>Me prévenir pour</h4>
@@ -763,9 +775,23 @@ function menu() {
 $("#b-menu").onclick = menu;
 
 /* ---------- actualiser ---------- */
-let MAJ_EN_COURS = false;
-async function actualiser() {
-  if (MAJ_EN_COURS) return; MAJ_EN_COURS = true;
+let MAJ_EN_COURS = false, DERNIERE_MAJ = 0;
+async function actualiser(silence) {
+  if (MAJ_EN_COURS) return; MAJ_EN_COURS = true; DERNIERE_MAJ = Date.now();
+  if (silence === true) {  // à l'ouverture et au retour sur l'appli : sans bruit
+    try {
+      const r = await fetch("annonces.json?t=" + Date.now(), {cache: "no-store"});
+      if (r.ok) {
+        const avant = new Set(OFFRES.map(a => a.id)), liste = await r.json();
+        if (Array.isArray(liste) && (liste.length !== OFFRES.length || liste.some(a => !avant.has(a.id)))) {
+          const nouv = liste.filter(a => !avant.has(a.id)).length;
+          OFFRES = liste; puces(); afficher();
+          if (nouv && avant.size) toast(`${nouv} nouvelle${nouv > 1 ? "s" : ""} offre${nouv > 1 ? "s" : ""} ajoutée${nouv > 1 ? "s" : ""}`);
+        }
+      }
+    } catch (e) {}
+    MAJ_EN_COURS = false; return;
+  }
   const b = $("#b-maj"); b.classList.add("tourne"); $("#tirer").classList.add("tourne");
   try {
     const r = await fetch("annonces.json?t=" + Date.now(), {cache: "no-store"});
@@ -778,7 +804,10 @@ async function actualiser() {
   } catch (e) { toast(navigator.onLine === false ? "Pas de connexion" : "Rechargement de la page…"); if (navigator.onLine !== false) setTimeout(() => location.reload(), 600); }
   b.classList.remove("tourne"); $("#tirer").classList.remove("tourne"); $("#tirer").style.transform = ""; MAJ_EN_COURS = false;
 }
-$("#b-maj").onclick = actualiser;
+$("#b-maj").onclick = () => actualiser();
+// mise à jour toute seule : à l'ouverture, au retour sur l'appli et toutes les 30 min
+document.addEventListener("visibilitychange", () => { if (!document.hidden && Date.now() - DERNIERE_MAJ > 5 * 60e3) actualiser(true); });
+setInterval(() => { if (!document.hidden) actualiser(true); }, 30 * 60e3);
 // tirer la page vers le bas pour actualiser
 let tirY = null, tirD = 0;
 addEventListener("touchstart", e => { tirY = scrollY <= 0 && $("#voile").hidden && !e.target.closest("#carte") ? e.touches[0].clientY : null; tirD = 0; }, {passive: true});
@@ -794,6 +823,7 @@ puces(); rayonUI(); afficher();
 // ouverture depuis une notification : #id de l'offre
 function depuisLien() { const id = decodeURIComponent(location.hash.slice(1)); const a = id && OFFRES.find(x => x.id === id); if (a) { F.section = a.categorie || "alternance"; puces(); afficher(); fiche(id); } }
 addEventListener("hashchange", depuisLien); depuisLien();
+actualiser(true);
 </script>
 </body>
 </html>

@@ -2,7 +2,7 @@ name: Alternance Réunion
 
 on:
   schedule:
-    - cron: "40 1,5,9,13 * * *"   # 4 fois par jour : 5h40, 9h40, 13h40 et 17h40 à La Réunion
+    - cron: "40 */5 * * *"   # toutes les 5 heures : 4h40, 9h40, 14h40, 19h40 et 0h40 à La Réunion
   workflow_dispatch:              # bouton "Run workflow" pour lancer à la main
 
 permissions:
