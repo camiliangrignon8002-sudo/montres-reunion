@@ -505,6 +505,34 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
 .dom.actif .carre{background:rgba(255,255,255,.92)}
 @media (prefers-color-scheme:dark){.goutte-dom{background:linear-gradient(180deg,rgba(76,195,138,.2),rgba(76,195,138,.1));box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 0 0 1px rgba(76,195,138,.25)}}
 @media (prefers-reduced-motion:reduce){.goutte-dom{transition:none}.dom:hover .carre,.nu:hover{transform:none}}
+
+/* ---------- vert en Liquid Glass : verre teinté translucide, lumière en lentille, liseré lumineux ---------- */
+:root{
+  --lg-vert:rgba(17,124,76,.74);
+  --lg-vert-lentille:radial-gradient(120% 150% at 50% -35%,rgba(255,255,255,.42),rgba(255,255,255,0) 58%),
+    radial-gradient(110% 130% at 50% 140%,rgba(150,255,205,.38),rgba(150,255,205,0) 60%);
+  --lg-vert-ombre:inset 0 1px 0 rgba(255,255,255,.7),inset 0 -1px 0 rgba(200,255,228,.45),
+    inset 0 12px 20px -14px rgba(255,255,255,.75),inset 0 -12px 18px -14px rgba(170,255,215,.55),
+    inset 0 0 0 .5px rgba(255,255,255,.35),0 10px 26px -12px rgba(17,124,76,.55),0 2px 6px -2px rgba(17,124,76,.25);
+}
+@media (prefers-color-scheme:dark){:root{
+  --lg-vert:rgba(40,170,108,.5);
+  --lg-vert-ombre:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(160,255,210,.25),
+    inset 0 12px 20px -14px rgba(255,255,255,.35),inset 0 -12px 18px -14px rgba(120,255,190,.3),
+    inset 0 0 0 .5px rgba(255,255,255,.2),0 10px 28px -12px rgba(40,170,108,.5);
+}}
+.btn:not(.gris):not(.leger),.segments button.actif,.puce.actif{
+  background:var(--lg-vert-lentille),var(--lg-vert);box-shadow:var(--lg-vert-ombre);
+  -webkit-backdrop-filter:blur(18px) saturate(200%) brightness(1.06);backdrop-filter:blur(18px) saturate(200%) brightness(1.06);
+  text-shadow:0 1px 2px rgba(0,60,30,.35)}
+.onglets::before{background:var(--lg-vert-lentille),var(--lg-vert);box-shadow:var(--lg-vert-ombre);
+  -webkit-backdrop-filter:blur(18px) saturate(200%);backdrop-filter:blur(18px) saturate(200%)}
+.onglets button.actif{text-shadow:0 1px 2px rgba(0,60,30,.35)}
+.onglets-bas b{background:var(--lg-vert-lentille),var(--lg-vert);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 0 0 1.5px var(--fond)}
+.btn:not(.gris):not(.leger):hover{background:var(--lg-vert-lentille),rgba(17,124,76,.8)}
+html.teinte{--lg-vert:#127749}
+@media (prefers-contrast:more){:root{--lg-vert:#0b5a36;--lg-vert-lentille:linear-gradient(transparent,transparent)}}
+@media (prefers-reduced-transparency:reduce){:root{--lg-vert:#127749}}
 </style>
 </head>
 <body>
@@ -641,7 +669,7 @@ const COMMUNES = {"Saint-Denis": [-20.8823, 55.4504], "Sainte-Clotilde": [-20.89
 const CENTRE = [-21.13, 55.53];
 const SOURCES = "HelloWork, Domtomemploi";
 let OFFRES = OFFRES0;
-const VERSION = "1793254349";
+const VERSION = "1793254442";
 let DETAILS = null, DETAILS_P = null, FICHE_ID = null;
 function chargerDetails() {  // descriptifs complets, chargés en arrière-plan après l'affichage
   if (!DETAILS_P) DETAILS_P = fetch("details.json?v=" + VERSION).then(r => r.ok ? r.json() : {}).then(d => {
