@@ -646,6 +646,26 @@ html{background:var(--fond)}
 html.doux *,html.doux *::before,html.doux *::after{animation:none!important;transition-duration:.01s!important}
 html.doux .offre.a-venir{opacity:1;transform:none}
 html.teinte body::before{opacity:.35}
+
+/* ================= fluidité ================= */
+/* fond immobile : un fond qui bouge oblige le téléphone à recalculer le flou de chaque verre à chaque image */
+body::before{animation:none;will-change:auto;inset:0}
+/* voile sans flou plein écran ; le verre de la fenêtre suffit */
+.voile{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(10,20,15,.3)}
+/* cœurs des annonces : verre sans flou (des dizaines de flous à l'écran ralentissent le défilement) */
+.offre .fav{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(255,255,255,.8)}
+@media (prefers-color-scheme:dark){.offre .fav{background:rgba(60,60,64,.7)}}
+/* flou plus léger sur les grands panneaux, couche dédiée pendant l'animation */
+.feuille{-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);contain:layout paint}
+.offre{transition:transform .5s var(--ressort),background .3s}
+.offre:hover{box-shadow:var(--v-lentille),var(--v-ombre)}
+.fantome{position:fixed;z-index:3;border-radius:34px;pointer-events:none;will-change:transform,clip-path;
+  background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(244,247,245,.96));box-shadow:inset 0 1px 0 #fff,0 30px 80px -20px rgba(0,0,0,.45)}
+@media (prefers-color-scheme:dark){.fantome{background:linear-gradient(180deg,rgba(44,44,48,.97),rgba(26,26,30,.97));box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 30px 80px -20px rgba(0,0,0,.7)}}
+.feuille{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(251,252,251,.9);transition:none}
+.feuille.posee{-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%)}
+@media (prefers-color-scheme:dark){.feuille{background:rgba(26,26,30,.9)}}
+html.teinte .feuille.posee{background:var(--v-fond-fort)}
 </style>
 </head>
 <body>
@@ -793,8 +813,8 @@ async function verifierVersion() {
   } catch (e) {}
 }
 verifierVersion();
-addEventListener("focus", verifierVersion);
-document.addEventListener("visibilitychange", () => { if (!document.hidden) verifierVersion(); });
+// au retour sur l'appli, seulement si aucune fenêtre n'est ouverte (pour ne jamais couper une lecture)
+document.addEventListener("visibilitychange", () => { if (!document.hidden && document.querySelector("#voile").hidden) verifierVersion(); });
 let DETAILS = null, DETAILS_P = null, FICHE_ID = null;
 function chargerDetails() {  // descriptifs complets, chargés en arrière-plan après l'affichage
   if (!DETAILS_P) DETAILS_P = fetch("details.json?v=" + VERSION).then(r => r.ok ? r.json() : {}).then(d => {
@@ -940,12 +960,15 @@ $("#q-fermer").onclick = () => { $("#cherche").hidden = true; ongletBas("offres"
 $("#b-favs").onclick = () => { F.type = F.type === "fav" ? "" : "fav"; sauver(); puces(); afficher(); };
 $("#b-lieu").onclick = () => panneauLieu();
 let dernierY = scrollY;
-addEventListener("scroll", () => {
+let DEFILE = false;
+addEventListener("scroll", () => { if (!DEFILE) { DEFILE = true; requestAnimationFrame(defile); } }, {passive: true});
+function defile() {
+  DEFILE = false;
   $(".bandeau").classList.toggle("colle", scrollY > 4);
   const bas = $(".onglets-bas"), d = scrollY - dernierY;
   if (Math.abs(d) > 6) { const avant = bas.classList.contains("reduite"); bas.classList.toggle("reduite", d > 0 && scrollY > 260); dernierY = scrollY;
     if (avant !== bas.classList.contains("reduite")) { placerGoutte(false); setTimeout(() => placerGoutte(false), 470); } }
-}, {passive: true});
+}
 // Liquid Glass : le reflet du verre suit le doigt ou la souris
 const VERRE = ".btn:not(.gris):not(.leger),.segments button,.onglets-bas button,.dom .carre,.nu,.onglets,.filtres button,.offre .fav,.offre";
 // onde liquide : au toucher, une goutte de lumière s'étale dans le verre
@@ -1437,15 +1460,36 @@ function genie(f, entree) {
   const [entonnoir, courbe, plein] = formesGenie(cx, e, versBas);
   const dx = ox - r.width / 2, dy = oy - r.height / 2;
   const k = [
-    {transform: `translate(${dx}px, ${dy}px) scale(.22, .06)`, clipPath: entonnoir, opacity: .35, filter: "blur(2px)"},
-    {transform: `translate(${dx * .32}px, ${dy * .32}px) scale(.78, .8)`, clipPath: courbe, opacity: 1, filter: "blur(0)", offset: .45},
-    {transform: "translate(0, 0) scale(1.012, 1.012)", clipPath: plein, opacity: 1, filter: "blur(0)", offset: .82},
-    {transform: "none", clipPath: plein, opacity: 1, filter: "blur(0)"},
+    {transform: `translate(${dx}px, ${dy}px) scale(.22, .06)`, clipPath: entonnoir, opacity: .35},
+    {transform: `translate(${dx * .32}px, ${dy * .32}px) scale(.78, .8)`, clipPath: courbe, opacity: 1, offset: .45},
+    {transform: "translate(0, 0) scale(1.012, 1.012)", clipPath: plein, opacity: 1, offset: .82},
+    {transform: "none", clipPath: plein, opacity: 1},
   ];
-  return f.animate(entree ? k : k.slice().reverse().map((x, i, l) => ({...x, offset: x.offset != null ? 1 - x.offset : undefined})),
-    entree ? {duration: 560, easing: "cubic-bezier(.22,.9,.3,1)"} : {duration: 430, easing: "cubic-bezier(.55,0,.75,.2)"});
+  // c'est une silhouette de verre vide qui se fait aspirer : rien à redessiner, l'animation reste fluide même sur un petit téléphone ;
+  // le contenu de la fenêtre apparaît quand elle est posée
+  const g = document.createElement("div");
+  g.className = "fantome";
+  Object.assign(g.style, {left: r.left + "px", top: r.top + "px", width: r.width + "px", height: r.height + "px"});
+  f.parentNode.appendChild(g);
+  f.style.opacity = "0";
+  const a = g.animate(entree ? k : k.slice().reverse().map((x, i, l) => ({...x, offset: x.offset != null ? 1 - x.offset : undefined})),
+    entree ? {duration: 520, easing: "cubic-bezier(.22,.9,.3,1)"} : {duration: 400, easing: "cubic-bezier(.55,0,.75,.2)"});
+  a.finished.then(() => {
+    g.remove();
+    if (!entree) return;
+    f.style.opacity = "";
+    f.animate([{opacity: 0}, {opacity: 1}], {duration: 180, easing: "ease-out"});
+    cascade(f);
+  }, () => { g.remove(); f.style.opacity = ""; });
+  return a;
+}
+let POSEE = 0;
+function poser(f, ms) {  // le flou du verre s'allume quand la fenêtre ne bouge plus (le recalculer pendant un mouvement saccade)
+  f.classList.remove("posee"); clearTimeout(POSEE);
+  POSEE = setTimeout(() => f.classList.add("posee"), ms);
 }
 function cascade(f) {  // le contenu arrive bloc par bloc, en douceur
+  poser(f, DOUX.matches ? 0 : 140 + Math.min(9, f.children.length) * 35 + 300);
   [...f.children].slice(0, 9).forEach((el, i) => el.animate([{opacity: 0, transform: "translateY(14px)"}, {opacity: 1, transform: "none"}],
     {duration: 420, delay: 140 + i * 35, easing: "cubic-bezier(.2,.9,.3,1)", fill: "backwards"}));
 }
@@ -1453,13 +1497,15 @@ function ouvrir(h) {
   const v = $("#voile"), f = $("#feuille"), dejaOuverte = !v.hidden && !FERMETURE;
   if (FERMETURE) { FERMETURE.cancel(); FERMETURE = null; }
   f.innerHTML = h; v.hidden = false; f.scrollTop = 0; document.body.style.overflow = "hidden";
-  if (DOUX.matches || !f.animate) return;
+  f.classList.remove("posee");
+  if (DOUX.matches || !f.animate) return poser(f, 0);
   if (dejaOuverte) {  // une fenêtre en remplace une autre : le verre se reforme, comme un liquide
-    f.animate([{transform: "scale(.965)", filter: "blur(6px)", opacity: .55}, {transform: "scale(1.006)", filter: "blur(0)", opacity: 1, offset: .7}, {transform: "none", opacity: 1}],
+    f.animate([{transform: "scale(.965)", opacity: .55}, {transform: "scale(1.006)", opacity: 1, offset: .7}, {transform: "none", opacity: 1}],
       {duration: 380, easing: "cubic-bezier(.2,.9,.3,1)"});
   } else {
     v.animate([{opacity: 0}, {opacity: 1}], {duration: 300, easing: "ease-out"});
     genie(f, true);
+    return;
   }
   cascade(f);
 }
@@ -1467,8 +1513,9 @@ function fermer() {
   FICHE_ID = null;
   const v = $("#voile"), f = $("#feuille");
   if (v.hidden || FERMETURE) return;
-  const fin = () => { FERMETURE = null; v.hidden = true; document.body.style.overflow = ""; };
+  const fin = () => { FERMETURE = null; v.hidden = true; f.style.opacity = ""; document.body.style.overflow = ""; };
   if (DOUX.matches || !f.animate) return fin();
+  clearTimeout(POSEE); f.classList.remove("posee");
   v.animate([{opacity: 1}, {opacity: 0}], {duration: 420, easing: "ease-in", fill: "forwards"}).finished.then(a => a.cancel()).catch(() => {});
   FERMETURE = genie(f, false);
   FERMETURE.finished.then(fin).catch(() => {});
