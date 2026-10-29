@@ -2943,36 +2943,24 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "ofim-on-a-louer-un-appartement-T2-residence-Dunes-de-L-Ocean-html",
-  "source": "OFIM",
-  "url": "https://www.ofim.fr/73728/Location-Appartement-SAINT-DENIS-ile-de-la-Reunion-a-louer-un-appartement-T2-residence-Dunes-de-L-Ocean.html",
-  "titre": "À louer un appartement T2 résidence Dunes de L’Ocean",
-  "prix": 652.1,
+  "id": "zimo-01a15485-2525-71f8-8fcb-53da564b6670",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/a-louer-un-appartement-t2-residence-dunes-de-l-ocean/01a15485-2525-71f8-8fcb-53da564b6670",
+  "titre": "À louer un appartement T2 résidence Dunes de L'Ocean",
+  "prix": 652.0,
   "commune": "Saint-Denis",
-  "quartier": "",
+  "quartier": "Saint-Denis",
   "pieces": 2,
   "type": "T2",
   "surface": 45.0,
   "meuble": null,
   "photos": [
-   "https://www.ofim.fr/media/m/326614/Location-Appartement-SAINT-DENIS-a-louer-un-appartement-T2-residence-Dunes-de-L-Ocean.jpg",
-   "https://www.ofim.fr/media/sm/323874/Location-Appartement-SAINT-DENIS-A-louer-T1-meuble-a-l-annee-Bd-St-Francois-residence-Macadamia.jpg",
-   "https://www.ofim.fr/media/sm/326450/Location-Appartement-SAINT-DENIS-a-louer-un-appartement-de-type-3-a-la-Residence-Edmond-Albius.jpg",
-   "https://www.ofim.fr/media/sm/325604/Location-Appartement-SAINTE-CLOTILDE-A-louer-ce-bel-appartement-de-type-F2-sur-la-residence-ARTY-a-Sainte-Clotilde-La-Bretagne.jpg",
-   "https://www.ofim.fr/media/sm/325468/Location-Appartement-SAINTE-CLOTILDE-A-louer-Appartement-T2-de-49-m2-en-rez-de-jardin-Sainte-Clotilde-La-Bretagne.jpg",
-   "https://www.ofim.fr/media/sm/324400/Location-Appartement-SAINT-JOSEPH-Appartement-F2-avec-terrasse-de-62-m2-a-Saint-Joseph.jpg",
-   "https://www.ofim.fr/media/sm/319109/Location-Appartement-TROIS-BASSINS-A-LOUER-spacieux-appartement-de-type-F2-a-TROIS-BASSINS.jpg",
-   "https://www.ofim.fr/media/sm/325323/Location-Appartement-SAINT-ANDRE-a-louer-a-Saint-Andre.jpg"
+   "https://img.e-xiste.com/BzL_klNJr3URZXK8MovnYxvKbY56DLGpcrl2p6grSnA/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_e9748565-d640-4a36-8559-1cb6f97d6460.jpg"
   ],
-  "description": "À louer T2 de 45 m² à Saint Denis, résidence Dunes de l'Océan. Chambre climatisée, balcon, parking. Loyer 652 €/mois charges incluses. Vue mer. Contactez…",
-  "caracteristiques": [
-   "Varangue / balcon",
-   "Parking",
-   "Climatisation",
-   "Vue mer"
-  ],
+  "description": "Location T2 Saint-Denis (974) 2 pièces 45 m²",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "OFIM",
+  "annonceur": "Pro · via leboncoin",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -2982,12 +2970,7 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/a-louer-un-appartement-t2-residence-dunes-de-l-ocean/01a15485-2525-71f8-8fcb-53da564b6670"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
