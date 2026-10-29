@@ -179,6 +179,8 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .segments{display:flex;border:1px solid var(--ligne);border-radius:999px;padding:3px;gap:2px;background:var(--fond)}
 .segments button{flex:1;border:0;background:none;border-radius:999px;padding:8px 6px;font-weight:600;font-size:14px;color:var(--doux)}
 .segments button.actif{background:var(--vert);color:#fff}
+.segments.six{display:grid;grid-template-columns:repeat(3,1fr);border-radius:18px}
+@media (min-width:560px){.segments.six{grid-template-columns:repeat(6,1fr);border-radius:999px}}
 .simu-res{display:flex;flex-direction:column;align-items:center;padding:18px 0 6px}
 .simu-res span{font-size:30px;font-weight:700;letter-spacing:-.01em}
 .simu-res small{color:var(--or);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:12px;margin-top:4px}
@@ -502,7 +504,7 @@ function puces() {  // onglets, titre et barre de filtres
   const typeLab = (TYPES[F.section].find(x => x[0] === F.type) || [])[1];
   $("#filtres").innerHTML = [
     `<button data-f="domaine" class="${F.domaine ? "actif" : ""}">${lab("Domaine", F.domaine)} ${chev}</button>`,
-    `<button data-f="bts" class="${F.bts ? "actif" : ""}">${F.bts ? esc(F.bts) : "Mon diplôme"} ${chev}</button>`,
+    `<button data-f="bts" class="${F.bts ? "actif" : ""}">${F.bts ? esc(F.bts.replace(/ \(.*\)/, "")) : "Formation"} ${chev}</button>`,
     `<button data-f="type" class="${F.type ? "actif" : ""}">${F.type ? typeLab.replace(/<svg.*?<\/svg>\s*/g, "") : "Type"} ${chev}</button>`,
     F.section === "alternance" ? `<button data-f="niveau" class="${F.niveau ? "actif" : ""}">${lab("Niveau", F.niveau)} ${chev}</button>` : "",
     `<button data-f="lieu" class="${POS && F.rayon < 70 ? "actif" : ""}">${POS && F.rayon < 70 ? `${F.rayon} km · ${esc(POS.nom)}` : "Autour de moi"} ${chev}</button>`,
@@ -552,8 +554,8 @@ addEventListener("scroll", () => $(".bandeau").classList.toggle("colle", scrollY
 $("#q").value = F.q; if (F.q) $("#cherche").hidden = false;
 let qMinuterie;
 $("#q").oninput = e => { clearTimeout(qMinuterie); qMinuterie = setTimeout(() => {
-  const m = BTS.find(([k]) => norm(k.replace(/ \(.*\)/, "")) === norm(e.target.value.trim()));
-  if (m) { F.bts = m[0]; F.q = ""; e.target.value = ""; sauver(); puces(); afficher(); suggestions(); toast(`Offres pour le ${m[0]}`); return; }
+  const m = BTS.find(([k]) => norm(k.replace(/ \(.*\)/, "")).replace(/[,/]/g, "") === norm(e.target.value.trim()).replace(/[,/]/g, ""));
+  if (m) { F.bts = m[0]; F.q = ""; e.target.value = ""; sauver(); puces(); afficher(); suggestions(); toast(`Offres pour : ${m[0]}`); return; }
   F.q = e.target.value; LIMITE = 30; sauver(); afficher(); suggestions(); }, 140); };
 
 function panneauFiltres() {
@@ -666,7 +668,60 @@ const BTS = [
   ["BUT Génie biologique", "Génie biologique", /laborat|biolog|analyses?|agroalimentaire|qualite|environnement|dieteti|hygiene/],
   ["BUT Chimie", "Chimie", /chimi|laborat|analyses?|qualite|traitement des eaux|production/],
   ["BUT Science des données", "Science des données", /data|donnees|statisti|analyste|business intelligence|\bbi\b|reporting/],
+  ["CAP Cuisine", "Cuisinier", /cuisin|commis|second de cuisine|chef de partie|plonge|restauration/],
+  ["CAP Pâtissier", "Pâtissier", /patiss|boulang|viennois|chocolat/],
+  ["CAP Boulanger", "Boulanger", /boulang|patiss|viennois|fournil/],
+  ["CAP Coiffure", "Métiers de la coiffure", /coiff|barbier/],
+  ["CAP Esthétique", "Esthétique, cosmétique, parfumerie", /esthet|beaute|cosmeti|onglerie|spa\b|parfum|maquill/],
+  ["CAP Petite enfance (AEPE)", "Accompagnant éducatif petite enfance", /petite enfance|creche|garde d.enfant|atsem|auxiliaire de puericulture|periscolaire|assistant\w* maternel/],
+  ["CAP Équipier polyvalent du commerce", "Équipier polyvalent du commerce", /employe (?:commercial|libre|polyvalent)|equipier|mise en rayon|caiss|vend|magasin|drive|rayon/],
+  ["CAP Service en restauration", "Commercialisation et services en HCR", /serveu|chef de rang|barman|runner|employe polyvalent de restauration|restaura|hotel|room service/],
+  ["CAP Électricien", "Électricien", /electri|cablage|photovolta|courant/],
+  ["CAP Maçon", "Maçon", /macon|coffreur|gros oeuvre|btp|chantier|carrel/],
+  ["CAP Plombier, chauffagiste", "Monteur en installations sanitaires et thermiques", /plomb|chauffag|sanitaire|cvc|climati|frigorist/],
+  ["CAP Menuisier", "Menuisier", /menuis|ebenist|agencement|charpent/],
+  ["CAP Peintre", "Peintre applicateur de revêtements", /peint|enduis|revetement|platr|finition/],
+  ["CAP Maintenance des véhicules", "Maintenance des véhicules", /mecani|automobile|vehicule|garag|pneu|carross|entretien rapide/],
+  ["CAP Boucher", "Boucher", /bouch|charcut|traiteur|poissonn/],
+  ["CAP Agent de sécurité", "Agent de sécurité", /securite|surete|agent de prevention|vigile|ssiap|gardien/],
+  ["Bac pro Commerce et vente", "Métiers du commerce et de la vente", /vend|vente|commerc|employe (?:commercial|libre)|rayon|caiss|conseiller client|magasin/],
+  ["Bac pro Accueil", "Métiers de l'accueil", /accueil|hote|hotesse|standard|reception|relation client|conseiller client/],
+  ["Bac pro AGOrA (gestion administrative)", "Assistance à la gestion des organisations", /assistant\w* administrati|agent administrati|gestionnaire administrati|secretair|assistant\w* (?:de )?gestion|accueil|facturation/],
+  ["Bac pro Logistique", "Logistique", /logisti|magasinier|preparateur de commande|cariste|entrepot|manutention|reception\w* de marchandises/],
+  ["Bac pro Cuisine", "Cuisine", /cuisin|commis|chef de partie|restauration/],
+  ["Bac pro Service en restauration", "Commercialisation et services en restauration", /serveu|chef de rang|barman|maitre d.hotel|restaura|hotel/],
+  ["Bac pro MELEC (électricité)", "Métiers de l'électricité et de ses environnements connectés", /electri|cablage|domoti|photovolta|fibre|courant/],
+  ["Bac pro Maintenance des véhicules", "Maintenance des véhicules", /mecani|automobile|vehicule|garag|poids lourds?|carross/],
+  ["Bac pro MSPC (maintenance industrielle)", "Maintenance des systèmes de production connectés", /maintenance|electromecani|technicien industriel|automatism|depannage/],
+  ["Bac pro ASSP (soins, services à la personne)", "Accompagnement, soins et services à la personne", /aide.soignant|auxiliaire de vie|aide a domicile|ehpad|accompagnant|agent de service|ash\b|petite enfance|social/],
+  ["Bac pro Bâtiment", "Technicien du bâtiment", /batiment|chantier|btp|macon|menuis|charpent|coffreur|chef d.equipe|travaux/],
+  ["Bac pro Énergie (TISEC, TMSEC)", "Systèmes énergétiques et climatiques", /cvc|climati|chauffag|frigorist|plomb|thermique|energi/],
+  ["Bac pro Sécurité", "Métiers de la sécurité", /securite|surete|prevention|ssiap|gardien|vigile/],
+  ["Bac pro Transport", "Conducteur transport routier", /chauffeur|conducteur (?:poids lourds?|spl|routier|livreur|de bus)|livreu|transport/],
+  ["Licence Commerce et vente", "Licence pro, bachelor commerce", /commercial|vente|business developer|charge\w* d.affaires|charge\w* de clientele|manager|responsable (?:de )?(?:magasin|secteur|rayon)|negociat|account/],
+  ["Licence Marketing et communication", "Licence pro, bachelor marketing", /marketing|communication|community manager|digital|evenement|chef de produit|graphis|redact/],
+  ["Licence Gestion et comptabilité", "Licence pro, bachelor gestion", /compta|gestion|paie|controle de gestion|audit|tresorer|finance|collaborateur comptable/],
+  ["Licence Ressources humaines", "Licence pro, bachelor RH", /ressources humaines|\brh\b|recrut|paie|formation|gestionnaire du personnel/],
+  ["Licence Banque et assurance", "Licence pro banque, assurance", /bancaire|banque|assuran|conseiller (?:de )?clientele|credit|patrimoni/],
+  ["Licence Immobilier", "Licence pro immobilier", /immobili|gestionnaire locati|syndic|transaction|copropriet/],
+  ["Licence Informatique et numérique", "Licence pro, bachelor informatique", /develop|informati|web|data|reseau|cyber|devops|support|systeme/],
+  ["Licence Logistique et transport", "Licence pro logistique", /logisti|transport|supply|exploitant|planificat|approvisionn|achat/],
+  ["Licence BTP et énergie", "Licence pro BTP, énergie", /conducteur de travaux|chantier|btp|batiment|genie civil|energi|photovolta|cvc|metreur|economiste|bureau d.etudes/],
+  ["Licence Tourisme et hôtellerie", "Licence pro tourisme, hôtellerie", /touris|hotel|reception|evenement|voyage|restaura/],
+  ["Licence Social et santé", "Licence pro intervention sociale, santé", /social|educat|insertion|mediat|coordinat|sante|accompagn/],
+  ["Licence Droit", "Licence de droit, licence pro métiers du notariat", /juridi|juriste|notari|clerc|droit|contentieux/],
+  ["Master Commerce et marketing", "Master, MBA, école de commerce", /marketing|commercial|business|chef de produit|responsable (?:commercial|marketing|grands comptes)|directeur commercial|key account|account manager/],
+  ["Master Finance et comptabilité", "Master CCA, finance, audit, DSCG", /audit|compta|finance|controle de gestion|tresorer|chef de mission|expert|fiscal/],
+  ["Master Ressources humaines", "Master RH", /ressources humaines|\brh\b|recrut|talent|paie|relations sociales/],
+  ["Master Informatique et data", "Master, école d'ingénieur informatique", /develop|informati|data|cyber|devops|architecte|chef de projet (?:it|informatique|digital)|ingenieur (?:logiciel|systemes?|reseaux?)/],
+  ["Master Droit", "Master de droit", /juriste|juridi|droit|avocat|notari|contentieux|compliance/],
+  ["Master Management et gestion", "Master management, MAE", /manager|directeur|direction|responsable d.agence|chef de projet|management|gestion de projet/],
+  ["Master / Ingénieur BTP et énergie", "Master, école d'ingénieur BTP", /ingenieur|conducteur de travaux|charge\w* d.affaires|chef de projet|bureau d.etudes|genie civil|energi|btp|batiment/],
+  ["Master / Ingénieur Industrie", "Master, école d'ingénieur industrie", /ingenieur|industri|production|methodes|qualite|maintenance|automatism|process/],
+  ["Master Social et santé", "Master santé, social", /coordinat|directeur|cadre de sante|social|sante publique|educat/],
 ];
+const GROUPES = [["CAP", "CAP"], ["Bac pro", "Bac pro"], ["BTS", "BTS"], ["BUT", "BUT"], ["Licence", "Licence"], ["Master", "Master"]];
+const groupeDe = k => (GROUPES.find(([g]) => k.startsWith(g)) || ["BTS"])[0];
 const BTS_RX = Object.fromEntries(BTS.map(([k, , rx]) => [k, rx]));
 // 2 : l'offre cite le BTS ; 1 : le métier correspond au BTS ; 0 : rien
 function scoreBts(a, bts) {
@@ -676,13 +731,13 @@ function scoreBts(a, bts) {
 function panneauBts(groupe) {
   const comptes = {};
   for (const a of OFFRES) if (dansSection(a) && !MASQUEES[a.id]) for (const [k] of BTS) if (scoreBts(a, k)) comptes[k] = (comptes[k] || 0) + 1;
-  groupe = groupe || (F.bts.startsWith("BUT") ? "BUT" : "BTS");
+  groupe = groupe || (F.bts ? groupeDe(F.bts) : "BTS");
   const opt = ([k, nom]) => `<button class="opt ${F.bts === k ? "actif" : ""}" data-v="${esc(k)}"><span>${esc(k)}<br><small style="font-size:13px">${esc(nom)}</small></span><small>${comptes[k] || 0}</small>${ic("coche", "marque")}</button>`;
-  ouvrir(`${barre("Mon diplôme")}
-    <div class="segments" id="d-groupe" style="margin-bottom:12px"><button data-g="BTS" class="${groupe === "BTS" ? "actif" : ""}">BTS</button><button data-g="BUT" class="${groupe === "BUT" ? "actif" : ""}">BUT</button></div>
-    <p class="aide" style="margin:0 2px 10px">Choisis ton ${groupe} : tu verras d'abord les offres qui le demandent, puis les ${F.section === "emploi" ? "emplois" : "alternances"} dont le métier lui correspond.</p>
+  ouvrir(`${barre("Formation")}
+    <div class="segments six" id="d-groupe" style="margin-bottom:12px">${GROUPES.map(([g, t]) => `<button data-g="${g}" class="${groupe === g ? "actif" : ""}">${t}</button>`).join("")}</div>
+    <p class="aide" style="margin:0 2px 10px">Choisis ta formation : tu verras d'abord les offres qui le demandent, puis les ${F.section === "emploi" ? "emplois" : "alternances"} dont le métier lui correspond.</p>
     <div class="opts">
-      <button class="opt ${F.bts ? "" : "actif"}" data-v=""><span>Tous les diplômes</span>${ic("coche", "marque")}</button>
+      <button class="opt ${F.bts ? "" : "actif"}" data-v=""><span>Toutes les formations</span>${ic("coche", "marque")}</button>
       ${BTS.filter(([k]) => k.startsWith(groupe)).map(opt).join("")}
     </div>`);
   $("#d-groupe").onclick = e => { const b = e.target.closest("[data-g]"); if (b) panneauBts(b.dataset.g); };
@@ -716,13 +771,13 @@ $("#actifs").onclick = e => {
   else { F[k] = vide[k]; if (k === "q") $("#q").value = ""; }
   sauver(); puces(); afficher();
 };
-const IDEES = ["Mon BTS", "Mon BUT", "Vendeur", "Commercial", "Assistant", "Comptable", "Cuisine", "Serveur", "Mécanicien", "Aide-soignant", "Informatique", "Électricien", "Accueil", "Logistique", "Coiffure", "Petite enfance"];
+const IDEES = ["Ma formation", "Vendeur", "Commercial", "Assistant", "Comptable", "Cuisine", "Serveur", "Mécanicien", "Aide-soignant", "Informatique", "Électricien", "Accueil", "Logistique", "Coiffure", "Petite enfance"];
 function suggestions() {
   const z = $("#suggestions"); if (!z) return;
   z.innerHTML = F.q ? "" : IDEES.map(t => `<button data-idee="${esc(t)}">${esc(t)}</button>`).join("");
 }
 $("#suggestions").onclick = e => { const b = e.target.closest("[data-idee]"); if (!b) return;
-  if (b.dataset.idee === "Mon BTS" || b.dataset.idee === "Mon BUT") { panneauBts(b.dataset.idee.slice(4)); return; } $("#q").value = F.q = b.dataset.idee; sauver(); afficher(); suggestions(); $("#liste").scrollIntoView({block: "start"}); };
+  if (b.dataset.idee === "Ma formation") { panneauBts(); return; } $("#q").value = F.q = b.dataset.idee; sauver(); afficher(); suggestions(); $("#liste").scrollIntoView({block: "start"}); };
 function ongletBas(n) { document.querySelectorAll(".onglets-bas button").forEach(b => b.classList.toggle("actif", b.dataset.nav === n)); }
 document.querySelector(".onglets-bas").onclick = e => {
   const b = e.target.closest("[data-nav]"); if (!b) return;
@@ -769,7 +824,7 @@ function carteOffre(a) {
       <div class="sous">${esc(sous)}${esc(loin)}</div>
       <div class="meta">${esc(meta)}</div>
       ${sal ? `<div class="salaire">${esc(sal)}</div>` : ""}
-      ${F.bts && a._bts === 2 ? `<div class="atout bts">${ic("toque", "p")} Demande ton ${esc(F.bts.replace(/ \(.*\)/, ""))}</div>` : F.bts && a._bts === 1 ? `<div class="atout bts doux">${ic("toque", "p")} Métier accessible avec ton ${esc(F.bts.replace(/ \(.*\)/, ""))}</div>` : ""}
+      ${F.bts && a._bts === 2 ? `<div class="atout bts">${ic("toque", "p")} Demande ${/^Licence/.test(F.bts) ? "ta" : "ton"} ${esc(F.bts.replace(/ \(.*\)/, ""))}</div>` : F.bts && a._bts === 1 ? `<div class="atout bts doux">${ic("toque", "p")} Métier accessible avec ${/^Licence/.test(F.bts) ? "ta" : "ton"} ${esc(F.bts.replace(/ \(.*\)/, ""))}</div>` : ""}
       ${!spont && a.debutant ? `<div class="atout">${ic("coche", "p")} Débutants acceptés</div>` : ""}
       <div class="quand">${spont ? "" : depuis(a) ? `Publiée ${esc(depuis(a))}` : ""}${CAND[a.id] ? `${spont ? "" : " · "}Postulé` : VUES[a.id] ? `${spont ? "" : " · "}Déjà vue` : ""}</div>
     </div>
