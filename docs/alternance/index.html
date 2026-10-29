@@ -28,7 +28,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 button,a,.offre,label{touch-action:manipulation}
 html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--fond);color:var(--texte);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Helvetica Neue","Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding-bottom:calc(40px + env(safe-area-inset-bottom));overflow-x:hidden}
 button,input,select,textarea{font:inherit;color:inherit}
@@ -122,7 +122,7 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .embleme svg{width:50px;height:38px;filter:drop-shadow(0 3px 2.5px rgba(70,50,10,.28)) drop-shadow(0 1px 0 rgba(255,255,255,.4))}
 .embleme .reflet{transform:skewX(-22deg);animation:reflet 5s cubic-bezier(.4,0,.2,1) 1s infinite}
 @keyframes reflet{0%{transform:translateX(0) skewX(-22deg)}40%,100%{transform:translateX(120px) skewX(-22deg)}}
-@media (prefers-reduced-motion:reduce){.embleme .reflet{animation:none;opacity:0}}
+
 .embleme span{font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--texte);font-weight:600;margin-right:-.32em}
 .embleme em{font-style:normal;font-size:8.5px;letter-spacing:.42em;text-transform:uppercase;color:var(--doux);margin-right:-.42em;position:relative;padding-top:7px}
 .embleme em::before{content:"";position:absolute;top:0;left:50%;width:16px;height:1.5px;margin-left:-8px;background:var(--or);border-radius:2px}
@@ -355,15 +355,12 @@ html.teinte{--lg-vert:#127749;--lg-clair:rgba(246,246,246,.96)}
 html.teinte .bandeau.colle{background:var(--fond)}
 @media (prefers-color-scheme:dark){html.teinte{--lg-vert:#1c8a57;--lg-clair:rgba(28,28,30,.97)}}
 /* réglages du téléphone : « Réduire la transparence », « Augmenter le contraste » */
-@media (prefers-reduced-transparency:reduce){
-  :root{--lg-vert:var(--vert);--lg-clair:var(--fond)}
-  .btn,.segments,.onglets-bas,.bandeau.colle{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
-}
+
 @media (prefers-contrast:more){
   :root{--lg-vert:#0b5a36;--lg-clair:var(--fond);--lg-bord:linear-gradient(var(--texte),var(--texte))}
   .btn,.segments,.onglets-bas{-webkit-backdrop-filter:none;backdrop-filter:none}
 }
-@media (prefers-reduced-motion:reduce){.btn:active,.onglets-bas button:active,.segments button:active{transform:none}}
+
 
 /* ---------- ordinateur : 2 annonces par ligne, comme un catalogue ---------- */
 @media (min-width:900px){
@@ -454,13 +451,9 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 /* mode Teinté et accessibilité : verre plus opaque, ou pas de verre du tout */
 html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
 @media (prefers-color-scheme:dark){html.teinte{--v-fond:rgba(30,30,32,.95);--v-fond-fort:rgba(26,26,28,.97)}}
-@media (prefers-reduced-transparency:reduce){
-  :root{--v-fond:var(--carte);--v-fond-fort:var(--fond)}
-  .bandeau,.nu,.filtres button,.actifs button,.cherche-in,.btn.gris,.offre .fav,.dom .carre,.onglets,.toast,.feuille,.feuille .bloc,.voile{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
-  body::before{display:none}
-}
+
 @media (prefers-contrast:more){:root{--v-fond:var(--fond);--v-lentille:inset 0 0 0 1px var(--texte)}}
-@media (prefers-reduced-motion:reduce){.feuille,.toast{animation:none}.onglets::before{transition:none}}
+
 
 /* rangées qui défilent : ombres courtes et marge, pour qu'elles ne se coupent pas en bande grise */
 .filtres button,.dom .carre,.actifs button,.suggestions button{box-shadow:var(--v-lentille),0 3px 10px -6px rgba(16,40,28,.25)}
@@ -477,7 +470,7 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
   .onglets-bas button.actif::after{display:none}
 }
 @media (max-width:760px) and (prefers-color-scheme:dark){.goutte{background:rgba(255,255,255,.13);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}}
-@media (prefers-reduced-motion:reduce){.goutte{transition:none}}
+
 
 /* ---------- en-tête, onglets et domaines : verre et mouvement liquide ---------- */
 .rail-dom{position:relative}
@@ -504,7 +497,7 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
 .filtres button:active,.actifs button:active,.offre .fav:active{transform:scale(.9,.86);transition:transform .12s}
 .dom.actif .carre{background:rgba(255,255,255,.92)}
 @media (prefers-color-scheme:dark){.goutte-dom{background:linear-gradient(180deg,rgba(76,195,138,.2),rgba(76,195,138,.1));box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 0 0 1px rgba(76,195,138,.25)}}
-@media (prefers-reduced-motion:reduce){.goutte-dom{transition:none}.dom:hover .carre,.nu:hover{transform:none}}
+
 
 /* ---------- vert en Liquid Glass : verre teinté translucide, lumière en lentille, liseré lumineux ---------- */
 :root{
@@ -532,7 +525,7 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
 .btn:not(.gris):not(.leger):hover{background:var(--lg-vert-lentille),rgba(17,124,76,.8)}
 html.teinte{--lg-vert:#127749}
 @media (prefers-contrast:more){:root{--lg-vert:#0b5a36;--lg-vert-lentille:linear-gradient(transparent,transparent)}}
-@media (prefers-reduced-transparency:reduce){:root{--lg-vert:#127749}}
+
 
 /* ================= Liquid Glass partout : annonces, fenêtres, champs, menus, réglages ================= */
 :root{
@@ -560,11 +553,6 @@ html.teinte{--lg-vert:#127749}
 .liste{gap:14px}
 .vide{background:var(--v-carte);box-shadow:var(--v-lentille),var(--v-ombre);border-radius:30px}
 #carte{border-radius:30px;box-shadow:var(--v-lentille),var(--v-ombre)}
-/* annonces qui émergent du verre en défilant */
-@supports (animation-timeline:view()){
-  .offre{animation:emerge linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
-  @keyframes emerge{from{opacity:.2;transform:translateY(28px) scale(.955)}to{opacity:1;transform:none}}
-}
 /* fenêtres : blocs de verre */
 .feuille .bloc,.feuille .hero{background:var(--v-carte);box-shadow:var(--v-lentille),0 6px 20px -14px rgba(16,40,28,.25);border-radius:26px!important}
 @media (prefers-color-scheme:dark){.feuille .bloc,.feuille .hero{background:rgba(255,255,255,.07)}}
@@ -616,9 +604,48 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.3,1.18)}
 @media (prefers-color-scheme:dark){.onde{background:radial-gradient(circle,rgba(255,255,255,.3),rgba(255,255,255,.08) 45%,rgba(255,255,255,0) 70%)}}
 /* teinté et accessibilité */
 html.teinte{--v-carte:rgba(250,250,250,.95);--v-champ:rgba(240,240,240,.97)}
-@media (prefers-reduced-transparency:reduce){:root{--v-carte:var(--carte);--v-carte-survol:var(--carte);--v-champ:var(--champ)}}
+
 @media (prefers-contrast:more){:root{--v-carte:var(--carte)}.offre,.feuille .bloc{box-shadow:inset 0 0 0 1px var(--texte)}}
-@media (prefers-reduced-motion:reduce){.offre{animation:none!important}.offre:hover{transform:none}.onde{display:none}}
+
+
+/* ================= fond vivant : de la couleur derrière le verre, sinon le verre ne se voit pas ================= */
+body::before{content:"";position:fixed;inset:-20vmax;z-index:-1;pointer-events:none;will-change:transform;
+  background:
+    radial-gradient(34vmax 30vmax at 30% 28%,rgba(18,160,95,.42),transparent 70%),
+    radial-gradient(30vmax 28vmax at 72% 36%,rgba(222,170,60,.40),transparent 70%),
+    radial-gradient(34vmax 30vmax at 32% 62%,rgba(56,178,172,.34),transparent 70%),
+    radial-gradient(32vmax 30vmax at 70% 74%,rgba(18,130,80,.36),transparent 70%),
+    var(--fond);
+  animation:derive 38s ease-in-out infinite alternate}
+@keyframes derive{0%{transform:translate3d(0,0,0) rotate(0)}50%{transform:translate3d(-4vmax,3vmax,0) rotate(8deg)}100%{transform:translate3d(3vmax,-3vmax,0) rotate(-6deg)}}
+body{background:transparent}
+html{background:var(--fond)}
+@media (prefers-color-scheme:dark){body::before{background:
+    radial-gradient(34vmax 30vmax at 30% 28%,rgba(30,170,105,.42),transparent 70%),
+    radial-gradient(30vmax 28vmax at 72% 36%,rgba(200,150,50,.30),transparent 70%),
+    radial-gradient(34vmax 30vmax at 32% 62%,rgba(40,150,150,.30),transparent 70%),
+    radial-gradient(32vmax 30vmax at 70% 74%,rgba(18,119,73,.40),transparent 70%),
+    var(--fond)}}
+/* le verre laisse passer la couleur : tuiles plus transparentes, bord lumineux bien visible */
+:root{--v-carte:rgba(255,255,255,.4);--v-carte-survol:rgba(255,255,255,.6);--v-fond:rgba(255,255,255,.48)}
+@media (prefers-color-scheme:dark){:root{--v-carte:rgba(28,28,32,.42);--v-carte-survol:rgba(44,44,48,.55);--v-fond:rgba(36,36,40,.48)}}
+.offre{box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.5),inset 1px 0 0 rgba(255,255,255,.55),inset -1px 0 0 rgba(255,255,255,.35),
+  inset 0 18px 30px -24px rgba(255,255,255,.95),var(--v-ombre)}
+@media (prefers-color-scheme:dark){.offre{box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(255,255,255,.08),inset 1px 0 0 rgba(255,255,255,.1),inset -1px 0 0 rgba(255,255,255,.06),var(--v-ombre)}}
+.offre .carre{background:rgba(255,255,255,.75);box-shadow:var(--v-lentille),0 8px 18px -10px rgba(16,40,28,.3)}
+@media (prefers-color-scheme:dark){.offre .carre{background:rgba(255,255,255,.08)}}
+/* la fenêtre ouverte : verre épais qui laisse deviner la couleur */
+.feuille{background:rgba(255,255,255,.72)}
+@media (prefers-color-scheme:dark){.feuille{background:rgba(24,24,28,.72)}}
+/* apparition des annonces : elles émergent du verre en défilant */
+.offre.a-venir{opacity:0;transform:translateY(34px) scale(.94)}
+.offre.vu{transition:opacity .6s cubic-bezier(.2,.9,.3,1),transform .8s var(--ressort),box-shadow .35s,background .3s}
+/* fluidité : les tuiles hors écran ne coûtent rien, les ombres ne se recalculent pas pendant le défilement */
+.offre{contain:layout paint style}
+/* choix « Animations réduites » dans le menu */
+html.doux *,html.doux *::before,html.doux *::after{animation:none!important;transition-duration:.01s!important}
+html.doux .offre.a-venir{opacity:1;transform:none}
+html.teinte body::before{opacity:.35}
 </style>
 </head>
 <body>
@@ -755,7 +782,7 @@ const COMMUNES = {"Saint-Denis": [-20.8823, 55.4504], "Sainte-Clotilde": [-20.89
 const CENTRE = [-21.13, 55.53];
 const SOURCES = "HelloWork";
 let OFFRES = OFFRES0;
-const VERSION = "1793255421";
+const VERSION = "1793255591";
 let DETAILS = null, DETAILS_P = null, FICHE_ID = null;
 function chargerDetails() {  // descriptifs complets, chargés en arrière-plan après l'affichage
   if (!DETAILS_P) DETAILS_P = fetch("details.json?v=" + VERSION).then(r => r.ok ? r.json() : {}).then(d => {
@@ -920,12 +947,34 @@ addEventListener("pointerdown", e => {
   o.className = "onde"; o.style.left = (e.clientX - r.left) + "px"; o.style.top = (e.clientY - r.top) + "px"; el.appendChild(o);
   o.animate([{transform: "scale(0)", opacity: 1}, {transform: `scale(${t})`, opacity: 0}], {duration: 650, easing: "cubic-bezier(.2,.8,.3,1)"}).finished.then(() => o.remove(), () => o.remove());
 }, {passive: true});
+let DERNIER_PT = null;
 addEventListener("pointermove", e => {
-  const el = e.target.closest && (e.target.closest(".dom") ? e.target.closest(".dom").querySelector(".carre") : e.target.closest(VERRE)); if (!el) return;
-  const r = el.getBoundingClientRect();
-  el.style.setProperty("--gx", ((e.clientX - r.left) / r.width * 100).toFixed(0) + "%");
-  el.style.setProperty("--gy", ((e.clientY - r.top) / r.height * 100 - 60).toFixed(0) + "%");
+  if (e.pointerType === "touch") return;  // au doigt : l'onde suffit, le défilement reste fluide
+  if (!DERNIER_PT) requestAnimationFrame(() => {
+    const e = DERNIER_PT; DERNIER_PT = null;
+    const el = e.target.closest && (e.target.closest(".dom") ? e.target.closest(".dom").querySelector(".carre") : e.target.closest(VERRE)); if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--gx", ((e.clientX - r.left) / r.width * 100).toFixed(0) + "%");
+    el.style.setProperty("--gy", ((e.clientY - r.top) / r.height * 100 - 60).toFixed(0) + "%");
+  });
+  DERNIER_PT = e;
 }, {passive: true});
+// apparition des annonces au défilement (iPhone compris)
+const APPARITION = "IntersectionObserver" in window ? new IntersectionObserver(l => l.forEach(x => {
+  if (!x.isIntersecting) return;
+  const el = x.target; APPARITION.unobserve(el);
+  el.classList.add("vu"); requestAnimationFrame(() => el.classList.remove("a-venir"));
+  setTimeout(() => el.classList.remove("vu"), 900);
+}), {rootMargin: "0px 0px -6% 0px"}) : null;
+function surveillerApparition(racine) {
+  if (!APPARITION || DOUX.matches) return;
+  const h = innerHeight;
+  racine.querySelectorAll(".offre:not(.a-venir):not([data-vu])").forEach(el => {
+    el.dataset.vu = 1;
+    if (el.getBoundingClientRect().top < h) return;  // déjà à l'écran : la cascade s'en occupe
+    el.classList.add("a-venir"); APPARITION.observe(el);
+  });
+}
 addEventListener("pointerleave", () => document.querySelectorAll("[style*='--gx']").forEach(el => { el.style.removeProperty("--gx"); el.style.removeProperty("--gy"); }), {passive: true});
 // sur téléphone, en inclinant l'appareil, le reflet de la barre du bas bouge légèrement
 addEventListener("deviceorientation", e => {
@@ -933,7 +982,8 @@ addEventListener("deviceorientation", e => {
   const a = $(".onglets-bas button.actif"); if (!a) return;
   a.style.setProperty("--gx", (50 + Math.max(-30, Math.min(30, e.gamma))).toFixed(0) + "%");
 }, {passive: true});
-let TEINTE = lire("alt974-teinte", false);
+let TEINTE = lire("alt974-teinte", false), ANIM_DOUCES = lire("alt974-doux", false);
+document.documentElement.classList.toggle("doux", !!ANIM_DOUCES);
 document.documentElement.classList.toggle("teinte", !!TEINTE);
 $("#q").value = F.q; if (F.q) $("#cherche").hidden = false;
 let qMinuterie;
@@ -1264,6 +1314,7 @@ function afficher(suite) {
     }
     const vieux = $("#suite"); if (vieux) vieux.remove();
     if (res.length > LIMITE) { $("#liste").insertAdjacentHTML("beforeend", '<div id="suite" aria-hidden="true"></div>'); SUITE.observe($("#suite")); }
+    surveillerApparition($("#liste"));
   }
   if (VUE === "carte") carteMaj(res);
 }
@@ -1343,7 +1394,7 @@ async function carteMaj(res) {
 
 /* ---------- feuilles ---------- */
 /* ---------- fenêtres : effet « Génie » de macOS (aspirée depuis / vers l'élément touché) ---------- */
-const DOUX = matchMedia("(prefers-reduced-motion: reduce)");
+const DOUX = {get matches() { return document.documentElement.classList.contains("doux"); }};
 let ORIGINE_EL = null, FERMETURE = null;
 addEventListener("pointerdown", e => {
   const el = e.target.closest && e.target.closest("button, a, .offre, [role=button], label");
@@ -1735,7 +1786,12 @@ let SW = null;
 let NOTIF = Object.assign({actif: false, sections: ["alternance", "emploi"], spontanees: false, domaines: []}, lire("alt974-notif", {}));
 const cleVapid = b => Uint8Array.from(atob(b.replace(/-/g, "+").replace(/_/g, "/") + "=".repeat((4 - b.length % 4) % 4)), c => c.charCodeAt(0));
 const iosHorsAppli = /iPhone|iPad|iPod/.test(navigator.userAgent) && !navigator.standalone && !matchMedia("(display-mode: standalone)").matches;
-if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").then(r => { SW = r; if (navigator.clearAppBadge) navigator.clearAppBadge().catch(() => {}); }).catch(() => {});
+if ("serviceWorker" in navigator) {
+  // une nouvelle version du site prend la main : on recharge une fois pour l'afficher tout de suite
+  const avait = !!navigator.serviceWorker.controller; let recharge = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => { if (avait && !recharge) { recharge = true; location.reload(); } });
+}
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js", {updateViaCache: "none"}).then(r => { SW = r; r.update().catch(() => {}); if (navigator.clearAppBadge) navigator.clearAppBadge().catch(() => {}); }).catch(() => {});
 
 async function deposer(abo, stop) {
   // lieu arrondi (~1 km) : seul le rayon compte pour choisir les offres
@@ -1891,6 +1947,7 @@ function menu() {
     <button class="entree" id="m-cv">${ic("doc")}Mon CV et mes infos</button>
     <button class="entree" id="m-notif">${ic("cloche")}Notifications ${NOTIF.actif ? "(activées)" : ""}</button>
     <button class="entree" id="m-lm">${ic("stylo")}Écrire une lettre de motivation</button>
+    <button class="entree" id="m-anim">${ic("reglages")}Animations : ${ANIM_DOUCES ? "réduites" : "liquides (actives)"}</button>
     <button class="entree" id="m-verre">${ic("reglages")}Effet verre : ${TEINTE ? "Teinté (plus lisible)" : "Transparent"}</button>
     <button class="entree" id="m-maj">${ic("maj")}Actualiser les offres</button>
     <button class="entree" id="m-guide">${ic("doc")}Le guide de l'alternance et du job</button>
@@ -1913,6 +1970,7 @@ function menu() {
   $("#m-notif").onclick = panneauNotifs;
   $("#m-maj").onclick = () => { fermer(); actualiser(); };
   $("#m-verre").onclick = () => { TEINTE = !TEINTE; ecrire("alt974-teinte", TEINTE); document.documentElement.classList.toggle("teinte", TEINTE); toast(TEINTE ? "Verre teinté : plus opaque et plus lisible" : "Verre transparent"); menu(); };
+  $("#m-anim").onclick = () => { ANIM_DOUCES = !ANIM_DOUCES; ecrire("alt974-doux", ANIM_DOUCES); document.documentElement.classList.toggle("doux", ANIM_DOUCES); toast(ANIM_DOUCES ? "Animations réduites" : "Animations liquides activées"); menu(); };
   $("#m-fav").onclick = () => { F.type = "fav"; sauver(); puces(); afficher(); fermer(); };
 }
 $("#b-menu").onclick = menu;
