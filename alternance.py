@@ -487,8 +487,6 @@ SITES = [
      r"/offres-emploi/[a-z0-9-]+-\d+"),
     ("Meteojob", "https://www.meteojob.com/jobs?what={q}&where=La%20R%C3%A9union&page={page}",
      r"/candidat/offres/offre-d-emploi-[^\"'#?]+"),
-    ("ParuVendu", "https://www.paruvendu.fr/emploi/annonces/?tt=1&r={q}&lo=974&p={page}",
-     r"/a/emploi/[^\"'#?]+"),
 ] + [  # la-mairie.com : offres par commune (alt=1 : alternance seulement)
     ("La Mairie", f"https://www.la-mairie.com/{c}/emploi?{{alt}}p={{page}}", rf"/{c}/emploi/[^\"'#?]+")
     for c in ("saint-denis", "saint-pierre", "saint-paul", "le-port", "saint-andre", "le-tampon", "saint-louis",
@@ -520,7 +518,7 @@ def job_postings(h):
     res = []
     for bloc in re.findall(r'<script[^>]+application/ld\+json[^>]*>(.*?)</script>', h or "", re.S | re.I):
         try:
-            d = json.loads(bloc.strip())
+            d = json.loads(html.unescape(bloc.strip()) if bloc.strip().startswith("&") else bloc.strip(), strict=False)
         except ValueError:
             continue
         pile = d if isinstance(d, list) else [d]
@@ -580,25 +578,56 @@ def depuis_jobposting(j, url, site):
 
 
 def meta_page(h, nom):
-    m = re.search(r'<meta[^>]+(?:property|name)=["\']' + re.escape(nom) + r'["\'][^>]*content=["\']([^"\']*)', h or "", re.I) or \
-        re.search(r'<meta[^>]+content=["\']([^"\']*)["\'][^>]*(?:property|name)=["\']' + re.escape(nom) + r'["\']', h or "", re.I)
-    return propre(m.group(1)) if m else ""
+    for balise in re.findall(r"<meta\b[^>]*>", h or "", re.I):
+        if re.search(r'(?:property|name)\s*=\s*["\']' + re.escape(nom) + r'["\']', balise, re.I):
+            m = re.search(r'content\s*=\s*(["\'])(.*?)\1', balise, re.S | re.I)
+            if m:
+                return propre(m.group(2))
+    return ""
+
+
+BOILERPLATE = re.compile(r"cookie|javascript|newsletter|mot de passe|connectez|inscri|politique de confidentialit|"
+                         r"mentions l[ée]gales|tous droits|cr[ée]er (?:un|mon) compte|alerte", re.I)
+
+
+def texte_principal(h):
+    """Les paragraphes du descriptif d'une page d'offre (sans menus ni pied de page)."""
+    h = re.sub(r"<(script|style|nav|header|footer|form)[^>]*>.*?</\1>", " ", h or "", flags=re.S | re.I)
+    blocs = []
+    for m in re.finditer(r"<(p|li|h2|h3)[^>]*>(.*?)</\1>", h, re.S | re.I):
+        t = propre(m.group(2))
+        if len(t) < 25 or BOILERPLATE.search(t) or t in blocs:
+            continue
+        blocs.append(("• " if m.group(1).lower() == "li" else "") + t)
+    texte = "\n".join(blocs)
+    return texte[:4000] if len(texte) > 150 else ""
 
 
 def depuis_page(h, url, site):
     """Offre lue sans JobPosting : titre et description de la page, commune d'après le texte."""
     titre = meta_page(h, "og:title") or propre((re.search(r"<title>(.*?)</title>", h or "", re.S | re.I) or [None, ""])[1])
     titre = re.split(r"\s+[|–-]\s+(?:HelloWork|Meteojob|ParuVendu|Domtomemploi|la-mairie|La Mairie)", titre, flags=re.I)[0]
+    titre_brut = titre
+    ent_titre = re.search(r"\s+-\s+Recrutement par\s+(.+)$", titre)
+    titre = re.sub(r"\s+-\s+Recrutement par\s+.+$", "", titre)
+    titre = re.sub(r"^Offre (?:d.)?[Ee]mploi\s+", "", titre)
+    noms = sorted(list(COMMUNES) + ["Sainte-Clotilde", "Saint-Gilles", "La Réunion", "Réunion", "Le Tampon", "Tampon"], key=len, reverse=True)
+    titre = re.sub(r"\s+(?:" + "|".join(re.escape(c) for c in noms) + r")?\s*\(97\d*\)\s*$", "", titre, flags=re.I).strip()  # « … Saint-Paul (97) »
     description = meta_page(h, "og:description") or meta_page(h, "description")
+    if re.match(r"D[ée]couvrez l.offre", description):
+        description = ""
+    corps = texte_principal(h)
+    if len(corps) > len(description):
+        description = corps
     texte = propre(re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", h or "", flags=re.S | re.I))[:20000]
-    commune = commune_de(titre, description, texte[:3000])
+    commune = commune_de(titre_brut, description, texte[:3000])
     if not titre or not (commune or re.search(r"r[ée]union|\b974\d\d\b", texte, re.I)):
         return None
     alternance = bool(re.search(r"alternan|apprenti|professionnalisation", titre + " " + description, re.I))
     contrats = type_contrat(titre, description) if alternance else contrat_emploi(titre, description, texte[:1500])
     if not contrats:
         return None
-    ent = re.search(r'"hiringOrganization"\s*:\s*\{[^}]*"name"\s*:\s*"([^"]+)"', h or "") or \
+    ent = ent_titre or re.search(r'"hiringOrganization"\s*:\s*\{[^}]*"name"\s*:\s*"([^"]+)"', h or "") or \
         re.search(r"(?:Entreprise|Société|Employeur)\s*:?\s*([A-Z][^\n<]{2,60})", texte)
     return offre(categorie="alternance" if alternance else "emploi", contrats=contrats, titre=titre,
                  entreprise=propre(ent.group(1)) if ent else "Entreprise (voir l'annonce)",
@@ -631,7 +660,8 @@ def sites_emploi():
             trouves = [hote + l if l.startswith("/") else l for l in re.findall(r'href="((?:https?://[^"/]+)?' + motif + ')"', h)]
             nouveaux = [l for l in dict.fromkeys(trouves) if l not in liens]
             if page == 1 and not nouveaux:
-                print(f"  {site} : aucun lien d'offre sur {recherche.format(page=1)} ({len(h)} caractères)")
+                exemples = [l for l in dict.fromkeys(re.findall(r'href="([^"]+)"', h)) if re.search(r"offre|emploi|job|annonce", l, re.I)][:12]
+                print(f"  {site} : aucun lien d'offre sur {recherche.format(page=1)} ({len(h)} caractères). Exemples : {exemples}")
             if not nouveaux:
                 break
             liens += nouveaux
