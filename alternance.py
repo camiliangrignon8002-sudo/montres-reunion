@@ -331,10 +331,62 @@ def lba_recruteur(r):
     return a
 
 
+def lba_public():
+    """Sans jeton : l'ancienne API publique de La Bonne Alternance (si elle répond encore)."""
+    res = []
+    for z in ZONES:
+        for i in range(0, len(ROMES), 10):
+            try:
+                r = requests.get("https://labonnealternance.apprentissage.beta.gouv.fr/api/v1/jobs",
+                                 params={"romes": ",".join(ROMES[i:i + 10]), "latitude": z["lat"], "longitude": z["lon"],
+                                         "radius": z["rayon"], "caller": "alternance974", "insee": "97411"}, timeout=60)
+            except Exception as e:
+                print(f"  La Bonne Alternance (public) : erreur {e!r}", file=sys.stderr)
+                return res
+            if r.status_code != 200:
+                print(f"  La Bonne Alternance (public) : {r.status_code} {r.text[:150]}", file=sys.stderr)
+                return res
+            d = r.json()
+            for cle in ("peJobs", "matchas", "partnerJobs", "lbaCompanies", "lbbCompanies"):
+                bloc = d.get(cle) or {}
+                for x in (bloc.get("results") if isinstance(bloc, dict) else bloc) or []:
+                    a = lba_v1(x, spont=cle in ("lbaCompanies", "lbbCompanies"))
+                    if a:
+                        res.append(a)
+            time.sleep(1)
+    return res
+
+
+def lba_v1(x, spont):
+    place, ent, job, contact = x.get("place") or {}, x.get("company") or {}, x.get("job") or {}, x.get("contact") or {}
+    titre = "Candidature spontanée" if spont else propre(x.get("title"))
+    if not titre or not ent.get("name"):
+        return None
+    a = offre(type="spontanee" if spont else "offre", titre=titre, entreprise=propre(ent.get("name")),
+              siret=propre(ent.get("siret")), secteur=propre(dig(x, "nafs", 0, "label")), romes=[r.get("code") for r in x.get("romes") or [] if isinstance(r, dict)],
+              description=propre(job.get("description") or x.get("description"), 4000),
+              debut=date_courte(job.get("jobStartDate")), publie=date_courte(job.get("creationDate")),
+              contrats=type_contrat(job.get("contractType"), titre), adresse=propre(place.get("fullAddress")),
+              commune=commune_de(place.get("zipCode"), place.get("city"), place.get("fullAddress")),
+              lat=place.get("latitude"), lon=place.get("longitude"), tel=propre(contact.get("phone")),
+              email=propre(contact.get("email")), site=propre(ent.get("url")),
+              postuler=propre(x.get("url")) or f"https://labonnealternance.apprentissage.beta.gouv.fr/recherche-apprentissage?display=list&itemId={x.get('id', '')}",
+              source="La Bonne Alternance", ids=[f"lba1:{x.get('id') or ent.get('siret')}"])
+    if spont:
+        a["description"] = ("Cette entreprise recrute régulièrement des alternants. Elle n'a pas publié d'offre, "
+                            "mais tu peux lui envoyer une candidature spontanée.")
+    for k in ("lat", "lon"):
+        try:
+            a[k] = float(a[k]) if a[k] is not None else None
+        except (TypeError, ValueError):
+            a[k] = None
+    return a
+
+
 def bonne_alternance():
     if not LBA_TOKEN:
-        print("La Bonne Alternance : pas de jeton LBA_API_TOKEN, source ignorée")
-        return []
+        print("La Bonne Alternance : pas de jeton LBA_API_TOKEN, essai de l'accès public")
+        return lba_public()
     res = []
     for z in ZONES:
         base = {"latitude": z["lat"], "longitude": z["lon"], "radius": z["rayon"]}
@@ -430,18 +482,19 @@ def ft_offre(o):
 SITES = [
     ("HelloWork", "https://www.hellowork.com/fr-fr/emploi/recherche.html?k={q}&l=La+R%C3%A9union&p={page}",
      r"/fr-fr/emplois/\d+\.html"),
-    ("Domtomjob", "https://www.domtomjob.com/emploi/offres-emploi-la-reunion.html?q={q}&page={page}",
-     r"/emploi/[^\"'#?]*offre[^\"'#?]*"),
+    ("Domtomemploi", "https://www.domtomemploi.fr/offres-emploi?keywords={q}&location=La+R%C3%A9union&page={page}",
+     r"/offres-emploi/[a-z0-9-]+-\d+"),
     ("Meteojob", "https://www.meteojob.com/jobs?what={q}&where=La%20R%C3%A9union&page={page}",
      r"/candidat/offres/offre-d-emploi-[^\"'#?]+"),
     ("ParuVendu", "https://www.paruvendu.fr/emploi/annonces/?tt=1&r={q}&lo=974&p={page}",
      r"/a/emploi/[^\"'#?]+"),
-    ("StudentJob", "https://www.studentjob.fr/alternance/la-reunion?page={page}", r"/offres-d-emploi/\d+[^\"'#?]*"),
-    ("l'Étudiant", "https://jobs-stages.letudiant.fr/stages-etudiants/offres/contrat-alternance/region-la-reunion/page-{page}.html",
-     r"/stages-etudiants/offre/[^\"'#?]+"),
+] + [  # la-mairie.com : offres par commune (alt=1 : alternance seulement)
+    ("La Mairie", f"https://www.la-mairie.com/{c}/emploi?{{alt}}p={{page}}", rf"/{c}/emploi/[^\"'#?]+")
+    for c in ("saint-denis", "saint-pierre", "saint-paul", "le-port", "saint-andre", "le-tampon", "saint-louis",
+              "sainte-marie", "saint-benoit", "la-possession")
 ]
-PAGES_PAR_SITE = 4
-OFFRES_PAR_SITE = 150
+PAGES_PAR_SITE = 3
+OFFRES_PAR_SITE = {"La Mairie": 25}  # offres lues au plus par recherche (80 par défaut)
 ALTERNANCE = re.compile(r"alternan|apprenti|professionnalisation|\bcfa\b", re.I)
 
 
@@ -524,10 +577,44 @@ def depuis_jobposting(j, url, site):
         postuler=propre(j.get("url") or url), source=site, ids=[f"url:{url.split('?')[0]}"])
 
 
+def meta_page(h, nom):
+    m = re.search(r'<meta[^>]+(?:property|name)=["\']' + re.escape(nom) + r'["\'][^>]*content=["\']([^"\']*)', h or "", re.I) or \
+        re.search(r'<meta[^>]+content=["\']([^"\']*)["\'][^>]*(?:property|name)=["\']' + re.escape(nom) + r'["\']', h or "", re.I)
+    return propre(m.group(1)) if m else ""
+
+
+def depuis_page(h, url, site):
+    """Offre lue sans JobPosting : titre et description de la page, commune d'après le texte."""
+    titre = meta_page(h, "og:title") or propre((re.search(r"<title>(.*?)</title>", h or "", re.S | re.I) or [None, ""])[1])
+    titre = re.split(r"\s+[|–-]\s+(?:HelloWork|Meteojob|ParuVendu|Domtomemploi|la-mairie|La Mairie)", titre, flags=re.I)[0]
+    description = meta_page(h, "og:description") or meta_page(h, "description")
+    texte = propre(re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", h or "", flags=re.S | re.I))[:20000]
+    commune = commune_de(titre, description, texte[:3000])
+    if not titre or not (commune or re.search(r"r[ée]union|\b974\d\d\b", texte, re.I)):
+        return None
+    alternance = bool(re.search(r"alternan|apprenti|professionnalisation", titre + " " + description, re.I))
+    contrats = type_contrat(titre, description) if alternance else contrat_emploi(titre, description, texte[:1500])
+    if not contrats:
+        return None
+    ent = re.search(r'"hiringOrganization"\s*:\s*\{[^}]*"name"\s*:\s*"([^"]+)"', h or "") or \
+        re.search(r"(?:Entreprise|Société|Employeur)\s*:?\s*([A-Z][^\n<]{2,60})", texte)
+    return offre(categorie="alternance" if alternance else "emploi", contrats=contrats, titre=titre,
+                 entreprise=propre(ent.group(1)) if ent else "Entreprise (voir l'annonce)",
+                 description=description, commune=commune or "La Réunion", postuler=url, source=site,
+                 ids=[f"url:{url.split('?')[0]}"])
+
+
 def sites_emploi():
     res = []
-    recherches = [(site, recherche.format(q=q, page="{page}"), motif) for site, recherche, motif in SITES
-                  for q in (["alternance", ""] if "{q}" in recherche else [None])]
+    recherches = []
+    for site, recherche, motif in SITES:
+        if "{alt}" in recherche:
+            recherches += [(site, recherche.replace("{alt}", a), motif) for a in ("alt=1&", "")]
+        elif "{q}" in recherche:
+            recherches += [(site, recherche.replace("{q}", q), motif) for q in ("alternance", "")]
+        else:
+            recherches.append((site, recherche, motif))
+    deja = set()  # une annonce trouvée par deux recherches n'est lue qu'une fois
     for site, recherche, motif in recherches:
         liens = []
         for page in range(1, PAGES_PAR_SITE + 1):
@@ -536,23 +623,35 @@ def sites_emploi():
                 break
             hote = re.match(r"https?://[^/]+", recherche).group()
             nouveaux = [hote + l if l.startswith("/") else l for l in re.findall(r'href="((?:https?://[^"/]+)?' + motif + ')"', h)]
-            nouveaux = [l for l in dict.fromkeys(nouveaux) if l not in liens]
+            nouveaux = [l for l in dict.fromkeys(nouveaux) if l not in liens and l not in deja]
             # certaines pages de recherche contiennent déjà les fiches JobPosting
             for j in job_postings(h):
                 a = depuis_jobposting(j, j.get("url") or recherche.format(page=page), site)
                 if a and a["commune"]:
                     res.append(a)
+            if page == 1 and not nouveaux:
+                print(f"  {site} : aucun lien d'offre sur {recherche.format(page=1)} ({len(h)} caractères)")
             if not nouveaux:
                 break
             liens += nouveaux
         trouvees = 0
-        for url in liens[:OFFRES_PAR_SITE]:
-            for j in job_postings(get(url)):
-                a = depuis_jobposting(j, url, site)
-                if a and a["commune"]:  # à La Réunion
+        liens = liens[:OFFRES_PAR_SITE.get(site, 80)]
+        deja.update(liens)
+        for n, url in enumerate(liens):
+            h = get(url)
+            fiches = job_postings(h)
+            if n == 0:  # pour le rapport : ce que la première page contient
+                adr = json.dumps(dig(fiches[0], "jobLocation") if fiches else None, ensure_ascii=False)[:160]
+                print(f"  {site} 1re offre : {len(h or '')} caractères, {len(fiches)} JobPosting, lieu {adr}")
+            lues = [depuis_jobposting(j, url, site) for j in fiches] or [depuis_page(h, url, site)]
+            for a in lues:
+                if a and not a["commune"]:  # la recherche était limitée à La Réunion
+                    texte_page = propre(h or "")[:5000]
+                    a["commune"] = commune_de(texte_page) or ("La Réunion" if re.search(r"r[ée]union|\b974", texte_page, re.I) else "")
+                if a and a["commune"]:
                     res.append(a)
                     trouvees += 1
-            time.sleep(0.5)
+            time.sleep(0.4)
         print(f"  {site} : {len(liens)} liens, {trouvees} offres à La Réunion ({recherche.split('?')[0]})")
     return res
 
@@ -561,7 +660,7 @@ def sites_emploi():
 
 def dans_une_zone(a):
     if a["lat"] is None or a["lon"] is None:
-        return bool(a["commune"])
+        return bool(a["commune"])  # commune réunionnaise, ou « La Réunion » pour les recherches limitées à l'île
     from math import radians, sin, cos, asin, sqrt
     for z in ZONES:
         dlat, dlon = radians(a["lat"] - z["lat"]), radians(a["lon"] - z["lon"])
