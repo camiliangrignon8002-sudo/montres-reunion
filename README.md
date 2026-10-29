@@ -177,6 +177,13 @@ Dans GitHub : **Settings → Secrets and variables → Actions → New repositor
 2. `FT_CLIENT_ID` et `FT_CLIENT_SECRET` : créer une application sur https://francetravail.io et y ajouter
    l'API **« Offres d'emploi v2 »**. C'est la source principale pour l'emploi.
 3. Les notifications utilisent la clé `VAPID_PRIVATE_KEY` déjà en place pour l'appli Montres.
+4. **Alertes e-mail** (Indeed, LinkedIn, Leboncoin, Welcome to the Jungle, Jobteaser, Apec, Monster…) : ces sites
+   bloquent la lecture automatique, mais envoient des alertes par mail. Crée une boîte Gmail réservée à l'appli,
+   active la validation en deux étapes puis crée un **mot de passe d'application** (Compte Google → Sécurité).
+   Sur chaque site, crée une alerte « alternance » (et une « emploi ») à **La Réunion** avec cette adresse.
+   Ajoute les secrets `ALERTES_EMAIL` (l'adresse) et `ALERTES_MOT_DE_PASSE` (le mot de passe d'application).
+   Autre messagerie : ajoute aussi `ALERTES_IMAP` (ex. `imap.mail.yahoo.com`). L'appli lit les alertes des
+   30 derniers jours à chaque recherche et met les offres sur le site ; elle ne modifie ni n'envoie aucun mail.
 
 Puis **Actions → Alternance Réunion → Run workflow** pour lancer la première recherche.
 

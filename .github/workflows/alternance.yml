@@ -28,6 +28,9 @@ jobs:
           FT_CLIENT_ID: ${{ secrets.FT_CLIENT_ID }}
           FT_CLIENT_SECRET: ${{ secrets.FT_CLIENT_SECRET }}
           VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          ALERTES_EMAIL: ${{ secrets.ALERTES_EMAIL }}
+          ALERTES_MOT_DE_PASSE: ${{ secrets.ALERTES_MOT_DE_PASSE }}
+          ALERTES_IMAP: ${{ secrets.ALERTES_IMAP }}
           PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/alternance/
       - name: Publier la page
         if: always()

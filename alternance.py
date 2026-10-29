@@ -11,7 +11,10 @@ Clés (secrets GitHub, gratuites) :
 - FT_CLIENT_ID et FT_CLIENT_SECRET : application « Offres d'emploi v2 » sur https://francetravail.io (facultatif)
 """
 
+import email
+import email.utils
 import html
+import imaplib
 import json
 import os
 import re
@@ -35,6 +38,11 @@ OUT_FILE = ROOT / "docs" / "alternance" / "index.html"
 REUNION = timezone(timedelta(hours=4))
 
 LBA_TOKEN = os.environ.get("LBA_API_TOKEN", "")
+# Boîte mail réservée à l'appli, qui reçoit les alertes d'Indeed, LinkedIn, Leboncoin… (secrets GitHub)
+ALERTES_EMAIL = os.environ.get("ALERTES_EMAIL", "")
+ALERTES_MOT_DE_PASSE = os.environ.get("ALERTES_MOT_DE_PASSE", "")  # Gmail : « mot de passe d'application »
+ALERTES_IMAP = os.environ.get("ALERTES_IMAP", "") or "imap.gmail.com"
+ALERTES_JOURS = 30  # une offre reçue par alerte reste affichée 30 jours
 FT_ID = os.environ.get("FT_CLIENT_ID", "")
 FT_SECRET = os.environ.get("FT_CLIENT_SECRET", "")
 LBA_URL = "https://api.apprentissage.beta.gouv.fr/api/job/v1/search"
@@ -701,6 +709,131 @@ def sites_emploi():
     return [affiner(json.loads(json.dumps(a))) for c in cache.values() for a in c["offres"]]
 
 
+# ---------------------------------------------------------------- alertes reçues par e-mail
+
+# expéditeur -> (nom affiché, forme des liens vers une offre)
+ALERTES_SITES = [
+    ("indeed", "Indeed", r"indeed\.(?:com|fr)/(?:rc/clk|viewjob|pagead/clk|m/viewjob|applystart)|indeed\.com/.*jk="),
+    ("linkedin", "LinkedIn", r"linkedin\.com/(?:comm/)?jobs/view/\d+"),
+    ("leboncoin", "Leboncoin", r"leboncoin\.fr/(?:ad|offres?_d_emploi|emploi|vi)/"),
+    ("welcometothejungle", "Welcome to the Jungle", r"welcometothejungle\.com/[a-z]{2}/companies/[^/]+/jobs/"),
+    ("jobteaser", "Jobteaser", r"jobteaser\.com/[a-z]{2}/job-offers/"),
+    ("hellowork", "HelloWork", r"hellowork\.com/fr-fr/emplois/\d+"),
+    ("meteojob", "Meteojob", r"meteojob\.com/.*offre"),
+    ("monster", "Monster", r"monster\.fr/.*(?:offre|job)"),
+    ("apec", "Apec", r"apec\.fr/.*detail-offre"),
+    ("francetravail", "France Travail", r"francetravail\.fr/offres/recherche/detail/"),
+    ("1jeune1solution", "1jeune1solution", r"1jeune1solution\.gouv\.fr/(?:emplois|apprentissage)/"),
+    ("studentjob", "StudentJob", r"studentjob\.fr/offres-d-emploi/"),
+    ("domtom", "Domtomemploi", r"domtomemploi\.fr/offres-emploi/"),
+]
+from html.parser import HTMLParser
+
+
+class _Morceaux(HTMLParser):
+    """Découpe un mail HTML en morceaux de texte, en notant le lien de chacun."""
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.morceaux, self.lien = [], None
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "a":
+            self.lien = dict(attrs).get("href")
+        elif tag in ("br", "p", "div", "tr", "td", "li", "table", "h1", "h2", "h3"):
+            self.morceaux.append(("", None))
+
+    def handle_endtag(self, tag):
+        if tag == "a":
+            self.lien = None
+
+    def handle_data(self, data):
+        t = re.sub(r"\s+", " ", data).strip()
+        if t:
+            self.morceaux.append((t, self.lien))
+
+
+def est_lieu(t):
+    """« Saint-Pierre (974) », « Le Port, La Réunion » : une ligne qui ne contient qu'un lieu."""
+    reste = norm(t)
+    for c in sorted(list(COMMUNES) + ["La Réunion", "Réunion", "France", "Saint-Gilles"], key=len, reverse=True):
+        reste = reste.replace(norm(c), " ")
+    reste = re.sub(r"\b97\d*\b|\(|\)|,|-|·|•|\bfr\b|\bteletravail\b|\bhybride\b|\bsur site\b", " ", reste)
+    return len(reste.strip()) < 3
+
+
+def offres_du_mail(corps_html, site, motif, recu):
+    p = _Morceaux()
+    p.feed(corps_html)
+    lignes = []  # (texte, lien) en regroupant les morceaux d'une même ligne
+    for t, lien in p.morceaux:
+        if not t:
+            lignes.append(["", None])
+        elif lignes and lignes[-1][0] and lignes[-1][1] == lien:
+            lignes[-1][0] += " " + t
+        else:
+            lignes.append([t, lien])
+    lignes = [(t, l) for t, l in lignes if t]
+    res, vus = [], set()
+    for i, (titre, lien) in enumerate(lignes):
+        if not lien or not re.search(motif, lien, re.I) or len(titre) < 4 or len(titre) > 140:
+            continue
+        if re.search(r"^(?:voir|postuler|candidature|apply|see|view|plus d.offres|toutes les offres|modifier|se désinscrire)", titre, re.I):
+            continue
+        cle = re.sub(r"[?&](?:utm_[^&]+|trk[^&]*|refId=[^&]+|trackingId=[^&]+)", "", lien)
+        if cle in vus:
+            continue
+        vus.add(cle)
+        suite = [t for t, l in lignes[i + 1:i + 5] if l in (None, lien) or not re.search(motif, l or "", re.I)][:3]
+        commune = commune_de(titre, *suite) or ("La Réunion" if re.search(r"r[ée]union|\b974", " ".join(suite + [titre]), re.I) else "")
+        if not commune:
+            continue  # alerte hors de La Réunion
+        entreprise = next((t for t in suite if not est_lieu(t) and not re.search(r"r[ée]union|€|\bil y a\b|\bnouveau\b|candidature simplifi", t, re.I)), "")
+        alternance = bool(re.search(r"alternan|apprenti|professionnalisation", titre + " " + " ".join(suite), re.I))
+        contrats = type_contrat(titre) if alternance else contrat_emploi(titre, " ".join(suite))
+        if not contrats:
+            continue
+        res.append(offre(categorie="alternance" if alternance else "emploi", contrats=contrats, titre=titre,
+                         entreprise=entreprise or "Entreprise (voir l'annonce)", commune=commune, postuler=lien,
+                         salaire=next((t for t in suite if "€" in t), ""), publie=recu, source=site,
+                         description=f"Offre reçue par une alerte {site}. Le descriptif complet est sur le site {site}.",
+                         ids=[f"mail:{cle[:200]}"]))
+    return res
+
+
+def alertes_email():
+    if not (ALERTES_EMAIL and ALERTES_MOT_DE_PASSE):
+        print("Alertes e-mail : pas de boîte configurée (ALERTES_EMAIL / ALERTES_MOT_DE_PASSE), source ignorée")
+        return []
+    boite = imaplib.IMAP4_SSL(ALERTES_IMAP)
+    boite.login(ALERTES_EMAIL, ALERTES_MOT_DE_PASSE)
+    boite.select("INBOX", readonly=True)
+    depuis = (datetime.now(timezone.utc) - timedelta(days=ALERTES_JOURS)).strftime("%d-%b-%Y")
+    _, ids = boite.search(None, f'(SINCE "{depuis}")')
+    res, par_site = [], {}
+    for num in (ids[0].split() if ids and ids[0] else []):
+        _, donnees = boite.fetch(num, "(RFC822)")
+        msg = email.message_from_bytes(donnees[0][1])
+        expediteur = (msg.get("From") or "").lower()
+        site = next(((nom, motif) for cle, nom, motif in ALERTES_SITES if cle in expediteur.replace("-", "").replace(" ", "")), None)
+        if not site:
+            continue
+        try:
+            recu = email.utils.parsedate_to_datetime(msg.get("Date")).date().isoformat()
+        except (TypeError, ValueError):
+            recu = ""
+        corps = ""
+        for partie in msg.walk():
+            if partie.get_content_type() == "text/html":
+                corps = partie.get_payload(decode=True).decode(partie.get_content_charset() or "utf-8", "replace")
+                break
+        trouvees = offres_du_mail(corps, site[0], site[1], recu)
+        par_site[site[0]] = par_site.get(site[0], 0) + len(trouvees)
+        res += trouvees
+    boite.logout()
+    print(f"  Alertes e-mail : {par_site or 'aucune alerte reconnue'}")
+    return res
+
+
 # ---------------------------------------------------------------- nettoyage des descriptifs
 
 CODE_PAGE = re.compile(r"->|data-[a-z-]+=|^[a-z-]+=\"|=\"|^>$|^\"?>$|#\w+[ \"]|^type=|^class=")
@@ -903,7 +1036,7 @@ def main():
     vus = json.loads(VUS_FILE.read_text()) if VUS_FILE.exists() else {}
     toutes, sources_ok = [], []
     for nom, fonction in [("La Bonne Alternance", bonne_alternance), ("France Travail", france_travail),
-                          ("Sites d'emploi", sites_emploi)]:
+                          ("Sites d'emploi", sites_emploi), ("Alertes e-mail", alertes_email)]:
         try:
             trouvees = fonction()
         except Exception as e:
@@ -911,7 +1044,7 @@ def main():
             continue
         print(f"{nom} : {len(trouvees)} offres")
         if trouvees:
-            sources_ok += sorted({a["source"] for a in trouvees}) if fonction is sites_emploi else [nom]
+            sources_ok += sorted({a["source"] for a in trouvees} - set(sources_ok)) if fonction in (sites_emploi, alertes_email) else [nom]
         toutes += trouvees
     gardees = sans_doublons([a for a in toutes if a["titre"] and a["entreprise"] and dans_une_zone(a)])
     maintenant = datetime.now(REUNION)
