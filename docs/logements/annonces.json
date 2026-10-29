@@ -172,6 +172,37 @@
   "vu": "2026-10-21T12:07+04:00"
  },
  {
+  "id": "zimo-01a1872e-b46d-7957-9551-ad9b91874934",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-1-piece-21-m2/01a1872e-b46d-7957-9551-ad9b91874934",
+  "titre": "Appartement 1 pièce 21 m²",
+  "prix": 384.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 21.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/bjtVCXvN6hGQskMaJ6SN6YbSEM_T_nraktv-wk65jfo/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_96aead18-5a07-4594-8bc1-60163738337a.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 21 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-29T15:01+04:00"
+ },
+ {
   "id": "superimmo-onces-location-appartement-23m-sainte-clotilde-97490-x12agv7",
   "source": "Superimmo",
   "url": "https://www.superimmo.com/annonces/location-appartement-23m-sainte-clotilde-97490-x12agv7",
@@ -222,49 +253,34 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "pv-1296630219",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296630219A1KILHAP000",
-  "titre": "Location appartement 1 pièce de 21m2 à Saint denis (97400)",
+  "id": "zimo-01a1699b-2867-76f5-9deb-416190bbc2b1",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-1-piece-21-m2/01a1699b-2867-76f5-9deb-416190bbc2b1",
+  "titre": "Appartement 1 pièce 21 m²",
   "prix": 431.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "T1",
   "surface": 21.0,
-  "meuble": true,
+  "meuble": null,
   "photos": [
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/28/c7/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtMzU2YTNjNjRiMGRlNWFlNjEyNzMzZDRmYTU1ZGIzOGItNDExMTQxNDE1MTI0ODAxMjUyMi5qcGc_MjAyNjEwMjQxMTQ0MzE_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/9a/9c/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzIwMjAwOTIyXzE1NTUzOC00NjcyMTgyMzk2MjM5MzQ1MTU0LmpwZz8yMDI2MTAyMjIwMTY0NQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/32/68/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ3NzItMTQ2OTc5MjM3OTQ4NTg3NTMxNTkuanBnPzIwMjYxMDIzMjA1OTE2_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/56/b2/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLWZpbGlncmFuZS0xLS0zNDk2MTgwMTcwMzA1NjEwNDYtNDIzMjYwNzI0NzU1MzQ0ODI1Ni5qcGc_MjAyNjEwMjQxMTQwMjA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/media.immo-facile.com/62/ff/L29mZmljZTEyL2ZjX3ByZW1pdW0vY2F0YWxvZy9pbWFnZXMvcHJfcC82LzEvNi8wLzcvOC80LzcvNjE2MDc4NDdhLmpwZz9EQVRFTUFKPTA5LzEwLzIwMjYtMTU6MDE6NTgmMjAyNjEwMjQwODM1NDA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/lanouvelleagence.staticlbi.com/27/eb/L3dhL2ltYWdlcy9iaWVucy8xLzRlNDY3NzJmNTJkNmIwNDRjYjgyYjUxNmE5OWJmNTA2L3Bob3RvX2FhNTZmMTdjY2QxYmQxN2QxYTUwOTk0NzU5OTE3MmQ5LmpwZz8yMDI2MTAyMzIzNTE0OQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/f6/24/L2NpdF9DSVRZQV9TVEdJTExFU190aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLWphZGUtMTc2NzY2MzYxNzMyMzQ5NDEyOS5qcGc_MjAyNjEwMjMyMDU5MDY_rct?func=crop&w=1000&gravity=auto"
+   "https://img.e-xiste.com/fbMQr9dBiJZ7HA2PuR7g6mtGCnn5rMIbhZIbGwzeEFU/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_5a66288a-0118-4b42-a374-c37ddd1d4ee6.jpg"
   ],
-  "description": "À LOUER : Appartement T1 situé à Saint Denis, dans le département de La Réunion, offrant un cadre de vie agréable et pratique. Ce bien dispose d'une surface habitable de 21,34 m², idéal pour une personne seule ou un couple. L'appartement est situé au deuxième étage d'une résidence, garantissant tranquillité et sécurité. L'espace de vie comprend une kitchenette fonctionnelle, permettant de préparer vos repas dans un environnement convivial. Le logement est composé d'une pièce principale, d'une salle de bain et d'un balcon, où vous pourrez profiter de l'extérieur et de la vue environnante. Bien que l'appartement ne soit pas meublé, cela vous offre la liberté de personnaliser l'espace selon vos goûts et vos besoins. La résidence est située dans le quartier de la trinité, proche du centre ville tout et de nombreuses commodités. À moins de 1500 mètres, vous trouverez plusieurs supermarchés tels que La Carré Gourmand, E.Leclerc, Carrefour, et d'autres, vous permettant de faire vos courses facilement. Enfin, pour les étudiants, l'appartement est situé à moins de 2000 mètres de plusieurs amphithéâtres universitaires, rendant ce bien idéal pour ceux qui souhaitent vivre près de leur lieu d'études. Cet appartement T1 à Saint Denis représente une opportunité à ne pas manquer pour ceux qui recherchent un logement pratique et bien situé. Le bien est soumis au statut de la copropriété. Loyer de 430,50 euros par mois charges comprises dont 25,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 449,73 euros. Les honoraires charge locataire sont de 277,42 euros ( soit 13,00 euros/m² ) dont 64,66 euros pour état des lieux ( soit 3,03 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Proche université"
-  ],
+  "description": "Location T1 Saint-Denis (974) 1 pièces 21 m²",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "Citya Saint Denis",
+  "annonceur": "Pro · via Citya",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "02 57 54 91 17",
+  "tel": "",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-1-piece-21-m2/01a1699b-2867-76f5-9deb-416190bbc2b1"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-23T20:52+04:00"
  },
  {
@@ -601,48 +617,6 @@
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "pv-1296543434",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296543434A1KILHAP000",
-  "titre": "Location appartement 1 pièce de 26m2 à Sainte clotilde (97490)",
-  "prix": 489.0,
-  "commune": "Saint-Denis",
-  "quartier": "Sainte-Clotilde",
-  "pieces": 1,
-  "type": "T1",
-  "surface": 26.0,
-  "meuble": null,
-  "photos": [
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/f3/3b/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSk9VUl9EX0VURS0yMzY3NzE2NDY2MjYxNjE3NDQuanBnPzIwMjYxMDIyMTE0NDUw_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/c2/8c/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtcGhvdG9zX3Jfc2lkZW5jZS0xMjY5Njk2NzAxMDAzNTA3MDgxMy5qcGc_MjAyNjEwMTcyMDE4MzE_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/media.immo-facile.com/e9/c4/L29mZmljZTE5L2xhcG9zc2Vzc2lvbi9jYXRhbG9nL2ltYWdlcy9wcl93ZWIvNS81LzYvMy81LzYvOS81NTYzNTY5YS5qcGc_REFURU1BSj0yMC8xMC8yMDI2LTA4OjU0OjUxJjIwMjYxMDIyMTExNjEy_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/media.apimo.pro/ee/09/L2NhY2hlLzQ1YjJhZWMyNDFlNTM0OGI3ZjllZTc2ZTkyZTgyNjk0XzRjNTc5ZGIzMTFfMTkyMC1iaWcuanBnPzIwMjYxMDIyMDExNDA3_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/media.apimo.pro/10/a6/L2NhY2hlL2JhNThhZTc1ZGE1YWUyNTEzODllYjI5ZTBmNzQyNTMwXzIzMmY3MmRhOTNfMTYwMC1iaWcuanBnPzIwMjYxMDIyMDExNDA3_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/media.apimo.pro/f0/bd/L2NhY2hlLzU4NmNkZTQwNmZmZWU2NTBiZjgxMTgxNTU4ZGFhYWQ2X2M5NjJjZmMwODJfMTkyMC1iaWcuanBnPzIwMjYxMDIyMDExNDA2_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/9b/df/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLUlNR180ODc0LTE4MDc4MjU1Nzk0ODAxMTY5NzgwLmpwZz8yMDI2MTAyMDExNDAzNA_rct?func=crop&w=1000&gravity=auto"
-  ],
-  "description": "EXCLUSIVITÉ À louer : Citya Saint-Denis vous présente cet appartement 1 pièce de 26 m² situé à SAINTE CLOTILDE (97490). Il est composé d'une cuisine équipée et d'une salle d'eau. Bénéficiez également d'espace extérieur pour gagner en confort avec un balcon. Cet appartement est situé dans un immeuble avec ascenseur. L'université de la Réunion se trouve à moins de 5 minutes à pieds. Pour plus d'information, veuillez prendre contact avec L'Agence Citya Saint Denis. Le bien est soumis au statut de la copropriété. Loyer de 489,43 euros par mois charges comprises dont 40,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 508,66 euros. Les honoraires charge locataire sont de 341,12 euros ( soit 13,12 euros/m² ) dont 78,78 euros pour état des lieux ( soit 3,03 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
-  "caracteristiques": [
-   "Varangue / balcon",
-   "Ascenseur",
-   "Cuisine équipée",
-   "Proche université"
-  ],
-  "date": "",
-  "annonceur": "Citya Saint Denis",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "02 57 54 91 17",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T19:53+04:00"
  },
  {
   "id": "pv-1295515903",
@@ -1242,6 +1216,39 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "zimo-01a18737-c78a-7f79-8ea6-330b52b27c67",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-meuble-de-12m2-a-louer-550-charges-comprise/01a18737-c78a-7f79-8ea6-330b52b27c67",
+  "titre": "Studio meublé de 12m2 à louer - 550 charges comprise",
+  "prix": 550.0,
+  "commune": "Le Port",
+  "quartier": "Le Port",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 12.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/7aAYiEjv8m1MoMdBJQCzIXIm2p4lJ1agTJFXcn9gaI0/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_4e83dd40-caeb-4497-8ca8-3c18325c7834.jpg"
+  ],
+  "description": "Location Studio Le Port (974) 1 pièces 12 m²",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord-Ouest",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-29T15:01+04:00"
  },
  {
   "id": "zimo-01a17c04-ad26-7d62-af55-2a3d75b11216",
