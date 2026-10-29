@@ -635,7 +635,13 @@ def nettoyer_titre(titre):
     t = re.sub(r"\s+(?:" + "|".join(re.escape(c) for c in noms) + r")?\s*[-–]?\s*\(?97\d*\)?\s*(?:\(Le\))?$", "", t, flags=re.I)
     t = re.sub(r"\s+(?:en )?(?:Île|Ile) de la Réunion$|\s+(?:à |sur |en )?(?:la )?Réunion(?: 974)?$", "", t, flags=re.I)
     t = re.sub(r"\s+(?:en )?(?:CDI|CDD|Intérim)$", "", t)
-    return t.strip(" -–") or titre
+    # listes de communes en fin de titre : « … Saint-André Saint-Denis (97) & Saint-Paul »
+    lieux = "|".join(re.escape(c).replace("\\-", "[- ]") for c in noms)
+    t = re.sub(r"(?:\s*(?:&|et|,|/|-)?\s*(?:" + lieux + r")(?:\s*\(97\d*\))?)+\s*$", "", t, flags=re.I)
+    # « Alternance … » / « … en Alternance » : l'onglet et le contrat le disent déjà
+    court = re.sub(r"^Alternance\s+|\s+(?:en\s+)?Alternance$", "", t, flags=re.I).strip()
+    t = court if len(court) >= 6 else t
+    return t.strip(" -–,&") or titre
 
 
 def depuis_page(h, url, site):

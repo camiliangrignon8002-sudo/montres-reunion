@@ -344,6 +344,20 @@ textarea{min-height:170px;resize:vertical}
   .onglets-bas::before{background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,0))}
   .onglets-bas button{color:#cfcfcf}
 }
+
+/* ---------- ordinateur : 2 annonces par ligne, comme un catalogue ---------- */
+@media (min-width:900px){
+  .liste{grid-template-columns:repeat(2,1fr);gap:14px}
+  .offre{grid-template-columns:1fr 150px;padding:30px 30px 28px 34px;min-height:250px}
+  .offre .carre{width:96px;height:96px;border-radius:22px}
+  .offre .carre svg{width:40px;height:40px}
+  .offre h3{font-size:22px}
+}
+.btn.large:not(.gris):not(.leger)::before{height:44%;left:3%;right:3%;opacity:.8}
+@media (prefers-color-scheme:dark){
+  .feuille{box-shadow:0 0 0 1px rgba(255,255,255,.1),0 30px 80px rgba(0,0,0,.6)}
+  .voile{background:rgba(0,0,0,.6)}
+}
 </style>
 </head>
 <body>
@@ -1478,12 +1492,13 @@ function panneauCandidatures() {
 }
 function menu() {
   ouvrir(`${barre("Menu")}<div class="bloc menu">
+    <button class="entree" id="m-espace">${ic("gens")}Mon espace</button>
     <button class="entree" id="m-cv">${ic("doc")}Mon CV et mes infos</button>
     <button class="entree" id="m-notif">${ic("cloche")}Notifications ${NOTIF.actif ? "(activées)" : ""}</button>
     <button class="entree" id="m-lm">${ic("stylo")}Écrire une lettre de motivation</button>
     <button class="entree" id="m-maj">${ic("maj")}Actualiser les offres</button>
     <button class="entree" id="m-guide">${ic("doc")}Le guide de l'alternance et du job</button>
-    <button class="entree" id="m-simu">${ic("barres")}Simulateur de salaire d'apprenti</button>
+    <button class="entree" id="m-simu">${ic("d-barres")}Simulateur de salaire d'apprenti</button>
     <button class="entree" id="m-masq">${ic("croix")}Offres masquées (${Object.keys(MASQUEES).length})</button>
     <button class="entree" id="m-cand">${ic("coche")}Mes candidatures (${Object.keys(CAND).length})</button>
     <button class="entree" id="m-fav">${ic("coeur")}Mes favoris (${Object.keys(FAV).length})</button>
@@ -1494,6 +1509,7 @@ function menu() {
   <p class="aide" style="text-align:center">Offres relevées : ${esc(SOURCES)}.<br>Installer : Partager → « Sur l'écran d'accueil ».</p>`);
   $("#m-cv").onclick = () => panneauCV();
   $("#m-cand").onclick = panneauCandidatures;
+  $("#m-espace").onclick = () => panneauEspace();
   $("#m-guide").onclick = () => panneauGuide();
   $("#m-simu").onclick = () => panneauGuide("simu");
   $("#m-masq").onclick = () => { F.type = "masquees"; sauver(); puces(); afficher(); fermer(); toast("Offres masquées : ouvre une offre pour la rendre visible"); };
