@@ -609,37 +609,6 @@
   "vu": "2026-10-21T19:53+04:00"
  },
  {
-  "id": "zimo-01a15f44-8f62-78b5-b671-4dbf4d98744e",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-26-m2/01a15f44-8f62-78b5-b671-4dbf4d98744e",
-  "titre": "Appartement 1 pièce 26 m²",
-  "prix": 489.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 26.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/0pVLA97UwYevqn9ANUTRlvdCwMOmwmXM5D__ow_Egnk/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_ef807de9-1502-40c9-ba25-fe6e8a53948d.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 26 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via Citya",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T20:51+04:00"
- },
- {
   "id": "pv-1295515903",
   "source": "ParuVendu",
   "url": "https://www.paruvendu.fr/immobilier/location/appartement/1295515903A1KILHAP000",
@@ -905,50 +874,45 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "ep-22679116",
-  "source": "EntreParticuliers",
-  "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/grand-studio-saint-denis-proche-centre/ref-22679116",
-  "titre": "Grand Studio SAINT DENIS proche centre — Saint-Denis",
-  "prix": 505.0,
+  "id": "bienici-hektor-immoplusreunion-4095",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/hektor-immoplusreunion-4095",
+  "titre": "Grand Studio SAINT DENIS proche centre",
+  "prix": 505,
   "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
+  "quartier": "Vauban",
   "pieces": 1,
   "type": "Studio",
-  "surface": 30.0,
-  "meuble": null,
+  "surface": 30,
+  "meuble": false,
   "photos": [
-   "https://www.entreparticuliers.com/media/epc-photos/photo_3f847212-162e-4e05-ae39-dce43639470d.jpg",
-   "https://www.entreparticuliers.com/media/epc-photos/photo_dfd24be7-51e6-4cff-a637-90230563bc3f.jpg",
-   "https://www.entreparticuliers.com/media/epc-photos/photo_c44abefd-b195-49dc-9da5-7b99c5bc6a79.jpg",
-   "https://www.entreparticuliers.com/media/epc-photos/photo_6e97bf21-6a6b-4c1b-853e-c7b818bfef51.jpg",
-   "https://www.entreparticuliers.com/media/epc-photos/photo_1260128d-e8e8-4d05-9b87-00c2d68f9f8d.jpg",
-   "https://www.entreparticuliers.com/media/epc-photos/photo_c2500ad0-7be7-4952-b3b0-120cc60fe69b.jpg",
-   "https://www.entreparticuliers.com/media/epc-photos/photo_1b31e1a3-298b-47b1-8bb5-34fb42c6354d.jpg"
+   "https://file.bienici.com/photo/hektor-immoplusreunion-4095_immoplusreunion.staticlbi.com_original_images_biens_1_e09a8f3997b5dcd01f2e7a34c91d7ced_photo_8df42899eaf278ed7af7289ba4ed8b09.jpg",
+   "https://file.bienici.com/photo/hektor-immoplusreunion-4095_immoplusreunion.staticlbi.com_original_images_biens_1_e09a8f3997b5dcd01f2e7a34c91d7ced_photo_e211886911055cf6d266b9ea71154578.jpg",
+   "https://file.bienici.com/photo/hektor-immoplusreunion-4095_immoplusreunion.staticlbi.com_original_images_biens_1_e09a8f3997b5dcd01f2e7a34c91d7ced_photo_43d83c3214e18945b0c041197426a9ae.jpg",
+   "https://file.bienici.com/photo/hektor-immoplusreunion-4095_immoplusreunion.staticlbi.com_original_images_biens_1_e09a8f3997b5dcd01f2e7a34c91d7ced_photo_d23997a84e732409197e81cfa6726cb2.jpg"
   ],
-  "description": "Ruelle des anges à Saint-Denis :\nGrand appartement T1 de 30 m2, bien disposé comprenant une pièce principale, une cuisine équipée, une salle d'eau avec wc, un balcon et un parking.\nSitué au premier étage d'un petit immeuble familial au calme, à proximité des grands axes et du centre ville.\nLoyer Mensuel : 505 euros.\nDépôt de garantie : 505 euros.\nHonoraires de location TTC : 390 euros (dont 90 euros pour l'état des lieux).\nl'état des risques auquel est soumis ce bien est disponible sur georisques.gouv.fr\nDétails :\nNombre de pièces : 1\nNombre de niveaux : 1\nNb de salle d'eau : 1\nCuisine : Americaine -Equipee\nMode de chauffage : AUTRE\nType de chauffage : AUTRE\nBalcon : 1\nNombre de wc : 1\nNombre de parking : 1",
+  "description": "Ruelle des anges à Saint-Denis :<br> Grand appartement T1 de 30 m2, bien disposé comprenant une pièce principale, une cuisine équipée, une salle d'eau avec wc, un balcon et un parking.<br> Situé au premier étage d'un petit immeuble familial au calme, à proximité des grands axes et du centre ville.<br> Loyer Mensuel : 505 euros.<br> Dépôt de garantie : 505 euros.<br> Honoraires de location TTC : 390 euros (dont 90 euros pour l'état des lieux).<br> l'état des risques auquel est soumis ce bien est disponible sur georisques.gouv.fr<br>",
   "caracteristiques": [
+   "Parking (1)",
+   "1e étage",
+   "Construit en 2000",
    "Varangue / balcon",
    "Parking",
    "Cuisine équipée"
   ],
-  "date": "",
-  "annonceur": "Particulier",
-  "lat": null,
-  "lon": null,
+  "date": "2026-10-22T08:43:15.599Z",
+  "annonceur": "IMMO PLUS REUNION",
+  "lat": -20.882757562410404,
+  "lon": 55.46123616923278,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0262 94 38 38",
   "email": "",
-  "adresse": "",
+  "adresse": "128 rue general de gaulle, 97400 Saint-Denis",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/hektor-immoplusreunion-4095"
-   }
-  ],
-  "vu": "2026-10-21T12:04+04:00"
+  "aussi": [],
+  "vu": "2026-10-29T07:05+04:00"
  },
  {
   "id": "superimmo--annonces-location-appartement-30m-saint-denis-97400-x1293gd",
@@ -3840,6 +3804,10 @@
    {
     "source": "Bien'ici",
     "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-52424705300084-GES04010021-542"
+   },
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-1-piece-27-m2/01a08ae0-4dca-706b-8b7e-1be7d7efbc0e"
    }
   ],
   "vu": "2026-10-28T11:16+04:00"
