@@ -1416,6 +1416,39 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "zimo-01a18653-028a-792d-9705-5ba9d575b848",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/a-louer-t1-meuble-confortable-et-fonctionnel/01a18653-028a-792d-9705-5ba9d575b848",
+  "titre": "À LOUER ? T1 MEUBLÉ ? CONFORTABLE ET FONCTIONNEL",
+  "prix": 574.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "T1",
+  "surface": null,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/NjAswtqyTd2oqoSP72BCI3FLF8no-uiIs8Lp9bXILsM/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_015f9e62-a4a5-4999-a6b3-f1dec38961c5.jpg"
+  ],
+  "description": "Location T1 Saint-Denis (974) 1 pièces",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "Pro · via DOMimmo",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-29T11:17+04:00"
+ },
+ {
   "id": "zimo-01a13159-7a94-7363-b33c-757385d67b4b",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/loue-studio-t1/01a13159-7a94-7363-b33c-757385d67b4b",
