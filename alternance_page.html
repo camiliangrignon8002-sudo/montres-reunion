@@ -377,6 +377,95 @@ html.teinte .bandeau.colle{background:var(--fond)}
   .feuille{box-shadow:0 0 0 1px rgba(255,255,255,.1),0 30px 80px rgba(0,0,0,.6)}
   .voile{background:rgba(0,0,0,.6)}
 }
+
+/* ================= Liquid Glass sur toute l'appli (couche de navigation et de contrôles) ================= */
+:root{
+  --v-fond:rgba(255,255,255,.62);            /* verre clair */
+  --v-fond-fort:rgba(255,255,255,.88);       /* panneaux (fiches, menus) : plus opaque pour lire le texte */
+  --v-flou:blur(24px) saturate(190%) brightness(1.04);
+  /* double liseré : la lumière entre en haut et ressort en bas, comme dans une lentille */
+  --v-lentille:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.55),
+    inset 0 10px 18px -14px rgba(255,255,255,.9),inset 0 -10px 18px -14px rgba(255,255,255,.6),inset 0 0 0 .5px rgba(0,0,0,.05);
+  --v-ombre:0 12px 32px -14px rgba(16,40,28,.28),0 2px 6px rgba(16,40,28,.06);
+  --ressort:cubic-bezier(.2,1.4,.35,1);
+}
+@media (prefers-color-scheme:dark){:root{
+  --v-fond:rgba(36,36,38,.6);--v-fond-fort:rgba(28,28,30,.88);--v-flou:blur(24px) saturate(170%) brightness(.95);
+  --v-lentille:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(255,255,255,.08),
+    inset 0 10px 18px -14px rgba(255,255,255,.18),inset 0 -10px 18px -14px rgba(255,255,255,.08),inset 0 0 0 .5px rgba(255,255,255,.08);
+  --v-ombre:0 14px 36px -12px rgba(0,0,0,.75),0 2px 6px rgba(0,0,0,.4);
+}}
+/* un fond à peine coloré (vert et or) pour que le verre ait quelque chose à refléter */
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+  radial-gradient(60vw 50vh at 8% -5%,rgba(18,119,73,.07),transparent 60%),
+  radial-gradient(50vw 45vh at 100% 10%,rgba(163,126,44,.07),transparent 60%),
+  radial-gradient(70vw 60vh at 50% 110%,rgba(18,119,73,.05),transparent 60%)}
+/* surfaces de verre clair */
+.bandeau,.nu,.cherche-in,.offre .fav,.onglets,.toast,.feuille{
+  -webkit-backdrop-filter:var(--v-flou);backdrop-filter:var(--v-flou)}
+/* dans les rangées qui défilent sur le côté, le flou crée un fond gris : verre sans flou (il repose sur le fond uni) */
+.filtres button,.dom .carre,.actifs button,.suggestions button,.lien-alerte,.btn.gris,.feuille .bloc{-webkit-backdrop-filter:none;backdrop-filter:none}
+.nu,.filtres button,.actifs button,.btn.gris,.offre .fav,.dom .carre,.onglets,.suggestions button,.lien-alerte{
+  background:var(--v-fond);box-shadow:var(--v-lentille),var(--v-ombre);border:0;
+  transition:transform .5s var(--ressort),background .3s,box-shadow .3s,color .3s}
+.nu:active,.filtres button:active,.actifs button:active,.btn.gris:active,.offre .fav:active,.dom:active .carre,.suggestions button:active,.lien-alerte:active{transform:scale(1.06)}
+/* en-tête : verre permanent, les annonces passent dessous */
+.bandeau{background:var(--v-fond);box-shadow:0 1px 0 rgba(0,0,0,.04)}
+.bandeau.colle{background:var(--v-fond);box-shadow:var(--v-ombre)}
+.nu{width:42px;height:42px}
+.droite{gap:8px}
+/* onglets Alternance / Emploi : capsule de verre, pastille verte qui glisse */
+.onglets{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0;width:min(420px,100%);margin:clamp(26px,4vw,44px) auto 0;padding:5px;border-radius:999px}
+.onglets::before{content:"";position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:999px;
+  background:var(--lg-vert);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 0 14px rgba(255,255,255,.14),0 6px 16px -8px rgba(18,119,73,.6);
+  transform:translateX(calc(var(--i,0) * 100%));transition:transform .55s var(--ressort)}
+.onglets button{position:relative;z-index:1;border:0;padding:12px 10px;border-radius:999px;font-size:16px;color:var(--texte);transition:color .3s}
+.onglets button.actif{color:#fff;border:0}
+/* barre de filtres : capsules de verre */
+.filtres{gap:10px;padding:clamp(24px,3.5vw,40px) 4px 20px}
+.filtres button{padding:10px 16px;border-radius:999px;font-size:15px}
+.filtres button.actif{color:var(--vert);background:rgba(18,119,73,.12)}
+.filtres .ressort{display:none}
+.actifs button{padding:7px 11px 7px 14px}
+.lien-alerte{padding:8px 14px;border-radius:999px}
+/* recherche : capsule de verre */
+.cherche{background:transparent;border-top:0}
+.cherche-in{max-width:1168px;margin:4px auto 8px;border-radius:999px;padding:2px 10px 2px 18px;background:var(--v-fond);box-shadow:var(--v-lentille),var(--v-ombre)}
+.suggestions button{border:0}
+/* boutons secondaires et cœur : verre clair */
+.btn.gris{border:0}
+.offre .fav{display:grid;place-items:center;width:40px;height:40px;padding:0;top:16px;left:16px}
+/* domaines : carrés de verre */
+.dom .carre{background:var(--v-fond)}
+.dom.actif .carre{background:rgba(255,255,255,.9);box-shadow:var(--v-lentille),0 14px 30px -12px rgba(18,119,73,.35),inset 0 0 0 1.5px rgba(18,119,73,.35)}
+@media (prefers-color-scheme:dark){.dom.actif .carre{background:rgba(60,60,64,.8)}}
+/* fenêtres : grands panneaux de verre flottants, ouverture avec effet ressort */
+.voile{background:rgba(10,20,15,.22);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.feuille{background:var(--v-fond-fort);box-shadow:var(--v-lentille),0 30px 80px -20px rgba(0,0,0,.45);
+  margin:0 8px calc(8px + env(safe-area-inset-bottom));border-radius:34px;animation:surgit .5s var(--ressort);max-height:calc(100vh - 24px)}
+@keyframes surgit{from{transform:translateY(30px) scale(.96);opacity:0}}
+@media (min-width:760px){.feuille{margin:0;border-radius:34px}}
+.feuille .bloc{background:rgba(255,255,255,.8);box-shadow:inset 0 0 0 .5px rgba(0,0,0,.04);border-radius:22px}
+.feuille .hero{background:rgba(255,255,255,.75);border-radius:24px!important}
+.feuille .barre .rond{background:var(--v-fond);box-shadow:var(--v-lentille),var(--v-ombre);border:0}
+@media (prefers-color-scheme:dark){.feuille .bloc,.feuille .hero{background:rgba(255,255,255,.06)}}
+/* messages : capsule de verre sombre */
+.toast{background:rgba(22,30,26,.72);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 14px 30px -10px rgba(0,0,0,.45);border-radius:999px;padding:12px 20px;animation:surgit .45s var(--ressort)}
+/* mode Teinté et accessibilité : verre plus opaque, ou pas de verre du tout */
+html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
+@media (prefers-color-scheme:dark){html.teinte{--v-fond:rgba(30,30,32,.95);--v-fond-fort:rgba(26,26,28,.97)}}
+@media (prefers-reduced-transparency:reduce){
+  :root{--v-fond:var(--carte);--v-fond-fort:var(--fond)}
+  .bandeau,.nu,.filtres button,.actifs button,.cherche-in,.btn.gris,.offre .fav,.dom .carre,.onglets,.toast,.feuille,.feuille .bloc,.voile{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  body::before{display:none}
+}
+@media (prefers-contrast:more){:root{--v-fond:var(--fond);--v-lentille:inset 0 0 0 1px var(--texte)}}
+@media (prefers-reduced-motion:reduce){.feuille,.toast{animation:none}.onglets::before{transition:none}}
+
+/* rangées qui défilent : ombres courtes et marge, pour qu'elles ne se coupent pas en bande grise */
+.filtres button,.dom .carre,.actifs button,.suggestions button{box-shadow:var(--v-lentille),0 3px 10px -6px rgba(16,40,28,.25)}
+.filtres{padding-left:8px;padding-right:8px;margin:0 -8px}
+.rail-dom{padding-left:8px;padding-right:8px;margin:0 -8px}
 </style>
 </head>
 <body>
@@ -598,6 +687,7 @@ const dansSection = a => (a.categorie || "alternance") === F.section;
 const TRIS = [["recent", "Plus récentes"], ["proche", "Plus proches"], ["salaire", "Salaire le plus élevé"]];
 function puces() {  // onglets, titre et barre de filtres
   document.querySelectorAll("#p-section button").forEach(b => { const on = b.dataset.section === F.section; b.classList.toggle("actif", on); b.setAttribute("aria-selected", on); });
+  $("#p-section").style.setProperty("--i", F.section === "emploi" ? 1 : 0);
   $("#titre").textContent = F.section === "emploi" ? "Offres d'emploi" : "Offres d'alternance";
   const chev = ic("chevron");
   const lab = (t, v) => v ? `${esc(t)} : ${esc(v)}` : esc(t);
