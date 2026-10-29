@@ -30,6 +30,7 @@ ROOT = Path(__file__).parent
 VUS_FILE = ROOT / "data" / "alternance_vus.json"
 FICHES_FILE = ROOT / "data" / "alternance_fiches.json"  # annonces des sites d'emploi déjà lues   # id -> date où l'appli a vu l'offre la 1re fois
 JSON_FILE = ROOT / "docs" / "alternance" / "annonces.json"
+META_FILE = ROOT / "docs" / "alternance" / "meta.json"   # date de mise à jour et sources, pour reconstruire la page
 OUT_FILE = ROOT / "docs" / "alternance" / "index.html"
 REUNION = timezone(timedelta(hours=4))
 
@@ -889,11 +890,20 @@ def main():
     VUS_FILE.parent.mkdir(exist_ok=True)
     VUS_FILE.write_text(json.dumps(vus, ensure_ascii=False))
     JSON_FILE.write_text(json.dumps(gardees, ensure_ascii=False, indent=1))
+    META_FILE.write_text(json.dumps({"maj": maj, "sources": sources_ok}, ensure_ascii=False))
     OUT_FILE.write_text(page_html(gardees, maj, sources_ok), encoding="utf-8")
     nouvelles = [a for a in gardees if a["vu"] == maintenant.isoformat(timespec="minutes")]
     if not premiere_fois:
         notifier(nouvelles)
 
 
+def reconstruire_page():
+    """Reconstruit index.html avec le modèle actuel, sans nouvelle recherche (le modèle a pu changer entre-temps)."""
+    if not JSON_FILE.exists():
+        return
+    meta = json.loads(META_FILE.read_text()) if META_FILE.exists() else {"maj": "", "sources": []}
+    OUT_FILE.write_text(page_html(json.loads(JSON_FILE.read_text()), meta["maj"], meta["sources"]), encoding="utf-8")
+
+
 if __name__ == "__main__":
-    main()
+    reconstruire_page() if "--page" in sys.argv else main()

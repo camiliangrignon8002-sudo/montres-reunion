@@ -38,6 +38,10 @@ jobs:
           git diff --cached --quiet || git commit -m "Mise à jour des offres d'alternance $(date -u +%F)"
           # le code a pu changer pendant la recherche : on se remet à jour avant de publier
           for essai in 1 2 3; do
-            git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break
+            git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" || { sleep 5; continue; }
+            # la page est reconstruite avec le dernier modèle (alternance_page.html a pu changer pendant la recherche)
+            python alternance.py --page && git add docs/alternance
+            git diff --cached --quiet || git commit -q -m "Page des offres avec le dernier modèle"
+            git push origin "HEAD:${GITHUB_REF_NAME}" && break
             sleep 5
           done
