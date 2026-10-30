@@ -2821,6 +2821,37 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "zimo-01a18eec-2c2b-7aa8-ba45-2ed3076adbba",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/loue-appartement-t2/01a18eec-2c2b-7aa8-ba45-2ed3076adbba",
+  "titre": "Loue appartement t2",
+  "prix": 650.0,
+  "commune": "La Possession",
+  "quartier": "La Possession",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 42.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/1NTpE28E3LpaTs9S6l8Q1SRIlPQgOIXYDR3Nmcq8RKg/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_76602622-7b75-4f30-875d-6bbf2e0f9aa8.jpg"
+  ],
+  "description": "Location T2 La Possession (974) 2 pièces 42 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord-Ouest",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-31T02:52+04:00"
+ },
+ {
   "id": "zimo-019ff4ae-bc26-719c-b2c3-8dbf32a30920",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-de-18-m2/019ff4ae-bc26-719c-b2c3-8dbf32a30920",
