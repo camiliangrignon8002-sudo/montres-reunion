@@ -934,12 +934,7 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "ParuVendu",
-    "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296247638A1KILHAP000"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-23T05:05+04:00"
  },
  {
@@ -2309,51 +2304,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "superimmo--annonces-location-appartement-45m-saint-denis-97400-x12agv8",
-  "source": "Superimmo",
-  "url": "https://www.superimmo.com/annonces/location-appartement-45m-saint-denis-97400-x12agv8",
-  "titre": "Location appartement 2 pièces 45 m² Saint-Denis (97400)",
-  "prix": 627.1,
-  "commune": "Saint-Denis",
-  "quartier": "",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 45.0,
-  "meuble": null,
-  "photos": [
-   "https://photo.superimmo.com/w129xyopgq0ahdp26r3ienkqtume",
-   "https://photo.superimmo.com/ml1qfjfgz3g7y3t7i1kebrvpr9vi",
-   "https://photo.superimmo.com/682j4xlb01nbzytsk925ih0vpa5v",
-   "https://photo.superimmo.com/ft7e5zipunumotsdoyi9317iah0x",
-   "https://photo.superimmo.com/p92kegqxisz3j8son8o5dj07s0qq",
-   "https://photo.superimmo.com/vqvlu97k54dtzvne3n8diog75zxa",
-   "https://photo.superimmo.com/3zw6uzrie6eohymcsqnttpg3mnm5",
-   "https://photo.superimmo.com/imhfxn4s64l7ebevplcktpbmczef",
-   "https://photo.superimmo.com/acgwn0pd4e4k6diclxw50yx38bf1",
-   "https://photo.superimmo.com/aoaupydagyj3ojfuie31d6gl2iwd",
-   "https://photo.superimmo.com/pe6dqj9bc9luyrunduvtq2ayv2q4",
-   "https://photo.superimmo.com/tmexvlewotn9hmnpkvb3lqpwrlm8",
-   "https://photo.superimmo.com/26ca9hn4cc6gps5e7hyptlig7zux",
-   "https://photo.superimmo.com/ceg622sxa4hxa8fju5ey8r1vjn0p",
-   "https://photo.superimmo.com/z3iqm4onza425q4kbn8yjcllkwkc"
-  ],
-  "description": "Annonce appartement location 45 m² 2 pièces à Saint-Denis OFIM a le plaisir de vous proposer",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Superimmo",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0262 21 46 46",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:59+04:00"
  },
  {
   "id": "zimo-01a10ce5-e522-7c85-9063-6cdea57a0204",
