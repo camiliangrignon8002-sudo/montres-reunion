@@ -2749,6 +2749,45 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "ep-22738623",
+  "source": "EntreParticuliers",
+  "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-2-pieces-35-m2/ref-22738623",
+  "titre": "Appartement 2 pièces 35 m² — Saint-Denis",
+  "prix": 650.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 35.0,
+  "meuble": null,
+  "photos": [
+   "https://www.entreparticuliers.com/media/epc-photos/photo_0017219d-4f1d-4731-939d-4c89f37c7004.jpg"
+  ],
+  "description": "Un appartement de type 2 pièces de 35,72m2 au 2eme étage, Rue Roland Garros:\nEntrée, une cuisine ouverte aménagée et équipée, un séjour, une chambre séparée, salle de bains et WC, chauffage et eau chaude individuel électrique. Menuiserie PVC neuves. Beaux volumes et nombreux rangements. Connexion Fibre.\nCuisine aménagée, plaque cuisson, micro-onde, bouilloire, grille-pain, vaisselle, ustensiles de cuisine, rangement ; Salle de bain rénovée et équipée; chambre : lit, couettes, oreillers, alèses, table basse, bureau, chaises, luminaire...)\nLoyer 620€ + 30€ de provisions sur charges (entretien commun + eau + ordures ménagères), avec régularisation annuelle. EDF à votre charge.\nDépôt de garantie : 1220€\nGarants exigés. Libre ! Eligible aux APL.\nDirecte propriétaire !",
+  "caracteristiques": [
+   "Cuisine équipée",
+   "Fibre"
+  ],
+  "date": "",
+  "annonceur": "Particulier",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": true,
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-2-pieces-35-m2/01a18cd5-51ed-72a8-932a-ebb17424ecb2"
+   }
+  ],
+  "vu": "2026-10-30T17:13+04:00"
+ },
+ {
   "id": "zimo-01a18b78-b1fc-7ea6-a284-99da502f2049",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-2-pieces-38-m2/01a18b78-b1fc-7ea6-a284-99da502f2049",
@@ -3217,6 +3256,39 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "zimo-01a18cdd-470e-725f-9364-525ba2d8500c",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-meuble-de-25-72-m2-situe-en-rez-de-chaussee/01a18cdd-470e-725f-9364-525ba2d8500c",
+  "titre": "Studio meublé de 25,72 m² situé en rez-de-chaussée",
+  "prix": 670.0,
+  "commune": "Sainte-Marie",
+  "quartier": "Sainte-Marie",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 25.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/85naxKcJbmL9Mmd4KAMUb0mGesVV_3XNO9TADtrRMFg/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_1adf15e7-b90c-4b4e-87c4-4a4dce69e13d.jpg"
+  ],
+  "description": "Location Studio Sainte-Marie (974) 1 pièces 25 m²",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-30T17:13+04:00"
  },
  {
   "id": "zimo-01a17d53-5381-7d03-a9f3-406b5650fe9c",
