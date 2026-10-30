@@ -369,7 +369,7 @@
    "Climatisation",
    "Proche transports"
   ],
-  "date": "2026-10-29T16:12:15.825Z",
+  "date": "2026-10-30T05:14:44.947Z",
   "annonceur": "Citya Belvédère Immobilier",
   "lat": -20.90768,
   "lon": 55.479679,
@@ -382,6 +382,55 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-29T21:08+04:00"
+ },
+ {
+  "id": "bienici-immo-facile-61682961",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/le-port/appartement/1pieces/immo-facile-61682961",
+  "titre": "Studio de 32.85 m2 - Le Port -",
+  "prix": 468.28,
+  "commune": "Le Port",
+  "quartier": "Ariste Bolon",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 32.85,
+  "meuble": false,
+  "photos": [
+   "https://file.bienici.com/photo/immo-facile-61682961_media.immo-facile.com_office5_littoral_immobilier_catalog_images_pr_p_6_1_6_8_2_9_6_1_61682961a.jpg_DATEMAJ_30_10_2026-06_39_17",
+   "https://file.bienici.com/photo/immo-facile-61682961_media.immo-facile.com_office5_littoral_immobilier_catalog_images_pr_p_6_1_6_8_2_9_6_1_61682961b.jpg_DATEMAJ_30_10_2026-06_39_17",
+   "https://file.bienici.com/photo/immo-facile-61682961_media.immo-facile.com_office5_littoral_immobilier_catalog_images_pr_p_6_1_6_8_2_9_6_1_61682961c.jpg_DATEMAJ_30_10_2026-06_39_17",
+   "https://file.bienici.com/photo/immo-facile-61682961_media.immo-facile.com_office5_littoral_immobilier_catalog_images_pr_p_6_1_6_8_2_9_6_1_61682961d.jpg_DATEMAJ_30_10_2026-06_39_17",
+   "https://file.bienici.com/photo/immo-facile-61682961_media.immo-facile.com_office5_littoral_immobilier_catalog_images_pr_p_6_1_6_8_2_9_6_1_61682961e.jpg_DATEMAJ_30_10_2026-06_39_17",
+   "https://file.bienici.com/photo/immo-facile-61682961_media.immo-facile.com_office5_littoral_immobilier_catalog_images_pr_p_6_1_6_8_2_9_6_1_61682961f.jpg_DATEMAJ_30_10_2026-06_39_17",
+   "https://file.bienici.com/photo/immo-facile-61682961_media.immo-facile.com_office5_littoral_immobilier_catalog_images_pr_p_6_1_6_8_2_9_6_1_61682961g.jpg_DATEMAJ_30_10_2026-06_39_17",
+   "https://file.bienici.com/photo/immo-facile-61682961_media.immo-facile.com_office5_littoral_immobilier_catalog_images_pr_p_6_1_6_8_2_9_6_1_61682961h.jpg_DATEMAJ_30_10_2026-06_39_17"
+  ],
+  "description": "Votre agence LITTORAL IMMOBILIER vous propose, à la LOCATION  un studio non-meublé de 32,85 m2 situé au 3 ème étage sans ascenseur.<br>Il comprenant : une cuisine ouverte sur séjour , un couloir, une salle de bains avec et un WC séparé.<br>Dans les charges sont compris : les charges de copropriété et la taxe d'ordures ménagères.<br>Ne sont pas compris : l'eau, l'électricité et internet.<br>Pas de place de parking.<br>Disponible de suite.<br>Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www.georisques.gouv.fr<br>Pour une visite, votre contact : Emilie Allain Agent Commercial <span class=\"importDescriptionDecorator\" data-type=\"phone\">0692189211</span> - <span class=\"importDescriptionDecorator\" data-type=\"phone\">0262242048</span><br> EMILIE ALLAIN (EI) Agent Commercial - Numéro RSAC : 850962952 - .",
+  "caracteristiques": [
+   "3e étage",
+   "Construit en 2014",
+   "Meublé",
+   "Parking",
+   "Ascenseur"
+  ],
+  "date": "2026-10-30T06:34:17.899Z",
+  "annonceur": "LITTORAL IMMOBILIER - LA REUNION",
+  "lat": -20.948847669647538,
+  "lon": 55.29845780261016,
+  "charges": 45,
+  "pro": true,
+  "tel": "0262 24 20 48",
+  "email": "",
+  "adresse": "186 route Nationale 1 Ermitage, 97434 SAINT GILLES LES BAINS",
+  "secteur": "Nord-Ouest",
+  "caf": false,
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-1-piece-33-m2/01a18b78-b1f3-7f8b-a2be-d96f9eac7918"
+   }
+  ],
+  "vu": "2026-10-30T11:16+04:00"
  },
  {
   "id": "pv-1295579198",
@@ -2693,6 +2742,37 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "zimo-01a18b78-b1fc-7ea6-a284-99da502f2049",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-38-m2/01a18b78-b1fc-7ea6-a284-99da502f2049",
+  "titre": "Appartement 2 pièces 38 m²",
+  "prix": 650.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 38.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/v0MJSCtfsUy-avQqwUqeKM7exajdcmpc8SVghYUyYsk/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_29c23a4d-6acf-4e11-b153-9f0da6154aa8.jpg"
+  ],
+  "description": "Location T2 Saint-Denis (974) 2 pièces 38 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-30T11:16+04:00"
+ },
+ {
   "id": "zimo-01a162af-147e-7f9d-a647-1c59982872e8",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-avec-coin-nuit-97490-moufia-ste-clotilde/01a162af-147e-7f9d-a647-1c59982872e8",
@@ -4282,6 +4362,37 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "zimo-01a18b78-ae39-7a9a-8923-9e9b1759d7e2",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-1-piece-28-m2/01a18b78-ae39-7a9a-8923-9e9b1759d7e2",
+  "titre": "Appartement 1 pièce 28 m²",
+  "prix": 716.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 28.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/fod-pD7kS5FhKDOEPPgwO7TkiP558ScAIsujIvn_1ac/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_242b91c7-417e-4b99-8bf3-bd4e75618cfd.jpg"
+  ],
+  "description": "Location T1 bis Saint-Denis (974) 1 pièces 28 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-30T11:16+04:00"
  },
  {
   "id": "zimo-01a0ce8e-7e51-7a4c-a7ca-d8b0a9892690",
