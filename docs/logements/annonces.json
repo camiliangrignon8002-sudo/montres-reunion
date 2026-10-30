@@ -2567,10 +2567,6 @@
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/2pieces/netty-company51942hxz-appt-2082"
    },
    {
-    "source": "Figaro Immobilier",
-    "url": "https://immobilier.lefigaro.fr/annonces/annonce-110257171.html"
-   },
-   {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-2-pieces-43-m2/01a17747-dd06-745d-9798-28d09eafa3fa"
    }
@@ -4451,41 +4447,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-30T19:13+04:00"
- },
- {
-  "id": "figaro-110318603",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110318603.html",
-  "titre": "Location meublée appartement 2 pièces 52.01 m² à Saint denis chaudron (97490), 707 €",
-  "prix": 707.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint denis chaudron",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 52.01,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/j87SLVmjrRuXbBXyVK84YkfIIzm4u6KZg4bGv6LVoTRbyQwTWu1KUCNfGagj-lrHrtZbEJMHu1A4Oc55-Zh3ebGIM4gelO16ymFW=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/VOxJ8mYBmC6VEG1sNcrojWnho8tlgNNw_MpVpthz4VjbKlpVrACp6zDARwGAlaBjOdg6FcWUFliy6QcvYrUsIGL5dBLGS6MBIYRoGA=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/v6JfpetS2o3-9ibTyQETvKr2s0-aNkMjWxt5uzmQRvveUEapzJD_-uL1t22dKPIwKJ5szofXRZNAfTt2YZFMr7h4xzHcrgMiR-d7gA=rw-w940-h605-l80"
-  ],
-  "description": "Grand T2 meublé à louer à Saint-Denis \n\nEmplacement idéal dans le Nord de\nl'île de La Réunion !\n\n\nDisponible à partir du 15/11/2026\n\nVisite à partir du 31/10/2026 selon disponibilités de la locataire en place\n\n\nNous vous proposons en exclusivité ce superbe appartement T2\nen RDC de 59.36 m2 total (52",
-  "caracteristiques": [
-   "Meublé"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-28T21:05+04:00"
  },
  {
   "id": "zimo-01a12c9b-f30a-7ee1-bd28-b6b09399d139",
