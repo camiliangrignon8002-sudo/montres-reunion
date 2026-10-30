@@ -168,37 +168,6 @@
   "vu": "2026-10-21T12:07+04:00"
  },
  {
-  "id": "zimo-01a1872e-b46d-7957-9551-ad9b91874934",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-21-m2/01a1872e-b46d-7957-9551-ad9b91874934",
-  "titre": "Appartement 1 pièce 21 m²",
-  "prix": 384.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 21.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/bjtVCXvN6hGQskMaJ6SN6YbSEM_T_nraktv-wk65jfo/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_96aead18-5a07-4594-8bc1-60163738337a.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 21 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-29T15:01+04:00"
- },
- {
   "id": "superimmo-onces-location-appartement-23m-sainte-clotilde-97490-x12agv7",
   "source": "Superimmo",
   "url": "https://www.superimmo.com/annonces/location-appartement-23m-sainte-clotilde-97490-x12agv7",
@@ -1128,39 +1097,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "zimo-01a18737-c78a-7f79-8ea6-330b52b27c67",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-meuble-de-12m2-a-louer-550-charges-comprise/01a18737-c78a-7f79-8ea6-330b52b27c67",
-  "titre": "Studio meublé de 12m2 à louer - 550 charges comprise",
-  "prix": 550.0,
-  "commune": "Le Port",
-  "quartier": "Le Port",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 12.0,
-  "meuble": true,
-  "photos": [
-   "https://img.e-xiste.com/7aAYiEjv8m1MoMdBJQCzIXIm2p4lJ1agTJFXcn9gaI0/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_4e83dd40-caeb-4497-8ca8-3c18325c7834.jpg"
-  ],
-  "description": "Location Studio Le Port (974) 1 pièces 12 m²",
-  "caracteristiques": [
-   "Meublé"
-  ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord-Ouest",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-29T15:01+04:00"
  },
  {
   "id": "zimo-01a17c04-ad26-7d62-af55-2a3d75b11216",
@@ -4447,6 +4383,41 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-30T19:13+04:00"
+ },
+ {
+  "id": "figaro-110318603",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110318603.html",
+  "titre": "Location meublée appartement 2 pièces 52.01 m² à Saint denis chaudron (97490), 707 €",
+  "prix": 707.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint denis chaudron",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 52.01,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/j87SLVmjrRuXbBXyVK84YkfIIzm4u6KZg4bGv6LVoTRbyQwTWu1KUCNfGagj-lrHrtZbEJMHu1A4Oc55-Zh3ebGIM4gelO16ymFW=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/VOxJ8mYBmC6VEG1sNcrojWnho8tlgNNw_MpVpthz4VjbKlpVrACp6zDARwGAlaBjOdg6FcWUFliy6QcvYrUsIGL5dBLGS6MBIYRoGA=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/v6JfpetS2o3-9ibTyQETvKr2s0-aNkMjWxt5uzmQRvveUEapzJD_-uL1t22dKPIwKJ5szofXRZNAfTt2YZFMr7h4xzHcrgMiR-d7gA=rw-w940-h605-l80"
+  ],
+  "description": "Grand T2 meublé à louer à Saint-Denis \n\nEmplacement idéal dans le Nord de\nl'île de La Réunion !\n\n\nDisponible à partir du 15/11/2026\n\nVisite à partir du 31/10/2026 selon disponibilités de la locataire en place\n\n\nNous vous proposons en exclusivité ce superbe appartement T2\nen RDC de 59.36 m2 total (52",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-28T21:05+04:00"
  },
  {
   "id": "zimo-01a12c9b-f30a-7ee1-bd28-b6b09399d139",
