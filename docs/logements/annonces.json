@@ -735,6 +735,10 @@
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
+   },
+   {
+    "source": "Herren Immobilier",
+    "url": "https://www.herren-immobilier.com/location/appartement/7996"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -2153,34 +2157,46 @@
   "vu": "2026-10-26T14:56+04:00"
  },
  {
-  "id": "zimo-01a155d4-7df5-7858-ac69-d1abcf35119e",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-1-piece-35-m2/01a155d4-7df5-7858-ac69-d1abcf35119e",
-  "titre": "Studio 1 pièce 35 m²",
+  "id": "figaro-110025017",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025017.html",
+  "titre": "Location meublée appartement 1 pièce 35 m² à Saint-Denis (97400), 620 €",
   "prix": 620.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
   "surface": 35.0,
-  "meuble": null,
+  "meuble": true,
   "photos": [
-   "https://img.e-xiste.com/wGxDnUV-p9nzp7imBPRFv0sO6Vn1NXMnxRV9wGmrCqU/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_5b98b023-b52d-44b2-ae1d-b6c076c073da.jpg"
+   "https://lh3.googleusercontent.com/9x9ldaQiNtBs5m4oO1RH1ej4jM20PQxcnoHiVR2IWNSEwS1UaKy9wE91EZd1dyxvxGiOVvVM5RnFphkMp7XYTe6eXK7tofrhVuzvTQ=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/7KdItYX7bTMMUQLGzNaWlow6W2p0rzAjizbOZpZqwDTOW7_xz18tGJEYeoTgPk6X9d33j-erp1g_9ZFJA63ZT2BhQQvuxPYFwXPoJQ=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/hBEHql9QUyNfhmdWYv24eVlsLM4zsMsD6BhhHtcdGpif1GVpCSrSAFaaiA35b-dkz1VLHpBUXKIfXGkffg8KmoNAicsp664zRevcmQ=rw-w940-h605-l80"
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 35 m²",
-  "caracteristiques": [],
+  "description": "RUNIMMO vous présente en location un studio meublé de 35m2 situé à la Trinité à Saint-Denis (97400), comprenant une belle pièce principale lumineuse, un coin cuisine tout équipée, une belle salle de bains, un balcon et une place de parking privative.\nLe bien est idéalement bien situé, à 2 minutes à pied du parc de la Trinité, proche des transports en commun et des commerces.\nPour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 455 € TTC à la charge du locataire comprenant 350 € TTC pour l'état des lieux. Loyer de base 580 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 160 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Proche transports"
+  ],
   "date": "",
-  "annonceur": "Pro · via leboncoin",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0692 26 92 05",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/studio-1-piece-35-m2/01a155d4-7df5-7858-ac69-d1abcf35119e"
+   }
+  ],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -3570,6 +3586,46 @@
   "charges": null,
   "pro": true,
   "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "figaro-110025019",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025019.html",
+  "titre": "Location meublée appartement 1 pièce 24.72 m² à Saint-Denis (97400), 680 €",
+  "prix": 680.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": null,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/yuCmIU2VVliHTLDaZhVC7dQKHEkgKEF6DHQ-ttgsVhQAPLGwNA5tAPiqMUtHx_Fi20T2kJ4msyZlSZU0puhHAbG_czetMbLgPw9a1Q=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/yaXvVs2WqRwgODHf5qBPzomBUey_xX2i128B7aL_lfg_OPyLKOcWN2eLsJR12XoYVeArIB6vvQhyx9LafbnkKMuk-aMmTyiaifvvRg=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/7UCEdPc8N0qDHp3URGOPM4ulUFrJfLTgQrpB_Ytl0J4qbV1esvf4iJe_shR9VajkSduyLpxJij9rLgzo6KTia6_brGJTRoy5dn7QP94=rw-w940-h605-l80"
+  ],
+  "description": "RUNIMMO vous propose en location un studio joliment meublé de 24,72 m2, situé dans la rue monthyon à Saint-Denis (97400), résidence ' LA GOELETTE '. Ce bien se compose d'une pièce principale lumineuse et climatisée, une cuisine aménagée et équipée, une belle salle d'eau avec wc et une grande terrasse. Une place de parking privative est disponible en sous-sol. Ce bien se situe proche du jardin de l'état, et du centre ville de Saint-Denis. Pour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 321 € TTC à la charge du locataire comprenant 74 € TTC pour l'état des lieux. Loyer de base 640 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 280 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Climatisation",
+   "Jardin",
+   "Cuisine équipée"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 26 92 05",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
