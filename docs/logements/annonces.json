@@ -249,37 +249,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a1699b-2867-76f5-9deb-416190bbc2b1",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-21-m2/01a1699b-2867-76f5-9deb-416190bbc2b1",
-  "titre": "Appartement 1 pièce 21 m²",
-  "prix": 431.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "T1",
-  "surface": 21.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/fbMQr9dBiJZ7HA2PuR7g6mtGCnn5rMIbhZIbGwzeEFU/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_5a66288a-0118-4b42-a374-c37ddd1d4ee6.jpg"
-  ],
-  "description": "Location T1 Saint-Denis (974) 1 pièces 21 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via Citya",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-23T20:52+04:00"
- },
- {
   "id": "superimmo--annonces-location-appartement-46m-saint-denis-97400-x12c5lv",
   "source": "Superimmo",
   "url": "https://www.superimmo.com/annonces/location-appartement-46m-saint-denis-97400-x12c5lv",
@@ -717,6 +686,10 @@
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
+   },
+   {
+    "source": "Herren Immobilier",
+    "url": "https://www.herren-immobilier.com/location/appartement/7996"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -3900,12 +3873,7 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-1-piece-27-m2/01a08ae0-4dca-706b-8b7e-1be7d7efbc0e"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-28T11:16+04:00"
  },
  {
