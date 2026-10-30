@@ -686,10 +686,6 @@
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
-   },
-   {
-    "source": "Herren Immobilier",
-    "url": "https://www.herren-immobilier.com/location/appartement/7996"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -866,49 +862,6 @@
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "superimmo--annonces-location-appartement-30m-saint-denis-97400-x1293gd",
-  "source": "Superimmo",
-  "url": "https://www.superimmo.com/annonces/location-appartement-30m-saint-denis-97400-x1293gd",
-  "titre": "Location appartement 1 pièce 30 m² Saint-Denis (97400)",
-  "prix": 505.0,
-  "commune": "Saint-Denis",
-  "quartier": "",
-  "pieces": 1,
-  "type": "T1",
-  "surface": 30.0,
-  "meuble": null,
-  "photos": [
-   "https://photo.superimmo.com/6i7evq0knn2e8livolynd307t8xa",
-   "https://photo.superimmo.com/2hpgbagw5da9qgkswg0i41dtq0ut",
-   "https://photo.superimmo.com/zq3jhodovqs94exj65k7mvhr3ohy",
-   "https://photo.superimmo.com/sidcxy1o42zfejz8i3up1bupp5iu",
-   "https://photo.superimmo.com/36jjtgo2wi6j5wju5iu3qplwr3az",
-   "https://photo.superimmo.com/or5it8q8y55iuvtgdie93vkbcrr2",
-   "https://photo.superimmo.com/61jhf51sjggipdy3n4hom8yn7bm3",
-   "https://photo.superimmo.com/sqdupccje9oj9d6q12yf1u4vc9i7",
-   "https://photo.superimmo.com/xhunrnrj6cfxpg0dki1pytmjs7mp",
-   "https://photo.superimmo.com/2aap1whm8vdo3w2ur76vqvzzkc82",
-   "https://photo.superimmo.com/38pyrtuqr92gq6btgmz6pg7e6c34",
-   "https://photo.superimmo.com/0qlvjftdqz4vgmdwykuy1bafcpe1",
-   "https://photo.superimmo.com/917wy3jqol0kmsmx1ua6qxwoxllc"
-  ],
-  "description": "Annonce appartement location 30 m² 1 pièce à Saint-Denis Ruelle des anges à : Grand appartement",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Superimmo",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0262 94 38 38",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-23T05:05+04:00"
  },
  {
   "id": "pv-1296109780",
