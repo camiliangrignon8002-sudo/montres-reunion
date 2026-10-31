@@ -2755,34 +2755,53 @@
   "vu": "2026-10-30T17:13+04:00"
  },
  {
-  "id": "zimo-01a18b78-b1fc-7ea6-a284-99da502f2049",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-38-m2/01a18b78-b1fc-7ea6-a284-99da502f2049",
-  "titre": "Appartement 2 pièces 38 m²",
+  "id": "superimmo--annonces-location-appartement-38m-saint-denis-97490-x12dj7p",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-38m-saint-denis-97490-x12dj7p",
+  "titre": "Location appartement 2 pièces 38,46 m² Saint-Denis (97490)",
   "prix": 650.0,
   "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
+  "quartier": "",
   "pieces": 2,
   "type": "T2",
-  "surface": 38.0,
+  "surface": 38.46,
   "meuble": null,
   "photos": [
-   "https://img.e-xiste.com/v0MJSCtfsUy-avQqwUqeKM7exajdcmpc8SVghYUyYsk/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_29c23a4d-6acf-4e11-b153-9f0da6154aa8.jpg"
+   "https://photo.superimmo.com/ugzfkmgr6k9eftjk95k0roedpvss",
+   "https://photo.superimmo.com/fi3jdhfa9tl0bvamcs1qgf9wpjj2",
+   "https://photo.superimmo.com/mwkxz6lywgndrvcqxwfas81focdh",
+   "https://photo.superimmo.com/5tjazoost523g953lslp2uxo918c",
+   "https://photo.superimmo.com/89e0ygnhyflet2sre06vhl4q9lr8",
+   "https://photo.superimmo.com/gpgwe74bwu0bcj4xak9xci421r79",
+   "https://photo.superimmo.com/yxr8bl5oug9i83mrqgme0ohhyk7b",
+   "https://photo.superimmo.com/auehrwepu3wzxpatfgpjbhnx0gky",
+   "https://photo.superimmo.com/8gg0ut1zwp1x0ax5j8x9o9zprxgt",
+   "https://photo.superimmo.com/yo93zssdr79hhit9hzl5wx8fqtvr",
+   "https://photo.superimmo.com/jgqxnu0ni0fzlxwosa8m338x8tbo",
+   "https://photo.superimmo.com/ifozulhpube8m7rtn6stu66lbj1j",
+   "https://photo.superimmo.com/zzi8wiui8uthcb8ti7xtcs3x58h1",
+   "https://photo.superimmo.com/418a5iueb62r812ydxohl1lpbc8g",
+   "https://photo.superimmo.com/pa6x8qh5es94q5xorylwgyyy42mp"
   ],
-  "description": "Location T2 Saint-Denis (974) 2 pièces 38 m²",
+  "description": "Annonce appartement location 38,46 m² 2 pièces à Saint-Denis LOGER LOUE A SAINTE CLOTILDE , BAS",
   "caracteristiques": [],
   "date": "",
-  "annonceur": "Pro · via leboncoin",
+  "annonceur": "Superimmo",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0692 53 38 57",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-2-pieces-38-m2/01a18b78-b1fc-7ea6-a284-99da502f2049"
+   }
+  ],
   "vu": "2026-10-30T11:16+04:00"
  },
  {
@@ -3038,6 +3057,37 @@
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "zimo-01a1903a-0794-7097-a261-c6ff77afd448",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/loue-t2-bellepierre/01a1903a-0794-7097-a261-c6ff77afd448",
+  "titre": "Loue T2 Bellepierre",
+  "prix": 658.0,
+  "commune": "Saint-Denis",
+  "quartier": "Bellepierre",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 42.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/v3o_PlY1GjuXKeM0ToLcGlnLzy2tWuxtkDNMR4H2EX0/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_51360e67-1681-4bd7-b16c-8aacfb3f6af1.jpg"
+  ],
+  "description": "Location T2 Saint-Denis (974) 2 pièces 42 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-31T08:58+04:00"
  },
  {
   "id": "bienici-ag970168-549637991",
@@ -3836,6 +3886,40 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "zimo-01a1903a-0971-775a-be6c-857f8c3d0509",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-entierement-meuble-vue-mer-ste-clotilde/01a1903a-0971-775a-be6c-857f8c3d0509",
+  "titre": "Studio - entièrement meublé- vue mer - Sté Clotilde",
+  "prix": 695.0,
+  "commune": "Saint-Denis",
+  "quartier": "Sainte-Clotilde",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 25.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/-wMaNm_u8XLEd1X4Ou48f8o8gmhd7OS-fxgSBkHYogo/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_cea67ba4-5bf9-44a1-9bf6-c633f1986c77.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 25 m²",
+  "caracteristiques": [
+   "Meublé",
+   "Vue mer"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-31T08:58+04:00"
  },
  {
   "id": "bienici-ag970404-554365799",
