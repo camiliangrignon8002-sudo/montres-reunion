@@ -1,9 +1,9 @@
 [
  {
-  "id": "zimo-01a19188-38e3-7d67-b9fe-17260675fe2f",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a19188-38e3-7d67-b9fe-17260675fe2f",
-  "titre": "Appartement 1 pièce 22 m²",
+  "id": "ep-22743188",
+  "source": "EntreParticuliers",
+  "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-1-piece-22-m2/ref-22743188",
+  "titre": "Appartement 1 pièce 22 m² — Saint-Denis",
   "prix": 364.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
@@ -12,22 +12,30 @@
   "surface": 22.0,
   "meuble": null,
   "photos": [
-   "https://img.e-xiste.com/T7dxQ3seoNkkfthM4Gder9CjSTA4xokTg365Wtfdgmc/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_d5c3da03-6472-4db3-ab94-7ca61e30ec9b.jpg"
+   "https://www.entreparticuliers.com/media/epc-photos/photo_e1aa5f42-9cc3-4d36-9860-a53bfd31677f.jpg"
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 22 m²",
-  "caracteristiques": [],
+  "description": "RUNIMMO vous propose à la location à Sainte-Clotilde, résidence « Central Fac 11 » proche de l'université dans une résidence étudiante récente un studio de 22.10m² situé au deuxième étage avec ascenseur comprenant une entrée avec cuisine, une pièce principale, une grande salle de bains avec wc. Disponible de suite.***Logement soumis au régime PINEL OM (plafond de ressources pour le locataire) *** Pour une visite contactez EMILIE au 0692 26 92 05.\nLoyer de base 364 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 364 €. Non soumis au DPE.",
+  "caracteristiques": [
+   "Ascenseur",
+   "Proche université"
+  ],
   "date": "",
-  "annonceur": "Pro · via Figaro Immobilier",
+  "annonceur": "Particulier",
   "lat": null,
   "lon": null,
   "charges": null,
-  "pro": true,
-  "tel": "",
+  "pro": false,
+  "tel": "0692 26 92 05",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a19188-38e3-7d67-b9fe-17260675fe2f"
+   }
+  ],
   "vu": "2026-10-31T14:50+04:00"
  },
  {
