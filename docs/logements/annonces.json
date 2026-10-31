@@ -2051,46 +2051,34 @@
   "vu": "2026-10-26T14:56+04:00"
  },
  {
-  "id": "figaro-110025017",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025017.html",
-  "titre": "Location meublée appartement 1 pièce 35 m² à Saint-Denis (97400), 620 €",
+  "id": "zimo-01a155d4-7df5-7858-ac69-d1abcf35119e",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-1-piece-35-m2/01a155d4-7df5-7858-ac69-d1abcf35119e",
+  "titre": "Studio 1 pièce 35 m²",
   "prix": 620.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
   "surface": 35.0,
-  "meuble": true,
+  "meuble": null,
   "photos": [
-   "https://lh3.googleusercontent.com/9x9ldaQiNtBs5m4oO1RH1ej4jM20PQxcnoHiVR2IWNSEwS1UaKy9wE91EZd1dyxvxGiOVvVM5RnFphkMp7XYTe6eXK7tofrhVuzvTQ=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/7KdItYX7bTMMUQLGzNaWlow6W2p0rzAjizbOZpZqwDTOW7_xz18tGJEYeoTgPk6X9d33j-erp1g_9ZFJA63ZT2BhQQvuxPYFwXPoJQ=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/hBEHql9QUyNfhmdWYv24eVlsLM4zsMsD6BhhHtcdGpif1GVpCSrSAFaaiA35b-dkz1VLHpBUXKIfXGkffg8KmoNAicsp664zRevcmQ=rw-w940-h605-l80"
+   "https://img.e-xiste.com/wGxDnUV-p9nzp7imBPRFv0sO6Vn1NXMnxRV9wGmrCqU/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_5b98b023-b52d-44b2-ae1d-b6c076c073da.jpg"
   ],
-  "description": "RUNIMMO vous présente en location un studio meublé de 35m2 situé à la Trinité à Saint-Denis (97400), comprenant une belle pièce principale lumineuse, un coin cuisine tout équipée, une belle salle de bains, un balcon et une place de parking privative.\nLe bien est idéalement bien situé, à 2 minutes à pied du parc de la Trinité, proche des transports en commun et des commerces.\nPour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 455 € TTC à la charge du locataire comprenant 350 € TTC pour l'état des lieux. Loyer de base 580 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 160 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Parking",
-   "Proche transports"
-  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 35 m²",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "",
+  "annonceur": "Pro · via leboncoin",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "0692 26 92 05",
+  "tel": "",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/studio-1-piece-35-m2/01a155d4-7df5-7858-ac69-d1abcf35119e"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -2231,6 +2219,37 @@
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "zimo-01a18f8c-c012-7db1-8d1b-2834ffd59f20",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-37-m2/01a18f8c-c012-7db1-8d1b-2834ffd59f20",
+  "titre": "Appartement 2 pièces 37 m²",
+  "prix": 622.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 37.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/mORV2c4qHBFLAd61BAFUYiuEs6lrmhezBx1rK6JX1Wc/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_d9ba7fd2-4829-437b-be6b-c10148910c42.jpg"
+  ],
+  "description": "Location T2 Saint-Denis (974) 2 pièces 37 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-31T07:00+04:00"
  },
  {
   "id": "zimo-01a136ec-89e3-7cd3-b7b1-488c92aa00cf",
@@ -2456,10 +2475,6 @@
    {
     "source": "Bien'ici",
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/2pieces/netty-company51942hxz-appt-2082"
-   },
-   {
-    "source": "Figaro Immobilier",
-    "url": "https://immobilier.lefigaro.fr/annonces/annonce-110257171.html"
    },
    {
     "source": "Zimo",
@@ -3224,52 +3239,56 @@
   "vu": "2026-10-27T17:05+04:00"
  },
  {
-  "id": "superimmo--annonces-location-appartement-23m-saint-denis-97400-x12bebm",
-  "source": "Superimmo",
-  "url": "https://www.superimmo.com/annonces/location-appartement-23m-saint-denis-97400-x12bebm",
-  "titre": "Location appartement 1 pièce 23 m² Saint-Denis (97400)",
-  "prix": 675.0,
+  "id": "bienici-netty-transac-appt-2853",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/netty-transac-appt-2853",
+  "titre": "Meublé & Terrasse Privative — Studio 23 m² + 7 m² de terras",
+  "prix": 675,
   "commune": "Saint-Denis",
-  "quartier": "",
+  "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
-  "surface": 23.0,
-  "meuble": null,
+  "surface": 23,
+  "meuble": true,
   "photos": [
-   "https://photo.superimmo.com/7cwwi7jhz131t68rn50h02jeggmv",
-   "https://photo.superimmo.com/m0qndp5ljp8kbxnfngir90pnkp3h",
-   "https://photo.superimmo.com/mvnmrlt58l7pt429nw33rf6vs2nr",
-   "https://photo.superimmo.com/5s8nhmdgjdbe0u2bf2fwhtrojzzo",
-   "https://photo.superimmo.com/9dilf9wp1ygvglj4z82ovfo33qge",
-   "https://photo.superimmo.com/swn787s7b6fub27gtdolbv2yhhhd",
-   "https://photo.superimmo.com/2dsbrg8yrgie5iw0m3m985tllufk",
-   "https://photo.superimmo.com/048d5csy7xs8odfg8gyuc7h9p0n5",
-   "https://photo.superimmo.com/x9n1euq2qieliz6dbvnbsev5goba",
-   "https://photo.superimmo.com/07jetvxms1druph9epokl7v5is1a",
-   "https://photo.superimmo.com/dk7dyty2r2lm9bklb3jprjmi2wyg",
-   "https://photo.superimmo.com/1rmja34gx3vxm18qwyaawmjobvrh",
-   "https://photo.superimmo.com/al6re5qkqd5nmm8pe5x3g193j80f",
-   "https://photo.superimmo.com/ecykjo6nf9j68f6vp6qzej5kz37g",
-   "https://photo.superimmo.com/lgwancekgihukyda8gkr07ucg8y4"
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495544_LA2853_2_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495545_LA2853_3_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495560_LA2853_13_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495558_LA2853_12_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495542_LA2853_1_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495547_LA2853_4_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495549_LA2853_5_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495550_LA2853_6_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495551_LA2853_7_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495553_LA2853_8_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495554_LA2853_9_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495556_LA2853_10_original.jpg",
+   "https://file.bienici.com/photo/netty-transac-appt-2853_img.netty.immo_product_transac_LA2853_1792495557_LA2853_11_original.jpg"
   ],
-  "description": "Annonce appartement location 23 m² 1 pièce à Saint-Denis « LE STUDIO DU CAMPUS » :",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Superimmo",
-  "lat": null,
-  "lon": null,
+  "description": "« LE STUDIO DU CAMPUS » :<br>   • Studio meublé de 23 m² habitables, une pièce à vivre.<br>   • Terrasse privative de 7 m² en prolongement.<br>   • Premier étage avec ascenseur, résidence avec piscine et salle de sport.<br>   • À Sainte-Clotilde, université et commerces à pied.<br>   • Location meublée, bail d'un an.<br>EN PRIME : les 7 m² de terrasse, que presque aucun studio de ce segment ne propose.<br>À Sainte-Clotilde, le campus à côté, Le Studio du Campus, déjà tout meublé.<br>Les 3 Atouts qui font la différence :<br>   • MEUBLÉ ET PRÊT À VIVRE — cuisine équipée, lave-linge, placards intégrés, climatisation complète. Vous arrivez avec une valise et vous vivez le soir même, sans un meuble à acheter ni un abonnement à monter.<br>   • 7 M² DE TERRASSE PRIVATIVE — un extérieur à soi quand la quasi-totalité des studios du secteur n'offre qu'une fenêtre. De quoi prendre le café dehors et faire respirer les 23 m².<br>   • PISCINE ET SALLE DE SPORT DANS LA RÉSIDENCE — deux équipements collectifs déjà là, entretenus, inclus dans le quotidien. Ce sont des services réels, pas une promesse de plaquette.<br>Le Confort d'un bien prêt à vivre :<br>   • Cuisine ouverte et équipée, pensée pour un usage quotidien simple.<br>   • Climatisation complète sur l'ensemble du logement.<br>   • Placards intégrés : le rangement ne mange pas la surface.<br>   • Lave-linge installé, dans son renfoncement près de l'entrée.<br>   • Salle d'eau avec douche, vasque, grand miroir et WC.<br>   • Premier étage desservi par ascenseur, très bon état général.<br>POURQUOI AGIR VITE ?<br>Un studio meublé, avec terrasse privative, à moins de dix minutes à pied de l'université et des commerces : sur Sainte-Clotilde, cette combinaison part généralement en quelques jours à la rentrée comme en cours d'année.<br>ÉTAT GÉNÉRAL<br>Le studio est en très bon état et ne demande aucun travaux. Carrelage beige clair, murs blancs, menuiseries en bon état : l'ensemble est sain et immédiatement habitable.<br>UNE PIÈCE DE 23 M² ORGANISÉE<br>La pièce principale est meublée et prête à vivre : canapé d'angle, table avec ses bancs, téléviseur. Le volume est régulier, la lumière traverse, et la baie coulissante donne directement sur la terrasse.<br>CUISINE OUVERTE ET ÉQUIPÉE<br>La cuisine est ouverte sur la pièce et déjà équipée : évier inox, plaque de cuisson, hotte, réfrigérateur, micro-ondes, rangements hauts et bas. Tout est en place, il n'y a rien à acheter.<br>SALLE D'EAU<br>La salle d'eau réunit une cabine de douche avec paroi coulissante et pommeau de pluie, une vasque sur meuble à tiroirs, un grand miroir éclairé et des étagères. Le WC est dans la même pièce.<br>CLIMATISATION, RANGEMENTS ET LAVE-LINGE<br>La climatisation couvre tout le logement. Les placards sont intégrés : ils libèrent le sol et évitent d'ajouter une armoire dans une pièce unique. Un lave-linge est installé dans son renfoncement, près de l'entrée : pas de laverie à chercher, pas de machine à acheter.<br>PISCINE ET SALLE DE SPORT<br>La résidence met à disposition une piscine et une salle de sport. Deux équipements qui changent le quotidien d'un studio et que l'on ne retrouve pas sur ce segment de loyer.<br>À PIED : UNIVERSITÉ, COMMERCES, BUS<br>L'université est à environ 500 mètres, la pharmacie et le médecin à 200 mètres, l'arrêt de bus en bas de la résidence. La boulangerie et la mairie annexe sont à 600 mètres, les commerces à un kilomètre.<br>7 M²...",
+  "caracteristiques": [
+   "Ascenseur",
+   "1e étage",
+   "Meublé",
+   "Varangue / balcon",
+   "Climatisation",
+   "Piscine",
+   "Cuisine équipée",
+   "Proche transports",
+   "Proche université"
+  ],
+  "date": "2026-10-30T15:07:12.746Z",
+  "annonceur": "Agence IMMO TRANSAC RÉUNION",
+  "lat": -20.87998885,
+  "lon": 55.448136944,
   "charges": null,
   "pro": true,
-  "tel": "0693 62 06 06",
+  "tel": "",
   "email": "",
-  "adresse": "",
+  "adresse": "344 avenue des Mascareignes, 97440 Saint-André",
   "secteur": "Nord",
   "caf": false,
   "aussi": [
-   {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/netty-transac-appt-2853"
-   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/meuble-terrasse-privative-studio-23-m2-7-m2-de-terras/01a15fc1-d58f-77b9-af88-90175ff835bc"
@@ -3551,46 +3570,6 @@
   "charges": null,
   "pro": true,
   "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "figaro-110025019",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025019.html",
-  "titre": "Location meublée appartement 1 pièce 24.72 m² à Saint-Denis (97400), 680 €",
-  "prix": 680.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": null,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/yuCmIU2VVliHTLDaZhVC7dQKHEkgKEF6DHQ-ttgsVhQAPLGwNA5tAPiqMUtHx_Fi20T2kJ4msyZlSZU0puhHAbG_czetMbLgPw9a1Q=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/yaXvVs2WqRwgODHf5qBPzomBUey_xX2i128B7aL_lfg_OPyLKOcWN2eLsJR12XoYVeArIB6vvQhyx9LafbnkKMuk-aMmTyiaifvvRg=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/7UCEdPc8N0qDHp3URGOPM4ulUFrJfLTgQrpB_Ytl0J4qbV1esvf4iJe_shR9VajkSduyLpxJij9rLgzo6KTia6_brGJTRoy5dn7QP94=rw-w940-h605-l80"
-  ],
-  "description": "RUNIMMO vous propose en location un studio joliment meublé de 24,72 m2, situé dans la rue monthyon à Saint-Denis (97400), résidence ' LA GOELETTE '. Ce bien se compose d'une pièce principale lumineuse et climatisée, une cuisine aménagée et équipée, une belle salle d'eau avec wc et une grande terrasse. Une place de parking privative est disponible en sous-sol. Ce bien se situe proche du jardin de l'état, et du centre ville de Saint-Denis. Pour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 321 € TTC à la charge du locataire comprenant 74 € TTC pour l'état des lieux. Loyer de base 640 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 280 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Parking",
-   "Climatisation",
-   "Jardin",
-   "Cuisine équipée"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0692 26 92 05",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
@@ -4272,41 +4251,6 @@
   "vu": "2026-10-30T19:13+04:00"
  },
  {
-  "id": "figaro-110318603",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110318603.html",
-  "titre": "Location meublée appartement 2 pièces 52.01 m² à Saint denis chaudron (97490), 707 €",
-  "prix": 707.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint denis chaudron",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 52.01,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/j87SLVmjrRuXbBXyVK84YkfIIzm4u6KZg4bGv6LVoTRbyQwTWu1KUCNfGagj-lrHrtZbEJMHu1A4Oc55-Zh3ebGIM4gelO16ymFW=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/VOxJ8mYBmC6VEG1sNcrojWnho8tlgNNw_MpVpthz4VjbKlpVrACp6zDARwGAlaBjOdg6FcWUFliy6QcvYrUsIGL5dBLGS6MBIYRoGA=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/v6JfpetS2o3-9ibTyQETvKr2s0-aNkMjWxt5uzmQRvveUEapzJD_-uL1t22dKPIwKJ5szofXRZNAfTt2YZFMr7h4xzHcrgMiR-d7gA=rw-w940-h605-l80"
-  ],
-  "description": "Grand T2 meublé à louer à Saint-Denis \n\nEmplacement idéal dans le Nord de\nl'île de La Réunion !\n\n\nDisponible à partir du 15/11/2026\n\nVisite à partir du 31/10/2026 selon disponibilités de la locataire en place\n\n\nNous vous proposons en exclusivité ce superbe appartement T2\nen RDC de 59.36 m2 total (52",
-  "caracteristiques": [
-   "Meublé"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-28T21:05+04:00"
- },
- {
   "id": "zimo-01a12c9b-f30a-7ee1-bd28-b6b09399d139",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-2piece/01a12c9b-f30a-7ee1-bd28-b6b09399d139",
@@ -4587,44 +4531,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-23T17:00+04:00"
- },
- {
-  "id": "figaro-108777541",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108777541.html",
-  "titre": "Location  appartement 1 pièce 42.61 m² à Sainte Clotilde (97490), 730 €",
-  "prix": 730.0,
-  "commune": "Saint-Denis",
-  "quartier": "Sainte Clotilde",
-  "pieces": 1,
-  "type": "T1",
-  "surface": null,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/d3N08dL52FH6uZyCKhYuIeLDR2L5fkzA462jkgQdEE-MkswFdYwY7Wq-Gf9yhSNUaO5-HMTsMUw86Z6egMgWZ1lCxRYy32hnk-Ud3w=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/0QoeYFQILXBQHaW_ZDPy9hAjdNqmx9KsG_1JPRZf0QkMy4MIvbXt2tPM2vVyuPdfVl4QFxdBntBOFCFlFEuqOkg3OA_6SGx3-XBXkQ=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/ztz7NrDN2TZ6VMi6g2ajpkqw0Bz-eXaDGsu6ZkQArho8wSgvJVrc4dQSw59jrntNGpE1JEOBXs4mACeD8hddGQmhxdH-O3q19T5Qjg=rw-w940-h605-l80"
-  ],
-  "description": "Découvrez ce T1 bis de 42 m²Meublé rénové situé dans une résidence sécurisée, offrant un agencement fonctionnel et de nombreux équipements pour un confort au quotidien.\nce logement rénové comprend une entrée , donnant sur une Cuisine aménagée de meubles hauts et bas et équipée plaque vitrocéramique, hotte, four, réfrigérateur et autres équipements.Un cellier avec étagères , machine à laver et chauffe eau, d'un coin chambre avec lit 160 X 200 brasseur d'air et dressing\nd'un coin séjour climatisé avec canapé convertible, table basse, pouf.d'un espace bureau, d'un coin repas avec table pour 4 personnes, d'une salle d'eau avec douche à l'italienne, WC, meuble vasque et miroir\nLes atouts\nRésidence sécurisée\n42 m² parfaitement agencés\nLogement meublé\nCoin chambre avec dressing\nSéjour climatisé\nCuisine équipée\nEspace bureau\nDouche à l'italienne\nNombreux rangements\nLoyer hors charges : 700 € / mois\nProvision sur charges de copropriété : 20 € / mois soumis à régularisation annuelle\nProvision pour TEOM : 10 € / mois soumis à régularisation annuelle\nTotal mensuel : 730 €\nDisponible de suite\nDépôt de garantie : 1400 € soit deux mois de loyer hors charges.\nHonoraires de mise en location à la charge du locataire 13 € par m2 soit 553,93 euros dont 127,83 euros pour l'état des lieux (soit 3euro/M2).\nBarème consultable sur le lien : http://www.tekaimmo.fr/pdf/honoraires.pdf .\nPour toute demande de visite ou complément d'information veuillez contacter David agent mandataire E.I.Teka Immo inscrit au rsac de saint denis sous le numéro 445345937 au 0692 14 60 00 ou david.teka@tekaimmo.fr ou le 0262 41 88 88\nAnnonce rédigée sous la responsabilité éditoriale de l'agent.\nVous pouvez retrouver toutes les informations sur les risques auxquels ce bien pourrait être exposé sur : www.georisques.gouv.fr\n\\r",
-  "caracteristiques": [
-   "Meublé",
-   "Climatisation",
-   "Cuisine équipée",
-   "Résidence sécurisée"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0692 14 60 00",
-  "email": "david.teka@tekaimmo.fr",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:07+04:00"
  },
  {
   "id": "zimo-01a152cd-c740-7666-bde6-114b192f5824",
