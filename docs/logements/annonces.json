@@ -486,10 +486,6 @@
   "caf": false,
   "aussi": [
    {
-    "source": "Figaro Immobilier",
-    "url": "https://immobilier.lefigaro.fr/annonces/annonce-110427691.html"
-   },
-   {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-1-piece-33-m2/01a18b78-b1f3-7f8b-a2be-d96f9eac7918"
    }
@@ -1142,6 +1138,43 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "figaro-99684193",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-99684193.html",
+  "titre": "Location  appartement 1 pièce 19 m² à Saint-Denis (97400), 550 €",
+  "prix": 550.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 19.0,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/-MHpqso9X992Nn3aE_p7LbTHZZzgwHJYo9pVkzDN251NMOXs47jex1QIcqzIxv1ryvxRKykzW3F47kXkDhh0Bjf_zTsJ8Tn9fIE4=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/suQCh9zdhT1Pr88a6ZekpA3X9-ATpUaHJP16ScO0VxBs0Lr4Xfb2ITMYszIZhi9EbqD6HDzdfh8jsjja_ViY9AVhP7_XKXigPoB-=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/vWIMGCErBDYYQd7K5dz8s_6i3BrfZoS59OAXxcT3CW79yJOuYeOdZFxVPorUJHET2Xk0mei0ItbmGUY2ealSImtrse5T8z24CwOnJA=rw-w940-h605-l80"
+  ],
+  "description": "Florence DOÉ 0692 01 28 80 florencedoe@outre-mer-immobilier.re https://www.outre-mer-immobilier.re/louer.html Studio meublé neuf? Près de la Fac\nStudio meublé de 18 m², entièrement refait à neuf, situé au rez-de-chaussée de la résidence Central Fac n°1, à proximité immédiate de l?université.\nLe logement comprend :\n- canapé-lit,\n- table à manger avec chaises hautes,\n- machine à laver,\n- vaisselle,\n- kitchenette équipée,\n- salle d?eau avec WC\nIdéal pour étudiant, proche de la faculté, des commerces et des transports.Plus d'informations et des vidéos ? Venez consulter notre site internet outre-mer-immobilier ou contactez moi : Florence DOÉ Négociateur(trice) Immobilier au 0692 01 28 80 - Vous avez également un bien à vendre ? Appelez-moi au 0692 01 28 80 pour une estimation gratuite !------------------------------------------Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site www.georisques.gouv.fr",
+  "caracteristiques": [
+   "Meublé",
+   "Proche transports",
+   "Proche université"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 01 28 80",
+  "email": "florencedoe@outre-mer-immobilier.re",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T19:53+04:00"
  },
  {
   "id": "zimo-01a17c04-ad26-7d62-af55-2a3d75b11216",
@@ -2354,73 +2387,6 @@
   "vu": "2026-10-31T07:00+04:00"
  },
  {
-  "id": "zimo-01a136ec-89e3-7cd3-b7b1-488c92aa00cf",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-meuble/01a136ec-89e3-7cd3-b7b1-488c92aa00cf",
-  "titre": "Studio meublé",
-  "prix": 627.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 20.0,
-  "meuble": true,
-  "photos": [
-   "https://img.e-xiste.com/_FxIbujLLUjvp-QmQPlim_o0DbSLZM-iPeJAVOcFgSE/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_4ced2689-c213-43b4-9635-72f6151c13b9.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
-  "caracteristiques": [
-   "Meublé"
-  ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "zimo-01a10ce5-e522-7c85-9063-6cdea57a0204",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-meuble-proche-universite/01a10ce5-e522-7c85-9063-6cdea57a0204",
-  "titre": "Studio meublé proche université",
-  "prix": 630.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 22.0,
-  "meuble": true,
-  "photos": [
-   "https://img.e-xiste.com/SJSJMxujyw4RZYhOBb9dOtXLkS-doCIp5hWCaK1rRbc/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_2f609525-5f2b-43c6-9f58-345d7dde491f.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 22 m²",
-  "caracteristiques": [
-   "Meublé",
-   "Proche université"
-  ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
   "id": "superimmo--annonces-location-appartement-41m-saint-denis-97490-x107deu",
   "source": "Superimmo",
   "url": "https://www.superimmo.com/annonces/location-appartement-41m-saint-denis-97490-x107deu",
@@ -2746,45 +2712,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "ep-22738623",
-  "source": "EntreParticuliers",
-  "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-2-pieces-35-m2/ref-22738623",
-  "titre": "Appartement 2 pièces 35 m² — Saint-Denis",
-  "prix": 650.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 35.0,
-  "meuble": null,
-  "photos": [
-   "https://www.entreparticuliers.com/media/epc-photos/photo_0017219d-4f1d-4731-939d-4c89f37c7004.jpg"
-  ],
-  "description": "Un appartement de type 2 pièces de 35,72m2 au 2eme étage, Rue Roland Garros:\nEntrée, une cuisine ouverte aménagée et équipée, un séjour, une chambre séparée, salle de bains et WC, chauffage et eau chaude individuel électrique. Menuiserie PVC neuves. Beaux volumes et nombreux rangements. Connexion Fibre.\nCuisine aménagée, plaque cuisson, micro-onde, bouilloire, grille-pain, vaisselle, ustensiles de cuisine, rangement ; Salle de bain rénovée et équipée; chambre : lit, couettes, oreillers, alèses, table basse, bureau, chaises, luminaire...)\nLoyer 620€ + 30€ de provisions sur charges (entretien commun + eau + ordures ménagères), avec régularisation annuelle. EDF à votre charge.\nDépôt de garantie : 1220€\nGarants exigés. Libre ! Eligible aux APL.\nDirecte propriétaire !",
-  "caracteristiques": [
-   "Cuisine équipée",
-   "Fibre"
-  ],
-  "date": "",
-  "annonceur": "Particulier",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": true,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-2-pieces-35-m2/01a18cd5-51ed-72a8-932a-ebb17424ecb2"
-   }
-  ],
-  "vu": "2026-10-30T17:13+04:00"
- },
- {
   "id": "superimmo--annonces-location-appartement-38m-saint-denis-97490-x12dj7p",
   "source": "Superimmo",
   "url": "https://www.superimmo.com/annonces/location-appartement-38m-saint-denis-97490-x12dj7p",
@@ -2992,6 +2919,40 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "ep-22738623",
+  "source": "EntreParticuliers",
+  "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-2-pieces-35-m2/ref-22738623",
+  "titre": "Appartement 2 pièces 35 m² — Saint-Denis",
+  "prix": 650.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 35.0,
+  "meuble": null,
+  "photos": [
+   "https://www.entreparticuliers.com/media/epc-photos/photo_0017219d-4f1d-4731-939d-4c89f37c7004.jpg"
+  ],
+  "description": "Un appartement de type 2 pièces de 35,72m2 au 2eme étage, Rue Roland Garros:\nEntrée, une cuisine ouverte aménagée et équipée, un séjour, une chambre séparée, salle de bains et WC, chauffage et eau chaude individuel électrique. Menuiserie PVC neuves. Beaux volumes et nombreux rangements. Connexion Fibre.\nCuisine aménagée, plaque cuisson, micro-onde, bouilloire, grille-pain, vaisselle, ustensiles de cuisine, rangement ; Salle de bain rénovée et équipée; chambre : lit, couettes, oreillers, alèses, table basse, bureau, chaises, luminaire...)\nLoyer 620€ + 30€ de provisions sur charges (entretien commun + eau + ordures ménagères), avec régularisation annuelle. EDF à votre charge.\nDépôt de garantie : 1220€\nGarants exigés. Libre ! Eligible aux APL.\nDirecte propriétaire !",
+  "caracteristiques": [
+   "Cuisine équipée",
+   "Fibre"
+  ],
+  "date": "",
+  "annonceur": "Particulier",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": true,
+  "aussi": [],
+  "vu": "2026-10-30T17:13+04:00"
  },
  {
   "id": "ep-22742396",
@@ -3230,42 +3191,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-01T11:18+04:00"
- },
- {
-  "id": "zimo-01a13baa-4600-7a22-9963-2e8441f489b3",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-meuble-st-denis-clim-varangue-parking-libre-le-5-novembre/01a13baa-4600-7a22-9963-2e8441f489b3",
-  "titre": "Studio meublé St-Denis, clim, varangue, parking libre le 5 novembre",
-  "prix": 670.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 37.0,
-  "meuble": true,
-  "photos": [
-   "https://img.e-xiste.com/gHOEjUZL0GkfVxsPulx4SerDeqfzu5chqvuMmViUCY4/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_1ac2db19-7177-4a7e-a09f-ba2e6f067fba.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 37 m²",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Parking",
-   "Climatisation"
-  ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
  },
  {
   "id": "zimo-01a13159-76f9-7700-9b1f-87ed81f7d0dc",
