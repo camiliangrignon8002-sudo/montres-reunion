@@ -176,6 +176,45 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "herren-immobilier-www-herren-immobilier-com-location-appartement-7992",
+  "source": "Herren Immobilier",
+  "url": "https://www.herren-immobilier.com/location/appartement/7992",
+  "titre": "Studio de 24m² à Ste Clotilde",
+  "prix": 375.0,
+  "commune": "Saint-Denis",
+  "quartier": "",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 24.0,
+  "meuble": null,
+  "photos": [
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/main.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/preview.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_144813.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_145038.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/DSC06474.jpg",
+   "https://www.herren-immobilier.com/images/stories/snpi.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7937/min.jpg"
+  ],
+  "description": "> Studio de 24m² � Ste Clotilde Réf : 5008 � Adresse : 97490 STE CLOTILDE Avantages Climatisation Placard(s) Proximité Ecole(s) Proximité Comme...",
+  "caracteristiques": [
+   "Climatisation"
+  ],
+  "date": "",
+  "annonceur": "Herren Immobilier",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "herren-location@orange.fr",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-22T01:51+04:00"
+ },
+ {
   "id": "zimo-01a14aa6-92c3-7e67-88ce-50a9aa439f6b",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio/01a14aa6-92c3-7e67-88ce-50a9aa439f6b",
@@ -851,39 +890,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "figaro-98661035",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-98661035.html",
-  "titre": "Location  appartement 1 pièce 20 m² à Moufia (97490), 500 €",
-  "prix": 500.0,
-  "commune": "Saint-Denis",
-  "quartier": "Moufia",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 20.0,
-  "meuble": null,
-  "photos": [
-   "https://lh3.googleusercontent.com/4AmR21oczw3d0xwlGeqTEe3VHkaEfugPmyOtPv01WvX2-UFQUQEW6BuTRJgF2j-X-KNoI38Fn2lfPo2SbofEZd9WLgAqD1pSSGmqGA=rw-w700-h660-l80"
-  ],
-  "description": "A louer studio comprenant :\n1 kitchenette\n1 pièce principale climatisée\n1 SDE + WC\nPlacards aménagés",
-  "caracteristiques": [
-   "Climatisation"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T13:51+04:00"
  },
  {
   "id": "zimo-019d8b5f-b7c0-7e61-b4df-51388c89c67d",
@@ -1672,6 +1678,40 @@
    }
   ],
   "vu": "2026-10-22T20:52+04:00"
+ },
+ {
+  "id": "zimo-01a19bcc-2ab2-7941-9d7e-a5af4a8aa922",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-etudiant-meuble/01a19bcc-2ab2-7941-9d7e-a5af4a8aa922",
+  "titre": "Studio étudiant meublé",
+  "prix": 600.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 32.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/NJFiX16ouetg3_gswIVg61kztH78tukI62LklbCeZJY/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_f07a31b3-86a1-494d-8e62-4e6e4ef1c101.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 32 m²",
+  "caracteristiques": [
+   "Meublé",
+   "Proche université"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-02T15:13+04:00"
  },
  {
   "id": "zimo-01a17302-4fc7-7361-bf48-afca430c812d",
@@ -4619,10 +4659,6 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
-   {
-    "source": "Figaro Immobilier",
-    "url": "https://immobilier.lefigaro.fr/annonces/annonce-108075429.html"
-   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/spacieux-t2/019fec0b-0419-728a-82e5-d4e908bf0441"
