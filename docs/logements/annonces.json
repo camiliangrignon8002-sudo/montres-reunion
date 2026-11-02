@@ -176,45 +176,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "herren-immobilier-www-herren-immobilier-com-location-appartement-7992",
-  "source": "Herren Immobilier",
-  "url": "https://www.herren-immobilier.com/location/appartement/7992",
-  "titre": "Studio de 24m² à Ste Clotilde",
-  "prix": 375.0,
-  "commune": "Saint-Denis",
-  "quartier": "",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 24.0,
-  "meuble": null,
-  "photos": [
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/main.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/preview.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_144813.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_145038.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/DSC06474.jpg",
-   "https://www.herren-immobilier.com/images/stories/snpi.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7937/min.jpg"
-  ],
-  "description": "> Studio de 24m² � Ste Clotilde Réf : 5008 � Adresse : 97490 STE CLOTILDE Avantages Climatisation Placard(s) Proximité Ecole(s) Proximité Comme...",
-  "caracteristiques": [
-   "Climatisation"
-  ],
-  "date": "",
-  "annonceur": "Herren Immobilier",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "herren-location@orange.fr",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-22T01:51+04:00"
- },
- {
   "id": "zimo-01a14aa6-92c3-7e67-88ce-50a9aa439f6b",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio/01a14aa6-92c3-7e67-88ce-50a9aa439f6b",
@@ -890,6 +851,39 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "figaro-98661035",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-98661035.html",
+  "titre": "Location  appartement 1 pièce 20 m² à Moufia (97490), 500 €",
+  "prix": 500.0,
+  "commune": "Saint-Denis",
+  "quartier": "Moufia",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 20.0,
+  "meuble": null,
+  "photos": [
+   "https://lh3.googleusercontent.com/4AmR21oczw3d0xwlGeqTEe3VHkaEfugPmyOtPv01WvX2-UFQUQEW6BuTRJgF2j-X-KNoI38Fn2lfPo2SbofEZd9WLgAqD1pSSGmqGA=rw-w700-h660-l80"
+  ],
+  "description": "A louer studio comprenant :\n1 kitchenette\n1 pièce principale climatisée\n1 SDE + WC\nPlacards aménagés",
+  "caracteristiques": [
+   "Climatisation"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T13:51+04:00"
  },
  {
   "id": "zimo-019d8b5f-b7c0-7e61-b4df-51388c89c67d",
@@ -2549,6 +2543,10 @@
    {
     "source": "Bien'ici",
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/2pieces/netty-company51942hxz-appt-2082"
+   },
+   {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-110257171.html"
    },
    {
     "source": "Zimo",
@@ -4409,6 +4407,41 @@
   "vu": "2026-10-27T17:05+04:00"
  },
  {
+  "id": "figaro-110318603",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110318603.html",
+  "titre": "Location meublée appartement 2 pièces 52.01 m² à Saint denis chaudron (97490), 707 €",
+  "prix": 707.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint denis chaudron",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 52.01,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/j87SLVmjrRuXbBXyVK84YkfIIzm4u6KZg4bGv6LVoTRbyQwTWu1KUCNfGagj-lrHrtZbEJMHu1A4Oc55-Zh3ebGIM4gelO16ymFW=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/VOxJ8mYBmC6VEG1sNcrojWnho8tlgNNw_MpVpthz4VjbKlpVrACp6zDARwGAlaBjOdg6FcWUFliy6QcvYrUsIGL5dBLGS6MBIYRoGA=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/v6JfpetS2o3-9ibTyQETvKr2s0-aNkMjWxt5uzmQRvveUEapzJD_-uL1t22dKPIwKJ5szofXRZNAfTt2YZFMr7h4xzHcrgMiR-d7gA=rw-w940-h605-l80"
+  ],
+  "description": "Grand T2 meublé à louer à Saint-Denis \n\nEmplacement idéal dans le Nord de\nl'île de La Réunion !\n\n\nDisponible à partir du 15/11/2026\n\nVisite à partir du 31/10/2026 selon disponibilités de la locataire en place\n\n\nNous vous proposons en exclusivité ce superbe appartement T2\nen RDC de 59.36 m2 total (52",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-28T21:05+04:00"
+ },
+ {
   "id": "zimo-01a12c9b-f30a-7ee1-bd28-b6b09399d139",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-2piece/01a12c9b-f30a-7ee1-bd28-b6b09399d139",
@@ -4586,6 +4619,10 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
+   {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-108075429.html"
+   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/spacieux-t2/019fec0b-0419-728a-82e5-d4e908bf0441"
