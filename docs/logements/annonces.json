@@ -3976,24 +3976,38 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a19c4c-0c04-7186-a0d9-842f4792cae3",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-45-m2/01a19c4c-0c04-7186-a0d9-842f4792cae3",
-  "titre": "Appartement 2 pièces 45 m²",
+  "id": "superimmo-onces-location-appartement-45m-sainte-clotilde-97490-x12dv2z",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-45m-sainte-clotilde-97490-x12dv2z",
+  "titre": "Location appartement 2 pièces 45 m² Sainte-Clotilde (97490)",
   "prix": 700.0,
   "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
+  "quartier": "",
   "pieces": 2,
   "type": "T2",
   "surface": 45.0,
   "meuble": null,
   "photos": [
-   "https://img.e-xiste.com/I9rnF8CJvrH2_CoPr8xerFIJKkJ4x1ufquIlPbptqK4/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_048360fd-d666-47ff-967e-faf23894589e.jpg"
+   "https://photo.superimmo.com/e7nat0zkagnqklnejkgu7pogwt4v",
+   "https://photo.superimmo.com/bflgl31a2y0cgbdt5yml8w1k5m0t",
+   "https://photo.superimmo.com/8hgthdvlnqv70fp6nfg18rrz211k",
+   "https://photo.superimmo.com/jhmsbm3tieunk8yib4vnmlga2v9j",
+   "https://photo.superimmo.com/plkrojesa2xtcjko9g8n03c3rsfd",
+   "https://photo.superimmo.com/lduriied136t6wh4vn10fy0i3lv7",
+   "https://photo.superimmo.com/thfmeys6kadv8kpeig3jg8ggr43f",
+   "https://photo.superimmo.com/48l89n03clu3hqx2av8ywsqq7qmt",
+   "https://photo.superimmo.com/bnitzidqwgj8vo3l73ovhna627ea",
+   "https://photo.superimmo.com/x9bb4gtx0cg08roc5xeplq5esw47",
+   "https://photo.superimmo.com/2370afbsvfej6ny6yrxyj1l4yvup",
+   "https://photo.superimmo.com/q79h0vdtmr0h1fkubzuhp2z7ptd5",
+   "https://photo.superimmo.com/ert2gyrqwdq8q8thcx3mt25wkors",
+   "https://photo.superimmo.com/7uio697sqfab65edckaryzxyywvb",
+   "https://photo.superimmo.com/u9ds1wg7s1sq9k2e0gb7ag02xoie"
   ],
-  "description": "Location T2 Saint-Denis (974) 2 pièces 45 m²",
+  "description": "Annonce appartement location 45 m² 2 pièces à Sainte-Clotilde A louer F2 de 45m2 à ,",
   "caracteristiques": [],
   "date": "",
-  "annonceur": "Pro · via leboncoin",
+  "annonceur": "Superimmo",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -4003,7 +4017,12 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-2-pieces-45-m2/01a19c4c-0c04-7186-a0d9-842f4792cae3"
+   }
+  ],
   "vu": "2026-11-02T17:27+04:00"
  },
  {
