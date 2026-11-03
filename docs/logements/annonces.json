@@ -90,7 +90,12 @@
   "adresse": "123 avenue de la Grande Ourse, 97434 Saint-Gilles-les-Bains",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-1-piece-31-m2/01a1a2c6-24a0-7f0c-a4fd-0b443f27f944"
+   }
+  ],
   "vu": "2026-11-03T21:13+04:00"
  },
  {
@@ -531,6 +536,37 @@
   "vu": "2026-10-23T20:52+04:00"
  },
  {
+  "id": "zimo-01a1a2c5-470f-7550-8fad-c2e1a4312981",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studios-etudiant-nord-et-sud/01a1a2c5-470f-7550-8fad-c2e1a4312981",
+  "titre": "Studios etudiant nord et sud",
+  "prix": 450.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 22.0,
+  "meuble": null,
+  "photos": [],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 22 m²",
+  "caracteristiques": [
+   "Proche université"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-03T23:11+04:00"
+ },
+ {
   "id": "zimo-01a1a240-e92b-7648-9129-0c8728147e3d",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/location-au-moufia/01a1a240-e92b-7648-9129-0c8728147e3d",
@@ -779,7 +815,12 @@
   "adresse": "123 avenue de la Grande Ourse, 97434 Saint-Gilles-les-Bains",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a1a2c6-24af-766b-8567-0e2125058761"
+   }
+  ],
   "vu": "2026-11-03T21:13+04:00"
  },
  {
@@ -2858,7 +2899,12 @@
   "adresse": "123 avenue de la Grande Ourse, 97434 Saint-Gilles-les-Bains",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-2-pieces-44-m2/01a1a2a6-e625-75b8-b046-05a5d1400e31"
+   }
+  ],
   "vu": "2026-11-03T21:13+04:00"
  },
  {
@@ -4242,6 +4288,35 @@
   "vu": "2026-10-25T20:48+04:00"
  },
  {
+  "id": "zimo-01a1a2c1-a1cc-7061-97cc-11dc67e2f265",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/location-appt-t2/01a1a2c1-a1cc-7061-97cc-11dc67e2f265",
+  "titre": "Location appt t2",
+  "prix": 660.0,
+  "commune": "Sainte-Suzanne",
+  "quartier": "Sainte-Suzanne",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 38.0,
+  "meuble": null,
+  "photos": [],
+  "description": "Location T2 Sainte-Suzanne (974) 2 pièces 38 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord-Est",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-03T23:11+04:00"
+ },
+ {
   "id": "zimo-01a195c0-8262-722e-b094-59a9fec24700",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-28m2-dernier-etage-vue-mer/01a195c0-8262-722e-b094-59a9fec24700",
@@ -5026,6 +5101,38 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "zimo-01a1a2a9-ab60-7203-98bf-bcee0917e9ae",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/loue-apt-t3-camelias-st-denis-3e-et-ascenseur-2-chbs-placards-int-debarras-balcon-tt-a-proximite/01a1a2a9-ab60-7203-98bf-bcee0917e9ae",
+  "titre": "Loue apt T3 camélias St Denis 3e ét ascenseur 2 chbs + placards int débarras balcon tt à proximité",
+  "prix": 690.0,
+  "commune": "Saint-Denis",
+  "quartier": "Les Camélias",
+  "pieces": 3,
+  "type": "T3",
+  "surface": 75.0,
+  "meuble": null,
+  "photos": [],
+  "description": "Location T3 Saint-Denis (974) 3 pièces 75 m²",
+  "caracteristiques": [
+   "Varangue / balcon",
+   "Ascenseur"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-03T23:11+04:00"
+ },
+ {
   "id": "zimo-01a1903a-0971-775a-be6c-857f8c3d0509",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-entierement-meuble-vue-mer-ste-clotilde/01a1903a-0971-775a-be6c-857f8c3d0509",
@@ -5591,37 +5698,6 @@
   "vu": "2026-11-03T20:07+04:00"
  },
  {
-  "id": "zimo-01a17d6a-c445-7edc-adc0-f45d443c5b7a",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-52-m2/01a17d6a-c445-7edc-adc0-f45d443c5b7a",
-  "titre": "Appartement 2 pièces 52 m²",
-  "prix": 706.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 52.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/YVxWqA6lSp1VB7XjN1uQfGkfhcoV0HoQ-nJw-Bx0fxA/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_e5746ce9-0b4d-4f49-938c-d10949bf08e3.jpg"
-  ],
-  "description": "Location T2 Saint-Denis (974) 2 pièces 52 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-27T17:05+04:00"
- },
- {
   "id": "figaro-110318603",
   "source": "Figaro Immobilier",
   "url": "https://immobilier.lefigaro.fr/annonces/annonce-110318603.html",
@@ -5653,8 +5729,17 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
-  "vu": "2026-10-28T21:05+04:00"
+  "aussi": [
+   {
+    "source": "EntreParticuliers",
+    "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-2-pieces-52-m2/ref-22752068"
+   },
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-2-pieces-52-m2/01a17d6a-c445-7edc-adc0-f45d443c5b7a"
+   }
+  ],
+  "vu": "2026-10-27T17:05+04:00"
  },
  {
   "id": "zimo-01a12c9b-f30a-7ee1-bd28-b6b09399d139",
