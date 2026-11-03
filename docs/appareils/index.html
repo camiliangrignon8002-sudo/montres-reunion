@@ -86,9 +86,9 @@ h1 { font: 700 32px/1.1 var(--font-d); letter-spacing: -.02em; margin: 0; }
 .card { background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow); padding: 0 18px 18px; display: flex; flex-direction: column; gap: 16px; min-width: 0; overflow: hidden; }
 .hero { margin: 0 -18px; background: var(--hero); padding: 26px 16px 18px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
 .hero svg.prod { width: 100%; max-width: 340px; height: auto; aspect-ratio: 32 / 20; margin-bottom: 10px; }
-.hero .photo { margin: -26px -16px 14px; align-self: stretch; height: 280px; background: #1f1d1b; display: grid; place-items: center; overflow: hidden; }
-.hero .photo img { max-width: 100%; height: 280px; width: auto; object-fit: contain; display: block; }
-.hero .photo.large img { width: 100%; height: 100%; object-fit: cover; }
+.hero .photo { align-self: stretch; height: 250px; display: grid; place-items: center; margin-bottom: 10px; }
+.hero .photo img { max-width: 92%; max-height: 250px; width: auto; height: auto; object-fit: contain; display: block; filter: drop-shadow(0 14px 18px rgba(0,0,0,.18)); }
+.hero .photo.petit img { max-width: 72%; }
 .hero h2 { font: 700 28px/1.1 var(--font-d); letter-spacing: -.015em; margin: 0; }
 .hero .model { color: var(--fg-2); font-size: 14px; overflow-wrap: anywhere; }
 .hero .pills { justify-content: center; margin-top: 6px; }
@@ -583,7 +583,7 @@ function rendre() {
     const pills = [`<span class="pill ${inf.statut.cls}">${inf.statut.txt}</span>`];
     if (inf.cycle) pills.push(`<span class="pill ${inf.cycle.cls}">${inf.cycle.txt}</span>`);
     return `<article class="card" aria-labelledby="t_${a.id}">
-      <div class="hero"><div class="photo${a.id === 'mac' ? ' large' : ''}"><img src="photo-${a.id}.jpg" alt="${esc(nom)}" loading="lazy" decoding="async" onerror="this.parentNode.outerHTML=dessin('${a.type}')"></div>
+      <div class="hero"><div class="photo${a.id === 'airpods' || a.id === 'earpods' ? ' petit' : ''}"><img src="produit-${a.id}.webp" alt="${esc(nom)}" loading="lazy" decoding="async" onerror="this.parentNode.outerHTML=dessin('${a.type}')"></div>
         <h2 id="t_${a.id}">${esc(nom)}</h2>
         <div class="model">${esc(inf.modele)}${COULEURS[a.id] ? ' · ' + COULEURS[a.id][R('c_' + a.id) || Object.keys(COULEURS[a.id])[0]][0] : ''}</div>
         <div class="pills">${pills.join('')}</div></div>
