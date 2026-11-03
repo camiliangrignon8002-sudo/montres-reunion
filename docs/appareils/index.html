@@ -21,7 +21,7 @@
   --ok: #1d7a35; --ok-soft: #e7f6eb; --ok-bar: #34c759;
   --warn: #8a5a00; --warn-soft: #fff4d1; --warn-bar: #ff9f0a;
   --bad: #c4000f; --bad-soft: #fdecee; --bad-bar: #ff3b30;
-  --muted-soft: #ececf0; --muted-bar: #c7c7cc;
+  --muted-soft: #ececf0; --muted-bar: #c7c7cc; --hero: #f5f5f7;
   --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
   --font-d: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
@@ -37,7 +37,7 @@
     --ok: #4cd964; --ok-soft: #10301a; --ok-bar: #30d158;
     --warn: #ffd60a; --warn-soft: #332a00; --warn-bar: #ff9f0a;
     --bad: #ff6961; --bad-soft: #3a1514; --bad-bar: #ff453a;
-    --muted-soft: #2c2c2e; --muted-bar: #48484a;
+    --muted-soft: #2c2c2e; --muted-bar: #48484a; --hero: #101012;
     --shadow: 0 1px 2px rgba(0,0,0,.5);
     color-scheme: dark;
   }
@@ -49,7 +49,7 @@
   --ok: #4cd964; --ok-soft: #10301a; --ok-bar: #30d158;
   --warn: #ffd60a; --warn-soft: #332a00; --warn-bar: #ff9f0a;
   --bad: #ff6961; --bad-soft: #3a1514; --bad-bar: #ff453a;
-  --muted-soft: #2c2c2e; --muted-bar: #48484a;
+  --muted-soft: #2c2c2e; --muted-bar: #48484a; --hero: #101012;
   --shadow: 0 1px 2px rgba(0,0,0,.5);
   color-scheme: dark;
 }
@@ -83,7 +83,12 @@ h1 { font: 700 32px/1.1 var(--font-d); letter-spacing: -.02em; margin: 0; }
 .stat span { color: var(--fg-2); font-size: 13px; }
 
 .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
-.card { background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow); padding: 18px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.card { background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow); padding: 0 18px 18px; display: flex; flex-direction: column; gap: 16px; min-width: 0; overflow: hidden; }
+.hero { margin: 0 -18px; background: var(--hero); padding: 26px 16px 18px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
+.hero svg.prod { width: 100%; max-width: 340px; height: auto; aspect-ratio: 32 / 20; margin-bottom: 10px; }
+.hero h2 { font: 700 28px/1.1 var(--font-d); letter-spacing: -.015em; margin: 0; }
+.hero .model { color: var(--fg-2); font-size: 14px; overflow-wrap: anywhere; }
+.hero .pills { justify-content: center; margin-top: 6px; }
 .card-h { display: flex; gap: 14px; align-items: center; }
 .ico { width: 52px; height: 52px; border-radius: 14px; background: var(--surface-2); display: grid; place-items: center; flex: none; color: var(--fg); }
 .ico svg { width: 30px; height: 30px; }
@@ -214,6 +219,10 @@ code, .code { font-family: var(--mono); font-size: 12.5px; background: var(--sur
       <div class="form">
         <label>Nom de l'iPhone<input id="f_n_iphone" autocomplete="off"></label>
         <label>Date d'achat de l'iPhone<input id="f_a_iphone" type="date"></label>
+        <label>Couleur de l'iPhone
+          <select id="f_c_iphone"><option value="naturel">Titane naturel</option><option value="desert">Titane désert</option><option value="noir">Titane noir</option><option value="blanc">Titane blanc</option></select></label>
+        <label>Couleur du Mac
+          <select id="f_c_mac"><option value="argent">Argent</option><option value="gris">Gris sidéral</option><option value="or">Or</option></select></label>
         <label>Nom du Mac<input id="f_n_mac" autocomplete="off"></label>
         <label>Numéro de série du Mac (donne la date de fabrication)<input id="f_serial" autocomplete="off" spellcheck="false" placeholder="ex. FVFZ…" maxlength="12"></label>
         <label>Nom des AirPods<input id="f_n_airpods" autocomplete="off"></label>
@@ -371,6 +380,103 @@ const ICONES = {
   airpods: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 3.5a3 3 0 0 0-3 3c0 1.7 1.2 3 2.6 3.1V19a1.2 1.2 0 0 0 2.4 0V6a2.6 2.6 0 0 0-2-2.5z"/><path d="M17 3.5a3 3 0 0 1 3 3c0 1.7-1.2 3-2.6 3.1V19a1.2 1.2 0 0 1-2.4 0V6a2.6 2.6 0 0 1 2-2.5z"/></svg>',
   earpods: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><ellipse cx="6.5" cy="5.5" rx="2.5" ry="2.8"/><ellipse cx="17.5" cy="5.5" rx="2.5" ry="2.8"/><path d="M7 8.3V12c0 3 2.2 5 5 5s5-2 5-5V8.3M12 17v5"/></svg>',
 };
+// Dessins des produits (SVG), dans le style des photos produit d'Apple.
+const COULEURS = {
+  iphone: { naturel: ['Titane naturel', '#d6d1c8', '#a9a397'], desert: ['Titane désert', '#d9c2ad', '#a98d76'], noir: ['Titane noir', '#5a5a5c', '#2e2e30'], blanc: ['Titane blanc', '#f4f3ef', '#cfcdc6'] },
+  mac: { argent: ['Argent', '#e8e9eb', '#b9bbbe'], gris: ['Gris sidéral', '#8e8f92', '#5f6063'], or: ['Or', '#f1dccd', '#cdb09c'] },
+};
+function lentille(x, y, r, id) {
+  return `<circle cx="${x}" cy="${y}" r="${r + 2.2}" fill="url(#${id}ring)"/><circle cx="${x}" cy="${y}" r="${r}" fill="#0b0b0e"/>
+    <circle cx="${x}" cy="${y}" r="${r * .55}" fill="url(#${id}glass)"/><circle cx="${x - r * .3}" cy="${y - r * .32}" r="${r * .18}" fill="#fff" opacity=".55"/>`;
+}
+function dessin(type) {
+  if (type === 'iphone') {
+    const [, c1, c2] = COULEURS.iphone[R('c_iphone') || 'naturel'];
+    return `<svg class="prod" viewBox="0 0 320 200" role="img" aria-label="iPhone 16 Pro, dos et écran"><defs>
+      <linearGradient id="ipb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>
+      <linearGradient id="ipe" x1="0" x2="1"><stop offset="0" stop-color="${c2}"/><stop offset=".5" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>
+      <linearGradient id="ips" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9f6b"/><stop offset=".45" stop-color="#c2368f"/><stop offset="1" stop-color="#1b1f6b"/></linearGradient>
+      <radialGradient id="ipring"><stop offset=".75" stop-color="#3a3a3d"/><stop offset="1" stop-color="#8a8a8e"/></radialGradient>
+      <radialGradient id="ipglass" cx=".4" cy=".4"><stop offset="0" stop-color="#3b4a7a"/><stop offset="1" stop-color="#05050a"/></radialGradient>
+      <filter id="ipsh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-opacity=".22"/></filter></defs>
+      <g filter="url(#ipsh)">
+        <rect x="150" y="16" width="94" height="176" rx="19" fill="url(#ipe)"/>
+        <rect x="152.5" y="18.5" width="89" height="171" rx="16.5" fill="#0a0a0a"/>
+        <rect x="155.5" y="21.5" width="83" height="165" rx="13.5" fill="url(#ips)"/>
+        <rect x="183" y="27" width="27" height="8" rx="4" fill="#000"/>
+        <text x="197" y="62" text-anchor="middle" font-family="-apple-system,Helvetica" font-size="22" font-weight="600" fill="#fff" opacity=".95">9:41</text>
+      </g>
+      <g filter="url(#ipsh)">
+        <rect x="80" y="8" width="96" height="180" rx="19" fill="url(#ipe)"/>
+        <rect x="82" y="10" width="92" height="176" rx="17" fill="url(#ipb)"/>
+        <rect x="89" y="17" width="49" height="49" rx="13" fill="${c2}" opacity=".55"/>
+        <rect x="89" y="17" width="49" height="49" rx="13" fill="none" stroke="#fff" stroke-opacity=".35"/>
+        ${lentille(102, 30, 8.2, 'ip')}${lentille(102, 53, 8.2, 'ip')}${lentille(124.5, 41.5, 8.2, 'ip')}
+        <circle cx="125" cy="25" r="3.3" fill="#f4ead0" stroke="#9a9080" stroke-width=".6"/>
+        <circle cx="125" cy="58" r="2.8" fill="#1a1a1c"/>
+        <rect x="176" y="52" width="2" height="16" rx="1" fill="${c2}"/><rect x="176" y="120" width="2" height="22" rx="1" fill="${c2}"/>
+      </g></svg>`;
+  }
+  if (type === 'mac') {
+    const [, c1, c2] = COULEURS.mac[R('c_mac') || 'argent'];
+    return `<svg class="prod" viewBox="0 0 320 200" role="img" aria-label="MacBook Air 13 pouces ouvert"><defs>
+      <linearGradient id="mcl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>
+      <linearGradient id="mcb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset=".55" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>
+      <linearGradient id="mcs" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e3c72"/><stop offset=".5" stop-color="#2a8a7a"/><stop offset="1" stop-color="#e8b04a"/></linearGradient>
+      <filter id="mcsh" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-opacity=".2"/></filter></defs>
+      <g filter="url(#mcsh)">
+        <rect x="58" y="14" width="204" height="134" rx="9" fill="url(#mcl)"/>
+        <rect x="61" y="17" width="198" height="128" rx="6.5" fill="#0c0c0d"/>
+        <rect x="68" y="24" width="184" height="114" rx="1.5" fill="url(#mcs)"/>
+        <path d="M68 104 C110 80 150 128 200 96 S240 84 252 92 V138 H68Z" fill="#fff" opacity=".12"/>
+        <path d="M68 118 C120 100 160 140 252 110 V138 H68Z" fill="#000" opacity=".18"/>
+        <rect x="68" y="24" width="184" height="5" fill="#fff" opacity=".25"/>
+        <circle cx="160" cy="20.5" r="1.3" fill="#2a2a30"/>
+        <path d="M24 149 H296 Q296 156 289 158 L176 161 H144 L31 158 Q24 156 24 149Z" fill="url(#mcb)"/>
+        <rect x="140" y="149" width="40" height="3.5" rx="1.75" fill="${c2}"/>
+      </g></svg>`;
+  }
+  if (type === 'airpods') {
+    const bud = (x, flip) => `<g transform="translate(${x} 0) scale(${flip ? -1 : 1} 1)">
+        <path d="M-4 62 Q-4 82 2 150 Q3 156 9 156 Q15 156 15 150 L14 86 Q24 78 22 62 Q20 44 6 42 Q-4 44 -4 62Z" fill="url(#apw)"/>
+        <ellipse cx="9" cy="58" rx="7" ry="9" fill="#2b2b2e" opacity=".85"/>
+        <ellipse cx="9" cy="58" rx="4.5" ry="6" fill="#3d3d40"/>
+        <ellipse cx="-3" cy="66" rx="6" ry="10" fill="#e8e8ea" stroke="#d0d0d3"/>
+        <rect x="6" y="128" width="6" height="10" rx="3" fill="#1d1d1f" opacity=".55"/></g>`;
+    return `<svg class="prod" viewBox="0 0 320 200" role="img" aria-label="AirPods Pro 2 et leur boîtier de charge"><defs>
+      <linearGradient id="apw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dcdcdf"/></linearGradient>
+      <linearGradient id="apc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e2e2e5"/></linearGradient>
+      <filter id="apsh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-opacity=".18"/></filter></defs>
+      <g filter="url(#apsh)">
+        <rect x="95" y="62" width="130" height="104" rx="32" fill="url(#apc)"/>
+        <path d="M97 98 H223" stroke="#c9c9cd" stroke-width="1.2"/>
+        <circle cx="160" cy="132" r="2.4" fill="#34c759"/>
+        <rect x="225" y="138" width="5" height="14" rx="2.5" fill="#c9c9cd"/>
+        <rect x="150" y="161" width="20" height="3" rx="1.5" fill="#bdbdc1"/>
+      </g>
+      <g filter="url(#apsh)">${bud(48, false)}${bud(272, true)}</g></svg>`;
+  }
+  // EarPods
+  const prise = R('ear') || 'usbc';
+  const fiche = prise === 'jack'
+    ? `<rect x="153" y="160" width="14" height="22" rx="3" fill="#f4f4f6" stroke="#d6d6da"/><rect x="157" y="182" width="6" height="14" rx="1.5" fill="#c8c9cc"/><rect x="157" y="187" width="6" height="1.2" fill="#77787c"/><rect x="157" y="191" width="6" height="1.2" fill="#77787c"/>`
+    : prise === 'lightning'
+    ? `<rect x="152" y="160" width="16" height="24" rx="3" fill="#f4f4f6" stroke="#d6d6da"/><rect x="156" y="184" width="8" height="11" rx="2.5" fill="#d9dadd" stroke="#a8a9ad" stroke-width=".6"/>`
+    : `<rect x="151" y="160" width="18" height="24" rx="3.5" fill="#f4f4f6" stroke="#d6d6da"/><rect x="154" y="184" width="12" height="11" rx="3.5" fill="#c8c9cc" stroke="#9fa0a4" stroke-width=".6"/><rect x="157" y="187" width="6" height="4" rx="2" fill="#5a5b5e"/>`;
+  const ec = (x, flip) => `<g transform="translate(${x} 0) scale(${flip ? -1 : 1} 1)">
+      <ellipse cx="0" cy="34" rx="19" ry="17" fill="url(#epw)"/>
+      <ellipse cx="-4" cy="31" rx="9" ry="8" fill="#c9c9cd" opacity=".6"/>
+      <path d="M8 44 Q14 50 12 76 L10 82 Q6 84 3 80 L2 50Z" fill="url(#epw)"/></g>`;
+  return `<svg class="prod" viewBox="0 0 320 200" role="img" aria-label="EarPods filaires"><defs>
+    <linearGradient id="epw" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#dcdcdf"/></linearGradient>
+    <filter id="epsh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity=".16"/></filter></defs>
+    <g fill="none" stroke="#e6e6e9" stroke-width="2.6" stroke-linecap="round">
+      <path d="M102 82 C104 110 130 122 158 128"/><path d="M218 82 C216 110 190 122 162 128"/><path d="M160 128 L160 162"/>
+      <path d="M102 82 C104 110 130 122 158 128" stroke="#cfcfd3" stroke-width=".8" transform="translate(.8 .8)"/></g>
+    <g filter="url(#epsh)">${ec(92, false)}${ec(228, true)}
+      <rect x="196" y="98" width="10" height="26" rx="5" fill="url(#epw)" transform="rotate(-28 201 111)"/>
+      <rect x="158" y="124" width="4" height="8" rx="2" fill="#f0f0f2"/>${fiche}</g></svg>`;
+}
 const BOLT = '<svg class="bolt" viewBox="0 0 12 12" aria-label="en charge"><path d="M7 0 1.5 7H5.5L4.5 12 10.5 5H6.5z" fill="currentColor"/></svg>';
 
 function barre(label, pct, charge) {
@@ -474,9 +580,10 @@ function rendre() {
     const pills = [`<span class="pill ${inf.statut.cls}">${inf.statut.txt}</span>`];
     if (inf.cycle) pills.push(`<span class="pill ${inf.cycle.cls}">${inf.cycle.txt}</span>`);
     return `<article class="card" aria-labelledby="t_${a.id}">
-      <div class="card-h"><div class="ico">${ICONES[a.type]}</div>
-        <div class="name"><h2 id="t_${a.id}">${esc(nom)}</h2><div class="model">${esc(inf.modele)}</div></div></div>
-      <div class="pills">${pills.join('')}</div>
+      <div class="hero">${dessin(a.type)}
+        <h2 id="t_${a.id}">${esc(nom)}</h2>
+        <div class="model">${esc(inf.modele)}${COULEURS[a.id] ? ' · ' + COULEURS[a.id][R('c_' + a.id) || Object.keys(COULEURS[a.id])[0]][0] : ''}</div>
+        <div class="pills">${pills.join('')}</div></div>
       <div><div class="sec-t">Batterie</div>${blocBatterie(a)}</div>
       <div><div class="sec-t">Mises à jour</div>${blocMaj(a, inf)}</div>
       <div><div class="sec-t">Cycle de vie</div>${frise(inf, a)}${blocDates(a, inf)}</div>
@@ -582,7 +689,7 @@ async function versionIOS() {
 // ---------- Réglages ----------
 function initReglages() {
   const champs = { n_iphone: 'f_n_iphone', a_iphone: 'f_a_iphone', n_mac: 'f_n_mac', serial: 'f_serial', n_airpods: 'f_n_airpods',
-    case: 'f_case', n_earpods: 'f_n_earpods', ear: 'f_ear', v_iphone: 'f_v_iphone', v_mac: 'f_v_mac', b_airpods: 'f_b_airpods', topic: 'f_topic' };
+    case: 'f_case', c_iphone: 'f_c_iphone', c_mac: 'f_c_mac', n_earpods: 'f_n_earpods', ear: 'f_ear', v_iphone: 'f_v_iphone', v_mac: 'f_v_mac', b_airpods: 'f_b_airpods', topic: 'f_topic' };
   for (const [k, id] of Object.entries(champs)) {
     const el = document.getElementById(id);
     if (reglages[k] != null) el.value = reglages[k];
