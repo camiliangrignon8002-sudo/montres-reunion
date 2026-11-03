@@ -281,7 +281,7 @@ const APPAREILS = [
   },
   {
     id: 'neo', nomDefaut: 'MacBook Neo', modele: 'MacBook Neo (13 pouces, 2026)', type: 'neo',
-    sortie: '2026-03-11', finVente: null,
+    sortie: '2026-03-11', finVente: '2027-03-15', finVenteEst: true, // arrêt de la vente estimé à l'arrivée du MacBook Neo 2
     majFin: '2033-09-01', majFinEst: true,
     os: 'macOS', osSortie: 'macOS Tahoe 26', derniere: '27.0', derniereNote: 'Compatible avec macOS 27 Golden Gate (puce Apple, pas Intel).',
     majTxt: 'Mac tout récent avec puce Apple : il recevra les nouvelles versions de macOS pendant de nombreuses années (environ 7 ans pour les Mac à puce Apple), puis des correctifs de sécurité.',
@@ -386,7 +386,7 @@ function infos(a) {
   let cycle = null;
   if (obsolete && now >= obsolete) cycle = { txt: 'Obsolète', cls: 'bad' };
   else if (vintage && now >= vintage) cycle = { txt: 'Vintage', cls: 'warn' };
-  else if (!finVente) cycle = { txt: 'Toujours en vente', cls: 'muted' };
+  else if (!finVente || (a.finVenteEst && now < finVente)) cycle = { txt: 'Toujours en vente', cls: 'muted' };
   return { modele: v.modele || a.modele, sortie, finVente, vintage, obsolete, majFin, statut, cycle };
 }
 
@@ -553,7 +553,7 @@ function blocMaj(a, inf) {
 
 function frise(inf, a) {
   if (!inf.obsolete) return '';
-  const debut = inf.sortie, fin = addY(inf.obsolete, 0.5) || inf.obsolete;
+  const debut = inf.sortie, fin = new Date(inf.obsolete); fin.setMonth(fin.getMonth() + 9);
   const span = fin - debut, pos = d => Math.max(0, Math.min(100, (d - debut) / span * 100));
   const pMaj = inf.majFin ? pos(inf.majFin) : pos(inf.vintage);
   const pV = pos(inf.vintage), pO = pos(inf.obsolete), pN = pos(new Date());
@@ -566,7 +566,7 @@ function frise(inf, a) {
       <span class="tick l" style="left:0">${inf.sortie.getFullYear()}</span>
       <span class="tick r" style="left:100%">${fin.getFullYear()}</span>
     </div>
-    <div class="legend"><span><i style="background:var(--ok-bar)"></i>Mises à jour${a.majFinEst ? ' (estimées)' : ''}</span><span><i style="background:var(--warn-bar)"></i>Sans mises à jour / vintage</span><span><i style="background:var(--bad-bar)"></i>Obsolète</span></div>`;
+    <div class="legend"><span><i style="background:var(--ok-bar)"></i>Mises à jour${a.majFinEst ? ' (estimées)' : ''}</span><span><i style="background:var(--warn-bar)"></i>Sans mises à jour / vintage</span><span><i style="background:var(--bad-bar)"></i>Obsolète${a.finVenteEst ? ' (dates estimées)' : ''}</span></div>`;
 }
 
 function blocDates(a, inf) {
@@ -586,8 +586,9 @@ function blocDates(a, inf) {
     <div class="kv"><span>Sortie du modèle</span><b>${fmtJour(inf.sortie)}</b></div>
     <div class="kv"><span>${a.id === 'mac' ? 'Fabrication de ton Mac' : a.id === 'iphone' ? 'Ton iPhone' : a.id === 'neo' ? 'Ton MacBook Neo' : 'Âge du modèle'}</span><b>${fab ? esc(fab) : duree(inf.sortie, now)}</b></div>
     ${a.os ? `<div class="kv full"><span>Fin des mises à jour</span><b>${futur(inf.majFin, est)}</b></div>` : ''}
-    <div class="kv"><span>Vintage</span><b>${inf.vintage ? futur(inf.vintage) : 'Pas encore (en vente)'}</b></div>
-    <div class="kv"><span>Obsolète</span><b>${inf.obsolete ? futur(inf.obsolete) : 'Pas encore (en vente)'}</b></div>
+    <div class="kv"><span>Vintage${a.finVenteEst ? ' (estimation)' : ''}</span><b>${inf.vintage ? futur(inf.vintage) : 'Pas encore (en vente)'}</b></div>
+    <div class="kv"><span>Obsolète${a.finVenteEst ? ' (estimation)' : ''}</span><b>${inf.obsolete ? futur(inf.obsolete) : 'Pas encore (en vente)'}</b></div>
+    ${a.finVenteEst ? `<p class="note full" style="grid-column:1/-1;margin:0">Calculé en supposant qu'Apple arrête de le vendre vers ${fmtMois(inf.finVente)}, à la sortie du MacBook Neo 2. Les dates bougeront s'il reste en vente plus longtemps.</p>` : ''}
   </div>`;
 }
 
