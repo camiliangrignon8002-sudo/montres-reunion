@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Mes appareils">
+<meta name="robots" content="noindex">
+<meta name="description" content="État de mes appareils Apple : batterie en direct, mises à jour, fin de support, vintage et obsolète.">
+<title>Mes appareils</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root {
+  --bg: #f5f5f7; --surface: #ffffff; --surface-2: #f2f2f5; --line: #e3e3e8;
+  --fg: #1d1d1f; --fg-2: #6e6e73; --fg-3: #8e8e93;
+  --accent: #0071e3; --accent-soft: #e8f1fd;
+  --ok: #1d7a35; --ok-soft: #e7f6eb; --ok-bar: #34c759;
+  --warn: #8a5a00; --warn-soft: #fff4d1; --warn-bar: #ff9f0a;
+  --bad: #c4000f; --bad-soft: #fdecee; --bad-bar: #ff3b30;
+  --muted-soft: #ececf0; --muted-bar: #c7c7cc;
+  --shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.06);
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+  --font-d: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r: 18px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #000000; --surface: #1c1c1e; --surface-2: #2c2c2e; --line: #38383a;
+    --fg: #f5f5f7; --fg-2: #a1a1a6; --fg-3: #7c7c80;
+    --accent: #2997ff; --accent-soft: #0f2a45;
+    --ok: #4cd964; --ok-soft: #10301a; --ok-bar: #30d158;
+    --warn: #ffd60a; --warn-soft: #332a00; --warn-bar: #ff9f0a;
+    --bad: #ff6961; --bad-soft: #3a1514; --bad-bar: #ff453a;
+    --muted-soft: #2c2c2e; --muted-bar: #48484a;
+    --shadow: 0 1px 2px rgba(0,0,0,.5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #000000; --surface: #1c1c1e; --surface-2: #2c2c2e; --line: #38383a;
+  --fg: #f5f5f7; --fg-2: #a1a1a6; --fg-3: #7c7c80;
+  --accent: #2997ff; --accent-soft: #0f2a45;
+  --ok: #4cd964; --ok-soft: #10301a; --ok-bar: #30d158;
+  --warn: #ffd60a; --warn-soft: #332a00; --warn-bar: #ff9f0a;
+  --bad: #ff6961; --bad-soft: #3a1514; --bad-bar: #ff453a;
+  --muted-soft: #2c2c2e; --muted-bar: #48484a;
+  --shadow: 0 1px 2px rgba(0,0,0,.5);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.45 var(--font);
+  padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+}
+[hidden] { display: none !important; }
+button, input, select { font: inherit; color: inherit; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 24px 16px 64px; }
+
+header.top { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin: 8px 0 20px; }
+h1 { font: 700 32px/1.1 var(--font-d); letter-spacing: -.02em; margin: 0; }
+.sub { color: var(--fg-2); margin-top: 4px; font-size: 14px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted-bar); display: inline-block; }
+.dot.live { background: var(--ok-bar); box-shadow: 0 0 0 0 rgba(52,199,89,.6); animation: pulse 2s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(52,199,89,.5); } 70% { box-shadow: 0 0 0 7px rgba(52,199,89,0); } 100% { box-shadow: 0 0 0 0 rgba(52,199,89,0); } }
+@media (prefers-reduced-motion: reduce) { .dot.live { animation: none; } }
+.btn {
+  border: 0; background: var(--surface); box-shadow: var(--shadow); border-radius: 999px;
+  padding: 8px 14px; cursor: pointer; font-weight: 600; font-size: 14px; white-space: nowrap;
+}
+.btn.primary { background: var(--accent); color: #fff; }
+.btn:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.summary { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-bottom: 20px; }
+.stat { background: var(--surface); border-radius: 14px; padding: 12px 14px; box-shadow: var(--shadow); }
+.stat b { display: block; font: 700 24px/1.1 var(--font-d); font-variant-numeric: tabular-nums; }
+.stat span { color: var(--fg-2); font-size: 13px; }
+
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+.card { background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow); padding: 18px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.card-h { display: flex; gap: 14px; align-items: center; }
+.ico { width: 52px; height: 52px; border-radius: 14px; background: var(--surface-2); display: grid; place-items: center; flex: none; color: var(--fg); }
+.ico svg { width: 30px; height: 30px; }
+.name { min-width: 0; flex: 1; }
+.name h2 { font: 650 18px/1.2 var(--font-d); margin: 0; }
+.name .model { color: var(--fg-2); font-size: 13px; margin-top: 2px; overflow-wrap: anywhere; }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill { font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
+.pill.ok { background: var(--ok-soft); color: var(--ok); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); }
+.pill.bad { background: var(--bad-soft); color: var(--bad); }
+.pill.muted { background: var(--muted-soft); color: var(--fg-2); }
+
+.sec-t { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 8px; }
+
+/* Batterie */
+.batt-row { display: flex; align-items: center; gap: 12px; }
+.batt-row + .batt-row { margin-top: 8px; }
+.batt-label { width: 64px; flex: none; font-size: 13px; color: var(--fg-2); }
+.batt { flex: 1; height: 22px; border-radius: 7px; background: var(--muted-soft); position: relative; overflow: hidden; }
+.batt i { position: absolute; inset: 0 auto 0 0; border-radius: 7px; background: var(--ok-bar); transition: width .6s ease; }
+.batt i.mid { background: var(--warn-bar); } .batt i.low { background: var(--bad-bar); }
+.batt-pct { width: 64px; text-align: right; font: 650 17px var(--font-d); font-variant-numeric: tabular-nums; flex: none; }
+.batt-pct small { font-size: 12px; font-weight: 500; color: var(--fg-2); }
+.bolt { display: inline-block; width: 12px; height: 12px; vertical-align: -1px; margin-right: 2px; color: var(--ok); }
+.batt-src { font-size: 12px; color: var(--fg-3); margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.batt-none { font-size: 14px; color: var(--fg-2); background: var(--surface-2); border-radius: 12px; padding: 10px 12px; }
+.linkbtn { background: none; border: 0; color: var(--accent); padding: 0; cursor: pointer; font-size: 12px; font-weight: 600; }
+
+/* Mises à jour */
+.upd { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.kv { background: var(--surface-2); border-radius: 12px; padding: 9px 12px; min-width: 0; }
+.kv span { display: block; font-size: 12px; color: var(--fg-2); }
+.kv b { display: block; font-weight: 600; font-size: 14px; overflow-wrap: anywhere; }
+.kv.full { grid-column: 1 / -1; }
+.kv b .pill { display: inline-block; font-size: 13px; margin-top: 2px; }
+.note { font-size: 13px; color: var(--fg-2); margin-top: 8px; }
+
+/* Frise */
+.tl { position: relative; height: 10px; border-radius: 5px; background: var(--muted-soft); margin: 30px 0 34px; }
+.tl .seg { position: absolute; top: 0; bottom: 0; }
+.tl .seg.s1 { background: var(--ok-bar); border-radius: 5px 0 0 5px; }
+.tl .seg.s2 { background: var(--warn-bar); }
+.tl .seg.s3 { background: var(--bad-bar); border-radius: 0 5px 5px 0; }
+.tl .seg.est { background-image: repeating-linear-gradient(135deg, rgba(255,255,255,.45) 0 4px, transparent 4px 8px); }
+.tl .now { position: absolute; top: -6px; bottom: -6px; width: 3px; margin-left: -1.5px; background: var(--fg); border-radius: 2px; }
+.tl .now::after { content: "Aujourd'hui"; position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: 11px; font-weight: 600; white-space: nowrap; }
+.tl .tick { position: absolute; top: 14px; font-size: 11px; color: var(--fg-2); transform: translateX(-50%); white-space: nowrap; }
+.tl .now.r::after { left: auto; right: -2px; transform: none; }
+.tl .now.l::after { left: -2px; transform: none; }
+.tl .tick.l { transform: none; } .tl .tick.r { transform: translateX(-100%); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--fg-2); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+
+.dates { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.specs { font-size: 13px; color: var(--fg-2); }
+
+/* Panneaux */
+details.panel { background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow); margin-top: 16px; }
+details.panel summary { cursor: pointer; padding: 16px 18px; font: 650 17px var(--font-d); list-style: none; display: flex; justify-content: space-between; align-items: center; }
+details.panel summary::-webkit-details-marker { display: none; }
+details.panel summary::after { content: "›"; font-size: 22px; color: var(--fg-3); transition: transform .2s; }
+details.panel[open] summary::after { transform: rotate(90deg); }
+.panel-b { padding: 0 18px 18px; }
+.panel-b h3 { font: 650 15px var(--font-d); margin: 18px 0 6px; }
+.panel-b ol { padding-left: 20px; margin: 6px 0; } .panel-b li { margin: 4px 0; }
+code, .code { font-family: var(--mono); font-size: 12.5px; background: var(--surface-2); border-radius: 6px; padding: 1px 5px; overflow-wrap: anywhere; }
+.code-block { display: flex; gap: 8px; align-items: stretch; margin: 8px 0; }
+.code-block code { display: block; flex: 1; padding: 10px 12px; border-radius: 10px; white-space: pre-wrap; }
+.form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--fg-2); min-width: 0; }
+.form input, .form select { background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 10px; font-size: 15px; width: 100%; min-width: 0; }
+.form .full { grid-column: 1 / -1; }
+.foot { color: var(--fg-3); font-size: 12px; margin-top: 24px; line-height: 1.6; }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--fg); color: var(--bg); padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; box-shadow: var(--shadow); }
+
+@media (max-width: 760px) {
+  .grid { grid-template-columns: 1fr; }
+  .summary { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  h1 { font-size: 28px; }
+  .form { grid-template-columns: 1fr; }
+}
+@media (max-width: 380px) { .upd, .dates { grid-template-columns: 1fr; } }
+</style>
+</head><body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Mes appareils</h1>
+      <div class="sub"><span class="dot" id="liveDot"></span><span id="liveTxt">Connexion…</span></div>
+    </div>
+    <button class="btn" id="refresh" type="button">Actualiser</button>
+  </header>
+
+  <section class="summary" id="summary" aria-label="Résumé"></section>
+  <section class="grid" id="cards"></section>
+
+  <details class="panel" id="setup">
+    <summary>Batterie en direct : brancher l'iPhone et le Mac</summary>
+    <div class="panel-b">
+      <p class="note" style="margin-top:0">Une page web ne peut pas lire elle-même la batterie de tes autres appareils.
+        L'iPhone et le Mac envoient donc leur niveau sur un canal privé (<span class="code" id="topicTxt"></span>, via ntfy.sh), et l'appli l'affiche dès qu'il arrive.</p>
+
+      <h3>iPhone 16 Pro (appli Raccourcis)</h3>
+      <ol>
+        <li>Ouvre <b>Raccourcis</b>, appuie sur <b>+</b>, nomme le raccourci <b>Batterie iPhone</b>.</li>
+        <li>Ajoute l'action <b>Obtenir le niveau de batterie</b>.</li>
+        <li>Ajoute <b>Obtenir les détails de l'appareil</b> → choisis <b>Version du système</b>.</li>
+        <li>Ajoute <b>Texte</b> et écris : <code>iphone;</code> [Niveau de batterie] <code>;</code> [Version du système]</li>
+        <li>Ajoute <b>Obtenir le contenu de l'URL</b>, adresse <code id="urlTxt"></code>, méthode <b>POST</b>, corps de requête : <b>Fichier</b> → [Texte].</li>
+        <li>Onglet <b>Automatisation</b> → <b>+</b> → <b>Niveau de batterie</b> → « Descend en dessous de » 90 %, puis exécuter <b>Batterie iPhone</b> immédiatement. Refais-le pour 70, 50, 30, 20 et 10 %, et ajoute <b>Chargeur → Est connecté</b> et <b>Est déconnecté</b>.</li>
+      </ol>
+      <p class="note">Ensuite, le bouton « Envoyer maintenant » de la carte iPhone lance le raccourci à la demande.</p>
+
+      <h3>MacBook Air (batterie du Mac + AirPods connectés)</h3>
+      <p class="note" style="margin-top:0">Colle cette commande dans <b>Terminal</b> une seule fois. Le Mac envoie ensuite sa batterie, son état de santé, sa version de macOS et la batterie des AirPods (gauche, droite, boîtier) toutes les 5 minutes, quand il est allumé.</p>
+      <div class="code-block"><code id="macCmd"></code><button class="btn" type="button" data-copy="macCmd">Copier</button></div>
+      <p class="note">Pour arrêter : la même commande avec <code>desinstaller</code> à la fin.</p>
+
+      <h3>AirPods Pro 2</h3>
+      <p class="note" style="margin-top:0">Apple ne donne pas la batterie des AirPods aux raccourcis de l'iPhone. Elle arrive automatiquement quand les AirPods sont connectés au Mac. Sinon, tu peux la saisir dans les réglages ci-dessous.</p>
+    </div>
+  </details>
+
+  <details class="panel" id="settings">
+    <summary>Réglages</summary>
+    <div class="panel-b">
+      <div class="form">
+        <label>Nom de l'iPhone<input id="f_n_iphone" autocomplete="off"></label>
+        <label>Date d'achat de l'iPhone<input id="f_a_iphone" type="date"></label>
+        <label>Nom du Mac<input id="f_n_mac" autocomplete="off"></label>
+        <label>Numéro de série du Mac (donne la date de fabrication)<input id="f_serial" autocomplete="off" spellcheck="false" placeholder="ex. FVFZ…" maxlength="12"></label>
+        <label>Nom des AirPods<input id="f_n_airpods" autocomplete="off"></label>
+        <label>Boîtier des AirPods Pro 2
+          <select id="f_case"><option value="usbc">USB-C (2023)</option><option value="lightning">Lightning (2022)</option></select></label>
+        <label>Nom des EarPods<input id="f_n_earpods" autocomplete="off"></label>
+        <label>Prise des EarPods
+          <select id="f_ear"><option value="usbc">USB-C</option><option value="lightning">Lightning</option><option value="jack">Mini-jack 3,5 mm</option></select></label>
+        <label>Version installée sur l'iPhone (si pas de raccourci)<input id="f_v_iphone" placeholder="ex. 27.0.1" inputmode="decimal"></label>
+        <label>Version installée sur le Mac (si pas de script)<input id="f_v_mac" placeholder="ex. 14.8" inputmode="decimal"></label>
+        <label>Batterie AirPods saisie à la main (%)<input id="f_b_airpods" type="number" min="0" max="100" placeholder="ex. 80"></label>
+        <label>Canal ntfy (le même sur tous tes appareils)<input id="f_topic" autocomplete="off" spellcheck="false"></label>
+      </div>
+      <p class="note">Les réglages restent sur cet appareil. Le canal ntfy n'est pas protégé par un mot de passe : n'y envoie que la batterie.</p>
+    </div>
+  </details>
+
+  <p class="foot" id="foot"></p>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+'use strict';
+const SITE = 'https://camiliangrignon8002-sudo.github.io/montres-reunion/appareils/';
+const SUJET_DEFAUT = 'appareils-24qr4o3v0pox';
+const VERIFIE = '3 novembre 2026';
+
+// Dates officielles (sortie, arrêt de la vente) et estimations (marquées est: true).
+// Vintage = 5 ans après l'arrêt de la vente, obsolète = 7 ans (règle Apple).
+const APPAREILS = [
+  {
+    id: 'iphone', nomDefaut: 'iPhone 16 Pro', modele: 'iPhone 16 Pro · iPhone17,1', type: 'iphone',
+    sortie: '2024-09-20', finVente: '2025-09-09',
+    majFin: '2031-09-01', majFinEst: true,
+    os: 'iOS', osSortie: 'iOS 18', derniere: '27.0.1', derniereNote: 'iOS 27.2 est en test (version candidate) et devrait arriver bientôt.',
+    majTxt: 'Compatible avec iOS 27. Apple garantit au moins 5 ans de correctifs (jusqu\'en 2029 au minimum) ; les iPhone reçoivent en pratique 6 à 7 ans de mises à jour.',
+    specs: 'Puce A18 Pro · écran 6,3 pouces · batterie 3 582 mAh · USB-C',
+    batterie: 'simple',
+  },
+  {
+    id: 'mac', nomDefaut: 'MacBook Air', modele: 'MacBook Air (Retina, 13 pouces, 2019) · MacBookAir8,2', type: 'mac',
+    sortie: '2019-07-09', finVente: '2020-03-18',
+    majFin: '2026-09-14', majFinEst: false,
+    os: 'macOS', osSortie: 'macOS Mojave 10.14', derniere: '14.8', derniereNote: 'macOS Sonoma 14 est la dernière version pour ce Mac : Sequoia, Tahoe et macOS 27 ne l\'acceptent pas.',
+    majTxt: 'Apple a arrêté les correctifs de Sonoma à la sortie de macOS 27 (septembre 2026). Le Mac marche toujours, mais il n\'est plus protégé contre les nouvelles failles : préfère un navigateur à jour (Chrome ou Firefox).',
+    specs: 'Intel Core i5 double cœur 1,6 GHz · 8 Go de RAM · SSD 256 Go · Touch ID · 2 ports Thunderbolt 3',
+    batterie: 'simple',
+  },
+  {
+    id: 'airpods', nomDefaut: 'AirPods Pro 2', modele: 'AirPods Pro (2ᵉ génération)', type: 'airpods',
+    variantes: {
+      usbc: { sortie: '2023-09-22', finVente: '2025-09-09', modele: 'AirPods Pro (2ᵉ génération) · boîtier USB-C' },
+      lightning: { sortie: '2022-09-23', finVente: '2023-09-12', modele: 'AirPods Pro (2ᵉ génération) · boîtier Lightning' },
+    },
+    majFin: '2030-09-01', majFinEst: true,
+    os: 'Firmware', osSortie: '', derniere: '8B41', derniereNote: 'Le firmware s\'installe tout seul quand les AirPods sont dans leur boîtier, en charge, près de l\'iPhone.',
+    majTxt: 'Apple publie encore des firmwares pour les AirPods Pro 2 (juin 2026). La batterie ne se remplace pas : c\'est souvent elle qui fixe la vraie durée de vie.',
+    specs: 'Puce H2 · réduction de bruit active · audio adaptatif · test auditif et aide auditive',
+    batterie: 'airpods',
+  },
+  {
+    id: 'earpods', nomDefaut: 'EarPods', modele: 'EarPods', type: 'earpods',
+    variantes: {
+      usbc: { sortie: '2023-09-12', finVente: null, modele: 'EarPods (USB-C)' },
+      lightning: { sortie: '2016-09-16', finVente: null, modele: 'EarPods (Lightning)' },
+      jack: { sortie: '2012-09-12', finVente: null, modele: 'EarPods (mini-jack 3,5 mm)' },
+    },
+    majFin: null, os: null,
+    majTxt: 'Écouteurs filaires : pas de logiciel, donc pas de mise à jour à faire. Ils restent en vente chez Apple, donc ni vintage ni obsolètes.',
+    specs: 'Filaires · télécommande et micro intégrés · aucune batterie',
+    batterie: 'aucune',
+  },
+];
+
+// ---------- Utilitaires ----------
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const D = s => s ? new Date(s + 'T12:00:00') : null;
+const addY = (d, n) => { if (!d) return null; const x = new Date(d); x.setFullYear(x.getFullYear() + n); return x; };
+const fmtMois = d => d ? d.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' }) : '—';
+const fmtJour = d => d ? d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) : '—';
+function depuis(t) {
+  const s = Math.round((Date.now() - t) / 1000);
+  if (s < 60) return 'à l\'instant';
+  if (s < 3600) return `il y a ${Math.round(s / 60)} min`;
+  if (s < 86400) return `il y a ${Math.round(s / 3600)} h`;
+  return `le ${new Date(t).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })} à ${new Date(t).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}`;
+}
+function duree(a, b) {
+  const m = Math.round((b - a) / (30.44 * 864e5));
+  const y = Math.floor(Math.abs(m) / 12), r = Math.abs(m) % 12;
+  const t = [y ? `${y} an${y > 1 ? 's' : ''}` : '', r ? `${r} mois` : ''].filter(Boolean).join(' et ') || 'moins d\'un mois';
+  return t;
+}
+function cmpVer(a, b) {
+  const pa = String(a).split('.').map(Number), pb = String(b).split('.').map(Number);
+  for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+    const x = pa[i] || 0, y = pb[i] || 0;
+    if (x !== y) return x < y ? -1 : 1;
+  }
+  return 0;
+}
+const store = {
+  get(k, def) { try { const v = localStorage.getItem('appareils.' + k); return v == null ? def : JSON.parse(v); } catch (e) { return def; } },
+  set(k, v) { try { localStorage.setItem('appareils.' + k, JSON.stringify(v)); } catch (e) {} },
+};
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => t.hidden = true, 2200); }
+
+// Date de fabrication d'un Mac à partir de l'ancien format de numéro de série (12 caractères, avant 2021).
+function fabricationMac(serie) {
+  const s = String(serie || '').trim().toUpperCase();
+  if (s.length !== 12) return null;
+  const ANNEES = 'CDFGHJKLMNPQRSTVWXYZ';
+  const ia = ANNEES.indexOf(s[3]);
+  const SEM = '123456789CDFGHJKLMNPQRTVWXY';
+  const is = SEM.indexOf(s[4]);
+  if (ia < 0 || is < 0) return null;
+  const annee = 2010 + Math.floor(ia / 2), moitie = ia % 2;
+  const semaine = is + 1 + (moitie ? 26 : 0);
+  const d = new Date(annee, 0, 1 + (semaine - 1) * 7);
+  return { annee, semaine, date: d };
+}
+
+// ---------- État ----------
+let reglages = store.get('reglages', {});
+let batt = store.get('batt', {});      // { iphone: {pct, charge, t, src, os}, mac: {...}, airpods: {g, d, boitier, t, src, fw} }
+let derniereVersionLive = store.get('versionLive', null); // { ios: '27.2', t }
+let fluxEtat = 'off';
+const R = k => reglages[k];
+const sujet = () => (R('topic') || SUJET_DEFAUT).trim();
+
+function infos(a) {
+  const v = a.variantes ? a.variantes[(a.id === 'airpods' ? R('case') : R('ear')) || 'usbc'] : a;
+  const sortie = D(v.sortie), finVente = D(v.finVente);
+  const vintage = finVente ? addY(finVente, 5) : null;
+  const obsolete = finVente ? addY(finVente, 7) : null;
+  const majFin = D(a.majFin);
+  const now = new Date();
+  let statut;
+  if (!a.os) statut = { txt: 'Sans logiciel', cls: 'muted' };
+  else if (majFin && now >= majFin) statut = { txt: 'Plus de mises à jour', cls: 'bad' };
+  else if (majFin && (majFin - now) < 365 * 864e5) statut = { txt: 'Fin des mises à jour proche', cls: 'warn' };
+  else statut = { txt: 'Mises à jour assurées', cls: 'ok' };
+  let cycle = null;
+  if (obsolete && now >= obsolete) cycle = { txt: 'Obsolète', cls: 'bad' };
+  else if (vintage && now >= vintage) cycle = { txt: 'Vintage', cls: 'warn' };
+  else if (!finVente) cycle = { txt: 'Toujours en vente', cls: 'muted' };
+  return { modele: v.modele || a.modele, sortie, finVente, vintage, obsolete, majFin, statut, cycle };
+}
+
+// ---------- Rendu ----------
+const ICONES = {
+  iphone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="6.5" y="2" width="11" height="20" rx="2.8"/><rect x="10" y="3.6" width="4" height="1.3" rx=".65" fill="currentColor" stroke="none"/></svg>',
+  mac: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="5" width="16" height="11" rx="1.5"/><path d="M2 18.5h20l-1 1.5H3z" fill="currentColor" stroke="none"/></svg>',
+  airpods: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 3.5a3 3 0 0 0-3 3c0 1.7 1.2 3 2.6 3.1V19a1.2 1.2 0 0 0 2.4 0V6a2.6 2.6 0 0 0-2-2.5z"/><path d="M17 3.5a3 3 0 0 1 3 3c0 1.7-1.2 3-2.6 3.1V19a1.2 1.2 0 0 1-2.4 0V6a2.6 2.6 0 0 1 2-2.5z"/></svg>',
+  earpods: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><ellipse cx="6.5" cy="5.5" rx="2.5" ry="2.8"/><ellipse cx="17.5" cy="5.5" rx="2.5" ry="2.8"/><path d="M7 8.3V12c0 3 2.2 5 5 5s5-2 5-5V8.3M12 17v5"/></svg>',
+};
+const BOLT = '<svg class="bolt" viewBox="0 0 12 12" aria-label="en charge"><path d="M7 0 1.5 7H5.5L4.5 12 10.5 5H6.5z" fill="currentColor"/></svg>';
+
+function barre(label, pct, charge) {
+  if (pct == null || isNaN(pct)) return `<div class="batt-row"><span class="batt-label">${label}</span><div class="batt"></div><span class="batt-pct"><small>—</small></span></div>`;
+  const p = Math.max(0, Math.min(100, Math.round(pct)));
+  const cls = p <= 20 ? 'low' : p <= 40 ? 'mid' : '';
+  return `<div class="batt-row" role="meter" aria-label="${esc(label)} batterie" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${p}">
+    <span class="batt-label">${label}</span><div class="batt"><i class="${cls}" style="width:${p}%"></i></div>
+    <span class="batt-pct">${charge ? BOLT : ''}${p}<small> %</small></span></div>`;
+}
+
+function blocBatterie(a) {
+  if (a.batterie === 'aucune') return `<div class="batt-none">Filaires : pas de batterie, ils prennent le courant de l'appareil branché.</div>`;
+  const b = batt[a.id];
+  const estIphone = /iPhone/.test(navigator.userAgent);
+  if (a.batterie === 'airpods') {
+    const manuel = R('b_airpods');
+    if (!b && (manuel == null || manuel === '')) return `<div class="batt-none">Pas encore de mesure. Connecte les AirPods au Mac (le script les lit tout seul) ou saisis le niveau dans les réglages.</div>`;
+    if (!b) return barre('Écouteurs', Number(manuel)) + `<div class="batt-src">Saisie à la main</div>`;
+    return barre('Gauche', b.g) + barre('Droite', b.d) + barre('Boîtier', b.boitier) +
+      `<div class="batt-src">Via le Mac · ${depuis(b.t)}${b.t < Date.now() - 6 * 3600e3 ? ' · plus connectés depuis' : ''}</div>`;
+  }
+  if (!b) {
+    const bouton = a.id === 'iphone' && estIphone ? ` <button class="linkbtn" data-run>Envoyer maintenant</button>` : '';
+    return `<div class="batt-none">Pas encore de mesure. Branche l'${a.id === 'iphone' ? 'iPhone' : 'ordinateur'} avec la section « Batterie en direct » plus bas.${bouton}</div>`;
+  }
+  let extra = '';
+  if (a.id === 'mac' && b.sante) extra += ` · santé ${Math.round(b.sante)} %`;
+  if (a.id === 'mac' && b.cycles) extra += ` · ${b.cycles} cycles`;
+  const src = b.src === 'local' ? 'Cet appareil, en direct' : b.src === 'shortcut' ? 'Via Raccourcis' : 'Via le script du Mac';
+  const run = a.id === 'iphone' && estIphone ? `<button class="linkbtn" data-run>Envoyer maintenant</button>` : '';
+  return barre('Niveau', b.pct, b.charge) + `<div class="batt-src">${src} · ${depuis(b.t)}${extra} ${run}</div>`;
+}
+
+function blocMaj(a, inf) {
+  if (!a.os) return `<p class="note" style="margin:0">${esc(a.majTxt)}</p>`;
+  const b = batt[a.id] || {};
+  const installee = (a.id === 'airpods' ? b.fw : b.os) || R('v_' + a.id) || '';
+  let derniere = a.derniere;
+  if (a.id === 'iphone' && derniereVersionLive && derniereVersionLive.ios && cmpVer(derniereVersionLive.ios, derniere) > 0) derniere = derniereVersionLive.ios;
+  let etat = 'Inconnu', cls = 'muted';
+  if (installee) {
+    const egal = a.id === 'airpods' ? installee.toUpperCase() === derniere.toUpperCase() : cmpVer(installee, derniere) >= 0;
+    if (a.id === 'mac' && egal) { etat = 'À jour (version finale)'; cls = 'warn'; }
+    else if (egal) { etat = 'À jour'; cls = 'ok'; }
+    else { etat = `Mise à jour : ${a.os === 'Firmware' ? '' : a.os + ' '}${derniere}`; cls = 'warn'; }
+  }
+  const pre = a.os === 'Firmware' ? '' : a.os + ' ';
+  return `<div class="upd">
+    <div class="kv"><span>Installée</span><b>${installee ? esc(pre + installee) : 'À renseigner'}</b></div>
+    <div class="kv"><span>Dernière disponible</span><b>${esc(pre + derniere)}</b></div>
+    <div class="kv full"><span>État</span><b><span class="pill ${cls}">${esc(etat)}</span></b></div>
+  </div>
+  <p class="note">${esc(a.derniereNote)} ${esc(a.majTxt)}</p>`;
+}
+
+function frise(inf, a) {
+  if (!inf.obsolete) return '';
+  const debut = inf.sortie, fin = addY(inf.obsolete, 0.5) || inf.obsolete;
+  const span = fin - debut, pos = d => Math.max(0, Math.min(100, (d - debut) / span * 100));
+  const pMaj = inf.majFin ? pos(inf.majFin) : pos(inf.vintage);
+  const pV = pos(inf.vintage), pO = pos(inf.obsolete), pN = pos(new Date());
+  const s2 = Math.max(pMaj, 0);
+  return `<div class="tl" aria-hidden="true">
+      <div class="seg s1" style="left:0;width:${pMaj}%"></div>
+      <div class="seg s2" style="left:${s2}%;width:${Math.max(0, pO - s2)}%"></div>
+      <div class="seg s3" style="left:${pO}%;right:0"></div>
+      <div class="now${pN > 88 ? ' r' : pN < 12 ? ' l' : ''}" style="left:${pN}%"></div>
+      <span class="tick l" style="left:0">${inf.sortie.getFullYear()}</span>
+      <span class="tick r" style="left:100%">${fin.getFullYear()}</span>
+    </div>
+    <div class="legend"><span><i style="background:var(--ok-bar)"></i>Mises à jour${a.majFinEst ? ' (estimées)' : ''}</span><span><i style="background:var(--warn-bar)"></i>Sans mises à jour / vintage</span><span><i style="background:var(--bad-bar)"></i>Obsolète</span></div>`;
+}
+
+function blocDates(a, inf) {
+  let fab;
+  if (a.id === 'mac') {
+    const f = fabricationMac(R('serial'));
+    fab = f ? `Semaine ${f.semaine} de ${f.annee} (${fmtMois(f.date)})` : (R('serial') ? 'Numéro de série non reconnu' : 'Ajoute le numéro de série');
+  } else if (a.id === 'iphone' && R('a_iphone')) {
+    fab = 'Acheté le ' + fmtJour(D(R('a_iphone')));
+  } else {
+    fab = null;
+  }
+  const est = a.majFinEst ? ' (estimation)' : '';
+  const now = new Date();
+  const futur = (d, txt) => d ? `${fmtMois(d)}${d > now ? ` · dans ${duree(now, d)}` : ` · depuis ${duree(d, now)}`}${txt || ''}` : '—';
+  return `<div class="dates">
+    <div class="kv"><span>Sortie du modèle</span><b>${fmtJour(inf.sortie)}</b></div>
+    <div class="kv"><span>${a.id === 'mac' ? 'Fabrication de ton Mac' : a.id === 'iphone' ? 'Ton iPhone' : 'Âge du modèle'}</span><b>${fab ? esc(fab) : duree(inf.sortie, now)}</b></div>
+    ${a.os ? `<div class="kv full"><span>Fin des mises à jour</span><b>${futur(inf.majFin, est)}</b></div>` : ''}
+    <div class="kv"><span>Vintage</span><b>${inf.vintage ? futur(inf.vintage) : 'Pas encore (en vente)'}</b></div>
+    <div class="kv"><span>Obsolète</span><b>${inf.obsolete ? futur(inf.obsolete) : 'Pas encore (en vente)'}</b></div>
+  </div>`;
+}
+
+function rendre() {
+  const cartes = APPAREILS.map(a => {
+    const inf = infos(a);
+    const nom = R('n_' + a.id) || a.nomDefaut;
+    const pills = [`<span class="pill ${inf.statut.cls}">${inf.statut.txt}</span>`];
+    if (inf.cycle) pills.push(`<span class="pill ${inf.cycle.cls}">${inf.cycle.txt}</span>`);
+    return `<article class="card" aria-labelledby="t_${a.id}">
+      <div class="card-h"><div class="ico">${ICONES[a.type]}</div>
+        <div class="name"><h2 id="t_${a.id}">${esc(nom)}</h2><div class="model">${esc(inf.modele)}</div></div></div>
+      <div class="pills">${pills.join('')}</div>
+      <div><div class="sec-t">Batterie</div>${blocBatterie(a)}</div>
+      <div><div class="sec-t">Mises à jour</div>${blocMaj(a, inf)}</div>
+      <div><div class="sec-t">Cycle de vie</div>${frise(inf, a)}${blocDates(a, inf)}</div>
+      <div class="specs">${esc(a.specs)}</div>
+    </article>`;
+  });
+  $('#cards').innerHTML = cartes.join('');
+
+  const all = APPAREILS.map(infos);
+  const ok = all.filter(i => i.statut.cls === 'ok').length;
+  const fini = all.filter(i => i.statut.cls === 'bad').length;
+  const vintage = all.filter(i => i.cycle && i.cycle.txt === 'Vintage').length;
+  const mesures = ['iphone', 'mac', 'airpods'].map(k => batt[k]).filter(Boolean);
+  const faible = mesures.filter(b => (b.pct ?? Math.min(b.g ?? 100, b.d ?? 100)) <= 20).length;
+  $('#summary').innerHTML = [
+    [ok, 'avec mises à jour'], [fini, 'sans mises à jour'], [vintage, 'vintage'], [faible, 'batterie faible (≤ 20 %)'],
+  ].map(([n, t]) => `<div class="stat"><b>${n}</b><span>${t}</span></div>`).join('');
+
+  const tps = { on: ['live', 'En direct'], off: ['', 'Hors ligne · dernières mesures enregistrées'], wait: ['', 'Connexion…'] }[fluxEtat];
+  $('#liveDot').className = 'dot ' + tps[0];
+  $('#liveTxt').textContent = tps[1];
+  document.querySelectorAll('[data-run]').forEach(b => b.onclick = () => { location.href = 'shortcuts://run-shortcut?name=' + encodeURIComponent('Batterie iPhone'); });
+}
+
+// ---------- Réception des mesures ----------
+function lireMessage(txt, t) {
+  txt = String(txt || '').trim();
+  let m = null;
+  try { m = JSON.parse(txt); } catch (e) {
+    const p = txt.split(/[;|]/).map(s => s.trim());
+    if (p[0] && p[0].toLowerCase() === 'iphone') m = { appareil: 'iphone', batterie: p[1], os: p[2], charge: p[3] };
+  }
+  if (!m || !m.appareil) return false;
+  const num = v => (v === '' || v == null || isNaN(Number(String(v).replace(',', '.')))) ? null : Number(String(v).replace(',', '.'));
+  const pct = v => { const n = num(v); return n == null ? null : (n <= 1 && n > 0 && String(v).includes('.') ? n * 100 : n); };
+  const vrai = v => v === true || v === 1 || /^(1|true|oui|yes)$/i.test(String(v));
+  const prev = batt[m.appareil];
+  if (prev && prev.t > t && prev.src !== 'local') return false;
+  if (m.appareil === 'iphone') {
+    batt.iphone = { pct: pct(m.batterie), charge: m.charge != null ? vrai(m.charge) : false, os: m.os ? String(m.os) : (prev && prev.os), t, src: 'shortcut' };
+  } else if (m.appareil === 'mac') {
+    if (!(batt.mac && batt.mac.src === 'local' && Date.now() - batt.mac.t < 60e3)) {
+      batt.mac = { pct: pct(m.batterie), charge: vrai(m.charge), os: m.os, sante: num(m.sante), cycles: num(m.cycles), t, src: 'script' };
+    }
+    if (m.airpods && (m.airpods.g != null || m.airpods.d != null)) {
+      batt.airpods = { g: pct(m.airpods.g), d: pct(m.airpods.d), boitier: pct(m.airpods.boitier), fw: m.airpods.firmware || null, t, src: 'script' };
+    }
+  } else return false;
+  store.set('batt', batt);
+  return true;
+}
+
+let source = null;
+async function charger() {
+  fluxEtat = 'wait'; rendre();
+  try {
+    const r = await fetch(`https://ntfy.sh/${encodeURIComponent(sujet())}/json?poll=1&since=12h`, { cache: 'no-store' });
+    const txt = await r.text();
+    txt.split('\n').filter(Boolean).forEach(l => { try { const e = JSON.parse(l); if (e.event === 'message') lireMessage(e.message, e.time * 1000); } catch (er) {} });
+  } catch (e) {}
+  ecouter();
+  rendre();
+}
+function ecouter() {
+  if (source) source.close();
+  if (!('EventSource' in window)) { fluxEtat = 'off'; return; }
+  source = new EventSource(`https://ntfy.sh/${encodeURIComponent(sujet())}/sse`);
+  source.onopen = () => { fluxEtat = 'on'; rendre(); };
+  source.onerror = () => { fluxEtat = 'off'; rendre(); };
+  source.onmessage = ev => {
+    try { const e = JSON.parse(ev.data); if (e.event === 'message' && lireMessage(e.message, e.time * 1000)) { rendre(); toast('Batterie mise à jour'); } } catch (er) {}
+  };
+}
+
+// Batterie de l'appareil qui affiche la page (Chrome / Edge sur Mac ; Safari ne la donne pas).
+async function batterieLocale() {
+  const estMac = /Macintosh/.test(navigator.userAgent) && !(navigator.maxTouchPoints > 1);
+  if (!estMac || !navigator.getBattery) return;
+  try {
+    const b = await navigator.getBattery();
+    const maj = () => {
+      const prev = batt.mac || {};
+      batt.mac = { ...prev, pct: b.level * 100, charge: b.charging, t: Date.now(), src: 'local' };
+      store.set('batt', batt); rendre();
+    };
+    ['levelchange', 'chargingchange'].forEach(e => b.addEventListener(e, maj));
+    maj();
+  } catch (e) {}
+}
+
+// Dernière version d'iOS signée par Apple pour l'iPhone 16 Pro (ipsw.me), si le service répond.
+async function versionIOS() {
+  if (derniereVersionLive && Date.now() - derniereVersionLive.t < 6 * 3600e3) return;
+  try {
+    const r = await fetch('https://api.ipsw.me/v4/device/iPhone17,1?type=ipsw');
+    if (!r.ok) return;
+    const j = await r.json();
+    const v = (j.firmwares || []).filter(f => f.signed).map(f => f.version).sort(cmpVer).pop();
+    if (v) { derniereVersionLive = { ios: v, t: Date.now() }; store.set('versionLive', derniereVersionLive); rendre(); }
+  } catch (e) {}
+}
+
+// ---------- Réglages ----------
+function initReglages() {
+  const champs = { n_iphone: 'f_n_iphone', a_iphone: 'f_a_iphone', n_mac: 'f_n_mac', serial: 'f_serial', n_airpods: 'f_n_airpods',
+    case: 'f_case', n_earpods: 'f_n_earpods', ear: 'f_ear', v_iphone: 'f_v_iphone', v_mac: 'f_v_mac', b_airpods: 'f_b_airpods', topic: 'f_topic' };
+  for (const [k, id] of Object.entries(champs)) {
+    const el = document.getElementById(id);
+    if (reglages[k] != null) el.value = reglages[k];
+    if (k.startsWith('n_')) el.placeholder = APPAREILS.find(a => a.id === k.slice(2)).nomDefaut;
+    if (k === 'topic') el.placeholder = SUJET_DEFAUT;
+    el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => {
+      reglages[k] = el.value.trim(); store.set('reglages', reglages);
+      if (k === 'topic') { afficherSujet(); clearTimeout(initReglages.h); initReglages.h = setTimeout(charger, 800); }
+      rendre();
+    });
+  }
+}
+function afficherSujet() {
+  $('#topicTxt').textContent = sujet();
+  $('#urlTxt').textContent = 'https://ntfy.sh/' + sujet();
+  $('#macCmd').textContent = `curl -fsSL ${SITE}mac.sh | bash -s -- installer ${sujet()}`;
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-copy]');
+  if (!b) return;
+  const t = document.getElementById(b.dataset.copy).textContent;
+  (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => toast('Copié'), () => toast('Sélectionne le texte pour le copier'));
+});
+$('#refresh').addEventListener('click', () => { charger(); versionIOS(); });
+document.addEventListener('visibilitychange', () => { if (!document.hidden) { charger(); } });
+setInterval(rendre, 60e3); // rafraîchit les « il y a X min »
+
+$('#foot').innerHTML = `Dates vérifiées le ${VERIFIE}. Vintage = 5 ans après l'arrêt de la vente, obsolète = 7 ans (règle d'Apple) :
+  Apple répare encore les produits vintage selon les pièces disponibles, plus du tout les produits obsolètes.
+  Les fins de mises à jour de l'iPhone et des AirPods sont des estimations : Apple ne les annonce pas à l'avance.`;
+
+initReglages();
+afficherSujet();
+rendre();
+charger();
+batterieLocale();
+versionIOS();
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+</script>
+</body></html>

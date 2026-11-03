@@ -275,3 +275,23 @@ Site vitrine des boutiques Nanas Vanille (Saint-Denis et Saint-Pierre), l'art et
 - Sur l'adresse github.io, les favoris restent dans le navigateur. Les comptes, la galerie photo, les articles avec
   leurs prix et la liste partagée des producteurs ne fonctionnent que dans la version Claude.
 - Fichier : `docs/nanas-vanille/index.html`.
+
+---
+
+# 🔋 Mes appareils Apple
+
+Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/appareils/
+
+Une carte par appareil (iPhone 16 Pro, MacBook Air 2019, AirPods Pro 2, EarPods) avec :
+la batterie en direct, la version installée et la dernière disponible, la date de sortie
+(et la date de fabrication du Mac à partir de son numéro de série), la fin des mises à jour,
+et les dates où il devient **vintage** (5 ans après l'arrêt de la vente) puis **obsolète** (7 ans).
+
+- **Batterie de l'iPhone** : un raccourci « Batterie iPhone » envoie le niveau sur le canal ntfy
+  `appareils-24qr4o3v0pox`, lancé par des automatisations (niveau de batterie, chargeur). Étapes dans l'appli.
+- **Batterie du Mac et des AirPods** : `docs/appareils/mac.sh`, à installer une fois dans Terminal
+  (commande dans l'appli). Il envoie toutes les 5 minutes la batterie, la santé et les cycles du Mac,
+  la version de macOS et la batterie des AirPods connectés au Mac.
+- Les dates et versions sont dans la liste `APPAREILS` de `docs/appareils/index.html`
+  (vérifiées le 3 novembre 2026). Les fins de mises à jour de l'iPhone et des AirPods sont des estimations.
+- Le canal ntfy n'a pas de mot de passe : il ne transporte que les niveaux de batterie et les versions.
