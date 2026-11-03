@@ -282,7 +282,7 @@ Site vitrine des boutiques Nanas Vanille (Saint-Denis et Saint-Pierre), l'art et
 
 Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/appareils/
 
-Une carte par appareil (iPhone 16 Pro, MacBook Air 2019, AirPods Pro 2, EarPods) avec :
+Une carte par appareil (iPhone 16 Pro, MacBook Air 2019, MacBook Neo, AirPods Pro 2, EarPods) avec :
 la batterie en direct, la version installée et la dernière disponible, la date de sortie
 (et la date de fabrication du Mac à partir de son numéro de série), la fin des mises à jour,
 et les dates où il devient **vintage** (5 ans après l'arrêt de la vente) puis **obsolète** (7 ans).

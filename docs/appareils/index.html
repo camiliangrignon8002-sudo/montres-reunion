@@ -190,7 +190,7 @@ code, .code { font-family: var(--mono); font-size: 12.5px; background: var(--sur
   <section class="grid" id="cards"></section>
 
   <details class="panel" id="setup">
-    <summary>Batterie en direct : brancher l'iPhone et le Mac</summary>
+    <summary>Batterie en direct : brancher l'iPhone et les Mac</summary>
     <div class="panel-b">
       <p class="note" style="margin-top:0">Une page web ne peut pas lire elle-même la batterie de tes autres appareils.
         L'iPhone et le Mac envoient donc leur niveau sur un canal privé (<span class="code" id="topicTxt"></span>, via ntfy.sh), et l'appli l'affiche dès qu'il arrive.</p>
@@ -206,8 +206,8 @@ code, .code { font-family: var(--mono); font-size: 12.5px; background: var(--sur
       </ol>
       <p class="note">Ensuite, le bouton « Envoyer maintenant » de la carte iPhone lance le raccourci à la demande.</p>
 
-      <h3>MacBook Air (batterie du Mac + AirPods connectés)</h3>
-      <p class="note" style="margin-top:0">Colle cette commande dans <b>Terminal</b> une seule fois. Le Mac envoie ensuite sa batterie, son état de santé, sa version de macOS et la batterie des AirPods (gauche, droite, boîtier) toutes les 5 minutes, quand il est allumé.</p>
+      <h3>MacBook Air et MacBook Neo (batterie du Mac + AirPods connectés)</h3>
+      <p class="note" style="margin-top:0">Colle cette commande dans <b>Terminal</b> une seule fois sur chaque Mac (l'appli reconnaît tout seul lequel envoie). Le Mac envoie ensuite sa batterie, son état de santé, sa version de macOS et la batterie des AirPods (gauche, droite, boîtier) toutes les 5 minutes, quand il est allumé.</p>
       <div class="code-block"><code id="macCmd"></code><button class="btn" type="button" data-copy="macCmd">Copier</button></div>
       <p class="note">Pour arrêter : la même commande avec <code>desinstaller</code> à la fin.</p>
 
@@ -227,6 +227,11 @@ code, .code { font-family: var(--mono); font-size: 12.5px; background: var(--sur
         <label>Couleur du Mac
           <select id="f_c_mac"><option value="gris">Gris sidéral</option><option value="argent">Argent</option><option value="or">Or</option></select></label>
         <label>Nom du Mac<input id="f_n_mac" autocomplete="off"></label>
+        <label>Nom du MacBook Neo<input id="f_n_neo" autocomplete="off"></label>
+        <label>Couleur du MacBook Neo
+          <select id="f_c_neo"><option value="argent">Argent</option><option value="indigo">Indigo</option><option value="jaune">Jaune agrume</option><option value="rose">Rose poudré</option></select></label>
+        <label>Date d'achat du MacBook Neo<input id="f_a_neo" type="date"></label>
+        <label>Version installée sur le MacBook Neo (si pas de script)<input id="f_v_neo" placeholder="ex. 27.0" inputmode="decimal"></label>
         <label>Numéro de série du Mac (donne la date de fabrication)<input id="f_serial" autocomplete="off" spellcheck="false" placeholder="ex. FVFZ…" maxlength="12"></label>
         <label>Nom des AirPods<input id="f_n_airpods" autocomplete="off"></label>
         <label>Boîtier des AirPods Pro 2
@@ -272,6 +277,15 @@ const APPAREILS = [
     os: 'macOS', osSortie: 'macOS Mojave 10.14', derniere: '14.8', derniereNote: 'macOS Sonoma 14 est la dernière version pour ce Mac : Sequoia, Tahoe et macOS 27 ne l\'acceptent pas.',
     majTxt: 'Apple a arrêté les correctifs de Sonoma à la sortie de macOS 27 (septembre 2026). Le Mac marche toujours, mais il n\'est plus protégé contre les nouvelles failles : préfère un navigateur à jour (Chrome ou Firefox).',
     specs: 'Intel Core i5 double cœur 1,6 GHz · 8 Go de RAM · SSD 256 Go · Touch ID · 2 ports Thunderbolt 3',
+    batterie: 'simple',
+  },
+  {
+    id: 'neo', nomDefaut: 'MacBook Neo', modele: 'MacBook Neo (13 pouces, 2026)', type: 'neo',
+    sortie: '2026-03-11', finVente: null,
+    majFin: '2033-09-01', majFinEst: true,
+    os: 'macOS', osSortie: 'macOS Tahoe 26', derniere: '27.0', derniereNote: 'Compatible avec macOS 27 Golden Gate (puce Apple, pas Intel).',
+    majTxt: 'Mac tout récent avec puce Apple : il recevra les nouvelles versions de macOS pendant de nombreuses années (environ 7 ans pour les Mac à puce Apple), puis des correctifs de sécurité.',
+    specs: 'Puce A18 Pro (CPU 6 cœurs, GPU 5 cœurs) · 8 Go de RAM · écran Liquid Retina 13 pouces · batterie 36,5 Wh (jusqu\'à 16 h) · 2 ports USB-C · prise casque',
     batterie: 'simple',
   },
   {
@@ -386,6 +400,7 @@ const ICONES = {
 // Dessins des produits (SVG), dans le style des photos produit d'Apple.
 const COULEURS = {
   iphone: { naturel: ['Titane naturel', '#d6d1c8', '#a9a397'], desert: ['Titane désert', '#d9c2ad', '#a98d76'], noir: ['Titane noir', '#5a5a5c', '#2e2e30'], blanc: ['Titane blanc', '#f4f3ef', '#cfcdc6'] },
+  neo: { argent: ['Argent', '#e6e7e9', '#b6b8bb'], indigo: ['Indigo', '#5b6a9a', '#38426a'], jaune: ['Jaune agrume', '#f1df8a', '#cdb556'], rose: ['Rose poudré', '#f2cfd0', '#cfa3a6'] },
   mac: { gris: ['Gris sidéral', '#8e8f92', '#5f6063'], argent: ['Argent', '#e8e9eb', '#b9bbbe'], or: ['Or', '#f1dccd', '#cdb09c'] },
 };
 function lentille(x, y, r, id) {
@@ -420,22 +435,22 @@ function dessin(type) {
         <rect x="176" y="52" width="2" height="16" rx="1" fill="${c2}"/><rect x="176" y="120" width="2" height="22" rx="1" fill="${c2}"/>
       </g></svg>`;
   }
-  if (type === 'mac') {
-    const [, c1, c2] = COULEURS.mac[R('c_mac') || 'gris'];
-    return `<svg class="prod" viewBox="0 0 320 200" role="img" aria-label="MacBook Air 13 pouces ouvert"><defs>
-      <linearGradient id="mcl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>
-      <linearGradient id="mcb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset=".55" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>
-      <linearGradient id="mcs" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e3c72"/><stop offset=".5" stop-color="#2a8a7a"/><stop offset="1" stop-color="#e8b04a"/></linearGradient>
-      <filter id="mcsh" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-opacity=".2"/></filter></defs>
-      <g filter="url(#mcsh)">
-        <rect x="58" y="14" width="204" height="134" rx="9" fill="url(#mcl)"/>
+  if (type === 'mac' || type === 'neo') {
+    const [, c1, c2] = COULEURS[type][R('c_' + type) || Object.keys(COULEURS[type])[0]];
+    return `<svg class="prod" viewBox="0 0 320 200" role="img" aria-label="${type === 'neo' ? 'MacBook Neo' : 'MacBook Air'} 13 pouces ouvert"><defs>
+      <linearGradient id="mcl${type}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>
+      <linearGradient id="mcb${type}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset=".55" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>
+      <linearGradient id="mcs${type}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${type === 'neo' ? c2 : '#1e3c72'}"/><stop offset=".5" stop-color="${type === 'neo' ? '#6b4fbf' : '#2a8a7a'}"/><stop offset="1" stop-color="${type === 'neo' ? c1 : '#e8b04a'}"/></linearGradient>
+      <filter id="mcsh${type}" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="6" flood-opacity=".2"/></filter></defs>
+      <g filter="url(#mcsh${type})">
+        <rect x="58" y="14" width="204" height="134" rx="9" fill="url(#mcl${type})"/>
         <rect x="61" y="17" width="198" height="128" rx="6.5" fill="#0c0c0d"/>
-        <rect x="68" y="24" width="184" height="114" rx="1.5" fill="url(#mcs)"/>
+        <rect x="68" y="24" width="184" height="114" rx="1.5" fill="url(#mcs${type})"/>
         <path d="M68 104 C110 80 150 128 200 96 S240 84 252 92 V138 H68Z" fill="#fff" opacity=".12"/>
         <path d="M68 118 C120 100 160 140 252 110 V138 H68Z" fill="#000" opacity=".18"/>
         <rect x="68" y="24" width="184" height="5" fill="#fff" opacity=".25"/>
         <circle cx="160" cy="20.5" r="1.3" fill="#2a2a30"/>
-        <path d="M24 149 H296 Q296 156 289 158 L176 161 H144 L31 158 Q24 156 24 149Z" fill="url(#mcb)"/>
+        <path d="M24 149 H296 Q296 156 289 158 L176 161 H144 L31 158 Q24 156 24 149Z" fill="url(#mcb${type})"/>
         <rect x="140" y="149" width="40" height="3.5" rx="1.75" fill="${c2}"/>
       </g></svg>`;
   }
@@ -507,8 +522,8 @@ function blocBatterie(a) {
     return `<div class="batt-none">Pas encore de mesure. Branche l'${a.id === 'iphone' ? 'iPhone' : 'ordinateur'} avec la section « Batterie en direct » plus bas.${bouton}</div>`;
   }
   let extra = '';
-  if (a.id === 'mac' && b.sante) extra += ` · santé ${Math.round(b.sante)} %`;
-  if (a.id === 'mac' && b.cycles) extra += ` · ${b.cycles} cycles`;
+  if ((a.id === 'mac' || a.id === 'neo') && b.sante) extra += ` · santé ${Math.round(b.sante)} %`;
+  if ((a.id === 'mac' || a.id === 'neo') && b.cycles) extra += ` · ${b.cycles} cycles`;
   const src = b.src === 'local' ? 'Cet appareil, en direct' : b.src === 'shortcut' ? 'Via Raccourcis' : 'Via le script du Mac';
   const run = a.id === 'iphone' && estIphone ? `<button class="linkbtn" data-run>Envoyer maintenant</button>` : '';
   return barre('Niveau', b.pct, b.charge) + `<div class="batt-src">${src} · ${depuis(b.t)}${extra} ${run}</div>`;
@@ -559,8 +574,8 @@ function blocDates(a, inf) {
   if (a.id === 'mac') {
     const f = fabricationMac(R('serial'));
     fab = f ? `Semaine ${f.semaine} de ${f.annee} (${fmtMois(f.date)})` : (R('serial') ? 'Numéro de série non reconnu' : 'Ajoute le numéro de série');
-  } else if (a.id === 'iphone' && R('a_iphone')) {
-    fab = 'Acheté le ' + fmtJour(D(R('a_iphone')));
+  } else if ((a.id === 'iphone' || a.id === 'neo') && R('a_' + a.id)) {
+    fab = 'Acheté le ' + fmtJour(D(R('a_' + a.id)));
   } else {
     fab = null;
   }
@@ -569,7 +584,7 @@ function blocDates(a, inf) {
   const futur = (d, txt) => d ? `${fmtMois(d)}${d > now ? ` · dans ${duree(now, d)}` : ` · depuis ${duree(d, now)}`}${txt || ''}` : '—';
   return `<div class="dates">
     <div class="kv"><span>Sortie du modèle</span><b>${fmtJour(inf.sortie)}</b></div>
-    <div class="kv"><span>${a.id === 'mac' ? 'Fabrication de ton Mac' : a.id === 'iphone' ? 'Ton iPhone' : 'Âge du modèle'}</span><b>${fab ? esc(fab) : duree(inf.sortie, now)}</b></div>
+    <div class="kv"><span>${a.id === 'mac' ? 'Fabrication de ton Mac' : a.id === 'iphone' ? 'Ton iPhone' : a.id === 'neo' ? 'Ton MacBook Neo' : 'Âge du modèle'}</span><b>${fab ? esc(fab) : duree(inf.sortie, now)}</b></div>
     ${a.os ? `<div class="kv full"><span>Fin des mises à jour</span><b>${futur(inf.majFin, est)}</b></div>` : ''}
     <div class="kv"><span>Vintage</span><b>${inf.vintage ? futur(inf.vintage) : 'Pas encore (en vente)'}</b></div>
     <div class="kv"><span>Obsolète</span><b>${inf.obsolete ? futur(inf.obsolete) : 'Pas encore (en vente)'}</b></div>
@@ -583,7 +598,7 @@ function rendre() {
     const pills = [`<span class="pill ${inf.statut.cls}">${inf.statut.txt}</span>`];
     if (inf.cycle) pills.push(`<span class="pill ${inf.cycle.cls}">${inf.cycle.txt}</span>`);
     return `<article class="card" aria-labelledby="t_${a.id}">
-      <div class="hero"><div class="photo${a.id === 'airpods' || a.id === 'earpods' ? ' petit' : ''}"><img src="produit-${a.id}.webp" alt="${esc(nom)}" loading="lazy" decoding="async" onerror="this.parentNode.outerHTML=dessin('${a.type}')"></div>
+      <div class="hero">${a.id === 'neo' ? dessin('neo') : `<div class="photo${a.id === 'airpods' || a.id === 'earpods' ? ' petit' : ''}"><img src="produit-${a.id}.webp" alt="${esc(nom)}" loading="lazy" decoding="async" onerror="this.parentNode.outerHTML=dessin('${a.type}')"></div>`}
         <h2 id="t_${a.id}">${esc(nom)}</h2>
         <div class="model">${esc(inf.modele)}${COULEURS[a.id] ? ' · ' + COULEURS[a.id][R('c_' + a.id) || Object.keys(COULEURS[a.id])[0]][0] : ''}</div>
         <div class="pills">${pills.join('')}</div></div>
@@ -599,7 +614,7 @@ function rendre() {
   const ok = all.filter(i => i.statut.cls === 'ok').length;
   const fini = all.filter(i => i.statut.cls === 'bad').length;
   const vintage = all.filter(i => i.cycle && i.cycle.txt === 'Vintage').length;
-  const mesures = ['iphone', 'mac', 'airpods'].map(k => batt[k]).filter(Boolean);
+  const mesures = ['iphone', 'mac', 'neo', 'airpods'].map(k => batt[k]).filter(Boolean);
   const faible = mesures.filter(b => (b.pct ?? Math.min(b.g ?? 100, b.d ?? 100)) <= 20).length;
   $('#summary').innerHTML = [
     [ok, 'avec mises à jour'], [fini, 'sans mises à jour'], [vintage, 'vintage'], [faible, 'batterie faible (≤ 20 %)'],
@@ -623,13 +638,15 @@ function lireMessage(txt, t) {
   const num = v => (v === '' || v == null || isNaN(Number(String(v).replace(',', '.')))) ? null : Number(String(v).replace(',', '.'));
   const pct = v => { const n = num(v); return n == null ? null : (n <= 1 && n > 0 && String(v).includes('.') ? n * 100 : n); };
   const vrai = v => v === true || v === 1 || /^(1|true|oui|yes)$/i.test(String(v));
+  if (m.appareil === 'mac' && m.modele && !/^MacBookAir8,/.test(m.modele)) m.appareil = 'neo';
   const prev = batt[m.appareil];
   if (prev && prev.t > t && prev.src !== 'local') return false;
   if (m.appareil === 'iphone') {
     batt.iphone = { pct: pct(m.batterie), charge: m.charge != null ? vrai(m.charge) : false, os: m.os ? String(m.os) : (prev && prev.os), t, src: 'shortcut' };
-  } else if (m.appareil === 'mac') {
-    if (!(batt.mac && batt.mac.src === 'local' && Date.now() - batt.mac.t < 60e3)) {
-      batt.mac = { pct: pct(m.batterie), charge: vrai(m.charge), os: m.os, sante: num(m.sante), cycles: num(m.cycles), t, src: 'script' };
+  } else if (m.appareil === 'mac' || m.appareil === 'neo') {
+    const k = m.appareil;
+    if (!(batt[k] && batt[k].src === 'local' && Date.now() - batt[k].t < 60e3)) {
+      batt[k] = { pct: pct(m.batterie), charge: vrai(m.charge), os: m.os, sante: num(m.sante), cycles: num(m.cycles), t, src: 'script' };
     }
     if (m.airpods && (m.airpods.g != null || m.airpods.d != null)) {
       batt.airpods = { g: pct(m.airpods.g), d: pct(m.airpods.d), boitier: pct(m.airpods.boitier), fw: m.airpods.firmware || null, t, src: 'script' };
@@ -668,8 +685,9 @@ async function batterieLocale() {
   try {
     const b = await navigator.getBattery();
     const maj = () => {
-      const prev = batt.mac || {};
-      batt.mac = { ...prev, pct: b.level * 100, charge: b.charging, t: Date.now(), src: 'local' };
+      const k = R('cemac') || (navigator.hardwareConcurrency === 6 ? 'neo' : 'mac');
+      const prev = batt[k] || {};
+      batt[k] = { ...prev, pct: b.level * 100, charge: b.charging, t: Date.now(), src: 'local' };
       store.set('batt', batt); rendre();
     };
     ['levelchange', 'chargingchange'].forEach(e => b.addEventListener(e, maj));
@@ -692,7 +710,7 @@ async function versionIOS() {
 // ---------- Réglages ----------
 function initReglages() {
   const champs = { n_iphone: 'f_n_iphone', a_iphone: 'f_a_iphone', n_mac: 'f_n_mac', serial: 'f_serial', n_airpods: 'f_n_airpods',
-    case: 'f_case', c_iphone: 'f_c_iphone', c_mac: 'f_c_mac', n_earpods: 'f_n_earpods', ear: 'f_ear', v_iphone: 'f_v_iphone', v_mac: 'f_v_mac', b_airpods: 'f_b_airpods', topic: 'f_topic' };
+    case: 'f_case', c_iphone: 'f_c_iphone', c_mac: 'f_c_mac', n_neo: 'f_n_neo', c_neo: 'f_c_neo', a_neo: 'f_a_neo', v_neo: 'f_v_neo', n_earpods: 'f_n_earpods', ear: 'f_ear', v_iphone: 'f_v_iphone', v_mac: 'f_v_mac', b_airpods: 'f_b_airpods', topic: 'f_topic' };
   for (const [k, id] of Object.entries(champs)) {
     const el = document.getElementById(id);
     if (reglages[k] != null) el.value = reglages[k];

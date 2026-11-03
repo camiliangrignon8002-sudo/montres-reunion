@@ -16,6 +16,7 @@ envoyer() {
   pct=$(printf '%s' "$batt" | grep -Eo '[0-9]+%' | head -1 | tr -d '%')
   charge=false; printf '%s' "$batt" | grep -q "AC Power" && charge=true
   os=$(sw_vers -productVersion)
+  modele=$(sysctl -n hw.model 2>/dev/null)
   ioreg_out=$(ioreg -rn AppleSmartBattery 2>/dev/null)
   maxcap=$(printf '%s' "$ioreg_out" | awk -F'= ' '/"AppleRawMaxCapacity"/{print $2; exit}')
   [ -z "$maxcap" ] && maxcap=$(printf '%s' "$ioreg_out" | awk -F'= ' '/"MaxCapacity"/{print $2; exit}')
@@ -36,7 +37,7 @@ envoyer() {
     END { if (l!="" || r!="") printf "{\"g\":%s,\"d\":%s,\"boitier\":%s,\"firmware\":\"%s\"}", (l==""?"null":l), (r==""?"null":r), (c==""?"null":c), fw }')
   [ -z "$ap" ] && ap=null
   curl -fsS -m 20 -o /dev/null -H "Title: batterie" \
-    -d "{\"appareil\":\"mac\",\"batterie\":${pct:-null},\"charge\":$charge,\"os\":\"$os\",\"sante\":$sante,\"cycles\":${cycles:-null},\"airpods\":$ap}" \
+    -d "{\"appareil\":\"mac\",\"batterie\":${pct:-null},\"charge\":$charge,\"os\":\"$os\",\"modele\":\"$modele\",\"sante\":$sante,\"cycles\":${cycles:-null},\"airpods\":$ap}" \
     "https://ntfy.sh/$SUJET"
 }
 
