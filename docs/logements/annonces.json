@@ -484,6 +484,10 @@
   "caf": false,
   "aussi": [
    {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-110427691.html"
+   },
+   {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-1-piece-33-m2/01a18b78-b1f3-7f8b-a2be-d96f9eac7918"
    }
@@ -2752,6 +2756,10 @@
    {
     "source": "Bien'ici",
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/ag340369-551086409"
+   },
+   {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html"
    },
    {
     "source": "Zimo",
