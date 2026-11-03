@@ -2690,6 +2690,10 @@
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/ag340369-551086409"
    },
    {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html"
+   },
+   {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a0cf1e-21a7-7b69-bfcb-d74b3312e7ae"
    }
@@ -3951,6 +3955,37 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "zimo-01a1a088-4aae-7874-ae5c-bd25a133b22d",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-47-m2/01a1a088-4aae-7874-ae5c-bd25a133b22d",
+  "titre": "Appartement 2 pièces 47 m²",
+  "prix": 700.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 47.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/qX0hy26DXUj7VFOssdrlPfUDXi6T0-bsecYUzm9eeaE/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_33a8255b-503d-47ea-b0ab-9334527b16fd.jpg"
+  ],
+  "description": "Location T2 Saint-Denis (974) 2 pièces 47 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-03T13:07+04:00"
  },
  {
   "id": "zimo-01a19c4c-0c04-7186-a0d9-842f4792cae3",
