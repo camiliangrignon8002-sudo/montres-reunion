@@ -484,10 +484,6 @@
   "caf": false,
   "aussi": [
    {
-    "source": "Figaro Immobilier",
-    "url": "https://immobilier.lefigaro.fr/annonces/annonce-110427691.html"
-   },
-   {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-1-piece-33-m2/01a18b78-b1f3-7f8b-a2be-d96f9eac7918"
    }
@@ -1997,6 +1993,41 @@
   "vu": "2026-10-30T07:02+04:00"
  },
  {
+  "id": "zimo-01a1a0ee-3bb2-78f1-bf78-0eafff7f3ba4",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/magnifique-t1-meuble-pret-a-vivre-avec-varangue-parking-sainte-clotilde/01a1a0ee-3bb2-78f1-bf78-0eafff7f3ba4",
+  "titre": "Magnifique T1 meublé \"Prêt à vivre\" avec Varangue & Parking - Sainte-Clotilde",
+  "prix": 610.0,
+  "commune": "Saint-Denis",
+  "quartier": "Sainte-Clotilde",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 22.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/c8bpP3JcBoKPP96bGKB27YROxGX-WwpppSe9_Z8MsCA/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_26ea04a4-d2c4-4128-847f-746b4af322a9.jpg"
+  ],
+  "description": "Location T1 Saint-Denis (974) 1 pièces 22 m²",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-03T15:10+04:00"
+ },
+ {
   "id": "zimo-01a11b76-a9bb-7f77-b78a-ff60e8af1211",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-2-pieces-34-m2/01a11b76-a9bb-7f77-b78a-ff60e8af1211",
@@ -2728,6 +2759,41 @@
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "zimo-01a1a0f2-85bb-7704-8a54-be6185c98a2a",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-meuble-avec-balcon-et-parking-sainte-clotilde-650-cc/01a1a0f2-85bb-7704-8a54-be6185c98a2a",
+  "titre": "Studio meublé avec balcon et parking - Sainte-Clotilde - 650 CC",
+  "prix": 650.0,
+  "commune": "Saint-Denis",
+  "quartier": "Sainte-Clotilde",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 23.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/_PqoF9Xctrd6W1e7oHyxYsraNymWs8wdD9ZrbWlIfr0/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_7d368d42-b98d-4963-9ee4-995b50173f88.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 23 m²",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-03T15:10+04:00"
  },
  {
   "id": "zimo-01a18b78-b1fc-7ea6-a284-99da502f2049",
@@ -4017,24 +4083,38 @@
   "vu": "2026-11-03T13:07+04:00"
  },
  {
-  "id": "zimo-01a19c4c-0c04-7186-a0d9-842f4792cae3",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-45-m2/01a19c4c-0c04-7186-a0d9-842f4792cae3",
-  "titre": "Appartement 2 pièces 45 m²",
+  "id": "superimmo-onces-location-appartement-45m-sainte-clotilde-97490-x12dv2z",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-45m-sainte-clotilde-97490-x12dv2z",
+  "titre": "Location appartement 2 pièces 45 m² Sainte-Clotilde (97490)",
   "prix": 700.0,
   "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
+  "quartier": "",
   "pieces": 2,
   "type": "T2",
   "surface": 45.0,
   "meuble": null,
   "photos": [
-   "https://img.e-xiste.com/I9rnF8CJvrH2_CoPr8xerFIJKkJ4x1ufquIlPbptqK4/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_048360fd-d666-47ff-967e-faf23894589e.jpg"
+   "https://photo.superimmo.com/e7nat0zkagnqklnejkgu7pogwt4v",
+   "https://photo.superimmo.com/bflgl31a2y0cgbdt5yml8w1k5m0t",
+   "https://photo.superimmo.com/8hgthdvlnqv70fp6nfg18rrz211k",
+   "https://photo.superimmo.com/jhmsbm3tieunk8yib4vnmlga2v9j",
+   "https://photo.superimmo.com/plkrojesa2xtcjko9g8n03c3rsfd",
+   "https://photo.superimmo.com/lduriied136t6wh4vn10fy0i3lv7",
+   "https://photo.superimmo.com/thfmeys6kadv8kpeig3jg8ggr43f",
+   "https://photo.superimmo.com/48l89n03clu3hqx2av8ywsqq7qmt",
+   "https://photo.superimmo.com/bnitzidqwgj8vo3l73ovhna627ea",
+   "https://photo.superimmo.com/x9bb4gtx0cg08roc5xeplq5esw47",
+   "https://photo.superimmo.com/2370afbsvfej6ny6yrxyj1l4yvup",
+   "https://photo.superimmo.com/q79h0vdtmr0h1fkubzuhp2z7ptd5",
+   "https://photo.superimmo.com/ert2gyrqwdq8q8thcx3mt25wkors",
+   "https://photo.superimmo.com/7uio697sqfab65edckaryzxyywvb",
+   "https://photo.superimmo.com/u9ds1wg7s1sq9k2e0gb7ag02xoie"
   ],
-  "description": "Location T2 Saint-Denis (974) 2 pièces 45 m²",
+  "description": "Annonce appartement location 45 m² 2 pièces à Sainte-Clotilde A louer F2 de 45m2 à ,",
   "caracteristiques": [],
   "date": "",
-  "annonceur": "Pro · via leboncoin",
+  "annonceur": "Superimmo",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -4044,7 +4124,12 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-2-pieces-45-m2/01a19c4c-0c04-7186-a0d9-842f4792cae3"
+   }
+  ],
   "vu": "2026-11-02T17:27+04:00"
  },
  {
