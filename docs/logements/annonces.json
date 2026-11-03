@@ -1,5 +1,34 @@
 [
  {
+  "id": "zimo-01a1a0d1-e2b9-7998-8661-c5f72faa2e4f",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio/01a1a0d1-e2b9-7998-8661-c5f72faa2e4f",
+  "titre": "Appartement Location Saint-Denis 1p 30m² 350€",
+  "prix": 350.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 30.0,
+  "meuble": null,
+  "photos": [],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 30 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-03T14:09+04:00"
+ },
+ {
   "id": "ep-22743188",
   "source": "EntreParticuliers",
   "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-1-piece-22-m2/ref-22743188",
@@ -454,6 +483,10 @@
   "secteur": "Nord-Ouest",
   "caf": false,
   "aussi": [
+   {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-110427691.html"
+   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-1-piece-33-m2/01a18b78-b1f3-7f8b-a2be-d96f9eac7918"
@@ -2688,10 +2721,6 @@
    {
     "source": "Bien'ici",
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/ag340369-551086409"
-   },
-   {
-    "source": "Figaro Immobilier",
-    "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html"
    },
    {
     "source": "Zimo",
