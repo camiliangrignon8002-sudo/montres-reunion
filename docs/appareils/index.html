@@ -86,6 +86,9 @@ h1 { font: 700 32px/1.1 var(--font-d); letter-spacing: -.02em; margin: 0; }
 .card { background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow); padding: 0 18px 18px; display: flex; flex-direction: column; gap: 16px; min-width: 0; overflow: hidden; }
 .hero { margin: 0 -18px; background: var(--hero); padding: 26px 16px 18px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
 .hero svg.prod { width: 100%; max-width: 340px; height: auto; aspect-ratio: 32 / 20; margin-bottom: 10px; }
+.hero .photo { margin: -26px -16px 14px; align-self: stretch; height: 280px; background: #1f1d1b; display: grid; place-items: center; overflow: hidden; }
+.hero .photo img { max-width: 100%; height: 280px; width: auto; object-fit: contain; display: block; }
+.hero .photo.large img { width: 100%; height: 100%; object-fit: cover; }
 .hero h2 { font: 700 28px/1.1 var(--font-d); letter-spacing: -.015em; margin: 0; }
 .hero .model { color: var(--fg-2); font-size: 14px; overflow-wrap: anywhere; }
 .hero .pills { justify-content: center; margin-top: 6px; }
@@ -222,7 +225,7 @@ code, .code { font-family: var(--mono); font-size: 12.5px; background: var(--sur
         <label>Couleur de l'iPhone
           <select id="f_c_iphone"><option value="naturel">Titane naturel</option><option value="desert">Titane désert</option><option value="noir">Titane noir</option><option value="blanc">Titane blanc</option></select></label>
         <label>Couleur du Mac
-          <select id="f_c_mac"><option value="argent">Argent</option><option value="gris">Gris sidéral</option><option value="or">Or</option></select></label>
+          <select id="f_c_mac"><option value="gris">Gris sidéral</option><option value="argent">Argent</option><option value="or">Or</option></select></label>
         <label>Nom du Mac<input id="f_n_mac" autocomplete="off"></label>
         <label>Numéro de série du Mac (donne la date de fabrication)<input id="f_serial" autocomplete="off" spellcheck="false" placeholder="ex. FVFZ…" maxlength="12"></label>
         <label>Nom des AirPods<input id="f_n_airpods" autocomplete="off"></label>
@@ -383,7 +386,7 @@ const ICONES = {
 // Dessins des produits (SVG), dans le style des photos produit d'Apple.
 const COULEURS = {
   iphone: { naturel: ['Titane naturel', '#d6d1c8', '#a9a397'], desert: ['Titane désert', '#d9c2ad', '#a98d76'], noir: ['Titane noir', '#5a5a5c', '#2e2e30'], blanc: ['Titane blanc', '#f4f3ef', '#cfcdc6'] },
-  mac: { argent: ['Argent', '#e8e9eb', '#b9bbbe'], gris: ['Gris sidéral', '#8e8f92', '#5f6063'], or: ['Or', '#f1dccd', '#cdb09c'] },
+  mac: { gris: ['Gris sidéral', '#8e8f92', '#5f6063'], argent: ['Argent', '#e8e9eb', '#b9bbbe'], or: ['Or', '#f1dccd', '#cdb09c'] },
 };
 function lentille(x, y, r, id) {
   return `<circle cx="${x}" cy="${y}" r="${r + 2.2}" fill="url(#${id}ring)"/><circle cx="${x}" cy="${y}" r="${r}" fill="#0b0b0e"/>
@@ -418,7 +421,7 @@ function dessin(type) {
       </g></svg>`;
   }
   if (type === 'mac') {
-    const [, c1, c2] = COULEURS.mac[R('c_mac') || 'argent'];
+    const [, c1, c2] = COULEURS.mac[R('c_mac') || 'gris'];
     return `<svg class="prod" viewBox="0 0 320 200" role="img" aria-label="MacBook Air 13 pouces ouvert"><defs>
       <linearGradient id="mcl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>
       <linearGradient id="mcb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset=".55" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient>
@@ -580,7 +583,7 @@ function rendre() {
     const pills = [`<span class="pill ${inf.statut.cls}">${inf.statut.txt}</span>`];
     if (inf.cycle) pills.push(`<span class="pill ${inf.cycle.cls}">${inf.cycle.txt}</span>`);
     return `<article class="card" aria-labelledby="t_${a.id}">
-      <div class="hero">${dessin(a.type)}
+      <div class="hero"><div class="photo${a.id === 'mac' ? ' large' : ''}"><img src="photo-${a.id}.jpg" alt="${esc(nom)}" loading="lazy" decoding="async" onerror="this.parentNode.outerHTML=dessin('${a.type}')"></div>
         <h2 id="t_${a.id}">${esc(nom)}</h2>
         <div class="model">${esc(inf.modele)}${COULEURS[a.id] ? ' · ' + COULEURS[a.id][R('c_' + a.id) || Object.keys(COULEURS[a.id])[0]][0] : ''}</div>
         <div class="pills">${pills.join('')}</div></div>

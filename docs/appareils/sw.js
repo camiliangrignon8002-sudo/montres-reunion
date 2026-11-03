@@ -1,6 +1,6 @@
 // Mes appareils : garde l'appli disponible hors connexion (réseau d'abord, cache en secours).
-const CACHE = 'appareils-v1';
-const FICHIERS = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'apple-touch-icon.png', 'favicon-32.png'];
+const CACHE = 'appareils-v2';
+const FICHIERS = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'apple-touch-icon.png', 'favicon-32.png', 'photo-iphone.jpg', 'photo-mac.jpg', 'photo-airpods.jpg', 'photo-earpods.jpg'];
 self.addEventListener('install', ev => { ev.waitUntil(caches.open(CACHE).then(c => c.addAll(FICHIERS))); self.skipWaiting(); });
 self.addEventListener('activate', ev => ev.waitUntil(
   caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())
