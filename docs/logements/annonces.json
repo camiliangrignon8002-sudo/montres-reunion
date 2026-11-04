@@ -945,6 +945,39 @@
   "vu": "2026-10-23T20:52+04:00"
  },
  {
+  "id": "zimo-01a1a5aa-75be-7812-95d8-ad1c3ddcedfa",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/loue-studio-proximite-fac-et-boulevard-sud/01a1a5aa-75be-7812-95d8-ad1c3ddcedfa",
+  "titre": "Loue studio proximité fac et boulevard Sud",
+  "prix": 450.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 25.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/pRjWBgtqhClZs30HXoWMBPEc84qj-6es4GJ4aA20FSQ/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_b2a18284-2d83-4664-b099-730af3c3dca1.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 25 m²",
+  "caracteristiques": [
+   "Proche université"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-04T14:22+04:00"
+ },
+ {
   "id": "zimo-01a1a2c5-470f-7550-8fad-c2e1a4312981",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studios-etudiant-nord-et-sud/01a1a2c5-470f-7550-8fad-c2e1a4312981",
@@ -1580,6 +1613,42 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-03T22:03+04:00"
+ },
+ {
+  "id": "bienici-apimo-86730950",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/apimo-86730950",
+  "titre": "Studio - 28 m2",
+  "prix": 490.56,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 27.57,
+  "meuble": null,
+  "photos": [
+   "https://file.bienici.com/photo/apimo-86730950_media.apimo.pro_cache_ba58ae75da5ae251389eb29e0f742530_232f72da93_1600-original.jpg",
+   "https://file.bienici.com/photo/apimo-86730950_media.apimo.pro_cache_deda862aa43a40165622594fbfc46ddc_30901a72c2_1600-original.jpg",
+   "https://file.bienici.com/photo/apimo-86730950_media.apimo.pro_cache_f6c89db33857f87533d544f7a426ad45_b14923bbea_1600-original.jpg",
+   "https://file.bienici.com/photo/apimo-86730950_media.apimo.pro_cache_388b52bf4499616ee796e72861430bed_badc058968_1920-original.jpg"
+  ],
+  "description": "En exclusivité, nous vous proposons à la location ce studio spacieux et lumineux de 28 m², situé dans un petit immeuble au cœur du centre-ville de Saint-Denis.\n\nAu 4ᵉ et dernier étage sans ascenseur, il se compose d’une agréable pièce de vie avec kitchenette équipée, ainsi que d’une salle d’eau avec WC.\n\nSon emplacement privilégié, à proximité immédiate des commerces, des commodités et des principaux axes, en fait un bien idéal pour une vie urbaine pratique et agréable.\n\nLivre au 20 octobre 2026\n\nContactez Jennyfer BOUCHER au <span class=\"importDescriptionDecorator\" data-type=\"phone\">0692 82 22 82</span>/ 0262 21 88 63 \n\nLoyer : 490,56 par mois charges comprises\nDépôt de garantie 470,56 €\nProvision mensuelle de charges récupérables : 30,00 €\n*Honoraire charge locataire -constitution du dossier, visite, rédaction du contrat : 367,36 €dont état des lieux d'entrée 83,53€\n\nRéf. annonce : SOG-1016.9\n\nNombre de lots dans la résidence: 8\n\nLes informations sur les risques\nauxquels ce bien est exposé sont disponibles sur le site Géorisques : www.georisques.gouv.fr",
+  "caracteristiques": [
+   "Ascenseur"
+  ],
+  "date": "2026-11-04T09:27:27.677Z",
+  "annonceur": "Sorim",
+  "lat": -20.87998885,
+  "lon": 55.448136944,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 82 22 82",
+  "email": "",
+  "adresse": "60 rue Alexis de Villeneuve, 97400 Saint-Denis",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-04T14:22+04:00"
  },
  {
   "id": "zimo-01a1a171-f6ce-76ba-a317-39d901c7cfa2",
@@ -2650,7 +2719,12 @@
   "adresse": "135 avenue de la Grande Ourse    97434 SAINT GILLES LES BAINS, 97434 Saint-Gilles les Bains",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/a-louer-studio-ste-clotilde-bois-de-nefles/01a1a5aa-9f0d-7a05-8cc8-4b616f4fe766"
+   }
+  ],
   "vu": "2026-11-04T12:27+04:00"
  },
  {
@@ -3789,6 +3863,41 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "figaro-108377217",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108377217.html",
+  "titre": "Location meublée appartement 1 pièce 16 m² à Saint paul (97460), 600 €",
+  "prix": 600.0,
+  "commune": "Le Port",
+  "quartier": "Saint paul",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 16.0,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/V8t4jUk9JOvqxHSjYks6F7CN9MvRnXUGC132I-P3EIYqJPmfXuLA5YYetKpgRay9KcGpCXfmQBwaxt3R94YwhpT7R4ZOePzbPZJIQw=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/a3tW_AOl9sAEI0RzegVvKUjVKI3HDOfC8YHBOMUDl_V1AVGdF8NL1R5mwFIA62-4oGYlkr80SKNA5e_iUe7UH1AKZkhzguB2jvHo=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/xyr8KWNJjo-adpsxY5w1bUkbtUYw1AnwJc48_Glu8RNe0A7fGnIBJgA2dlu2ouU54maNbkxRgQtAbu7llYtoYk_f3XMs-5h_YOWAjQ=rw-w940-h605-l80"
+  ],
+  "description": "Nous vous proposons à la location cette chambre meublée d'une surface de 16m2, située à Saint Gilles les Hauts.\nLe locataire aura à sa disposition sa propre SDB personnelle ainsi que son WC (type chambre parentale)\nEn commun tous le reste de la maison et les extérieurs.\nLoyer 600EUR\nEau, électricité et internet inclus dans le loyer - le logement est loué meublé - le ménage est fait dans les espaces personnels (et compris dans le loyer) tous les 15 jours\nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www.georisques.gouv.fr",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord-Ouest",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T17:56+04:00"
  },
  {
   "id": "zimo-01a1a437-8d02-7c24-ad2a-5670df729845",
@@ -5139,10 +5248,6 @@
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/ag340369-551086409"
    },
    {
-    "source": "Figaro Immobilier",
-    "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html"
-   },
-   {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a0cf1e-21a7-7b69-bfcb-d74b3312e7ae"
    }
@@ -5676,6 +5781,10 @@
    {
     "source": "ParuVendu",
     "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296212967A1KILHAP000"
+   },
+   {
+    "source": "Bien'ici",
+    "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/3pieces/apimo-6528575"
    },
    {
     "source": "Zimo",
@@ -7494,28 +7603,30 @@
   "vu": "2026-11-03T20:07+04:00"
  },
  {
-  "id": "figaro-110318603",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110318603.html",
-  "titre": "Location meublée appartement 2 pièces 52.01 m² à Saint denis chaudron (97490), 707 €",
+  "id": "ep-22752068",
+  "source": "EntreParticuliers",
+  "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-2-pieces-52-m2/ref-22752068",
+  "titre": "Appartement 2 pièces 52 m² — Saint-Denis",
   "prix": 707.0,
   "commune": "Saint-Denis",
-  "quartier": "Saint denis chaudron",
+  "quartier": "Saint-Denis",
   "pieces": 2,
   "type": "T2",
-  "surface": 52.01,
+  "surface": 52.0,
   "meuble": true,
   "photos": [
-   "https://lh3.googleusercontent.com/j87SLVmjrRuXbBXyVK84YkfIIzm4u6KZg4bGv6LVoTRbyQwTWu1KUCNfGagj-lrHrtZbEJMHu1A4Oc55-Zh3ebGIM4gelO16ymFW=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/VOxJ8mYBmC6VEG1sNcrojWnho8tlgNNw_MpVpthz4VjbKlpVrACp6zDARwGAlaBjOdg6FcWUFliy6QcvYrUsIGL5dBLGS6MBIYRoGA=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/v6JfpetS2o3-9ibTyQETvKr2s0-aNkMjWxt5uzmQRvveUEapzJD_-uL1t22dKPIwKJ5szofXRZNAfTt2YZFMr7h4xzHcrgMiR-d7gA=rw-w940-h605-l80"
+   "https://www.entreparticuliers.com/media/epc-photos/photo_dc7f1fe3-d096-498a-9774-2920d99190ee.jpg"
   ],
-  "description": "Grand T2 meublé à louer à Saint-Denis \n\nEmplacement idéal dans le Nord de\nl'île de La Réunion !\n\n\nDisponible à partir du 15/11/2026\n\nVisite à partir du 31/10/2026 selon disponibilités de la locataire en place\n\n\nNous vous proposons en exclusivité ce superbe appartement T2\nen RDC de 59.36 m2 total (52",
+  "description": "Grand T2 meublé à louer à Saint-Denis\nEmplacement idéal dans le Nord de\nl'île de La Réunion !\nDisponible à partir du 15/11/2026\nVisite à partir du 31/10/2026 selon disponibilités de la locataire en place\nNous vous proposons en exclusivité ce superbe appartement T2\nen RDC de 59.36 m2 total (52.01 m2 loi Carrez)\nEntièrement meublé & équipé.\nIl ne manque rien pour vous installer\nconfortablement !\nNombreuses commodités à proximité dont:\n- À 2 min des axes rapides\n- A 5 min de la faculté de SAINT DENIS\nComposition du bien :\n- Cuisine entièrement équipée\n- Séjour spacieux\n- Salle de bain / WC\n- Chambre climatisé avec placard intégré\n- Terrasse donnant sur l'arrière de la résidence\n- Une place de parking sécurisée et privée\nLoyer : 705.89 EUR / mois Charges comprises*\n*Internet,Eau & Électricité : non inclus\nProvisions sur charges : 45EUR / mois\n(charges de copropriété)\nLoyer Hors Charges: 661.89EUR / mois\nHonoraires d'agence : 682.37 EUR TTC\n(incluant 157.59 EUR TTC pour l'état des lieux)\nDépôt de garantie : 1 200 EUR\nSoit 2 mois de loyer hors charges\nRéf. annonce : LAP1030005271\nMandat exclusif no 6727\nInfos & réservations, Contactez :\nM. KRAFT Yannick\nConseiller Winkey Immobilier\nRSAC Saint-Denis No 879 118 289\nDate de construction : 2007\nNon soumis au DPE\nAssainissement : Tout à l'égout\nConsommation énergie primaire : Non communiquée.\nConsommation énergie finale : Non communiquée.\nCette annonce vous est proposée par  - EI - NoRSAC: 879 118 289, Enregistré à Greffe du tribunal de commerce de    La présente annonce immobilière a été rédigée sous la responsabilité éditoriale de l'agent mandataire. conformément à l'article l.561-5 et suivants du code monétaire et financier, il vous sera demandé de nous présenter une pièce d'identité avant chaque visite.",
   "caracteristiques": [
-   "Meublé"
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Climatisation",
+   "Résidence sécurisée"
   ],
   "date": "",
-  "annonceur": "",
+  "annonceur": "Particulier",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -7526,10 +7637,6 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
-   {
-    "source": "EntreParticuliers",
-    "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-2-pieces-52-m2/ref-22752068"
-   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-2-pieces-52-m2/01a17d6a-c445-7edc-adc0-f45d443c5b7a"
