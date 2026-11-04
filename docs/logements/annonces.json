@@ -1374,47 +1374,54 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "bienici-hektor-herrenimmo1-179",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/hektor-herrenimmo1-179",
-  "titre": "Studio meublé Sainte-Clotilde",
-  "prix": 485,
+  "id": "superimmo-onces-location-appartement-20m-sainte-clotilde-97490-x11etl2",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-20m-sainte-clotilde-97490-x11etl2",
+  "titre": "Location appartement 1 pièce 20 m² Sainte-Clotilde (97490)",
+  "prix": 485.0,
   "commune": "Saint-Denis",
-  "quartier": "Le Chaudron - Sainte-Clotilde",
+  "quartier": "",
   "pieces": 1,
   "type": "Studio",
-  "surface": 20,
+  "surface": 20.0,
   "meuble": true,
   "photos": [
-   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_6e5ce6271563a6013c582a21f0756b91.jpg",
-   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_e1f6ae48cea70674e7e14cecd8f20dcf.jpg",
-   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_24f006c0dbd81f5b53c263038f6ead17.jpg",
-   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_2f06a06736c194eb0811489853eb2dd9.jpg",
-   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_4c5a0faa5b63b3ef7ddd957bafafdbe9.jpg",
-   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_74bf8456369ecdb16e2b3851c81eca5e.jpg"
+   "https://photo.superimmo.com/1t9eqrwlp9ilsxb5cstop9w4cge1",
+   "https://photo.superimmo.com/o5g72p0lwo9qnpo1rxhelhg2sv06",
+   "https://photo.superimmo.com/l4htzeyisi6hy1go20ksms2lmi77",
+   "https://photo.superimmo.com/tnrna5lhpnvox5en8l6jdeoc6eg4",
+   "https://photo.superimmo.com/forru3ix8vd547vbkisvch90tqrh",
+   "https://photo.superimmo.com/3jii4t4h7vh1iox8sn5m4qai29ib",
+   "https://photo.superimmo.com/mlqzruh0hp21657tuc5h8glhqo42",
+   "https://photo.superimmo.com/vzndax9hl5b91z6z6oi431zg4e09",
+   "https://photo.superimmo.com/ls9jl59do20vwq2i2bsi9blyaq36",
+   "https://photo.superimmo.com/akvac441cee5mueqijwwaubzadkz",
+   "https://photo.superimmo.com/6xufmxoqrpdpv6ou2lvm9wvtf569",
+   "https://photo.superimmo.com/tb1wrrszrjqyus1hzwxkdr32g7k8",
+   "https://photo.superimmo.com/2hq0t8jp4h9mw7vr9ntf54z9bnfz",
+   "https://photo.superimmo.com/91jcij3kvqitxw37fjcq81ltoklb",
+   "https://photo.superimmo.com/b46boq4vp67998xdgc52yjegnlcy"
   ],
-  "description": "Situé à Sainte-Clotilde, ce studio meublé de 20 m2 dispose d'une pièce principale, un coin cuisine avec plaque, frigo, hotte et placards, une salle de bains avec douche + WC et meuble vasque ainsi qu'un parking sécurisé en sous/sol.<br> Disponible début novembre.<br> Loyer mensuel TCC : 485,00 EUR<br> Honoraires en zone tendue : 261,00 EUR dont 60,15 EUR pour l'état des lieux.<br> Dépôt de garantie : un mois de loyer soit 485,00 EUR<br> HERREN Immobilier <span class=\"importDescriptionDecorator\" data-type=\"phone\">02 62 20 01 62</span>/ 0692 42 71 13<br>",
+  "description": "Annonce appartement location 20 m² 1 pièce à Sainte-Clotilde Studio meublé Situé à , ce studio",
   "caracteristiques": [
-   "Ascenseur",
-   "Parking (1)",
-   "4e étage",
-   "Libre le 24/06/2024",
-   "Meublé",
-   "Parking",
-   "Résidence sécurisée"
+   "Meublé"
   ],
-  "date": "2026-10-28T05:09:39.818Z",
-  "annonceur": "HERREN IMMOBILIER",
-  "lat": -20.894592372761053,
-  "lon": 55.484249891276285,
+  "date": "",
+  "annonceur": "Superimmo",
+  "lat": null,
+  "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "0262 20 01 62",
+  "tel": "",
   "email": "",
-  "adresse": "10 rue Neuve, 97400 SAINT-DENIS",
+  "adresse": "",
   "secteur": "Nord",
   "caf": false,
   "aussi": [
+   {
+    "source": "Bien'ici",
+    "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/hektor-herrenimmo1-179"
+   },
    {
     "source": "EntreParticuliers",
     "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/studio-meuble-sainte-clotilde/ref-22729322"
@@ -2607,6 +2614,44 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-04T10:18+04:00"
+ },
+ {
+  "id": "bienici-immo-facile-61704747",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/immo-facile-61704747",
+  "titre": "A LOUER - STUDIO - STE CLOTILDE BOIS DE NEFLES",
+  "prix": 554,
+  "commune": "Saint-Denis",
+  "quartier": "Le Moufia - Sainte-Clotilde",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 20,
+  "meuble": true,
+  "photos": [
+   "https://file.bienici.com/photo/immo-facile-61704747_media.immo-facile.com_office5_cpstgilles_041224_catalog_images_pr_web_6_1_7_0_4_7_4_7_61704747a.jpg_DATEMAJ_04_11_2026-06_45_52",
+   "https://file.bienici.com/photo/immo-facile-61704747_media.immo-facile.com_office5_cpstgilles_041224_catalog_images_pr_web_6_1_7_0_4_7_4_7_61704747b.jpg_DATEMAJ_04_11_2026-06_45_52",
+   "https://file.bienici.com/photo/immo-facile-61704747_media.immo-facile.com_office5_cpstgilles_041224_catalog_images_pr_web_6_1_7_0_4_7_4_7_61704747c.jpg_DATEMAJ_04_11_2026-06_45_52"
+  ],
+  "description": "N°DOSSIER : 0285<br>L'Immo by Odyssée vous propose à la location ce joli studio de 20 m2 meublé à Sainte Clotilde Bois de Nèfles. Au 1er étage de la résidence, il se compose d'une entrée, d'une kitchenette, d'un séjour, d'une salle d'eau avec WC.<br>Vous bénéficierez d'une place de parking en sous sol.<br>PAS DE VISITES EN VISIO<br>Loyer : 554,00 € dont 39,00 € de provisions de charges de copropriété.<br>DISPONIBLE NOVEMBRE<br>Dépôt de garantie : 1030,00 €<br>Honoraires de mise en location : 260,00 € dont 60,00 € pour l'établissement de l'état des lieux d'entrée.<br>Mentions obligatoires:<br>- L'Île de la Réunion n'est pas concernée par le Diagnostic de Performance Energétique (DPE).<br>- L'Île de la Réunion est située dans le périmètre d'un plan de prévention des risques: zone de sismicité. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr<br>Agence L'Immo by Odyssée - Île de la Réunion - Saint Gilles les Bains",
+  "caracteristiques": [
+   "Parking (1)",
+   "1e étage",
+   "Meublé",
+   "Parking"
+  ],
+  "date": "2026-11-04T07:01:45.831Z",
+  "annonceur": " CÔTÉ PARTICULIERS",
+  "lat": -20.916295475185414,
+  "lon": 55.48515096804473,
+  "charges": 39,
+  "pro": true,
+  "tel": "0693 90 77 77",
+  "email": "",
+  "adresse": "135 avenue de la Grande Ourse    97434 SAINT GILLES LES BAINS, 97434 Saint-Gilles les Bains",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-04T12:27+04:00"
  },
  {
   "id": "bienici-citya-immobilier-501991-GES54350012-34",
@@ -4774,8 +4819,8 @@
   "caf": false,
   "aussi": [
    {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/2pieces/netty-company51942hxz-appt-2082"
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-110257171.html"
    },
    {
     "source": "Zimo",
@@ -5092,6 +5137,10 @@
    {
     "source": "Bien'ici",
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/ag340369-551086409"
+   },
+   {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html"
    },
    {
     "source": "Zimo",
@@ -6508,6 +6557,46 @@
   "vu": "2026-11-04T01:01+04:00"
  },
  {
+  "id": "figaro-110025019",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025019.html",
+  "titre": "Location meublée appartement 1 pièce 24.72 m² à Saint-Denis (97400), 680 €",
+  "prix": 680.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": null,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/yuCmIU2VVliHTLDaZhVC7dQKHEkgKEF6DHQ-ttgsVhQAPLGwNA5tAPiqMUtHx_Fi20T2kJ4msyZlSZU0puhHAbG_czetMbLgPw9a1Q=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/yaXvVs2WqRwgODHf5qBPzomBUey_xX2i128B7aL_lfg_OPyLKOcWN2eLsJR12XoYVeArIB6vvQhyx9LafbnkKMuk-aMmTyiaifvvRg=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/7UCEdPc8N0qDHp3URGOPM4ulUFrJfLTgQrpB_Ytl0J4qbV1esvf4iJe_shR9VajkSduyLpxJij9rLgzo6KTia6_brGJTRoy5dn7QP94=rw-w940-h605-l80"
+  ],
+  "description": "RUNIMMO vous propose en location un studio joliment meublé de 24,72 m2, situé dans la rue monthyon à Saint-Denis (97400), résidence ' LA GOELETTE '. Ce bien se compose d'une pièce principale lumineuse et climatisée, une cuisine aménagée et équipée, une belle salle d'eau avec wc et une grande terrasse. Une place de parking privative est disponible en sous-sol. Ce bien se situe proche du jardin de l'état, et du centre ville de Saint-Denis. Pour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 321 € TTC à la charge du locataire comprenant 74 € TTC pour l'état des lieux. Loyer de base 640 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 280 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Climatisation",
+   "Jardin",
+   "Cuisine équipée"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 26 92 05",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T12:04+04:00"
+ },
+ {
   "id": "zimo-01a1a189-df7b-78cb-b3c1-c59c4b2abbc0",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-2-pieces-44-m2/01a1a189-df7b-78cb-b3c1-c59c4b2abbc0",
@@ -7405,30 +7494,28 @@
   "vu": "2026-11-03T20:07+04:00"
  },
  {
-  "id": "ep-22752068",
-  "source": "EntreParticuliers",
-  "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-2-pieces-52-m2/ref-22752068",
-  "titre": "Appartement 2 pièces 52 m² — Saint-Denis",
+  "id": "figaro-110318603",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110318603.html",
+  "titre": "Location meublée appartement 2 pièces 52.01 m² à Saint denis chaudron (97490), 707 €",
   "prix": 707.0,
   "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
+  "quartier": "Saint denis chaudron",
   "pieces": 2,
   "type": "T2",
-  "surface": 52.0,
+  "surface": 52.01,
   "meuble": true,
   "photos": [
-   "https://www.entreparticuliers.com/media/epc-photos/photo_dc7f1fe3-d096-498a-9774-2920d99190ee.jpg"
+   "https://lh3.googleusercontent.com/j87SLVmjrRuXbBXyVK84YkfIIzm4u6KZg4bGv6LVoTRbyQwTWu1KUCNfGagj-lrHrtZbEJMHu1A4Oc55-Zh3ebGIM4gelO16ymFW=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/VOxJ8mYBmC6VEG1sNcrojWnho8tlgNNw_MpVpthz4VjbKlpVrACp6zDARwGAlaBjOdg6FcWUFliy6QcvYrUsIGL5dBLGS6MBIYRoGA=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/v6JfpetS2o3-9ibTyQETvKr2s0-aNkMjWxt5uzmQRvveUEapzJD_-uL1t22dKPIwKJ5szofXRZNAfTt2YZFMr7h4xzHcrgMiR-d7gA=rw-w940-h605-l80"
   ],
-  "description": "Grand T2 meublé à louer à Saint-Denis\nEmplacement idéal dans le Nord de\nl'île de La Réunion !\nDisponible à partir du 15/11/2026\nVisite à partir du 31/10/2026 selon disponibilités de la locataire en place\nNous vous proposons en exclusivité ce superbe appartement T2\nen RDC de 59.36 m2 total (52.01 m2 loi Carrez)\nEntièrement meublé & équipé.\nIl ne manque rien pour vous installer\nconfortablement !\nNombreuses commodités à proximité dont:\n- À 2 min des axes rapides\n- A 5 min de la faculté de SAINT DENIS\nComposition du bien :\n- Cuisine entièrement équipée\n- Séjour spacieux\n- Salle de bain / WC\n- Chambre climatisé avec placard intégré\n- Terrasse donnant sur l'arrière de la résidence\n- Une place de parking sécurisée et privée\nLoyer : 705.89 EUR / mois Charges comprises*\n*Internet,Eau & Électricité : non inclus\nProvisions sur charges : 45EUR / mois\n(charges de copropriété)\nLoyer Hors Charges: 661.89EUR / mois\nHonoraires d'agence : 682.37 EUR TTC\n(incluant 157.59 EUR TTC pour l'état des lieux)\nDépôt de garantie : 1 200 EUR\nSoit 2 mois de loyer hors charges\nRéf. annonce : LAP1030005271\nMandat exclusif no 6727\nInfos & réservations, Contactez :\nM. KRAFT Yannick\nConseiller Winkey Immobilier\nRSAC Saint-Denis No 879 118 289\nDate de construction : 2007\nNon soumis au DPE\nAssainissement : Tout à l'égout\nConsommation énergie primaire : Non communiquée.\nConsommation énergie finale : Non communiquée.\nCette annonce vous est proposée par  - EI - NoRSAC: 879 118 289, Enregistré à Greffe du tribunal de commerce de    La présente annonce immobilière a été rédigée sous la responsabilité éditoriale de l'agent mandataire. conformément à l'article l.561-5 et suivants du code monétaire et financier, il vous sera demandé de nous présenter une pièce d'identité avant chaque visite.",
+  "description": "Grand T2 meublé à louer à Saint-Denis \n\nEmplacement idéal dans le Nord de\nl'île de La Réunion !\n\n\nDisponible à partir du 15/11/2026\n\nVisite à partir du 31/10/2026 selon disponibilités de la locataire en place\n\n\nNous vous proposons en exclusivité ce superbe appartement T2\nen RDC de 59.36 m2 total (52",
   "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Parking",
-   "Climatisation",
-   "Résidence sécurisée"
+   "Meublé"
   ],
   "date": "",
-  "annonceur": "Particulier",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -7439,6 +7526,10 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
+   {
+    "source": "EntreParticuliers",
+    "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-2-pieces-52-m2/ref-22752068"
+   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-2-pieces-52-m2/01a17d6a-c445-7edc-adc0-f45d443c5b7a"
