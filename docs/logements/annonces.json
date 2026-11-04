@@ -368,6 +368,45 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "herren-immobilier-www-herren-immobilier-com-location-appartement-7992",
+  "source": "Herren Immobilier",
+  "url": "https://www.herren-immobilier.com/location/appartement/7992",
+  "titre": "Studio de 24m² à Ste Clotilde",
+  "prix": 375.0,
+  "commune": "Saint-Denis",
+  "quartier": "",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 24.0,
+  "meuble": null,
+  "photos": [
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/main.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/preview.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_144813.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_145038.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/DSC06474.jpg",
+   "https://www.herren-immobilier.com/images/stories/snpi.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7937/min.jpg"
+  ],
+  "description": "> Studio de 24m² � Ste Clotilde Réf : 5008 � Adresse : 97490 STE CLOTILDE Avantages Climatisation Placard(s) Proximité Ecole(s) Proximité Comme...",
+  "caracteristiques": [
+   "Climatisation"
+  ],
+  "date": "",
+  "annonceur": "Herren Immobilier",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "herren-location@orange.fr",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-22T01:51+04:00"
+ },
+ {
   "id": "zimo-01a1a373-5e94-7173-b821-6f56c54cd672",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a1a373-5e94-7173-b821-6f56c54cd672",
@@ -4064,6 +4103,41 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "figaro-108377217",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108377217.html",
+  "titre": "Location meublée appartement 1 pièce 16 m² à Saint paul (97460), 600 €",
+  "prix": 600.0,
+  "commune": "Le Port",
+  "quartier": "Saint paul",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 16.0,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/V8t4jUk9JOvqxHSjYks6F7CN9MvRnXUGC132I-P3EIYqJPmfXuLA5YYetKpgRay9KcGpCXfmQBwaxt3R94YwhpT7R4ZOePzbPZJIQw=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/a3tW_AOl9sAEI0RzegVvKUjVKI3HDOfC8YHBOMUDl_V1AVGdF8NL1R5mwFIA62-4oGYlkr80SKNA5e_iUe7UH1AKZkhzguB2jvHo=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/xyr8KWNJjo-adpsxY5w1bUkbtUYw1AnwJc48_Glu8RNe0A7fGnIBJgA2dlu2ouU54maNbkxRgQtAbu7llYtoYk_f3XMs-5h_YOWAjQ=rw-w940-h605-l80"
+  ],
+  "description": "Nous vous proposons à la location cette chambre meublée d'une surface de 16m2, située à Saint Gilles les Hauts.\nLe locataire aura à sa disposition sa propre SDB personnelle ainsi que son WC (type chambre parentale)\nEn commun tous le reste de la maison et les extérieurs.\nLoyer 600EUR\nEau, électricité et internet inclus dans le loyer - le logement est loué meublé - le ménage est fait dans les espaces personnels (et compris dans le loyer) tous les 15 jours\nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www.georisques.gouv.fr",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord-Ouest",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T17:56+04:00"
+ },
+ {
   "id": "zimo-01a1a437-8d02-7c24-ad2a-5670df729845",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-de-40m2-a-st-denis/01a1a437-8d02-7c24-ad2a-5670df729845",
@@ -5291,12 +5365,7 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/a-louer-un-appartement-t2-a-belle-pierre-a-la-residence-terrasse-de-bellepierre/01a18901-c99d-7dae-bee3-38b034874619"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-29T22:00+04:00"
  },
  {
@@ -5739,37 +5808,6 @@
   "vu": "2026-11-03T19:05+04:00"
  },
  {
-  "id": "zimo-01a18eec-2c2b-7aa8-ba45-2ed3076adbba",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/loue-appartement-t2/01a18eec-2c2b-7aa8-ba45-2ed3076adbba",
-  "titre": "Loue appartement t2",
-  "prix": 650.0,
-  "commune": "La Possession",
-  "quartier": "La Possession",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 42.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/1NTpE28E3LpaTs9S6l8Q1SRIlPQgOIXYDR3Nmcq8RKg/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_76602622-7b75-4f30-875d-6bbf2e0f9aa8.jpg"
-  ],
-  "description": "Location T2 La Possession (974) 2 pièces 42 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord-Ouest",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-31T02:52+04:00"
- },
- {
   "id": "zimo-01a1a204-a07b-76b0-b53c-f7105e389dea",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appt-t2/01a1a204-a07b-76b0-b53c-f7105e389dea",
@@ -6155,39 +6193,6 @@
   "vu": "2026-11-03T23:11+04:00"
  },
  {
-  "id": "zimo-01a195c0-8262-722e-b094-59a9fec24700",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-28m2-dernier-etage-vue-mer/01a195c0-8262-722e-b094-59a9fec24700",
-  "titre": "Studio 28m2 dernier étage vue mer",
-  "prix": 665.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 28.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/7hmgUvlpcBFlwEoSTQMdeMyI3LoMa236RV_0KOek2os/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_1c2d099b-e823-41f7-9201-62646a0938de.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 28 m²",
-  "caracteristiques": [
-   "Vue mer"
-  ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-01T11:18+04:00"
- },
- {
   "id": "zimo-01a13159-76f9-7700-9b1f-87ed81f7d0dc",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-universite/01a13159-76f9-7700-9b1f-87ed81f7d0dc",
@@ -6374,37 +6379,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-04T05:23+04:00"
- },
- {
-  "id": "zimo-01a17d53-5381-7d03-a9f3-406b5650fe9c",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/a-louer-un-appartement-f2-en-duplex-meublee-residence-esplanade-saint-denis/01a17d53-5381-7d03-a9f3-406b5650fe9c",
-  "titre": "À LOUER un appartement F2 en duplex meublée Résidence Esplanade - Saint-Denis",
-  "prix": 674.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 43.0,
-  "meuble": true,
-  "photos": [
-   "https://img.e-xiste.com/pPgIU1L6rnfxq3Qyjm6hPq5eUCf-imxXePr8A_HhSHo/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_eefbf417-082f-4ab7-a592-425b29244485.jpg"
-  ],
-  "description": "Location Duplex Saint-Denis (974) 2 pièces 43 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-27T17:05+04:00"
  },
  {
   "id": "bienici-netty-transac-appt-2853",
@@ -6728,37 +6702,6 @@
    "https://img.e-xiste.com/GGni6VXL-e76tJUmccuald5W-gUEOD0H2QkkgFpD2OA/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_ac0c8d24-34de-4932-846d-781d1ce6d83f.jpg"
   ],
   "description": "Location T1 bis Saint-Denis (974) 1 pièces 42 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "zimo-01a0ed35-f647-720b-8d1e-977eafad6ae3",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-31-m2/01a0ed35-f647-720b-8d1e-977eafad6ae3",
-  "titre": "Appartement 2 pièces 31 m²",
-  "prix": 680.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 31.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/dVkftbsCA6z-POB9OnhS1qpIJRvUscehvzQPhlnLFRE/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_c7c03629-d5e6-484e-b602-27ef526630bf.jpg"
-  ],
-  "description": "Location T2 Saint-Denis (974) 2 pièces 31 m²",
   "caracteristiques": [],
   "date": "",
   "annonceur": "Pro · via leboncoin",
@@ -8022,37 +7965,42 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a168c8-576c-7d6e-bff0-769c1b536d04",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-proche-universite-et-clinique-ste-clotilde/01a168c8-576c-7d6e-bff0-769c1b536d04",
-  "titre": "Studio proche université et clinique Ste Clotilde",
+  "id": "figaro-108777541",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108777541.html",
+  "titre": "Location  appartement 1 pièce 42.61 m² à Sainte Clotilde (97490), 730 €",
   "prix": 730.0,
   "commune": "Saint-Denis",
-  "quartier": "Sainte-Clotilde",
+  "quartier": "Sainte Clotilde",
   "pieces": 1,
-  "type": "Studio",
-  "surface": 25.0,
-  "meuble": null,
+  "type": "T1",
+  "surface": null,
+  "meuble": true,
   "photos": [
-   "https://img.e-xiste.com/HOAWWy98_BLyrFdAiEajnimHX7Dyl0Ee0RcN3pa9QBY/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_56bb66bf-a6b5-40d0-a1c7-256a48966104.jpg"
+   "https://lh3.googleusercontent.com/d3N08dL52FH6uZyCKhYuIeLDR2L5fkzA462jkgQdEE-MkswFdYwY7Wq-Gf9yhSNUaO5-HMTsMUw86Z6egMgWZ1lCxRYy32hnk-Ud3w=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/0QoeYFQILXBQHaW_ZDPy9hAjdNqmx9KsG_1JPRZf0QkMy4MIvbXt2tPM2vVyuPdfVl4QFxdBntBOFCFlFEuqOkg3OA_6SGx3-XBXkQ=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/ztz7NrDN2TZ6VMi6g2ajpkqw0Bz-eXaDGsu6ZkQArho8wSgvJVrc4dQSw59jrntNGpE1JEOBXs4mACeD8hddGQmhxdH-O3q19T5Qjg=rw-w940-h605-l80"
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 25 m²",
+  "description": "Découvrez ce T1 bis de 42 m²Meublé rénové situé dans une résidence sécurisée, offrant un agencement fonctionnel et de nombreux équipements pour un confort au quotidien.\nce logement rénové comprend une entrée , donnant sur une Cuisine aménagée de meubles hauts et bas et équipée plaque vitrocéramique, hotte, four, réfrigérateur et autres équipements.Un cellier avec étagères , machine à laver et chauffe eau, d'un coin chambre avec lit 160 X 200 brasseur d'air et dressing\nd'un coin séjour climatisé avec canapé convertible, table basse, pouf.d'un espace bureau, d'un coin repas avec table pour 4 personnes, d'une salle d'eau avec douche à l'italienne, WC, meuble vasque et miroir\nLes atouts\nRésidence sécurisée\n42 m² parfaitement agencés\nLogement meublé\nCoin chambre avec dressing\nSéjour climatisé\nCuisine équipée\nEspace bureau\nDouche à l'italienne\nNombreux rangements\nLoyer hors charges : 700 € / mois\nProvision sur charges de copropriété : 20 € / mois soumis à régularisation annuelle\nProvision pour TEOM : 10 € / mois soumis à régularisation annuelle\nTotal mensuel : 730 €\nDisponible de suite\nDépôt de garantie : 1400 € soit deux mois de loyer hors charges.\nHonoraires de mise en location à la charge du locataire 13 € par m2 soit 553,93 euros dont 127,83 euros pour l'état des lieux (soit 3euro/M2).\nBarème consultable sur le lien : http://www.tekaimmo.fr/pdf/honoraires.pdf .\nPour toute demande de visite ou complément d'information veuillez contacter David agent mandataire E.I.Teka Immo inscrit au rsac de saint denis sous le numéro 445345937 au 0692 14 60 00 ou david.teka@tekaimmo.fr ou le 0262 41 88 88\nAnnonce rédigée sous la responsabilité éditoriale de l'agent.\nVous pouvez retrouver toutes les informations sur les risques auxquels ce bien pourrait être exposé sur : www.georisques.gouv.fr\n\\r",
   "caracteristiques": [
-   "Proche université"
+   "Meublé",
+   "Climatisation",
+   "Cuisine équipée",
+   "Résidence sécurisée"
   ],
   "date": "",
-  "annonceur": "Particulier · via leboncoin",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
+  "pro": true,
+  "tel": "0692 14 60 00",
+  "email": "david.teka@tekaimmo.fr",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
   "aussi": [],
-  "vu": "2026-10-23T17:00+04:00"
+  "vu": "2026-10-21T12:07+04:00"
  },
  {
   "id": "zimo-01a152cd-c740-7666-bde6-114b192f5824",
