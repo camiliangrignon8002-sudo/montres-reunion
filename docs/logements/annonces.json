@@ -5826,37 +5826,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a1903a-0794-7097-a261-c6ff77afd448",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/loue-t2-bellepierre/01a1903a-0794-7097-a261-c6ff77afd448",
-  "titre": "Loue T2 Bellepierre",
-  "prix": 658.0,
-  "commune": "Saint-Denis",
-  "quartier": "Bellepierre",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 42.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/v3o_PlY1GjuXKeM0ToLcGlnLzy2tWuxtkDNMR4H2EX0/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_51360e67-1681-4bd7-b16c-8aacfb3f6af1.jpg"
-  ],
-  "description": "Location T2 Saint-Denis (974) 2 pièces 42 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-31T08:58+04:00"
- },
- {
   "id": "zimo-01a1a260-091b-7254-a458-29a0bacb2feb",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-2-pieces-40-m2/01a1a260-091b-7254-a458-29a0bacb2feb",
@@ -6715,40 +6684,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-03T17:23+04:00"
- },
- {
-  "id": "zimo-01a14062-ac52-7c6e-8d32-bfc72199bec7",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/loue-meuble-pour-etudiant/01a14062-ac52-7c6e-8d32-bfc72199bec7",
-  "titre": "Loue meublé pour étudiant",
-  "prix": 688.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 24.0,
-  "meuble": true,
-  "photos": [
-   "https://img.e-xiste.com/vLTwwDNnmlc0hwpReg7V8ZVuwOs0Kb0A0scBjuaKRmg/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_7504331b-4577-4172-b7f3-dc2be1c74c8d.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 24 m²",
-  "caracteristiques": [
-   "Meublé",
-   "Proche université"
-  ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:07+04:00"
  },
  {
   "id": "zimo-01a187b7-03de-75a0-8132-b95c682e1743",
