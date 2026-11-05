@@ -368,6 +368,45 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "herren-immobilier-www-herren-immobilier-com-location-appartement-7992",
+  "source": "Herren Immobilier",
+  "url": "https://www.herren-immobilier.com/location/appartement/7992",
+  "titre": "Studio de 24m² à Ste Clotilde",
+  "prix": 375.0,
+  "commune": "Saint-Denis",
+  "quartier": "",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 24.0,
+  "meuble": null,
+  "photos": [
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/main.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/preview.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_144813.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_145038.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/DSC06474.jpg",
+   "https://www.herren-immobilier.com/images/stories/snpi.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7937/min.jpg"
+  ],
+  "description": "> Studio de 24m² � Ste Clotilde Réf : 5008 � Adresse : 97490 STE CLOTILDE Avantages Climatisation Placard(s) Proximité Ecole(s) Proximité Comme...",
+  "caracteristiques": [
+   "Climatisation"
+  ],
+  "date": "",
+  "annonceur": "Herren Immobilier",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "herren-location@orange.fr",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-22T01:51+04:00"
+ },
+ {
   "id": "zimo-01a1a373-5e94-7173-b821-6f56c54cd672",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a1a373-5e94-7173-b821-6f56c54cd672",
@@ -875,38 +914,48 @@
   "vu": "2026-10-27T02:51+04:00"
  },
  {
-  "id": "bienici-citya-immobilier-501991-GES01880013-34",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-501991-GES01880013-34",
-  "titre": "T1 22 m²",
-  "prix": 436.94,
+  "id": "pv-1297061039",
+  "source": "ParuVendu",
+  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1297061039A1KILHAP000",
+  "titre": "Location appartement 1 pièce de 22m2 à Saint clotilde (97490)",
+  "prix": 437.0,
   "commune": "Saint-Denis",
-  "quartier": "Le Moufia - Sainte-Clotilde",
+  "quartier": "Sainte-Clotilde",
   "pieces": 1,
   "type": "T1",
-  "surface": 22.48,
-  "meuble": false,
+  "surface": 22.0,
+  "meuble": null,
   "photos": [
-   "https://file.bienici.com/photo/citya-immobilier-501991-GES01880013-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-felicite-13139221733995896474.jpg"
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/45/eb/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtZmVsaWNpdGUtMTMxMzkyMjE3MzM5OTU4OTY0NzQuanBnPzIwMjYxMTA1MTI0MTU2_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/b3/b7/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtZmVsaWNpdGUtMTY4NzUyOTQzNjQ4NjM3MzMwNTUuanBnPzIwMjYxMTA1MTI0MDMz_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/ec/a3/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE5ODMtODQ4OTYyOTgwNjAxODk0NzQyNS5qcGc_MjAyNjExMDUxMjQxMTk_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/49/84/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ1NzUtOTQ5ODAyODA2MzYyNjM3NTkwNy5qcGc_MjAyNjExMDQyMDE2MzY_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/ef/2d/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLWZpbGlncmFuZS1JTUdfMjAyMDA1MjZfMTYxNTA2LTUyNzMyMzM5MTcwMDE0Mjc2NDYtMTQzODk3OTQyNjg5ODQ4MTI4NzUuanBnPzIwMjYxMTA1MTE0MTE2_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/29/4c/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS0yLS02ODg4NjYxOTQ0ODA4NDg1NDQyLmpwZz8yMDI2MTEwNTExMzk0NA_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/42/82/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2NvdXBjb2V1ci1maWxpZ3JhbmUtMS0tMTcwMDA5MDk3MjgwOTg0MDY3MjcuanBnPzIwMjYxMTA1MTEzOTM0_rct?func=crop&w=1000&gravity=auto"
   ],
-  "description": "Appartement comprenant un séjour/cuisine, une SDB avec WC\nune varangue de 5.47m² et une place de parking\n\n Loyer de 436,94 euros par mois charges comprises dont 20,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). \n Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 456,17 euros. \n Les honoraires charge locataire sont de 294,94 euros ( soit 13,12 euros/m² ) dont 68,11 euros pour état des lieux ( soit 3,03 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
+  "description": "Appartement lumineux à Saint Clotilde, idéal pour profiter d'un séjour/cuisine spacieux, d'une varangue de 5.47m² et d'un parking. Confort assurée avec des charges comprises.\nAppartement comprenant un séjour/cuisine, une SDB avec WC une varangue de 5.47m² et une place de parking Loyer de 436,94 euros par mois charges comprises dont 20,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 456,17 euros. Les honoraires charge locataire sont de 294,94 euros ( soit 13,12 euros/m² ) dont 68,11 euros pour état des lieux ( soit 3,03 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
   "caracteristiques": [
-   "4e étage",
    "Varangue / balcon",
    "Parking"
   ],
-  "date": "2026-11-04T16:06:04.146Z",
+  "date": "",
   "annonceur": "Citya Saint Denis",
-  "lat": -20.9035459,
-  "lon": 55.4903108,
-  "charges": 20,
+  "lat": null,
+  "lon": null,
+  "charges": null,
   "pro": true,
-  "tel": "0262 32 43 24",
+  "tel": "02 57 54 91 17",
   "email": "",
-  "adresse": "45 rue de Paris, 97400 Saint-Denis",
+  "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Bien'ici",
+    "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-501991-GES01880013-34"
+   }
+  ],
   "vu": "2026-11-04T21:11+04:00"
  },
  {
@@ -941,42 +990,48 @@
   "vu": "2026-11-04T22:04+04:00"
  },
  {
-  "id": "bienici-citya-immobilier-501991-GES01880086-34",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-501991-GES01880086-34",
-  "titre": "T1 22 m²",
-  "prix": 437.61,
+  "id": "pv-1297061040",
+  "source": "ParuVendu",
+  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1297061040A1KILHAP000",
+  "titre": "Location appartement 1 pièce de 22m2 à Saint clotilde (97490)",
+  "prix": 438.0,
   "commune": "Saint-Denis",
-  "quartier": "Le Moufia - Sainte-Clotilde",
+  "quartier": "Sainte-Clotilde",
   "pieces": 1,
   "type": "T1",
-  "surface": 22.14,
-  "meuble": false,
+  "surface": 22.0,
+  "meuble": null,
   "photos": [
-   "https://file.bienici.com/photo/citya-immobilier-501991-GES01880086-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-felicite-16875294364863733055.jpg"
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/b3/b7/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtZmVsaWNpdGUtMTY4NzUyOTQzNjQ4NjM3MzMwNTUuanBnPzIwMjYxMTA1MTI0MDMz_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/ec/a3/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE5ODMtODQ4OTYyOTgwNjAxODk0NzQyNS5qcGc_MjAyNjExMDUxMjQxMTk_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/45/eb/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtZmVsaWNpdGUtMTMxMzkyMjE3MzM5OTU4OTY0NzQuanBnPzIwMjYxMTA1MTI0MTU2_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/49/84/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ1NzUtOTQ5ODAyODA2MzYyNjM3NTkwNy5qcGc_MjAyNjExMDQyMDE2MzY_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/ef/2d/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLWZpbGlncmFuZS1JTUdfMjAyMDA1MjZfMTYxNTA2LTUyNzMyMzM5MTcwMDE0Mjc2NDYtMTQzODk3OTQyNjg5ODQ4MTI4NzUuanBnPzIwMjYxMTA1MTE0MTE2_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/29/4c/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS0yLS02ODg4NjYxOTQ0ODA4NDg1NDQyLmpwZz8yMDI2MTEwNTExMzk0NA_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/42/82/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2NvdXBjb2V1ci1maWxpZ3JhbmUtMS0tMTcwMDA5MDk3MjgwOTg0MDY3MjcuanBnPzIwMjYxMTA1MTEzOTM0_rct?func=crop&w=1000&gravity=auto"
   ],
-  "description": "EXCLUSIVITÉ idéal étudiant\nÀ louer : découvrez cet appartement T1 de 22,14 m², localisé à SAINT CLOTILDE (97490) à 200m de l'Université. Il propose une kitchenette, pièce de vie avec balcon et placard. Salle d'eau, vasque, douche et WC\nCet appartement se situe dans un immeuble avec ascenseur.\nL'appartement se trouve dans le quartier du Moufia-Sainte-Clotilde. On trouve des commerces à moins de 3 minutes à pied de l'appartement.\nContactez-nous pour obtenir de plus amples renseignements sur cet appartement en location à SAINT CLOTILDE.  Le bien est soumis au statut de la copropriété. \n\n Loyer de 437,61 euros par mois charges comprises dont 30,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). \n Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 456,84 euros. \n Les honoraires charge locataire sont de 287,82 euros ( soit 13,00 euros/m² ) dont 67,08 euros pour état des lieux ( soit 3,03 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
+  "description": "Idéal pour étudiant, cet appartement T1 à louer offre un emplacement privilégié à 200m de l'Université. Profitez d'une kitchenette et d'un balcon dans un immeuble avec ascenseur, à deux pas des commerces.\nEXCLUSIVITÉ idéal étudiant À louer : découvrez cet appartement T1 de 22,14 m², localisé à SAINT CLOTILDE (97490) à 200m de l'Université. Il propose une kitchenette, pièce de vie avec balcon et placard. Salle d'eau, vasque, douche et WC Cet appartement se situe dans un immeuble avec ascenseur. L'appartement se trouve dans le quartier du Moufia-Sainte-Clotilde. On trouve des commerces à moins de 3 minutes à pied de l'appartement. Contactez-nous pour obtenir de plus amples renseignements sur cet appartement en location à SAINT CLOTILDE. Le bien est soumis au statut de la copropriété. Loyer de 437,61 euros par mois charges comprises dont 30,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 456,84 euros. Les honoraires charge locataire sont de 287,82 euros ( soit 13,00 euros/m² ) dont 67,08 euros pour état des lieux ( soit 3,03 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
   "caracteristiques": [
-   "Ascenseur",
-   "Accès handicapé",
-   "Balcon / varangue",
-   "Parking (1)",
-   "3e étage",
    "Varangue / balcon",
+   "Ascenseur",
    "Proche université"
   ],
-  "date": "2026-11-04T16:09:58.303Z",
+  "date": "",
   "annonceur": "Citya Saint Denis",
-  "lat": -20.9033379,
-  "lon": 55.4895171,
-  "charges": 30,
+  "lat": null,
+  "lon": null,
+  "charges": null,
   "pro": true,
-  "tel": "0262 32 43 24",
+  "tel": "02 57 54 91 17",
   "email": "",
-  "adresse": "45 rue de Paris, 97400 Saint-Denis",
+  "adresse": "",
   "secteur": "Nord",
   "caf": false,
   "aussi": [
+   {
+    "source": "Bien'ici",
+    "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-501991-GES01880086-34"
+   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a1a794-357e-7993-8709-936c958b50c2"
@@ -1064,45 +1119,53 @@
   "vu": "2026-10-23T20:52+04:00"
  },
  {
-  "id": "bienici-citya-immobilier-501991-GES00750020-34",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-501991-GES00750020-34",
-  "titre": "T1 19 m²",
-  "prix": 450,
+  "id": "pv-1297061038",
+  "source": "ParuVendu",
+  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1297061038A1KILHAP000",
+  "titre": "Location appartement 1 pièce de 19m2 à Sainte clotilde (97490)",
+  "prix": 450.0,
   "commune": "Saint-Denis",
-  "quartier": "Le Chaudron - Sainte-Clotilde",
+  "quartier": "Sainte-Clotilde",
   "pieces": 1,
   "type": "T1",
-  "surface": 19,
+  "surface": 19.0,
   "meuble": true,
   "photos": [
-   "https://file.bienici.com/photo/citya-immobilier-501991-GES00750020-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_1983-8489629806018947425.jpg",
-   "https://file.bienici.com/photo/citya-immobilier-501991-GES00750020-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_1978-10327434874323861265.jpg",
-   "https://file.bienici.com/photo/citya-immobilier-501991-GES00750020-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_1980-17559317056158714181.jpg",
-   "https://file.bienici.com/photo/citya-immobilier-501991-GES00750020-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_1643-444033689619283442.jpg",
-   "https://file.bienici.com/photo/citya-immobilier-501991-GES00750020-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-IMG_1644-15635927051352467872.jpg"
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/ec/a3/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE5ODMtODQ4OTYyOTgwNjAxODk0NzQyNS5qcGc_MjAyNjExMDUxMjQxMTk_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/c4/5d/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE5NzgtMTAzMjc0MzQ4NzQzMjM4NjEyNjUuanBnPzIwMjYxMTA1MTI0MTE5_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/72/a1/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE5ODAtMTc1NTkzMTcwNTYxNTg3MTQxODEuanBnPzIwMjYxMTA1MTI0MTE5_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/30/a1/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE2NDMtNDQ0MDMzNjg5NjE5MjgzNDQyLmpwZz8yMDI2MTEwNTEyNDExOQ_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/9c/88/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE2NDQtMTU2MzU5MjcwNTEzNTI0Njc4NzIuanBnPzIwMjYxMTA1MTI0MTE5_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/b3/b7/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtZmVsaWNpdGUtMTY4NzUyOTQzNjQ4NjM3MzMwNTUuanBnPzIwMjYxMTA1MTI0MDMz_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/45/eb/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtZmVsaWNpdGUtMTMxMzkyMjE3MzM5OTU4OTY0NzQuanBnPzIwMjYxMTA1MTI0MTU2_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/49/84/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ1NzUtOTQ5ODAyODA2MzYyNjM3NTkwNy5qcGc_MjAyNjExMDQyMDE2MzY_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/ef/2d/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLWZpbGlncmFuZS1JTUdfMjAyMDA1MjZfMTYxNTA2LTUyNzMyMzM5MTcwMDE0Mjc2NDYtMTQzODk3OTQyNjg5ODQ4MTI4NzUuanBnPzIwMjYxMTA1MTE0MTE2_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/29/4c/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS0yLS02ODg4NjYxOTQ0ODA4NDg1NDQyLmpwZz8yMDI2MTEwNTExMzk0NA_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/42/82/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2NvdXBjb2V1ci1maWxpZ3JhbmUtMS0tMTcwMDA5MDk3MjgwOTg0MDY3MjcuanBnPzIwMjYxMTA1MTEzOTM0_rct?func=crop&w=1000&gravity=auto"
   ],
-  "description": "99 Avenue Leconte Delisle - 97490 SAINTE CLOTILDE\nÀ louer : découvrez cet appartement 1 pièce de 19 m² entièrement meublé, à SAINTE CLOTILDE (97490). Il inclut une pièce de vie principale et une kitchenette, une salle de bains avec wc. Le chauffage de la résidence est individuel, électrique.\nPour profiter des beaux jours, cet appartement est aussi agrémenté d'un balcon.\nCet appartement est équipé d'un ascenseur.\nL'appartement est situé non loin des commerces. On trouve plusieurs écoles (maternelles, primaires, élémentaires et collèges) à moins de 10 minutes du bien.  Le bien est soumis au statut de la copropriété. \n\n Loyer de 450,00 euros par mois charges comprises dont 30,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). \n Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 469,23 euros. \n Les honoraires charge locataire sont de 242,19 euros ( soit 12,75 euros/m² ) dont 57,57 euros pour état des lieux ( soit 3,03 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
+  "description": "Découvrez cet appartement meublé de 19 m² à Sainte Clotilde, idéalement situé près des commerces. Profitez d'un balcon et d'un accès facile aux écoles, le tout dans une résidence avec ascenseur.\n99 Avenue Leconte Delisle - 97490 SAINTE CLOTILDE À louer : découvrez cet appartement 1 pièce de 19 m² entièrement meublé, à SAINTE CLOTILDE (97490). Il inclut une pièce de vie principale et une kitchenette, une salle de bains avec wc. Le chauffage de la résidence est individuel, électrique. Pour profiter des beaux jours, cet appartement est aussi agrémenté d'un balcon. Cet appartement est équipé d'un ascenseur. L'appartement est situé non loin des commerces. On trouve plusieurs écoles (maternelles, primaires, élémentaires et collèges) à moins de 10 minutes du bien. Le bien est soumis au statut de la copropriété. Loyer de 450,00 euros par mois charges comprises dont 30,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 469,23 euros. Les honoraires charge locataire sont de 242,19 euros ( soit 12,75 euros/m² ) dont 57,57 euros pour état des lieux ( soit 3,03 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
   "caracteristiques": [
-   "Ascenseur",
-   "Balcon / varangue",
-   "2e étage",
-   "1 chambre",
    "Meublé",
-   "Varangue / balcon"
+   "Varangue / balcon",
+   "Ascenseur"
   ],
-  "date": "2026-11-04T16:10:01.649Z",
+  "date": "",
   "annonceur": "Citya Saint Denis",
-  "lat": -20.895986479685966,
-  "lon": 55.491570614593,
-  "charges": 30,
+  "lat": null,
+  "lon": null,
+  "charges": null,
   "pro": true,
-  "tel": "0262 32 43 24",
+  "tel": "02 57 54 91 17",
   "email": "",
-  "adresse": "45 rue de Paris, 97400 Saint-Denis",
+  "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Bien'ici",
+    "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-501991-GES00750020-34"
+   }
+  ],
   "vu": "2026-11-04T21:11+04:00"
  },
  {
@@ -1501,37 +1564,45 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "bienici-citya-immobilier-12-GES55790102-35",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-12-GES55790102-35",
-  "titre": "T1 25 m²",
-  "prix": 478.24,
+  "id": "pv-1297060958",
+  "source": "ParuVendu",
+  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1297060958A1KILHAP000",
+  "titre": "Location appartement 1 pièce de 25m2 à Sainte clotilde (97490)",
+  "prix": 478.0,
   "commune": "Saint-Denis",
-  "quartier": "Le Moufia - Sainte-Clotilde",
+  "quartier": "Sainte-Clotilde",
   "pieces": 1,
   "type": "T1",
-  "surface": 25.47,
-  "meuble": false,
+  "surface": 25.0,
+  "meuble": null,
   "photos": [
-   "https://file.bienici.com/photo/citya-immobilier-12-GES55790102-35_box.ics.fr_cit_CITYA_STPIERRE_tic_location_photo_filigrane-filigrane-IMG_20200526_161506-5273233917001427646-14389794268984812875.jpg"
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/ef/2d/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLWZpbGlncmFuZS1JTUdfMjAyMDA1MjZfMTYxNTA2LTUyNzMyMzM5MTcwMDE0Mjc2NDYtMTQzODk3OTQyNjg5ODQ4MTI4NzUuanBnPzIwMjYxMTA1MTE0MTE2_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/42/ae/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLWZpbGlncmFuZS0xLS0zNDk2MTgwMTcwMzA1NjEwNDYtNDIzMjYwNzI0NzU1MzQ0ODI1Ni5qcGc_MjAyNjEwMjQyMDE3MjU_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/03/97/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLUlNR180ODc0LTE4MDc4MjU1Nzk0ODAxMTY5NzgwLmpwZz8yMDI2MTAyNzA1NTMyMw_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/45/eb/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtZmVsaWNpdGUtMTMxMzkyMjE3MzM5OTU4OTY0NzQuanBnPzIwMjYxMTA1MTI0MTU2_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/ec/a3/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE5ODMtODQ4OTYyOTgwNjAxODk0NzQyNS5qcGc_MjAyNjExMDUxMjQxMTk_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/b3/b7/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtZmVsaWNpdGUtMTY4NzUyOTQzNjQ4NjM3MzMwNTUuanBnPzIwMjYxMTA1MTI0MDMz_rct?func=crop&w=1000&gravity=auto"
   ],
-  "description": "À LOUER : Appartement T1 situé à Sainte Clotilde, La Réunion (97490). Il offre une surface habitable de 25,47 m² + balcon.\n\nCe logement est composé d'une cuisine ouverte sur pièce de vie, d'une salle d'eau avec douche, lavabo et wc.\n\nCe bien est idéal pour ceux qui recherchent un cadre de vie agréable et fonctionnel. N'hésitez pas à nous contacter pour plus d'informations ou pour organiser une visite. CITYA ST DENIS TEL <span class=\"importDescriptionDecorator\" data-type=\"phone\">02.62.411.420</span>. \n Loyer de 478,24 euros par mois charges comprises dont 25,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). \n Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 497,47 euros. \n Les honoraires charge locataire sont de 334,17 euros ( soit 13,12 euros/m² ) dont 77,17 euros pour état des lieux ( soit 3,03 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/saint-pierre-97410/214#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/saint-pierre-97410/214#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
+  "description": "Profitez d'un appartement T1 agréable à Sainte Clotilde, comprenant une cuisine ouverte et un balcon. Parfait pour ceux recherchant un espace fonctionnel et bien situé pour leur quotidien.\nÀ LOUER : Appartement T1 situé à Sainte Clotilde, La Réunion (97490). Il offre une surface habitable de 25,47 m² + balcon. Ce logement est composé d'une cuisine ouverte sur pièce de vie, d'une salle d'eau avec douche, lavabo et wc. Ce bien est idéal pour ceux qui recherchent un cadre de vie agréable et fonctionnel. N'hésitez pas à nous contacter pour plus d'informations ou pour organiser une visite. CITYA ST DENIS TEL Loyer de 478,24 euros par mois charges comprises dont 25,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 497,47 euros. Les honoraires charge locataire sont de 334,17 euros ( soit 13,12 euros/m² ) dont 77,17 euros pour état des lieux ( soit 3,03 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
   "caracteristiques": [
-   "2e étage",
    "Varangue / balcon"
   ],
-  "date": "2026-11-04T16:06:04.146Z",
+  "date": "",
   "annonceur": "Citya Delmonte",
-  "lat": -20.901869,
-  "lon": 55.489878,
-  "charges": 25,
+  "lat": null,
+  "lon": null,
+  "charges": null,
   "pro": true,
-  "tel": "0262 25 32 53",
+  "tel": "02 57 54 67 73",
   "email": "",
-  "adresse": "3 Rue François de Mahy, 97410 Saint-Pierre",
+  "adresse": "",
   "secteur": "Nord",
   "caf": false,
   "aussi": [
+   {
+    "source": "Bien'ici",
+    "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-12-GES55790102-35"
+   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-1-piece-25-m2/01a1a794-3ace-7238-a04f-92636de2a593"
@@ -1930,33 +2001,46 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a1a4c6-1b98-7eb1-990d-381e7ceef14e",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/loue-studio-au-moufia/01a1a4c6-1b98-7eb1-990d-381e7ceef14e",
-  "titre": "Loue studio au moufia",
+  "id": "figaro-98661035",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-98661035.html",
+  "titre": "Location  appartement 1 pièce 20 m² à Moufia (97490), 500 €",
   "prix": 500.0,
   "commune": "Saint-Denis",
-  "quartier": "Le Moufia",
+  "quartier": "Moufia",
   "pieces": 1,
   "type": "Studio",
   "surface": 20.0,
   "meuble": null,
-  "photos": [],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
-  "caracteristiques": [],
+  "photos": [
+   "https://lh3.googleusercontent.com/4AmR21oczw3d0xwlGeqTEe3VHkaEfugPmyOtPv01WvX2-UFQUQEW6BuTRJgF2j-X-KNoI38Fn2lfPo2SbofEZd9WLgAqD1pSSGmqGA=rw-w700-h660-l80"
+  ],
+  "description": "A louer studio comprenant :\n1 kitchenette\n1 pièce principale climatisée\n1 SDE + WC\nPlacards aménagés",
+  "caracteristiques": [
+   "Climatisation"
+  ],
   "date": "",
-  "annonceur": "Particulier · via leboncoin",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
-  "pro": false,
+  "pro": true,
   "tel": "",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
-  "vu": "2026-11-03T22:03+04:00"
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/loue-studio-au-moufia/01a1a4c6-1b98-7eb1-990d-381e7ceef14e"
+   },
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/studio/01a1a28d-46dc-72a3-8b45-667450f619e3"
+   }
+  ],
+  "vu": "2026-10-21T13:51+04:00"
  },
  {
   "id": "zimo-01a1a41b-dcce-7010-900c-575b74aa0265",
@@ -2841,6 +2925,43 @@
   "vu": "2026-11-04T10:18+04:00"
  },
  {
+  "id": "figaro-99684193",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-99684193.html",
+  "titre": "Location  appartement 1 pièce 19 m² à Saint-Denis (97400), 550 €",
+  "prix": 550.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 19.0,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/-MHpqso9X992Nn3aE_p7LbTHZZzgwHJYo9pVkzDN251NMOXs47jex1QIcqzIxv1ryvxRKykzW3F47kXkDhh0Bjf_zTsJ8Tn9fIE4=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/suQCh9zdhT1Pr88a6ZekpA3X9-ATpUaHJP16ScO0VxBs0Lr4Xfb2ITMYszIZhi9EbqD6HDzdfh8jsjja_ViY9AVhP7_XKXigPoB-=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/vWIMGCErBDYYQd7K5dz8s_6i3BrfZoS59OAXxcT3CW79yJOuYeOdZFxVPorUJHET2Xk0mei0ItbmGUY2ealSImtrse5T8z24CwOnJA=rw-w940-h605-l80"
+  ],
+  "description": "Florence DOÉ 0692 01 28 80 florencedoe@outre-mer-immobilier.re https://www.outre-mer-immobilier.re/louer.html Studio meublé neuf? Près de la Fac\nStudio meublé de 18 m², entièrement refait à neuf, situé au rez-de-chaussée de la résidence Central Fac n°1, à proximité immédiate de l?université.\nLe logement comprend :\n- canapé-lit,\n- table à manger avec chaises hautes,\n- machine à laver,\n- vaisselle,\n- kitchenette équipée,\n- salle d?eau avec WC\nIdéal pour étudiant, proche de la faculté, des commerces et des transports.Plus d'informations et des vidéos ? Venez consulter notre site internet outre-mer-immobilier ou contactez moi : Florence DOÉ Négociateur(trice) Immobilier au 0692 01 28 80 - Vous avez également un bien à vendre ? Appelez-moi au 0692 01 28 80 pour une estimation gratuite !------------------------------------------Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site www.georisques.gouv.fr",
+  "caracteristiques": [
+   "Meublé",
+   "Proche transports",
+   "Proche université"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 01 28 80",
+  "email": "florencedoe@outre-mer-immobilier.re",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T19:53+04:00"
+ },
+ {
   "id": "bienici-immo-facile-61704747",
   "source": "Bien'ici",
   "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/immo-facile-61704747",
@@ -3360,45 +3481,51 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "bienici-citya-immobilier-501991-GES05670921-34",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/2pieces/citya-immobilier-501991-GES05670921-34",
-  "titre": "T2 35 m²",
-  "prix": 584.99,
+  "id": "pv-1297061041",
+  "source": "ParuVendu",
+  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1297061041A1KILHAP000",
+  "titre": "Location appartement 2 pièces de 36m2 à Sainte clotilde (97490)",
+  "prix": 585.0,
   "commune": "Saint-Denis",
-  "quartier": "Le Chaudron - Sainte-Clotilde",
+  "quartier": "Sainte-Clotilde",
   "pieces": 2,
   "type": "T2",
-  "surface": 35.52,
-  "meuble": false,
+  "surface": 36.0,
+  "meuble": null,
   "photos": [
-   "https://file.bienici.com/photo/citya-immobilier-501991-GES05670921-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-fa_ade_1-12040003143661763482.jpg"
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/0b/c9/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtZmFfYWRlXzEtMTIwNDAwMDMxNDM2NjE3NjM0ODIuanBnPzIwMjYxMTA1MTI0MDE0_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/ef/2d/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLWZpbGlncmFuZS1JTUdfMjAyMDA1MjZfMTYxNTA2LTUyNzMyMzM5MTcwMDE0Mjc2NDYtMTQzODk3OTQyNjg5ODQ4MTI4NzUuanBnPzIwMjYxMTA1MTE0MTE2_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/29/4c/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS0yLS02ODg4NjYxOTQ0ODA4NDg1NDQyLmpwZz8yMDI2MTEwNTExMzk0NA_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/42/82/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2NvdXBjb2V1ci1maWxpZ3JhbmUtMS0tMTcwMDA5MDk3MjgwOTg0MDY3MjcuanBnPzIwMjYxMTA1MTEzOTM0_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/18/aa/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2F2aXNpdGVycmFwaWRlbWVudC1maWxpZ3JhbmUtMS0tMTcyNjM2OTkyOTc5Mjg1MDYxMTEuanBnPzIwMjYxMTA1MTEzODUz_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/36/c2/L2NpdF9DSVRZQV9TVEdJTExFU190aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLUlNTUVVQkxFLTgwODU4ODYyNDUzNjM5ODM0MC5qcGc_MjAyNjExMDUxMTM4MDc_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/_https_/media.immo-facile.com/dd/46/L29mZmljZTE5L2xhcG9zc2Vzc2lvbi9jYXRhbG9nL2ltYWdlcy9wcl93ZWIvNy8zLzcvOC8yLzMvNS83Mzc4MjM1YS5qcGc_REFURU1BSj0yNy8wOC8yMDI1LTE3OjM1OjA3JjIwMjYxMTA1MDkzOTU5_rct?func=crop&w=1000&gravity=auto"
   ],
-  "description": "EXCLUSIVITÉ\nEn location : à SAINTE CLOTILDE (97490), découvrez cet appartement T2 de 35,52 m².\nIl est situé dans un immeuble avec ascenseur. Un digicode et un interphone assurent un accès sécurisé. Cet appartement inclut une chambre, une cuisine équipée et une salle de bains. L'appartement dispose aussi d'une climatisation.\nUn balcon offre à ce logement de l'espace supplémentaire bienvenu.\nPour vos véhicules, l'appartement est à louer avec une place de parking en intérieur.\nL'appartement est situé à proximité des commerces. On trouve des écoles de tous niveaux (de la maternelle au lycée) à moins de 10 minutes du bien.  Le bien est soumis au statut de la copropriété. \n\n Loyer de 584,99 euros par mois charges comprises dont 30,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). \n Soit avec Assurance Habitation et Assistance* ( 22.42 euros ) : 607,41 euros. \n Les honoraires charge locataire sont de 461,76 euros ( soit 13,00 euros/m² ) dont 107,63 euros pour état des lieux ( soit 3,03 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
+  "description": "Découvrez cet appartement T2 moderne à Sainte Clotilde, bénéficiant d'une climatisation, d'un balcon et d'une place de parking. Profitez d'un cadre sécurisé avec ascenseur, digicode et interphone, à proximité des commerces et des écoles.\nEXCLUSIVITÉ En location : à SAINTE CLOTILDE (97490), découvrez cet appartement T2 de 35,52 m². Il est situé dans un immeuble avec ascenseur. Un digicode et un interphone assurent un accès sécurisé. Cet appartement inclut une chambre, une cuisine équipée et une salle de bains. L'appartement dispose aussi d'une climatisation. Un balcon offre à ce logement de l'espace supplémentaire bienvenu. Pour vos véhicules, l'appartement est à louer avec une place de parking en intérieur. L'appartement est situé à proximité des commerces. On trouve des écoles de tous niveaux (de la maternelle au lycée) à moins de 10 minutes du bien. Le bien est soumis au statut de la copropriété. Loyer de 584,99 euros par mois charges comprises dont 30,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). Soit avec Assurance Habitation et Assistance* ( 22.42 euros ) : 607,41 euros. Les honoraires charge locataire sont de 461,76 euros ( soit 13,00 euros/m² ) dont 107,63 euros pour état des lieux ( soit 3,03 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
   "caracteristiques": [
-   "Ascenseur",
-   "Balcon / varangue",
-   "Parking (1)",
-   "3e étage",
-   "1 chambre",
    "Varangue / balcon",
    "Parking",
    "Climatisation",
+   "Ascenseur",
    "Cuisine équipée",
    "Résidence sécurisée"
   ],
-  "date": "2026-11-04T16:09:56.854Z",
+  "date": "",
   "annonceur": "Citya Saint Denis",
-  "lat": -20.892676,
-  "lon": 55.483714,
-  "charges": 30,
+  "lat": null,
+  "lon": null,
+  "charges": null,
   "pro": true,
-  "tel": "0262 32 43 24",
+  "tel": "02 57 54 91 17",
   "email": "",
-  "adresse": "45 rue de Paris, 97400 Saint-Denis",
+  "adresse": "",
   "secteur": "Nord",
   "caf": false,
   "aussi": [
+   {
+    "source": "Bien'ici",
+    "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/2pieces/citya-immobilier-501991-GES05670921-34"
+   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-2-pieces-36-m2/01a1a794-3d10-7e2f-ac59-2c9c57a3e30b"
@@ -3465,6 +3592,39 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-04T02:59+04:00"
+ },
+ {
+  "id": "zimo-01a1ab50-64e2-7bba-9a89-0d26dfc09d38",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/tres-beau-studio-meuble-avec-gout-26-m2/01a1ab50-64e2-7bba-9a89-0d26dfc09d38",
+  "titre": "Très beau studio meublé avec goût 26 m2",
+  "prix": 597.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 26.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/SIeA7tOtCnr0Sop3eBggWwKCTPp_2Gu0gO0lfNGhmyM/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_4959c73b-8544-44ac-a919-418e7a394d27.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 26 m²",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-05T16:09+04:00"
  },
  {
   "id": "bienici-gedeon-33833975",
@@ -3568,83 +3728,6 @@
    }
   ],
   "vu": "2026-10-29T15:57+04:00"
- },
- {
-  "id": "pv-1296583026",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296583026A1KILHAP000",
-  "titre": "Location appartement 1 pièce de 10m2 à Sainte marie (97438)",
-  "prix": 600.0,
-  "commune": "Sainte-Marie",
-  "quartier": "Sainte-Marie",
-  "pieces": 1,
-  "type": "T1",
-  "surface": 10.0,
-  "meuble": null,
-  "photos": [
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/5a/bf/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ3NDItNTc3OTg3MTAyMjg1OTMzNTI5OS5qcGc_MjAyNjEwMjgyMDE2MzI_rct",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/cb/b8/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ3NDEtMzE0NDgxMjg0NDA2MTkyNDU3OC5qcGc_MjAyNjEwMjgyMDE2MzI_rct",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/f1/9d/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ3MzgtNDU4MzQ5OTY1NjQwMTU0NzIyNC5qcGc_MjAyNjEwMjgyMDE2MzI_rct",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/47/c4/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ3MzktMTU0NjQwOTM1MDU4MTI0MjU3MzIuanBnPzIwMjYxMDI4MjAxNjMy_rct",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/6c/5b/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ3MzEtMjY5NzE1MDk2MjczNDI1MzY3MS5qcGc_MjAyNjEwMjgyMDE2MzI_rct",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/dd/7d/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ3MzUtMzEyOTIzOTU1NTM4NjkzMTU0Ni5qcGc_MjAyNjEwMjgyMDE2MzI_rct"
-  ],
-  "description": "Disponibilité immédiate, Chambre à louer dans très belle villa avec jardin, place de parking. Eau et Edf inclus, à visiter rapidement. Loyer de 600,00 euros par mois charges comprises Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 619,23 euros. Les honoraires charge locataire sont de 130,00 euros ( soit 13,00 euros/m² ) dont 30,00 euros pour état des lieux ( soit 3,00 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
-  "caracteristiques": [
-   "Parking",
-   "Jardin"
-  ],
-  "date": "",
-  "annonceur": "Citya Saint Denis",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "02 57 54 91 17",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-22T20:52+04:00"
- },
- {
-  "id": "pv-1296583025",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296583025A1KILHAP000",
-  "titre": "Location appartement 1 pièce de 12m2 à Sainte marie (97438)",
-  "prix": 600.0,
-  "commune": "Sainte-Marie",
-  "quartier": "Sainte-Marie",
-  "pieces": 1,
-  "type": "T1",
-  "surface": 12.0,
-  "meuble": null,
-  "photos": [
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/1b/69/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ3MzUtMTczMzkxMzM4MTUxNDAwOTM0MzguanBnPzIwMjYxMDI4MjAxNjMy_rct",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/2e/ca/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ3MzEtMTUxMDU2NjY0MTM0Mzg2MjkwNTUuanBnPzIwMjYxMDI4MjAxNjMy_rct",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/bc/9c/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ3MzgtMTU2Njc0MjU0ODQ3MTI2NzQ4MTYuanBnPzIwMjYxMDI4MjAxNjMy_rct",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/a4/d2/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ3MzktNDY1ODE0NTMzODMwMTQzMDY4OC5qcGc_MjAyNjEwMjgyMDE2MzI_rct",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/c6/69/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzQ3NDQtNDM5OTAxNTE0ODAwNDMwNzg4NS5qcGc_MjAyNjEwMjgyMDE2MzI_rct"
-  ],
-  "description": "Disponibilité immédiate, Chambre à louer dans très belle villa avec jardin, place de parking. Eau et Edf inclus, à visiter rapidement. Loyer de 600,00 euros par mois charges comprises Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 619,23 euros. Les honoraires charge locataire sont de 156,00 euros ( soit 13,00 euros/m² ) dont 36,00 euros pour état des lieux ( soit 3,00 euros/m² ). Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : #bareme-location Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr . *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.\nLieu : DOM-TOM (97)",
-  "caracteristiques": [
-   "Parking",
-   "Jardin"
-  ],
-  "date": "",
-  "annonceur": "Citya Saint Denis",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "02 57 54 91 17",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-22T20:52+04:00"
  },
  {
   "id": "zimo-01a19bcc-2ab2-7941-9d7e-a5af4a8aa922",
@@ -4093,6 +4176,37 @@
   "vu": "2026-11-04T07:04+04:00"
  },
  {
+  "id": "zimo-01a1ab3a-42b0-7b0e-988d-a781d9b5c2e2",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/a-louer-appartement-f2-situe-au-centre-ville-du-port-a-602-70-euros/01a1ab3a-42b0-7b0e-988d-a781d9b5c2e2",
+  "titre": "A LOUER Appartement F2 situé au centre ville du PORT à 602,70 euros",
+  "prix": 602.0,
+  "commune": "Le Port",
+  "quartier": "Centre-ville",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 46.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/pGnH6FSHmojMl6OekSv9eMD_C07L8lqEuI9s_k-Fx8w/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_c9c42725-20f5-483d-9062-ac723ea2f5c7.jpg"
+  ],
+  "description": "Location T2 Le Port (974) 2 pièces 46 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord-Ouest",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-05T16:09+04:00"
+ },
+ {
   "id": "ep-22730000",
   "source": "EntreParticuliers",
   "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-saint-denis-1-piece-bellepierre/ref-22730000",
@@ -4519,6 +4633,37 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-04T07:04+04:00"
+ },
+ {
+  "id": "zimo-01a1ab48-1b4a-71d8-8031-ac0b3eb239f1",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-a-louer-trinite/01a1ab48-1b4a-71d8-8031-ac0b3eb239f1",
+  "titre": "Studio à louer Trinité",
+  "prix": 620.0,
+  "commune": "Saint-Denis",
+  "quartier": "La Trinité",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 29.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/4WW9mZlpWEn2H-sM2gef-YuCcsXKHJdBnF093t7snAA/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_c7cc67fa-8755-4465-a64f-f3028ed37550.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 2 pièces 29 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-05T16:09+04:00"
  },
  {
   "id": "zimo-01a13623-cfc1-70f5-bba2-31d019c06eef",
@@ -6441,7 +6586,12 @@
   "adresse": "54 RUE ANTOINE DE BERTIN, 97434 st gilles les bains",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/a-louer-studio-meuble-de-25m2-a-ste-clotilde-ref-1997/01a1ab50-7bae-728b-b922-115edc19f9e7"
+   }
+  ],
   "vu": "2026-11-05T14:19+04:00"
  },
  {
