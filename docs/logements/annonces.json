@@ -1957,6 +1957,10 @@
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
+   },
+   {
+    "source": "Herren Immobilier",
+    "url": "https://www.herren-immobilier.com/location/appartement/7996"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -5350,11 +5354,46 @@
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/ag340369-551086409"
    },
    {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html"
+   },
+   {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a0cf1e-21a7-7b69-bfcb-d74b3312e7ae"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "zimo-01a1ac32-8863-7894-a214-3a861860de97",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-1-piece-21-m2/01a1ac32-8863-7894-a214-3a861860de97",
+  "titre": "Appartement 1 pièce 21 m²",
+  "prix": 650.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 21.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/d5SFS969QVjXMvbup-2JCN-fFm1LkNRROUBr1xTc9a8/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_1a846068-7851-409f-964e-b4bbe90dd4a1.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 21 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via Figaro Immobilier",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-05T19:14+04:00"
  },
  {
   "id": "zimo-01a1a0f2-85bb-7704-8a54-be6185c98a2a",
@@ -7146,6 +7185,10 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/studio-meuble-carre-d-or-st-denis/01a1ac3a-a1f3-7f6f-8eb3-c45565d12fa3"
+   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/studio-1-piece-28-m2/01a1abb1-e4ae-7dd0-aa2c-a0e8f276819c"
