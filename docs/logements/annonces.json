@@ -1653,47 +1653,54 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "bienici-hektor-herrenimmo1-179",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/hektor-herrenimmo1-179",
-  "titre": "Studio meublé Sainte-Clotilde",
-  "prix": 485,
+  "id": "superimmo-onces-location-appartement-20m-sainte-clotilde-97490-x11etl2",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-20m-sainte-clotilde-97490-x11etl2",
+  "titre": "Location appartement 1 pièce 20 m² Sainte-Clotilde (97490)",
+  "prix": 485.0,
   "commune": "Saint-Denis",
-  "quartier": "Le Chaudron - Sainte-Clotilde",
+  "quartier": "",
   "pieces": 1,
   "type": "Studio",
-  "surface": 20,
+  "surface": 20.0,
   "meuble": true,
   "photos": [
-   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_6e5ce6271563a6013c582a21f0756b91.jpg",
-   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_e1f6ae48cea70674e7e14cecd8f20dcf.jpg",
-   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_24f006c0dbd81f5b53c263038f6ead17.jpg",
-   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_2f06a06736c194eb0811489853eb2dd9.jpg",
-   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_4c5a0faa5b63b3ef7ddd957bafafdbe9.jpg",
-   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_74bf8456369ecdb16e2b3851c81eca5e.jpg"
+   "https://photo.superimmo.com/1t9eqrwlp9ilsxb5cstop9w4cge1",
+   "https://photo.superimmo.com/o5g72p0lwo9qnpo1rxhelhg2sv06",
+   "https://photo.superimmo.com/l4htzeyisi6hy1go20ksms2lmi77",
+   "https://photo.superimmo.com/tnrna5lhpnvox5en8l6jdeoc6eg4",
+   "https://photo.superimmo.com/forru3ix8vd547vbkisvch90tqrh",
+   "https://photo.superimmo.com/3jii4t4h7vh1iox8sn5m4qai29ib",
+   "https://photo.superimmo.com/mlqzruh0hp21657tuc5h8glhqo42",
+   "https://photo.superimmo.com/vzndax9hl5b91z6z6oi431zg4e09",
+   "https://photo.superimmo.com/ls9jl59do20vwq2i2bsi9blyaq36",
+   "https://photo.superimmo.com/akvac441cee5mueqijwwaubzadkz",
+   "https://photo.superimmo.com/6xufmxoqrpdpv6ou2lvm9wvtf569",
+   "https://photo.superimmo.com/tb1wrrszrjqyus1hzwxkdr32g7k8",
+   "https://photo.superimmo.com/2hq0t8jp4h9mw7vr9ntf54z9bnfz",
+   "https://photo.superimmo.com/91jcij3kvqitxw37fjcq81ltoklb",
+   "https://photo.superimmo.com/b46boq4vp67998xdgc52yjegnlcy"
   ],
-  "description": "Situé à Sainte-Clotilde, ce studio meublé de 20 m2 dispose d'une pièce principale, un coin cuisine avec plaque, frigo, hotte et placards, une salle de bains avec douche + WC et meuble vasque ainsi qu'un parking sécurisé en sous/sol.<br> Disponible début novembre.<br> Loyer mensuel TCC : 485,00 EUR<br> Honoraires en zone tendue : 261,00 EUR dont 60,15 EUR pour l'état des lieux.<br> Dépôt de garantie : un mois de loyer soit 485,00 EUR<br> HERREN Immobilier <span class=\"importDescriptionDecorator\" data-type=\"phone\">02 62 20 01 62</span>/ 0692 42 71 13<br>",
+  "description": "Annonce appartement location 20 m² 1 pièce à Sainte-Clotilde Studio meublé Situé à , ce studio",
   "caracteristiques": [
-   "Ascenseur",
-   "Parking (1)",
-   "4e étage",
-   "Libre le 24/06/2024",
-   "Meublé",
-   "Parking",
-   "Résidence sécurisée"
+   "Meublé"
   ],
-  "date": "2026-10-28T05:09:39.818Z",
-  "annonceur": "HERREN IMMOBILIER",
-  "lat": -20.894592372761053,
-  "lon": 55.484249891276285,
+  "date": "",
+  "annonceur": "Superimmo",
+  "lat": null,
+  "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "0262 20 01 62",
+  "tel": "",
   "email": "",
-  "adresse": "10 rue Neuve, 97400 SAINT-DENIS",
+  "adresse": "",
   "secteur": "Nord",
   "caf": false,
   "aussi": [
+   {
+    "source": "Bien'ici",
+    "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/hektor-herrenimmo1-179"
+   },
    {
     "source": "EntreParticuliers",
     "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/studio-meuble-sainte-clotilde/ref-22729322"
@@ -1771,10 +1778,6 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
-   {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/netty-company58298tcg-appt-2786"
-   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/a-louer-appartement-f1-a-l-etat-irreprochable-proche-hyper-centr/01a0f388-2310-7b20-afee-0be4a4dc3b92"
@@ -1948,41 +1951,38 @@
   "vu": "2026-11-04T09:13+04:00"
  },
  {
-  "id": "pv-1295653924",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1295653924A1KILHAP000",
-  "titre": "Location appartement 1 pièce de 71m2 à Saint denis (97490)",
+  "id": "superimmo--annonces-location-appartement-71m-saint-denis-97490-x1246ia",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-71m-saint-denis-97490-x1246ia",
+  "titre": "Location appartement 1 pièce 71 m² Saint-Denis (97490)",
   "prix": 500.0,
   "commune": "Saint-Denis",
-  "quartier": "Sainte-Clotilde",
+  "quartier": "",
   "pieces": 1,
   "type": "T1",
   "surface": 71.0,
   "meuble": true,
   "photos": [
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/d5/31/L3dhL2ltYWdlcy9iaWVucy8xLzE2YTYwODMyMjgyMDY1OGExZjM3NDM4ZjBmNDkzZmUxL3Bob3RvX2EzOTYwNDJjZTU5NDliMTdiMmEwZTRhYTJhZTcyZDI1LmpwZz8yMDI2MTAwNzIzMDYxMQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/52/b4/L3dhL2ltYWdlcy9iaWVucy8xLzE2YTYwODMyMjgyMDY1OGExZjM3NDM4ZjBmNDkzZmUxL3Bob3RvXzNiZWQwMGUzYTRmMDU3YWYyYTI0MTliYzEwOTFjNjA5LmpwZz8yMDI2MTAwNzIzMDYxMQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/69/e3/L3dhL2ltYWdlcy9iaWVucy8xLzE2YTYwODMyMjgyMDY1OGExZjM3NDM4ZjBmNDkzZmUxL3Bob3RvXzc4YTc1MjU2YjEyODc4NGIwODZjZDMzZDVjZTE5ZjQ0LmpwZz8yMDI2MTAwNzIzMDYxMQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/84/4c/L3dhL2ltYWdlcy9iaWVucy8xLzE2YTYwODMyMjgyMDY1OGExZjM3NDM4ZjBmNDkzZmUxL3Bob3RvXzA3NGM5ODAzOGY1NGJkMmUzYWU3MDI4MDZkZWUxOWRiLmpwZz8yMDI2MTAwNzIzMDYxMQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/c8/4c/L3dhL2ltYWdlcy9iaWVucy8xLzE2YTYwODMyMjgyMDY1OGExZjM3NDM4ZjBmNDkzZmUxL3Bob3RvX2ViMWY5YzVhMDg3ZjQxOGExODVlYWY4YzFkZDQ3NGVhLmpwZz8yMDI2MTAwNzIzMDYxMQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/c0/c9/L3dhL2ltYWdlcy9iaWVucy8xL2UzNTgxNzg0ZjRlYjljNGZjM2VhY2U5ZjQ5OGZlNTIzL3Bob3RvXzg4ZTk3ZWZjMmQzZjY1MjZmODQzNjA2ODY0OGRmMmYwLmpwZz8yMDI2MTAxNTA3MTk0NQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/bc/d9/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE0NzQtNTgwNzAyODc5NzAwMTY4MjkyOS5qcGc_MjAyNjEwMjAxMTQ0NDQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/6d/88/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE0ODAtMTQ2OTI0NjA5NDc5ODQwOTYzOTcuanBnPzIwMjYxMDIwMTE0NDQ0_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/9b/df/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLUlNR180ODc0LTE4MDc4MjU1Nzk0ODAxMTY5NzgwLmpwZz8yMDI2MTAyMDExNDAzNA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/18/ec/L3dhL2ltYWdlcy9iaWVucy8xLzczYjQ2MDE1ZDA0YmQyMjAyZjVjMjEyY2UxOGJhMGNhL3Bob3RvXzEyZjQ0YTkzYzM4YmFlMjZjYzJlOTgzNmFkMGQ0NWJmLmpwZz8yMDI2MTAyMDA3MjEyOA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/lanouvelleagence.staticlbi.com/c5/92/L3dhL2ltYWdlcy9iaWVucy8xLzhlM2ZkMmJhZWE2MDkyZDQ4ODQzM2UzMGVjYTE0YjI3L3Bob3RvXzEzYjU0MTIzZjdkNTUxNGRjMmI0YzExZTNhNmM0NWI3X0luY18wLmpwZz8yMDI2MTAyMDA3MjA1Mg_rct?func=crop&w=1000&gravity=auto"
+   "https://photo.superimmo.com/gf30vdhx5s05y0n0h137u5jna8go",
+   "https://photo.superimmo.com/o5g72p0lwo9qnpo1rxhelhg2sv06",
+   "https://photo.superimmo.com/22ugzulyxxv361kjidk57kmiuw28",
+   "https://photo.superimmo.com/5hqupl6cz4evqfb1xmua9wc6d51i",
+   "https://photo.superimmo.com/9tvxe0plsl2zapcxv1qfdduc0tu3",
+   "https://photo.superimmo.com/biqya13nr951t0h9ic22x66e3jcr",
+   "https://photo.superimmo.com/ngqd0fr37e66rgrfzbwv8wyhl8j0",
+   "https://photo.superimmo.com/riwak42lll4i8q44j250lbcn1qfs",
+   "https://photo.superimmo.com/1dau3vimqdkunnacar7bhdl06zsw",
+   "https://photo.superimmo.com/yp28vjyl5eupjl5ce2uvijhtjeyi",
+   "https://photo.superimmo.com/p1fp9jkxb82ty2kenhoygh48ewcg",
+   "https://photo.superimmo.com/fn3ejflb0f1r82do0qxymiiwxbni",
+   "https://photo.superimmo.com/ver2xyi1inofk63yqslslnme2ciz",
+   "https://photo.superimmo.com/104irezlk8vdrt9mde54f55b1t76",
+   "https://photo.superimmo.com/lze7k5fb97hj4ceu5fzlk0vzan1u"
   ],
-  "description": "Située dans le secteur du Moufia à Sainte-Clotilde, 3 chambres meublées individuelles proposées à la location au sein d'une villa T4 neuve de 71m2. Chaque chambre bénéficie d'un espace privatif meublé, au sein d'un logement partagé avec deux autres occupantes. Les parties communes comprennent un séjour ouvert sur une cuisine équipée, une salle d'eau, un WC, un petit rangement ainsi qu'une petite terrasse aménagée. Vous disposez également d'un accès piéton sécurisé. Tout le mobilier / électroménager est neuf.\nSituée à proximité de l'Université de La Réunion, du rectorat, d'établissements scolaires et des transports en commun, et à seulement 3 minutes en voiture du Boulevard Sud, cette location bénéficie d'un emplacement particulièrement pratique pour les étudiantes.\nL'eau et l'électricité sont compris dans le loyer de chaque chambre.\nDisponible à partir de mi-octobre 2026.\nLoyer mensuel par chambre : 500,00 € charges comprises.\nDépôt de garantie : un mois de loyer charges comprises, soit 500,00 €.\nHonoraires en zone tendue : 307,67 €.\nHERREN Immobilier /\nDétails :\nNombre de pièces : 1\nNb de salle d'eau : 1\nTerrasse : 1\nNombre de wc : 1\nPart Honoraires Etat des lieux : 213 euros\nLieu : DOM-TOM (97)",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Cuisine équipée",
-   "Résidence sécurisée",
-   "Proche transports",
-   "Proche université"
-  ],
+  "description": "Annonce appartement location 71 m² 1 pièce à Saint-Denis Chambres meublées à Ste Clotilde Située dans",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "HERREN IMMOBILIER",
+  "annonceur": "Superimmo",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -1993,6 +1993,10 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
+   {
+    "source": "ParuVendu",
+    "url": "https://www.paruvendu.fr/immobilier/location/appartement/1295653924A1KILHAP000"
+   },
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
@@ -2912,6 +2916,43 @@
   "vu": "2026-11-04T10:18+04:00"
  },
  {
+  "id": "figaro-99684193",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-99684193.html",
+  "titre": "Location  appartement 1 pièce 19 m² à Saint-Denis (97400), 550 €",
+  "prix": 550.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 19.0,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/-MHpqso9X992Nn3aE_p7LbTHZZzgwHJYo9pVkzDN251NMOXs47jex1QIcqzIxv1ryvxRKykzW3F47kXkDhh0Bjf_zTsJ8Tn9fIE4=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/suQCh9zdhT1Pr88a6ZekpA3X9-ATpUaHJP16ScO0VxBs0Lr4Xfb2ITMYszIZhi9EbqD6HDzdfh8jsjja_ViY9AVhP7_XKXigPoB-=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/vWIMGCErBDYYQd7K5dz8s_6i3BrfZoS59OAXxcT3CW79yJOuYeOdZFxVPorUJHET2Xk0mei0ItbmGUY2ealSImtrse5T8z24CwOnJA=rw-w940-h605-l80"
+  ],
+  "description": "Florence DOÉ 0692 01 28 80 florencedoe@outre-mer-immobilier.re https://www.outre-mer-immobilier.re/louer.html Studio meublé neuf? Près de la Fac\nStudio meublé de 18 m², entièrement refait à neuf, situé au rez-de-chaussée de la résidence Central Fac n°1, à proximité immédiate de l?université.\nLe logement comprend :\n- canapé-lit,\n- table à manger avec chaises hautes,\n- machine à laver,\n- vaisselle,\n- kitchenette équipée,\n- salle d?eau avec WC\nIdéal pour étudiant, proche de la faculté, des commerces et des transports.Plus d'informations et des vidéos ? Venez consulter notre site internet outre-mer-immobilier ou contactez moi : Florence DOÉ Négociateur(trice) Immobilier au 0692 01 28 80 - Vous avez également un bien à vendre ? Appelez-moi au 0692 01 28 80 pour une estimation gratuite !------------------------------------------Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site www.georisques.gouv.fr",
+  "caracteristiques": [
+   "Meublé",
+   "Proche transports",
+   "Proche université"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 01 28 80",
+  "email": "florencedoe@outre-mer-immobilier.re",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T19:53+04:00"
+ },
+ {
   "id": "bienici-immo-facile-61704747",
   "source": "Bien'ici",
   "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/immo-facile-61704747",
@@ -3069,37 +3110,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-27T11:04+04:00"
- },
- {
-  "id": "zimo-01a07c45-39b7-7bdc-96fd-e6e30e960043",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-20-m2/01a07c45-39b7-7bdc-96fd-e6e30e960043",
-  "titre": "Appartement 1 pièce 20 m²",
-  "prix": 560.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 20.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/_iNM3UNwniCXAi69P5DiRlZNPsoo-4AjlUdXcxkRftg/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fimmo-cdn.fr%2Fimages%2Ffigaro%2F6a9eaecca223ac14e09cb538-1.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via Figaro Immobilier",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
  },
  {
   "id": "zimo-01a1a22e-bb8b-744a-90c4-e827cb48127b",
@@ -3723,6 +3733,39 @@
    }
   ],
   "vu": "2026-10-29T15:57+04:00"
+ },
+ {
+  "id": "zimo-01a1b065-3fa6-76af-aac4-f86ba7953841",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/locations-studio-meuble/01a1b065-3fa6-76af-aac4-f86ba7953841",
+  "titre": "Locations Studio meublé",
+  "prix": 600.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 25.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/pnlt38VsPl_bN8tOAP3CpBgirg0x9n8Z15K4k95u_m8/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_da5f32f6-0bd3-421b-aaff-e9cdaf6a0b06.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 25 m²",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-06T16:01+04:00"
  },
  {
   "id": "zimo-01a19bcc-2ab2-7941-9d7e-a5af4a8aa922",
@@ -5004,6 +5047,46 @@
   "vu": "2026-11-04T00:05+04:00"
  },
  {
+  "id": "superimmo--annonces-location-appartement-41m-saint-denis-97490-x107deu",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-41m-saint-denis-97490-x107deu",
+  "titre": "Location appartement 1 pièce 41,73 m² Saint-Denis (97490)",
+  "prix": 630.0,
+  "commune": "Saint-Denis",
+  "quartier": "",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 41.73,
+  "meuble": null,
+  "photos": [
+   "https://photo.superimmo.com/3tm5sbq1mraos6frxe7vq3msxoti",
+   "https://photo.superimmo.com/h40n7lsn1dx7pne6iqh5ib4mtv9a",
+   "https://photo.superimmo.com/i4z65x60uy1so2fscn1ipyb0asxv",
+   "https://photo.superimmo.com/jnp9w7y5k9sjw86g5erjbe4fread",
+   "https://photo.superimmo.com/tm755xjz4gadya491b4weyp4j2sl",
+   "https://photo.superimmo.com/t1mj572cmhv7qetca99l05ijsp68",
+   "https://photo.superimmo.com/5uhomemhgfwgiu2nt7giyarp3j7z",
+   "https://photo.superimmo.com/fcv5px2tk778rhzcub83jchk6hxs",
+   "https://photo.superimmo.com/s61sgqk2s4vak4cdvhvoe176kr9q",
+   "https://photo.superimmo.com/1nhn1hcautnc9lkbzvejpzodj23b"
+  ],
+  "description": "Annonce appartement location 41,73 m² 1 pièce à Saint-Denis Mon agence immobilière vous propose à la",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Superimmo",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0693 02 78 28",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T12:59+04:00"
+ },
+ {
   "id": "zimo-01a19ae6-b6e3-7410-acae-0fffe7fe7f3b",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/t1-duplex-moufia-ste-clotilde/01a19ae6-b6e3-7410-acae-0fffe7fe7f3b",
@@ -5062,6 +5145,46 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-04T01:01+04:00"
+ },
+ {
+  "id": "superimmo--annonces-location-appartement-38m-saint-denis-97490-x12ai3j",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-38m-saint-denis-97490-x12ai3j",
+  "titre": "Location appartement 2 pièces 38,67 m² Saint-Denis (97490)",
+  "prix": 634.0,
+  "commune": "Saint-Denis",
+  "quartier": "",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 38.67,
+  "meuble": null,
+  "photos": [
+   "https://photo.superimmo.com/gjdzfv0agbakjkuhfbkikhc6fb3g",
+   "https://photo.superimmo.com/hcou9c6poou16fol1gx8pzxe39yj",
+   "https://photo.superimmo.com/wcbbjy9ki94x8c2w18j7m52tr1p1",
+   "https://photo.superimmo.com/bqrxhb2qx1xu0xy8yusz8h7d113m",
+   "https://photo.superimmo.com/ua2cyc8r929fm0ce77y5qnnvbt7o",
+   "https://photo.superimmo.com/7ncgdsyxlr8fcooibkspfsshfpjs",
+   "https://photo.superimmo.com/x3q8w2vsg7wvt2jcg6aj9otcujej",
+   "https://photo.superimmo.com/h7tx4e9h9wn2a4gepiz3fez5qdn9",
+   "https://photo.superimmo.com/pkmtqzoyyk41ns9e7vu6k8gq6f58",
+   "https://photo.superimmo.com/qj9p84sylmq8wm8i8r5kmdz4alas"
+  ],
+  "description": "Annonce appartement location 38,67 m² 2 pièces à Saint-Denis Disponible le 16 novembre / résidence séniors.",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Superimmo",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "04 67 13 85 97",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T12:59+04:00"
  },
  {
   "id": "bienici-century-21-202_2780_16023",
@@ -5258,6 +5381,45 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-04T07:04+04:00"
+ },
+ {
+  "id": "figaro-110599777",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110599777.html",
+  "titre": "Location meublée appartement 1 pièce 20.6 m² à Saint denis chaudron (97490), 647 €",
+  "prix": 647.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint denis chaudron",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 20.6,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/UM9pCqSjE36AMLqU6T8KLyrIzmMsFYDTUKzdBthltGSLPvOrbnHZ6DZZZDc41yhNrz1XGK0DV1ANfDQHSO0ubY_E4vH34woq4BN0RA=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/dYD_D7RdO1A7kg_KYJxd7nOEQjnwp2oOMaEXd4qdxRuyjDtiHhtU2bk-5z1c_f_9TKDXIXYg8hNcJ2603ZKLEbGxXU-CzCNJdWDl_rM=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/M1F_VrCZL2Q323vdEiT0Q8ClT06fK0T_RCCtinkvtCU0Z-BhIV2pdYnn5wbN2t1KCoMqmoigI8IBod6L0hE9KMpbcYdN10KjKirFIXU=rw-w940-h605-l80"
+  ],
+  "description": "Situé dans la Résidence Pierre et Sable II à Saint-Denis (97490), à 5 minutes de l'université, découvrez ce charmant studio entièrement meublé, idéal pour une personne seule ou un étudiant.\nD'une superficie habitable de 20,60 m² (23,50 m² au sol), ce logement se situe au 2? étage d'une résidence de 4 étages avec ascenseur.\nTrès lumineux, il offre un espace de vie agréable et fonctionnel, prolongé par une petite varangue permettant de profiter d'un espace extérieur au quotidien.\nL'appartement bénéficie également d'une place de stationnement privative et numérotée, un véritable avantage dans le secteur.\nConditions financières\nLoyer mensuel charges comprises : 650 €\nLoyer hors charges : 600 €\nProvisions sur charges : 50 €, comprenant l'entretien des parties communes ainsi que la taxe d'enlèvement des ordures ménagères (TEOM).\nHonoraires de location à la charge du locataire\nHonoraires : 270,27 € dont 62,42 pour la réalisation de l'état des lieux\nDépôt de garantie : 1 200€\nDISPONIBLE À PARITR DU 12 NOVEMBRE\nUn studio meublé, lumineux et fonctionnel, idéalement situé dans le quartier du Moufia, à proximité des commodités.\nN'attendez plus pour organiser une visite !\nHonoraires de 270,27 € TTC à la charge du locataire comprenant 62,42 € TTC pour l'état des lieux. Loyer de base 600.00 €/mois. Provision sur charges 47 €/mois, régularisation annuelle. Dépôt de garantie 1 200 €. DPE en cours. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Ascenseur",
+   "Proche université"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-05T17:29+04:00"
  },
  {
   "id": "zimo-01a1a314-057c-7e39-a161-dddf81f63120",
@@ -5914,10 +6076,6 @@
    {
     "source": "ParuVendu",
     "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296212967A1KILHAP000"
-   },
-   {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/3pieces/apimo-6528575"
    },
    {
     "source": "Zimo",
@@ -6821,6 +6979,46 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-06T14:19+04:00"
+ },
+ {
+  "id": "figaro-110025019",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025019.html",
+  "titre": "Location meublée appartement 1 pièce 24.72 m² à Saint-Denis (97400), 680 €",
+  "prix": 680.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": null,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/yuCmIU2VVliHTLDaZhVC7dQKHEkgKEF6DHQ-ttgsVhQAPLGwNA5tAPiqMUtHx_Fi20T2kJ4msyZlSZU0puhHAbG_czetMbLgPw9a1Q=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/yaXvVs2WqRwgODHf5qBPzomBUey_xX2i128B7aL_lfg_OPyLKOcWN2eLsJR12XoYVeArIB6vvQhyx9LafbnkKMuk-aMmTyiaifvvRg=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/7UCEdPc8N0qDHp3URGOPM4ulUFrJfLTgQrpB_Ytl0J4qbV1esvf4iJe_shR9VajkSduyLpxJij9rLgzo6KTia6_brGJTRoy5dn7QP94=rw-w940-h605-l80"
+  ],
+  "description": "RUNIMMO vous propose en location un studio joliment meublé de 24,72 m2, situé dans la rue monthyon à Saint-Denis (97400), résidence ' LA GOELETTE '. Ce bien se compose d'une pièce principale lumineuse et climatisée, une cuisine aménagée et équipée, une belle salle d'eau avec wc et une grande terrasse. Une place de parking privative est disponible en sous-sol. Ce bien se situe proche du jardin de l'état, et du centre ville de Saint-Denis. Pour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 321 € TTC à la charge du locataire comprenant 74 € TTC pour l'état des lieux. Loyer de base 640 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 280 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Climatisation",
+   "Jardin",
+   "Cuisine équipée"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 26 92 05",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T12:04+04:00"
  },
  {
   "id": "superimmo--annonces-location-appartement-25m-saint-denis-97490-x12etyh",
