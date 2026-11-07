@@ -5813,10 +5813,10 @@
   "vu": "2026-10-30T11:16+04:00"
  },
  {
-  "id": "pv-1296212967",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296212967A1KILHAP000",
-  "titre": "Location appartement 3 pièces de 70m2 à Saint-denis (97400)",
+  "id": "zimo-01a1330c-1be6-7cfa-b2c2-a2bb89d4a045",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-3-pieces-70-m2/01a1330c-1be6-7cfa-b2c2-a2bb89d4a045",
+  "titre": "Appartement- 3 pièces- 70 m²",
   "prix": 657.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
@@ -5825,40 +5825,22 @@
   "surface": 70.0,
   "meuble": null,
   "photos": [
-   "https://img.paruvendu.fr/media_ext/_https_/media.apimo.pro/92/61/L2NhY2hlL2M3NDUzMTQ3ZWIyOTU1NzUwMWJlMGZkNDMxZTAyYWJlXzA0NjU2MTc2MDJfMTkyMC1iaWcuanBnPzIwMjYxMDE0MDMwNDA4_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/media.apimo.pro/86/55/L2NhY2hlL2FlM2JlYWY5MDcxMjRhZjRkNzJjOWU0MjkzNWVmNTliXzZlOTI2MzQ1MzdfMTYwMC1iaWcuanBnPzIwMjYxMDE0MDMwNDA4_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/media.apimo.pro/27/66/L2NhY2hlLzRmZGZmZGFlZGI5ZTM2MmZkMzFhZGZkNjIyMjg3NDAzXzcwZjE0MWM4ZTVfMTYwMC1iaWcuanBnPzIwMjYxMDE0MDMwNDA4_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/media.apimo.pro/65/fb/L2NhY2hlLzQzYzIyZjM5NDBlMjQ1ZDc0MTQ1YTNmYjk3MGY3YzY0X2RjMGQ1ZGZhYzRfMTYwMC1iaWcuanBnPzIwMjYxMDE0MDMwNDA4_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/media.apimo.pro/11/bf/L2NhY2hlLzZiMzY5Nzk4Y2M3MTQyNmM5NzE2NjZhMjM1M2IzYWUwXzAwNjQyNWQzODRfMTYwMC1iaWcuanBnPzIwMjYxMDE0MDMwNDA4_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/bc/d9/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE0NzQtNTgwNzAyODc5NzAwMTY4MjkyOS5qcGc_MjAyNjEwMjAxMTQ0NDQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/6d/88/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE0ODAtMTQ2OTI0NjA5NDc5ODQwOTYzOTcuanBnPzIwMjYxMDIwMTE0NDQ0_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/9b/df/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLUlNR180ODc0LTE4MDc4MjU1Nzk0ODAxMTY5NzgwLmpwZz8yMDI2MTAyMDExNDAzNA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/18/ec/L3dhL2ltYWdlcy9iaWVucy8xLzczYjQ2MDE1ZDA0YmQyMjAyZjVjMjEyY2UxOGJhMGNhL3Bob3RvXzEyZjQ0YTkzYzM4YmFlMjZjYzJlOTgzNmFkMGQ0NWJmLmpwZz8yMDI2MTAyMDA3MjEyOA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/lanouvelleagence.staticlbi.com/c5/92/L3dhL2ltYWdlcy9iaWVucy8xLzhlM2ZkMmJhZWE2MDkyZDQ4ODQzM2UzMGVjYTE0YjI3L3Bob3RvXzEzYjU0MTIzZjdkNTUxNGRjMmI0YzExZTNhNmM0NWI3X0luY18wLmpwZz8yMDI2MTAyMDA3MjA1Mg_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/photos.exportadapt.com/8a/16/LzY5MDA0LzY5MDA0MTA0NjhfNzYuanBnPzIwMjYxMDIwMDEwMDIx_rct?func=crop&w=1000&gravity=auto"
+   "https://img.e-xiste.com/y78fGlQ-BYwLJpkl-BoHvLuIBgfiYxwYt6Uo3ozpje0/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_00d30da7-cdff-4bb8-a6dc-59f08eb8b9b5.jpg"
   ],
-  "description": "En EXCLUSIVITE, SORIM vous propose à la location ce spacieux T3 d'une surface de 70m2, situé en RDC d'une petite résidence de 8 logements.\nIdéalement situé à 5 mn du centre ville dans la rue Sainte-Marie.\nIl comprend : une entrée avec placards, une cuisine avec cellier, un séjour avec balcon, deux chambres dont une avec placards, une salle de bain et un wc indépendant.\nVous bénéficierez d'une place de parking privative Libre au 06 Novembre 2026\nContactez Jennyfer BOUCHER /\nLOYER 657.37 euros par mois charges comprises\nDépôt de garantie : 597.37\nProvisions sur charges : 60.00 euros\nHonoraire charge locataire -constitution du dossier, visite, rédaction du contrat 657.37 euros dont état des lieux d'entrée 212.10 euros\nréf annonce : SOG-210\nLes informations sur les risques\nauxquels ce bien est exposé sont disponibles sur le site Géorisques : www.georisques.gouv.fr\nNuméro de mandat : SOG-210\nLieu : DOM-TOM (97)",
-  "caracteristiques": [
-   "Varangue / balcon",
-   "Parking"
-  ],
+  "description": "Location T3 Saint-Denis (974) 3 pièces 70 m²",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "SORIM",
+  "annonceur": "Pro · via ParuVendu",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "0692 82 22 82",
+  "tel": "",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-3-pieces-70-m2/01a1330c-1be6-7cfa-b2c2-a2bb89d4a045"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
