@@ -1865,10 +1865,6 @@
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
-   },
-   {
-    "source": "Herren Immobilier",
-    "url": "https://www.herren-immobilier.com/location/appartement/7996"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -6433,6 +6429,42 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-06T14:19+04:00"
+ },
+ {
+  "id": "zimo-01a1bb89-0345-7bdd-810f-2915c641fad7",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/loue-f1-meuble-climatise-27-m2-balcon-10-m2-place-parking-residence-privatisee-quartier-franc/01a1bb89-0345-7bdd-810f-2915c641fad7",
+  "titre": "Loue F1 meublé climatisé 27 m² + balcon 10 m² + place parking - résidence privatisée -Quartier Franç",
+  "prix": 680.0,
+  "commune": "Sainte-Suzanne",
+  "quartier": "Sainte-Suzanne",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 36.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/0cf3v73s7IJ6zSl7rnh63umecK4LyVQIHi1N_wa7Rs8/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_584d40d1-988e-48eb-a3ce-5a5c44027775.jpg"
+  ],
+  "description": "Location T1 Sainte-Suzanne (974) 1 pièces 36 m²",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Climatisation"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord-Est",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-08T18:54+04:00"
  },
  {
   "id": "superimmo--annonces-location-appartement-25m-saint-denis-97490-x12etyh",
