@@ -283,6 +283,42 @@
   "vu": "2026-11-04T09:13+04:00"
  },
  {
+  "id": "herren-immobilier-en-immobilier-com-location-appartement-7247-studio-au-moufia",
+  "source": "Herren Immobilier",
+  "url": "https://www.herren-immobilier.com/location/appartement/7247-studio-au-moufia",
+  "titre": "Studio au Moufia",
+  "prix": 370.0,
+  "commune": "Saint-Denis",
+  "quartier": "",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 22.0,
+  "meuble": null,
+  "photos": [
+   "https://www.herren-immobilier.com/images/com_jea/images/7247/main.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7247/preview.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7247/secondary/20140715_110105_resized.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7247/secondary/20140715_110115_resized.jpg",
+   "https://www.herren-immobilier.com/images/stories/snpi.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7944/min.jpg"
+  ],
+  "description": "> Studio au Moufia Réf : 1471 � Adresse : 97490 SAINTE-CLOTILDE Avantages Placard(s) Proximité Ecole(s) Proximité Commerces Cuisine KITCHENETTE...",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Herren Immobilier",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "herren-location@orange.fr",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T12:59+04:00"
+ },
+ {
   "id": "pv-1294677363",
   "source": "ParuVendu",
   "url": "https://www.paruvendu.fr/immobilier/location/appartement/1294677363A1KILHAP000",
@@ -1825,6 +1861,10 @@
    {
     "source": "ParuVendu",
     "url": "https://www.paruvendu.fr/immobilier/location/appartement/1295653924A1KILHAP000"
+   },
+   {
+    "source": "Herren Immobilier",
+    "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
