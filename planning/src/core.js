@@ -38,7 +38,7 @@
   };
 
   // Codes qui empêchent d'enregistrer une modification ou de valider un planning.
-  const BLOCKING = new Set(["TIME_INVALID", "SEG_OVERLAP", "SHIFT_OVERLAP", "ZONE_FORBIDDEN", "ZONE_MISSING", "FORMATION", "ABSENCE", "INACTIVE", "UNKNOWN_EMP"]);
+  const BLOCKING = new Set(["TIME_INVALID", "SEG_OVERLAP", "SHIFT_OVERLAP", "ZONE_FORBIDDEN", "ZONE_MISSING", "FORMATION", "ABSENCE", "INACTIVE", "UNKNOWN_EMP", "TRAINEE_ALONE"]);
 
   // ---------- Dates (ISO AAAA-MM-JJ, calculées en UTC pour éviter les décalages d'heure d'été) ----------
   const pad = (n) => String(n).padStart(2, "0");
@@ -138,6 +138,32 @@
   const uid = (p) => `${p || "id"}-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
 
   const empById = (state, id) => state.employees.find((e) => e.id === id);
+
+  // ---------- Nouvelles personnes en formation ----------
+  // Pendant un mois et demi après l'arrivée, la personne ne reste jamais seule dans sa zone.
+  function trainingEnd(since) {
+    const d = parseISO(since); if (!d) return null;
+    const m = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1));
+    const last = new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth() + 1, 0)).getUTCDate();
+    return addDays(iso(new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth(), Math.min(d.getUTCDate(), last)))), 15);
+  }
+  const inTraining = (emp, date) => !!(emp && emp.training && emp.training.until && (!emp.training.since || date >= emp.training.since) && date < emp.training.until);
+  // Plages (minutes) où la personne en formation est seule dans la zone du bloc : aucune personne confirmée présente.
+  function aloneRanges(state, shifts, sh, g) {
+    const [a, b] = segRange(g);
+    const others = [];
+    for (const x of shifts) {
+      if (x.emp === sh.emp || x.date !== sh.date) continue;
+      const o = empById(state, x.emp);
+      if (!o || inTraining(o, x.date)) continue;
+      for (const y of x.segs || []) if (y.z === g.z && isTime(y.s) && isTime(y.e)) others.push(segRange(y));
+    }
+    others.sort((p, q) => p[0] - q[0]);
+    const gaps = []; let cur = a;
+    for (const [x, y] of others) { if (y <= cur) continue; if (x > cur) gaps.push([cur, Math.min(x, b)]); cur = Math.max(cur, y); if (cur >= b) break; }
+    if (cur < b) gaps.push([cur, b]);
+    return gaps.filter(([x, y]) => y > x).map(([x, y]) => ({ s: fromMin(x), e: fromMin(y) }));
+  }
   function findEmployee(state, name) {
     const q = norm(name);
     if (!q) return { matches: [] };
@@ -361,6 +387,16 @@
       if (st.checkMaxDay && timesOk && shiftMinutes(sh.segs) > st.maxDayHours * 60) add("alerte", "DAY_MAX", sh.emp, d, `${who} : ${fmtHours(shiftMinutes(sh.segs))} le ${fmtDate(d, "day")} (plus de ${st.maxDayHours} h).`);
     }
 
+    // Personnes en formation : jamais seules dans leur zone.
+    for (const sh of w.shifts) {
+      const emp = empById(state, sh.emp);
+      if (!inTraining(emp, sh.date) || !(sh.segs || []).every((g) => isTime(g.s) && isTime(g.e))) continue;
+      for (const g of sh.segs) {
+        const gaps = aloneRanges(state, w.shifts, sh, g);
+        if (gaps.length) add("erreur", "TRAINEE_ALONE", sh.emp, sh.date, `${emp.name} est en formation (jusqu'au ${fmtDate(addDays(emp.training.until, -1), "short")}) et serait seul(e) en ${g.z} le ${fmtDate(sh.date, "day")} de ${rangesLabel(gaps)}.`);
+      }
+    }
+
     // Chevauchements et repos (avec les semaines voisines).
     const around = shiftsAround(state, monday).filter((s) => (s.segs || []).every((g) => isTime(g.s) && isTime(g.e)));
     for (const c of courseShiftsAround(state, monday)) if (around.some((x) => x.emp === c.emp)) around.push(c);
@@ -457,6 +493,7 @@
       if (calStatus(state, emp, date) === "inconnu") continue; // jamais « disponible » par défaut
       if (w.shifts.some((s) => s.emp === emp.id && s.date === date)) continue;
       if (personalRuleIssues(emp, date, segs).length) continue; // horaires ou jours de repos fixes
+      if (inTraining(emp, date) && segs.some((g) => aloneRanges(state, w.shifts, { emp: emp.id, date }, g).length)) continue; // en formation : jamais seul(e)
       // Repos avec les jours voisins
       const cand = { emp: emp.id, date, segs };
       const cr = absRanges(cand, monday);
@@ -478,7 +515,7 @@
       const dayCourse = courseMinutesOn(state, emp, date);
       if (st.checkMaxDay && newMin + dayCourse > st.maxDayHours * 60) notes.push(dayCourse ? `plus de ${st.maxDayHours} h dans la journée avec les cours` : `plus de ${st.maxDayHours} h dans la journée`);
       if (courseMin) notes.push(`${fmtHours(courseMin)} de cours cette semaine`);
-      const ref = courseMin ? Math.max(0, (st.contractHours || 35) * 60 - courseMin) : templateMinutes(state, emp.id);
+      const ref = courseMin ? Math.max(0, (st.contractHours || 35) * 60 - courseMin) : templateMinutes(state, emp.id) || (emp.contractHours || 0) * 60;
       const deficit = ref - weekMin;
       let score = 0;
       if (ref > 0) score += deficit >= newMin ? 30 : deficit > 0 ? 15 : -10;
@@ -521,6 +558,22 @@
       }
     }
     week.shifts.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+    // Personne en formation qui resterait seule : pas placée (le poste est proposé à quelqu'un d'autre).
+    for (let changed = true; changed;) {
+      changed = false;
+      for (const sh of week.shifts) {
+        if (sh.date < from || sh.date > to) continue;
+        const emp = empById(state, sh.emp);
+        if (!inTraining(emp, sh.date)) continue;
+        const gaps = sh.segs.flatMap((g) => aloneRanges(state, week.shifts, sh, g).map((x) => ({ ...x, z: g.z })));
+        if (!gaps.length) continue;
+        week.shifts = week.shifts.filter((x) => x !== sh);
+        const pi = placed.findIndex((p) => p.emp === sh.emp && p.date === sh.date);
+        if (pi >= 0) placed.splice(pi, 1);
+        notPlaced.push({ emp: sh.emp, date: sh.date, segs: sh.segs, reason: `en formation : serait seul(e) en ${gaps[0].z} de ${gaps.map((x) => `${x.s}–${x.e}`).join(", ")}` });
+        changed = true; break;
+      }
+    }
     const tmp = { ...state, weeks: { ...(state.weeks || {}), [monday]: week } };
     const issues = validateWeek(tmp, monday);
     const suggestions = notPlaced.map((n) => ({ ...n, candidates: findCandidates(tmp, n.date, n.segs, { exclude: [n.emp] }).slice(0, 3) }));
@@ -820,8 +873,10 @@
             if (s.employees.some((x) => x.id !== emp.id && norm(x.name) === norm(n))) { fail(`${n} existe déjà.`); break; }
             emp.name = n;
           }
-          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave"]) if (p[k] !== undefined) emp[k] = p[k];
+          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave", "training", "contractHours", "startedOn", "backOn"]) if (p[k] !== undefined) emp[k] = p[k];
           if (p.onLeave && !isISO(p.onLeave.since)) { fail("Date de début des vacances invalide."); break; }
+          if (p.training && !(isISO(p.training.until) && (!p.training.since || isISO(p.training.since)))) { fail("Date de fin de formation invalide."); break; }
+          if (p.contractHours != null && !(Number(p.contractHours) > 0 && Number(p.contractHours) <= 48)) { fail("Heures du contrat invalides (entre 1 et 48)."); break; }
           if (emp.role === "alternant" && !emp.calendarId && s.calendars[0]) emp.calendarId = s.calendars[0].id;
           if (p.rules) {
             const r = p.rules;
@@ -1013,7 +1068,7 @@
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, trainingEnd, inTraining, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };

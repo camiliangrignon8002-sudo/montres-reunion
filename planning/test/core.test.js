@@ -248,7 +248,8 @@ test("remplaçants : jamais un alternant en cours, jamais une zone interdite, ja
 test("semaine du 26/10 (planning papier) : totaux de la feuille et aucune erreur bloquante", () => {
   const x = REF.extraWeeks.find((w) => w.monday === "2026-10-26");
   let s = withWeek1();
-  const ops = Object.entries(x.zonesAdd).map(([emp, zs]) => ({ type: "setZones", emp, zones: { ...C.empById(s, emp).zones, ...Object.fromEntries(zs.map((z) => [z, "deduit"])) } }));
+  const ops = (x.newEmployees || []).map((n) => ({ type: "addEmployee", employee: { name: n.name, zones: n.zones } }));
+  ops.push(...Object.entries(x.zonesAdd).map(([emp, zs]) => ({ type: "setZones", emp, zones: { ...C.empById(s, emp).zones, ...Object.fromEntries(zs.map((z) => [z, "deduit"])) } })));
   s = apply(s, ops).state;
   s.weeks[x.monday] = { week: x.monday, status: "brouillon", shifts: x.shifts.map((t, i) => ({ id: "t" + i, emp: t.emp, date: C.addDays(x.monday, t.dow), segs: t.segs })) };
   for (const [emp, h] of Object.entries(x.totalsOnPaper)) assert.equal(C.weekMinutes(s, x.monday, emp) / 60, h, emp);
@@ -360,4 +361,27 @@ test("alternants : pause déjeuner au CFA 12:30–13:30 non comptée et bloquée
   const r = apply(s, [{ type: "setShift", emp: "fleur", date: day, segs: [{ s: "12:40", e: "13:20", z: "ZR" }] }]);
   assert.equal(r.ok, false);
   assert.match(r.errors.join(), /pause déjeuner/);
+});
+
+test("nouvelles personnes en formation : jamais seules dans leur zone (même pendant une pause)", () => {
+  let s = withWeek1();
+  s = apply(s, [{ type: "addEmployee", employee: { name: "Ruby", zones: { ZP: "confirme" } } }, { type: "updateEmployee", id: "ruby", patch: { training: { since: "2026-10-19", until: C.trainingEnd("2026-10-19") } } }]).state;
+  assert.equal(C.trainingEnd("2026-11-02"), "2026-12-17");
+  assert.equal(C.trainingEnd("2026-01-31"), "2026-03-15");
+  // Lundi 19/10 : Eric en ZP de 07:00 à 12:00 puis 12:30–14:30 ; Ruby de 07:00 à 14:30 serait seule de 12:00 à 12:30.
+  const eric = s.weeks["2026-10-19"].shifts.find((x) => x.emp === "eric" && x.date === "2026-10-19");
+  assert.ok(eric);
+  const others = s.weeks["2026-10-19"].shifts.filter((x) => x.date === "2026-10-19" && x.emp !== "eric" && x.segs.some((g) => g.z === "ZP"));
+  s.weeks["2026-10-19"].shifts = s.weeks["2026-10-19"].shifts.filter((x) => !others.includes(x));
+  const r = apply(s, [{ type: "setShift", emp: "ruby", date: "2026-10-19", segs: [{ s: "07:00", e: "14:30", z: "ZP" }] }]);
+  assert.equal(r.ok, false);
+  assert.match(r.errors.join(), /en formation.*seul\(e\) en ZP.*12:00–12:30/);
+  // Avec quelqu'un de confirmé tout le temps : accepté.
+  const ok = apply(s, [{ type: "setShift", emp: "ruby", date: "2026-10-19", segs: eric.segs }]);
+  assert.equal(ok.ok, true);
+  // Après la formation : plus de contrôle.
+  const later = apply(s, [{ type: "updateEmployee", id: "ruby", patch: { training: { since: "2026-10-01", until: "2026-10-19" } } }, { type: "setShift", emp: "ruby", date: "2026-10-19", segs: [{ s: "07:00", e: "14:30", z: "ZP" }] }]);
+  assert.equal(later.ok, true);
+  // Jamais proposée en remplaçante si elle serait seule.
+  assert.ok(!C.findCandidates(s, "2026-10-19", [{ s: "15:00", e: "21:00", z: "ZP" }]).some((x) => x.emp === "ruby"));
 });

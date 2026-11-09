@@ -293,6 +293,99 @@
     notes: ["Lydia, samedi 31/10 : ajout manuscrit « 06H / 13H » surligné en orange, hors des totaux imprimés : non ajouté, à confirmer."],
   }];
 
+  // Plannings papier du 26/10 (version corrigée, avec les nouveaux horaires d'après-midi), du 02/11 et du 09/11/2026.
+  // Totaux relus, identiques aux feuilles : 345 h (380 h moins les 35 h de Lydia), 401 h (436 − 35), 422 h.
+  // Nouvelles personnes : Sabrina (26/10), Helena et Ruby (02/11), Lana (09/11) ; en formation un mois et demi.
+  const mkw = () => { const list = []; return { list, p: (emp, dows, segs) => dows.forEach((d) => list.push({ emp, dow: d, segs })) }; };
+  const std7 = (z) => g("07:00", "12:00", z, "12:30", "14:30", z);
+  const T26 = mkw(), t26 = T26.p;
+  t26("camilian", [0, 1], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t26("camilian", [6], std7(ZR));
+  t26("charlotte", [0, 1, 3], g("14:30", "17:30", ZP, "18:00", "22:00", ZP));
+  t26("charlotte", [5], g("05:30", "10:30", ZP, "11:00", "13:30", ZP));
+  t26("charlotte", [6], g("05:30", "10:30", ZP, "11:00", "12:30", ZP));
+  t26("eric", [0, 3, 4], g("05:30", "10:30", ZP, "11:00", "13:00", ZP));
+  t26("eric", [1, 2], std7(ZP));
+  t26("fleur", [0, 1], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
+  t26("fleur", [6], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t26("lucas", [2], g("12:30", "16:00", ZP, "16:30", "20:00", ZP));
+  t26("lucas", [5, 6], g("06:00", "11:00", ZP, "11:30", "13:30", ZP));
+  t26("maelle", [2], g("14:30", "17:30", ZP, "18:00", "22:00", ZP));
+  t26("maelle", [3, 4, 6], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t26("maelle", [5], g("13:30", "17:00", ZP, "17:30", "21:00", ZP));
+  t26("mathilde", [2, 3, 4, 5, 6], g("16:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t26("murielle", [0], std7(ZR));
+  t26("murielle", [1], g("15:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t26("murielle", [2], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
+  t26("murielle", [4, 5], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t26("nathalie", [0, 1, 2, 5, 6], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  t26("reine-claude", [0], g("15:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t26("reine-claude", [3, 4, 5, 6], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
+  t26("sabrina", [0], std7(ZP));
+  t26("sebastien", [0, 1, 2, 3, 4], std7(ZP));
+  const T02 = mkw(), t02 = T02.p;
+  t02("amandine", [0, 1, 4, 5, 6], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t02("camilian", [3], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t02("camilian", [4], g("15:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t02("camilian", [6], g("08:00", "12:00", ZR, "12:30", "15:30", ZR));
+  t02("charlotte", [0], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));
+  t02("charlotte", [1], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));  // case vert foncé sur la photo, lue comme ZP (comme le lundi)
+  t02("charlotte", [2, 3, 4], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  t02("eric", [2, 3, 4], std7(ZP));
+  t02("fleur", [2, 3], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
+  t02("fleur", [5], g("08:00", "12:00", ZR, "12:30", "15:30", ZR));
+  t02("helena", [0, 1, 3], std7(ZP));
+  t02("lucas", [4, 5, 6], std7(ZP));
+  t02("maelle", [2, 3, 4, 5, 6], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));
+  t02("mathilde", [0, 5, 6], g("15:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t02("mathilde", [1], g("16:30", "17:30", ZP, "18:00", "22:00", ZP));
+  t02("mathilde", [2], g("14:30", "17:30", ZP, "18:00", "22:00", ZP));
+  t02("murielle", [0, 1], g("08:00", "12:00", ZR, "12:30", "15:30", ZR));
+  t02("murielle", [3], g("15:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t02("murielle", [5, 6], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  t02("reine-claude", [0, 1, 4, 5, 6], g("15:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t02("ruby", [2, 3, 4], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t02("sebastien", [0, 1, 2, 3, 4], std7(ZP));
+  t02("sophie", [0, 1, 2, 5, 6], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
+  const T09 = mkw(), t09 = T09.p;
+  t09("amandine", [2, 3, 6], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t09("amandine", [4, 5], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
+  t09("camilian", [0, 1, 2], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
+  t09("charlotte", [0, 1], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  t09("charlotte", [4, 5, 6], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));
+  t09("eric", [0, 1, 2, 3], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));
+  t09("eric", [4], std7(ZP));
+  t09("fleur", [0, 1], g("08:00", "12:00", ZR, "12:30", "15:30", ZR));
+  t09("fleur", [2], std7(ZP));
+  t09("lana", [1, 3, 5, 6], std7(ZP));
+  t09("lucas", [0, 1], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t09("lucas", [2], g("13:30", "17:00", ZP, "17:30", "21:00", ZP));
+  t09("maelle", [0, 1, 4, 5, 6], g("14:30", "17:30", ZP, "18:00", "22:00", ZP));
+  t09("mathilde", [2, 3, 4, 5, 6], g("16:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t09("murielle", [0, 1, 2, 3, 6], g("15:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t09("reine-claude", [2, 3, 4, 5, 6], g("08:00", "12:00", ZR, "12:30", "15:30", ZR));
+  t09("ruby", [3, 4, 5], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t09("sebastien", [0, 1, 2, 3, 4], std7(ZP));
+  t09("sophie", [2, 3, 4, 5, 6], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  // Nouvelles personnes : arrivée = premier jour sur un planning papier ; heures = total de leur semaine sur le papier.
+  const NEWCOMERS = [
+    { id: "sabrina", name: "Sabrina", zones: { ZP: "confirme" }, since: "2026-10-26", contractHours: null },
+    { id: "helena", name: "Helena", zones: { ZP: "confirme" }, since: "2026-11-02", contractHours: 21 },
+    { id: "ruby", name: "Ruby", zones: { ZP: "confirme" }, since: "2026-11-04", contractHours: 21 },
+    { id: "lana", name: "Lana", zones: { ZP: "confirme" }, since: "2026-11-10", contractHours: 28 },
+  ];
+  const NOV = [
+    { refId: "papier-2026-10-26-b", monday: "2026-10-26", shifts: T26.list, replace: true, newEmployees: NEWCOMERS.filter((x) => x.id === "sabrina"),
+      totalsOnPaper: { camilian: 21, charlotte: 35, eric: 35, fleur: 21, lucas: 21, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sabrina: 7, sebastien: 35 } },
+    { refId: "papier-2026-11-02", monday: "2026-11-02", shifts: T02.list, replace: true, newEmployees: NEWCOMERS.filter((x) => ["helena", "ruby"].includes(x.id)),
+      totalsOnPaper: { amandine: 35, camilian: 21, charlotte: 35, eric: 21, fleur: 21, helena: 21, lucas: 21, maelle: 35, mathilde: 30, murielle: 35, nathalie: 0, "reine-claude": 35, ruby: 21, sebastien: 35, sophie: 35 } },
+    { refId: "papier-2026-11-09", monday: "2026-11-09", shifts: T09.list, replace: true, newEmployees: NEWCOMERS.filter((x) => x.id === "lana"),
+      totalsOnPaper: { amandine: 35, camilian: 21, charlotte: 35, eric: 35, fleur: 21, lana: 28, lucas: 21, maelle: 35, mathilde: 30, murielle: 35, nathalie: 0, "reine-claude": 35, ruby: 21, sebastien: 35, sophie: 35 } },
+  ].map((w) => ({ ...w, source: "planning papier (photo)", noClosing: true, zonesAdd: { camilian: ["ZP", "ZR"], fleur: ["ZP", "ZR"], lucas: ["ZP"], amandine: ["ZP", "ZR"], sophie: ["ZP", "ZR"], mathilde: ["ZP", "ZR"], murielle: ["ZP", "ZR"] } }));
+  // La version corrigée du 26/10 remplace l'ancienne photo de cette semaine.
+  for (const w of NOV) { const i = extraWeeks.findIndex((x) => x.monday === w.monday); if (i >= 0) extraWeeks.splice(i, 1); }
+  extraWeeks.push(...NOV);
+
   // Règles données par le responsable le 22/10/2026.
   const ruleUpdates = [{
     id: "regles-2026-10-22",
@@ -373,6 +466,15 @@
       id: "pause-midi-cfa",
       summary: "Alternants : pause déjeuner au CFA de 12:30 à 13:30 chaque jour de cours (non comptée, pas de travail sur ce créneau)",
       timetables: { "bts-mco1": COURSE_TT },
+    }, {
+      id: "retours-novembre",
+      summary: "Retours d'après le planning papier : Sophie de nouveau dans l'équipe et Amandine revenue de vacances le 02/11/2026",
+      back: { sophie: "2026-11-02" },
+      returnFrom: { amandine: "2026-11-02" },
+    }, {
+      id: "plannings-novembre",
+      summary: "Plannings papier du 26/10 (version corrigée), du 02/11 et du 09/11 ajoutés ; Sabrina, Helena, Ruby et Lana en formation un mois et demi",
+      validatePaperWeeks: true,
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",

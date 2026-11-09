@@ -334,3 +334,4 @@ table.t td.num { white-space: nowrap; }
 .alt-item b { font-size: 15px; }
 .alt-item .chip { white-space: normal; line-height: 1.4; padding-block: 3px; }
 .blk.seg-cours + .blk.seg-cours { margin-top: 3px; }
+.name-btn .tiny-chip { display: inline-block; width: fit-content; font-size: 10.5px; padding: 1px 6px; margin-top: 3px; }

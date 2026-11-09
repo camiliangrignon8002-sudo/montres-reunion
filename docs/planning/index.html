@@ -353,6 +353,7 @@ table.t td.num { white-space: nowrap; }
 .alt-item b { font-size: 15px; }
 .alt-item .chip { white-space: normal; line-height: 1.4; padding-block: 3px; }
 .blk.seg-cours + .blk.seg-cours { margin-top: 3px; }
+.name-btn .tiny-chip { display: inline-block; width: fit-content; font-size: 10.5px; padding: 1px 6px; margin-top: 3px; }
 
 </style>
 <div id="app-root"></div>
@@ -653,6 +654,99 @@ table.t td.num { white-space: nowrap; }
     notes: ["Lydia, samedi 31/10 : ajout manuscrit « 06H / 13H » surligné en orange, hors des totaux imprimés : non ajouté, à confirmer."],
   }];
 
+  // Plannings papier du 26/10 (version corrigée, avec les nouveaux horaires d'après-midi), du 02/11 et du 09/11/2026.
+  // Totaux relus, identiques aux feuilles : 345 h (380 h moins les 35 h de Lydia), 401 h (436 − 35), 422 h.
+  // Nouvelles personnes : Sabrina (26/10), Helena et Ruby (02/11), Lana (09/11) ; en formation un mois et demi.
+  const mkw = () => { const list = []; return { list, p: (emp, dows, segs) => dows.forEach((d) => list.push({ emp, dow: d, segs })) }; };
+  const std7 = (z) => g("07:00", "12:00", z, "12:30", "14:30", z);
+  const T26 = mkw(), t26 = T26.p;
+  t26("camilian", [0, 1], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t26("camilian", [6], std7(ZR));
+  t26("charlotte", [0, 1, 3], g("14:30", "17:30", ZP, "18:00", "22:00", ZP));
+  t26("charlotte", [5], g("05:30", "10:30", ZP, "11:00", "13:30", ZP));
+  t26("charlotte", [6], g("05:30", "10:30", ZP, "11:00", "12:30", ZP));
+  t26("eric", [0, 3, 4], g("05:30", "10:30", ZP, "11:00", "13:00", ZP));
+  t26("eric", [1, 2], std7(ZP));
+  t26("fleur", [0, 1], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
+  t26("fleur", [6], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t26("lucas", [2], g("12:30", "16:00", ZP, "16:30", "20:00", ZP));
+  t26("lucas", [5, 6], g("06:00", "11:00", ZP, "11:30", "13:30", ZP));
+  t26("maelle", [2], g("14:30", "17:30", ZP, "18:00", "22:00", ZP));
+  t26("maelle", [3, 4, 6], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t26("maelle", [5], g("13:30", "17:00", ZP, "17:30", "21:00", ZP));
+  t26("mathilde", [2, 3, 4, 5, 6], g("16:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t26("murielle", [0], std7(ZR));
+  t26("murielle", [1], g("15:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t26("murielle", [2], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
+  t26("murielle", [4, 5], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t26("nathalie", [0, 1, 2, 5, 6], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  t26("reine-claude", [0], g("15:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t26("reine-claude", [3, 4, 5, 6], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
+  t26("sabrina", [0], std7(ZP));
+  t26("sebastien", [0, 1, 2, 3, 4], std7(ZP));
+  const T02 = mkw(), t02 = T02.p;
+  t02("amandine", [0, 1, 4, 5, 6], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t02("camilian", [3], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t02("camilian", [4], g("15:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t02("camilian", [6], g("08:00", "12:00", ZR, "12:30", "15:30", ZR));
+  t02("charlotte", [0], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));
+  t02("charlotte", [1], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));  // case vert foncé sur la photo, lue comme ZP (comme le lundi)
+  t02("charlotte", [2, 3, 4], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  t02("eric", [2, 3, 4], std7(ZP));
+  t02("fleur", [2, 3], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
+  t02("fleur", [5], g("08:00", "12:00", ZR, "12:30", "15:30", ZR));
+  t02("helena", [0, 1, 3], std7(ZP));
+  t02("lucas", [4, 5, 6], std7(ZP));
+  t02("maelle", [2, 3, 4, 5, 6], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));
+  t02("mathilde", [0, 5, 6], g("15:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t02("mathilde", [1], g("16:30", "17:30", ZP, "18:00", "22:00", ZP));
+  t02("mathilde", [2], g("14:30", "17:30", ZP, "18:00", "22:00", ZP));
+  t02("murielle", [0, 1], g("08:00", "12:00", ZR, "12:30", "15:30", ZR));
+  t02("murielle", [3], g("15:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t02("murielle", [5, 6], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  t02("reine-claude", [0, 1, 4, 5, 6], g("15:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t02("ruby", [2, 3, 4], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t02("sebastien", [0, 1, 2, 3, 4], std7(ZP));
+  t02("sophie", [0, 1, 2, 5, 6], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
+  const T09 = mkw(), t09 = T09.p;
+  t09("amandine", [2, 3, 6], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t09("amandine", [4, 5], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
+  t09("camilian", [0, 1, 2], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
+  t09("charlotte", [0, 1], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  t09("charlotte", [4, 5, 6], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));
+  t09("eric", [0, 1, 2, 3], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));
+  t09("eric", [4], std7(ZP));
+  t09("fleur", [0, 1], g("08:00", "12:00", ZR, "12:30", "15:30", ZR));
+  t09("fleur", [2], std7(ZP));
+  t09("lana", [1, 3, 5, 6], std7(ZP));
+  t09("lucas", [0, 1], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t09("lucas", [2], g("13:30", "17:00", ZP, "17:30", "21:00", ZP));
+  t09("maelle", [0, 1, 4, 5, 6], g("14:30", "17:30", ZP, "18:00", "22:00", ZP));
+  t09("mathilde", [2, 3, 4, 5, 6], g("16:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t09("murielle", [0, 1, 2, 3, 6], g("15:30", "17:30", ZR, "18:00", "23:00", ZR));
+  t09("reine-claude", [2, 3, 4, 5, 6], g("08:00", "12:00", ZR, "12:30", "15:30", ZR));
+  t09("ruby", [3, 4, 5], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
+  t09("sebastien", [0, 1, 2, 3, 4], std7(ZP));
+  t09("sophie", [2, 3, 4, 5, 6], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
+  // Nouvelles personnes : arrivée = premier jour sur un planning papier ; heures = total de leur semaine sur le papier.
+  const NEWCOMERS = [
+    { id: "sabrina", name: "Sabrina", zones: { ZP: "confirme" }, since: "2026-10-26", contractHours: null },
+    { id: "helena", name: "Helena", zones: { ZP: "confirme" }, since: "2026-11-02", contractHours: 21 },
+    { id: "ruby", name: "Ruby", zones: { ZP: "confirme" }, since: "2026-11-04", contractHours: 21 },
+    { id: "lana", name: "Lana", zones: { ZP: "confirme" }, since: "2026-11-10", contractHours: 28 },
+  ];
+  const NOV = [
+    { refId: "papier-2026-10-26-b", monday: "2026-10-26", shifts: T26.list, replace: true, newEmployees: NEWCOMERS.filter((x) => x.id === "sabrina"),
+      totalsOnPaper: { camilian: 21, charlotte: 35, eric: 35, fleur: 21, lucas: 21, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sabrina: 7, sebastien: 35 } },
+    { refId: "papier-2026-11-02", monday: "2026-11-02", shifts: T02.list, replace: true, newEmployees: NEWCOMERS.filter((x) => ["helena", "ruby"].includes(x.id)),
+      totalsOnPaper: { amandine: 35, camilian: 21, charlotte: 35, eric: 21, fleur: 21, helena: 21, lucas: 21, maelle: 35, mathilde: 30, murielle: 35, nathalie: 0, "reine-claude": 35, ruby: 21, sebastien: 35, sophie: 35 } },
+    { refId: "papier-2026-11-09", monday: "2026-11-09", shifts: T09.list, replace: true, newEmployees: NEWCOMERS.filter((x) => x.id === "lana"),
+      totalsOnPaper: { amandine: 35, camilian: 21, charlotte: 35, eric: 35, fleur: 21, lana: 28, lucas: 21, maelle: 35, mathilde: 30, murielle: 35, nathalie: 0, "reine-claude": 35, ruby: 21, sebastien: 35, sophie: 35 } },
+  ].map((w) => ({ ...w, source: "planning papier (photo)", noClosing: true, zonesAdd: { camilian: ["ZP", "ZR"], fleur: ["ZP", "ZR"], lucas: ["ZP"], amandine: ["ZP", "ZR"], sophie: ["ZP", "ZR"], mathilde: ["ZP", "ZR"], murielle: ["ZP", "ZR"] } }));
+  // La version corrigée du 26/10 remplace l'ancienne photo de cette semaine.
+  for (const w of NOV) { const i = extraWeeks.findIndex((x) => x.monday === w.monday); if (i >= 0) extraWeeks.splice(i, 1); }
+  extraWeeks.push(...NOV);
+
   // Règles données par le responsable le 22/10/2026.
   const ruleUpdates = [{
     id: "regles-2026-10-22",
@@ -733,6 +827,15 @@ table.t td.num { white-space: nowrap; }
       id: "pause-midi-cfa",
       summary: "Alternants : pause déjeuner au CFA de 12:30 à 13:30 chaque jour de cours (non comptée, pas de travail sur ce créneau)",
       timetables: { "bts-mco1": COURSE_TT },
+    }, {
+      id: "retours-novembre",
+      summary: "Retours d'après le planning papier : Sophie de nouveau dans l'équipe et Amandine revenue de vacances le 02/11/2026",
+      back: { sophie: "2026-11-02" },
+      returnFrom: { amandine: "2026-11-02" },
+    }, {
+      id: "plannings-novembre",
+      summary: "Plannings papier du 26/10 (version corrigée), du 02/11 et du 09/11 ajoutés ; Sabrina, Helena, Ruby et Lana en formation un mois et demi",
+      validatePaperWeeks: true,
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
@@ -800,7 +903,7 @@ table.t td.num { white-space: nowrap; }
   };
 
   // Codes qui empêchent d'enregistrer une modification ou de valider un planning.
-  const BLOCKING = new Set(["TIME_INVALID", "SEG_OVERLAP", "SHIFT_OVERLAP", "ZONE_FORBIDDEN", "ZONE_MISSING", "FORMATION", "ABSENCE", "INACTIVE", "UNKNOWN_EMP"]);
+  const BLOCKING = new Set(["TIME_INVALID", "SEG_OVERLAP", "SHIFT_OVERLAP", "ZONE_FORBIDDEN", "ZONE_MISSING", "FORMATION", "ABSENCE", "INACTIVE", "UNKNOWN_EMP", "TRAINEE_ALONE"]);
 
   // ---------- Dates (ISO AAAA-MM-JJ, calculées en UTC pour éviter les décalages d'heure d'été) ----------
   const pad = (n) => String(n).padStart(2, "0");
@@ -900,6 +1003,32 @@ table.t td.num { white-space: nowrap; }
   const uid = (p) => `${p || "id"}-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
 
   const empById = (state, id) => state.employees.find((e) => e.id === id);
+
+  // ---------- Nouvelles personnes en formation ----------
+  // Pendant un mois et demi après l'arrivée, la personne ne reste jamais seule dans sa zone.
+  function trainingEnd(since) {
+    const d = parseISO(since); if (!d) return null;
+    const m = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1));
+    const last = new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth() + 1, 0)).getUTCDate();
+    return addDays(iso(new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth(), Math.min(d.getUTCDate(), last)))), 15);
+  }
+  const inTraining = (emp, date) => !!(emp && emp.training && emp.training.until && (!emp.training.since || date >= emp.training.since) && date < emp.training.until);
+  // Plages (minutes) où la personne en formation est seule dans la zone du bloc : aucune personne confirmée présente.
+  function aloneRanges(state, shifts, sh, g) {
+    const [a, b] = segRange(g);
+    const others = [];
+    for (const x of shifts) {
+      if (x.emp === sh.emp || x.date !== sh.date) continue;
+      const o = empById(state, x.emp);
+      if (!o || inTraining(o, x.date)) continue;
+      for (const y of x.segs || []) if (y.z === g.z && isTime(y.s) && isTime(y.e)) others.push(segRange(y));
+    }
+    others.sort((p, q) => p[0] - q[0]);
+    const gaps = []; let cur = a;
+    for (const [x, y] of others) { if (y <= cur) continue; if (x > cur) gaps.push([cur, Math.min(x, b)]); cur = Math.max(cur, y); if (cur >= b) break; }
+    if (cur < b) gaps.push([cur, b]);
+    return gaps.filter(([x, y]) => y > x).map(([x, y]) => ({ s: fromMin(x), e: fromMin(y) }));
+  }
   function findEmployee(state, name) {
     const q = norm(name);
     if (!q) return { matches: [] };
@@ -1123,6 +1252,16 @@ table.t td.num { white-space: nowrap; }
       if (st.checkMaxDay && timesOk && shiftMinutes(sh.segs) > st.maxDayHours * 60) add("alerte", "DAY_MAX", sh.emp, d, `${who} : ${fmtHours(shiftMinutes(sh.segs))} le ${fmtDate(d, "day")} (plus de ${st.maxDayHours} h).`);
     }
 
+    // Personnes en formation : jamais seules dans leur zone.
+    for (const sh of w.shifts) {
+      const emp = empById(state, sh.emp);
+      if (!inTraining(emp, sh.date) || !(sh.segs || []).every((g) => isTime(g.s) && isTime(g.e))) continue;
+      for (const g of sh.segs) {
+        const gaps = aloneRanges(state, w.shifts, sh, g);
+        if (gaps.length) add("erreur", "TRAINEE_ALONE", sh.emp, sh.date, `${emp.name} est en formation (jusqu'au ${fmtDate(addDays(emp.training.until, -1), "short")}) et serait seul(e) en ${g.z} le ${fmtDate(sh.date, "day")} de ${rangesLabel(gaps)}.`);
+      }
+    }
+
     // Chevauchements et repos (avec les semaines voisines).
     const around = shiftsAround(state, monday).filter((s) => (s.segs || []).every((g) => isTime(g.s) && isTime(g.e)));
     for (const c of courseShiftsAround(state, monday)) if (around.some((x) => x.emp === c.emp)) around.push(c);
@@ -1219,6 +1358,7 @@ table.t td.num { white-space: nowrap; }
       if (calStatus(state, emp, date) === "inconnu") continue; // jamais « disponible » par défaut
       if (w.shifts.some((s) => s.emp === emp.id && s.date === date)) continue;
       if (personalRuleIssues(emp, date, segs).length) continue; // horaires ou jours de repos fixes
+      if (inTraining(emp, date) && segs.some((g) => aloneRanges(state, w.shifts, { emp: emp.id, date }, g).length)) continue; // en formation : jamais seul(e)
       // Repos avec les jours voisins
       const cand = { emp: emp.id, date, segs };
       const cr = absRanges(cand, monday);
@@ -1240,7 +1380,7 @@ table.t td.num { white-space: nowrap; }
       const dayCourse = courseMinutesOn(state, emp, date);
       if (st.checkMaxDay && newMin + dayCourse > st.maxDayHours * 60) notes.push(dayCourse ? `plus de ${st.maxDayHours} h dans la journée avec les cours` : `plus de ${st.maxDayHours} h dans la journée`);
       if (courseMin) notes.push(`${fmtHours(courseMin)} de cours cette semaine`);
-      const ref = courseMin ? Math.max(0, (st.contractHours || 35) * 60 - courseMin) : templateMinutes(state, emp.id);
+      const ref = courseMin ? Math.max(0, (st.contractHours || 35) * 60 - courseMin) : templateMinutes(state, emp.id) || (emp.contractHours || 0) * 60;
       const deficit = ref - weekMin;
       let score = 0;
       if (ref > 0) score += deficit >= newMin ? 30 : deficit > 0 ? 15 : -10;
@@ -1283,6 +1423,22 @@ table.t td.num { white-space: nowrap; }
       }
     }
     week.shifts.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+    // Personne en formation qui resterait seule : pas placée (le poste est proposé à quelqu'un d'autre).
+    for (let changed = true; changed;) {
+      changed = false;
+      for (const sh of week.shifts) {
+        if (sh.date < from || sh.date > to) continue;
+        const emp = empById(state, sh.emp);
+        if (!inTraining(emp, sh.date)) continue;
+        const gaps = sh.segs.flatMap((g) => aloneRanges(state, week.shifts, sh, g).map((x) => ({ ...x, z: g.z })));
+        if (!gaps.length) continue;
+        week.shifts = week.shifts.filter((x) => x !== sh);
+        const pi = placed.findIndex((p) => p.emp === sh.emp && p.date === sh.date);
+        if (pi >= 0) placed.splice(pi, 1);
+        notPlaced.push({ emp: sh.emp, date: sh.date, segs: sh.segs, reason: `en formation : serait seul(e) en ${gaps[0].z} de ${gaps.map((x) => `${x.s}–${x.e}`).join(", ")}` });
+        changed = true; break;
+      }
+    }
     const tmp = { ...state, weeks: { ...(state.weeks || {}), [monday]: week } };
     const issues = validateWeek(tmp, monday);
     const suggestions = notPlaced.map((n) => ({ ...n, candidates: findCandidates(tmp, n.date, n.segs, { exclude: [n.emp] }).slice(0, 3) }));
@@ -1582,8 +1738,10 @@ table.t td.num { white-space: nowrap; }
             if (s.employees.some((x) => x.id !== emp.id && norm(x.name) === norm(n))) { fail(`${n} existe déjà.`); break; }
             emp.name = n;
           }
-          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave"]) if (p[k] !== undefined) emp[k] = p[k];
+          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave", "training", "contractHours", "startedOn", "backOn"]) if (p[k] !== undefined) emp[k] = p[k];
           if (p.onLeave && !isISO(p.onLeave.since)) { fail("Date de début des vacances invalide."); break; }
+          if (p.training && !(isISO(p.training.until) && (!p.training.since || isISO(p.training.since)))) { fail("Date de fin de formation invalide."); break; }
+          if (p.contractHours != null && !(Number(p.contractHours) > 0 && Number(p.contractHours) <= 48)) { fail("Heures du contrat invalides (entre 1 et 48)."); break; }
           if (emp.role === "alternant" && !emp.calendarId && s.calendars[0]) emp.calendarId = s.calendars[0].id;
           if (p.rules) {
             const r = p.rules;
@@ -1775,7 +1933,7 @@ table.t td.num { white-space: nowrap; }
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, trainingEnd, inTraining, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };
@@ -2193,6 +2351,7 @@ table.t td.num { white-space: nowrap; }
         "4. Ne contourne jamais une contrainte (zone non autorisée, cours au CFA, absence, chevauchement). Si c'est impossible, explique pourquoi et propose 2 ou 3 solutions concrètes (par exemple avec « chercher_remplacants »).",
         "5. Un jour sans information dans le calendrier d'alternance n'est pas un jour disponible.",
         "5 bis. Alternants : les heures de cours au CFA comptent dans les 35 h (cours + travail = 35 h par semaine). Un jour de cours, on peut travailler en dehors des heures de cours, jamais pendant.",
+        "5 ter. Une personne « en formation » (nouvelle, pendant un mois et demi) ne reste jamais seule dans sa zone, même 10 minutes ou pendant la pause d'un collègue : il faut toujours une personne confirmée en même temps dans la même zone.",
         "6. Si une proposition renvoie des alertes, résume-les en une ligne chacune.",
         "7. Réponds sans titres ni tableaux Markdown ; des listes courtes sont permises.",
       ].join("\n\n");
@@ -2936,7 +3095,7 @@ table.t td.num { white-space: nowrap; }
         }),
         h("th", { class: "tot" }, "Total"))),
       h("tbody", {}, grid.rows.map((row) => h("tr", { class: row.emp.active === false ? "inactive" : "" },
-        h("td", { class: "name" }, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"))),
+        h("td", { class: "name" }, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"), C.weekDates(grid.monday).some((d) => C.inTraining(row.emp, d)) ? h("span", { class: "chip warn tiny-chip", title: "Nouvelle personne : jamais seule dans sa zone" }, "En formation") : null)),
         row.cells.map((cell) => {
           const k = row.emp.id + "|" + cell.date, lvl = cellIssue[k];
           const kids = [];
@@ -3360,7 +3519,7 @@ table.t td.num { white-space: nowrap; }
         h("div", { class: "kpi" }, h("b", { style: { color: sum("extra") + sum("extraDays") ? "var(--ok)" : "" } }, plus(sum("extra") + sum("extraDays"))), h("span", {}, "heures sup et jours en plus")),
         h("div", { class: "kpi" }, h("b", { style: { color: sum("late") ? "var(--danger)" : "" } }, minus(sum("late"))), h("span", {}, "retards"))),
       h("section", { class: "card", style: { padding: "0" } }, h("div", { class: "t-wrap" }, h("table", { class: "t" },
-        h("thead", {}, h("tr", {}, h("th", {}, "Personne"), h("th", {}, "Jours"), h("th", {}, "Prévu"), h("th", {}, "Sup"), h("th", {}, "Retards"), h("th", {}, "Total"), hasCourse ? h("th", {}, "Cours CFA") : null, mode === "week" ? h("th", {}, `Écart ${s.settings.contractHours || 35} h`) : null)),
+        h("thead", {}, h("tr", {}, h("th", {}, "Personne"), h("th", {}, "Jours"), h("th", {}, "Prévu"), h("th", {}, "Sup"), h("th", {}, "Retards"), h("th", {}, "Total"), hasCourse ? h("th", {}, "Cours CFA") : null, mode === "week" ? h("th", {}, "Écart contrat") : null)),
         h("tbody", {}, rows.map((r) => h("tr", {},
           h("td", {}, h("button", { type: "button", class: "name-btn inline", onClick: () => this.openPerson(r.e.id, mode) }, r.e.name)),
           h("td", { class: "num" }, r.x.workedDays + r.x.extraDayCount),
@@ -3369,7 +3528,7 @@ table.t td.num { white-space: nowrap; }
           h("td", { class: "num", style: { color: r.x.late ? "var(--danger)" : "" } }, minus(r.x.late)),
           h("td", { class: "num" }, h("b", {}, C.fmtHours(r.x.total))),
           hasCourse ? h("td", { class: "num" }, r.x.course ? h("span", { class: "chip cours" }, C.fmtHours(r.x.course)) : "—") : null,
-          mode === "week" ? (() => { const t = r.x.total + r.x.course; return h("td", { class: "num small", title: r.x.course ? `${C.fmtHours(r.x.total)} de travail + ${C.fmtHours(r.x.course)} de cours` : "", style: { color: t > contract ? "var(--ok)" : t < contract ? "var(--fg-2)" : "" } }, t === contract ? "✓" : `${t > contract ? "+" : "−"}${C.fmtHours(Math.abs(t - contract))}`); })() : null)))))),
+          mode === "week" ? (() => { const t = r.x.total + r.x.course, contract = (r.e.contractHours || s.settings.contractHours || 35) * 60; return h("td", { class: "num small", title: r.x.course ? `${C.fmtHours(r.x.total)} de travail + ${C.fmtHours(r.x.course)} de cours` : "", style: { color: t > contract ? "var(--ok)" : t < contract ? "var(--fg-2)" : "" } }, t === contract ? "✓" : `${t > contract ? "+" : "−"}${C.fmtHours(Math.abs(t - contract))}`); })() : null)))))),
       h("p", { class: "small muted" }, hasCourse ? "Pour les alternants, l'écart compte les heures de cours au CFA : cours + travail = contrat. Touchez un prénom pour le détail jour par jour et pour ajouter des heures sup, une journée en plus ou un retard." : "Touchez un prénom pour le détail jour par jour et pour ajouter des heures sup, une journée en plus ou un retard."));
   } };
 
@@ -3493,7 +3652,7 @@ table.t td.num { white-space: nowrap; }
         h("thead", {}, h("tr", {}, h("th", {}, "Prénom"), h("th", {}, "Statut"), h("th", {}, "Zones"), h("th", {}, "Heures du modèle"), h("th", {}, "Règles"), h("th", {}, "Active"), h("th", {}, ""))),
         h("tbody", {}, s.employees.map((e) => h("tr", {},
           h("td", {}, h("b", {}, e.name), (e.aliases || []).length ? h("div", { class: "tiny muted" }, `aussi : ${e.aliases.join(", ")}`) : null),
-          h("td", {}, e.role === "alternant" ? h("span", { class: "chip cours" }, "Alternant(e)") : "Salarié(e)"),
+          h("td", {}, e.role === "alternant" ? h("span", { class: "chip cours" }, "Alternant(e)") : "Salarié(e)", C.inTraining(e, this.today()) || (e.training && e.training.since > this.today()) ? h("div", {}, h("span", { class: "chip warn", title: "Jamais seule dans sa zone pendant la formation" }, `En formation jusqu'au ${C.fmtDate(C.addDays(e.training.until, -1), "short")}`)) : null, e.contractHours ? h("div", { class: "tiny muted" }, `Contrat ${e.contractHours} h`) : null),
           h("td", {}, h("div", { class: "row" }, Object.entries(e.zones || {}).map(([z, lv]) => h("span", { class: "row", style: { gap: "3px" } }, zoneTag(s, z), lv === "incertain" ? h("span", { class: "chip warn" }, "?") : null)), !Object.keys(e.zones || {}).length ? h("span", { class: "chip warn" }, "inconnue") : null)),
           h("td", { class: "num" }, C.fmtHours(C.templateMinutes(s, e.id))),
           h("td", { class: "small" }, rulesText(e) || h("span", { class: "muted" }, "—")),
@@ -3511,12 +3670,23 @@ table.t td.num { white-space: nowrap; }
     const fixE = h("input", { type: "time", class: "input", id: "emp-fix-e", value: r.fixedHours ? r.fixedHours.e : "" });
     const offBoxes = C.DAYS.map((d, i) => h("label", { class: "check" }, h("input", { type: "checkbox", value: String(i), checked: (r.daysOff || []).includes(i) }), d));
     const sameWe = h("input", { type: "checkbox", id: "emp-same-we", checked: !!r.sameWeekends });
+    const tr = e.training || {};
+    const trOn = h("input", { type: "checkbox", id: "emp-train", checked: !!(tr.until && tr.until > this.today()) });
+    const trSince = h("input", { type: "date", class: "input", id: "emp-train-since", value: tr.since || e.startedOn || this.today() });
+    const trUntil = h("input", { type: "date", class: "input", id: "emp-train-until", value: tr.until ? C.addDays(tr.until, -1) : C.addDays(C.trainingEnd(trSince.value), -1) });
+    trSince.addEventListener("change", () => { if (C.isISO(trSince.value)) trUntil.value = C.addDays(C.trainingEnd(trSince.value), -1); });
+    const contractIn = h("input", { type: "number", class: "input", id: "emp-contract", min: "1", max: "48", step: "0.5", value: e.contractHours || "", placeholder: String(s.settings.contractHours || 35) });
     openDialog({ title: e.name, body: h("div", { class: "stack" }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("label", { class: "f" }, "Autres écritures (séparées par des virgules)", aliases),
       h("h3", {}, "Règles personnelles"),
       h("label", { class: "check" }, fixOn, "Toujours les mêmes horaires"), h("div", { class: "form-grid" }, h("label", { class: "f" }, "Début", fixS), h("label", { class: "f" }, "Fin", fixE)),
       h("label", { class: "check" }, sameWe, "Toujours les mêmes week-ends"),
       h("div", { class: "stack", style: { gap: "4px" } }, h("span", { class: "small muted" }, "Jours de repos fixes (jamais de créneau ces jours-là) :"), h("div", { class: "row" }, offBoxes)),
       r.note ? h("p", { class: "small muted" }, `Consigne : ${r.note}`) : null,
+      h("label", { class: "f" }, "Heures par semaine (contrat)", contractIn),
+      h("h3", {}, "Nouvelle personne"),
+      h("label", { class: "check" }, trOn, "En formation : ne reste jamais seule dans sa zone"),
+      h("div", { class: "form-grid" }, h("label", { class: "f" }, "Arrivée", trSince), h("label", { class: "f" }, "En formation jusqu'au", trUntil)),
+      h("p", { class: "small muted" }, "Un mois et demi après l'arrivée par défaut. Ensuite, la mention disparaît d'elle-même."),
       h("p", { class: "small muted" }, "Les zones se règlent dans « Zones et règles ». Une personne qui a des horaires ne peut pas être supprimée : désactivez-la pour garder l'historique.")),
       actions: [
         { label: "Supprimer", danger: true, onClick: async () => { if (!(await confirmDialog(`Supprimer ${e.name} ?`, "Possible seulement si la personne n'a aucun horaire enregistré ni dans le modèle.", "Supprimer", true))) return false; return (await this.commit([{ type: "removeEmployee", id }])).ok; } },
@@ -3525,7 +3695,10 @@ table.t td.num { white-space: nowrap; }
           const daysOff = offBoxes.map((b) => b.querySelector("input")).filter((i) => i.checked).map((i) => Number(i.value));
           if (fixOn.checked && (!C.isTime(fixS.value) || !C.isTime(fixE.value))) { toast("Indiquez le début et la fin des horaires fixes.", "err"); return false; }
           const rules = { ...r, fixedHours: fixOn.checked ? { s: fixS.value, e: fixE.value } : null, daysOff: daysOff.length ? daysOff : null, sameWeekends: sameWe.checked };
-          return (await this.commit([{ type: "updateEmployee", id, patch: { name: name.value, role: role.value, aliases: aliases.value.split(",").map((x) => x.trim()).filter(Boolean), rules } }])).ok;
+          if (trOn.checked && !(C.isISO(trSince.value) && C.isISO(trUntil.value) && trUntil.value >= trSince.value)) { toast("Indiquez l'arrivée et la fin de la formation.", "err"); return false; }
+          const training = trOn.checked ? { since: trSince.value, until: C.addDays(trUntil.value, 1) } : e.training ? { ...e.training, until: e.training.since && e.training.since <= this.today() ? this.today() : e.training.until, ended: true } : undefined;
+          const contractHours = contractIn.value ? Number(contractIn.value) : null;
+          return (await this.commit([{ type: "updateEmployee", id, patch: { name: name.value, role: role.value, aliases: aliases.value.split(",").map((x) => x.trim()).filter(Boolean), rules, training, contractHours } }])).ok;
         } },
       ] });
   };
@@ -3831,6 +4004,7 @@ table.t td.num { white-space: nowrap; }
       };
       typeSel.addEventListener("change", () => { if (typeSel.value === "journee_sup" && !durIn.value) durIn.value = "7h"; refresh(); });
       dateIn.addEventListener("change", refresh);
+      const cH = (C.empById(this.state, empId) || {}).contractHours || this.state.settings.contractHours || 35;
       body.replaceChildren(...[
         h("div", { class: "row between" },
           h("div", { class: "seg-ctl", role: "group", "aria-label": "Période" }, ["week", "month"].map((m) => h("button", { type: "button", "aria-pressed": String(m === mode), onClick: () => { mode = m; if (m === "month") month = monday.slice(0, 7); draw(); } }, m === "week" ? "Semaine" : "Mois"))),
@@ -3841,7 +4015,7 @@ table.t td.num { white-space: nowrap; }
           kpi(`journée(s) en plus${x.extraDayCount ? " (" + x.extraDayCount + ")" : ""}`, x.extraDays ? "+" + C.fmtHours(x.extraDays) : "0 h", x.extraDays ? "var(--ok)" : ""),
           kpi("retards", x.late ? "−" + C.fmtHours(x.late) : "0 h", x.late ? "var(--danger)" : ""),
           kpi("total réel", C.fmtHours(x.total))),
-        mode === "week" ? h("p", { class: "small muted" }, `Contrat : ${s.settings.contractHours || 35} h par semaine${x.total !== (s.settings.contractHours || 35) * 60 ? ` (${x.total > (s.settings.contractHours || 35) * 60 ? "+" : "−"}${C.fmtHours(Math.abs(x.total - (s.settings.contractHours || 35) * 60))})` : " ✓"}${ref ? ` · planning modèle : ${C.fmtHours(ref)}` : ""}.`) : null,
+        mode === "week" ? h("p", { class: "small muted" }, `Contrat : ${cH} h par semaine${x.total !== cH * 60 ? ` (${x.total > cH * 60 ? "+" : "−"}${C.fmtHours(Math.abs(x.total - cH * 60))})` : " ✓"}${ref ? ` · planning modèle : ${C.fmtHours(ref)}` : ""}.`) : null,
         h("details", { open: mode === "week" }, h("summary", { class: "small" }, `${x.workedDays} jour(s) planifié(s)`),
           h("div", { class: "list" }, x.days.map((d) => h("div", { class: "item" }, h("span", { class: "grow" }, C.fmtDate(d.date, "day")), h("span", { class: "small muted num" }, C.segLabel(d.segs)), h("b", { class: "num small" }, C.fmtHours(d.minutes)))))),
         h("h3", {}, "Heures sup, journées en plus et retards"),
@@ -3901,6 +4075,7 @@ table.t td.num { white-space: nowrap; }
       if (cur && cur.refId === x.refId) continue;
       const p = { x };
       if (!cur || !cur.shifts.length) await this.applyRefWeek(p, false);
+      else if (x.replace) await this.applyRefWeek(p, true); // nouveau planning papier fourni : il remplace la semaine (version gardée)
       else this.pendingRef.push(p);
     }
     // Départs de l'équipe : la personne est désactivée et ses créneaux à partir de la date sont retirés
@@ -3950,12 +4125,20 @@ table.t td.num { white-space: nowrap; }
         for (const a of Object.values(st.absences || {})) if (a.emp === id) ops.push({ type: "removeAbsence", id: a.id });
         if (C.empById(st, id)) ops.push({ type: "removeEmployee", id });
       }
+      // Retour de congé sans date de fin : le congé devient une absence qui s'arrête la veille du retour.
+      for (const [id, from] of Object.entries(u.returnFrom || {})) {
+        const e = C.empById(this.state, id);
+        if (!e || !e.onLeave || !(from > e.onLeave.since)) continue;
+        ops.push({ type: "addAbsence", absence: { emp: id, type: e.onLeave.type || "vacances", from: e.onLeave.since, to: C.addDays(from, -1), note: "retour d'après le planning papier" } }, { type: "updateEmployee", id, patch: { onLeave: null } });
+      }
+      for (const [id, from] of Object.entries(u.back || {})) if (C.empById(this.state, id)) ops.push({ type: "updateEmployee", id, patch: { active: true, leftOn: null, backOn: from } });
       for (const [id, leave] of Object.entries(u.onLeave || {})) if (C.empById(this.state, id)) ops.push({ type: "updateEmployee", id, patch: { onLeave: leave } });
       if (u.closing) {
         // Nouvelle heure de fermeture : services d'après-midi décalés à partir de la date, dans les semaines et le modèle.
         const cl = u.closing, st = this.state;
         for (const w of Object.values(st.weeks)) {
           if (C.addDays(w.week, 6) < cl.from) continue;
+          if ((R.extraWeeks || []).some((x) => x.refId === w.refId && x.noClosing)) continue; // papier déjà aux nouveaux horaires
           let changed = false;
           const shifts = w.shifts.map((x) => { if (x.date < cl.from) return x; const segs = C.applyClosing(x.segs, cl); if (segs !== x.segs) changed = true; return { ...x, segs }; });
           if (changed) ops.push({ type: "putWeek", monday: w.week, week: { ...C.clone(w), shifts } });
@@ -3998,6 +4181,12 @@ table.t td.num { white-space: nowrap; }
         if (missing.length) pre.push({ type: "setZones", emp: f.id, zones: { ...(e.zones || {}), ...Object.fromEntries(missing.map((z) => [z, f.zones[z]])) } });
         if (e.active === false && !e.leftOn) pre.push({ type: "updateEmployee", id: f.id, patch: { leftOn: f.leftOn } });
       }
+    }
+    // Nouvelles personnes : ajoutées à l'équipe, en formation un mois et demi à partir de leur arrivée.
+    for (const n of x.newEmployees || []) {
+      if (C.empById(s, n.id)) continue;
+      pre.push({ type: "addEmployee", employee: { name: n.name, role: "salarie", zones: n.zones } },
+        { type: "updateEmployee", id: n.id, patch: { startedOn: n.since, training: { since: n.since, until: C.trainingEnd(n.since) }, ...(n.contractHours ? { contractHours: n.contractHours } : {}) } });
     }
     const week = { week: x.monday, status: "brouillon", source: x.source, refId: x.refId, shifts: x.shifts.map((t, i) => ({ id: `${x.refId}-${i}`, emp: t.emp, date: C.addDays(x.monday, t.dow), segs: C.clone(t.segs) })) };
     const ops = [];

@@ -78,9 +78,9 @@ const MOCK = `
     await page.waitForTimeout(300);
     const st0 = await page.evaluate(() => ({ s19: PlanningApp.state.weeks["2026-10-19"].status, s26: PlanningApp.state.weeks["2026-10-26"].status, doubts: Object.values(PlanningApp.state.weeks).flatMap((w) => w.shifts).filter((x) => x.segs.some((g) => g.doute)).length, banner: !!document.querySelector(".card h3") && /Informations à confirmer/.test(document.body.textContent) }));
     const oct = await page.evaluate(() => { const st = PlanningApp.state; const m = (k) => st.weeks[k] ? { n: st.weeks[k].shifts.reduce((a, x) => a + PlanningCore.shiftMinutes(x.segs), 0) / 60, s: st.weeks[k].status, err: PlanningCore.validateWeek(st, k).filter((i) => i.level === "erreur").length } : null; const so = st.employees.find((e) => e.id === "sophie"); return { w5: m("2026-10-05"), w12: m("2026-10-12"), sophie: so && { active: so.active, left: so.leftOn }, sophieOct: PlanningCore.hoursSummary(st, "sophie", "2026-10-01", "2026-10-31").total / 60 }; });
-    check("semaines du 05/10 et 12/10 ajoutées, validées, sans erreur ; heures de Sophie gardées", oct.w5 && oct.w5.n === 339.5 && oct.w5.s === "validé" && oct.w5.err === 0 && oct.w12.n === 380 && oct.w12.s === "validé" && oct.w12.err === 0 && oct.sophie.active === false && oct.sophieOct === 91, JSON.stringify(oct));
+    check("semaines du 05/10 et 12/10 ajoutées, validées, sans erreur ; heures de Sophie gardées", oct.w5 && oct.w5.n === 339.5 && oct.w5.s === "validé" && oct.w5.err === 0 && oct.w12.n === 380 && oct.w12.s === "validé" && oct.w12.err === 0 && oct.sophie.active === true && !oct.sophie.left && oct.sophieOct === 91, JSON.stringify(oct));
     const sept = await page.evaluate(() => { const st = PlanningApp.state; const ws = ["2026-09-07", "2026-09-14", "2026-09-21", "2026-09-28"]; return { hours: ws.map((k) => st.weeks[k] ? st.weeks[k].shifts.reduce((a, x) => a + PlanningCore.shiftMinutes(x.segs), 0) / 60 : null), status: ws.map((k) => st.weeks[k] && st.weeks[k].status), err: ws.map((k) => PlanningCore.validateWeek(st, k).filter((i) => i.level === "erreur").length), cp: Object.values(st.absences).filter((a) => a.type === "conges").length, former: ["sonia", "sylvie", "sophie"].map((id) => { const e = st.employees.find((x) => x.id === id); return e ? (e.active === false ? e.leftOn : "actif") : "absent"; }), lydia: !!st.employees.find((e) => e.id === "lydia"), amZones: Object.keys((st.employees.find((e) => e.id === "amandine") || {}).zones || {}).sort().join() }; });
-    check("septembre ajouté : 455/478/415/408 h, validé, sans erreur, CP, anciens employés, sans Lydia", sept.hours.join() === "455,478,415,408" && sept.status.every((x) => x === "validé") && sept.err.join() === "0,0,0,0" && sept.cp === 3 && sept.former.join() === "2026-09-21,2026-10-05,2026-10-19" && !sept.lydia && sept.amZones === "ZP,ZR", JSON.stringify(sept));
+    check("septembre ajouté : 455/478/415/408 h, validé, sans erreur, CP, anciens employés, sans Lydia", sept.hours.join() === "455,478,415,408" && sept.status.every((x) => x === "validé") && sept.err.join() === "0,0,0,0" && sept.cp === 3 && sept.former.join() === "2026-09-21,2026-10-05,actif" && !sept.lydia && sept.amZones === "ZP,ZR", JSON.stringify(sept));
     const pm = await page.evaluate(() => { const st = PlanningApp.state; const f = (emp, d) => { const x = Object.values(st.weeks).flatMap((w) => w.shifts).find((y) => y.emp === emp && y.date === d); return x ? x.segs[0].s + "-" + x.segs[x.segs.length - 1].e : null; }; return { fleur: f("fleur", "2026-10-26"), charlotte: f("charlotte", "2026-10-26"), nath: f("nathalie", "2026-10-26"), old: f("fleur", "2026-10-21"), tpl: st.template.shifts.find((t) => t.emp === "camilian").segs.map((g) => g.s + "-" + g.e).join(" "), s26: st.weeks["2026-10-26"].status }; });
     check("après-midi à partir du 26/10 : ZP 14:30–22:00, ZR 15:30–23:00 (modèle compris), avant le 26/10 inchangé", pm.fleur === "15:30-23:00" && pm.charlotte === "14:30-22:00" && pm.nath === "06:00-13:30" && pm.old === "14:30-22:00" && pm.tpl === "14:30-18:00 18:30-22:00", JSON.stringify(pm));
     check("tout confirmé : semaines papier validées, aucun point en attente", st0.s19 === "validé" && st0.s26 === "validé" && st0.doubts === 0, JSON.stringify(st0));
@@ -100,7 +100,7 @@ const MOCK = `
     await page.click('td.cell[aria-label^="Fleur, Mercredi 21"]');
     await page.waitForSelector(".dialog");
     const zrEnabled = await page.$$eval(".zone-pick button", (bs) => bs.map((b) => b.textContent + (b.disabled ? ":off" : ":on")));
-    check("Fleur : ZP verrouillée, ZR autorisée", zrEnabled.includes("ZP:off") && zrEnabled.includes("ZR:on"), zrEnabled.join(","));
+    check("Fleur : ZP et ZR autorisées (vue en vert sur les plannings de novembre)", zrEnabled.includes("ZP:on") && zrEnabled.includes("ZR:on"), zrEnabled.join(","));
     await page.fill('input[aria-label="Fin du bloc 2"]', "21:30");
     await page.dispatchEvent('input[aria-label="Fin du bloc 2"]', "change");
     await page.click(".dialog footer >> text=Enregistrer");
@@ -152,16 +152,17 @@ const MOCK = `
     await page.click('button[aria-label="Semaine suivante"]');
     await page.waitForSelector('td.cell[aria-label^="Lucas, Mercredi 28"]');
     const w2 = await page.evaluate(() => { const w = PlanningApp.state.weeks["2026-10-26"]; return { n: w.shifts.length, min: w.shifts.reduce((a, x) => a + PlanningCore.shiftMinutes(x.segs), 0), err: PlanningCore.validateWeek(PlanningApp.state, "2026-10-26").filter((i) => i.level === "erreur").length }; });
-    check("semaine du 26/10 ajoutée : 338 h (366 h − 28 h de Lydia), aucune erreur", w2.min === 338 * 60 && w2.err === 0, JSON.stringify(w2));
-    // cours : Camilian et Fleur ne peuvent pas être placés le 12 et le 13 novembre
-    await page.click('button[aria-label="Semaine suivante"]');
-    await page.click('button[aria-label="Semaine suivante"]');
+    check("semaine du 26/10 (version corrigée) : 345 h (380 h − 35 h de Lydia), aucune erreur", w2.min === 345 * 60 && w2.err === 0, JSON.stringify(w2));
+    const nov = await page.evaluate(() => { const st = PlanningApp.state; const h = (m) => PlanningApp.state.weeks[m].shifts.reduce((a, x) => a + PlanningCore.shiftMinutes(x.segs), 0) / 60; const tr = (id) => { const e = st.employees.find((x) => x.id === id); return e && e.training ? e.training.since + ">" + e.training.until : "?"; }; return { h: [h("2026-11-02"), h("2026-11-09")], tr: ["sabrina", "helena", "ruby", "lana"].map(tr), alone: PlanningCore.validateWeek(st, "2026-11-09").filter((i) => i.code === "TRAINEE_ALONE").length, amandine: !st.employees.find((e) => e.id === "amandine").onLeave }; });
+    check("02/11 et 09/11 ajoutés (401 h et 422 h), nouvelles en formation, Amandine revenue", nov.h.join() === "401,422" && nov.tr.join() === "2026-10-26>2026-12-11,2026-11-02>2026-12-17,2026-11-04>2026-12-19,2026-11-10>2026-12-25" && nov.alone === 6 && nov.amandine, JSON.stringify(nov));
+    // cours : Camilian et Fleur ne peuvent pas être placés le 26 et le 27 novembre
+    for (let i = 0; i < 4; i++) await page.click('button[aria-label="Semaine suivante"]');
     await page.waitForSelector("text=Aucun horaire pour cette semaine.");
     await page.click(".empty >> text=Générer à partir du modèle");
     await page.click("text=Préparer la proposition");
     await page.waitForSelector("text=Proposition de planning");
     const notPlaced = await page.textContent(".dialog");
-    check("génération : 4 postes non attribués (CFA les 12-13 nov.)", /4 poste\(s\) non attribué/.test(notPlaced) && (notPlaced.match(/(formation|cours) au CFA/g) || []).length === 4);
+    check("génération : 4 postes non attribués (CFA les 26-27 nov.)", /4 poste\(s\) non attribué/.test(notPlaced) && (notPlaced.match(/(formation|cours) au CFA/g) || []).length === 4);
     await page.click(".dialog footer >> text=/Enregistrer 1 semaine/");
     await page.waitForSelector("text=Postes à pourvoir");
     const coursTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) td', (tds) => tds.filter((t) => t.querySelector(".seg-cours")).length);
@@ -171,7 +172,7 @@ const MOCK = `
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/3-generation.png`, fullPage: true });
 
     // tentative interdite : placer Fleur le 29
-    await page.click('td.cell[aria-label^="Fleur, Jeudi 12"]');
+    await page.click('td.cell[aria-label^="Fleur, Jeudi 26"]');
     await page.waitForSelector(".dialog");
     await page.click("text=Ajouter un horaire");
     await page.waitForTimeout(100);
@@ -348,14 +349,9 @@ const MOCK = `
     const ly = await page.evaluate(() => { const st = PlanningApp.state; return { emp: !!st.employees.find((e) => e.id === "lydia"), sonia: (st.employees.find((e) => e.id === "sonia") || { active: false }).active !== false, shifts: Object.values(st.weeks).flatMap((w) => w.shifts).filter((x) => x.emp === "lydia").length, vac: Object.values(st.weeks).flatMap((w) => w.vacated || []).filter((x) => x.emp === "lydia").length, tpl: st.template.shifts.filter((t) => t.emp === "lydia").length, err: ["2026-10-19", "2026-10-26"].map((m) => PlanningCore.validateWeek(st, m).filter((i) => i.level === "erreur" || i.code === "UNCOVERED").length) }; });
     check("Lydia (patronne) retirée partout, Sonia et Sylvie supprimées, aucun poste à pourvoir à sa place", !ly.emp && !ly.sonia && !ly.shifts && !ly.vac && !ly.tpl && ly.err.join() === "0,0", JSON.stringify(ly));
     const am = await page.evaluate(() => { const st = PlanningApp.state; const a = st.employees.find((e) => e.id === "amandine"); return { sophie: !!st.employees.find((e) => e.id === "sophie"), leave: a && a.onLeave && a.onLeave.since, avail: PlanningCore.availability(st, "amandine", "2026-11-04", []).ok, tag: PlanningCore.weekGrid(st, "2026-10-26").rows.find((r) => r.emp.id === "amandine").cells[0].absences.length }; });
-    check("Sophie partie (gardée pour l'historique) ; Amandine en vacances (jamais planifiée)", am.sophie && am.leave === "2026-09-30" && am.avail === false && am.tag === 1, JSON.stringify(am));
-    await page.evaluate(() => PlanningApp.go("absences"));
-    await page.waitForSelector("text=En congé, retour non renseigné");
-    await page.fill('input[aria-label="Date de retour de Amandine"]', "2026-11-09");
-    await page.click("text=Enregistrer le retour");
-    await page.waitForTimeout(300);
-    const back = await page.evaluate(() => { const st = PlanningApp.state; return { leave: st.employees.find((e) => e.id === "amandine").onLeave, abs: Object.values(st.absences).filter((a) => a.emp === "amandine" && a.type === "vacances").map((a) => a.from + ">" + a.to), ok: PlanningCore.availability(st, "amandine", "2026-11-09", []).block.length }; });
-    check("retour d'Amandine : congé du 30/09 au 08/11, disponible le 09/11", !back.leave && back.abs.join() === "2026-09-30>2026-11-08" && back.ok === 0, JSON.stringify(back));
+    check("Sophie de retour ; Amandine revenue le 02/11 (vacances du 30/09 au 01/11 gardées)", am.sophie && !am.leave && am.avail === true && am.tag === 1, JSON.stringify(am));
+    const back = await page.evaluate(() => { const st = PlanningApp.state; return Object.values(st.absences).filter((a) => a.emp === "amandine" && a.type === "vacances").map((a) => a.from + ">" + a.to).join(); });
+    check("retour d'Amandine : congé du 30/09 au 01/11", back === "2026-09-30>2026-11-01", back);
     const conf = await page.evaluate(() => { const st = PlanningApp.state; return { rules: st.settings.rulesConfirmed, day: st.settings.maxDayHours, week: st.settings.maxWeekHours, pause: st.settings.minPauseMinutes, uncertain: st.employees.filter((e) => Object.values(e.zones || {}).some((v) => v !== "confirme")).length, doubts: Object.values(st.weeks).flatMap((w) => w.shifts).filter((x) => x.segs.some((g) => g.doute)).length }; });
     check("informations confirmées (35 h, 7 h + 30 min, zones, couleurs)", conf.rules && conf.day === 7 && conf.week === 35 && conf.pause === 30 && conf.uncertain === 0 && conf.doubts === 0, JSON.stringify(conf));
     const man = await page.evaluate(async () => (await fetch("manifest.webmanifest")).json());
