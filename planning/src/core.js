@@ -38,7 +38,7 @@
   };
 
   // Codes qui empêchent d'enregistrer une modification ou de valider un planning.
-  const BLOCKING = new Set(["TIME_INVALID", "SEG_OVERLAP", "SHIFT_OVERLAP", "ZONE_FORBIDDEN", "ZONE_MISSING", "FORMATION", "ABSENCE", "INACTIVE", "UNKNOWN_EMP", "TRAINEE_ALONE"]);
+  const BLOCKING = new Set(["TIME_INVALID", "SEG_OVERLAP", "SHIFT_OVERLAP", "ZONE_FORBIDDEN", "ZONE_MISSING", "FORMATION", "ABSENCE", "INACTIVE", "UNKNOWN_EMP", "TRAINEE_ALONE", "LATEST_END"]);
 
   // ---------- Dates (ISO AAAA-MM-JJ, calculées en UTC pour éviter les décalages d'heure d'été) ----------
   const pad = (n) => String(n).padStart(2, "0");
@@ -187,6 +187,10 @@
     if (r.fixedHours && segs && segs.length) {
       const sp = shiftSpan(segs);
       if (sp.s !== r.fixedHours.s || sp.e !== r.fixedHours.e) out.push({ code: "FIXED_HOURS", msg: `${emp.name} travaille toujours de ${r.fixedHours.s} à ${r.fixedHours.e} : ici ${sp.s}–${sp.e} (${fmtDate(date, "day")}).` });
+    }
+    if (r.maxEnd && segs && segs.length && segs.every((g) => isTime(g.s) && isTime(g.e))) {
+      const end = shiftRanges(segs).slice(-1)[0][1];
+      if (end > toMin(r.maxEnd)) out.push({ code: "LATEST_END", level: "erreur", msg: `${emp.name} ne finit jamais après ${r.maxEnd} : ici ${shiftSpan(segs).e} le ${fmtDate(date, "day")}.` });
     }
     if (Array.isArray(r.daysOff) && r.daysOff.includes(dow(date))) out.push({ code: "FIXED_DAYOFF", msg: `${emp.name} ne travaille jamais le ${DAYS[dow(date)].toLowerCase()} (jour de repos fixe) : créneau le ${fmtDate(date, "day")}.` });
     return out;
@@ -379,7 +383,7 @@
       }
       else if (cs === "inconnu") add("alerte", "CAL_UNKNOWN", sh.emp, d, `${who} : statut d'alternance inconnu le ${fmtDate(d, "day")} (calendrier non renseigné).`);
       else if (cs === "ferie") add("info", "FERIE", sh.emp, d, `${fmtDate(d, "day")} est férié dans le calendrier d'alternance.`);
-      if (timesOk) for (const x of personalRuleIssues(emp, d, sh.segs)) add("alerte", x.code, sh.emp, d, x.msg);
+      if (timesOk) for (const x of personalRuleIssues(emp, d, sh.segs)) add(x.level || "alerte", x.code, sh.emp, d, x.msg);
       if (st.checkPause && timesOk && shiftMinutes(sh.segs) > 6 * 60) {
         const pz = pauses(sh.segs).reduce((a, p) => a + p.min, 0);
         if (pz < st.minPauseMinutes) add("alerte", "PAUSE", sh.emp, d, `${who} : ${pz ? pz + " min" : "aucune"} de pause le ${fmtDate(d, "day")} (${st.minPauseMinutes} min prévues).`);
@@ -881,6 +885,7 @@
           if (p.rules) {
             const r = p.rules;
             if (r.fixedHours && !(isTime(r.fixedHours.s) && isTime(r.fixedHours.e) && r.fixedHours.s !== r.fixedHours.e)) { fail("Horaires fixes invalides."); break; }
+            if (r.maxEnd && !isTime(r.maxEnd)) { fail("Heure de fin maximum invalide."); break; }
             if (r.daysOff && !(Array.isArray(r.daysOff) && r.daysOff.every((d) => d >= 0 && d <= 6))) { fail("Jours de repos invalides."); break; }
           }
           conf("employees");

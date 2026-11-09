@@ -162,7 +162,7 @@ const MOCK = `
     await page.click("text=Préparer la proposition");
     await page.waitForSelector("text=Proposition de planning");
     const notPlaced = await page.textContent(".dialog");
-    check("génération : 4 postes non attribués (CFA les 26-27 nov.)", /4 poste\(s\) non attribué/.test(notPlaced) && (notPlaced.match(/(formation|cours) au CFA/g) || []).length === 4);
+    check("génération : 9 postes non attribués (CFA les 26-27 nov. + vacances de Nathalie)", /9 poste\(s\) non attribué/.test(notPlaced) && (notPlaced.match(/acances/g) || []).length === 5 && (notPlaced.match(/(formation|cours) au CFA/g) || []).length === 4);
     await page.click(".dialog footer >> text=/Enregistrer 1 semaine/");
     await page.waitForSelector("text=Postes à pourvoir");
     const coursTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) td', (tds) => tds.filter((t) => t.querySelector(".seg-cours")).length);
@@ -333,7 +333,7 @@ const MOCK = `
     await page.waitForSelector(".daybar");
     await page.waitForTimeout(300);
     const rules = await page.evaluate(() => { const e = (id) => PlanningApp.state.employees.find((x) => x.id === id); return { seb: e("sebastien").rules, eric: e("eric").rules, nat: e("nathalie").rules }; });
-    check("règles ajoutées aux données déjà sur le téléphone", rules.seb && rules.seb.fixedHours.s === "07:00" && rules.eric.daysOff.join() === "5,6" && rules.eric.fixedHours.s === "07:00" && rules.nat.fixedHours.e === "13:30" && rules.nat.daysOff.join() === "5,6", JSON.stringify(rules).slice(0, 120));
+    check("règles ajoutées aux données déjà sur le téléphone", rules.seb && rules.seb.fixedHours.s === "07:00" && rules.eric.daysOff.join() === "5,6" && !rules.eric.fixedHours && rules.eric.maxEnd === "15:30" && rules.nat.fixedHours.e === "13:30" && rules.nat.daysOff.join() === "5,6", JSON.stringify(rules).slice(0, 120));
     await page.evaluate(() => PlanningApp.go("team"));
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/11-regles.png`, fullPage: true });
     // Données d'un téléphone qui avait encore Lydia (avant qu'elle soit retirée) : elle doit disparaître partout

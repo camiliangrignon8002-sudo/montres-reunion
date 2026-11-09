@@ -270,7 +270,16 @@ test("règles personnelles : horaires fixes et jours de repos signalés, respect
   const pm = C.findCandidates(s, "2026-10-19", [{ s: "13:30", e: "21:00", z: "ZP" }]).map((c) => c.emp);
   assert.ok(!pm.includes("sebastien"));
   for (const id of ["fleur", "camilian", "lucas"]) assert.equal(C.empById(s, id).calendarId, "bts-mco1");
-  assert.deepEqual(C.empById(s, "eric").rules.fixedHours, { s: "07:00", e: "14:30" });
+  assert.equal(C.empById(s, "eric").rules.fixedHours, null); // horaires variables
+  assert.equal(C.empById(s, "eric").rules.maxEnd, "15:30");
+  // Eric : jamais après 15:30 (bloquant) ; 05:30–13:00 accepté sans alerte d'horaires fixes.
+  const late = apply(s, [{ type: "setShift", emp: "eric", date: "2026-10-20", segs: [{ s: "09:00", e: "12:00", z: "ZP" }, { s: "12:30", e: "16:00", z: "ZP" }] }]);
+  assert.equal(late.ok, false);
+  assert.match(late.errors.join(), /Eric ne finit jamais après 15:30/);
+  const early = apply(s, [{ type: "setShift", emp: "eric", date: "2026-10-20", segs: [{ s: "05:30", e: "10:30", z: "ZP" }, { s: "11:00", e: "13:00", z: "ZP" }] }]);
+  assert.ok(early.ok);
+  assert.ok(!C.validateWeek(early.state, W1).some((i) => i.emp === "eric" && i.code === "FIXED_HOURS"));
+  assert.ok(!C.findCandidates(s, "2026-10-21", [{ s: "10:00", e: "13:00", z: "ZP" }, { s: "13:30", e: "17:30", z: "ZP" }]).some((c) => c.emp === "eric"));
   assert.deepEqual(C.empById(s, "nathalie").rules.daysOff, [5, 6]);
   // le modèle (semaine du 19/10) respecte ces règles : aucune alerte de règle personnelle
   assert.equal(C.validateWeek(s, W1).filter((i) => i.code === "FIXED_HOURS" || i.code === "FIXED_DAYOFF").length, 0);

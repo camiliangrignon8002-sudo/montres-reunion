@@ -401,6 +401,11 @@
       eric: { fixedHours: { s: "07:00", e: "14:30" }, daysOff: [5, 6], sameWeekends: true, note: "Toujours 07:00–14:30, repos samedi et dimanche." },
       nathalie: { fixedHours: { s: "06:00", e: "13:30" }, daysOff: [5, 6], sameWeekends: true, note: "De l'ouverture de la zone réservée (06:00) à 13:30, repos samedi et dimanche." },
     },
+  }, {
+    id: "regles-2026-11-09",
+    rules: {
+      eric: { fixedHours: null, maxEnd: "15:30", note: "Horaires variables ; ne finit jamais après 15:30." },
+    },
   }];
 
   for (const u of ruleUpdates) for (const [id, r] of Object.entries(u.rules)) { const e = employees.find((x) => x.id === id); e.rules = { ...(e.rules || {}), ...r }; e.rulesApplied = [...(e.rulesApplied || []), u.id]; }
@@ -471,6 +476,10 @@
       summary: "Retours d'après le planning papier : Sophie de nouveau dans l'équipe et Amandine revenue de vacances le 02/11/2026",
       back: { sophie: "2026-11-02" },
       returnFrom: { amandine: "2026-11-02" },
+    }, {
+      id: "nathalie-vacances-1102",
+      summary: "Nathalie en vacances depuis le 02/11/2026 (retour non renseigné)",
+      onLeave: { nathalie: { type: "vacances", since: "2026-11-02" } },
     }, {
       id: "plannings-novembre",
       summary: "Plannings papier du 26/10 (version corrigée), du 02/11 et du 09/11 ajoutés ; Sabrina, Helena, Ruby et Lana en formation un mois et demi",

@@ -149,6 +149,7 @@
     if (e.role === "alternant") out.push(e.calendarId ? "Suit le calendrier du BTS" : "Calendrier d'alternance non défini");
     if (e.onLeave) out.push(`En ${C.ABSENCE_TYPES[e.onLeave.type] ? C.ABSENCE_TYPES[e.onLeave.type].toLowerCase() : "congé"} depuis le ${C.fmtDate(e.onLeave.since, "short")}`);
     if (r.fixedHours) out.push(`Toujours ${r.fixedHours.s}–${r.fixedHours.e}`);
+    if (r.maxEnd) out.push(`Jamais après ${r.maxEnd}`);
     if (Array.isArray(r.daysOff) && r.daysOff.length) out.push(`Repos fixe : ${r.daysOff.map((d) => C.DAYS[d].toLowerCase()).join(", ")}`);
     else if (r.sameWeekends) out.push("Mêmes week-ends (jours à préciser)");
     if (r.sameWeekends === false) out.push("Week-ends variables");
@@ -1139,6 +1140,7 @@
     const fixE = h("input", { type: "time", class: "input", id: "emp-fix-e", value: r.fixedHours ? r.fixedHours.e : "" });
     const offBoxes = C.DAYS.map((d, i) => h("label", { class: "check" }, h("input", { type: "checkbox", value: String(i), checked: (r.daysOff || []).includes(i) }), d));
     const sameWe = h("input", { type: "checkbox", id: "emp-same-we", checked: !!r.sameWeekends });
+    const maxEndIn = h("input", { type: "time", class: "input", id: "emp-max-end", value: r.maxEnd || "" });
     const tr = e.training || {};
     const trOn = h("input", { type: "checkbox", id: "emp-train", checked: !!(tr.until && tr.until > this.today()) });
     const trSince = h("input", { type: "date", class: "input", id: "emp-train-since", value: tr.since || e.startedOn || this.today() });
@@ -1148,6 +1150,7 @@
     openDialog({ title: e.name, body: h("div", { class: "stack" }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("label", { class: "f" }, "Autres écritures (séparées par des virgules)", aliases),
       h("h3", {}, "Règles personnelles"),
       h("label", { class: "check" }, fixOn, "Toujours les mêmes horaires"), h("div", { class: "form-grid" }, h("label", { class: "f" }, "Début", fixS), h("label", { class: "f" }, "Fin", fixE)),
+      h("label", { class: "f" }, "Ne finit jamais après (laisser vide si pas de limite)", maxEndIn),
       h("label", { class: "check" }, sameWe, "Toujours les mêmes week-ends"),
       h("div", { class: "stack", style: { gap: "4px" } }, h("span", { class: "small muted" }, "Jours de repos fixes (jamais de créneau ces jours-là) :"), h("div", { class: "row" }, offBoxes)),
       r.note ? h("p", { class: "small muted" }, `Consigne : ${r.note}`) : null,
@@ -1163,7 +1166,7 @@
         { label: "Enregistrer", primary: true, onClick: async () => {
           const daysOff = offBoxes.map((b) => b.querySelector("input")).filter((i) => i.checked).map((i) => Number(i.value));
           if (fixOn.checked && (!C.isTime(fixS.value) || !C.isTime(fixE.value))) { toast("Indiquez le début et la fin des horaires fixes.", "err"); return false; }
-          const rules = { ...r, fixedHours: fixOn.checked ? { s: fixS.value, e: fixE.value } : null, daysOff: daysOff.length ? daysOff : null, sameWeekends: sameWe.checked };
+          const rules = { ...r, fixedHours: fixOn.checked ? { s: fixS.value, e: fixE.value } : null, daysOff: daysOff.length ? daysOff : null, sameWeekends: sameWe.checked, maxEnd: maxEndIn.value || null };
           if (trOn.checked && !(C.isISO(trSince.value) && C.isISO(trUntil.value) && trUntil.value >= trSince.value)) { toast("Indiquez l'arrivée et la fin de la formation.", "err"); return false; }
           const training = trOn.checked ? { since: trSince.value, until: C.addDays(trUntil.value, 1) } : e.training ? { ...e.training, until: e.training.since && e.training.since <= this.today() ? this.today() : e.training.until, ended: true } : undefined;
           const contractHours = contractIn.value ? Number(contractIn.value) : null;
