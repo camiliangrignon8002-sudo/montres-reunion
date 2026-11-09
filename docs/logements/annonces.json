@@ -1337,6 +1337,49 @@
   "vu": "2026-11-04T05:23+04:00"
  },
  {
+  "id": "ofim-ion-a-LOUER-STUDIO-AVEC-BALCON-ET-PARKING-a-SAINT-DENIS-html",
+  "source": "OFIM",
+  "url": "https://www.ofim.fr/73862/Location-Appartement-SAINT-DENIS-ile-de-la-Reunion-a-LOUER-STUDIO-AVEC-BALCON-ET-PARKING-a-SAINT-DENIS.html",
+  "titre": "À LOUER – STUDIO AVEC BALCON ET PARKING À SAINT-DENIS",
+  "prix": 471.58,
+  "commune": "Saint-Denis",
+  "quartier": "",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 25.0,
+  "meuble": null,
+  "photos": [
+   "https://www.ofim.fr/media/m/328072/cuisine-saint-denis.jpg",
+   "https://www.ofim.fr/media/l-resize/328073/location-appartement-saint-denis.jpg",
+   "https://www.ofim.fr/media/l-resize/328074/balcon-saint-denis.jpg",
+   "https://www.ofim.fr/media/l-resize/328075/sejour-lumineux-saint-denis.jpg",
+   "https://www.ofim.fr/media/sm/326547/Location-Appartement-SAINTE-CLOTILDE-A-louer-appartement-de-type-F1-sur-la-residence-Les-Orangelles-appt-n-29-a-Sainte-Clotilde.jpg",
+   "https://www.ofim.fr/media/sm/327470/immeuble-saint-paul.jpg",
+   "https://www.ofim.fr/media/sm/327035/chambre-tampon.jpg",
+   "https://www.ofim.fr/media/sm/327279/vue-mer-possession.jpg",
+   "https://www.ofim.fr/media/sm/327759/immeuble-port.jpg"
+  ],
+  "description": "Studio à louer à Saint-Denis avec balcon et parking. Idéal pour étudiant ou personne seule. Contactez Elodie Zitte pour visiter. Loyer 471,58€/mois charges…",
+  "caracteristiques": [
+   "Varangue / balcon",
+   "Parking",
+   "Proche université"
+  ],
+  "date": "",
+  "annonceur": "OFIM",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-09T15:12+04:00"
+ },
+ {
   "id": "pv-1295579198",
   "source": "ParuVendu",
   "url": "https://www.paruvendu.fr/immobilier/location/appartement/1295579198A1KILHAP000",
@@ -3281,6 +3324,41 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-04T02:59+04:00"
+ },
+ {
+  "id": "zimo-01a1bfd4-0600-7653-8303-f4012810efa6",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/a-louer-studio-meuble-25-m2-vue-mer-moufia-central-fac-5/01a1bfd4-0600-7653-8303-f4012810efa6",
+  "titre": "À LOUER - STUDIO MEUBLÉ 25 m² - VUE MER - MOUFIA / CENTRAL FAC 5",
+  "prix": 590.0,
+  "commune": "Saint-Denis",
+  "quartier": "Le Moufia",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 25.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/lBDAvJnMBIV5UOZg1ZnMQdQ3ylvQ6_mlQI7_VuFCIJc/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_948f057a-2bed-4c49-af9f-d2de3bb319c1.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 25 m²",
+  "caracteristiques": [
+   "Meublé",
+   "Vue mer",
+   "Proche université"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-09T15:12+04:00"
  },
  {
   "id": "zimo-01a1a373-0a53-70ca-9467-70d329903274",
