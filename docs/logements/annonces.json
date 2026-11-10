@@ -2779,35 +2779,47 @@
   "vu": "2026-11-09T20:20+04:00"
  },
  {
-  "id": "zimo-01a1a5aa-9f0d-7a05-8cc8-4b616f4fe766",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/a-louer-studio-ste-clotilde-bois-de-nefles/01a1a5aa-9f0d-7a05-8cc8-4b616f4fe766",
+  "id": "bienici-immo-facile-61704747",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/immo-facile-61704747",
   "titre": "A LOUER - STUDIO - STE CLOTILDE BOIS DE NEFLES",
-  "prix": 554.0,
+  "prix": 554,
   "commune": "Saint-Denis",
-  "quartier": "Sainte-Clotilde",
+  "quartier": "Le Moufia - Sainte-Clotilde",
   "pieces": 1,
   "type": "Studio",
-  "surface": 20.0,
-  "meuble": null,
+  "surface": 20,
+  "meuble": true,
   "photos": [
-   "https://img.e-xiste.com/TtNB5WjcqoT5aTv9OWX8MJupl4Y0B8asnwgbmdomtxI/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_692a2275-f1eb-4fb4-a4fc-3b75d5e5c577.jpg"
+   "https://file.bienici.com/photo/immo-facile-61704747_media.immo-facile.com_office5_cpstgilles_041224_catalog_images_pr_web_6_1_7_0_4_7_4_7_61704747a.jpg_DATEMAJ_04_11_2026-06_45_52",
+   "https://file.bienici.com/photo/immo-facile-61704747_media.immo-facile.com_office5_cpstgilles_041224_catalog_images_pr_web_6_1_7_0_4_7_4_7_61704747b.jpg_DATEMAJ_04_11_2026-06_45_52",
+   "https://file.bienici.com/photo/immo-facile-61704747_media.immo-facile.com_office5_cpstgilles_041224_catalog_images_pr_web_6_1_7_0_4_7_4_7_61704747c.jpg_DATEMAJ_04_11_2026-06_45_52"
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via bien'ici",
-  "lat": null,
-  "lon": null,
-  "charges": null,
+  "description": "N°DOSSIER : 0285<br>L'Immo by Odyssée vous propose à la location ce joli studio de 20 m2 meublé à Sainte Clotilde Bois de Nèfles. Au 1er étage de la résidence, il se compose d'une entrée, d'une kitchenette, d'un séjour, d'une salle d'eau avec WC.<br>Candidature soumise à des conditions de solvabilité et de garanties conformes aux exigences réglementaires, justificatifs de ressources à l'appui.<br>Vous bénéficierez d'une place de parking en sous sol.<br>PAS DE VISITES EN VISIO<br>Loyer : 554,00 € dont 39,00 € de provisions de charges de copropriété.<br>DISPONIBLE NOVEMBRE<br>Dépôt de garantie : 1030,00 €<br>Honoraires de mise en location : 260,00 € dont 60,00 € pour l'établissement de l'état des lieux d'entrée.<br>Mentions obligatoires:<br>- L'Île de la Réunion n'est pas concernée par le Diagnostic de Performance Energétique (DPE).<br>- L'Île de la Réunion est située dans le périmètre d'un plan de prévention des risques: zone de sismicité. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr<br>Agence L'Immo by Odyssée - Île de la Réunion - Saint Gilles les Bains",
+  "caracteristiques": [
+   "Parking (1)",
+   "1e étage",
+   "Meublé",
+   "Parking"
+  ],
+  "date": "2026-11-10T06:58:58.467Z",
+  "annonceur": " CÔTÉ PARTICULIERS",
+  "lat": -20.916295475185414,
+  "lon": 55.48515096804473,
+  "charges": 39,
   "pro": true,
-  "tel": "",
+  "tel": "0693 90 77 77",
   "email": "",
-  "adresse": "",
+  "adresse": "135 avenue de la Grande Ourse    97434 SAINT GILLES LES BAINS, 97434 Saint-Gilles les Bains",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
-  "vu": "2026-11-09T11:44+04:00"
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/a-louer-studio-ste-clotilde-bois-de-nefles/01a1a5aa-9f0d-7a05-8cc8-4b616f4fe766"
+   }
+  ],
+  "vu": "2026-11-04T12:27+04:00"
  },
  {
   "id": "pv-1297023020",
@@ -6396,11 +6408,9 @@
   "surface": 25.64,
   "meuble": true,
   "photos": [
-   "https://file.bienici.com/photo/hektor-patrimoine-expertise-immobiliere-3784_adopteuntoit.staticlbi.com_original_images_biens_1_64ecdfc11302b003d687f4cd3b0c8f4a_e1d35b1cf16d784a214c8325083270c8.jpg",
+   "https://file.bienici.com/photo/hektor-patrimoine-expertise-immobiliere-3784_adopteuntoit.staticlbi.com_original_images_biens_1_64ecdfc11302b003d687f4cd3b0c8f4a_c6b2155d291744869f79afaab5c4a974.jpg",
    "https://file.bienici.com/photo/hektor-patrimoine-expertise-immobiliere-3784_adopteuntoit.staticlbi.com_original_images_biens_1_64ecdfc11302b003d687f4cd3b0c8f4a_3dbf18b85c9c30d5564a9e47a0607c0a.jpg",
    "https://file.bienici.com/photo/hektor-patrimoine-expertise-immobiliere-3784_adopteuntoit.staticlbi.com_original_images_biens_1_64ecdfc11302b003d687f4cd3b0c8f4a_be87a625c2cc8ca4229e3b2ce3af2d26.jpg",
-   "https://file.bienici.com/photo/hektor-patrimoine-expertise-immobiliere-3784_adopteuntoit.staticlbi.com_original_images_biens_1_64ecdfc11302b003d687f4cd3b0c8f4a_photo_a244d34480d3f3c8aa97ce094a20fe0f.jpg",
-   "https://file.bienici.com/photo/hektor-patrimoine-expertise-immobiliere-3784_adopteuntoit.staticlbi.com_original_images_biens_1_64ecdfc11302b003d687f4cd3b0c8f4a_c6b2155d291744869f79afaab5c4a974.jpg",
    "https://file.bienici.com/photo/hektor-patrimoine-expertise-immobiliere-3784_adopteuntoit.staticlbi.com_original_images_biens_1_64ecdfc11302b003d687f4cd3b0c8f4a_photo_3743df0c954defade42c69beda7b5164.jpg",
    "https://file.bienici.com/photo/hektor-patrimoine-expertise-immobiliere-3784_adopteuntoit.staticlbi.com_original_images_biens_1_64ecdfc11302b003d687f4cd3b0c8f4a_photo_750cf4406bfa66fd3909c15a7e80d8c6.jpg",
    "https://file.bienici.com/photo/hektor-patrimoine-expertise-immobiliere-3784_adopteuntoit.staticlbi.com_original_images_biens_1_64ecdfc11302b003d687f4cd3b0c8f4a_photo_7ce3db5b094d39512cbde97ec46da3b2.jpg",
@@ -6416,7 +6426,7 @@
    "Ascenseur",
    "Proche université"
   ],
-  "date": "2026-11-06T06:37:18.681Z",
+  "date": "2026-11-10T07:07:01.147Z",
   "annonceur": "PATRIMOINE EXPERTISE IMMOBILIERE  SARL",
   "lat": -20.899808513580943,
   "lon": 55.479557536029816,
