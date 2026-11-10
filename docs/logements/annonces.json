@@ -368,45 +368,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "herren-immobilier-www-herren-immobilier-com-location-appartement-7992",
-  "source": "Herren Immobilier",
-  "url": "https://www.herren-immobilier.com/location/appartement/7992",
-  "titre": "Studio de 24m² à Ste Clotilde",
-  "prix": 375.0,
-  "commune": "Saint-Denis",
-  "quartier": "",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 24.0,
-  "meuble": null,
-  "photos": [
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/main.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/preview.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_144813.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_145038.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/DSC06474.jpg",
-   "https://www.herren-immobilier.com/images/stories/snpi.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7937/min.jpg"
-  ],
-  "description": "> Studio de 24m² � Ste Clotilde Réf : 5008 � Adresse : 97490 STE CLOTILDE Avantages Climatisation Placard(s) Proximité Ecole(s) Proximité Comme...",
-  "caracteristiques": [
-   "Climatisation"
-  ],
-  "date": "",
-  "annonceur": "Herren Immobilier",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "herren-location@orange.fr",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-22T01:51+04:00"
- },
- {
   "id": "zimo-01a1a373-5e94-7173-b821-6f56c54cd672",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a1a373-5e94-7173-b821-6f56c54cd672",
@@ -1575,54 +1536,47 @@
   "vu": "2026-11-04T21:11+04:00"
  },
  {
-  "id": "superimmo-onces-location-appartement-20m-sainte-clotilde-97490-x11etl2",
-  "source": "Superimmo",
-  "url": "https://www.superimmo.com/annonces/location-appartement-20m-sainte-clotilde-97490-x11etl2",
-  "titre": "Location appartement 1 pièce 20 m² Sainte-Clotilde (97490)",
-  "prix": 485.0,
+  "id": "bienici-hektor-herrenimmo1-179",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/hektor-herrenimmo1-179",
+  "titre": "Studio meublé Sainte-Clotilde",
+  "prix": 485,
   "commune": "Saint-Denis",
-  "quartier": "",
+  "quartier": "Le Chaudron - Sainte-Clotilde",
   "pieces": 1,
   "type": "Studio",
-  "surface": 20.0,
+  "surface": 20,
   "meuble": true,
   "photos": [
-   "https://photo.superimmo.com/1t9eqrwlp9ilsxb5cstop9w4cge1",
-   "https://photo.superimmo.com/o5g72p0lwo9qnpo1rxhelhg2sv06",
-   "https://photo.superimmo.com/l4htzeyisi6hy1go20ksms2lmi77",
-   "https://photo.superimmo.com/tnrna5lhpnvox5en8l6jdeoc6eg4",
-   "https://photo.superimmo.com/forru3ix8vd547vbkisvch90tqrh",
-   "https://photo.superimmo.com/3jii4t4h7vh1iox8sn5m4qai29ib",
-   "https://photo.superimmo.com/mlqzruh0hp21657tuc5h8glhqo42",
-   "https://photo.superimmo.com/vzndax9hl5b91z6z6oi431zg4e09",
-   "https://photo.superimmo.com/ls9jl59do20vwq2i2bsi9blyaq36",
-   "https://photo.superimmo.com/akvac441cee5mueqijwwaubzadkz",
-   "https://photo.superimmo.com/6xufmxoqrpdpv6ou2lvm9wvtf569",
-   "https://photo.superimmo.com/tb1wrrszrjqyus1hzwxkdr32g7k8",
-   "https://photo.superimmo.com/2hq0t8jp4h9mw7vr9ntf54z9bnfz",
-   "https://photo.superimmo.com/91jcij3kvqitxw37fjcq81ltoklb",
-   "https://photo.superimmo.com/b46boq4vp67998xdgc52yjegnlcy"
+   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_6e5ce6271563a6013c582a21f0756b91.jpg",
+   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_e1f6ae48cea70674e7e14cecd8f20dcf.jpg",
+   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_24f006c0dbd81f5b53c263038f6ead17.jpg",
+   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_2f06a06736c194eb0811489853eb2dd9.jpg",
+   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_4c5a0faa5b63b3ef7ddd957bafafdbe9.jpg",
+   "https://file.bienici.com/photo/hektor-herrenimmo1-179_herrenimmo.staticlbi.com_original_images_biens_1_01823bca1b3baaebab4f7c36d07894ee_photo_74bf8456369ecdb16e2b3851c81eca5e.jpg"
   ],
-  "description": "Annonce appartement location 20 m² 1 pièce à Sainte-Clotilde Studio meublé Situé à , ce studio",
+  "description": "Situé à Sainte-Clotilde, ce studio meublé de 20 m2 dispose d'une pièce principale, un coin cuisine avec plaque, frigo, hotte et placards, une salle de bains avec douche + WC et meuble vasque ainsi qu'un parking sécurisé en sous/sol.<br> Disponible début novembre.<br> Loyer mensuel TCC : 485,00 EUR<br> Honoraires en zone tendue : 261,00 EUR dont 60,15 EUR pour l'état des lieux.<br> Dépôt de garantie : un mois de loyer soit 485,00 EUR<br> HERREN Immobilier <span class=\"importDescriptionDecorator\" data-type=\"phone\">02 62 20 01 62</span>/ 0692 42 71 13<br>",
   "caracteristiques": [
-   "Meublé"
+   "Ascenseur",
+   "Parking (1)",
+   "4e étage",
+   "Libre le 24/06/2024",
+   "Meublé",
+   "Parking",
+   "Résidence sécurisée"
   ],
-  "date": "",
-  "annonceur": "Superimmo",
-  "lat": null,
-  "lon": null,
+  "date": "2026-10-28T05:09:39.818Z",
+  "annonceur": "HERREN IMMOBILIER",
+  "lat": -20.894592372761053,
+  "lon": 55.484249891276285,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0262 20 01 62",
   "email": "",
-  "adresse": "",
+  "adresse": "10 rue Neuve, 97400 SAINT-DENIS",
   "secteur": "Nord",
   "caf": false,
   "aussi": [
-   {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/hektor-herrenimmo1-179"
-   },
    {
     "source": "EntreParticuliers",
     "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/studio-meuble-sainte-clotilde/ref-22729322"
@@ -1917,6 +1871,10 @@
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
+   },
+   {
+    "source": "Herren Immobilier",
+    "url": "https://www.herren-immobilier.com/location/appartement/7996"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -3370,6 +3328,46 @@
   "vu": "2026-11-04T02:59+04:00"
  },
  {
+  "id": "superimmo--annonces-location-appartement-42m-saint-denis-97490-x12fq3x",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-42m-saint-denis-97490-x12fq3x",
+  "titre": "Location appartement 2 pièces 42,25 m² Saint-Denis (97490)",
+  "prix": 589.0,
+  "commune": "Saint-Denis",
+  "quartier": "",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 42.25,
+  "meuble": null,
+  "photos": [
+   "https://photo.superimmo.com/pgv0zgxcp7bguxzj8phd227n7r54",
+   "https://photo.superimmo.com/hcou9c6poou16fol1gx8pzxe39yj",
+   "https://photo.superimmo.com/enfqp0920ho9dh0geqpbbj5h2y5w",
+   "https://photo.superimmo.com/zqpj0qluhddmeluysw7sp1o9lnc5",
+   "https://photo.superimmo.com/tw404k3u8im6uf85a2qn3rfdbo5y",
+   "https://photo.superimmo.com/2b9eg5vcx5bm4rlrmmvu1wkef6tv",
+   "https://photo.superimmo.com/exl6v1u42emzd8hyoar9xx4xi6zg",
+   "https://photo.superimmo.com/lcaort31xkwns0x9gisljgpm4qwg",
+   "https://photo.superimmo.com/j7hzqi6kfl19huz0xwob9anz626r",
+   "https://photo.superimmo.com/de0t3t7ikzod5yq317evvo9x90c8"
+  ],
+  "description": "Annonce appartement location 42,25 m² 2 pièces à Saint-Denis Disponible le 3 décembre / résidence sénior",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Superimmo",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "04 67 13 85 97",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-10T08:07+04:00"
+ },
+ {
   "id": "pv-1297244025",
   "source": "ParuVendu",
   "url": "https://www.paruvendu.fr/immobilier/location/appartement/1297244025A1KILHAP000",
@@ -3415,6 +3413,10 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
+   {
+    "source": "EntreParticuliers",
+    "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/apt-t2-ste-clotilde-route-du-moufia/ref-22774399"
+   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/apt-t2-ste-clotilde-route-du-moufia/01a1c34b-f530-70c8-acd1-afbf0bdd59db"
@@ -5197,56 +5199,6 @@
   "vu": "2026-11-04T01:01+04:00"
  },
  {
-  "id": "pv-1295634704",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1295634704A1KILHAP000",
-  "titre": "Location appartement 1 pièce de 22m2 à Saint denis (97400)",
-  "prix": 650.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "T1",
-  "surface": 22.0,
-  "meuble": true,
-  "photos": [
-   "https://img.paruvendu.fr/media_ext/_https_/photos.ubiflow.net/92/9d/LzM0MDM2OS81NTEwODY0MDkvcGhvdG9zLzEuanBnPzIwMjYwOTI5MTMyNzQ0_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/photos.ubiflow.net/1c/a3/LzM0MDM2OS81NTEwODY0MDkvcGhvdG9zLzIuanBnPzIwMjYwOTI5MTMyNzQ0_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/photos.ubiflow.net/ca/16/LzM0MDM2OS81NTEwODY0MDkvcGhvdG9zLzMuanBnPzIwMjYwOTI5MTMyNzQ0_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/photos.ubiflow.net/77/76/LzM0MDM2OS81NTEwODY0MDkvcGhvdG9zLzQuanBnPzIwMjYwOTI5MTMyNzQ0_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/6d/88/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE0ODAtMTQ2OTI0NjA5NDc5ODQwOTYzOTcuanBnPzIwMjYxMDIwMTE0NDQ0_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/bc/d9/L2NpdF9DSVRZQV9TVERFTklTX3RpYy9sb2NhdGlvbi9waG90by9maWxpZ3JhbmUtSU1HXzE0NzQtNTgwNzAyODc5NzAwMTY4MjkyOS5qcGc_MjAyNjEwMjAxMTQ0NDQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/9b/df/L2NpdF9DSVRZQV9TVFBJRVJSRV90aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLUlNR180ODc0LTE4MDc4MjU1Nzk0ODAxMTY5NzgwLmpwZz8yMDI2MTAyMDExNDAzNA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/18/ec/L3dhL2ltYWdlcy9iaWVucy8xLzczYjQ2MDE1ZDA0YmQyMjAyZjVjMjEyY2UxOGJhMGNhL3Bob3RvXzEyZjQ0YTkzYzM4YmFlMjZjYzJlOTgzNmFkMGQ0NWJmLmpwZz8yMDI2MTAyMDA3MjEyOA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/lanouvelleagence.staticlbi.com/c5/92/L3dhL2ltYWdlcy9iaWVucy8xLzhlM2ZkMmJhZWE2MDkyZDQ4ODQzM2UzMGVjYTE0YjI3L3Bob3RvXzEzYjU0MTIzZjdkNTUxNGRjMmI0YzExZTNhNmM0NWI3X0luY18wLmpwZz8yMDI2MTAyMDA3MjA1Mg_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/photos.exportadapt.com/8a/16/LzY5MDA0LzY5MDA0MTA0NjhfNzYuanBnPzIwMjYxMDIwMDEwMDIx_rct?func=crop&w=1000&gravity=auto"
-  ],
-  "description": "À louer – Bel appartement T1 entièrement meublé – 22 m² avec balcon\nJe vous invite à découvrir ce charmant appartement T1 d'une surface habitable de 22 m² au sein d'une résidence avec ascenseur.\nIl se compose :\nD'un séjour avec kitchenette équipée (plan de travail, plaque de cuisson, meuble de rangement...),\nD'une salle d'eau avec WC,\nD'une varangue de 3 m²,\nAvec 1 place de parking attribuée.\nLocalisation :\nIdéalement situé, à moins de 600m :\n- Etablissements scolaires\n- Commerces\n- Etablissements de santé\nDisponible immédiatement\nPour postuler à cette location :\nMerci de compléter votre dossier via l'onglet ZELOK:\n« DÉPOSER MON DOSSIER » (version gratuite, et non express).\nUne fois le dossier complété, vous serez contacté pour organiser une visite.\nÀ très bientôt ! Les honoraires sont partagés entre le locataire et le bailleur, les honoraires à la charge du locataire sont de 292,83€, dont 67,63€ pour l'état des lieux.\nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www. georisques. gouv. fr.\nRéseau Immobilier CAPIFRANCE - Votre agent commercial (RSAC N°883 218 034 - Greffe de SAINT DENIS) Médérik BASSET Entrepreneur Individuel +262693803830 - Réf.970859\nNom du négociateur : BASSET Médérik\nLieu : DOM-TOM (97)",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Parking",
-   "Ascenseur"
-  ],
-  "date": "",
-  "annonceur": "Capifrance",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0693 80 38 30",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a0cf1e-21a7-7b69-bfcb-d74b3312e7ae"
-   }
-  ],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
   "id": "zimo-01a1b153-1e5e-72a8-90f3-cd091d68e5a5",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-moufia/01a1b153-1e5e-72a8-90f3-cd091d68e5a5",
@@ -5371,6 +5323,37 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-09T23:12+04:00"
+ },
+ {
+  "id": "zimo-01a0cf1e-21a7-7b69-bfcb-d74b3312e7ae",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a0cf1e-21a7-7b69-bfcb-d74b3312e7ae",
+  "titre": "Appartement 1 pièce 22 m²",
+  "prix": 650.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 22.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/4qfTYvGgt03K8Bn4Ug4LCMa9BWZpqbc5QOaCkRdHn_o/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_39790312-9a29-4393-8668-9de07f01719d.jpg"
+  ],
+  "description": "Location T1 Saint-Denis (974) 1 pièces 22 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via Capifrance",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T12:04+04:00"
  },
  {
   "id": "zimo-01a1a433-f2cc-76dd-98b2-01d12bfd44c3",
@@ -7820,39 +7803,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-09T13:28+04:00"
- },
- {
-  "id": "zimo-01a05f87-36cd-7f05-90e8-6e63ec32d2f4",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-meuble-2-pieces-39-m2/01a05f87-36cd-7f05-90e8-6e63ec32d2f4",
-  "titre": "Appartement meublé - 2 pièces - 39 m²",
-  "prix": 727.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 39.0,
-  "meuble": true,
-  "photos": [
-   "https://img.e-xiste.com/uSzwQ9SJ9s5QcgMyIeU2tj_GwsoTTEyWLIFCLb6EIyU/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_f98fcb41-5c71-4af1-82cc-a544238a5937.jpg"
-  ],
-  "description": "Location T2 Saint-Denis (974) 2 pièces 39 m²",
-  "caracteristiques": [
-   "Meublé"
-  ],
-  "date": "",
-  "annonceur": "Pro · via ParuVendu",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
  },
  {
   "id": "bienici-ag970168-549727565",
