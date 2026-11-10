@@ -368,6 +368,45 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "herren-immobilier-www-herren-immobilier-com-location-appartement-7992",
+  "source": "Herren Immobilier",
+  "url": "https://www.herren-immobilier.com/location/appartement/7992",
+  "titre": "Studio de 24m² à Ste Clotilde",
+  "prix": 375.0,
+  "commune": "Saint-Denis",
+  "quartier": "",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 24.0,
+  "meuble": null,
+  "photos": [
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/main.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/preview.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_144813.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_145038.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/DSC06474.jpg",
+   "https://www.herren-immobilier.com/images/stories/snpi.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7937/min.jpg"
+  ],
+  "description": "> Studio de 24m² � Ste Clotilde Réf : 5008 � Adresse : 97490 STE CLOTILDE Avantages Climatisation Placard(s) Proximité Ecole(s) Proximité Comme...",
+  "caracteristiques": [
+   "Climatisation"
+  ],
+  "date": "",
+  "annonceur": "Herren Immobilier",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "herren-location@orange.fr",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-22T01:51+04:00"
+ },
+ {
   "id": "zimo-01a1a373-5e94-7173-b821-6f56c54cd672",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a1a373-5e94-7173-b821-6f56c54cd672",
@@ -2694,6 +2733,43 @@
   "vu": "2026-11-04T10:18+04:00"
  },
  {
+  "id": "figaro-99684193",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-99684193.html",
+  "titre": "Location  appartement 1 pièce 19 m² à Saint-Denis (97400), 550 €",
+  "prix": 550.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 19.0,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/-MHpqso9X992Nn3aE_p7LbTHZZzgwHJYo9pVkzDN251NMOXs47jex1QIcqzIxv1ryvxRKykzW3F47kXkDhh0Bjf_zTsJ8Tn9fIE4=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/suQCh9zdhT1Pr88a6ZekpA3X9-ATpUaHJP16ScO0VxBs0Lr4Xfb2ITMYszIZhi9EbqD6HDzdfh8jsjja_ViY9AVhP7_XKXigPoB-=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/vWIMGCErBDYYQd7K5dz8s_6i3BrfZoS59OAXxcT3CW79yJOuYeOdZFxVPorUJHET2Xk0mei0ItbmGUY2ealSImtrse5T8z24CwOnJA=rw-w940-h605-l80"
+  ],
+  "description": "Florence DOÉ 0692 01 28 80 florencedoe@outre-mer-immobilier.re https://www.outre-mer-immobilier.re/louer.html Studio meublé neuf? Près de la Fac\nStudio meublé de 18 m², entièrement refait à neuf, situé au rez-de-chaussée de la résidence Central Fac n°1, à proximité immédiate de l?université.\nLe logement comprend :\n- canapé-lit,\n- table à manger avec chaises hautes,\n- machine à laver,\n- vaisselle,\n- kitchenette équipée,\n- salle d?eau avec WC\nIdéal pour étudiant, proche de la faculté, des commerces et des transports.Plus d'informations et des vidéos ? Venez consulter notre site internet outre-mer-immobilier ou contactez moi : Florence DOÉ Négociateur(trice) Immobilier au 0692 01 28 80 - Vous avez également un bien à vendre ? Appelez-moi au 0692 01 28 80 pour une estimation gratuite !------------------------------------------Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site www.georisques.gouv.fr",
+  "caracteristiques": [
+   "Meublé",
+   "Proche transports",
+   "Proche université"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 01 28 80",
+  "email": "florencedoe@outre-mer-immobilier.re",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T19:53+04:00"
+ },
+ {
   "id": "bienici-citya-immobilier-501991-GES00020025-34",
   "source": "Bien'ici",
   "url": "https://www.bienici.com/annonce/location/la-montagne/appartement/2pieces/citya-immobilier-501991-GES00020025-34",
@@ -3991,10 +4067,6 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
-   {
-    "source": "Figaro Immobilier",
-    "url": "https://immobilier.lefigaro.fr/annonces/annonce-110683147.html"
-   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-t1-res-les-marquises/01a1a1ce-55f3-7e8c-bbeb-0e4ac0bc6ede"
@@ -5344,34 +5416,46 @@
   "vu": "2026-11-09T23:12+04:00"
  },
  {
-  "id": "zimo-01a0cf1e-21a7-7b69-bfcb-d74b3312e7ae",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a0cf1e-21a7-7b69-bfcb-d74b3312e7ae",
-  "titre": "Appartement 1 pièce 22 m²",
+  "id": "figaro-109098711",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html",
+  "titre": "Location meublée appartement 1 pièce 22 m² à Saint-Denis (97400), 650 €",
   "prix": 650.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "T1",
   "surface": 22.0,
-  "meuble": null,
+  "meuble": true,
   "photos": [
-   "https://img.e-xiste.com/4qfTYvGgt03K8Bn4Ug4LCMa9BWZpqbc5QOaCkRdHn_o/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_39790312-9a29-4393-8668-9de07f01719d.jpg"
+   "https://lh3.googleusercontent.com/qfb_PeIUv0PPnXXP2sgF65y5iO2iblpHBP-3qzbMVsp_KjFmDAK9FkQEAb6gkoe2TAxXFe-5mgg9up8XlKCWTaw8dj6lZxPkJUDcJw=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/L3bNTobfGGy12A-nROVePn7F8VChNm8MvDPwO_jS9RLH-mxBZDQbwSEn-AJ3rG0OBuVAKLiNzvvnS2wM6hc_lfo5c_qN4R8TrDfs=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/e79KbqbQsge9LCJoRQc2q4CX-UaCVx2rF54GmKXWP4AqvABa7annMu-f0K7o1kZ_rduyohgkQBjLgztzU-QkdvcSxgqndpFVgtg_=rw-w940-h605-l80"
   ],
-  "description": "Location T1 Saint-Denis (974) 1 pièces 22 m²",
-  "caracteristiques": [],
+  "description": "À louer – Bel appartement T1 entièrement meublé – 22 m² avec balcon\nJe vous invite à découvrir ce charmant appartement T1 d'une surface habitable de 22 m² au sein d'une résidence avec ascenseur.\nIl se compose :\nD'un séjour avec kitchenette équipée (plan de travail, plaque de cuisson, meuble de rangement...),\nD'une salle d'eau avec WC,\nD'une varangue de 3 m²,\nAvec 1 place de parking attribuée.\nLocalisation :\nIdéalement situé, à moins de 600m :\n- Etablissements scolaires\n- Commerces\n- Etablissements de santé\nDisponible immédiatement\nPour postuler à cette location :\nMerci de compléter votre dossier via l'onglet ZELOK:\n« DÉPOSER MON DOSSIER » (version gratuite, et non express).\nUne fois le dossier complété, vous serez contacté pour organiser une visite.\nÀ très bientôt ! Les honoraires sont partagés entre le locataire et le bailleur, les honoraires à la charge du locataire sont de 292,83€, dont 67,63€ pour l'état des lieux.\nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www. georisques. gouv. fr.\nRéseau Immobilier CAPIFRANCE - Votre agent commercial (RSAC N°883 218 034 - Greffe de SAINT DENIS) Médérik BASSET Entrepreneur Individuel +262693803830 - Réf.970859",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Ascenseur"
+  ],
   "date": "",
-  "annonceur": "Pro · via Capifrance",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0693 80 38 30",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a0cf1e-21a7-7b69-bfcb-d74b3312e7ae"
+   }
+  ],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -7833,6 +7917,37 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-09T13:28+04:00"
+ },
+ {
+  "id": "zimo-01a1c59a-28aa-7719-9a32-e52bf56ad560",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-30-m2/01a1c59a-28aa-7719-9a32-e52bf56ad560",
+  "titre": "Appartement 2 pièces 30 m²",
+  "prix": 725.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 30.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/_0s6tEZkWvU-vUA0WPo3xdnkgyVdr6T2Q09-hqW21Kg/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_fac61e11-6793-4e22-baf6-40cabf824a0e.jpg"
+  ],
+  "description": "Location T2 Saint-Denis (974) 2 pièces 30 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-10T17:23+04:00"
  },
  {
   "id": "bienici-ag970168-549727565",
