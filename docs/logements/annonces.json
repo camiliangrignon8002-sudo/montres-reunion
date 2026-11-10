@@ -368,6 +368,45 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "herren-immobilier-www-herren-immobilier-com-location-appartement-7992",
+  "source": "Herren Immobilier",
+  "url": "https://www.herren-immobilier.com/location/appartement/7992",
+  "titre": "Studio de 24m² à Ste Clotilde",
+  "prix": 375.0,
+  "commune": "Saint-Denis",
+  "quartier": "",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 24.0,
+  "meuble": null,
+  "photos": [
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/main.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/preview.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_144813.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_145038.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/DSC06474.jpg",
+   "https://www.herren-immobilier.com/images/stories/snpi.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7937/min.jpg"
+  ],
+  "description": "> Studio de 24m² � Ste Clotilde Réf : 5008 � Adresse : 97490 STE CLOTILDE Avantages Climatisation Placard(s) Proximité Ecole(s) Proximité Comme...",
+  "caracteristiques": [
+   "Climatisation"
+  ],
+  "date": "",
+  "annonceur": "Herren Immobilier",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "herren-location@orange.fr",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-22T01:51+04:00"
+ },
+ {
   "id": "zimo-01a1a373-5e94-7173-b821-6f56c54cd672",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a1a373-5e94-7173-b821-6f56c54cd672",
@@ -3329,6 +3368,59 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-04T02:59+04:00"
+ },
+ {
+  "id": "pv-1297244025",
+  "source": "ParuVendu",
+  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1297244025A1KILHAP000",
+  "titre": "Location appartement 2 pièces de 38m2 à Ste clotilde (97490)",
+  "prix": 590.0,
+  "commune": "Saint-Denis",
+  "quartier": "Sainte-Clotilde",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 38.0,
+  "meuble": null,
+  "photos": [
+   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/66/b1/L29yaWdpbmFsL2ltYWdlcy9iaWVucy8xLzJjZDRlOGEyY2UwODFjM2Q3YzMyYzNjZGU0MzEyZWY3LzY5YWU4NjQwYWU1ZGNkYTZhNDZiYjgzNDFjMDY1MzU1LmpwZz8yMDI2MTExMDAyNDI1Nw_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/01/f7/L29yaWdpbmFsL2ltYWdlcy9iaWVucy8xLzJjZDRlOGEyY2UwODFjM2Q3YzMyYzNjZGU0MzEyZWY3L2ViMzlkNWM1NWYxMDYyYTJjYTQ3MDM1MTg4ZjhiZTc0LmpwZz8yMDI2MTExMDAyNDI1Nw_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/2a/69/L29yaWdpbmFsL2ltYWdlcy9iaWVucy8xLzJjZDRlOGEyY2UwODFjM2Q3YzMyYzNjZGU0MzEyZWY3L2RjMzBjNTNhMjRkMzEzOWJmOWEzMTk5ZTIwZmE0MWM5LmpwZz8yMDI2MTExMDAyNDI1Nw_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/ae/4a/L29yaWdpbmFsL2ltYWdlcy9iaWVucy8xLzJjZDRlOGEyY2UwODFjM2Q3YzMyYzNjZGU0MzEyZWY3L2FiZmM1MDdjNzQ2MjlkMGZmMTYxMjhiOTQxNGM2NmI1LmpwZz8yMDI2MTExMDAyNDI1Nw_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/_https_/immoplusreunion.staticlbi.com/40/62/L29yaWdpbmFsL2ltYWdlcy9iaWVucy8xLzJjZDRlOGEyY2UwODFjM2Q3YzMyYzNjZGU0MzEyZWY3LzI0YWU4Y2I3NzlkZDZiODRkYmUzMTZjNWRkNDcyN2M3LmpwZz8yMDI2MTExMDAyNDI1Nw_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/_https_/media.apimo.pro/12/44/L2NhY2hlL2Y3MDQ1YjUwZjQ2NDkzMDcyY2Y5ZWJhYWE5MzMyZWNjXzM2ZWU1YTNjMDZfMTkyMC1iaWcuanBnPzIwMjYxMTEwMDEwNjMx_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/_https_/lanouvelleagence.staticlbi.com/bc/0c/L29yaWdpbmFsL2ltYWdlcy9iaWVucy8xLzY2NDIyNDE1NmY2ZGExMzk1M2E3YzhhMDMzZjFhZDU1L3Bob3RvXzM4MDgyODljMmFlMGJmNjM5ZGNhNGUxZTg2Y2Q0ODlkX0luY18wLmpwZz8yMDI2MTEwOTIzNDYwNw_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/_https_/lanouvelleagence.staticlbi.com/69/e3/L29yaWdpbmFsL2ltYWdlcy9iaWVucy8xLzRlNDY3NzJmNTJkNmIwNDRjYjgyYjUxNmE5OWJmNTA2L3Bob3RvX2FhNTZmMTdjY2QxYmQxN2QxYTUwOTk0NzU5OTE3MmQ5LmpwZz8yMDI2MTEwOTIzMjAyOQ_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/_https_/lanouvelleagence.staticlbi.com/fa/56/L29yaWdpbmFsL2ltYWdlcy9iaWVucy8xL2RlNzhlNTA5NDgwNTFmZDVkYjUzNTU0ZmUyN2RiNTAwL3Bob3RvX2NlN2VmZGNmN2VlZTU1ZGFkODY1NzczNGRhYTljODMwX0luY18wLmpwZz8yMDI2MTEwOTIzMjAyNQ_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/box.ics.fr/65/17/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS1zX2pvdXItNDY4MDYyODQwNDQ2Mjk2NzY2LmpwZz8yMDI2MTEwOTA1NTMxOA_rct?func=crop&w=1000&gravity=auto",
+   "https://img.paruvendu.fr/media_ext/_https_/www.outre-mer-immobilier.re/06/4b/L3Bob3Rvcy8yODY4LzFjYzJjZWVlNDFhNjY1NmIzZjRjMmQwZjcyMjRhZDFlL19nYWxlcmllc2ZfLmpwZz8yMDI2MTEwOTA1MTUwNg_rct?func=crop&w=1000&gravity=auto"
+  ],
+  "description": "Appartement T2 avec chambre climatisée et terrasse, idéal pour jeunes actifs ou étudiants. Situé dans la résidence OCEANE à Ste Clotilde, vous profiterez de la proximité avec l'université et des transports en commun.\nRésidence OCEANE - Appartement T2 de 38m2 habitable (52 m2 utile) comprenant uune cuisine équipée avec plaques, hotte, un salon/séjour, une salle de bains avec WC, une chambre climatisée avec placard, une terrasse, un parking ,\nRésidence proche Université, transport en commun, ,idéal jeune actif ou étudiant\nloyer mensuel TCC : 590 €\ndepot de garantie : 570 €\nhonoraires d'agence TTC : 494 €\nles risques auxquels ce bien est soumis sont disponibles sur georisques.gouv.fr\nDétails :\nNombre de chambre(s) : 1\nNombre de pièces : 2\nNb de salle de bains : 1\nNombre de wc : 1\nNombre de parking : 1\nPart Honoraires Etat des lieux : 114 euros\nType de charge : prévisionnelles mensuelles\nCharges : 20 euros/mois\nNom du négociateur : CATAPOULE Vincent\nLieu : DOM-TOM (97)",
+  "caracteristiques": [
+   "Varangue / balcon",
+   "Parking",
+   "Climatisation",
+   "Cuisine équipée",
+   "Proche transports",
+   "Proche université"
+  ],
+  "date": "",
+  "annonceur": "IMMO PLUS REUNION",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/apt-t2-ste-clotilde-route-du-moufia/01a1c34b-f530-70c8-acd1-afbf0bdd59db"
+   }
+  ],
+  "vu": "2026-11-10T07:02+04:00"
  },
  {
   "id": "zimo-01a1bfd4-0600-7653-8303-f4012810efa6",
