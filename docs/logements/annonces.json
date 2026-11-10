@@ -1612,7 +1612,12 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Bien'ici",
+    "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/netty-company58298tcg-appt-2786"
+   }
+  ],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
