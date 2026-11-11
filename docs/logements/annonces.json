@@ -6575,31 +6575,24 @@
   "vu": "2026-11-04T01:01+04:00"
  },
  {
-  "id": "figaro-110703823",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110703823.html",
-  "titre": "Location  appartement 1 pièce 40 m² à La possession (97419), 680 €",
+  "id": "zimo-01a1affb-9589-7843-9371-60a2362e6c24",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-1-piece-40-m2/01a1affb-9589-7843-9371-60a2362e6c24",
+  "titre": "Studio 1 pièce 40 m²",
   "prix": 680.0,
   "commune": "La Possession",
-  "quartier": "La possession",
+  "quartier": "La Possession",
   "pieces": 1,
   "type": "Studio",
   "surface": 40.0,
-  "meuble": true,
+  "meuble": null,
   "photos": [
-   "https://lh3.googleusercontent.com/byNbODN1MQuvuRsDWGUW9eXBRu1jP9-KRHJrg-SX52fEN6FLkHz9iyh5ED2Bmi9-EFHZHRz8KLNXQRu5LGHbYtD4msqtVF7g4dqUl6Y=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/CyAi4O9Z3g9KTEpVI9YCTOUucaH1yKvWlKOmltt1F547NWWIjCOjDchTKUZlV_0RZlfjdGGzjGbES109C_Srzby1zDyoN8f_M6dwQA=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/2rAtqD1J_ifnlUrlobUm8rLfGeQton4ihELUWn6-7zqWLq8QYtSr0eZNKV1-9KQbxsyne_Q2gfYuFgdLpZHxanDz6JjROsOrrConDw=rw-w940-h605-l80"
+   "https://img.e-xiste.com/JufZkqqxTJeujytBT9MXz0gf19obB1qsjNO3AygULdk/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_0b5eaf30-d95c-4bf6-8bea-82144fe58c41.jpg"
   ],
-  "description": "Nous vous proposons à la location ce studio de 40m2, dans la résidence LES DATTIERS à La Possession.\nLa résidence se situe ZAC SAINT LAURENT, à proximité d'école, des commerces etc....\nL'appartement se compose d'une pièce de vie avec accès à une spacieuse varangue, un coin cuisine aménagée, 1 salle de bain et 1 wc.\nUne place de stationnement attribuée au logement.\nLoyer : 680EUR (dont 15EUR de provisions pour charges de copropriété)\nEau, électricité et internet non inclus. Logement loué non-meublé.\nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www.georisques.gouv.fr",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Parking",
-   "Cuisine équipée"
-  ],
+  "description": "Location Studio La Possession (974) 1 pièces 40 m²",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "",
+  "annonceur": "Pro · via leboncoin",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -6609,12 +6602,7 @@
   "adresse": "",
   "secteur": "Nord-Ouest",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/studio-1-piece-40-m2/01a1affb-9589-7843-9371-60a2362e6c24"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-11-06T14:19+04:00"
  },
  {
