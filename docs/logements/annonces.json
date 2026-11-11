@@ -1761,10 +1761,6 @@
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
-   },
-   {
-    "source": "Herren Immobilier",
-    "url": "https://www.herren-immobilier.com/location/appartement/7996"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -5473,44 +5469,6 @@
   "vu": "2026-11-03T19:05+04:00"
  },
  {
-  "id": "figaro-109098711",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html",
-  "titre": "Location meublée appartement 1 pièce 22 m² à Saint-Denis (97400), 650 €",
-  "prix": 650.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "T1",
-  "surface": 22.0,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/qfb_PeIUv0PPnXXP2sgF65y5iO2iblpHBP-3qzbMVsp_KjFmDAK9FkQEAb6gkoe2TAxXFe-5mgg9up8XlKCWTaw8dj6lZxPkJUDcJw=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/L3bNTobfGGy12A-nROVePn7F8VChNm8MvDPwO_jS9RLH-mxBZDQbwSEn-AJ3rG0OBuVAKLiNzvvnS2wM6hc_lfo5c_qN4R8TrDfs=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/e79KbqbQsge9LCJoRQc2q4CX-UaCVx2rF54GmKXWP4AqvABa7annMu-f0K7o1kZ_rduyohgkQBjLgztzU-QkdvcSxgqndpFVgtg_=rw-w940-h605-l80"
-  ],
-  "description": "À louer – Bel appartement T1 entièrement meublé – 22 m² avec balcon\nJe vous invite à découvrir ce charmant appartement T1 d'une surface habitable de 22 m² au sein d'une résidence avec ascenseur.\nIl se compose :\nD'un séjour avec kitchenette équipée (plan de travail, plaque de cuisson, meuble de rangement...),\nD'une salle d'eau avec WC,\nD'une varangue de 3 m²,\nAvec 1 place de parking attribuée.\nLocalisation :\nIdéalement situé, à moins de 600m :\n- Etablissements scolaires\n- Commerces\n- Etablissements de santé\nDisponible immédiatement\nPour postuler à cette location :\nMerci de compléter votre dossier via l'onglet ZELOK:\n« DÉPOSER MON DOSSIER » (version gratuite, et non express).\nUne fois le dossier complété, vous serez contacté pour organiser une visite.\nÀ très bientôt ! Les honoraires sont partagés entre le locataire et le bailleur, les honoraires à la charge du locataire sont de 292,83€, dont 67,63€ pour l'état des lieux.\nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www. georisques. gouv. fr.\nRéseau Immobilier CAPIFRANCE - Votre agent commercial (RSAC N°883 218 034 - Greffe de SAINT DENIS) Médérik BASSET Entrepreneur Individuel +262693803830 - Réf.970859",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Parking",
-   "Ascenseur"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0693 80 38 30",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
   "id": "superimmo--annonces-location-appartement-20m-saint-denis-97490-x12ev28",
   "source": "Superimmo",
   "url": "https://www.superimmo.com/annonces/location-appartement-20m-saint-denis-97490-x12ev28",
@@ -6567,31 +6525,24 @@
   "vu": "2026-11-08T18:54+04:00"
  },
  {
-  "id": "figaro-110703823",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110703823.html",
-  "titre": "Location  appartement 1 pièce 40 m² à La possession (97419), 680 €",
+  "id": "zimo-01a1affb-9589-7843-9371-60a2362e6c24",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-1-piece-40-m2/01a1affb-9589-7843-9371-60a2362e6c24",
+  "titre": "Studio 1 pièce 40 m²",
   "prix": 680.0,
   "commune": "La Possession",
-  "quartier": "La possession",
+  "quartier": "La Possession",
   "pieces": 1,
   "type": "Studio",
   "surface": 40.0,
-  "meuble": true,
+  "meuble": null,
   "photos": [
-   "https://lh3.googleusercontent.com/byNbODN1MQuvuRsDWGUW9eXBRu1jP9-KRHJrg-SX52fEN6FLkHz9iyh5ED2Bmi9-EFHZHRz8KLNXQRu5LGHbYtD4msqtVF7g4dqUl6Y=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/CyAi4O9Z3g9KTEpVI9YCTOUucaH1yKvWlKOmltt1F547NWWIjCOjDchTKUZlV_0RZlfjdGGzjGbES109C_Srzby1zDyoN8f_M6dwQA=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/2rAtqD1J_ifnlUrlobUm8rLfGeQton4ihELUWn6-7zqWLq8QYtSr0eZNKV1-9KQbxsyne_Q2gfYuFgdLpZHxanDz6JjROsOrrConDw=rw-w940-h605-l80"
+   "https://img.e-xiste.com/JufZkqqxTJeujytBT9MXz0gf19obB1qsjNO3AygULdk/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_0b5eaf30-d95c-4bf6-8bea-82144fe58c41.jpg"
   ],
-  "description": "Nous vous proposons à la location ce studio de 40m2, dans la résidence LES DATTIERS à La Possession.\nLa résidence se situe ZAC SAINT LAURENT, à proximité d'école, des commerces etc....\nL'appartement se compose d'une pièce de vie avec accès à une spacieuse varangue, un coin cuisine aménagée, 1 salle de bain et 1 wc.\nUne place de stationnement attribuée au logement.\nLoyer : 680EUR (dont 15EUR de provisions pour charges de copropriété)\nEau, électricité et internet non inclus. Logement loué non-meublé.\nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www.georisques.gouv.fr",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Parking",
-   "Cuisine équipée"
-  ],
+  "description": "Location Studio La Possession (974) 1 pièces 40 m²",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "",
+  "annonceur": "Pro · via leboncoin",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -6601,53 +6552,8 @@
   "adresse": "",
   "secteur": "Nord-Ouest",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/studio-1-piece-40-m2/01a1affb-9589-7843-9371-60a2362e6c24"
-   }
-  ],
-  "vu": "2026-11-06T14:19+04:00"
- },
- {
-  "id": "figaro-110025019",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025019.html",
-  "titre": "Location meublée appartement 1 pièce 24.72 m² à Saint-Denis (97400), 680 €",
-  "prix": 680.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": null,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/yuCmIU2VVliHTLDaZhVC7dQKHEkgKEF6DHQ-ttgsVhQAPLGwNA5tAPiqMUtHx_Fi20T2kJ4msyZlSZU0puhHAbG_czetMbLgPw9a1Q=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/yaXvVs2WqRwgODHf5qBPzomBUey_xX2i128B7aL_lfg_OPyLKOcWN2eLsJR12XoYVeArIB6vvQhyx9LafbnkKMuk-aMmTyiaifvvRg=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/7UCEdPc8N0qDHp3URGOPM4ulUFrJfLTgQrpB_Ytl0J4qbV1esvf4iJe_shR9VajkSduyLpxJij9rLgzo6KTia6_brGJTRoy5dn7QP94=rw-w940-h605-l80"
-  ],
-  "description": "RUNIMMO vous propose en location un studio joliment meublé de 24,72 m2, situé dans la rue monthyon à Saint-Denis (97400), résidence ' LA GOELETTE '. Ce bien se compose d'une pièce principale lumineuse et climatisée, une cuisine aménagée et équipée, une belle salle d'eau avec wc et une grande terrasse. Une place de parking privative est disponible en sous-sol. Ce bien se situe proche du jardin de l'état, et du centre ville de Saint-Denis. Pour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 321 € TTC à la charge du locataire comprenant 74 € TTC pour l'état des lieux. Loyer de base 640 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 280 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Parking",
-   "Climatisation",
-   "Jardin",
-   "Cuisine équipée"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0692 26 92 05",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
   "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
+  "vu": "2026-11-06T14:19+04:00"
  },
  {
   "id": "superimmo--annonces-location-appartement-25m-saint-denis-97490-x12etyh",
@@ -7352,32 +7258,24 @@
   "vu": "2026-10-21T12:59+04:00"
  },
  {
-  "id": "figaro-110703821",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110703821.html",
-  "titre": "Location meublée appartement 1 pièce 25 m² à Saint-Denis (97400), 702 €",
+  "id": "zimo-01a1affb-957d-7be9-abe5-15f832a602af",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-1-piece-25-m2/01a1affb-957d-7be9-abe5-15f832a602af",
+  "titre": "Studio 1 pièce 25 m²",
   "prix": 702.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
   "surface": 25.0,
-  "meuble": true,
+  "meuble": null,
   "photos": [
-   "https://lh3.googleusercontent.com/it-RKJ3kWZimyXBBi7Uf5K5fcG1LmugKg7ciNTqzJA8Kr9IAyNzZRX-X4HloP400N-xVau-jJMssiGu4s7NdLPCgmUgFFssMTAcsgxY=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/CCD9qZMTIMH1x-KXkMCqHQX2BHM4vRPgzMhWU_LVAVrSxj3o6I3e_jnEYwBOKF0A5ktKiMcEwScnSAm5DY7gbmjeyGUJXldAyBMRtV0=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/M0bx6wqJy5OGJD3tmMWa2r6JWK173sMQPprszQ6mtFWJDltUWBh2yeZLanVTrTnUgPHmWkO6NKEG9MVIqyqefRjF0-XohTZLjkm6vQ=rw-w940-h605-l80"
+   "https://img.e-xiste.com/01ydZS5Z4c7zjSA4OE50NMvdbVJznM3Q70CR2UxHMeo/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_d2eaa78b-e878-4aed-8573-3b4aca5f1712.jpg"
   ],
-  "description": "Nous vous proposons à la location ce studio meublé de 25m2, dans la résidence LE CLOS SAINT JACQUES à Saint-Denis.\nLa résidence se trouve à proximité du Jardin d'état, dans la Rue Montreuil\nL'appartement, situé au 1er étage se compose d'une pièce de vie avec espace buanderie et dressing, un coin cuisine aménagée et équipée, 1 salle d'eau et 1 wc. 1 balcon complète ce logement.\nPas de place de parking\nle logement est disponible au 3 décembre, suite au préavis des locataires, mais les visites commencent.\nLoyer : 702,41EUR (dont 50EUR de provisions pour charges de copropriété)\nEau, électricité et internet non inclus. Logement loué meublé.\nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www.georisques.gouv.fr",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Parking",
-   "Jardin",
-   "Cuisine équipée"
-  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 25 m²",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "",
+  "annonceur": "Pro · via leboncoin",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -7387,12 +7285,7 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/studio-1-piece-25-m2/01a1affb-957d-7be9-abe5-15f832a602af"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-11-06T14:19+04:00"
  },
  {
