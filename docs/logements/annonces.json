@@ -1816,46 +1816,33 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "figaro-98661035",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-98661035.html",
-  "titre": "Location  appartement 1 pièce 20 m² à Moufia (97490), 500 €",
+  "id": "zimo-01a1a4c6-1b98-7eb1-990d-381e7ceef14e",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/loue-studio-au-moufia/01a1a4c6-1b98-7eb1-990d-381e7ceef14e",
+  "titre": "Loue studio au moufia",
   "prix": 500.0,
   "commune": "Saint-Denis",
-  "quartier": "Moufia",
+  "quartier": "Le Moufia",
   "pieces": 1,
   "type": "Studio",
   "surface": 20.0,
   "meuble": null,
-  "photos": [
-   "https://lh3.googleusercontent.com/4AmR21oczw3d0xwlGeqTEe3VHkaEfugPmyOtPv01WvX2-UFQUQEW6BuTRJgF2j-X-KNoI38Fn2lfPo2SbofEZd9WLgAqD1pSSGmqGA=rw-w700-h660-l80"
-  ],
-  "description": "A louer studio comprenant :\n1 kitchenette\n1 pièce principale climatisée\n1 SDE + WC\nPlacards aménagés",
-  "caracteristiques": [
-   "Climatisation"
-  ],
+  "photos": [],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "",
+  "annonceur": "Particulier · via leboncoin",
   "lat": null,
   "lon": null,
   "charges": null,
-  "pro": true,
+  "pro": false,
   "tel": "",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/loue-studio-au-moufia/01a1a4c6-1b98-7eb1-990d-381e7ceef14e"
-   },
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/studio/01a1a28d-46dc-72a3-8b45-667450f619e3"
-   }
-  ],
-  "vu": "2026-10-21T13:51+04:00"
+  "aussi": [],
+  "vu": "2026-11-03T22:03+04:00"
  },
  {
   "id": "zimo-01a1a41b-dcce-7010-900c-575b74aa0265",
@@ -2105,6 +2092,40 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-03T17:23+04:00"
+ },
+ {
+  "id": "zimo-01a1ca93-030f-7780-b6cc-16e135e346cc",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/agreable-studio-meuble-etudiant-st-denis-510-mois/01a1ca93-030f-7780-b6cc-16e135e346cc",
+  "titre": "Agréable studio meublé étudiant St-Denis 510/mois",
+  "prix": 510.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 21.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/doRzXmyzlk7h8E1vrZHlUIzqTTa0EHhhhdh_roKxfTs/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_2b785ed8-c5a9-4dce-8384-01e61567f18d.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 21 m²",
+  "caracteristiques": [
+   "Meublé",
+   "Proche université"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-11T17:30+04:00"
  },
  {
   "id": "zimo-019f76f9-3f7f-7cff-a68f-356f105478c9",
@@ -5292,34 +5313,46 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a0cf1e-21a7-7b69-bfcb-d74b3312e7ae",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a0cf1e-21a7-7b69-bfcb-d74b3312e7ae",
-  "titre": "Appartement 1 pièce 22 m²",
+  "id": "figaro-109098711",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-109098711.html",
+  "titre": "Location meublée appartement 1 pièce 22 m² à Saint-Denis (97400), 650 €",
   "prix": 650.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "T1",
   "surface": 22.0,
-  "meuble": null,
+  "meuble": true,
   "photos": [
-   "https://img.e-xiste.com/4qfTYvGgt03K8Bn4Ug4LCMa9BWZpqbc5QOaCkRdHn_o/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_39790312-9a29-4393-8668-9de07f01719d.jpg"
+   "https://lh3.googleusercontent.com/qfb_PeIUv0PPnXXP2sgF65y5iO2iblpHBP-3qzbMVsp_KjFmDAK9FkQEAb6gkoe2TAxXFe-5mgg9up8XlKCWTaw8dj6lZxPkJUDcJw=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/L3bNTobfGGy12A-nROVePn7F8VChNm8MvDPwO_jS9RLH-mxBZDQbwSEn-AJ3rG0OBuVAKLiNzvvnS2wM6hc_lfo5c_qN4R8TrDfs=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/e79KbqbQsge9LCJoRQc2q4CX-UaCVx2rF54GmKXWP4AqvABa7annMu-f0K7o1kZ_rduyohgkQBjLgztzU-QkdvcSxgqndpFVgtg_=rw-w940-h605-l80"
   ],
-  "description": "Location T1 Saint-Denis (974) 1 pièces 22 m²",
-  "caracteristiques": [],
+  "description": "À louer – Bel appartement T1 entièrement meublé – 22 m² avec balcon\nJe vous invite à découvrir ce charmant appartement T1 d'une surface habitable de 22 m² au sein d'une résidence avec ascenseur.\nIl se compose :\nD'un séjour avec kitchenette équipée (plan de travail, plaque de cuisson, meuble de rangement...),\nD'une salle d'eau avec WC,\nD'une varangue de 3 m²,\nAvec 1 place de parking attribuée.\nLocalisation :\nIdéalement situé, à moins de 600m :\n- Etablissements scolaires\n- Commerces\n- Etablissements de santé\nDisponible immédiatement\nPour postuler à cette location :\nMerci de compléter votre dossier via l'onglet ZELOK:\n« DÉPOSER MON DOSSIER » (version gratuite, et non express).\nUne fois le dossier complété, vous serez contacté pour organiser une visite.\nÀ très bientôt ! Les honoraires sont partagés entre le locataire et le bailleur, les honoraires à la charge du locataire sont de 292,83€, dont 67,63€ pour l'état des lieux.\nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www. georisques. gouv. fr.\nRéseau Immobilier CAPIFRANCE - Votre agent commercial (RSAC N°883 218 034 - Greffe de SAINT DENIS) Médérik BASSET Entrepreneur Individuel +262693803830 - Réf.970859",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Ascenseur"
+  ],
   "date": "",
-  "annonceur": "Pro · via Capifrance",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0693 80 38 30",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a0cf1e-21a7-7b69-bfcb-d74b3312e7ae"
+   }
+  ],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
@@ -5930,46 +5963,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-03T23:11+04:00"
- },
- {
-  "id": "figaro-108763619",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108763619.html",
-  "titre": "Location  appartement 1 pièce 22.88 m² à Sainte Clotilde (97490), 660 €",
-  "prix": 660.0,
-  "commune": "Saint-Denis",
-  "quartier": "Sainte Clotilde",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 22.88,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/QWqeT3VAHwJ0LkPn9OPQIzFhFEaBvkg_odmzK9ElOkQoKxEuFInsf5YsGj-9TgaOpg0GxgPrjsfvhyWWQXfEBu5GpVSnyTCU9rXm0sc=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/L4lJ-wVPt78puF_t46BOeMKDM1_xLffzcBWmBQTxcSou4ik79XimYC-tYYzBsm8MNnS-g1UDyjPClHcbUDkPjCzpG1n93m8YVWKjpw=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/xEaKqjza4PaiwR0B_GQUKG_LrTHah88_DgwbvVvpyRKDMVqKP8vi21sOzcg0qT_rp8bssrhC0oPhKkWnJUblkDc2-iJqUDFpqP0W=rw-w940-h605-l80"
-  ],
-  "description": "Venez visiter ce charmant studio meublé très bien agencé situé dans la résidence le Rembrand proche de la clinique et de la faculté comprenant une entrée, une pièce à vivre climatisée, une cuisine aménagée avec placards haut et bas et équipée d'un réfrigérateur, micro ondes, évier, plaque de cuisson...... , une salle d'eau avec douche et toilette et une varangue donnant sur le jardin de la résidence.\nUne place de parking est attribuée à ce logement.\nce logement est disponible de suite.\nLoyer mensuel 660 € dont 20 € de provision pour charges de copropriété\nDépôt de garantie 1260 € soit deux mois de loyer hors charges\nHonoraires locataires 13 € du m2 soit 286 € dont 66 € pour état des lieux soit 3 € du m2\nPour toute visite contactez David agent commercial du réseau teka Immo au 0692 14 60 00 ou ou par é-mail :david.teka@tekaimmo.fr\nlien vers notre barème :http://www.teka Immo.com/pdf/honoraires.pdf.Annonce rédigée sous la responsabilité éditoriale de l'agent.\n\\r",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Parking",
-   "Climatisation",
-   "Jardin",
-   "Cuisine équipée"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0692 14 60 00",
-  "email": "david.teka@tekaimmo.fr",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T17:56+04:00"
  },
  {
   "id": "zimo-01a13159-76f9-7700-9b1f-87ed81f7d0dc",
