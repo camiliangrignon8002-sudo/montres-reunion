@@ -52,53 +52,79 @@ function buildLabel(f, A, idx, total, maxAniso, W = 2048){
   const bh = A.bot - A.top;
   const aspect = (TAU * A.r / W) / (bh / H); // largeur réelle d'un texel / hauteur
 
-  // --- dos
-  const grad = g.createLinearGradient(0, 0, 0, H);
-  grad.addColorStop(0, f.c1); grad.addColorStop(.5, f.c1); grad.addColorStop(1, shade(f.c1, -.18));
-  g.fillStyle = grad; g.fillRect(0, 0, W, H);
-  // fines bandes métalliques en haut et en bas
-  const metal = (y, h) => { const m = g.createLinearGradient(0, y, 0, y + h); m.addColorStop(0, "#8f949c"); m.addColorStop(.5, "#eef0f3"); m.addColorStop(1, "#9aa0a8"); g.fillStyle = m; g.fillRect(0, y, W, h); };
-  metal(0, H*.018); metal(H - H*.018, H*.018);
-
-  const cx = W * .75; // centre du dos
-  g.save(); g.translate(cx, 0); g.scale(H/1024/aspect, H/1024);
-  const ink = f.ink, acc = f.acc;
-  // demi-largeur visible du dos (±55°), en unités non déformées
-  const colW = (W * 46/360) * aspect / (H/1024);
-  g.textAlign = "center"; g.fillStyle = ink;
-  g.font = '500 26px "JetBrains Mono", monospace';
-  g.globalAlpha = .8; g.fillText(`N° ${String(idx+1).padStart(2,"0")} / ${String(total).padStart(2,"0")}`, 0, 110); g.globalAlpha = 1;
-  // nom du goût, en grand, sur 1 ou 2 lignes
-  const words = f.short.toUpperCase().split(" ");
-  let size = Math.min(120, colW*.55); g.font = `900 ${size}px "Archivo", sans-serif`;
-  const lines = [];
-  for (const w of words){ const l = lines.length ? lines[lines.length-1] + " " + w : w; if (lines.length && g.measureText(l).width < colW*2) lines[lines.length-1] = l; else lines.push(w); }
-  while (lines.some(l => g.measureText(l).width > colW*2) && size > 50){ size -= 6; g.font = `900 ${size}px "Archivo", sans-serif`; }
-  lines.forEach((l, n) => g.fillText(l, 0, 230 + n*size*.92));
-  let y = 230 + (lines.length - 1)*size*.92 + 60;
-  g.font = `700 ${Math.round(Math.min(30, colW*.13))}px "Archivo Narrow", sans-serif`; g.globalAlpha = .9;
-  g.fillText(f.tag.toUpperCase(), 0, y); g.globalAlpha = 1;
-  y += 40;
-  g.fillStyle = acc === ink ? shade(ink, -.3) : acc; g.fillRect(-colW*.6, y, colW*1.2, 6);
-  y += 70;
-  const rows = [["Caféine","32 mg"],["Taurine","400 mg"],["Sucres", f.sug ? `${String(f.sug).replace(".",",")} g` : "0 g"],["Énergie", `${f.kcal} kcal`]];
-  g.textAlign = "left";
-  for (const [k, v] of rows){
-    g.fillStyle = ink; g.globalAlpha = .75; g.font = `500 ${Math.round(Math.min(26, colW*.11))}px "JetBrains Mono", monospace`; g.fillText(k.toUpperCase(), -colW*.82, y);
-    g.globalAlpha = 1; g.textAlign = "right"; g.font = `900 ${Math.round(Math.min(44, colW*.2))}px "Archivo", sans-serif`; g.fillText(v, colW*.82, y + 4); g.textAlign = "left";
-    g.globalAlpha = .25; g.fillRect(-colW*.82, y + 22, colW*1.64, 2); g.globalAlpha = 1;
-    y += 82;
+  // --- dos : les vraies mentions du dos de la canette, recomposées en net
+  const classic = ["energy-drink", "sugarfree", "zero"].includes(f.id);
+  let bg;
+  // couleurs de la palette des fiches fournies
+  const PAL = { "white-edition": "#f1f1f1", "red-edition": "#c5001a", "blue-edition": "#0022b8", "yellow-edition": "#ffd200", "green-edition": "#7ed321", "orange-edition": "#ff6a00", "purple-edition": "#6a1b9a", "pink-edition": "#ff2d93", "peach-edition": "#ff9c7a", "winter-edition": "#8fd7ff" };
+  if (classic) bg = "#c9cdd3";
+  else if (PAL[f.id]) bg = shade(PAL[f.id], -.1);
+  else {
+    // couleur de la canette, prise sur la photo (zones unies près des bords de la face)
+    const gg = A.canvas.getContext("2d"), cols = [];
+    for (const th of [-.7, -.55, .55, .7]) for (let k = .45; k < .8; k += .05){
+      const d = gg.getImageData(Math.round(A.cx + A.r*Math.sin(th)), Math.round(A.top + bh*k), 1, 1).data; cols.push([d[0], d[1], d[2]]);
+    }
+    const med = i => cols.map(c => c[i]).sort((x, y) => x - y)[cols.length >> 1];
+    bg = shade(`#${[med(0), med(1), med(2)].map(v => v.toString(16).padStart(2, "0")).join("")}`, -.03);
   }
-  g.textAlign = "center"; g.font = '500 22px "JetBrains Mono", monospace'; g.globalAlpha = .7;
-  g.fillText("POUR 100 ML · 250 ML", 0, y + 10); g.globalAlpha = 1;
-  // code-barres
-  g.fillStyle = "#fff"; roundRect(g, -110, 1024 - 190, 220, 110, 8); g.fill();
-  g.fillStyle = "#111"; let bx = -96; let s = 7 + idx;
-  while (bx < 96){ s = (s*16807) % 2147483647; const w = 2 + (s % 4); g.fillRect(bx, 1024 - 176, w, 82); bx += w + 2 + (s >> 3) % 3; }
+  const grad = g.createLinearGradient(0, 0, W, 0);
+  grad.addColorStop(0, bg); grad.addColorStop(1, bg);
+  g.fillStyle = grad; g.fillRect(0, 0, W, H);
+  if (classic){ const m = g.createLinearGradient(0, 0, 0, H); m.addColorStop(0, "rgba(255,255,255,.18)"); m.addColorStop(.5, "rgba(255,255,255,0)"); m.addColorStop(1, "rgba(0,0,0,.12)"); g.fillStyle = m; g.fillRect(0, 0, W, H); }
+  const INK = { "energy-drink": "#1b2f7a", "sugarfree": "#1f74c0", "zero": "#0f1a30", "white-edition": "#5b2a86", "yellow-edition": "#c8102e" };
+  const ink = INK[f.id] || "#ffffff";
+  const sx = H/1024/aspect, sy = H/1024; // unités non déformées
+  g.save(); g.translate(W*.75, 0); g.scale(sx, sy);
+  const colW = (W * 52/360) / sx;
+  const x0 = -colW*.84, maxW = colW*1.7;
+  const ed = f.name.replace(/ Edition$/, "");
+  const title = classic ? `Red Bull® ${f.id === "energy-drink" ? "Energy Drink" : f.name.toUpperCase() === "ZERO" ? "ZERO" : f.name}.` : `Red Bull® The ${ed} Edition®`;
+  const para = classic
+    ? (f.sf ? ["Boisson énergisante", "sans sucres.", "Contient de la caféine,", "de la taurine et des", "vitamines B.", "À consommer avec", "modération."]
+            : ["Boisson énergisante.", "Contient de la caféine,", "de la taurine et des", "vitamines B.", "À consommer avec", "modération."])
+    : ["Boisson énergisante", `saveur ${f.tag}.`, "Contient de la caféine,", "de la taurine et des", "vitamines B.", "À consommer avec", "modération."];
+  g.fillStyle = ink; g.textAlign = "left"; g.textBaseline = "alphabetic";
+  let fs = 74, ft = 74;
+  const wOf = (t, w, z) => { g.font = `${w} ${z}px "Archivo Narrow", sans-serif`; return g.measureText(t).width; };
+  while (Math.max(...para.map(l => wOf(l, 500, fs))) > maxW && fs > 24) fs -= 2;
+  while (wOf(title, 700, ft) > maxW && ft > 24) ft -= 2;
+  ft = Math.min(ft, fs*1.05);
+  let y = 110;
+  g.font = `700 ${ft}px "Archivo Narrow", sans-serif`; g.fillText(title, x0, y); y += fs*1.3;
+  g.font = `500 ${fs}px "Archivo Narrow", sans-serif`;
+  for (const l of para){ g.fillText(l, x0, y); y += fs*1.12; }
+  y += fs*.5;
+  g.font = `500 ${Math.round(fs*.56)}px "Archivo Narrow", sans-serif`; g.globalAlpha = .85;
+  for (const l of ["Teneur élevée en caféine (32 mg/100 ml).", "Déconseillé aux enfants et aux femmes", "enceintes ou allaitantes."]){ g.fillText(l, x0, y); y += fs*.66; }
+  g.globalAlpha = 1;
+  // code-barres (vertical, en bas à gauche)
+  const bw = colW*.62, bht = 300, by = 1024 - bht - 60;
+  g.fillStyle = "#fff"; roundRect(g, x0, by, bw, bht, 10); g.fill();
+  g.fillStyle = "#111"; let yy = by + 16, sd = 11 + idx;
+  while (yy < by + bht - 40){ sd = (sd*16807) % 2147483647; const h = 3 + (sd % 6); g.fillRect(x0 + 16, yy, bw - 60, h); yy += h + 3 + (sd >> 4) % 4; }
+  g.save(); g.translate(x0 + bw - 18, by + bht - 20); g.rotate(-Math.PI/2); g.font = '500 20px "JetBrains Mono", monospace'; g.fillText("9 002490 2" + String(idx).padStart(5, "0"), 0, 0); g.restore();
+  // logos de recyclage et volume
+  g.strokeStyle = ink; g.fillStyle = ink; g.lineWidth = 4;
+  const tri = (cx, cy, r) => { g.beginPath(); for (let k = 0; k < 3; k++){ const a = -Math.PI/2 + k*TAU/3; g[k ? "lineTo" : "moveTo"](cx + r*Math.cos(a), cy + r*Math.sin(a)); } g.closePath(); g.stroke(); };
+  const rx = x0 + bw + colW*.32;
+  tri(rx, by + 60, 44); g.font = '700 22px "Archivo Narrow", sans-serif'; g.textAlign = "center"; g.fillText("ALU", rx, by + 118);
+  g.beginPath(); g.arc(rx, by + 175, 36, 0, TAU); g.stroke(); g.font = '700 26px "Archivo Narrow", sans-serif'; g.fillText("♻", rx, by + 185);
+  g.textAlign = "right"; g.font = `700 ${Math.round(colW*.28)}px "Archivo Narrow", sans-serif`; g.fillText("250 ml℮", colW*.86, 1024 - 70);
+  g.restore();
+  // gouttes d'eau, comme sur la face
+  g.save(); g.scale(sx, sy);
+  let sd2 = 5 + idx*7; const R = () => (sd2 = (sd2*16807) % 2147483647, (sd2 - 1)/2147483646);
+  for (let k = 0; k < 900; k++){
+    const x = R()*W/sx, yv = R()*1024, r = 2 + R()*R()*9;
+    g.fillStyle = "rgba(0,0,0,.14)"; g.beginPath(); g.arc(x + r*.25, yv + r*.3, r, 0, TAU); g.fill();
+    g.fillStyle = "rgba(255,255,255,.22)"; g.beginPath(); g.arc(x, yv, r, 0, TAU); g.fill();
+    g.fillStyle = "rgba(255,255,255,.75)"; g.beginPath(); g.arc(x - r*.35, yv - r*.35, r*.28, 0, TAU); g.fill();
+  }
   g.restore();
 
   // --- face : photo déroulée sur 140°, fondue sur les côtés
-  const TMAX = 70 * Math.PI/180, FADE = 14 * Math.PI/180;
+  const TMAX = 82 * Math.PI/180, FADE = 26 * Math.PI/180;
   for (let i = 0; i < W; i++){
     const th = (i/W - .25) * TAU;
     if (Math.abs(th) > TMAX) continue;
@@ -160,14 +186,14 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
   const rimR = new THREE.PointLight(0xffffff, 14, 12); rimR.position.set(3.2, -1, -1.5); scene.add(rimR);
   const amb = scene.children.find(o => o.isAmbientLight);
   // projecteur qui se resserre sur la canette quand elle montre ses infos
-  const spot = new THREE.SpotLight(0xffffff, 0, 30, .22, .55, 1.2); spot.position.set(0, 2.5, 9); scene.add(spot); scene.add(spot.target);
+  const spot = new THREE.SpotLight(0xffffff, 0, 30, .26, .8, 1.2); spot.position.set(0, 2.5, 9); scene.add(spot); scene.add(spot.target);
 
   const N = flavors.length;
   const lidTex = lidTexture();
   const cans = flavors.map((f, i) => {
     const group = new THREE.Group(), spin = new THREE.Group(); group.add(spin);
     const r = .2;  // rayon provisoire, ajusté quand la photo est analysée
-    const label = new THREE.MeshStandardMaterial({ color: new THREE.Color(f.c1), metalness: .35, roughness: .32, envMapIntensity: .9, transparent: true });
+    const label = new THREE.MeshStandardMaterial({ color: new THREE.Color(f.c1), metalness: .22, roughness: .42, envMapIntensity: .75, transparent: true });
     const silver = new THREE.MeshStandardMaterial({ color: 0xd6d9de, metalness: 1, roughness: .22, envMapIntensity: 1.1, transparent: true });
     const lid = new THREE.MeshStandardMaterial({ map: lidTex, metalness: .9, roughness: .3, transparent: true });
     const body = new THREE.Mesh(new THREE.CylinderGeometry(r, r, 1, SEG, 1, true), label);
@@ -203,7 +229,7 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
     if (c.ready || c.loading) return; c.loading = true;
     try {
       let tex, ratio;
-      if (c.f.label){
+      if (false && c.f.label){
         // étiquette 360° préparée à l'avance (face, côtés et vrai dos de la canette)
         const img = await loadImage(c.f.label);
         tex = new THREE.Texture(img); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = maxAniso; tex.needsUpdate = true;
@@ -270,7 +296,7 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
     prevKey = sig;
     const canH = s.chPx / s.vh * HW;
     const heroY = -s.k0.y / 100 * HW;
-    const arc = ww * (s.mob ? .7 : .46);
+    const arc = ww * (s.mob ? .78 : .5);
     const t = s.now / 1000;
     for (const c of cans){
       let o = c.i - pos; o = ((o % N) + N + N/2) % N - N/2;
@@ -278,10 +304,10 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
       const far = s.mob ? 2.4 : 3.4;
       if (c.i !== cur && (ao > far || he >= 1)){ c.group.visible = false; continue; }
       // vitrine en arc : la canette du centre en avant, les autres penchées et dans l'ombre
-      const a = clamp(o * .36, -1.3, 1.3);
-      let x = Math.sin(a) * arc, z = -(1 - Math.cos(a)) * 4.2 - ao * .25;
+      const a = clamp(o * .5, -1.35, 1.35);
+      let x = Math.sin(a) * arc, z = -(1 - Math.cos(a)) * 6 - Math.min(ao, 1) * 1.4;
       let y = heroY + (ao > 0 ? (Math.min(ao, 1) * .06 + Math.sin(c.i * 1.7) * .05) * canH : 0);
-      let sc = canH * s.k0.s * (1 - Math.min(ao, 3) * .05);
+      let sc = canH * s.k0.s * (1 - Math.min(ao, 1) * .22 - Math.max(0, Math.min(ao, 3) - 1) * .06);
       const lean = (c.i % 2 ? 1 : -1) * Math.min(ao, 1);
       let rz = lean * .2 - o * .05, rx = Math.min(ao, 1) * .08;
       let ry = o * .45 + (idle ? Math.sin(t * .6 + c.i) * .12 : 0);
@@ -293,7 +319,8 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
         x = lerp(x, kx, he); y = lerp(y, ky, he); z = lerp(z, 0, he);
         sc = lerp(sc, canH * s.k.s, he);
         rz = lerp(rz, -s.k.z * Math.PI/180, he);
-        ry = lerp(ry, s.ang * Math.PI/180, he) + s.tx * .35;
+        ry = s.ang * Math.PI/180 + s.tx * .35;          // la canette du centre tourne sur elle-même
+        rz = rz - (s.k0.z || 0) * Math.PI/180 * (1 - Math.min(ao, 1));
         rx = lerp(rx, 0, he) + s.ty * .12;
         op = s.opacity; lit = lerp(lit, 1, he);
       } else { z -= he * 6; op *= 1 - he; }
@@ -313,15 +340,15 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
     podium.visible = ring.visible = po > .01;
     if (podium.visible){
       const g = sel.group, base = g.position.y - g.scale.y * .56;
-      podium.position.set(g.position.x, base, g.position.z); podium.scale.setScalar(g.scale.y * 1.7);
-      podium.material.opacity = po * .8;
-      ring.position.set(g.position.x, base + .002, g.position.z); ring.scale.setScalar(g.scale.y * .95);
-      ring.material.opacity = po * .7;
+      podium.position.set(g.position.x, base, g.position.z); podium.scale.setScalar(g.scale.y * 1.1);
+      podium.material.opacity = po * .55;
+      ring.position.set(g.position.x, base + .002, g.position.z); ring.scale.setScalar(g.scale.y * .62);
+      ring.material.opacity = po * .45;
     }
     // lumière de focus : le reste s'assombrit, un faisceau éclaire la canette
     const fo = s.focus || 0;
-    spot.intensity = fo * 260; spot.position.set(sel.group.position.x + 1.2, sel.group.position.y + 3, 8); spot.target.position.copy(sel.group.position);
-    key.intensity = lerp(1.6, .55, fo); amb.intensity = lerp(.35, .08, fo);
+    spot.intensity = fo * 70; spot.position.set(sel.group.position.x + 1.2, sel.group.position.y + 3, 8); spot.target.position.copy(sel.group.position);
+    key.intensity = lerp(1.6, .7, fo); amb.intensity = lerp(.35, .08, fo);
     rimL.intensity = lerp(18, 6, fo); rimR.intensity = lerp(14, 4, fo);
     for (const m of sel.mats) m.envMapIntensity = lerp(.9, .35, fo);
     renderer.render(scene, camera);
