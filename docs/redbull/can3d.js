@@ -17,7 +17,7 @@ function lidTexture(){
 }
 
 export async function create({ canvas, lite = false, onChange = null }){
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !lite && (devicePixelRatio || 1) < 2, alpha: true, powerPreference: "high-performance" });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
   renderer.setClearColor(0, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
@@ -79,7 +79,7 @@ export async function create({ canvas, lite = false, onChange = null }){
   let W = 0, H = 0;
   function resize(){
     W = canvas.clientWidth; H = canvas.clientHeight;
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, lite ? 1 : 1.5));
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, lite ? 1.5 : 2));
     renderer.setSize(W, H, false);
     camera.aspect = W / Math.max(1, H); camera.updateProjectionMatrix();
     dirty = true;
