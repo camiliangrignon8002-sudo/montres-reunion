@@ -101,7 +101,9 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
   function load(url){
     if (!cache.has(url)) cache.set(url, new Promise(res => loader.load(url, t => {
       t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = maxAniso; t.wrapS = THREE.RepeatWrapping;
-      renderer.initTexture(t); ready.set(url, t); res(t); last = ""; if (onChange) onChange();
+      renderer.initTexture(t); ready.set(url, t); res(t); last = "";
+      for (const c of cans) if (!c.label.map){ c.label.map = t; c.label.needsUpdate = true; }   // compile une seule fois
+      if (onChange) onChange();
     }, undefined, () => res(null))));
     return cache.get(url);
   }
@@ -126,21 +128,26 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
     if (sig === last) return out;
     last = sig;
     let mainCan = null;
-    cans.forEach((c, i) => {
-      const it = items[i], t = it && ready.get(it.url);
-      if (!it || !t || it.alpha <= .005){ c.group.visible = false; if (it && !t) load(it.url); return; }
+    // chaque canette garde la même étiquette pendant tout son trajet (aucune recompilation en plein mouvement)
+    const want = new Set(items.filter(it => it.alpha > .005 && ready.get(it.url)).map(it => it.url));
+    for (const c of cans) if (c.url && !want.has(c.url)) { c.url = null; c.group.visible = false; }
+    for (const it of items){
+      const t = ready.get(it.url);
+      if (!t){ load(it.url); continue; }
+      if (it.alpha <= .005) continue;
+      let c = cans.find(c => c.url === it.url);
+      if (!c){ c = cans.find(c => !c.url); if (!c) continue; const first = !c.label.map; c.label.map = t; if (first) c.label.needsUpdate = true; c.url = it.url; }
       c.group.visible = true;
-      if (c.url !== it.url){ c.label.map = t; c.label.needsUpdate = true; c.url = it.url; }
       const k = (it.ratio || .21) / .21;
       c.spin.scale.set(k, 1, k);
       c.group.scale.setScalar(it.h * VH);
-      c.group.position.set(it.x * VH * camera.aspect, -it.y * VH, it.main ? 0 : -.6);
+      c.group.position.set(it.x * VH * camera.aspect, -it.y * VH, -.6 * (it.depth ?? (it.main ? 0 : 1)));
       c.group.rotation.set(0, 0, -it.tilt * Math.PI/180);
       c.spin.rotation.y = -Math.PI/2 + it.ang * Math.PI/180;
       for (const m of c.mats) m.opacity = it.alpha;
       c.sh.material.opacity = .45 * it.alpha * (it.shadow ?? 1);
       if (it.main) mainCan = c;
-    });
+    }
     const sw = Math.sin((o.p || 0) * Math.PI * 3);
     key.position.set(-3 + sw * 5, 3.5, 6); rim.position.set(4 - sw * 2, 1.5, -3);
     const fo = o.focus || 0;
