@@ -158,7 +158,6 @@ function select(i){
   const dir = ((i - cur + N) % N) <= N/2 ? 1 : -1;
   cur = i; history.replaceState(null, "", "#"+F[i].id);
   show(); layout();
-  burst = dir; burstT = performance.now();          // petit tour sur elle-même au changement
   if (gl) gl.set(F[cur], F[(cur+1)%N]);
   kick();
 }
@@ -239,7 +238,8 @@ function frame(now){
   if (bt >= 1) burst = 0;
   const t = now / 1000;
   const idle = idleOn ? 1 : 0;
-  const ang = at(ANG, p) - b;                                 // une seule rotation : autour de l'axe de la canette
+  // face pendant le goût, puis un seul demi-tour (toujours dans le même sens) pour montrer le dos et ses infos
+  const ang = 180 * ease(clamp((p - .27) / .08));
   const tilt = 8;                                             // inclinaison fixe
   const hh = M.chf * (info ? (mob ? .7 : .9) : .86);
   const y = mob && info ? -.12 : (info ? 0 : -.06);
