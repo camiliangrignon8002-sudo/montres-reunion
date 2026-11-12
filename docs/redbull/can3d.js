@@ -71,7 +71,7 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
     const t = await load(f.label);
     if (my !== token) return;
     if (t){ label.map = t; label.needsUpdate = true; }
-    build(f.ratio || .21);
+    const k = (f.ratio || .21) / .21; spin.scale.set(k, 1, k);   // pas de reconstruction
     dirty = true; if (onChange) onChange();
     if (next) setTimeout(() => load(next.label), 400);   // précharge la suivante
   }
