@@ -895,6 +895,35 @@ input[type=range]::-moz-range-progress{background:var(--bouton)}
 /* titres, compteur et rangées sur le même bord gauche */
 .titre-sec,.compte,.filtres,.rail-dom,.hero-page,.nouveautes{margin-left:0}
 .fleches{margin-top:4px}
+
+/* ================= deux tons : clair en haut, plus soutenu en bas, l'icône à cheval ================= */
+:root{--b0:#33043a;--b1:#6fbf8a;--b2:#9d8ae0;--b3:#0c235c;--b4:#2a9fd8;--b5:#f79a74}
+[data-t="0"]{--bas:var(--b0)}[data-t="1"]{--bas:var(--b1)}[data-t="2"]{--bas:var(--b2)}
+[data-t="3"]{--bas:var(--b3)}[data-t="4"]{--bas:var(--b4)}[data-t="5"]{--bas:var(--b5)}
+.offre,.offre:hover{background:linear-gradient(0deg,var(--bas,var(--b0)) 0 118px,var(--c,var(--t0)) 118px)!important}
+.offre{padding:30px 30px 176px!important;min-height:400px}
+.offre .dessin,.carrousel .offre .dessin{position:absolute!important;left:30px;bottom:34px;height:auto!important;margin:0!important;order:0}
+.offre .carre svg,.carrousel .offre .carre svg{width:112px!important;height:112px!important;filter:drop-shadow(0 10px 14px rgba(0,0,0,.22))}
+.offre .plus{right:30px;bottom:30px}
+.carrousel .offre{min-height:470px}
+@media (max-width:520px){
+  .offre{padding-bottom:156px!important;min-height:360px}
+  .offre,.offre:hover{background:linear-gradient(0deg,var(--bas,var(--b0)) 0 104px,var(--c,var(--t0)) 104px)!important}
+  .offre .carre svg,.carrousel .offre .carre svg{width:96px!important;height:96px!important}
+}
+/* domaines : pastille en deux tons */
+.dom .carre{background:linear-gradient(0deg,var(--bas,#000) 0 38%,var(--c,#1d1d1f) 38%)!important;overflow:hidden}
+.dom:not([data-t]) .carre{background:linear-gradient(0deg,#000 0 38%,#3a3a3c 38%)!important}
+.dom .carre svg{filter:drop-shadow(0 4px 6px rgba(0,0,0,.2))}
+/* fiche : en-tête en deux tons */
+.feuille .hero,.feuille .hero[data-t]{background:linear-gradient(0deg,var(--bas,var(--b0)) 0 34%,var(--c,var(--t0)) 34%)!important}
+.feuille .hero .carre svg{filter:drop-shadow(0 8px 12px rgba(0,0,0,.22))}
+/* guide : deux tons, le + sur la bande */
+.guide-cartes button{background:linear-gradient(0deg,var(--bas) 0 82px,var(--c) 82px)!important;padding-bottom:104px}
+.guide-cartes button:nth-child(1){--bas:var(--b0)}.guide-cartes button:nth-child(2){--bas:var(--b1)}
+.guide-cartes button:nth-child(3){--bas:var(--b2)}.guide-cartes button:nth-child(4){--bas:var(--b3)}
+.offre .txt{padding-right:58px!important}
+.feuille .hero,.feuille .hero[data-t]{background:linear-gradient(0deg,var(--bas,var(--b0)) 0 22%,var(--c,var(--t0)) 22%)!important}
 </style>
 </head>
 <body>
@@ -1055,7 +1084,7 @@ const COMMUNES = {"Saint-Denis": [-20.8823, 55.4504], "Sainte-Clotilde": [-20.89
 const CENTRE = [-21.13, 55.53];
 const SOURCES = "Domtomemploi, HelloWork";
 let OFFRES = OFFRES0;
-const VERSION = "1794456807";
+const VERSION = "1794456902";
 async function verifierVersion() {
   try {
     const v = (await (await fetch("version.txt?" + Date.now(), {cache: "no-store"})).text()).trim();
