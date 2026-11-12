@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#08060f">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 <link rel="modulepreload" href="./vendor/three.module.min.js">
-<link rel="modulepreload" href="./can3d.js?v=4">
+<link rel="modulepreload" href="./can3d.js?v=5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,900;1,900&family=JetBrains+Mono:wght@400&display=swap">
@@ -204,7 +204,7 @@ function at(k,p){
   return (2*t3-3*t2+1)*p1[1] + (t3-2*t2+t)*m1 + (-2*t3+3*t2)*p2[1] + (t3-t2)*m2;
 }
 const story = $("#story"), stage = $("#stage"), prog = $("#prog"), center = $("#center"), shade = $("#shade");
-let shadeOn = null; const S = { x: innerWidth/2, y: innerHeight/2, w: 100, h: 80 };
+let shadeOn = null, G = null; const S = { x: innerWidth/2, y: innerHeight/2, w: 100, h: 80 };
 const steps = [...document.querySelectorAll(".step")], dots = [...document.querySelectorAll(".dots button")];
 dots.forEach((d,k) => d.onclick = () => scrollTo({ top: story.offsetTop + (STEPS[k][0] + .06) * M.len, behavior: reduce ? "auto" : "smooth" }));
 function measure(){
@@ -244,34 +244,36 @@ function frame(now){
   const t = now / 1000;
   const idle = idleOn ? 1 : 0;
   // face pendant le goût, puis un seul demi-tour (toujours dans le même sens) pour montrer le dos et ses infos
-  const ang = 180 * ease(clamp((p - .27) / .08));
+  // la canette tourne tout le temps, toujours dans le même sens : face pendant le goût, puis le dos défile doucement
+  const ang = p < .08 ? 0 : p < .27 ? lerp(-25, 15, (p-.08)/.19) : p < .34 ? lerp(15, 150, ease((p-.27)/.07)) : lerp(150, 212, (p-.34)/.66);
   const tilt = 8;                                             // inclinaison fixe
   const hh = M.chf * (info ? (mob ? .7 : .9) : .86);
   const y = mob && info ? -.12 : (info ? 0 : -.06);
   // lumière sur la zone du dos qui correspond au texte (fraction de la hauteur du corps : centre, demi-hauteur)
   const ZONE = [null, [.3, .1], [.52, .15], [.82, .14]];
-  const z = ZONE[si] || null, spotOn = !!z && ang > 170;
+  const z = ZONE[si] || null;
+  const spotOn = !!z && ang > 140;
   if (spotOn !== shadeOn){ shadeOn = spotOn; shade.classList.toggle("on", spotOn); }
   if (z){
     const L = hh * M.vh, tr = tilt * Math.PI/180, d = (.5 - z[0]) * L;
-    const cx0 = M.vw/2, cy0 = M.vh/2 + y*M.vh;
-    const zx = cx0 + d*Math.sin(tr), zy = cy0 - d*Math.cos(tr);
-    const zw = L * .27, zh = z[1] * L * 1.5;
-    const km2 = 1 - Math.exp(-dt / 120);
+    let zx = M.vw/2 + d*Math.sin(tr), zy = M.vh/2 + y*M.vh - d*Math.cos(tr);
+    if (G){ zx = G.x; zy = G.y; }                      // position exacte calculée par la 3D
+    const zw = L * .25 * (G ? .55 + .45*G.face : 1), zh = z[1] * L * 1.5;
+    const km2 = 1 - Math.exp(-dt / 110);
     S.x += (zx - S.x) * km2; S.y += (zy - S.y) * km2; S.w += (zw - S.w) * km2; S.h += (zh - S.h) * km2;
     shade.style.setProperty("--sx", S.x.toFixed(1)+"px"); shade.style.setProperty("--sy", S.y.toFixed(1)+"px");
     shade.style.setProperty("--sw", S.w.toFixed(1)+"px"); shade.style.setProperty("--sh", S.h.toFixed(1)+"px");
-    if (Math.abs(zy - S.y) > .5 || Math.abs(zh - S.h) > .5) kick();
+    if (Math.abs(zx - S.x) > .5 || Math.abs(zy - S.y) > .5 || Math.abs(zh - S.h) > .5) kick();
   }
   if (!gl){ const c = Math.cos(ang*Math.PI/180); center.style.transform = `translate(-50%,-50%) translateY(${y*M.vh}px) rotate(${tilt}deg) scale(${hh/M.chf/.86}) scaleX(${Math.max(.05,Math.abs(c)).toFixed(3)})`; }
-  if (gl) gl.update({ ang, tilt, x: 0, y, h: hh, tx: 0, ty: 0, focus: p > .3 && p < .76 ? 1 : 0 });
+  if (gl) G = gl.update({ ang, tilt, x: 0, y, h: hh, p, zone: z ? z[0] : null, focus: z && ang > 140 ? 1 : 0 });
   const moving = Math.abs(raw - sp) > 0 || Math.abs(vel) > .002 || Math.abs(mx - tx) > .001 || Math.abs(my - ty) > .001 || burst;
   if (moving) kick();
 }
 show(); measure(); addEventListener("load", measure);
 (async () => {
   try {
-    const mod = await import("./can3d.js?v=4");
+    const mod = await import("./can3d.js?v=5");
     gl = await mod.create({ canvas: $("#gl"), lite, onChange: kick });
     await gl.set(F[cur], F[(cur+1)%N]); measure();
     root.classList.add("gl");
