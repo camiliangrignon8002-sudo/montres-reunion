@@ -2639,7 +2639,12 @@
   "adresse": "123 avenue de la Grande Ourse, 97434 Saint-Gilles-les-Bains",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-2-pieces-44-m2/01a1d0ac-6d6e-7e26-979e-57ba752cf05d"
+   }
+  ],
   "vu": "2026-11-12T20:20+04:00"
  },
  {
@@ -5252,7 +5257,12 @@
   "adresse": "5 rue Pierre Bérégovoy ZAC Bel Air 2, 97441 Sainte-Suzanne",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-1-piece-27-m2/01a1d0b0-1759-79fc-86bd-ff796aa261ce"
+   }
+  ],
   "vu": "2026-10-28T11:16+04:00"
  },
  {
