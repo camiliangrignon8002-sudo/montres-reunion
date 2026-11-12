@@ -275,3 +275,20 @@ Site vitrine des boutiques Nanas Vanille (Saint-Denis et Saint-Pierre), l'art et
 - Sur l'adresse github.io, les favoris restent dans le navigateur. Les comptes, la galerie photo, les articles avec
   leurs prix et la liste partagée des producteurs ne fonctionnent que dans la version Claude.
 - Fichier : `docs/nanas-vanille/index.html`.
+
+---
+
+# 🥫 Index des canettes (Red Bull)
+
+Site : https://camiliangrignon8002-sudo.github.io/montres-reunion/redbull/
+
+Site de fan non officiel : 11 canettes Red Bull, goût par goût. La page s'ouvre sur une canette, on choisit son goût
+dans la rangée du bas (ou avec les flèches du clavier, ou le bouton en haut à droite), puis on fait défiler :
+la canette tourne et se déplace, et les infos apparaissent à côté.
+
+- 01 Le goût (description et profil), 02 L'énergie (caféine, taurine, sucres, kcal en 250, 355 ou 473 ml),
+  03 Les ingrédients (qui tournent autour de la canette), 04 Les valeurs pour 100 ml, 05 Bon à savoir et le goût suivant.
+- En bas, un comparatif de toutes les canettes.
+- Lien direct vers un goût : ajouter par exemple `#blue-edition` à l'adresse.
+- Les canettes sont dessinées en code (pas de logo ni d'image de la marque). Valeurs indicatives.
+- Goûts et chiffres : tableau `F` au début du script dans `docs/redbull/index.html`.
