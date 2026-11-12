@@ -457,6 +457,41 @@
   "vu": "2026-11-03T21:13+04:00"
  },
  {
+  "id": "bienici-citya-immobilier-501991-GES10620077-34",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-501991-GES10620077-34",
+  "titre": "Studio 21 m²",
+  "prix": 397.93,
+  "commune": "Saint-Denis",
+  "quartier": "Le Moufia - Sainte-Clotilde",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 21.26,
+  "meuble": false,
+  "photos": [
+   "https://file.bienici.com/photo/citya-immobilier-501991-GES10620077-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-photos_r_sidence-12696967010035070813.jpg"
+  ],
+  "description": "RESIDENCE BLUE BAY - 5 RUE DE L'ANJOU\nDans une résidence sécurisée studio d'une superficie de 21.26m² comprenant une pièce de vie principale avec kitchenette aménagée, une salle d'eau avec wc.\nA deux pas de l'université, à visiter rapidement!\nDisponibilité au 15  Novembre 2026. \n Loyer de 397,93 euros par mois charges comprises dont 25,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). \n Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 417,16 euros. \n Les honoraires charge locataire sont de 278,93 euros ( soit 13,12 euros/m² ) dont 64,42 euros pour état des lieux ( soit 3,03 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
+  "caracteristiques": [
+   "4e étage",
+   "Résidence sécurisée",
+   "Proche université"
+  ],
+  "date": "2026-11-12T16:06:44.248Z",
+  "annonceur": "Citya Saint Denis",
+  "lat": -20.901952,
+  "lon": 55.490935,
+  "charges": 25,
+  "pro": true,
+  "tel": "0262 32 43 24",
+  "email": "",
+  "adresse": "45 rue de Paris, 97400 Saint-Denis",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-12T20:20+04:00"
+ },
+ {
   "id": "zimo-01a1a437-dd4a-70cf-ac9c-e05e8d23814a",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-1-piece-28-m2/01a1a437-dd4a-70cf-ac9c-e05e8d23814a",
@@ -1020,10 +1055,6 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
-   {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-501991-GES01880086-34"
-   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a1a794-357e-7993-8709-936c958b50c2"
@@ -1836,10 +1867,6 @@
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
-   },
-   {
-    "source": "Herren Immobilier",
-    "url": "https://www.herren-immobilier.com/location/appartement/7996"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -2082,10 +2109,6 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
-   {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/sainte-marie/appartement/2pieces/citya-immobilier-52424705300084-GES10220027-542"
-   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-2-pieces-50-m2/01a11c52-fc2f-7829-bd5b-958371e82d8d"
@@ -2585,6 +2608,41 @@
   "vu": "2026-11-04T05:23+04:00"
  },
  {
+  "id": "bienici-citya-immobilier-12453256-GES04490006-495",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/2pieces/citya-immobilier-12453256-GES04490006-495",
+  "titre": "T2 44 m²",
+  "prix": 540,
+  "commune": "Saint-Denis",
+  "quartier": "Le Moufia - Sainte-Clotilde",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 44.4,
+  "meuble": false,
+  "photos": [
+   "https://file.bienici.com/photo/citya-immobilier-12453256-GES04490006-495_box.ics.fr_cit_CITYA_STGILLES_tic_location_photo_filigrane-IMMEUBLE-1396581555527860722.jpg"
+  ],
+  "description": "Appt de type 2 d'une superficie d'environ 44.40 m2 de surfac\ne loi carrez comprenant une entrée par le porche, un séjour/\nsalle à manger avec coin cuisine semi-équipée, une chambre a\nvec brasseur d'air, une salle de douche avec wc, une varangu\ne de 9.20\n\n Loyer de 540,00 euros par mois charges comprises dont 50,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). \n Soit avec Assurance Habitation et Assistance* ( 22.42 euros ) : 562,42 euros. \n Les honoraires charge locataire sont de 582,53 euros ( soit 13,12 euros/m² ) dont 134,53 euros pour état des lieux ( soit 3,03 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/saint-gilles-les-bains-97434/500#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/saint-gilles-les-bains-97434/500#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
+  "caracteristiques": [
+   "Rez-de-chaussée",
+   "1 chambre",
+   "Proche université"
+  ],
+  "date": "2026-11-12T16:05:30.875Z",
+  "annonceur": "Citya France Immobilier",
+  "lat": -20.900955,
+  "lon": 55.482384,
+  "charges": 50,
+  "pro": true,
+  "tel": "0262 33 29 39",
+  "email": "",
+  "adresse": "123 avenue de la Grande Ourse, 97434 Saint-Gilles-les-Bains",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-12T20:20+04:00"
+ },
+ {
   "id": "pv-1297314062",
   "source": "ParuVendu",
   "url": "https://www.paruvendu.fr/immobilier/location/appartement/1297314062A1KILHAP000",
@@ -2966,10 +3024,6 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
-   {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/2pieces/citya-immobilier-52424705300084-GES27740083-542"
-   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-2-pieces-40-m2/01a16eb7-ad06-7197-b773-4220efb33287"
@@ -5159,6 +5213,47 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-04T01:01+04:00"
+ },
+ {
+  "id": "bienici-citya-immobilier-52424705300084-GES04010021-542",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-52424705300084-GES04010021-542",
+  "titre": "T1 27 m²",
+  "prix": 650,
+  "commune": "Saint-Denis",
+  "quartier": "La Bretagne - Sainte-Clotilde",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 27.4,
+  "meuble": true,
+  "photos": [
+   "https://file.bienici.com/photo/citya-immobilier-52424705300084-GES04010021-542_box.ics.fr_cit_CITYA_IDR_tic_location_photo_filigrane-7--17214775176447984749.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-52424705300084-GES04010021-542_box.ics.fr_cit_CITYA_IDR_tic_location_photo_filigrane-6--18087920480336549621.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-52424705300084-GES04010021-542_box.ics.fr_cit_CITYA_IDR_tic_location_photo_filigrane-10-16290439129545789922.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-52424705300084-GES04010021-542_box.ics.fr_cit_CITYA_IDR_tic_location_photo_filigrane-4--9692716503126462318.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-52424705300084-GES04010021-542_box.ics.fr_cit_CITYA_IDR_tic_location_photo_filigrane-2_2-12513815393932508888.jpg"
+  ],
+  "description": "À LOUER : Appartement T1 à la Bretagne.\n\nNous vous proposons un charmant appartement de type T1, idéalement situé à la Bretagne. Ce bien, d'une superficie de 27 m², est parfait pour une personne seule ou un étudiant à la recherche d'un cadre de vie agréable et fonctionnel. \n\nL'appartement se trouve au premier étage d'un immeuble équipé d'un ascenseur, facilitant ainsi l'accès. Il est entièrement meublé, ce qui vous permettra de vous installer rapidement sans avoir à vous soucier de l'achat de mobilier. La kitchenette, bien agencée, offre tout le nécessaire pour préparer vos repas dans un espace optimisé. \n\nL'appartement bénéficie d'une luminosité naturelle grâce à son orientation, et surtout, il n'y a aucun vis-à-vis, garantissant ainsi votre intimité. Ce point est particulièrement appréciable pour ceux qui recherchent un environnement calme et serein. \n\nSitué dans un quartier paisible, cet appartement est également proche des commodités nécessaires au quotidien, telles que les commerces, les transports en commun et les établissements scolaires. \n\nQue vous soyez étudiant ou jeune actif, cet appartement T1 saura répondre à vos attentes en matière de confort et de praticité. N'hésitez pas à nous contacter pour plus d'informations ou pour organiser une visite. Ce bien rare ne restera pas disponible longtemps. \n Loyer de 650,00 euros par mois charges comprises dont 40,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). \n Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 669,23 euros. \n Les honoraires charge locataire sont de 359,49 euros ( soit 13,12 euros/m² ) dont 83,02 euros pour état des lieux ( soit 3,03 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/sainte-suzanne-97441/547#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/sainte-suzanne-97441/547#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
+  "caracteristiques": [
+   "Ascenseur",
+   "1e étage",
+   "Meublé",
+   "Proche transports",
+   "Proche université"
+  ],
+  "date": "2026-11-12T16:07:57.089Z",
+  "annonceur": "Citya Belvédère Immobilier",
+  "lat": -20.9112421,
+  "lon": 55.4990762,
+  "charges": 40,
+  "pro": true,
+  "tel": "0262 73 73 40",
+  "email": "",
+  "adresse": "5 rue Pierre Bérégovoy ZAC Bel Air 2, 97441 Sainte-Suzanne",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-28T11:16+04:00"
  },
  {
   "id": "zimo-01a1cafc-8048-7d04-91bd-405b6d1846d8",
