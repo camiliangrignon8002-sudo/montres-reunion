@@ -722,6 +722,37 @@
   "vu": "2026-11-03T22:03+04:00"
  },
  {
+  "id": "zimo-01a1d02b-7ac9-7367-8821-953f0237c7d2",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-1-piece-24-m2/01a1d02b-7ac9-7367-8821-953f0237c7d2",
+  "titre": "Appartement 1 pièce 24 m²",
+  "prix": 421.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 24.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/CzfohJc0rCAoiOm5N4bnMj_vPcK7i8L3L6bgobp2OO8/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_34a237e3-d0f3-4d2d-838a-0aeb8cd5f03a.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 24 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-12T19:11+04:00"
+ },
+ {
   "id": "zimo-01a1a3e7-1e1b-7576-8b85-585f2e23e07f",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a1a3e7-1e1b-7576-8b85-585f2e23e07f",
@@ -1460,7 +1491,12 @@
   "adresse": "53 rue Montreuil, 97400 Saint-Denis",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-f1-a-louer-proche-universite-et-toutes-commodites/01a1d02b-a1a8-7dad-9875-5d888593931a"
+   }
+  ],
   "vu": "2026-11-12T17:31+04:00"
  },
  {
@@ -1800,6 +1836,10 @@
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
+   },
+   {
+    "source": "Herren Immobilier",
+    "url": "https://www.herren-immobilier.com/location/appartement/7996"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -6401,28 +6441,31 @@
   "vu": "2026-11-05T14:19+04:00"
  },
  {
-  "id": "zimo-01a15489-9004-7edf-8010-59939018b533",
+  "id": "zimo-01a1d027-63c2-760a-a4fc-ddce6ca537cf",
   "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-25-m2/01a15489-9004-7edf-8010-59939018b533",
-  "titre": "Appartement 1 pièce 25 m²",
+  "url": "https://www.zimo.fr/annonce/a-louer-superbe-studio-meuble-avec-terrasse-a-sainte-clotilde/01a1d027-63c2-760a-a4fc-ddce6ca537cf",
+  "titre": "A louer superbe studio meublé avec terrasse à Sainte Clotilde",
   "prix": 680.0,
   "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
+  "quartier": "Sainte-Clotilde",
   "pieces": 1,
   "type": "Studio",
   "surface": 25.0,
-  "meuble": null,
+  "meuble": true,
   "photos": [
-   "https://img.e-xiste.com/3FEcjI_e71-MHd5qhAE8gLrlvUZfdF1H7cxIO0xVCm0/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_1a2a8664-3266-4bd7-8b95-a2e9161b3b9a.jpg"
+   "https://img.e-xiste.com/5PCeR7dSske_NoduNNj8QLvkytkA97OLhllFkXxKFig/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_4b1a0f07-e678-43b9-a933-8a41e60927fd.jpg"
   ],
   "description": "Location Studio Saint-Denis (974) 1 pièces 25 m²",
-  "caracteristiques": [],
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon"
+  ],
   "date": "",
-  "annonceur": "Pro · via leboncoin",
+  "annonceur": "Particulier · via leboncoin",
   "lat": null,
   "lon": null,
   "charges": null,
-  "pro": true,
+  "pro": false,
   "tel": "",
   "email": "",
   "adresse": "",
@@ -7043,10 +7086,6 @@
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/studio-meuble-carre-d-or-st-denis/01a1ac3a-a1f3-7f6f-8eb3-c45565d12fa3"
-   },
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/studio-1-piece-28-m2/01a1abb1-e4ae-7dd0-aa2c-a0e8f276819c"
    }
   ],
   "vu": "2026-11-05T17:29+04:00"
