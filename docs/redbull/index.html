@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#08060f">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 <link rel="modulepreload" href="./vendor/three.module.min.js">
-<link rel="modulepreload" href="./can3d.js?v=16">
+<link rel="modulepreload" href="./can3d.js?v=19">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,900;1,900&family=JetBrains+Mono:wght@400&display=swap">
@@ -65,7 +65,7 @@ canvas#gl{transition:opacity .16s}
 .step h2{margin:0 0 20px;font-weight:900;font-style:italic;font-size:clamp(40px,4.6vw,72px);line-height:.88;letter-spacing:-.03em;text-transform:uppercase}
 .step p{margin:0;font-size:clamp(17px,1.45vw,23px);line-height:1.5;color:rgba(255,255,255,.9)}
 .shade{position:absolute;left:0;top:0;width:400px;height:400px;margin:-200px 0 0 -200px;z-index:3;pointer-events:none;opacity:0;transition:opacity .55s;border-radius:50%;
-  background:radial-gradient(closest-side,transparent 62%,rgba(0,0,0,.25) 78%,rgba(0,0,0,.72) 100%);box-shadow:0 0 0 300vmax rgba(0,0,0,.72);will-change:transform,opacity}
+  background:radial-gradient(closest-side,transparent 62%,rgba(0,0,0,.25) 78%,rgba(0,0,0,.72) 100%);box-shadow:0 0 0 300vmax rgba(0,0,0,.72);will-change:transform,opacity;contain:strict}
 .shade.on{opacity:1}
 .dots{position:absolute;right:4vw;top:50%;transform:translateY(-50%);z-index:4;display:flex;flex-direction:column;gap:26px;opacity:0;transition:opacity .4s}
 .stage.info .dots{opacity:1}
@@ -200,7 +200,7 @@ let raf = 0, sp = 0, lastStep = -2, infoOn = null;
 addEventListener("scroll", kick, {passive:true});
 document.addEventListener("visibilitychange", () => { if (!document.hidden){ lastNow = performance.now(); kick(); } });
 function kick(){ if (!raf) raf = requestAnimationFrame(frame); }
-let lastNow = performance.now();
+let lastNow = performance.now(), perf = { n: 0, t: 0 }, dpr = Math.min(devicePixelRatio || 1, lite ? 1 : mid ? 1.15 : 1.75);
 const ZONE = [null, [.3, .1], [.52, .15], [.82, .14]];
 function frame(now){
   raf = 0;
@@ -215,8 +215,6 @@ function frame(now){
     if (Math.abs(target - pos) < .0006 && Math.abs(pvel) < .002){ pos = target; pvel = 0; }
   }
   const moveV = clamp(pvel / 3, -1, 1);                       // vitesse du carrousel (normalisée)
-  // roulement sans glisser : la rotation suit exactement la distance parcourue (≈ 145° par place)
-  const roll = (target - pos) * 200;
   const p = sp, mob = M.vw < 760;
   prog.style.transform = `scaleX(${p.toFixed(4)})`;
   const info = p > .08; if (info !== infoOn){ infoOn = info; stage.classList.toggle("info", info); $("#hero").inert = info; }
@@ -242,7 +240,7 @@ function frame(now){
     let x = o * gap + Math.sign(o) * gap * .2 * side;
     let y = yHero + side * ((i % 2 ? -1 : 1) * .03) * Math.min(ao, 2);
     let h = hHero * (1 - side * .22 - Math.max(0, ao - 1) * .08);
-    let tl = lerp(tilt, (i % 3 - 1) * 9 + o * 3, side) + moveV * 10, a = o * 22 - roll;
+    let tl = lerp(tilt, (i % 3 - 1) * 9 + o * 3, side) + moveV * 10, a = o * 382;   // un tour complet par place parcourue : roule sans saut, arrive pile de face
     y -= Math.abs(moveV) * .025 * (1 - side * .5);
     let al = clamp(reach + .6 - ao);
     if (isMain){ x = lerp(x, 0, he); y = lerp(y, yInfo, he); h = lerp(h, hInfo, he); tl = lerp(tl, tilt, he); a = lerp(a, ang, he); }
@@ -266,12 +264,19 @@ function frame(now){
     if (Math.abs(zx - S.x) > .5 || Math.abs(zy - S.y) > .5 || Math.abs(zh - S.h) > .5) kick();
   }
   if (!gl){ const c = Math.cos(ang*Math.PI/180); center.style.transform = `translate(-50%,-50%) translateY(${(info ? yInfo : yHero)*M.vh}px) rotate(${tilt}deg) scale(${(info ? hInfo : hHero)/M.chf/.86}) scaleX(${Math.max(.05,Math.abs(c)).toFixed(3)})`; }
+  // finesse adaptative : si les images arrivent trop lentement pendant un mouvement, on baisse la résolution 3D
+  if (gl && (Math.abs(raw - sp) > 0 || pos !== target)){
+    perf.n++; perf.t += dt;
+    if (perf.n >= 40){ const avg = perf.t / perf.n; perf.n = 0; perf.t = 0;
+      if (avg > 21 && dpr > 1){ dpr = Math.max(1, dpr - .25); gl.setPixelRatio(dpr); }
+    }
+  }
   if (Math.abs(raw - sp) > 0 || pos !== target || pvel !== 0) kick();
 }
 show(); measure(); addEventListener("load", measure);
 (async () => {
   try {
-    const mod = await import("./can3d.js?v=16");
+    const mod = await import("./can3d.js?v=19");
     gl = await mod.create({ canvas: $("#gl"), lite, mid, onChange: kick, pool: 7 });
     // d'abord la canette affichée et ses voisines, puis toutes les autres
     const order = [...F.keys()].sort((a, b) => Math.min((a-cur+N)%N, (cur-a+N)%N) - Math.min((b-cur+N)%N, (cur-b+N)%N));

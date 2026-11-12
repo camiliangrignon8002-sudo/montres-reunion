@@ -67,14 +67,14 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
   const V = pts => pts.map(([x, y]) => new THREE.Vector2(x * r, y));
   const G = {
     body: new THREE.CylinderGeometry(r, r, 1, SEG, 1, true),
-    top: new THREE.LatheGeometry(V([[1,.5],[.996,.507],[.983,.514],[.958,.522],[.925,.53],[.89,.537],[.862,.543],[.85,.547],[.852,.551],[.866,.554],[.876,.557],[.87,.561],[.85,.562],[.83,.558],[.82,.551],[.64,.549],[0,.55]]), SEG),
+    top: new THREE.LatheGeometry(V([[1,.5],[.999,.505],[.994,.511],[.983,.518],[.965,.526],[.943,.533],[.918,.54],[.894,.546],[.874,.551],[.862,.555],[.858,.559],[.861,.562],[.873,.565],[.881,.568],[.877,.572],[.862,.574],[.846,.572],[.838,.567],[.834,.563],[.64,.561],[0,.562]]), SEG),
     bot: new THREE.LatheGeometry(V([[0,-.512],[.45,-.516],[.66,-.524],[.76,-.532],[.8,-.536],[.85,-.536],[.91,-.53],[.955,-.521],[.985,-.511],[.998,-.505],[1,-.5]]), SEG),
-    lid: new THREE.CircleGeometry(r * .82, SEG),
+    lid: new THREE.CircleGeometry(r * .835, SEG),
     shadow: new THREE.PlaneGeometry(1, 1),
   };
   const LID = lidTex(), SHADOW = shadowTex();
   // v = 0 au bord du corps, 1 au centre (haut) ; profil du bas : v = 0 au centre, 1 au bord
-  const TOPR = ringTex([[0,"#8e939a"],[.06,"#e9ecef"],[.16,"#9ea3aa"],[.3,"#d7dade"],[.42,"#6f747b"],[.5,"#f4f5f7"],[.56,"#8a8f96"],[.62,"#e3e6ea"],[.7,"#7b8088"],[.8,"#b9bdc3"],[1,"#a6abb2"]]);
+  const TOPR = ringTex([[0,"#d4d7db"],[.08,"#9ea3aa"],[.22,"#e6e8eb"],[.38,"#8f949b"],[.5,"#c7cbd0"],[.56,"#f5f6f7"],[.62,"#7d828a"],[.7,"#dfe2e5"],[.8,"#9a9fa6"],[1,"#b9bdc3"]]);
   const BOTR = ringTex([[0,"#9ea3aa"],[.35,"#c9ccd1"],[.55,"#7f848b"],[.62,"#eceef1"],[.7,"#8b9097"],[.82,"#d8dbdf"],[.92,"#7a7f86"],[1,"#c4c8cd"]]);
   const mkLabel = () => hi
     ? new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: .4, roughness: .3, clearcoat: 1, clearcoatRoughness: .08, envMapIntensity: 1.1, transparent: true })
@@ -90,7 +90,7 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
     const label = mkLabel(), silver = mkSilver(), silverB = mkSilver(); silver.map = TOPR; silverB.map = BOTR;
     const lid = new THREE.MeshStandardMaterial({ map: LID, color: 0xa4a9b0, metalness: .95, roughness: .3, envMapIntensity: 1, transparent: true, polygonOffset: true, polygonOffsetFactor: -1 });
     spin.add(new THREE.Mesh(G.body, label), new THREE.Mesh(G.top, silver), new THREE.Mesh(G.bot, silverB));
-    const l = new THREE.Mesh(G.lid, lid); l.rotation.x = -Math.PI/2; l.position.y = .5495; spin.add(l);
+    const l = new THREE.Mesh(G.lid, lid); l.rotation.x = -Math.PI/2; l.position.y = .5615; spin.add(l);
     const sh = new THREE.Mesh(G.shadow, new THREE.MeshBasicMaterial({ map: SHADOW, transparent: true, depthWrite: false, opacity: .5 }));
     sh.rotation.x = -Math.PI/2; sh.position.y = -.56; sh.scale.set(.8, .8, 1); sh.renderOrder = -1;
     group.add(sh); scene.add(group); group.visible = false;
@@ -109,10 +109,10 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
   }
   function preload(urls){ (function next(i){ if (i >= urls.length) return; load(urls[i]).then(() => setTimeout(() => next(i + 1), 60)); })(0); }
 
-  let W = 0, H = 0, last = "";
+  let W = 0, H = 0, last = "", prOverride = 0;
   function resize(){
     W = canvas.clientWidth; H = canvas.clientHeight;
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, lite ? 1 : mid ? 1.15 : 2));
+    renderer.setPixelRatio(prOverride || Math.min(devicePixelRatio || 1, lite ? 1 : mid ? 1.15 : 1.75));
     renderer.setSize(W, H, false);
     camera.aspect = W / Math.max(1, H); camera.updateProjectionMatrix(); last = "";
   }
@@ -142,7 +142,7 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
       c.spin.scale.set(k, 1, k);
       c.group.scale.setScalar(it.h * VH);
       c.group.position.set(it.x * VH * camera.aspect, -it.y * VH, -.6 * (it.depth ?? (it.main ? 0 : 1)));
-      c.group.rotation.set(0, 0, -it.tilt * Math.PI/180);
+      c.group.rotation.set(.24, 0, -it.tilt * Math.PI/180);   // vue légèrement plongeante : on voit le couvercle
       c.spin.rotation.y = -Math.PI/2 + it.ang * Math.PI/180;
       for (const m of c.mats) m.opacity = it.alpha;
       c.sh.material.opacity = .45 * it.alpha * (it.shadow ?? 1);
@@ -164,5 +164,6 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
     return out;
   }
   const isReady = url => ready.has(url);
-  return { draw, preload, load, isReady, resize };
+  function setPixelRatio(v){ prOverride = v; resize(); }
+  return { draw, preload, load, isReady, resize, setPixelRatio };
 }
