@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Alternance 974</title>
 <meta name="description" content="Toutes les offres d'alternance et d'emploi à La Réunion : apprentissage, contrat pro, CDI, CDD, intérim, contacts, carte, CV et lettre de motivation.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Alternance 974">
+<meta property="og:title" content="Alternance 974 · Toutes les offres d'alternance et d'emploi à La Réunion">
+<meta property="og:description" content="Toutes les offres d'alternance et d'emploi à La Réunion : apprentissage, contrat pro, CDI, CDD, intérim, contacts, carte, CV et lettre de motivation.">
+<meta property="og:url" content="https://camiliangrignon8002-sudo.github.io/montres-reunion/alternance/">
+<meta property="og:image" content="https://camiliangrignon8002-sudo.github.io/montres-reunion/alternance/icon-512.png">
+<meta property="og:image:width" content="512"><meta property="og:image:height" content="512">
+<meta name="twitter:card" content="summary">
+<meta name="apple-mobile-web-app-title" content="Alternance 974">
+<link rel="canonical" href="https://camiliangrignon8002-sudo.github.io/montres-reunion/alternance/">
 <meta name="theme-color" content="#092f70">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2371,6 +2381,7 @@ function panneauCandidatures() {
 }
 function menu() {
   ouvrir(`${barre("Menu")}<div class="bloc menu">
+    <button class="entree" id="m-partage">${ic("partager")}Partager l'appli (AirDrop, Messages…)</button>
     <button class="entree" id="m-espace">${ic("gens")}Mon espace</button>
     <button class="entree" id="m-cv">${ic("doc")}Mon CV et mes infos</button>
     <button class="entree" id="m-notif">${ic("cloche")}Notifications ${NOTIF.actif ? "(activées)" : ""}</button>
@@ -2389,6 +2400,11 @@ function menu() {
   <p class="aide" style="text-align:center">Offres relevées : ${esc(SOURCES)}.<br>Installer : Partager → « Sur l'écran d'accueil ».</p>`);
   $("#m-cv").onclick = () => panneauCV();
   $("#m-cand").onclick = panneauCandidatures;
+  $("#m-partage").onclick = async () => {
+    const lien = "https://camiliangrignon8002-sudo.github.io/montres-reunion/alternance/", texte = "Alternance 974 : toutes les offres d'alternance et d'emploi à La Réunion";
+    if (navigator.share) { try { await navigator.share({title: "Alternance 974", text: texte, url: lien}); } catch (e) {} return; }
+    try { await navigator.clipboard.writeText(lien); toast("Lien copié : colle-le dans un message"); } catch (e) { prompt("Copie ce lien :", lien); }
+  };
   $("#m-espace").onclick = () => panneauEspace();
   $("#m-guide").onclick = () => panneauGuide();
   $("#m-simu").onclick = () => panneauGuide("simu");
