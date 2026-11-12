@@ -1,7 +1,7 @@
 // Notifications de l'appli Alternance 974 : affichage + pastille sur l'icône de l'écran d'accueil.
 // La page vient toujours du réseau (dernière version) ; les descriptifs et icônes du téléphone, mis à jour en arrière-plan.
 // La liste des offres (liste.json) passe toujours par le réseau d'abord. Hors connexion, la copie sert.
-const CACHE = 'alternance974-v6';
+const CACHE = 'alternance974-v7';
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', ev => ev.waitUntil(
   caches.keys().then(l => Promise.all(l.filter(k => k.startsWith('alternance974') && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())));
