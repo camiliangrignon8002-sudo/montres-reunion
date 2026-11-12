@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#08060f">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 <link rel="modulepreload" href="./vendor/three.module.min.js">
-<link rel="modulepreload" href="./can3d.js?v=21">
+<link rel="modulepreload" href="./can3d.js?v=22">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,900;1,900&family=JetBrains+Mono:wght@400&display=swap">
@@ -276,7 +276,7 @@ function frame(now){
 show(); measure(); addEventListener("load", measure);
 (async () => {
   try {
-    const mod = await import("./can3d.js?v=21");
+    const mod = await import("./can3d.js?v=22");
     gl = await mod.create({ canvas: $("#gl"), lite, mid, onChange: kick, pool: 7 });
     // d'abord la canette affichée et ses voisines, puis toutes les autres
     const order = [...F.keys()].sort((a, b) => Math.min((a-cur+N)%N, (cur-a+N)%N) - Math.min((b-cur+N)%N, (cur-b+N)%N));

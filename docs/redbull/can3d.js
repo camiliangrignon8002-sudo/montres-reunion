@@ -37,7 +37,7 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: hi, alpha: true, powerPreference: "high-performance" });
   renderer.setClearColor(0, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.08;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.12;
   const maxAniso = Math.min(8, renderer.capabilities.getMaxAnisotropy());
 
   const scene = new THREE.Scene();
@@ -50,6 +50,7 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
       m.position.set(x, y, z); m.rotation.set(rx || 0, ry || 0, 0); env.add(m);
     };
     panel(3, 14, -7, 0, 3, Math.PI/2.6, 0, 5);        // grande bande à gauche
+    panel(.7, 14, -2.2, 0, 8, Math.PI*.95, 0, 6);    // reflet vertical fin sur l'étiquette
     panel(1.4, 14, 7, 0, 1, -Math.PI/2.2, 0, 3.5);    // bande fine à droite
     panel(10, 4, 0, 9, 0, 0, Math.PI/2, 2.2);         // plafond doux
     panel(6, 2, 0, -2, 9, Math.PI, 0, .9);            // rappel de face, faible
@@ -60,6 +61,7 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
   const amb = new THREE.AmbientLight(0xffffff, .22); scene.add(amb);
   const key = new THREE.DirectionalLight(0xffffff, 1.7); key.position.set(-3, 3.5, 6); scene.add(key);
   const rim = new THREE.DirectionalLight(0xffffff, 1.6); rim.position.set(4, 1.5, -3); scene.add(rim);
+  const rim2 = new THREE.DirectionalLight(0xffffff, 1.3); rim2.position.set(-4.5, .5, -2.5); scene.add(rim2);   // second liseré sur le bord gauche
   const tint = new THREE.PointLight(0xffffff, 0, 8, 1.6); tint.position.set(1.8, -1, 2.5); scene.add(tint);
 
   // formes partagées (rayon de base .21 ; chaque canette est mise à l'échelle selon ses proportions)
@@ -77,12 +79,12 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
   // v = 0 au bord du corps, 1 au centre (haut) ; profil du bas : v = 0 au centre, 1 au bord
   const TOPR = ringTex([[0,"#b9bdc3"],[.15,"#8a8f96"],[.35,"#cfd2d6"],[.5,"#7a7f86"],[.6,"#d8dbdf"],[.7,"#6f747b"],[.85,"#a3a8ae"],[1,"#8e939a"]]);
   const BOTR = ringTex([[0,"#9ea3aa"],[.35,"#c9ccd1"],[.55,"#7f848b"],[.62,"#eceef1"],[.7,"#8b9097"],[.82,"#d8dbdf"],[.92,"#7a7f86"],[1,"#c4c8cd"]]);
-  const mkLabel = () => (false)
-    ? null
+  const mkLabel = () => hi
+    ? new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: .3, roughness: .34, clearcoat: .7, clearcoatRoughness: .14, envMapIntensity: 1.05, transparent: false })
     : new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: .3, roughness: .36, envMapIntensity: .85, transparent: false });
   const mkSilver = () => false
     ? new THREE.MeshPhysicalMaterial({ color: 0x9a9fa6, metalness: 1, roughness: .22, anisotropy: .5, anisotropyRotation: Math.PI/2, envMapIntensity: 1, side: THREE.DoubleSide, transparent: true })
-    : new THREE.MeshStandardMaterial({ color: 0xe4e7eb, metalness: .9, roughness: .3, envMapIntensity: 1.25, side: THREE.DoubleSide, transparent: false });
+    : new THREE.MeshStandardMaterial({ color: 0xe4e7eb, metalness: .9, roughness: .3, envMapIntensity: 1.45, side: THREE.DoubleSide, transparent: false });
 
   const marker = new THREE.Object3D();
   const cans = [];
