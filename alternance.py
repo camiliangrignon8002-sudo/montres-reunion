@@ -1186,13 +1186,33 @@ def notifier(nouvelles):
     print(f"Notifications : {atteints} téléphone(s) prévenu(s) sur {len(abos)}")
 
 
+# noms courts pour alléger la page (déplié par la page, voir deplier() dans alternance_page.html)
+CLES_COURTES = {"categorie": "c", "type": "y", "titre": "t", "entreprise": "e", "contrats": "k", "commune": "m",
+                "postuler": "u", "source": "s", "publie": "p", "position_approx": "a", "domaine": "d",
+                "salaire_mois": "sm", "salaire": "sa", "vu": "v", "lat": "la", "lon": "lo"}
+
+
+def compacter(a):
+    """Même offre en moins d'octets : clés courtes, valeurs par défaut et identifiant déduit du lien omis."""
+    c = {}
+    for k, v in a.items():
+        if k == "id" and v == "url:" + a.get("postuler", ""):
+            continue
+        if (k, v) in (("categorie", "alternance"), ("type", "offre")):
+            continue
+        c[CLES_COURTES.get(k, k)] = 1 if (k == "position_approx" and v is True) else v
+    return c
+
+
 def page_html(offres, maj, sources_ok):
     # la page n'embarque que la liste ; les descriptifs sont dans details.json (chargé juste après)
     legeres = [{k: v for k, v in a.items() if k not in DETAILS and v not in ("", None, [], False)} for a in offres]
     DETAILS_FILE.write_text(json.dumps({a["id"]: {k: a[k] for k in DETAILS if a.get(k)} for a in offres},
                                        ensure_ascii=False, separators=(",", ":")))
-    LISTE_FILE.write_text(json.dumps(legeres, ensure_ascii=False, separators=(",", ":")))
-    donnees = json.dumps(legeres, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    LISTE_FILE.write_text(json.dumps(legeres, ensure_ascii=False, separators=(",", ":")))  # pour les pages encore ouvertes sur une ancienne version
+    compactes = json.dumps([compacter(a) for a in legeres], ensure_ascii=False, separators=(",", ":"))
+    (LISTE_FILE.parent / "liste-c.json").write_text(compactes)
+    donnees = compactes.replace("</", "<\\/")
     communes = json.dumps(COMMUNES, ensure_ascii=False)
     z = ZONES[0]
     gabarit = (ROOT / "alternance_page.html").read_text(encoding="utf-8")
