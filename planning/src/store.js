@@ -105,15 +105,22 @@
       const id = entry.id;
       if (this.mode === "db") {
         await this.queue(`${col}/${id}`, () => this.dbCall(() => this.db.doc(`${col}/${id}`).set(entry)));
-        this.prune(col).catch(() => {});
+        if (this.shouldPrune(col)) this.prune(col).catch(() => {});
       } else if (this.mode === "local") {
         lsSet(`${col}/${id}`, entry);
+        if (!this.shouldPrune(col)) return;
         const keys = lsKeys(col + "/").map((k) => ({ k, at: (lsGet(k) || {}).at || "" })).sort((a, b) => (a.at < b.at ? 1 : -1));
         keys.slice(col === "history" ? HISTORY_KEEP : VERSIONS_KEEP).filter((x) => tooOld(x.at)).forEach((x) => lsSet(x.k, null));
       } else {
         this.logs = this.logs || { history: [], versions: [] };
         this.logs[col].unshift(entry);
       }
+    },
+    // Le ménage du journal (lecture de tout l'historique) se fait au premier enregistrement puis tous les 25, pas à chaque fois.
+    shouldPrune(col) {
+      this.writes = this.writes || {};
+      const n = (this.writes[col] = (this.writes[col] || 0) + 1);
+      return n === 1 || n % 25 === 0;
     },
     async prune(col) {
       const keep = col === "history" ? HISTORY_KEEP : VERSIONS_KEEP;

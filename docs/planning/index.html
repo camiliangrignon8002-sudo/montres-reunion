@@ -392,19 +392,21 @@ html.liquid[data-theme="dark"] {
   --surface: rgba(40,42,48,.4); --surface-2: rgba(30,31,36,.35); --line: rgba(255,255,255,.1); --bg: #0f1012;
 }
 html.liquid { background: var(--g-bg-2); }
-html.liquid body { background: radial-gradient(700px 520px at 12% 12%, var(--g-spot-1), transparent 65%), radial-gradient(900px 700px at 88% 30%, var(--g-spot-2), transparent 60%), linear-gradient(160deg, var(--g-bg-1) 0%, var(--g-bg-2) 55%, var(--g-bg-3) 100%); background-attachment: fixed; }
+/* Fond peint une seule fois sur un calque fixe (plus fluide au défilement que background-attachment: fixed). */
+html.liquid body { background: transparent; }
+html.liquid body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(700px 520px at 12% 12%, var(--g-spot-1), transparent 65%), radial-gradient(900px 700px at 88% 30%, var(--g-spot-2), transparent 60%), linear-gradient(160deg, var(--g-bg-1) 0%, var(--g-bg-2) 55%, var(--g-bg-3) 100%); }
 html.liquid body::before { background: transparent; }
 html.liquid .side { background: linear-gradient(180deg, var(--g-fill-1), var(--g-fill-2)); -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur); border-right: none; box-shadow: inset -1px 0 0 var(--g-edge), 8px 0 40px rgba(0,0,0,.05); }
 html.liquid .topbar { background: linear-gradient(180deg, var(--g-fill-1), var(--g-fill-2)); border-bottom: 1px solid var(--g-edge); }
-html.liquid .card, html.liquid .banner { background: linear-gradient(160deg, var(--g-fill-1) 0%, var(--g-fill-2) 45%, var(--g-fill-3) 100%); -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur); border: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), inset 0 -1px 0 var(--g-hi-2), var(--g-shadow); border-radius: 26px; }
+html.liquid .card, html.liquid .banner { background: linear-gradient(160deg, var(--g-fill-1) 0%, var(--g-fill-2) 45%, var(--g-fill-3) 100%); border: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), inset 0 -1px 0 var(--g-hi-2), var(--g-shadow); border-radius: 26px; }
 html.liquid .card.flat { box-shadow: inset 0 1px 0 var(--g-hi); }
 html.liquid .dialog, html.liquid .dialog header, html.liquid .dialog footer { background: var(--g-dialog); }
 html.liquid .dialog { -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur); border: 1px solid var(--g-edge); border-radius: 26px; box-shadow: inset 0 1px 0 var(--g-hi), 0 24px 70px rgba(0,0,0,.25); }
-html.liquid .plan thead th, html.liquid .plan th.name, html.liquid .plan td.name, html.liquid .plan thead th.name { background: var(--g-fill-1); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+html.liquid .plan thead th, html.liquid .plan th.name, html.liquid .plan td.name, html.liquid .plan thead th.name { background: color-mix(in srgb, var(--bg) 78%, transparent); }
 html.liquid .plan th, html.liquid .plan td { border-color: var(--g-edge); }
 html.liquid .blk { border-radius: 12px; background: linear-gradient(180deg, color-mix(in srgb, var(--z) 22%, var(--g-blk)), color-mix(in srgb, var(--z) 32%, var(--g-blk-2))); border: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), inset 3px 0 0 var(--z), 0 2px 10px rgba(0,0,0,.05); }
 html.liquid .blk.seg-cours { background: linear-gradient(180deg, color-mix(in srgb, var(--cours) 18%, var(--g-blk)), color-mix(in srgb, var(--cours) 28%, var(--g-blk-2))); }
-html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid .skill { background: linear-gradient(180deg, var(--g-btn-1), var(--g-btn-2)); border: 1px solid var(--g-edge); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); box-shadow: inset 0 1px 0 var(--g-hi), 0 2px 8px rgba(0,0,0,.06); }
+html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid .skill { background: linear-gradient(180deg, var(--g-btn-1), var(--g-btn-2)); border: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), 0 2px 8px rgba(0,0,0,.06); }
 html.liquid .btn, html.liquid .seg-ctl, html.liquid .skill { border-radius: 999px; }
 html.liquid .btn.primary { background: linear-gradient(180deg, #2b8cff, #0069e6); color: #fff; border-color: rgba(255,255,255,.4); box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 4px 14px rgba(0,113,227,.28); }
 html.liquid .btn.danger { background: linear-gradient(180deg, color-mix(in srgb, var(--danger) 85%, #fff), var(--danger)); color: #fff; }
@@ -416,6 +418,13 @@ html.liquid .skill.formation[aria-pressed="true"] { background: var(--warn-soft)
 html.liquid .skill.ancien[aria-pressed="true"] { background: var(--ok-soft); border-color: var(--ok); }
 html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 66%, transparent), color-mix(in srgb, var(--bg) 84%, transparent)); -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur); border-top: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), 0 -6px 30px rgba(0,0,0,.06); }
 html.liquid .input { background: var(--g-btn-1); border-color: var(--g-edge); }
+
+/* Fluidité : flou réservé aux quelques grandes surfaces (menu, barres, fenêtres) ; rien de flou si l'appareil demande moins de transparence. */
+html.liquid .side, html.liquid .topbar, html.liquid .tabbar, html.liquid .dialog { will-change: transform; }
+@media (prefers-reduced-transparency: reduce) {
+  html.liquid .side, html.liquid .topbar, html.liquid .tabbar, html.liquid .dialog { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--g-dialog); }
+}
+.month .mday { contain: layout paint; }
 
 </style>
 <div id="app-root"></div>
@@ -2213,15 +2222,22 @@ html.liquid .input { background: var(--g-btn-1); border-color: var(--g-edge); }
       const id = entry.id;
       if (this.mode === "db") {
         await this.queue(`${col}/${id}`, () => this.dbCall(() => this.db.doc(`${col}/${id}`).set(entry)));
-        this.prune(col).catch(() => {});
+        if (this.shouldPrune(col)) this.prune(col).catch(() => {});
       } else if (this.mode === "local") {
         lsSet(`${col}/${id}`, entry);
+        if (!this.shouldPrune(col)) return;
         const keys = lsKeys(col + "/").map((k) => ({ k, at: (lsGet(k) || {}).at || "" })).sort((a, b) => (a.at < b.at ? 1 : -1));
         keys.slice(col === "history" ? HISTORY_KEEP : VERSIONS_KEEP).filter((x) => tooOld(x.at)).forEach((x) => lsSet(x.k, null));
       } else {
         this.logs = this.logs || { history: [], versions: [] };
         this.logs[col].unshift(entry);
       }
+    },
+    // Le ménage du journal (lecture de tout l'historique) se fait au premier enregistrement puis tous les 25, pas à chaque fois.
+    shouldPrune(col) {
+      this.writes = this.writes || {};
+      const n = (this.writes[col] = (this.writes[col] || 0) + 1);
+      return n === 1 || n % 25 === 0;
     },
     async prune(col) {
       const keep = col === "history" ? HISTORY_KEEP : VERSIONS_KEEP;
@@ -2968,7 +2984,11 @@ html.liquid .input { background: var(--g-btn-1); border-color: var(--g-edge); }
         else if (c.col === "adjustments") { this.state.adjustments = this.state.adjustments || {}; if (c.removed) delete this.state.adjustments[c.id]; else this.state.adjustments[c.id] = c.data; n++; }
         else if (c.col === "config" && C.CONFIG_KEYS.includes(c.id) && !c.removed) { this.state[c.id] = c.id === "settings" ? { ...C.DEFAULT_SETTINGS, ...c.data.value } : c.data.value; n++; }
       }
-      if (n) { this.render(); toast("Le planning vient d'être modifié par une autre personne."); }
+      if (!n) return;
+      this._vwState = null; // données modifiées sur place : vérifications à refaire
+      // Plusieurs changements arrivent souvent d'un coup : un seul affichage et un seul message.
+      clearTimeout(this._remoteT);
+      this._remoteT = setTimeout(() => { this.render(); toast("Le planning vient d'être modifié par une autre personne."); }, 120);
     },
     savePrefs() { try { localStorage.setItem("planning-equipe:ui", JSON.stringify({ view: this.ui.view, aiOpen: this.ui.aiOpen })); } catch (e) { /* ignoré */ } },
 
@@ -3000,7 +3020,11 @@ html.liquid .input { background: var(--g-btn-1); border-color: var(--g-edge); }
       this.setSync("busy");
       const written = [];
       try {
-        for (const c of changes) { await Store.put(c.col, c.id, c.after); written.push(c); }
+        // Écritures en parallèle (l'ordre est garanti document par document).
+        const res = await Promise.allSettled(changes.map((c) => Store.put(c.col, c.id, c.after)));
+        res.forEach((x, i) => { if (x.status === "fulfilled") written.push(changes[i]); });
+        const bad = res.find((x) => x.status === "rejected");
+        if (bad) throw bad.reason;
       } catch (e) {
         for (const c of written.reverse()) { try { await Store.put(c.col, c.id, c.before); } catch (e2) { /* au mieux */ } }
         this.setSync("fail");
@@ -3040,6 +3064,12 @@ html.liquid .input { background: var(--g-btn-1); border-color: var(--g-edge); }
     },
 
     // ---------- Annulation ----------
+    // Vérifications d'une semaine, gardées tant que les données ne changent pas (chaque modification crée un nouvel état).
+    vw(st, monday) {
+      if (st !== this.state) return C.validateWeek(st, monday);
+      if (this._vwState !== st) { this._vwState = st; this._vw = {}; }
+      return this._vw[monday] || (this._vw[monday] = C.validateWeek(st, monday));
+    },
     describeUndo() { return this.history.find((e) => !e.undone && !e.tooBig && e.source !== "annulation" && e.changes && e.changes.length && "after" in e.changes[0]) || null; },
     async undo(entry) {
       entry = entry || this.describeUndo();
@@ -3140,7 +3170,7 @@ html.liquid .input { background: var(--g-btn-1); border-color: var(--g-edge); }
       // Compteur d'erreurs sur la semaine en cours
       const wb = document.querySelector('.side [data-screen="week"]');
       if (wb && this.state) {
-        const n = C.validateWeek(this.state, C.mondayOf(this.today())).filter((i) => i.level === "erreur").length;
+        const n = this.vw(this.state, C.mondayOf(this.today())).filter((i) => i.level === "erreur").length;
         wb.querySelector(".count") && wb.querySelector(".count").remove();
         if (n) wb.append(h("span", { class: "count", title: `${n} erreur(s) cette semaine` }, n));
       }
@@ -3164,7 +3194,7 @@ html.liquid .input { background: var(--g-btn-1); border-color: var(--g-edge); }
   SCREENS.dashboard = { title: "Tableau de bord", render() {
     const s = this.state, today = this.today(), monday = C.mondayOf(today), next = C.addDays(monday, 7);
     const w = C.getWeek(s, monday), wn = C.getWeek(s, next);
-    const iss = C.validateWeek(s, monday);
+    const iss = this.vw(s, monday);
     const errs = iss.filter((i) => i.level === "erreur"), alerts = iss.filter((i) => i.level === "alerte");
     const open = C.uncoveredPosts(s, monday);
     const totalMin = w ? w.shifts.reduce((a, x) => a + C.shiftMinutes(x.segs), 0) : 0;
@@ -3230,7 +3260,7 @@ html.liquid .input { background: var(--g-btn-1); border-color: var(--g-edge); }
     const s = this.state, monday = this.ui.monday, today = this.today();
     const w = C.getWeek(s, monday);
     const grid = C.weekGrid(s, monday);
-    const issues = C.validateWeek(s, monday);
+    const issues = this.vw(s, monday);
     const open = C.uncoveredPosts(s, monday);
     const errs = issues.filter((i) => i.level === "erreur"), alerts = issues.filter((i) => i.level === "alerte");
     const cellIssue = {}; for (const i of issues) if (i.emp && i.date && i.level !== "info") { const k = i.emp + "|" + i.date; cellIssue[k] = cellIssue[k] === "erreur" ? "erreur" : i.level; }
@@ -3611,13 +3641,15 @@ html.liquid .input { background: var(--g-btn-1); border-color: var(--g-edge); }
     const start = C.mondayOf(first);
     const end = C.addDays(C.mondayOf(`${this.ui.month}-${String(last).padStart(2, "0")}`), 6);
     const cells = [];
+    const issuesOf = {}; // une vérification par semaine, pas par jour
+    const weekIssues = (mo) => issuesOf[mo] || (issuesOf[mo] = this.vw(s, mo));
     for (let d = start; d <= end; d = C.addDays(d, 1)) {
       const w = C.getWeek(s, C.mondayOf(d));
       const shifts = w ? w.shifts.filter((x) => x.date === d) : [];
       const byZone = {}; for (const x of shifts) for (const z of new Set(x.segs.map((g) => g.z))) byZone[z] = (byZone[z] || 0) + 1;
       const cours = s.employees.filter((e) => C.calStatus(s, e, d) === "formation");
       const abs = s.employees.filter((e) => C.absencesOn(s, e.id, d).length);
-      const errs = shifts.length ? C.validateWeek(s, C.mondayOf(d)).filter((i) => i.date === d && i.level === "erreur").length : 0;
+      const errs = shifts.length ? weekIssues(C.mondayOf(d)).filter((i) => i.date === d && i.level === "erreur").length : 0;
       cells.push(h("button", { type: "button", class: `mday${d.slice(0, 7) !== this.ui.month ? " out" : ""}${d === today ? " today" : ""}`, onClick: () => { this.ui.monday = C.mondayOf(d); this.ui.day = d; this.ui.view = "day"; this.go("week"); }, "aria-label": `${C.fmtDate(d, "day")} : ${shifts.length} personne(s)` },
         h("div", { class: "row between" }, h("span", { class: "n" }, Number(d.slice(8))), w && w.status === "validé" && C.dow(d) === 0 ? h("span", { class: "chip ok", style: { padding: "0 6px" } }, "✓") : null, errs ? h("span", { class: "chip err", style: { padding: "0 6px" } }, "!") : null),
         h("div", { class: "bars" },

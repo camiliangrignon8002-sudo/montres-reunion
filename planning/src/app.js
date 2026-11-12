@@ -272,7 +272,11 @@
         else if (c.col === "adjustments") { this.state.adjustments = this.state.adjustments || {}; if (c.removed) delete this.state.adjustments[c.id]; else this.state.adjustments[c.id] = c.data; n++; }
         else if (c.col === "config" && C.CONFIG_KEYS.includes(c.id) && !c.removed) { this.state[c.id] = c.id === "settings" ? { ...C.DEFAULT_SETTINGS, ...c.data.value } : c.data.value; n++; }
       }
-      if (n) { this.render(); toast("Le planning vient d'être modifié par une autre personne."); }
+      if (!n) return;
+      this._vwState = null; // données modifiées sur place : vérifications à refaire
+      // Plusieurs changements arrivent souvent d'un coup : un seul affichage et un seul message.
+      clearTimeout(this._remoteT);
+      this._remoteT = setTimeout(() => { this.render(); toast("Le planning vient d'être modifié par une autre personne."); }, 120);
     },
     savePrefs() { try { localStorage.setItem("planning-equipe:ui", JSON.stringify({ view: this.ui.view, aiOpen: this.ui.aiOpen })); } catch (e) { /* ignoré */ } },
 
@@ -304,7 +308,11 @@
       this.setSync("busy");
       const written = [];
       try {
-        for (const c of changes) { await Store.put(c.col, c.id, c.after); written.push(c); }
+        // Écritures en parallèle (l'ordre est garanti document par document).
+        const res = await Promise.allSettled(changes.map((c) => Store.put(c.col, c.id, c.after)));
+        res.forEach((x, i) => { if (x.status === "fulfilled") written.push(changes[i]); });
+        const bad = res.find((x) => x.status === "rejected");
+        if (bad) throw bad.reason;
       } catch (e) {
         for (const c of written.reverse()) { try { await Store.put(c.col, c.id, c.before); } catch (e2) { /* au mieux */ } }
         this.setSync("fail");
@@ -344,6 +352,12 @@
     },
 
     // ---------- Annulation ----------
+    // Vérifications d'une semaine, gardées tant que les données ne changent pas (chaque modification crée un nouvel état).
+    vw(st, monday) {
+      if (st !== this.state) return C.validateWeek(st, monday);
+      if (this._vwState !== st) { this._vwState = st; this._vw = {}; }
+      return this._vw[monday] || (this._vw[monday] = C.validateWeek(st, monday));
+    },
     describeUndo() { return this.history.find((e) => !e.undone && !e.tooBig && e.source !== "annulation" && e.changes && e.changes.length && "after" in e.changes[0]) || null; },
     async undo(entry) {
       entry = entry || this.describeUndo();
@@ -444,7 +458,7 @@
       // Compteur d'erreurs sur la semaine en cours
       const wb = document.querySelector('.side [data-screen="week"]');
       if (wb && this.state) {
-        const n = C.validateWeek(this.state, C.mondayOf(this.today())).filter((i) => i.level === "erreur").length;
+        const n = this.vw(this.state, C.mondayOf(this.today())).filter((i) => i.level === "erreur").length;
         wb.querySelector(".count") && wb.querySelector(".count").remove();
         if (n) wb.append(h("span", { class: "count", title: `${n} erreur(s) cette semaine` }, n));
       }
@@ -468,7 +482,7 @@
   SCREENS.dashboard = { title: "Tableau de bord", render() {
     const s = this.state, today = this.today(), monday = C.mondayOf(today), next = C.addDays(monday, 7);
     const w = C.getWeek(s, monday), wn = C.getWeek(s, next);
-    const iss = C.validateWeek(s, monday);
+    const iss = this.vw(s, monday);
     const errs = iss.filter((i) => i.level === "erreur"), alerts = iss.filter((i) => i.level === "alerte");
     const open = C.uncoveredPosts(s, monday);
     const totalMin = w ? w.shifts.reduce((a, x) => a + C.shiftMinutes(x.segs), 0) : 0;
@@ -534,7 +548,7 @@
     const s = this.state, monday = this.ui.monday, today = this.today();
     const w = C.getWeek(s, monday);
     const grid = C.weekGrid(s, monday);
-    const issues = C.validateWeek(s, monday);
+    const issues = this.vw(s, monday);
     const open = C.uncoveredPosts(s, monday);
     const errs = issues.filter((i) => i.level === "erreur"), alerts = issues.filter((i) => i.level === "alerte");
     const cellIssue = {}; for (const i of issues) if (i.emp && i.date && i.level !== "info") { const k = i.emp + "|" + i.date; cellIssue[k] = cellIssue[k] === "erreur" ? "erreur" : i.level; }
@@ -915,13 +929,15 @@
     const start = C.mondayOf(first);
     const end = C.addDays(C.mondayOf(`${this.ui.month}-${String(last).padStart(2, "0")}`), 6);
     const cells = [];
+    const issuesOf = {}; // une vérification par semaine, pas par jour
+    const weekIssues = (mo) => issuesOf[mo] || (issuesOf[mo] = this.vw(s, mo));
     for (let d = start; d <= end; d = C.addDays(d, 1)) {
       const w = C.getWeek(s, C.mondayOf(d));
       const shifts = w ? w.shifts.filter((x) => x.date === d) : [];
       const byZone = {}; for (const x of shifts) for (const z of new Set(x.segs.map((g) => g.z))) byZone[z] = (byZone[z] || 0) + 1;
       const cours = s.employees.filter((e) => C.calStatus(s, e, d) === "formation");
       const abs = s.employees.filter((e) => C.absencesOn(s, e.id, d).length);
-      const errs = shifts.length ? C.validateWeek(s, C.mondayOf(d)).filter((i) => i.date === d && i.level === "erreur").length : 0;
+      const errs = shifts.length ? weekIssues(C.mondayOf(d)).filter((i) => i.date === d && i.level === "erreur").length : 0;
       cells.push(h("button", { type: "button", class: `mday${d.slice(0, 7) !== this.ui.month ? " out" : ""}${d === today ? " today" : ""}`, onClick: () => { this.ui.monday = C.mondayOf(d); this.ui.day = d; this.ui.view = "day"; this.go("week"); }, "aria-label": `${C.fmtDate(d, "day")} : ${shifts.length} personne(s)` },
         h("div", { class: "row between" }, h("span", { class: "n" }, Number(d.slice(8))), w && w.status === "validé" && C.dow(d) === 0 ? h("span", { class: "chip ok", style: { padding: "0 6px" } }, "✓") : null, errs ? h("span", { class: "chip err", style: { padding: "0 6px" } }, "!") : null),
         h("div", { class: "bars" },
