@@ -1,7 +1,6 @@
 // Canettes en 3D (Three.js) : carrousel et canette principale, toutes en vraie 3D.
 // Étiquettes 360° préparées à l'avance (face + vrai dos). Formes partagées, rendu seulement quand ça bouge.
 import * as THREE from "three";
-import { RoomEnvironment } from "./vendor/RoomEnvironment.js";
 
 const TAU = Math.PI * 2;
 
@@ -19,6 +18,14 @@ const lidTex = () => canvasTex(256, (g) => {
   g.fillStyle = "#6f747b"; g.beginPath(); g.ellipse(128, 94, 14, 13, 0, 0, TAU); g.fill();
   g.fillStyle = "#9aa0a7"; g.beginPath(); g.arc(128, 150, 7, 0, TAU); g.fill();
 });
+// anneaux de l'aluminium (épaule, rebord, fond) : alternance clair / foncé le long du profil
+const ringTex = (stops) => { const t = canvasTex(256, (g) => {
+  const gr = g.createLinearGradient(0, 0, 0, 256);
+  for (const [v, c] of stops) gr.addColorStop(v, c);
+  g.fillStyle = gr; g.fillRect(0, 0, 256, 256);
+  // fines stries de brossage
+  for (let y = 0; y < 256; y += 2){ g.fillStyle = `rgba(${Math.random() < .5 ? "255,255,255" : "0,0,0"},${(Math.random()*.05).toFixed(3)})`; g.fillRect(0, y, 256, 1); }
+}); return t; };
 const shadowTex = () => { const t = canvasTex(128, (g) => {
   const rg = g.createRadialGradient(64, 64, 0, 64, 64, 64);
   rg.addColorStop(0, "rgba(0,0,0,.75)"); rg.addColorStop(.45, "rgba(0,0,0,.4)"); rg.addColorStop(1, "rgba(0,0,0,0)");
@@ -34,7 +41,21 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
   const maxAniso = Math.min(8, renderer.capabilities.getMaxAnisotropy());
 
   const scene = new THREE.Scene();
-  { const pm = new THREE.PMREMGenerator(renderer); scene.environment = pm.fromScene(new RoomEnvironment(), .03).texture; pm.dispose(); }
+  // studio photo : fond sombre + panneaux lumineux en bandes -> reflets métalliques contrastés
+  {
+    const env = new THREE.Scene();
+    env.add(new THREE.Mesh(new THREE.SphereGeometry(20, 32, 16), new THREE.MeshBasicMaterial({ color: 0x0b0c10, side: THREE.BackSide })));
+    const panel = (w, h, x, y, z, ry, rx, lum, tint) => {
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(tint || 0xffffff).multiplyScalar(lum), side: THREE.DoubleSide }));
+      m.position.set(x, y, z); m.rotation.set(rx || 0, ry || 0, 0); env.add(m);
+    };
+    panel(3, 14, -7, 0, 3, Math.PI/2.6, 0, 5);        // grande bande à gauche
+    panel(1.4, 14, 7, 0, 1, -Math.PI/2.2, 0, 3.5);    // bande fine à droite
+    panel(10, 4, 0, 9, 0, 0, Math.PI/2, 2.2);         // plafond doux
+    panel(6, 2, 0, -2, 9, Math.PI, 0, .9);            // rappel de face, faible
+    panel(2, 10, 0, 0, -9, 0, 0, 2.5);                // contre-jour
+    const pm = new THREE.PMREMGenerator(renderer); scene.environment = pm.fromScene(env, .02).texture; pm.dispose();
+  }
   const camera = new THREE.PerspectiveCamera(26, 1, .1, 60); camera.position.set(0, 0, 10);
   const amb = new THREE.AmbientLight(0xffffff, .22); scene.add(amb);
   const key = new THREE.DirectionalLight(0xffffff, 1.7); key.position.set(-3, 3.5, 6); scene.add(key);
@@ -52,25 +73,28 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
     shadow: new THREE.PlaneGeometry(1, 1),
   };
   const LID = lidTex(), SHADOW = shadowTex();
+  // v = 0 au bord du corps, 1 au centre (haut) ; profil du bas : v = 0 au centre, 1 au bord
+  const TOPR = ringTex([[0,"#8e939a"],[.06,"#e9ecef"],[.16,"#9ea3aa"],[.3,"#d7dade"],[.42,"#6f747b"],[.5,"#f4f5f7"],[.56,"#8a8f96"],[.62,"#e3e6ea"],[.7,"#7b8088"],[.8,"#b9bdc3"],[1,"#a6abb2"]]);
+  const BOTR = ringTex([[0,"#9ea3aa"],[.35,"#c9ccd1"],[.55,"#7f848b"],[.62,"#eceef1"],[.7,"#8b9097"],[.82,"#d8dbdf"],[.92,"#7a7f86"],[1,"#c4c8cd"]]);
   const mkLabel = () => hi
-    ? new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: .35, roughness: .3, clearcoat: 1, clearcoatRoughness: .1, envMapIntensity: .9, transparent: true })
+    ? new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: .4, roughness: .3, clearcoat: 1, clearcoatRoughness: .08, envMapIntensity: 1.1, transparent: true })
     : new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: .3, roughness: .36, envMapIntensity: .85, transparent: true });
   const mkSilver = () => hi
-    ? new THREE.MeshPhysicalMaterial({ color: 0xe2e5e9, metalness: 1, roughness: .28, anisotropy: .8, anisotropyRotation: Math.PI/2, envMapIntensity: 1.2, side: THREE.DoubleSide, transparent: true })
-    : new THREE.MeshStandardMaterial({ color: 0xe2e5e9, metalness: 1, roughness: .28, envMapIntensity: 1.2, side: THREE.DoubleSide, transparent: true });
+    ? new THREE.MeshPhysicalMaterial({ color: 0xd9dce0, metalness: 1, roughness: .14, anisotropy: .5, anisotropyRotation: Math.PI/2, envMapIntensity: 1.3, side: THREE.DoubleSide, transparent: true })
+    : new THREE.MeshStandardMaterial({ color: 0xd9dce0, metalness: 1, roughness: .16, envMapIntensity: 1.3, side: THREE.DoubleSide, transparent: true });
 
   const marker = new THREE.Object3D();
   const cans = [];
   for (let i = 0; i < pool; i++){
     const group = new THREE.Group(), spin = new THREE.Group(); group.add(spin);
-    const label = mkLabel(), silver = mkSilver();
+    const label = mkLabel(), silver = mkSilver(), silverB = mkSilver(); silver.map = TOPR; silverB.map = BOTR;
     const lid = new THREE.MeshStandardMaterial({ map: LID, metalness: .95, roughness: .3, envMapIntensity: 1.1, transparent: true, polygonOffset: true, polygonOffsetFactor: -1 });
-    spin.add(new THREE.Mesh(G.body, label), new THREE.Mesh(G.top, silver), new THREE.Mesh(G.bot, silver));
+    spin.add(new THREE.Mesh(G.body, label), new THREE.Mesh(G.top, silver), new THREE.Mesh(G.bot, silverB));
     const l = new THREE.Mesh(G.lid, lid); l.rotation.x = -Math.PI/2; l.position.y = .5495; spin.add(l);
     const sh = new THREE.Mesh(G.shadow, new THREE.MeshBasicMaterial({ map: SHADOW, transparent: true, depthWrite: false, opacity: .5 }));
     sh.rotation.x = -Math.PI/2; sh.position.y = -.56; sh.scale.set(.8, .8, 1); sh.renderOrder = -1;
     group.add(sh); scene.add(group); group.visible = false;
-    cans.push({ group, spin, label, mats: [label, silver, lid], sh, url: null });
+    cans.push({ group, spin, label, mats: [label, silver, silverB, lid], sh, url: null });
   }
 
   const cache = new Map(), ready = new Map(), loader = new THREE.TextureLoader();
@@ -86,7 +110,7 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
   let W = 0, H = 0, last = "";
   function resize(){
     W = canvas.clientWidth; H = canvas.clientHeight;
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, lite ? 1 : mid ? 1.35 : 2));
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, lite ? 1 : mid ? 1.15 : 2));
     renderer.setSize(W, H, false);
     camera.aspect = W / Math.max(1, H); camera.updateProjectionMatrix(); last = "";
   }
@@ -122,7 +146,7 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
     const fo = o.focus || 0;
     key.intensity = 1.7 - fo * .15; rim.intensity = 1.6 - fo * .3;
     if (o.accent){ col.set(o.accent); tint.color.copy(col); }
-    if (mainCan){ tint.position.set(mainCan.group.position.x + 1.6, mainCan.group.position.y - .6, 2.4); tint.intensity = 6; }
+    if (mainCan){ tint.position.set(mainCan.group.position.x + 1.6, mainCan.group.position.y - .6, 2.4); tint.intensity = 1.5; }
     renderer.render(scene, camera);
     if (mainCan){
       mainCan.spin.add(marker); marker.position.set(-r, .5 - (o.zone ?? .5), 0);
