@@ -50,7 +50,6 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
       m.position.set(x, y, z); m.rotation.set(rx || 0, ry || 0, 0); env.add(m);
     };
     panel(3, 14, -7, 0, 3, Math.PI/2.6, 0, 5);        // grande bande à gauche
-    panel(.7, 14, -2.2, 0, 8, Math.PI*.95, 0, 6);    // reflet vertical fin sur l'étiquette
     panel(1.4, 14, 7, 0, 1, -Math.PI/2.2, 0, 3.5);    // bande fine à droite
     panel(10, 4, 0, 9, 0, 0, Math.PI/2, 2.2);         // plafond doux
     panel(6, 2, 0, -2, 9, Math.PI, 0, .9);            // rappel de face, faible
@@ -156,7 +155,13 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
     const sw = Math.sin((o.p || 0) * Math.PI * 3);
     key.position.set(-3 + sw * 5, 3.5, 6); rim.position.set(4 - sw * 2, 1.5, -3);
     const fo = o.focus || 0;
-    key.intensity = 1.7 - fo * .15; rim.intensity = 1.6 - fo * .3;
+    // pendant les infos : lumière douce et régulière, pas de reflet sur l'étiquette (texte lisible)
+    key.intensity = 1.7 - fo * 1.1; rim.intensity = 1.6 - fo * .6; rim2.intensity = 1.3 - fo * .5; amb.intensity = .22 + fo * 1.35;
+    for (const c of cans){
+      const m = c.label, f = c === mainCan ? fo : 0;
+      m.envMapIntensity = 1.05 - f * .85; m.roughness = .34 + f * .4;
+      if (m.clearcoat !== undefined) m.clearcoat = .7 - f * .68;
+    }
     if (o.accent){ col.set(o.accent); tint.color.copy(col); }
     if (mainCan){ tint.position.set(mainCan.group.position.x + 1.6, mainCan.group.position.y - .6, 2.4); tint.intensity = 1.5; }
     renderer.render(scene, camera);
