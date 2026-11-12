@@ -382,7 +382,7 @@
     { refId: "papier-2026-11-09", monday: "2026-11-09", shifts: T09.list, replace: true, newEmployees: NEWCOMERS.filter((x) => x.id === "lana"),
       totalsOnPaper: { amandine: 35, camilian: 21, charlotte: 35, eric: 35, fleur: 21, lana: 28, lucas: 21, maelle: 35, mathilde: 30, murielle: 35, nathalie: 0, "reine-claude": 35, ruby: 21, sebastien: 35, sophie: 35 } },
   ].map((w) => ({ ...w, source: "planning papier (photo)", noClosing: true, zonesAdd: { camilian: ["ZP", "ZR"], fleur: ["ZP", "ZR"], lucas: ["ZP"], amandine: ["ZP", "ZR"], sophie: ["ZP", "ZR"], mathilde: ["ZP", "ZR"], murielle: ["ZP", "ZR"] } }));
-  // Semaine du 16/11 au 22/11/2026 (photo, page 1/4 + ligne de Sophie). Total relu : 456 h, identique à la feuille.
+  // Semaine du 16/11 au 22/11/2026 (photo, page 1/4 + ligne de Sophie ; version modifiée du 12/11 : Reine Claude en ZP toute la semaine). Total relu : 456 h, identique à la feuille.
   const T16 = mkw(), t16 = T16.p;
   t16("amandine", [2, 3, 4, 5, 6], g("05:30", "10:00", ZP, "10:30", "13:00", ZP));
   t16("camilian", [4, 5, 6], g("08:00", "12:00", ZR, "12:30", "15:30", ZR));
@@ -399,7 +399,7 @@
   t16("murielle", [2, 3], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
   t16("nathalie", [0, 1, 2, 3, 4], g("06:00", "11:00", ZR, "11:30", "13:30", ZR));
   t16("reine-claude", [1], g("08:00", "10:00", ZP, "10:30", "15:30", ZP));
-  t16("reine-claude", [2, 3, 5], g("15:30", "18:00", ZR, "18:30", "23:00", ZR));
+  t16("reine-claude", [2, 3, 5], g("15:30", "18:00", ZP, "18:30", "23:00", ZP)); // 2e photo : passé en vert (ZP) à la main, avant en rose
   t16("reine-claude", [4], g("14:30", "18:00", ZP, "18:30", "22:00", ZP));
   t16("ruby", [2], g("14:30", "17:00", ZP, "17:30", "22:00", ZP));
   t16("ruby", [3], g("09:00", "11:00", ZP, "11:30", "15:30", ZP));
@@ -409,7 +409,7 @@
   t16("sonia", [0, 3, 4, 5, 6], g("15:30", "17:30", ZR, "18:00", "23:00", ZR));
   t16("sophie", [0, 1, 2], g("15:30", "18:00", ZR, "18:30", "23:00", ZR));
   t16("sophie", [5, 6], g("06:00", "10:00", ZR, "10:30", "13:30", ZR));
-  NOV.push({ refId: "papier-2026-11-16", monday: "2026-11-16", shifts: T16.list, replace: true, source: "planning papier (photo)", noClosing: true,
+  NOV.push({ refId: "papier-2026-11-16-b", monday: "2026-11-16", shifts: T16.list, replace: true, source: "planning papier (photo)", noClosing: true,
     absences: [{ emp: "maelle", type: "conges", from: "2026-11-16", to: "2026-11-22", note: "CP (planning papier)" }],
     zonesAdd: { "reine-claude": ["ZP", "ZR"], murielle: ["ZP", "ZR"], mathilde: ["ZP", "ZR"], sonia: ["ZR"] },
     notes: ["Lana : « École » écrit le mercredi 18/11 (pas de créneau ce jour-là)."],
@@ -518,6 +518,10 @@
       summary: "Planning papier du 16/11 : Nathalie revenue de vacances et Sonia de nouveau dans l'équipe à partir du 16/11/2026",
       back: { sonia: "2026-11-16" },
       returnFrom: { nathalie: "2026-11-16" },
+    }, {
+      id: "semaine-1611-modif",
+      summary: "Planning du 16/11 modifié : Reine Claude en zone publique mercredi, jeudi et samedi",
+      validatePaperWeeks: true,
     }, {
       id: "semaine-1611",
       summary: "Planning papier du 16/11 au 22/11 ajouté (Maelle en CP toute la semaine)",
