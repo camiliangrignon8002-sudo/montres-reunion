@@ -280,15 +280,23 @@ Site vitrine des boutiques Nanas Vanille (Saint-Denis et Saint-Pierre), l'art et
 
 # 🥫 Index des canettes (Red Bull)
 
-Site : https://camiliangrignon8002-sudo.github.io/montres-reunion/redbull/
+Étude de design, pas destinée à être mise en ligne. Fichier : `docs/redbull/index.html` (ouvrir le fichier dans un navigateur).
 
 Site de fan non officiel : 11 canettes Red Bull, goût par goût. La page s'ouvre sur une canette, on choisit son goût
-dans la rangée du bas (ou avec les flèches du clavier, ou le bouton en haut à droite), puis on fait défiler :
-la canette tourne et se déplace, et les infos apparaissent à côté.
+(rangée du bas, flèches du clavier ou bouton en haut à droite), puis chaque défilement change la scène :
 
-- 01 Le goût (description et profil), 02 L'énergie (caféine, taurine, sucres, kcal en 250, 355 ou 473 ml),
-  03 Les ingrédients (qui tournent autour de la canette), 04 Les valeurs pour 100 ml, 05 Bon à savoir et le goût suivant.
-- En bas, un comparatif de toutes les canettes.
-- Lien direct vers un goût : ajouter par exemple `#blue-edition` à l'adresse.
-- Les canettes sont dessinées en code (pas de logo ni d'image de la marque). Valeurs indicatives.
-- Goûts et chiffres : tableau `F` au début du script dans `docs/redbull/index.html`.
+1. la couleur du goût envahit l'écran depuis la canette, avec son nom en géant ;
+2. le goût : une vague de liquide monte, barres du profil ;
+3. l'énergie : éclairs autour de la canette, anneaux, chiffres qui comptent (250, 355 ou 473 ml) ;
+4. les ingrédients tournent autour de la canette, explosion de couleurs ;
+5. trois bandeaux de texte géants qui défilent en sens inverse ;
+6. la canette se couche, tableau des valeurs pour 100 ml ;
+7. toute la gamme défile à l'horizontale ;
+8. bon à savoir et goût suivant. En dessous : un comparatif.
+
+La canette suit la souris, s'écrase un peu quand on défile vite, les bulles accélèrent, un reflet la balaie.
+
+- **Vraies canettes** : poser une photo détourée par goût dans `docs/redbull/canettes/` (noms dans `LISEZMOI.txt`).
+  Sans photo, la page montre une canette dessinée en code.
+- Lien direct vers un goût : `#blue-edition` à la fin de l'adresse.
+- Goûts et chiffres (indicatifs) : tableau `F` au début du script.

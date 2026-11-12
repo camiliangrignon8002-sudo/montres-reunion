@@ -1,0 +1,17 @@
+Pose ici une photo détourée (PNG, fond transparent) par canette, avec exactement ces noms :
+
+energy-drink.png
+sugarfree.png
+zero.png
+red-edition.png
+blue-edition.png
+yellow-edition.png
+green-edition.png
+apricot-edition.png
+coconut-edition.png
+sea-blue-edition.png
+pink-edition.png
+
+Canette debout, de face, bien cadrée (environ 600 x 1500 px suffit).
+Dès qu'une photo est là, la page l'utilise à la place de la canette dessinée.
+Il en manque une ? La page garde la canette dessinée pour ce goût.

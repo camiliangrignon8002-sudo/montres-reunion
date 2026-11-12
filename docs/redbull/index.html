@@ -4,111 +4,133 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Index des canettes</title>
-<meta name="description" content="Toutes les canettes Red Bull, goût par goût : saveur, caféine, sucres, ingrédients et valeurs nutritionnelles. Site de fan non officiel.">
-<meta name="theme-color" content="#07080b">
+<meta name="description" content="Étude de design : chaque canette Red Bull, goût par goût, qui prend vie au défilement. Projet de test non officiel.">
+<meta name="theme-color" content="#06070a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Archivo+Narrow:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 :root{
-  --bg:#07080b; --ink:#f2f3f5; --muted:#8a8f99; --line:rgba(255,255,255,.09);
-  --c1:#1b2f6e; --c2:#c9ced6; --acc:#e3263a; --label-ink:#fff;
+  --bg:#06070a; --ink:#f2f3f5; --muted:#8a8f99; --line:rgba(255,255,255,.09);
+  --c1:#1b2f6e; --c2:#c9ced6; --acc:#e3263a; --label-ink:#fff; --glow:.38;
   --display:"Archivo", system-ui, sans-serif;
   --narrow:"Archivo Narrow", "Archivo", sans-serif;
   --mono:"JetBrains Mono", ui-monospace, monospace;
   --cw:170px; --ch:420px;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:auto;-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--display);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   background:
-    radial-gradient(60vmax 50vmax at 50% 45%, color-mix(in srgb,var(--c1) 38%, transparent), transparent 70%),
+    radial-gradient(60vmax 50vmax at 50% 45%, color-mix(in srgb,var(--c1) calc(var(--glow)*100%), transparent), transparent 70%),
     linear-gradient(var(--line) 1px, transparent 1px) 0 0/80px 80px,
-    linear-gradient(90deg,var(--line) 1px, transparent 1px) 0 0/80px 80px;
-  transition:background .8s}
+    linear-gradient(90deg,var(--line) 1px, transparent 1px) 0 0/80px 80px}
+/* grain */
+body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:60;opacity:.07;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation:grain .9s steps(4) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(1%,3%)}}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-a{color:inherit}
 .mono{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.cursor-glow{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;pointer-events:none;z-index:1;
+  background:radial-gradient(closest-side, color-mix(in srgb,var(--c1) 45%, transparent), transparent);mix-blend-mode:screen;opacity:.55;will-change:transform}
 
 /* ---------- HUD ---------- */
-.hud{position:fixed;inset:0;pointer-events:none;z-index:30;padding:18px 22px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.hud{position:fixed;inset:0;pointer-events:none;z-index:40;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .hud > *{position:absolute;pointer-events:auto}
 .hud .tl{top:18px;left:22px;display:flex;gap:10px;align-items:center;color:var(--ink)}
-.hud .tl .dot{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc);transition:background .6s}
+.hud .tl .dot{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc)}
 .hud .tr{top:12px;right:16px}
 .hud .bl{bottom:18px;left:22px}
 .hud .br{bottom:18px;right:22px;text-align:right}
-.hud .bl,.hud .br{transition:opacity .3s}
-.hud.past .bl,.hud.past .br{opacity:0;pointer-events:none}
-.hud .bar{position:fixed;left:0;top:0;height:2px;background:var(--acc);width:calc(var(--prog,0)*100%);transition:background .6s}
+.hud .bl,.hud .br,.hud .chap{transition:opacity .3s}
+.hud.past .bl,.hud.past .br,.hud.past .chap{opacity:0;pointer-events:none}
+.hud .bar{position:fixed;left:0;top:0;height:2px;background:var(--acc)}
+.chap{bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px;align-items:center}
+.chap span{display:block;width:18px;height:3px;border-radius:2px;background:var(--line);transition:width .4s,background .4s}
+.chap span.on{width:42px;background:var(--acc)}
+.chap span.done{background:color-mix(in srgb,var(--acc) 45%, transparent)}
 .btn-menu{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(10,11,14,.6);backdrop-filter:blur(10px);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
-.btn-menu:hover{border-color:color-mix(in srgb,var(--acc) 60%, transparent)}
 .btn-menu i{width:14px;height:14px;border-radius:3px;background:var(--c1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
 
-/* ---------- Canette ---------- */
+/* ---------- Canette dessinée ---------- */
 .can{position:relative;width:var(--cw);height:var(--ch);--fc1:var(--c1);--fc2:var(--c2);--facc:var(--acc);--fink:var(--label-ink)}
-.can .body{position:absolute;inset:0;border-radius:calc(var(--cw)*.09)/calc(var(--cw)*.05);overflow:hidden;background:var(--fc1);
-  box-shadow:0 40px 80px -20px rgba(0,0,0,.7)}
+.can .body{position:absolute;inset:0;border-radius:calc(var(--cw)*.09)/calc(var(--cw)*.05);overflow:hidden;background:var(--fc1);box-shadow:0 40px 80px -20px rgba(0,0,0,.7)}
 .can .strip{position:absolute;top:0;bottom:0;left:0;display:flex;will-change:transform}
 .can .panel{width:calc(var(--cw)*3.14);height:100%;flex:none;position:relative;background:var(--fc1);overflow:hidden}
-/* motif métallique et bandes */
 .can .panel::before{content:"";position:absolute;left:0;right:0;bottom:0;height:46%;
-  background:
-    repeating-linear-gradient(135deg, rgba(255,255,255,.0) 0 10px, rgba(255,255,255,.18) 10px 11px),
-    repeating-linear-gradient(45deg, rgba(255,255,255,.0) 0 10px, rgba(255,255,255,.18) 10px 11px),
-    linear-gradient(180deg,var(--fc2), color-mix(in srgb,var(--fc2) 70%, #000));
-  clip-path:polygon(0 22%, 16% 0, 32% 22%, 48% 0, 64% 22%, 80% 0, 100% 22%, 100% 100%, 0 100%)}
+  background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(255,255,255,.18) 10px 11px),repeating-linear-gradient(45deg,transparent 0 10px,rgba(255,255,255,.18) 10px 11px),linear-gradient(180deg,var(--fc2),color-mix(in srgb,var(--fc2) 70%,#000));
+  clip-path:polygon(0 22%,16% 0,32% 22%,48% 0,64% 22%,80% 0,100% 22%,100% 100%,0 100%)}
 .can .front{position:absolute;left:0;width:var(--cw);top:13%;text-align:center;color:var(--fink)}
 .can .mark{width:calc(var(--cw)*.34);height:calc(var(--cw)*.34);margin:0 auto calc(var(--cw)*.06);transform:rotate(45deg);border:calc(var(--cw)*.025) solid var(--facc);position:relative}
 .can .mark::after{content:"";position:absolute;inset:22%;background:var(--facc)}
-.can .brand{font-family:var(--display);font-weight:900;font-size:calc(var(--cw)*.2);letter-spacing:-.02em;line-height:.9;text-transform:uppercase}
+.can .brand{font-weight:900;font-size:calc(var(--cw)*.2);letter-spacing:-.02em;line-height:.9;text-transform:uppercase}
 .can .sub{font-family:var(--narrow);font-weight:700;font-size:calc(var(--cw)*.075);letter-spacing:.2em;text-transform:uppercase;margin-top:calc(var(--cw)*.05);opacity:.9}
 .can .fl{display:inline-block;margin-top:calc(var(--cw)*.08);padding:calc(var(--cw)*.025) calc(var(--cw)*.06);background:var(--fink);color:var(--fc1);font-family:var(--narrow);font-weight:700;font-size:calc(var(--cw)*.07);letter-spacing:.08em;text-transform:uppercase;border-radius:2px}
-.can .side{position:absolute;left:calc(var(--cw)*1.15);width:calc(var(--cw)*.9);top:12%;font-family:var(--mono);font-size:calc(var(--cw)*.036);line-height:1.45;color:var(--fink);opacity:.85;text-transform:none;letter-spacing:0}
+.can .side{position:absolute;left:calc(var(--cw)*1.15);width:calc(var(--cw)*.9);top:12%;font-family:var(--mono);font-size:calc(var(--cw)*.036);line-height:1.45;color:var(--fink);opacity:.85}
 .can .side b{display:block;font-size:calc(var(--cw)*.05);margin-bottom:6px;letter-spacing:.1em;text-transform:uppercase}
 .can .back{position:absolute;left:calc(var(--cw)*2.2);width:calc(var(--cw)*.8);top:12%;color:var(--fink)}
-.can .back .vert{font-family:var(--display);font-weight:900;font-size:calc(var(--cw)*.12);writing-mode:vertical-rl;transform:rotate(180deg);text-transform:uppercase;letter-spacing:.04em;opacity:.9;float:left}
-.can .barcode{position:absolute;left:calc(var(--cw)*2.55);bottom:8%;width:calc(var(--cw)*.4);height:calc(var(--cw)*.22);background:#fff;padding:4px}
+.can .back .vert{font-weight:900;font-size:calc(var(--cw)*.12);writing-mode:vertical-rl;transform:rotate(180deg);text-transform:uppercase;letter-spacing:.04em;opacity:.9;float:left}
+.can .barcode{position:absolute;left:calc(var(--cw)*2.55);bottom:8%;width:calc(var(--cw)*.4);height:calc(var(--cw)*.22);background:#fff}
 .can .barcode::before{content:"";position:absolute;inset:4px;background:repeating-linear-gradient(90deg,#111 0 2px,transparent 2px 3px,#111 3px 4px,transparent 4px 7px,#111 7px 8px,transparent 8px 9px)}
-.can .vol{position:absolute;left:calc(var(--cw)*.0);width:var(--cw);bottom:6%;text-align:center;font-family:var(--mono);font-size:calc(var(--cw)*.055);color:#111;font-weight:500;letter-spacing:.08em}
+.can .vol{position:absolute;left:0;width:var(--cw);bottom:6%;text-align:center;font-family:var(--mono);font-size:calc(var(--cw)*.055);color:#111;font-weight:500;letter-spacing:.08em}
 .can .shade{position:absolute;inset:0;pointer-events:none;border-radius:inherit;
-  background:
-    linear-gradient(180deg, #d9dde3 0, #8f949c 2.2%, #eef0f3 4%, #a5aab2 6%, transparent 6.4%, transparent 95%, #8f949c 95.4%, #e6e9ed 97%, #7d828a 100%),
-    linear-gradient(90deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.18) 14%, rgba(255,255,255,.42) 28%, rgba(255,255,255,.08) 38%, rgba(0,0,0,0) 55%, rgba(0,0,0,.12) 72%, rgba(0,0,0,.66) 100%)}
+  background:linear-gradient(180deg,#d9dde3 0,#8f949c 2.2%,#eef0f3 4%,#a5aab2 6%,transparent 6.4%,transparent 95%,#8f949c 95.4%,#e6e9ed 97%,#7d828a 100%),
+    linear-gradient(90deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.18) 14%,rgba(255,255,255,.42) 28%,rgba(255,255,255,.08) 38%,transparent 55%,rgba(0,0,0,.12) 72%,rgba(0,0,0,.66) 100%)}
 .can .lid{position:absolute;left:6%;right:6%;top:calc(var(--cw)*-.07);height:calc(var(--cw)*.16);border-radius:50%;
-  background:radial-gradient(ellipse at 50% 60%, #9ca1a9 0 38%, #e9ecef 46%, #8a8f97 58%, #dfe2e6 70%, #6f747c 100%);
-  box-shadow:inset 0 -2px 3px rgba(0,0,0,.35)}
+  background:radial-gradient(ellipse at 50% 60%,#9ca1a9 0 38%,#e9ecef 46%,#8a8f97 58%,#dfe2e6 70%,#6f747c 100%);box-shadow:inset 0 -2px 3px rgba(0,0,0,.35)}
 .can .lid::after{content:"";position:absolute;left:38%;top:32%;width:26%;height:30%;border-radius:40%;border:2px solid #7b8088;background:#c7cbd1}
-.can .floor{position:absolute;left:-30%;right:-30%;bottom:calc(var(--cw)*-.25);height:calc(var(--cw)*.3);border-radius:50%;background:radial-gradient(closest-side, rgba(0,0,0,.6), transparent);filter:blur(6px);z-index:-1}
+.can .floor{position:absolute;left:-30%;right:-30%;bottom:calc(var(--cw)*-.25);height:calc(var(--cw)*.3);border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);filter:blur(6px);z-index:-1}
+/* reflet qui balaie la canette */
+.sweep{position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.55) 48%,rgba(255,255,255,0) 60%);background-size:300% 100%;background-position:var(--sx,0%) 0;mix-blend-mode:overlay}
+/* ---------- Canette en photo (tes fichiers dans canettes/) ---------- */
+.can.photo{width:auto;display:inline-block}
+.can.photo img{display:block;height:100%;width:auto;filter:drop-shadow(0 50px 40px rgba(0,0,0,.55)) drop-shadow(0 0 60px color-mix(in srgb,var(--fc1) 40%,transparent))}
+.can.photo .sweep{-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
 .can.mini{--cw:46px;--ch:114px}
-.can.mini .side,.can.mini .back,.can.mini .barcode,.can.mini .vol{display:none}
+.can.mini .side,.can.mini .back,.can.mini .barcode,.can.mini .vol,.can.mini .sweep{display:none}
 .can.mini .body{box-shadow:0 12px 20px -8px rgba(0,0,0,.8)}
+.can.mini.photo img{filter:drop-shadow(0 10px 10px rgba(0,0,0,.6))}
 
-/* ---------- Histoire défilante ---------- */
-.story{position:relative;height:900vh;z-index:1}
+/* ---------- Scène ---------- */
+.story{position:relative;height:1500vh;z-index:2}
 .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-.bigword{position:absolute;top:50%;left:0;white-space:nowrap;font-family:var(--display);font-weight:900;font-size:clamp(120px,24vw,380px);line-height:.8;letter-spacing:-.05em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--c1) 70%, #fff 10%);opacity:.45;transform:translate3d(var(--bx,0),-50%,0);pointer-events:none;will-change:transform}
-canvas#fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.can-wrap{position:absolute;left:50%;top:50%;will-change:transform;z-index:3}
+.bigword{position:absolute;top:50%;left:0;white-space:nowrap;font-weight:900;font-size:clamp(120px,24vw,380px);line-height:.8;letter-spacing:-.05em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--c1) 70%,#fff 10%);opacity:.45;transform:translate3d(var(--bx,0),-50%,0);pointer-events:none;will-change:transform}
+canvas#fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.flood{position:absolute;inset:0;z-index:1;background:radial-gradient(circle at 50% 50%, color-mix(in srgb,var(--c1) 100%, #fff 12%), var(--c1) 45%, color-mix(in srgb,var(--c1) 70%, #000));clip-path:circle(var(--fr,0px) at var(--fx,50%) var(--fy,50%));will-change:clip-path}
+.flood-t{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:var(--label-ink);pointer-events:none}
+.flood-t .mono{opacity:.75}
+.flood-t h2{margin:14px 0;font-weight:900;font-size:clamp(70px,17vw,300px);line-height:.8;letter-spacing:-.06em;text-transform:uppercase}
+.flood-t p{max-width:520px;margin:0 20px;font-size:17px;line-height:1.5;opacity:.85}
+.can-wrap{position:absolute;left:50%;top:50%;width:0;height:0;transform-origin:0 0;will-change:transform,opacity;z-index:5}
+.tilt{width:0;height:0;transform-origin:0 0;transform-style:preserve-3d;will-change:transform}
+.tilt .can{position:absolute;left:0;top:0}
 .can-wrap .can{transform:translate(-50%,-50%)}
-.rings{position:absolute;left:50%;top:50%;width:min(86vmin,760px);height:min(86vmin,760px);transform:translate(-50%,-50%);pointer-events:none;z-index:2}
-.rings circle{fill:none;stroke:var(--acc);stroke-width:1;transition:stroke .6s}
-.rings text{fill:var(--muted);font-family:var(--mono);font-size:9px;letter-spacing:.2em}
+.rings{position:absolute;left:50%;top:50%;width:min(86vmin,760px);height:min(86vmin,760px);pointer-events:none;z-index:3}
+.rings circle{fill:none;stroke:var(--acc);stroke-width:1}
 
-/* hero */
-.hero{position:absolute;inset:0;z-index:4;pointer-events:none;opacity:calc(1 - var(--h,0));transform:translateY(calc(var(--h,0) * -40px))}
+/* titres découpés lettre par lettre */
+.split{display:block;overflow:hidden;padding-bottom:.06em}
+.split .w{display:inline-block;white-space:nowrap}
+.split .l{display:inline-block;transform:translate3d(0,calc(clamp(0, 1 - (var(--o,0) * 2.2 - var(--i) * .045), 1) * 105%),0) rotate(calc(clamp(0, 1 - (var(--o,0) * 2.2 - var(--i) * .045), 1) * 8deg))}
+
+/* héro */
+.hero{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:calc(1 - var(--h,0));transform:translateY(calc(var(--h,0) * -40px))}
 .hero .eyebrow{position:absolute;top:84px;left:50%;transform:translateX(-50%);color:var(--muted);white-space:nowrap}
 .hero h1{position:absolute;left:5vw;top:50%;transform:translateY(-50%);margin:0;font-weight:900;font-size:clamp(44px,8.2vw,132px);line-height:.86;letter-spacing:-.045em;text-transform:uppercase;max-width:34vw}
-.hero h1 small{display:block;font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.16em;color:var(--acc);margin-bottom:18px;transition:color .6s}
+.hero h1 small{display:block;font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.16em;color:var(--acc);margin-bottom:18px}
+.hero h1 .split .l{animation:rise .9s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i) * 35ms);transform:none}
+@keyframes rise{from{transform:translateY(105%) rotate(8deg)}to{transform:none}}
 .hero .tag{position:absolute;right:5vw;top:50%;transform:translateY(-50%);max-width:26vw;font-size:clamp(15px,1.25vw,19px);line-height:1.45;color:#c9ccd2}
 .hero .tag .mono{display:block;color:var(--muted);margin-bottom:12px}
 .picker{position:absolute;left:0;right:0;bottom:64px;display:flex;flex-direction:column;align-items:center;gap:14px;pointer-events:auto}
-.picker .row{display:flex;gap:8px;overflow-x:auto;max-width:100%;padding:10px 20px 6px;scrollbar-width:none;scroll-snap-type:x mandatory}
+.picker .row{display:flex;gap:8px;overflow-x:auto;max-width:100%;padding:12px 20px 6px;scrollbar-width:none}
 .picker .row::-webkit-scrollbar{display:none}
-.pick{flex:none;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 8px 8px;border-radius:10px;border:1px solid transparent;transition:transform .35s cubic-bezier(.2,.8,.2,1), border-color .3s, background .3s;width:84px}
-.pick:hover{transform:translateY(-6px)}
-.pick[aria-pressed="true"]{border-color:var(--line);background:rgba(255,255,255,.04);transform:translateY(-10px)}
+.pick{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:8px;padding:10px 8px 8px;border-radius:10px;border:1px solid transparent;transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .3s,background .3s;width:84px;height:156px}
+.pick:hover{transform:translateY(-8px) rotate(-3deg)}
+.pick[aria-pressed="true"]{border-color:var(--line);background:rgba(255,255,255,.04);transform:translateY(-12px)}
 .pick span{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center;line-height:1.3}
 .pick[aria-pressed="true"] span{color:var(--ink)}
 .scrollhint{display:flex;align-items:center;gap:10px;color:var(--muted)}
@@ -116,41 +138,42 @@ canvas#fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 @keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* panneaux */
-.pnl{position:absolute;z-index:5;opacity:var(--o,0);transform:translate3d(0,calc((1 - var(--o,0)) * 30px),0);pointer-events:none;width:min(420px,38vw)}
+.pnl{position:absolute;z-index:7;opacity:clamp(0, calc(var(--o,0) * 1.6), 1);transform:translate3d(0,calc((1 - var(--o,0)) * 40px),0);pointer-events:none;width:min(430px,38vw)}
 .pnl.on{pointer-events:auto}
-.pnl.left{left:5vw;top:50%;margin-top:-180px}
-.pnl.right{right:5vw;top:50%;margin-top:-200px}
-.pnl .k{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:22px;color:var(--muted)}
-.pnl .k b{color:var(--acc);font-weight:500;transition:color .6s}
+.pnl.left{left:5vw;top:50%;margin-top:-190px}
+.pnl.right{right:5vw;top:50%;margin-top:-210px}
+.pnl .k{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:22px;color:var(--muted);position:relative}
+.pnl .k::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:calc(var(--o,0)*100%);background:var(--acc)}
+.pnl .k b{color:var(--acc);font-weight:500}
 .pnl h2{margin:0 0 14px;font-weight:900;font-size:clamp(34px,4.2vw,64px);line-height:.9;letter-spacing:-.04em;text-transform:uppercase}
 .pnl p{margin:0 0 20px;color:#c3c6cc;font-size:16px;line-height:1.55}
 .prof{display:grid;gap:12px}
 .prof div{display:grid;grid-template-columns:90px 1fr 28px;align-items:center;gap:12px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.prof u{display:block;height:6px;background:var(--line);position:relative;text-decoration:none;overflow:hidden}
-.prof u::after{content:"";position:absolute;inset:0;background:var(--acc);transform-origin:left;transform:scaleX(calc(var(--v) / 10 * var(--o,0)));transition:background .6s}
+.prof u{display:block;height:6px;background:var(--line);position:relative;text-decoration:none;overflow:hidden;border-radius:3px}
+.prof u::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--c1),var(--acc));transform-origin:left;transform:scaleX(calc(var(--v) / 10 * clamp(0, var(--o,0) * 1.6 - var(--i) * .12, 1)))}
 .prof em{font-style:normal;color:var(--ink);text-align:right}
 .figs{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-left:1px solid var(--line)}
 .fig{padding:16px 16px 14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.fig .n{font-weight:900;font-size:clamp(34px,3.6vw,54px);letter-spacing:-.04em;line-height:1}
+.fig .n{font-weight:900;font-size:clamp(34px,3.6vw,54px);letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
 .fig .n small{font-size:.38em;letter-spacing:0;margin-left:4px;color:var(--muted);font-weight:500}
 .fig .mono{color:var(--muted);margin-top:8px;display:block}
 .fmt{display:flex;gap:6px;margin:0 0 18px}
 .fmt button{padding:7px 12px;border:1px solid var(--line);border-radius:999px;font-family:var(--mono);font-size:11px;color:var(--muted)}
 .fmt button[aria-pressed="true"]{background:var(--ink);color:#000;border-color:var(--ink)}
 .note{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em;margin-top:14px;line-height:1.6}
-.chips{position:absolute;inset:0;z-index:4;pointer-events:none}
-.chip{position:absolute;left:50%;top:50%;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(10,11,14,.72);backdrop-filter:blur(8px);font-family:var(--mono);font-size:11px;letter-spacing:.06em;white-space:nowrap;color:var(--ink);opacity:0;will-change:transform}
+.chips{position:absolute;inset:0;z-index:6;pointer-events:none}
+.chip{position:absolute;left:0;top:0;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(10,11,14,.72);backdrop-filter:blur(8px);font-family:var(--mono);font-size:11px;letter-spacing:.06em;white-space:nowrap;opacity:0;will-change:transform}
 .chip b{color:var(--acc);font-weight:500;margin-right:6px}
-.ttl3{position:absolute;left:5vw;bottom:9vh;z-index:5;opacity:var(--o,0);max-width:420px}
+.ttl3{position:absolute;left:5vw;bottom:9vh;z-index:7;opacity:clamp(0, calc(var(--o,0) * 1.6), 1);max-width:440px}
 .ttl3 h2{margin:10px 0 0;font-weight:900;font-size:clamp(34px,4.2vw,64px);line-height:.9;letter-spacing:-.04em;text-transform:uppercase}
 .ttl3 p{color:#c3c6cc;line-height:1.55;margin:12px 0 0}
 table.nut{width:100%;border-collapse:collapse;font-size:14px}
 .nut td{padding:10px 0;border-bottom:1px solid var(--line)}
 .nut td:last-child{text-align:right;font-family:var(--mono);font-size:13px}
-.nut tr{opacity:clamp(0, calc(var(--o,0) * 8 - var(--i) * .7), 1);transition:opacity .2s}
+.nut tr{opacity:clamp(0, calc(var(--o,0) * 6 - var(--i) * .45), 1);transform:translateX(calc(clamp(0, 1 - (var(--o,0) * 6 - var(--i) * .45), 1) * 24px))}
 .nut .ind td:first-child{padding-left:16px;color:var(--muted)}
 .nut .vnr{color:var(--muted);margin-left:8px}
-.warn{border:1px solid color-mix(in srgb,var(--acc) 50%, transparent);border-radius:12px;padding:18px;margin-bottom:20px;background:color-mix(in srgb,var(--acc) 8%, transparent)}
+.warn{border:1px solid color-mix(in srgb,var(--acc) 50%,transparent);border-radius:12px;padding:18px;margin-bottom:20px;background:color-mix(in srgb,var(--acc) 8%,transparent)}
 .warn .mono{color:var(--acc);display:block;margin-bottom:8px}
 .warn p{margin:0;font-size:15px}
 .next{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;padding:18px 20px;border-radius:12px;background:var(--ink);color:#000;font-weight:700;font-size:17px;text-align:left}
@@ -159,8 +182,30 @@ table.nut{width:100%;border-collapse:collapse;font-size:14px}
 .next:hover .arr{transform:translateX(6px)}
 .next-swatch{width:30px;height:52px;border-radius:5px;flex:none}
 
+/* bandeaux géants */
+.marq{position:absolute;left:0;right:0;white-space:nowrap;font-weight:900;text-transform:uppercase;letter-spacing:-.05em;line-height:.85;pointer-events:none;opacity:var(--o,0);will-change:transform}
+.marq.m1{top:14vh;z-index:4;font-size:15vw;color:var(--ink)}
+.marq.m2{top:41vh;z-index:6;font-size:15vw;color:transparent;-webkit-text-stroke:2px var(--acc)}
+.marq.m3{top:68vh;z-index:4;font-size:15vw;color:color-mix(in srgb,var(--c1) 85%,#fff)}
+
+/* la gamme, en défilement horizontal */
+.gallery{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:var(--o,0)}
+.gallery.on{pointer-events:auto}
+.gallery .gt{position:absolute;left:5vw;top:15vh}
+.gallery .gt h2{margin:10px 0 0;font-weight:900;font-size:clamp(40px,6vw,92px);line-height:.88;letter-spacing:-.045em;text-transform:uppercase}
+.gallery .track{position:absolute;left:0;top:50%;display:flex;gap:4vw;align-items:flex-end;padding:0 10vw;will-change:transform}
+.gitem{flex:none;display:flex;flex-direction:column;align-items:center;gap:16px;transition:filter .3s}
+.gitem .can{--cw:96px;--ch:236px}
+.gitem .can.mini .side{display:none}
+.gitem b{font-size:16px}
+.gitem small{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.gitem .num{font-family:var(--mono);font-size:10px;color:var(--muted)}
+.gitem[aria-current="true"] b{color:var(--acc)}
+.gitem:hover .can{transform:translateY(-12px) rotate(-4deg)}
+.gitem .can{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+
 /* ---------- Comparatif ---------- */
-.after{position:relative;z-index:2;background:var(--bg);border-top:1px solid var(--line)}
+.after{position:relative;z-index:3;background:var(--bg);border-top:1px solid var(--line)}
 .wrap{max-width:1200px;margin:0 auto;padding:120px 24px}
 .wrap > .mono{color:var(--muted)}
 .wrap h2.big{font-weight:900;font-size:clamp(40px,7vw,104px);line-height:.88;letter-spacing:-.045em;text-transform:uppercase;margin:16px 0 18px}
@@ -168,25 +213,27 @@ table.nut{width:100%;border-collapse:collapse;font-size:14px}
 .cmp{border-top:1px solid var(--line)}
 .cmp-head,.cmp-row{display:grid;grid-template-columns:56px 1.4fr 1fr 1fr 1fr 40px;gap:18px;align-items:center;padding:16px 8px;border-bottom:1px solid var(--line)}
 .cmp-head{color:var(--muted)}
-.cmp-row{width:100%;text-align:left;transition:background .25s}
+.cmp-row{width:100%;text-align:left;transition:background .25s;opacity:0;transform:translateY(30px)}
+.cmp-row.in{opacity:1;transform:none;transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1),background .25s}
 .cmp-row:hover{background:rgba(255,255,255,.03)}
 .cmp-row .nm{font-weight:700;font-size:19px;letter-spacing:-.01em}
 .cmp-row .nm small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:400;letter-spacing:.06em;margin-top:4px}
 .cmp-row .sw{width:26px;height:46px;border-radius:4px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
 .meter{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px}
 .meter u{flex:1;height:4px;background:var(--line);position:relative;text-decoration:none;max-width:140px}
-.meter u::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w);background:var(--mc,#fff)}
+.meter u::after{content:"";position:absolute;left:0;top:0;bottom:0;width:0;background:var(--mc,#fff);transition:width 1.2s cubic-bezier(.2,.8,.2,1) .2s}
+.cmp-row.in .meter u::after{width:var(--w)}
 .cmp-row .go{font-size:20px;color:var(--muted);transition:transform .3s,color .3s}
 .cmp-row:hover .go{transform:translateX(4px);color:var(--ink)}
 .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:96px}
 .fact{background:var(--bg);padding:28px}
 .fact .n{font-weight:900;font-size:48px;letter-spacing:-.04em}
 .fact p{color:#b9bcc3;line-height:1.55;margin:10px 0 0;font-size:15px}
-footer{position:relative;z-index:2;border-top:1px solid var(--line);background:var(--bg)}
+footer{position:relative;z-index:3;border-top:1px solid var(--line);background:var(--bg)}
 footer .wrap{padding:40px 24px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--muted);font-size:13px;line-height:1.6}
 
 /* ---------- Menu des goûts ---------- */
-.sheet{position:fixed;inset:0;z-index:50;background:rgba(5,6,8,.86);backdrop-filter:blur(14px);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .35s}
+.sheet{position:fixed;inset:0;z-index:70;background:rgba(5,6,8,.86);backdrop-filter:blur(14px);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .35s}
 .sheet.open{opacity:1;pointer-events:auto}
 .sheet-in{width:min(1000px,92vw);max-height:86vh;overflow:auto}
 .sheet-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
@@ -199,26 +246,24 @@ footer .wrap{padding:40px 24px;display:flex;justify-content:space-between;gap:24
 .gcell b{display:block;font-size:15px}
 .gcell small{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
 
-/* transition de changement de goût */
 .can-wrap.swap .can{animation:swap .7s cubic-bezier(.7,0,.2,1)}
 @keyframes swap{0%{transform:translate(-50%,-50%)}45%{transform:translate(-50%,40vh) rotate(8deg);opacity:0}55%{transform:translate(-50%,-140vh) rotate(-8deg);opacity:0}100%{transform:translate(-50%,-50%)}}
-
 :focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 
-/* ---------- Mobile ---------- */
 @media (max-width:760px){
   :root{--cw:116px;--ch:288px}
-  .hud{padding:14px}
   .hud .tl{top:16px;left:16px}
   .hud .tr{top:10px;right:10px}
   .hud .bl{display:none}
   .hud .br{bottom:14px;right:16px}
+  .chap{left:16px;transform:none}
+  .chap span{width:10px}.chap span.on{width:26px}
   .hero .eyebrow{top:70px}
   .hero h1{left:16px;right:16px;top:96px;transform:none;max-width:none;font-size:clamp(40px,12vw,64px);text-align:center}
   .hero h1 small{margin-bottom:10px}
   .hero .tag{display:none}
   .picker{bottom:34px}
-  .pick{width:70px}
+  .pick{width:70px;height:150px}
   .pnl,.pnl.left,.pnl.right{left:16px;right:16px;width:auto;top:auto;bottom:46px;margin:0;max-height:50vh;overflow:hidden}
   .pnl h2{font-size:34px;margin-bottom:8px}
   .pnl p{font-size:14px;margin-bottom:12px}
@@ -229,6 +274,12 @@ footer .wrap{padding:40px 24px;display:flex;justify-content:space-between;gap:24
   .ttl3{left:16px;right:16px;bottom:46px}
   .ttl3 h2{font-size:34px}
   .chip{font-size:10px;padding:6px 9px}
+  .flood-t{justify-content:flex-end;padding-bottom:12vh}
+  .flood-t h2{font-size:19vw}
+  .flood-t p{font-size:15px}
+  .marq{font-size:26vw!important}
+  .gallery .gt{left:16px;top:12vh}
+  .gitem .can{--cw:76px;--ch:188px}
   .cmp-head{display:none}
   .cmp-row{grid-template-columns:34px 1fr 30px;gap:12px}
   .cmp-row .meter{display:none}
@@ -236,39 +287,51 @@ footer .wrap{padding:40px 24px;display:flex;justify-content:space-between;gap:24
   .facts{grid-template-columns:1fr}
   .wrap{padding:80px 16px}
   .bigword{font-size:38vw}
+  .cursor-glow{display:none}
 }
 @media (prefers-reduced-motion:reduce){
-  .scrollhint i{animation:none}
-  .can-wrap.swap .can{animation:none}
+  body::after,.scrollhint i,.can-wrap.swap .can,.hero h1 .split .l{animation:none}
 }
 </style>
 </head>
 <body>
+<div class="cursor-glow" id="glow"></div>
 
-<div class="hud" aria-hidden="false">
-  <div class="bar"></div>
+<div class="hud">
+  <div class="bar" id="bar"></div>
   <div class="tl mono"><span class="dot"></span><span>Index des canettes</span></div>
   <div class="tr"><button class="btn-menu" id="openSheet" aria-haspopup="dialog"><i></i><span id="menuLabel">Tous les goûts</span></button></div>
   <div class="bl mono" id="hudL">Rot 000° · Défilement 000 %</div>
+  <div class="chap" id="chap" aria-hidden="true"></div>
   <div class="br mono" id="hudR">01 / 11</div>
 </div>
 
 <main>
   <section class="story" id="story" aria-label="La canette en détail">
     <div class="stage" id="stage">
-      <div class="bigword" id="bigword">Energy</div>
+      <div class="bigword" id="bigword"></div>
+      <div class="flood" id="flood">
+        <div class="flood-t">
+          <div class="mono" id="floodNo"></div>
+          <h2 class="split-host" data-o="flood" id="floodName"></h2>
+          <p id="floodTxt"></p>
+        </div>
+      </div>
+      <div class="marq m1" id="m1"></div>
+      <div class="marq m3" id="m3"></div>
       <canvas id="fx"></canvas>
       <svg class="rings" id="rings" viewBox="0 0 400 400" aria-hidden="true">
         <circle cx="200" cy="200" r="150" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" id="ring1" opacity=".5"/>
         <circle cx="200" cy="200" r="182" pathLength="1" stroke-dasharray=".004 .012" id="ring2" opacity="0"/>
         <circle cx="200" cy="200" r="120" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" id="ring3" opacity=".9" stroke-width="2"/>
       </svg>
-      <div class="can-wrap" id="canWrap"></div>
+      <div class="can-wrap" id="canWrap"><div class="tilt" id="tilt"></div></div>
+      <div class="marq m2" id="m2"></div>
       <div class="chips" id="chips"></div>
 
       <div class="hero" id="hero">
-        <div class="eyebrow mono" id="eyebrow">Index des goûts · 11 canettes</div>
-        <h1><small id="heroNo">N° 01 — L'original</small><span id="heroName">Energy Drink</span></h1>
+        <div class="eyebrow mono" id="eyebrow"></div>
+        <h1><small id="heroNo"></small><span id="heroName"></span></h1>
         <div class="tag"><span class="mono">Note dominante</span><span id="heroTag"></span></div>
         <div class="picker">
           <div class="mono" style="color:var(--muted)">Choisis ta canette</div>
@@ -277,14 +340,14 @@ footer .wrap{padding:40px 24px;display:flex;justify-content:space-between;gap:24
         </div>
       </div>
 
-      <div class="pnl left" data-r="0.07,0.22" id="p1">
+      <div class="pnl left" data-r="0.165,0.275" id="p1">
         <div class="k mono"><span><b>01</b> / Le goût</span><span id="p1note"></span></div>
         <h2 id="p1name"></h2>
         <p id="p1desc"></p>
         <div class="prof" id="p1prof"></div>
       </div>
 
-      <div class="pnl right" data-r="0.25,0.42" id="p2">
+      <div class="pnl right" data-r="0.295,0.405" id="p2">
         <div class="k mono"><span><b>02</b> / L'énergie</span><span>Par canette</span></div>
         <div class="fmt" id="fmt" role="group" aria-label="Format de la canette">
           <button data-ml="250" aria-pressed="true">250 ml</button>
@@ -300,20 +363,25 @@ footer .wrap{padding:40px 24px;display:flex;justify-content:space-between;gap:24
         <div class="note" id="p2note"></div>
       </div>
 
-      <div class="ttl3" data-r="0.45,0.6" id="p3">
-        <div class="k mono" style="color:var(--muted)"><b style="color:var(--acc);font-weight:500">03</b> / Ce qu'il y a dedans</div>
-        <h2>Ingrédients</h2>
+      <div class="ttl3" data-r="0.425,0.545" id="p3">
+        <div class="mono" style="color:var(--muted)"><b style="color:var(--acc);font-weight:500">03</b> / Ce qu'il y a dedans</div>
+        <h2 class="split-host" id="p3t">Ingrédients</h2>
         <p id="p3sweet"></p>
       </div>
 
-      <div class="pnl right" data-r="0.63,0.8" id="p4">
-        <div class="k mono"><span><b>04</b> / Pour 100 ml</span><span>% VNR*</span></div>
+      <div class="pnl right" data-r="0.665,0.775" id="p4">
+        <div class="k mono"><span><b>05</b> / Pour 100 ml</span><span>% VNR*</span></div>
         <table class="nut" id="nut"></table>
-        <div class="note">* Valeur nutritionnelle de référence pour un adulte. Valeurs indicatives : la référence reste l'étiquette de ta canette.</div>
+        <div class="note">* Valeur nutritionnelle de référence pour un adulte. Valeurs indicatives : la référence reste l'étiquette de la canette.</div>
       </div>
 
-      <div class="pnl left" data-r="0.83,1.01" id="p5">
-        <div class="k mono"><span><b>05</b> / Bon à savoir</span><span id="p5no"></span></div>
+      <div class="gallery" data-r="0.785,0.9" id="gal">
+        <div class="gt"><span class="mono" style="color:var(--muted)"><b style="color:var(--acc);font-weight:500">06</b> / La gamme</span><h2 class="split-host">11 canettes</h2></div>
+        <div class="track" id="track"></div>
+      </div>
+
+      <div class="pnl left" data-r="0.91,1.01" id="p5">
+        <div class="k mono"><span><b>07</b> / Bon à savoir</span><span id="p5no"></span></div>
         <div class="warn"><span class="mono">Teneur élevée en caféine</span><p>32 mg pour 100 ml. Déconseillé aux enfants et aux femmes enceintes ou allaitantes.</p></div>
         <p>Pour un adulte, l'EFSA estime sans risque jusqu'à 400 mg de caféine par jour, café et thé compris. Meilleur servi très frais, entre 3 et 6 °C.</p>
         <button class="next" id="nextBtn"><span><span class="mono">Goût suivant</span><span id="nextName"></span></span><span style="display:flex;align-items:center;gap:14px"><span class="next-swatch" id="nextSw"></span><span class="arr">→</span></span></button>
@@ -340,8 +408,8 @@ footer .wrap{padding:40px 24px;display:flex;justify-content:space-between;gap:24
 
 <footer>
   <div class="wrap">
-    <span>Site de fan non officiel, sans lien avec Red Bull GmbH. Red Bull est une marque déposée de son propriétaire. Les canettes sont des illustrations, pas les visuels de la marque.</span>
-    <span>Valeurs indicatives, gamme et disponibilité variables selon les pays.</span>
+    <span>Étude de design, projet de test non officiel, sans lien avec Red Bull GmbH. Red Bull est une marque déposée de son propriétaire.</span>
+    <span>Valeurs indicatives, gamme variable selon les pays.</span>
   </div>
 </footer>
 
@@ -355,9 +423,6 @@ footer .wrap{padding:40px 24px;display:flex;justify-content:space-between;gap:24
 <script>
 (() => {
 "use strict";
-
-/* ===== Données =====
-   Par 100 ml. Valeurs indicatives d'après les étiquettes européennes ; les éditions sucrées tournent autour de 45 kcal. */
 const BASE_ING = ["Eau","Sucre","Glucose","Acide citrique","Dioxyde de carbone","Taurine 0,4 %","Carbonates de sodium et de magnésium","Caféine 0,03 %","Niacine","Acide pantothénique","Vitamine B6","Vitamine B12","Arômes"];
 const SF_ING = ["Eau","Acide citrique","Dioxyde de carbone","Taurine 0,4 %","Citrates de sodium","Carbonate de magnésium","Caféine 0,03 %","Édulcorants","Niacine","Acide pantothénique","Vitamine B6","Vitamine B12","Arômes"];
 
@@ -407,87 +472,105 @@ const F = [
    c1:"#ec6aa6", c2:"#fbd3e5", acc:"#7a1747", ink:"#ffffff", kcal:3, sug:0, sf:true,
    prof:{"Sucré":5,"Acidulé":7,"Fruité":8,"Pétillant":7}, extra:["Concentré de carotte noire"]}
 ];
+
 const N = F.length;
 const pad = n => String(n).padStart(2,"0");
 const fmtNum = (v,d=0) => v.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d});
+const $ = s => document.querySelector(s);
+const root = document.documentElement;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const clamp = (v,a=0,b=1) => Math.min(b,Math.max(a,v));
+const ease = t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
+const lerp = (a,b,t) => a+(b-a)*t;
+
+/* ===== Photos : pose tes images détourées dans canettes/<id>.png ===== */
+F.forEach(f => { f.img = `canettes/${f.id}.png`; f.photo = false; });
 
 /* ===== Canette ===== */
 function canHTML(f, mini){
-  const panel = `
-    <div class="panel">
-      <div class="front">
-        <div class="mark"></div>
-        <div class="brand">Red<br>Bull</div>
-        <div class="sub">Energy Drink</div>
-        ${f.id==="energy-drink" ? "" : `<div class="fl">${f.sf && f.id!=="pink-edition" ? f.name : f.short}</div>`}
-      </div>
+  const vars = `--fc1:${f.c1};--fc2:${f.c2};--facc:${f.acc};--fink:${f.ink}`;
+  if (f.photo) return `<div class="can photo${mini?" mini":""}" style="${vars};--m:url('${f.img}')"><img src="${f.img}" alt="Canette ${f.name}"><div class="sweep"></div></div>`;
+  const panel = `<div class="panel">
+      <div class="front"><div class="mark"></div><div class="brand">Red<br>Bull</div><div class="sub">Energy Drink</div>
+        ${f.id==="energy-drink" ? "" : `<div class="fl">${f.sf && f.id!=="pink-edition" ? f.name : f.short}</div>`}</div>
       <div class="side"><b>Ingrédients</b>${(f.sf?SF_ING:BASE_ING).join(", ")}.<br><br>Teneur élevée en caféine (32 mg/100 ml).</div>
-      <div class="back"><div class="vert">${f.name}</div></div>
-      <div class="barcode"></div>
-      <div class="vol">250 ML</div>
-    </div>`;
-  return `<div class="can${mini?" mini":""}" style="--fc1:${f.c1};--fc2:${f.c2};--facc:${f.acc};--fink:${f.ink}">
-    <div class="floor"></div>
-    <div class="body"><div class="strip">${panel}${panel}</div><div class="shade"></div></div>
-    <div class="lid"></div>
-  </div>`;
+      <div class="back"><div class="vert">${f.name}</div></div><div class="barcode"></div><div class="vol">250 ML</div></div>`;
+  return `<div class="can${mini?" mini":""}" style="${vars}"><div class="floor"></div>
+    <div class="body"><div class="strip">${panel}${panel}</div><div class="shade"></div><div class="sweep"></div></div><div class="lid"></div></div>`;
+}
+function split(el, text){
+  let i = 0;
+  el.innerHTML = `<span class="split">` + text.split(" ").map(w => `<span class="w">` + [...w].map(c => `<span class="l" style="--i:${i++}">${c}</span>`).join("") + `</span>`).join(" ") + `</span>`;
 }
 
-/* ===== État ===== */
-const $ = s => document.querySelector(s);
-const root = document.documentElement;
-let cur = 0, ml = 250;
-const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* ===== Construction ===== */
+let cur = -1, ml = 250, chips = [];
+const pickRow = $("#pickRow"), grid = $("#grid"), cmp = $("#cmp"), track = $("#track");
+function buildLists(){
+  pickRow.innerHTML = ""; grid.innerHTML = ""; track.innerHTML = "";
+  [...cmp.querySelectorAll(".cmp-row")].forEach(r => r.remove());
+  F.forEach((f,i) => {
+    const b = document.createElement("button");
+    b.className = "pick"; b.setAttribute("aria-label", f.name);
+    b.innerHTML = canHTML(f,true) + `<span>${f.short}</span>`;
+    b.onclick = () => select(i);
+    pickRow.appendChild(b);
 
-const pickRow = $("#pickRow"), grid = $("#grid"), cmp = $("#cmp");
-F.forEach((f,i) => {
-  const b = document.createElement("button");
-  b.className = "pick"; b.setAttribute("aria-pressed","false"); b.setAttribute("aria-label", f.name);
-  b.innerHTML = canHTML(f,true) + `<span>${f.short}</span>`;
-  b.onclick = () => select(i);
-  pickRow.appendChild(b);
+    const g = document.createElement("button");
+    g.className = "gcell";
+    g.innerHTML = `<div style="transform:scale(.8)">${canHTML(f,true)}</div><div><b>${f.name}</b><small>${f.tag}</small></div>`;
+    g.onclick = () => { select(i); closeSheet(); };
+    grid.appendChild(g);
 
-  const g = document.createElement("button");
-  g.className = "gcell";
-  g.innerHTML = `<div style="transform:scale(.8);transform-origin:center">${canHTML(f,true)}</div><div><b>${f.name}</b><small>${f.tag}</small></div>`;
-  g.onclick = () => { select(i); closeSheet(); };
-  grid.appendChild(g);
+    const t = document.createElement("button");
+    t.className = "gitem";
+    t.innerHTML = `<span class="num">${pad(i+1)}</span>${canHTML(f,true)}<b>${f.name}</b><small>${f.tag}</small>`;
+    t.onclick = () => select(i);
+    track.appendChild(t);
 
-  const r = document.createElement("button");
-  r.className = "cmp-row";
-  const maxS = 11, maxK = 46;
-  r.innerHTML = `<span class="sw" style="background:linear-gradient(180deg,${f.c1} 55%,${f.c2} 55%)"></span>
-    <span class="nm">${f.name}<small>${f.tag}</small></span>
-    <span class="meter" style="--mc:${f.c1==="#f1f0ea"?"#ddd":f.c1}"><u style="--w:${f.sug/maxS*100}%"></u>${fmtNum(f.sug,f.sug%1?1:0)} g</span>
-    <span class="meter" style="--mc:${f.c1==="#f1f0ea"?"#ddd":f.c1}"><u style="--w:${Math.max(f.kcal/maxK*100,2)}%"></u>${f.kcal} kcal</span>
-    <span class="meter" style="--mc:#fff"><u style="--w:100%"></u>32 mg</span>
-    <span class="go">→</span>`;
-  r.onclick = () => { select(i); window.scrollTo({top:$("#story").offsetTop, behavior: reduce?"auto":"smooth"}); };
-  cmp.appendChild(r);
-});
+    const r = document.createElement("button");
+    r.className = "cmp-row";
+    const mc = f.c1==="#f1f0ea" ? "#ddd" : f.c1;
+    r.innerHTML = `<span class="sw" style="background:linear-gradient(180deg,${f.c1} 55%,${f.c2} 55%)"></span>
+      <span class="nm">${f.name}<small>${f.tag}</small></span>
+      <span class="meter" style="--mc:${mc}"><u style="--w:${f.sug/11*100}%"></u>${fmtNum(f.sug,f.sug%1?1:0)} g</span>
+      <span class="meter" style="--mc:${mc}"><u style="--w:${Math.max(f.kcal/46*100,2)}%"></u>${f.kcal} kcal</span>
+      <span class="meter"><u style="--w:100%"></u>32 mg</span><span class="go">→</span>`;
+    r.onclick = () => { select(i); scrollTo({top:$("#story").offsetTop, behavior:reduce?"auto":"smooth"}); };
+    cmp.appendChild(r);
+    io.observe(r);
+  });
+  markCurrent();
+}
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.style.transitionDelay = (e.target.dataset.d||0)+"ms"; e.target.classList.add("in"); io.unobserve(e.target);} }), {threshold:.2});
+function markCurrent(){
+  pickRow.querySelectorAll(".pick").forEach((b,k) => b.setAttribute("aria-pressed", k===cur ? "true":"false"));
+  grid.querySelectorAll(".gcell").forEach((b,k) => b.setAttribute("aria-current", k===cur ? "true":"false"));
+  track.querySelectorAll(".gitem").forEach((b,k) => b.setAttribute("aria-current", k===cur ? "true":"false"));
+}
 
-const canWrap = $("#canWrap");
+const canWrap = $("#canWrap"), tilt = $("#tilt");
 let strip = null;
-
 function render(f, i){
   root.style.setProperty("--c1", f.c1);
   root.style.setProperty("--c2", f.c2);
-  root.style.setProperty("--acc", f.c1==="#f1f0ea" ? f.acc : (f.id==="energy-drink" ? f.acc : f.c1));
+  root.style.setProperty("--acc", (f.c1==="#f1f0ea" || f.id==="energy-drink") ? f.acc : f.c1);
   root.style.setProperty("--label-ink", f.ink);
-  document.querySelector('meta[name="theme-color"]').content = "#07080b";
   $("#bigword").textContent = (f.short + " · ").repeat(3);
   $("#heroNo").textContent = `N° ${pad(i+1)} — ${f.tag}`;
-  $("#heroName").textContent = f.name;
+  split($("#heroName"), f.name);
   $("#heroTag").textContent = f.desc;
   $("#eyebrow").textContent = `Index des goûts · ${N} canettes`;
   $("#hudR").textContent = `${pad(i+1)} / ${pad(N)}`;
   $("#menuLabel").textContent = f.name;
   $(".btn-menu i").style.background = f.c1;
-
+  $("#floodNo").textContent = `N° ${pad(i+1)} · ${f.note}`;
+  split($("#floodName"), f.short);
+  $("#floodTxt").textContent = f.desc;
   $("#p1note").textContent = f.note;
-  $("#p1name").textContent = f.name;
+  split($("#p1name"), f.name);
   $("#p1desc").textContent = f.desc;
-  $("#p1prof").innerHTML = Object.entries(f.prof).map(([k,v]) => `<div>${k}<u style="--v:${v}"></u><em>${v}</em></div>`).join("");
+  $("#p1prof").innerHTML = Object.entries(f.prof).map(([k,v],n) => `<div>${k}<u style="--v:${v};--i:${n}"></u><em>${v}</em></div>`).join("");
   $("#p3sweet").textContent = f.sf
     ? "Sans sucres : la douceur vient d'édulcorants. Taurine, caféine et vitamines du groupe B, comme dans toutes les canettes."
     : `Sucrée au sucre et au glucose, ${fmtNum(f.sug,1)} g pour 100 ml. Taurine, caféine et vitamines du groupe B, comme dans toutes les canettes.`;
@@ -495,10 +578,13 @@ function render(f, i){
   const nx = F[(i+1)%N];
   $("#nextName").textContent = nx.name;
   $("#nextSw").style.background = `linear-gradient(180deg,${nx.c1} 55%,${nx.c2} 55%)`;
+  const m = (s,n=6) => (s+" · ").repeat(n);
+  $("#m1").textContent = m(f.name);
+  $("#m2").textContent = m("Caféine · Taurine · Vitamines B",3);
+  $("#m3").textContent = m(f.note);
 
-  const kj = Math.round(f.kcal*4.184);
   const rows = [
-    ["Énergie", `${kj} kJ / ${f.kcal} kcal`],
+    ["Énergie", `${Math.round(f.kcal*4.184)} kJ / ${f.kcal} kcal`],
     ["Matières grasses","0 g"],
     ["Glucides", `${fmtNum(f.sug,1)} g`],
     ["dont sucres", `${fmtNum(f.sug,1)} g`, true],
@@ -510,35 +596,28 @@ function render(f, i){
     ["Vitamine B12", `2 µg<span class="vnr">80 %</span>`]
   ];
   $("#nut").innerHTML = rows.map((r,k) => `<tr style="--i:${k}" class="${r[2]?"ind":""}"><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("");
-
-  // pastilles ingrédients
   const ing = (f.sf?SF_ING:BASE_ING).concat(f.extra);
   $("#chips").innerHTML = ing.map((t,k) => `<div class="chip"><b>${pad(k+1)}</b>${t}</div>`).join("");
   chips = [...document.querySelectorAll(".chip")];
-
-  pickRow.querySelectorAll(".pick").forEach((b,k) => b.setAttribute("aria-pressed", k===i ? "true":"false"));
-  grid.querySelectorAll(".gcell").forEach((b,k) => b.setAttribute("aria-current", k===i ? "true":"false"));
-  updateCounts(true);
+  markCurrent();
+  updateCounts();
 }
-
-let chips = [];
+function mountCan(f){
+  tilt.innerHTML = canHTML(f,false);
+  strip = tilt.querySelector(".strip");
+}
 function select(i, opts={}){
   i = (i+N)%N;
   if (i===cur && !opts.force) return;
   cur = i;
   const f = F[i];
   history.replaceState(null,"","#"+f.id);
-  const doSwap = () => {
-    canWrap.innerHTML = canHTML(f,false);
-    strip = canWrap.querySelector(".strip");
-    render(f,i);
-  };
-  const btn0 = pickRow.children[i];
-  if (opts.instant || reduce) { doSwap(); if (btn0) pickRow.scrollLeft = btn0.offsetLeft - (pickRow.clientWidth - btn0.offsetWidth)/2; return; }
+  const doSwap = () => { mountCan(f); render(f,i); };
+  const btn = pickRow.children[i];
+  if (opts.instant || reduce){ doSwap(); if (btn) pickRow.scrollLeft = btn.offsetLeft - (pickRow.clientWidth - btn.offsetWidth)/2; return; }
   canWrap.classList.remove("swap"); void canWrap.offsetWidth; canWrap.classList.add("swap");
   setTimeout(doSwap, 320);
   setTimeout(() => canWrap.classList.remove("swap"), 720);
-  const btn = pickRow.children[i];
   if (btn) btn.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"});
 }
 
@@ -546,10 +625,11 @@ function select(i, opts={}){
 document.querySelectorAll("#fmt button").forEach(b => b.onclick = () => {
   ml = +b.dataset.ml;
   document.querySelectorAll("#fmt button").forEach(x => x.setAttribute("aria-pressed", x===b ? "true":"false"));
-  updateCounts(true);
+  updateCounts();
 });
 let countT = 0;
-function updateCounts(force){
+function updateCounts(){
+  if (cur < 0) return;
   const f = F[cur], k = ml/100;
   const tgt = {caf:32*k, tau:400*k, sug:f.sug*k, kcal:f.kcal*k};
   document.querySelectorAll("[data-count]").forEach(el => {
@@ -568,166 +648,220 @@ function closeSheet(){ sheet.classList.remove("open"); if (lastFocus) lastFocus.
 $("#openSheet").onclick = openSheet;
 $("#closeSheet").onclick = closeSheet;
 sheet.addEventListener("click", e => { if (e.target===sheet) closeSheet(); });
-$("#nextBtn").onclick = () => { select(cur+1); window.scrollTo({top:$("#story").offsetTop, behavior: reduce?"auto":"smooth"}); };
+$("#nextBtn").onclick = () => { select(cur+1); scrollTo({top:$("#story").offsetTop, behavior:reduce?"auto":"smooth"}); };
 addEventListener("keydown", e => {
   if (e.key==="Escape" && sheet.classList.contains("open")) closeSheet();
   if (sheet.classList.contains("open")) return;
-  if (e.target.closest && e.target.closest("input,textarea")) return;
   if (e.key==="ArrowRight") select(cur+1);
   if (e.key==="ArrowLeft") select(cur-1);
 });
 
-/* ===== Chorégraphie au défilement ===== */
-const clamp = (v,a=0,b=1) => Math.min(b,Math.max(a,v));
-const ease = t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
-// images clés : p, x (vw), y (vh), s (échelle), z (inclinaison °)
-const KEYS_D = [
-  {p:0,    x:0,   y:-9, s:.86,  z:0},
-  {p:.06,  x:0,   y:0,  s:1.05, z:0},
-  {p:.14,  x:20,  y:0,  s:1.1,  z:-8},
-  {p:.22,  x:20,  y:0,  s:1.1,  z:-8},
-  {p:.32,  x:-20, y:2,  s:1.15, z:10},
-  {p:.42,  x:-20, y:2,  s:1.15, z:10},
-  {p:.5,   x:6,   y:-2, s:1.3,  z:-18},
-  {p:.6,   x:6,   y:-2, s:1.3,  z:-18},
-  {p:.7,   x:-22, y:0,  s:1,    z:0},
-  {p:.8,   x:-22, y:0,  s:1,    z:0},
-  {p:.9,   x:22,  y:0,  s:1.05, z:12},
-  {p:1,    x:22,  y:0,  s:1.05, z:12}
+/* souris : la canette suit le regard */
+let mx = 0, my = 0, tx = 0, ty = 0, gx = innerWidth/2, gy = innerHeight/2, ggx = gx, ggy = gy;
+addEventListener("pointermove", e => { mx = e.clientX/innerWidth*2-1; my = e.clientY/innerHeight*2-1; gx = e.clientX; gy = e.clientY; }, {passive:true});
+
+/* ===== Chorégraphie ===== */
+// p, x (vw), y (vh), s (échelle), z (inclinaison °)
+const KD = [
+  [0,0,-9,.86,0],[.04,0,-2,1,0],[.08,0,0,1.5,-6],[.135,0,0,1.5,-6],
+  [.17,22,2,1.05,-8],[.27,22,2,1.05,-8],
+  [.3,-21,0,1.1,10],[.405,-21,0,1.1,10],
+  [.44,4,-2,1.3,-18],[.545,4,-2,1.3,-18],
+  [.575,0,0,.78,0],[.645,0,0,.78,0],
+  [.68,-24,-6,.95,90],[.77,-24,-6,.95,90],
+  [.8,-24,45,.9,130],[.89,-24,45,.9,130],
+  [.925,22,0,1.05,12],[1,22,0,1.05,12]
 ];
-const KEYS_M = [
-  {p:0,    x:0, y:-13, s:.58,  z:0},
-  {p:.07,  x:0, y:-18, s:.82,  z:-6},
-  {p:.22,  x:0, y:-18, s:.82,  z:-6},
-  {p:.32,  x:0, y:-18, s:.82,  z:8},
-  {p:.42,  x:0, y:-18, s:.82,  z:8},
-  {p:.5,   x:0, y:-8,  s:1.1,  z:-14},
-  {p:.6,   x:0, y:-8,  s:1.1,  z:-14},
-  {p:.68,  x:0, y:-24, s:.66,  z:0},
-  {p:.82,  x:0, y:-24, s:.66,  z:0},
-  {p:.9,   x:0, y:-28, s:.6,   z:10},
-  {p:1,    x:0, y:-28, s:.6,   z:10}
+const KM = [
+  [0,0,-5,.58,0],[.04,0,-3,.75,0],[.08,0,-17,.85,-6],[.135,0,-17,.85,-6],
+  [.17,0,-20,.72,-8],[.27,0,-20,.72,-8],
+  [.3,0,-20,.72,10],[.405,0,-20,.72,10],
+  [.44,0,-8,1,-14],[.545,0,-8,1,-14],
+  [.575,0,0,.7,0],[.645,0,0,.7,0],
+  [.68,0,-31,.5,90],[.77,0,-31,.5,90],
+  [.8,0,45,.6,130],[.89,0,45,.6,130],
+  [.925,0,-28,.6,10],[1,0,-28,.6,10]
 ];
-function track(keys, p){
+function track_(keys, p){
   let a = keys[0], b = keys[keys.length-1];
-  for (let k=0;k<keys.length-1;k++){ if (p>=keys[k].p && p<=keys[k+1].p){ a=keys[k]; b=keys[k+1]; break; } }
-  const t = ease(clamp((p-a.p)/((b.p-a.p)||1)));
-  const o = {};
-  for (const key of ["x","y","s","z"]) o[key] = a[key] + (b[key]-a[key])*t;
-  return o;
+  for (let k=0;k<keys.length-1;k++){ if (p>=keys[k][0] && p<=keys[k+1][0]){ a=keys[k]; b=keys[k+1]; break; } }
+  const t = ease(clamp((p-a[0])/((b[0]-a[0])||1)));
+  return {x:lerp(a[1],b[1],t), y:lerp(a[2],b[2],t), s:lerp(a[3],b[3],t), z:lerp(a[4],b[4],t)};
 }
-function win(p, a, b, fade=.035){
-  // 0 → 1 → 0 sur [a,b]
-  return clamp((p-a)/fade) * clamp((b-p)/fade);
-}
+const win = (p,a,b,f=.03) => clamp((p-a)/f) * clamp((b-p)/f);
+const CHAP = [[0,.05],[.05,.15],[.15,.28],[.28,.415],[.415,.56],[.56,.66],[.66,.78],[.78,.905],[.905,1.01]];
+$("#chap").innerHTML = CHAP.map(() => "<span></span>").join("");
+const chapEls = [...$("#chap").children];
 
-const story = $("#story"), hero = $("#hero"), bigword = $("#bigword");
-const panels = [...document.querySelectorAll("[data-r]")].map(el => ({el, r:el.dataset.r.split(",").map(Number)}));
+const story = $("#story"), hero = $("#hero"), bigword = $("#bigword"), flood = $("#flood"), gal = $("#gal");
+const panels = [...document.querySelectorAll("[data-r]")].map(el => ({el, r:el.dataset.r.split(",").map(Number), hosts:[...el.querySelectorAll(".split-host")]}));
 const ring1 = $("#ring1"), ring2 = $("#ring2"), ring3 = $("#ring3"), rings = $("#rings");
-const hudEl = $(".hud"), hudL = $("#hudL"), bar = $(".hud .bar");
+const hudEl = $(".hud"), hudL = $("#hudL"), bar = $("#bar"), glow = $("#glow");
+const m1 = $("#m1"), m2 = $("#m2"), m3 = $("#m3");
 
-/* particules : bulles + éclats de fruit */
 const cv = $("#fx"), cx = cv.getContext("2d");
-let W=0, H=0, DPR=1;
-function resize(){ DPR = Math.min(devicePixelRatio||1,2); W=cv.clientWidth; H=cv.clientHeight; cv.width=W*DPR; cv.height=H*DPR; cx.setTransform(DPR,0,0,DPR,0,0); }
+let W=0, H=0;
+function resize(){ const d = Math.min(devicePixelRatio||1,2); W=cv.clientWidth; H=cv.clientHeight; cv.width=W*d; cv.height=H*d; cx.setTransform(d,0,0,d,0,0); }
 addEventListener("resize", resize);
 let seed = 7; const rnd = () => (seed = (seed*16807)%2147483647, (seed-1)/2147483646);
-const bubbles = Array.from({length:70}, () => ({x:rnd(), y:rnd(), r:1+rnd()*3.2, v:.02+rnd()*.06, w:rnd()*6.28}));
-const shards = Array.from({length:90}, () => ({a:rnd()*6.283, d:.25+rnd()*.85, r:3+rnd()*16, spin:rnd()*6, kind:rnd()}));
+const bubbles = Array.from({length:80}, () => ({x:rnd(), y:rnd(), r:1+rnd()*3.2, v:.02+rnd()*.06, w:rnd()*6.28}));
+const shards = Array.from({length:110}, () => ({a:rnd()*6.283, d:.25+rnd()*.85, r:3+rnd()*16, spin:rnd()*6, kind:rnd()}));
+const sparks = Array.from({length:56}, (_,k) => ({a:k/56*6.283, l:.5+rnd()*.5, ph:rnd()*6.28}));
+const hex = (h,a) => { const n = parseInt(h.slice(1),16); return `rgba(${n>>16},${n>>8&255},${n&255},${a})`; };
 
-let spin = 0, lastT = performance.now(), smoothP = 0;
+let spin = 0, lastT = performance.now(), sp = 0, lastRaw = 0, vel = 0;
 function frame(now){
   const dt = Math.min(64, now-lastT); lastT = now;
-  const vh = innerHeight, mob = innerWidth < 760;
+  const vh = innerHeight, vw = innerWidth, mob = vw < 760;
   const top = story.offsetTop, len = story.offsetHeight - vh;
   const raw = clamp((scrollY - top)/len);
-  smoothP += (raw - smoothP) * (reduce ? 1 : Math.min(1, dt/90));
-  const p = smoothP;
+  sp += (raw - sp) * (reduce ? 1 : Math.min(1, dt/110));
+  const p = sp;
+  vel = lerp(vel, (raw-lastRaw)*1000/Math.max(dt,1), .1); lastRaw = raw;
+  tx = lerp(tx, mx, .06); ty = lerp(ty, my, .06);
 
-  // rotation : lente en continu + liée au défilement
-  if (!reduce) spin += dt * .012 * (1 - win(p,.42,.62,.04)*.7);
-  const rot = spin + p*1080;
+  // canette
+  if (!reduce) spin += dt * .012;
+  const rot = spin + p*1440 + tx*40;
   if (strip){
     const S = strip.firstElementChild.offsetWidth;
-    const off = ((rot % 360) + 360) % 360 / 360 * S;
-    strip.style.transform = `translate3d(${-off}px,0,0)`;
+    strip.style.transform = `translate3d(${-((((rot%360)+360)%360)/360*S)}px,0,0)`;
   }
-  const k = track(mob ? KEYS_M : KEYS_D, p);
+  const k = track_(mob ? KM : KD, p);
   const bob = reduce ? 0 : Math.sin(now/900)*6;
-  canWrap.style.transform = `translate3d(calc(${k.x}vw),calc(${k.y}vh + ${bob}px),0) scale(${k.s}) rotate(${k.z}deg)`;
+  const squash = clamp(Math.abs(vel)*.02, 0, .06);
+  canWrap.style.transform = `translate3d(${k.x}vw,calc(${k.y}vh + ${bob}px),0) scale(${k.s*(1+squash*.3)},${k.s*(1-squash*.2)}) rotate(${k.z + clamp(vel*.8,-8,8)}deg)`;
+  canWrap.style.opacity = 1 - win(p,.785,.9,.02);
+  tilt.style.transform = `perspective(900px) rotateY(${tx*16}deg) rotateX(${-ty*10}deg)`;
+  canWrap.style.setProperty("--sx", `${(100 - ((p*600 + tx*30 + now/60) % 200))}%`);
+
+  // ambiance : l'intensité de la lumière suit la scène
+  root.style.setProperty("--glow", (.28 + win(p,.04,.16,.04)*.3 + win(p,.42,.56,.04)*.25 + Math.abs(tx)*.08).toFixed(3));
 
   // héro
-  const h = clamp(p/.05);
+  const h = clamp(p/.045);
   hero.style.setProperty("--h", h);
   hero.style.visibility = h>=1 ? "hidden" : "visible";
+  bigword.style.setProperty("--bx", `${-p*160 + 10}vw`);
+  bigword.style.opacity = .45 * (1 - win(p,.56,.66,.03));
 
-  // grand mot
-  bigword.style.setProperty("--bx", `${-p*120 + 10}vw`);
+  // vague de couleur qui s'ouvre depuis la canette
+  const fo = clamp((p-.045)/.045), fc = clamp((p-.14)/.035);
+  const fr = ease(fo) * (1 - ease(fc)) * Math.hypot(vw,vh);
+  flood.style.setProperty("--fr", fr.toFixed(1)+"px");
+  flood.style.setProperty("--fx", `calc(50% + ${k.x}vw)`);
+  flood.style.setProperty("--fy", `calc(50% + ${k.y}vh)`);
+  flood.style.setProperty("--o", (clamp((p-.07)/.05) * (1-fc)).toFixed(3));
+  flood.querySelector(".flood-t").style.transform = `translateY(${(1-ease(fo))*60 - fc*80}px) scale(${1 + p*.4})`;
 
   // panneaux
   for (const {el,r} of panels){
-    const o = win(p, r[0], r[1]);
+    const o = win(p, r[0], r[1], .028);
     el.style.setProperty("--o", o.toFixed(3));
     el.classList.toggle("on", o>.5);
-    el.setAttribute("aria-hidden", o>.5 ? "false" : "true");
+    el.toggleAttribute("inert", o<=.5);
   }
   // compteurs
-  const ct = clamp((p-.25)/.08);
-  const ce = ease(ct);
+  const ce = ease(clamp((p-.3)/.06));
   if (Math.abs(ce-countT) > .001){ countT = ce; updateCounts(); }
 
   // anneaux
-  const rg = win(p,.24,.62,.05);
+  const rg = win(p,.29,.56,.04);
   rings.style.opacity = rg;
-  ring1.style.strokeDashoffset = 1 - clamp((p-.25)/.1);
-  ring3.style.strokeDashoffset = 1 - clamp((p-.27)/.12) * (32/50);
+  ring1.style.strokeDashoffset = 1 - clamp((p-.3)/.08);
+  ring3.style.strokeDashoffset = 1 - clamp((p-.31)/.1) * .64;
   ring2.style.opacity = rg*.7;
-  ring2.style.transform = `rotate(${p*240}deg)`; ring2.style.transformOrigin = "200px 200px";
-  rings.style.transform = `translate(-50%,-50%) translate(${k.x}vw,${k.y}vh)`;
+  ring2.style.transformOrigin = "200px 200px";
+  ring2.style.transform = `rotate(${p*300}deg)`;
+  rings.style.transform = `translate(-50%,-50%) translate(${k.x}vw,${k.y}vh) scale(${1 + win(p,.42,.56,.04)*.25})`;
 
-  // pastilles ingrédients en orbite (scène 3)
-  const ci = win(p,.45,.62,.04);
-  const cxp = innerWidth/2 + k.x/100*innerWidth, cyp = vh/2 + k.y/100*vh;
-  const rad = Math.min(innerWidth, vh) * (mob ? .4 : .36);
+  // ingrédients en orbite
+  const ccx = vw/2 + k.x/100*vw, ccy = vh/2 + k.y/100*vh;
+  const rad = Math.min(vw, vh) * (mob ? .4 : .36);
   chips.forEach((c,idx) => {
-    const n = chips.length;
-    const a = idx/n*Math.PI*2 + p*5 + now/9000;
-    const local = clamp((p - .46 - idx*.004)/.05) * clamp((.62 - p)/.03);
-    const rr = rad * (0.4 + .6*ease(local)) * (1 + (idx%2)*.18);
-    const x = Math.cos(a)*rr*(mob ? .95 : 1.35), y = Math.sin(a)*rr*.82;
-    c.style.opacity = local * ci;
-    c.style.transform = `translate3d(${cxp + x}px, ${cyp + y}px,0) translate(-50%,-50%)`;
-    c.style.left = "0"; c.style.top = "0";
+    const a = idx/chips.length*Math.PI*2 + p*6 + now/9000;
+    const local = clamp((p - .425 - idx*.004)/.05) * clamp((.55 - p)/.03);
+    const rr = rad * (.35 + .65*ease(local)) * (1 + (idx%2)*.18);
+    c.style.opacity = local;
+    c.style.transform = `translate3d(${ccx + Math.cos(a)*rr*(mob?.95:1.35)}px,${ccy + Math.sin(a)*rr*.82}px,0) translate(-50%,-50%)`;
   });
 
-  // HUD
+  // bandeaux géants
+  const mo = win(p,.56,.665,.03);
+  [m1,m2,m3].forEach((m,n) => {
+    m.style.setProperty("--o", mo);
+    const dir = n===1 ? 1 : -1;
+    m.style.transform = `translate3d(${dir*(p-.6)*260 - (n===1?120:30)}vw,0,0) skewX(${clamp(vel*2,-12,12)}deg)`;
+  });
+
+  // la gamme, qui défile à l'horizontale
+  const go = win(p,.785,.9,.025);
+  gal.style.setProperty("--o", go);
+  gal.classList.toggle("on", go>.5);
+  gal.toggleAttribute("inert", go<=.5);
+  if (go > 0){
+    const tw = track.scrollWidth;
+    const gp = clamp((p-.79)/.105);
+    track.style.transform = `translate3d(${lerp(vw*.35, vw - tw - vw*.05, ease(gp))}px,-30%,0)`;
+    [...track.children].forEach((it,n) => {
+      it.style.transform = `translateY(${Math.sin(n*.9 + p*40)*16}px) rotate(${Math.sin(n*1.3 + p*30)*3}deg)`;
+    });
+  }
+
+  // chapitres + HUD
+  CHAP.forEach((c,n) => { chapEls[n].className = p>=c[0] && p<c[1] ? "on" : p>=c[1] ? "done" : ""; });
   hudEl.classList.toggle("past", scrollY > top + len + vh*.3);
-  bar.style.setProperty("--prog", p);
   bar.style.width = (p*100)+"%";
   hudL.textContent = `Rot ${String(Math.round(((rot%360)+360)%360)).padStart(3,"0")}° · Défilement ${String(Math.round(raw*100)).padStart(3,"0")} %`;
+  ggx = lerp(ggx, gx, .12); ggy = lerp(ggy, gy, .12);
+  glow.style.transform = `translate3d(${ggx}px,${ggy}px,0)`;
 
   // canvas
   cx.clearRect(0,0,W,H);
   const f = F[cur];
-  const liveB = .35 + win(p,.04,.98,.05)*.65;
+  const fizz = 1 + clamp(Math.abs(vel)*.6, 0, 4);
   for (const b of bubbles){
-    if (!reduce){ b.y -= b.v * dt/1000; if (b.y < -.05){ b.y = 1.05; b.x = rnd(); } }
+    if (!reduce){ b.y -= b.v * fizz * dt/1000; if (b.y < -.05){ b.y = 1.05; b.x = rnd(); } }
     const x = (b.x + Math.sin(now/1200 + b.w)*.004)*W, y = b.y*H;
     cx.beginPath(); cx.arc(x,y,b.r,0,6.283);
-    cx.strokeStyle = `rgba(255,255,255,${.12*liveB})`; cx.lineWidth = 1; cx.stroke();
+    cx.strokeStyle = `rgba(255,255,255,${.14})`; cx.lineWidth = 1; cx.stroke();
   }
-  // éclats : explosion de saveur autour de la canette
-  const burst = clamp((p-.45)/.1) * clamp((.66-p)/.06);
+  // vague de liquide (le goût)
+  const lw = win(p,.15,.285,.04);
+  if (lw > 0){
+    const lvl = H*(1 - .34*ease(lw));
+    for (let L=0; L<2; L++){
+      cx.beginPath(); cx.moveTo(0,H);
+      for (let x=0; x<=W; x+=16){
+        cx.lineTo(x, lvl + L*22 + Math.sin(x/(180-L*40) + now/(700+L*300) + L)*14*(1+fizz*.3) + Math.sin(x/90 + now/500)*5);
+      }
+      cx.lineTo(W,H); cx.closePath();
+      cx.fillStyle = hex(f.c1, L ? .38 : .22); cx.fill();
+    }
+  }
+  // énergie : éclairs radiaux autour de la canette
+  const en = win(p,.29,.41,.03);
+  if (en > 0){
+    cx.lineCap = "round";
+    for (const s of sparks){
+      const pulse = .5 + .5*Math.sin(now/180 + s.ph);
+      const r0 = Math.min(W,H)*.2, r1 = r0 + Math.min(W,H)*.22*s.l*pulse*en;
+      const a = s.a + p*2;
+      cx.beginPath(); cx.moveTo(ccx+Math.cos(a)*r0, ccy+Math.sin(a)*r0); cx.lineTo(ccx+Math.cos(a)*r1, ccy+Math.sin(a)*r1);
+      cx.strokeStyle = hex(f.acc==="#ffffff"?f.c1:f.acc, .55*en*pulse); cx.lineWidth = 1.5; cx.stroke();
+    }
+  }
+  // explosion de saveur
+  const burst = clamp((p-.43)/.08) * clamp((.565-p)/.04);
   if (burst > 0){
-    const spread = Math.max(W,H) * .55 * ease(clamp((p-.45)/.15));
+    const spread = Math.max(W,H) * .55 * ease(clamp((p-.43)/.13));
     for (const s of shards){
       const d = s.d * spread;
-      const x = cxp + Math.cos(s.a + p*.6)*d, y = cyp + Math.sin(s.a + p*.6)*d*.85;
-      cx.save(); cx.translate(x,y); cx.rotate(s.spin + p*8);
+      cx.save(); cx.translate(ccx + Math.cos(s.a + p*.6)*d, ccy + Math.sin(s.a + p*.6)*d*.85); cx.rotate(s.spin + p*8);
       cx.globalAlpha = burst * (s.kind > .5 ? .85 : .5);
       cx.fillStyle = s.kind > .66 ? f.c1 : s.kind > .33 ? f.acc : f.c2;
       if (s.kind > .5){ cx.beginPath(); cx.arc(0,0,s.r*.55,0,6.283); cx.fill(); }
-      else { cx.fillRect(-s.r*.5,-s.r*.12,s.r,s.r*.24); }
+      else cx.fillRect(-s.r*.5,-s.r*.12,s.r,s.r*.24);
       cx.restore();
     }
     cx.globalAlpha = 1;
@@ -736,12 +870,21 @@ function frame(now){
 }
 
 /* ===== Démarrage ===== */
+buildLists();
 const fromHash = F.findIndex(f => "#"+f.id === location.hash);
-cur = -1;
 select(fromHash >= 0 ? fromHash : 0, {instant:true, force:true});
 resize();
 requestAnimationFrame(frame);
 addEventListener("hashchange", () => { const i = F.findIndex(f => "#"+f.id === location.hash); if (i>=0) select(i); });
+// charge les photos de canettes si elles existent
+let pending = F.length, any = false;
+F.forEach(f => {
+  const im = new Image();
+  im.onload = () => { f.photo = true; any = true; done(); };
+  im.onerror = done;
+  im.src = f.img;
+});
+function done(){ if (--pending === 0 && any){ buildLists(); mountCan(F[cur]); } }
 })();
 </script>
 </body>
