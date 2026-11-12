@@ -4,323 +4,69 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Index des canettes</title>
-<meta name="description" content="Étude de design : chaque canette Red Bull en 3D, goût par goût. Projet de test non officiel.">
-<meta name="theme-color" content="#07070a">
+<meta name="description" content="Étude de design : chaque canette Red Bull en 3D, qui tourne sur elle-même. Projet de test non officiel.">
+<meta name="theme-color" content="#050507">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 <link rel="modulepreload" href="./vendor/three.module.min.js">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;900&family=Archivo+Narrow:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;900&family=Archivo+Narrow:wght@500;700&family=JetBrains+Mono:wght@400&display=swap">
 <style>
-:root{
-  --bg:#07070a; --ink:#f4f4f6; --muted:#8d919a; --line:rgba(255,255,255,.1);
-  --c1:#1f3a93; --acc:#e3263a;
-  --display:"Archivo",system-ui,sans-serif; --narrow:"Archivo Narrow","Archivo",sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
-  --ch:400px;
-}
+:root{--c1:#1f3a93;--acc:#e3263a;--ink:#f4f4f6;--muted:#8d919a;--line:rgba(255,255,255,.12)}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--display);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-.mono{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
-:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
-
-/* en-tête */
-.top{position:fixed;left:0;right:0;top:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:16px 22px;pointer-events:none}
-.top > *{pointer-events:auto}
-.brand{display:flex;align-items:center;gap:10px}
-.brand i{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc);transition:background .6s,box-shadow .6s}
-.menu{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:rgba(10,10,14,.7)}
-.menu i{width:12px;height:12px;border-radius:3px;background:var(--c1);transition:background .6s}
-.bar{position:fixed;left:0;top:0;height:2px;width:100%;background:var(--acc);transform-origin:left;transform:scaleX(0);z-index:31}
-
-/* scène fixe */
-.story{position:relative;height:760vh}
+html,body{margin:0;background:#050507;color:var(--ink);font-family:"Archivo",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+:focus-visible{outline:2px solid var(--acc);outline-offset:4px;border-radius:6px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.spin{height:420vh}
 .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-/* projecteur façon vitrine : lumière en haut, sol sombre */
-.stage.focus .light{opacity:.28}
-.stage.focus .word{opacity:0}
-.light{position:absolute;inset:0;background:
-  radial-gradient(70% 55% at 50% 0%, color-mix(in srgb,var(--acc) 30%, #fff 22%) 0%, color-mix(in srgb,var(--c1) 40%, transparent) 42%, transparent 75%),
-  radial-gradient(60% 30% at 50% 100%, color-mix(in srgb,var(--c1) 35%, transparent), transparent 70%),
-  #07070a;transition:opacity .6s}
-.light::after{content:"";position:absolute;inset:0;background:radial-gradient(40% 60% at 50% 40%, rgba(255,255,255,.08), transparent 70%)}
-.floor{position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(transparent, rgba(0,0,0,.65));pointer-events:none}
-.word{position:absolute;left:0;right:0;top:50%;transform:translateY(-58%);text-align:center;white-space:nowrap;font-weight:900;font-size:clamp(110px,22vw,360px);letter-spacing:-.06em;line-height:.8;text-transform:uppercase;color:rgba(255,255,255,.06);pointer-events:none;transition:opacity .6s}
-canvas#gl{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
-.fallback{position:absolute;left:50%;top:50%;height:var(--ch);transform:translate(-50%,-50%);z-index:3;display:none;filter:drop-shadow(0 30px 30px rgba(0,0,0,.5))}
+/* lumière de vitrine : projecteur en haut, sol sombre */
+.light{position:absolute;inset:0;transition:opacity .5s;background:
+  radial-gradient(46% 62% at 50% 6%, rgba(255,255,255,.26), color-mix(in srgb,var(--acc) 22%,transparent) 38%, transparent 72%),
+  radial-gradient(70% 40% at 50% 100%, color-mix(in srgb,var(--c1) 30%,transparent), transparent 70%)}
+.stage.focus .light{opacity:.35}
+canvas#gl{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fallback{position:absolute;left:50%;top:46%;height:64vh;transform:translate(-50%,-50%);display:none}
 html.nogl .fallback{display:block}
-
-/* héro : le carrousel */
-.hero{position:absolute;inset:0;z-index:5;pointer-events:none;transition:opacity .45s, transform .45s}
-.hero.off{opacity:0;transform:translateY(-30px)}
-.hero .eyebrow{position:absolute;top:78px;left:0;right:0;text-align:center;color:var(--muted)}
-.pick{position:absolute;left:0;right:0;bottom:7vh;display:flex;flex-direction:column;align-items:center;gap:16px;pointer-events:auto}
-.pick .name{text-align:center}
-.pick .name b{display:block;font-weight:900;font-size:clamp(34px,4.6vw,64px);letter-spacing:-.045em;line-height:.9;text-transform:uppercase}
-.pick .name span{display:block;margin-top:10px;color:var(--muted)}
-.pick .nav{display:flex;align-items:center;gap:14px}
-.pick .nav button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:rgba(10,10,14,.55);font-size:20px;transition:border-color .3s,transform .3s}
-.pick .nav button:hover{border-color:var(--acc);transform:scale(1.08)}
-.dots{display:flex;gap:6px}
-.pick .nav .dots button{width:7px;height:7px;border:0;border-radius:50%;background:rgba(255,255,255,.25);padding:0;transition:background .3s,transform .3s}
-.pick .nav .dots button:hover{transform:scale(1.3);background:rgba(255,255,255,.5)}
-.pick .nav .dots button[aria-current="true"]{background:var(--acc);transform:scale(1.5)}
-.hint{color:var(--muted);display:flex;gap:10px;align-items:center}
-.hint i{width:1px;height:22px;background:linear-gradient(var(--acc),transparent)}
-.hero .hit{position:absolute;left:0;right:0;top:12%;bottom:30%;pointer-events:auto;cursor:grab}
-
-/* panneaux d'infos : de simples fondus */
-.pnl{position:absolute;z-index:6;top:50%;width:min(430px,36vw);opacity:0;transform:translate3d(0,calc(-50% + 24px),0);transition:opacity .5s,transform .6s cubic-bezier(.2,.8,.2,1);pointer-events:none}
-.pnl.on{opacity:1;transform:translate3d(0,-50%,0);pointer-events:auto}
-.pnl.left{left:6vw}
-.pnl.right{right:6vw}
-.pnl .k{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:22px;color:var(--muted)}
-.pnl .k b{color:var(--acc);font-weight:500}
-.pnl h2{margin:0 0 14px;font-weight:900;font-size:clamp(34px,4vw,60px);line-height:.9;letter-spacing:-.04em;text-transform:uppercase}
-.pnl p{margin:0 0 18px;color:#c6c8ce;font-size:16px;line-height:1.55}
-.meta{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:0 0 20px}
-.meta .mono{display:block;color:var(--muted);font-size:10px;margin-bottom:4px}
-.meta b{font-size:14px;font-weight:500;line-height:1.35}
-.prof{display:grid;gap:11px}
-.prof div{display:grid;grid-template-columns:90px 1fr 24px;align-items:center;gap:12px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.prof u{display:block;height:5px;border-radius:3px;background:var(--line);overflow:hidden;text-decoration:none}
-.prof u::after{content:"";display:block;height:100%;width:100%;background:var(--acc);transform-origin:left;transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.8,.2,1) .15s}
-.pnl.on .prof u::after{transform:scaleX(calc(var(--v)/10))}
-.prof em{font-style:normal;color:var(--ink);text-align:right}
-.figs{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-left:1px solid var(--line)}
-.fig{padding:16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.fig .n{font-weight:900;font-size:clamp(32px,3.4vw,50px);letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
-.fig .n small{font-size:.38em;margin-left:4px;color:var(--muted);font-weight:500;letter-spacing:0}
-.fig .mono{display:block;margin-top:8px;color:var(--muted)}
-.fmt{display:flex;gap:6px;margin:0 0 16px}
-.fmt button{padding:7px 12px;border:1px solid var(--line);border-radius:999px;font-family:var(--mono);font-size:11px;color:var(--muted)}
-.fmt button[aria-pressed="true"]{background:var(--ink);color:#000;border-color:var(--ink)}
-.note{font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.6;margin-top:14px}
-.ing{display:flex;flex-wrap:wrap;gap:7px}
-.ing span{padding:7px 11px;border:1px solid var(--line);border-radius:999px;font-family:var(--mono);font-size:11px;background:rgba(10,10,14,.6)}
-.ing span b{color:var(--acc);font-weight:500;margin-right:6px}
-table.nut{width:100%;border-collapse:collapse;font-size:14px}
-.nut td{padding:9px 0;border-bottom:1px solid var(--line)}
-.nut td:last-child{text-align:right;font-family:var(--mono);font-size:13px}
-.nut .ind td:first-child{padding-left:16px;color:var(--muted)}
-.nut .vnr{color:var(--muted);margin-left:8px}
-.warn{border:1px solid color-mix(in srgb,var(--acc) 50%,transparent);border-radius:12px;padding:16px 18px;margin-bottom:18px;background:color-mix(in srgb,var(--acc) 9%,transparent)}
-.warn .mono{color:var(--acc);display:block;margin-bottom:6px}
-.warn p{margin:0;font-size:14px;color:#dcdde1}
-.next{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;padding:16px 18px;border-radius:12px;background:var(--ink);color:#000;font-weight:700;font-size:17px;text-align:left}
-.next .mono{display:block;color:#555;margin-bottom:4px;font-weight:400}
-.next img{height:56px;width:auto}
-.chap{position:absolute;right:20px;top:50%;transform:translateY(-50%);z-index:7;display:flex;flex-direction:column;gap:8px}
-.chap span{display:block;width:3px;height:18px;border-radius:2px;background:var(--line);transition:background .4s,height .4s}
-.chap span.on{height:36px;background:var(--acc)}
-
-/* après la scène */
-.after{position:relative;z-index:2;background:var(--bg);border-top:1px solid var(--line)}
-.wrap{max-width:1180px;margin:0 auto;padding:110px 24px}
-.wrap > .mono,.base > .mono{color:var(--muted)}
-h2.big,.base h3{font-weight:900;font-size:clamp(38px,6.4vw,96px);line-height:.88;letter-spacing:-.045em;text-transform:uppercase;margin:14px 0 18px}
-.base h3{font-size:clamp(32px,4.6vw,64px)}
-.lede{max-width:600px;color:#c6c8ce;font-size:17px;line-height:1.55;margin:0 0 48px}
-.cmp{border-top:1px solid var(--line)}
-.cmp-row{display:grid;grid-template-columns:44px 1.5fr 1fr 1fr 1fr 30px;gap:18px;align-items:center;width:100%;padding:12px 8px;border-bottom:1px solid var(--line);text-align:left;transition:background .25s}
-.cmp-row:hover{background:rgba(255,255,255,.035)}
-.cmp-head{color:var(--muted)}
-.cmp-row img{height:52px;width:auto;justify-self:center}
-.cmp-row .nm{font-weight:700;font-size:18px}
-.cmp-row .nm small{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:400;margin-top:4px}
-.cmp-row .v{font-family:var(--mono);font-size:13px}
-.base{margin-top:110px}
-.ref{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line);margin-bottom:40px}
-.ref div{padding:22px 18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
-.ref b{display:block;font-weight:900;font-size:clamp(26px,3.2vw,44px);letter-spacing:-.04em}
-.ref .mono{display:block;margin-top:8px;color:var(--muted)}
-table.roles{width:100%;border-collapse:collapse;font-size:15px}
-.roles th{text-align:left;color:var(--muted);font-weight:400;padding:0 0 12px;border-bottom:1px solid var(--line)}
-.roles td{padding:14px 0;border-bottom:1px solid var(--line);vertical-align:top}
-.roles td:first-child{font-weight:700;width:34%;padding-right:16px}
-.roles td:last-child{color:#c6c8ce}
-.retenir{margin-top:32px;border:1px solid color-mix(in srgb,var(--acc) 50%,transparent);border-radius:12px;padding:20px;background:color-mix(in srgb,var(--acc) 8%,transparent)}
-.retenir .mono{display:block;color:var(--acc);margin-bottom:8px}
-.retenir p{margin:0;line-height:1.6;color:#dcdde1}
-footer{border-top:1px solid var(--line);background:var(--bg)}
-footer .wrap{padding:36px 24px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--muted);font-size:13px;line-height:1.6}
-
-/* menu des goûts */
-.sheet{position:fixed;inset:0;z-index:50;background:rgba(5,5,8,.95);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .3s}
-.sheet.open{opacity:1;pointer-events:auto}
-.sheet-in{width:min(1000px,92vw);max-height:86vh;overflow:auto}
-.sheet-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
-.sheet-top h3{margin:0;font-weight:900;font-size:clamp(28px,4vw,46px);letter-spacing:-.04em;text-transform:uppercase}
-.sheet-x{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;font-size:18px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
-.gcell{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:12px;text-align:left;transition:border-color .25s,background .25s}
-.gcell:hover{background:rgba(255,255,255,.04)}
-.gcell[aria-current="true"]{border-color:var(--acc)}
-.gcell img{height:64px;width:auto}
-.gcell b{display:block;font-size:15px}
-.gcell small{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-
+.brand{position:absolute;top:22px;left:0;right:0;text-align:center;color:var(--muted);z-index:2}
+.arrow{position:absolute;top:44%;z-index:3;width:60px;height:60px;margin-top:-30px;border-radius:50%;display:grid;place-items:center;color:#fff;border:1px solid rgba(255,255,255,.28);background:rgba(8,8,12,.45);transition:border-color .3s,transform .3s}
+.arrow:hover{border-color:var(--acc)}
+.arrow:hover{color:#fff;transform:scale(1.12)}
+.arrow svg{width:26px;height:26px}
+.arrow.prev{left:calc(50% - min(15vw,210px) - 30px)}
+.arrow.next{right:calc(50% - min(15vw,210px) - 30px)}
+.name{position:absolute;left:0;right:0;bottom:11vh;text-align:center;z-index:2;pointer-events:none}
+.name b{display:block;font-weight:900;font-size:clamp(30px,4.2vw,60px);line-height:.88;letter-spacing:-.04em;text-transform:uppercase;transition:opacity .25s}
+.name span{display:block;margin-top:12px;color:var(--muted)}
+.track{position:absolute;left:50%;bottom:7vh;width:min(46vw,520px);height:3px;transform:translateX(-50%);border-radius:3px;z-index:2;
+  background:linear-gradient(90deg,#3aa0dc,#1f3a93,#e8338f,#d0202e,#f07a1a,#f2c300,#4caf2f,#7cc8f2);opacity:.55}
+.track i{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--ink);box-shadow:0 0 14px var(--acc);transition:left .45s cubic-bezier(.2,.8,.2,1)}
+.hint{position:absolute;left:0;right:0;bottom:2.6vh;text-align:center;color:var(--muted);z-index:2;transition:opacity .4s}
+.legal{position:absolute;left:16px;bottom:12px;color:rgba(255,255,255,.28);font-size:10px;letter-spacing:.06em;z-index:2;max-width:300px}
 @media (max-width:760px){
-  :root{--ch:270px}
-  .top{padding:12px 14px}
-  .hero .eyebrow{top:64px}
-  .pick{bottom:4vh;gap:12px}
-  .pnl,.pnl.left,.pnl.right{left:16px;right:16px;width:auto;top:auto;bottom:26px;transform:translate3d(0,24px,0);max-height:54vh;overflow:hidden}
-  .pnl.on{transform:none}
-  .pnl h2{font-size:32px}
-  .pnl p{font-size:14px;margin-bottom:12px}
-  .pnl .k{margin-bottom:12px}
-  .meta{grid-template-columns:1fr;gap:8px;margin-bottom:12px}
-  .fig{padding:10px 12px}.fig .n{font-size:28px}
-  .nut td{padding:6px 0;font-size:13px}
-  .chap{right:8px}
-  .word{font-size:34vw}
-  .cmp-head{display:none}
-  .cmp-row{grid-template-columns:34px 1fr 24px;gap:12px}
-  .cmp-row .v{display:none}
-  .ref{grid-template-columns:1fr 1fr}
-  .wrap{padding:80px 16px}
+  .arrow{top:44%}
+  .arrow.prev{left:6px}.arrow.next{right:6px}
+  .name{bottom:13vh}
+  .track{width:70vw}
+  .legal{display:none}
 }
-@media (prefers-reduced-motion:reduce){ .pnl,.hero{transition:none} }
 </style>
 </head>
 <body>
-<div class="bar" id="bar"></div>
-<header class="top">
-  <div class="brand mono"><i></i>Index des canettes</div>
-  <button class="menu mono" id="openSheet" aria-haspopup="dialog"><i></i><span id="menuLabel">Tous les goûts</span></button>
-</header>
-
-<main>
-  <section class="story" id="story" aria-label="La canette en détail">
-    <div class="stage" id="stage">
-      <div class="light"></div>
-      <div class="word" id="word"></div>
-      <div class="floor"></div>
-      <canvas id="gl" aria-hidden="true"></canvas>
-      <img class="fallback" id="fallback" alt="">
-
-      <div class="hero" id="hero">
-        <div class="eyebrow mono" id="eyebrow"></div>
-        <div class="hit" id="hit" aria-hidden="true"></div>
-        <div class="pick">
-          <div class="name"><b id="pickName"></b><span class="mono" id="pickNo"></span></div>
-          <div class="nav">
-            <button id="prev" aria-label="Goût précédent">‹</button>
-            <div class="dots" id="dots" role="group" aria-label="Choisir un goût"></div>
-            <button id="next" aria-label="Goût suivant">›</button>
-          </div>
-          <div class="hint mono"><i></i>Défile pour la faire tourner</div>
-        </div>
-      </div>
-
-      <div class="pnl left" data-r=".085,.225">
-        <div class="k mono"><span><b>01</b> / Le goût</span><span id="p1note"></span></div>
-        <h2 id="p1name"></h2>
-        <p id="p1desc"></p>
-        <div class="meta"><div><span class="mono">Profil</span><b id="p1profil"></b></div><div><span class="mono">Particularité</span><b id="p1part"></b></div></div>
-        <div class="prof" id="p1prof"></div>
-      </div>
-
-      <div class="pnl right" data-r=".245,.385">
-        <div class="k mono"><span><b>02</b> / L'énergie</span><span>Par canette</span></div>
-        <div class="fmt" id="fmt" role="group" aria-label="Format">
-          <button data-ml="250" aria-pressed="true">250 ml</button>
-          <button data-ml="355" aria-pressed="false">355 ml</button>
-          <button data-ml="473" aria-pressed="false">473 ml</button>
-        </div>
-        <div class="figs">
-          <div class="fig"><div class="n"><span data-c="caf"></span><small>mg</small></div><span class="mono">Caféine</span></div>
-          <div class="fig"><div class="n"><span data-c="tau"></span><small>mg</small></div><span class="mono">Taurine</span></div>
-          <div class="fig"><div class="n"><span data-c="sug"></span><small>g</small></div><span class="mono">Sucres</span></div>
-          <div class="fig"><div class="n"><span data-c="kcal"></span><small>kcal</small></div><span class="mono">Énergie</span></div>
-        </div>
-        <div class="note" id="p2note"></div>
-      </div>
-
-      <div class="pnl left" data-r=".405,.545">
-        <div class="k mono"><span><b>03</b> / Composition</span><span id="p3n"></span></div>
-        <h2>Ce qu'il y a dedans</h2>
-        <p id="p3txt"></p>
-        <div class="ing" id="ing"></div>
-      </div>
-
-      <div class="pnl right" data-r=".565,.705">
-        <div class="k mono"><span><b>04</b> / Pour 100 ml</span><span>% VNR*</span></div>
-        <table class="nut" id="nut"></table>
-        <div class="note">* Valeur nutritionnelle de référence pour un adulte. Valeurs indicatives : la référence reste l'étiquette.</div>
-      </div>
-
-      <div class="pnl left" data-r=".725,.855">
-        <div class="k mono"><span><b>05</b> / À retenir</span><span id="p5no"></span></div>
-        <div class="warn"><span class="mono">Teneur élevée en caféine</span><p>32 mg pour 100 ml. Déconseillé aux enfants et aux femmes enceintes ou allaitantes.</p></div>
-        <p>Pour un adulte, l'EFSA estime sans risque jusqu'à 400 mg de caféine par jour, café et thé compris. La caféine peut perturber le sommeil et provoquer des palpitations chez certaines personnes.</p>
-      </div>
-
-      <div class="pnl right" data-r=".87,1.01">
-        <div class="k mono"><span><b>06</b> / L'histoire</span><span id="p6tag"></span></div>
-        <h2 id="p6name"></h2>
-        <p id="p6txt"></p>
-        <button class="next" id="nextBtn"><span><span class="mono">Goût suivant</span><span id="nextName"></span></span><img id="nextImg" alt=""></button>
-      </div>
-
-      <div class="chap" id="chap" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-    </div>
-  </section>
-
-  <section class="after" aria-labelledby="cmpT">
-    <div class="wrap">
-      <div class="mono">Comparatif · pour 100 ml</div>
-      <h2 class="big" id="cmpT">Toutes les canettes</h2>
-      <p class="lede">Même dose de caféine partout, 32 mg pour 100 ml. Ce qui change d'une canette à l'autre, c'est l'arôme et le sucre. Choisis-en une pour la voir en 3D.</p>
-      <div class="cmp" id="cmp">
-        <div class="cmp-row cmp-head mono"><span></span><span>Goût</span><span>Sucres</span><span>Énergie</span><span>Caféine</span><span></span></div>
-      </div>
-
-      <div class="base">
-        <div class="mono">La base commune · canette de 250 ml</div>
-        <h3>Une seule recette, des arômes différents</h3>
-        <p class="lede">Les éditions partagent presque toutes la même base. Ce qui change, c'est l'arôme, la saveur, et parfois le sucre remplacé par des édulcorants. La taurine correspond à la formule standard : vérifie l'étiquette de chaque référence.</p>
-        <div class="ref">
-          <div><b>80 mg</b><span class="mono">Caféine</span></div>
-          <div><b>1 000 mg</b><span class="mono">Taurine</span></div>
-          <div><b>27 g</b><span class="mono">Sucres</span></div>
-          <div><b>112,5</b><span class="mono">kcal</span></div>
-          <div><b>0 g</b><span class="mono">Matières grasses</span></div>
-        </div>
-        <table class="roles">
-          <thead><tr><th class="mono">Ingrédient</th><th class="mono">Rôle dans l'organisme</th></tr></thead>
-          <tbody>
-            <tr><td>Caféine</td><td>Augmente temporairement la vigilance et la concentration</td></tr>
-            <tr><td>Taurine</td><td>Participe à plusieurs fonctions cellulaires</td></tr>
-            <tr><td>Vitamine B3</td><td>Contribue au métabolisme énergétique</td></tr>
-            <tr><td>Vitamine B5</td><td>Contribue aux performances mentales normales</td></tr>
-            <tr><td>Vitamine B6</td><td>Contribue au fonctionnement du système nerveux</td></tr>
-            <tr><td>Vitamine B12</td><td>Participe au métabolisme énergétique et réduit la fatigue</td></tr>
-            <tr><td>Sucre</td><td>Fournit de l'énergie sous forme de glucides</td></tr>
-            <tr><td>Arômes de fruits</td><td>Apportent le goût, pas les nutriments d'un fruit</td></tr>
-            <tr><td>Eau</td><td>L'ingrédient principal, la base de la boisson</td></tr>
-          </tbody>
-        </table>
-        <div class="retenir"><span class="mono">À retenir</span><p>Les vitamines contribuent au fonctionnement normal de l'organisme, mais boire une canette ne procure pas de bénéfice santé particulier. Une saveur pastèque ou myrtille ne remplace pas une portion de fruits : les arômes apportent le goût, pas les nutriments.</p></div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer><div class="wrap">
-  <span>Étude de design, projet de test non officiel, sans lien avec Red Bull GmbH. Red Bull est une marque déposée de son propriétaire.</span>
-  <span>Valeurs indicatives. Recettes et disponibilité variables selon les pays.</span>
-</div></footer>
-
-<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetT">
-  <div class="sheet-in">
-    <div class="sheet-top"><h3 id="sheetT">Choisis ta canette</h3><button class="sheet-x" id="closeSheet" aria-label="Fermer">✕</button></div>
-    <div class="grid" id="grid"></div>
+<main class="spin" id="spin" aria-label="Canette en 3D">
+  <div class="stage" id="stage">
+    <div class="light"></div>
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <img class="fallback" id="fallback" alt="">
+    <div class="brand mono">Index des canettes</div>
+    <button class="arrow prev" id="prev" aria-label="Canette précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button class="arrow next" id="next" aria-label="Canette suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button>
+    <div class="name" aria-live="polite"><b id="nm"></b><span class="mono" id="tg"></span></div>
+    <div class="track" aria-hidden="true"><i id="dot"></i></div>
+    <div class="hint mono" id="hint">Défile pour la faire tourner</div>
+    <div class="legal">Étude de design non officielle, sans lien avec Red Bull GmbH.</div>
   </div>
-</div>
-
+</main>
 <script>
 (() => {
 "use strict";
@@ -345,180 +91,81 @@ const F = [
   {"id": "summer-edition", "name": "Summer Edition", "short": "Amélanchier", "tag": "Amélanchier", "note": "Baie d'amélanchier", "desc": "La Juneberry, ou amélanchier : une petite baie fruitée et acidulée, entre la myrtille et l'amande.", "c1": "#1d3fa8", "c2": "#d7dbe0", "acc": "#4f73ff", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 7, "Acidulé": 5, "Fruité": 8, "Pétillant": 7}, "extra": ["Spiruline"], "profil": "Fruité, acidulé", "part": "Une saveur de baies.", "hist": "Chaque été, une Summer Edition arrive pour la saison. Celle-ci est à la Juneberry, ou amélanchier, une petite baie entre la myrtille et l'amande."}
 ];
 
-const N = F.length;
-const $ = s => document.querySelector(s);
-const root = document.documentElement;
-const pad = n => String(n).padStart(2,"0");
-const fmt = (v,d=0) => v.toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d});
-const clamp = (v,a=0,b=1) => Math.min(b,Math.max(a,v));
-const lerp = (a,b,t) => a+(b-a)*t;
-const ease = t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
+const N = F.length, $ = s => document.querySelector(s), root = document.documentElement;
+const clamp = (v,a=0,b=1) => Math.min(b,Math.max(a,v)), lerp = (a,b,t) => a+(b-a)*t;
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 F.forEach(f => { f.img = `canettes/${f.id}.webp`; f.thumb = `canettes/mini/${f.id}.webp`; });
-// précharge l'étiquette de la canette affichée au départ
-{ const h0 = F.find(f => "#"+f.id === location.hash) || F[0]; if (h0.label){ const l = document.createElement("link"); l.rel = "preload"; l.as = "image"; l.href = h0.label; document.head.appendChild(l); } }
+let cur = Math.max(0, F.findIndex(f => "#"+f.id === location.hash)), gl = null;
+let lite = /[?&]lite/.test(location.search) || (matchMedia("(pointer: coarse)").matches && (navigator.hardwareConcurrency||8) <= 4);
 
-let cur = 0, ml = 250, gl = null;
-
-/* ---------- listes ---------- */
-const dots = $("#dots"), grid = $("#grid"), cmp = $("#cmp");
-F.forEach((f,i) => {
-  const d = document.createElement("button"); d.setAttribute("aria-label", f.name); d.onclick = () => select(i); dots.appendChild(d);
-  const g = document.createElement("button"); g.className = "gcell";
-  g.innerHTML = `<img src="${f.thumb}" alt="" loading="lazy"><div><b>${f.name}</b><small>${f.tag}</small></div>`;
-  g.onclick = () => { select(i); closeSheet(); scrollTo({top:0, behavior:reduce?"auto":"smooth"}); }; grid.appendChild(g);
-  const r = document.createElement("button"); r.className = "cmp-row";
-  r.innerHTML = `<img src="${f.thumb}" alt="" loading="lazy"><span class="nm">${f.name}<small>${f.tag}</small></span><span class="v">${fmt(f.sug, f.sug%1?1:0)} g</span><span class="v">${f.kcal} kcal</span><span class="v">32 mg</span><span>→</span>`;
-  r.onclick = () => { select(i); scrollTo({top:0, behavior:reduce?"auto":"smooth"}); }; cmp.appendChild(r);
-});
-
-/* ---------- contenu d'un goût ---------- */
-function render(){
+function show(){
   const f = F[cur];
   root.style.setProperty("--c1", f.c1); root.style.setProperty("--acc", f.acc);
-  $("#eyebrow").textContent = `Index des goûts · ${N} canettes`;
-  $("#pickName").textContent = f.name;
-  $("#pickNo").textContent = `${pad(cur+1)} / ${pad(N)} · ${f.tag}`;
-  $("#menuLabel").textContent = f.name;
-  $(".menu i").style.background = f.c1;
-  $("#word").textContent = f.short;
+  $("#nm").textContent = f.tag;
+  $("#tg").textContent = `${f.name} · ${String(cur+1).padStart(2,"0")} / ${N}`;
+  $("#dot").style.left = `${cur/(N-1)*100}%`;
   $("#fallback").src = f.img;
-  $("#p1note").textContent = f.note; $("#p1name").textContent = f.name; $("#p1desc").textContent = f.desc;
-  $("#p1profil").textContent = f.profil; $("#p1part").textContent = f.part;
-  $("#p1prof").innerHTML = Object.entries(f.prof).map(([k,v]) => `<div>${k}<u style="--v:${v}"></u><em>${v}</em></div>`).join("");
-  const ing = (f.sf ? SF_ING : BASE_ING).concat(f.extra);
-  $("#p3n").textContent = `${ing.length} ingrédients`;
-  $("#p3txt").textContent = f.sf
-    ? "La base commune, sans sucres : la douceur vient d'édulcorants. Caféine, taurine et vitamines B, comme dans toutes les canettes."
-    : `La base commune, sucrée au sucre et au glucose (${fmt(f.sug,1)} g pour 100 ml). Caféine, taurine et vitamines B, comme dans toutes les canettes.`;
-  $("#ing").innerHTML = ing.map((t,k) => `<span><b>${pad(k+1)}</b>${t}</span>`).join("");
-  const rows = [["Énergie",`${Math.round(f.kcal*4.184)} kJ / ${f.kcal} kcal`],["Matières grasses","0 g"],["Glucides",`${fmt(f.sug,1)} g`],["dont sucres",`${fmt(f.sug,1)} g`,1],["Protéines","0 g"],["Sel",f.sf?"0,17 g":"0,1 g"],
-    ["Niacine (B3)",`8 mg<span class="vnr">50 %</span>`],["Acide pantothénique (B5)",`2 mg<span class="vnr">33 %</span>`],["Vitamine B6",`2 mg<span class="vnr">143 %</span>`],["Vitamine B12",`2 µg<span class="vnr">80 %</span>`]];
-  $("#nut").innerHTML = rows.map(r => `<tr class="${r[2]?"ind":""}"><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("");
-  $("#p5no").textContent = `${pad(cur+1)} / ${pad(N)}`;
-  $("#p6tag").textContent = f.tag; $("#p6name").textContent = f.name; $("#p6txt").textContent = f.hist;
-  const nx = F[(cur+1)%N]; $("#nextName").textContent = nx.name; $("#nextImg").src = nx.thumb;
-  [...dots.children].forEach((d,k) => d.setAttribute("aria-current", k===cur ? "true":"false"));
-  [...grid.children].forEach((d,k) => d.setAttribute("aria-current", k===cur ? "true":"false"));
-  counts(true);
+  document.title = `${f.name} · Index des canettes`;
 }
 function select(i){
-  i = (i+N)%N; if (i === cur && gl) return;
-  cur = i; history.replaceState(null,"","#"+F[i].id);
+  i = (i+N)%N; if (i === cur) return;
+  cur = i; history.replaceState(null, "", "#"+F[i].id);
   if (gl) gl.select(i);
-  render(); kick();
+  show(); kick();
 }
-
-/* ---------- chiffres de l'énergie ---------- */
-let countStart = 0, countOn = false;
-function counts(instant){
-  const f = F[cur], k = ml/100, t = instant ? 1 : ease(clamp((performance.now()-countStart)/900));
-  const v = {caf:32*k, tau:400*k, sug:f.sug*k, kcal:f.kcal*k};
-  document.querySelectorAll("[data-c]").forEach(el => { const x = v[el.dataset.c]*t; el.textContent = v[el.dataset.c] % 1 ? fmt(x,1) : fmt(Math.round(x)); });
-  const caf = Math.round(32*k);
-  $("#p2note").textContent = `${caf} mg de caféine, ${caf<=80 ? "à peu près une tasse de café filtre" : caf<=120 ? "entre une et deux tasses de café" : "près de deux tasses de café"}. Pour un adulte : 400 mg par jour au maximum.`;
-  return t < 1;
-}
-document.querySelectorAll("#fmt button").forEach(b => b.onclick = () => {
-  ml = +b.dataset.ml; document.querySelectorAll("#fmt button").forEach(x => x.setAttribute("aria-pressed", x===b?"true":"false")); counts(true);
-});
-
-/* ---------- menu ---------- */
-const sheet = $("#sheet"); let lastFocus = null;
-function openSheet(){ lastFocus = document.activeElement; sheet.classList.add("open"); setTimeout(() => grid.children[cur].focus(), 50); }
-function closeSheet(){ sheet.classList.remove("open"); if (lastFocus) lastFocus.focus(); }
-$("#openSheet").onclick = openSheet; $("#closeSheet").onclick = closeSheet;
-sheet.addEventListener("click", e => { if (e.target === sheet) closeSheet(); });
 $("#prev").onclick = () => select(cur-1);
 $("#next").onclick = () => select(cur+1);
-$("#nextBtn").onclick = () => { select(cur+1); scrollTo({top:0, behavior:reduce?"auto":"smooth"}); };
-addEventListener("keydown", e => {
-  if (e.key === "Escape" && sheet.classList.contains("open")) closeSheet();
-  if (sheet.classList.contains("open")) return;
-  if (e.key === "ArrowRight") select(cur+1);
-  if (e.key === "ArrowLeft") select(cur-1);
-});
-// glisser ou cliquer sur une canette du carrousel
-let dx0 = null, dy0 = 0;
-$("#hit").addEventListener("pointerdown", e => { dx0 = e.clientX; dy0 = e.clientY; });
+addEventListener("keydown", e => { if (e.key === "ArrowRight") select(cur+1); if (e.key === "ArrowLeft") select(cur-1); });
+// glisser à gauche / à droite, ou cliquer une canette voisine
+let x0 = null, y0 = 0;
+$("#stage").addEventListener("pointerdown", e => { if (!e.target.closest("button")){ x0 = e.clientX; y0 = e.clientY; } });
 addEventListener("pointerup", e => {
-  if (dx0 === null) return;
-  const dx = e.clientX - dx0, dy = e.clientY - dy0; dx0 = null;
+  if (x0 === null) return; const dx = e.clientX - x0, dy = e.clientY - y0; x0 = null;
   if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) select(cur + (dx < 0 ? 1 : -1));
   else if (Math.abs(dx) < 8 && Math.abs(dy) < 8 && gl){ const i = gl.pick(e.clientX, e.clientY); if (i >= 0) select(i); }
 });
 
-/* ---------- chorégraphie ---------- */
-// p, x (vw), y (vh), échelle, inclinaison (°)
-const KD = [[0,0,-13,.82,0],[.045,0,-13,.82,0],[.085,22,0,1.12,-8],[.225,22,0,1.12,-8],[.245,-22,0,1.14,6],[.385,-22,0,1.14,6],[.405,22,0,1.14,-6],[.545,22,0,1.14,-6],[.565,-22,0,1,90],[.705,-22,0,1,90],[.725,22,0,1.12,10],[.855,22,0,1.12,10],[.87,-22,0,1.05,-4],[1,-22,0,1.05,-4]];
-const KM = [[0,0,-14,.74,0],[.045,0,-14,.74,0],[.085,0,-21,.66,-8],[.225,0,-21,.66,-8],[.245,0,-21,.66,6],[.385,0,-21,.66,6],[.405,0,-21,.66,-6],[.545,0,-21,.66,-6],[.565,0,-27,.5,90],[.705,0,-27,.5,90],[.725,0,-21,.66,10],[.855,0,-21,.66,10],[.87,0,-21,.66,-4],[1,0,-21,.66,-4]];
-// angle : face, dos (avec les infos imprimées), tour complet, etc.
-const ANG = [[0,0],[.045,0],[.085,360],[.225,360],[.245,540],[.385,540],[.405,555],[.545,525],[.565,900],[.705,900],[.725,1080],[.855,1080],[.87,1440],[1,1440]];
-function at(keys, p){
-  for (let k=0;k<keys.length-1;k++){ const a=keys[k], b=keys[k+1]; if (p>=a[0] && p<=b[0]){ const t = ease(clamp((p-a[0])/((b[0]-a[0])||1))); return a.slice(1).map((v,n) => lerp(v, b[n+1], t)); } }
-  return keys[keys.length-1].slice(1);
-}
-const stage = $("#stage"), story = $("#story"), hero = $("#hero"), bar = $("#bar"), word = $("#word"), fb = $("#fallback");
-const panels = [...document.querySelectorAll(".pnl")].map(el => ({el, r: el.dataset.r.split(",").map(Number), on:false}));
-const chap = [...$("#chap").children];
+const spin = $("#spin"), stage = $("#stage"), hint = $("#hint"), fb = $("#fallback");
 let M = {};
-function measure(){ M.vw = innerWidth; M.vh = innerHeight; M.top = story.offsetTop; M.len = Math.max(1, story.offsetHeight - M.vh); M.ch = parseFloat(getComputedStyle(root).getPropertyValue("--ch")) || 400; if (gl) gl.resize(); kick(); }
+function measure(){ M.vw = innerWidth; M.vh = innerHeight; M.len = Math.max(1, spin.offsetHeight - M.vh); if (gl) gl.resize(); kick(); }
 addEventListener("resize", measure);
-
-let mx = 0, my = 0, tx = 0, ty = 0, sp = 0, raf = 0, lastChap = -1, heroOff = null;
+let raf = 0, sp = 0, mx = 0, my = 0, tx = 0, ty = 0, focusOn = null, hintOn = null;
 const fine = matchMedia("(pointer: fine)").matches;
 if (fine) addEventListener("pointermove", e => { mx = e.clientX/innerWidth*2-1; my = e.clientY/innerHeight*2-1; kick(); }, {passive:true});
 addEventListener("scroll", kick, {passive:true});
 function kick(){ if (!raf) raf = requestAnimationFrame(frame); }
-
 function frame(now){
   raf = 0;
-  const raw = clamp((scrollY - M.top)/M.len);
-  sp = reduce ? raw : lerp(sp, raw, .2); if (Math.abs(raw - sp) < .0004) sp = raw;
+  const raw = clamp(scrollY / M.len);
+  sp = reduce ? raw : lerp(sp, raw, .22); if (Math.abs(raw - sp) < .0003) sp = raw;
   tx = lerp(tx, mx, .12); ty = lerp(ty, my, .12);
-  const p = sp, mob = M.vw < 760;
-  const k = at(mob ? KM : KD, p), k0 = (mob ? KM : KD)[0].slice(1);
-  const ang = at(ANG, p)[0];
-  const h = clamp(p/.045);
-  const focus = clamp((p-.235)/.02) * clamp((.712-p)/.02);
-  const fOn = focus > .5; if (fOn !== stage._f){ stage._f = fOn; stage.classList.toggle("focus", fOn); }
-  bar.style.transform = `scaleX(${p.toFixed(4)})`;
-
-  const off = h > .5; if (off !== heroOff){ heroOff = off; hero.classList.toggle("off", off); hero.inert = off; }
-  for (const P of panels){ const on = p >= P.r[0] && p < P.r[1]; if (on !== P.on){ P.on = on; P.el.classList.toggle("on", on); P.el.inert = !on; if (on && P.el.querySelector("[data-c]")){ countStart = performance.now(); countOn = true; } } }
-  const ci = p < .045 ? 0 : 1 + panels.findIndex(P => P.on);
-  if (ci !== lastChap){ lastChap = ci; chap.forEach((c,n) => c.classList.toggle("on", n === ci)); }
-
+  const ang = sp * 720;                          // deux tours complets sur toute la page
+  const back = Math.max(0, -Math.cos(ang * Math.PI/180));
+  const focus = Math.pow(back, 2.2);              // la lumière se resserre quand le dos est face à nous
+  const fo = focus > .45; if (fo !== focusOn){ focusOn = fo; stage.classList.toggle("focus", fo); }
+  const hOn = sp < .02; if (hOn !== hintOn){ hintOn = hOn; hint.style.opacity = hOn ? 1 : 0; }
+  const mob = M.vw < 760;
   let busy = Math.abs(raw - sp) > 0 || Math.abs(mx - tx) > .002 || Math.abs(my - ty) > .002;
-  if (countOn){ countOn = counts(false); busy = busy || countOn; }
   if (gl){
-    const r = gl.update({ h, k:{x:k[0], y:k[1], s:k[2], z:k[3]}, k0:{x:k0[0], y:k0[1], s:k0[2]}, ang, tx: fine ? tx : 0, ty: fine ? ty : 0, now, vh: M.vh, chPx: M.ch, opacity: 1, mob, idle: false, focus });
+    const k0 = { x: 0, y: mob ? -4 : -3, s: 1, z: 8 };
+    gl.update({ h: 0, k: k0, k0, ang, tx: fine ? tx*.6 : 0, ty: fine ? ty*.6 : 0, now, vh: M.vh, chPx: M.vh * (mob ? .46 : .56), opacity: 1, mob, idle: false, focus });
     busy = busy || gl.busy();
   } else {
-    // sans 3D : la photo se déplace et « tourne » en s'aplatissant
     const c = Math.cos(ang*Math.PI/180);
-    fb.style.transform = `translate(-50%,-50%) translate(${k[0]}vw,${k[1]}vh) rotate(${-k[3]}deg) scale(${k[2]*Math.max(.08,Math.abs(c))},${k[2]})`;
+    fb.style.transform = `translate(-50%,-50%) rotate(-8deg) scaleX(${Math.max(.06, Math.abs(c))})`;
   }
   if (busy) kick();
 }
-
-/* ---------- démarrage ---------- */
-let lite = /[?&]lite/.test(location.search) || (matchMedia("(pointer: coarse)").matches && (navigator.hardwareConcurrency||8) <= 4);
-const fromHash = F.findIndex(f => "#"+f.id === location.hash);
-cur = fromHash >= 0 ? fromHash : 0;
-render(); measure(); addEventListener("load", measure);
-addEventListener("hashchange", () => { const i = F.findIndex(f => "#"+f.id === location.hash); if (i >= 0) select(i); });
+show(); measure(); addEventListener("load", measure);
 (async () => {
   try {
     await Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 2500))]);
     const mod = await import("./can3d.js");
     gl = await mod.create({ canvas: $("#gl"), flavors: F, lite, onChange: kick });
-    gl.select(cur);
-    // si l'appareil peine, on baisse la qualité
-    let n = 0, t0 = performance.now();
-    (function probe(t){ if (++n < 40) return requestAnimationFrame(probe); if ((t - t0)/n > 26 && !lite){ lite = true; gl.setLite(true); } })(t0);
-    kick();
-  } catch (e) { console.warn("3D indisponible, photo en 2D", e); gl = null; root.classList.add("nogl"); kick(); }
+    gl.select(cur); measure();
+    let n = 0; const t0 = performance.now();
+    (function probe(t){ if (++n < 40) return requestAnimationFrame(probe); if ((t - t0)/n > 26 && !lite){ lite = true; gl.setLite(true); kick(); } })(t0);
+  } catch (e) { console.warn("3D indisponible", e); root.classList.add("nogl"); kick(); }
 })();
 })();
 </script>
