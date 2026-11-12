@@ -769,6 +769,11 @@ html.doux .couleurs i{transition:none}
 input[type=range]::-webkit-slider-runnable-track{background:linear-gradient(90deg,var(--bleu-roi),var(--v-rail))}
 .toast{box-shadow:0 0 0 1px color-mix(in srgb,var(--vert) 40%,transparent),0 14px 30px -10px rgba(0,0,0,.7)}
 @media (max-width:760px){.onglets-bas button.actif{color:var(--vert)}}
+
+/* barre du haut : se retire en descendant, revient en remontant */
+.bandeau{transition:transform .38s cubic-bezier(.2,.9,.3,1),box-shadow .2s;will-change:transform}
+.bandeau.cachee{transform:translateY(-100%);box-shadow:none!important}
+html.doux .bandeau{transition:none}
 </style>
 </head>
 <body>
@@ -918,7 +923,7 @@ const COMMUNES = {"Saint-Denis": [-20.8823, 55.4504], "Sainte-Clotilde": [-20.89
 const CENTRE = [-21.13, 55.53];
 const SOURCES = "Domtomemploi, HelloWork";
 let OFFRES = OFFRES0;
-const VERSION = "1794455488";
+const VERSION = "1794456010";
 async function verifierVersion() {
   try {
     const v = (await (await fetch("version.txt?" + Date.now(), {cache: "no-store"})).text()).trim();
@@ -1116,6 +1121,8 @@ function defile() {
   $(".bandeau").classList.toggle("colle", scrollY > 4);
   const bas = $(".onglets-bas"), d = scrollY - dernierY;
   if (Math.abs(d) > 6) { const avant = bas.classList.contains("reduite"); bas.classList.toggle("reduite", d > 0 && scrollY > 260); dernierY = scrollY;
+    // la barre du haut se retire quand on descend, revient dès qu'on remonte
+    $(".bandeau").classList.toggle("cachee", d > 0 && scrollY > 140 && !document.querySelector(".bandeau :focus"));
     if (avant !== bas.classList.contains("reduite")) { placerGoutte(false); setTimeout(() => placerGoutte(false), 470); } }
 }
 // Liquid Glass : le reflet du verre suit le doigt ou la souris
