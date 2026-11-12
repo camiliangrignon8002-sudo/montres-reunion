@@ -1848,23 +1848,9 @@ function genie(f, entree) {
     {transform: "translate(0, 0) scale(1.012, 1.012)", clipPath: plein, opacity: 1, offset: .82},
     {transform: "none", clipPath: plein, opacity: 1},
   ];
-  // c'est une silhouette de verre vide qui se fait aspirer : rien à redessiner, l'animation reste fluide même sur un petit téléphone ;
-  // le contenu de la fenêtre apparaît quand elle est posée
-  const g = document.createElement("div");
-  g.className = "fantome";
-  Object.assign(g.style, {left: r.left + "px", top: r.top + "px", width: r.width + "px", height: r.height + "px"});
-  f.parentNode.appendChild(g);
-  f.style.opacity = "0";
-  const a = g.animate(entree ? k : k.slice().reverse().map((x, i, l) => ({...x, offset: x.offset != null ? 1 - x.offset : undefined})),
-    entree ? {duration: 520, easing: "cubic-bezier(.22,.9,.3,1)"} : {duration: 400, easing: "cubic-bezier(.55,0,.75,.2)"});
-  a.finished.then(() => {
-    g.remove();
-    if (!entree) return;
-    f.style.opacity = "";
-    f.animate([{opacity: 0}, {opacity: 1}], {duration: 180, easing: "ease-out"});
-    cascade(f);
-  }, () => { g.remove(); f.style.opacity = ""; });
-  return a;
+  // la vraie fenêtre, avec son contenu, se déploie depuis l'élément touché (et s'y fait aspirer à la fermeture)
+  return f.animate(entree ? k : k.slice().reverse().map((x, i, l) => ({...x, offset: x.offset != null ? 1 - x.offset : undefined})),
+    entree ? {duration: 480, easing: "cubic-bezier(.22,.9,.3,1)"} : {duration: 380, easing: "cubic-bezier(.55,0,.75,.2)"});
 }
 let POSEE = 0;
 function poser(f, ms) {  // le flou du verre s'allume quand la fenêtre ne bouge plus (le recalculer pendant un mouvement saccade)
@@ -1872,9 +1858,9 @@ function poser(f, ms) {  // le flou du verre s'allume quand la fenêtre ne bouge
   POSEE = setTimeout(() => f.classList.add("posee"), ms);
 }
 function cascade(f) {  // le contenu arrive bloc par bloc, en douceur
-  poser(f, DOUX.matches ? 0 : 140 + Math.min(9, f.children.length) * 35 + 300);
+  poser(f, DOUX.matches ? 0 : 500);
   [...f.children].slice(0, 9).forEach((el, i) => el.animate([{opacity: 0, transform: "translateY(14px)"}, {opacity: 1, transform: "none"}],
-    {duration: 420, delay: 140 + i * 35, easing: "cubic-bezier(.2,.9,.3,1)", fill: "backwards"}));
+    {duration: 380, delay: 40 + i * 22, easing: "cubic-bezier(.2,.9,.3,1)", fill: "backwards"}));
 }
 function ouvrir(h) {
   const v = $("#voile"), f = $("#feuille"), dejaOuverte = !v.hidden && !FERMETURE;
@@ -1886,9 +1872,8 @@ function ouvrir(h) {
     f.animate([{transform: "scale(.965)", opacity: .55}, {transform: "scale(1.006)", opacity: 1, offset: .7}, {transform: "none", opacity: 1}],
       {duration: 380, easing: "cubic-bezier(.2,.9,.3,1)"});
   } else {
-    v.animate([{opacity: 0}, {opacity: 1}], {duration: 300, easing: "ease-out"});
+    v.animate([{opacity: 0}, {opacity: 1}], {duration: 260, easing: "ease-out"});
     genie(f, true);
-    return;
   }
   cascade(f);
 }
