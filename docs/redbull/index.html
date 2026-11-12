@@ -16,25 +16,23 @@
   --display:"Archivo", system-ui, sans-serif;
   --narrow:"Archivo Narrow", "Archivo", sans-serif;
   --mono:"JetBrains Mono", ui-monospace, monospace;
-  --cw:170px; --ch:420px;
+  --cw:160px; --ch:380px;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--display);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
   background:
-    radial-gradient(60vmax 50vmax at 50% 45%, color-mix(in srgb,var(--c1) calc(var(--glow)*100%), transparent), transparent 70%),
     linear-gradient(var(--line) 1px, transparent 1px) 0 0/80px 80px,
     linear-gradient(90deg,var(--line) 1px, transparent 1px) 0 0/80px 80px}
-/* grain */
-body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:60;opacity:.07;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  animation:grain .9s steps(4) infinite}
+/* grain, intégré au fond (pas de couche plein écran par-dessus) */
+.ambient::after{content:"";position:absolute;inset:0;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.ambient{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(60vmax 50vmax at 50% 45%, var(--c1), transparent 70%);opacity:.3;will-change:opacity}
 @keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(1%,3%)}}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .mono{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
-.cursor-glow{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;pointer-events:none;z-index:1;
-  background:radial-gradient(closest-side, color-mix(in srgb,var(--c1) 45%, transparent), transparent);mix-blend-mode:screen;opacity:.55;will-change:transform}
+.cursor-glow{position:fixed;left:0;top:0;width:380px;height:380px;margin:-190px 0 0 -190px;border-radius:50%;pointer-events:none;z-index:1;
+  background:radial-gradient(closest-side, color-mix(in srgb,var(--c1) 45%, transparent), transparent);opacity:.3;will-change:transform}
 
 /* ---------- HUD ---------- */
 .hud{position:fixed;inset:0;pointer-events:none;z-index:40;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
@@ -46,7 +44,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .hud .br{bottom:18px;right:22px;text-align:right}
 .hud .bl,.hud .br,.hud .chap{transition:opacity .3s}
 .hud.past .bl,.hud.past .br,.hud.past .chap{opacity:0;pointer-events:none}
-.hud .bar{position:fixed;left:0;top:0;height:2px;background:var(--acc)}
+.hud .bar{position:fixed;left:0;top:0;height:2px;width:100%;background:var(--acc);transform-origin:left;transform:scaleX(0);will-change:transform}
 .chap{bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px;align-items:center}
 .chap span{display:block;width:18px;height:3px;border-radius:2px;background:var(--line);transition:width .4s,background .4s}
 .chap span.on{width:42px;background:var(--acc)}
@@ -84,22 +82,24 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .can .floor{position:absolute;left:-30%;right:-30%;bottom:calc(var(--cw)*-.25);height:calc(var(--cw)*.3);border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);filter:blur(6px);z-index:-1}
 /* reflet qui balaie la canette */
 .sweep{position:absolute;inset:0;pointer-events:none;border-radius:inherit;
-  background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.55) 48%,rgba(255,255,255,0) 60%);background-size:300% 100%;background-position:var(--sx,0%) 0;mix-blend-mode:overlay}
+  overflow:hidden}
+.sweep i{position:absolute;top:0;bottom:0;left:0;width:100%;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.32) 50%,transparent 70%);will-change:transform}
 /* ---------- Canette en photo (tes fichiers dans canettes/) ---------- */
 .can.photo{width:auto;display:inline-block}
-.can.photo img{display:block;height:100%;width:auto;filter:drop-shadow(0 50px 40px rgba(0,0,0,.55)) drop-shadow(0 0 60px color-mix(in srgb,var(--fc1) 40%,transparent))}
+.can.photo img{display:block;height:100%;width:auto}
+.can.photo::after{content:"";position:absolute;left:-20%;right:-20%;bottom:-6%;height:10%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent);z-index:-1}
 .can.photo .sweep{-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
 .can.mini{--cw:46px;--ch:114px}
 .can.mini .side,.can.mini .back,.can.mini .barcode,.can.mini .vol,.can.mini .sweep{display:none}
 .can.mini .body{box-shadow:0 12px 20px -8px rgba(0,0,0,.8)}
-.can.mini.photo img{filter:drop-shadow(0 10px 10px rgba(0,0,0,.6))}
+
 
 /* ---------- Scène ---------- */
 .story{position:relative;height:1500vh;z-index:2}
 .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-.bigword{position:absolute;top:50%;left:0;white-space:nowrap;font-weight:900;font-size:clamp(120px,24vw,380px);line-height:.8;letter-spacing:-.05em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--c1) 70%,#fff 10%);opacity:.45;transform:translate3d(var(--bx,0),-50%,0);pointer-events:none;will-change:transform}
+.bigword{position:absolute;top:50%;left:0;white-space:nowrap;font-weight:900;font-size:clamp(120px,24vw,380px);line-height:.8;letter-spacing:-.05em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px color-mix(in srgb,var(--c1) 70%,#fff 10%);opacity:.45;transform:translate3d(10vw,-50%,0);pointer-events:none;will-change:transform}
 canvas#fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
-.flood{position:absolute;inset:0;z-index:1;background:radial-gradient(circle at 50% 50%, color-mix(in srgb,var(--c1) 100%, #fff 12%), var(--c1) 45%, color-mix(in srgb,var(--c1) 70%, #000));clip-path:circle(var(--fr,0px) at var(--fx,50%) var(--fy,50%));will-change:clip-path}
+.flood{position:absolute;inset:0;z-index:1;visibility:hidden;background:radial-gradient(circle at 50% 50%, color-mix(in srgb,var(--c1) 100%, #fff 12%), var(--c1) 45%, color-mix(in srgb,var(--c1) 70%, #000));clip-path:circle(0px at 50% 50%)}
 .flood-t{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:var(--label-ink);pointer-events:none}
 .flood-t .mono{opacity:.75}
 .flood-t h2{margin:14px 0;font-weight:900;font-size:clamp(70px,17vw,300px);line-height:.8;letter-spacing:-.06em;text-transform:uppercase}
@@ -162,7 +162,7 @@ canvas#fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z
 .fmt button[aria-pressed="true"]{background:var(--ink);color:#000;border-color:var(--ink)}
 .note{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em;margin-top:14px;line-height:1.6}
 .chips{position:absolute;inset:0;z-index:6;pointer-events:none}
-.chip{position:absolute;left:0;top:0;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(10,11,14,.72);backdrop-filter:blur(8px);font-family:var(--mono);font-size:11px;letter-spacing:.06em;white-space:nowrap;opacity:0;will-change:transform}
+.chip{position:absolute;left:0;top:0;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(10,11,14,.88);font-family:var(--mono);font-size:11px;letter-spacing:.06em;white-space:nowrap;opacity:0;will-change:transform}
 .chip b{color:var(--acc);font-weight:500;margin-right:6px}
 .ttl3{position:absolute;left:5vw;bottom:9vh;z-index:7;opacity:clamp(0, calc(var(--o,0) * 1.6), 1);max-width:440px}
 .ttl3 h2{margin:10px 0 0;font-weight:900;font-size:clamp(34px,4.2vw,64px);line-height:.9;letter-spacing:-.04em;text-transform:uppercase}
@@ -183,13 +183,13 @@ table.nut{width:100%;border-collapse:collapse;font-size:14px}
 .next-swatch{width:30px;height:52px;border-radius:5px;flex:none}
 
 /* bandeaux géants */
-.marq{position:absolute;left:0;right:0;white-space:nowrap;font-weight:900;text-transform:uppercase;letter-spacing:-.05em;line-height:.85;pointer-events:none;opacity:var(--o,0);will-change:transform}
+.marq{position:absolute;left:0;right:0;visibility:hidden;white-space:nowrap;font-weight:900;text-transform:uppercase;letter-spacing:-.05em;line-height:.85;pointer-events:none;opacity:var(--o,0);will-change:transform}
 .marq.m1{top:14vh;z-index:4;font-size:15vw;color:var(--ink)}
 .marq.m2{top:41vh;z-index:6;font-size:15vw;color:transparent;-webkit-text-stroke:2px var(--acc)}
 .marq.m3{top:68vh;z-index:4;font-size:15vw;color:color-mix(in srgb,var(--c1) 85%,#fff)}
 
 /* la gamme, en défilement horizontal */
-.gallery{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:var(--o,0)}
+.gallery{position:absolute;inset:0;z-index:6;visibility:hidden;pointer-events:none;opacity:var(--o,0)}
 .gallery.on{pointer-events:auto}
 .gallery .gt{position:absolute;left:5vw;top:15vh}
 .gallery .gt h2{margin:10px 0 0;font-weight:900;font-size:clamp(40px,6vw,92px);line-height:.88;letter-spacing:-.045em;text-transform:uppercase}
@@ -233,7 +233,7 @@ footer{position:relative;z-index:3;border-top:1px solid var(--line);background:v
 footer .wrap{padding:40px 24px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--muted);font-size:13px;line-height:1.6}
 
 /* ---------- Menu des goûts ---------- */
-.sheet{position:fixed;inset:0;z-index:70;background:rgba(5,6,8,.86);backdrop-filter:blur(14px);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .35s}
+.sheet{position:fixed;inset:0;z-index:70;background:rgba(5,6,8,.94);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .35s}
 .sheet.open{opacity:1;pointer-events:auto}
 .sheet-in{width:min(1000px,92vw);max-height:86vh;overflow:auto}
 .sheet-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
@@ -246,12 +246,15 @@ footer .wrap{padding:40px 24px;display:flex;justify-content:space-between;gap:24
 .gcell b{display:block;font-size:15px}
 .gcell small{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
 
+html.lite .cursor-glow,html.lite .ambient::after,html.lite .sweep,html.lite canvas#fx{display:none}
+html.lite .marq.m2{-webkit-text-stroke:0;color:color-mix(in srgb,var(--acc) 70%,transparent)}
+html.lite .bigword{-webkit-text-stroke:0;color:color-mix(in srgb,var(--c1) 30%,transparent)}
 .can-wrap.swap .can{animation:swap .7s cubic-bezier(.7,0,.2,1)}
 @keyframes swap{0%{transform:translate(-50%,-50%)}45%{transform:translate(-50%,40vh) rotate(8deg);opacity:0}55%{transform:translate(-50%,-140vh) rotate(-8deg);opacity:0}100%{transform:translate(-50%,-50%)}}
 :focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 
 @media (max-width:760px){
-  :root{--cw:116px;--ch:288px}
+  :root{--cw:110px;--ch:268px}
   .hud .tl{top:16px;left:16px}
   .hud .tr{top:10px;right:10px}
   .hud .bl{display:none}
@@ -290,11 +293,12 @@ footer .wrap{padding:40px 24px;display:flex;justify-content:space-between;gap:24
   .cursor-glow{display:none}
 }
 @media (prefers-reduced-motion:reduce){
-  body::after,.scrollhint i,.can-wrap.swap .can,.hero h1 .split .l{animation:none}
+  .scrollhint i,.can-wrap.swap .can,.hero h1 .split .l{animation:none}
 }
 </style>
 </head>
 <body>
+<div class="ambient" id="ambient"></div>
 <div class="cursor-glow" id="glow"></div>
 
 <div class="hud">
@@ -430,17 +434,17 @@ const F = [
   {"id": "energy-drink", "name": "Energy Drink", "short": "Energy", "tag": "L'original", "note": "Tutti-frutti acidulé", "desc": "Le goût de départ, celui qu'on reconnaît les yeux fermés : sucré, acidulé, avec une note de bonbon aux fruits et une finale légèrement amère.", "c1": "#1f3a93", "c2": "#d7dbe0", "acc": "#e3263a", "ink": "#ffffff", "kcal": 46, "sug": 11, "sf": false, "prof": {"Sucré": 8, "Acidulé": 7, "Fruité": 5, "Pétillant": 7}, "extra": ["Caramel", "Riboflavine"]},
   {"id": "sugarfree", "name": "Sugarfree", "short": "Sugarfree", "tag": "Sans sucres", "note": "L'original, en léger", "desc": "La recette de l'original sans sucre ajouté. Même attaque acidulée, une bouche plus sèche et seulement 3 kcal pour 100 ml.", "c1": "#3aa0dc", "c2": "#d7dbe0", "acc": "#4fb6f0", "ink": "#ffffff", "kcal": 3, "sug": 0, "sf": true, "prof": {"Sucré": 5, "Acidulé": 7, "Fruité": 4, "Pétillant": 8}, "extra": ["Caramel"]},
   {"id": "zero", "name": "Zero", "short": "Zero", "tag": "Zéro sucres", "note": "Plus proche de l'original", "desc": "Sans sucres, avec une autre combinaison d'édulcorants pour coller au plus près du goût de l'original.", "c1": "#1c2c4c", "c2": "#d7dbe0", "acc": "#e3263a", "ink": "#ffffff", "kcal": 2, "sug": 0, "sf": true, "prof": {"Sucré": 6, "Acidulé": 6, "Fruité": 5, "Pétillant": 7}, "extra": ["Caramel"]},
-  {"id": "white-edition", "name": "White Edition", "short": "Coco", "tag": "Coco & baies", "note": "Noix de coco · baies", "desc": "Une noix de coco crémeuse, adoucie par des baies sombres. Douceur exotique, presque dessert.", "c1": "#e4e6e8", "c2": "#d7dbe0", "acc": "#b8c4d4", "ink": "#111827", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 8, "Acidulé": 3, "Fruité": 7, "Pétillant": 6}, "extra": []},
+  {"id": "white-edition", "name": "White Edition", "short": "Coco", "tag": "Coco & açaí", "note": "Noix de coco · açaí", "desc": "Une noix de coco crémeuse, relevée par la baie d'açaí. Douceur exotique, presque dessert.", "c1": "#e4e6e8", "c2": "#d7dbe0", "acc": "#b8c4d4", "ink": "#111827", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 8, "Acidulé": 3, "Fruité": 7, "Pétillant": 6}, "extra": []},
   {"id": "red-edition", "name": "Red Edition", "short": "Pastèque", "tag": "Pastèque", "note": "Pastèque", "desc": "Une pastèque bien mûre, juteuse et douce, avec une petite pointe acidulée qui garde le tout frais.", "c1": "#d0202e", "c2": "#d7dbe0", "acc": "#f0414e", "ink": "#ffffff", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 8, "Acidulé": 4, "Fruité": 9, "Pétillant": 6}, "extra": ["Concentré de carotte noire"]},
   {"id": "blue-edition", "name": "Blue Edition", "short": "Myrtille", "tag": "Myrtille", "note": "Myrtille", "desc": "Myrtille sucrée, presque confite, avec un fond de baies sauvages. L'une des éditions les plus gourmandes.", "c1": "#1e3fae", "c2": "#d7dbe0", "acc": "#5577ff", "ink": "#ffffff", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 9, "Acidulé": 4, "Fruité": 8, "Pétillant": 6}, "extra": ["Concentrés de fruits et légumes"]},
   {"id": "yellow-edition", "name": "Yellow Edition", "short": "Tropical", "tag": "Fruits tropicaux", "note": "Fruits tropicaux", "desc": "Un cocktail de fruits tropicaux où l'on devine l'ananas et la mangue. Ensoleillé, rond et très parfumé.", "c1": "#f2c300", "c2": "#d7dbe0", "acc": "#ffd21a", "ink": "#1a1404", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 8, "Acidulé": 5, "Fruité": 9, "Pétillant": 6}, "extra": ["Bêta-carotène"]},
   {"id": "green-edition", "name": "Green Edition", "short": "Kiwi", "tag": "Kiwi & pomme", "note": "Kiwi · pomme", "desc": "Le kiwi acidulé en attaque, la pomme verte croquante derrière. Vif, frais, très désaltérant.", "c1": "#4caf2f", "c2": "#d7dbe0", "acc": "#6fd64a", "ink": "#ffffff", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 7, "Acidulé": 8, "Fruité": 8, "Pétillant": 7}, "extra": ["Concentré de carthame"]},
   {"id": "orange-edition", "name": "Orange Edition", "short": "Abricot", "tag": "Abricot & fraise", "note": "Abricot · fraise", "desc": "L'abricot en premier, velouté, puis la fraise qui arrive en fin de gorgée. Un goût d'été, doux et fruité.", "c1": "#f07a1a", "c2": "#d7dbe0", "acc": "#ff9640", "ink": "#ffffff", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 8, "Acidulé": 4, "Fruité": 9, "Pétillant": 6}, "extra": ["Concentré de carotte"]},
-  {"id": "pink-edition", "name": "Pink Edition", "short": "Baies", "tag": "Baies sauvages", "note": "Baies sauvages", "desc": "Des baies sauvages acidulées, framboise et mûre en tête, avec une fin légèrement florale.", "c1": "#e0479a", "c2": "#d7dbe0", "acc": "#ff5fb0", "ink": "#ffffff", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 7, "Acidulé": 7, "Fruité": 8, "Pétillant": 7}, "extra": ["Concentré de carotte noire"]},
+  {"id": "pink-edition", "name": "Pink Edition", "short": "Fruits rouges", "tag": "Fruits rouges", "note": "Fruits rouges", "desc": "Des fruits rouges acidulés, framboise et fraise en tête, avec une fin légèrement florale.", "c1": "#e0479a", "c2": "#d7dbe0", "acc": "#ff5fb0", "ink": "#ffffff", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 7, "Acidulé": 7, "Fruité": 8, "Pétillant": 7}, "extra": ["Concentré de carotte noire"]},
   {"id": "purple-edition", "name": "Purple Edition", "short": "Açaí", "tag": "Açaí", "note": "Baie d'açaí", "desc": "La baie d'açaí, profonde et un peu chocolatée, entre le raisin noir et la mûre. Sombre et gourmande.", "c1": "#6b2a8c", "c2": "#d7dbe0", "acc": "#a052d0", "ink": "#ffffff", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 7, "Acidulé": 4, "Fruité": 8, "Pétillant": 6}, "extra": ["Concentré de carotte noire"]},
   {"id": "peach-edition", "name": "Peach Edition", "short": "Pêche", "tag": "Pêche & nectarine", "note": "Pêche · nectarine", "desc": "Une pêche blanche juteuse, prolongée par la nectarine. Douce, ronde, très parfumée.", "c1": "#f2a283", "c2": "#d7dbe0", "acc": "#ffb596", "ink": "#3a1a10", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 8, "Acidulé": 3, "Fruité": 9, "Pétillant": 6}, "extra": ["Concentré de carotte"]},
-  {"id": "winter-edition", "name": "Winter Edition", "short": "Ourson", "tag": "Ourson gélifié glacé", "note": "Bonbon ourson · glacé", "desc": "Le goût des oursons en gélatine, avec une sensation glacée. Une édition d'hiver qui joue la confiserie.", "c1": "#1aa3a8", "c2": "#d7dbe0", "acc": "#2fd0d4", "ink": "#ffffff", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 9, "Acidulé": 5, "Fruité": 7, "Pétillant": 7}, "extra": ["Spiruline"]},
-  {"id": "spring-edition", "name": "Spring Edition", "short": "Pamplemousse", "tag": "Pamplemousse & fleurs", "note": "Pamplemousse · fleurs", "desc": "Le pamplemousse rose, légèrement amer, adouci par des notes de fleurs. Une édition de printemps toute en fraîcheur.", "c1": "#e85a9c", "c2": "#d7dbe0", "acc": "#ff74b4", "ink": "#ffffff", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 6, "Acidulé": 8, "Fruité": 8, "Pétillant": 7}, "extra": ["Concentré de carotte noire"]},
+  {"id": "winter-edition", "name": "Winter Edition", "short": "Baies givrées", "tag": "Baies givrées", "note": "Baies · givré", "desc": "Des baies rouges et noires avec une sensation givrée. Une édition d'hiver fraîche et fruitée.", "c1": "#1aa3a8", "c2": "#d7dbe0", "acc": "#2fd0d4", "ink": "#ffffff", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 9, "Acidulé": 5, "Fruité": 7, "Pétillant": 7}, "extra": ["Spiruline"]},
+  {"id": "spring-edition", "name": "Spring Edition", "short": "Pamplemousse", "tag": "Pamplemousse & fleur de cerisier", "note": "Pamplemousse · cerisier", "desc": "Le pamplemousse rose, légèrement amer, adouci par la fleur de cerisier. Une édition de printemps toute en fraîcheur.", "c1": "#e85a9c", "c2": "#d7dbe0", "acc": "#ff74b4", "ink": "#ffffff", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 6, "Acidulé": 8, "Fruité": 8, "Pétillant": 7}, "extra": ["Concentré de carotte noire"]},
   {"id": "summer-edition", "name": "Summer Edition", "short": "Amélanchier", "tag": "Amélanchier", "note": "Baie d'amélanchier", "desc": "L'amélanchier, une petite baie entre la myrtille et l'amande. Rafraîchissant, légèrement floral.", "c1": "#1d3fa8", "c2": "#d7dbe0", "acc": "#4f73ff", "ink": "#ffffff", "kcal": 45, "sug": 10.6, "sf": false, "prof": {"Sucré": 7, "Acidulé": 5, "Fruité": 8, "Pétillant": 7}, "extra": ["Spiruline"]}
 ];
 
@@ -455,19 +459,19 @@ const ease = t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
 const lerp = (a,b,t) => a+(b-a)*t;
 
 /* ===== Photos : pose tes images détourées dans canettes/<id>.png ===== */
-F.forEach(f => { f.img = `canettes/${f.id}.webp`; f.photo = true; });
+F.forEach(f => { f.img = `canettes/${f.id}.webp`; f.thumb = `canettes/mini/${f.id}.webp`; f.photo = true; });
 
 /* ===== Canette ===== */
 function canHTML(f, mini){
   const vars = `--fc1:${f.c1};--fc2:${f.c2};--facc:${f.acc};--fink:${f.ink}`;
-  if (f.photo) return `<div class="can photo${mini?" mini":""}" style="${vars};--m:url('${f.img}')"><img src="${f.img}" alt="Canette ${f.name}"><div class="sweep"></div></div>`;
+  if (f.photo) return `<div class="can photo${mini?" mini":""}" style="${vars};--m:url('${f.img}')"><img src="${mini ? f.thumb : f.img}" alt="Canette ${f.name}" decoding="async"${mini?' loading="lazy"':""}>${mini?"":`<div class="sweep"><i></i></div>`}</div>`;
   const panel = `<div class="panel">
       <div class="front"><div class="mark"></div><div class="brand">Red<br>Bull</div><div class="sub">Energy Drink</div>
         ${f.id==="energy-drink" ? "" : `<div class="fl">${f.sf && f.id!=="pink-edition" ? f.name : f.short}</div>`}</div>
       <div class="side"><b>Ingrédients</b>${(f.sf?SF_ING:BASE_ING).join(", ")}.<br><br>Teneur élevée en caféine (32 mg/100 ml).</div>
       <div class="back"><div class="vert">${f.name}</div></div><div class="barcode"></div><div class="vol">250 ML</div></div>`;
   return `<div class="can${mini?" mini":""}" style="${vars}"><div class="floor"></div>
-    <div class="body"><div class="strip">${panel}${panel}</div><div class="shade"></div><div class="sweep"></div></div><div class="lid"></div></div>`;
+    <div class="body"><div class="strip">${panel}${panel}</div><div class="shade"></div>${mini?"":`<div class="sweep"><i></i></div>`}</div><div class="lid"></div></div>`;
 }
 function split(el, text){
   let i = 0;
@@ -512,6 +516,8 @@ function buildLists(){
     io.observe(r);
   });
   markCurrent();
+  gitems = [...track.children];
+  if (typeof measure === "function") requestAnimationFrame(measure);
 }
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.style.transitionDelay = (e.target.dataset.d||0)+"ms"; e.target.classList.add("in"); io.unobserve(e.target);} }), {threshold:.2});
 function markCurrent(){
@@ -577,6 +583,8 @@ function render(f, i){
 function mountCan(f){
   tilt.innerHTML = canHTML(f,false);
   strip = tilt.querySelector(".strip");
+  sweepEl = tilt.querySelector(".sweep i");
+  if (typeof measure === "function") requestAnimationFrame(measure);
 }
 function select(i, opts={}){
   i = (i+N)%N;
@@ -635,10 +643,10 @@ addEventListener("pointermove", e => { mx = e.clientX/innerWidth*2-1; my = e.cli
 /* ===== Chorégraphie ===== */
 // p, x (vw), y (vh), s (échelle), z (inclinaison °)
 const KD = [
-  [0,0,-9,.86,0],[.04,0,-2,1,0],[.08,0,0,1.5,-6],[.135,0,0,1.5,-6],
+  [0,0,-9,.86,0],[.04,0,-2,1,0],[.08,0,0,1.3,-6],[.135,0,0,1.3,-6],
   [.17,22,2,1.05,-8],[.27,22,2,1.05,-8],
   [.3,-21,0,1.1,10],[.405,-21,0,1.1,10],
-  [.44,4,-2,1.3,-18],[.545,4,-2,1.3,-18],
+  [.44,4,-2,1.2,-18],[.545,4,-2,1.2,-18],
   [.575,0,0,.78,0],[.645,0,0,.78,0],
   [.68,-24,-6,.95,90],[.77,-24,-6,.95,90],
   [.8,-24,45,.9,130],[.89,-24,45,.9,130],
@@ -668,173 +676,206 @@ const chapEls = [...$("#chap").children];
 const story = $("#story"), hero = $("#hero"), bigword = $("#bigword"), flood = $("#flood"), gal = $("#gal");
 const panels = [...document.querySelectorAll("[data-r]")].map(el => ({el, r:el.dataset.r.split(",").map(Number), hosts:[...el.querySelectorAll(".split-host")]}));
 const ring1 = $("#ring1"), ring2 = $("#ring2"), ring3 = $("#ring3"), rings = $("#rings");
-const hudEl = $(".hud"), hudL = $("#hudL"), bar = $("#bar"), glow = $("#glow");
+const hudEl = $(".hud"), hudL = $("#hudL"), bar = $("#bar"), glow = $("#glow"), ambient = $("#ambient");
 const m1 = $("#m1"), m2 = $("#m2"), m3 = $("#m3");
 
 const cv = $("#fx"), cx = cv.getContext("2d");
 let W=0, H=0;
-function resize(){ const d = Math.min(devicePixelRatio||1,2); W=cv.clientWidth; H=cv.clientHeight; cv.width=W*d; cv.height=H*d; cx.setTransform(d,0,0,d,0,0); }
-addEventListener("resize", resize);
+function resize(){ const d = 1; W=cv.clientWidth; H=cv.clientHeight; cv.width=W*d; cv.height=H*d; cx.setTransform(d,0,0,d,0,0); }
 let seed = 7; const rnd = () => (seed = (seed*16807)%2147483647, (seed-1)/2147483646);
-const bubbles = Array.from({length:80}, () => ({x:rnd(), y:rnd(), r:1+rnd()*3.2, v:.02+rnd()*.06, w:rnd()*6.28}));
-const shards = Array.from({length:110}, () => ({a:rnd()*6.283, d:.25+rnd()*.85, r:3+rnd()*16, spin:rnd()*6, kind:rnd()}));
+const bubbles = Array.from({length:50}, () => ({x:rnd(), y:rnd(), r:1+rnd()*3.2, v:.02+rnd()*.06, w:rnd()*6.28}));
+const shards = Array.from({length:80}, () => ({a:rnd()*6.283, d:.25+rnd()*.85, r:3+rnd()*16, spin:rnd()*6, kind:rnd()}));
 const sparks = Array.from({length:56}, (_,k) => ({a:k/56*6.283, l:.5+rnd()*.5, ph:rnd()*6.28}));
 const hex = (h,a) => { const n = parseInt(h.slice(1),16); return `rgba(${n>>16},${n>>8&255},${n&255},${a})`; };
 
 let spin = 0, lastT = performance.now(), sp = 0, lastRaw = 0, vel = 0;
+// n'écrit dans le DOM que si la valeur change vraiment
+const S = (el, k, v) => { const c = el._c || (el._c = {}); if (c[k] !== v){ c[k] = v; if (k[0]==="-") el.style.setProperty(k, v); else el.style[k] = v; } };
+const A = (el, name, on) => { const c = el._c || (el._c = {}); const key = "@"+name; if (c[key] !== on){ c[key] = on; if (name==="inert") el.toggleAttribute("inert", on); else el.classList.toggle(name, on); } };
+const r3 = v => (Math.round(v*1000)/1000).toString();
+let M = {top:0, len:1, vw:0, vh:0, tw:0};
+function measure(){
+  M.vh = innerHeight; M.vw = innerWidth;
+  M.top = story.offsetTop; M.len = Math.max(1, story.offsetHeight - M.vh);
+  M.tw = track.scrollWidth;
+  M.S = strip ? strip.firstElementChild.offsetWidth : 0;
+}
+addEventListener("resize", () => { measure(); resize(); });
+const floodT = flood.querySelector(".flood-t");
+let gitems = [], sweepEl = null;
+const marqs = [m1,m2,m3];
+let lastHud = "", lastChap = -1, idleFx = false;
+let lite = /[?&]lite/.test(location.search) || matchMedia("(pointer: coarse)").matches && (navigator.hardwareConcurrency||8) <= 4;
+let probe = 0, probeSum = 0;
+if (lite) root.classList.add("lite");
 function frame(now){
-  const dt = Math.min(64, now-lastT); lastT = now;
-  const vh = innerHeight, vw = innerWidth, mob = vw < 760;
-  const top = story.offsetTop, len = story.offsetHeight - vh;
+  const rawDt = now-lastT;
+  const dt = Math.min(64, rawDt); lastT = now;
+  // si l'appareil n'arrive pas à suivre, on passe en mode allégé
+  if (!lite && document.visibilityState === "visible" && probe < 90){ if (probe > 10) probeSum += rawDt; if (++probe === 90 && probeSum/80 > 24){ lite = true; root.classList.add("lite"); } }
+  const {vh, vw, top, len} = M, mob = vw < 760;
   const raw = clamp((scrollY - top)/len);
-  sp += (raw - sp) * (reduce ? 1 : Math.min(1, dt/110));
+  sp += (raw - sp) * (reduce || lite ? 1 : Math.min(1, dt/110));
+  if (Math.abs(raw-sp) < .00005) sp = raw;
   const p = sp;
   vel = lerp(vel, (raw-lastRaw)*1000/Math.max(dt,1), .1); lastRaw = raw;
   tx = lerp(tx, mx, .06); ty = lerp(ty, my, .06);
+  const inStory = scrollY < top + len + vh;
 
-  // canette
-  if (!reduce) spin += dt * .012;
-  const rot = spin + p*1440 + tx*40;
-  if (strip){
-    const S = strip.firstElementChild.offsetWidth;
-    strip.style.transform = `translate3d(${-((((rot%360)+360)%360)/360*S)}px,0,0)`;
-  }
-  const k = track_(mob ? KM : KD, p);
-  const bob = reduce ? 0 : Math.sin(now/900)*6;
-  const squash = clamp(Math.abs(vel)*.02, 0, .06);
-  canWrap.style.transform = `translate3d(${k.x}vw,calc(${k.y}vh + ${bob}px),0) scale(${k.s*(1+squash*.3)},${k.s*(1-squash*.2)}) rotate(${k.z + clamp(vel*.8,-8,8)}deg)`;
-  canWrap.style.opacity = 1 - win(p,.785,.9,.02);
-  tilt.style.transform = `perspective(900px) rotateY(${tx*16}deg) rotateX(${-ty*10}deg)`;
-  canWrap.style.setProperty("--sx", `${(100 - ((p*600 + tx*30 + now/60) % 200))}%`);
+  if (inStory){
+    // canette
+    if (!reduce) spin += dt * .012;
+    const rot = spin + p*1440 + tx*40;
+    if (strip && M.S) strip.style.transform = `translate3d(${-((((rot%360)+360)%360)/360*M.S).toFixed(1)}px,0,0)`;
+    var k = track_(mob ? KM : KD, p);
+    const bob = reduce ? 0 : Math.sin(now/900)*6;
+    const squash = clamp(Math.abs(vel)*.02, 0, .06);
+    canWrap.style.transform = `translate3d(${k.x.toFixed(2)}vw,calc(${k.y.toFixed(2)}vh + ${bob.toFixed(1)}px),0) scale(${(k.s*(1+squash*.3)).toFixed(3)},${(k.s*(1-squash*.2)).toFixed(3)}) rotate(${(k.z + clamp(vel*.8,-8,8)).toFixed(2)}deg)`;
+    S(canWrap, "opacity", r3(1 - win(p,.785,.9,.02)));
+    tilt.style.transform = `perspective(900px) rotateY(${(tx*16).toFixed(2)}deg) rotateX(${(-ty*10).toFixed(2)}deg)`;
+    if (sweepEl) sweepEl.style.transform = `translate3d(${((p*600 + tx*30 + now/60) % 300) - 100}%,0,0)`;
 
-  // ambiance : l'intensité de la lumière suit la scène
-  root.style.setProperty("--glow", (.28 + win(p,.04,.16,.04)*.3 + win(p,.42,.56,.04)*.25 + Math.abs(tx)*.08).toFixed(3));
+    // ambiance
+    S(ambient, "opacity", r3(.3 + win(p,.04,.16,.04)*.3 + win(p,.42,.56,.04)*.25 + Math.abs(tx)*.08));
 
-  // héro
-  const h = clamp(p/.045);
-  hero.style.setProperty("--h", h);
-  hero.style.visibility = h>=1 ? "hidden" : "visible";
-  bigword.style.setProperty("--bx", `${-p*160 + 10}vw`);
-  bigword.style.opacity = .45 * (1 - win(p,.56,.66,.03));
+    // héro
+    const h = clamp(p/.045);
+    S(hero, "--h", r3(h));
+    S(hero, "visibility", h>=1 ? "hidden" : "visible");
+    bigword.style.transform = `translate3d(${(-p*160 + 10).toFixed(2)}vw,-50%,0)`;
+    S(bigword, "opacity", r3(.45 * (1 - win(p,.56,.66,.03))));
 
-  // vague de couleur qui s'ouvre depuis la canette
-  const fo = clamp((p-.045)/.045), fc = clamp((p-.14)/.035);
-  const fr = ease(fo) * (1 - ease(fc)) * Math.hypot(vw,vh);
-  flood.style.setProperty("--fr", fr.toFixed(1)+"px");
-  flood.style.setProperty("--fx", `calc(50% + ${k.x}vw)`);
-  flood.style.setProperty("--fy", `calc(50% + ${k.y}vh)`);
-  flood.style.setProperty("--o", (clamp((p-.07)/.05) * (1-fc)).toFixed(3));
-  flood.querySelector(".flood-t").style.transform = `translateY(${(1-ease(fo))*60 - fc*80}px) scale(${1 + p*.4})`;
+    // vague de couleur
+    const fo = clamp((p-.045)/.045), fc = clamp((p-.14)/.035);
+    const fr = ease(fo) * (1 - ease(fc)) * Math.hypot(vw,vh);
+    if (fr > .5){
+      S(flood, "visibility", "visible");
+      flood.style.clipPath = `circle(${fr.toFixed(0)}px at calc(50% + ${k.x.toFixed(2)}vw) calc(50% + ${k.y.toFixed(2)}vh))`;
+      S(flood, "--o", r3(clamp((p-.07)/.05) * (1-fc)));
+      floodT.style.transform = `translateY(${((1-ease(fo))*60 - fc*80).toFixed(1)}px) scale(${(1 + p*.4).toFixed(3)})`;
+    } else S(flood, "visibility", "hidden");
 
-  // panneaux
-  for (const {el,r} of panels){
-    const o = win(p, r[0], r[1], .028);
-    el.style.setProperty("--o", o.toFixed(3));
-    el.classList.toggle("on", o>.5);
-    el.toggleAttribute("inert", o<=.5);
-  }
-  // compteurs
-  const ce = ease(clamp((p-.3)/.06));
-  if (Math.abs(ce-countT) > .001){ countT = ce; updateCounts(); }
+    // panneaux
+    for (const {el,r} of panels){
+      const o = win(p, r[0], r[1], .028);
+      S(el, "--o", r3(o));
+      S(el, "visibility", o > 0 ? "visible" : "hidden");
+      A(el, "on", o>.5);
+      A(el, "inert", o<=.5);
+    }
+    const ce = ease(clamp((p-.3)/.06));
+    if (Math.abs(ce-countT) > .001){ countT = ce; updateCounts(); }
 
-  // anneaux
-  const rg = win(p,.29,.56,.04);
-  rings.style.opacity = rg;
-  ring1.style.strokeDashoffset = 1 - clamp((p-.3)/.08);
-  ring3.style.strokeDashoffset = 1 - clamp((p-.31)/.1) * .64;
-  ring2.style.opacity = rg*.7;
-  ring2.style.transformOrigin = "200px 200px";
-  ring2.style.transform = `rotate(${p*300}deg)`;
-  rings.style.transform = `translate(-50%,-50%) translate(${k.x}vw,${k.y}vh) scale(${1 + win(p,.42,.56,.04)*.25})`;
+    // anneaux
+    const rg = win(p,.29,.56,.04);
+    S(rings, "opacity", r3(rg));
+    if (rg > 0){
+      S(ring1, "strokeDashoffset", r3(1 - clamp((p-.3)/.08)));
+      S(ring3, "strokeDashoffset", r3(1 - clamp((p-.31)/.1) * .64));
+      S(ring2, "opacity", r3(rg*.7));
+      ring2.style.transform = `rotate(${(p*300).toFixed(1)}deg)`;
+      rings.style.transform = `translate(-50%,-50%) translate(${k.x.toFixed(2)}vw,${k.y.toFixed(2)}vh) scale(${(1 + win(p,.42,.56,.04)*.25).toFixed(3)})`;
+    }
 
-  // ingrédients en orbite
-  const ccx = vw/2 + k.x/100*vw, ccy = vh/2 + k.y/100*vh;
-  const rad = Math.min(vw, vh) * (mob ? .4 : .36);
-  chips.forEach((c,idx) => {
-    const a = idx/chips.length*Math.PI*2 + p*6 + now/9000;
-    const local = clamp((p - .425 - idx*.004)/.05) * clamp((.55 - p)/.03);
-    const rr = rad * (.35 + .65*ease(local)) * (1 + (idx%2)*.18);
-    c.style.opacity = local;
-    c.style.transform = `translate3d(${ccx + Math.cos(a)*rr*(mob?.95:1.35)}px,${ccy + Math.sin(a)*rr*.82}px,0) translate(-50%,-50%)`;
-  });
+    var ccx = vw/2 + k.x/100*vw, ccy = vh/2 + k.y/100*vh;
+    // ingrédients en orbite
+    const chipsOn = p > .42 && p < .555;
+    if (chipsOn || chips._on){
+      chips._on = chipsOn;
+      const rad = Math.min(vw, vh) * (mob ? .4 : .36);
+      chips.forEach((c,idx) => {
+        const local = clamp((p - .425 - idx*.004)/.05) * clamp((.55 - p)/.03);
+        S(c, "opacity", r3(local));
+        if (local > 0){
+          const a = idx/chips.length*Math.PI*2 + p*6 + now/9000;
+          const rr = rad * (.35 + .65*ease(local)) * (1 + (idx%2)*.18);
+          c.style.transform = `translate3d(${(ccx + Math.cos(a)*rr*(mob?.95:1.35)).toFixed(1)}px,${(ccy + Math.sin(a)*rr*.82).toFixed(1)}px,0) translate(-50%,-50%)`;
+        }
+      });
+    }
 
-  // bandeaux géants
-  const mo = win(p,.56,.665,.03);
-  [m1,m2,m3].forEach((m,n) => {
-    m.style.setProperty("--o", mo);
-    const dir = n===1 ? 1 : -1;
-    m.style.transform = `translate3d(${dir*(p-.6)*260 - (n===1?120:30)}vw,0,0) skewX(${clamp(vel*2,-12,12)}deg)`;
-  });
-
-  // la gamme, qui défile à l'horizontale
-  const go = win(p,.785,.9,.025);
-  gal.style.setProperty("--o", go);
-  gal.classList.toggle("on", go>.5);
-  gal.toggleAttribute("inert", go<=.5);
-  if (go > 0){
-    const tw = track.scrollWidth;
-    const gp = clamp((p-.79)/.105);
-    track.style.transform = `translate3d(${lerp(vw*.35, vw - tw - vw*.05, ease(gp))}px,-30%,0)`;
-    [...track.children].forEach((it,n) => {
-      it.style.transform = `translateY(${Math.sin(n*.9 + p*40)*16}px) rotate(${Math.sin(n*1.3 + p*30)*3}deg)`;
+    // bandeaux géants
+    const mo = win(p,.56,.665,.03);
+    marqs.forEach((m,n) => {
+      S(m, "--o", r3(mo));
+      S(m, "visibility", mo > 0 ? "visible" : "hidden");
+      if (mo > 0) m.style.transform = `translate3d(${((n===1?1:-1)*(p-.6)*260 - (n===1?120:30)).toFixed(2)}vw,0,0) skewX(${clamp(vel*2,-12,12).toFixed(1)}deg)`;
     });
+
+    // la gamme
+    const go = win(p,.785,.9,.025);
+    S(gal, "--o", r3(go));
+    S(gal, "visibility", go > 0 ? "visible" : "hidden");
+    A(gal, "on", go>.5);
+    A(gal, "inert", go<=.5);
+    if (go > 0){
+      const gp = clamp((p-.79)/.105);
+      track.style.transform = `translate3d(${lerp(vw*.35, vw - M.tw - vw*.05, ease(gp)).toFixed(1)}px,-30%,0)`;
+      gitems.forEach((it,n) => { it.style.transform = `translateY(${(Math.sin(n*.9 + p*40)*16).toFixed(1)}px) rotate(${(Math.sin(n*1.3 + p*30)*3).toFixed(2)}deg)`; });
+    }
+
+    // chapitres + HUD
+    const ci = CHAP.findIndex(c => p>=c[0] && p<c[1]);
+    if (ci !== lastChap){ lastChap = ci; chapEls.forEach((e,n) => e.className = n===ci ? "on" : n<ci ? "done" : ""); }
+    bar.style.transform = `scaleX(${r3(p)})`;
+    const hud = `Rot ${String(Math.round(((rot%360)+360)%360)).padStart(3,"0")}° · Défilement ${String(Math.round(raw*100)).padStart(3,"0")} %`;
+    if (hud !== lastHud){ lastHud = hud; hudL.textContent = hud; }
+  }
+  A(hudEl, "past", scrollY > top + len + vh*.3);
+  if (!mob && (Math.abs(ggx-gx) > .5 || Math.abs(ggy-gy) > .5)){
+    ggx = lerp(ggx, gx, .12); ggy = lerp(ggy, gy, .12);
+    glow.style.transform = `translate3d(${ggx.toFixed(1)}px,${ggy.toFixed(1)}px,0)`;
   }
 
-  // chapitres + HUD
-  CHAP.forEach((c,n) => { chapEls[n].className = p>=c[0] && p<c[1] ? "on" : p>=c[1] ? "done" : ""; });
-  hudEl.classList.toggle("past", scrollY > top + len + vh*.3);
-  bar.style.width = (p*100)+"%";
-  hudL.textContent = `Rot ${String(Math.round(((rot%360)+360)%360)).padStart(3,"0")}° · Défilement ${String(Math.round(raw*100)).padStart(3,"0")} %`;
-  ggx = lerp(ggx, gx, .12); ggy = lerp(ggy, gy, .12);
-  glow.style.transform = `translate3d(${ggx}px,${ggy}px,0)`;
-
-  // canvas
+  // canvas : rien à dessiner hors de la scène (ni en mode allégé)
+  if (!inStory || lite){ if (!idleFx){ cx.clearRect(0,0,W,H); idleFx = true; } requestAnimationFrame(frame); return; }
+  idleFx = false;
   cx.clearRect(0,0,W,H);
   const f = F[cur];
   const fizz = 1 + clamp(Math.abs(vel)*.6, 0, 4);
+  cx.beginPath();
   for (const b of bubbles){
     if (!reduce){ b.y -= b.v * fizz * dt/1000; if (b.y < -.05){ b.y = 1.05; b.x = rnd(); } }
     const x = (b.x + Math.sin(now/1200 + b.w)*.004)*W, y = b.y*H;
-    cx.beginPath(); cx.arc(x,y,b.r,0,6.283);
-    cx.strokeStyle = `rgba(255,255,255,${.14})`; cx.lineWidth = 1; cx.stroke();
+    cx.moveTo(x+b.r, y); cx.arc(x,y,b.r,0,6.283);
   }
-  // vague de liquide (le goût)
+  cx.strokeStyle = "rgba(255,255,255,.14)"; cx.lineWidth = 1; cx.stroke();
   const lw = win(p,.15,.285,.04);
   if (lw > 0){
     const lvl = H*(1 - .34*ease(lw));
     for (let L=0; L<2; L++){
       cx.beginPath(); cx.moveTo(0,H);
-      for (let x=0; x<=W; x+=16){
-        cx.lineTo(x, lvl + L*22 + Math.sin(x/(180-L*40) + now/(700+L*300) + L)*14*(1+fizz*.3) + Math.sin(x/90 + now/500)*5);
-      }
+      for (let x=0; x<=W+24; x+=24) cx.lineTo(x, lvl + L*22 + Math.sin(x/(180-L*40) + now/(700+L*300) + L)*14*(1+fizz*.3) + Math.sin(x/90 + now/500)*5);
       cx.lineTo(W,H); cx.closePath();
       cx.fillStyle = hex(f.c1, L ? .38 : .22); cx.fill();
     }
   }
-  // énergie : éclairs radiaux autour de la canette
   const en = win(p,.29,.41,.03);
   if (en > 0){
-    cx.lineCap = "round";
+    cx.lineCap = "round"; cx.lineWidth = 1.5;
+    const r0 = Math.min(W,H)*.2;
     for (const s of sparks){
       const pulse = .5 + .5*Math.sin(now/180 + s.ph);
-      const r0 = Math.min(W,H)*.2, r1 = r0 + Math.min(W,H)*.22*s.l*pulse*en;
-      const a = s.a + p*2;
+      const r1 = r0 + Math.min(W,H)*.22*s.l*pulse*en, a = s.a + p*2;
       cx.beginPath(); cx.moveTo(ccx+Math.cos(a)*r0, ccy+Math.sin(a)*r0); cx.lineTo(ccx+Math.cos(a)*r1, ccy+Math.sin(a)*r1);
-      cx.strokeStyle = hex(f.acc==="#ffffff"?f.c1:f.acc, .55*en*pulse); cx.lineWidth = 1.5; cx.stroke();
+      cx.strokeStyle = hex(f.acc, .55*en*pulse); cx.stroke();
     }
   }
-  // explosion de saveur
   const burst = clamp((p-.43)/.08) * clamp((.565-p)/.04);
   if (burst > 0){
     const spread = Math.max(W,H) * .55 * ease(clamp((p-.43)/.13));
-    for (const s of shards){
-      const d = s.d * spread;
-      cx.save(); cx.translate(ccx + Math.cos(s.a + p*.6)*d, ccy + Math.sin(s.a + p*.6)*d*.85); cx.rotate(s.spin + p*8);
-      cx.globalAlpha = burst * (s.kind > .5 ? .85 : .5);
-      cx.fillStyle = s.kind > .66 ? f.c1 : s.kind > .33 ? f.acc : f.c2;
-      if (s.kind > .5){ cx.beginPath(); cx.arc(0,0,s.r*.55,0,6.283); cx.fill(); }
-      else cx.fillRect(-s.r*.5,-s.r*.12,s.r,s.r*.24);
-      cx.restore();
+    const cols = [f.c2, f.acc, f.c1];
+    for (let g=0; g<3; g++){
+      cx.fillStyle = cols[g];
+      cx.globalAlpha = burst * (g===0 ? .5 : .8);
+      cx.beginPath();
+      for (const s of shards){
+        if ((s.kind > .66 ? 2 : s.kind > .33 ? 1 : 0) !== g) continue;
+        const d = s.d * spread;
+        const x = ccx + Math.cos(s.a + p*.6)*d, y = ccy + Math.sin(s.a + p*.6)*d*.85, r = s.r*.55;
+        cx.moveTo(x+r, y); cx.arc(x, y, r, 0, 6.283);
+      }
+      cx.fill();
     }
     cx.globalAlpha = 1;
   }
@@ -846,6 +887,8 @@ buildLists();
 const fromHash = F.findIndex(f => "#"+f.id === location.hash);
 select(fromHash >= 0 ? fromHash : 0, {instant:true, force:true});
 resize();
+measure();
+addEventListener("load", measure);
 requestAnimationFrame(frame);
 addEventListener("hashchange", () => { const i = F.findIndex(f => "#"+f.id === location.hash); if (i>=0) select(i); });
 // charge les photos de canettes si elles existent
