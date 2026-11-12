@@ -137,7 +137,7 @@ function glowTexture(){
 }
 
 export async function create({ canvas, flavors, lite = false, onChange = null }){
-  let busyFlag = true;
+  let busyFlag = true, prevKey = "";
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: !lite, alpha: true, powerPreference: "high-performance" });
   const SEG = lite ? 40 : 64, TEX = lite ? 1024 : 2048;
   renderer.setClearColor(0x000000, 0);
@@ -242,7 +242,6 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
 
   // s : { h, k:{x,y,s,z}, k0, ang, tx, ty, now, vh, chPx, opacity, mob, idle }
   const grey = new THREE.Color();
-  let prevKey = "";
   function update(s){
     const ww = HW * W / Math.max(1, H);
     const moving = Math.abs(target - pos) > .0005;
