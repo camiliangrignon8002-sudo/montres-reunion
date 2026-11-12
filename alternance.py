@@ -1192,6 +1192,14 @@ CLES_COURTES = {"categorie": "c", "type": "y", "titre": "t", "entreprise": "e", 
                 "salaire_mois": "sm", "salaire": "sa", "vu": "v", "lat": "la", "lon": "lo"}
 
 
+def paquet(ident):
+    """Numéro du paquet de descriptifs d'une offre (même calcul que paquet() dans la page)."""
+    h = 0
+    for c in ident:
+        h = (h * 31 + ord(c)) & 0xFFFFFFFF
+    return h % 64
+
+
 def compacter(a):
     """Même offre en moins d'octets : clés courtes, valeurs par défaut et identifiant déduit du lien omis."""
     c = {}
@@ -1221,6 +1229,16 @@ def page_html(offres, maj, sources_ok):
     legeres = [{k: v for k, v in a.items() if k not in DETAILS and v not in ("", None, [], False)} for a in offres]
     DETAILS_FILE.write_text(json.dumps({a["id"]: {k: a[k] for k in DETAILS if a.get(k)} for a in offres},
                                        ensure_ascii=False, separators=(",", ":")))
+    # les mêmes descriptifs en 64 petits paquets : la fiche ne charge que le sien (voir paquet() dans la page)
+    paquets = {}
+    for a in offres:
+        paquets.setdefault(paquet(a["id"]), {})[a["id"]] = {k: a[k] for k in DETAILS if a.get(k)}
+    dossier = LISTE_FILE.parent / "d"
+    dossier.mkdir(exist_ok=True)
+    for f in dossier.glob("*.json"):
+        f.unlink()
+    for n, contenu in paquets.items():
+        (dossier / f"{n}.json").write_text(json.dumps(contenu, ensure_ascii=False, separators=(",", ":")))
     LISTE_FILE.write_text(json.dumps(legeres, ensure_ascii=False, separators=(",", ":")))  # pour les pages encore ouvertes sur une ancienne version
     compactes = json.dumps([compacter(a) for a in legeres], ensure_ascii=False, separators=(",", ":"))
     (LISTE_FILE.parent / "liste-c.json").write_text(compactes)

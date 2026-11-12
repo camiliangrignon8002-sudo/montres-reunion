@@ -139,7 +139,7 @@ avant de payer. Le premier relevé complet du calendrier prend quelques passages
 
 Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/alternance/
 
-**Toutes les 5 heures** (4h40, 9h40, 14h40, 19h40 et 0h40, heure de La Réunion), GitHub relève les offres à La Réunion,
+**Toutes les 2 heures, jour et nuit** (0h40, 2h40, 4h40… heure de La Réunion), GitHub relève les offres à La Réunion,
 les plus récentes en tête. L'appli se met à jour toute seule à l'ouverture :
 
 - **Alternance** (apprentissage, contrat de professionnalisation) : **La Bonne Alternance** (le site de l'État, qui reprend
