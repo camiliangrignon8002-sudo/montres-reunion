@@ -964,6 +964,36 @@ input[type=range]::-moz-range-progress{background:var(--bouton)}
 .dom .carre svg{margin-bottom:30%;width:clamp(24px,2.6vw,30px)!important;height:clamp(24px,2.6vw,30px)!important;filter:none}
 .feuille .hero .carre svg{filter:none}
 .hero-page .surtitre{display:none}
+
+/* ================= couleurs simples : une couleur unie par tuile, ombre grise au survol ================= */
+:root{
+  --t0:#ffffff;--k0:#1d1d1f;--t1:#a8d5b5;--k1:#0f4d2c;--t2:#1a3a8a;--k2:#ffffff;
+  --t3:#6fcff7;--k3:#0b2a5c;--t4:#f8c6d8;--k4:#7a1238;--t5:#1f6fb0;--k5:#ffffff;
+  --b0:var(--t0);--b1:var(--t1);--b2:var(--t2);--b3:var(--t3);--b4:var(--t4);--b5:var(--t5);
+}
+.offre,.offre:hover{background:var(--c,var(--t0))!important}
+.offre{padding:30px 30px 88px!important;min-height:320px;box-shadow:0 1px 2px rgba(0,0,0,.04)!important;transition:box-shadow .3s ease,transform .3s ease!important}
+.offre:hover{box-shadow:0 12px 32px -6px rgba(0,0,0,.2),0 3px 8px rgba(0,0,0,.08)!important;transform:translateY(-2px)!important}
+.offre:active{transform:translateY(0) scale(.99)!important}
+.offre .dessin,.carrousel .offre .dessin{position:static!important;order:-1;margin:0 0 20px!important;height:auto!important}
+.offre .carre svg,.carrousel .offre .carre svg{width:52px!important;height:52px!important}
+.carrousel .offre{min-height:400px}
+.offre .fav{box-shadow:0 1px 4px rgba(0,0,0,.15)!important}
+.offre[data-t="0"] .fav,.offre[data-t="0"] .plus{background:#f2f2f4!important}
+.offre:hover .plus{transform:none}
+/* domaines : pastille unie */
+.dom .carre{background:var(--c,#1d1d1f)!important;box-shadow:0 1px 2px rgba(0,0,0,.06)!important}
+.dom[data-t="0"] .carre{box-shadow:inset 0 0 0 1px #d2d2d7!important}
+.dom:not([data-t]) .carre{background:#1d1d1f!important}
+.dom .carre svg{margin-bottom:0}
+.dom:hover .carre{box-shadow:0 10px 24px -8px rgba(0,0,0,.25)!important}
+/* fiche et guide : unis */
+.feuille .hero,.feuille .hero[data-t]{background:var(--c,var(--t0))!important}
+.feuille .hero[data-t="0"]{box-shadow:inset 0 0 0 1px #e5e5ea!important}
+.guide-cartes button{background:var(--c)!important;padding-bottom:84px;transition:box-shadow .3s,transform .3s}
+.guide-cartes button:nth-child(1){--c:var(--t1);--k:var(--k1)}.guide-cartes button:nth-child(2){--c:var(--t2);--k:var(--k2)}
+.guide-cartes button:nth-child(3){--c:var(--t3);--k:var(--k3)}.guide-cartes button:nth-child(4){--c:var(--t4);--k:var(--k4)}
+.guide-cartes button:hover{transform:translateY(-2px)!important;box-shadow:0 12px 32px -6px rgba(0,0,0,.2)!important}
 </style>
 </head>
 <body>
@@ -1136,7 +1166,7 @@ const COMMUNES = {"Saint-Denis": [-20.8823, 55.4504], "Sainte-Clotilde": [-20.89
 const CENTRE = [-21.13, 55.53];
 const SOURCES = "Domtomemploi, HelloWork";
 let OFFRES = OFFRES0;
-const VERSION = "1794458002";
+const VERSION = "1794458028";
 async function verifierVersion() {
   try {
     const v = (await (await fetch("version.txt?" + Date.now(), {cache: "no-store"})).text()).trim();
