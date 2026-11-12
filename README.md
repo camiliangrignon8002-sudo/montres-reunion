@@ -280,9 +280,11 @@ Site vitrine des boutiques Nanas Vanille (Saint-Denis et Saint-Pierre), l'art et
 
 # 🥫 Index des canettes (Red Bull)
 
-Étude de design, pas destinée à être mise en ligne. Fichier : `docs/redbull/index.html` (ouvrir le fichier dans un navigateur).
+Site : https://camiliangrignon8002-sudo.github.io/montres-reunion/redbull/
 
-Site de fan non officiel : 11 canettes Red Bull, goût par goût. La page s'ouvre sur une canette, on choisit son goût
+Étude de design. Fichier : `docs/redbull/index.html`.
+
+Site de fan non officiel : 15 canettes Red Bull, goût par goût. La page s'ouvre sur une canette, on choisit son goût
 (rangée du bas, flèches du clavier ou bouton en haut à droite), puis chaque défilement change la scène :
 
 1. la couleur du goût envahit l'écran depuis la canette, avec son nom en géant ;
@@ -296,7 +298,7 @@ Site de fan non officiel : 11 canettes Red Bull, goût par goût. La page s'ouvr
 
 La canette suit la souris, s'écrase un peu quand on défile vite, les bulles accélèrent, un reflet la balaie.
 
-- **Vraies canettes** : poser une photo détourée par goût dans `docs/redbull/canettes/` (noms dans `LISEZMOI.txt`).
-  Sans photo, la page montre une canette dessinée en code.
+- **Canettes** : photos détourées dans `docs/redbull/canettes/` (noms dans `LISEZMOI.txt`), découpées dans l'image fournie.
+  Si une photo manque, la page montre une canette dessinée en code.
 - Lien direct vers un goût : `#blue-edition` à la fin de l'adresse.
 - Goûts et chiffres (indicatifs) : tableau `F` au début du script.
