@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#08060f">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 <link rel="modulepreload" href="./vendor/three.module.min.js">
-<link rel="modulepreload" href="./can3d.js?v=24">
+<link rel="modulepreload" href="./can3d.js?v=25">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,900;1,900&family=JetBrains+Mono:wght@400&display=swap">
@@ -133,6 +133,7 @@ const F = [
 
 const N = F.length, $ = s => document.querySelector(s), root = document.documentElement;
 const clamp = (v,a=0,b=1) => Math.min(b,Math.max(a,v)), lerp = (a,b,t) => a+(b-a)*t;
+const smooth = t => t*t*t*(t*(6*t-15)+10);
 const ease = t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 // mode léger seulement sur les vraiment petites configurations (ou ?lite dans l'adresse)
@@ -196,18 +197,39 @@ function measure(){
   if (gl) gl.resize(); kick();
 }
 addEventListener("resize", measure);
-let raf = 0, sp = 0, lastStep = -2, infoOn = null;
+let raf = 0, sp = 0, sp1 = 0, lastStep = -2, infoOn = null;
 addEventListener("scroll", kick, {passive:true});
 document.addEventListener("visibilitychange", () => { if (!document.hidden){ lastNow = performance.now(); kick(); } });
 function kick(){ if (!raf) raf = requestAnimationFrame(frame); }
 let lastNow = performance.now(), perf = { n: 0, t: 0 }, dpr = Math.min(devicePixelRatio || 1, lite ? 1 : mid ? 1.15 : 1.5);
 const ZONE = [null, [.3, .1], [.52, .15], [.82, .14]];
+// rotation au défilement : face (goût), demi-tour en douceur vers le dos, puis le dos tourne lentement
+const ANGK = [[0,0],[.06,0],[.18,-14],[.27,8],[.37,160],[.6,184],[.8,198],[1,214]];
+// spline cubique monotone (Fritsch-Carlson) : vitesse continue, pas de dépassement
+const spline = (() => {
+  const memo = new Map();
+  return (k, x) => {
+    let m = memo.get(k);
+    if (!m){
+      const n = k.length, d = [], t = [];
+      for (let i = 0; i < n-1; i++) d.push((k[i+1][1]-k[i][1]) / (k[i+1][0]-k[i][0]));
+      t[0] = 0; t[n-1] = d[n-2];
+      for (let i = 1; i < n-1; i++){ const h0 = k[i][0]-k[i-1][0], h1 = k[i+1][0]-k[i][0]; t[i] = d[i-1]*d[i] <= 0 ? 0 : 3*(h0+h1) / ((2*h1+h0)/d[i-1] + (h1+2*h0)/d[i]); }
+      m = t; memo.set(k, m);
+    }
+    x = clamp(x, k[0][0], k[k.length-1][0]);
+    let i = 0; while (i < k.length-2 && x > k[i+1][0]) i++;
+    const h = k[i+1][0]-k[i][0], u = (x-k[i][0])/h, u2 = u*u, u3 = u2*u;
+    return (2*u3-3*u2+1)*k[i][1] + (u3-2*u2+u)*h*m[i] + (-2*u3+3*u2)*k[i+1][1] + (u3-u2)*h*m[i+1];
+  };
+})();
 function frame(now){
   raf = 0;
   const dt = Math.min(50, Math.max(1, now - lastNow)); lastNow = now;
   const raw = clamp((scrollY - story.offsetTop) / M.len);
-  const k = 1 - Math.exp(-dt / 110);                          // lissage indépendant de la fréquence d'écran
-  sp += (raw - sp) * k; if (Math.abs(raw - sp) < .00008) sp = raw;
+  // double lissage (inertie douce) indépendant de la fréquence d'écran
+  const k = 1 - Math.exp(-dt / 90); sp1 += (raw - sp1) * k;
+  sp += (sp1 - sp) * k; if (Math.abs(raw - sp) < .00005 && Math.abs(raw - sp1) < .00005){ sp = sp1 = raw; }
   // ressort critique : départ et arrivée en douceur, sans à-coup ni rebond
   {
     const w = 4.6, sdt = dt / 1000;
@@ -221,9 +243,9 @@ function frame(now){
   const si = STEPS.findIndex(s => p >= s[0] && p < s[1]);
   if (si !== lastStep){ lastStep = si; steps.forEach((s,k) => s.classList.toggle("on", k === si)); dots.forEach((d,k) => d.classList.toggle("on", k === si)); }
 
-  const he = ease(clamp(p / .08));                            // passage carrousel -> défilement
+  const he = smooth(clamp(p / .09));                            // passage carrousel -> défilement
   // canette principale : face pendant le goût, puis demi-tour vers le dos, qui tourne encore doucement
-  const ang = p < .08 ? 0 : p < .27 ? lerp(-25, 15, (p-.08)/.19) : p < .34 ? lerp(15, 150, ease((p-.27)/.07)) : lerp(150, 212, (p-.34)/.66);
+  const ang = spline(ANGK, p);                               // une seule courbe continue : aucune saccade de vitesse
   const tilt = 8;
   const hHero = M.chf * .86, hInfo = M.chf * (mob ? .7 : .9);
   const yHero = -.06, yInfo = mob ? -.12 : 0;
@@ -276,7 +298,7 @@ function frame(now){
 show(); measure(); addEventListener("load", measure);
 (async () => {
   try {
-    const mod = await import("./can3d.js?v=24");
+    const mod = await import("./can3d.js?v=25");
     gl = await mod.create({ canvas: $("#gl"), lite, mid, onChange: kick, pool: 7 });
     // d'abord la canette affichée et ses voisines, puis toutes les autres
     const order = [...F.keys()].sort((a, b) => Math.min((a-cur+N)%N, (cur-a+N)%N) - Math.min((b-cur+N)%N, (cur-b+N)%N));
