@@ -973,7 +973,7 @@ input[type=range]::-moz-range-progress{background:var(--bouton)}
 }
 .offre,.offre:hover{background:var(--c,var(--t0))!important}
 .offre{padding:30px 30px 88px!important;min-height:320px;box-shadow:0 1px 2px rgba(0,0,0,.04)!important;transition:box-shadow .3s ease,transform .3s ease!important}
-.offre:hover{box-shadow:0 12px 32px -6px rgba(0,0,0,.2),0 3px 8px rgba(0,0,0,.08)!important;transform:translateY(-2px)!important}
+.offre:hover{box-shadow:0 14px 34px -6px rgba(0,0,0,.22),0 3px 8px rgba(0,0,0,.08)!important;transform:translateY(-2px) scale(1.025)!important;z-index:2}
 .offre:active{transform:translateY(0) scale(.99)!important}
 .offre .dessin,.carrousel .offre .dessin{position:static!important;order:-1;margin:0 0 20px!important;height:auto!important}
 .offre .carre svg,.carrousel .offre .carre svg{width:52px!important;height:52px!important}
@@ -993,10 +993,12 @@ input[type=range]::-moz-range-progress{background:var(--bouton)}
 .guide-cartes button{background:var(--c)!important;padding-bottom:84px;transition:box-shadow .3s,transform .3s}
 .guide-cartes button:nth-child(1){--c:var(--t1);--k:var(--k1)}.guide-cartes button:nth-child(2){--c:var(--t2);--k:var(--k2)}
 .guide-cartes button:nth-child(3){--c:var(--t3);--k:var(--k3)}.guide-cartes button:nth-child(4){--c:var(--t4);--k:var(--k4)}
-.guide-cartes button:hover{transform:translateY(-2px)!important;box-shadow:0 12px 32px -6px rgba(0,0,0,.2)!important}
+.guide-cartes button:hover{transform:translateY(-2px) scale(1.025)!important;box-shadow:0 12px 32px -6px rgba(0,0,0,.2)!important}
 .logo-grand svg{filter:none!important;width:clamp(120px,13vw,180px)!important;height:auto!important;aspect-ratio:70/64}
 .marque .logo{filter:none!important;width:30px!important;height:auto!important;aspect-ratio:70/64}
 @media (max-width:899px){.logo-grand svg{width:84px!important}}
+.carrousel{padding-top:16px!important;padding-bottom:48px!important;padding-left:10px!important;padding-right:10px!important;margin-left:-10px!important;margin-right:-10px!important}
+.nouveautes .fleches{margin-top:-24px!important}
 </style>
 </head>
 <body>
