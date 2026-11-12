@@ -4,165 +4,227 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Index des canettes</title>
-<meta name="description" content="Étude de design : chaque canette Red Bull en 3D, qui tourne sur elle-même. Projet de test non officiel.">
-<meta name="theme-color" content="#050507">
+<meta name="description" content="Étude de design : les canettes Red Bull en 3D, qui tournent sur elles-mêmes. Projet de test non officiel.">
+<meta name="theme-color" content="#08060f">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 <link rel="modulepreload" href="./vendor/three.module.min.js">
+<link rel="modulepreload" href="./can3d.js">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;900&family=Archivo+Narrow:wght@500;700&family=JetBrains+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,900;1,900&family=JetBrains+Mono:wght@400&display=swap">
 <style>
-:root{--c1:#1f3a93;--acc:#e3263a;--ink:#f4f4f6;--muted:#8d919a;--line:rgba(255,255,255,.12)}
+:root{--c1:#1f3a93;--acc:#e3263a;--ink:#f5f5f7;--muted:rgba(255,255,255,.55)}
 *{box-sizing:border-box}
-html,body{margin:0;background:#050507;color:var(--ink);font-family:"Archivo",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{margin:0;background:#07060b;color:var(--ink);font-family:"Archivo",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
-:focus-visible{outline:2px solid var(--acc);outline-offset:4px;border-radius:6px}
-.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
-.spin{height:420vh}
-.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
-/* lumière de vitrine : projecteur en haut, sol sombre */
-.light{position:absolute;inset:0;transition:opacity .5s;background:
-  radial-gradient(46% 62% at 50% 6%, rgba(255,255,255,.26), color-mix(in srgb,var(--acc) 22%,transparent) 38%, transparent 72%),
-  radial-gradient(70% 40% at 50% 100%, color-mix(in srgb,var(--c1) 30%,transparent), transparent 70%)}
-.stage.focus .light{opacity:.35}
-canvas#gl{position:absolute;inset:0;width:100%;height:100%;display:block}
-.fallback{position:absolute;left:50%;top:46%;height:64vh;transform:translate(-50%,-50%);display:none}
-html.nogl .fallback{display:block}
-.brand{position:absolute;top:22px;left:0;right:0;text-align:center;color:var(--muted);z-index:2}
-.arrow{position:absolute;top:44%;z-index:3;width:60px;height:60px;margin-top:-30px;border-radius:50%;display:grid;place-items:center;color:#fff;border:1px solid rgba(255,255,255,.28);background:rgba(8,8,12,.45);transition:border-color .3s,transform .3s}
-.arrow:hover{border-color:var(--acc)}
-.arrow:hover{color:#fff;transform:scale(1.12)}
-.arrow svg{width:26px;height:26px}
-.arrow.prev{left:calc(50% - min(15vw,210px) - 30px)}
-.arrow.next{right:calc(50% - min(15vw,210px) - 30px)}
-.name{position:absolute;left:0;right:0;bottom:11vh;text-align:center;z-index:2;pointer-events:none}
-.name b{display:block;font-weight:900;font-size:clamp(30px,4.2vw,60px);line-height:.88;letter-spacing:-.04em;text-transform:uppercase;transition:opacity .25s}
-.name span{display:block;margin-top:12px;color:var(--muted)}
-.track{position:absolute;left:50%;bottom:7vh;width:min(46vw,520px);height:3px;transform:translateX(-50%);border-radius:3px;z-index:2;
-  background:linear-gradient(90deg,#3aa0dc,#1f3a93,#e8338f,#d0202e,#f07a1a,#f2c300,#4caf2f,#7cc8f2);opacity:.55}
-.track i{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--ink);box-shadow:0 0 14px var(--acc);transition:left .45s cubic-bezier(.2,.8,.2,1)}
-.hint{position:absolute;left:0;right:0;bottom:2.6vh;text-align:center;color:var(--muted);z-index:2;transition:opacity .4s}
-.legal{position:absolute;left:16px;bottom:12px;color:rgba(255,255,255,.28);font-size:10px;letter-spacing:.06em;z-index:2;max-width:300px}
+:focus-visible{outline:2px solid #fff;outline-offset:4px;border-radius:8px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+
+.story{height:620vh}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
+  background:radial-gradient(80% 70% at 50% 45%, color-mix(in srgb,var(--c1) 55%,#07060b) 0%, color-mix(in srgb,var(--c1) 22%,#07060b) 45%, #07060b 85%);
+  transition:background .6s}
+.word{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap;font-weight:900;font-style:italic;font-size:clamp(90px,17vw,300px);line-height:.8;letter-spacing:-.04em;text-transform:uppercase;text-align:center;color:color-mix(in srgb,var(--c1) 45%,#fff 14%);opacity:0;transition:opacity .6s;pointer-events:none}
+.stage.info .word{opacity:.32}
+canvas#gl{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2;pointer-events:none}
+
+/* barre de progression */
+.prog{position:absolute;left:5vw;right:5vw;top:22px;height:1px;background:rgba(255,255,255,.14);z-index:5}
+.prog i{position:absolute;left:0;top:-1px;height:3px;width:100%;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,transparent,#fff);border-radius:3px}
+.brand{position:absolute;top:44px;left:0;right:0;text-align:center;z-index:5;font-weight:900;font-style:italic;font-size:22px;letter-spacing:-.02em;text-transform:uppercase}
+
+/* carrousel */
+.hero{position:absolute;inset:0;z-index:3;transition:opacity .4s}
+.stage.info .hero{opacity:0;pointer-events:none}
+.side{position:absolute;left:50%;top:50%;height:calc(var(--ch) * .86);transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .5s;will-change:transform;cursor:pointer}
+.side img{height:100%;width:auto;display:block}
+.arrow{position:absolute;top:50%;z-index:4;width:44px;height:44px;margin-top:-22px;display:grid;place-items:center;color:#fff;opacity:.85;transition:transform .3s,opacity .3s}
+.arrow:hover{opacity:1;transform:scale(1.15)}
+.arrow svg{width:30px;height:30px}
+.arrow.prev{left:calc(50% - var(--cw) * .5 - 70px)}
+.arrow.next{right:calc(50% - var(--cw) * .5 - 70px)}
+.pick{position:absolute;left:0;right:0;bottom:6.5vh;text-align:center;z-index:4}
+.pick b{display:block;font-weight:900;font-style:italic;font-size:clamp(36px,4.6vw,66px);line-height:.88;letter-spacing:-.03em;text-transform:uppercase}
+.bar{position:relative;width:min(40vw,460px);height:3px;margin:22px auto 0;border-radius:3px;background:linear-gradient(90deg,#0022b8,#c5001a,#ffd200,#7ed321,#f1f1f1,#ff6a00,#6a1b9a,#ff2d93,#ff9c7a,#8fd7ff)}
+.bar i{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--acc);border:3px solid #fff;transition:left .5s cubic-bezier(.2,.8,.2,1)}
+.hint{margin-top:22px;color:var(--muted)}
+
+/* infos au défilement */
+.step{position:absolute;left:6vw;top:50%;width:min(520px,36vw);z-index:4;opacity:0;transform:translate3d(0,calc(-50% + 26px),0);transition:opacity .45s,transform .6s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.step.on{opacity:1;transform:translate3d(0,-50%,0)}
+.tag{display:inline-flex;align-items:center;gap:0;margin-bottom:22px}
+.tag span{background:#fff;color:#111;padding:7px 12px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.tag i{display:grid;place-items:center;width:32px;height:32px;background:var(--acc);color:#fff;font-style:normal;font-size:14px}
+.step h2{margin:0 0 20px;font-weight:900;font-style:italic;font-size:clamp(40px,4.6vw,72px);line-height:.88;letter-spacing:-.03em;text-transform:uppercase}
+.step p{margin:0;font-size:clamp(17px,1.45vw,23px);line-height:1.5;color:rgba(255,255,255,.9)}
+.dots{position:absolute;right:4vw;top:50%;transform:translateY(-50%);z-index:4;display:flex;flex-direction:column;gap:26px;opacity:0;transition:opacity .4s}
+.stage.info .dots{opacity:1}
+.dots button{width:62px;height:62px;border-radius:50%;border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;font-family:"JetBrains Mono",monospace;font-size:12px;color:rgba(255,255,255,.7);transition:background .3s,color .3s,border-color .3s}
+.dots button.on{background:#fff;color:#111;border-color:#fff}
+.legal{position:absolute;left:5vw;bottom:14px;font-size:10px;color:rgba(255,255,255,.28);z-index:4}
+
 @media (max-width:760px){
-  .arrow{top:44%}
-  .arrow.prev{left:6px}.arrow.next{right:6px}
-  .name{bottom:13vh}
-  .track{width:70vw}
+  .brand{top:40px;font-size:18px}
+  .arrow.prev{left:8px}.arrow.next{right:8px}
+  .pick{bottom:5vh}
+  .bar{width:68vw}
+  .step{left:20px;right:20px;width:auto;top:auto;bottom:8vh;transform:translate3d(0,26px,0)}
+  .step.on{transform:none}
+  .step h2{font-size:38px;margin-bottom:12px}
+  .step p{font-size:16px}
+  .tag{margin-bottom:14px}
+  .dots{right:12px;top:30%;gap:14px}
+  .dots button{width:40px;height:40px;font-size:10px}
   .legal{display:none}
 }
 </style>
 </head>
 <body>
-<main class="spin" id="spin" aria-label="Canette en 3D">
+<main class="story" id="story">
   <div class="stage" id="stage">
-    <div class="light"></div>
+    <div class="prog"><i id="prog"></i></div>
+    <div class="brand">Index des canettes</div>
+    <div class="word" id="word"></div>
     <canvas id="gl" aria-hidden="true"></canvas>
-    <img class="fallback" id="fallback" alt="">
-    <div class="brand mono">Index des canettes</div>
-    <button class="arrow prev" id="prev" aria-label="Canette précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button>
-    <button class="arrow next" id="next" aria-label="Canette suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button>
-    <div class="name" aria-live="polite"><b id="nm"></b><span class="mono" id="tg"></span></div>
-    <div class="track" aria-hidden="true"><i id="dot"></i></div>
-    <div class="hint mono" id="hint">Défile pour la faire tourner</div>
+
+    <div class="hero" id="hero">
+      <div id="sides"></div>
+      <button class="arrow prev" id="prev" aria-label="Canette précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 4l-8 8 8 8"/></svg></button>
+      <button class="arrow next" id="next" aria-label="Canette suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 4l8 8-8 8"/></svg></button>
+      <div class="pick"><b id="nm" aria-live="polite"></b><div class="bar" aria-hidden="true"><i id="knob"></i></div><div class="hint mono">Défile pour découvrir</div></div>
+    </div>
+
+    <section class="step" data-i="0"><div class="tag"><i>01</i><span id="t0"></span></div><h2 id="h0"></h2><p id="p0"></p></section>
+    <section class="step" data-i="1"><div class="tag"><i>02</i><span>Teneur élevée en caféine</span></div><h2>32 mg<br>pour 100 ml</h2><p id="p1"></p></section>
+    <section class="step" data-i="2"><div class="tag"><i>03</i><span>Taurine · vitamines B</span></div><h2>Taurine &amp;<br>vitamines B</h2><p>400 mg de taurine pour 100 ml, avec de la niacine, de l'acide pantothénique, et les vitamines B6 et B12, qui contribuent au métabolisme énergétique.</p></section>
+    <section class="step" data-i="3"><div class="tag"><i>04</i><span>Valeurs nutritionnelles</span></div><h2 id="h3"></h2><p id="p3"></p></section>
+    <div class="dots" id="dots"><button data-s="0">01</button><button data-s="1">02</button><button data-s="2">03</button><button data-s="3">04</button></div>
     <div class="legal">Étude de design non officielle, sans lien avec Red Bull GmbH.</div>
   </div>
 </main>
 <script>
 (() => {
 "use strict";
-const BASE_ING = ["Eau","Sucre","Glucose","Acide citrique","Dioxyde de carbone","Taurine 0,4 %","Carbonates de sodium et de magnésium","Caféine 0,03 %","Niacine","Acide pantothénique","Vitamine B6","Vitamine B12","Arômes"];
-const SF_ING = ["Eau","Acide citrique","Dioxyde de carbone","Taurine 0,4 %","Citrates de sodium","Carbonate de magnésium","Caféine 0,03 %","Édulcorants","Niacine","Acide pantothénique","Vitamine B6","Vitamine B12","Arômes"];
-
 const F = [
-  {"id": "energy-drink", "name": "Energy Drink", "short": "Energy", "tag": "L'original", "note": "Tutti-frutti acidulé", "desc": "Boisson énergisante originale, sucrée et acidulée, avec une note de bonbon aux fruits qu'on reconnaît les yeux fermés.", "c1": "#1f3a93", "c2": "#d7dbe0", "acc": "#e3263a", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 7, "Fruité": 5, "Pétillant": 7}, "extra": ["Caramel", "Riboflavine"], "profil": "Sucré et acidulé", "part": "La recette historique de la marque.", "hist": "Tout commence en 1987, en Autriche. Dietrich Mateschitz découvre en Thaïlande le Krating Daeng, un tonique créé par Chaleo Yoovidhya. Ensemble, ils l'adaptent au goût européen, le rendent pétillant et le vendent dans cette canette fine bleue et argent. La recette n'a presque pas changé depuis.", "label": "canettes/label/energy-drink.webp", "ratio": 0.2178},
-  {"id": "zero", "name": "Zero", "short": "Zero", "tag": "Zéro sucres", "note": "Plus proche de l'original", "desc": "Le profil de l'original revisité, sans sucres, avec des édulcorants.", "c1": "#1c2c4c", "c2": "#d7dbe0", "acc": "#e3263a", "ink": "#ffffff", "kcal": 1, "sug": 0, "sf": true, "prof": {"Sucré": 6, "Acidulé": 6, "Fruité": 5, "Pétillant": 7}, "extra": ["Caramel"], "profil": "L'original revisité", "part": "Zéro sucre, quasiment zéro calorie.", "hist": "La Zero est la version la plus récente de la recette sans sucres. Elle a été pensée pour coller encore plus au goût de l'original, avec une autre association d'édulcorants, dans une canette argent et bleu nuit.", "label": "canettes/label/zero.webp", "ratio": 0.218},
-  {"id": "white-edition", "name": "White Edition", "short": "Coco", "tag": "Coco & açaí", "note": "Noix de coco · açaí", "desc": "La noix de coco crémeuse rencontre la baie d'açaí. Exotique, douce et légèrement acidulée.", "c1": "#e4e6e8", "c2": "#d7dbe0", "acc": "#b8c4d4", "ink": "#111827", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 3, "Fruité": 7, "Pétillant": 6}, "extra": [], "profil": "Exotique, doux, légèrement acidulé", "part": "Une association de saveurs tropicales.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La White Edition joue la carte de la douceur exotique, avec la noix de coco et la baie d'açaí.", "label": "canettes/label/white-edition.webp", "ratio": 0.2208},
-  {"id": "red-edition", "name": "Red Edition", "short": "Pastèque", "tag": "Pastèque", "note": "Pastèque", "desc": "Une pastèque bien mûre, juteuse et douce, avec une petite pointe acidulée qui garde le tout frais.", "c1": "#d0202e", "c2": "#d7dbe0", "acc": "#f0414e", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 4, "Fruité": 9, "Pétillant": 6}, "extra": ["Concentré de carotte noire"], "profil": "Fruité, doux, rafraîchissant", "part": "Une saveur estivale.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La Red Edition fait partie de la toute première vague. D'abord à la canneberge, elle est passée à la pastèque, devenue l'un des goûts les plus appréciés.", "label": "canettes/label/red-edition.webp", "ratio": 0.2144},
-  {"id": "blue-edition", "name": "Blue Edition", "short": "Myrtille", "tag": "Myrtille", "note": "Myrtille", "desc": "La myrtille, fruitée et légèrement acidulée, avec un fond de fruits rouges et noirs.", "c1": "#1e3fae", "c2": "#d7dbe0", "acc": "#5577ff", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 9, "Acidulé": 4, "Fruité": 8, "Pétillant": 6}, "extra": ["Concentrés de fruits et légumes"], "profil": "Fruité, légèrement acidulé", "part": "Un goût de fruits rouges et noirs.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La Blue Edition, à la myrtille, fait elle aussi partie de la première vague de 2013.", "label": "canettes/label/blue-edition.webp", "ratio": 0.2104},
-  {"id": "yellow-edition", "name": "Yellow Edition", "short": "Tropical", "tag": "Fruits tropicaux", "note": "Fruits tropicaux", "desc": "Un cocktail de fruits tropicaux où l'on devine l'ananas et la mangue.", "c1": "#f2c300", "c2": "#d7dbe0", "acc": "#ffd21a", "ink": "#1a1404", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 5, "Fruité": 9, "Pétillant": 6}, "extra": ["Bêta-carotène"], "profil": "Ensoleillé, rond, parfumé", "part": "Vendue sur certains marchés.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La Yellow Edition mise sur les fruits tropicaux, ananas, mangue et fruit de la passion.", "label": "canettes/label/yellow-edition.webp", "ratio": 0.22},
-  {"id": "green-edition", "name": "Green Edition", "short": "Kiwi", "tag": "Kiwi & pomme", "note": "Kiwi · pomme", "desc": "Le kiwi acidulé en attaque, la pomme verte croquante derrière. Vif et désaltérant.", "c1": "#4caf2f", "c2": "#d7dbe0", "acc": "#6fd64a", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 7, "Acidulé": 8, "Fruité": 8, "Pétillant": 7}, "extra": ["Concentré de carthame"], "profil": "Vif, frais, acidulé", "part": "Ancienne saveur, vendue sur certains marchés.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La Green Edition a changé de goût selon les pays et les années : kiwi et pomme ici, d'autres fruits ailleurs.", "label": "canettes/label/green-edition.webp", "ratio": 0.2189},
-  {"id": "orange-edition", "name": "Orange Edition", "short": "Abricot", "tag": "Abricot & fraise", "note": "Abricot · fraise", "desc": "L'abricot en premier, velouté, puis la fraise qui arrive en fin de gorgée.", "c1": "#f07a1a", "c2": "#d7dbe0", "acc": "#ff9640", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 4, "Fruité": 9, "Pétillant": 6}, "extra": ["Concentré de carotte"], "profil": "Sucré, fruité, légèrement acidulé", "part": "Un mélange de fruits d'été.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. L'Orange Edition associe l'abricot et la fraise. Aux États-Unis, ce même goût a aussi été vendu sous le nom d'Amber Edition.", "label": "canettes/label/orange-edition.webp", "ratio": 0.2182},
-  {"id": "pink-edition", "name": "Pink Edition", "short": "Fruits des bois", "tag": "Fruits des bois", "note": "Fruits des bois", "desc": "Les fruits des bois, framboise, mûre et myrtille, intenses et équilibrés.", "c1": "#e8338f", "c2": "#d7dbe0", "acc": "#ff2d93", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 7, "Acidulé": 7, "Fruité": 8, "Pétillant": 7}, "extra": ["Concentré de carotte noire"], "profil": "Fruité, acidulé", "part": "Saveur variable selon le marché.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La Pink Edition, aux fruits des bois, fait partie des éditions dont la recette varie le plus d'un pays à l'autre.", "label": "canettes/label/pink-edition.webp", "ratio": 0.2159},
-  {"id": "purple-edition", "name": "Purple Edition", "short": "Açaí", "tag": "Açaí", "note": "Baie d'açaí", "desc": "La baie d'açaí, profonde et un peu chocolatée, entre le raisin noir et la mûre.", "c1": "#6b2a8c", "c2": "#d7dbe0", "acc": "#a052d0", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 7, "Acidulé": 4, "Fruité": 8, "Pétillant": 6}, "extra": ["Concentré de carotte noire"], "profil": "Profond, gourmand", "part": "Vendue sur certains marchés.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La Purple Edition met en avant l'açaí, une baie d'Amazonie, dans une canette violette vendue sur certains marchés.", "label": "canettes/label/purple-edition.webp", "ratio": 0.2093},
-  {"id": "peach-edition", "name": "Peach Edition", "short": "Pêche", "tag": "Pêche", "note": "Pêche", "desc": "Une pêche douce et rafraîchissante, avec des notes florales et une touche d'agrume.", "c1": "#f2a283", "c2": "#d7dbe0", "acc": "#ff9c7a", "ink": "#3a1a10", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 3, "Fruité": 9, "Pétillant": 6}, "extra": ["Concentré de carotte"], "profil": "Doux, floral, légèrement agrumé", "part": "Des notes florales et d'agrumes.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La Peach Edition, à la pêche, fait partie des éditions les plus récentes de la gamme.", "label": "canettes/label/peach-edition.webp", "ratio": 0.2167},
-  {"id": "winter-edition", "name": "Winter Edition", "short": "Vanille", "tag": "Vanille", "note": "Vanille", "desc": "La vanille, douce et gourmande, dans une boisson fraîche et légère. Une édition d'hiver qui ne dure qu'une saison.", "c1": "#7cc8f2", "c2": "#d7dbe0", "acc": "#8fd7ff", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 7, "Acidulé": 3, "Fruité": 4, "Pétillant": 6}, "extra": ["Arôme vanille"], "profil": "Doux, gourmand", "part": "Une édition saisonnière, en quantité limitée.", "hist": "Chaque hiver, une nouvelle Winter Edition apparaît pour une saison seulement, avec un goût et une couleur qui changent d'une année à l'autre. Celle-ci mise sur la vanille, douce et gourmande.", "label": "canettes/label/winter-edition.webp", "ratio": 0.2095}
+  {"id": "energy-drink", "name": "Energy Drink", "short": "Energy", "tag": "L'original", "desc": "Boisson énergisante originale, sucrée et acidulée, avec une note de bonbon aux fruits qu'on reconnaît les yeux fermés.", "c1": "#1f3a93", "acc": "#e3263a", "kcal": 46, "sug": 11, "sf": false, "label": "canettes/label/energy-drink.webp", "ratio": 0.2093, "kj": 194, "gout": ""},
+  {"id": "zero", "name": "Zero", "short": "Zero", "tag": "Zéro sucres", "desc": "Le profil de l'original revisité, sans sucres, avec des édulcorants.", "c1": "#1c2c4c", "acc": "#e3263a", "kcal": 1, "sug": 0, "sf": true, "label": "canettes/label/zero.webp", "ratio": 0.2095, "kj": 4, "gout": ""},
+  {"id": "white-edition", "name": "White Edition", "short": "Coco", "tag": "Coco & açaí", "desc": "La noix de coco crémeuse rencontre la baie d'açaí. Exotique, douce et légèrement acidulée.", "c1": "#e4e6e8", "acc": "#b8c4d4", "kcal": 46, "sug": 11, "sf": false, "label": "canettes/label/white-edition.webp", "ratio": 0.2122, "kj": 194, "gout": "coco et açaí"},
+  {"id": "red-edition", "name": "Red Edition", "short": "Pastèque", "tag": "Pastèque", "desc": "Une pastèque bien mûre, juteuse et douce, avec une petite pointe acidulée qui garde le tout frais.", "c1": "#d0202e", "acc": "#f0414e", "kcal": 46, "sug": 11, "sf": false, "label": "canettes/label/red-edition.webp", "ratio": 0.2063, "kj": 194, "gout": "pastèque"},
+  {"id": "blue-edition", "name": "Blue Edition", "short": "Myrtille", "tag": "Myrtille", "desc": "La myrtille, fruitée et légèrement acidulée, avec un fond de fruits rouges et noirs.", "c1": "#1e3fae", "acc": "#5577ff", "kcal": 46, "sug": 11, "sf": false, "label": "canettes/label/blue-edition.webp", "ratio": 0.2024, "kj": 194, "gout": "myrtille"},
+  {"id": "yellow-edition", "name": "Yellow Edition", "short": "Tropical", "tag": "Fruits tropicaux", "desc": "Un cocktail de fruits tropicaux où l'on devine l'ananas et la mangue.", "c1": "#f2c300", "acc": "#ffd21a", "kcal": 46, "sug": 11, "sf": false, "label": "canettes/label/yellow-edition.webp", "ratio": 0.2121, "kj": 194, "gout": "tropical"},
+  {"id": "green-edition", "name": "Green Edition", "short": "Kiwi", "tag": "Kiwi & pomme", "desc": "Le kiwi acidulé en attaque, la pomme verte croquante derrière. Vif et désaltérant.", "c1": "#4caf2f", "acc": "#6fd64a", "kcal": 46, "sug": 11, "sf": false, "label": "canettes/label/green-edition.webp", "ratio": 0.2104, "kj": 194, "gout": "kiwi et pomme"},
+  {"id": "orange-edition", "name": "Orange Edition", "short": "Abricot", "tag": "Abricot & fraise", "desc": "L'abricot en premier, velouté, puis la fraise qui arrive en fin de gorgée.", "c1": "#f07a1a", "acc": "#ff9640", "kcal": 46, "sug": 11, "sf": false, "label": "canettes/label/orange-edition.webp", "ratio": 0.2104, "kj": 194, "gout": "abricot et fraise"},
+  {"id": "pink-edition", "name": "Pink Edition", "short": "Fruits des bois", "tag": "Fruits des bois", "desc": "Les fruits des bois, framboise, mûre et myrtille, intenses et équilibrés.", "c1": "#e8338f", "acc": "#ff2d93", "kcal": 46, "sug": 11, "sf": false, "label": "canettes/label/pink-edition.webp", "ratio": 0.2076, "kj": 194, "gout": "fruits des bois"},
+  {"id": "purple-edition", "name": "Purple Edition", "short": "Açaí", "tag": "Açaí", "desc": "La baie d'açaí, profonde et un peu chocolatée, entre le raisin noir et la mûre.", "c1": "#6b2a8c", "acc": "#a052d0", "kcal": 46, "sug": 11, "sf": false, "label": "canettes/label/purple-edition.webp", "ratio": 0.2014, "kj": 194, "gout": "açaí"},
+  {"id": "peach-edition", "name": "Peach Edition", "short": "Pêche", "tag": "Pêche", "desc": "Une pêche douce et rafraîchissante, avec des notes florales et une touche d'agrume.", "c1": "#f2a283", "acc": "#ff9c7a", "kcal": 46, "sug": 11, "sf": false, "label": "canettes/label/peach-edition.webp", "ratio": 0.2089, "kj": 194, "gout": "pêche"},
+  {"id": "winter-edition", "name": "Winter Edition", "short": "Vanille", "tag": "Vanille", "desc": "La vanille, douce et gourmande, dans une boisson fraîche et légère. Une édition d'hiver qui ne dure qu'une saison.", "c1": "#7cc8f2", "acc": "#8fd7ff", "kcal": 46, "sug": 11, "sf": false, "label": "canettes/label/winter-edition.webp", "ratio": 0.2016, "kj": 194, "gout": "vanille"}
 ];
 
 const N = F.length, $ = s => document.querySelector(s), root = document.documentElement;
 const clamp = (v,a=0,b=1) => Math.min(b,Math.max(a,v)), lerp = (a,b,t) => a+(b-a)*t;
+const ease = t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-F.forEach(f => { f.img = `canettes/${f.id}.webp`; f.thumb = `canettes/mini/${f.id}.webp`; });
+const lite = /[?&]lite/.test(location.search) || (navigator.deviceMemory || 8) <= 4 || (navigator.hardwareConcurrency || 8) <= 4 || matchMedia("(pointer: coarse)").matches;
+F.forEach(f => { f.img = `canettes/side/${f.id}.webp`; if (lite) f.label = f.label.replace("label/", "label/sm/"); });
 let cur = Math.max(0, F.findIndex(f => "#"+f.id === location.hash)), gl = null;
-let lite = /[?&]lite/.test(location.search) || (matchMedia("(pointer: coarse)").matches && (navigator.hardwareConcurrency||8) <= 4);
+const fmt = v => String(v).replace(".", ",");
+
+/* ---------- carrousel ---------- */
+const sides = $("#sides");
+const els = F.map((f,i) => { const d = document.createElement("div"); d.className = "side"; d.innerHTML = `<img src="${f.img}" alt="${f.name}" decoding="async" loading="lazy">`; d.onclick = () => select(i); sides.appendChild(d); return d; });
+let M = {};
+function layout(){
+  const mob = M.vw < 760, reach = mob || lite ? 1 : 3;
+  els.forEach((el,i) => {
+    let o = ((i - cur) % N + N + N/2) % N - N/2; o = Math.round(o);
+    const ao = Math.abs(o);
+    if (o === 0 || ao > reach){ el.style.opacity = 0; el.style.pointerEvents = "none"; el.style.transform = `translate(-50%,-50%) translateX(${Math.sign(o)*(reach+1)*M.gap}px) scale(.6)`; return; }
+    const x = o * M.gap + Math.sign(o) * M.gap * .25, y = (i % 2 ? -1 : 1) * M.vh * .035 * ao;
+    const r = (i % 3 - 1) * 9 + o * 2.5, s = 1 - ao * .1;
+    el.style.opacity = 1 - (ao - 1) * .18; el.style.pointerEvents = "auto";
+    el.style.transform = `translate(-50%,-50%) translate(${x}px,${y}px) rotate(${r}deg) scale(${s})`;
+  });
+}
+let burst = 0, burstT = 0;
+function select(i){
+  i = (i+N)%N; if (i === cur) return;
+  const dir = ((i - cur + N) % N) <= N/2 ? 1 : -1;
+  cur = i; history.replaceState(null, "", "#"+F[i].id);
+  show(); layout();
+  burst = dir; burstT = performance.now();          // petit tour sur elle-même au changement
+  if (gl) gl.set(F[cur], F[(cur+1)%N]);
+  kick();
+}
+$("#prev").onclick = () => select(cur-1);
+$("#next").onclick = () => select(cur+1);
+addEventListener("keydown", e => { if (e.key === "ArrowRight") select(cur+1); if (e.key === "ArrowLeft") select(cur-1); });
+let x0 = null, y0 = 0;
+$("#hero").addEventListener("pointerdown", e => { if (!e.target.closest("button,.side")){ x0 = e.clientX; y0 = e.clientY; } });
+addEventListener("pointerup", e => { if (x0 === null) return; const dx = e.clientX - x0, dy = e.clientY - y0; x0 = null; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) select(cur + (dx < 0 ? 1 : -1)); });
 
 function show(){
   const f = F[cur];
   root.style.setProperty("--c1", f.c1); root.style.setProperty("--acc", f.acc);
   $("#nm").textContent = f.tag;
-  $("#tg").textContent = `${f.name} · ${String(cur+1).padStart(2,"0")} / ${N}`;
-  $("#dot").style.left = `${cur/(N-1)*100}%`;
-  $("#fallback").src = f.img;
+  $("#knob").style.left = `${cur/(N-1)*100}%`;
+  $("#word").textContent = f.short;
+  $("#t0").textContent = f.name;
+  $("#h0").textContent = f.tag;
+  $("#p0").textContent = f.desc;
+  $("#p1").textContent = `${f.id === "zero" ? "Même énergie, sans sucre : 80 mg" : "80 mg"} de caféine dans une canette de 250 ml, à peu près une tasse de café. Déconseillé aux enfants et aux femmes enceintes ou allaitantes.`;
+  $("#h3").innerHTML = `${f.kcal} kcal<br>pour 100 ml`;
+  $("#p3").textContent = `${f.kj} kJ / ${f.kcal} kcal · glucides ${fmt(f.sug)} g dont sucres ${fmt(f.sug)} g · matières grasses 0 g · protéines 0 g · sel 0,10 g.`;
   document.title = `${f.name} · Index des canettes`;
 }
-function select(i){
-  i = (i+N)%N; if (i === cur) return;
-  cur = i; history.replaceState(null, "", "#"+F[i].id);
-  if (gl) gl.select(i);
-  show(); kick();
-}
-$("#prev").onclick = () => select(cur-1);
-$("#next").onclick = () => select(cur+1);
-addEventListener("keydown", e => { if (e.key === "ArrowRight") select(cur+1); if (e.key === "ArrowLeft") select(cur-1); });
-// glisser à gauche / à droite, ou cliquer une canette voisine
-let x0 = null, y0 = 0;
-$("#stage").addEventListener("pointerdown", e => { if (!e.target.closest("button")){ x0 = e.clientX; y0 = e.clientY; } });
-addEventListener("pointerup", e => {
-  if (x0 === null) return; const dx = e.clientX - x0, dy = e.clientY - y0; x0 = null;
-  if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) select(cur + (dx < 0 ? 1 : -1));
-  else if (Math.abs(dx) < 8 && Math.abs(dy) < 8 && gl){ const i = gl.pick(e.clientX, e.clientY); if (i >= 0) select(i); }
-});
 
-const spin = $("#spin"), stage = $("#stage"), hint = $("#hint"), fb = $("#fallback");
-let M = {};
-function measure(){ M.vw = innerWidth; M.vh = innerHeight; M.len = Math.max(1, spin.offsetHeight - M.vh); if (gl) gl.resize(); kick(); }
+/* ---------- défilement ---------- */
+// p : 0 = carrousel ; ensuite 4 étapes, la canette tourne et montre son dos
+const STEPS = [[.12,.3],[.32,.52],[.54,.74],[.76,1.01]];
+const ANG = [[0,0],[.06,0],[.12,-28],[.3,-28],[.32,165],[.52,165],[.54,205],[.74,205],[.76,180],[.93,180],[1,360]];
+const TILT = [[0,8],[.06,8],[.12,14],[.3,14],[.32,-10],[.52,-10],[.54,8],[.74,8],[.76,-16],[1,-16]];
+function at(k,p){ for (let j=0;j<k.length-1;j++){ const a=k[j], b=k[j+1]; if (p>=a[0] && p<=b[0]) return lerp(a[1], b[1], ease(clamp((p-a[0])/((b[0]-a[0])||1)))); } return k[k.length-1][1]; }
+const story = $("#story"), stage = $("#stage"), prog = $("#prog");
+const steps = [...document.querySelectorAll(".step")], dots = [...document.querySelectorAll(".dots button")];
+dots.forEach((d,k) => d.onclick = () => scrollTo({ top: story.offsetTop + (STEPS[k][0] + .06) * M.len, behavior: reduce ? "auto" : "smooth" }));
+function measure(){
+  M.vw = innerWidth; M.vh = innerHeight; M.len = Math.max(1, story.offsetHeight - M.vh);
+  M.chf = M.vw < 760 ? .5 : .66;                    // hauteur de la canette (fraction de l'écran)
+  M.ch = M.vh * M.chf; M.cw = M.ch * .44; M.gap = Math.max(M.cw * 1.05, M.vw * (M.vw < 760 ? .34 : .14));
+  root.style.setProperty("--ch", M.ch + "px"); root.style.setProperty("--cw", M.cw + "px");
+  layout(); if (gl) gl.resize(); kick();
+}
 addEventListener("resize", measure);
-let raf = 0, sp = 0, mx = 0, my = 0, tx = 0, ty = 0, focusOn = null, hintOn = null;
+let raf = 0, sp = 0, mx = 0, my = 0, tx = 0, ty = 0, lastStep = -2, infoOn = null;
 const fine = matchMedia("(pointer: fine)").matches;
 if (fine) addEventListener("pointermove", e => { mx = e.clientX/innerWidth*2-1; my = e.clientY/innerHeight*2-1; kick(); }, {passive:true});
 addEventListener("scroll", kick, {passive:true});
 function kick(){ if (!raf) raf = requestAnimationFrame(frame); }
 function frame(now){
   raf = 0;
-  const raw = clamp(scrollY / M.len);
-  sp = reduce ? raw : lerp(sp, raw, .22); if (Math.abs(raw - sp) < .0003) sp = raw;
-  tx = lerp(tx, mx, .12); ty = lerp(ty, my, .12);
-  const ang = sp * 720;                          // deux tours complets sur toute la page
-  const back = Math.max(0, -Math.cos(ang * Math.PI/180));
-  const focus = Math.pow(back, 2.2);              // la lumière se resserre quand le dos est face à nous
-  const fo = focus > .45; if (fo !== focusOn){ focusOn = fo; stage.classList.toggle("focus", fo); }
-  const hOn = sp < .02; if (hOn !== hintOn){ hintOn = hOn; hint.style.opacity = hOn ? 1 : 0; }
-  const mob = M.vw < 760;
-  let busy = Math.abs(raw - sp) > 0 || Math.abs(mx - tx) > .002 || Math.abs(my - ty) > .002;
-  if (gl){
-    const k0 = { x: 0, y: mob ? -4 : -3, s: 1, z: 8 };
-    gl.update({ h: 0, k: k0, k0, ang, tx: fine ? tx*.6 : 0, ty: fine ? ty*.6 : 0, now, vh: M.vh, chPx: M.vh * (mob ? .46 : .56), opacity: 1, mob, idle: false, focus });
-    busy = busy || gl.busy();
-  } else {
-    const c = Math.cos(ang*Math.PI/180);
-    fb.style.transform = `translate(-50%,-50%) rotate(-8deg) scaleX(${Math.max(.06, Math.abs(c))})`;
-  }
-  if (busy) kick();
+  const raw = clamp((scrollY - story.offsetTop) / M.len);
+  sp = reduce ? raw : lerp(sp, raw, .18); if (Math.abs(raw - sp) < .0004) sp = raw;
+  tx = lerp(tx, mx, .1); ty = lerp(ty, my, .1);
+  const p = sp, mob = M.vw < 760;
+  prog.style.transform = `scaleX(${p.toFixed(4)})`;
+  const info = p > .08; if (info !== infoOn){ infoOn = info; stage.classList.toggle("info", info); $("#hero").inert = info; }
+  const si = STEPS.findIndex(s => p >= s[0] && p < s[1]);
+  if (si !== lastStep){ lastStep = si; steps.forEach((s,k) => s.classList.toggle("on", k === si)); dots.forEach((d,k) => d.classList.toggle("on", k === si)); }
+  // tour rapide au changement de canette
+  const bt = clamp((now - burstT) / 750), b = burst ? (1 - ease(bt)) * 360 * burst : 0;
+  if (bt >= 1) burst = 0;
+  const ang = at(ANG, p) - b, tilt = at(TILT, p);
+  const h = M.chf * (info ? (mob ? .7 : .9) : .94);
+  const y = mob && info ? -.12 : (info ? 0 : -.03);
+  if (gl) gl.update({ ang, tilt, x: 0, y, h, tx: fine ? tx*(info ? .25 : .6) : 0, ty: fine ? ty*.6 : 0, focus: p > .3 && p < .76 ? 1 : 0 });
+  if (Math.abs(raw - sp) > 0 || Math.abs(mx - tx) > .002 || Math.abs(my - ty) > .002 || burst) kick();
 }
 show(); measure(); addEventListener("load", measure);
 (async () => {
   try {
-    await Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 2500))]);
     const mod = await import("./can3d.js");
-    gl = await mod.create({ canvas: $("#gl"), flavors: F, lite, onChange: kick });
-    gl.select(cur); measure();
-    let n = 0; const t0 = performance.now();
-    (function probe(t){ if (++n < 40) return requestAnimationFrame(probe); if ((t - t0)/n > 26 && !lite){ lite = true; gl.setLite(true); kick(); } })(t0);
-  } catch (e) { console.warn("3D indisponible", e); root.classList.add("nogl"); kick(); }
+    gl = await mod.create({ canvas: $("#gl"), lite, onChange: kick });
+    await gl.set(F[cur], F[(cur+1)%N]); measure();
+  } catch (e) { console.warn("3D indisponible", e); }
 })();
 })();
 </script>
