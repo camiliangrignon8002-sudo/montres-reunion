@@ -20,7 +20,7 @@
   --vert:#0f367a;--vert-doux:#e8ecf2;--or:#a37e2c;--orange:#b25000;--orange-doux:#fdf0e3;--bleu:#1f5fbf;--bleu-doux:#e6eefb;
   --rouge:#d1242f;--ombre:none;--r:6px;
 }
-@media all{:root{
+@media not all{:root{
   --fond:#060b17;--carte:#0e1729;--texte:#eef2fa;--doux:#93a0b8;--ligne:#1c2944;--champ:#0e1729;
   --vert:#4b8bff;--vert-doux:#0f1f3d;--or:#d4af37;--orange:#ff9f0a;--orange-doux:#33210a;--bleu:#6ea8ff;--bleu-doux:#14243d;
   --rouge:#ff6b6b;--ombre:none;
@@ -78,7 +78,7 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .offre:hover{background:#efefef}
 .offre:active{transform:scale(.992);transition:transform .08s}
 #suite{grid-column:1/-1;height:1px}
-@media all{.offre:hover{background:#1c1c1c}}
+@media not all{.offre:hover{background:#1c1c1c}}
 .offre:focus-visible{outline:2px solid var(--vert);outline-offset:2px}
 .offre .txt{display:flex;flex-direction:column;gap:5px;min-width:0;padding-top:30px}
 .offre h3{margin:0;font-size:21px;line-height:1.2;font-weight:700;letter-spacing:-.01em}
@@ -156,13 +156,13 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .dom.actif b{color:var(--vert);font-weight:600}
 .dom.actif i{width:34px;opacity:1}
 .dom.actif .carre{background:var(--fond);box-shadow:0 10px 26px rgba(0,0,0,.07),inset 0 0 0 1px var(--ligne)}
-@media all{.dom:hover .carre{background:#1f1f1f}}
+@media not all{.dom:hover .carre{background:#1f1f1f}}
 .offre .salaire{font-size:15px;font-weight:600;color:var(--texte)}
 .offre .atout{font-size:13.5px;color:var(--vert);display:flex;align-items:center;gap:4px}
 .offre .atout.bts{color:var(--or);font-weight:600}
 .offre .atout.bts.doux{font-weight:500}
 .offre.vue h3{color:#4a4a4a}
-@media all{.offre.vue h3{color:#bdbdbd}}
+@media not all{.offre.vue h3{color:#bdbdbd}}
 .compte{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;justify-content:space-between}
 .compte b{color:var(--vert);font-weight:600}
 .lien-alerte{border:0;background:none;color:var(--vert);font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px;padding:4px 0}
@@ -185,13 +185,13 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .simu-res span{font-size:30px;font-weight:700;letter-spacing:-.01em}
 .simu-res small{color:var(--or);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:12px;margin-top:4px}
 .alerte-arnaque{background:#fdf2f2;color:#8a1c1c}
-@media all{.alerte-arnaque{background:#2a1212;color:#ffb4b4}}
+@media not all{.alerte-arnaque{background:#2a1212;color:#ffb4b4}}
 .guide-acc{padding:56px 0 8px}
 .guide-acc h2{text-align:center;font-size:clamp(28px,4vw,44px);letter-spacing:-.02em;margin:0 0 28px}
 .guide-cartes{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
 .guide-cartes button{border:0;background:var(--carte);padding:28px 18px 24px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--texte);text-align:center}
 .guide-cartes button:hover{background:#efefef}
-@media all{.guide-cartes button:hover{background:#1c1c1c}}
+@media not all{.guide-cartes button:hover{background:#1c1c1c}}
 .guide-cartes .carre{margin-bottom:8px}
 .guide-cartes b{font-size:17px}
 .guide-cartes small{color:var(--doux);font-size:14px}
@@ -207,7 +207,7 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
   .droite #b-loupe,.droite #b-favs{display:none}
   .toast{bottom:calc(84px + env(safe-area-inset-bottom))}
 }
-@media (max-width:760px){.onglets-bas{background:rgba(10,10,10,.92)}}
+@media not all{.onglets-bas{background:rgba(10,10,10,.92)}}
 .actifs{display:flex;flex-wrap:wrap;gap:8px;margin:-6px 0 14px}
 .actifs:empty{display:none}
 .actifs button{border:1px solid var(--ligne);background:var(--fond);border-radius:999px;padding:6px 10px 6px 13px;font-size:13.5px;display:inline-flex;align-items:center;gap:6px;color:var(--texte)}
@@ -288,7 +288,7 @@ textarea{min-height:170px;resize:vertical}
   --lg-ombre:0 8px 24px -10px rgba(0,0,0,.25),0 1px 3px rgba(0,0,0,.08);
   --lg-bord:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.18) 32%,rgba(255,255,255,0) 50%,rgba(255,255,255,.14) 72%,rgba(255,255,255,.6));
 }
-@media all{:root{
+@media not all{:root{
   --lg-vert:rgba(45,92,173,.62);
   --lg-clair:rgba(44,44,46,.5);
   --lg-ombre:0 10px 28px -10px rgba(0,0,0,.7),0 1px 3px rgba(0,0,0,.5);
@@ -346,14 +346,14 @@ textarea{min-height:170px;resize:vertical}
   body{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
   .toast{bottom:calc(96px + env(safe-area-inset-bottom))}
 }
-@media (max-width:760px){.onglets-bas button.actif{background:rgba(255,255,255,.12)}}
+@media not all{.onglets-bas button.actif{background:rgba(255,255,255,.12)}}
 /* en-tête collé : verre clair */
 .bandeau.colle{background:rgba(255,255,255,.72);-webkit-backdrop-filter:var(--lg-flou);backdrop-filter:var(--lg-flou)}
-@media all{.bandeau.colle{background:rgba(0,0,0,.6)}}
+@media not all{.bandeau.colle{background:rgba(0,0,0,.6)}}
 /* mode « Teinté » (iOS 26.1) : verre plus opaque et plus lisible */
 html.teinte{--lg-vert:#0f367a;--lg-clair:rgba(246,246,246,.96)}
 html.teinte .bandeau.colle{background:var(--fond)}
-@media all{html.teinte{--lg-vert:#19448d;--lg-clair:rgba(28,28,30,.97)}}
+@media not all{html.teinte{--lg-vert:#19448d;--lg-clair:rgba(28,28,30,.97)}}
 /* réglages du téléphone : « Réduire la transparence », « Augmenter le contraste » */
 
 @media (prefers-contrast:more){
@@ -370,7 +370,7 @@ html.teinte .bandeau.colle{background:var(--fond)}
   .offre .carre svg{width:40px;height:40px}
   .offre h3{font-size:22px}
 }
-@media all{
+@media not all{
   .feuille{box-shadow:0 0 0 1px rgba(255,255,255,.1),0 30px 80px rgba(0,0,0,.6)}
   .voile{background:rgba(0,0,0,.6)}
 }
@@ -386,7 +386,7 @@ html.teinte .bandeau.colle{background:var(--fond)}
   --v-ombre:0 12px 32px -14px rgba(15,25,41,.28),0 2px 6px rgba(15,25,41,.06);
   --ressort:cubic-bezier(.2,1.4,.35,1);
 }
-@media all{:root{
+@media not all{:root{
   --v-fond:rgba(36,36,38,.6);--v-fond-fort:rgba(28,28,30,.88);--v-flou:blur(24px) saturate(170%) brightness(.95);
   --v-lentille:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(255,255,255,.08),
     inset 0 10px 18px -14px rgba(255,255,255,.18),inset 0 -10px 18px -14px rgba(255,255,255,.08),inset 0 0 0 .5px rgba(255,255,255,.08);
@@ -435,7 +435,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 /* domaines : carrés de verre */
 .dom .carre{background:var(--v-fond)}
 .dom.actif .carre{background:rgba(255,255,255,.9);box-shadow:var(--v-lentille),0 14px 30px -12px rgba(15,54,122,.35),inset 0 0 0 1.5px rgba(15,54,122,.35)}
-@media all{.dom.actif .carre{background:rgba(60,60,64,.8)}}
+@media not all{.dom.actif .carre{background:rgba(60,60,64,.8)}}
 /* fenêtres : grands panneaux de verre flottants, ouverture avec effet ressort */
 .voile{background:rgba(10,14,20,.22);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 .feuille{background:var(--v-fond-fort);box-shadow:var(--v-lentille),0 30px 80px -20px rgba(0,0,0,.45);
@@ -445,12 +445,12 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .feuille .bloc{background:rgba(255,255,255,.8);box-shadow:inset 0 0 0 .5px rgba(0,0,0,.04);border-radius:22px}
 .feuille .hero{background:rgba(255,255,255,.75);border-radius:24px!important}
 .feuille .barre .rond{background:var(--v-fond);box-shadow:var(--v-lentille),var(--v-ombre);border:0}
-@media all{.feuille .bloc,.feuille .hero{background:rgba(255,255,255,.06)}}
+@media not all{.feuille .bloc,.feuille .hero{background:rgba(255,255,255,.06)}}
 /* messages : capsule de verre sombre */
 .toast{background:rgba(22,30,26,.72);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 14px 30px -10px rgba(0,0,0,.45);border-radius:999px;padding:12px 20px;animation:surgit .45s var(--ressort)}
 /* mode Teinté et accessibilité : verre plus opaque, ou pas de verre du tout */
 html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
-@media all{html.teinte{--v-fond:rgba(30,30,32,.95);--v-fond-fort:rgba(26,26,28,.97)}}
+@media not all{html.teinte{--v-fond:rgba(30,30,32,.95);--v-fond-fort:rgba(26,26,28,.97)}}
 
 @media (prefers-contrast:more){:root{--v-fond:var(--fond);--v-lentille:inset 0 0 0 1px var(--texte)}}
 
@@ -469,7 +469,7 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
   .onglets-bas button{z-index:1;background:none!important}
   .onglets-bas button.actif::after{display:none}
 }
-@media (max-width:760px){.goutte{background:rgba(255,255,255,.13);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}}
+@media not all{.goutte{background:rgba(255,255,255,.13);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}}
 
 
 /* ---------- en-tête, onglets et domaines : verre et mouvement liquide ---------- */
@@ -486,7 +486,7 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
   content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:0;transition:opacity .4s;
   background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.9),rgba(255,255,255,0) 62%)}
 .dom:hover .carre::after,.nu:hover::after,.onglets:hover::after,.filtres button:hover::after,.offre .fav:hover::after{opacity:1}
-@media all{.dom .carre::after,.nu::after,.onglets::after,.filtres button::after,.offre .fav::after{background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.18),rgba(255,255,255,0) 62%)}}
+@media not all{.dom .carre::after,.nu::after,.onglets::after,.filtres button::after,.offre .fav::after{background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.18),rgba(255,255,255,0) 62%)}}
 .onglets button{z-index:1}
 /* goutte qui se soulève au survol, s'écrase au toucher et rebondit */
 .dom .carre,.nu{transition:transform .55s var(--ressort),box-shadow .35s,background .3s}
@@ -496,7 +496,7 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
 .nu:active{transform:scale(.88,.84);transition:transform .12s}
 .filtres button:active,.actifs button:active,.offre .fav:active{transform:scale(.9,.86);transition:transform .12s}
 .dom.actif .carre{background:rgba(255,255,255,.92)}
-@media all{.goutte-dom{background:linear-gradient(180deg,rgba(73,119,198,.2),rgba(73,119,198,.1));box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 0 0 1px rgba(73,119,198,.25)}}
+@media not all{.goutte-dom{background:linear-gradient(180deg,rgba(73,119,198,.2),rgba(73,119,198,.1));box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 0 0 1px rgba(73,119,198,.25)}}
 
 
 /* ---------- vert en Liquid Glass : verre teinté translucide, lumière en lentille, liseré lumineux ---------- */
@@ -508,7 +508,7 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
     inset 0 12px 20px -14px rgba(255,255,255,.75),inset 0 -12px 18px -14px rgba(170,201,255,.55),
     inset 0 0 0 .5px rgba(255,255,255,.35),0 10px 26px -12px rgba(14,56,127,.55),0 2px 6px -2px rgba(14,56,127,.25);
 }
-@media all{:root{
+@media not all{:root{
   --lg-vert:rgba(37,87,173,.5);
   --lg-vert-ombre:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(160,195,255,.25),
     inset 0 12px 20px -14px rgba(255,255,255,.35),inset 0 -12px 18px -14px rgba(120,170,255,.3),
@@ -534,7 +534,7 @@ html.teinte{--lg-vert:#0f367a}
   --v-champ:rgba(255,255,255,.55);
   --v-rail:rgba(120,120,128,.2);
 }
-@media all{:root{
+@media not all{:root{
   --v-carte:rgba(40,40,44,.55);--v-carte-survol:rgba(54,54,58,.66);--v-champ:rgba(255,255,255,.06);--v-rail:rgba(120,120,128,.32);
 }}
 /* annonces : tuiles de verre arrondies, lumière qui suit le doigt, soulèvement au survol */
@@ -546,7 +546,7 @@ html.teinte{--lg-vert:#0f367a}
 .offre:hover{background:var(--v-carte-survol);transform:translateY(-3px);box-shadow:var(--v-lentille),0 22px 44px -18px rgba(15,25,41,.32),0 2px 6px rgba(15,25,41,.06)}
 .offre:hover::before{opacity:.75}
 .offre:active{transform:scale(.975,.965);transition:transform .14s}
-@media all{
+@media not all{
   .offre::before{background:radial-gradient(70% 90% at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.14),rgba(255,255,255,0) 70%)}
   .offre:hover{background:var(--v-carte-survol)}
 }
@@ -555,9 +555,9 @@ html.teinte{--lg-vert:#0f367a}
 #carte{border-radius:30px;box-shadow:var(--v-lentille),var(--v-ombre)}
 /* fenêtres : blocs de verre */
 .feuille .bloc,.feuille .hero{background:var(--v-carte);box-shadow:var(--v-lentille),0 6px 20px -14px rgba(15,25,41,.25);border-radius:26px!important}
-@media all{.feuille .bloc,.feuille .hero{background:rgba(255,255,255,.07)}}
+@media not all{.feuille .bloc,.feuille .hero{background:rgba(255,255,255,.07)}}
 .replie::after{background:linear-gradient(transparent,rgba(255,255,255,.92))}
-@media all{.replie::after{background:linear-gradient(transparent,rgba(40,40,44,.95))}}
+@media not all{.replie::after{background:linear-gradient(transparent,rgba(40,40,44,.95))}}
 /* champs : verre creusé, lueur verte au focus */
 label.champ input:not([type=range]):not([type=checkbox]):not([type=radio]),label.champ textarea,label.champ select,.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])){
   border:0;border-radius:16px;padding:12px 14px;background:var(--v-champ);
@@ -566,7 +566,7 @@ label.champ input:not([type=range]):not([type=checkbox]):not([type=radio]),label
 label.champ input:focus,label.champ textarea:focus,label.champ select:focus,.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])):focus{
   background:rgba(255,255,255,.85);transform:scale(1.01);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 0 0 4px rgba(15,54,122,.16),0 0 0 1px rgba(15,54,122,.45),0 10px 24px -14px rgba(15,54,122,.5)}
-@media all{
+@media not all{
   label.champ input:not([type=range]):not([type=checkbox]):not([type=radio]),label.champ textarea,label.champ select,.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])){box-shadow:inset 0 0 0 .5px rgba(255,255,255,.1)}
   label.champ input:focus,label.champ textarea:focus,label.champ select:focus,.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])):focus{background:rgba(255,255,255,.1)}
 }
@@ -601,7 +601,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.3,1.18)}
 /* onde liquide au toucher */
 .onde{position:absolute;border-radius:50%;pointer-events:none;z-index:2;width:16px;height:16px;margin:-8px 0 0 -8px;
   background:radial-gradient(circle,rgba(255,255,255,.75),rgba(255,255,255,.25) 45%,rgba(255,255,255,0) 70%)}
-@media all{.onde{background:radial-gradient(circle,rgba(255,255,255,.3),rgba(255,255,255,.08) 45%,rgba(255,255,255,0) 70%)}}
+@media not all{.onde{background:radial-gradient(circle,rgba(255,255,255,.3),rgba(255,255,255,.08) 45%,rgba(255,255,255,0) 70%)}}
 /* teinté et accessibilité */
 html.teinte{--v-carte:rgba(250,250,250,.95);--v-champ:rgba(240,240,240,.97)}
 
@@ -620,7 +620,7 @@ body::before{content:"";position:fixed;inset:-20vmax;z-index:-1;pointer-events:n
 @keyframes derive{0%{transform:translate3d(0,0,0) rotate(0)}50%{transform:translate3d(-4vmax,3vmax,0) rotate(8deg)}100%{transform:translate3d(3vmax,-3vmax,0) rotate(-6deg)}}
 body{background:transparent}
 html{background:var(--fond)}
-@media all{body::before{background:
+@media not all{body::before{background:
     radial-gradient(34vmax 30vmax at 30% 28%,rgba(27,80,173,.42),transparent 70%),
     radial-gradient(30vmax 28vmax at 72% 36%,rgba(200,150,50,.30),transparent 70%),
     radial-gradient(34vmax 30vmax at 32% 62%,rgba(37,80,153,.30),transparent 70%),
@@ -628,15 +628,15 @@ html{background:var(--fond)}
     var(--fond)}}
 /* le verre laisse passer la couleur : tuiles plus transparentes, bord lumineux bien visible */
 :root{--v-carte:rgba(255,255,255,.4);--v-carte-survol:rgba(255,255,255,.6);--v-fond:rgba(255,255,255,.48)}
-@media all{:root{--v-carte:rgba(28,28,32,.42);--v-carte-survol:rgba(44,44,48,.55);--v-fond:rgba(36,36,40,.48)}}
+@media not all{:root{--v-carte:rgba(28,28,32,.42);--v-carte-survol:rgba(44,44,48,.55);--v-fond:rgba(36,36,40,.48)}}
 .offre{box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.5),inset 1px 0 0 rgba(255,255,255,.55),inset -1px 0 0 rgba(255,255,255,.35),
   inset 0 18px 30px -24px rgba(255,255,255,.95),var(--v-ombre)}
-@media all{.offre{box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(255,255,255,.08),inset 1px 0 0 rgba(255,255,255,.1),inset -1px 0 0 rgba(255,255,255,.06),var(--v-ombre)}}
+@media not all{.offre{box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(255,255,255,.08),inset 1px 0 0 rgba(255,255,255,.1),inset -1px 0 0 rgba(255,255,255,.06),var(--v-ombre)}}
 .offre .carre{background:rgba(255,255,255,.75);box-shadow:var(--v-lentille),0 8px 18px -10px rgba(15,25,41,.3)}
-@media all{.offre .carre{background:rgba(255,255,255,.08)}}
+@media not all{.offre .carre{background:rgba(255,255,255,.08)}}
 /* la fenêtre ouverte : verre épais qui laisse deviner la couleur */
 .feuille{background:rgba(255,255,255,.72)}
-@media all{.feuille{background:rgba(24,24,28,.72)}}
+@media not all{.feuille{background:rgba(24,24,28,.72)}}
 /* apparition des annonces : elles émergent du verre en défilant */
 .offre.a-venir{opacity:0;transform:translateY(34px) scale(.94)}
 .offre.vu{transition:opacity .6s cubic-bezier(.2,.9,.3,1),transform .8s var(--ressort),box-shadow .35s,background .3s}
@@ -654,130 +654,175 @@ body::before{animation:none;will-change:auto;inset:0}
 .voile{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(10,14,20,.3)}
 /* cœurs des annonces : verre sans flou (des dizaines de flous à l'écran ralentissent le défilement) */
 .offre .fav{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(255,255,255,.8)}
-@media all{.offre .fav{background:rgba(60,60,64,.7)}}
+@media not all{.offre .fav{background:rgba(60,60,64,.7)}}
 /* flou plus léger sur les grands panneaux, couche dédiée pendant l'animation */
 .feuille{-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);contain:layout paint}
 .offre{transition:transform .5s var(--ressort),background .3s}
 .offre:hover{box-shadow:var(--v-lentille),var(--v-ombre)}
 .fantome{position:fixed;z-index:3;border-radius:34px;pointer-events:none;will-change:transform,clip-path;
   background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(244,247,245,.96));box-shadow:inset 0 1px 0 #fff,0 30px 80px -20px rgba(0,0,0,.45)}
-@media all{.fantome{background:linear-gradient(180deg,rgba(44,44,48,.97),rgba(26,26,30,.97));box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 30px 80px -20px rgba(0,0,0,.7)}}
+@media not all{.fantome{background:linear-gradient(180deg,rgba(44,44,48,.97),rgba(26,26,30,.97));box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 30px 80px -20px rgba(0,0,0,.7)}}
 .feuille{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(251,252,251,.9);transition:none}
 .feuille.posee{-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%)}
-@media all{.feuille{background:rgba(26,26,30,.9)}}
+@media not all{.feuille{background:rgba(26,26,30,.9)}}
 html.teinte .feuille.posee{background:var(--v-fond-fort)}
-
-/* ================= sans Liquid Glass : appli sombre, bleu nuit et or, surfaces nettes ================= */
-:root{
-  --bleu-roi:#2f6fe4;--bleu-roi-fonce:#1f56c0;--or-clair:#e6c65c;
-  --lg-vert:var(--bleu-roi);--lg-clair:var(--carte);--lg-vert-lentille:linear-gradient(transparent,transparent);--lg-vert-ombre:none;
-  --lg-ombre:none;--lg-bord:none;--lg-flou:none;
-  --v-fond:var(--carte);--v-fond-fort:#0b1324;--v-carte:var(--carte);--v-carte-survol:#132038;--v-champ:#0a1222;--v-rail:#24324f;
-  --v-lentille:0 0 #0000;--v-ombre:0 0 #0000;--v-flou:none;
-}
-*,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
-html,body{background:var(--fond)}
-body::before{display:none!important}
-/* plus de reflets, de liserés de verre ni d'ondes de lumière */
-.lg-bord::after,.btn:not(.gris):not(.leger)::after,.segments button.actif::after,.puce.actif::after,.btn.leger::after,
-.onglets-bas::after,.onglets-bas button.actif::after,.segments::after,
-.btn:not(.gris):not(.leger)::before,.segments button.actif::before,.onglets-bas button::before,
-.dom .carre::after,.nu::after,.onglets::after,.filtres button::after,.offre .fav::after,.offre::before,.onde{display:none!important}
-/* boutons principaux : bleu roi plein, liseré or au survol */
-.btn:not(.gris):not(.leger),.segments button.actif,.puce.actif{background:var(--bleu-roi);color:#fff;box-shadow:none;text-shadow:none;border:1px solid transparent}
-.btn:not(.gris):not(.leger):hover{background:var(--bleu-roi-fonce);border-color:rgba(212,175,55,.55)}
-.btn.leger{background:var(--vert-doux);color:var(--vert);box-shadow:none}
-.btn.gris,.nu,.filtres button,.actifs button,.suggestions button,.lien-alerte,.offre .fav,.feuille .barre .rond{background:var(--carte);box-shadow:none;border:1px solid var(--ligne)}
-.filtres button.actif{background:var(--vert-doux);color:var(--vert);border-color:color-mix(in srgb,var(--vert) 45%,transparent)}
-/* en-tête et barres : bleu nuit opaque, filet or */
-.bandeau,.bandeau.colle{background:var(--fond);box-shadow:none;border-bottom:1px solid var(--ligne)}
-.cherche-in{background:var(--carte);box-shadow:none;border:1px solid var(--ligne)}
-.onglets{background:var(--carte);box-shadow:none;border:1px solid var(--ligne)}
-.onglets::before{background:var(--bleu-roi);box-shadow:none}
-.segments{background:var(--v-champ);box-shadow:none;border:1px solid var(--ligne)}
-@media (max-width:760px){
-  .onglets-bas{background:#0b1324;box-shadow:0 10px 30px -12px rgba(0,0,0,.8);border:1px solid var(--ligne)}
-  .onglets-bas button.actif{color:var(--or-clair)}
-  .goutte{background:color-mix(in srgb,var(--vert) 16%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--vert) 30%,transparent)}
-}
-/* domaines */
-.dom .carre{background:var(--carte);box-shadow:none;border:1px solid var(--ligne)}
-.dom:hover .carre{box-shadow:none;border-color:rgba(212,175,55,.5)}
-.dom.actif .carre{background:#132038;box-shadow:inset 0 0 0 1.5px var(--or)}
-.goutte-dom{background:color-mix(in srgb,var(--vert) 12%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--vert) 28%,transparent)}
-/* annonces : tuiles nettes, filet or au survol */
-.offre{background:var(--carte);box-shadow:none;border:1px solid var(--ligne)}
-.offre:hover{background:var(--v-carte-survol);box-shadow:none;border-color:rgba(212,175,55,.45)}
-.offre .carre{background:#132038;box-shadow:none;border:1px solid var(--ligne)}
-.vide,#carte{background:var(--carte);box-shadow:none;border:1px solid var(--ligne)}
-/* fenêtres */
-.voile{background:rgba(2,5,12,.72)}
-.feuille,.feuille.posee{background:#0b1324;box-shadow:0 0 0 1px var(--ligne),0 30px 80px -20px rgba(0,0,0,.8)}
-.fantome{background:#0b1324;box-shadow:0 0 0 1px var(--ligne),0 30px 80px -20px rgba(0,0,0,.8)}
-.feuille .bloc,.feuille .hero{background:var(--carte);box-shadow:none;border:1px solid var(--ligne)}
-.replie::after{background:linear-gradient(transparent,var(--carte))}
-/* champs */
-label.champ input:not([type=range]):not([type=checkbox]):not([type=radio]),label.champ textarea,label.champ select,
-.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])){
-  background:var(--v-champ);box-shadow:none;border:1px solid var(--ligne)}
-label.champ input:focus,label.champ textarea:focus,label.champ select:focus,
-.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])):focus{
-  background:var(--v-champ);border-color:var(--vert);box-shadow:0 0 0 3px color-mix(in srgb,var(--vert) 22%,transparent);transform:none}
-/* interrupteurs et curseur */
-.bascule i{background:var(--v-rail);box-shadow:none}
-.bascule input:checked + i{background:var(--bleu-roi);box-shadow:none}
-.bascule i::after{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.4)}
-input[type=range]::-webkit-slider-runnable-track{background:var(--v-rail);box-shadow:none}
-input[type=range]::-webkit-slider-thumb{background:var(--or);box-shadow:0 1px 4px rgba(0,0,0,.5)}
-input[type=range]::-moz-range-thumb{background:var(--or)}
-input[type=range]::-moz-range-progress{background:var(--bleu-roi)}
-/* menus */
-.menu a:hover,.menu button.entree:hover,.opt:hover{background:var(--carte);box-shadow:none}
-.opt.actif{background:var(--vert-doux);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--vert) 30%,transparent)}
-.cv-etat{box-shadow:none}
-.toast{background:#132038;box-shadow:0 0 0 1px var(--ligne),0 14px 30px -10px rgba(0,0,0,.7)}
-.leaflet-popup-content button{background:var(--bleu-roi)}
-
-/* ================= nuances de couleur au fil du défilement ================= */
-html{background:var(--fond)}
-body{background:transparent!important}
-.couleurs{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.couleurs i{position:absolute;inset:-12vh -10vw;opacity:0;will-change:opacity,transform;transition:opacity .25s linear}
-.couleurs .c1{background:radial-gradient(60vmax 45vmax at 20% 8%,rgba(47,111,228,0.49),transparent 65%),radial-gradient(45vmax 35vmax at 90% 30%,rgba(40,90,200,0.29),transparent 65%)}
-.couleurs .c2{background:radial-gradient(55vmax 45vmax at 80% 40%,rgba(98,72,214,0.38),transparent 65%),radial-gradient(45vmax 40vmax at 10% 70%,rgba(47,111,228,0.32),transparent 65%)}
-.couleurs .c3{background:radial-gradient(55vmax 45vmax at 20% 50%,rgba(22,150,200,0.32),transparent 65%),radial-gradient(45vmax 40vmax at 85% 80%,rgba(212,175,55,0.20),transparent 65%)}
-.couleurs .c4{background:radial-gradient(60vmax 45vmax at 70% 85%,rgba(212,175,55,0.38),transparent 65%),radial-gradient(45vmax 35vmax at 10% 60%,rgba(180,130,40,0.23),transparent 65%)}
-.bandeau,.bandeau.colle{background:rgba(6,11,23,.82);border-bottom-color:var(--accent,var(--ligne))}
-.bandeau.colle{box-shadow:0 1px 0 var(--accent,transparent),0 8px 24px -16px var(--accent,transparent)}
-@media (max-width:760px){.onglets-bas{border-color:var(--accent,var(--ligne));box-shadow:0 10px 30px -12px rgba(0,0,0,.8),0 0 22px -10px var(--accent,transparent)}}
-/* les tuiles laissent passer un peu de la couleur du fond */
-.offre{background:rgba(14,23,41,.8)}
-.offre:hover{background:rgba(19,32,56,.92)}
-html.doux .couleurs i{transition:none}
-
-/* ================= toute l'appli suit la nuance du défilement ================= */
-:root{--vert-doux:color-mix(in srgb,var(--vert) 15%,#060b17)}
-.btn:not(.gris):not(.leger),.segments button.actif,.puce.actif,.onglets::before,.bascule input:checked + i{
-  background:linear-gradient(135deg,var(--bleu-roi),var(--bleu-roi-fonce))}
-.offre{border-color:color-mix(in srgb,var(--vert) 16%,var(--ligne));transition:transform .5s var(--ressort)}
-.offre .carre,.dom .carre{border-color:color-mix(in srgb,var(--vert) 22%,var(--ligne));color:var(--vert);transition:transform .55s var(--ressort)}
-.offre .carre svg,.dom .carre svg{color:var(--vert)}
-.dom.actif .carre{box-shadow:inset 0 0 0 1.5px var(--or),0 0 18px -8px var(--vert)}
-.offre:hover{border-color:var(--vert)}
-.onglets,.segments,.filtres button,.nu,.cherche-in{border-color:color-mix(in srgb,var(--vert) 20%,var(--ligne));transition:transform .5s var(--ressort)}
-.feuille .bloc,.feuille .hero{border-color:color-mix(in srgb,var(--vert) 18%,var(--ligne))}
-input[type=range]::-webkit-slider-runnable-track{background:linear-gradient(90deg,var(--bleu-roi),var(--v-rail))}
-.toast{box-shadow:0 0 0 1px color-mix(in srgb,var(--vert) 40%,transparent),0 14px 30px -10px rgba(0,0,0,.7)}
-@media (max-width:760px){.onglets-bas button.actif{color:var(--vert)}}
 
 /* barre du haut : se retire en descendant, revient en remontant */
 .bandeau{transition:transform .38s cubic-bezier(.2,.9,.3,1),box-shadow .2s;will-change:transform}
 .bandeau.cachee{transform:translateY(-100%);box-shadow:none!important}
 html.doux .bandeau{transition:none}
+
+/* ================= style « vitrine » : fond clair, titres bordeaux, tuiles pastel ================= */
+:root{
+  --fond:#f5f5f7;--carte:#fff;--texte:#1d1d1f;--doux:#6e6e73;--ligne:#d2d2d7;--champ:#fff;
+  --vert:#0066cc;--vert-doux:#e8f0fb;--bleu:#0066cc;--or:#a37e2c;--bordeaux:#8a1538;--bouton:#0071e3;--bouton-fonce:#0062c4;
+  --r:18px;--ressort:cubic-bezier(.2,1.4,.35,1);
+  /* les teintes des tuiles : clair en haut, plus soutenu en bas */
+  --t0:#f6c9dc;--t0b:#ec8db7;--t1:#b9d5ee;--t1b:#3f82bf;--t2:#cdc2f2;--t2b:#8a74cf;
+  --t3:#b6dfc1;--t3b:#4e9a6a;--t4:#fbd8bd;--t4b:#e79a62;--t5:#f6e6a6;--t5b:#d2b046;
+  --lg-vert:var(--bouton);--lg-clair:#fff;--lg-vert-lentille:linear-gradient(transparent,transparent);--lg-vert-ombre:none;--lg-ombre:none;--lg-bord:none;
+  --v-fond:#fff;--v-fond-fort:#fff;--v-carte:#fff;--v-carte-survol:#fff;--v-champ:#fff;--v-rail:#d2d2d7;--v-lentille:0 0 #0000;--v-ombre:0 0 #0000;
+}
+*,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+html,body{background:var(--fond)!important;color:var(--texte)}
+body::before{display:none!important}
+.lg-bord::after,.btn:not(.gris):not(.leger)::after,.segments button.actif::after,.puce.actif::after,.btn.leger::after,
+.onglets-bas::after,.onglets-bas button.actif::after,.segments::after,
+.btn:not(.gris):not(.leger)::before,.segments button.actif::before,.onglets-bas button::before,
+.dom .carre::after,.nu::after,.onglets::after,.filtres button::after,.offre .fav::after,.offre::before,.onde{display:none!important}
+
+/* barre du haut : blanche, fine, comme une barre de navigation de boutique */
+.bandeau,.bandeau.colle{background:rgba(251,251,253,.96);border-bottom:1px solid rgba(0,0,0,.08);box-shadow:none}
+.nu{background:transparent;border:0;box-shadow:none;color:var(--texte)}
+.nu:hover{background:rgba(0,0,0,.05)}
+.cherche-in{background:#fff;border:1px solid var(--ligne);box-shadow:none}
+.embleme span{color:var(--texte)}.embleme em{color:var(--doux)}
+
+/* en-tête de page : grand titre bordeaux à gauche, accroche à droite */
+.hero-page{display:grid;grid-template-columns:1fr;gap:18px;text-align:left;padding-top:clamp(28px,5vw,64px)}
+.hero-page .surtitre{color:var(--doux);letter-spacing:.02em;text-transform:none;font-size:17px;font-weight:600}
+.hero-page h1{color:var(--bordeaux);font-size:clamp(44px,8vw,96px);line-height:1;letter-spacing:-.025em;font-weight:700;margin:6px 0 0;text-align:left}
+.accroche p{color:var(--bordeaux);font-size:clamp(22px,2.6vw,34px);line-height:1.15;font-weight:600;letter-spacing:-.01em;margin:0 0 12px}
+.lien-bleu{display:block;border:0;background:none;padding:4px 0;color:var(--vert);font-size:17px;cursor:pointer}
+.lien-bleu:hover{text-decoration:underline}
+@media (min-width:900px){
+  .hero-page{grid-template-columns:1.2fr 1fr;align-items:center}
+  .accroche{text-align:right}.accroche p{max-width:16ch;margin-left:auto}.lien-bleu{margin-left:auto}
+  .hero-page .onglets{grid-column:1/-1}
+}
+/* onglets Alternance / Emploi */
+.onglets{background:#e8e8ed;border:0;box-shadow:none;margin-left:0}
+.onglets::before{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.onglets button,.onglets button.actif{color:var(--texte);text-shadow:none}
+.onglets button.actif{font-weight:600}
+
+/* titres de section : début en bordeaux, suite en gris */
+.titre-sec{font-size:clamp(24px,3vw,34px);line-height:1.15;font-weight:600;letter-spacing:-.01em;color:var(--doux);margin:clamp(34px,5vw,60px) 0 18px}
+.titre-sec b{color:var(--bordeaux);font-weight:600}
+
+/* domaines : rangée d'icônes colorées avec leur nom dessous */
+.dom .carre{border:0;box-shadow:none;background:var(--t0);color:#1d1d1f;border-radius:22px}
+.dom[data-t="1"] .carre{background:var(--t1)}.dom[data-t="2"] .carre{background:var(--t2)}.dom[data-t="3"] .carre{background:var(--t3)}
+.dom[data-t="4"] .carre{background:var(--t4)}.dom[data-t="5"] .carre{background:var(--t5)}
+.dom:not([data-t]) .carre{background:#e8e8ed}
+.dom b{color:var(--texte);font-weight:500}
+.dom:hover .carre{box-shadow:0 10px 24px -12px rgba(0,0,0,.35)}
+.dom.actif .carre{box-shadow:0 0 0 2px var(--fond),0 0 0 4px var(--texte)}
+.dom.actif b{color:var(--texte);font-weight:600}
+.goutte-dom,.dom i{display:none}
+
+/* filtres : pastilles claires */
+.filtres button,.actifs button,.suggestions button,.lien-alerte{background:#fff;color:var(--texte);border:1px solid var(--ligne);box-shadow:none}
+.filtres button.actif{background:var(--texte);color:#fff;border-color:var(--texte)}
+.lien-alerte{color:var(--vert)}
+.compte{color:var(--doux)}
+
+/* tuiles d'offres : pastel, bande plus soutenue en bas, coins très arrondis */
+.offre{--c:var(--t0);--cb:var(--t0b);background:linear-gradient(0deg,var(--cb) 0 46px,var(--c) 46px);padding-bottom:70px!important;border:0;border-radius:28px!important;
+  box-shadow:0 4px 14px -6px rgba(0,0,0,.12);color:#1d1d1f;transition:transform .5s var(--ressort),box-shadow .35s}
+.offre[data-t="1"]{--c:var(--t1);--cb:var(--t1b)}.offre[data-t="2"]{--c:var(--t2);--cb:var(--t2b)}.offre[data-t="3"]{--c:var(--t3);--cb:var(--t3b)}
+.offre[data-t="4"]{--c:var(--t4);--cb:var(--t4b)}.offre[data-t="5"]{--c:var(--t5);--cb:var(--t5b)}
+.offre:hover{background:linear-gradient(0deg,var(--cb) 0 46px,var(--c) 46px);transform:scale(1.015);box-shadow:0 18px 38px -18px rgba(0,0,0,.35)}
+.offre:active{transform:scale(.985)}
+.offre h3{color:#1d1d1f}
+.offre .sous,.offre .meta,.offre .quand{color:rgba(29,29,31,.78)}
+.offre .neuf{color:rgba(29,29,31,.72);font-weight:600;letter-spacing:.02em}
+.offre .salaire{color:#1d1d1f}
+.offre .atout{color:#1d1d1f}
+.offre .fav{background:#fff;border:0;box-shadow:0 2px 8px rgba(0,0,0,.12);color:var(--texte)}
+.offre .carre{background:#fff;border:0;box-shadow:0 8px 20px -10px rgba(0,0,0,.35);color:#1d1d1f;border-radius:50%}
+.offre .dessin i{background:rgba(29,29,31,.35)}
+.offre.vue h3{color:rgba(29,29,31,.6)}
+.vide{background:#fff;border:0;box-shadow:none;border-radius:28px}
+#carte{border-radius:28px;box-shadow:none;border:0}
+
+/* carrousel « Quoi de neuf ? » */
+.nouveautes{position:relative}
+.carrousel{display:grid;grid-auto-flow:column;grid-auto-columns:min(86%,420px);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:6px 4px 26px;margin:0 -4px;scrollbar-width:none;overscroll-behavior-x:contain}
+.carrousel::-webkit-scrollbar{display:none}
+.carrousel .offre{scroll-snap-align:start;min-height:420px;grid-template-columns:1fr;align-content:start}
+.carrousel .offre .dessin{justify-self:end;align-self:end}
+.carrousel .offre .carre{width:110px;height:110px}
+.carrousel .offre .carre svg{width:48px;height:48px}
+@media (min-width:900px){.carrousel{grid-auto-columns:calc((100% - 40px) / 3)}}
+.fleches{display:flex;justify-content:flex-end;gap:14px}
+.fleche{width:44px;height:44px;border-radius:50%;border:0;background:#e8e8ed;color:var(--texte);display:grid;place-items:center;cursor:pointer;transition:background .2s,transform .3s var(--ressort)}
+.fleche:hover{background:#dcdce1}.fleche:active{transform:scale(.92)}
+#car-g svg{transform:rotate(90deg)}#car-d svg{transform:rotate(-90deg)}
+
+/* boutons */
+.btn:not(.gris):not(.leger),.segments button.actif,.puce.actif{background:var(--bouton);color:#fff;border:0;box-shadow:none;text-shadow:none;border-radius:999px}
+.btn:not(.gris):not(.leger):hover{background:var(--bouton-fonce)}
+.btn.gris,.feuille .barre .rond{background:#e8e8ed;color:var(--texte);border:0;box-shadow:none}
+.btn.leger{background:var(--vert-doux);color:var(--vert);box-shadow:none}
+.segments{background:#e8e8ed;border:0;box-shadow:none}
+.segments button{color:var(--texte)}
+
+/* barre du bas (téléphone) : blanche */
+@media (max-width:760px){
+  .onglets-bas{background:rgba(255,255,255,.97);border:1px solid rgba(0,0,0,.08);box-shadow:0 10px 30px -12px rgba(0,0,0,.25)}
+  .onglets-bas button{color:var(--doux)}
+  .onglets-bas button.actif{color:var(--bouton)}
+  .goutte{background:rgba(0,113,227,.1);box-shadow:none}
+}
+
+/* fenêtres : blanches, blocs gris très clair */
+.voile{background:rgba(0,0,0,.32)}
+.feuille,.feuille.posee{background:#fff;box-shadow:0 30px 80px -20px rgba(0,0,0,.35);color:var(--texte)}
+.fantome{background:#fff;box-shadow:0 30px 80px -20px rgba(0,0,0,.35)}
+.feuille .bloc{background:var(--fond);border:0;box-shadow:none}
+.feuille .hero{--c:var(--t0);--cb:var(--t0b);background:linear-gradient(0deg,var(--cb) 0 14px,var(--c) 14px);border:0;box-shadow:none;color:#1d1d1f}
+.feuille .hero[data-t="1"]{--c:var(--t1);--cb:var(--t1b)}.feuille .hero[data-t="2"]{--c:var(--t2);--cb:var(--t2b)}.feuille .hero[data-t="3"]{--c:var(--t3);--cb:var(--t3b)}
+.feuille .hero[data-t="4"]{--c:var(--t4);--cb:var(--t4b)}.feuille .hero[data-t="5"]{--c:var(--t5);--cb:var(--t5b)}
+.feuille .hero .carre{background:#fff;border:0;border-radius:50%;box-shadow:0 8px 20px -10px rgba(0,0,0,.35)}
+.feuille .hero .sous,.feuille .hero .meta{color:rgba(29,29,31,.78)}
+.replie::after{background:linear-gradient(transparent,var(--fond))}
+label.champ input:not([type=range]):not([type=checkbox]):not([type=radio]),label.champ textarea,label.champ select,
+.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])){
+  background:#fff;border:1px solid var(--ligne);box-shadow:none;color:var(--texte)}
+label.champ input:focus,label.champ textarea:focus,label.champ select:focus,
+.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])):focus{
+  border-color:var(--bouton);box-shadow:0 0 0 3px rgba(0,113,227,.2);transform:none}
+.bascule i{background:#e9e9eb;box-shadow:none}
+.bascule input:checked + i{background:#34c759;box-shadow:none}
+.bascule i::after{background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.2)}
+input[type=range]::-webkit-slider-runnable-track{background:#d2d2d7;box-shadow:none}
+input[type=range]::-webkit-slider-thumb{background:#fff;box-shadow:0 1px 5px rgba(0,0,0,.3)}
+input[type=range]::-moz-range-thumb{background:#fff}
+input[type=range]::-moz-range-progress{background:var(--bouton)}
+.menu a:hover,.menu button.entree:hover,.opt:hover{background:var(--fond);box-shadow:none}
+.menu svg.ic{color:var(--vert)}
+.opt.actif{background:var(--vert-doux);box-shadow:none;color:var(--vert)}
+.toast{background:rgba(29,29,31,.92);color:#fff;box-shadow:0 14px 30px -10px rgba(0,0,0,.4)}
+.leaflet-popup-content button{background:var(--bouton)}
+.guide-acc h2{color:var(--bordeaux)}
+.guide-cartes button{background:#fff;border:0;box-shadow:none}
+.guide-cartes button:hover{background:#fff;box-shadow:0 10px 26px -14px rgba(0,0,0,.3)}
+.pied{color:var(--doux)}
 </style>
 </head>
 <body>
-<div class="couleurs" aria-hidden="true"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
   <symbol id="i-d-mallette" viewBox="0 0 24 24"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M9 7.5V5.6A1.6 1.6 0 0 1 10.6 4h2.8A1.6 1.6 0 0 1 15 5.6v1.9M3 12.5h7.2M13.8 12.5H21"/><rect x="10.2" y="11.2" width="3.6" height="2.8" rx=".6"/></symbol>
@@ -869,8 +914,11 @@ html.doux .bandeau{transition:none}
 
 <main class="page">
   <section class="hero-page">
-    <div class="surtitre">La Réunion</div>
-    <h1 id="titre">Offres d'alternance</h1>
+    <div class="hero-g"><div class="surtitre">La Réunion</div>
+    <h1 id="titre">Offres d'alternance</h1></div>
+    <div class="accroche"><p>Trouvez l'alternance ou l'emploi qui vous ressemble, près de chez vous.</p>
+      <button class="lien-bleu" id="lien-alerte">Recevoir les nouvelles offres <span aria-hidden="true">↗</span></button>
+      <button class="lien-bleu" id="lien-guide">Le guide de l'alternance <span aria-hidden="true">↗</span></button></div>
     <div class="onglets" role="tablist" id="p-section">
       <button role="tab" data-section="alternance">Alternance</button>
       <button role="tab" data-section="emploi">Emploi</button>
@@ -879,6 +927,12 @@ html.doux .bandeau{transition:none}
   <div class="rail-dom" id="rail-dom" aria-label="Domaines"></div>
   <nav class="filtres" id="filtres" aria-label="Filtres"></nav>
   <div class="actifs" id="actifs"></div>
+  <section class="nouveautes" id="nouveautes" hidden>
+    <h2 class="titre-sec"><b>Quoi de neuf ?</b> Les offres toutes fraîches.</h2>
+    <div class="carrousel" id="carrousel"></div>
+    <div class="fleches"><button class="fleche" id="car-g" aria-label="Précédentes"><svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></button><button class="fleche" id="car-d" aria-label="Suivantes"><svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></button></div>
+  </section>
+  <h2 class="titre-sec" id="titre-liste"><b>Toutes les offres.</b> Les plus récentes d'abord.</h2>
   <div class="compte" id="compte"></div>
   <div class="liste" id="liste"></div>
   <div id="carte" hidden></div>
@@ -1015,6 +1069,8 @@ const COURT = {"Commerce, vente": "Commerce", "Grande distribution": "Grande dis
   "Gestion, administration": "Gestion administration", "Mécanique, maintenance": "Mécanique", "Transport, logistique": "Transport logistique",
   "Social, services à la personne": "Social", "Banque, assurance, immobilier": "Banque assurance", "Communication, médias": "Communication",
   "Spectacle, sport": "Sport", "Artisanat d'art": "Artisanat", "Autres": "Autres métiers"};
+const NOMS_DOM = Object.keys(ICONES);
+const teinteDe = d => { const i = NOMS_DOM.indexOf(d); return (i < 0 ? 0 : i) % 6; };
 const dessin = d => `<span class="carre"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-${ICONES[d] || "d-mallette"}"/></svg></span><i></i>`;
 const icDom = (d, c = "p") => ic(ICONES[d] || "point", c);
 const dansSection = a => (a.categorie || "alternance") === F.section;
@@ -1046,7 +1102,7 @@ function puces() {  // onglets, titre et barre de filtres
   const doms = Object.keys(comptes).sort((x, y) => (x === "Autres") - (y === "Autres") || comptes[y] - comptes[x]);
   const rail = $("#rail-dom"), avantG = rail.querySelector(".goutte-dom"), depart = avantG ? {l: avantG.offsetLeft, w: avantG.offsetWidth} : null;
   $("#rail-dom").innerHTML = [`<button class="dom ${F.domaine ? "" : "actif"}" data-dom=""><span class="carre"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-d-tout"/></svg></span><b>Tous</b><i></i></button>`,
-    ...doms.map(d => `<button class="dom ${F.domaine === d ? "actif" : ""}" data-dom="${esc(d)}" title="${esc(d)} (${comptes[d]})"><span class="carre"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-${ICONES[d] || "d-mallette"}"/></svg></span><b>${esc(COURT[d] || d)}</b><i></i></button>`)].join("");
+    ...doms.map(d => `<button class="dom ${F.domaine === d ? "actif" : ""}" data-dom="${esc(d)}" data-t="${teinteDe(d)}" title="${esc(d)} (${comptes[d]})"><span class="carre"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-${ICONES[d] || "d-mallette"}"/></svg></span><b>${esc(COURT[d] || d)}</b><i></i></button>`)].join("");
   placerGoutteDom(depart);
   $("#b-favs").classList.toggle("actif", F.type === "fav");
   filtresActifs();
@@ -1083,41 +1139,8 @@ $("#b-lieu").onclick = () => panneauLieu();
 let dernierY = scrollY;
 let DEFILE = false;
 addEventListener("scroll", () => { if (!DEFILE) { DEFILE = true; requestAnimationFrame(defile); } }, {passive: true});
-// nuances de couleur selon le défilement : bleu roi en haut, indigo et turquoise au milieu, or en bas
-const COULEURS = [...document.querySelectorAll(".couleurs i")];
-function nuances() {
-  const max = Math.max(1, document.documentElement.scrollHeight - innerHeight), t = Math.min(1, Math.max(0, scrollY / max));
-  const bosse = c => Math.max(0, 1 - Math.abs(t - c) * 2.6);  // 1 au centre de sa zone, 0 loin
-  const o = [Math.max(bosse(0), .25), bosse(.38), bosse(.66), Math.max(0, (t - .55) / .45)];
-  COULEURS.forEach((el, i) => { el.style.opacity = o[i].toFixed(3); el.style.transform = `translate3d(0, ${(-t * 18 + i * 2).toFixed(2)}vh, 0)`; });
-  // toute l'appli prend la même nuance : boutons, icônes, étiquettes, bordures, liserés
-  // couleurs de l'appli : 30 paliers, au plus une mise à jour toutes les 120 ms (le recalcul touche toute la page)
-  const pas = Math.round(t * 30);
-  if (pas === NUANCE_PAS) return;
-  const maintenant = performance.now();
-  if (maintenant - NUANCE_T < 120) { clearTimeout(NUANCE_MINUT); NUANCE_MINUT = setTimeout(nuances, 130); return; }
-  NUANCE_PAS = pas; NUANCE_T = maintenant;
-  const r = document.documentElement.style, c = melange(pas / 30);
-  r.setProperty("--vert", c.clair); r.setProperty("--bleu-roi", c.plein); r.setProperty("--bleu-roi-fonce", c.fonce); r.setProperty("--accent", c.clair);
-}
-// le parcours des couleurs : bleu roi → indigo → turquoise → or
-const PALETTE = [
-  [0, [75, 139, 255], [47, 111, 228]], [.36, [139, 125, 255], [96, 78, 214]],
-  [.68, [60, 198, 224], [17, 128, 160]], [1, [222, 186, 74], [160, 120, 24]],
-];
-let NUANCE_PAS = -1, NUANCE_T = 0, NUANCE_MINUT = 0;
-function melange(t) {
-  let i = 0; while (i < PALETTE.length - 2 && t > PALETTE[i + 1][0]) i++;
-  const [t0, c0, p0] = PALETTE[i], [t1, c1, p1] = PALETTE[i + 1], f = Math.min(1, Math.max(0, (t - t0) / (t1 - t0)));
-  const m = (x, y) => x.map((v, j) => Math.round(v + (y[j] - v) * f));
-  const cl = m(c0, c1), pl = m(p0, p1), fo = pl.map(v => Math.round(v * .78));
-  return {clair: `rgb(${cl})`, plein: `rgb(${pl})`, fonce: `rgb(${fo})`};
-}
-addEventListener("resize", () => requestAnimationFrame(nuances), {passive: true});
-requestAnimationFrame(nuances);
 function defile() {
   DEFILE = false;
-  nuances();
   $(".bandeau").classList.toggle("colle", scrollY > 4);
   const bas = $(".onglets-bas"), d = scrollY - dernierY;
   if (Math.abs(d) > 6) { const avant = bas.classList.contains("reduite"); bas.classList.toggle("reduite", d > 0 && scrollY > 260); dernierY = scrollY;
@@ -1465,7 +1488,7 @@ function carteOffre(a) {
   const meta = spont ? "Candidature spontanée" : [a.contrats.join(" · "), a.niveau].filter(Boolean).join(" · ");
   const sal = a.salaire ? a.salaire.replace(/\s*\/\s*/g, " / ") : "";
   const loin = a._d != null ? ` · ${kmTexte(a._d)}` : "";
-  return `<div class="offre ${VUES[a.id] ? "vue" : ""}" role="button" tabindex="0" data-id="${esc(a.id)}">
+  return `<div class="offre ${VUES[a.id] ? "vue" : ""}" role="button" tabindex="0" data-id="${esc(a.id)}" data-t="${teinteDe(a.domaine)}">
     <button class="fav" data-fav="${esc(a.id)}" aria-label="${FAV[a.id] ? "Retirer des favoris" : "Ajouter aux favoris"}">${ic("coeur", FAV[a.id] ? "plein" : "")}</button>
     <div class="txt">
       ${neuf(a) ? '<span class="neuf">Nouveau</span>' : ""}
@@ -1508,6 +1531,7 @@ function afficher(suite) {
     if (res.length > LIMITE) { $("#liste").insertAdjacentHTML("beforeend", '<div id="suite" aria-hidden="true"></div>'); SUITE.observe($("#suite")); }
     surveillerApparition($("#liste"));
   }
+  if (!suite) carrousel(res);
   if (VUE === "carte") carteMaj(res);
 }
 $("#liste").onclick = e => {
@@ -1515,6 +1539,19 @@ $("#liste").onclick = e => {
   if (f) { const id = f.dataset.fav; FAV[id] ? delete FAV[id] : FAV[id] = 1; ecrire("alt974-fav", FAV); f.innerHTML = ic("coeur", FAV[id] ? "plein" : ""); f.setAttribute("aria-label", FAV[id] ? "Retirer des favoris" : "Ajouter aux favoris"); const nf = Object.keys(FAV).length; $("#nb-fav").textContent = nf || ""; if (F.type === "fav") afficher(); else if ($("#voile").hidden) toast(FAV[id] ? "Ajoutée aux favoris" : "Retirée des favoris"); return; }
   const b = e.target.closest(".offre"); if (b) fiche(b.dataset.id);
 };
+function carrousel(res) {  // les offres les plus récentes, en tuiles qui défilent sur le côté
+  const sec = $("#nouveautes"), frais = res.filter(a => a.type === "offre" && joursDepuis(a) < 3).slice(0, 12);
+  sec.hidden = frais.length < 3 || VUE === "carte";
+  $("#titre-liste").hidden = !res.length;
+  if (sec.hidden) return;
+  $("#carrousel").innerHTML = frais.map(carteOffre).join("");
+  $("#carrousel").scrollLeft = 0;
+}
+$("#carrousel").onclick = e => $("#liste").onclick(e);
+$("#car-g").onclick = () => $("#carrousel").scrollBy({left: -$("#carrousel").clientWidth * .85, behavior: "smooth"});
+$("#car-d").onclick = () => $("#carrousel").scrollBy({left: $("#carrousel").clientWidth * .85, behavior: "smooth"});
+$("#lien-alerte").onclick = () => panneauNotifs();
+$("#lien-guide").onclick = () => panneauGuide();
 $("#liste").onkeydown = e => { const b = e.target.closest(".offre"); if (b && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); fiche(b.dataset.id); } };
 
 /* ---------- autour de moi ---------- */
@@ -1702,7 +1739,7 @@ function fiche(id) {
   const bus = `https://www.google.com/maps/dir/?api=1${POS ? `&origin=${POS.lat},${POS.lon}` : ""}&destination=${a.lat != null ? `${a.lat},${a.lon}` : encodeURIComponent(a.adresse || a.commune)}&travelmode=transit`;
   const verifier = `https://annuaire-entreprises.data.gouv.fr/rechercher?terme=${encodeURIComponent(a.entreprise)}`;
   ouvrir(`${barre("")}
-    <div class="hero">
+    <div class="hero" data-t="${teinteDe(a.domaine)}">
       <div class="txt">
         ${neuf(a) ? '<span class="neuf">Nouveau</span>' : ""}
         <h2>${esc(spont ? a.entreprise : a.titre)}</h2>
