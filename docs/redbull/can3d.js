@@ -161,7 +161,7 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
     if (mainCan){ tint.position.set(mainCan.group.position.x + 1.6, mainCan.group.position.y - .6, 2.4); tint.intensity = 1.5; }
     renderer.render(scene, camera);
     if (mainCan){
-      mainCan.spin.add(marker); marker.position.set(-r, .5 - (o.zone ?? .5), 0);
+      mainCan.spin.add(marker); marker.position.set(0, .5 - (o.zone ?? .5), 0);   // sur l'axe : la lumière reste centrée sur la canette
       mainCan.group.updateMatrixWorld(true); marker.getWorldPosition(wp);
       nrm.set(-1, 0, 0).applyQuaternion(mainCan.spin.getWorldQuaternion(q)); out.face = Math.max(0, nrm.z);
       wp.project(camera); out.x = (wp.x + 1) / 2 * W; out.y = (1 - wp.y) / 2 * H;
