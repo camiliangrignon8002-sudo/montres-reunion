@@ -24,10 +24,15 @@ function analyse(img){
     for (let x = 0; x < width; x++){ if (data[(y*width + x)*4 + 3] > 128){ L[y] = x; break; } }
     for (let x = width - 1; x >= 0; x--){ if (data[(y*width + x)*4 + 3] > 128){ R[y] = x; break; } }
   }
-  let maxW = 0; for (let y = 0; y < height; y++) if (L[y] >= 0) maxW = Math.max(maxW, R[y] - L[y]);
-  let top = 0, bot = height - 1;
-  while (top < height && !(L[top] >= 0 && R[top] - L[top] >= maxW*.965)) top++;
-  while (bot > 0 && !(L[bot] >= 0 && R[bot] - L[bot] >= maxW*.965)) bot--;
+  // largeur de référence : la médiane du milieu de la canette
+  const mids = [];
+  for (let y = Math.floor(height*.3); y < height*.7; y++) if (L[y] >= 0) mids.push(R[y] - L[y]);
+  mids.sort((a,b)=>a-b);
+  const midW = mids[mids.length>>1] || width;
+  const ok = y => L[y] >= 0 && R[y] - L[y] >= midW*.96;
+  let top = Math.floor(height*.3), bot = Math.floor(height*.7);
+  while (top > 0 && ok(top - 1)) top--;
+  while (bot < height - 1 && ok(bot + 1)) bot++;
   // marge pour éviter les bords arrondis
   const pad = Math.round((bot - top) * .012); top += pad; bot -= pad;
   const ls = [], rs = [];
@@ -58,19 +63,20 @@ function buildLabel(f, A, idx, total, maxAniso, W = 2048){
   const cx = W * .75; // centre du dos
   g.save(); g.translate(cx, 0); g.scale(H/1024/aspect, H/1024);
   const ink = f.ink, acc = f.acc;
-  const colW = 300; // demi-largeur utile (unités non déformées)
+  // demi-largeur visible du dos (±55°), en unités non déformées
+  const colW = (W * 46/360) * aspect / (H/1024);
   g.textAlign = "center"; g.fillStyle = ink;
   g.font = '500 26px "JetBrains Mono", monospace';
   g.globalAlpha = .8; g.fillText(`N° ${String(idx+1).padStart(2,"0")} / ${String(total).padStart(2,"0")}`, 0, 110); g.globalAlpha = 1;
   // nom du goût, en grand, sur 1 ou 2 lignes
   const words = f.short.toUpperCase().split(" ");
-  let size = 120; g.font = `900 ${size}px "Archivo", sans-serif`;
+  let size = Math.min(120, colW*.55); g.font = `900 ${size}px "Archivo", sans-serif`;
   const lines = [];
   for (const w of words){ const l = lines.length ? lines[lines.length-1] + " " + w : w; if (lines.length && g.measureText(l).width < colW*2) lines[lines.length-1] = l; else lines.push(w); }
   while (lines.some(l => g.measureText(l).width > colW*2) && size > 50){ size -= 6; g.font = `900 ${size}px "Archivo", sans-serif`; }
   lines.forEach((l, n) => g.fillText(l, 0, 230 + n*size*.92));
   let y = 230 + (lines.length - 1)*size*.92 + 60;
-  g.font = '700 30px "Archivo Narrow", sans-serif'; g.globalAlpha = .9;
+  g.font = `700 ${Math.round(Math.min(30, colW*.13))}px "Archivo Narrow", sans-serif`; g.globalAlpha = .9;
   g.fillText(f.tag.toUpperCase(), 0, y); g.globalAlpha = 1;
   y += 40;
   g.fillStyle = acc === ink ? shade(ink, -.3) : acc; g.fillRect(-colW*.6, y, colW*1.2, 6);
@@ -78,8 +84,8 @@ function buildLabel(f, A, idx, total, maxAniso, W = 2048){
   const rows = [["Caféine","32 mg"],["Taurine","400 mg"],["Sucres", f.sug ? `${String(f.sug).replace(".",",")} g` : "0 g"],["Énergie", `${f.kcal} kcal`]];
   g.textAlign = "left";
   for (const [k, v] of rows){
-    g.fillStyle = ink; g.globalAlpha = .75; g.font = '500 26px "JetBrains Mono", monospace'; g.fillText(k.toUpperCase(), -colW*.82, y);
-    g.globalAlpha = 1; g.textAlign = "right"; g.font = '900 44px "Archivo", sans-serif'; g.fillText(v, colW*.82, y + 4); g.textAlign = "left";
+    g.fillStyle = ink; g.globalAlpha = .75; g.font = `500 ${Math.round(Math.min(26, colW*.11))}px "JetBrains Mono", monospace`; g.fillText(k.toUpperCase(), -colW*.82, y);
+    g.globalAlpha = 1; g.textAlign = "right"; g.font = `900 ${Math.round(Math.min(44, colW*.2))}px "Archivo", sans-serif`; g.fillText(v, colW*.82, y + 4); g.textAlign = "left";
     g.globalAlpha = .25; g.fillRect(-colW*.82, y + 22, colW*1.64, 2); g.globalAlpha = 1;
     y += 82;
   }
@@ -105,7 +111,7 @@ function buildLabel(f, A, idx, total, maxAniso, W = 2048){
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = maxAniso; t.wrapS = THREE.RepeatWrapping;
   t.needsUpdate = true;
-  return { tex: t, ratio: A.r / bh };
+  return { tex: t, ratio: A.r / bh * .93 };
 }
 
 function shade(hex, amt){
@@ -138,8 +144,8 @@ function glowTexture(){
 
 export async function create({ canvas, flavors, lite = false, onChange = null }){
   let busyFlag = true, prevKey = "";
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !lite, alpha: true, powerPreference: "high-performance" });
-  const SEG = lite ? 40 : 64, TEX = lite ? 1024 : 2048;
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !lite && (devicePixelRatio || 1) < 2, alpha: true, powerPreference: "high-performance" });
+  const SEG = lite ? 40 : 64, TEX = lite ? 1024 : 1536;
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
@@ -254,7 +260,7 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
     prevKey = key;
     const canH = s.chPx / s.vh * HW;
     const heroY = -s.k0.y / 100 * HW;
-    const arc = ww * (s.mob ? .62 : .4);
+    const arc = ww * (s.mob ? .7 : .46);
     const t = s.now / 1000;
     for (const c of cans){
       let o = c.i - pos; o = ((o % N) + N + N/2) % N - N/2;

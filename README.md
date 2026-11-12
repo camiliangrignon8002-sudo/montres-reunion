@@ -282,7 +282,7 @@ Site vitrine des boutiques Nanas Vanille (Saint-Denis et Saint-Pierre), l'art et
 
 Site : https://camiliangrignon8002-sudo.github.io/montres-reunion/redbull/
 
-Étude de design. Fichier : `docs/redbull/index.html`.
+Étude de design. Fichiers : `docs/redbull/index.html` (page) et `docs/redbull/can3d.js` (canettes en 3D, Three.js embarqué dans `vendor/`).
 
 Site de fan non officiel : 15 canettes Red Bull, goût par goût. La page s'ouvre sur une canette, on choisit son goût
 (rangée du bas, flèches du clavier ou bouton en haut à droite), puis chaque défilement change la scène :
