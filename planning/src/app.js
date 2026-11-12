@@ -15,6 +15,12 @@
     return JSON.parse(new TextDecoder().decode(buf)).reference;
   }
 
+  // ---------- Apparence (par appareil) : « verre liquide » par défaut, « classique » au choix ----------
+  const STYLE_KEY = "planning-equipe:style";
+  const readStyle = () => { try { return localStorage.getItem(STYLE_KEY) || "liquide"; } catch { return "liquide"; } };
+  const applyStyle = (v) => document.documentElement.classList.toggle("liquid", v !== "classique");
+  applyStyle(readStyle());
+
   // ---------- Outils DOM ----------
   function h(tag, attrs, ...kids) {
     const el = document.createElement(tag);
@@ -1241,6 +1247,8 @@
     const num = (k, label, unit) => h("label", { class: "f" }, label, h("div", { class: "row" }, h("input", { type: "number", class: "input", style: { width: "90px" }, min: "1", max: "100", value: st[k], disabled: !edit, onChange: (ev) => this.commit([{ type: "setSettings", patch: { [k]: ev.target.value } }]) }), unit));
     const tog = (k, label) => h("label", { class: "check" }, h("input", { type: "checkbox", checked: !!st[k], disabled: !edit, onChange: (ev) => this.commit([{ type: "setSettings", patch: { [k]: ev.target.checked } }]) }), label);
     return h("div", { class: "stack", style: { gap: "16px" } },
+      h("section", { class: "card" }, h("div", { class: "row between" }, h("div", {}, h("h2", {}, "Apparence"), h("p", { class: "small muted" }, "Sur cet appareil seulement.")),
+        h("div", { class: "seg-ctl", role: "group", "aria-label": "Apparence" }, [["liquide", "Verre liquide"], ["classique", "Classique"]].map(([v, l]) => h("button", { type: "button", "aria-pressed": String(readStyle() === v), onClick: (ev) => { try { localStorage.setItem(STYLE_KEY, v); } catch {} applyStyle(v); ev.currentTarget.parentElement.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === ev.currentTarget))); } }, l))))),
       h("section", { class: "card" }, h("h2", {}, "Zones de travail"), h("p", { class: "small muted" }, "Couleurs reprises du planning papier : vert = zone publique (ZP), orange = zone réservée (ZR). Le motif et le code restent visibles pour les personnes qui distinguent mal les couleurs."),
         h("div", { class: "list" }, s.zones.map((z) => h("div", { class: "item", style: { "flex-wrap": "wrap" } },
           h("span", { class: `blk ${zoneStyle(s, z.id).cls}`, style: { "--z": z.color, width: "64px", "justify-content": "center" } }, h("small", {}, z.short)),

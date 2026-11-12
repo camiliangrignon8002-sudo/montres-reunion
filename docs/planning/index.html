@@ -361,6 +361,62 @@ table.t td.num { white-space: nowrap; }
 .skill.formation[aria-pressed="true"] { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); }
 .skill.ancien[aria-pressed="true"] { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
 
+/* ---------- Style « verre liquide » (par défaut ; « Classique » dans Zones et règles) ---------- */
+html.liquid {
+  --g-bg-1: #f6f7f9; --g-bg-2: #e4e7ec; --g-bg-3: #f1f2f5; --g-spot-1: rgba(255,255,255,.95); --g-spot-2: rgba(205,210,220,.75);
+  --g-fill-1: rgba(255,255,255,.62); --g-fill-2: rgba(255,255,255,.28); --g-fill-3: rgba(255,255,255,.40);
+  --g-edge: rgba(255,255,255,.6); --g-hi: rgba(255,255,255,.95); --g-hi-2: rgba(255,255,255,.35);
+  --g-btn-1: rgba(255,255,255,.78); --g-btn-2: rgba(255,255,255,.38); --g-sel: rgba(255,255,255,.96); --g-sel-fg: #1d1d1f;
+  --g-shadow: 0 10px 40px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04); --g-blk: rgba(255,255,255,.7); --g-blk-2: rgba(255,255,255,.35);
+  --g-dialog: rgba(255,255,255,.86); --g-blur: saturate(160%) blur(28px);
+  --surface: rgba(255,255,255,.34); --surface-2: rgba(255,255,255,.22); --line: rgba(255,255,255,.7); --bg: #eceef2;
+}
+@media (prefers-color-scheme: dark) {
+  html.liquid:not([data-theme="light"]) {
+    --g-bg-1: #1a1b1f; --g-bg-2: #0d0e10; --g-bg-3: #16171a; --g-spot-1: rgba(90,95,110,.35); --g-spot-2: rgba(60,64,75,.45);
+    --g-fill-1: rgba(60,62,70,.55); --g-fill-2: rgba(30,31,36,.35); --g-fill-3: rgba(45,47,54,.45);
+    --g-edge: rgba(255,255,255,.12); --g-hi: rgba(255,255,255,.22); --g-hi-2: rgba(255,255,255,.06);
+    --g-btn-1: rgba(90,92,100,.55); --g-btn-2: rgba(50,52,58,.4); --g-sel: rgba(120,122,130,.6); --g-sel-fg: #fff;
+    --g-shadow: 0 10px 40px rgba(0,0,0,.45); --g-blk: rgba(40,42,48,.55); --g-blk-2: rgba(25,26,30,.45);
+    --g-dialog: rgba(36,37,42,.9);
+    --surface: rgba(40,42,48,.4); --surface-2: rgba(30,31,36,.35); --line: rgba(255,255,255,.1); --bg: #0f1012;
+  }
+}
+html.liquid[data-theme="dark"] {
+  --g-bg-1: #1a1b1f; --g-bg-2: #0d0e10; --g-bg-3: #16171a; --g-spot-1: rgba(90,95,110,.35); --g-spot-2: rgba(60,64,75,.45);
+  --g-fill-1: rgba(60,62,70,.55); --g-fill-2: rgba(30,31,36,.35); --g-fill-3: rgba(45,47,54,.45);
+  --g-edge: rgba(255,255,255,.12); --g-hi: rgba(255,255,255,.22); --g-hi-2: rgba(255,255,255,.06);
+  --g-btn-1: rgba(90,92,100,.55); --g-btn-2: rgba(50,52,58,.4); --g-sel: rgba(120,122,130,.6); --g-sel-fg: #fff;
+  --g-shadow: 0 10px 40px rgba(0,0,0,.45); --g-blk: rgba(40,42,48,.55); --g-blk-2: rgba(25,26,30,.45);
+  --g-dialog: rgba(36,37,42,.9);
+  --surface: rgba(40,42,48,.4); --surface-2: rgba(30,31,36,.35); --line: rgba(255,255,255,.1); --bg: #0f1012;
+}
+html.liquid { background: var(--g-bg-2); }
+html.liquid body { background: radial-gradient(700px 520px at 12% 12%, var(--g-spot-1), transparent 65%), radial-gradient(900px 700px at 88% 30%, var(--g-spot-2), transparent 60%), linear-gradient(160deg, var(--g-bg-1) 0%, var(--g-bg-2) 55%, var(--g-bg-3) 100%); background-attachment: fixed; }
+html.liquid body::before { background: transparent; }
+html.liquid .side { background: linear-gradient(180deg, var(--g-fill-1), var(--g-fill-2)); -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur); border-right: none; box-shadow: inset -1px 0 0 var(--g-edge), 8px 0 40px rgba(0,0,0,.05); }
+html.liquid .topbar { background: linear-gradient(180deg, var(--g-fill-1), var(--g-fill-2)); border-bottom: 1px solid var(--g-edge); }
+html.liquid .card, html.liquid .banner { background: linear-gradient(160deg, var(--g-fill-1) 0%, var(--g-fill-2) 45%, var(--g-fill-3) 100%); -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur); border: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), inset 0 -1px 0 var(--g-hi-2), var(--g-shadow); border-radius: 26px; }
+html.liquid .card.flat { box-shadow: inset 0 1px 0 var(--g-hi); }
+html.liquid .dialog, html.liquid .dialog header, html.liquid .dialog footer { background: var(--g-dialog); }
+html.liquid .dialog { -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur); border: 1px solid var(--g-edge); border-radius: 26px; box-shadow: inset 0 1px 0 var(--g-hi), 0 24px 70px rgba(0,0,0,.25); }
+html.liquid .plan thead th, html.liquid .plan th.name, html.liquid .plan td.name, html.liquid .plan thead th.name { background: var(--g-fill-1); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+html.liquid .plan th, html.liquid .plan td { border-color: var(--g-edge); }
+html.liquid .blk { border-radius: 12px; background: linear-gradient(180deg, color-mix(in srgb, var(--z) 22%, var(--g-blk)), color-mix(in srgb, var(--z) 32%, var(--g-blk-2))); border: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), inset 3px 0 0 var(--z), 0 2px 10px rgba(0,0,0,.05); }
+html.liquid .blk.seg-cours { background: linear-gradient(180deg, color-mix(in srgb, var(--cours) 18%, var(--g-blk)), color-mix(in srgb, var(--cours) 28%, var(--g-blk-2))); }
+html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid .skill { background: linear-gradient(180deg, var(--g-btn-1), var(--g-btn-2)); border: 1px solid var(--g-edge); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); box-shadow: inset 0 1px 0 var(--g-hi), 0 2px 8px rgba(0,0,0,.06); }
+html.liquid .btn, html.liquid .seg-ctl, html.liquid .skill { border-radius: 999px; }
+html.liquid .btn.primary { background: linear-gradient(180deg, #2b8cff, #0069e6); color: #fff; border-color: rgba(255,255,255,.4); box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 4px 14px rgba(0,113,227,.28); }
+html.liquid .btn.danger { background: linear-gradient(180deg, color-mix(in srgb, var(--danger) 85%, #fff), var(--danger)); color: #fff; }
+html.liquid .seg-ctl button[aria-pressed="true"], html.liquid .daybar button[aria-pressed="true"] { background: var(--g-sel); color: var(--g-sel-fg); border-color: var(--g-edge); box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+html.liquid .daybar button[aria-pressed="true"] b { color: var(--g-sel-fg); }
+html.liquid .skill[aria-pressed="true"] { background: linear-gradient(180deg, var(--accent-soft), color-mix(in srgb, var(--accent-soft) 60%, transparent)); border-color: var(--accent); }
+html.liquid .skill.badgeRouge[aria-pressed="true"] { background: var(--danger-soft); border-color: var(--danger); }
+html.liquid .skill.formation[aria-pressed="true"] { background: var(--warn-soft); border-color: var(--warn); }
+html.liquid .skill.ancien[aria-pressed="true"] { background: var(--ok-soft); border-color: var(--ok); }
+html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 66%, transparent), color-mix(in srgb, var(--bg) 84%, transparent)); -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur); border-top: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), 0 -6px 30px rgba(0,0,0,.06); }
+html.liquid .input { background: var(--g-btn-1); border-color: var(--g-edge); }
+
 </style>
 <div id="app-root"></div>
 <noscript>Cette application a besoin de JavaScript.</noscript>
@@ -2655,6 +2711,12 @@ table.t td.num { white-space: nowrap; }
     return JSON.parse(new TextDecoder().decode(buf)).reference;
   }
 
+  // ---------- Apparence (par appareil) : « verre liquide » par défaut, « classique » au choix ----------
+  const STYLE_KEY = "planning-equipe:style";
+  const readStyle = () => { try { return localStorage.getItem(STYLE_KEY) || "liquide"; } catch { return "liquide"; } };
+  const applyStyle = (v) => document.documentElement.classList.toggle("liquid", v !== "classique");
+  applyStyle(readStyle());
+
   // ---------- Outils DOM ----------
   function h(tag, attrs, ...kids) {
     const el = document.createElement(tag);
@@ -3881,6 +3943,8 @@ table.t td.num { white-space: nowrap; }
     const num = (k, label, unit) => h("label", { class: "f" }, label, h("div", { class: "row" }, h("input", { type: "number", class: "input", style: { width: "90px" }, min: "1", max: "100", value: st[k], disabled: !edit, onChange: (ev) => this.commit([{ type: "setSettings", patch: { [k]: ev.target.value } }]) }), unit));
     const tog = (k, label) => h("label", { class: "check" }, h("input", { type: "checkbox", checked: !!st[k], disabled: !edit, onChange: (ev) => this.commit([{ type: "setSettings", patch: { [k]: ev.target.checked } }]) }), label);
     return h("div", { class: "stack", style: { gap: "16px" } },
+      h("section", { class: "card" }, h("div", { class: "row between" }, h("div", {}, h("h2", {}, "Apparence"), h("p", { class: "small muted" }, "Sur cet appareil seulement.")),
+        h("div", { class: "seg-ctl", role: "group", "aria-label": "Apparence" }, [["liquide", "Verre liquide"], ["classique", "Classique"]].map(([v, l]) => h("button", { type: "button", "aria-pressed": String(readStyle() === v), onClick: (ev) => { try { localStorage.setItem(STYLE_KEY, v); } catch {} applyStyle(v); ev.currentTarget.parentElement.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b === ev.currentTarget))); } }, l))))),
       h("section", { class: "card" }, h("h2", {}, "Zones de travail"), h("p", { class: "small muted" }, "Couleurs reprises du planning papier : vert = zone publique (ZP), orange = zone réservée (ZR). Le motif et le code restent visibles pour les personnes qui distinguent mal les couleurs."),
         h("div", { class: "list" }, s.zones.map((z) => h("div", { class: "item", style: { "flex-wrap": "wrap" } },
           h("span", { class: `blk ${zoneStyle(s, z.id).cls}`, style: { "--z": z.color, width: "64px", "justify-content": "center" } }, h("small", {}, z.short)),
