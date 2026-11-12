@@ -80,15 +80,15 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
     ? new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: .4, roughness: .3, clearcoat: 1, clearcoatRoughness: .08, envMapIntensity: 1.1, transparent: true })
     : new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: .3, roughness: .36, envMapIntensity: .85, transparent: true });
   const mkSilver = () => hi
-    ? new THREE.MeshPhysicalMaterial({ color: 0xd9dce0, metalness: 1, roughness: .14, anisotropy: .5, anisotropyRotation: Math.PI/2, envMapIntensity: 1.3, side: THREE.DoubleSide, transparent: true })
-    : new THREE.MeshStandardMaterial({ color: 0xd9dce0, metalness: 1, roughness: .16, envMapIntensity: 1.3, side: THREE.DoubleSide, transparent: true });
+    ? new THREE.MeshPhysicalMaterial({ color: 0x9a9fa6, metalness: 1, roughness: .22, anisotropy: .5, anisotropyRotation: Math.PI/2, envMapIntensity: 1, side: THREE.DoubleSide, transparent: true })
+    : new THREE.MeshStandardMaterial({ color: 0x9a9fa6, metalness: 1, roughness: .24, envMapIntensity: 1, side: THREE.DoubleSide, transparent: true });
 
   const marker = new THREE.Object3D();
   const cans = [];
   for (let i = 0; i < pool; i++){
     const group = new THREE.Group(), spin = new THREE.Group(); group.add(spin);
     const label = mkLabel(), silver = mkSilver(), silverB = mkSilver(); silver.map = TOPR; silverB.map = BOTR;
-    const lid = new THREE.MeshStandardMaterial({ map: LID, metalness: .95, roughness: .3, envMapIntensity: 1.1, transparent: true, polygonOffset: true, polygonOffsetFactor: -1 });
+    const lid = new THREE.MeshStandardMaterial({ map: LID, color: 0xa4a9b0, metalness: .95, roughness: .3, envMapIntensity: 1, transparent: true, polygonOffset: true, polygonOffsetFactor: -1 });
     spin.add(new THREE.Mesh(G.body, label), new THREE.Mesh(G.top, silver), new THREE.Mesh(G.bot, silverB));
     const l = new THREE.Mesh(G.lid, lid); l.rotation.x = -Math.PI/2; l.position.y = .5495; spin.add(l);
     const sh = new THREE.Mesh(G.shadow, new THREE.MeshBasicMaterial({ map: SHADOW, transparent: true, depthWrite: false, opacity: .5 }));

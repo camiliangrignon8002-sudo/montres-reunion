@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#08060f">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 <link rel="modulepreload" href="./vendor/three.module.min.js">
-<link rel="modulepreload" href="./can3d.js?v=13">
+<link rel="modulepreload" href="./can3d.js?v=14">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,900;1,900&family=JetBrains+Mono:wght@400&display=swap">
@@ -211,13 +211,13 @@ function frame(now){
   // ressort critique : départ et arrivée en douceur, sans à-coup ni rebond
   if (reduce) { pos = target; pvel = 0; }
   else {
-    const w = 6.5, sdt = dt / 1000;
+    const w = 5.2, sdt = dt / 1000;
     for (let n = 0; n < 4; n++){ const a = w*w*(target - pos) - 2*w*pvel; pvel += a * sdt/4; pos += pvel * sdt/4; }
     if (Math.abs(target - pos) < .0006 && Math.abs(pvel) < .002){ pos = target; pvel = 0; }
   }
   const moveV = clamp(pvel / 3, -1, 1);                       // vitesse du carrousel (normalisée)
   // roulement sans glisser : la rotation suit exactement la distance parcourue (≈ 145° par place)
-  const roll = (target - pos) * 145;
+  const roll = (target - pos) * 200;
   const p = sp, mob = M.vw < 760;
   prog.style.transform = `scaleX(${p.toFixed(4)})`;
   const info = p > .08; if (info !== infoOn){ infoOn = info; stage.classList.toggle("info", info); $("#hero").inert = info; }
@@ -272,7 +272,7 @@ function frame(now){
 show(); measure(); addEventListener("load", measure);
 (async () => {
   try {
-    const mod = await import("./can3d.js?v=13");
+    const mod = await import("./can3d.js?v=14");
     gl = await mod.create({ canvas: $("#gl"), lite, mid, onChange: kick, pool: 7 });
     // d'abord la canette affichée et ses voisines, puis toutes les autres
     const order = [...F.keys()].sort((a, b) => Math.min((a-cur+N)%N, (cur-a+N)%N) - Math.min((b-cur+N)%N, (cur-b+N)%N));
