@@ -16,7 +16,7 @@ function lidTexture(){
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
 }
 
-export async function create({ canvas, lite = false, onChange = null }){
+export async function create({ canvas, lite = false, mid = false, onChange = null }){
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
   renderer.setClearColor(0, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -30,9 +30,9 @@ export async function create({ canvas, lite = false, onChange = null }){
   const key = new THREE.DirectionalLight(0xffffff, 1.5); key.position.set(-2.5, 3, 6); scene.add(key);
   const rim = new THREE.DirectionalLight(0xffffff, 1.2); rim.position.set(3, 1, -2); scene.add(rim);
 
-  const SEG = lite ? 48 : 96;
+  const SEG = lite || mid ? 56 : 96;
   // étiquette : vernis brillant (clearcoat) sur l'impression ; métal brossé pour le haut et le bas
-  const label = lite
+  const label = (lite || mid)
     ? new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: .3, roughness: .38, envMapIntensity: .8 })
     : new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: .35, roughness: .32, clearcoat: 1, clearcoatRoughness: .12, envMapIntensity: .85 });
   const silver = new THREE.MeshStandardMaterial({ color: 0xdfe2e6, metalness: 1, roughness: .26, envMapIntensity: 1.15, side: THREE.DoubleSide });
@@ -45,12 +45,12 @@ export async function create({ canvas, lite = false, onChange = null }){
     // corps imprimé
     parts.body = new THREE.Mesh(new THREE.CylinderGeometry(r, r, 1, SEG, 1, true), label);
     // haut : épaule arrondie, goulot, rebord roulé, couvercle en creux
-    const top = [[r,.5],[r*.997,.512],[r*.985,.524],[r*.96,.538],[r*.925,.553],[r*.885,.568],[r*.85,.58],[r*.832,.588],[r*.83,.595],[r*.842,.601],[r*.862,.605],[r*.874,.609],[r*.868,.614],[r*.845,.616],[r*.82,.611],[r*.806,.6],[r*.8,.588],[r*.62,.586],[0,.587]];
+    const top = [[r,.5],[r*.996,.507],[r*.983,.514],[r*.958,.522],[r*.925,.53],[r*.89,.537],[r*.862,.543],[r*.85,.547],[r*.852,.551],[r*.866,.554],[r*.876,.557],[r*.87,.561],[r*.85,.562],[r*.83,.558],[r*.82,.551],[r*.64,.549],[0,.55]];
     parts.top = new THREE.Mesh(new THREE.LatheGeometry(top.map(([x,y]) => new THREE.Vector2(x,y)), SEG), silver);
     // bas : arrondi, anneau d'appui, fond bombé
-    const bot = [[0,-.522],[r*.45,-.528],[r*.66,-.542],[r*.76,-.558],[r*.8,-.566],[r*.84,-.566],[r*.9,-.556],[r*.95,-.54],[r*.985,-.522],[r*.998,-.51],[r,-.5]];
+    const bot = [[0,-.512],[r*.45,-.516],[r*.66,-.524],[r*.76,-.532],[r*.8,-.536],[r*.85,-.536],[r*.91,-.53],[r*.955,-.521],[r*.985,-.511],[r*.998,-.505],[r,-.5]];
     parts.bot = new THREE.Mesh(new THREE.LatheGeometry(bot.map(([x,y]) => new THREE.Vector2(x,y)), SEG), silver);
-    parts.lid = new THREE.Mesh(new THREE.CircleGeometry(r*.8, SEG), lid); parts.lid.rotation.x = -Math.PI/2; parts.lid.position.y = .5875;
+    parts.lid = new THREE.Mesh(new THREE.CircleGeometry(r*.82, SEG), lid); parts.lid.rotation.x = -Math.PI/2; parts.lid.position.y = .5495;
     for (const m of Object.values(parts)) spin.add(m);
     marker.position.set(-r, 0, 0);
   }
@@ -79,7 +79,7 @@ export async function create({ canvas, lite = false, onChange = null }){
   let W = 0, H = 0;
   function resize(){
     W = canvas.clientWidth; H = canvas.clientHeight;
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, lite ? 1.5 : 2));
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, lite ? 1.25 : mid ? 1.6 : 2));
     renderer.setSize(W, H, false);
     camera.aspect = W / Math.max(1, H); camera.updateProjectionMatrix();
     dirty = true;
@@ -116,5 +116,6 @@ export async function create({ canvas, lite = false, onChange = null }){
     }
     return out;
   }
-  return { set, update, resize, setLite(v){ lite = v; resize(); } };
+  function preload(urls){ (function next(i){ if (i >= urls.length) return; load(urls[i]).then(() => setTimeout(() => next(i + 1), 120)); })(0); }
+  return { set, preload, update, resize, setLite(v){ lite = v; resize(); } };
 }
