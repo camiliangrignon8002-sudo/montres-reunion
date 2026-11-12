@@ -335,3 +335,9 @@ table.t td.num { white-space: nowrap; }
 .alt-item .chip { white-space: normal; line-height: 1.4; padding-block: 3px; }
 .blk.seg-cours + .blk.seg-cours { margin-top: 3px; }
 .name-btn .tiny-chip { display: inline-block; width: fit-content; font-size: 10.5px; padding: 1px 6px; margin-top: 3px; }
+.skill-chips { display: flex; flex-wrap: wrap; gap: 4px; min-width: 260px; }
+.skill { border: 1px solid var(--line); background: var(--surface); color: var(--fg-2); border-radius: 999px; padding: 2px 9px; font-size: 12px; cursor: pointer; white-space: nowrap; }
+.skill[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.skill.badgeRouge[aria-pressed="true"] { background: var(--danger-soft); border-color: var(--danger); color: var(--danger); }
+.skill.formation[aria-pressed="true"] { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); }
+.skill.ancien[aria-pressed="true"] { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }

@@ -147,7 +147,12 @@
     const last = new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth() + 1, 0)).getUTCDate();
     return addDays(iso(new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth(), Math.min(d.getUTCDate(), last)))), 15);
   }
-  const inTraining = (emp, date) => !!(emp && emp.training && emp.training.until && (!emp.training.since || date >= emp.training.since) && date < emp.training.until);
+  // Compétence « en formation » cochée : jusqu'à la date de fin si elle est indiquée, sinon jusqu'à ce qu'on la décoche.
+  const inTraining = (emp, date) => !!(emp && emp.training && !emp.training.ended && (!emp.training.since || date >= emp.training.since) && (!emp.training.until || date < emp.training.until));
+  const trainingLabel = (emp) => (emp.training && emp.training.until ? ` (jusqu'au ${fmtDate(addDays(emp.training.until, -1), "short")})` : "");
+  // Compétences cochables. Le badge rouge = droit de travailler en zone réservée (ZR) ; sans lui, ZP seulement.
+  const SKILLS = { badgeRouge: "Badge rouge (ZR)", fdj: "FDJ", ouverture: "Ouverture du magasin", fermeture: "Fermeture du magasin", formation: "En formation", ancien: "Ancien(ne)" };
+  const hasSkill = (emp, k) => !!(emp && (k === "badgeRouge" ? (emp.zones || {}).ZR : emp.skills && emp.skills[k]));
   // Plages (minutes) où la personne en formation est seule dans la zone du bloc : aucune personne confirmée présente.
   function aloneRanges(state, shifts, sh, g) {
     const [a, b] = segRange(g);
@@ -397,7 +402,21 @@
       if (!inTraining(emp, sh.date) || !(sh.segs || []).every((g) => isTime(g.s) && isTime(g.e))) continue;
       for (const g of sh.segs) {
         const gaps = aloneRanges(state, w.shifts, sh, g);
-        if (gaps.length) add("erreur", "TRAINEE_ALONE", sh.emp, sh.date, `${emp.name} est en formation (jusqu'au ${fmtDate(addDays(emp.training.until, -1), "short")}) et serait seul(e) en ${g.z} le ${fmtDate(sh.date, "day")} de ${rangesLabel(gaps)}.`);
+        if (gaps.length) add("erreur", "TRAINEE_ALONE", sh.emp, sh.date, `${emp.name} est en formation${trainingLabel(emp)} et serait seul(e) en ${g.z} le ${fmtDate(sh.date, "day")} de ${rangesLabel(gaps)}.`);
+      }
+    }
+
+    // Ouverture et fermeture : dans chaque zone, la première (ou la dernière) personne présente doit avoir la compétence,
+    // dès qu'au moins une personne de l'équipe l'a cochée.
+    for (const [k, code, label] of [["ouverture", "OPEN_SKILL", "ouvre"], ["fermeture", "CLOSE_SKILL", "ferme"]]) {
+      if (!state.employees.some((e) => e.active !== false && hasSkill(e, k))) continue;
+      for (const d of weekDates(monday)) for (const z of (state.zones || []).map((x) => x.id)) {
+        const segs = [];
+        for (const sh of w.shifts) if (sh.date === d) for (const g of sh.segs || []) if (g.z === z && isTime(g.s) && isTime(g.e)) segs.push({ emp: sh.emp, r: segRange(g) });
+        if (!segs.length) continue;
+        const t = k === "ouverture" ? Math.min(...segs.map((x) => x.r[0])) : Math.max(...segs.map((x) => x.r[1]));
+        const who = [...new Set(segs.filter((x) => (k === "ouverture" ? x.r[0] : x.r[1]) === t).map((x) => x.emp))];
+        if (!who.some((id) => hasSkill(empById(state, id), k))) add("alerte", code, who[0], d, `${z} le ${fmtDate(d, "day")} : ${who.map(nameOf).join(", ")} ${label}${who.length > 1 ? "nt" : ""} à ${fromMin(t)} sans la compétence « ${SKILLS[k].toLowerCase()} ».`);
       }
     }
 
@@ -526,9 +545,24 @@
       if (!restOk) score -= 40;
       score -= notes.length * 5;
       if (templateFor(state, date).some((t) => t.emp === emp.id && segKey(t.segs) === segKey(segs))) score += 10;
+      // Poste d'ouverture ou de fermeture : la compétence compte.
+      for (const [k, first] of [["ouverture", true], ["fermeture", false]]) {
+        if (!opensOrCloses(state, w, date, segs, first) || !state.employees.some((e) => e.active !== false && hasSkill(e, k))) continue;
+        if (hasSkill(emp, k)) score += 15; else { score -= 15; notes.push(`sans la compétence « ${SKILLS[k].toLowerCase()} »`); }
+      }
       out.push({ emp: emp.id, name: emp.name, score, notes, weekMinutes: weekMin, refMinutes: ref, restOk });
     }
     return out.sort((a, b) => b.score - a.score || a.weekMinutes - b.weekMinutes);
+  }
+
+  // Le créneau serait le premier (ou le dernier) de sa zone ce jour-là.
+  function opensOrCloses(state, w, date, segs, first) {
+    return segs.some((g) => {
+      if (!isTime(g.s) || !isTime(g.e)) return false;
+      const [a, b] = segRange(g);
+      const others = w.shifts.filter((x) => x.date === date).flatMap((x) => (x.segs || []).filter((y) => y.z === g.z && isTime(y.s) && isTime(y.e)).map(segRange));
+      return first ? others.every((r) => a <= r[0]) : others.every((r) => b >= r[1]);
+    });
   }
 
   // ---------- Génération ----------
@@ -877,9 +911,9 @@
             if (s.employees.some((x) => x.id !== emp.id && norm(x.name) === norm(n))) { fail(`${n} existe déjà.`); break; }
             emp.name = n;
           }
-          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave", "training", "contractHours", "startedOn", "backOn"]) if (p[k] !== undefined) emp[k] = p[k];
+          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave", "training", "contractHours", "startedOn", "backOn", "skills"]) if (p[k] !== undefined) emp[k] = p[k];
           if (p.onLeave && !isISO(p.onLeave.since)) { fail("Date de début des vacances invalide."); break; }
-          if (p.training && !(isISO(p.training.until) && (!p.training.since || isISO(p.training.since)))) { fail("Date de fin de formation invalide."); break; }
+          if (p.training && !((!p.training.until || isISO(p.training.until)) && (!p.training.since || isISO(p.training.since)))) { fail("Date de fin de formation invalide."); break; }
           if (p.contractHours != null && !(Number(p.contractHours) > 0 && Number(p.contractHours) <= 48)) { fail("Heures du contrat invalides (entre 1 et 48)."); break; }
           if (emp.role === "alternant" && !emp.calendarId && s.calendars[0]) emp.calendarId = s.calendars[0].id;
           if (p.rules) {
@@ -1073,7 +1107,7 @@
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, trainingEnd, inTraining, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };

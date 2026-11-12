@@ -394,3 +394,19 @@ test("nouvelles personnes en formation : jamais seules dans leur zone (même pen
   // Jamais proposée en remplaçante si elle serait seule.
   assert.ok(!C.findCandidates(s, "2026-10-19", [{ s: "15:00", e: "21:00", z: "ZP" }]).some((x) => x.emp === "ruby"));
 });
+
+test("compétences : ouverture et fermeture signalées, formation sans date de fin", () => {
+  let s = withWeek1();
+  // personne n'a la compétence : aucune alerte
+  assert.ok(!C.validateWeek(s, W1).some((i) => i.code === "OPEN_SKILL" || i.code === "CLOSE_SKILL"));
+  s = apply(s, [{ type: "updateEmployee", id: "eric", patch: { skills: { ouverture: true } } }]).state;
+  const open = C.validateWeek(s, W1).filter((i) => i.code === "OPEN_SKILL");
+  assert.ok(open.length > 0);
+  assert.match(open[0].msg, /sans la compétence « ouverture du magasin »/);
+  assert.equal(C.hasSkill(C.empById(s, "eric"), "ouverture"), true);
+  assert.equal(C.hasSkill(C.empById(s, "eric"), "badgeRouge"), !!C.empById(s, "eric").zones.ZR);
+  // en formation sans date de fin : actif jusqu'à ce qu'on décoche
+  const e = { training: { since: "2026-11-01" } };
+  assert.equal(C.inTraining(e, "2027-06-01"), true);
+  assert.equal(C.inTraining({ training: { since: "2026-11-01", ended: "2026-11-12" } }, "2026-11-20"), false);
+});

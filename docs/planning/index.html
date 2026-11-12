@@ -354,6 +354,12 @@ table.t td.num { white-space: nowrap; }
 .alt-item .chip { white-space: normal; line-height: 1.4; padding-block: 3px; }
 .blk.seg-cours + .blk.seg-cours { margin-top: 3px; }
 .name-btn .tiny-chip { display: inline-block; width: fit-content; font-size: 10.5px; padding: 1px 6px; margin-top: 3px; }
+.skill-chips { display: flex; flex-wrap: wrap; gap: 4px; min-width: 260px; }
+.skill { border: 1px solid var(--line); background: var(--surface); color: var(--fg-2); border-radius: 999px; padding: 2px 9px; font-size: 12px; cursor: pointer; white-space: nowrap; }
+.skill[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+.skill.badgeRouge[aria-pressed="true"] { background: var(--danger-soft); border-color: var(--danger); color: var(--danger); }
+.skill.formation[aria-pressed="true"] { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); }
+.skill.ancien[aria-pressed="true"] { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
 
 </style>
 <div id="app-root"></div>
@@ -880,6 +886,10 @@ table.t td.num { white-space: nowrap; }
       back: { sonia: "2026-11-16" },
       returnFrom: { nathalie: "2026-11-16" },
     }, {
+      id: "competences",
+      summary: "Compétences ajoutées à chaque personne (badge rouge, FDJ, ouverture, fermeture, en formation, ancien(ne)) : tout le monde peut travailler en ZP",
+      skillsInit: true,
+    }, {
       id: "semaine-1611-modif",
       summary: "Planning du 16/11 modifié : Reine Claude en zone publique mercredi, jeudi et samedi",
       validatePaperWeeks: true,
@@ -1067,7 +1077,12 @@ table.t td.num { white-space: nowrap; }
     const last = new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth() + 1, 0)).getUTCDate();
     return addDays(iso(new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth(), Math.min(d.getUTCDate(), last)))), 15);
   }
-  const inTraining = (emp, date) => !!(emp && emp.training && emp.training.until && (!emp.training.since || date >= emp.training.since) && date < emp.training.until);
+  // Compétence « en formation » cochée : jusqu'à la date de fin si elle est indiquée, sinon jusqu'à ce qu'on la décoche.
+  const inTraining = (emp, date) => !!(emp && emp.training && !emp.training.ended && (!emp.training.since || date >= emp.training.since) && (!emp.training.until || date < emp.training.until));
+  const trainingLabel = (emp) => (emp.training && emp.training.until ? ` (jusqu'au ${fmtDate(addDays(emp.training.until, -1), "short")})` : "");
+  // Compétences cochables. Le badge rouge = droit de travailler en zone réservée (ZR) ; sans lui, ZP seulement.
+  const SKILLS = { badgeRouge: "Badge rouge (ZR)", fdj: "FDJ", ouverture: "Ouverture du magasin", fermeture: "Fermeture du magasin", formation: "En formation", ancien: "Ancien(ne)" };
+  const hasSkill = (emp, k) => !!(emp && (k === "badgeRouge" ? (emp.zones || {}).ZR : emp.skills && emp.skills[k]));
   // Plages (minutes) où la personne en formation est seule dans la zone du bloc : aucune personne confirmée présente.
   function aloneRanges(state, shifts, sh, g) {
     const [a, b] = segRange(g);
@@ -1317,7 +1332,21 @@ table.t td.num { white-space: nowrap; }
       if (!inTraining(emp, sh.date) || !(sh.segs || []).every((g) => isTime(g.s) && isTime(g.e))) continue;
       for (const g of sh.segs) {
         const gaps = aloneRanges(state, w.shifts, sh, g);
-        if (gaps.length) add("erreur", "TRAINEE_ALONE", sh.emp, sh.date, `${emp.name} est en formation (jusqu'au ${fmtDate(addDays(emp.training.until, -1), "short")}) et serait seul(e) en ${g.z} le ${fmtDate(sh.date, "day")} de ${rangesLabel(gaps)}.`);
+        if (gaps.length) add("erreur", "TRAINEE_ALONE", sh.emp, sh.date, `${emp.name} est en formation${trainingLabel(emp)} et serait seul(e) en ${g.z} le ${fmtDate(sh.date, "day")} de ${rangesLabel(gaps)}.`);
+      }
+    }
+
+    // Ouverture et fermeture : dans chaque zone, la première (ou la dernière) personne présente doit avoir la compétence,
+    // dès qu'au moins une personne de l'équipe l'a cochée.
+    for (const [k, code, label] of [["ouverture", "OPEN_SKILL", "ouvre"], ["fermeture", "CLOSE_SKILL", "ferme"]]) {
+      if (!state.employees.some((e) => e.active !== false && hasSkill(e, k))) continue;
+      for (const d of weekDates(monday)) for (const z of (state.zones || []).map((x) => x.id)) {
+        const segs = [];
+        for (const sh of w.shifts) if (sh.date === d) for (const g of sh.segs || []) if (g.z === z && isTime(g.s) && isTime(g.e)) segs.push({ emp: sh.emp, r: segRange(g) });
+        if (!segs.length) continue;
+        const t = k === "ouverture" ? Math.min(...segs.map((x) => x.r[0])) : Math.max(...segs.map((x) => x.r[1]));
+        const who = [...new Set(segs.filter((x) => (k === "ouverture" ? x.r[0] : x.r[1]) === t).map((x) => x.emp))];
+        if (!who.some((id) => hasSkill(empById(state, id), k))) add("alerte", code, who[0], d, `${z} le ${fmtDate(d, "day")} : ${who.map(nameOf).join(", ")} ${label}${who.length > 1 ? "nt" : ""} à ${fromMin(t)} sans la compétence « ${SKILLS[k].toLowerCase()} ».`);
       }
     }
 
@@ -1446,9 +1475,24 @@ table.t td.num { white-space: nowrap; }
       if (!restOk) score -= 40;
       score -= notes.length * 5;
       if (templateFor(state, date).some((t) => t.emp === emp.id && segKey(t.segs) === segKey(segs))) score += 10;
+      // Poste d'ouverture ou de fermeture : la compétence compte.
+      for (const [k, first] of [["ouverture", true], ["fermeture", false]]) {
+        if (!opensOrCloses(state, w, date, segs, first) || !state.employees.some((e) => e.active !== false && hasSkill(e, k))) continue;
+        if (hasSkill(emp, k)) score += 15; else { score -= 15; notes.push(`sans la compétence « ${SKILLS[k].toLowerCase()} »`); }
+      }
       out.push({ emp: emp.id, name: emp.name, score, notes, weekMinutes: weekMin, refMinutes: ref, restOk });
     }
     return out.sort((a, b) => b.score - a.score || a.weekMinutes - b.weekMinutes);
+  }
+
+  // Le créneau serait le premier (ou le dernier) de sa zone ce jour-là.
+  function opensOrCloses(state, w, date, segs, first) {
+    return segs.some((g) => {
+      if (!isTime(g.s) || !isTime(g.e)) return false;
+      const [a, b] = segRange(g);
+      const others = w.shifts.filter((x) => x.date === date).flatMap((x) => (x.segs || []).filter((y) => y.z === g.z && isTime(y.s) && isTime(y.e)).map(segRange));
+      return first ? others.every((r) => a <= r[0]) : others.every((r) => b >= r[1]);
+    });
   }
 
   // ---------- Génération ----------
@@ -1797,9 +1841,9 @@ table.t td.num { white-space: nowrap; }
             if (s.employees.some((x) => x.id !== emp.id && norm(x.name) === norm(n))) { fail(`${n} existe déjà.`); break; }
             emp.name = n;
           }
-          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave", "training", "contractHours", "startedOn", "backOn"]) if (p[k] !== undefined) emp[k] = p[k];
+          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave", "training", "contractHours", "startedOn", "backOn", "skills"]) if (p[k] !== undefined) emp[k] = p[k];
           if (p.onLeave && !isISO(p.onLeave.since)) { fail("Date de début des vacances invalide."); break; }
-          if (p.training && !(isISO(p.training.until) && (!p.training.since || isISO(p.training.since)))) { fail("Date de fin de formation invalide."); break; }
+          if (p.training && !((!p.training.until || isISO(p.training.until)) && (!p.training.since || isISO(p.training.since)))) { fail("Date de fin de formation invalide."); break; }
           if (p.contractHours != null && !(Number(p.contractHours) > 0 && Number(p.contractHours) <= 48)) { fail("Heures du contrat invalides (entre 1 et 48)."); break; }
           if (emp.role === "alternant" && !emp.calendarId && s.calendars[0]) emp.calendarId = s.calendars[0].id;
           if (p.rules) {
@@ -1993,7 +2037,7 @@ table.t td.num { white-space: nowrap; }
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, trainingEnd, inTraining, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };
@@ -2412,6 +2456,7 @@ table.t td.num { white-space: nowrap; }
         "5. Un jour sans information dans le calendrier d'alternance n'est pas un jour disponible.",
         "5 bis. Alternants : les heures de cours au CFA comptent dans les 35 h (cours + travail = 35 h par semaine). Un jour de cours, on peut travailler en dehors des heures de cours, jamais pendant.",
         "5 ter. Une personne « en formation » (nouvelle, pendant un mois et demi) ne reste jamais seule dans sa zone, même 10 minutes ou pendant la pause d'un collègue : il faut toujours une personne confirmée en même temps dans la même zone.",
+        "5 quater. Compétences : sans « badge rouge », jamais en ZR (ZP seulement). La première personne d'une zone doit avoir « ouverture du magasin » et la dernière « fermeture du magasin » quand quelqu'un dans l'équipe a ces compétences.",
         "6. Si une proposition renvoie des alertes, résume-les en une ligne chacune.",
         "7. Réponds sans titres ni tableaux Markdown ; des listes courtes sont permises.",
       ].join("\n\n");
@@ -2480,7 +2525,7 @@ table.t td.num { white-space: nowrap; }
             return s().employees.filter((e) => e.active !== false).map((e) => {
               const sh = w && w.shifts.find((x) => x.emp === e.id && x.date === d);
               const ab = C.absencesOn(s(), e.id, d)[0]; const cs = C.calStatus(s(), e, d);
-              return { prenom: e.name, zones: Object.keys(e.zones || {}).join(",") || "aucune", etat: sh ? `travaille ${fmtShift(sh)}` : ab ? `absent(e) : ${C.ABSENCE_TYPES[ab.type]}` : cs === "formation" ? (C.courseRanges(s(), e, d) ? `en cours au CFA (${C.rangesLabel(C.courseRanges(s(), e, d))}), libre en dehors` : "en cours au CFA") : cs === "inconnu" ? "statut d'alternance inconnu" : "libre" };
+              return { prenom: e.name, zones: Object.keys(e.zones || {}).join(",") || "aucune", competences: Object.keys(C.SKILLS).filter((k) => k === "formation" ? C.inTraining(e, d) : C.hasSkill(e, k)).map((k) => C.SKILLS[k]).join(", ") || "aucune", etat: sh ? `travaille ${fmtShift(sh)}` : ab ? `absent(e) : ${C.ABSENCE_TYPES[ab.type]}` : cs === "formation" ? (C.courseRanges(s(), e, d) ? `en cours au CFA (${C.rangesLabel(C.courseRanges(s(), e, d))}), libre en dehors` : "en cours au CFA") : cs === "inconnu" ? "statut d'alternance inconnu" : "libre" };
             });
           },
         },
@@ -3156,7 +3201,7 @@ table.t td.num { white-space: nowrap; }
         }),
         h("th", { class: "tot" }, "Total"))),
       h("tbody", {}, grid.rows.map((row) => h("tr", { class: row.emp.active === false ? "inactive" : "" },
-        h("td", { class: "name" }, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"), C.weekDates(grid.monday).some((d) => C.inTraining(row.emp, d)) ? h("span", { class: "chip warn tiny-chip", title: "Nouvelle personne : jamais seule dans sa zone" }, "En formation") : null)),
+        h("td", { class: "name" }, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"), C.weekDates(grid.monday).some((d) => C.inTraining(row.emp, d)) ? h("span", { class: "chip warn tiny-chip", title: "Jamais seule, à aucun moment" }, "En formation") : C.hasSkill(row.emp, "ancien") ? h("span", { class: "chip tiny-chip", title: "Personne expérimentée" }, "Ancien(ne)") : null)),
         row.cells.map((cell) => {
           const k = row.emp.id + "|" + cell.date, lvl = cellIssue[k];
           const kids = [];
@@ -3694,27 +3739,71 @@ table.t td.num { white-space: nowrap; }
       past.length ? h("details", { class: "card" }, h("summary", {}, `Passées (${past.length})`), h("div", { class: "list" }, past.slice(0, 60).map(row))) : null);
   } };
 
+  // ---------- Compétences ----------
+  const SKILL_KEYS = ["badgeRouge", "fdj", "ouverture", "fermeture", "formation", "ancien"];
+  const SKILL_HELP = {
+    badgeRouge: "Peut travailler en zone réservée (ZR). Sans badge rouge : zone publique (ZP) seulement.",
+    fdj: "Peut tenir la Française des Jeux.",
+    ouverture: "Peut ouvrir le magasin : la première personne de la zone doit l'avoir.",
+    fermeture: "Peut fermer le magasin : la dernière personne de la zone doit l'avoir.",
+    formation: "Ne reste jamais seule, à aucun moment : toujours avec quelqu'un qui n'est pas en formation.",
+    ancien: "Étiquette : personne expérimentée.",
+  };
+  App.skillOn = function (e, k) { return k === "formation" ? C.inTraining(e, this.today()) || !!(e.training && !e.training.ended && e.training.since > this.today()) : C.hasSkill(e, k); };
+  App.skillOps = function (e, k, on) {
+    if (k === "badgeRouge") {
+      const zones = { ...(e.zones || {}) };
+      if (on) zones.ZR = "confirme"; else delete zones.ZR;
+      if (!zones.ZP) zones.ZP = "confirme";
+      return [{ type: "setZones", emp: e.id, zones }];
+    }
+    const skills = { ...(e.skills || {}) };
+    const patch = {};
+    if (k === "formation") {
+      const t = this.today();
+      patch.training = on ? { since: t, until: C.trainingEnd(t) } : { ...(e.training || {}), ended: t };
+      skills.ancien = !on;
+    } else {
+      skills[k] = on;
+      if (k === "ancien" && on && this.skillOn(e, "formation")) patch.training = { ...(e.training || {}), ended: this.today() };
+    }
+    patch.skills = skills;
+    return [{ type: "updateEmployee", id: e.id, patch }];
+  };
+  App.skillChips = function (e) {
+    return h("div", { class: "skill-chips" }, SKILL_KEYS.map((k) => {
+      const on = this.skillOn(e, k);
+      return Store.canWrite
+        ? h("button", { type: "button", class: `skill ${k}`, "aria-pressed": String(on), title: SKILL_HELP[k], onClick: () => this.commit(this.skillOps(e, k, !on), { summary: `${e.name} : ${C.SKILLS[k]} ${on ? "retiré(e)" : "ajouté(e)"}` }) }, C.SKILLS[k])
+        : on ? h("span", { class: `skill ${k}`, "aria-pressed": "true", title: SKILL_HELP[k] }, C.SKILLS[k]) : null;
+    }));
+  };
+
   // ---------- Équipe ----------
   SCREENS.team = { title: "Équipe", render() {
     const s = this.state;
     const name = h("input", { class: "input", id: "team-name", placeholder: "Prénom", maxlength: "40" });
     const role = h("select", { class: "input", id: "team-role" }, h("option", { value: "salarie" }, "Salarié(e)"), h("option", { value: "alternant" }, "Alternant(e)"));
-    const zc = s.zones.map((z) => h("label", { class: "check" }, h("input", { type: "checkbox", value: z.id }), zoneTag(s, z.id), z.name));
+    const badge = h("input", { type: "checkbox", id: "team-badge" });
+    const newTr = h("input", { type: "checkbox", id: "team-train", checked: true });
     return h("div", { class: "stack", style: { gap: "16px" } },
       Store.canWrite ? h("section", { class: "card" }, h("h2", {}, "Ajouter une personne"),
         h("form", { class: "stack", onSubmit: async (e) => {
           e.preventDefault();
-          const zonesList = zc.map((c) => c.querySelector("input")).filter((i) => i.checked).map((i) => i.value);
-          const r = await this.commit([{ type: "addEmployee", employee: { name: name.value, role: role.value, zonesList } }]);
+          const zonesList = badge.checked ? ["ZP", "ZR"] : ["ZP"];
+          const id = C.slug(name.value);
+          const t = this.today();
+          const r = await this.commit([{ type: "addEmployee", employee: { name: name.value, role: role.value, zonesList } },
+            ...(C.empById(this.state, id) ? [] : [{ type: "updateEmployee", id, patch: newTr.checked ? { startedOn: t, training: { since: t, until: C.trainingEnd(t) }, skills: { ancien: false } } : { skills: { ancien: true } } }])]);
           if (r.ok) { name.value = ""; }
-        } }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("div", { class: "row" }, h("span", { class: "small muted" }, "Zones autorisées :"), zc), h("div", {}, h("button", { type: "submit", class: "btn primary" }, "Ajouter"))),
+        } }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("div", { class: "row" }, h("label", { class: "check", title: SKILL_HELP.badgeRouge }, badge, "Badge rouge (peut travailler en ZR)"), h("label", { class: "check", title: SKILL_HELP.formation }, newTr, "Nouvelle personne : en formation un mois et demi")), h("p", { class: "small muted" }, "Les autres compétences (FDJ, ouverture, fermeture…) se cochent dans la liste ci-dessous."), h("div", {}, h("button", { type: "submit", class: "btn primary" }, "Ajouter"))),
       ) : null,
       h("section", { class: "card" }, h("h2", {}, `${s.employees.length} personnes`), h("div", { class: "t-wrap" }, h("table", { class: "t" },
-        h("thead", {}, h("tr", {}, h("th", {}, "Prénom"), h("th", {}, "Statut"), h("th", {}, "Zones"), h("th", {}, "Heures du modèle"), h("th", {}, "Règles"), h("th", {}, "Active"), h("th", {}, ""))),
+        h("thead", {}, h("tr", {}, h("th", {}, "Prénom"), h("th", {}, "Statut"), h("th", {}, "Compétences"), h("th", {}, "Heures du modèle"), h("th", {}, "Règles"), h("th", {}, "Active"), h("th", {}, ""))),
         h("tbody", {}, s.employees.map((e) => h("tr", {},
           h("td", {}, h("b", {}, e.name), (e.aliases || []).length ? h("div", { class: "tiny muted" }, `aussi : ${e.aliases.join(", ")}`) : null),
-          h("td", {}, e.role === "alternant" ? h("span", { class: "chip cours" }, "Alternant(e)") : "Salarié(e)", C.inTraining(e, this.today()) || (e.training && e.training.since > this.today()) ? h("div", {}, h("span", { class: "chip warn", title: "Jamais seule dans sa zone pendant la formation" }, `En formation jusqu'au ${C.fmtDate(C.addDays(e.training.until, -1), "short")}`)) : null, e.contractHours ? h("div", { class: "tiny muted" }, `Contrat ${e.contractHours} h`) : null),
-          h("td", {}, h("div", { class: "row" }, Object.entries(e.zones || {}).map(([z, lv]) => h("span", { class: "row", style: { gap: "3px" } }, zoneTag(s, z), lv === "incertain" ? h("span", { class: "chip warn" }, "?") : null)), !Object.keys(e.zones || {}).length ? h("span", { class: "chip warn" }, "inconnue") : null)),
+          h("td", {}, e.role === "alternant" ? h("span", { class: "chip cours" }, "Alternant(e)") : "Salarié(e)", e.contractHours ? h("div", { class: "tiny muted" }, `Contrat ${e.contractHours} h`) : null),
+          h("td", {}, this.skillChips(e), e.training && e.training.until && this.skillOn(e, "formation") ? h("div", { class: "tiny muted" }, `En formation jusqu'au ${C.fmtDate(C.addDays(e.training.until, -1), "short")}`) : null),
           h("td", { class: "num" }, C.fmtHours(C.templateMinutes(s, e.id))),
           h("td", { class: "small" }, rulesText(e) || h("span", { class: "muted" }, "—")),
           h("td", {}, Store.canWrite ? h("input", { type: "checkbox", checked: e.active !== false, "aria-label": `${e.name} active`, onChange: (ev) => this.commit([{ type: "updateEmployee", id: e.id, patch: { active: ev.target.checked } }]) }) : (e.active !== false ? "Oui" : "Non")),
@@ -3733,9 +3822,12 @@ table.t td.num { white-space: nowrap; }
     const sameWe = h("input", { type: "checkbox", id: "emp-same-we", checked: !!r.sameWeekends });
     const maxEndIn = h("input", { type: "time", class: "input", id: "emp-max-end", value: r.maxEnd || "" });
     const tr = e.training || {};
-    const trOn = h("input", { type: "checkbox", id: "emp-train", checked: !!(tr.until && tr.until > this.today()) });
+    const trOn = h("input", { type: "checkbox", id: "emp-train", checked: this.skillOn(e, "formation") });
+    const sk = Object.fromEntries(["badgeRouge", "fdj", "ouverture", "fermeture", "ancien"].map((k) => [k, h("input", { type: "checkbox", id: `emp-skill-${k}`, checked: this.skillOn(e, k) })]));
+    trOn.addEventListener("change", () => { if (trOn.checked) sk.ancien.checked = false; });
+    sk.ancien.addEventListener("change", () => { if (sk.ancien.checked) trOn.checked = false; });
     const trSince = h("input", { type: "date", class: "input", id: "emp-train-since", value: tr.since || e.startedOn || this.today() });
-    const trUntil = h("input", { type: "date", class: "input", id: "emp-train-until", value: tr.until ? C.addDays(tr.until, -1) : C.addDays(C.trainingEnd(trSince.value), -1) });
+    const trUntil = h("input", { type: "date", class: "input", id: "emp-train-until", value: tr.until ? C.addDays(tr.until, -1) : tr.since ? "" : C.addDays(C.trainingEnd(trSince.value), -1) });
     trSince.addEventListener("change", () => { if (C.isISO(trSince.value)) trUntil.value = C.addDays(C.trainingEnd(trSince.value), -1); });
     const contractIn = h("input", { type: "number", class: "input", id: "emp-contract", min: "1", max: "48", step: "0.5", value: e.contractHours || "", placeholder: String(s.settings.contractHours || 35) });
     openDialog({ title: e.name, body: h("div", { class: "stack" }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("label", { class: "f" }, "Autres écritures (séparées par des virgules)", aliases),
@@ -3746,10 +3838,11 @@ table.t td.num { white-space: nowrap; }
       h("div", { class: "stack", style: { gap: "4px" } }, h("span", { class: "small muted" }, "Jours de repos fixes (jamais de créneau ces jours-là) :"), h("div", { class: "row" }, offBoxes)),
       r.note ? h("p", { class: "small muted" }, `Consigne : ${r.note}`) : null,
       h("label", { class: "f" }, "Heures par semaine (contrat)", contractIn),
-      h("h3", {}, "Nouvelle personne"),
-      h("label", { class: "check" }, trOn, "En formation : ne reste jamais seule dans sa zone"),
-      h("div", { class: "form-grid" }, h("label", { class: "f" }, "Arrivée", trSince), h("label", { class: "f" }, "En formation jusqu'au", trUntil)),
-      h("p", { class: "small muted" }, "Un mois et demi après l'arrivée par défaut. Ensuite, la mention disparaît d'elle-même."),
+      h("h3", {}, "Compétences"),
+      h("div", { class: "stack", style: { gap: "6px" } }, ["badgeRouge", "fdj", "ouverture", "fermeture"].map((k) => h("label", { class: "check", title: SKILL_HELP[k] }, sk[k], h("span", {}, h("b", {}, C.SKILLS[k]), h("span", { class: "small muted" }, ` — ${SKILL_HELP[k]}`)))),
+        h("label", { class: "check" }, trOn, h("span", {}, h("b", {}, "En formation"), h("span", { class: "small muted" }, ` — ${SKILL_HELP.formation}`))),
+        h("div", { class: "form-grid" }, h("label", { class: "f" }, "Depuis le", trSince), h("label", { class: "f" }, "Jusqu'au (vide = jusqu'à ce qu'on décoche)", trUntil)),
+        h("label", { class: "check" }, sk.ancien, h("span", {}, h("b", {}, "Ancien(ne)"), h("span", { class: "small muted" }, ` — ${SKILL_HELP.ancien}`)))),
       h("p", { class: "small muted" }, "Les zones se règlent dans « Zones et règles ». Une personne qui a des horaires ne peut pas être supprimée : désactivez-la pour garder l'historique.")),
       actions: [
         { label: "Supprimer", danger: true, onClick: async () => { if (!(await confirmDialog(`Supprimer ${e.name} ?`, "Possible seulement si la personne n'a aucun horaire enregistré ni dans le modèle.", "Supprimer", true))) return false; return (await this.commit([{ type: "removeEmployee", id }])).ok; } },
@@ -3758,10 +3851,15 @@ table.t td.num { white-space: nowrap; }
           const daysOff = offBoxes.map((b) => b.querySelector("input")).filter((i) => i.checked).map((i) => Number(i.value));
           if (fixOn.checked && (!C.isTime(fixS.value) || !C.isTime(fixE.value))) { toast("Indiquez le début et la fin des horaires fixes.", "err"); return false; }
           const rules = { ...r, fixedHours: fixOn.checked ? { s: fixS.value, e: fixE.value } : null, daysOff: daysOff.length ? daysOff : null, sameWeekends: sameWe.checked, maxEnd: maxEndIn.value || null };
-          if (trOn.checked && !(C.isISO(trSince.value) && C.isISO(trUntil.value) && trUntil.value >= trSince.value)) { toast("Indiquez l'arrivée et la fin de la formation.", "err"); return false; }
-          const training = trOn.checked ? { since: trSince.value, until: C.addDays(trUntil.value, 1) } : e.training ? { ...e.training, until: e.training.since && e.training.since <= this.today() ? this.today() : e.training.until, ended: true } : undefined;
+          if (trOn.checked && !(C.isISO(trSince.value) && (!trUntil.value || (C.isISO(trUntil.value) && trUntil.value >= trSince.value)))) { toast("Indiquez le début de la formation (et une fin après le début).", "err"); return false; }
+          const training = trOn.checked ? { since: trSince.value, ...(trUntil.value ? { until: C.addDays(trUntil.value, 1) } : {}) } : e.training ? { ...e.training, ended: e.training.ended || this.today() } : undefined;
           const contractHours = contractIn.value ? Number(contractIn.value) : null;
-          return (await this.commit([{ type: "updateEmployee", id, patch: { name: name.value, role: role.value, aliases: aliases.value.split(",").map((x) => x.trim()).filter(Boolean), rules, training, contractHours } }])).ok;
+          const skills = { ...(e.skills || {}), fdj: sk.fdj.checked, ouverture: sk.ouverture.checked, fermeture: sk.fermeture.checked, ancien: sk.ancien.checked };
+          const zones = { ...(e.zones || {}) };
+          if (sk.badgeRouge.checked) zones.ZR = zones.ZR || "confirme"; else delete zones.ZR;
+          if (!zones.ZP) zones.ZP = "confirme";
+          const zoneOps = JSON.stringify(zones) !== JSON.stringify(e.zones || {}) ? [{ type: "setZones", emp: id, zones }] : [];
+          return (await this.commit([{ type: "updateEmployee", id, patch: { name: name.value, role: role.value, aliases: aliases.value.split(",").map((x) => x.trim()).filter(Boolean), rules, training, contractHours, skills } }, ...zoneOps])).ok;
         } },
       ] });
   };
@@ -4193,6 +4291,12 @@ table.t td.num { white-space: nowrap; }
         const e = C.empById(this.state, id);
         if (!e || !e.onLeave || !(from > e.onLeave.since)) continue;
         ops.push({ type: "addAbsence", absence: { emp: id, type: e.onLeave.type || "vacances", from: e.onLeave.since, to: C.addDays(from, -1), note: "retour d'après le planning papier" } }, { type: "updateEmployee", id, patch: { onLeave: null } });
+      }
+      // Compétences : tout le monde peut travailler en ZP ; le badge rouge (ZR) reprend les zones déjà autorisées ;
+      // « ancien(ne) » pour chaque personne qui n'est pas en formation.
+      if (u.skillsInit) for (const e of this.state.employees) {
+        if (!(e.zones || {}).ZP) ops.push({ type: "setZones", emp: e.id, zones: { ...(e.zones || {}), ZP: "confirme" } });
+        if (!e.skills) ops.push({ type: "updateEmployee", id: e.id, patch: { skills: { ancien: !this.skillOn(e, "formation") } } });
       }
       for (const [id, from] of Object.entries(u.back || {})) if (C.empById(this.state, id)) ops.push({ type: "updateEmployee", id, patch: { active: true, leftOn: null, backOn: from } });
       for (const [id, leave] of Object.entries(u.onLeave || {})) if (C.empById(this.state, id)) ops.push({ type: "updateEmployee", id, patch: { onLeave: leave } });

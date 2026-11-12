@@ -519,6 +519,10 @@
       back: { sonia: "2026-11-16" },
       returnFrom: { nathalie: "2026-11-16" },
     }, {
+      id: "competences",
+      summary: "Compétences ajoutées à chaque personne (badge rouge, FDJ, ouverture, fermeture, en formation, ancien(ne)) : tout le monde peut travailler en ZP",
+      skillsInit: true,
+    }, {
       id: "semaine-1611-modif",
       summary: "Planning du 16/11 modifié : Reine Claude en zone publique mercredi, jeudi et samedi",
       validatePaperWeeks: true,

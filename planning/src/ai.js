@@ -53,6 +53,7 @@
         "5. Un jour sans information dans le calendrier d'alternance n'est pas un jour disponible.",
         "5 bis. Alternants : les heures de cours au CFA comptent dans les 35 h (cours + travail = 35 h par semaine). Un jour de cours, on peut travailler en dehors des heures de cours, jamais pendant.",
         "5 ter. Une personne « en formation » (nouvelle, pendant un mois et demi) ne reste jamais seule dans sa zone, même 10 minutes ou pendant la pause d'un collègue : il faut toujours une personne confirmée en même temps dans la même zone.",
+        "5 quater. Compétences : sans « badge rouge », jamais en ZR (ZP seulement). La première personne d'une zone doit avoir « ouverture du magasin » et la dernière « fermeture du magasin » quand quelqu'un dans l'équipe a ces compétences.",
         "6. Si une proposition renvoie des alertes, résume-les en une ligne chacune.",
         "7. Réponds sans titres ni tableaux Markdown ; des listes courtes sont permises.",
       ].join("\n\n");
@@ -121,7 +122,7 @@
             return s().employees.filter((e) => e.active !== false).map((e) => {
               const sh = w && w.shifts.find((x) => x.emp === e.id && x.date === d);
               const ab = C.absencesOn(s(), e.id, d)[0]; const cs = C.calStatus(s(), e, d);
-              return { prenom: e.name, zones: Object.keys(e.zones || {}).join(",") || "aucune", etat: sh ? `travaille ${fmtShift(sh)}` : ab ? `absent(e) : ${C.ABSENCE_TYPES[ab.type]}` : cs === "formation" ? (C.courseRanges(s(), e, d) ? `en cours au CFA (${C.rangesLabel(C.courseRanges(s(), e, d))}), libre en dehors` : "en cours au CFA") : cs === "inconnu" ? "statut d'alternance inconnu" : "libre" };
+              return { prenom: e.name, zones: Object.keys(e.zones || {}).join(",") || "aucune", competences: Object.keys(C.SKILLS).filter((k) => k === "formation" ? C.inTraining(e, d) : C.hasSkill(e, k)).map((k) => C.SKILLS[k]).join(", ") || "aucune", etat: sh ? `travaille ${fmtShift(sh)}` : ab ? `absent(e) : ${C.ABSENCE_TYPES[ab.type]}` : cs === "formation" ? (C.courseRanges(s(), e, d) ? `en cours au CFA (${C.rangesLabel(C.courseRanges(s(), e, d))}), libre en dehors` : "en cours au CFA") : cs === "inconnu" ? "statut d'alternance inconnu" : "libre" };
             });
           },
         },

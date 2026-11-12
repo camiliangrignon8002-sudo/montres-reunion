@@ -210,9 +210,18 @@ const MOCK = `
     // ajout d'un employé
     await page.click('.side [data-screen="team"]');
     await page.fill("#team-name", "Inès");
-    await page.click('label.check:has-text("Zone publique") input');
     await page.click("text=Ajouter >> nth=-1");
     await page.waitForTimeout(150);
+    const ines = await page.evaluate(() => { const e = PlanningApp.state.employees.find((x) => x.id === "ines"); return { zones: Object.keys(e.zones).join(), tr: PlanningCore.inTraining(e, PlanningApp.today()), anc: !!(e.skills && e.skills.ancien) }; });
+    check("nouvel employé : ZP seulement (pas de badge rouge), en formation", ines.zones === "ZP" && ines.tr && !ines.anc, JSON.stringify(ines));
+    // compétences cochables : badge rouge → ZR autorisée ; décocher « en formation » → ancien(ne)
+    await page.click('tr:has(b:text-is("Inès")) button.skill.badgeRouge'); await page.waitForTimeout(150);
+    await page.click('tr:has(b:text-is("Inès")) button.skill.formation'); await page.waitForTimeout(150);
+    await page.click('tr:has(b:text-is("Inès")) button.skill.fdj'); await page.waitForTimeout(150);
+    const ines2 = await page.evaluate(() => { const e = PlanningApp.state.employees.find((x) => x.id === "ines"); return { zones: Object.keys(e.zones).sort().join(), tr: PlanningCore.inTraining(e, PlanningApp.today()), anc: !!e.skills.ancien, fdj: !!e.skills.fdj }; });
+    check("compétences : badge rouge (ZR), FDJ, fin de formation → ancien(ne)", ines2.zones === "ZP,ZR" && !ines2.tr && ines2.anc && ines2.fdj, JSON.stringify(ines2));
+    const sk = await page.evaluate(() => { const st = PlanningApp.state; return { allZP: st.employees.every((e) => e.zones.ZP), anc: st.employees.filter((e) => e.skills && e.skills.ancien).length, lana: !!(st.employees.find((e) => e.id === "lana").skills || {}).ancien, nat: Object.keys(st.employees.find((e) => e.id === "nathalie").zones).sort().join() }; });
+    check("compétences initialisées : tout le monde en ZP, nouvelles pas ancien(ne)", sk.allZP && !sk.lana && sk.anc > 10 && sk.nat === "ZP,ZR", JSON.stringify(sk));
     await page.click('.side [data-screen="week"]');
     check("nouvel employé : une ligne de plus dans le planning", await page.isVisible('td.name b:text-is("Inès")'));
 
