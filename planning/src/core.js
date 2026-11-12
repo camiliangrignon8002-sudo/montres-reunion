@@ -140,16 +140,16 @@
   const empById = (state, id) => state.employees.find((e) => e.id === id);
 
   // ---------- Nouvelles personnes en formation ----------
-  // Pendant un mois et demi après l'arrivée, la personne ne reste jamais seule dans sa zone.
+  // Tant que « en formation » est cochée, la personne ne reste jamais seule dans sa zone.
   function trainingEnd(since) {
     const d = parseISO(since); if (!d) return null;
     const m = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1));
     const last = new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth() + 1, 0)).getUTCDate();
     return addDays(iso(new Date(Date.UTC(m.getUTCFullYear(), m.getUTCMonth(), Math.min(d.getUTCDate(), last)))), 15);
   }
-  // Compétence « en formation » cochée : jusqu'à la date de fin si elle est indiquée, sinon jusqu'à ce qu'on la décoche.
-  const inTraining = (emp, date) => !!(emp && emp.training && !emp.training.ended && (!emp.training.since || date >= emp.training.since) && (!emp.training.until || date < emp.training.until));
-  const trainingLabel = (emp) => (emp.training && emp.training.until ? ` (jusqu'au ${fmtDate(addDays(emp.training.until, -1), "short")})` : "");
+  // Compétence « en formation » : active tant qu'elle n'est pas décochée à la main (pas de date de fin).
+  const inTraining = (emp, date) => !!(emp && emp.training && !emp.training.ended && (!emp.training.since || date >= emp.training.since));
+  const trainingLabel = () => "";
   // Compétences cochables. Le badge rouge = droit de travailler en zone réservée (ZR) ; sans lui, ZP seulement.
   const SKILLS = { badgeRouge: "Badge rouge (ZR)", fdj: "FDJ", ouverture: "Ouverture du magasin", fermeture: "Fermeture du magasin", formation: "En formation", ancien: "Ancien(ne)" };
   const hasSkill = (emp, k) => !!(emp && (k === "badgeRouge" ? (emp.zones || {}).ZR : emp.skills && emp.skills[k]));
@@ -913,7 +913,7 @@
           }
           for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave", "training", "contractHours", "startedOn", "backOn", "skills"]) if (p[k] !== undefined) emp[k] = p[k];
           if (p.onLeave && !isISO(p.onLeave.since)) { fail("Date de début des vacances invalide."); break; }
-          if (p.training && !((!p.training.until || isISO(p.training.until)) && (!p.training.since || isISO(p.training.since)))) { fail("Date de fin de formation invalide."); break; }
+          if (p.training && p.training.since && !isISO(p.training.since)) { fail("Date de début de formation invalide."); break; }
           if (p.contractHours != null && !(Number(p.contractHours) > 0 && Number(p.contractHours) <= 48)) { fail("Heures du contrat invalides (entre 1 et 48)."); break; }
           if (emp.role === "alternant" && !emp.calendarId && s.calendars[0]) emp.calendarId = s.calendars[0].id;
           if (p.rules) {

@@ -52,7 +52,7 @@
         "4. Ne contourne jamais une contrainte (zone non autorisée, cours au CFA, absence, chevauchement). Si c'est impossible, explique pourquoi et propose 2 ou 3 solutions concrètes (par exemple avec « chercher_remplacants »).",
         "5. Un jour sans information dans le calendrier d'alternance n'est pas un jour disponible.",
         "5 bis. Alternants : les heures de cours au CFA comptent dans les 35 h (cours + travail = 35 h par semaine). Un jour de cours, on peut travailler en dehors des heures de cours, jamais pendant.",
-        "5 ter. Une personne « en formation » (nouvelle, pendant un mois et demi) ne reste jamais seule dans sa zone, même 10 minutes ou pendant la pause d'un collègue : il faut toujours une personne confirmée en même temps dans la même zone.",
+        "5 ter. Une personne « en formation » (case cochée, jusqu'à ce qu'on la décoche) ne reste jamais seule dans sa zone, même 10 minutes ou pendant la pause d'un collègue : il faut toujours une personne confirmée en même temps dans la même zone.",
         "5 quater. Compétences : sans « badge rouge », jamais en ZR (ZP seulement). La première personne d'une zone doit avoir « ouverture du magasin » et la dernière « fermeture du magasin » quand quelqu'un dans l'équipe a ces compétences.",
         "6. Si une proposition renvoie des alertes, résume-les en une ligne chacune.",
         "7. Réponds sans titres ni tableaux Markdown ; des listes courtes sont permises.",

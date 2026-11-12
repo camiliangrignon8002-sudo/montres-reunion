@@ -295,7 +295,7 @@
 
   // Plannings papier du 26/10 (version corrigée, avec les nouveaux horaires d'après-midi), du 02/11 et du 09/11/2026.
   // Totaux relus, identiques aux feuilles : 345 h (380 h moins les 35 h de Lydia), 401 h (436 − 35), 422 h.
-  // Nouvelles personnes : Sabrina (26/10), Helena et Ruby (02/11), Lana (09/11) ; en formation un mois et demi.
+  // Nouvelles personnes : Sabrina (26/10), Helena et Ruby (02/11), Lana (09/11) ; en formation jusqu'à ce qu'on décoche.
   const mkw = () => { const list = []; return { list, p: (emp, dows, segs) => dows.forEach((d) => list.push({ emp, dow: d, segs })) }; };
   const std7 = (z) => g("07:00", "12:00", z, "12:30", "14:30", z);
   const T26 = mkw(), t26 = T26.p;
@@ -523,6 +523,10 @@
       summary: "Compétences ajoutées à chaque personne (badge rouge, FDJ, ouverture, fermeture, en formation, ancien(ne)) : tout le monde peut travailler en ZP",
       skillsInit: true,
     }, {
+      id: "formation-sans-delai",
+      summary: "En formation : plus de délai d'un mois et demi, la personne reste en formation jusqu'à ce qu'on décoche",
+      trainingNoEnd: true,
+    }, {
       id: "semaine-1611-modif",
       summary: "Planning du 16/11 modifié : Reine Claude en zone publique mercredi, jeudi et samedi",
       validatePaperWeeks: true,
@@ -532,7 +536,7 @@
       validatePaperWeeks: true,
     }, {
       id: "plannings-novembre",
-      summary: "Plannings papier du 26/10 (version corrigée), du 02/11 et du 09/11 ajoutés ; Sabrina, Helena, Ruby et Lana en formation un mois et demi",
+      summary: "Plannings papier du 26/10 (version corrigée), du 02/11 et du 09/11 ajoutés ; Sabrina, Helena, Ruby et Lana en formation",
       validatePaperWeeks: true,
     }],
     source: {

@@ -1125,7 +1125,7 @@
     const patch = {};
     if (k === "formation") {
       const t = this.today();
-      patch.training = on ? { since: t, until: C.trainingEnd(t) } : { ...(e.training || {}), ended: t };
+      patch.training = on ? { since: t } : { ...(e.training || {}), ended: t };
       skills.ancien = !on;
     } else {
       skills[k] = on;
@@ -1158,16 +1158,16 @@
           const id = C.slug(name.value);
           const t = this.today();
           const r = await this.commit([{ type: "addEmployee", employee: { name: name.value, role: role.value, zonesList } },
-            ...(C.empById(this.state, id) ? [] : [{ type: "updateEmployee", id, patch: newTr.checked ? { startedOn: t, training: { since: t, until: C.trainingEnd(t) }, skills: { ancien: false } } : { skills: { ancien: true } } }])]);
+            ...(C.empById(this.state, id) ? [] : [{ type: "updateEmployee", id, patch: newTr.checked ? { startedOn: t, training: { since: t }, skills: { ancien: false } } : { skills: { ancien: true } } }])]);
           if (r.ok) { name.value = ""; }
-        } }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("div", { class: "row" }, h("label", { class: "check", title: SKILL_HELP.badgeRouge }, badge, "Badge rouge (peut travailler en ZR)"), h("label", { class: "check", title: SKILL_HELP.formation }, newTr, "Nouvelle personne : en formation un mois et demi")), h("p", { class: "small muted" }, "Les autres compétences (FDJ, ouverture, fermeture…) se cochent dans la liste ci-dessous."), h("div", {}, h("button", { type: "submit", class: "btn primary" }, "Ajouter"))),
+        } }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("div", { class: "row" }, h("label", { class: "check", title: SKILL_HELP.badgeRouge }, badge, "Badge rouge (peut travailler en ZR)"), h("label", { class: "check", title: SKILL_HELP.formation }, newTr, "Nouvelle personne : en formation (jusqu'à ce qu'on décoche)")), h("p", { class: "small muted" }, "Les autres compétences (FDJ, ouverture, fermeture…) se cochent dans la liste ci-dessous."), h("div", {}, h("button", { type: "submit", class: "btn primary" }, "Ajouter"))),
       ) : null,
       h("section", { class: "card" }, h("h2", {}, `${s.employees.length} personnes`), h("div", { class: "t-wrap" }, h("table", { class: "t" },
         h("thead", {}, h("tr", {}, h("th", {}, "Prénom"), h("th", {}, "Statut"), h("th", {}, "Compétences"), h("th", {}, "Heures du modèle"), h("th", {}, "Règles"), h("th", {}, "Active"), h("th", {}, ""))),
         h("tbody", {}, s.employees.map((e) => h("tr", {},
           h("td", {}, h("b", {}, e.name), (e.aliases || []).length ? h("div", { class: "tiny muted" }, `aussi : ${e.aliases.join(", ")}`) : null),
           h("td", {}, e.role === "alternant" ? h("span", { class: "chip cours" }, "Alternant(e)") : "Salarié(e)", e.contractHours ? h("div", { class: "tiny muted" }, `Contrat ${e.contractHours} h`) : null),
-          h("td", {}, this.skillChips(e), e.training && e.training.until && this.skillOn(e, "formation") ? h("div", { class: "tiny muted" }, `En formation jusqu'au ${C.fmtDate(C.addDays(e.training.until, -1), "short")}`) : null),
+          h("td", {}, this.skillChips(e)),
           h("td", { class: "num" }, C.fmtHours(C.templateMinutes(s, e.id))),
           h("td", { class: "small" }, rulesText(e) || h("span", { class: "muted" }, "—")),
           h("td", {}, Store.canWrite ? h("input", { type: "checkbox", checked: e.active !== false, "aria-label": `${e.name} active`, onChange: (ev) => this.commit([{ type: "updateEmployee", id: e.id, patch: { active: ev.target.checked } }]) }) : (e.active !== false ? "Oui" : "Non")),
@@ -1191,8 +1191,6 @@
     trOn.addEventListener("change", () => { if (trOn.checked) sk.ancien.checked = false; });
     sk.ancien.addEventListener("change", () => { if (sk.ancien.checked) trOn.checked = false; });
     const trSince = h("input", { type: "date", class: "input", id: "emp-train-since", value: tr.since || e.startedOn || this.today() });
-    const trUntil = h("input", { type: "date", class: "input", id: "emp-train-until", value: tr.until ? C.addDays(tr.until, -1) : tr.since ? "" : C.addDays(C.trainingEnd(trSince.value), -1) });
-    trSince.addEventListener("change", () => { if (C.isISO(trSince.value)) trUntil.value = C.addDays(C.trainingEnd(trSince.value), -1); });
     const contractIn = h("input", { type: "number", class: "input", id: "emp-contract", min: "1", max: "48", step: "0.5", value: e.contractHours || "", placeholder: String(s.settings.contractHours || 35) });
     openDialog({ title: e.name, body: h("div", { class: "stack" }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("label", { class: "f" }, "Autres écritures (séparées par des virgules)", aliases),
       h("h3", {}, "Règles personnelles"),
@@ -1205,7 +1203,7 @@
       h("h3", {}, "Compétences"),
       h("div", { class: "stack", style: { gap: "6px" } }, ["badgeRouge", "fdj", "ouverture", "fermeture"].map((k) => h("label", { class: "check", title: SKILL_HELP[k] }, sk[k], h("span", {}, h("b", {}, C.SKILLS[k]), h("span", { class: "small muted" }, ` — ${SKILL_HELP[k]}`)))),
         h("label", { class: "check" }, trOn, h("span", {}, h("b", {}, "En formation"), h("span", { class: "small muted" }, ` — ${SKILL_HELP.formation}`))),
-        h("div", { class: "form-grid" }, h("label", { class: "f" }, "Depuis le", trSince), h("label", { class: "f" }, "Jusqu'au (vide = jusqu'à ce qu'on décoche)", trUntil)),
+        h("label", { class: "f" }, "En formation depuis le (jusqu'à ce qu'on décoche)", trSince),
         h("label", { class: "check" }, sk.ancien, h("span", {}, h("b", {}, "Ancien(ne)"), h("span", { class: "small muted" }, ` — ${SKILL_HELP.ancien}`)))),
       h("p", { class: "small muted" }, "Les zones se règlent dans « Zones et règles ». Une personne qui a des horaires ne peut pas être supprimée : désactivez-la pour garder l'historique.")),
       actions: [
@@ -1215,8 +1213,8 @@
           const daysOff = offBoxes.map((b) => b.querySelector("input")).filter((i) => i.checked).map((i) => Number(i.value));
           if (fixOn.checked && (!C.isTime(fixS.value) || !C.isTime(fixE.value))) { toast("Indiquez le début et la fin des horaires fixes.", "err"); return false; }
           const rules = { ...r, fixedHours: fixOn.checked ? { s: fixS.value, e: fixE.value } : null, daysOff: daysOff.length ? daysOff : null, sameWeekends: sameWe.checked, maxEnd: maxEndIn.value || null };
-          if (trOn.checked && !(C.isISO(trSince.value) && (!trUntil.value || (C.isISO(trUntil.value) && trUntil.value >= trSince.value)))) { toast("Indiquez le début de la formation (et une fin après le début).", "err"); return false; }
-          const training = trOn.checked ? { since: trSince.value, ...(trUntil.value ? { until: C.addDays(trUntil.value, 1) } : {}) } : e.training ? { ...e.training, ended: e.training.ended || this.today() } : undefined;
+          if (trOn.checked && !C.isISO(trSince.value)) { toast("Indiquez le début de la formation.", "err"); return false; }
+          const training = trOn.checked ? { since: trSince.value } : e.training ? { ...e.training, ended: e.training.ended || this.today() } : undefined;
           const contractHours = contractIn.value ? Number(contractIn.value) : null;
           const skills = { ...(e.skills || {}), fdj: sk.fdj.checked, ouverture: sk.ouverture.checked, fermeture: sk.fermeture.checked, ancien: sk.ancien.checked };
           const zones = { ...(e.zones || {}) };
@@ -1662,6 +1660,13 @@
         if (!(e.zones || {}).ZP) ops.push({ type: "setZones", emp: e.id, zones: { ...(e.zones || {}), ZP: "confirme" } });
         if (!e.skills) ops.push({ type: "updateEmployee", id: e.id, patch: { skills: { ancien: !this.skillOn(e, "formation") } } });
       }
+      // Formation sans délai : la date de fin est retirée, la personne reste en formation tant qu'on ne décoche pas.
+      if (u.trainingNoEnd) for (const e of this.state.employees) {
+        if (!e.training || !e.training.until) continue;
+        const { until, ...rest } = e.training;
+        const wasOn = !e.training.ended && until > this.today();
+        ops.push({ type: "updateEmployee", id: e.id, patch: { training: wasOn ? { ...rest, ended: undefined } : { ...rest, ended: e.training.ended || until } } });
+      }
       for (const [id, from] of Object.entries(u.back || {})) if (C.empById(this.state, id)) ops.push({ type: "updateEmployee", id, patch: { active: true, leftOn: null, backOn: from } });
       for (const [id, leave] of Object.entries(u.onLeave || {})) if (C.empById(this.state, id)) ops.push({ type: "updateEmployee", id, patch: { onLeave: leave } });
       if (u.closing) {
@@ -1713,11 +1718,11 @@
         if (e.active === false && !e.leftOn) pre.push({ type: "updateEmployee", id: f.id, patch: { leftOn: f.leftOn } });
       }
     }
-    // Nouvelles personnes : ajoutées à l'équipe, en formation un mois et demi à partir de leur arrivée.
+    // Nouvelles personnes : ajoutées à l'équipe, en formation à partir de leur arrivée (jusqu'à ce qu'on décoche).
     for (const n of x.newEmployees || []) {
       if (C.empById(s, n.id)) continue;
       pre.push({ type: "addEmployee", employee: { name: n.name, role: "salarie", zones: n.zones } },
-        { type: "updateEmployee", id: n.id, patch: { startedOn: n.since, training: { since: n.since, until: C.trainingEnd(n.since) }, ...(n.contractHours ? { contractHours: n.contractHours } : {}) } });
+        { type: "updateEmployee", id: n.id, patch: { startedOn: n.since, training: { since: n.since }, ...(n.contractHours ? { contractHours: n.contractHours } : {}) } });
     }
     const week = { week: x.monday, status: "brouillon", source: x.source, refId: x.refId, shifts: x.shifts.map((t, i) => ({ id: `${x.refId}-${i}`, emp: t.emp, date: C.addDays(x.monday, t.dow), segs: C.clone(t.segs) })) };
     const ops = [];
