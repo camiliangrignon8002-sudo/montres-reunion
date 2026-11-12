@@ -158,6 +158,9 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
   const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(3, 4, 6); scene.add(key);
   const rimL = new THREE.PointLight(0xffffff, 18, 12); rimL.position.set(-3, 1, -2); scene.add(rimL);
   const rimR = new THREE.PointLight(0xffffff, 14, 12); rimR.position.set(3.2, -1, -1.5); scene.add(rimR);
+  const amb = scene.children.find(o => o.isAmbientLight);
+  // projecteur qui se resserre sur la canette quand elle montre ses infos
+  const spot = new THREE.SpotLight(0xffffff, 0, 30, .22, .55, 1.2); spot.position.set(0, 2.5, 9); scene.add(spot); scene.add(spot.target);
 
   const N = flavors.length;
   const lidTex = lidTexture();
@@ -199,9 +202,16 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
   async function prepare(c){
     if (c.ready || c.loading) return; c.loading = true;
     try {
-      const img = await loadImage(c.f.img);
-      const A = analyse(img);
-      const { tex, ratio } = buildLabel(c.f, A, c.i, N, maxAniso, TEX);
+      let tex, ratio;
+      if (c.f.label){
+        // étiquette 360° préparée à l'avance (face, côtés et vrai dos de la canette)
+        const img = await loadImage(c.f.label);
+        tex = new THREE.Texture(img); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = maxAniso; tex.needsUpdate = true;
+        ratio = c.f.ratio;
+      } else {
+        const img = await loadImage(c.f.img);
+        ({ tex, ratio } = buildLabel(c.f, analyse(img), c.i, N, maxAniso, TEX));
+      }
       applyGeometry(c, ratio);
       const m = c.mats[0]; m.map = tex; m.color.set(0xffffff); m.needsUpdate = true; prevKey = "";
       renderer.initTexture(tex);
@@ -214,7 +224,7 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
   function resize(){
     prevKey = "";
     W = canvas.clientWidth; H = canvas.clientHeight;
-    dpr = Math.min(devicePixelRatio || 1, lite ? 1 : 1.5);
+    dpr = Math.min(devicePixelRatio || 1, lite ? 1 : (W < 760 ? 1.25 : 1.5));
     renderer.setPixelRatio(dpr); renderer.setSize(W, H, false);
     camera.aspect = W / Math.max(1, H); camera.updateProjectionMatrix();
   }
@@ -254,10 +264,10 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
     pos = moving ? lerp(pos, target, .14) : target;
     const he = ease(clamp(s.h));
     const idle = s.idle && he < 1;
-    const key = [s.h, s.k.x, s.k.y, s.k.s, s.k.z, s.ang, s.tx, s.ty, s.opacity, pos, W, H].map(v => typeof v === "number" ? v.toFixed(3) : v).join("|");
+    const sig = [s.focus, s.h, s.k.x, s.k.y, s.k.s, s.k.z, s.ang, s.tx, s.ty, s.opacity, pos, W, H].map(v => typeof v === "number" ? v.toFixed(3) : v).join("|");
     busyFlag = moving || idle;
-    if (!idle && !moving && key === prevKey) return false; // rien n'a bougé : pas de rendu
-    prevKey = key;
+    if (!idle && !moving && sig === prevKey) return false; // rien n'a bougé : pas de rendu
+    prevKey = sig;
     const canH = s.chPx / s.vh * HW;
     const heroY = -s.k0.y / 100 * HW;
     const arc = ww * (s.mob ? .7 : .46);
@@ -265,7 +275,8 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
     for (const c of cans){
       let o = c.i - pos; o = ((o % N) + N + N/2) % N - N/2;
       const ao = Math.abs(o);
-      if (c.i !== cur && (ao > 3.4 || he >= 1)){ c.group.visible = false; continue; }
+      const far = s.mob ? 2.4 : 3.4;
+      if (c.i !== cur && (ao > far || he >= 1)){ c.group.visible = false; continue; }
       // vitrine en arc : la canette du centre en avant, les autres penchées et dans l'ombre
       const a = clamp(o * .36, -1.3, 1.3);
       let x = Math.sin(a) * arc, z = -(1 - Math.cos(a)) * 4.2 - ao * .25;
@@ -274,7 +285,7 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
       const lean = (c.i % 2 ? 1 : -1) * Math.min(ao, 1);
       let rz = lean * .2 - o * .05, rx = Math.min(ao, 1) * .08;
       let ry = o * .45 + (idle ? Math.sin(t * .6 + c.i) * .12 : 0);
-      let op = clamp(3.4 - ao);
+      let op = clamp(far - ao);
       let lit = 1 - Math.min(ao, 2.5) * .26;
       if (idle && ao < .5) y += Math.sin(t * 1.4) * .03 * canH;
       if (c.i === cur){
@@ -307,6 +318,12 @@ export async function create({ canvas, flavors, lite = false, onChange = null })
       ring.position.set(g.position.x, base + .002, g.position.z); ring.scale.setScalar(g.scale.y * .95);
       ring.material.opacity = po * .7;
     }
+    // lumière de focus : le reste s'assombrit, un faisceau éclaire la canette
+    const fo = s.focus || 0;
+    spot.intensity = fo * 260; spot.position.set(sel.group.position.x + 1.2, sel.group.position.y + 3, 8); spot.target.position.copy(sel.group.position);
+    key.intensity = lerp(1.6, .55, fo); amb.intensity = lerp(.35, .08, fo);
+    rimL.intensity = lerp(18, 6, fo); rimR.intensity = lerp(14, 4, fo);
+    for (const m of sel.mats) m.envMapIntensity = lerp(.9, .35, fo);
     renderer.render(scene, camera);
     return true;
   }

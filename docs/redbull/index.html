@@ -35,9 +35,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .bar{position:fixed;left:0;top:0;height:2px;width:100%;background:var(--acc);transform-origin:left;transform:scaleX(0);z-index:31}
 
 /* scène fixe */
-.story{position:relative;height:620vh}
+.story{position:relative;height:760vh}
 .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 /* projecteur façon vitrine : lumière en haut, sol sombre */
+.stage.focus .light{opacity:.28}
+.stage.focus .word{opacity:0}
 .light{position:absolute;inset:0;background:
   radial-gradient(70% 55% at 50% 0%, color-mix(in srgb,var(--acc) 30%, #fff 22%) 0%, color-mix(in srgb,var(--c1) 40%, transparent) 42%, transparent 75%),
   radial-gradient(60% 30% at 50% 100%, color-mix(in srgb,var(--c1) 35%, transparent), transparent 70%),
@@ -213,7 +215,7 @@ footer .wrap{padding:36px 24px;display:flex;justify-content:space-between;gap:24
         </div>
       </div>
 
-      <div class="pnl left" data-r=".1,.26">
+      <div class="pnl left" data-r=".085,.225">
         <div class="k mono"><span><b>01</b> / Le goût</span><span id="p1note"></span></div>
         <h2 id="p1name"></h2>
         <p id="p1desc"></p>
@@ -221,7 +223,7 @@ footer .wrap{padding:36px 24px;display:flex;justify-content:space-between;gap:24
         <div class="prof" id="p1prof"></div>
       </div>
 
-      <div class="pnl right" data-r=".28,.44">
+      <div class="pnl right" data-r=".245,.385">
         <div class="k mono"><span><b>02</b> / L'énergie</span><span>Par canette</span></div>
         <div class="fmt" id="fmt" role="group" aria-label="Format">
           <button data-ml="250" aria-pressed="true">250 ml</button>
@@ -237,27 +239,33 @@ footer .wrap{padding:36px 24px;display:flex;justify-content:space-between;gap:24
         <div class="note" id="p2note"></div>
       </div>
 
-      <div class="pnl left" data-r=".46,.62">
+      <div class="pnl left" data-r=".405,.545">
         <div class="k mono"><span><b>03</b> / Composition</span><span id="p3n"></span></div>
         <h2>Ce qu'il y a dedans</h2>
         <p id="p3txt"></p>
         <div class="ing" id="ing"></div>
       </div>
 
-      <div class="pnl right" data-r=".64,.8">
+      <div class="pnl right" data-r=".565,.705">
         <div class="k mono"><span><b>04</b> / Pour 100 ml</span><span>% VNR*</span></div>
         <table class="nut" id="nut"></table>
         <div class="note">* Valeur nutritionnelle de référence pour un adulte. Valeurs indicatives : la référence reste l'étiquette.</div>
       </div>
 
-      <div class="pnl left" data-r=".82,1.01">
+      <div class="pnl left" data-r=".725,.855">
         <div class="k mono"><span><b>05</b> / À retenir</span><span id="p5no"></span></div>
         <div class="warn"><span class="mono">Teneur élevée en caféine</span><p>32 mg pour 100 ml. Déconseillé aux enfants et aux femmes enceintes ou allaitantes.</p></div>
         <p>Pour un adulte, l'EFSA estime sans risque jusqu'à 400 mg de caféine par jour, café et thé compris. La caféine peut perturber le sommeil et provoquer des palpitations chez certaines personnes.</p>
+      </div>
+
+      <div class="pnl right" data-r=".87,1.01">
+        <div class="k mono"><span><b>06</b> / L'histoire</span><span id="p6tag"></span></div>
+        <h2 id="p6name"></h2>
+        <p id="p6txt"></p>
         <button class="next" id="nextBtn"><span><span class="mono">Goût suivant</span><span id="nextName"></span></span><img id="nextImg" alt=""></button>
       </div>
 
-      <div class="chap" id="chap" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="chap" id="chap" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
     </div>
   </section>
 
@@ -320,21 +328,21 @@ const BASE_ING = ["Eau","Sucre","Glucose","Acide citrique","Dioxyde de carbone",
 const SF_ING = ["Eau","Acide citrique","Dioxyde de carbone","Taurine 0,4 %","Citrates de sodium","Carbonate de magnésium","Caféine 0,03 %","Édulcorants","Niacine","Acide pantothénique","Vitamine B6","Vitamine B12","Arômes"];
 
 const F = [
-  {"id": "energy-drink", "name": "Energy Drink", "short": "Energy", "tag": "L'original", "note": "Tutti-frutti acidulé", "desc": "Boisson énergisante originale, sucrée et acidulée, avec une note de bonbon aux fruits qu'on reconnaît les yeux fermés.", "c1": "#1f3a93", "c2": "#d7dbe0", "acc": "#e3263a", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 7, "Fruité": 5, "Pétillant": 7}, "extra": ["Caramel", "Riboflavine"], "profil": "Sucré et acidulé", "part": "La recette historique de la marque."},
-  {"id": "sugarfree", "name": "Sugarfree", "short": "Sugarfree", "tag": "Sans sucres", "note": "L'original, en léger", "desc": "Le goût de l'original, sans sucres : la même attaque acidulée, une bouche plus sèche.", "c1": "#3aa0dc", "c2": "#d7dbe0", "acc": "#4fb6f0", "ink": "#ffffff", "kcal": 3, "sug": 0, "sf": true, "prof": {"Sucré": 5, "Acidulé": 7, "Fruité": 4, "Pétillant": 8}, "extra": ["Caramel"], "profil": "Proche de l'original", "part": "Sans sucres, avec des édulcorants."},
-  {"id": "zero", "name": "Zero", "short": "Zero", "tag": "Zéro sucres", "note": "Plus proche de l'original", "desc": "Le profil de l'original revisité, sans sucres, avec des édulcorants.", "c1": "#1c2c4c", "c2": "#d7dbe0", "acc": "#e3263a", "ink": "#ffffff", "kcal": 1, "sug": 0, "sf": true, "prof": {"Sucré": 6, "Acidulé": 6, "Fruité": 5, "Pétillant": 7}, "extra": ["Caramel"], "profil": "L'original revisité", "part": "Zéro sucre, quasiment zéro calorie."},
-  {"id": "white-edition", "name": "White Edition", "short": "Coco", "tag": "Coco & açaí", "note": "Noix de coco · açaí", "desc": "La noix de coco crémeuse rencontre la baie d'açaí. Exotique, douce et légèrement acidulée.", "c1": "#e4e6e8", "c2": "#d7dbe0", "acc": "#b8c4d4", "ink": "#111827", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 3, "Fruité": 7, "Pétillant": 6}, "extra": [], "profil": "Exotique, doux, légèrement acidulé", "part": "Une association de saveurs tropicales."},
-  {"id": "red-edition", "name": "Red Edition", "short": "Pastèque", "tag": "Pastèque", "note": "Pastèque", "desc": "Une pastèque bien mûre, juteuse et douce, avec une petite pointe acidulée qui garde le tout frais.", "c1": "#d0202e", "c2": "#d7dbe0", "acc": "#f0414e", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 4, "Fruité": 9, "Pétillant": 6}, "extra": ["Concentré de carotte noire"], "profil": "Fruité, doux, rafraîchissant", "part": "Une saveur estivale."},
-  {"id": "blue-edition", "name": "Blue Edition", "short": "Myrtille", "tag": "Myrtille", "note": "Myrtille", "desc": "La myrtille, fruitée et légèrement acidulée, avec un fond de fruits rouges et noirs.", "c1": "#1e3fae", "c2": "#d7dbe0", "acc": "#5577ff", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 9, "Acidulé": 4, "Fruité": 8, "Pétillant": 6}, "extra": ["Concentrés de fruits et légumes"], "profil": "Fruité, légèrement acidulé", "part": "Un goût de fruits rouges et noirs."},
-  {"id": "yellow-edition", "name": "Yellow Edition", "short": "Tropical", "tag": "Fruits tropicaux", "note": "Fruits tropicaux", "desc": "Un cocktail de fruits tropicaux où l'on devine l'ananas et la mangue.", "c1": "#f2c300", "c2": "#d7dbe0", "acc": "#ffd21a", "ink": "#1a1404", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 5, "Fruité": 9, "Pétillant": 6}, "extra": ["Bêta-carotène"], "profil": "Ensoleillé, rond, parfumé", "part": "Vendue sur certains marchés."},
-  {"id": "green-edition", "name": "Green Edition", "short": "Kiwi", "tag": "Kiwi & pomme", "note": "Kiwi · pomme", "desc": "Le kiwi acidulé en attaque, la pomme verte croquante derrière. Vif et désaltérant.", "c1": "#4caf2f", "c2": "#d7dbe0", "acc": "#6fd64a", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 7, "Acidulé": 8, "Fruité": 8, "Pétillant": 7}, "extra": ["Concentré de carthame"], "profil": "Vif, frais, acidulé", "part": "Ancienne saveur, vendue sur certains marchés."},
-  {"id": "orange-edition", "name": "Orange Edition", "short": "Abricot", "tag": "Abricot & fraise", "note": "Abricot · fraise", "desc": "L'abricot en premier, velouté, puis la fraise qui arrive en fin de gorgée.", "c1": "#f07a1a", "c2": "#d7dbe0", "acc": "#ff9640", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 4, "Fruité": 9, "Pétillant": 6}, "extra": ["Concentré de carotte"], "profil": "Sucré, fruité, légèrement acidulé", "part": "Un mélange de fruits d'été."},
-  {"id": "pink-edition", "name": "Pink Edition", "short": "Fruits rouges", "tag": "Fruits rouges", "note": "Fruits rouges", "desc": "Des fruits rouges et des fruits des bois, acidulés, framboise et fraise en tête.", "c1": "#e0479a", "c2": "#d7dbe0", "acc": "#ff5fb0", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 7, "Acidulé": 7, "Fruité": 8, "Pétillant": 7}, "extra": ["Concentré de carotte noire"], "profil": "Fruité, acidulé", "part": "Saveur variable selon le marché."},
-  {"id": "purple-edition", "name": "Purple Edition", "short": "Açaí", "tag": "Açaí", "note": "Baie d'açaí", "desc": "La baie d'açaí, profonde et un peu chocolatée, entre le raisin noir et la mûre.", "c1": "#6b2a8c", "c2": "#d7dbe0", "acc": "#a052d0", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 7, "Acidulé": 4, "Fruité": 8, "Pétillant": 6}, "extra": ["Concentré de carotte noire"], "profil": "Profond, gourmand", "part": "Vendue sur certains marchés."},
-  {"id": "peach-edition", "name": "Peach Edition", "short": "Pêche", "tag": "Pêche & nectarine", "note": "Pêche · nectarine", "desc": "Une pêche blanche juteuse, prolongée par la nectarine, avec des notes florales et une touche d'agrume.", "c1": "#f2a283", "c2": "#d7dbe0", "acc": "#ffb596", "ink": "#3a1a10", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 3, "Fruité": 9, "Pétillant": 6}, "extra": ["Concentré de carotte"], "profil": "Doux, floral, légèrement agrumé", "part": "Des notes florales et d'agrumes."},
-  {"id": "winter-edition", "name": "Winter Edition", "short": "Baies givrées", "tag": "Baies givrées", "note": "Baies · givré", "desc": "Des baies avec une sensation givrée. Une édition d'hiver, qui change d'une année à l'autre.", "c1": "#1aa3a8", "c2": "#d7dbe0", "acc": "#2fd0d4", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 9, "Acidulé": 5, "Fruité": 7, "Pétillant": 7}, "extra": ["Spiruline"], "profil": "Fruité, frais", "part": "Une édition saisonnière."},
-  {"id": "spring-edition", "name": "Spring Edition", "short": "Pamplemousse", "tag": "Pamplemousse & fleur de cerisier", "note": "Pamplemousse · cerisier", "desc": "Le pamplemousse rose, légèrement amer, adouci par la fleur de cerisier.", "c1": "#e85a9c", "c2": "#d7dbe0", "acc": "#ff74b4", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 6, "Acidulé": 8, "Fruité": 8, "Pétillant": 7}, "extra": ["Concentré de carotte noire"], "profil": "Frais, floral, légèrement amer", "part": "Une édition de printemps, variable."},
-  {"id": "summer-edition", "name": "Summer Edition", "short": "Amélanchier", "tag": "Amélanchier", "note": "Baie d'amélanchier", "desc": "La Juneberry, ou amélanchier : une petite baie fruitée et acidulée, entre la myrtille et l'amande.", "c1": "#1d3fa8", "c2": "#d7dbe0", "acc": "#4f73ff", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 7, "Acidulé": 5, "Fruité": 8, "Pétillant": 7}, "extra": ["Spiruline"], "profil": "Fruité, acidulé", "part": "Une saveur de baies."}
+  {"id": "energy-drink", "name": "Energy Drink", "short": "Energy", "tag": "L'original", "note": "Tutti-frutti acidulé", "desc": "Boisson énergisante originale, sucrée et acidulée, avec une note de bonbon aux fruits qu'on reconnaît les yeux fermés.", "c1": "#1f3a93", "c2": "#d7dbe0", "acc": "#e3263a", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 7, "Fruité": 5, "Pétillant": 7}, "extra": ["Caramel", "Riboflavine"], "profil": "Sucré et acidulé", "part": "La recette historique de la marque.", "hist": "Tout commence en 1987, en Autriche. Dietrich Mateschitz découvre en Thaïlande le Krating Daeng, un tonique créé par Chaleo Yoovidhya. Ensemble, ils l'adaptent au goût européen, le rendent pétillant et le vendent dans cette canette fine bleue et argent. La recette n'a presque pas changé depuis.", "label": "canettes/label/energy-drink.webp", "ratio": 0.2178},
+  {"id": "sugarfree", "name": "Sugarfree", "short": "Sugarfree", "tag": "Sans sucres", "note": "L'original, en léger", "desc": "Le goût de l'original, sans sucres : la même attaque acidulée, une bouche plus sèche.", "c1": "#3aa0dc", "c2": "#d7dbe0", "acc": "#4fb6f0", "ink": "#ffffff", "kcal": 3, "sug": 0, "sf": true, "prof": {"Sucré": 5, "Acidulé": 7, "Fruité": 4, "Pétillant": 8}, "extra": ["Caramel"], "profil": "Proche de l'original", "part": "Sans sucres, avec des édulcorants.", "hist": "Lancée en 2003, la Sugarfree répond à ceux qui voulaient l'effet de l'original sans le sucre. Même base, mêmes vitamines, des édulcorants à la place du sucre, et une canette bleu clair pour la reconnaître."},
+  {"id": "zero", "name": "Zero", "short": "Zero", "tag": "Zéro sucres", "note": "Plus proche de l'original", "desc": "Le profil de l'original revisité, sans sucres, avec des édulcorants.", "c1": "#1c2c4c", "c2": "#d7dbe0", "acc": "#e3263a", "ink": "#ffffff", "kcal": 1, "sug": 0, "sf": true, "prof": {"Sucré": 6, "Acidulé": 6, "Fruité": 5, "Pétillant": 7}, "extra": ["Caramel"], "profil": "L'original revisité", "part": "Zéro sucre, quasiment zéro calorie.", "hist": "La Zero est la version la plus récente de la recette sans sucres. Elle a été pensée pour coller encore plus au goût de l'original, avec une autre association d'édulcorants, dans une canette argent et bleu nuit.", "label": "canettes/label/zero.webp", "ratio": 0.218},
+  {"id": "white-edition", "name": "White Edition", "short": "Coco", "tag": "Coco & açaí", "note": "Noix de coco · açaí", "desc": "La noix de coco crémeuse rencontre la baie d'açaí. Exotique, douce et légèrement acidulée.", "c1": "#e4e6e8", "c2": "#d7dbe0", "acc": "#b8c4d4", "ink": "#111827", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 3, "Fruité": 7, "Pétillant": 6}, "extra": [], "profil": "Exotique, doux, légèrement acidulé", "part": "Une association de saveurs tropicales.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La White Edition joue la carte de la douceur exotique, avec la noix de coco et la baie d'açaí.", "label": "canettes/label/white-edition.webp", "ratio": 0.2208},
+  {"id": "red-edition", "name": "Red Edition", "short": "Pastèque", "tag": "Pastèque", "note": "Pastèque", "desc": "Une pastèque bien mûre, juteuse et douce, avec une petite pointe acidulée qui garde le tout frais.", "c1": "#d0202e", "c2": "#d7dbe0", "acc": "#f0414e", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 4, "Fruité": 9, "Pétillant": 6}, "extra": ["Concentré de carotte noire"], "profil": "Fruité, doux, rafraîchissant", "part": "Une saveur estivale.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La Red Edition fait partie de la toute première vague. D'abord à la canneberge, elle est passée à la pastèque, devenue l'un des goûts les plus appréciés.", "label": "canettes/label/red-edition.webp", "ratio": 0.2144},
+  {"id": "blue-edition", "name": "Blue Edition", "short": "Myrtille", "tag": "Myrtille", "note": "Myrtille", "desc": "La myrtille, fruitée et légèrement acidulée, avec un fond de fruits rouges et noirs.", "c1": "#1e3fae", "c2": "#d7dbe0", "acc": "#5577ff", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 9, "Acidulé": 4, "Fruité": 8, "Pétillant": 6}, "extra": ["Concentrés de fruits et légumes"], "profil": "Fruité, légèrement acidulé", "part": "Un goût de fruits rouges et noirs.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La Blue Edition, à la myrtille, fait elle aussi partie de la première vague de 2013.", "label": "canettes/label/blue-edition.webp", "ratio": 0.2104},
+  {"id": "yellow-edition", "name": "Yellow Edition", "short": "Tropical", "tag": "Fruits tropicaux", "note": "Fruits tropicaux", "desc": "Un cocktail de fruits tropicaux où l'on devine l'ananas et la mangue.", "c1": "#f2c300", "c2": "#d7dbe0", "acc": "#ffd21a", "ink": "#1a1404", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 5, "Fruité": 9, "Pétillant": 6}, "extra": ["Bêta-carotène"], "profil": "Ensoleillé, rond, parfumé", "part": "Vendue sur certains marchés.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La Yellow Edition mise sur les fruits tropicaux, ananas, mangue et fruit de la passion.", "label": "canettes/label/yellow-edition.webp", "ratio": 0.22},
+  {"id": "green-edition", "name": "Green Edition", "short": "Kiwi", "tag": "Kiwi & pomme", "note": "Kiwi · pomme", "desc": "Le kiwi acidulé en attaque, la pomme verte croquante derrière. Vif et désaltérant.", "c1": "#4caf2f", "c2": "#d7dbe0", "acc": "#6fd64a", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 7, "Acidulé": 8, "Fruité": 8, "Pétillant": 7}, "extra": ["Concentré de carthame"], "profil": "Vif, frais, acidulé", "part": "Ancienne saveur, vendue sur certains marchés.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La Green Edition a changé de goût selon les pays et les années : kiwi et pomme ici, d'autres fruits ailleurs.", "label": "canettes/label/green-edition.webp", "ratio": 0.2189},
+  {"id": "orange-edition", "name": "Orange Edition", "short": "Abricot", "tag": "Abricot & fraise", "note": "Abricot · fraise", "desc": "L'abricot en premier, velouté, puis la fraise qui arrive en fin de gorgée.", "c1": "#f07a1a", "c2": "#d7dbe0", "acc": "#ff9640", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 4, "Fruité": 9, "Pétillant": 6}, "extra": ["Concentré de carotte"], "profil": "Sucré, fruité, légèrement acidulé", "part": "Un mélange de fruits d'été.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. L'Orange Edition associe l'abricot et la fraise. Aux États-Unis, ce même goût a aussi été vendu sous le nom d'Amber Edition.", "label": "canettes/label/orange-edition.webp", "ratio": 0.2182},
+  {"id": "pink-edition", "name": "Pink Edition", "short": "Fruits des bois", "tag": "Fruits des bois", "note": "Fruits des bois", "desc": "Les fruits des bois, framboise, mûre et myrtille, intenses et équilibrés.", "c1": "#e8338f", "c2": "#d7dbe0", "acc": "#ff2d93", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 7, "Acidulé": 7, "Fruité": 8, "Pétillant": 7}, "extra": ["Concentré de carotte noire"], "profil": "Fruité, acidulé", "part": "Saveur variable selon le marché.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La Pink Edition, aux fruits des bois, fait partie des éditions dont la recette varie le plus d'un pays à l'autre.", "label": "canettes/label/pink-edition.webp", "ratio": 0.2159},
+  {"id": "purple-edition", "name": "Purple Edition", "short": "Açaí", "tag": "Açaí", "note": "Baie d'açaí", "desc": "La baie d'açaí, profonde et un peu chocolatée, entre le raisin noir et la mûre.", "c1": "#6b2a8c", "c2": "#d7dbe0", "acc": "#a052d0", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 7, "Acidulé": 4, "Fruité": 8, "Pétillant": 6}, "extra": ["Concentré de carotte noire"], "profil": "Profond, gourmand", "part": "Vendue sur certains marchés.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La Purple Edition met en avant l'açaí, une baie d'Amazonie, dans une canette violette vendue sur certains marchés.", "label": "canettes/label/purple-edition.webp", "ratio": 0.2093},
+  {"id": "peach-edition", "name": "Peach Edition", "short": "Pêche", "tag": "Pêche", "note": "Pêche", "desc": "Une pêche douce et rafraîchissante, avec des notes florales et une touche d'agrume.", "c1": "#f2a283", "c2": "#d7dbe0", "acc": "#ff9c7a", "ink": "#3a1a10", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 8, "Acidulé": 3, "Fruité": 9, "Pétillant": 6}, "extra": ["Concentré de carotte"], "profil": "Doux, floral, légèrement agrumé", "part": "Des notes florales et d'agrumes.", "hist": "Les Editions sont nées en 2013 aux États-Unis : pour la première fois, la marque déclinait sa recette en plusieurs goûts, chacun avec sa couleur de canette. Depuis, la gamme change selon les pays et les saisons. La Peach Edition, à la pêche, fait partie des éditions les plus récentes de la gamme.", "label": "canettes/label/peach-edition.webp", "ratio": 0.2167},
+  {"id": "winter-edition", "name": "Winter Edition", "short": "Vanille", "tag": "Vanille", "note": "Vanille", "desc": "La vanille, douce et gourmande, dans une boisson fraîche et légère. Une édition d'hiver qui ne dure qu'une saison.", "c1": "#7cc8f2", "c2": "#d7dbe0", "acc": "#8fd7ff", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 7, "Acidulé": 3, "Fruité": 4, "Pétillant": 6}, "extra": ["Arôme vanille"], "profil": "Doux, gourmand", "part": "Une édition saisonnière, en quantité limitée.", "hist": "Chaque hiver, une nouvelle Winter Edition apparaît pour une saison seulement, avec un goût et une couleur qui changent d'une année à l'autre. Celle-ci mise sur la vanille, douce et gourmande.", "label": "canettes/label/winter-edition.webp", "ratio": 0.2095},
+  {"id": "spring-edition", "name": "Spring Edition", "short": "Pamplemousse", "tag": "Pamplemousse & fleur de cerisier", "note": "Pamplemousse · cerisier", "desc": "Le pamplemousse rose, légèrement amer, adouci par la fleur de cerisier.", "c1": "#e85a9c", "c2": "#d7dbe0", "acc": "#ff74b4", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 6, "Acidulé": 8, "Fruité": 8, "Pétillant": 7}, "extra": ["Concentré de carotte noire"], "profil": "Frais, floral, légèrement amer", "part": "Une édition de printemps, variable.", "hist": "Comme en hiver, le printemps a droit à son édition limitée. Celle-ci associe le pamplemousse et la fleur de cerisier."},
+  {"id": "summer-edition", "name": "Summer Edition", "short": "Amélanchier", "tag": "Amélanchier", "note": "Baie d'amélanchier", "desc": "La Juneberry, ou amélanchier : une petite baie fruitée et acidulée, entre la myrtille et l'amande.", "c1": "#1d3fa8", "c2": "#d7dbe0", "acc": "#4f73ff", "ink": "#ffffff", "kcal": 45, "sug": 10.8, "sf": false, "prof": {"Sucré": 7, "Acidulé": 5, "Fruité": 8, "Pétillant": 7}, "extra": ["Spiruline"], "profil": "Fruité, acidulé", "part": "Une saveur de baies.", "hist": "Chaque été, une Summer Edition arrive pour la saison. Celle-ci est à la Juneberry, ou amélanchier, une petite baie entre la myrtille et l'amande."}
 ];
 
 const N = F.length;
@@ -347,6 +355,8 @@ const lerp = (a,b,t) => a+(b-a)*t;
 const ease = t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 F.forEach(f => { f.img = `canettes/${f.id}.webp`; f.thumb = `canettes/mini/${f.id}.webp`; });
+// précharge l'étiquette de la canette affichée au départ
+{ const h0 = F.find(f => "#"+f.id === location.hash) || F[0]; if (h0.label){ const l = document.createElement("link"); l.rel = "preload"; l.as = "image"; l.href = h0.label; document.head.appendChild(l); } }
 
 let cur = 0, ml = 250, gl = null;
 
@@ -386,6 +396,7 @@ function render(){
     ["Niacine (B3)",`8 mg<span class="vnr">50 %</span>`],["Acide pantothénique (B5)",`2 mg<span class="vnr">33 %</span>`],["Vitamine B6",`2 mg<span class="vnr">143 %</span>`],["Vitamine B12",`2 µg<span class="vnr">80 %</span>`]];
   $("#nut").innerHTML = rows.map(r => `<tr class="${r[2]?"ind":""}"><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("");
   $("#p5no").textContent = `${pad(cur+1)} / ${pad(N)}`;
+  $("#p6tag").textContent = f.tag; $("#p6name").textContent = f.name; $("#p6txt").textContent = f.hist;
   const nx = F[(cur+1)%N]; $("#nextName").textContent = nx.name; $("#nextImg").src = nx.thumb;
   [...dots.children].forEach((d,k) => d.setAttribute("aria-current", k===cur ? "true":"false"));
   [...grid.children].forEach((d,k) => d.setAttribute("aria-current", k===cur ? "true":"false"));
@@ -439,15 +450,15 @@ addEventListener("pointerup", e => {
 
 /* ---------- chorégraphie ---------- */
 // p, x (vw), y (vh), échelle, inclinaison (°)
-const KD = [[0,0,-13,.82,0],[.05,0,-13,.82,0],[.11,22,0,1.12,-8],[.25,22,0,1.12,-8],[.29,-22,0,1.12,8],[.43,-22,0,1.12,8],[.47,22,0,1.08,-14],[.61,22,0,1.08,-14],[.65,-22,0,1,90],[.79,-22,0,1,90],[.83,22,0,1.12,10],[1,22,0,1.12,10]];
-const KM = [[0,0,-14,.74,0],[.05,0,-14,.74,0],[.11,0,-21,.66,-8],[.25,0,-21,.66,-8],[.29,0,-21,.66,8],[.43,0,-21,.66,8],[.47,0,-21,.66,-12],[.61,0,-21,.66,-12],[.65,0,-27,.5,90],[.79,0,-27,.5,90],[.83,0,-21,.66,10],[1,0,-21,.66,10]];
+const KD = [[0,0,-13,.82,0],[.045,0,-13,.82,0],[.085,22,0,1.12,-8],[.225,22,0,1.12,-8],[.245,-22,0,1.14,6],[.385,-22,0,1.14,6],[.405,22,0,1.14,-6],[.545,22,0,1.14,-6],[.565,-22,0,1,90],[.705,-22,0,1,90],[.725,22,0,1.12,10],[.855,22,0,1.12,10],[.87,-22,0,1.05,-4],[1,-22,0,1.05,-4]];
+const KM = [[0,0,-14,.74,0],[.045,0,-14,.74,0],[.085,0,-21,.66,-8],[.225,0,-21,.66,-8],[.245,0,-21,.66,6],[.385,0,-21,.66,6],[.405,0,-21,.66,-6],[.545,0,-21,.66,-6],[.565,0,-27,.5,90],[.705,0,-27,.5,90],[.725,0,-21,.66,10],[.855,0,-21,.66,10],[.87,0,-21,.66,-4],[1,0,-21,.66,-4]];
 // angle : face, dos (avec les infos imprimées), tour complet, etc.
-const ANG = [[0,0],[.05,0],[.11,360],[.25,360],[.29,540],[.43,540],[.47,720],[.61,1080],[.65,1260],[.79,1260],[.83,1440],[1,1440]];
+const ANG = [[0,0],[.045,0],[.085,360],[.225,360],[.245,540],[.385,540],[.405,555],[.545,525],[.565,900],[.705,900],[.725,1080],[.855,1080],[.87,1440],[1,1440]];
 function at(keys, p){
   for (let k=0;k<keys.length-1;k++){ const a=keys[k], b=keys[k+1]; if (p>=a[0] && p<=b[0]){ const t = ease(clamp((p-a[0])/((b[0]-a[0])||1))); return a.slice(1).map((v,n) => lerp(v, b[n+1], t)); } }
   return keys[keys.length-1].slice(1);
 }
-const story = $("#story"), hero = $("#hero"), bar = $("#bar"), word = $("#word"), fb = $("#fallback");
+const stage = $("#stage"), story = $("#story"), hero = $("#hero"), bar = $("#bar"), word = $("#word"), fb = $("#fallback");
 const panels = [...document.querySelectorAll(".pnl")].map(el => ({el, r: el.dataset.r.split(",").map(Number), on:false}));
 const chap = [...$("#chap").children];
 let M = {};
@@ -468,19 +479,20 @@ function frame(now){
   const p = sp, mob = M.vw < 760;
   const k = at(mob ? KM : KD, p), k0 = (mob ? KM : KD)[0].slice(1);
   const ang = at(ANG, p)[0];
-  const h = clamp(p/.05);
+  const h = clamp(p/.045);
+  const focus = clamp((p-.235)/.02) * clamp((.712-p)/.02);
+  const fOn = focus > .5; if (fOn !== stage._f){ stage._f = fOn; stage.classList.toggle("focus", fOn); }
   bar.style.transform = `scaleX(${p.toFixed(4)})`;
 
   const off = h > .5; if (off !== heroOff){ heroOff = off; hero.classList.toggle("off", off); hero.inert = off; }
   for (const P of panels){ const on = p >= P.r[0] && p < P.r[1]; if (on !== P.on){ P.on = on; P.el.classList.toggle("on", on); P.el.inert = !on; if (on && P.el.querySelector("[data-c]")){ countStart = performance.now(); countOn = true; } } }
-  const ci = p < .05 ? 0 : 1 + panels.findIndex(P => P.on);
+  const ci = p < .045 ? 0 : 1 + panels.findIndex(P => P.on);
   if (ci !== lastChap){ lastChap = ci; chap.forEach((c,n) => c.classList.toggle("on", n === ci)); }
-  word.style.opacity = p > .62 && p < .82 ? 0 : 1;
 
   let busy = Math.abs(raw - sp) > 0 || Math.abs(mx - tx) > .002 || Math.abs(my - ty) > .002;
   if (countOn){ countOn = counts(false); busy = busy || countOn; }
   if (gl){
-    const r = gl.update({ h, k:{x:k[0], y:k[1], s:k[2], z:k[3]}, k0:{x:k0[0], y:k0[1], s:k0[2]}, ang, tx: fine ? tx : 0, ty: fine ? ty : 0, now, vh: M.vh, chPx: M.ch, opacity: 1, mob, idle: !lite && !reduce && h < 1 });
+    const r = gl.update({ h, k:{x:k[0], y:k[1], s:k[2], z:k[3]}, k0:{x:k0[0], y:k0[1], s:k0[2]}, ang, tx: fine ? tx : 0, ty: fine ? ty : 0, now, vh: M.vh, chPx: M.ch, opacity: 1, mob, idle: false, focus });
     busy = busy || gl.busy();
   } else {
     // sans 3D : la photo se déplace et « tourne » en s'aplatissant

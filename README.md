@@ -298,7 +298,7 @@ Site de fan non officiel : 15 canettes Red Bull, goût par goût. La page s'ouvr
 
 La canette suit la souris, s'écrase un peu quand on défile vite, les bulles accélèrent, un reflet la balaie.
 
-- **Canettes** : photos détourées dans `docs/redbull/canettes/` (noms dans `LISEZMOI.txt`), découpées dans l'image fournie.
+- **Canettes** : photos découpées dans les fiches fournies (`docs/redbull/canettes/`). Pour 12 goûts, une étiquette 360° (face, côtés et vrai dos) est dans `canettes/label/` ; la canette tourne en 3D au défilement, montre son dos sous un projecteur pendant les infos, et finit sur son histoire.
   Si une photo manque, la page montre une canette dessinée en code.
 - Lien direct vers un goût : `#blue-edition` à la fin de l'adresse.
 - Goûts et chiffres (indicatifs) : tableau `F` au début du script.
