@@ -1204,6 +1204,18 @@ def compacter(a):
     return c
 
 
+def compresser_css(page):
+    """Style de la page sans commentaires ni espaces inutiles : moins à lire pour le navigateur."""
+    a, b = page.find("<style>"), page.find("</style>")
+    if a < 0 or b < 0:
+        return page
+    css = re.sub(r"/\*.*?\*/", "", page[a + 7:b], flags=re.S)
+    css = re.sub(r"\s+", " ", css)
+    css = re.sub(r"\s*([{};,>])\s*", r"\1", css)
+    css = css.replace(";}", "}")
+    return page[:a + 7] + css.strip() + page[b:]
+
+
 def page_html(offres, maj, sources_ok):
     # la page n'embarque que la liste ; les descriptifs sont dans details.json (chargé juste après)
     legeres = [{k: v for k, v in a.items() if k not in DETAILS and v not in ("", None, [], False)} for a in offres]
@@ -1219,7 +1231,7 @@ def page_html(offres, maj, sources_ok):
     version = str(int(time.time()))
     # lu par la page ouverte : si une version plus récente est en ligne, elle se recharge toute seule
     (LISTE_FILE.parent / "version.txt").write_text(version)
-    return (gabarit.replace("__DONNEES__", donnees).replace("__COMMUNES__", communes)
+    return compresser_css(gabarit.replace("__DONNEES__", donnees).replace("__COMMUNES__", communes)
             .replace("__CENTRE__", json.dumps([z["lat"], z["lon"]])).replace("__ZONE__", html.escape(z["nom"]))
             .replace("__VERSION__", version).replace("__VAPID__", VAPID_PUBLIQUE).replace("__TOPIC__", TOPIC_ABONNEMENTS)
             .replace("__MAJ__", html.escape(maj)).replace("__SOURCES__", html.escape(", ".join(sources_ok) or "aucune")))

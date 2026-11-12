@@ -13,18 +13,13 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 <style>
 :root{
   --fond:#fff;--carte:#f4f4f4;--texte:#1a1a1a;--doux:#6b6b6b;--ligne:#e6e6e6;--champ:#f4f4f4;
   --vert:#0f367a;--vert-doux:#e8ecf2;--or:#a37e2c;--orange:#b25000;--orange-doux:#fdf0e3;--bleu:#1f5fbf;--bleu-doux:#e6eefb;
   --rouge:#d1242f;--ombre:none;--r:6px;
 }
-@media not all{:root{
-  --fond:#060b17;--carte:#0e1729;--texte:#eef2fa;--doux:#93a0b8;--ligne:#1c2944;--champ:#0e1729;
-  --vert:#4b8bff;--vert-doux:#0f1f3d;--or:#d4af37;--orange:#ff9f0a;--orange-doux:#33210a;--bleu:#6ea8ff;--bleu-doux:#14243d;
-  --rouge:#ff6b6b;--ombre:none;
-}}
+
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 button,a,.offre,label{touch-action:manipulation}
 html{scroll-behavior:smooth}
@@ -78,7 +73,7 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .offre:hover{background:#efefef}
 .offre:active{transform:scale(.992);transition:transform .08s}
 #suite{grid-column:1/-1;height:1px}
-@media not all{.offre:hover{background:#1c1c1c}}
+
 .offre:focus-visible{outline:2px solid var(--vert);outline-offset:2px}
 .offre .txt{display:flex;flex-direction:column;gap:5px;min-width:0;padding-top:30px}
 .offre h3{margin:0;font-size:21px;line-height:1.2;font-weight:700;letter-spacing:-.01em}
@@ -156,13 +151,13 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .dom.actif b{color:var(--vert);font-weight:600}
 .dom.actif i{width:34px;opacity:1}
 .dom.actif .carre{background:var(--fond);box-shadow:0 10px 26px rgba(0,0,0,.07),inset 0 0 0 1px var(--ligne)}
-@media not all{.dom:hover .carre{background:#1f1f1f}}
+
 .offre .salaire{font-size:15px;font-weight:600;color:var(--texte)}
 .offre .atout{font-size:13.5px;color:var(--vert);display:flex;align-items:center;gap:4px}
 .offre .atout.bts{color:var(--or);font-weight:600}
 .offre .atout.bts.doux{font-weight:500}
 .offre.vue h3{color:#4a4a4a}
-@media not all{.offre.vue h3{color:#bdbdbd}}
+
 .compte{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;justify-content:space-between}
 .compte b{color:var(--vert);font-weight:600}
 .lien-alerte{border:0;background:none;color:var(--vert);font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px;padding:4px 0}
@@ -185,13 +180,13 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
 .simu-res span{font-size:30px;font-weight:700;letter-spacing:-.01em}
 .simu-res small{color:var(--or);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:12px;margin-top:4px}
 .alerte-arnaque{background:#fdf2f2;color:#8a1c1c}
-@media not all{.alerte-arnaque{background:#2a1212;color:#ffb4b4}}
+
 .guide-acc{padding:56px 0 8px}
 .guide-acc h2{text-align:center;font-size:clamp(28px,4vw,44px);letter-spacing:-.02em;margin:0 0 28px}
 .guide-cartes{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
 .guide-cartes button{border:0;background:var(--carte);padding:28px 18px 24px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--texte);text-align:center}
 .guide-cartes button:hover{background:#efefef}
-@media not all{.guide-cartes button:hover{background:#1c1c1c}}
+
 .guide-cartes .carre{margin-bottom:8px}
 .guide-cartes b{font-size:17px}
 .guide-cartes small{color:var(--doux);font-size:14px}
@@ -207,7 +202,7 @@ input[type=range]{width:100%;accent-color:var(--vert);margin:10px 0 2px}
   .droite #b-loupe,.droite #b-favs{display:none}
   .toast{bottom:calc(84px + env(safe-area-inset-bottom))}
 }
-@media not all{.onglets-bas{background:rgba(10,10,10,.92)}}
+
 .actifs{display:flex;flex-wrap:wrap;gap:8px;margin:-6px 0 14px}
 .actifs:empty{display:none}
 .actifs button{border:1px solid var(--ligne);background:var(--fond);border-radius:999px;padding:6px 10px 6px 13px;font-size:13.5px;display:inline-flex;align-items:center;gap:6px;color:var(--texte)}
@@ -288,12 +283,7 @@ textarea{min-height:170px;resize:vertical}
   --lg-ombre:0 8px 24px -10px rgba(0,0,0,.25),0 1px 3px rgba(0,0,0,.08);
   --lg-bord:linear-gradient(135deg,rgba(255,255,255,.95),rgba(255,255,255,.18) 32%,rgba(255,255,255,0) 50%,rgba(255,255,255,.14) 72%,rgba(255,255,255,.6));
 }
-@media not all{:root{
-  --lg-vert:rgba(45,92,173,.62);
-  --lg-clair:rgba(44,44,46,.5);
-  --lg-ombre:0 10px 28px -10px rgba(0,0,0,.7),0 1px 3px rgba(0,0,0,.5);
-  --lg-bord:linear-gradient(135deg,rgba(255,255,255,.5),rgba(255,255,255,.08) 32%,rgba(255,255,255,0) 50%,rgba(255,255,255,.06) 72%,rgba(255,255,255,.3));
-}}
+
 /* surfaces vertes : boutons principaux, choix actifs */
 .btn:not(.gris):not(.leger),.segments button.actif,.puce.actif{
   position:relative;isolation:isolate;background:var(--lg-vert);color:#fff;border-color:transparent;
@@ -346,14 +336,14 @@ textarea{min-height:170px;resize:vertical}
   body{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
   .toast{bottom:calc(96px + env(safe-area-inset-bottom))}
 }
-@media not all{.onglets-bas button.actif{background:rgba(255,255,255,.12)}}
+
 /* en-tête collé : verre clair */
 .bandeau.colle{background:rgba(255,255,255,.72);-webkit-backdrop-filter:var(--lg-flou);backdrop-filter:var(--lg-flou)}
-@media not all{.bandeau.colle{background:rgba(0,0,0,.6)}}
+
 /* mode « Teinté » (iOS 26.1) : verre plus opaque et plus lisible */
 html.teinte{--lg-vert:#0f367a;--lg-clair:rgba(246,246,246,.96)}
 html.teinte .bandeau.colle{background:var(--fond)}
-@media not all{html.teinte{--lg-vert:#19448d;--lg-clair:rgba(28,28,30,.97)}}
+
 /* réglages du téléphone : « Réduire la transparence », « Augmenter le contraste » */
 
 @media (prefers-contrast:more){
@@ -370,10 +360,7 @@ html.teinte .bandeau.colle{background:var(--fond)}
   .offre .carre svg{width:40px;height:40px}
   .offre h3{font-size:22px}
 }
-@media not all{
-  .feuille{box-shadow:0 0 0 1px rgba(255,255,255,.1),0 30px 80px rgba(0,0,0,.6)}
-  .voile{background:rgba(0,0,0,.6)}
-}
+
 
 /* ================= Liquid Glass sur toute l'appli (couche de navigation et de contrôles) ================= */
 :root{
@@ -386,12 +373,7 @@ html.teinte .bandeau.colle{background:var(--fond)}
   --v-ombre:0 12px 32px -14px rgba(15,25,41,.28),0 2px 6px rgba(15,25,41,.06);
   --ressort:cubic-bezier(.2,1.4,.35,1);
 }
-@media not all{:root{
-  --v-fond:rgba(36,36,38,.6);--v-fond-fort:rgba(28,28,30,.88);--v-flou:blur(24px) saturate(170%) brightness(.95);
-  --v-lentille:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(255,255,255,.08),
-    inset 0 10px 18px -14px rgba(255,255,255,.18),inset 0 -10px 18px -14px rgba(255,255,255,.08),inset 0 0 0 .5px rgba(255,255,255,.08);
-  --v-ombre:0 14px 36px -12px rgba(0,0,0,.75),0 2px 6px rgba(0,0,0,.4);
-}}
+
 /* un fond à peine coloré (vert et or) pour que le verre ait quelque chose à refléter */
 body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
   radial-gradient(60vw 50vh at 8% -5%,rgba(15,54,122,.07),transparent 60%),
@@ -435,7 +417,7 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 /* domaines : carrés de verre */
 .dom .carre{background:var(--v-fond)}
 .dom.actif .carre{background:rgba(255,255,255,.9);box-shadow:var(--v-lentille),0 14px 30px -12px rgba(15,54,122,.35),inset 0 0 0 1.5px rgba(15,54,122,.35)}
-@media not all{.dom.actif .carre{background:rgba(60,60,64,.8)}}
+
 /* fenêtres : grands panneaux de verre flottants, ouverture avec effet ressort */
 .voile{background:rgba(10,14,20,.22);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 .feuille{background:var(--v-fond-fort);box-shadow:var(--v-lentille),0 30px 80px -20px rgba(0,0,0,.45);
@@ -445,12 +427,12 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .feuille .bloc{background:rgba(255,255,255,.8);box-shadow:inset 0 0 0 .5px rgba(0,0,0,.04);border-radius:22px}
 .feuille .hero{background:rgba(255,255,255,.75);border-radius:24px!important}
 .feuille .barre .rond{background:var(--v-fond);box-shadow:var(--v-lentille),var(--v-ombre);border:0}
-@media not all{.feuille .bloc,.feuille .hero{background:rgba(255,255,255,.06)}}
+
 /* messages : capsule de verre sombre */
 .toast{background:rgba(22,30,26,.72);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 14px 30px -10px rgba(0,0,0,.45);border-radius:999px;padding:12px 20px;animation:surgit .45s var(--ressort)}
 /* mode Teinté et accessibilité : verre plus opaque, ou pas de verre du tout */
 html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
-@media not all{html.teinte{--v-fond:rgba(30,30,32,.95);--v-fond-fort:rgba(26,26,28,.97)}}
+
 
 @media (prefers-contrast:more){:root{--v-fond:var(--fond);--v-lentille:inset 0 0 0 1px var(--texte)}}
 
@@ -469,7 +451,7 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
   .onglets-bas button{z-index:1;background:none!important}
   .onglets-bas button.actif::after{display:none}
 }
-@media not all{.goutte{background:rgba(255,255,255,.13);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}}
+
 
 
 /* ---------- en-tête, onglets et domaines : verre et mouvement liquide ---------- */
@@ -486,7 +468,7 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
   content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:0;transition:opacity .4s;
   background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.9),rgba(255,255,255,0) 62%)}
 .dom:hover .carre::after,.nu:hover::after,.onglets:hover::after,.filtres button:hover::after,.offre .fav:hover::after{opacity:1}
-@media not all{.dom .carre::after,.nu::after,.onglets::after,.filtres button::after,.offre .fav::after{background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.18),rgba(255,255,255,0) 62%)}}
+
 .onglets button{z-index:1}
 /* goutte qui se soulève au survol, s'écrase au toucher et rebondit */
 .dom .carre,.nu{transition:transform .55s var(--ressort),box-shadow .35s,background .3s}
@@ -496,7 +478,7 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
 .nu:active{transform:scale(.88,.84);transition:transform .12s}
 .filtres button:active,.actifs button:active,.offre .fav:active{transform:scale(.9,.86);transition:transform .12s}
 .dom.actif .carre{background:rgba(255,255,255,.92)}
-@media not all{.goutte-dom{background:linear-gradient(180deg,rgba(73,119,198,.2),rgba(73,119,198,.1));box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 0 0 1px rgba(73,119,198,.25)}}
+
 
 
 /* ---------- vert en Liquid Glass : verre teinté translucide, lumière en lentille, liseré lumineux ---------- */
@@ -508,12 +490,7 @@ html.teinte{--v-fond:rgba(250,250,250,.94);--v-fond-fort:rgba(250,250,250,.97)}
     inset 0 12px 20px -14px rgba(255,255,255,.75),inset 0 -12px 18px -14px rgba(170,201,255,.55),
     inset 0 0 0 .5px rgba(255,255,255,.35),0 10px 26px -12px rgba(14,56,127,.55),0 2px 6px -2px rgba(14,56,127,.25);
 }
-@media not all{:root{
-  --lg-vert:rgba(37,87,173,.5);
-  --lg-vert-ombre:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(160,195,255,.25),
-    inset 0 12px 20px -14px rgba(255,255,255,.35),inset 0 -12px 18px -14px rgba(120,170,255,.3),
-    inset 0 0 0 .5px rgba(255,255,255,.2),0 10px 28px -12px rgba(37,87,173,.5);
-}}
+
 .btn:not(.gris):not(.leger),.segments button.actif,.puce.actif{
   background:var(--lg-vert-lentille),var(--lg-vert);box-shadow:var(--lg-vert-ombre);
   -webkit-backdrop-filter:blur(18px) saturate(200%) brightness(1.06);backdrop-filter:blur(18px) saturate(200%) brightness(1.06);
@@ -534,9 +511,7 @@ html.teinte{--lg-vert:#0f367a}
   --v-champ:rgba(255,255,255,.55);
   --v-rail:rgba(120,120,128,.2);
 }
-@media not all{:root{
-  --v-carte:rgba(40,40,44,.55);--v-carte-survol:rgba(54,54,58,.66);--v-champ:rgba(255,255,255,.06);--v-rail:rgba(120,120,128,.32);
-}}
+
 /* annonces : tuiles de verre arrondies, lumière qui suit le doigt, soulèvement au survol */
 .offre,.hero{border-radius:30px!important}
 .offre{isolation:isolate;overflow:hidden;background:var(--v-carte);box-shadow:var(--v-lentille),var(--v-ombre);
@@ -546,18 +521,15 @@ html.teinte{--lg-vert:#0f367a}
 .offre:hover{background:var(--v-carte-survol);transform:translateY(-3px);box-shadow:var(--v-lentille),0 22px 44px -18px rgba(15,25,41,.32),0 2px 6px rgba(15,25,41,.06)}
 .offre:hover::before{opacity:.75}
 .offre:active{transform:scale(.975,.965);transition:transform .14s}
-@media not all{
-  .offre::before{background:radial-gradient(70% 90% at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.14),rgba(255,255,255,0) 70%)}
-  .offre:hover{background:var(--v-carte-survol)}
-}
+
 .liste{gap:14px}
 .vide{background:var(--v-carte);box-shadow:var(--v-lentille),var(--v-ombre);border-radius:30px}
 #carte{border-radius:30px;box-shadow:var(--v-lentille),var(--v-ombre)}
 /* fenêtres : blocs de verre */
 .feuille .bloc,.feuille .hero{background:var(--v-carte);box-shadow:var(--v-lentille),0 6px 20px -14px rgba(15,25,41,.25);border-radius:26px!important}
-@media not all{.feuille .bloc,.feuille .hero{background:rgba(255,255,255,.07)}}
+
 .replie::after{background:linear-gradient(transparent,rgba(255,255,255,.92))}
-@media not all{.replie::after{background:linear-gradient(transparent,rgba(40,40,44,.95))}}
+
 /* champs : verre creusé, lueur verte au focus */
 label.champ input:not([type=range]):not([type=checkbox]):not([type=radio]),label.champ textarea,label.champ select,.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])){
   border:0;border-radius:16px;padding:12px 14px;background:var(--v-champ);
@@ -566,10 +538,7 @@ label.champ input:not([type=range]):not([type=checkbox]):not([type=radio]),label
 label.champ input:focus,label.champ textarea:focus,label.champ select:focus,.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])):focus{
   background:rgba(255,255,255,.85);transform:scale(1.01);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 0 0 4px rgba(15,54,122,.16),0 0 0 1px rgba(15,54,122,.45),0 10px 24px -14px rgba(15,54,122,.5)}
-@media not all{
-  label.champ input:not([type=range]):not([type=checkbox]):not([type=radio]),label.champ textarea,label.champ select,.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])){box-shadow:inset 0 0 0 .5px rgba(255,255,255,.1)}
-  label.champ input:focus,label.champ textarea:focus,label.champ select:focus,.feuille :is(input[type=text],input[type=email],input[type=search],input[type=tel],input[type=date],input[type=number],input:not([type])):focus{background:rgba(255,255,255,.1)}
-}
+
 /* interrupteurs : rail de verre, perle qui s'étire comme une goutte */
 .bascule i{background:var(--v-rail);box-shadow:inset 0 1px 2px rgba(0,0,0,.08);transition:background .35s}
 .bascule input:checked + i{background:var(--lg-vert-lentille),var(--lg-vert);box-shadow:var(--lg-vert-ombre)}
@@ -601,7 +570,7 @@ input[type=range]:active::-webkit-slider-thumb{transform:scale(1.3,1.18)}
 /* onde liquide au toucher */
 .onde{position:absolute;border-radius:50%;pointer-events:none;z-index:2;width:16px;height:16px;margin:-8px 0 0 -8px;
   background:radial-gradient(circle,rgba(255,255,255,.75),rgba(255,255,255,.25) 45%,rgba(255,255,255,0) 70%)}
-@media not all{.onde{background:radial-gradient(circle,rgba(255,255,255,.3),rgba(255,255,255,.08) 45%,rgba(255,255,255,0) 70%)}}
+
 /* teinté et accessibilité */
 html.teinte{--v-carte:rgba(250,250,250,.95);--v-champ:rgba(240,240,240,.97)}
 
@@ -620,23 +589,18 @@ body::before{content:"";position:fixed;inset:-20vmax;z-index:-1;pointer-events:n
 @keyframes derive{0%{transform:translate3d(0,0,0) rotate(0)}50%{transform:translate3d(-4vmax,3vmax,0) rotate(8deg)}100%{transform:translate3d(3vmax,-3vmax,0) rotate(-6deg)}}
 body{background:transparent}
 html{background:var(--fond)}
-@media not all{body::before{background:
-    radial-gradient(34vmax 30vmax at 30% 28%,rgba(27,80,173,.42),transparent 70%),
-    radial-gradient(30vmax 28vmax at 72% 36%,rgba(200,150,50,.30),transparent 70%),
-    radial-gradient(34vmax 30vmax at 32% 62%,rgba(37,80,153,.30),transparent 70%),
-    radial-gradient(32vmax 30vmax at 70% 74%,rgba(15,54,122,.40),transparent 70%),
-    var(--fond)}}
+
 /* le verre laisse passer la couleur : tuiles plus transparentes, bord lumineux bien visible */
 :root{--v-carte:rgba(255,255,255,.4);--v-carte-survol:rgba(255,255,255,.6);--v-fond:rgba(255,255,255,.48)}
-@media not all{:root{--v-carte:rgba(28,28,32,.42);--v-carte-survol:rgba(44,44,48,.55);--v-fond:rgba(36,36,40,.48)}}
+
 .offre{box-shadow:inset 0 1px 0 rgba(255,255,255,.95),inset 0 -1px 0 rgba(255,255,255,.5),inset 1px 0 0 rgba(255,255,255,.55),inset -1px 0 0 rgba(255,255,255,.35),
   inset 0 18px 30px -24px rgba(255,255,255,.95),var(--v-ombre)}
-@media not all{.offre{box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(255,255,255,.08),inset 1px 0 0 rgba(255,255,255,.1),inset -1px 0 0 rgba(255,255,255,.06),var(--v-ombre)}}
+
 .offre .carre{background:rgba(255,255,255,.75);box-shadow:var(--v-lentille),0 8px 18px -10px rgba(15,25,41,.3)}
-@media not all{.offre .carre{background:rgba(255,255,255,.08)}}
+
 /* la fenêtre ouverte : verre épais qui laisse deviner la couleur */
 .feuille{background:rgba(255,255,255,.72)}
-@media not all{.feuille{background:rgba(24,24,28,.72)}}
+
 /* apparition des annonces : elles émergent du verre en défilant */
 .offre.a-venir{opacity:0;transform:translateY(34px) scale(.94)}
 .offre.vu{transition:opacity .6s cubic-bezier(.2,.9,.3,1),transform .8s var(--ressort),box-shadow .35s,background .3s}
@@ -654,17 +618,17 @@ body::before{animation:none;will-change:auto;inset:0}
 .voile{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(10,14,20,.3)}
 /* cœurs des annonces : verre sans flou (des dizaines de flous à l'écran ralentissent le défilement) */
 .offre .fav{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(255,255,255,.8)}
-@media not all{.offre .fav{background:rgba(60,60,64,.7)}}
+
 /* flou plus léger sur les grands panneaux, couche dédiée pendant l'animation */
 .feuille{-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);contain:layout paint}
 .offre{transition:transform .5s var(--ressort),background .3s}
 .offre:hover{box-shadow:var(--v-lentille),var(--v-ombre)}
 .fantome{position:fixed;z-index:3;border-radius:34px;pointer-events:none;will-change:transform,clip-path;
   background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(244,247,245,.96));box-shadow:inset 0 1px 0 #fff,0 30px 80px -20px rgba(0,0,0,.45)}
-@media not all{.fantome{background:linear-gradient(180deg,rgba(44,44,48,.97),rgba(26,26,30,.97));box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 30px 80px -20px rgba(0,0,0,.7)}}
+
 .feuille{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(251,252,251,.9);transition:none}
 .feuille.posee{-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%)}
-@media not all{.feuille{background:rgba(26,26,30,.9)}}
+
 html.teinte .feuille.posee{background:var(--v-fond-fort)}
 
 /* barre du haut : se retire en descendant, revient en remontant */
@@ -999,6 +963,19 @@ input[type=range]::-moz-range-progress{background:var(--bouton)}
 @media (max-width:899px){.logo-grand svg{width:84px!important}}
 .carrousel{padding-top:16px!important;padding-bottom:48px!important;padding-left:10px!important;padding-right:10px!important;margin-left:-10px!important;margin-right:-10px!important}
 .nouveautes .fleches{margin-top:-24px!important}
+
+/* Indeed et LinkedIn : deux tuiles qui ouvrent la même recherche */
+.ailleurs-tuiles{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:700px){.ailleurs-tuiles{grid-template-columns:1fr 1fr}}
+.tuile-ext{position:relative;display:flex;flex-direction:column;gap:6px;padding:28px 30px 80px;border-radius:30px;text-decoration:none;
+  background:var(--c);color:var(--k);box-shadow:0 1px 2px rgba(0,0,0,.04);transition:box-shadow .3s ease,transform .3s ease}
+.tuile-ext:hover{transform:translateY(-2px) scale(1.025);box-shadow:0 14px 34px -6px rgba(0,0,0,.22),0 3px 8px rgba(0,0,0,.08)}
+.tuile-ext .gros{width:48px;height:48px;margin-bottom:14px}
+.tuile-ext .gros use{fill:currentColor}
+.tuile-ext b{font-size:clamp(22px,2.2vw,28px);line-height:1.15;font-weight:600;letter-spacing:-.01em}
+.tuile-ext small{font-size:15px;opacity:.8}
+.tuile-ext .plus{position:absolute;right:28px;bottom:26px;width:44px;height:44px;border-radius:50%;background:#fff;color:#1d1d1f;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.tuile-ext .plus svg{width:20px;height:20px}
 </style>
 </head>
 <body>
@@ -1126,6 +1103,13 @@ input[type=range]::-moz-range-progress{background:var(--bouton)}
     <h2 class="titre-sec"><b>Quoi de neuf ?</b> Les offres toutes fraîches.</h2>
     <div class="carrousel" id="carrousel"></div>
     <div class="fleches"><button class="fleche" id="car-g" aria-label="Précédentes"><svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></button><button class="fleche" id="car-d" aria-label="Suivantes"><svg class="ic" aria-hidden="true"><use href="#i-chevron"/></svg></button></div>
+  </section>
+  <section class="ailleurs" id="ailleurs">
+    <h2 class="titre-sec"><b>Encore plus d'offres.</b> Sur Indeed et LinkedIn.</h2>
+    <div class="ailleurs-tuiles">
+      <a class="tuile-ext" id="ext-indeed" data-t="5" target="_blank" rel="noopener"><svg class="ic gros" aria-hidden="true"><use href="#i-d-mallette"/></svg><b>Voir les offres sur Indeed</b><small id="ext-indeed-q">Alternance à La Réunion</small><span class="plus" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-lien"/></svg></span></a>
+      <a class="tuile-ext" id="ext-linkedin" data-t="2" target="_blank" rel="noopener"><svg class="ic gros" aria-hidden="true"><use href="#i-d-mains"/></svg><b>Voir les offres sur LinkedIn</b><small id="ext-linkedin-q">Alternance à La Réunion</small><span class="plus" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-lien"/></svg></span></a>
+    </div>
   </section>
   <h2 class="titre-sec" id="titre-liste"><b>Toutes les offres.</b> Les plus récentes d'abord.</h2>
   <div class="compte" id="compte"></div>
@@ -1343,31 +1327,6 @@ function defile() {
     $(".bandeau").classList.toggle("cachee", d > 0 && scrollY > 140 && !document.querySelector(".bandeau :focus"));
     if (avant !== bas.classList.contains("reduite")) { placerGoutte(false); setTimeout(() => placerGoutte(false), 470); } }
 }
-// Liquid Glass : le reflet du verre suit le doigt ou la souris
-const VERRE = ".btn:not(.gris):not(.leger),.segments button,.onglets-bas button,.dom .carre,.nu,.onglets,.filtres button,.offre .fav,.offre";
-// onde liquide : au toucher, une goutte de lumière s'étale dans le verre
-const ONDE = ".offre,.btn,.opt,.menu a,.menu button.entree,.filtres button,.segments button,.feuille .bloc button,.nu";
-addEventListener("pointerdown", e => {
-  if (DOUX.matches) return;
-  const el = e.target.closest && e.target.closest(ONDE); if (!el || !el.animate) return;
-  const r = el.getBoundingClientRect(), o = document.createElement("span"), t = Math.max(r.width, r.height) * 2.4 / 16;
-  if (getComputedStyle(el).position === "static") el.style.position = "relative";
-  el.style.overflow = "hidden";
-  o.className = "onde"; o.style.left = (e.clientX - r.left) + "px"; o.style.top = (e.clientY - r.top) + "px"; el.appendChild(o);
-  o.animate([{transform: "scale(0)", opacity: 1}, {transform: `scale(${t})`, opacity: 0}], {duration: 650, easing: "cubic-bezier(.2,.8,.3,1)"}).finished.then(() => o.remove(), () => o.remove());
-}, {passive: true});
-let DERNIER_PT = null;
-addEventListener("pointermove", e => {
-  if (e.pointerType === "touch") return;  // au doigt : l'onde suffit, le défilement reste fluide
-  if (!DERNIER_PT) requestAnimationFrame(() => {
-    const e = DERNIER_PT; DERNIER_PT = null;
-    const el = e.target.closest && (e.target.closest(".dom") ? e.target.closest(".dom").querySelector(".carre") : e.target.closest(VERRE)); if (!el) return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--gx", ((e.clientX - r.left) / r.width * 100).toFixed(0) + "%");
-    el.style.setProperty("--gy", ((e.clientY - r.top) / r.height * 100 - 60).toFixed(0) + "%");
-  });
-  DERNIER_PT = e;
-}, {passive: true});
 // apparition des annonces au défilement (iPhone compris)
 const APPARITION = "IntersectionObserver" in window ? new IntersectionObserver(l => l.forEach(x => {
   if (!x.isIntersecting) return;
@@ -1384,13 +1343,6 @@ function surveillerApparition(racine) {
     el.classList.add("a-venir"); APPARITION.observe(el);
   });
 }
-addEventListener("pointerleave", () => document.querySelectorAll("[style*='--gx']").forEach(el => { el.style.removeProperty("--gx"); el.style.removeProperty("--gy"); }), {passive: true});
-// sur téléphone, en inclinant l'appareil, le reflet de la barre du bas bouge légèrement
-addEventListener("deviceorientation", e => {
-  if (e.gamma == null) return;
-  const a = $(".onglets-bas button.actif"); if (!a) return;
-  a.style.setProperty("--gx", (50 + Math.max(-30, Math.min(30, e.gamma))).toFixed(0) + "%");
-}, {passive: true});
 let VERRE_ACTIF = false, ANIM_ACTIVES = lire("alt974-animations", true);
 let TEINTE = false, ANIM_DOUCES = !ANIM_ACTIVES;  // plus de Liquid Glass : pas de mode « teinté »
 document.documentElement.classList.toggle("doux", !!ANIM_DOUCES);
@@ -1727,7 +1679,7 @@ function afficher(suite) {
     if (res.length > LIMITE) { $("#liste").insertAdjacentHTML("beforeend", '<div id="suite" aria-hidden="true"></div>'); SUITE.observe($("#suite")); }
     surveillerApparition($("#liste"));
   }
-  if (!suite) { carrousel(res); navActive(); }
+  if (!suite) { carrousel(res); navActive(); liensAilleurs(); }
   if (VUE === "carte") carteMaj(res);
 }
 $("#liste").onclick = e => {
@@ -1735,6 +1687,13 @@ $("#liste").onclick = e => {
   if (f) { const id = f.dataset.fav; FAV[id] ? delete FAV[id] : FAV[id] = 1; ecrire("alt974-fav", FAV); f.innerHTML = ic("coeur", FAV[id] ? "plein" : ""); f.setAttribute("aria-label", FAV[id] ? "Retirer des favoris" : "Ajouter aux favoris"); const nf = Object.keys(FAV).length; $("#nb-fav").textContent = nf || ""; if (F.type === "fav") afficher(); else if ($("#voile").hidden) toast(FAV[id] ? "Ajoutée aux favoris" : "Retirée des favoris"); return; }
   const b = e.target.closest(".offre"); if (b) fiche(b.dataset.id);
 };
+function liensAilleurs() {  // la même recherche, ouverte sur Indeed et LinkedIn
+  const alt = F.section !== "emploi", mots = [F.q || (F.domaine && F.domaine !== "Autres" ? F.domaine.split(",")[0] : ""), alt ? "alternance" : ""].filter(Boolean).join(" ");
+  const q = encodeURIComponent(mots), texte = (mots ? mots.charAt(0).toUpperCase() + mots.slice(1) : "Toutes les offres d'emploi") + " à La Réunion";
+  $("#ext-indeed").href = `https://fr.indeed.com/emplois?q=${q}&l=La+R%C3%A9union`;
+  $("#ext-linkedin").href = `https://www.linkedin.com/jobs/search/?keywords=${q}&location=La%20R%C3%A9union%2C%20France`;
+  $("#ext-indeed-q").textContent = texte; $("#ext-linkedin-q").textContent = texte;
+}
 function carrousel(res) {  // les offres les plus récentes, en tuiles qui défilent sur le côté
   const sec = $("#nouveautes"), frais = res.filter(a => a.type === "offre" && joursDepuis(a) < 3).slice(0, 12);
   sec.hidden = frais.length < 3 || VUE === "carte";
@@ -1796,6 +1755,7 @@ let CARTE = null, COUCHE = null, CERCLE = null, MOI = null, LEAFLET = null;
 function chargerLeaflet() {
   if (window.L) return Promise.resolve();
   if (LEAFLET) return LEAFLET;
+  const css = document.createElement("link"); css.rel = "stylesheet"; css.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"; css.crossOrigin = ""; document.head.append(css);
   LEAFLET = new Promise((ok, ko) => { const s = document.createElement("script"); s.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"; s.crossOrigin = ""; s.onload = ok; s.onerror = ko; document.head.append(s); });
   return LEAFLET;
 }
