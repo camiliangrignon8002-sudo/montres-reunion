@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#08060f">
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 <link rel="modulepreload" href="./vendor/three.module.min.js">
-<link rel="modulepreload" href="./can3d.js?v=7">
+<link rel="modulepreload" href="./can3d.js?v=9">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,900;1,900&family=JetBrains+Mono:wght@400&display=swap">
@@ -66,8 +66,8 @@ html.gl.swap .stage:not(.info) .center{opacity:1;transition:none}
 .tag i{display:grid;place-items:center;width:32px;height:32px;background:var(--acc);color:#fff;font-style:normal;font-size:14px}
 .step h2{margin:0 0 20px;font-weight:900;font-style:italic;font-size:clamp(40px,4.6vw,72px);line-height:.88;letter-spacing:-.03em;text-transform:uppercase}
 .step p{margin:0;font-size:clamp(17px,1.45vw,23px);line-height:1.5;color:rgba(255,255,255,.9)}
-.shade{position:absolute;inset:0;z-index:3;pointer-events:none;background:rgba(0,0,0,.82);opacity:0;transition:opacity .55s;
-  -webkit-mask:radial-gradient(var(--sw,80px) var(--sh,60px) at var(--sx,50%) var(--sy,50%),transparent 55%,#000 100%);mask:radial-gradient(var(--sw,80px) var(--sh,60px) at var(--sx,50%) var(--sy,50%),transparent 55%,#000 100%)}
+.shade{position:absolute;left:0;top:0;width:400px;height:400px;margin:-200px 0 0 -200px;z-index:3;pointer-events:none;opacity:0;transition:opacity .55s;border-radius:50%;
+  background:radial-gradient(closest-side,transparent 62%,rgba(0,0,0,.25) 78%,rgba(0,0,0,.72) 100%);box-shadow:0 0 0 300vmax rgba(0,0,0,.72);will-change:transform,opacity}
 .shade.on{opacity:1}
 .dots{position:absolute;right:4vw;top:50%;transform:translateY(-50%);z-index:4;display:flex;flex-direction:column;gap:26px;opacity:0;transition:opacity .4s}
 .stage.info .dots{opacity:1}
@@ -263,11 +263,11 @@ function frame(now){
     const L = hh * M.vh, tr = tilt * Math.PI/180, d = (.5 - z[0]) * L;
     let zx = M.vw/2 + d*Math.sin(tr), zy = M.vh/2 + y*M.vh - d*Math.cos(tr);
     if (G){ zx = G.x; zy = G.y; }                      // position exacte calculée par la 3D
-    const zw = L * .25 * (G ? .55 + .45*G.face : 1), zh = z[1] * L * 1.5;
+    const zw = L * .3 * (G ? .6 + .4*G.face : 1), zh = z[1] * L * 1.9;
     const km2 = 1 - Math.exp(-dt / 110);
     S.x += (zx - S.x) * km2; S.y += (zy - S.y) * km2; S.w += (zw - S.w) * km2; S.h += (zh - S.h) * km2;
-    shade.style.setProperty("--sx", S.x.toFixed(1)+"px"); shade.style.setProperty("--sy", S.y.toFixed(1)+"px");
-    shade.style.setProperty("--sw", S.w.toFixed(1)+"px"); shade.style.setProperty("--sh", S.h.toFixed(1)+"px");
+    // la découpe lumineuse se déplace (transform seulement : aucun repeint de la page)
+    shade.style.transform = `translate3d(${S.x.toFixed(1)}px,${S.y.toFixed(1)}px,0) scale(${(S.w/200).toFixed(3)},${(S.h/200).toFixed(3)})`;
     if (Math.abs(zx - S.x) > .5 || Math.abs(zy - S.y) > .5 || Math.abs(zh - S.h) > .5) kick();
   }
   if (!gl){ const c = Math.cos(ang*Math.PI/180); center.style.transform = `translate(-50%,-50%) translateY(${y*M.vh}px) rotate(${tilt}deg) scale(${hh/M.chf/.86}) scaleX(${Math.max(.05,Math.abs(c)).toFixed(3)})`; }
@@ -278,7 +278,7 @@ function frame(now){
 show(); measure(); addEventListener("load", measure);
 (async () => {
   try {
-    const mod = await import("./can3d.js?v=7");
+    const mod = await import("./can3d.js?v=9");
     gl = await mod.create({ canvas: $("#gl"), lite, mid, onChange: kick });
     await gl.set(F[cur], F[(cur+1)%N]); measure();
     root.classList.add("gl");

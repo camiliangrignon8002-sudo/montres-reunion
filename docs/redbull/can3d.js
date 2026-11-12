@@ -17,7 +17,7 @@ function lidTexture(){
 }
 
 export async function create({ canvas, lite = false, mid = false, onChange = null }){
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: !mid && !lite, alpha: true, powerPreference: "high-performance" });
   renderer.setClearColor(0, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
@@ -30,7 +30,7 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
   const key = new THREE.DirectionalLight(0xffffff, 1.5); key.position.set(-2.5, 3, 6); scene.add(key);
   const rim = new THREE.DirectionalLight(0xffffff, 1.2); rim.position.set(3, 1, -2); scene.add(rim);
 
-  const SEG = lite || mid ? 56 : 96;
+  const SEG = lite || mid ? 40 : 96;
   // étiquette : vernis brillant (clearcoat) sur l'impression ; métal brossé pour le haut et le bas
   const label = (lite || mid)
     ? new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: .3, roughness: .38, envMapIntensity: .8 })
@@ -56,7 +56,7 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
   }
   build(.21);
   // projecteur qui éclaire la zone d'info, et reflet qui balaie la canette
-  const spot = new THREE.SpotLight(0xffffff, 0, 20, .16, .7, 1.4); spot.position.set(-1.5, 1.5, 8); scene.add(spot, spot.target);
+  const spot = new THREE.SpotLight(0xffffff, 0, 20, .2, .9, 1.4); spot.position.set(-1.5, 1.5, 8); scene.add(spot, spot.target);
   const cache = new Map(), loader = new THREE.TextureLoader();
   function load(url){
     if (!cache.has(url)) cache.set(url, new Promise(res => loader.load(url, t => {
@@ -79,7 +79,7 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
   let W = 0, H = 0;
   function resize(){
     W = canvas.clientWidth; H = canvas.clientHeight;
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, lite ? 1.25 : mid ? 1.6 : 2));
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, lite ? 1 : mid ? 1.35 : 2));
     renderer.setSize(W, H, false);
     camera.aspect = W / Math.max(1, H); camera.updateProjectionMatrix();
     dirty = true;
@@ -102,12 +102,12 @@ export async function create({ canvas, lite = false, mid = false, onChange = nul
       const sw = Math.sin((s.p || 0) * Math.PI * 3);
       key.position.set(-3 + sw * 5, 3, 6); rim.position.set(3.5 - sw * 2, 1, -2);
       const fo = s.focus || 0;
-      key.intensity = 1.6 - fo * .5; rim.intensity = 1.4 - fo * .4; amb.intensity = .25 - fo * .08;
+      key.intensity = 1.6 - fo * .15; rim.intensity = 1.4 - fo * .3; amb.intensity = .25;
       if (s.zone != null){ marker.position.y = .5 - s.zone; }
       can.updateMatrixWorld(true);
       marker.getWorldPosition(wp);
       spot.target.position.copy(wp); spot.position.set(wp.x - 1.2, wp.y + 1.6, 8);
-      spot.intensity = fo * (lite ? 120 : 170);
+      spot.intensity = 0;
       renderer.render(scene, camera);
       // position de la zone à l'écran, et à quel point elle est tournée vers nous
       nrm.set(-1, 0, 0).applyQuaternion(spin.getWorldQuaternion(new THREE.Quaternion()));
