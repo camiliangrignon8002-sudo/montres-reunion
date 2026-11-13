@@ -1895,6 +1895,10 @@
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
+   },
+   {
+    "source": "Herren Immobilier",
+    "url": "https://www.herren-immobilier.com/location/appartement/7996"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -2565,11 +2569,11 @@
   ],
   "description": "Appt de type 2 d'une superficie d'environ 44.40 m2 de surfac\ne loi carrez comprenant une entrée par le porche, un séjour/\nsalle à manger avec coin cuisine semi-équipée, une chambre a\nvec brasseur d'air, une salle de douche avec wc, une varangu\ne de 9.20\n\n Loyer de 540,00 euros par mois charges comprises dont 50,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). \n Soit avec Assurance Habitation et Assistance* ( 22.42 euros ) : 562,42 euros. \n Les honoraires charge locataire sont de 582,53 euros ( soit 13,12 euros/m² ) dont 134,53 euros pour état des lieux ( soit 3,03 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/saint-gilles-les-bains-97434/500#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/saint-gilles-les-bains-97434/500#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
   "caracteristiques": [
-   "Rez-de-chaussée",
+   "1e étage",
    "1 chambre",
    "Proche université"
   ],
-  "date": "2026-11-12T16:05:30.875Z",
+  "date": "2026-11-13T06:08:34.539Z",
   "annonceur": "Citya France Immobilier",
   "lat": -20.900955,
   "lon": 55.482384,
@@ -6272,7 +6276,7 @@
   "caracteristiques": [
    "Proche université"
   ],
-  "date": "2026-10-22T09:49:12.971Z",
+  "date": "2026-11-13T06:10:24.000Z",
   "annonceur": "Immo Transac",
   "lat": null,
   "lon": null,
