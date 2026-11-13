@@ -1139,32 +1139,50 @@
   "vu": "2026-11-03T23:11+04:00"
  },
  {
-  "id": "zimo-01a1a240-e92b-7648-9129-0c8728147e3d",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/location-au-moufia/01a1a240-e92b-7648-9129-0c8728147e3d",
-  "titre": "Location au moufia",
+  "id": "gti-ppartement-f1-a-louer-proche-universite-et-toutes-commodites",
+  "source": "GTI",
+  "url": "https://www.gti.re/location/109-st-denis-chaudron/appartement/1276-appartement-f1-a-louer-proche-universite-et-toutes-commodites",
+  "titre": "APPARTEMENT F1 A LOUER PROCHE UNIVERSITE ET TOUTES COMMODITES",
   "prix": 450.0,
   "commune": "Saint-Denis",
-  "quartier": "Le Moufia",
+  "quartier": "",
   "pieces": 1,
   "type": "Studio",
   "surface": 19.0,
-  "meuble": null,
-  "photos": [],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 19 m²",
-  "caracteristiques": [],
+  "meuble": true,
+  "photos": [
+   "https://agencegti.staticlbi.com/1200xauto/images/biens/1/7f6cf3a2c136fac102475bee6d5cdf9d/photo_import_8123c57b4440ef971ff359326d611861.jpg",
+   "https://agencegti.staticlbi.com/1600xauto/images/biens/1/7f6cf3a2c136fac102475bee6d5cdf9d/photo_import_11972d7a2bd954adde7b35e870ad6f4b.jpg",
+   "https://agencegti.staticlbi.com/1600xauto/images/biens/1/7f6cf3a2c136fac102475bee6d5cdf9d/photo_import_9429b759559e38ab08bf93b6c778d102.jpg",
+   "https://agencegti.staticlbi.com/1600xauto/images/biens/1/7f6cf3a2c136fac102475bee6d5cdf9d/photo_import_55912b8c506c6f590cddf6a78bad6bf5.jpg",
+   "https://agencegti.staticlbi.com/1600xauto/images/biens/1/7f6cf3a2c136fac102475bee6d5cdf9d/photo_import_b90759ab33222d59783d3e3d78a42536.jpg",
+   "https://agencegti.staticlbi.com/1600xauto/images/biens/1/7f6cf3a2c136fac102475bee6d5cdf9d/photo_import_923bae29489df2049387058a27601542.jpg",
+   "https://www.gti.re/location/109-st-denis-chaudron/appartement/images/modules/home/2.jpg"
+  ],
+  "description": "L'agence GTI vous propose à la location cet agréable studio meublé rénové en 2024. Situé à Sainte-Clotilde, il est proche de l'Université, du rectorat, de la clinique Sainte-Clotilde, et à 7 minutes en voiture du CHU de Bellepierre. Autre atout non négligeable, il est à quelques pas des lignes de bus et des commerces environnants vous permettant de circuler aisément et de faire vos achats au quotidien.\nCet appartement propose une pièce de vie lumineuse et climatisée, meublée d'un canapé-lit récent et de qualité, de rangements, d'un téléviseur et d'un espace repas. La kitchenette est équipée de plaques de cuisson, hotte asspirante, d'un réfrigérateur et d'un four à micro-ondes. Côté salle d'eau, une belle et vaste douche à l'italienne et un meuble vasque au look actuel vous accueilleront. Les WC sont indépendants. Ce studio est doté d'un lave-linge.\nDisponible le 27/06/2026.\nHonoraires de 249,28 € TTC à la charge du locataire comprenant 57,57 € TTC pour l'état des lieux. Loyer de base 450.00 €/mois. Provision sur charges 30 €/mois, régularisation annuelle. Dépôt de garantie 420 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.\nVotre conseiller GESTION TRANSACTIONS IMMOBILIERS : Gilles MICHEL\nAgent commercial (Entreprise individuelle)\nRSAC 750993081",
+  "caracteristiques": [
+   "Meublé",
+   "Climatisation",
+   "Proche transports",
+   "Proche université"
+  ],
   "date": "",
-  "annonceur": "Particulier · via leboncoin",
+  "annonceur": "GTI",
   "lat": null,
   "lon": null,
   "charges": null,
-  "pro": false,
+  "pro": true,
   "tel": "",
-  "email": "",
+  "email": "gti@gti.re",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/location-au-moufia/01a1a240-e92b-7648-9129-0c8728147e3d"
+   }
+  ],
   "vu": "2026-11-03T21:13+04:00"
  },
  {
