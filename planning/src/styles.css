@@ -349,7 +349,7 @@ html.liquid {
   --g-edge: rgba(255,255,255,.6); --g-hi: rgba(255,255,255,.95); --g-hi-2: rgba(255,255,255,.35);
   --g-btn-1: rgba(255,255,255,.78); --g-btn-2: rgba(255,255,255,.38); --g-sel: rgba(255,255,255,.96); --g-sel-fg: #1d1d1f;
   --g-shadow: 0 8px 24px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.04); --g-blk: rgba(255,255,255,.7); --g-blk-2: rgba(255,255,255,.35);
-  --g-dialog: rgba(255,255,255,.86); --g-blur: saturate(160%) blur(28px);
+  --g-dialog: rgba(255,255,255,.97); --g-blur: saturate(160%) blur(28px);
   --surface: rgba(255,255,255,.34); --surface-2: rgba(255,255,255,.22); --line: rgba(255,255,255,.7); --bg: #eceef2;
 }
 @media (prefers-color-scheme: dark) {
@@ -359,7 +359,7 @@ html.liquid {
     --g-edge: rgba(255,255,255,.12); --g-hi: rgba(255,255,255,.22); --g-hi-2: rgba(255,255,255,.06);
     --g-btn-1: rgba(90,92,100,.55); --g-btn-2: rgba(50,52,58,.4); --g-sel: rgba(120,122,130,.6); --g-sel-fg: #fff;
     --g-shadow: 0 10px 40px rgba(0,0,0,.45); --g-blk: rgba(40,42,48,.55); --g-blk-2: rgba(25,26,30,.45);
-    --g-dialog: rgba(36,37,42,.9);
+    --g-dialog: rgba(36,37,42,.97);
     --surface: rgba(40,42,48,.4); --surface-2: rgba(30,31,36,.35); --line: rgba(255,255,255,.1); --bg: #0f1012;
   }
 }
@@ -369,7 +369,7 @@ html.liquid[data-theme="dark"] {
   --g-edge: rgba(255,255,255,.12); --g-hi: rgba(255,255,255,.22); --g-hi-2: rgba(255,255,255,.06);
   --g-btn-1: rgba(90,92,100,.55); --g-btn-2: rgba(50,52,58,.4); --g-sel: rgba(120,122,130,.6); --g-sel-fg: #fff;
   --g-shadow: 0 10px 40px rgba(0,0,0,.45); --g-blk: rgba(40,42,48,.55); --g-blk-2: rgba(25,26,30,.45);
-  --g-dialog: rgba(36,37,42,.9);
+  --g-dialog: rgba(36,37,42,.97);
   --surface: rgba(40,42,48,.4); --surface-2: rgba(30,31,36,.35); --line: rgba(255,255,255,.1); --bg: #0f1012;
 }
 html.liquid { background: var(--g-bg-2); }
@@ -478,3 +478,12 @@ html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 .issue .grow { flex: 0 1 auto; min-width: 0; }
 .issue-x { flex: none; margin-left: 4px; margin-top: -2px; width: 26px; height: 26px; border-radius: 50%; border: 0; background: transparent; color: var(--fg-3); font-size: 13px; cursor: pointer; display: grid; place-items: center; transition: background-color .12s, color .12s, transform .12s; }
 .issue-x:hover { background: var(--danger-soft); color: var(--danger); transform: scale(1.15); }
+
+/* Champs alignés : même hauteur pour les listes, dates, heures et textes. */
+input.input:not([type="checkbox"]):not([type="radio"]):not([type="color"]), select.input { height: 42px; box-sizing: border-box; }
+.form-grid > label.f > span:first-child { min-height: 1.3em; }
+.tag-office { display: inline-block; width: fit-content; font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.link-section .item { gap: 8px; }
+html.liquid .dialog header, html.liquid .dialog footer { background: #fff; }
+@media (prefers-color-scheme: dark) { html.liquid:not([data-theme="light"]) .dialog header, html.liquid:not([data-theme="light"]) .dialog footer { background: #242529; } }
+html.liquid[data-theme="dark"] .dialog header, html.liquid[data-theme="dark"] .dialog footer { background: #242529; }

@@ -198,6 +198,7 @@
       const end = shiftRanges(segs).slice(-1)[0][1];
       if (end > toMin(r.maxEnd)) out.push({ code: "LATEST_END", level: "erreur", msg: `${emp.name} ne finit jamais après ${r.maxEnd} : ici ${shiftSpan(segs).e} le ${fmtDate(date, "day")}.` });
     }
+    if (r.weekZone && segs && segs.some((g) => g.z && g.z !== r.weekZone)) out.push({ code: "WEEK_ZONE", msg: `${emp.name} est en ${r.weekZone} toute la semaine : bloc en ${segs.find((g) => g.z !== r.weekZone).z} le ${fmtDate(date, "day")}.` });
     if (Array.isArray(r.daysOff) && r.daysOff.includes(dow(date))) out.push({ code: "FIXED_DAYOFF", msg: `${emp.name} ne travaille jamais le ${DAYS[dow(date)].toLowerCase()} (jour de repos fixe) : créneau le ${fmtDate(date, "day")}.` });
     return out;
   }
@@ -408,9 +409,10 @@
     }
 
     // Personnes liées : mêmes horaires (zone au choix) et/ou mêmes week-ends.
-    for (const l of st.links || []) {
+    for (const l of (st.links || []).filter((x) => x.active !== false)) {
       const names = l.emps.map(nameOf).join(" et ");
       for (const d of weekDates(monday)) {
+        if (l.since && d < l.since) continue; // une condition ne s'applique qu'à partir de sa création
         const sh = l.emps.map((id) => w.shifts.find((x) => x.emp === id && x.date === d)).filter(Boolean);
         if (l.sameHours && sh.length > 1) {
           const spans = sh.map((x) => shiftSpan(x.segs));
@@ -478,6 +480,16 @@
       if (st.checkMaxWeek && m > st.maxWeekHours * 60) add("alerte", "WEEK_MAX", emp.id, null, `${emp.name} : ${fmtHours(m)} sur la semaine (plus de ${st.maxWeekHours} h).`);
       const ref = templateMinutes(state, emp.id);
       if (ref && m !== ref) add("info", "HOURS_DIFF", emp.id, null, `${emp.name} : ${fmtHours(m)} cette semaine, ${fmtHours(ref)} dans le modèle.`);
+    }
+    // Jours de bureau minimum par semaine
+    for (const emp of state.employees) {
+      const min = Number((emp.rules || {}).officeMinDays) || 0;
+      if (!min || emp.active === false) continue;
+      if (emp.rules.officeSince && addDays(monday, 6) < emp.rules.officeSince) continue; // règle valable à partir de sa date
+      const mine = w.shifts.filter((x) => x.emp === emp.id);
+      if (!mine.length) continue;
+      const n = mine.filter((x) => x.office).length;
+      if (n < min) add("alerte", "OFFICE_DAYS", emp.id, null, `${emp.name} : ${n} jour(s) de bureau cette semaine, il en faut au moins ${min}. Cochez « Jour de bureau » sur ses créneaux concernés.`);
     }
     // Couverture
     if (!(opts && opts.skipCoverage)) for (const u of uncoveredPosts(state, monday)) add("alerte", "UNCOVERED", u.templateEmp, u.date, `Poste du modèle non pourvu le ${fmtDate(u.date, "day")} : ${segLabel(u.segs)} (${u.segs.map((g) => g.z).filter((v, i, a) => a.indexOf(v) === i).join("/")}) — habituellement ${nameOf(u.templateEmp)}${u.reason ? ", " + u.reason : ""}.`);
@@ -602,7 +614,8 @@
       if (date < from || date > to) continue;
       for (const t of templateFor(state, date)) {
         const emp = empById(state, t.emp);
-        const segs = t.segs.map(({ s, e, z }) => ({ s, e, z }));
+        const wz = emp && emp.rules && emp.rules.weekZone && allowedZones(emp).includes(emp.rules.weekZone) ? emp.rules.weekZone : null;
+        const segs = t.segs.map(({ s, e, z }) => ({ s, e, z: wz || z })); // zone imposée toute la semaine
         let reason = null;
         if (!emp) reason = "personne absente de l'équipe";
         else if (emp.active === false) reason = "employé désactivé";
@@ -619,7 +632,7 @@
       }
     }
     // Personnes liées : on aligne les horaires (et la zone si demandé) sur la première personne du groupe, et les week-ends.
-    const links = opts.links || (state.settings && state.settings.links) || [];
+    const links = (opts.links || (state.settings && state.settings.links) || []).filter((x) => x.active !== false);
     const canTake = (emp, date, segs) => emp && emp.active !== false && (!include || include.has(emp.id)) && !extra.some((x) => x.emp === emp.id && x.date === date)
       && availability(state, emp.id, date, segs).ok && !personalRuleIssues(emp, date, segs).length && calStatus(state, emp, date) !== "formation";
     const copySegs = (ref, emp, own, sameZone) => ref.segs.map((g, i) => {
@@ -816,7 +829,7 @@
             else if (!zoneLevel(emp, g.z)) fail(`${emp.name} n'est pas autorisé(e) en ${zoneById(s, g.z).name}. Modifiez d'abord ses zones dans « Zones » si c'est voulu.`);
           }
           if (errors.length > before) break;
-          setShiftRaw(emp.id, op.date, segs, op.note ? { note: String(op.note).slice(0, 200) } : null);
+          setShiftRaw(emp.id, op.date, segs, { ...(op.note ? { note: String(op.note).slice(0, 200) } : {}), ...(op.office ? { office: true } : {}) });
           break;
         }
         case "removeShift": {
@@ -977,6 +990,8 @@
             const r = p.rules;
             if (r.fixedHours && !(isTime(r.fixedHours.s) && isTime(r.fixedHours.e) && r.fixedHours.s !== r.fixedHours.e)) { fail("Horaires fixes invalides."); break; }
             if (r.maxEnd && !isTime(r.maxEnd)) { fail("Heure de fin maximum invalide."); break; }
+            if (r.weekZone && !zoneById(s, r.weekZone)) { fail("Zone de la semaine inconnue."); break; }
+            if (r.officeMinDays != null && !(Number(r.officeMinDays) >= 0 && Number(r.officeMinDays) <= 7)) { fail("Nombre de jours de bureau invalide (0 à 7)."); break; }
             if (r.daysOff && !(Array.isArray(r.daysOff) && r.daysOff.every((d) => d >= 0 && d <= 6))) { fail("Jours de repos invalides."); break; }
           }
           conf("employees");
@@ -1028,7 +1043,7 @@
                 const emps = [...new Set((l && l.emps) || [])].filter((id) => empById(s, id));
                 if (emps.length < 2) { fail("Une liaison relie au moins deux personnes."); break; }
                 if (!l.sameHours && !l.sameWeekends) { fail("Choisissez au moins « mêmes horaires » ou « mêmes week-ends »."); break; }
-                out.push({ id: String(l.id || uid("lien")), emps, sameHours: !!l.sameHours, sameZone: !!l.sameZone, sameWeekends: !!l.sameWeekends });
+                out.push({ id: String(l.id || uid("lien")), emps, sameHours: !!l.sameHours, sameZone: !!l.sameZone, sameWeekends: !!l.sameWeekends, active: l.active !== false, label: String(l.label || "").slice(0, 60), ...(isISO(l.since) ? { since: l.since } : {}) });
               }
               if (out.length === v.length) s.settings.links = out.slice(0, 50);
               continue;

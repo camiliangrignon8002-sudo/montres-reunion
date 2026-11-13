@@ -439,6 +439,11 @@
     rules: {
       eric: { fixedHours: null, maxEnd: "15:30", note: "Horaires variables ; ne finit jamais après 15:30." },
     },
+  }, {
+    id: "regles-2026-11-13",
+    rules: {
+      charlotte: { officeMinDays: 2, officeSince: "2026-11-16", note: "Au moins 2 jours de bureau par semaine." },
+    },
   }];
 
   for (const u of ruleUpdates) for (const [id, r] of Object.entries(u.rules)) { const e = employees.find((x) => x.id === id); e.rules = { ...(e.rules || {}), ...r }; e.rulesApplied = [...(e.rulesApplied || []), u.id]; }
@@ -518,6 +523,10 @@
       summary: "Planning papier du 16/11 : Nathalie revenue de vacances et Sonia de nouveau dans l'équipe à partir du 16/11/2026",
       back: { sonia: "2026-11-16" },
       returnFrom: { nathalie: "2026-11-16" },
+    }, {
+      id: "liens-trajet-camilian-fleur",
+      summary: "Camilian et Fleur (en couple, une seule voiture) : horaires similaires pour le trajet",
+      addLinks: [{ id: "lien-trajet-camilian-fleur", emps: ["camilian", "fleur"], sameHours: true, sameZone: false, sameWeekends: false, active: true, label: "Trajet (une voiture)" }],
     }, {
       id: "competences",
       summary: "Compétences ajoutées à chaque personne (badge rouge, FDJ, ouverture, fermeture, en formation, ancien(ne)) : tout le monde peut travailler en ZP",

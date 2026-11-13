@@ -434,3 +434,23 @@ test("conditions : personnes liées (mêmes horaires, zone au choix, mêmes week
   assert.ok(iss.some((i) => i.code === "LINK_WEEKEND"));
   assert.ok(!iss.some((i) => i.code === "LINK_ZONE")); // zone libre
 });
+
+test("conditions : zone toute la semaine, jours de bureau, liaison désactivable", () => {
+  let s = withWeek1();
+  let r = apply(s, [{ type: "updateEmployee", id: "charlotte", patch: { rules: { ...(C.empById(s, "charlotte").rules || {}), officeMinDays: 2, officeSince: null } } }]);
+  s = r.state;
+  assert.ok(C.validateWeek(s, W1).some((i) => i.code === "OFFICE_DAYS" && i.emp === "charlotte"));
+  const ch = s.weeks[W1].shifts.filter((x) => x.emp === "charlotte").slice(0, 2);
+  r = apply(s, ch.map((x) => ({ type: "setShift", emp: "charlotte", date: x.date, segs: x.segs, office: true })), { allowErrors: true });
+  assert.ok(!C.validateWeek(r.state, W1).some((i) => i.code === "OFFICE_DAYS"));
+  // zone toute la semaine : génération en ZR et alerte si un bloc est en ZP
+  s = apply(s, [{ type: "updateEmployee", id: "murielle", patch: { rules: { weekZone: "ZR" } } }]).state;
+  const { week } = C.generateWeek(s, "2026-12-07");
+  assert.ok(week.shifts.filter((x) => x.emp === "murielle").every((x) => x.segs.every((g) => g.z === "ZR")));
+  // liaison décochée : ignorée
+  s = apply(s, [{ type: "setSettings", patch: { links: [{ emps: ["maelle", "murielle"], sameHours: true, sameWeekends: true, active: false }] } }]).state;
+  s.weeks["2026-12-07"] = { week: "2026-12-07", status: "brouillon", shifts: [
+    { id: "a", emp: "maelle", date: "2026-12-08", segs: [{ s: "07:00", e: "12:00", z: "ZP" }] },
+    { id: "b", emp: "murielle", date: "2026-12-08", segs: [{ s: "15:00", e: "20:00", z: "ZR" }] }] };
+  assert.ok(!C.validateWeek(s, "2026-12-07").some((i) => i.code.startsWith("LINK")));
+});

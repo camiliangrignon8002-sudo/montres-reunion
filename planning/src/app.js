@@ -605,7 +605,7 @@
           const k = row.emp.id + "|" + cell.date, lvl = cellIssue[k];
           const kids = [];
           if (cell.shift) {
-            kids.push(h("div", { class: "stack" }, cell.shift.segs.map((g) => blk(s, g))));
+            kids.push(h("div", { class: "stack" }, cell.shift.segs.map((g) => blk(s, g)), cell.shift.office ? h("span", { class: "tag-office", title: "Jour de bureau" }, "Bureau") : null));
           } else {
             if (cell.absences.length) kids.push(h("span", { class: "tag-abs" }, C.ABSENCE_TYPES[cell.absences[0].type]));
             if (cell.cal === "formation") kids.push(...courseTags(cell.course, ""));
@@ -773,6 +773,7 @@
     let existing = emp && w ? w.shifts.find((x) => x.emp === emp.id && x.date === date) : null;
     let segs = existing ? existing.segs.map((g) => ({ ...g })) : [];
     let note = existing && existing.note || "";
+    let office = !!(existing && existing.office);
     const body = h("div", { class: "stack" });
     let dlg;
     const presetsFor = () => {
@@ -821,6 +822,7 @@
       }, "sm")));
       const presets = presetsFor();
       if (presets.length) kids.push(h("div", { class: "stack", style: { gap: "6px" } }, h("span", { class: "small muted" }, "Horaires habituels (modèle) :"), h("div", { class: "suggest" }, presets.map((p) => h("button", { type: "button", onClick: () => { segs = p.map((g) => ({ ...g })); draw(); } }, `${C.segLabel(p)} ${[...new Set(p.map((g) => g.z))].join("/")}`)))));
+      if (emp.rules && emp.rules.officeMinDays) kids.push(h("label", { class: "check" }, h("input", { type: "checkbox", id: "ed-office", checked: office, onChange: (e) => { office = e.target.checked; refreshCheck(); } }), `Jour de bureau (${emp.name} : au moins ${emp.rules.officeMinDays} par semaine)`));
       kids.push(h("label", { class: "f" }, "Note (facultatif, non transmise à l'IA)", h("input", { class: "input", id: "ed-note", value: note, maxlength: "200", onInput: (e) => { note = e.target.value; } })));
       const check = h("div", { id: "ed-check" });
       kids.push(check);
@@ -840,7 +842,7 @@
     const refreshCheck = () => {
       const box = body.querySelector("#ed-check");
       if (!box || !emp) return;
-      const ops = segs.length ? [{ type: "setShift", emp: emp.id, date, segs, note }] : existing ? [{ type: "removeShift", emp: emp.id, date }] : [];
+      const ops = segs.length ? [{ type: "setShift", emp: emp.id, date, segs, note, office }] : existing ? [{ type: "removeShift", emp: emp.id, date }] : [];
       if (!ops.length) { box.replaceChildren(); return; }
       const r = C.applyOps(s, ops, {});
       const total = C.shiftMinutes(segs.filter((g) => C.isTime(g.s) && C.isTime(g.e)));
@@ -890,10 +892,12 @@
     const lHours = h("input", { type: "checkbox", id: "link-hours", checked: true });
     const lZone = h("input", { type: "checkbox", id: "link-zone" });
     const lWe = h("input", { type: "checkbox", id: "link-we", checked: true });
-    const linkText = (l) => `${l.emps.map((id) => empName(this.state, id)).join(" + ")} : ${[l.sameHours ? "mêmes horaires" : null, l.sameHours ? (l.sameZone ? "même zone" : "zone libre") : null, l.sameWeekends ? "mêmes week-ends" : null].filter(Boolean).join(", ")}`;
+    const linkText = (l) => this.linkText(l);
     const drawLinks = () => {
       const links = this.state.settings.links || [];
-      linkBox.replaceChildren(...(links.length ? links.map((l) => h("div", { class: "item" }, h("span", { class: "grow" }, "🔗 ", linkText(l)),
+      linkBox.replaceChildren(...(links.length ? links.map((l) => h("div", { class: "item" },
+        Store.canWrite ? h("input", { type: "checkbox", checked: l.active !== false, "aria-label": "Activer cette condition", onChange: async (ev) => { const r = await this.commit([{ type: "setSettings", patch: { links: (this.state.settings.links || []).map((x) => (x.id === l.id ? { ...x, active: ev.target.checked } : x)) } }], { quiet: true, summary: `Condition ${ev.target.checked ? "activée" : "désactivée"} : ${linkText(l)}` }); if (r.ok) drawLinks(); } }) : null,
+        h("span", { class: "grow", style: { opacity: l.active === false ? ".5" : "1" } }, "🔗 ", linkText(l)),
         Store.canWrite ? iconBtn("close", "Retirer cette condition", async () => { const r = await this.commit([{ type: "setSettings", patch: { links: (this.state.settings.links || []).filter((x) => x.id !== l.id) } }], { summary: `Condition retirée : ${linkText(l)}` }); if (r.ok) drawLinks(); }) : null))
         : [h("p", { class: "small muted" }, "Aucune condition pour l'instant.")]));
     };
@@ -902,7 +906,7 @@
       const emps = linkPick.map((c) => c.querySelector("input")).filter((i) => i.checked).map((i) => i.value);
       if (emps.length < 2) { toast("Cochez au moins deux personnes à lier.", "err"); return; }
       if (!lHours.checked && !lWe.checked) { toast("Choisissez « mêmes horaires » ou « mêmes week-ends ».", "err"); return; }
-      const l = { id: C.uid("lien"), emps, sameHours: lHours.checked, sameZone: lHours.checked && lZone.checked, sameWeekends: lWe.checked };
+      const l = { id: C.uid("lien"), emps, sameHours: lHours.checked, sameZone: lHours.checked && lZone.checked, sameWeekends: lWe.checked, since: C.mondayOf(this.today()) };
       const r = await this.commit([{ type: "setSettings", patch: { links: [...(this.state.settings.links || []), l] } }], { summary: `Condition ajoutée : ${linkText(l)}` });
       if (r.ok) { linkPick.forEach((c) => (c.querySelector("input").checked = false)); drawLinks(); }
     };
@@ -1182,6 +1186,50 @@
       past.length ? h("details", { class: "card" }, h("summary", {}, `Passées (${past.length})`), h("div", { class: "list" }, past.slice(0, 60).map(row))) : null);
   } };
 
+  // ---------- Horaires liés (pour une personne) ----------
+  App.linkText = function (l) {
+    return `${l.label ? l.label + " — " : ""}${l.emps.map((id) => empName(this.state, id)).join(" + ")} : ${[l.sameHours ? "mêmes horaires" : null, l.sameHours ? (l.sameZone ? "même zone" : "zone libre") : null, l.sameWeekends ? "mêmes week-ends" : null].filter(Boolean).join(", ")}`;
+  };
+  App.linkSection = function (empId) {
+    const box = h("div", { class: "stack link-section", style: { gap: "8px" } });
+    let open = false;
+    const save = async (links, summary) => { const r = await this.commit([{ type: "setSettings", patch: { links } }], { summary, quiet: true }); if (r.ok) draw(); };
+    const draw = () => {
+      const s = this.state, all = s.settings.links || [];
+      const mine = all.filter((l) => l.emps.includes(empId));
+      const rows = mine.length ? mine.map((l) => h("div", { class: "item" },
+        Store.canWrite ? h("input", { type: "checkbox", checked: l.active !== false, "aria-label": "Activer cette condition", title: "Cochée : respectée dans les plannings ; décochée : ignorée",
+          onChange: (ev) => save(all.map((x) => (x.id === l.id ? { ...x, active: ev.target.checked } : x)), `Condition ${ev.target.checked ? "activée" : "désactivée"} : ${this.linkText(l)}`) }) : null,
+        h("span", { class: "grow", style: { opacity: l.active === false ? ".5" : "1" } }, "🔗 ", this.linkText(l)),
+        Store.canWrite ? iconBtn("close", "Supprimer cette condition", () => save(all.filter((x) => x.id !== l.id), `Condition supprimée : ${this.linkText(l)}`)) : null))
+        : [h("p", { class: "small muted" }, "Aucun horaire lié.")];
+      const kids = [...rows];
+      if (Store.canWrite) {
+        kids.push(h("div", {}, btn(open ? "Fermer la liste" : "🔗 Lier avec…", () => { open = !open; draw(); }, "sm")));
+        if (open) {
+          const picks = s.employees.filter((e) => e.active !== false && e.id !== empId).map((e) => h("label", { class: "check" }, h("input", { type: "checkbox", value: e.id }), e.name));
+          const oH = h("input", { type: "checkbox", checked: true }), oZ = h("input", { type: "checkbox" }), oW = h("input", { type: "checkbox" });
+          const lbl = h("input", { class: "input", maxlength: "60", placeholder: "Nom (facultatif) : ex. Trajet, Couple…" });
+          kids.push(h("div", { class: "card flat stack", style: { gap: "8px" } },
+            h("span", { class: "small muted" }, `Lier ${empName(s, empId)} avec :`), h("div", { class: "row", style: { "flex-wrap": "wrap" } }, picks),
+            h("div", { class: "row", style: { "flex-wrap": "wrap" } }, h("label", { class: "check" }, oH, "Mêmes horaires"), h("label", { class: "check" }, oZ, "Dans la même zone"), h("label", { class: "check" }, oW, "Mêmes week-ends")),
+            lbl,
+            h("div", {}, btn("Ajouter", () => {
+              const emps = [empId, ...picks.map((c) => c.querySelector("input")).filter((i) => i.checked).map((i) => i.value)];
+              if (emps.length < 2) { toast("Cochez au moins une personne.", "err"); return; }
+              if (!oH.checked && !oW.checked) { toast("Choisissez « mêmes horaires » ou « mêmes week-ends ».", "err"); return; }
+              const l = { id: C.uid("lien"), emps, sameHours: oH.checked, sameZone: oH.checked && oZ.checked, sameWeekends: oW.checked, active: true, label: lbl.value.trim(), since: C.mondayOf(this.today()) };
+              open = false;
+              save([...all, l], `Condition ajoutée : ${this.linkText(l)}`);
+            }, "sm primary"))));
+        }
+      }
+      box.replaceChildren(...kids);
+    };
+    draw();
+    return box;
+  };
+
   // ---------- Compétences ----------
   const SKILL_KEYS = ["badgeRouge", "fdj", "ouverture", "fermeture", "formation", "ancien"];
   const SKILL_HELP = {
@@ -1264,6 +1312,9 @@
     const offBoxes = C.DAYS.map((d, i) => h("label", { class: "check" }, h("input", { type: "checkbox", value: String(i), checked: (r.daysOff || []).includes(i) }), d));
     const sameWe = h("input", { type: "checkbox", id: "emp-same-we", checked: !!r.sameWeekends });
     const maxEndIn = h("input", { type: "time", class: "input", id: "emp-max-end", value: r.maxEnd || "" });
+    const weekZoneIn = h("select", { class: "input", id: "emp-week-zone" }, h("option", { value: "" }, "Au choix (ZP ou ZR)"), s.zones.map((z) => h("option", { value: z.id, selected: r.weekZone === z.id }, `${z.short} toute la semaine`)));
+    const officeOn = h("input", { type: "checkbox", id: "emp-office", checked: !!r.officeMinDays });
+    const officeN = h("input", { type: "number", class: "input", id: "emp-office-n", min: "1", max: "7", value: r.officeMinDays || 2, style: { width: "80px" } });
     const tr = e.training || {};
     const trOn = h("input", { type: "checkbox", id: "emp-train", checked: this.skillOn(e, "formation") });
     const sk = Object.fromEntries(["badgeRouge", "fdj", "ouverture", "fermeture", "ancien"].map((k) => [k, h("input", { type: "checkbox", id: `emp-skill-${k}`, checked: this.skillOn(e, k) })]));
@@ -1274,11 +1325,14 @@
     openDialog({ title: e.name, body: h("div", { class: "stack" }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("label", { class: "f" }, "Autres écritures (séparées par des virgules)", aliases),
       h("h3", {}, "Règles personnelles"),
       h("label", { class: "check" }, fixOn, "Toujours les mêmes horaires"), h("div", { class: "form-grid" }, h("label", { class: "f" }, "Début", fixS), h("label", { class: "f" }, "Fin", fixE)),
-      h("label", { class: "f" }, "Ne finit jamais après (laisser vide si pas de limite)", maxEndIn),
+      h("div", { class: "form-grid" }, h("label", { class: "f" }, "Fin au plus tard", maxEndIn), h("label", { class: "f" }, "Zone pour toute la semaine", weekZoneIn)),
+      h("div", { class: "row" }, h("label", { class: "check" }, officeOn, "Jours de bureau, au minimum"), officeN, h("span", { class: "small muted" }, "par semaine")),
       h("label", { class: "check" }, sameWe, "Toujours les mêmes week-ends"),
       h("div", { class: "stack", style: { gap: "4px" } }, h("span", { class: "small muted" }, "Jours de repos fixes (jamais de créneau ces jours-là) :"), h("div", { class: "row" }, offBoxes)),
       r.note ? h("p", { class: "small muted" }, `Consigne : ${r.note}`) : null,
       h("label", { class: "f" }, "Heures par semaine (contrat)", contractIn),
+      h("h3", {}, "Horaires liés"),
+      this.linkSection(id),
       h("h3", {}, "Compétences"),
       h("div", { class: "stack", style: { gap: "6px" } }, ["badgeRouge", "fdj", "ouverture", "fermeture"].map((k) => h("label", { class: "check", title: SKILL_HELP[k] }, sk[k], h("span", {}, h("b", {}, C.SKILLS[k]), h("span", { class: "small muted" }, ` — ${SKILL_HELP[k]}`)))),
         h("label", { class: "check" }, trOn, h("span", {}, h("b", {}, "En formation"), h("span", { class: "small muted" }, ` — ${SKILL_HELP.formation}`))),
@@ -1291,7 +1345,8 @@
         { label: "Enregistrer", primary: true, onClick: async () => {
           const daysOff = offBoxes.map((b) => b.querySelector("input")).filter((i) => i.checked).map((i) => Number(i.value));
           if (fixOn.checked && (!C.isTime(fixS.value) || !C.isTime(fixE.value))) { toast("Indiquez le début et la fin des horaires fixes.", "err"); return false; }
-          const rules = { ...r, fixedHours: fixOn.checked ? { s: fixS.value, e: fixE.value } : null, daysOff: daysOff.length ? daysOff : null, sameWeekends: sameWe.checked, maxEnd: maxEndIn.value || null };
+          const rules = { ...r, fixedHours: fixOn.checked ? { s: fixS.value, e: fixE.value } : null, daysOff: daysOff.length ? daysOff : null, sameWeekends: sameWe.checked, maxEnd: maxEndIn.value || null, weekZone: weekZoneIn.value || null, officeMinDays: officeOn.checked ? Math.max(1, Math.min(7, Number(officeN.value) || 2)) : null, officeSince: officeOn.checked ? (r.officeMinDays ? r.officeSince || null : C.mondayOf(this.today())) : null };
+          if (rules.weekZone && !(sk.badgeRouge.checked || rules.weekZone !== "ZR")) { toast("Sans badge rouge, la zone de la semaine ne peut pas être ZR.", "err"); return false; }
           if (trOn.checked && !C.isISO(trSince.value)) { toast("Indiquez le début de la formation.", "err"); return false; }
           const training = trOn.checked ? { since: trSince.value } : e.training ? { ...e.training, ended: e.training.ended || this.today() } : undefined;
           const contractHours = contractIn.value ? Number(contractIn.value) : null;
@@ -1596,10 +1651,10 @@
       const durIn = h("input", { class: "input", id: "aj-dur", placeholder: "ex. 1h30, 0:20, 7h", inputmode: "text" });
       const noteIn = h("input", { class: "input", id: "aj-note", maxlength: "200", placeholder: "Facultatif" });
       const realIn = h("input", { type: "time", class: "input", id: "aj-real", "aria-label": "Heure réelle" });
-      const realLbl = h("span", {}, "ou heure réelle d'arrivée");
+      const realLbl = h("span", {}, "Heure réelle d'arrivée");
       const hint = h("p", { class: "small muted", id: "aj-hint" });
       const refresh = () => {
-        realLbl.textContent = typeSel.value === "retard" ? "ou heure réelle d'arrivée" : typeSel.value === "heures_sup" ? "ou heure réelle de départ" : "";
+        realLbl.textContent = typeSel.value === "retard" ? "Heure réelle d'arrivée" : typeSel.value === "heures_sup" ? "Heure réelle de départ" : "";
         realIn.parentElement && (realIn.parentElement.hidden = typeSel.value === "journee_sup");
         const st = this.state.settings;
         const w = C.getWeek(this.state, C.mondayOf(dateIn.value));
@@ -1622,6 +1677,7 @@
         mode === "week" ? h("p", { class: "small muted" }, `Contrat : ${cH} h par semaine${x.total !== cH * 60 ? ` (${x.total > cH * 60 ? "+" : "−"}${C.fmtHours(Math.abs(x.total - cH * 60))})` : " ✓"}${ref ? ` · planning modèle : ${C.fmtHours(ref)}` : ""}.`) : null,
         h("details", { open: mode === "week" }, h("summary", { class: "small" }, `${x.workedDays} jour(s) planifié(s)`),
           h("div", { class: "list" }, x.days.map((d) => h("div", { class: "item" }, h("span", { class: "grow" }, C.fmtDate(d.date, "day")), h("span", { class: "small muted num" }, C.segLabel(d.segs)), h("b", { class: "num small" }, C.fmtHours(d.minutes)))))),
+        h("details", { class: "link-details" }, h("summary", { class: "small" }, `🔗 Horaires liés (${(this.state.settings.links || []).filter((l) => l.emps.includes(empId)).length})`), this.linkSection(empId)),
         h("h3", {}, "Heures sup, journées en plus et retards"),
         x.adjustments.length ? h("div", { class: "list" }, x.adjustments.map((a) => {
           const t = C.ADJUST_TYPES[a.type];
@@ -1734,6 +1790,11 @@
         const e = C.empById(this.state, id);
         if (!e || !e.onLeave || !(from > e.onLeave.since)) continue;
         ops.push({ type: "addAbsence", absence: { emp: id, type: e.onLeave.type || "vacances", from: e.onLeave.since, to: C.addDays(from, -1), note: "retour d'après le planning papier" } }, { type: "updateEmployee", id, patch: { onLeave: null } });
+      }
+      if (u.addLinks) {
+        const cur = this.state.settings.links || [];
+        const add = u.addLinks.filter((l) => !cur.some((x) => x.id === l.id) && l.emps.every((id) => C.empById(this.state, id))).map((l) => ({ ...l, since: C.mondayOf(this.today()) }));
+        if (add.length) ops.push({ type: "setSettings", patch: { links: [...cur, ...add] } });
       }
       // Compétences : tout le monde peut travailler en ZP ; le badge rouge (ZR) reprend les zones déjà autorisées ;
       // « ancien(ne) » pour chaque personne qui n'est pas en formation.
