@@ -526,7 +526,11 @@
     }, {
       id: "liens-trajet-camilian-fleur",
       summary: "Camilian et Fleur (en couple, une seule voiture) : horaires similaires pour le trajet",
-      addLinks: [{ id: "lien-trajet-camilian-fleur", emps: ["camilian", "fleur"], sameHours: true, sameZone: false, sameWeekends: false, active: true, label: "Trajet (une voiture)" }],
+      addLinks: [{ id: "lien-trajet-camilian-fleur", emps: ["camilian", "fleur"], sameHours: true, sameZone: false, sameWeekends: false, active: true, kind: "trajet", label: "Même trajet, même horaire" }],
+    }, {
+      id: "trajet-voiture",
+      summary: "Camilian et Fleur : bouton voiture « Même trajet, même horaire »",
+      patchLinks: { "lien-trajet-camilian-fleur": { kind: "trajet", label: "Même trajet, même horaire" } },
     }, {
       id: "competences",
       summary: "Compétences ajoutées à chaque personne (badge rouge, FDJ, ouverture, fermeture, en formation, ancien(ne)) : tout le monde peut travailler en ZP",

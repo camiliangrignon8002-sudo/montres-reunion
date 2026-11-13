@@ -69,6 +69,8 @@
     close: "M6 6l12 12 M18 6L6 18",
     more: "M5 12h.01 M12 12h.01 M19 12h.01",
     plus: "M12 5v14 M5 12h14",
+    link: "M10 14a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1 M14 10a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1",
+    car: "M5 17h14 M3.5 17v-3.5L6 8.5h12l2.5 5V17 M3.5 17v2h3v-2 M17.5 17v2h3v-2 M7 13.5h.01 M17 13.5h.01 M6.5 8.5l1-2.5h9l1 2.5",
     check: "M5 12.5l4.5 4.5L19 7",
     send: "M5 12h14 M13 6l6 6-6 6",
     wand: "M4 20L15 9 M17 3l.9 2.1L20 6l-2.1.9L17 9l-.9-2.1L14 6l2.1-.9z",
@@ -600,7 +602,8 @@
         }),
         h("th", { class: "tot" }, "Total"))),
       h("tbody", {}, grid.rows.map((row) => h("tr", { class: row.emp.active === false ? "inactive" : "" },
-        h("td", { class: "name" }, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"), C.weekDates(grid.monday).some((d) => C.inTraining(row.emp, d)) ? h("span", { class: "chip warn tiny-chip", title: "Jamais seule, à aucun moment" }, "En formation") : C.hasSkill(row.emp, "ancien") ? h("span", { class: "chip tiny-chip", title: "Personne expérimentée" }, "Ancien(ne)") : null)),
+        h("td", { class: "name" }, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"), C.weekDates(grid.monday).some((d) => C.inTraining(row.emp, d)) ? h("span", { class: "chip warn tiny-chip", title: "Jamais seule, à aucun moment" }, "En formation") : C.hasSkill(row.emp, "ancien") ? h("span", { class: "chip tiny-chip", title: "Personne expérimentée" }, "Ancien(ne)") : null),
+          (s.settings.links || []).filter((l) => l.kind === "trajet" && l.emps.includes(row.emp.id)).map((l) => this.carToggle(l, false))),
         row.cells.map((cell) => {
           const k = row.emp.id + "|" + cell.date, lvl = cellIssue[k];
           const kids = [];
@@ -1188,41 +1191,48 @@
 
   // ---------- Horaires liés (pour une personne) ----------
   App.linkText = function (l) {
+    if (l.kind === "trajet") return `${l.label || "Même trajet, même horaire"} — ${l.emps.map((id) => empName(this.state, id)).join(" + ")}`;
     return `${l.label ? l.label + " — " : ""}${l.emps.map((id) => empName(this.state, id)).join(" + ")} : ${[l.sameHours ? "mêmes horaires" : null, l.sameHours ? (l.sameZone ? "même zone" : "zone libre") : null, l.sameWeekends ? "mêmes week-ends" : null].filter(Boolean).join(", ")}`;
   };
+  // Bouton voiture (même trajet) : vert = horaires ensemble, blanc = pas le même trajet.
+  App.carToggle = function (l, withLabel) {
+    const on = l.active !== false;
+    const others = l.emps.map((id) => empName(this.state, id)).join(" + ");
+    return h("button", { type: "button", class: "car-toggle" + (withLabel ? " wide" : ""), "aria-pressed": String(on), disabled: !Store.canWrite,
+      title: `${l.label || "Même trajet, même horaire"} (${others}) : ${on ? "oui — horaires mis ensemble" : "non — pas le même trajet"}`,
+      onClick: async (ev) => { ev.stopPropagation(); await this.commit([{ type: "setSettings", patch: { links: (this.state.settings.links || []).map((x) => (x.id === l.id ? { ...x, active: !on } : x)) } }], { quiet: true, summary: `${others} : ${!on ? "même trajet, même horaire" : "pas le même trajet"}` }); if (this._afterLink) this._afterLink(); } },
+      icon("car"), withLabel ? h("span", {}, l.label || "Même trajet, même horaire") : null);
+  };
   App.linkSection = function (empId) {
-    const box = h("div", { class: "stack link-section", style: { gap: "8px" } });
+    const box = h("div", { class: "link-section" });
     let open = false;
     const save = async (links, summary) => { const r = await this.commit([{ type: "setSettings", patch: { links } }], { summary, quiet: true }); if (r.ok) draw(); };
     const draw = () => {
+      this._afterLink = draw;
       const s = this.state, all = s.settings.links || [];
       const mine = all.filter((l) => l.emps.includes(empId));
-      const rows = mine.length ? mine.map((l) => h("div", { class: "item" },
-        Store.canWrite ? h("input", { type: "checkbox", checked: l.active !== false, "aria-label": "Activer cette condition", title: "Cochée : respectée dans les plannings ; décochée : ignorée",
-          onChange: (ev) => save(all.map((x) => (x.id === l.id ? { ...x, active: ev.target.checked } : x)), `Condition ${ev.target.checked ? "activée" : "désactivée"} : ${this.linkText(l)}`) }) : null,
-        h("span", { class: "grow", style: { opacity: l.active === false ? ".5" : "1" } }, "🔗 ", this.linkText(l)),
-        Store.canWrite ? iconBtn("close", "Supprimer cette condition", () => save(all.filter((x) => x.id !== l.id), `Condition supprimée : ${this.linkText(l)}`)) : null))
-        : [h("p", { class: "small muted" }, "Aucun horaire lié.")];
-      const kids = [...rows];
-      if (Store.canWrite) {
-        kids.push(h("div", {}, btn(open ? "Fermer la liste" : "🔗 Lier avec…", () => { open = !open; draw(); }, "sm")));
-        if (open) {
-          const picks = s.employees.filter((e) => e.active !== false && e.id !== empId).map((e) => h("label", { class: "check" }, h("input", { type: "checkbox", value: e.id }), e.name));
-          const oH = h("input", { type: "checkbox", checked: true }), oZ = h("input", { type: "checkbox" }), oW = h("input", { type: "checkbox" });
-          const lbl = h("input", { class: "input", maxlength: "60", placeholder: "Nom (facultatif) : ex. Trajet, Couple…" });
-          kids.push(h("div", { class: "card flat stack", style: { gap: "8px" } },
-            h("span", { class: "small muted" }, `Lier ${empName(s, empId)} avec :`), h("div", { class: "row", style: { "flex-wrap": "wrap" } }, picks),
-            h("div", { class: "row", style: { "flex-wrap": "wrap" } }, h("label", { class: "check" }, oH, "Mêmes horaires"), h("label", { class: "check" }, oZ, "Dans la même zone"), h("label", { class: "check" }, oW, "Mêmes week-ends")),
-            lbl,
-            h("div", {}, btn("Ajouter", () => {
+      const head = h("div", { class: "row link-head" },
+        Store.canWrite ? h("button", { type: "button", class: "link-btn", "aria-pressed": String(open), title: "Lier les horaires avec quelqu'un", "aria-label": "Lier les horaires avec quelqu'un", onClick: () => { open = !open; draw(); } }, icon("link")) : null,
+        mine.filter((l) => l.kind === "trajet").map((l) => this.carToggle(l, true)));
+      const rows = mine.filter((l) => l.kind !== "trajet").map((l) => h("div", { class: "item" },
+        Store.canWrite ? h("input", { type: "checkbox", checked: l.active !== false, "aria-label": "Activer cette condition", onChange: (ev) => save(all.map((x) => (x.id === l.id ? { ...x, active: ev.target.checked } : x)), `Condition ${ev.target.checked ? "activée" : "désactivée"} : ${this.linkText(l)}`) }) : null,
+        h("span", { class: "grow", style: { opacity: l.active === false ? ".5" : "1" } }, this.linkText(l)),
+        Store.canWrite ? iconBtn("close", "Supprimer cette condition", () => save(all.filter((x) => x.id !== l.id), `Condition supprimée : ${this.linkText(l)}`)) : null));
+      const kids = [head, ...rows];
+      if (open && Store.canWrite) {
+        const picks = s.employees.filter((e) => e.active !== false && e.id !== empId).map((e) => h("label", { class: "check" }, h("input", { type: "checkbox", value: e.id }), e.name));
+        const oH = h("input", { type: "checkbox", checked: true }), oZ = h("input", { type: "checkbox" }), oW = h("input", { type: "checkbox" });
+        kids.push(h("div", { class: "card flat stack link-pick", style: { gap: "8px" } },
+          h("span", { class: "small muted" }, `Lier ${empName(s, empId)} avec :`), h("div", { class: "row", style: { "flex-wrap": "wrap" } }, picks),
+          h("div", { class: "row", style: { "flex-wrap": "wrap" } }, h("label", { class: "check" }, oH, "Mêmes horaires"), h("label", { class: "check" }, oZ, "Même zone"), h("label", { class: "check" }, oW, "Mêmes week-ends"),
+            btn("Lier", () => {
               const emps = [empId, ...picks.map((c) => c.querySelector("input")).filter((i) => i.checked).map((i) => i.value)];
               if (emps.length < 2) { toast("Cochez au moins une personne.", "err"); return; }
               if (!oH.checked && !oW.checked) { toast("Choisissez « mêmes horaires » ou « mêmes week-ends ».", "err"); return; }
-              const l = { id: C.uid("lien"), emps, sameHours: oH.checked, sameZone: oH.checked && oZ.checked, sameWeekends: oW.checked, active: true, label: lbl.value.trim(), since: C.mondayOf(this.today()) };
+              const l = { id: C.uid("lien"), emps, sameHours: oH.checked, sameZone: oH.checked && oZ.checked, sameWeekends: oW.checked, active: true, since: C.mondayOf(this.today()) };
               open = false;
               save([...all, l], `Condition ajoutée : ${this.linkText(l)}`);
             }, "sm primary"))));
-        }
       }
       box.replaceChildren(...kids);
     };
@@ -1677,7 +1687,7 @@
         mode === "week" ? h("p", { class: "small muted" }, `Contrat : ${cH} h par semaine${x.total !== cH * 60 ? ` (${x.total > cH * 60 ? "+" : "−"}${C.fmtHours(Math.abs(x.total - cH * 60))})` : " ✓"}${ref ? ` · planning modèle : ${C.fmtHours(ref)}` : ""}.`) : null,
         h("details", { open: mode === "week" }, h("summary", { class: "small" }, `${x.workedDays} jour(s) planifié(s)`),
           h("div", { class: "list" }, x.days.map((d) => h("div", { class: "item" }, h("span", { class: "grow" }, C.fmtDate(d.date, "day")), h("span", { class: "small muted num" }, C.segLabel(d.segs)), h("b", { class: "num small" }, C.fmtHours(d.minutes)))))),
-        h("details", { class: "link-details" }, h("summary", { class: "small" }, `🔗 Horaires liés (${(this.state.settings.links || []).filter((l) => l.emps.includes(empId)).length})`), this.linkSection(empId)),
+        this.linkSection(empId),
         h("h3", {}, "Heures sup, journées en plus et retards"),
         x.adjustments.length ? h("div", { class: "list" }, x.adjustments.map((a) => {
           const t = C.ADJUST_TYPES[a.type];
@@ -1790,6 +1800,10 @@
         const e = C.empById(this.state, id);
         if (!e || !e.onLeave || !(from > e.onLeave.since)) continue;
         ops.push({ type: "addAbsence", absence: { emp: id, type: e.onLeave.type || "vacances", from: e.onLeave.since, to: C.addDays(from, -1), note: "retour d'après le planning papier" } }, { type: "updateEmployee", id, patch: { onLeave: null } });
+      }
+      if (u.patchLinks) {
+        const cur = this.state.settings.links || [];
+        if (cur.some((l) => u.patchLinks[l.id])) ops.push({ type: "setSettings", patch: { links: cur.map((l) => (u.patchLinks[l.id] ? { ...l, ...u.patchLinks[l.id] } : l)) } });
       }
       if (u.addLinks) {
         const cur = this.state.settings.links || [];

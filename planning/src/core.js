@@ -1043,7 +1043,7 @@
                 const emps = [...new Set((l && l.emps) || [])].filter((id) => empById(s, id));
                 if (emps.length < 2) { fail("Une liaison relie au moins deux personnes."); break; }
                 if (!l.sameHours && !l.sameWeekends) { fail("Choisissez au moins « mêmes horaires » ou « mêmes week-ends »."); break; }
-                out.push({ id: String(l.id || uid("lien")), emps, sameHours: !!l.sameHours, sameZone: !!l.sameZone, sameWeekends: !!l.sameWeekends, active: l.active !== false, label: String(l.label || "").slice(0, 60), ...(isISO(l.since) ? { since: l.since } : {}) });
+                out.push({ id: String(l.id || uid("lien")), emps, sameHours: !!l.sameHours, sameZone: !!l.sameZone, sameWeekends: !!l.sameWeekends, active: l.active !== false, label: String(l.label || "").slice(0, 60), ...(l.kind === "trajet" ? { kind: "trajet" } : {}), ...(isISO(l.since) ? { since: l.since } : {}) });
               }
               if (out.length === v.length) s.settings.links = out.slice(0, 50);
               continue;
