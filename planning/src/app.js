@@ -668,7 +668,7 @@
         posts.length ? h("div", { class: "card" }, h("h3", {}, "Postes à pourvoir ce jour"), this.postsList(posts)) : null);
     };
 
-    const shown = issues.filter((i) => i.level !== "info" && i.code !== "UNCOVERED");
+    const shown = issues.filter((i) => (i.level !== "info" || i.code === "LINK_TRIP") && i.code !== "UNCOVERED");
     const dism = new Set((w && w.dismissed) || []);
     const visible = shown.filter((i) => !dism.has(C.dismissKey(i)));
     const hidden = shown.length - visible.length;
@@ -678,13 +678,13 @@
       h("div", { class: "row between" }, h("h2", {}, "Points à vérifier"), h("div", { class: "row" }, vErr ? h("span", { class: "chip err" }, `${vErr} erreur(s)`) : h("span", { class: "chip ok" }, "Aucune erreur"), vAl ? h("span", { class: "chip warn" }, `${vAl} alerte(s)`) : null,
         canEdit && visible.length > 1 ? btn("Tout masquer", () => setDismissed([...dism, ...visible.map(C.dismissKey)], `Semaine du ${C.fmtWeek(monday)} : ${visible.length} point(s) pris en compte`), "sm ghost") : null)),
       visible.length ? h("div", {}, visible.slice(0, 60).map((i) => h("div", { class: "issue " + i.level },
-        h("span", { class: "ico" }, i.level === "erreur" ? "!" : "?"),
+        h("span", { class: "ico" }, i.level === "erreur" ? "!" : i.code === "LINK_TRIP" ? "🚗" : "?"),
         h("span", { class: "grow", role: i.emp && i.date ? "button" : null, style: { cursor: i.emp && i.date ? "pointer" : "default" }, onClick: () => { if (i.emp && i.date) this.openEditor(i.emp, i.date); } }, i.msg),
         canEdit ? h("button", { type: "button", class: "issue-x", "aria-label": "Masquer ce point (pris en compte)", title: "Masquer : j'en ai pris connaissance", onClick: (ev) => { ev.stopPropagation(); setDismissed([...dism, C.dismissKey(i)], `Point pris en compte : ${i.msg.slice(0, 80)}`); } }, "✕") : null)))
         : h("p", { class: "muted" }, !w ? "Rien à vérifier : la semaine est vide." : hidden ? "Tous les points ont été pris en compte." : "Tout est cohérent avec les règles enregistrées."),
       hidden ? h("p", { class: "small muted", style: { "margin-top": "8px" } }, `${hidden} point(s) masqué(s). `, canEdit ? h("a", { href: "#", onClick: (ev) => { ev.preventDefault(); setDismissed([], `Semaine du ${C.fmtWeek(monday)} : points masqués réaffichés`); } }, "Tout réafficher") : null,
         vErr < errs.length ? " Les erreurs masquées empêchent toujours de valider la semaine." : null) : null,
-      issues.some((i) => i.level === "info") ? h("details", { style: { "margin-top": "10px" } }, h("summary", { class: "small muted" }, `${issues.filter((i) => i.level === "info").length} information(s)`), issues.filter((i) => i.level === "info").map((i) => h("div", { class: "small muted", style: { padding: "3px 0" } }, i.msg))) : null);
+      issues.some((i) => i.level === "info" && i.code !== "LINK_TRIP") ? h("details", { style: { "margin-top": "10px" } }, h("summary", { class: "small muted" }, `${issues.filter((i) => i.level === "info" && i.code !== "LINK_TRIP").length} information(s)`), issues.filter((i) => i.level === "info" && i.code !== "LINK_TRIP").map((i) => h("div", { class: "small muted", style: { padding: "3px 0" } }, i.msg))) : null);
     const postsCard = open.length ? h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", {}, "Postes à pourvoir"), h("span", { class: "chip warn" }, open.length)),
       h("p", { class: "small muted" }, "Postes du planning modèle sans personne cette semaine. Les remplaçants proposés respectent zones, cours, absences, repos et durée : rien n'est attribué sans votre clic."),
       this.postsList(open)) : null;

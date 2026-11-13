@@ -416,7 +416,8 @@
         const sh = l.emps.map((id) => w.shifts.find((x) => x.emp === id && x.date === d)).filter(Boolean);
         if (l.sameHours && sh.length > 1) {
           const spans = sh.map((x) => shiftSpan(x.segs));
-          if (spans.some((p) => p.s !== spans[0].s || p.e !== spans[0].e)) add("alerte", "LINK_HOURS", sh[0].emp, d, `${names} doivent avoir les mêmes horaires : ${sh.map((x, i) => `${nameOf(x.emp)} ${spans[i].s}–${spans[i].e}`).join(", ")} le ${fmtDate(d, "day")}.`);
+          if (spans.some((p) => p.s !== spans[0].s || p.e !== spans[0].e) && l.kind === "trajet") add("info", "LINK_TRIP", sh[0].emp, d, `Horaires différents ${[...sh].reverse().map((x) => nameOf(x.emp)).join(" / ")} le ${fmtDate(d, "day")} : trajet plus compliqué (${sh.map((x, i) => `${nameOf(x.emp)} ${spans[i].s}–${spans[i].e}`).join(", ")}).`);
+          else if (spans.some((p) => p.s !== spans[0].s || p.e !== spans[0].e)) add("alerte", "LINK_HOURS", sh[0].emp, d, `${names} doivent avoir les mêmes horaires : ${sh.map((x, i) => `${nameOf(x.emp)} ${spans[i].s}–${spans[i].e}`).join(", ")} le ${fmtDate(d, "day")}.`);
           if (l.sameZone) {
             const zk = sh.map((x) => [...new Set(x.segs.map((g) => g.z))].sort().join("/"));
             if (zk.some((z) => z !== zk[0])) add("alerte", "LINK_ZONE", sh[0].emp, d, `${names} doivent être dans la même zone le ${fmtDate(d, "day")} (${sh.map((x, i) => `${nameOf(x.emp)} ${zk[i]}`).join(", ")}).`);

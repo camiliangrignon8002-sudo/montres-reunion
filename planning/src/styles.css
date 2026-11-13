@@ -204,7 +204,7 @@ table.plan { border-collapse: separate; border-spacing: 0; width: 100%; min-widt
 .issue:first-child { border-top: 0; }
 .issue .ico { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 800; color: #fff; background: var(--danger); margin-top: 1px; }
 .issue.alerte .ico { background: var(--warn); color: var(--surface); }
-.issue.info .ico { background: var(--fg-3); }
+.issue.info .ico { background: transparent; font-size: 15px; }
 .post { display: flex; flex-direction: column; gap: 8px; padding: 12px 0; border-top: 1px solid var(--line); }
 .post:first-child { border-top: 0; }
 
