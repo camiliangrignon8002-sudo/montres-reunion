@@ -4588,16 +4588,16 @@
   "vu": "2026-11-12T17:31+04:00"
  },
  {
-  "id": "superimmo--com-annonces-location-appartement-saint-denis-97490-x12ct6o",
+  "id": "superimmo--annonces-location-appartement-19m-saint-denis-97490-x12ct6o",
   "source": "Superimmo",
-  "url": "https://www.superimmo.com/annonces/location-appartement-saint-denis-97490-x12ct6o",
-  "titre": "Location appartement 1 pièce  Saint-Denis (97490)",
+  "url": "https://www.superimmo.com/annonces/location-appartement-19m-saint-denis-97490-x12ct6o",
+  "titre": "Location appartement 1 pièce 19,82 m² Saint-Denis (97490)",
   "prix": 620.0,
   "commune": "Saint-Denis",
   "quartier": "",
   "pieces": 1,
   "type": "T1",
-  "surface": null,
+  "surface": 19.82,
   "meuble": true,
   "photos": [
    "https://photo.superimmo.com/hedohs5irk4atsbi06nk2a68rs8i",
@@ -4608,7 +4608,7 @@
    "https://photo.superimmo.com/055o5h38q42c7tu9ou6n5zv14x9u",
    "https://photo.superimmo.com/zfeq1sfmaxduk2g02lvmez4lvljt"
   ],
-  "description": "Annonce appartement location  1 pièce à Saint-Denis Découvrez ce charmant T1 meublé, idéal pour",
+  "description": "Annonce appartement location 19,82 m² 1 pièce à Saint-Denis Découvrez ce charmant T1 meublé, idéal pour",
   "caracteristiques": [
    "Meublé"
   ],
@@ -4624,7 +4624,7 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [],
-  "vu": "2026-10-29T09:01+04:00"
+  "vu": "2026-11-13T09:17+04:00"
  },
  {
   "id": "pv-1295397318",
@@ -5147,7 +5147,7 @@
    "Proche transports",
    "Proche université"
   ],
-  "date": "2026-11-12T16:07:57.089Z",
+  "date": "2026-11-13T05:08:25.721Z",
   "annonceur": "Citya Belvédère Immobilier",
   "lat": -20.9112421,
   "lon": 55.4990762,
