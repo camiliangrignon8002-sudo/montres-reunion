@@ -35,6 +35,7 @@
     coverageFromTemplate: true,
     rulesConfirmed: false,
     appliedUpdates: [],
+    links: [], // personnes liées : [{ id, emps: [...], sameHours, sameZone, sameWeekends }]
   };
 
   // Codes qui empêchent d'enregistrer une modification ou de valider un planning.
@@ -406,6 +407,26 @@
       }
     }
 
+    // Personnes liées : mêmes horaires (zone au choix) et/ou mêmes week-ends.
+    for (const l of st.links || []) {
+      const names = l.emps.map(nameOf).join(" et ");
+      for (const d of weekDates(monday)) {
+        const sh = l.emps.map((id) => w.shifts.find((x) => x.emp === id && x.date === d)).filter(Boolean);
+        if (l.sameHours && sh.length > 1) {
+          const spans = sh.map((x) => shiftSpan(x.segs));
+          if (spans.some((p) => p.s !== spans[0].s || p.e !== spans[0].e)) add("alerte", "LINK_HOURS", sh[0].emp, d, `${names} doivent avoir les mêmes horaires : ${sh.map((x, i) => `${nameOf(x.emp)} ${spans[i].s}–${spans[i].e}`).join(", ")} le ${fmtDate(d, "day")}.`);
+          if (l.sameZone) {
+            const zk = sh.map((x) => [...new Set(x.segs.map((g) => g.z))].sort().join("/"));
+            if (zk.some((z) => z !== zk[0])) add("alerte", "LINK_ZONE", sh[0].emp, d, `${names} doivent être dans la même zone le ${fmtDate(d, "day")} (${sh.map((x, i) => `${nameOf(x.emp)} ${zk[i]}`).join(", ")}).`);
+          }
+        }
+        if (l.sameWeekends && dow(d) >= 5 && sh.length && sh.length < l.emps.length) {
+          const off = l.emps.filter((id) => !sh.some((x) => x.emp === id));
+          add("alerte", "LINK_WEEKEND", sh[0].emp, d, `${names} doivent avoir les mêmes week-ends : ${sh.map((x) => nameOf(x.emp)).join(", ")} travaille le ${fmtDate(d, "day")}, pas ${off.map(nameOf).join(", ")}.`);
+        }
+      }
+    }
+
     // Ouverture et fermeture : dans chaque zone, la première (ou la dernière) personne présente doit avoir la compétence,
     // dès qu'au moins une personne de l'équipe l'a cochée.
     for (const [k, code, label] of [["ouverture", "OPEN_SKILL", "ouvre"], ["fermeture", "CLOSE_SKILL", "ferme"]]) {
@@ -593,6 +614,32 @@
         }
         if (reason) notPlaced.push({ emp: t.emp, date, segs, reason });
         else { week.shifts.push({ id: uid("c"), emp: emp.id, date, segs }); placed.push({ emp: emp.id, date }); }
+      }
+    }
+    // Personnes liées : on aligne les horaires (et la zone si demandé) sur la première personne du groupe, et les week-ends.
+    const links = opts.links || (state.settings && state.settings.links) || [];
+    const canTake = (emp, date, segs) => emp && emp.active !== false && (!include || include.has(emp.id)) && !extra.some((x) => x.emp === emp.id && x.date === date)
+      && availability(state, emp.id, date, segs).ok && !personalRuleIssues(emp, date, segs).length && calStatus(state, emp, date) !== "formation";
+    const copySegs = (ref, emp, own, sameZone) => ref.segs.map((g, i) => {
+      let z = sameZone ? g.z : own ? (own.segs[i] || own.segs[0]).z : g.z;
+      if (!allowedZones(emp).includes(z)) z = allowedZones(emp).includes(g.z) ? g.z : allowedZones(emp)[0];
+      return { s: g.s, e: g.e, z };
+    });
+    for (const l of links) for (const date of weekDates(monday)) {
+      if (date < from || date > to) continue;
+      const placedL = l.emps.map((id) => week.shifts.find((x) => x.emp === id && x.date === date)).filter(Boolean);
+      if (!placedL.length) continue;
+      const ref = placedL[0];
+      for (const id of l.emps) {
+        if (id === ref.emp) continue;
+        const emp = empById(state, id), own = week.shifts.find((x) => x.emp === id && x.date === date);
+        const weekendMissing = !own && l.sameWeekends && dow(date) >= 5;
+        if (!own && !weekendMissing) continue;
+        if (own && !l.sameHours) continue;
+        const segs = l.sameHours || !own ? copySegs(ref, emp, own, l.sameZone) : own.segs;
+        if (own && segKey(segs) === segKey(own.segs)) continue;
+        if (!canTake(emp, date, segs)) { notPlaced.push({ emp: id, date, segs, reason: `lié(e) à ${empById(state, ref.emp).name} mais indisponible sur ${shiftSpan(segs).s}–${shiftSpan(segs).e}` }); continue; }
+        if (own) own.segs = segs; else { week.shifts.push({ id: uid("c"), emp: id, date, segs }); placed.push({ emp: id, date }); }
       }
     }
     week.shifts.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
@@ -964,6 +1011,18 @@
           const p = op.patch || {};
           for (const [k, v] of Object.entries(p)) {
             if (!(k in DEFAULT_SETTINGS)) continue;
+            if (k === "links") {
+              if (!Array.isArray(v)) { fail("Liaisons invalides."); continue; }
+              const out = [];
+              for (const l of v) {
+                const emps = [...new Set((l && l.emps) || [])].filter((id) => empById(s, id));
+                if (emps.length < 2) { fail("Une liaison relie au moins deux personnes."); break; }
+                if (!l.sameHours && !l.sameWeekends) { fail("Choisissez au moins « mêmes horaires » ou « mêmes week-ends »."); break; }
+                out.push({ id: String(l.id || uid("lien")), emps, sameHours: !!l.sameHours, sameZone: !!l.sameZone, sameWeekends: !!l.sameWeekends });
+              }
+              if (out.length === v.length) s.settings.links = out.slice(0, 50);
+              continue;
+            }
             if (Array.isArray(DEFAULT_SETTINGS[k])) { if (!Array.isArray(v)) { fail(`Valeur invalide pour ${k}.`); continue; } s.settings[k] = v.map(String).slice(0, 200); continue; }
             if (typeof DEFAULT_SETTINGS[k] === "string") { s.settings[k] = String(v).slice(0, 10); continue; }
             if (typeof DEFAULT_SETTINGS[k] === "number" && !(Number(v) > 0)) { fail(`Valeur invalide pour ${k}.`); continue; }

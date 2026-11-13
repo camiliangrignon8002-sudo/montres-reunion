@@ -409,3 +409,28 @@ test("compétences : ouverture et fermeture signalées, formation sans date de f
   assert.equal(C.inTraining(e, "2027-06-01"), true);
   assert.equal(C.inTraining({ training: { since: "2026-11-01", ended: "2026-11-12" } }, "2026-11-20"), false);
 });
+
+test("conditions : personnes liées (mêmes horaires, zone au choix, mêmes week-ends)", () => {
+  let s = withWeek1();
+  const r = apply(s, [{ type: "setSettings", patch: { links: [{ emps: ["maelle", "murielle"], sameHours: true, sameZone: false, sameWeekends: true }] } }]);
+  assert.ok(r.ok, r.errors && r.errors.join());
+  s = r.state;
+  assert.equal(apply(s, [{ type: "setSettings", patch: { links: [{ emps: ["maelle"], sameHours: true }] } }]).ok, false);
+  const M = "2026-12-07";
+  const { week, report } = C.generateWeek(s, M);
+  for (const d of C.weekDates(M)) {
+    const a = week.shifts.find((x) => x.emp === "maelle" && x.date === d), b = week.shifts.find((x) => x.emp === "murielle" && x.date === d);
+    const excused = report.notPlaced.some((n) => ["maelle", "murielle"].includes(n.emp) && n.date === d);
+    if (a && b) assert.deepEqual(C.shiftSpan(a.segs), C.shiftSpan(b.segs), d);
+    if (C.dow(d) >= 5 && !excused) assert.equal(!!a, !!b, "week-end " + d);
+  }
+  // validation : horaires différents signalés
+  s.weeks[M] = { week: M, status: "brouillon", shifts: [
+    { id: "a", emp: "maelle", date: "2026-12-08", segs: [{ s: "07:00", e: "12:00", z: "ZP" }, { s: "12:30", e: "14:30", z: "ZP" }] },
+    { id: "b", emp: "murielle", date: "2026-12-08", segs: [{ s: "14:30", e: "17:00", z: "ZR" }, { s: "17:30", e: "22:00", z: "ZR" }] },
+    { id: "c", emp: "maelle", date: "2026-12-12", segs: [{ s: "07:00", e: "12:00", z: "ZP" }, { s: "12:30", e: "14:30", z: "ZP" }] }] };
+  const iss = C.validateWeek(s, M);
+  assert.ok(iss.some((i) => i.code === "LINK_HOURS"));
+  assert.ok(iss.some((i) => i.code === "LINK_WEEKEND"));
+  assert.ok(!iss.some((i) => i.code === "LINK_ZONE")); // zone libre
+});

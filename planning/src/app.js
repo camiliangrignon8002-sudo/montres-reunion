@@ -466,6 +466,8 @@
       else if (!this.state && screen !== "import") nodes.push(h("div", { class: "empty" }, "Aucune donnée. ", btn("Importer les calendriers", () => this.go("import"), "primary")));
       else nodes.push(def.render.call(this));
       content.replaceChildren(...nodes);
+      // Grandes cartes (tableau, mois, formulaire) : marquées une fois ici plutôt qu'avec un sélecteur CSS coûteux au survol.
+      for (const c of content.querySelectorAll(".card")) if (c.querySelector("table, .month, form, textarea")) c.classList.add("big");
       if (this.ready) hideSplash();
       // Compteur d'erreurs sur la semaine en cours
       const wb = document.querySelector('.side [data-screen="week"]');
@@ -868,11 +870,40 @@
       return { from: fromIn.value, to: toIn.value };
     };
     const absN = Object.values(s.absences).length;
+    // Conditions : personnes liées (enregistrées, reprises à chaque génération).
+    const linkBox = h("div", { class: "stack", style: { gap: "8px" } });
+    const linkPick = s.employees.filter((e) => e.active !== false).map((e) => h("label", { class: "check" }, h("input", { type: "checkbox", value: e.id }), e.name));
+    const lHours = h("input", { type: "checkbox", id: "link-hours", checked: true });
+    const lZone = h("input", { type: "checkbox", id: "link-zone" });
+    const lWe = h("input", { type: "checkbox", id: "link-we", checked: true });
+    const linkText = (l) => `${l.emps.map((id) => empName(this.state, id)).join(" + ")} : ${[l.sameHours ? "mêmes horaires" : null, l.sameHours ? (l.sameZone ? "même zone" : "zone libre") : null, l.sameWeekends ? "mêmes week-ends" : null].filter(Boolean).join(", ")}`;
+    const drawLinks = () => {
+      const links = this.state.settings.links || [];
+      linkBox.replaceChildren(...(links.length ? links.map((l) => h("div", { class: "item" }, h("span", { class: "grow" }, "🔗 ", linkText(l)),
+        Store.canWrite ? iconBtn("close", "Retirer cette condition", async () => { const r = await this.commit([{ type: "setSettings", patch: { links: (this.state.settings.links || []).filter((x) => x.id !== l.id) } }], { summary: `Condition retirée : ${linkText(l)}` }); if (r.ok) drawLinks(); }) : null))
+        : [h("p", { class: "small muted" }, "Aucune condition pour l'instant.")]));
+    };
+    drawLinks();
+    const addLink = async () => {
+      const emps = linkPick.map((c) => c.querySelector("input")).filter((i) => i.checked).map((i) => i.value);
+      if (emps.length < 2) { toast("Cochez au moins deux personnes à lier.", "err"); return; }
+      if (!lHours.checked && !lWe.checked) { toast("Choisissez « mêmes horaires » ou « mêmes week-ends ».", "err"); return; }
+      const l = { id: C.uid("lien"), emps, sameHours: lHours.checked, sameZone: lHours.checked && lZone.checked, sameWeekends: lWe.checked };
+      const r = await this.commit([{ type: "setSettings", patch: { links: [...(this.state.settings.links || []), l] } }], { summary: `Condition ajoutée : ${linkText(l)}` });
+      if (r.ok) { linkPick.forEach((c) => (c.querySelector("input").checked = false)); drawLinks(); }
+    };
     openDialog({ title: "Générer un planning", wide: true, body: h("div", { class: "stack" },
       h("p", { class: "muted small" }, `Le générateur reprend le planning modèle (« ${s.template.label || "modèle"} ») jour par jour, avec ses horaires, pauses et zones. Il n'attribue jamais un créneau pendant des cours, une absence ou dans une zone non autorisée : ces postes restent « à pourvoir », avec des remplaçants proposés.`),
       h("div", { class: "row" }, seg), periodBox,
       h("h3", {}, "Personnes concernées"), h("div", { class: "form-grid" }, checks),
       h("p", { class: "small muted" }, `${absN} congé(s) ou absence(s) enregistré(s) et le calendrier d'alternance sont pris en compte automatiquement.`),
+      h("section", { class: "card flat", id: "gen-links" }, h("h3", {}, "Conditions : personnes liées"),
+        h("p", { class: "small muted" }, "Les personnes liées travaillent aux mêmes horaires (dans la même zone ou non, au choix) et/ou ont les mêmes week-ends. Les conditions restent enregistrées pour les prochaines générations."),
+        linkBox,
+        Store.canWrite ? h("div", { class: "stack", style: { gap: "8px", "margin-top": "10px" } },
+          h("span", { class: "small muted" }, "Nouvelle condition — cochez les personnes à lier :"), h("div", { class: "row", style: { "flex-wrap": "wrap" } }, linkPick),
+          h("div", { class: "row", style: { "flex-wrap": "wrap" } }, h("label", { class: "check" }, lHours, "Mêmes horaires"), h("label", { class: "check" }, lZone, "Dans la même zone"), h("label", { class: "check" }, lWe, "Mêmes week-ends")),
+          h("div", {}, btn("Ajouter la condition", addLink, "sm primary"))) : null),
       h("details", {}, h("summary", { class: "small" }, "Contraintes particulières pour cette génération"),
         h("div", { class: "stack", style: { "margin-top": "8px" } }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Personne", xEmp), h("label", { class: "f" }, "Indisponible le", xDate), btn("Ajouter", () => { if (C.isISO(xDate.value)) { extra.push({ emp: xEmp.value, date: xDate.value }); drawExtra(); } }, "sm")), extraBox)),
       h("label", { class: "check" }, overwrite, "Remplacer les semaines qui contiennent déjà des horaires (une version de chacune est enregistrée avant)")),
