@@ -473,3 +473,6 @@ html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 .blk, .mday, .daybar button { position: relative; }
 /* Petites cartes sur leur propre calque : leur agrandissement est fait par la carte graphique. */
 @media (hover: hover) { .card:not(.big) { will-change: transform; } }
+.issue .grow { flex: 1; min-width: 0; }
+.issue-x { flex: none; width: 26px; height: 26px; border-radius: 50%; border: 0; background: transparent; color: var(--fg-3); font-size: 13px; cursor: pointer; display: grid; place-items: center; transition: background-color .12s, color .12s, transform .12s; }
+.issue-x:hover { background: var(--danger-soft); color: var(--danger); transform: scale(1.15); }

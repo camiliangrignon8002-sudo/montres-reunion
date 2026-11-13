@@ -496,7 +496,8 @@
   SCREENS.dashboard = { title: "Tableau de bord", render() {
     const s = this.state, today = this.today(), monday = C.mondayOf(today), next = C.addDays(monday, 7);
     const w = C.getWeek(s, monday), wn = C.getWeek(s, next);
-    const iss = this.vw(s, monday);
+    const dismissedSet = new Set((w && w.dismissed) || []);
+    const iss = this.vw(s, monday).filter((i) => !dismissedSet.has(C.dismissKey(i))); // points pris en compte masqués
     const errs = iss.filter((i) => i.level === "erreur"), alerts = iss.filter((i) => i.level === "alerte");
     const open = C.uncoveredPosts(s, monday);
     const totalMin = w ? w.shifts.reduce((a, x) => a + C.shiftMinutes(x.segs), 0) : 0;
@@ -664,9 +665,22 @@
         posts.length ? h("div", { class: "card" }, h("h3", {}, "Postes à pourvoir ce jour"), this.postsList(posts)) : null);
     };
 
+    const shown = issues.filter((i) => i.level !== "info" && i.code !== "UNCOVERED");
+    const dism = new Set((w && w.dismissed) || []);
+    const visible = shown.filter((i) => !dism.has(C.dismissKey(i)));
+    const hidden = shown.length - visible.length;
+    const setDismissed = (keys, summary) => this.commit([{ type: "setDismissed", monday, keys }], { summary, quiet: true });
+    const vErr = visible.filter((i) => i.level === "erreur").length, vAl = visible.filter((i) => i.level === "alerte").length;
     const issuesCard = h("section", { class: "card" },
-      h("div", { class: "row between" }, h("h2", {}, "Points à vérifier"), h("div", { class: "row" }, errs.length ? h("span", { class: "chip err" }, `${errs.length} erreur(s)`) : h("span", { class: "chip ok" }, "Aucune erreur"), alerts.length ? h("span", { class: "chip warn" }, `${alerts.length} alerte(s)`) : null)),
-      issues.filter((i) => i.level !== "info" && i.code !== "UNCOVERED").length ? h("div", {}, issues.filter((i) => i.level !== "info" && i.code !== "UNCOVERED").slice(0, 40).map((i) => h("div", { class: "issue " + i.level, role: i.emp && i.date ? "button" : null, style: { cursor: i.emp && i.date ? "pointer" : "default" }, onClick: () => { if (i.emp && i.date) this.openEditor(i.emp, i.date); } }, h("span", { class: "ico" }, i.level === "erreur" ? "!" : "?"), h("span", {}, i.msg)))) : h("p", { class: "muted" }, w ? "Tout est cohérent avec les règles enregistrées." : "Rien à vérifier : la semaine est vide."),
+      h("div", { class: "row between" }, h("h2", {}, "Points à vérifier"), h("div", { class: "row" }, vErr ? h("span", { class: "chip err" }, `${vErr} erreur(s)`) : h("span", { class: "chip ok" }, "Aucune erreur"), vAl ? h("span", { class: "chip warn" }, `${vAl} alerte(s)`) : null,
+        canEdit && visible.length > 1 ? btn("Tout masquer", () => setDismissed([...dism, ...visible.map(C.dismissKey)], `Semaine du ${C.fmtWeek(monday)} : ${visible.length} point(s) pris en compte`), "sm ghost") : null)),
+      visible.length ? h("div", {}, visible.slice(0, 60).map((i) => h("div", { class: "issue " + i.level },
+        h("span", { class: "ico" }, i.level === "erreur" ? "!" : "?"),
+        h("span", { class: "grow", role: i.emp && i.date ? "button" : null, style: { cursor: i.emp && i.date ? "pointer" : "default" }, onClick: () => { if (i.emp && i.date) this.openEditor(i.emp, i.date); } }, i.msg),
+        canEdit ? h("button", { type: "button", class: "issue-x", "aria-label": "Masquer ce point (pris en compte)", title: "Masquer : j'en ai pris connaissance", onClick: (ev) => { ev.stopPropagation(); setDismissed([...dism, C.dismissKey(i)], `Point pris en compte : ${i.msg.slice(0, 80)}`); } }, "✕") : null)))
+        : h("p", { class: "muted" }, !w ? "Rien à vérifier : la semaine est vide." : hidden ? "Tous les points ont été pris en compte." : "Tout est cohérent avec les règles enregistrées."),
+      hidden ? h("p", { class: "small muted", style: { "margin-top": "8px" } }, `${hidden} point(s) masqué(s). `, canEdit ? h("a", { href: "#", onClick: (ev) => { ev.preventDefault(); setDismissed([], `Semaine du ${C.fmtWeek(monday)} : points masqués réaffichés`); } }, "Tout réafficher") : null,
+        vErr < errs.length ? " Les erreurs masquées empêchent toujours de valider la semaine." : null) : null,
       issues.some((i) => i.level === "info") ? h("details", { style: { "margin-top": "10px" } }, h("summary", { class: "small muted" }, `${issues.filter((i) => i.level === "info").length} information(s)`), issues.filter((i) => i.level === "info").map((i) => h("div", { class: "small muted", style: { padding: "3px 0" } }, i.msg))) : null);
     const postsCard = open.length ? h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", {}, "Postes à pourvoir"), h("span", { class: "chip warn" }, open.length)),
       h("p", { class: "small muted" }, "Postes du planning modèle sans personne cette semaine. Les remplaçants proposés respectent zones, cours, absences, repos et durée : rien n'est attribué sans votre clic."),

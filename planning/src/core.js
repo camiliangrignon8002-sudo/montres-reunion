@@ -485,6 +485,8 @@
   }
   const blockingIssues = (issues) => issues.filter((i) => i.blocking);
   const issueKey = (i) => `${i.code}|${i.emp}|${i.date}`;
+  // Clé d'un point précis (le message compte : si la situation change, le point réapparaît).
+  const dismissKey = (i) => `${i.code}|${i.emp || ""}|${i.date || ""}|${i.msg}`;
 
   // ---------- Couverture (postes du modèle) ----------
   function uncoveredPosts(state, monday) {
@@ -870,6 +872,14 @@
           markWeek(to);
           break;
         }
+        case "setDismissed": {
+          // Points à vérifier « pris en connaissance » : masqués de la liste (ils restent dans la validation).
+          if (!dateOk(op.monday)) break;
+          const wk = s.weeks[op.monday]; if (!wk) { fail("Semaine introuvable."); break; }
+          wk.dismissed = [...new Set((op.keys || []).map(String))].slice(0, 500);
+          markWeek(op.monday);
+          break;
+        }
         case "putWeek": {
           if (!dateOk(op.monday)) break;
           s.weeks[op.monday] = clone(op.week); markWeek(op.monday);
@@ -1166,7 +1176,7 @@
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };
