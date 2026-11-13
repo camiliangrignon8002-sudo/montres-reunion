@@ -452,7 +452,8 @@ html.liquid #splash { background: radial-gradient(700px 520px at 30% 20%, var(--
   .card:not(.big):hover { transform: scale(1.03); }
   /* Grandes cartes (tableaux, formulaires) : elles se soulèvent au lieu de grossir, pour que le texte reste net. */
   .card.big:hover { transform: translateY(-5px); }
-  .item:hover, .issue:hover { transform: scale(1.03); }
+  .item:hover { transform: scale(1.03); }
+  .issue:hover { background: color-mix(in srgb, var(--fg) 4%, transparent); }
   
   .banner:hover, .kpi:hover, .legend > span:hover, .alt-item:hover { transform: scale(1.03); }
   .tag-abs:hover, .tag-cours:hover, .tag-unk:hover { transform: scale(1.06); }
@@ -469,7 +470,7 @@ html.liquid #splash { background: radial-gradient(700px 520px at 30% 20%, var(--
   html .nav:hover, html .name-btn:hover { box-shadow: 0 6px 18px rgba(0, 0, 0, .1); }
   html .plan td.cell .blk:hover, html .blk:hover { box-shadow: 0 10px 24px rgba(0, 0, 0, .16), 0 2px 6px rgba(0, 0, 0, .08), inset 3px 0 0 var(--z); }
   html .card:hover { box-shadow: 0 16px 36px rgba(0, 0, 0, .14), 0 3px 8px rgba(0, 0, 0, .05); }
-  html .item:hover, html .issue:hover, html .alt-item:hover, html .kpi:hover, html .banner:hover, html .legend > span:hover {
+  html .item:hover, html .alt-item:hover, html .kpi:hover, html .banner:hover, html .legend > span:hover {
     box-shadow: 0 8px 24px rgba(0, 0, 0, .1); border-radius: 12px;
   }
 }
@@ -492,8 +493,9 @@ html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 .blk, .mday, .daybar button { position: relative; }
 /* Petites cartes sur leur propre calque : leur agrandissement est fait par la carte graphique. */
 @media (hover: hover) { .card:not(.big) { will-change: transform; } }
-.issue .grow { flex: 1; min-width: 0; }
-.issue-x { flex: none; width: 26px; height: 26px; border-radius: 50%; border: 0; background: transparent; color: var(--fg-3); font-size: 13px; cursor: pointer; display: grid; place-items: center; transition: background-color .12s, color .12s, transform .12s; }
+.issue { border-radius: 10px; padding-left: 6px; padding-right: 6px; }
+.issue .grow { flex: 0 1 auto; min-width: 0; }
+.issue-x { flex: none; margin-left: 4px; margin-top: -2px; width: 26px; height: 26px; border-radius: 50%; border: 0; background: transparent; color: var(--fg-3); font-size: 13px; cursor: pointer; display: grid; place-items: center; transition: background-color .12s, color .12s, transform .12s; }
 .issue-x:hover { background: var(--danger-soft); color: var(--danger); transform: scale(1.15); }
 
 </style>
