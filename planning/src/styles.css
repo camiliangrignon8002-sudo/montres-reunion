@@ -443,3 +443,32 @@ html.liquid #splash { background: radial-gradient(700px 520px at 30% 20%, var(--
   .input:hover { transform: scale(1.015); }
   .btn:active, .icon-btn:active, .skill:active, .nav:active { transform: scale(.97); }
 }
+
+/* ---------- Ombre au survol et fluidité ---------- */
+@media (hover: hover) {
+  html .btn:hover, html .icon-btn:hover, html .seg-ctl button:hover, html .zone-pick button:hover, html .skill:hover, html .chip:hover,
+  html .daybar button:hover, html .mday:hover, html .tag-abs:hover, html .tag-cours:hover, html .tag-unk:hover, html .input:hover {
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .14), 0 2px 6px rgba(0, 0, 0, .08);
+  }
+  html .btn.primary:hover { box-shadow: 0 10px 26px rgba(0, 113, 227, .38), 0 2px 6px rgba(0, 0, 0, .1); }
+  html .nav:hover, html .name-btn:hover { box-shadow: 0 6px 18px rgba(0, 0, 0, .1); }
+  html .plan td.cell .blk:hover, html .blk:hover { box-shadow: 0 10px 24px rgba(0, 0, 0, .16), 0 2px 6px rgba(0, 0, 0, .08), inset 3px 0 0 var(--z); }
+  html .card:hover { box-shadow: 0 22px 60px rgba(0, 0, 0, .16), 0 4px 12px rgba(0, 0, 0, .06); }
+  html .item:hover, html .issue:hover, html .alt-item:hover, html .kpi:hover, html .banner:hover, html table.t tbody tr:hover, html .plan td.name:hover, html .plan thead th:hover, html .legend > span:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .1); border-radius: 12px;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  @media (hover: hover) { html:not([data-theme="light"]) .card:hover { box-shadow: 0 22px 60px rgba(0, 0, 0, .55); } }
+}
+/* Écran qui apparaît en fondu (opacité + léger glissement : fluide même sur téléphone). */
+#content.enter > * { animation: screen-in .26s cubic-bezier(.2, .8, .2, 1) both; }
+#content.enter > *:nth-child(2) { animation-delay: .03s; }
+#content.enter > *:nth-child(3) { animation-delay: .06s; }
+@keyframes screen-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+/* Fluidité générale */
+html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+.content, .t-wrap, .plan-wrap { -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+@media (hover: none) {
+  .btn:active, .icon-btn:active, .nav:active, .skill:active, .blk:active, .mday:active, .item:active, .tabbar button:active, .daybar button:active { transform: scale(.96); transition: transform .12s ease; }
+}

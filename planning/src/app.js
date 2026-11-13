@@ -397,8 +397,11 @@
       this.ui.screen = screen;
       try { history.replaceState(null, "", "#" + screen); } catch (e) { /* ignoré */ }
       this.render();
+      // Changement d'écran : apparition en fondu (animation légère, faite par la carte graphique).
+      const ct = document.querySelector("#content");
+      if (ct) { ct.classList.remove("enter"); void ct.offsetWidth; ct.classList.add("enter"); }
       const c = document.querySelector(".content"); if (c) c.scrollTop = 0;
-      root.scrollTo && root.scrollTo(0, 0);
+      root.scrollTo && root.scrollTo({ top: 0, behavior: "instant" });
     },
     toggleAI(open) {
       this.ui.aiOpen = open == null ? !this.ui.aiOpen : open;
