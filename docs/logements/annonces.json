@@ -1430,45 +1430,34 @@
   "vu": "2026-11-09T15:12+04:00"
  },
  {
-  "id": "figaro-110780243",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110780243.html",
-  "titre": "Location  appartement 1 pièce 24.4 m² à La possession (97419), 472 €",
+  "id": "zimo-01a1cedc-c0f8-7f97-93a5-f4757c8aede0",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-1-piece-24-m2/01a1cedc-c0f8-7f97-93a5-f4757c8aede0",
+  "titre": "Studio 1 pièce 24 m²",
   "prix": 472.0,
   "commune": "La Possession",
-  "quartier": "La possession",
+  "quartier": "La Possession",
   "pieces": 1,
   "type": "Studio",
-  "surface": 24.4,
+  "surface": 24.0,
   "meuble": null,
   "photos": [
-   "https://lh3.googleusercontent.com/LSMAxKlpDvbMC2-1cZtkdsp_MLnI67g1A_oJ6lCQpmoxFlWMgRgBFptR7kv9oLY0N9wbReCgbuzXT4OVIhOJ00j5EYIWPQ8gE-jz=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/1-llUemDpPN3V01qyK7k4PM4nEUH9xzdRcFRutFZoOGsiT-vwgyWfrJb2G5FM1vT5q0Zh1HsIrCuhCjIqI7yjbePJL07cEhe_EojEQ=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/5P8HleU7NboMsJnRcYpTp0T_-8e_IOaCQiRq05NZ3enDG-I2ZLu0QFq7h6rz6N3zyi0ltIcPB0kNsr-JdiTdi-ZI5GtB2kxbXS4aog=rw-w940-h605-l80"
+   "https://img.e-xiste.com/30Ki5t4E6kV6u0WCSGvJTLzuwGMi6RqGfC69MkE2M4E/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_70ad70be-dc8b-45cb-a682-c842edbf12d0.jpg"
   ],
-  "description": "Studio Lumineux et Moderne - 24.40 m² avec Balcon et Stationnement\nDécouvrez ce charmant studio de 24.40 m², niché au 2ème étage d'un immeuble récent construit en 2019. Ce petit nid douillet, baigné de lumière grâce à son exposition est, est idéal pour les jeunes professionnels ou les couples en quête d'un espace fonctionnel et élégant.\nL'appartement est en excellent état, tout comme les parties communes, et dispose d'un ascenseur pour un accès facilité. Un stationnement intérieur est également inclus, offrant sécurité et praticité.\nSitué dans un quartier dynamique, vous serez à seulement 5 minutes à pied d'une crèche et d'un restaurant, et à 10 minutes à pied d'une maternelle, d'une école élémentaire, d'un collège, d'une alimentation générale et de plusieurs médecins généralistes.\n***Logement soumis au régime PINEL (plafond de ressources pour le locataire) ***\nPour une visite, contactez Anaïs au 0692359521\nHonoraires de 317 € TTC à la charge du locataire comprenant 73 € TTC pour l'état des lieux. Loyer de base 447 €/mois. Provision sur charges 25 €/mois, régularisation annuelle. Dépôt de garantie 447 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.\nCarte pro. CP175012018000034249",
-  "caracteristiques": [
-   "Varangue / balcon",
-   "Parking",
-   "Ascenseur"
-  ],
+  "description": "Location Studio La Possession (974) 1 pièces 24 m²",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "",
+  "annonceur": "Pro · via leboncoin",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "0692 35 95 21",
+  "tel": "",
   "email": "",
   "adresse": "",
   "secteur": "Nord-Ouest",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/studio-1-piece-24-m2/01a1cedc-c0f8-7f97-93a5-f4757c8aede0"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-11-12T13:17+04:00"
  },
  {
@@ -6743,6 +6732,46 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-08T18:54+04:00"
+ },
+ {
+  "id": "figaro-110025019",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110025019.html",
+  "titre": "Location meublée appartement 1 pièce 24.72 m² à Saint-Denis (97400), 680 €",
+  "prix": 680.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": null,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/yuCmIU2VVliHTLDaZhVC7dQKHEkgKEF6DHQ-ttgsVhQAPLGwNA5tAPiqMUtHx_Fi20T2kJ4msyZlSZU0puhHAbG_czetMbLgPw9a1Q=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/yaXvVs2WqRwgODHf5qBPzomBUey_xX2i128B7aL_lfg_OPyLKOcWN2eLsJR12XoYVeArIB6vvQhyx9LafbnkKMuk-aMmTyiaifvvRg=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/7UCEdPc8N0qDHp3URGOPM4ulUFrJfLTgQrpB_Ytl0J4qbV1esvf4iJe_shR9VajkSduyLpxJij9rLgzo6KTia6_brGJTRoy5dn7QP94=rw-w940-h605-l80"
+  ],
+  "description": "RUNIMMO vous propose en location un studio joliment meublé de 24,72 m2, situé dans la rue monthyon à Saint-Denis (97400), résidence ' LA GOELETTE '. Ce bien se compose d'une pièce principale lumineuse et climatisée, une cuisine aménagée et équipée, une belle salle d'eau avec wc et une grande terrasse. Une place de parking privative est disponible en sous-sol. Ce bien se situe proche du jardin de l'état, et du centre ville de Saint-Denis. Pour une visite contactez EMILIE au 0692 26 92 05.\nHonoraires de 321 € TTC à la charge du locataire comprenant 74 € TTC pour l'état des lieux. Loyer de base 640 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 1 280 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Climatisation",
+   "Jardin",
+   "Cuisine équipée"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 26 92 05",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T12:04+04:00"
  },
  {
   "id": "superimmo--annonces-location-appartement-25m-saint-denis-97490-x12etyh",
