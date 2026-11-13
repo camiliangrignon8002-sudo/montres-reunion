@@ -987,12 +987,7 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-501991-GES01880013-34"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-11-04T21:11+04:00"
  },
  {
