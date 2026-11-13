@@ -258,17 +258,23 @@ test("semaine du 26/10 (planning papier) : totaux de la feuille et aucune erreur
 
 test("règles personnelles : horaires fixes et jours de repos signalés, respectés par les remplaçants", () => {
   const s = withWeek1();
-  assert.deepEqual(C.empById(s, "sebastien").rules.fixedHours, { s: "07:00", e: "14:30" });
+  // Sebastien : du matin (horaires variables), le soir possible sans alerte
+  assert.equal(C.empById(s, "sebastien").rules.fixedHours, null);
+  assert.equal(C.empById(s, "sebastien").rules.prefers, "matin");
   const r = apply(s, [{ type: "setShift", emp: "sebastien", date: "2026-10-19", segs: [{ s: "13:30", e: "21:00", z: "ZP" }] }]);
-  assert.ok(r.ok); // alerte, pas blocage
-  assert.ok(C.validateWeek(r.state, W1).some((i) => i.code === "FIXED_HOURS" && i.emp === "sebastien"));
+  assert.ok(r.ok);
+  assert.ok(!C.validateWeek(r.state, W1).some((i) => i.emp === "sebastien" && ["FIXED_HOURS", "FIXED_DAYOFF", "LATEST_END"].includes(i.code)));
   const r2 = apply(s, [{ type: "setShift", emp: "eric", date: "2026-10-24", segs: [{ s: "07:00", e: "14:30", z: "ZP" }] }]);
   assert.ok(C.validateWeek(r2.state, W1).some((i) => i.code === "FIXED_DAYOFF" && i.emp === "eric"));
   // Eric (repos samedi-dimanche) jamais proposé un samedi ; Sebastien jamais sur un poste d'après-midi
   const sat = C.findCandidates(s, "2026-10-24", [{ s: "07:00", e: "14:30", z: "ZP" }]).map((c) => c.emp);
   assert.ok(!sat.includes("eric"));
-  const pm = C.findCandidates(s, "2026-10-19", [{ s: "13:30", e: "21:00", z: "ZP" }]).map((c) => c.emp);
-  assert.ok(!pm.includes("sebastien"));
+  // Sebastien proposé en priorité le matin, en dernier le soir (jamais exclu)
+  const am = C.findCandidates(s, "2026-12-08", [{ s: "06:00", e: "11:00", z: "ZP" }, { s: "11:30", e: "13:30", z: "ZP" }]);
+  const pm = C.findCandidates(s, "2026-12-08", [{ s: "14:30", e: "17:00", z: "ZP" }, { s: "17:30", e: "22:00", z: "ZP" }]);
+  const sa = am.find((c) => c.emp === "sebastien"), sp = pm.find((c) => c.emp === "sebastien");
+  assert.ok(sa && sp && sa.score > sp.score);
+  assert.ok(sp.notes.includes("fait d'habitude le matin"));
   for (const id of ["fleur", "camilian", "lucas"]) assert.equal(C.empById(s, id).calendarId, "bts-mco1");
   assert.equal(C.empById(s, "eric").rules.fixedHours, null); // horaires variables
   assert.equal(C.empById(s, "eric").rules.maxEnd, "15:30");

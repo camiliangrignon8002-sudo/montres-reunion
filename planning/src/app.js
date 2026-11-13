@@ -166,6 +166,7 @@
     if (e.onLeave) out.push(`En ${C.ABSENCE_TYPES[e.onLeave.type] ? C.ABSENCE_TYPES[e.onLeave.type].toLowerCase() : "congé"} depuis le ${C.fmtDate(e.onLeave.since, "short")}`);
     if (r.fixedHours) out.push(`Toujours ${r.fixedHours.s}–${r.fixedHours.e}`);
     if (r.maxEnd) out.push(`Jamais après ${r.maxEnd}`);
+    if (r.prefers) out.push(r.prefers === "matin" ? "Du matin (soir possible)" : "Du soir (matin possible)");
     if (Array.isArray(r.daysOff) && r.daysOff.length) out.push(`Repos fixe : ${r.daysOff.map((d) => C.DAYS[d].toLowerCase()).join(", ")}`);
     else if (r.sameWeekends) out.push("Mêmes week-ends (jours à préciser)");
     if (r.sameWeekends === false) out.push("Week-ends variables");
@@ -1323,6 +1324,7 @@
     const sameWe = h("input", { type: "checkbox", id: "emp-same-we", checked: !!r.sameWeekends });
     const maxEndIn = h("input", { type: "time", class: "input", id: "emp-max-end", value: r.maxEnd || "" });
     const weekZoneIn = h("select", { class: "input", id: "emp-week-zone" }, h("option", { value: "" }, "Au choix (ZP ou ZR)"), s.zones.map((z) => h("option", { value: z.id, selected: r.weekZone === z.id }, `${z.short} toute la semaine`)));
+    const prefIn = h("select", { class: "input", id: "emp-prefers" }, [["", "Indifférent"], ["matin", "Du matin (le soir reste possible)"], ["soir", "Du soir (le matin reste possible)"]].map(([v, l]) => h("option", { value: v, selected: (r.prefers || "") === v }, l)));
     const officeOn = h("input", { type: "checkbox", id: "emp-office", checked: !!r.officeMinDays });
     const officeN = h("input", { type: "number", class: "input", id: "emp-office-n", min: "1", max: "7", value: r.officeMinDays || 2, style: { width: "80px" } });
     const tr = e.training || {};
@@ -1335,7 +1337,7 @@
     openDialog({ title: e.name, body: h("div", { class: "stack" }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("label", { class: "f" }, "Autres écritures (séparées par des virgules)", aliases),
       h("h3", {}, "Règles personnelles"),
       h("label", { class: "check" }, fixOn, "Toujours les mêmes horaires"), h("div", { class: "form-grid" }, h("label", { class: "f" }, "Début", fixS), h("label", { class: "f" }, "Fin", fixE)),
-      h("div", { class: "form-grid" }, h("label", { class: "f" }, "Fin au plus tard", maxEndIn), h("label", { class: "f" }, "Zone pour toute la semaine", weekZoneIn)),
+      h("div", { class: "form-grid" }, h("label", { class: "f" }, "Fin au plus tard", maxEndIn), h("label", { class: "f" }, "Zone pour toute la semaine", weekZoneIn), h("label", { class: "f" }, "Service habituel", prefIn)),
       h("div", { class: "row" }, h("label", { class: "check" }, officeOn, "Jours de bureau, au minimum"), officeN, h("span", { class: "small muted" }, "par semaine")),
       h("label", { class: "check" }, sameWe, "Toujours les mêmes week-ends"),
       h("div", { class: "stack", style: { gap: "4px" } }, h("span", { class: "small muted" }, "Jours de repos fixes (jamais de créneau ces jours-là) :"), h("div", { class: "row" }, offBoxes)),
@@ -1355,7 +1357,7 @@
         { label: "Enregistrer", primary: true, onClick: async () => {
           const daysOff = offBoxes.map((b) => b.querySelector("input")).filter((i) => i.checked).map((i) => Number(i.value));
           if (fixOn.checked && (!C.isTime(fixS.value) || !C.isTime(fixE.value))) { toast("Indiquez le début et la fin des horaires fixes.", "err"); return false; }
-          const rules = { ...r, fixedHours: fixOn.checked ? { s: fixS.value, e: fixE.value } : null, daysOff: daysOff.length ? daysOff : null, sameWeekends: sameWe.checked, maxEnd: maxEndIn.value || null, weekZone: weekZoneIn.value || null, officeMinDays: officeOn.checked ? Math.max(1, Math.min(7, Number(officeN.value) || 2)) : null, officeSince: officeOn.checked ? (r.officeMinDays ? r.officeSince || null : C.mondayOf(this.today())) : null };
+          const rules = { ...r, fixedHours: fixOn.checked ? { s: fixS.value, e: fixE.value } : null, daysOff: daysOff.length ? daysOff : null, sameWeekends: sameWe.checked, maxEnd: maxEndIn.value || null, weekZone: weekZoneIn.value || null, prefers: prefIn.value || null, officeMinDays: officeOn.checked ? Math.max(1, Math.min(7, Number(officeN.value) || 2)) : null, officeSince: officeOn.checked ? (r.officeMinDays ? r.officeSince || null : C.mondayOf(this.today())) : null };
           if (rules.weekZone && !(sk.badgeRouge.checked || rules.weekZone !== "ZR")) { toast("Sans badge rouge, la zone de la semaine ne peut pas être ZR.", "err"); return false; }
           if (trOn.checked && !C.isISO(trSince.value)) { toast("Indiquez le début de la formation.", "err"); return false; }
           const training = trOn.checked ? { since: trSince.value } : e.training ? { ...e.training, ended: e.training.ended || this.today() } : undefined;

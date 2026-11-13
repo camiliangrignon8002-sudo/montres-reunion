@@ -444,6 +444,11 @@
     rules: {
       charlotte: { officeMinDays: 2, officeSince: "2026-11-16", note: "Au moins 2 jours de bureau par semaine." },
     },
+  }, {
+    id: "regles-2026-11-13b",
+    rules: {
+      sebastien: { fixedHours: null, prefers: "matin", note: "Du matin (horaires variables dans la matinée) ; le soir reste possible si on le demande." },
+    },
   }];
 
   for (const u of ruleUpdates) for (const [id, r] of Object.entries(u.rules)) { const e = employees.find((x) => x.id === id); e.rules = { ...(e.rules || {}), ...r }; e.rulesApplied = [...(e.rulesApplied || []), u.id]; }

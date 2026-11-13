@@ -581,6 +581,12 @@
       if (!restOk) score -= 40;
       score -= notes.length * 5;
       if (templateFor(state, date).some((t) => t.emp === emp.id && segKey(t.segs) === segKey(segs))) score += 10;
+      // Service préféré (matin ou soir) : jamais une erreur, seulement un ordre de proposition.
+      const pref = emp.rules && emp.rules.prefers;
+      if (pref) {
+        const morning = toMin(shiftSpan(segs).s) < 12 * 60;
+        if ((pref === "matin") === morning) score += 12; else { score -= 25; notes.push(pref === "matin" ? "fait d'habitude le matin" : "fait d'habitude le soir"); }
+      }
       // Poste d'ouverture ou de fermeture : la compétence compte.
       for (const [k, first] of [["ouverture", true], ["fermeture", false]]) {
         if (!opensOrCloses(state, w, date, segs, first) || !state.employees.some((e) => e.active !== false && hasSkill(e, k))) continue;
@@ -992,6 +998,7 @@
             if (r.fixedHours && !(isTime(r.fixedHours.s) && isTime(r.fixedHours.e) && r.fixedHours.s !== r.fixedHours.e)) { fail("Horaires fixes invalides."); break; }
             if (r.maxEnd && !isTime(r.maxEnd)) { fail("Heure de fin maximum invalide."); break; }
             if (r.weekZone && !zoneById(s, r.weekZone)) { fail("Zone de la semaine inconnue."); break; }
+            if (r.prefers && !["matin", "soir"].includes(r.prefers)) { fail("Service préféré invalide."); break; }
             if (r.officeMinDays != null && !(Number(r.officeMinDays) >= 0 && Number(r.officeMinDays) <= 7)) { fail("Nombre de jours de bureau invalide (0 à 7)."); break; }
             if (r.daysOff && !(Array.isArray(r.daysOff) && r.daysOff.every((d) => d >= 0 && d <= 6))) { fail("Jours de repos invalides."); break; }
           }
