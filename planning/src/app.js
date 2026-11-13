@@ -21,6 +21,14 @@
   const applyStyle = (v) => document.documentElement.classList.toggle("liquid", v !== "classique");
   applyStyle(readStyle());
 
+  // Écran de démarrage (logo) : retiré en fondu dès que le planning est affiché.
+  function hideSplash() {
+    const sp = document.getElementById("splash");
+    if (!sp || sp.classList.contains("out")) return;
+    sp.classList.add("out");
+    setTimeout(() => sp.remove(), 400);
+  }
+
   // ---------- Outils DOM ----------
   function h(tag, attrs, ...kids) {
     const el = document.createElement(tag);
@@ -455,6 +463,7 @@
       else if (!this.state && screen !== "import") nodes.push(h("div", { class: "empty" }, "Aucune donnée. ", btn("Importer les calendriers", () => this.go("import"), "primary")));
       else nodes.push(def.render.call(this));
       content.replaceChildren(...nodes);
+      if (this.ready) hideSplash();
       // Compteur d'erreurs sur la semaine en cours
       const wb = document.querySelector('.side [data-screen="week"]');
       if (wb && this.state) {
@@ -1965,6 +1974,6 @@
   };
 
   root.PlanningApp = App;
-  const start = () => App.boot().catch((e) => { const m = document.getElementById("app-root") || document.body; m.textContent = "Erreur au démarrage : " + (e && e.message) + ". Touchez Actualiser ou rechargez la page."; });
+  const start = () => App.boot().catch((e) => { hideSplash(); const m = document.getElementById("app-root") || document.body; m.textContent = "Erreur au démarrage : " + (e && e.message) + ". Touchez Actualiser ou rechargez la page."; });
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })(typeof globalThis !== "undefined" ? globalThis : this);

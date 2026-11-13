@@ -52,6 +52,7 @@ async function main() {
 <style>
 ${src("styles.css")}
 </style>
+<div id="splash" role="status" aria-label="Chargement du planning"><img src="data:image/png;base64,${fs.readFileSync(S("splash-logo.png")).toString("base64")}" alt="" width="88" height="88"><b>Planning équipe</b><i></i></div>
 <div id="app-root"></div>
 <noscript>Cette application a besoin de JavaScript.</noscript>
 ${refScript}

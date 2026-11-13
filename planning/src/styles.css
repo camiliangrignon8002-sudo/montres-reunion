@@ -406,3 +406,15 @@ html.liquid .side, html.liquid .topbar, html.liquid .tabbar, html.liquid .dialog
   html.liquid .side, html.liquid .topbar, html.liquid .tabbar, html.liquid .dialog { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--g-dialog); }
 }
 .month .mday { contain: layout paint; }
+
+/* ---------- Écran de démarrage ---------- */
+#splash { position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: var(--bg); transition: opacity .35s ease, visibility .35s; }
+html.liquid #splash { background: radial-gradient(700px 520px at 30% 20%, var(--g-spot-1), transparent 65%), linear-gradient(160deg, var(--g-bg-1), var(--g-bg-2) 60%, var(--g-bg-3)); }
+#splash img { width: 88px; height: 88px; border-radius: 22px; box-shadow: 0 14px 40px rgba(0, 60, 180, .28); animation: splash-pop .9s ease-in-out infinite alternate; }
+#splash b { font-family: var(--font-display, var(--font)); font-size: 17px; font-weight: 650; color: var(--fg); letter-spacing: -.01em; }
+#splash i { width: 120px; height: 4px; border-radius: 99px; background: var(--line); overflow: hidden; position: relative; }
+#splash i::after { content: ""; position: absolute; inset: 0; width: 40%; border-radius: inherit; background: var(--accent); animation: splash-bar 1.1s ease-in-out infinite; }
+#splash.out { opacity: 0; visibility: hidden; }
+@keyframes splash-pop { from { transform: scale(.96); } to { transform: scale(1.03); } }
+@keyframes splash-bar { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
+@media (prefers-reduced-motion: reduce) { #splash img, #splash i::after { animation: none; } }
