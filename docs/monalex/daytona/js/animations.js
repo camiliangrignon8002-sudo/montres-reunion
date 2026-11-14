@@ -23,7 +23,8 @@ export function animations({ montre, aiguilles, mouvement, poussoirs, fermoir, e
   function tick(dt) {
     t += dt;
     if (etat.pauseAuto > 0) etat.pauseAuto -= dt;
-    if (etat.rotation && etat.pauseAuto <= 0) {
+    if (etat.balancier) { montre.rotation.y = .42 * Math.sin(t * .45); montre.rotation.x = .06 * Math.sin(t * .31); }   // vitrine : la montre reste de face
+    else if (etat.rotation && etat.pauseAuto <= 0) {
       montre.rotation.y += etat.vitesse * dt;
       montre.rotation.z = .06 * Math.sin(t * .8);          // léger balancement du poignet (fait vivre la masse oscillante)
     }
