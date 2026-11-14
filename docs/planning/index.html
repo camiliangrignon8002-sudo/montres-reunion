@@ -4453,8 +4453,17 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
     const zone = h("select", { class: "input", id: "ds-zone" }, h("option", { value: "" }, "ZP + ZR"), this.state.zones.filter((z) => z.id !== "ADM").map((z) => h("option", { value: z.id }, z.short)));
     const mn = h("input", { type: "number", class: "input", id: "ds-min", min: "0", max: "30", placeholder: "—" }), mx = h("input", { type: "number", class: "input", id: "ds-max", min: "0", max: "30", placeholder: "—" });
     const every = h("input", { type: "checkbox", id: "ds-every" });
+    // Raccourcis : la dernière heure avant la fermeture (ou la première après l'ouverture) de la zone, selon la saison.
+    const preset = (kind) => {
+      const z = zone.value || "ZR", oh = C.openingHours(this.state, z, date);
+      if (!oh) { toast("Horaires d'ouverture inconnus pour cette zone.", "err"); return; }
+      if (!zone.value) zone.value = z;
+      if (kind === "close") { sIn.value = C.fromMin(C.toMin(oh.e) - 60); eIn.value = oh.e; } else { sIn.value = oh.s; eIn.value = C.fromMin(C.toMin(oh.s) + 60); }
+      mn.focus();
+    };
     openDialog({ title: `Nombre de personnes · ${C.fmtDate(date, "day")}`, body: h("div", { class: "stack" }, box,
       h("h3", {}, "Ajouter"),
+      h("div", { class: "row" }, h("span", { class: "small muted" }, "Raccourcis :"), btn("🌅 Ouverture", () => preset("open"), "sm"), btn("🌙 Fermeture", () => preset("close"), "sm")),
       h("div", { class: "form-grid" }, h("label", { class: "f" }, "De", sIn), h("label", { class: "f" }, "À", eIn), h("label", { class: "f" }, "Zone", zone)),
       h("div", { class: "form-grid" }, h("label", { class: "f" }, "Minimum de personnes", mn), h("label", { class: "f" }, "Maximum de personnes", mx)),
       h("label", { class: "check" }, every, `Aussi tous les ${C.DAYS[C.dow(date)].toLowerCase()}s des 8 prochaines semaines`),

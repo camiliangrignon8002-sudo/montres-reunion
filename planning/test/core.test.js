@@ -628,3 +628,14 @@ test("motif d'absence : CP, sanction, perso, intermetra", () => {
   assert.equal(C.absLabel(Object.values(r.state.absences)[0]), "Sanction");
   assert.equal(apply(s, [{ type: "addAbsence", absence: { emp: "maelle", type: "arret", motif: "xx", from: "2026-12-08" } }]).ok, false);
 });
+
+test("ZR : 3 personnes puis 2 pour la fermeture, sans alerte", () => {
+  let s = withWeek1();
+  const W = "2026-12-07";
+  s = apply(s, [{ type: "setSettings", patch: { staffing: [
+    { from: W, to: W, s: "17:30", e: "22:00", zone: "ZR", min: 3, max: 3 },
+    { from: W, to: W, s: "22:00", e: "23:00", zone: "ZR", min: 2, max: 2 }] } }]).state;
+  const put = (emp, a, b) => ({ type: "setShift", emp, date: W, segs: [{ s: a, e: b, z: "ZR" }] });
+  const r = apply(s, [put("murielle", "17:30", "23:00"), put("reine-claude", "17:30", "23:00"), put("charlotte", "17:30", "22:00")], { allowErrors: true });
+  assert.ok(!C.validateWeek(r.state, W).some((i) => i.code === "STAFF_MIN" || i.code === "STAFF_MAX"));
+});
