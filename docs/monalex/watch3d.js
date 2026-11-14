@@ -159,8 +159,8 @@ export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag 
   // Daytona modélisée en vraie 3D (boîtier, lunette, poussoirs, cadran, bracelet Oyster)
   if (!watch && skin.type === "daytona") {
     try {
-      const { buildDaytona, studioDaytona } = await import("./daytona3d.js?v=21");
-      watch = buildDaytona({ hi: dpr > 1.2 });
+      const { buildDaytona, studioDaytona } = await import("./daytona3d.js?v=22");
+      watch = buildDaytona({ hi: dpr > 1.2, photo: "img/daytona-face.jpg?v=22" });
       scene.environment.dispose(); scene.environment = studioDaytona(renderer);
     } catch (e) { console.warn(e); watch = null; }
   }
@@ -217,6 +217,7 @@ export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag 
     scene.traverse(o => { o.geometry?.dispose?.(); (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => { m?.map?.dispose?.(); m?.dispose?.(); }); });
     scene.environment?.dispose?.(); renderer.dispose();
   }
+  watch.userData.onPret = () => { draw(); kick(); };   // la photo du cadran est arrivée : on redessine
   resize(); kick();
   return { dispose, kick };
 }

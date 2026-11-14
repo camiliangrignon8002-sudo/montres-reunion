@@ -113,7 +113,7 @@ function texLunette(size) {
 }
 
 // --------------------------------------------------------------- la montre
-export function buildDaytona({ hi = true } = {}) {
+export function buildDaytona({ hi = true, photo = "" } = {}) {
   const M = matieres(), w = new THREE.Group();
   const seg = hi ? 128 : 72;
 
@@ -121,51 +121,74 @@ export function buildDaytona({ hi = true } = {}) {
   w.add(new THREE.Mesh(tour([[0, -6.0], [17.2, -6.0], [19.0, -5.4], [19.85, -3.6], [20.05, -.5], [19.95, 2.4], [19.6, 3.9], [19.0, 4.45], [16.4, 4.45]], seg), M.poli));
   // fond vissé, légèrement bombé
   w.add(new THREE.Mesh(tour([[0, -7.1], [8, -7.05], [14, -6.75], [16.6, -6.3], [17.2, -6.0]], seg), M.brosse));
-  // lunette céramique (profil arrondi) + échelle gravée
-  w.add(new THREE.Mesh(tour([[19.85, 4.45], [19.95, 5.2], [19.75, 6.0], [19.2, 6.35], [17.2, 6.35], [R_LUN_INT, 5.9], [R_LUN_INT, 4.4]], seg), M.ceramique));
-  const lun = new THREE.Mesh(new THREE.RingGeometry(R_LUN_INT + .55, R_LUN_EXT - .1, seg, 1), new THREE.MeshStandardMaterial({ map: texLunette(hi ? 2048 : 1024), transparent: true, alphaTest: .25, roughness: .4, metalness: .6 }));
-  lun.position.z = 6.36; w.add(lun);
-  // rehaut (bague intérieure) et cadran
-  w.add(new THREE.Mesh(tour([[R_CADRAN, 3.05], [R_LUN_INT, 4.45]], seg), new THREE.MeshStandardMaterial({ color: 0xe6e5e0, roughness: .5 })));
-  const texC = texCadran(hi ? 2048 : 1024);
-  const cadran = new THREE.Mesh(new THREE.CircleGeometry(R_CADRAN, seg), new THREE.MeshPhysicalMaterial({ map: texC, emissiveMap: texC, emissive: 0xffffff, emissiveIntensity: .32, roughness: .3, metalness: 0, clearcoat: .8, clearcoatRoughness: .1 }));
-  cadran.position.z = 3.05; w.add(cadran);
-  // bagues des compteurs en relief
-  for (const [x, y] of [[7.4, 0], [-7.4, 0], [0, -7.4]]) {
-    const b = new THREE.Mesh(new THREE.TorusGeometry(4.38, .13, 8, 48), M.orGris); b.position.set(x, y, 3.12); w.add(b);
+  if (photo) {
+    // --- version photoréaliste : la vraie photo de face (cadran, compteurs, aiguilles, lunette) posée sur le relief 3D
+    const tex = new THREE.TextureLoader().load(photo, () => { if (w.userData.onPret) w.userData.onPret(); });
+    tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
+    const RT = 20.93;                                   // rayon couvert par la photo, en mm (lunette = 19.95 mm)
+    const planaire = geo => { const p = geo.attributes.position, uv = new Float32Array(p.count * 2);
+      for (let i = 0; i < p.count; i++) { uv[i * 2] = .5 + p.getX(i) / (2 * RT); uv[i * 2 + 1] = .5 + p.getY(i) / (2 * RT); }
+      geo.setAttribute("uv", new THREE.BufferAttribute(uv, 2)); return geo; };
+    const photoMat = new THREE.MeshBasicMaterial({ map: tex });
+    const RI = 14.6, RC = 14.35;                        // bord intérieur de la lunette et du cadran, mesurés sur la photo
+    // lunette : relief arrondi, avec la vraie lunette de la photo
+    w.add(new THREE.Mesh(planaire(tour([[19.85, 4.45], [19.95, 5.2], [19.75, 6.0], [19.2, 6.35], [15.4, 6.35], [RI, 5.95], [RI, 4.4]], seg)), photoMat));
+    // vernis brillant de la céramique : reflets mobiles par-dessus la photo
+    const glacis = new THREE.Mesh(tour([[19.75, 6.02], [19.2, 6.38], [15.4, 6.38], [RI, 5.98]], seg), new THREE.MeshPhysicalMaterial({ color: 0x000000, metalness: 0, roughness: .06, transparent: true, opacity: .55, clearcoat: 1, clearcoatRoughness: .03, envMapIntensity: 1.1, depthWrite: false, blending: THREE.AdditiveBlending }));
+    w.add(glacis);
+    // rehaut et cadran : la photo, à plat sous le verre
+    w.add(new THREE.Mesh(planaire(tour([[RC, 3.05], [RI, 4.45]], seg)), photoMat));
+    const cadran = new THREE.Mesh(planaire(new THREE.CircleGeometry(RC, seg)), photoMat); cadran.position.z = 3.05; w.add(cadran);
+    // verre bombé avec reflet
+    const verreP = new THREE.Mesh(tour([[0, 6.55], [8, 6.45], [13, 6.2], [RI + .1, 5.95]], seg), new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: 0, roughness: 0, transparent: true, opacity: .06, clearcoat: 1, envMapIntensity: 1.6, depthWrite: false }));
+    w.add(verreP);
+  } else {
+    // lunette céramique (profil arrondi) + échelle gravée
+    w.add(new THREE.Mesh(tour([[19.85, 4.45], [19.95, 5.2], [19.75, 6.0], [19.2, 6.35], [17.2, 6.35], [R_LUN_INT, 5.9], [R_LUN_INT, 4.4]], seg), M.ceramique));
+    const lun = new THREE.Mesh(new THREE.RingGeometry(R_LUN_INT + .55, R_LUN_EXT - .1, seg, 1), new THREE.MeshStandardMaterial({ map: texLunette(hi ? 2048 : 1024), transparent: true, alphaTest: .25, roughness: .4, metalness: .6 }));
+    lun.position.z = 6.36; w.add(lun);
+    // rehaut (bague intérieure) et cadran
+    w.add(new THREE.Mesh(tour([[R_CADRAN, 3.05], [R_LUN_INT, 4.45]], seg), new THREE.MeshStandardMaterial({ color: 0xe6e5e0, roughness: .5 })));
+    const texC = texCadran(hi ? 2048 : 1024);
+    const cadran = new THREE.Mesh(new THREE.CircleGeometry(R_CADRAN, seg), new THREE.MeshPhysicalMaterial({ map: texC, emissiveMap: texC, emissive: 0xffffff, emissiveIntensity: .32, roughness: .3, metalness: 0, clearcoat: .8, clearcoatRoughness: .1 }));
+    cadran.position.z = 3.05; w.add(cadran);
+    // bagues des compteurs en relief
+    for (const [x, y] of [[7.4, 0], [-7.4, 0], [0, -7.4]]) {
+      const b = new THREE.Mesh(new THREE.TorusGeometry(4.38, .13, 8, 48), M.orGris); b.position.set(x, y, 3.12); w.add(b);
+    }
+    // index appliqués en or gris avec matière luminescente
+    const idxGeo = pave(.95, 3.0, .55, .25, 2), lumGeo = new THREE.PlaneGeometry(.42, 2.4);
+    for (let h = 0; h < 12; h++) {
+      if (h === 3 || h === 6 || h === 9) continue;
+      const a = h / 12 * TAU, r = 12.7;
+      const pos = (n, dz) => { const m = new THREE.Mesh(n === "l" ? lumGeo : idxGeo, n === "l" ? M.lume : M.orGris); m.position.set(Math.sin(a) * r, Math.cos(a) * r, 3.35 + dz); m.rotation.z = -a; return m; };
+      if (h === 0) { for (const dx of [-.75, .75]) { const m = pos("i", 0), l = pos("l", .3); m.position.x += dx; l.position.x += dx; w.add(m, l); } }
+      else w.add(pos("i", 0), pos("l", .3));
+    }
+    // aiguilles (10 h 10) : bâtons en or gris avec luminescent ; trotteuse centrale ; aiguilles des compteurs
+    const aiguille = (long, larg, z, angle, avecLume = true) => {
+      const s = new THREE.Shape(); s.moveTo(-larg / 2, -1.6); s.lineTo(larg / 2, -1.6); s.lineTo(larg / 2, long - larg); s.lineTo(0, long); s.lineTo(-larg / 2, long - larg); s.closePath();
+      const g = new THREE.ExtrudeGeometry(s, { depth: .22, bevelEnabled: true, bevelThickness: .06, bevelSize: .05, bevelSegments: 1 });
+      const grp = new THREE.Group(); grp.add(new THREE.Mesh(g, M.orGris));
+      if (avecLume) { const l = new THREE.Mesh(new THREE.PlaneGeometry(larg * .45, long * .62), M.lume); l.position.set(0, long * .52, .32); grp.add(l); }
+      grp.position.z = z; grp.rotation.z = -angle; return grp;
+    };
+    w.add(aiguille(9.2, 1.25, 3.6, (10 + 10 / 60) / 12 * TAU));
+    w.add(aiguille(13.4, 1.0, 3.95, 10 / 60 * TAU));
+    const trot = new THREE.Group();
+    trot.add(new THREE.Mesh(new THREE.BoxGeometry(.18, 18, .12), M.orGris)); trot.children[0].position.y = 4.8;
+    const cw = new THREE.Mesh(new THREE.CylinderGeometry(.55, .55, .14, 24), M.orGris); cw.rotation.x = Math.PI / 2; cw.position.y = -3.4; trot.add(cw);
+    trot.position.z = 4.3; w.add(trot);
+    const centre = new THREE.Mesh(new THREE.CylinderGeometry(.7, .7, 1.4, 24), M.orGris); centre.rotation.x = Math.PI / 2; centre.position.z = 3.8; w.add(centre);
+    for (const [x, y, a] of [[7.4, 0, 1.2], [-7.4, 0, 4.6], [0, -7.4, 2.4]]) {
+      const pa = new THREE.Mesh(new THREE.BoxGeometry(.2, 3.3, .1), M.orGris); pa.geometry.translate(0, 1.4, 0);
+      pa.position.set(x, y, 3.25); pa.rotation.z = -a; w.add(pa);
+      const ax = new THREE.Mesh(new THREE.CylinderGeometry(.32, .32, .3, 16), M.orGris); ax.rotation.x = Math.PI / 2; ax.position.set(x, y, 3.3); w.add(ax);
+    }
   }
-  // index appliqués en or gris avec matière luminescente
-  const idxGeo = pave(.95, 3.0, .55, .25, 2), lumGeo = new THREE.PlaneGeometry(.42, 2.4);
-  for (let h = 0; h < 12; h++) {
-    if (h === 3 || h === 6 || h === 9) continue;
-    const a = h / 12 * TAU, r = 12.7;
-    const pos = (n, dz) => { const m = new THREE.Mesh(n === "l" ? lumGeo : idxGeo, n === "l" ? M.lume : M.orGris); m.position.set(Math.sin(a) * r, Math.cos(a) * r, 3.35 + dz); m.rotation.z = -a; return m; };
-    if (h === 0) { for (const dx of [-.75, .75]) { const m = pos("i", 0), l = pos("l", .3); m.position.x += dx; l.position.x += dx; w.add(m, l); } }
-    else w.add(pos("i", 0), pos("l", .3));
-  }
-  // aiguilles (10 h 10) : bâtons en or gris avec luminescent ; trotteuse centrale ; aiguilles des compteurs
-  const aiguille = (long, larg, z, angle, avecLume = true) => {
-    const s = new THREE.Shape(); s.moveTo(-larg / 2, -1.6); s.lineTo(larg / 2, -1.6); s.lineTo(larg / 2, long - larg); s.lineTo(0, long); s.lineTo(-larg / 2, long - larg); s.closePath();
-    const g = new THREE.ExtrudeGeometry(s, { depth: .22, bevelEnabled: true, bevelThickness: .06, bevelSize: .05, bevelSegments: 1 });
-    const grp = new THREE.Group(); grp.add(new THREE.Mesh(g, M.orGris));
-    if (avecLume) { const l = new THREE.Mesh(new THREE.PlaneGeometry(larg * .45, long * .62), M.lume); l.position.set(0, long * .52, .32); grp.add(l); }
-    grp.position.z = z; grp.rotation.z = -angle; return grp;
-  };
-  w.add(aiguille(9.2, 1.25, 3.6, (10 + 10 / 60) / 12 * TAU));
-  w.add(aiguille(13.4, 1.0, 3.95, 10 / 60 * TAU));
-  const trot = new THREE.Group();
-  trot.add(new THREE.Mesh(new THREE.BoxGeometry(.18, 18, .12), M.orGris)); trot.children[0].position.y = 4.8;
-  const cw = new THREE.Mesh(new THREE.CylinderGeometry(.55, .55, .14, 24), M.orGris); cw.rotation.x = Math.PI / 2; cw.position.y = -3.4; trot.add(cw);
-  trot.position.z = 4.3; w.add(trot);
-  const centre = new THREE.Mesh(new THREE.CylinderGeometry(.7, .7, 1.4, 24), M.orGris); centre.rotation.x = Math.PI / 2; centre.position.z = 3.8; w.add(centre);
-  for (const [x, y, a] of [[7.4, 0, 1.2], [-7.4, 0, 4.6], [0, -7.4, 2.4]]) {
-    const pa = new THREE.Mesh(new THREE.BoxGeometry(.2, 3.3, .1), M.orGris); pa.geometry.translate(0, 1.4, 0);
-    pa.position.set(x, y, 3.25); pa.rotation.z = -a; w.add(pa);
-    const ax = new THREE.Mesh(new THREE.CylinderGeometry(.32, .32, .3, 16), M.orGris); ax.rotation.x = Math.PI / 2; ax.position.set(x, y, 3.3); w.add(ax);
-  }
-  // verre saphir (léger reflet)
-  const verre = new THREE.Mesh(new THREE.CircleGeometry(R_LUN_INT + .2, seg), new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: 0, roughness: 0, transparent: true, opacity: .035, clearcoat: 1, envMapIntensity: 1.2, depthWrite: false }));
-  verre.position.z = 6.0; w.add(verre);
+  // verre saphir (léger reflet) — version dessinée
+  if (!photo) { const verre = new THREE.Mesh(new THREE.CircleGeometry(R_LUN_INT + .2, seg), new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: 0, roughness: 0, transparent: true, opacity: .035, clearcoat: 1, envMapIntensity: 1.2, depthWrite: false }));
+  verre.position.z = 6.0; w.add(verre); }
 
   // cornes galbées (vue de profil) : 4 pièces extrudées
   const corne = new THREE.Shape();
