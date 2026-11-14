@@ -593,6 +593,7 @@
         h("button", { type: "button", "aria-pressed": String(this.ui.view === "day"), onClick: () => { this.ui.view = "day"; this.savePrefs(); this.render(); } }, "Jour")));
     const actions = h("div", { class: "row" },
       canEdit ? btn([icon("wand"), "Générer"], () => this.openGenerate(), "primary sm") : null,
+      canEdit ? btn(["🎯 ", "Critères"], () => this.openCriteria(), "sm") : null,
       canEdit && w && w.shifts.length ? btn([icon("check"), w.status === "validé" ? "Repasser en brouillon" : "Valider"], () => this.openValidate(), "sm") : null,
       canEdit ? btn([icon("plus"), "Créneau"], () => this.openEditor(null, this.ui.day), "sm") : null,
       btn("Exporter", () => this.go("export"), "sm ghost"),
@@ -893,7 +894,10 @@
   };
 
   // ---------- Génération ----------
-  App.openGenerate = function () {
+  // Critères du planning (sans générer) : même contenu que la fenêtre « Générer », réuni sous un seul bouton.
+  App.openCriteria = function () { this.openGenerate({ criteriaOnly: true }); };
+  App.openGenerate = function (gopts) {
+    const only = !!(gopts && gopts.criteriaOnly);
     const s = this.state;
     let mode = "semaine";
     const weekIn = h("input", { type: "date", class: "input", id: "gen-week", value: this.ui.monday });
@@ -967,12 +971,23 @@
       const r = await this.commit([{ type: "setSettings", patch: { links: [...(this.state.settings.links || []), l] } }], { summary: `Condition ajoutée : ${linkText(l)}` });
       if (r.ok) { linkPick.forEach((c) => (c.querySelector("input").checked = false)); drawLinks(); }
     };
-    openDialog({ title: "Générer un planning", wide: true, body: h("div", { class: "stack" },
+    // Passagers prévus pour chaque jour de la semaine affichée.
+    const wkDays = C.weekDates(C.mondayOf(this.ui.monday));
+    const paxInputs = wkDays.map((d) => h("label", { class: "f" }, `${C.DAYS_SHORT[C.dow(d)]} ${C.fmtDate(d, "short")}`, h("input", { type: "number", class: "input", min: "0", max: "99999", step: "10", placeholder: "—", value: (s.settings.passengers || {})[d] ?? "", "data-date": d,
+      onChange: async (ev) => { const pax = { ...(this.state.settings.passengers || {}) }; if (ev.target.value === "") delete pax[d]; else pax[d] = Number(ev.target.value); await this.commit([{ type: "setSettings", patch: { passengers: pax } }], { quiet: true, summary: `Passagers ${C.fmtDate(d, "short")} : ${ev.target.value || "—"}` }); } })));
+    const paxSection = h("section", { class: "card flat", id: "gen-pax" }, h("h3", {}, "Critère : passagers prévus"),
+      h("p", { class: "small muted" }, `Au-delà de ${s.settings.paxThreshold} passagers : ${s.settings.paxStaff} personnes en ${s.settings.paxZone} le matin et le soir ; jusqu'à ${s.settings.paxCloseRelief}, une personne peut partir pour la fermeture. Semaine du ${C.fmtWeek(wkDays[0])}.`),
+      h("div", { class: "form-grid pax-grid" }, paxInputs));
+    const rulesLink = h("section", { class: "card flat" }, h("h3", {}, "Autres critères"),
+      h("p", { class: "small muted" }, "Règles par personne (zone, matin/soir, horaires liés, incompatibilités, jours de bureau…) : fiche de chaque personne dans « Équipe ». Droit du travail, horaires d'ouverture, 42 h : « Zones et règles »."),
+      h("div", { class: "row" }, btn("Équipe", () => { this._dlgClose && this._dlgClose(); this.go("team"); }, "sm"), btn("Zones et règles", () => { this._dlgClose && this._dlgClose(); this.go("zones"); }, "sm")));
+    const genParts = only ? [] : [
       h("p", { class: "muted small" }, `Le générateur reprend le planning modèle (« ${s.template.label || "modèle"} ») jour par jour, avec ses horaires, pauses et zones. Il n'attribue jamais un créneau pendant des cours, une absence ou dans une zone non autorisée : ces postes restent « à pourvoir », avec des remplaçants proposés.`),
       h("div", { class: "row" }, seg), periodBox,
       h("h3", {}, "Personnes concernées"), h("div", { class: "form-grid" }, checks),
-      h("p", { class: "small muted" }, `${absN} congé(s) ou absence(s) enregistré(s) et le calendrier d'alternance sont pris en compte automatiquement.`),
-      h("section", { class: "card flat", id: "gen-season" }, h("h3", {}, "Saison"), seasonBox,
+      h("p", { class: "small muted" }, `${absN} congé(s) ou absence(s) enregistré(s) et le calendrier d'alternance sont pris en compte automatiquement.`)];
+    const dlg = openDialog({ title: only ? "Critères du planning" : "Générer un planning", wide: true, body: h("div", { class: "stack" }, ...genParts, only ? paxSection : null,
+      only ? null : h("section", { class: "card flat", id: "gen-season" }, h("h3", {}, "Saison"), seasonBox,
         h("p", { class: "small muted" }, `Cochée d'après la période été (${C.fmtDate(s.settings.summerFrom || "2026-10-25", "short")} → ${C.fmtDate(s.settings.summerTo || "2027-03-27", "short")}) ; hiver en dehors. Les postes qui dépassent l'ouverture sont décalés pour y tenir.`)),
       h("section", { class: "card flat", id: "gen-staff" }, h("h3", {}, "Critère : nombre de personnes"),
         h("p", { class: "small muted" }, "Minimum et/ou maximum de personnes présentes sur une période et une plage horaire (dans une zone, ou ZP + ZR ensemble). Vérifié dans le planning ; les remplaçants ne dépassent jamais le maximum."),
@@ -990,16 +1005,19 @@
           h("span", { class: "small muted" }, "Nouvelle condition — cochez les personnes à lier :"), h("div", { class: "row", style: { "flex-wrap": "wrap" } }, linkPick),
           h("div", { class: "row", style: { "flex-wrap": "wrap" } }, h("label", { class: "check" }, lHours, "Mêmes horaires"), h("label", { class: "check" }, lZone, "Dans la même zone"), h("label", { class: "check" }, lWe, "Mêmes week-ends")),
           h("div", {}, btn("Ajouter la condition", addLink, "sm primary"))) : null),
-      h("details", {}, h("summary", { class: "small" }, "Contraintes particulières pour cette génération"),
+      only ? null : paxSection,
+      only ? rulesLink : null,
+      only ? null : h("details", {}, h("summary", { class: "small" }, "Contraintes particulières pour cette génération"),
         h("div", { class: "stack", style: { "margin-top": "8px" } }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Personne", xEmp), h("label", { class: "f" }, "Indisponible le", xDate), btn("Ajouter", () => { if (C.isISO(xDate.value)) { extra.push({ emp: xEmp.value, date: xDate.value }); drawExtra(); } }, "sm")), extraBox)),
-      h("label", { class: "check" }, overwrite, "Remplacer les semaines qui contiennent déjà des horaires (une version de chacune est enregistrée avant)")),
-      actions: [{ label: "Annuler" }, { label: "Préparer la proposition", primary: true, onClick: () => {
+      only ? null : h("label", { class: "check" }, overwrite, "Remplacer les semaines qui contiennent déjà des horaires (une version de chacune est enregistrée avant)")),
+      actions: only ? [{ label: "Générer avec ces critères", onClick: () => { setTimeout(() => this.openGenerate(), 0); } }, { label: "Fermer", primary: true, onClick: () => { this.render(); } }] : [{ label: "Annuler" }, { label: "Préparer la proposition", primary: true, onClick: () => {
         const { from, to } = range();
         if (!C.isISO(from) || !C.isISO(to) || to < from) { toast("Période invalide.", "err"); return false; }
         if (C.daysBetween(from, to) > 92) { toast("Trois mois maximum à la fois.", "err"); return false; }
         const employees = checks.map((c) => c.querySelector("input")).filter((i) => i.checked).map((i) => i.value);
         this.previewGeneration({ from, to, employees, unavailable: extra, overwrite: overwrite.checked, season });
       } }] });
+    this._dlgClose = () => dlg && dlg.close && dlg.close();
   };
   App.previewGeneration = function (opts) {
     const s = this.state;
