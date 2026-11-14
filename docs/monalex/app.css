@@ -983,8 +983,8 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
 .sub-live{transform:none!important}
 
 /* Fond horloger discret sur tout le site : cadrans, rouages, couronne, lunette, emblème Monalex */
-html{background:#fff url(img/motif.svg?v=3) 0 0/660px 700px repeat}
+html{background:#fff url(img/motif.svg?v=4) 0 0/660px 700px repeat}
 html,body{background-color:transparent}
 html{background-color:var(--bg)}
-.page{background-image:url(img/motif.svg?v=3);background-size:660px 700px}
+.page{background-image:url(img/motif.svg?v=4);background-size:660px 700px}
 @media (max-width:640px){html,.page{background-size:500px 530px}}
