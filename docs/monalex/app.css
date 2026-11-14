@@ -787,3 +787,5 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
 .pitem .pp img{position:absolute;inset:4%;width:92%;height:92%;object-fit:contain;mix-blend-mode:multiply}
 .cp-slide a{position:relative}
 .card .body,.card h3,.card .price,.card .where{overflow-wrap:anywhere}
+
+.cp-hero-t p.cp-3d-lien{padding-left:min(16vw,120px);margin-top:26px}

@@ -1,0 +1,64 @@
+@font-face{font-family:"Cormorant Garamond";src:url(../fonts/cormorant-garamond-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Cormorant Garamond";src:url(../fonts/cormorant-garamond-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"EB Garamond";src:url(../fonts/eb-garamond-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+:root{--fond:#f4f3ef;--encre:#1d1d1f;--doux:#6e6e73;--ligne:rgba(0,0,0,.08);--verre:rgba(255,255,255,.78);--vert:#0b5d3b;--sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--fond);color:var(--encre);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow:hidden}
+#scene{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;outline:none;cursor:grab}
+#scene:active{cursor:grabbing}
+.haut{position:fixed;z-index:3;top:0;left:0;right:0;display:flex;align-items:flex-start;gap:16px;padding:max(14px,env(safe-area-inset-top)) 18px 0;pointer-events:none}
+.haut>*{pointer-events:auto}
+.retour{font-size:13px;color:var(--doux);text-decoration:none;padding:9px 14px;border-radius:999px;background:var(--verre);border:1px solid var(--ligne)}
+.retour:hover{color:var(--encre)}
+.titre{flex:1;text-align:center;pointer-events:none}
+.titre h1{margin:2px 0 0;font:600 clamp(26px,3.2vw,40px)/1.05 "Cormorant Garamond",Georgia,serif;letter-spacing:.01em}
+.titre p{margin:6px 0 0;font-size:12px;color:var(--doux);letter-spacing:.02em}
+.btn{font:500 13px/1 var(--sans);color:var(--encre);background:transparent;border:0;border-radius:999px;padding:10px 14px;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}
+.btn:hover{background:rgba(0,0,0,.05)}
+.btn.on{background:var(--encre);color:#fff}
+.btn:disabled{opacity:.35;cursor:default}
+.btn:focus-visible{outline:2px solid var(--vert);outline-offset:2px}
+.btn.rond{width:38px;height:38px;padding:0;background:var(--verre);border:1px solid var(--ligne);font:italic 600 17px Georgia,serif}
+.barre{position:fixed;z-index:3;left:50%;bottom:max(16px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:2px;padding:6px;max-width:calc(100% - 24px);overflow-x:auto;scrollbar-width:none;background:var(--verre);-webkit-backdrop-filter:saturate(1.6) blur(18px);backdrop-filter:saturate(1.6) blur(18px);border:1px solid var(--ligne);border-radius:999px;box-shadow:0 10px 40px rgba(0,0,0,.08)}
+.barre::-webkit-scrollbar{display:none}
+.sep{width:1px;height:20px;background:var(--ligne);margin:0 4px;flex:none}
+.seg{display:flex;background:rgba(0,0,0,.05);border-radius:999px;padding:2px}
+.seg .btn{padding:8px 12px}
+.vit{width:74px;accent-color:var(--encre);margin:0 6px}
+.vues{position:fixed;z-index:4;left:50%;bottom:calc(max(16px,env(safe-area-inset-bottom)) + 62px);transform:translateX(-50%);width:min(560px,calc(100% - 24px));display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:2px;padding:8px;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid var(--ligne);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.12);max-height:55vh;overflow:auto}
+.vues[hidden]{display:none}
+.vue{display:flex;gap:10px;align-items:center;text-align:left;font:13px var(--sans);color:var(--encre);background:none;border:0;padding:10px 12px;border-radius:12px;cursor:pointer}
+.vue:hover{background:rgba(0,0,0,.05)}
+.vue .n{font-variant-numeric:tabular-nums;color:var(--doux);font-size:11px}
+.fiche,.apropos{position:fixed;z-index:4;right:18px;top:96px;width:min(340px,calc(100% - 36px));padding:20px 22px;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid var(--ligne);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.1)}
+.fiche[hidden],.apropos[hidden]{display:none}
+.fiche h2,.apropos h2{margin:2px 0 8px;font:600 24px/1.1 "Cormorant Garamond",Georgia,serif}
+.fiche p,.apropos p{margin:0 0 10px;font:16px/1.45 "EB Garamond",Georgia,serif;color:#333}
+.fiche .sur{font:600 10px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--vert);margin-bottom:4px}
+.apropos{width:min(420px,calc(100% - 36px));max-height:calc(100% - 190px);overflow:auto}
+.apropos table{width:100%;border-collapse:collapse;margin:6px 0 12px;font-size:13px}
+.apropos th,.apropos td{text-align:left;padding:7px 4px;border-bottom:1px solid var(--ligne)}
+.apropos thead th{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--doux)}
+.apropos td.officiel{color:var(--vert);font-weight:600}
+.apropos td.estimé{color:var(--doux)}
+.apropos .petit{font-size:14px;color:var(--doux)}
+.x{position:absolute;top:10px;right:12px;width:30px;height:30px;border:0;border-radius:50%;background:rgba(0,0,0,.05);font-size:18px;line-height:1;cursor:pointer;color:var(--encre)}
+.aide{position:fixed;z-index:2;left:0;right:0;bottom:calc(max(16px,env(safe-area-inset-bottom)) + 66px);margin:0;text-align:center;font-size:12px;color:var(--doux);pointer-events:none;transition:opacity .6s 4s;opacity:0}
+.pret .aide{opacity:1;animation:dispar .6s 7s forwards}
+@keyframes dispar{to{opacity:0}}
+.chargement{position:fixed;inset:0;z-index:5;display:grid;place-content:center;justify-items:center;gap:14px;font:15px "EB Garamond",Georgia,serif;color:var(--doux);background:var(--fond);transition:opacity .5s,visibility .5s}
+.pret .chargement{opacity:0;visibility:hidden}
+.anneau{width:34px;height:34px;border-radius:50%;border:2px solid rgba(0,0,0,.1);border-top-color:var(--encre);animation:tour 1s linear infinite}
+@keyframes tour{to{transform:rotate(360deg)}}
+.sans3d{display:none}
+.sans-webgl .sans3d,.lent .sans3d{display:grid;position:fixed;inset:0;z-index:6;place-content:center;background:var(--fond);font:17px "EB Garamond",Georgia,serif;color:var(--doux);padding:24px;text-align:center}
+.lent:not(.sans-webgl) .sans3d{display:none}
+@media (max-width:640px){
+  .titre p{display:none}
+  .titre h1{font-size:24px}
+  .retour{font-size:0;padding:0;width:38px;height:38px;display:grid;place-content:center}
+  .retour::before{content:"←";font-size:16px;color:var(--encre)}
+  .fiche,.apropos{top:auto;bottom:calc(max(16px,env(safe-area-inset-bottom)) + 66px);right:12px;width:calc(100% - 24px)}
+  .barre{left:12px;right:12px;transform:none;max-width:none}
+}
+@media (prefers-reduced-motion:reduce){.anneau{animation:none}}
