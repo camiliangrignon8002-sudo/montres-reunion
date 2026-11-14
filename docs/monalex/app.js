@@ -334,7 +334,7 @@ function collections() {
 }
 function renderColls() {
   const list = collections();
-  $("#colls").innerHTML = `<button class="coll" data-c="" aria-pressed="${!S.coll}"><svg viewBox="0 0 64 96"><g fill="none" stroke="#127749" stroke-width="1.6"><circle cx="32" cy="48" r="18"/><circle cx="32" cy="48" r="12"/><path d="M24 30V8h16v22M24 66v22h16V66"/></g></svg><span>Toutes</span><small>${ALL.length} montres</small></button>` +
+  $("#colls").innerHTML = `<button class="coll" data-c="" aria-pressed="${!S.coll}"><svg viewBox="0 0 64 96"><g fill="none" stroke="#111" stroke-width="1.6"><circle cx="32" cy="48" r="18"/><circle cx="32" cy="48" r="12"/><path d="M24 30V8h16v22M24 66v22h16V66"/></g></svg><span>Toutes</span><small>${ALL.length} montres</small></button>` +
     list.map(([c, { m, n }]) => `<button class="coll" data-c="${esc(c)}" aria-pressed="${S.coll === c}">${watchSVG(m.skin, { diam: m.diametre })}<span>${esc(c)}</span><small>${n} montre${n > 1 ? "s" : ""}</small></button>`).join("");
   $("#fColls").innerHTML = list.map(([c]) => `<li><a href="#c/${slugC(c)}">${esc(c)}</a></li>`).join("");
 }
@@ -520,7 +520,7 @@ function pageMap(id, v) {
   if (CONFIG.googleMapsKey) {
     googleMaps().then(g => {
       const map = new g.Map($("#" + id), { center: { lat: v.lat, lng: v.lng }, zoom: 16, styles: GSTYLE, mapTypeControl: false, streetViewControl: true, fullscreenControl: true });
-      new g.Marker({ map, position: { lat: v.lat, lng: v.lng }, title: v.nom, icon: { path: g.SymbolPath.CIRCLE, scale: 9, fillColor: "#127749", fillOpacity: 1, strokeColor: "#c9a961", strokeWeight: 3 } });
+      new g.Marker({ map, position: { lat: v.lat, lng: v.lng }, title: v.nom, icon: { path: g.SymbolPath.CIRCLE, scale: 9, fillColor: "#111111", fillOpacity: 1, strokeColor: "#c9a961", strokeWeight: 3 } });
     }).catch(() => {});
     return;
   }
@@ -1599,15 +1599,13 @@ async function start() {
   try { await loadData(false); }
   catch (e) { $("#grid").innerHTML = `<div class="empty"><h3>Les montres ne se chargent pas</h3><p>La connexion semble coupée. Tirez la page vers le bas pour réessayer.</p><button class="btn btn-green" onclick="location.reload()">Réessayer</button></div>`; return; }
   $("#demo").hidden = !DATA.demo || !!store.get("rm.demoOk", 0);
-  // Montre 3D de l'accueil (chronographe or, cadran vert poker), avec le dessin en secours
-  // Vitrine de l'accueil : vraie photo de la Daytona, détourée, qui flotte avec un reflet de lumière
-  { const c = $("#hero3d"), v = document.createElement("div"), img = new Image();
-    v.className = "hero-photo"; v.setAttribute("aria-hidden", "true"); img.alt = ""; img.decoding = "async";
-    img.onload = () => { v.classList.add("on"); $("#heroImg").style.visibility = "hidden"; };
-    img.src = "img/daytona-photo.webp"; v.append(img); c.replaceWith(v); }
+  // Accueil : affiche Submariner ; un clic ouvre son histoire et le lien vers rolex.com
+  { const d = $("#subDlg");
+    $("#subPoster").addEventListener("click", () => d.showModal());
+    $("#subFermer").addEventListener("click", () => d.close());
+    $("#subVoir").addEventListener("click", () => d.close());
+    d.addEventListener("click", ev => { if (ev.target === d) d.close(); }); }
   $("#annee").textContent = new Date().getFullYear();
-  // Visuel d'accueil assorti au logo : chronographe or, cadran vert
-  $("#heroImg").innerHTML = watchSVG({ type: "daytona", dial: "#035837", sub: "#03321e", bezel: "#03321e", insert: "#03321e", metal: "gold", bracelet: "oyster" }, { diam: 40, vb: "75 170 250 260", par: "xMidYMid slice" });
   $("#searchEmblem").innerHTML = $("#homeLink").innerHTML;
   if (DATA.mise_a_jour) $("#updated").textContent = `Annonces mises à jour le ${new Date(DATA.mise_a_jour).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}.`;
   renderColls(); renderHome(); updateDots();
