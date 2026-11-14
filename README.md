@@ -327,4 +327,5 @@ Trouver une montre **et un détaillant officiel Rolex** à **Monaco**, puis en *
 - **Compte** (gardé sur le téléphone) : favoris, montres suivies (alerte prix et statut), demandes aux vendeurs et
   détaillants avec le temps de réponse mesuré.
 - **Rafraîchir** : tirer la page vers le bas, ou « Rafraîchir les annonces » dans le menu.
-- Projet non affilié à Rolex SA : pas de logo ni de photo officielle.
+- Logo Monalex : `docs/monalex/img/` (logo complet, cadran seul, mot « MONALEX », image de partage) ; icônes de l'écran d'accueil tirées du cadran.
+- Projet non affilié à Rolex SA : pas de logo ni de photo Rolex.

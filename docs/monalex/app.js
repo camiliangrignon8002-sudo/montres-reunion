@@ -1183,8 +1183,8 @@ async function start() {
   try { await loadData(false); }
   catch (e) { $("#grid").innerHTML = `<div class="empty"><h3>Impossible de charger les montres</h3><p>Vérifiez la connexion, puis tirez la page vers le bas.</p></div>`; return; }
   $("#demo").hidden = !DATA.demo || !!store.get("rm.demoOk", 0);
-  const hero = ALL.find(m => m.reference === "126333") || ALL[0];
-  $("#heroImg").innerHTML = watchSVG(hero.skin, { diam: hero.diametre, vb: "70 175 260 250", par: "xMidYMid slice" });
+  // Visuel d'accueil assorti au logo : chronographe or, cadran vert
+  $("#heroImg").innerHTML = watchSVG({ type: "daytona", dial: "#0f4a2c", sub: "#0f4a2c", bezel: "#0c3a22", insert: "#0c3a22", metal: "gold", bracelet: "oyster" }, { diam: 40, vb: "75 170 250 260", par: "xMidYMid slice" });
   $("#searchEmblem").innerHTML = $("#homeLink").innerHTML;
   if (DATA.mise_a_jour) $("#updated").textContent = `Annonces mises à jour le ${new Date(DATA.mise_a_jour).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}.`;
   renderColls(); renderHome(); updateDots();
