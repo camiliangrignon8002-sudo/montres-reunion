@@ -522,7 +522,7 @@
         h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", {}, "Aujourd'hui"), h("span", { class: "chip" }, `${todayShifts.length} personne(s)`)),
           !w ? h("div", { class: "stack" }, h("p", { class: "muted" }, "Aucun planning cette semaine."), btn("Générer la semaine", () => this.openGenerate(), "primary")) :
             todayShifts.length ? h("div", { class: "list" }, todayShifts.map((x) => h("div", { class: "item", style: { cursor: "pointer" }, onClick: () => this.openEditor(x.emp, x.date) },
-              h("div", { class: "grow" }, h("b", {}, empName(s, x.emp)), isNow(x) ? h("span", { class: "chip ok", style: { "margin-left": "8px" } }, "en poste") : null),
+              h("div", { class: "grow today-who" }, h("b", {}, empName(s, x.emp)), isNow(x) ? h("span", { class: "chip ok" }, "en poste") : null),
               h("div", { class: "stack", style: { gap: "3px" } }, x.segs.map((g) => blk(s, g)))))) : h("p", { class: "muted" }, "Personne n'est planifié aujourd'hui.")),
         h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", {}, "Cette semaine"), statusChip(w)),
           h("div", { class: "kpis" },

@@ -510,3 +510,7 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
 @media (max-width: 760px) { .tabbar { background: color-mix(in srgb, var(--surface) 98%, transparent); } }
 /* Le navigateur évite de dessiner ce qui est hors écran (listes et cartes longues). */
 .card.big .t-wrap, .month { contain: content; }
+/* Tableau de bord : « en poste » aligné pour tout le monde (colonne du prénom de largeur fixe). */
+.today-who { display: grid; grid-template-columns: minmax(0, 7.2em) auto; align-items: center; column-gap: 8px; }
+.today-who b { line-height: 1.2; }
+.today-who .chip { justify-self: start; }
