@@ -156,6 +156,14 @@ export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag 
   const camera = new THREE.PerspectiveCamera(28, 1, .1, 60); camera.position.set(0, 0, 12);
 
   let watch = modele && await vraiModele(modele);
+  // Daytona modélisée en vraie 3D (boîtier, lunette, poussoirs, cadran, bracelet Oyster)
+  if (!watch && skin.type === "daytona") {
+    try {
+      const { buildDaytona, studioDaytona } = await import("./daytona3d.js?v=21");
+      watch = buildDaytona({ hi: dpr > 1.2 });
+      scene.environment.dispose(); scene.environment = studioDaytona(renderer);
+    } catch (e) { console.warn(e); watch = null; }
+  }
   if (!watch && photo) { try { watch = photoWatch(await photoDetouree(photo)); } catch (e) { watch = null; } }
   if (!watch) watch = buildWatch(skin, await faceTexture(svg, dpr > 1.2 ? 1024 : 768));
   scene.add(watch);
@@ -172,13 +180,14 @@ export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag 
     if (!canvas.isConnected) { dispose(); return; }
     if (!visible || !actif() || document.hidden) { tPrec = 0; return; }
     const dt = tPrec ? Math.min(.05, (t - tPrec) / 1000) : 0; tPrec = t;
-    if (!calme()) spin += dt * 1.1;                              // tour complet en ~6 s, indépendant de la vitesse de l'écran
+    if (!calme()) spin += dt * (watch.userData.daytona ? .75 : 1.1);                              // tour complet en ~6 s, indépendant de la vitesse de l'écran
     const y = scrollY();
     if (estPhoto) {
       const ang = spin * 1.6 + y * .009 + dragX;
       ty = Math.sin(ang) * .62; tx = Math.sin(ang * .5) * .12 + dragY * .5;
       watch.userData.reflet.material.opacity = Math.max(0, Math.sin(ang)) * .22;
-    } else { ty = -.5 + spin + y * .009 + dragX; tx = -.35 + Math.sin(y * .006) * .25 + dragY; }   // deux fois plus réactif au défilement
+    } else if (watch.userData.daytona) { ty = -.35 + spin + y * .009 + dragX; tx = -.42 + Math.sin(spin * .7 + y * .004) * .2 + dragY; }
+    else { ty = -.5 + spin + y * .009 + dragX; tx = -.35 + Math.sin(y * .006) * .25 + dragY; }   // deux fois plus réactif au défilement
     const k = 1 - Math.pow(.0005, dt || .016);                  // lissage calé sur le temps réel
     rx += (tx - rx) * k; ry += (ty - ry) * k;
     watch.rotation.x = rx; watch.rotation.y = ry; if (estPhoto) watch.rotation.z = 0;
