@@ -11,7 +11,7 @@ export function fermoir(M) {
   // capot : charnière à l'extrémité +Y
   const chCapot = new THREE.Group(); chCapot.position.set(0, H - .6, .3);
   const capot = new THREE.Group(); capot.position.y = -(H - .6);
-  const plaque = new THREE.Mesh(pave(16.4, 2 * H, 1.6, .9, .55, 3), M.acierSatine);
+  const plaque = new THREE.Mesh(pave(16.2, 2 * H, 1.5, 1.2, .5, 2), [M.acierSatine, M.acierPoli]);
   const nervure = new THREE.Mesh(pave(6.2, 2 * H - 3, .4, .6, .18, 2), M.acierPoli); nervure.position.z = .85;
   capot.add(plaque, nervure);
   // levier Oysterlock (sécurité), charnière sur le capot
@@ -27,7 +27,7 @@ export function fermoir(M) {
   chLame2.add(lame2); g.add(chLame2);
   // Easylink : petite rallonge de 5 mm qui se déplie à l'extrémité -Y
   const chEasy = new THREE.Group(); chEasy.position.set(0, -H + .4, -.4);
-  const easy = new THREE.Mesh(pave(14.8, 5, .9, .5, .3, 2), M.acierSatine); easy.position.y = 2.5;
+  const easy = new THREE.Mesh(pave(14.8, 5, .9, .5, .3, 2), [M.acierSatine, M.acierPoli]); easy.position.y = 2.5;
   chEasy.add(easy); g.add(chEasy);
   piece(chCapot, "Fermoir Oysterlock", "Fermoir déployant avec levier de sécurité qui évite toute ouverture accidentelle.");
   piece(chLevier, "Levier de sécurité Oysterlock", "Doit être soulevé avant d'ouvrir le capot.");

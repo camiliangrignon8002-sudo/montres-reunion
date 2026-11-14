@@ -6,12 +6,12 @@ import { tour, cannele, pave, piece, remap } from "./geo.js";
 function corne(M, xIn, sens) {
   // profil de la corne dans le plan (y, z), extrudé selon X sur 2,6 mm
   const s = new THREE.Shape(), L = D.corneACorne / 2;
-  s.moveTo(15.2, 3.75);
-  s.bezierCurveTo(18.4, 3.6, 20.9, 2.6, L - .55, .2);
-  s.quadraticCurveTo(L + .05, -.9, L - .25, -2.35);
-  s.quadraticCurveTo(L - 1.3, -3.4, 19.6, -3.85);
-  s.lineTo(15.2, -4.4); s.closePath();
-  const ep = 2.6, bev = .38;
+  s.moveTo(15.2, 3.7);
+  s.bezierCurveTo(18.6, 3.5, 21.2, 2.3, L - .45, .35);
+  s.quadraticCurveTo(L + .05, -.5, L - .2, -1.75);
+  s.quadraticCurveTo(L - 1.1, -2.55, 19.8, -2.95);
+  s.lineTo(15.2, -3.5); s.closePath();
+  const ep = 2.35, bev = .32;
   const g = new THREE.ExtrudeGeometry(s, { depth: ep - 2 * bev, bevelEnabled: true, bevelThickness: bev, bevelSize: bev, bevelSegments: 4, curveSegments: 24 });
   remap(g, (a, b, c) => [xIn + bev + c, sens * a, b]);
   // groupe 0 = faces (flancs, polis) ; groupe 1 = pourtour (dessus/dessous, satinés)
@@ -22,18 +22,18 @@ function corne(M, xIn, sens) {
 export function boitier(M) {
   const g = new THREE.Group(); g.name = "boitier";
   const carrure = new THREE.Mesh(tour([
-    [14.6, -4.9], [18.7, -4.9], null, [18.7, -4.9], [19.45, -4.62], [19.88, -4.0], [20.0, -3.2], [20.0, 3.3], [19.86, 3.85], [19.55, 4.15], null,
-    [19.55, 4.15], [14.95, 4.15], null, [14.95, 4.15], [14.95, 2.75], [14.6, 2.6], null, [14.6, 2.6], [14.6, -4.9]], 180), M.acierPoli);
+    [14.6, -3.7], [18.6, -3.7], null, [18.6, -3.7], [19.42, -3.45], [19.86, -2.85], [19.97, -2.1], [19.97, 3.25], [19.84, 3.82], [19.55, 4.15], null,
+    [19.55, 4.15], [14.95, 4.15], null, [14.95, 4.15], [14.95, 2.75], [14.6, 2.6], null, [14.6, 2.6], [14.6, -3.7]], 200), M.acierPoli);
   g.add(piece(carrure, "Carrure Oyster", "Monobloc en Oystersteel (acier 904L), Ø 40 mm, côtés polis. Étanche à 100 m."));
   const cornes = new THREE.Group();
-  for (const sx of [1, -1]) for (const sy of [1, -1]) cornes.add(corne(M, sx > 0 ? 10 : -12.6, sy));
+  for (const sx of [1, -1]) for (const sy of [1, -1]) cornes.add(corne(M, sx > 0 ? 10 : -12.35, sy));
   g.add(piece(cornes, "Cornes", "Quatre cornes : dessus satiné, flancs polis. 20 mm entre cornes (estimé)."));
   // épaulements protégeant la couronne
   const ep = new THREE.Group();
   for (const sy of [1, -1]) {
     const f = new THREE.Shape(); f.moveTo(18.2, sy * 8.2); f.quadraticCurveTo(20.6, sy * 7.4, 21.25, sy * 5.0); f.quadraticCurveTo(21.5, sy * 3.9, 20.9, sy * 3.55); f.lineTo(18.2, sy * 3.3); f.closePath();
     const geo = new THREE.ExtrudeGeometry(f, { depth: 4.6, bevelEnabled: true, bevelThickness: .55, bevelSize: .45, bevelSegments: 4, curveSegments: 20 });
-    geo.translate(0, 0, -2.65); ep.add(new THREE.Mesh(geo, M.acierPoli));
+    geo.translate(0, 0, -2.1); ep.add(new THREE.Mesh(geo, M.acierPoli));
   }
   g.add(piece(ep, "Épaulements", "Protègent la couronne Triplock, venus de la carrure."));
   // anneau intérieur (rehaut) entre le cadran et le verre
@@ -41,12 +41,12 @@ export function boitier(M) {
   g.add(piece(rehaut, "Rehaut", "Anneau intérieur qui borde le cadran."));
 
   // --- fond vissé (authentique) et fond saphir (technique)
-  const cannelures = new THREE.Mesh(cannele(18.15, 60, .28, .5, -5.4, .08, 16.9), M.acierPoli);
+  const cannelures = new THREE.Mesh(cannele(18.05, 72, .22, .5, -4.2, .08, 16.9), M.acierPoli);
   cannelures.geometry.rotateY(-Math.PI / 2);
-  const fondPlein = new THREE.Mesh(tour([[18.0, -5.4], [17.4, -5.55], [15.8, -5.78], [9, -5.93], [0, -5.95]], 160), M.acierPoli);
+  const fondPlein = new THREE.Mesh(tour([[17.95, -4.2], [17.5, -4.55], [16.2, -5.25], [12, -5.75], [6, -5.92], [0, -5.95]], 200), M.acierPoli);
   const fondOuvert = new THREE.Group();
-  fondOuvert.add(new THREE.Mesh(tour([[18.0, -5.4], [17.2, -5.6], [15.2, -5.7], null, [15.2, -5.7], [14.4, -5.62], [14.4, -5.0]], 160), M.acierPoli));
-  const glace = new THREE.Mesh(tour([[0, -5.66], [14.42, -5.62], [14.42, -5.05], [0, -5.05]], 96), M.saphir);
+  fondOuvert.add(new THREE.Mesh(tour([[17.95, -4.2], [17.5, -4.55], [16.2, -5.25], [15.2, -5.5], null, [15.2, -5.5], [14.4, -5.45], [14.4, -4.9]], 200), M.acierPoli));
+  const glace = new THREE.Mesh(tour([[0, -5.62], [14.42, -5.48], [14.42, -4.95], [0, -4.95]], 96), M.saphir);
   fondOuvert.add(piece(glace, "Fond saphir (mode technique)", "Présentation pédagogique : le fond réel de la 126500LN est en acier plein."));
   const fond = new THREE.Group(); fond.name = "fond";
   fond.add(cannelures, fondPlein, fondOuvert);
