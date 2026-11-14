@@ -803,6 +803,10 @@
           h("option", { value: "" }, "Choisir une personne…"), s.employees.filter((e) => e.active !== false).map((e) => h("option", { value: e.id }, e.name)));
         const dateIn = h("input", { type: "date", class: "input", id: "ed-date", value: date, onChange: () => { if (C.isISO(dateIn.value)) { date = dateIn.value; draw(); } } });
         kids.push(h("div", { class: "form-grid" }, h("label", { class: "f" }, "Personne", sel), h("label", { class: "f" }, "Date", dateIn)));
+        // Ou bien : fixer combien de personnes il faut ce jour-là, sur une plage horaire.
+        kids.push(h("div", { class: "card flat row between", style: { "flex-wrap": "wrap", gap: "8px" } },
+          h("span", { class: "small" }, "👥 Ou fixer le ", h("b", {}, "nombre de personnes"), ` voulu le ${C.fmtDate(date, "day")} (plage horaire, zone, minimum et maximum).`),
+          btn("Nombre de personnes", () => { dlg && dlg.close(); this.openDayStaffing(date); }, "sm primary")));
         body.replaceChildren(...kids);
         dlg && dlg.setActions([{ label: "Fermer" }]);
         return;
