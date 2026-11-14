@@ -609,7 +609,7 @@
           const byZone = {}; for (const x of shifts) for (const z of new Set(x.segs.map((g) => g.z))) byZone[z] = (byZone[z] || 0) + 1;
           const need = (s.settings.staffing || []).filter((r) => d >= r.from && d <= r.to);
           return h("th", { class: (d === today ? "today" : "") + (canEdit ? " day-click" : ""), title: canEdit ? "Toucher pour fixer le nombre de personnes ce jour-là" : null, onClick: canEdit ? () => this.openDayStaffing(d) : null },
-            h("span", {}, C.DAYS[C.dow(d)]), h("span", { class: "d" }, C.fmtDate(d, "short")),
+            h("span", {}, C.DAYS[C.dow(d)]), h("span", { class: "d" }, C.fmtDate(d, "short"), d === today ? h("span", { class: "today-pill" }, "Aujourd'hui") : null),
             (() => { const p = C.paxOf(s, d); return p ? h("span", { class: "need pax", title: p.slots ? `Passagers attendus : ${p.m} le matin (05:30–13:00), ${p.a} entre 13:00 et 18:00, ${p.s} le soir (après 18:00)` : `${p.total} passagers attendus` }, `✈︎ ${p.total.toLocaleString("fr-FR")}`) : null; })(),
             need.length ? h("span", { class: "need", title: need.map((r) => `${r.s}–${r.e} ${r.zone || "ZP+ZR"} : ${r.min ?? "?"}–${r.max ?? "?"}`).join("\n") }, `👥 ${need.length}`) : null,
             h("span", { class: "cnt" }, s.zones.filter((z) => byZone[z.id]).map((z) => h("span", { class: `blk ${zoneStyle(s, z.id).cls}`, style: { "--z": z.color, padding: "0 5px" }, title: `${byZone[z.id]} en ${z.name}` }, h("small", {}, `${z.short} ${byZone[z.id]}`)))));
