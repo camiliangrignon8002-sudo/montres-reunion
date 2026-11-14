@@ -574,11 +574,15 @@
     if (!grid.days.includes(this.ui.day)) this.ui.day = grid.days.includes(today) ? today : monday;
 
     const status = !w || !w.shifts.length ? h("span", { class: "chip" }, "Vide") : w.status === "validé" ? h("span", { class: "chip ok" }, "Validée") : h("span", { class: "chip warn" }, "Brouillon");
+    // Saison de la semaine (horaires d'ouverture) : été / hiver, modifiable d'un clic.
+    const wSeason = w && (w.season === "ete" || w.season === "hiver") ? w.season : C.seasonOf(monday, s);
+    const seasonToggle = w && w.shifts.length ? h("div", { class: "seg-ctl", role: "group", "aria-label": "Saison de la semaine", title: "Horaires des points de vente utilisés pour cette semaine" },
+      [["ete", "☀︎ Été"], ["hiver", "❄︎ Hiver"]].map(([v, l]) => h("button", { type: "button", "aria-pressed": String(wSeason === v), disabled: !canEdit, onClick: () => { if (wSeason !== v) this.commit([{ type: "setWeekSeason", monday, season: v }], { summary: `Semaine du ${C.fmtWeek(monday)} : horaires ${v === "ete" ? "d'été" : "d'hiver"}` }); } }, l))) : null;
     const head = h("div", { class: "week-head" },
       h("div", { class: "when" }, iconBtn("left", "Semaine précédente", () => { this.ui.monday = C.addDays(monday, -7); this.render(); }), iconBtn("right", "Semaine suivante", () => { this.ui.monday = C.addDays(monday, 7); this.render(); })),
       h("div", { class: "stack", style: { gap: "0" } }, h("h1", {}, C.fmtWeek(monday)), h("span", { class: "small muted" }, `Semaine ${C.isoWeekNumber(monday)}${w && w.source ? " · " + w.source : ""}`)),
       iconBtn("download", "Télécharger le planning de la semaine en PDF", () => this.downloadPDF([monday], `planning-semaine-${monday}.pdf`), { class: "icon-btn dl-btn", id: "dl-week" }),
-      status,
+      status, seasonToggle,
       monday !== C.mondayOf(today) ? btn("Aujourd'hui", () => { this.ui.monday = C.mondayOf(today); this.ui.day = today; this.render(); }, "sm ghost") : null,
       h("div", { style: { flex: "1" } }),
       h("div", { class: "seg-ctl", role: "group", "aria-label": "Affichage" },
@@ -890,6 +894,12 @@
       return { from: fromIn.value, to: toIn.value };
     };
     const absN = Object.values(s.absences).length;
+    // Saison des horaires d'ouverture pour cette génération (cochée d'après la période été, modifiable).
+    let season = C.seasonOf(this.ui.monday, s);
+    const seasonBox = h("div", { class: "row" });
+    const drawSeason = () => seasonBox.replaceChildren(h("span", { class: "small muted" }, "Horaires des points de vente :"),
+      ...[["ete", "Été"], ["hiver", "Hiver"]].map(([v, l]) => h("label", { class: "check" }, h("input", { type: "checkbox", id: `gen-season-${v}`, checked: season === v, onChange: () => { season = v; drawSeason(); } }), `${l} (ZP ${s.settings[`hoursZP_${v}`]}, ZR ${s.settings[`hoursZR_${v}`]})`)));
+    drawSeason();
     // Conditions : personnes liées (enregistrées, reprises à chaque génération).
     const linkBox = h("div", { class: "stack", style: { gap: "8px" } });
     const linkPick = s.employees.filter((e) => e.active !== false).map((e) => h("label", { class: "check" }, h("input", { type: "checkbox", value: e.id }), e.name));
@@ -919,6 +929,8 @@
       h("div", { class: "row" }, seg), periodBox,
       h("h3", {}, "Personnes concernées"), h("div", { class: "form-grid" }, checks),
       h("p", { class: "small muted" }, `${absN} congé(s) ou absence(s) enregistré(s) et le calendrier d'alternance sont pris en compte automatiquement.`),
+      h("section", { class: "card flat", id: "gen-season" }, h("h3", {}, "Saison"), seasonBox,
+        h("p", { class: "small muted" }, `Cochée d'après la période été (${C.fmtDate(s.settings.summerFrom || "2026-10-25", "short")} → ${C.fmtDate(s.settings.summerTo || "2027-03-27", "short")}) ; hiver en dehors. Les postes qui dépassent l'ouverture sont décalés pour y tenir.`)),
       h("section", { class: "card flat", id: "gen-max" }, h("h3", {}, "Critère : durée par semaine"),
         h("p", { class: "small" }, `Temps plein : dépassement possible au-delà de ${s.settings.maxWeekHours} h, mais jamais plus de `, h("b", {}, `${s.settings.hardMaxWeekHours || 42} h par semaine`), ` (cours et heures sup compris). Temps partiel : jamais plus que le contrat + ${s.settings.partTimeExtraPercent ?? 10} %${(() => { const pt = s.employees.filter((e) => e.active !== false && C.weekCap(s, e).partTime); return pt.length ? ` (${pt.map((e) => `${e.name} ${C.fmtHours(C.weekCap(s, e).minutes)}`).join(", ")})` : ""; })()}. Réglable dans « Zones et règles ».`),
         Store.canWrite ? h("div", { class: "row" }, h("span", { class: "small muted" }, "Maximum :"), h("input", { type: "number", class: "input", id: "gen-hardmax", min: "1", max: "60", step: "0.5", value: s.settings.hardMaxWeekHours || 42, style: { width: "90px" }, onChange: (ev) => this.commit([{ type: "setSettings", patch: { hardMaxWeekHours: ev.target.value } }], { summary: `Maximum par semaine : ${ev.target.value} h`, quiet: true }) }), h("span", { class: "small muted" }, "heures")) : null),
@@ -937,7 +949,7 @@
         if (!C.isISO(from) || !C.isISO(to) || to < from) { toast("Période invalide.", "err"); return false; }
         if (C.daysBetween(from, to) > 92) { toast("Trois mois maximum à la fois.", "err"); return false; }
         const employees = checks.map((c) => c.querySelector("input")).filter((i) => i.checked).map((i) => i.value);
-        this.previewGeneration({ from, to, employees, unavailable: extra, overwrite: overwrite.checked });
+        this.previewGeneration({ from, to, employees, unavailable: extra, overwrite: overwrite.checked, season });
       } }] });
   };
   App.previewGeneration = function (opts) {
@@ -948,7 +960,7 @@
     for (const m of weeks) {
       const exists = C.getWeek(s, m) && C.getWeek(s, m).shifts.some((x) => x.date >= opts.from && x.date <= opts.to);
       if (exists && !opts.overwrite) { results.push({ monday: m, skipped: true }); continue; }
-      const g = C.generateWeek(tmp, m, { employees: opts.employees, from: opts.from > m ? opts.from : m, to: opts.to < C.addDays(m, 6) ? opts.to : C.addDays(m, 6), unavailable: opts.unavailable, now: new Date().toISOString() });
+      const g = C.generateWeek(tmp, m, { employees: opts.employees, from: opts.from > m ? opts.from : m, to: opts.to < C.addDays(m, 6) ? opts.to : C.addDays(m, 6), unavailable: opts.unavailable, season: opts.season, now: new Date().toISOString() });
       if (exists) { g.week.status = "brouillon"; }
       tmp = { ...tmp, weeks: { ...tmp.weeks, [m]: g.week } };
       results.push({ monday: m, week: g.week, report: g.report, exists });

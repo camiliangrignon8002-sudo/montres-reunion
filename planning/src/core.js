@@ -345,7 +345,8 @@
   };
   function openingHours(state, zone, date) {
     const st = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
-    const season = seasonOf(date, { settings: st }), v = st[`hours${zone}_${season}`];
+    const wk = state.weeks && state.weeks[mondayOf(date)];
+    const season = wk && (wk.season === "ete" || wk.season === "hiver") ? wk.season : seasonOf(date, { settings: st }), v = st[`hours${zone}_${season}`];
     const m = v && /^(\d\d:\d\d)-(\d\d:\d\d)$/.exec(v);
     return m ? { s: m[1], e: m[2], season } : null;
   }
@@ -726,14 +727,26 @@
     const extra = opts.unavailable || []; // [{emp, date}] contraintes ponctuelles
     const existing = getWeek(state, monday);
     const keep = existing ? existing.shifts.filter((s) => s.date < from || s.date > to) : [];
-    const week = { week: monday, status: "brouillon", source: "généré", generatedAt: opts.now || null, shifts: keep.map((s) => ({ ...s, segs: s.segs.map((g) => ({ ...g })) })) };
+    const season = opts.season === "ete" || opts.season === "hiver" ? opts.season : seasonOf(monday, state);
+    const week = { week: monday, status: "brouillon", source: "généré", season, generatedAt: opts.now || null, shifts: keep.map((s) => ({ ...s, segs: s.segs.map((g) => ({ ...g })) })) };
+    const stG = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
+    // Horaires de la saison choisie : un poste qui déborde est décalé pour tenir dans l'ouverture du point de vente.
+    const fitSeason = (segs) => {
+      if (!stG.checkOpening || !segs.length || !segs.every((g) => isTime(g.s) && isTime(g.e))) return segs;
+      const hrs = (z) => { const m = /^(\d\d:\d\d)-(\d\d:\d\d)$/.exec(stG[`hours${z}_${season}`] || ""); return m ? [toMin(m[1]), toMin(m[2])] : null; };
+      const first = hrs(segs[0].z), last = hrs(segs[segs.length - 1].z);
+      const a = toMin(segs[0].s), b = toMin(segs[segs.length - 1].e);
+      let delta = 0;
+      if (last && b > last[1]) delta = last[1] - b; else if (first && a < first[0]) delta = first[0] - a;
+      return delta ? segs.map((g) => ({ ...g, s: fromMin(toMin(g.s) + delta), e: fromMin(toMin(g.e) + delta) })) : segs;
+    };
     const placed = [], notPlaced = [];
     for (const date of weekDates(monday)) {
       if (date < from || date > to) continue;
       for (const t of templateFor(state, date)) {
         const emp = empById(state, t.emp);
         const wz = emp && emp.rules && emp.rules.weekZone && allowedZones(emp).includes(emp.rules.weekZone) ? emp.rules.weekZone : null;
-        const segs = t.segs.map(({ s, e, z }) => ({ s, e, z: wz || z })); // zone imposée toute la semaine
+        const segs = fitSeason(t.segs.map(({ s, e, z }) => ({ s, e, z: wz || z }))); // zone imposée toute la semaine, horaires de la saison
         let reason = null;
         if (!emp) reason = "personne absente de l'équipe";
         else if (emp.active === false) reason = "employé désactivé";
@@ -1001,6 +1014,14 @@
           const delta = daysBetween(from, to);
           s.weeks[to] = { week: to, status: "brouillon", source: `copie du ${fmtDate(from, "num")}`, shifts: src.shifts.map((x) => ({ id: uid("c"), emp: x.emp, date: addDays(x.date, delta), segs: clone(x.segs) })) };
           markWeek(to);
+          break;
+        }
+        case "setWeekSeason": {
+          // Saison des horaires d'ouverture pour une semaine (été / hiver).
+          if (!dateOk(op.monday)) break;
+          const wk = s.weeks[op.monday]; if (!wk) { fail("Semaine introuvable."); break; }
+          if (op.season !== "ete" && op.season !== "hiver") { fail("Saison invalide."); break; }
+          wk.season = op.season; markWeek(op.monday);
           break;
         }
         case "setDismissed": {

@@ -523,3 +523,15 @@ test("horaires d'ouverture des points de vente (été / hiver)", () => {
   assert.equal(apply(s, [{ type: "setSettings", patch: { hoursZP_hiver: "5h30" } }]).ok, false);
   assert.ok(!C.findCandidates(s, W, [{ s: "18:00", e: "22:00", z: "ZP" }]).length);
 });
+
+test("saison choisie à la génération : postes décalés dans l'ouverture du point de vente", () => {
+  const s = withWeek1();
+  const W = "2026-12-07";
+  const hiver = C.generateWeek(s, W, { season: "hiver" }).week;
+  assert.equal(hiver.season, "hiver");
+  assert.ok(hiver.shifts.every((x) => x.segs.every((g) => g.z !== "ZP" || (g.s >= "05:30" && g.e <= "21:00"))));
+  const ete = C.generateWeek(s, W, { season: "ete" }).week;
+  assert.equal(ete.season, "ete");
+  const r = apply(s, [{ type: "putWeek", monday: W, week: hiver }, { type: "setWeekSeason", monday: W, season: "ete" }], { allowErrors: true });
+  assert.equal(r.state.weeks[W].season, "ete");
+});
