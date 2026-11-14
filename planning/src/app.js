@@ -521,6 +521,7 @@
         h("div", { class: "stack", style: { gap: "4px" } }, h("h3", {}, "Informations à confirmer"),
           h("p", { class: "small muted" }, `${pending ? `Zones à confirmer ou inconnues : ${s.employees.filter((e) => e.active !== false && !e.onLeave && (Object.values(e.zones || {}).includes("incertain") || !Object.keys(e.zones || {}).length)).map((e) => e.name).join(", ")}. ` : ""}${!s.settings.rulesConfirmed ? "Les règles de repos et de durée sont des valeurs par défaut." : ""}`)),
         h("div", { class: "row" }, btn("Voir les questions", () => this.go("import"), "sm"), btn("Zones et règles", () => this.go("zones"), "sm")))) : null,
+      this.paxCard(today),
       h("div", { class: "cards" },
         h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", {}, "Aujourd'hui"), h("span", { class: "chip" }, `${todayShifts.length} personne(s)`)),
           !w ? h("div", { class: "stack" }, h("p", { class: "muted" }, "Aucun planning cette semaine."), btn("Générer la semaine", () => this.openGenerate(), "primary")) :
@@ -609,7 +610,7 @@
           const need = (s.settings.staffing || []).filter((r) => d >= r.from && d <= r.to);
           return h("th", { class: (d === today ? "today" : "") + (canEdit ? " day-click" : ""), title: canEdit ? "Toucher pour fixer le nombre de personnes ce jour-là" : null, onClick: canEdit ? () => this.openDayStaffing(d) : null },
             h("span", {}, C.DAYS[C.dow(d)]), h("span", { class: "d" }, C.fmtDate(d, "short")),
-            (s.settings.passengers || {})[d] != null ? h("span", { class: "need pax", title: `${s.settings.passengers[d]} passagers prévus` }, `✈︎ ${s.settings.passengers[d]}`) : null,
+            (() => { const p = C.paxOf(s, d); return p ? h("span", { class: "need pax", title: p.slots ? `Passagers attendus : ${p.m} le matin (05:30–13:00), ${p.a} entre 13:00 et 18:00, ${p.s} le soir (après 18:00)` : `${p.total} passagers attendus` }, `✈︎ ${p.total.toLocaleString("fr-FR")}`) : null; })(),
             need.length ? h("span", { class: "need", title: need.map((r) => `${r.s}–${r.e} ${r.zone || "ZP+ZR"} : ${r.min ?? "?"}–${r.max ?? "?"}`).join("\n") }, `👥 ${need.length}`) : null,
             h("span", { class: "cnt" }, s.zones.filter((z) => byZone[z.id]).map((z) => h("span", { class: `blk ${zoneStyle(s, z.id).cls}`, style: { "--z": z.color, padding: "0 5px" }, title: `${byZone[z.id]} en ${z.name}` }, h("small", {}, `${z.short} ${byZone[z.id]}`)))));
         }),
@@ -973,11 +974,10 @@
     };
     // Passagers prévus pour chaque jour de la semaine affichée.
     const wkDays = C.weekDates(C.mondayOf(this.ui.monday));
-    const paxInputs = wkDays.map((d) => h("label", { class: "f" }, `${C.DAYS_SHORT[C.dow(d)]} ${C.fmtDate(d, "short")}`, h("input", { type: "number", class: "input", min: "0", max: "99999", step: "10", placeholder: "—", value: (s.settings.passengers || {})[d] ?? "", "data-date": d,
-      onChange: async (ev) => { const pax = { ...(this.state.settings.passengers || {}) }; if (ev.target.value === "") delete pax[d]; else pax[d] = Number(ev.target.value); await this.commit([{ type: "setSettings", patch: { passengers: pax } }], { quiet: true, summary: `Passagers ${C.fmtDate(d, "short")} : ${ev.target.value || "—"}` }); } })));
-    const paxSection = h("section", { class: "card flat", id: "gen-pax" }, h("h3", {}, "Critère : passagers prévus"),
+    const paxInputs = wkDays.map((d) => h("div", { class: "pax-day" }, h("b", { class: "small" }, `${C.DAYS[C.dow(d)]} ${C.fmtDate(d, "short")}`), this.paxEditor(d)));
+    const paxSection = h("section", { class: "card flat", id: "gen-pax" }, h("h3", {}, "Critère : passagers attendus"),
       h("p", { class: "small muted" }, `Au-delà de ${s.settings.paxThreshold} passagers : ${s.settings.paxStaff} personnes en ${s.settings.paxZone} le matin et le soir ; jusqu'à ${s.settings.paxCloseRelief}, une personne peut partir pour la fermeture. Semaine du ${C.fmtWeek(wkDays[0])}.`),
-      h("div", { class: "form-grid pax-grid" }, paxInputs));
+      h("div", { class: "stack", style: { gap: "10px" } }, paxInputs));
     const rulesLink = h("section", { class: "card flat" }, h("h3", {}, "Autres critères"),
       h("p", { class: "small muted" }, "Règles par personne (zone, matin/soir, horaires liés, incompatibilités, jours de bureau…) : fiche de chaque personne dans « Équipe ». Droit du travail, horaires d'ouverture, 42 h : « Zones et règles »."),
       h("div", { class: "row" }, btn("Équipe", () => { this._dlgClose && this._dlgClose(); this.go("team"); }, "sm"), btn("Zones et règles", () => { this._dlgClose && this._dlgClose(); this.go("zones"); }, "sm")));
@@ -1245,6 +1245,41 @@
     return r;
   };
 
+  // Accueil : passagers attendus aujourd'hui (total + 3 créneaux) et les jours suivants.
+  App.paxCard = function (today) {
+    const s = this.state, p = C.paxOf(s, today), slots = C.paxSlots(s, today), st = s.settings;
+    const next = Array.from({ length: 6 }, (_, i) => C.addDays(today, i + 1)).map((d) => ({ d, p: C.paxOf(s, d) })).filter((x) => x.p);
+    if (!p && !next.length) return null;
+    const fmt = (n) => (n == null ? "—" : n.toLocaleString("fr-FR"));
+    const hot = (n) => n != null && n > st.paxThreshold;
+    return h("section", { class: "card pax-card" },
+      h("div", { class: "row between" }, h("h2", {}, "✈︎ Passagers attendus aujourd'hui"), p ? h("span", { class: "pax-total" }, fmt(p.total)) : h("span", { class: "muted" }, "non renseigné")),
+      p && p.slots ? h("div", { class: "pax-slots" }, slots.map((sl) => { const n = p[sl.k]; return h("div", { class: "pax-slot" + (hot(n) && sl.k !== "a" ? " hot" : "") },
+        h("span", { class: "small muted" }, `${sl.label} · ${sl.s} – ${sl.e === "fermeture" ? "fermeture" : sl.e}`), h("b", {}, fmt(n)),
+        hot(n) && sl.k !== "a" ? h("span", { class: "tiny" }, `${st.paxStaff} en ${st.paxZone}`) : null); })) : null,
+      next.length ? h("div", { class: "pax-next" }, next.map((x) => h("button", { type: "button", class: "pax-chip", title: x.p.slots ? `Matin ${fmt(x.p.m)} · entre-deux ${fmt(x.p.a)} · soir ${fmt(x.p.s)}` : "", onClick: () => { this.ui.monday = C.mondayOf(x.d); this.go("week"); } },
+        h("span", { class: "tiny muted" }, C.fmtDate(x.d, "short")), h("b", {}, fmt(x.p.total))))) : null);
+  };
+
+  // Passagers d'un jour : 3 créneaux (matin, entre-deux, soir), modifiables.
+  App.paxEditor = function (date, onSaved) {
+    const p = C.paxOf(this.state, date), slots = C.paxSlots(this.state, date);
+    const vals = p ? [p.slots ? p.m : p.total, p.a ?? 0, p.slots ? p.s : 0] : ["", "", ""];
+    const ins = slots.map((sl, i) => h("input", { type: "number", class: "input", min: "0", max: "99999", step: "10", placeholder: "—", value: p ? vals[i] : "", "aria-label": `Passagers ${sl.label}` }));
+    const total = h("b", {});
+    const sum = () => { total.textContent = ins.some((x) => x.value !== "") ? `${ins.reduce((a, x) => a + (Number(x.value) || 0), 0)} passagers` : "—"; };
+    const save = async () => {
+      sum();
+      const pax = { ...(this.state.settings.passengers || {}) };
+      if (ins.every((x) => x.value === "")) delete pax[date]; else pax[date] = ins.map((x) => Number(x.value) || 0);
+      const r = await this.commit([{ type: "setSettings", patch: { passengers: pax } }], { quiet: true, summary: `Passagers ${C.fmtDate(date, "short")} : ${ins.map((x) => x.value || 0).join(" / ")}` });
+      if (r.ok && onSaved) onSaved();
+    };
+    ins.forEach((x) => x.addEventListener("change", save));
+    sum();
+    return h("div", { class: "pax-edit" }, slots.map((sl, i) => h("label", { class: "f" }, `${sl.label} (${sl.s}–${sl.e === "fermeture" ? "ferm." : sl.e})`, ins[i])), h("div", { class: "f" }, h("span", {}, "Total"), total));
+  };
+
   // Toucher un jour : fixer le nombre de personnes voulu sur des plages horaires de ce jour.
   App.openDayStaffing = function (date) {
     const box = h("div", { class: "stack", style: { gap: "6px" } });
@@ -1269,21 +1304,14 @@
       mn.focus();
     };
     const st = this.state.settings;
-    const paxIn = h("input", { type: "number", class: "input", id: "ds-pax", min: "0", max: "99999", step: "10", placeholder: "ex. 1750", value: (st.passengers || {})[date] ?? "", style: { width: "140px" } });
     const paxInfo = h("p", { class: "small muted" });
     const drawPax = () => {
       const rules = C.paxRules(this.state, date);
-      paxInfo.textContent = rules.length ? `Plus de ${st.paxThreshold} passagers : ${rules.map((r) => `${r.min} en ${r.zone} de ${r.s} à ${r.e}`).join(", ")}.` : `Au-delà de ${st.paxThreshold} passagers : ${st.paxStaff} personnes en ${st.paxZone} le matin et le soir (une peut partir pour la fermeture jusqu'à ${st.paxCloseRelief} passagers).`;
+      paxInfo.textContent = rules.length ? `Plus de ${st.paxThreshold} passagers sur le créneau : ${rules.map((r) => `${r.min} en ${r.zone} de ${r.s} à ${r.e}`).join(", ")}.` : `Au-delà de ${st.paxThreshold} passagers : ${st.paxStaff} personnes en ${st.paxZone} le matin et le soir (une peut partir pour la fermeture jusqu'à ${st.paxCloseRelief} passagers).`;
     };
-    paxIn.addEventListener("change", async () => {
-      const pax = { ...(this.state.settings.passengers || {}) };
-      if (paxIn.value === "") delete pax[date]; else pax[date] = Number(paxIn.value);
-      const r = await this.commit([{ type: "setSettings", patch: { passengers: pax } }], { quiet: true, summary: `Passagers ${C.fmtDate(date, "short")} : ${paxIn.value || "—"}` });
-      if (r.ok) drawPax();
-    });
     drawPax();
     openDialog({ title: `Nombre de personnes · ${C.fmtDate(date, "day")}`, body: h("div", { class: "stack" },
-      h("div", { class: "row" }, h("label", { class: "f" }, "✈︎ Passagers prévus ce jour-là", paxIn)), paxInfo,
+      h("h3", {}, "✈︎ Passagers attendus"), this.paxEditor(date, () => drawPax()), paxInfo,
       box,
       h("h3", {}, "Ajouter"),
       h("div", { class: "row" }, h("span", { class: "small muted" }, "Raccourcis :"), btn("🌅 Ouverture", () => preset("open"), "sm"), btn("🌙 Fermeture", () => preset("close"), "sm")),
@@ -2087,6 +2115,7 @@
         if (!e || !e.onLeave || !(from > e.onLeave.since)) continue;
         ops.push({ type: "addAbsence", absence: { emp: id, type: e.onLeave.type || "vacances", from: e.onLeave.since, to: C.addDays(from, -1), note: "retour d'après le planning papier" } }, { type: "updateEmployee", id, patch: { onLeave: null } });
       }
+      if (u.paxImport) ops.push({ type: "setSettings", patch: { passengers: { ...(this.state.settings.passengers || {}), ...u.paxImport } } });
       if (u.addZone && !C.zoneById(this.state, u.addZone.id)) ops.push({ type: "addZone", zone: u.addZone });
       if (u.patchLinks) {
         const cur = this.state.settings.links || [];

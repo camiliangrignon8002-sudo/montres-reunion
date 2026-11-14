@@ -56,7 +56,7 @@
     rulesConfirmed: false,
     appliedUpdates: [],
     passengers: {}, // passagers prévus par jour : { "2026-11-23": 1750 }
-    paxThreshold: 1700, paxZone: "ZR", paxStaff: 3, paxCloseRelief: 1800, paxMorningEnd: "12:00", paxEveningStart: "17:00",
+    paxThreshold: 1700, paxZone: "ZR", paxStaff: 3, paxCloseRelief: 1800, paxMorningEnd: "13:00", paxEveningStart: "18:00",
     staffing: [], // effectif min/max : [{ id, from, to, s, e, zone, min, max }]
     links: [], // personnes liées : [{ id, emps: [...], sameHours, sameZone, sameWeekends }]
   };
@@ -380,16 +380,31 @@
   }
   // Passagers : au-delà du seuil, effectif renforcé dans la zone le matin et le soir ; à la fermeture,
   // une personne peut partir si les passagers ne dépassent pas le second seuil.
+  // Passagers attendus un jour : { m: matin, a: entre-deux, s: soir, total } (ou total seul si saisi à la main).
+  function paxOf(state, date) {
+    const v = ((state.settings || {}).passengers || {})[date];
+    if (v == null) return null;
+    if (Array.isArray(v)) return { m: v[0], a: v[1], s: v[2], total: v[0] + v[1] + v[2], slots: true };
+    return { m: v, a: null, s: v, total: v, slots: false };
+  }
+  // Créneaux de passagers : matin (ouverture → 13:00), entre-deux (13:00 → 18:00), soir (18:00 → fermeture).
+  function paxSlots(state, date) {
+    const st = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
+    return [{ k: "m", label: "Matin", s: "05:30", e: st.paxMorningEnd }, { k: "a", label: "Entre-deux", s: st.paxMorningEnd, e: st.paxEveningStart }, { k: "s", label: "Soir", s: st.paxEveningStart, e: "fermeture" }];
+  }
   function paxRules(state, date) {
     const st = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
-    const n = (st.passengers || {})[date];
-    if (n == null || n <= st.paxThreshold) return [];
+    const p = paxOf(state, date);
+    if (!p) return [];
     const oh = openingHours(state, st.paxZone, date);
     if (!oh) return [];
-    const close = toMin(oh.e), lastHour = fromMin(close - 60), base = { from: date, to: date, zone: st.paxZone, max: null, pax: n };
-    const out = [{ ...base, id: `pax-m-${date}`, s: oh.s, e: st.paxMorningEnd, min: st.paxStaff }];
-    if (n > st.paxCloseRelief) out.push({ ...base, id: `pax-s-${date}`, s: st.paxEveningStart, e: oh.e, min: st.paxStaff });
-    else out.push({ ...base, id: `pax-s-${date}`, s: st.paxEveningStart, e: lastHour, min: st.paxStaff }, { ...base, id: `pax-f-${date}`, s: lastHour, e: oh.e, min: Math.max(1, st.paxStaff - 1) });
+    const close = toMin(oh.e), lastHour = fromMin(close - 60), base = { from: date, to: date, zone: st.paxZone, max: null };
+    const out = [];
+    if (p.m > st.paxThreshold) out.push({ ...base, pax: p.m, id: `pax-m-${date}`, s: oh.s, e: st.paxMorningEnd, min: st.paxStaff });
+    if (p.s > st.paxThreshold) {
+      if (p.s > st.paxCloseRelief) out.push({ ...base, pax: p.s, id: `pax-s-${date}`, s: st.paxEveningStart, e: oh.e, min: st.paxStaff });
+      else out.push({ ...base, pax: p.s, id: `pax-s-${date}`, s: st.paxEveningStart, e: lastHour, min: st.paxStaff }, { ...base, pax: p.s, id: `pax-f-${date}`, s: lastHour, e: oh.e, min: Math.max(1, st.paxStaff - 1) });
+    }
     return out.filter((r) => toMin(r.e) > toMin(r.s));
   }
   // Incompatibilités : deux personnes qui ne travaillent jamais dans la même zone en même temps (dans les deux sens).
@@ -662,7 +677,7 @@
     for (const r of [...(st.staffing || []), ...weekDates(monday).flatMap((d) => paxRules(state, d))]) for (const d of weekDates(monday)) {
       if (d < r.from || d > r.to || !w.shifts.some((x) => x.date === d)) continue;
       const g = staffingGaps(state, w.shifts, d, r), where = r.zone ? `en ${r.zone}` : "au total";
-      if (g.low.length) add("alerte", "STAFF_MIN", null, d, `${fmtDate(d, "day")} : ${g.low.map((x) => `${x.n} personne(s) ${where} de ${x.s} à ${x.e}`).join(", ")}, il en faut au moins ${r.min} (${r.s}–${r.e}${r.pax != null ? `, ${r.pax} passagers prévus` : ""}).`);
+      if (g.low.length) add("alerte", "STAFF_MIN", null, d, `${fmtDate(d, "day")} : ${g.low.map((x) => `${x.n} personne(s) ${where} de ${x.s} à ${x.e}`).join(", ")}, il en faut au moins ${r.min} (${r.s}–${r.e}${r.pax != null ? `, ${r.pax} passagers attendus sur ce créneau` : ""}).`);
       if (g.high.length) add("alerte", "STAFF_MAX", null, d, `${fmtDate(d, "day")} : ${g.high.map((x) => `${x.n} personnes ${where} de ${x.s} à ${x.e}`).join(", ")}, ${r.max} au maximum (${r.s}–${r.e}).`);
     }
     // Incompatibilités : jamais dans la même zone au même moment.
@@ -1293,8 +1308,12 @@
             if (k === "passengers") {
               if (!v || typeof v !== "object" || Array.isArray(v)) { fail("Passagers invalides."); continue; }
               const out = {};
-              for (const [d, n] of Object.entries(v)) { if (!isISO(d)) continue; if (n === "" || n == null) continue; const x = Math.round(Number(n)); if (!(x >= 0 && x < 100000)) { fail("Nombre de passagers invalide."); break; } out[d] = x; }
-              s.settings.passengers = Object.fromEntries(Object.entries(out).sort().slice(-800));
+              for (const [d, n] of Object.entries(v)) {
+                if (!isISO(d) || n === "" || n == null) continue;
+                if (Array.isArray(n)) { const t = n.slice(0, 3).map((x) => Math.round(Number(x) || 0)); if (t.length !== 3 || t.some((x) => !(x >= 0 && x < 100000))) { fail("Passagers par créneau invalides."); break; } out[d] = t; continue; }
+                const x = Math.round(Number(n)); if (!(x >= 0 && x < 100000)) { fail("Nombre de passagers invalide."); break; } out[d] = x;
+              }
+              s.settings.passengers = Object.fromEntries(Object.entries(out).sort().slice(-1000));
               continue;
             }
             if (k === "staffing") {
@@ -1470,7 +1489,7 @@
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, staffingGaps, paxRules, incompatible, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, staffingGaps, paxRules, paxOf, paxSlots, incompatible, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };
