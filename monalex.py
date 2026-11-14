@@ -31,6 +31,8 @@ except ImportError:  # pragma: no cover
 ROOT = Path(__file__).parent
 OUT = ROOT / "docs" / "monalex" / "annonces.json"
 VUS = ROOT / "data" / "monalex_vus.json"     # id -> date de première apparition
+CATALOGUE = ROOT / "docs" / "monalex" / "montres.json"
+PHOTOS = ROOT / "docs" / "monalex" / "photos.json"   # photos libres (Wikimedia Commons) des références du catalogue
 PHOTO_MIN = 1200
 PAUSE = 1.2                                   # secondes entre deux pages d'un même site
 UA = "Mozilla/5.0 (compatible; MonalexBot/1.0; recherche de montres)"
@@ -55,6 +57,21 @@ BOUTIQUES = {
     "luxuryhut":   dict(nom="The Luxury Hut", site="https://www.theluxuryhut.com", ville="Londres", pays="Royaume-Uni", code_pays="GB", adresse="Hatton Garden", cp="EC1N", lat=51.5191, lng=-0.1091, devise="GBP"),
     "maunder":     dict(nom="Maunder Watches", site="https://www.maunderwatches.co.uk", ville="Londres", pays="Royaume-Uni", code_pays="GB", adresse="Burlington Arcade", cp="W1J", lat=51.5091, lng=-0.1405, devise="GBP"),
     "globalwatch": dict(nom="Global Watch Shop", site="https://www.globalwatchshop.co.uk", ville="Londres", pays="Royaume-Uni", code_pays="GB", adresse="London Silver Vaults", cp="WC2A", lat=51.5171, lng=-0.1112, devise="GBP"),
+    # États-Unis
+    "beckertime":  dict(nom="BeckerTime", site="https://beckertime.com", ville="Keller (Texas)", pays="États-Unis", code_pays="US", adresse="1540 Keller Parkway, Suite 108", cp="TX 76248", lat=32.9346, lng=-97.2297, devise="USD"),
+    "watchchest":  dict(nom="Watch Chest", site="https://watchchest.com", ville="Dallas", pays="États-Unis", code_pays="US", adresse="5001 LBJ Freeway, Suite 1010", cp="TX 75244", lat=32.9227, lng=-96.8178, devise="USD"),
+    "grandcaliber": dict(nom="Grand Caliber", site="https://grandcaliber.com", ville="Dallas", pays="États-Unis", code_pays="US", adresse="McKinney Avenue, Uptown", cp="TX 75204", lat=32.8010, lng=-96.8010, devise="USD", approx=True),
+    "swisswatchexpo": dict(nom="SwissWatchExpo", site="https://www.swisswatchexpo.com", ville="Atlanta", pays="États-Unis", code_pays="US", adresse="315 East Paces Ferry Rd NE", cp="GA 30305", lat=33.8396, lng=-84.3800, devise="USD"),
+    "watchguys":   dict(nom="WatchGuys", site="https://www.watchguys.com", ville="Los Angeles", pays="États-Unis", code_pays="US", adresse="613 S. Hill St.", cp="CA 90014", lat=34.0464, lng=-118.2520, devise="USD"),
+    "mywatchllc":  dict(nom="My Watch LLC", site="https://mywatchllc.com", ville="Oak Park (Michigan)", pays="États-Unis", code_pays="US", adresse="Oak Park (sur rendez-vous)", cp="MI 48237", lat=42.4595, lng=-83.1827, devise="USD", approx=True),
+    "kingjewelers": dict(nom="King Jewelers", site="https://kingjewelers.com", ville="Nashville", pays="États-Unis", code_pays="US", adresse="4121 Hillsboro Pike", cp="TN 37215", lat=36.1030, lng=-86.8160, devise="USD"),
+    # Moyen-Orient
+    "timepiece360": dict(nom="Timepiece360", site="https://timepiece360.com", ville="Dubaï", pays="Émirats arabes unis", code_pays="AE", adresse="Al Quoz Industrial Area", cp="", lat=25.1350, lng=55.2300, devise="AED", approx=True),
+    "watchmaestro": dict(nom="WatchMaestro", site="https://watchmaestro.com", ville="Dubaï", pays="Émirats arabes unis", code_pays="AE", adresse="Dubaï", cp="", lat=25.2048, lng=55.2708, devise="AED", approx=True, pages=["https://watchmaestro.com/rolex/"]),
+    "thestore":    dict(nom="The Store Dubai", site="https://www.thestore.ae", ville="Dubaï", pays="Émirats arabes unis", code_pays="AE", adresse="Dubaï", cp="", lat=25.2100, lng=55.2750, devise="AED", approx=True),
+    # Asie
+    "watchexchange-sg": dict(nom="Watch Exchange", site="https://watchexchange.sg", ville="Singapour", pays="Singapour", code_pays="SG", adresse="Singapour", cp="", lat=1.3050, lng=103.8320, devise="SGD", approx=True, pages=["https://watchexchange.sg/watches/rolex/"]),
+    "hjluxury":    dict(nom="HJ Luxury", site="https://www.hjwatch.com", ville="Singapour", pays="Singapour", code_pays="SG", adresse="14 Scotts Road #04-134, Far East Plaza", cp="228213", lat=1.3071, lng=103.8329, devise="SGD"),
 }
 
 COLLECTIONS = [("cosmograph daytona", "Cosmograph Daytona"), ("daytona", "Cosmograph Daytona"), ("submariner", "Submariner"),
@@ -80,9 +97,18 @@ def texte(h):
     return re.sub(r"[ \t]+", " ", re.sub(r"\n\s*\n+", "\n", h)).strip()
 
 
-def est_rolex(*champs):
-    t = norm(" ".join(str(c) for c in champs))
-    return "rolex" in t and not any(norm(x) in t for x in PAS_UNE_MONTRE)
+ACCESSOIRE = re.compile(r"^(bracelet|strap|band|boucle|buckle|ecrin|coffret|box|pochette)\b|\b(bracelet (cuir|caoutchouc|nato|pour|en )|rubber ?b|caoutchouc|nato|strap|watch band|bracelet seul|pour rolex|for rolex|compatible|aftermarket|boucle ardillon|deployant seul)\b")
+PRIX_MIN = {"EUR": 1500, "CHF": 1500, "GBP": 1300, "USD": 1600, "AED": 6000, "SGD": 2200, "HKD": 12000, "JPY": 250000}
+
+
+def est_rolex(titre, marque="", prix=None, devise="EUR"):
+    """Une vraie montre Rolex : « Rolex » dans le titre ou la marque, pas un accessoire, et un prix plausible."""
+    t, m = norm(titre), norm(marque)
+    if "rolex" not in t and m.strip() != "rolex":
+        return False
+    if ACCESSOIRE.search(t) or any(norm(x) in t for x in PAS_UNE_MONTRE):
+        return False
+    return not prix or prix >= PRIX_MIN.get(devise, 1500)
 
 
 def details(titre, desc):
@@ -140,12 +166,12 @@ def shopify(site, b):
         if not prods:
             break
         for p in prods:
-            if not est_rolex(p.get("title"), p.get("vendor"), " ".join(p.get("tags") or [])):
-                continue
             variants = p.get("variants") or [{}]
             if not any(v.get("available", True) for v in variants):
                 continue  # vendue
             prix = float(variants[0].get("price") or 0) or None
+            if not est_rolex(p.get("title"), p.get("vendor"), prix, b["devise"]):
+                continue
             ph = photos_nettes([(i.get("src"), i.get("width")) for i in p.get("images") or []])
             out.append(dict(titre=p.get("title", ""), url=f"{site.base}/products/{p.get('handle')}", prix=prix, devise=b["devise"],
                             description=texte(p.get("body_html")), photos=ph))
@@ -163,10 +189,12 @@ def woocommerce(site, b):
         if not prods:
             break
         for p in prods:
-            if not p.get("is_in_stock", True) or not est_rolex(p.get("name"), " ".join(c.get("name", "") for c in p.get("categories") or [])):
+            if not p.get("is_in_stock", True):
                 continue
             pr = p.get("prices") or {}
             prix = int(pr["price"]) / 10 ** int(pr.get("currency_minor_unit", 2)) if pr.get("price") else None
+            if not est_rolex(html.unescape(p.get("name", "")), "", prix, pr.get("currency_code") or b["devise"]):
+                continue
             imgs = []
             for i in p.get("images") or []:
                 best = max(((int(w), u) for u, w in re.findall(r"(\S+)\s+(\d+)w", i.get("srcset") or "")), default=None)
@@ -208,7 +236,11 @@ def jsonld(site, b):
                 if "OutOfStock" in str(offre.get("availability", "")) or "SoldOut" in str(offre.get("availability", "")):
                     continue
                 marque = p.get("brand", {}).get("name", "") if isinstance(p.get("brand"), dict) else p.get("brand", "")
-                if not est_rolex(p.get("name"), marque):
+                try:
+                    prix = float(str(offre.get("price") or "").replace(",", ".")) or None
+                except ValueError:
+                    prix = None
+                if not est_rolex(html.unescape(p.get("name", "")), marque, prix, offre.get("priceCurrency") or b["devise"]):
                     continue
                 imgs = p.get("image") or []
                 imgs = [imgs] if isinstance(imgs, (str, dict)) else imgs
@@ -235,6 +267,57 @@ def relever(bid, b):
         if res is not None and (res or nom == "fiches produit"):
             return res, nom
     return [], "site non reconnu"
+
+
+# ---------------------------------------------------------------- photos libres du catalogue (Wikimedia Commons)
+LICENCES_LIBRES = ("cc0", "public domain", "domaine public", "pd", "cc by", "cc-by")
+
+
+def commons(requete, limite=20):
+    r = requests.get("https://commons.wikimedia.org/w/api.php", timeout=30, headers={"User-Agent": "MonalexBot/1.0 (photos de montres)"}, **IMPERSONATE,
+                     params=dict(action="query", format="json", generator="search", gsrsearch=requete, gsrnamespace=6, gsrlimit=limite,
+                                 prop="imageinfo", iiprop="url|size|mime|extmetadata", iiurlwidth=1600))
+    pages = (r.json().get("query") or {}).get("pages") or {}
+    out = []
+    for p in sorted(pages.values(), key=lambda p: p.get("index", 0)):
+        ii = (p.get("imageinfo") or [{}])[0]
+        meta = ii.get("extmetadata") or {}
+        lic = texte((meta.get("LicenseShortName") or {}).get("value", ""))
+        if ii.get("mime") not in ("image/jpeg", "image/png", "image/webp") or (ii.get("width") or 0) < PHOTO_MIN:
+            continue
+        if not any(norm(lic).startswith(x) for x in LICENCES_LIBRES) or re.search(r"\bnc\b|\bnd\b", norm(lic)):
+            continue
+        out.append(dict(titre=p.get("title", ""), src=ii.get("thumburl") or ii.get("url"), w=min(ii.get("width"), 1600),
+                        auteur=texte((meta.get("Artist") or {}).get("value", ""))[:120] or "Auteur sur Wikimedia Commons",
+                        licence=lic, page=ii.get("descriptionurl")))
+    return out
+
+
+def photos_catalogue():
+    cat = json.loads(CATALOGUE.read_text())["montres"]
+    res, utilisees = {}, set()
+    for m in cat:
+        ref, mots = m["reference"], [w for w in norm(m["modele"]).split() if len(w) > 2 and w not in ("date", "rolex")]
+        trouvees = []
+        for q in (f"Rolex {ref}", f"Rolex {m['modele']}"):
+            try:
+                cand = commons(q)
+            except Exception as e:
+                print(f"  Commons {q} : {e}", file=sys.stderr)
+                cand = []
+            for c in cand:
+                t = norm(c["titre"])
+                bon = norm(ref) in t if q.endswith(ref) else ("rolex" in t and all(w in t for w in mots))
+                if bon and c["src"] not in utilisees and c["src"] not in [x["src"] for x in trouvees]:
+                    trouvees.append(c)
+            if len(trouvees) >= 3:
+                break
+            time.sleep(PAUSE)
+        trouvees = trouvees[:6]
+        utilisees.update(x["src"] for x in trouvees)
+        res[m["id"]] = trouvees
+        print(f"  photos {ref} : {len(trouvees)}")
+    PHOTOS.write_text(json.dumps(dict(mise_a_jour=datetime.now(timezone.utc).isoformat(timespec="minutes"), photos=res), ensure_ascii=False, indent=1))
 
 
 def main():
@@ -270,3 +353,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # photos libres du catalogue : une fois par jour suffit (au passage de minuit, heure de Paris environ)
+    if os.environ.get("PHOTOS") == "1" or not PHOTOS.exists() or datetime.now(timezone.utc).hour == 22:
+        try:
+            photos_catalogue()
+        except Exception as e:
+            print(f"Photos du catalogue : {e}", file=sys.stderr)

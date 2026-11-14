@@ -79,6 +79,15 @@ const ZONES = [
   { id: "europe", nom: "+ Europe", sous: "Toute l'Europe", test: c => EUROPE.has(c) },
   { id: "monde", nom: "Monde entier", sous: "Partout dans le monde", test: () => true },
 ];
+const REGIONS = [
+  ["europe", "Europe", c => EUROPE.has(c)],
+  ["ameriques", "Amériques", c => /^(US|CA|MX|BR|AR|CL|CO|PE|PA|UY|DO|PR|BS|KY)$/.test(c)],
+  ["moyen-orient", "Moyen-Orient", c => /^(AE|QA|KW|SA|BH|OM|LB|JO|IL|TR)$/.test(c)],
+  ["asie", "Asie", c => /^(HK|SG|JP|CN|TW|KR|TH|MY|ID|PH|VN|IN|MO)$/.test(c)],
+  ["oceanie", "Océanie", c => /^(AU|NZ)$/.test(c)],
+  ["afrique", "Afrique", c => /^(ZA|MA|EG|NG|KE|MU|TN|SN|CI)$/.test(c)],
+];
+const regionOk = (c, region) => !region || (REGIONS.find(r => r[0] === region) || [, , () => true])[2](c);
 const ZONE_NOM = { monaco: "Monaco", france: "Monaco et France", europe: "Europe", monde: "Monde entier" };
 function km(a, b) {
   const R = 6371, t = x => x * Math.PI / 180;
@@ -90,9 +99,10 @@ const fmtKm = d => d < 1 ? "moins de 1 km" : d < 10 ? `${d.toFixed(1).replace(".
 
 /* ====================================================================== état */
 let DATA = { vendeurs: {}, montres: [] };
+let PHOTOS = { photos: {} };
 let ALL = [], VEND = [], DET = [], DETDATA = { detaillants: [] }, ANNDATA = { annonces: [], boutiques: {} };
 const S = {
-  zone: store.get("rm.zone", "monaco"), coll: "", etat: "", q: "", sort: "coll", view: "list",
+  zone: store.get("rm.zone", "monaco"), region: "", coll: "", etat: "", q: "", sort: "coll", view: "list",
   f: emptyF(), origin: { ...CONFIG.origine }, near: false, inApp: false, lastLoad: 0,
 };
 function emptyF() { return { prixMax: 0, source: [], colls: [], couleur: [], materiau: [], lunette: [], bracelet: [], diametre: [], complications: [], etat: [], etancheiteMin: 0, entretien: [], condition: [], vendeur: [], set: false, origine: false, enLigne: false }; }
@@ -138,7 +148,7 @@ function prepare() {
   const byId = Object.fromEntries(VEND.map(v => [v.id, v]));
   // boutiques indépendantes (annonces relevées sur leurs sites)
   for (const [id, b] of Object.entries(ANNDATA.boutiques || {})) { const v = { id, ...b, type: "Boutique", boutique: true, dist: km(S.origin, b) }; VEND.push(v); byId[id] = v; }
-  ALL = DATA.montres.map(m => ({ ...m, source: "Catalogue officiel", v: byId[m.vendeur] || null, mat: materiauGroupe(m), ent: entretienGroupe(m) }));
+  ALL = DATA.montres.map(m => ({ ...m, photos: (PHOTOS.photos || {})[m.id] || m.photos || [], source: "Catalogue officiel", v: byId[m.vendeur] || null, mat: materiauGroupe(m), ent: entretienGroupe(m) }));
   const TAUX = { EUR: 1, CHF: 1.06, GBP: 1.17, USD: .92, AED: .25, JPY: .0061, HKD: .118, SGD: .69 };  // conversion indicative pour trier et filtrer
   for (const a of ANNDATA.annonces || []) {
     if (!byId[a.boutique]) continue;
@@ -168,7 +178,7 @@ const vendeur = id => VEND.find(x => x.id === id) || DET.find(x => x.id === id);
 const detaillant = id => DET.find(x => x.id === id);
 
 /* ====================================================================== filtres et tri */
-function crit() { return { zone: S.zone, coll: S.coll, etat: S.etat, q: S.q, f: JSON.parse(JSON.stringify(S.f)) }; }
+function crit() { return { zone: S.zone, region: S.zone === "monde" ? S.region : "", coll: S.coll, etat: S.etat, q: S.q, f: JSON.parse(JSON.stringify(S.f)) }; }
 function filtered(ignoreZone = false) {
   const c = crit(); if (ignoreZone) c.zone = "monde";
   return filterWith(c).sort(sorter(S.sort));
@@ -176,11 +186,11 @@ function filtered(ignoreZone = false) {
 function etatDe(m) { if (m.annonce) return m.etat === "Neuf" ? "Neuve" : "Occasion (boutique)"; return m.etat === "Neuf" ? "Neuve" : /pre-owned/i.test(m.v?.type || m.source_type || "") ? `${m.condition} (Pre-Owned)` : m.condition; }
 function filterWith(c) {
   const z = ZONES.find(x => x.id === c.zone) || ZONES[3];
-  const zoneDet = DET.some(d => z.test(d.code_pays));
+  const zoneDet = DET.some(d => z.test(d.code_pays) && regionOk(d.code_pays, c.region));
   const q = norm(c.q).trim().split(/\s+/).filter(Boolean), F = { ...emptyF(), ...c.f };
   const any = (arr, val) => !arr.length || arr.includes(val);
   return ALL.filter(m => {
-    if (m.vendeur ? !z.test(m.v.code_pays) : !zoneDet) return false;
+    if (m.vendeur ? !(z.test(m.v.code_pays) && regionOk(m.v.code_pays, c.region)) : !zoneDet) return false;
     if (c.coll && m.collection !== c.coll) return false;
     if (c.etat && m.etat !== c.etat) return false;
     if (!any(F.source || [], m.source)) return false;
@@ -276,10 +286,18 @@ function pitem(m, side = "", extra = "") {
 /* ====================================================================== accueil */
 function renderZones() {
   $("#zones").innerHTML = ZONES.map((z, i) => {
-    const n = detsInZone(z.id).length;
-    return `${i ? '<span class="zone-sep" aria-hidden="true">›</span>' : ""}<button class="zone" role="tab" data-z="${z.id}" aria-selected="${S.zone === z.id}">${esc(z.nom)}<small>${n} détaillant${n > 1 ? "s" : ""}</small></button>`;
+    const n = detsInZone(z.id, "").length + VEND.filter(v => v.boutique && z.test(v.code_pays)).length;
+    return `${i ? '<span class="zone-sep" aria-hidden="true">›</span>' : ""}<button class="zone" role="tab" data-z="${z.id}" aria-selected="${S.zone === z.id}">${esc(z.nom)}<small>${n} boutique${n > 1 ? "s" : ""}</small></button>`;
   }).join("");
-  $("#fZone").textContent = $("#menuZone").textContent = ZONE_NOM[S.zone];
+  const reg = $("#regions");
+  if (reg) {
+    reg.hidden = S.zone !== "monde";
+    reg.innerHTML = `<button class="rchip" data-region="" aria-pressed="${!S.region}">Tout le monde</button>` + REGIONS.map(([id, nom]) => {
+      const n = detsInZone("monde", id).length + VEND.filter(v => v.boutique && regionOk(v.code_pays, id)).length;
+      return n ? `<button class="rchip" data-region="${id}" aria-pressed="${S.region === id}">${esc(nom)} <small>${n}</small></button>` : "";
+    }).join("");
+  }
+  $("#fZone").textContent = $("#menuZone").textContent = S.zone === "monde" && S.region ? REGIONS.find(r => r[0] === S.region)[1] : ZONE_NOM[S.zone];
 }
 const ORDRE = ["Submariner", "Cosmograph Daytona", "GMT-Master II", "Datejust", "Day-Date", "Oyster Perpetual", "Explorer", "Sea-Dweller", "Deepsea", "Yacht-Master", "Sky-Dweller", "1908", "Air-King"];
 function collections() {
@@ -339,7 +357,7 @@ function detRow(d) {
     <span class="rx">Détaillant officiel Rolex${d.service ? " · centre de service" : ""}</span>
     <span>${esc(d.adresse)}, ${esc(d.ville)} · ${fmtKm(d.dist)}</span></div>${CHEV}</a>`;
 }
-function detsInZone(zoneId = S.zone) { const z = ZONES.find(x => x.id === zoneId) || ZONES[3]; return DET.filter(d => z.test(d.code_pays)).sort((a, b) => a.dist - b.dist); }
+function detsInZone(zoneId = S.zone, region = zoneId === "monde" ? S.region : "") { const z = ZONES.find(x => x.id === zoneId) || ZONES[3]; return DET.filter(d => z.test(d.code_pays) && regionOk(d.code_pays, region)).sort((a, b) => a.dist - b.dist); }
 function renderOfficiels() {
   const list = detsInZone();
   $("#offCount").textContent = `${list.length} détaillant${list.length > 1 ? "s" : ""} · ${ZONE_NOM[S.zone]}`;
@@ -348,13 +366,19 @@ function renderOfficiels() {
 function renderHome() { placeStores(); renderZones(); renderGrid(); renderSellers(); renderOfficiels(); $("#homeTiles").innerHTML = tiles("home"); }
 
 /* ====================================================================== cartes géographiques */
-const TILES = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
-const ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>';
+const TILES = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}";
+const TILES_NOMS = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}";
+function fond(map) {
+  L.tileLayer(TILES, { attribution: ATTR, maxNativeZoom: 16, maxZoom: 19 }).addTo(map);
+  L.tileLayer(TILES_NOMS, { maxNativeZoom: 16, maxZoom: 19, pane: "overlayPane" }).addTo(map);
+  return map;
+}
+const ATTR = 'Fond &copy; <a href="https://www.esri.com">Esri</a>, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 let bigMap, bigLayer, pMap;
 function baseMap(el, opt) {
   const map = L.map(el, { scrollWheelZoom: false, worldCopyJump: true, ...opt });
   (typeof el === "string" ? document.getElementById(el) : el).classList.add("stylise");
-  L.tileLayer(TILES, { attribution: ATTR, subdomains: "abcd", maxZoom: 19, detectRetina: true }).addTo(map);
+  fond(map);
   return map;
 }
 function renderBigMap(list) {
@@ -381,7 +405,7 @@ function googleMaps() {
 }
 /* ---------- carte des boutiques, façon « trouver une boutique » : épingles regroupées, recherche, panneau de résultats */
 const SMAPS = new Map();
-const PIN_ICON = `<svg class="pin-ico" viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 4h8l1 5M12 4l-1 5M12 28h8l1-5M12 28l-1-5"/><circle cx="16" cy="16" r="8"/><path d="M16 11.5V16l3 2"/></g></svg>`;
+const PIN_ICON = `<svg class="pin-ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2.4"/>${Array.from({ length: 12 }, (_, i) => { const a = i * Math.PI / 6, r1 = i % 3 ? 10.2 : 9, x1 = 16 + r1 * Math.sin(a), y1 = 16 - r1 * Math.cos(a), x2 = 16 + 11.4 * Math.sin(a), y2 = 16 - 11.4 * Math.cos(a); return `<line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}" stroke="currentColor" stroke-width="${i % 3 ? 1.2 : 2}"/>`; }).join("")}<path d="M16 16 11.6 11.2M16 16l5.6-2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.6" fill="currentColor"/></svg>`;
 function storeMap(el, dets, titre) {
   if (!window.L || !el) return;
   let st = SMAPS.get(el);
@@ -395,7 +419,7 @@ function storeMap(el, dets, titre) {
         <div class="smap-list" hidden></div></div></div>`;
     const root = el.firstElementChild, mapEl = $(".smap-map", root);
     const map = L.map(mapEl, { scrollWheelZoom: false, worldCopyJump: true, zoomControl: false }).setView([CONFIG.origine.lat, CONFIG.origine.lng], 4);
-    L.tileLayer(TILES, { attribution: ATTR, subdomains: "abcd", maxZoom: 19, detectRetina: true }).addTo(map);
+    fond(map);
     L.control.zoom({ position: "bottomright" }).addTo(map);
     st = { root, map, layer: L.layerGroup().addTo(map), q: "", kind: "tous", dets: [], titre: "" };
     SMAPS.set(el, st);
@@ -499,7 +523,7 @@ function nomCritere(c) {
   if (F.etancheiteMin) bits.push(`≥ ${nf(F.etancheiteMin)} m`);
   if (F.prixMax) bits.push(`≤ ${eur(F.prixMax)}`);
   if (c.q) bits.push(`« ${c.q} »`);
-  bits.push(ZONE_NOM[c.zone]);
+  bits.push(c.region ? REGIONS.find(r => r[0] === c.region)[1] : ZONE_NOM[c.zone]);
   return bits.join(" · ");
 }
 function saveAlert() {
@@ -673,8 +697,8 @@ function pageMontre(id) {
   if (!m) { openPage(`<div class="empty" style="margin-top:30px"><h3>Cette référence n'est plus au catalogue</h3><p>Elle a peut-être été arrêtée par Rolex.</p><button class="btn btn-green" data-goto="list">Voir le catalogue</button></div>`, "Référence introuvable"); return; }
   ME.vues = [id, ...ME.vues.filter(x => x !== id)].slice(0, 12); ME.save();
   const photos = photosOf(m);
-  const slides = photos.length ? photos.map((p, i) => ({ nom: p.legende || `Photo ${i + 1}`, html: `<img src="${esc(p.src)}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async" onload="checkPhoto(this)">`, big: p.hd || p.src }))
-    : VUES.map(x => ({ nom: x.nom, html: watchSVG(m.skin, { diam: m.diametre, vb: x.vb, label: `${m.modele} — ${x.nom}` }), vb: x.vb }));
+  const slides = [...photos.map((p, i) => ({ nom: p.auteur ? `Photo : ${p.auteur} · ${p.licence}` : `Photo ${i + 1}`, credit: p, html: `<img src="${esc(p.src)}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async" ${i ? 'loading="lazy"' : ""} onload="checkPhoto(this)">`, big: p.src })),
+    ...VUES.slice(0, photos.length ? 1 : 4).map(x => ({ nom: `${x.nom} (illustration)`, html: watchSVG(m.skin, { diam: m.diametre, vb: x.vb, label: `${m.modele} — ${x.nom}` }), vb: x.vb }))];
   const dets = detsInZone(), d0 = dets[0] || [...DET].sort((a, b) => a.dist - b.dist)[0];
   const suivi = ME.suivis[m.id];
   const specs = [
@@ -691,7 +715,8 @@ function pageMontre(id) {
     <div class="gal">
       <div class="gal-main" id="galMain">${slides.map((s, i) => `<div class="slide" data-i="${i}">${s.html}</div>`).join("")}</div>
       <div class="gal-thumbs" id="galThumbs">${slides.map((s, i) => `<button data-i="${i}" aria-label="${esc(s.nom)}" aria-current="${i === 0}">${s.html}</button>`).join("")}</div>
-      <div class="gal-hint"><span id="galName">${esc(slides[0].nom)}</span> · touchez pour agrandir${photos.length ? "" : " · illustration, photos officielles sur rolex.com"}</div>
+      <div class="gal-hint"><span id="galName">${esc(slides[0].nom)}</span> · touchez pour agrandir</div>
+      ${photos.length ? `<p class="d-note">Photos libres de droits : ${photos.map(p => `<a href="${esc(p.page)}" target="_blank" rel="noopener">${esc(p.auteur)} (${esc(p.licence)})</a>`).join(", ")}, via Wikimedia Commons.</p>` : ""}
     </div>
     <div class="d-info">
       <div class="eyebrow">${esc(m.collection)}</div>
@@ -985,7 +1010,8 @@ function pageSources(ouvrir = "") {
     ["catalogue", "Catalogue officiel", "Les références, leurs caractéristiques et le prix public conseillé.", `<ul class="src-l">${ligne("Rolex — les montres", "Caractéristiques et prix public de chaque référence", "https://www.rolex.com/fr/watches")}${ligne("Rolex — trouver un détaillant", "Liste officielle des détaillants", "https://www.rolex.com/fr/store-locator")}</ul>`],
     ["detaillants", `Détaillants officiels (${DET.length})`, `Adresses et téléphones relevés le ${fmtDay((DETDATA.verifie_le || "2026-11-14") + "T12:00")}, chacun avec sa fiche d'origine.`, parPays(DET, d => ligne(d.nom, `${d.adresse}, ${d.ville}`, d.source))],
     ["boutiques", `Boutiques et annonces (${bouts.length})`, `Annonces relevées toutes les 2 heures sur le site de chaque boutique${ANNDATA.mise_a_jour ? `, dernière fois ${ago(ANNDATA.mise_a_jour, Date.now())}` : ""}. Les photos appartiennent aux boutiques.`, parPays(bouts, b => ligne(b.nom, `${b.ville}${b.n != null ? ` · ${b.n} annonce${b.n > 1 ? "s" : ""}` : ""}`, b.site))],
-    ["cartes", "Cartes", "Fonds de carte, vue satellite et 3D.", `<ul class="src-l">${ligne("OpenStreetMap", "Données cartographiques, © contributeurs OpenStreetMap", "https://www.openstreetmap.org/copyright")}${ligne("CARTO", "Fond de carte", "https://carto.com/attributions")}${ligne("Google Maps", "Plan et satellite, sur accord des cookies", "https://maps.google.com")}${ligne("Google Earth", "Vue 3D des adresses", "https://earth.google.com")}</ul>`],
+    ["photos", "Photos du catalogue", "Photos libres de droits trouvées sur Wikimedia Commons, avec leur auteur et leur licence. Quand il n'y en a pas, la montre est dessinée.", `<ul class="src-l">${Object.entries(PHOTOS.photos || {}).flatMap(([id, ps]) => ps.map(p => ligne(p.auteur, `${(montre(id) || {}).modele || id} · ${p.licence}`, p.page))).join("") || ligne("Wikimedia Commons", "Recherche des photos en cours", "https://commons.wikimedia.org")}</ul>`],
+    ["cartes", "Cartes", "Fonds de carte, vue satellite et 3D.", `<ul class="src-l">${ligne("Esri", "Fond de carte gris clair (Esri, HERE, Garmin)", "https://www.esri.com")}${ligne("OpenStreetMap", "Données cartographiques, © contributeurs OpenStreetMap", "https://www.openstreetmap.org/copyright")}${ligne("Google Maps", "Plan et satellite, sur accord des cookies", "https://maps.google.com")}${ligne("Google Earth", "Vue 3D des adresses", "https://earth.google.com")}</ul>`],
     ["credits", "Polices et outils", "Tous libres d'utilisation.", `<ul class="src-l">${ligne("Cormorant Garamond", "Police des titres · licence SIL OFL", "https://github.com/CatharsisFonts/Cormorant")}${ligne("EB Garamond", "Police du texte · licence SIL OFL", "https://github.com/octaviopardo/EBGaramond12")}${ligne("Three.js", "Montres en 3D · licence MIT", "https://threejs.org")}${ligne("Leaflet", "Cartes interactives · licence BSD", "https://leafletjs.com")}</ul>`],
   ];
   openPage(`
@@ -1269,6 +1295,7 @@ async function loadData(force) {
   const r = await fetch(CONFIG.donnees + (force ? `?t=${Date.now()}` : ""), { cache: force ? "no-store" : "no-cache" });
   if (!r.ok) throw new Error(r.status);
   DATA = await r.json();
+  try { const ph = await fetch("photos.json" + (force ? `?t=${Date.now()}` : ""), { cache: "no-cache" }); if (ph.ok) PHOTOS = await ph.json(); } catch (e) {}
   try { const a = await fetch(CONFIG.annonces + `?t=${Math.floor(Date.now() / 6e5)}`, { cache: force ? "no-store" : "no-cache" }); if (a.ok) ANNDATA = await a.json(); } catch (e) {}
   try { const d = await fetch(CONFIG.detaillants + (force ? `?t=${Date.now()}` : ""), { cache: force ? "no-store" : "no-cache" }); if (d.ok) DETDATA = await d.json(); } catch (e) {}
   S.lastLoad = Date.now();
@@ -1383,6 +1410,7 @@ document.addEventListener("click", e => {
   const zg = t.closest("[data-zone-go]"); if (zg) { e.preventDefault(); S.zone = zg.dataset.zoneGo; store.set("rm.zone", S.zone); renderHome(); goList(); return; }
   const cg = t.closest("[data-coll-go]"); if (cg) { e.preventDefault(); S.coll = cg.dataset.collGo; S.zone = "monde"; renderHome(); goList(); return; }
   const sg = t.closest("[data-sort-go]"); if (sg) { S.sort = sg.dataset.sortGo; S.zone = "monde"; renderHome(); goList(); return; }
+  const rg = t.closest("[data-region]"); if (rg) { S.region = rg.dataset.region; renderHome(); return; }
   const z = t.closest("[data-z]"); if (z) { S.zone = z.dataset.z; store.set("rm.zone", S.zone); renderHome(); if (z.hasAttribute("data-rerender")) route(); return; }
   const c = t.closest(".coll"); if (c) { if (c.dataset.c) location.hash = "c/" + slugC(c.dataset.c); else { S.coll = ""; renderHome(); } return; }
   const et = t.closest("[data-etat]"); if (et) { S.etat = et.dataset.etat; renderHome(); return; }
