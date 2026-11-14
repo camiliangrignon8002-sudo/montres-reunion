@@ -797,7 +797,7 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
   background-size:300% 100%;background-position:120% 0;mix-blend-mode:screen;
   -webkit-mask:var(--m) center/100% 100% no-repeat;mask:var(--m) center/100% 100% no-repeat;
   animation:em-eclat 7s cubic-bezier(.45,.05,.25,1) 1.2s infinite}
-.em-s-dial{--m:url(img/cadran-160.png)}
+.em-s-dial{--m:url(img/cadran-or.png)}
 .em-s-word{--m:url(img/monalex-mot.png)}
 .em-s-word::after{animation-delay:1.55s}
 .emblem .em-dial{filter:drop-shadow(0 4px 6px rgba(0,0,0,.18)) drop-shadow(0 0 7px rgba(214,175,92,.28))}
@@ -819,3 +819,28 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
 @keyframes hp-reflet{0%{background-position:130% 0}35%,100%{background-position:-30% 0}}
 @media (min-width:900px){.hero-photo{height:70%;top:5%}}
 @media (prefers-reduced-motion:reduce){.hero-photo img,.hero-photo::after{animation:none}}
+
+/* ===== Style rolex.com : emblème doré, accueil clair et lumineux autour de la vraie photo ===== */
+.emblem .em-dial{filter:drop-shadow(0 6px 10px rgba(80,52,12,.28)) drop-shadow(0 1px 1px rgba(80,52,12,.35))}
+.emblem .em-word{margin-top:5px}
+.hero{background:radial-gradient(120% 85% at 50% 32%,#fff 0%,#f1f1f2 48%,#e2e3e6 100%);color:#1d1d1f}
+.hero::after,.hero-sheen,.hero-img{display:none}
+.hero-photo{top:4%;height:56%;filter:drop-shadow(0 34px 38px rgba(30,30,40,.22)) drop-shadow(0 4px 6px rgba(30,30,40,.12));animation:hp-zoom 14s ease-in-out infinite alternate}
+.hero-photo::after{mix-blend-mode:overlay}
+@keyframes hp-zoom{from{transform:translateX(-50%) scale(1)}to{transform:translateX(-50%) scale(1.045)}}
+.hero-t .eyebrow{color:#0b5d3b;text-shadow:none;font-weight:600}
+.hero-t h1{color:#1d1d1f;text-shadow:none}
+.hero-t .btn-glass{background:#fff;color:#1d1d1f;border:1px solid rgba(0,0,0,.12);box-shadow:0 6px 18px rgba(0,0,0,.06)}
+.hero-t .btn-glass:first-child{background:#0b5d3b;color:#fff;border-color:#0b5d3b}
+.hero-down{color:#1d1d1f;opacity:.6}
+.hero-photo{top:2%;height:47%}
+.hero-t{padding-bottom:58px}
+.hero-t h1{font-size:clamp(46px,13vw,64px);margin:10px 0 22px}
+@media (min-width:900px){
+  .hero-photo{left:31%;top:7%;height:86%}
+  .hero-t{inset:50% 7% auto 54%;transform:translateY(-50%);padding:0;text-align:left}
+  .hero-t h1{font-size:clamp(64px,6.4vw,104px);margin:16px 0 34px}
+  .hero-t .btns{justify-content:flex-start}
+  .hero-t .btn{min-width:0;padding:0 26px}
+}
+@media (prefers-reduced-motion:reduce){.hero-photo{animation:none}}
