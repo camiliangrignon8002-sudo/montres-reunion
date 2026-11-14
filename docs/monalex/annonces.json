@@ -1,5 +1,5 @@
 {
- "mise_a_jour": "2026-11-14T16:43+00:00",
+ "mise_a_jour": "2026-11-14T18:45+00:00",
  "sources": [
   {
    "id": "intemporel",
@@ -131,7 +131,7 @@
    "id": "watchguys",
    "nom": "WatchGuys",
    "via": "Shopify",
-   "annonces": 663
+   "annonces": 661
   },
   {
    "id": "mywatchllc",
@@ -15113,48 +15113,6 @@
     }
    ],
    "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Daytona \n Reference Number: \n 126515LN \n SKU: \n C12621199 \n Condition: \n Very Good i \n Gender: \n Men's \n Style: \n Sport, Casual \n Box and Papers: \n Box and Papers \n Year: \n 2024 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n 18K Rose Gold \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Diamond \n Bezel: \n Black \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Rubber \n Color: \n Black \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n 7”- 7 1/2” \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Chronograph, Tachymeter",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "f3c792ed9e6e",
-   "boutique": "watchguys",
-   "reference": "126710GRNR",
-   "collection": "GMT-Master II",
-   "annee": "2025",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Rolex GMT-Master II 126710GRNR Bruce Wayne Stainless Steel Oyster",
-   "url": "https://www.watchguys.com/products/rolex-gmt-master-ii-126710grnr-bruce-wayne-stainless-steel-oyster",
-   "prix": 19395,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_Bruce_Wayne_GMT_Jubilee_126710GRNR_New_7889540a-3aa2-439f-b734-9308ccca95c1.webp?v=1791238963",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_GMT-Master_126710GRNR_Bruce_Wayne_Watch_On_Wrist_bd6cdabe-88e0-4b64-8903-edad21f8103e.webp?v=1791238968",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_GMT-Master_II_126710GRNR_2_e1099bd2-e51f-4a46-a517-07c99c979126.webp?v=1791238973",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_GMT-Master_II_126710GRNR_3_2f6837ec-d05a-4e63-a9ac-89888f60c068.webp?v=1791238978",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_GMT-Master_II_126710GRNR_4_8d335448-07c4-4cbd-a105-b3e22ac3550d.webp?v=1791238982",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/New_Rolex_Box_with_Cards_9748bf04-64af-43f8-9012-a9cc53b9d316.webp?v=1791238993",
-     "w": 2048
-    }
-   ],
-   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n GMT-Master II \n Reference Number: \n 126710GRNR \n Nickname: \n Bruce Wayne \n SKU: \n WG4022 \n Condition: \n Excellent i \n Gender: \n Men's \n Style: \n Sport, Casual \n Box and Papers: \n Box and Papers \n Year: \n 2025 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Dot/Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date, GMT",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -31546,44 +31504,6 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
-   "id": "9910b11d861d",
-   "boutique": "watchguys",
-   "reference": "126720VTNR",
-   "collection": "GMT-Master II",
-   "annee": "2026",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Rolex GMT-Master II 126720VTNR Sprite Jubilee",
-   "url": "https://www.watchguys.com/products/rolex-gmt-master-126720vtnr-sprite-jubilee",
-   "prix": 18395,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126720vtnr-sprite-watches-653.webp?v=1791233250",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126720vtnr-sprite-watches-900.webp?v=1791233255",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126720vtnr-sprite-watches-351.webp?v=1791233259",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126720vtnr-sprite-watches-468.webp?v=1791233264",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/New_Rolex_Box_with_Cards_decd5ef4-d14c-4e43-a17b-5e975f13db2a_8887e41b-f95d-40d9-ae03-1760a2f6477a.webp?v=1791233270",
-     "w": 2048
-    }
-   ],
-   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n GMT-Master II \n Reference Number: \n 126720VTNR \n Nickname: \n Sprite \n SKU: \n WG3957 \n Condition: \n Excellent \n i \n Gender: \n Men's \n Style: \n Sport, Casual \n Box and Papers: \n Box and Papers \n Note: \n White Hangtag Included \n Year: \n 2026 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Dot/Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date, GMT",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
    "id": "48211c23345c",
    "boutique": "watchguys",
    "reference": "126719BLRO",
@@ -39852,64 +39772,6 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
-   "id": "c57fa211a75b",
-   "boutique": "mywatchllc",
-   "reference": "",
-   "collection": "Cosmograph Daytona",
-   "annee": "2026",
-   "etat": "Neuf",
-   "boite": true,
-   "papiers": true,
-   "titre": "NEW 2026 Rolex Daytona Baby Le Mans 40mm 126519LN White Gold Black Dial (NEW STYLE CARD)",
-   "url": "https://mywatchllc.com/products/new-2026-rolex-daytona-baby-le-mans-40mm-126519ln-white-gold-black-dial-2",
-   "prix": 49500,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/16F2B9DD-D06E-4B4A-9928-05062A1A18F4.jpg?v=1787685177",
-     "w": 2807
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/AAB561E4-62C1-4153-B0AE-9458834EDD3E.jpg?v=1787685177",
-     "w": 2493
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/CCE07F04-4FF9-4970-B124-F618D7964535.jpg?v=1787685177",
-     "w": 2591
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/219B55F2-F966-4684-89CF-EF34C8EA7338.jpg?v=1787685177",
-     "w": 2612
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/1922C33D-FF29-42A5-BAFD-AA3B57AB3950.jpg?v=1787685177",
-     "w": 2598
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/3CDB51EC-F907-4E51-B1C5-18954E069D00.jpg?v=1787685177",
-     "w": 2518
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/41C06717-BDF2-4C32-B502-62C7685A7ADA.jpg?v=1787685177",
-     "w": 2500
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/B620E15B-CB1E-4C6A-ADE9-014966C80ED2.jpg?v=1787685177",
-     "w": 2721
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/BEC344FD-9D44-4068-9926-167E9C862861.jpg?v=1787863936",
-     "w": 1645
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/5A479A08-8085-497C-B683-E8B8D7F44CB8.jpg?v=1787863937",
-     "w": 2954
-    }
-   ],
-   "description": "NEW 2026 Rolex Cosmograph Daytona Baby Le Mans 40mm 126519LN-0001 White Gold Black Dial \nIncludes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes  \n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year Manufacturer warranty  \n ✔️Serial number tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: 7.5inch - 8.0inch wrist (Oysterflex) \n ✔️Need a different size? We stock genuine Rolex OEM Oysterflex straps and can size one to your wrist before shipping. Please inquire before purchasing to confirm availability. \n ✔️Watch is BRAND NEW/UNWORN . \n ✔️ Trades welcome",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
    "id": "dcf675e1680c",
    "boutique": "mywatchllc",
    "reference": "",
@@ -46430,6 +46292,64 @@
    ],
    "description": "2025 Rolex Deepsea 44mm 136668LB-0001 18kt Yellow Gold Blue Dial \n Includes the following: \n ✔️Original Rolex Double Boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated April 2025\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 8.25 inch wrist (Full Links)\n ✔️Watch is in excellent overall condition.\n ✔️ Trades welcome",
    "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "4dd092789e93",
+   "boutique": "mywatchllc",
+   "reference": "",
+   "collection": "Cosmograph Daytona",
+   "annee": "2026",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "NEW 2026 Rolex Daytona \"Baby Le Mans\" 40mm 126519LN White Gold Black Dial",
+   "url": "https://mywatchllc.com/products/new-2026-rolex-daytona-baby-le-mans-40mm-126519ln-white-gold-black-dial-1",
+   "prix": 50000,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/033FE120-7B57-472F-943A-7376BD2DA7F8.jpg?v=1781299064",
+     "w": 2596
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/CD9AC2FC-79B5-476D-ACAC-A5F23D56E23F.jpg?v=1781299064",
+     "w": 2583
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/16C1B885-ACC5-4A84-B057-C8E631FB0FF2.jpg?v=1781299064",
+     "w": 2609
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/EEB1F966-52A4-44AE-B897-0361B048EC2C.jpg?v=1781299064",
+     "w": 2588
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/578999CB-5F9D-4C2A-8924-0801ED97AE2B.jpg?v=1781299064",
+     "w": 2354
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/E9E88AFB-4DFF-40DF-852F-89E89E977961.jpg?v=1781299064",
+     "w": 2378
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/3EDC318F-376B-4B4B-87D0-E9173C755A88.jpg?v=1781299065",
+     "w": 2384
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/2C2E08A4-2D94-45DE-BF94-45C91E6C3C68.jpg?v=1781299064",
+     "w": 2401
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/52989F9B-5307-40F6-A113-4814BEF049E8.jpg?v=1781299064",
+     "w": 1645
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/EA21A42E-A467-47A6-9BB2-3890F2B643A7.jpg?v=1781299065",
+     "w": 3024
+    }
+   ],
+   "description": "Rolex Cosmograph Daytona \"Baby Le Mans\" 40mm 126519LN-0001 White Gold Black Dial \nIncludes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes  \n ✔️Warranty card dated 2026 \n ✔️5 year Manufacturer warranty  \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: Oysterflex \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "premiere_vue": "2026-11-14T18:45+00:00"
   },
   {
    "id": "b77d6caecc1a",
