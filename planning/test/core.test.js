@@ -261,10 +261,10 @@ test("règles personnelles : horaires fixes et jours de repos signalés, respect
   // Sebastien : du matin (horaires variables), le soir possible sans alerte
   assert.equal(C.empById(s, "sebastien").rules.fixedHours, null);
   assert.equal(C.empById(s, "sebastien").rules.prefers, "matin");
-  const r = apply(s, [{ type: "setShift", emp: "sebastien", date: "2026-10-19", segs: [{ s: "13:30", e: "21:00", z: "ZP" }] }]);
-  assert.ok(r.ok);
+  const r = apply(s, [{ type: "setShift", emp: "sebastien", date: "2026-10-19", segs: [{ s: "14:30", e: "17:00", z: "ZP" }, { s: "17:30", e: "21:30", z: "ZP" }] }]);
+  assert.ok(r.ok, r.errors && r.errors.join());
   assert.ok(!C.validateWeek(r.state, W1).some((i) => i.emp === "sebastien" && ["FIXED_HOURS", "FIXED_DAYOFF", "LATEST_END"].includes(i.code)));
-  const r2 = apply(s, [{ type: "setShift", emp: "eric", date: "2026-10-24", segs: [{ s: "07:00", e: "14:30", z: "ZP" }] }]);
+  const r2 = apply(s, [{ type: "setShift", emp: "eric", date: "2026-10-24", segs: [{ s: "07:00", e: "13:00", z: "ZP" }] }]); // 35 h + 6 h ≤ 42 h
   assert.ok(C.validateWeek(r2.state, W1).some((i) => i.code === "FIXED_DAYOFF" && i.emp === "eric"));
   // Eric (repos samedi-dimanche) jamais proposé un samedi ; Sebastien jamais sur un poste d'après-midi
   const sat = C.findCandidates(s, "2026-10-24", [{ s: "07:00", e: "14:30", z: "ZP" }]).map((c) => c.emp);
@@ -298,13 +298,13 @@ test("heures : semaine et mois, avec heures sup, journée en plus et retard", ()
   const r = apply(s, [
     { type: "addAdjustment", adjustment: { emp: "Fleur", date: "2026-10-21", type: "heures_sup", minutes: C.parseDuration("1h30") } },
     { type: "addAdjustment", adjustment: { emp: "fleur", date: "2026-10-22", type: "retard", minutes: C.parseDuration("0:20") } },
-    { type: "addAdjustment", adjustment: { emp: "fleur", date: "2026-10-19", type: "journee_sup", minutes: C.parseDuration("7h") } },
+    { type: "addAdjustment", adjustment: { emp: "fleur", date: "2026-10-19", type: "journee_sup", minutes: C.parseDuration("5h") } }, // 35 h + 1 h 30 + 5 h = 41 h 30 (≤ 42 h)
   ]);
   assert.ok(r.ok, r.errors && r.errors.join());
   assert.equal(r.changes.filter((c) => c.col === "adjustments").length, 3);
   s = r.state;
   x = C.hoursSummary(s, "fleur", W1, "2026-10-25");
-  assert.deepEqual([x.extra, x.late, x.extraDays, x.extraDayCount, x.total], [90, 20, 420, 1, 35 * 60 + 90 + 420 - 20]);
+  assert.deepEqual([x.extra, x.late, x.extraDays, x.extraDayCount, x.total], [90, 20, 300, 1, 35 * 60 + 90 + 300 - 20]);
   const m = C.hoursSummary(s, "fleur", "2026-10-01", "2026-10-31");
   assert.equal(m.total, x.total); // une seule semaine planifiée en octobre
   assert.equal(apply(s, [{ type: "addAdjustment", adjustment: { emp: "fleur", date: "2026-10-21", type: "heures_sup", minutes: 0 } }]).ok, false);
@@ -459,4 +459,24 @@ test("conditions : zone toute la semaine, jours de bureau, liaison désactivable
     { id: "a", emp: "maelle", date: "2026-12-08", segs: [{ s: "07:00", e: "12:00", z: "ZP" }] },
     { id: "b", emp: "murielle", date: "2026-12-08", segs: [{ s: "15:00", e: "20:00", z: "ZR" }] }] };
   assert.ok(!C.validateWeek(s, "2026-12-07").some((i) => i.code.startsWith("LINK")));
+});
+
+test("durée par semaine : dépassement possible jusqu'à 42 h, jamais au-delà", () => {
+  let s = withWeek1();
+  assert.equal(C.DEFAULT_SETTINGS.hardMaxWeekHours, 42);
+  const W = "2026-12-07";
+  const day = (i, a, b) => ({ type: "setShift", emp: "maelle", date: C.addDays(W, i), segs: [{ s: a, e: "12:00", z: "ZP" }, { s: "12:30", e: b, z: "ZP" }] });
+  // 6 jours de 7 h = 42 h : accepté (dépassement signalé, pas bloquant)
+  let r = apply(s, [0, 1, 2, 3, 4, 5].map((i) => day(i, "07:00", "14:30")));
+  assert.ok(r.ok, r.errors && r.errors.join());
+  assert.ok(!C.validateWeek(r.state, W).some((i) => i.code === "WEEK_HARD_MAX"));
+  // un 7e jour : 49 h → refusé
+  const r2 = apply(r.state, [day(6, "07:00", "14:30")]);
+  assert.equal(r2.ok, false);
+  assert.match(r2.errors.join(), /maximum de 42 h/);
+  // heures sup au-delà de 42 h refusées
+  const r3 = apply(r.state, [{ type: "addAdjustment", adjustment: { emp: "maelle", date: C.addDays(W, 1), type: "heures_sup", minutes: 30 } }]);
+  assert.equal(r3.ok, false);
+  // jamais proposée en remplaçante au-delà de 42 h
+  assert.ok(!C.findCandidates(r.state, C.addDays(W, 6), [{ s: "07:00", e: "12:00", z: "ZP" }]).some((c) => c.emp === "maelle"));
 });

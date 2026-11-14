@@ -28,6 +28,7 @@
     checkRest: true, minRestHours: 11,
     checkMaxDay: true, maxDayHours: 10,
     checkMaxWeek: true, maxWeekHours: 48,
+    hardMaxWeekHours: 42, // dépassement possible jusqu'à cette limite, jamais au-delà (heures sup comprises)
     checkPause: true, minPauseMinutes: 30,
     contractHours: 35,
     lateThreshold: 5, extraThreshold: 5,
@@ -39,7 +40,7 @@
   };
 
   // Codes qui empêchent d'enregistrer une modification ou de valider un planning.
-  const BLOCKING = new Set(["TIME_INVALID", "SEG_OVERLAP", "SHIFT_OVERLAP", "ZONE_FORBIDDEN", "ZONE_MISSING", "FORMATION", "ABSENCE", "INACTIVE", "UNKNOWN_EMP", "TRAINEE_ALONE", "LATEST_END"]);
+  const BLOCKING = new Set(["TIME_INVALID", "SEG_OVERLAP", "SHIFT_OVERLAP", "ZONE_FORBIDDEN", "ZONE_MISSING", "FORMATION", "ABSENCE", "INACTIVE", "UNKNOWN_EMP", "TRAINEE_ALONE", "LATEST_END", "WEEK_HARD_MAX"]);
 
   // ---------- Dates (ISO AAAA-MM-JJ, calculées en UTC pour éviter les décalages d'heure d'été) ----------
   const pad = (n) => String(n).padStart(2, "0");
@@ -309,6 +310,10 @@
     const base = daysBetween(refMonday, shift.date) * 1440;
     return shiftRanges(shift.segs).map(([s, e]) => [base + s, base + e]);
   }
+  function weekExtraMinutes(state, monday, empId) {
+    const end = addDays(monday, 6);
+    return Object.values(state.adjustments || {}).filter((a) => a.emp === empId && a.date >= monday && a.date <= end && (a.type === "heures_sup" || a.type === "journee_sup")).reduce((x, a) => x + a.minutes, 0);
+  }
   function weekMinutes(state, monday, empId) {
     const w = getWeek(state, monday);
     return w ? w.shifts.filter((s) => s.emp === empId).reduce((a, s) => a + shiftMinutes(s.segs), 0) : 0;
@@ -469,6 +474,12 @@
     for (const emp of state.employees) {
       const m = weekMinutes(state, monday, emp.id);
       const cm = emp.active === false ? 0 : weekCourseMinutes(state, monday, emp.id);
+      // Limite absolue de la semaine : planning + cours + heures sup et journées en plus.
+      const extraW = weekExtraMinutes(state, monday, emp.id);
+      if (st.hardMaxWeekHours && m + cm + extraW > st.hardMaxWeekHours * 60) {
+        add("erreur", "WEEK_HARD_MAX", emp.id, null, `${emp.name} : ${fmtHours(m + cm + extraW)} cette semaine${cm || extraW ? ` (${[`${fmtHours(m)} de planning`, cm ? `${fmtHours(cm)} de cours` : null, extraW ? `${fmtHours(extraW)} d'heures en plus` : null].filter(Boolean).join(" + ")})` : ""}, au-delà du maximum de ${st.hardMaxWeekHours} h : aucun dépassement possible au-delà.`);
+        continue;
+      }
       if (cm) {
         // Alternant(e) en semaine de cours : cours + travail = durée du contrat.
         const tot = m + cm, target = (st.contractHours || 35) * 60;
@@ -478,7 +489,7 @@
         continue;
       }
       if (!m) continue;
-      if (st.checkMaxWeek && m > st.maxWeekHours * 60) add("alerte", "WEEK_MAX", emp.id, null, `${emp.name} : ${fmtHours(m)} sur la semaine (plus de ${st.maxWeekHours} h).`);
+      if (st.checkMaxWeek && m > st.maxWeekHours * 60) add("alerte", "WEEK_MAX", emp.id, null, `${emp.name} : ${fmtHours(m)} sur la semaine, dépassement de ${fmtHours(m - st.maxWeekHours * 60)} (possible jusqu'à ${st.hardMaxWeekHours || st.maxWeekHours} h).`);
       const ref = templateMinutes(state, emp.id);
       if (ref && m !== ref) add("info", "HOURS_DIFF", emp.id, null, `${emp.name} : ${fmtHours(m)} cette semaine, ${fmtHours(ref)} dans le modèle.`);
     }
@@ -569,7 +580,10 @@
       if (!restOk) { notes.push(`repos < ${st.minRestHours} h avec un autre service`); }
       const weekMin = weekMinutes(state, monday, emp.id);
       const courseMin = weekCourseMinutes(state, monday, emp.id);
-      if (st.checkMaxWeek && weekMin + courseMin + newMin > st.maxWeekHours * 60) continue;
+      const after = weekMin + courseMin + newMin + weekExtraMinutes(state, monday, emp.id);
+      if (st.hardMaxWeekHours && after > st.hardMaxWeekHours * 60) continue; // jamais au-delà de la limite absolue
+      const overtime = st.checkMaxWeek && weekMin + courseMin + newMin > st.maxWeekHours * 60;
+      if (overtime) notes.push(`dépassement : ${fmtHours(weekMin + courseMin + newMin)} sur la semaine`);
       if (courseMin && weekMin + courseMin + newMin > (st.contractHours || 35) * 60) continue; // cours + travail ≤ contrat
       const dayCourse = courseMinutesOn(state, emp, date);
       if (st.checkMaxDay && newMin + dayCourse > st.maxDayHours * 60) notes.push(dayCourse ? `plus de ${st.maxDayHours} h dans la journée avec les cours` : `plus de ${st.maxDayHours} h dans la journée`);
@@ -579,6 +593,7 @@
       let score = 0;
       if (ref > 0) score += deficit >= newMin ? 30 : deficit > 0 ? 15 : -10;
       if (!restOk) score -= 40;
+      if (overtime) score -= 20;
       score -= notes.length * 5;
       if (templateFor(state, date).some((t) => t.emp === emp.id && segKey(t.segs) === segKey(segs))) score += 10;
       // Service préféré (matin ou soir) : jamais une erreur, seulement un ordre de proposition.
@@ -950,6 +965,11 @@
           const stx = { ...DEFAULT_SETTINGS, ...(s.settings || {}) };
           if (a.type === "retard" && min < stx.lateThreshold) { fail(`Moins de ${stx.lateThreshold} min de retard : ce n'est pas compté.`); break; }
           if (a.type === "heures_sup" && min < stx.extraThreshold) { fail(`Moins de ${stx.extraThreshold} min après l'heure : ce n'est pas compté en heures sup.`); break; }
+          if ((a.type === "heures_sup" || a.type === "journee_sup") && stx.hardMaxWeekHours) {
+            const mo = mondayOf(a.date);
+            const tot = weekMinutes(s, mo, emp.id) + weekCourseMinutes(s, mo, emp.id) + weekExtraMinutes(s, mo, emp.id) + min;
+            if (tot > stx.hardMaxWeekHours * 60) { fail(`${emp.name} arriverait à ${fmtHours(tot)} sur la semaine : le maximum est ${stx.hardMaxWeekHours} h, aucun dépassement au-delà.`); break; }
+          }
           const id = a.id || uid("aj");
           s.adjustments[id] = { id, emp: emp.id, date: a.date, type: a.type, minutes: min, note: String(a.note || "").slice(0, 200), createdAt: meta.now || null, by: meta.by || null };
           touched.adjustments.add(id);
@@ -1199,7 +1219,7 @@
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };
