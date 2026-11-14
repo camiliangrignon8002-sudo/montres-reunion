@@ -18,6 +18,9 @@
     fermeture: "Fermeture",
   };
 
+  // Motif d'une absence (menu déroulant).
+  const ABSENCE_MOTIFS = { cp: "CP", sanction: "Sanction", perso: "Perso", intermetra: "Intermetra" };
+
   // Heures réellement faites en plus ou en moins du planning.
   const ADJUST_TYPES = {
     heures_sup: { label: "Heures sup", sign: 1 },
@@ -318,7 +321,7 @@
     const x = toMin(a.s), y = toMin(a.e);
     return (segs || []).some((g) => isTime(g.s) && isTime(g.e) && segRange(g)[0] < y && x < segRange(g)[1]);
   };
-  const absLabel = (a) => `${a.label || ABSENCE_TYPES[a.type] || "Absence"}${absPartial(a) ? ` ${a.s}–${a.e}` : ""}`;
+  const absLabel = (a) => `${a.label || (a.motif && ABSENCE_MOTIFS[a.motif]) || ABSENCE_TYPES[a.type] || "Absence"}${absPartial(a) ? ` ${a.s}–${a.e}` : ""}`;
   const absenceDates = (a) => (a.open ? `depuis le ${fmtDate(a.from, "short")}, retour non renseigné` : `du ${fmtDate(a.from, "short")} au ${fmtDate(a.to, "short")}`);
 
   // ---------- Modèle ----------
@@ -1153,6 +1156,7 @@
           if (hasRange && !(isTime(a.s) && isTime(a.e) && toMin(a.e) > toMin(a.s))) { fail("Plage horaire de l'absence invalide (début avant la fin)."); break; }
           const rec = { id, emp: emp.id, type: a.type, from: a.from, to, note: String(a.note || "").slice(0, 300), createdAt: (s.absences[id] && s.absences[id].createdAt) || meta.now || null };
           if (a.label) rec.label = String(a.label).slice(0, 60);
+          if (a.motif) { if (!ABSENCE_MOTIFS[a.motif]) { fail("Motif d'absence inconnu."); break; } rec.motif = a.motif; }
           if (hasRange) { rec.s = normTime(a.s) || a.s; rec.e = normTime(a.e) || a.e; }
           s.absences[id] = rec;
           touched.absences.add(id);
@@ -1439,7 +1443,7 @@
   }
 
   root.PlanningCore = {
-    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, deviationFromTimes, applyClosing, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
+    DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, ABSENCE_MOTIFS, deviationFromTimes, applyClosing, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,

@@ -619,3 +619,12 @@ test("effectif minimum / maximum sur une plage horaire", () => {
   assert.ok(!C.findCandidates(st2, W, [{ s: "08:00", e: "11:00", z: "ZP" }]).length); // maximum atteint
   assert.equal(apply(s, [{ type: "setSettings", patch: { staffing: [{ from: W, to: W, s: "12:00", e: "07:00", min: 1 }] } }]).ok, false);
 });
+
+test("motif d'absence : CP, sanction, perso, intermetra", () => {
+  const s = withWeek1();
+  assert.deepEqual(Object.values(C.ABSENCE_MOTIFS), ["CP", "Sanction", "Perso", "Intermetra"]);
+  const r = apply(s, [{ type: "addAbsence", absence: { emp: "maelle", type: "arret", motif: "sanction", from: "2026-12-08", to: "2026-12-08" } }]);
+  assert.ok(r.ok);
+  assert.equal(C.absLabel(Object.values(r.state.absences)[0]), "Sanction");
+  assert.equal(apply(s, [{ type: "addAbsence", absence: { emp: "maelle", type: "arret", motif: "xx", from: "2026-12-08" } }]).ok, false);
+});
