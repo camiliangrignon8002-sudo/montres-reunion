@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cosmograph Daytona en 3D · Monalex</title>
+<meta name="description" content="Reproduction 3D interactive et interprétative du Cosmograph Daytona 126500LN : boîtier, lunette Cerachrom, cadran, chronographe, bracelet Oyster, fermoir Oysterlock et mouvement.">
+<meta name="theme-color" content="#f4f3ef">
+<link rel="icon" href="../favicon-32.png">
+<link rel="stylesheet" href="style.css?v=1">
+<script type="importmap">{"imports":{"three":"../vendor/three.module.min.js","three/addons/":"../vendor/jsm/"}}</script>
+</head>
+<body>
+<header class="haut">
+  <a class="retour" href="../#/" aria-label="Retour à Monalex">← Monalex</a>
+  <div class="titre"><h1>Cosmograph Daytona</h1><p>126500LN · Oystersteel · cadran blanc · reproduction 3D interprétative</p></div>
+  <button id="b-info" class="btn rond" type="button" aria-label="À propos de ce modèle">i</button>
+</header>
+
+<canvas id="scene" aria-label="Montre en 3D. Faites glisser pour tourner, pincez ou utilisez la molette pour zoomer, touchez une pièce pour la découvrir."></canvas>
+<div class="chargement" aria-live="polite"><span class="anneau"></span>Assemblage de la montre…</div>
+<p class="aide">Glissez pour tourner · Pincez pour zoomer · Touchez une pièce</p>
+<div class="sans3d">Votre navigateur n'affiche pas la 3D (WebGL indisponible).</div>
+
+<div id="vues" class="vues" hidden role="menu" aria-label="Vues prédéfinies"></div>
+<nav id="barre" class="barre" aria-label="Commandes de la montre"></nav>
+
+<aside id="fiche" class="fiche" hidden aria-live="polite">
+  <button id="fiche-x" class="x" type="button" aria-label="Fermer">×</button>
+  <p class="sur">Pièce sélectionnée</p>
+  <h2 id="fiche-nom"></h2>
+  <p id="fiche-txt"></p>
+</aside>
+
+<aside id="apropos" class="apropos" hidden>
+  <button id="apropos-x" class="x" type="button" aria-label="Fermer">×</button>
+  <h2>À propos de ce modèle</h2>
+  <p>Modèle 3D construit entièrement en code (géométrie paramétrique, matériaux PBR, textures générées). C'est une <strong>interprétation</strong> visuelle : il ne remplace ni une photo, ni un modèle CAO du fabricant.</p>
+  <table><thead><tr><th>Mesure</th><th>Valeur</th><th>Source</th></tr></thead><tbody id="dims"></tbody></table>
+  <p class="petit">« officiel » : valeur publiée par Rolex pour la référence 126500LN. « estimé » : estimation de modélisation, réglable dans <code>js/dims.js</code>.</p>
+  <p class="petit">Le mouvement est une <strong>interprétation pédagogique</strong> inspirée du calibre 4131 (chronographe automatique, roue à colonnes, 4 Hz, 72 h). Ce n'est pas une copie certifiée : disposition, formes et nombres de dents sont plausibles, pas relevés sur pièce. Sur la vraie montre, le fond est en acier plein : le fond saphir du mode Technique sert seulement à montrer l'intérieur.</p>
+  <p class="petit">Rolex, Oyster, Cosmograph, Daytona, Oysterlock, Easylink, Triplock, Cerachrom, Chromalight et Parachrom sont des marques de Rolex SA. Monalex n'est pas affilié à Rolex.</p>
+</aside>
+
+<script type="module" src="js/main.js?v=1"></script>
+<script>
+  // repli si le module échoue (pas de WebGL, navigateur trop ancien)
+  setTimeout(() => { if (!document.body.classList.contains("pret")) document.body.classList.add("lent"); }, 12000);
+</script>
+</body>
+</html>

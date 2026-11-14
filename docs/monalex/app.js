@@ -897,7 +897,7 @@ function pageCollection(slug) {
   const html = `
   <section class="cp-hero">
     <div class="cp-hero-img">${watchSVG(m0.skin, { diam: m0.diametre, vb: "55 90 290 410" })}<canvas class="cp-3d" id="cp3d" aria-label="${esc(m0.modele)} en 3D, faites glisser pour la tourner"></canvas></div>
-    <div class="cp-hero-t"><p class="eyebrow">${esc(c)}</p><h1>${esc(titre)}</h1><p>${esc(texte)}</p></div>
+    <div class="cp-hero-t"><p class="eyebrow">${esc(c)}</p><h1>${esc(titre)}</h1><p>${esc(texte)}</p>${/daytona/i.test(c) ? `<p class="cp-3d-lien"><a class="btn btn-green" href="daytona/">Explorer la Daytona en 3D</a></p>` : ""}</div>
   </section>
 
   <section class="cp-models" id="cp-modeles">
