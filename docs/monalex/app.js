@@ -271,7 +271,7 @@ function renderColls() {
   const list = collections();
   $("#colls").innerHTML = `<button class="coll" data-c="" aria-pressed="${!S.coll}"><svg viewBox="0 0 64 96"><g fill="none" stroke="#127749" stroke-width="1.6"><circle cx="32" cy="48" r="18"/><circle cx="32" cy="48" r="12"/><path d="M24 30V8h16v22M24 66v22h16V66"/></g></svg><span>Toutes</span><small>${ALL.length} montres</small></button>` +
     list.map(([c, { m, n }]) => `<button class="coll" data-c="${esc(c)}" aria-pressed="${S.coll === c}">${watchSVG(m.skin, { diam: m.diametre })}<span>${esc(c)}</span><small>${n} montre${n > 1 ? "s" : ""}</small></button>`).join("");
-  $("#fColls").innerHTML = list.map(([c]) => `<li><button data-coll-go="${esc(c)}">${esc(c)}</button></li>`).join("");
+  $("#fColls").innerHTML = list.map(([c]) => `<li><a href="#c/${slugC(c)}">${esc(c)}</a></li>`).join("");
 }
 function renderGrid() {
   const r = filtered();
@@ -531,6 +531,7 @@ function openPage(html, title, actions = "") {
   el.innerHTML = `<div class="p-top"><div class="wrap"><button class="round" data-back aria-label="Retour">${BACK}</button><span class="t">${esc(title)}</span><div class="p-act">${actions}</div></div></div><div class="wrap" style="padding-bottom:calc(60px + var(--safe-b))">${html}</div>`;
   el.scrollTop = same ? keep : 0;
   el.dataset.h = location.hash;
+  el.classList.remove("cp");
   el.classList.add("open"); document.body.classList.add("lock");
   document.title = `${title}  · Monalex`;
 }
@@ -708,6 +709,101 @@ function pageVendeur(id) {
   <section class="d-sec" style="margin-top:40px"><p class="kicker">En vente</p><h2>${ms.length} montre${ms.length > 1 ? "s" : ""} chez ce vendeur</h2><div class="similar">${ms.map(cardHTML).join("")}</div></section>`;
   openPage(html, v.nom);
   pageMap("vmap", v);
+}
+
+/* ---------- page d'une collection : visuel, carrousel des modèles, caractéristiques, aller plus loin, suivant */
+const COLL_TXT = {
+  "Submariner": ["L'appel des profondeurs", "La montre de plongée de référence : lunette tournante graduée, index lumineux et étanchéité à 300 mètres. Un outil devenu une icône."],
+  "Cosmograph Daytona": ["Le temps de la course", "Un chronographe né pour les pilotes : échelle tachymétrique sur la lunette, trois compteurs et une lisibilité sans faille."],
+  "GMT-Master II": ["Deux fuseaux, un regard", "Lire l'heure ici et ailleurs d'un seul coup d'œil, grâce à l'aiguille 24 heures et à la lunette bicolore."],
+  "Datejust": ["L'élégance de la date", "La date sous sa loupe, une lunette cannelée, un bracelet Jubilé : l'équilibre classique par excellence."],
+  "Day-Date": ["Le prestige en toutes lettres", "Le jour en toutes lettres et la date, toujours en or ou en platine, sur le bracelet Président."],
+  "Oyster Perpetual": ["La prouesse de l'essentiel", "Trois aiguilles, un cadran net, un boîtier Oyster étanche : la montre réduite à ce qui compte."],
+  "Explorer": ["Pensée pour l'extrême", "Une lisibilité parfaite avec ses chiffres 3, 6 et 9, et une robustesse faite pour les expéditions."],
+  "Sea-Dweller": ["Plus profond encore", "Une plongeuse taillée pour la saturation, avec valve à hélium et étanchéité à 1 220 mètres."],
+  "Deepsea": ["Vers les abysses", "Un boîtier renforcé conçu pour les très grandes profondeurs : étanche jusqu'à 3 900 mètres."],
+  "Yacht-Master": ["L'esprit du large", "Une montre de navigation élégante, avec lunette tournante bidirectionnelle aux chiffres en relief."],
+  "Sky-Dweller": ["Le voyageur accompli", "Deuxième fuseau horaire et calendrier annuel, réglés simplement par la lunette tournante."],
+  "1908": ["L'art du classique", "Un boîtier fin, un cadran épuré et une petite seconde : l'horlogerie habillée dans sa forme la plus pure."],
+  "Air-King": ["L'hommage à l'aviation", "Un cadran inspiré des instruments de bord, avec une grande minuterie pour lire les temps de vol."],
+};
+const slugC = c => norm(c).replace(/[^a-z0-9]+/g, "-");
+const collOf = slug => collections().map(([c]) => c).find(c => slugC(c) === slug);
+function swatch(m) {
+  const set = metalSet(m.skin.metal), a = METALS[set.kase], b = METALS[set.bezel];
+  return `linear-gradient(135deg, ${b[0]} 0%, ${b[1]} 35%, ${a[2]} 50%, ${a[1]} 70%, ${a[0]} 100%)`;
+}
+function pageCollection(slug) {
+  const c = collOf(slug);
+  if (!c) { location.hash = ""; return; }
+  const ms = ALL.filter(m => m.collection === c).sort((a, b) => a.diametre - b.diametre);
+  const [titre, texte] = COLL_TXT[c] || [c, ""];
+  const liste = collections().map(([x]) => x), suivante = liste[(liste.indexOf(c) + 1) % liste.length];
+  const m0 = ms[0], dets = detsInZone();
+  const html = `
+  <section class="cp-hero">
+    <div class="cp-hero-img">${watchSVG(m0.skin, { diam: m0.diametre, vb: "55 90 290 410" })}</div>
+    <div class="cp-hero-t"><p class="eyebrow">${esc(c)}</p><h1>${esc(titre)}</h1><p>${esc(texte)}</p></div>
+  </section>
+
+  <section class="cp-models" id="cp-modeles">
+    <div class="cp-track" id="cpTrack">${ms.map((m, i) => `<div class="cp-slide" data-i="${i}"><a href="#m/${encodeURIComponent(m.id)}">${watchSVG(m.skin, { diam: m.diametre, label: m.modele })}</a></div>`).join("")}</div>
+    ${ms.length > 1 ? `<p class="cp-hint">Faire glisser pour explorer</p>` : ""}
+    <div class="cp-sw" role="tablist" aria-label="Versions">${ms.map((m, i) => `<button role="tab" aria-selected="${i === 0}" data-sw="${i}" aria-label="${esc(m.modele)}, ${esc(shortMat(m.materiau))}" style="background:${swatch(m)}"></button>`).join("")}</div>
+    <div class="cp-info" id="cpInfo"></div>
+  </section>
+
+  <section class="cp-feat" id="cp-carac">
+    <div class="wrap"><p class="cp-lead">${esc(m0.fonctions)}. Boîtier Oyster, mouvement perpétuel, étanchéité ${nf(m0.etancheite)} mètres.</p>
+      <a class="btn btn-green" href="#m/${encodeURIComponent(m0.id)}">Découvrir les caractéristiques</a></div>
+    <div class="cp-macro">${watchSVG(m0.skin, { diam: m0.diametre, vb: "120 175 280 260", par: "xMidYMid slice" })}</div>
+  </section>
+
+  <section class="cp-more" id="cp-plus">
+    <h2>Aller plus loin</h2>
+    <div class="cp-grid">
+      <a class="cp-tile" href="#officiels"><span class="cp-ti">${watchSVG(m0.skin, { diam: m0.diametre, vb: "100 200 200 200" })}</span><b>Où l'acheter</b><small>${dets.length} détaillant${dets.length > 1 ? "s" : ""} · ${esc(ZONE_NOM[S.zone])}</small></a>
+      <a class="cp-tile dark" href="#m/${encodeURIComponent(m0.id)}"><span class="cp-ti">${watchSVG(m0.skin, { diam: m0.diametre, vb: "205 160 160 160" })}</span><b>La fiche technique</b><small>Calibre ${esc(m0.calibre)} · ${m0.reserve} h</small></a>
+      <button class="cp-tile" data-alert-coll="${esc(c)}"><span class="cp-ti cp-bell"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4l2-2ZM10 20a2 2 0 0 0 4 0"/></svg></span><b>M'alerter</b><small>Pour toute nouvelle ${esc(c)}</small></button>
+      <button class="cp-tile" data-coll-go="${esc(c)}"><span class="cp-ti">${watchSVG((ms[1] || m0).skin, { diam: (ms[1] || m0).diametre, vb: "105 400 190 190" })}</span><b>Toutes les ${esc(c)}</b><small>${ms.length} référence${ms.length > 1 ? "s" : ""} au catalogue</small></button>
+    </div>
+  </section>
+
+  <section class="cp-next">
+    <p class="eyebrow">Suivant</p>
+    <h2>${esc(suivante)}</h2>
+    <a class="btn btn-green" href="#c/${slugC(suivante)}">En savoir plus</a>
+  </section>
+
+  <footer class="cp-foot">
+    <img src="img/logo.png" alt="Monalex" width="220">
+    <nav class="crumbs"><a href="#">Accueil</a> / <a href="#" data-goto="list">Montres</a> / <span>${esc(c)}</span></nav>
+    <button class="btn btn-light" data-share><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4" stroke="currentColor" stroke-width="2"/></svg>Partager</button>
+  </footer>
+
+  <div class="cp-bar" id="cpBar"><button class="cp-bar-b" aria-expanded="false">${esc(c)}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 15 6-6 6 6"/></svg></button>
+    <div class="cp-bar-m" hidden>
+      <a href="#cp-modeles" data-cpgo>Les modèles</a><a href="#cp-carac" data-cpgo>Caractéristiques</a><a href="#cp-plus" data-cpgo>Aller plus loin</a>
+      <hr>${liste.map(x => `<a href="#c/${slugC(x)}"${x === c ? ' aria-current="page"' : ""}>${esc(x)}</a>`).join("")}
+    </div></div>`;
+  openPage(html, c);
+  page().classList.add("cp");
+  // carrousel des modèles + pastilles
+  const track = $("#cpTrack"), info = $("#cpInfo"), sws = $$("[data-sw]");
+  const show = i => {
+    const m = ms[i];
+    sws.forEach((b, j) => b.setAttribute("aria-selected", i === j));
+    info.innerHTML = `<p class="cp-new">${m.etat === "Neuf" ? "Catalogue officiel" : esc(m.etat)}</p>
+      <button class="cp-fav" data-fav="${esc(m.id)}" aria-pressed="${ME.favs.has(m.id)}">${HEART}<span>${ME.favs.has(m.id) ? "Dans vos favoris" : "Ajouter aux favoris"}</span></button>
+      <h3>${esc(m.modele)}</h3><p class="cp-cap">Oyster, ${m.diametre} mm, ${esc(m.materiau.toLowerCase())}</p>
+      <a class="cp-link" href="#m/${encodeURIComponent(m.id)}">Découvrir ce modèle ${CHEV}</a>`;
+  };
+  show(0);
+  track.addEventListener("scroll", () => { const i = Math.round(track.scrollLeft / track.clientWidth); if (ms[i] && sws[i]?.getAttribute("aria-selected") !== "true") show(i); }, { passive: true });
+  sws.forEach(b => b.onclick = () => { const i = +b.dataset.sw; track.scrollTo({ left: track.clientWidth * i, behavior: "smooth" }); show(i); });
+  const bar = $("#cpBar"), bb = $(".cp-bar-b", bar), menu = $(".cp-bar-m", bar);
+  bb.onclick = () => { const o = menu.hidden; menu.hidden = !o; bb.setAttribute("aria-expanded", o); };
+  $$("[data-cpgo]", bar).forEach(a => a.onclick = e => { e.preventDefault(); menu.hidden = true; bb.setAttribute("aria-expanded", false); const t = $(a.getAttribute("href")); page().scrollTo({ top: t.offsetTop - 70, behavior: "smooth" }); });
 }
 
 /* ---------- détaillant officiel (données réelles) */
@@ -1189,7 +1285,7 @@ document.addEventListener("click", e => {
   const cg = t.closest("[data-coll-go]"); if (cg) { e.preventDefault(); S.coll = cg.dataset.collGo; S.zone = "monde"; renderHome(); goList(); return; }
   const sg = t.closest("[data-sort-go]"); if (sg) { S.sort = sg.dataset.sortGo; S.zone = "monde"; renderHome(); goList(); return; }
   const z = t.closest("[data-z]"); if (z) { S.zone = z.dataset.z; store.set("rm.zone", S.zone); renderHome(); if (z.hasAttribute("data-rerender")) route(); return; }
-  const c = t.closest(".coll"); if (c) { S.coll = c.dataset.c; renderHome(); return; }
+  const c = t.closest(".coll"); if (c) { if (c.dataset.c) location.hash = "c/" + slugC(c.dataset.c); else { S.coll = ""; renderHome(); } return; }
   const et = t.closest("[data-etat]"); if (et) { S.etat = et.dataset.etat; renderHome(); return; }
   if (t.closest("[data-open-filters]")) { openPanel(); return; }
   if (t.closest("[data-refresh]")) { closeOv("menu"); refresh(true); return; }
@@ -1202,6 +1298,7 @@ document.addEventListener("click", e => {
   const uf = t.closest("[data-unfollow]"); if (uf) { unfollow(uf.dataset.unfollow); route(); return; }
   if (t.closest("[data-seen-all]")) { Object.keys(ME.suivis).forEach(markSeen); ME.alertes.forEach(a => a.vus = filterWith(a.crit).map(m => m.id)); ME.save(); route(); renderHome(); return; }
   if (t.closest("[data-save-alert]")) { closePanel(); saveAlert(); return; }
+  const ac = t.closest("[data-alert-coll]"); if (ac) { S.coll = ac.dataset.alertColl; S.f = emptyF(); S.q = ""; saveAlert(); return; }
   const da = t.closest("[data-del-alert]"); if (da) { ME.alertes = ME.alertes.filter(a => a.id !== da.dataset.delAlert); ME.save(); toast("Alerte supprimée."); route(); return; }
   const va = t.closest("[data-voir-alert]"); if (va) { const a = ME.alertes.find(x => x.id === va.dataset.voirAlert); if (a) { Object.assign(S, { zone: a.crit.zone, coll: a.crit.coll, q: a.crit.q, f: { ...emptyF(), ...a.crit.f } }); renderHome(); goList(); } return; }
   const vs = t.closest("[data-vsort]"); if (vs) { VSORT = vs.dataset.vsort; pageVendeurs(); return; }
@@ -1313,6 +1410,7 @@ function route() {
   else if (k === "v") pageVendeur(a);
   else if (k === "vendeurs") { location.replace("#officiels"); }
   else if (k === "d") pageDetaillant(a);
+  else if (k === "c") pageCollection(a);
   else if (k === "officiels") pageOfficiels();
   else if (k === "infos") pageInfos();
   else if (k === "notifications") pageNotifications();
