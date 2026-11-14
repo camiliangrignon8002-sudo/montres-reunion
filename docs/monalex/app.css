@@ -719,3 +719,14 @@ h1,h2,h3,.p-h1,.d-info h1,.hero-t h1,.sec-h h2,.d-sec h2,.acc-h h1,.seller-card 
 .src-l b{display:block;font-weight:500}
 .src-l small{display:block;color:var(--muted);font-size:14px}
 .src-l a{color:var(--poker-2);font-size:14.5px;white-space:nowrap;text-decoration:none}
+
+/* ---------- régions du monde, fond de carte gris clair */
+.regions{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:10px 0 12px}
+.regions::-webkit-scrollbar{display:none}
+.rchip{flex:none;height:36px;padding:0 14px;border-radius:999px;background:var(--bg2);font-size:15px;font-family:var(--font);color:var(--ink-2)}
+.rchip small{opacity:.6;margin-left:3px}
+.rchip[aria-pressed=true]{background:var(--grad);color:#fff}
+.smap .leaflet-tile-pane{filter:none}
+.stylise .leaflet-tile-pane{filter:none}
+.spin .pin-ico{width:34px;height:34px;transform:rotate(45deg)}
+.smap{isolation:isolate;z-index:0}
