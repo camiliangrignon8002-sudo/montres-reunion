@@ -698,7 +698,7 @@ function pageMontre(id) {
   ME.vues = [id, ...ME.vues.filter(x => x !== id)].slice(0, 12); ME.save();
   const photos = photosOf(m);
   const slides = [...photos.map((p, i) => ({ nom: p.auteur ? `Photo : ${p.auteur} · ${p.licence}` : `Photo ${i + 1}`, credit: p, html: `<img src="${esc(p.src)}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async" ${i ? 'loading="lazy"' : ""} onload="checkPhoto(this)">`, big: p.src })),
-    ...VUES.slice(0, photos.length ? 1 : 4).map(x => ({ nom: `${x.nom} (illustration)`, html: watchSVG(m.skin, { diam: m.diametre, vb: x.vb, label: `${m.modele} — ${x.nom}` }), vb: x.vb }))];
+    ...VUES.slice(0, photos.length ? 1 : 4).map(x => ({ nom: `${x.nom} (illustration)`, html: watchSVG(m.skin, { diam: m.diametre, vb: x.vb, fx: true, label: `${m.modele} — ${x.nom}` }), vb: x.vb }))];
   const dets = detsInZone(), d0 = dets[0] || [...DET].sort((a, b) => a.dist - b.dist)[0];
   const suivi = ME.suivis[m.id];
   const specs = [
@@ -823,12 +823,13 @@ function swatch(m) {
 }
 /* ---------- montres en 3D (Three.js, comme le site Red Bull) */
 const M3D = new Map();
-function mount3D(canvas, m, scrollEl) {
+function mount3D(canvas, m, scrollEl, actif) {
   if (!canvas || M3D.get(canvas)) return;
   M3D.set(canvas, "…");
-  import("./watch3d.js").then(mod => mod.mountWatch3D(canvas, m.skin, { svg: watchSVG(m.skin, { diam: m.diametre, vb: "71 171 258 258" }), scrollEl }))
-    .then(h => { if (h) { M3D.set(canvas, h); canvas.classList.add("on"); } else canvas.remove(); })
+  const go = () => import("./watch3d.js").then(mod => mod.mountWatch3D(canvas, m.skin, { svg: watchSVG(m.skin, { diam: m.diametre, vb: "71 171 258 258", fx: true }), scrollEl, actif })).then(h => { if (h) { M3D.set(canvas, h); canvas.classList.add("on"); } else canvas.remove(); })
     .catch(() => canvas.remove());
+  if (document.documentElement.classList.contains("calm")) { canvas.remove(); return; }
+  "requestIdleCallback" in window ? requestIdleCallback(go, { timeout: 1500 }) : setTimeout(go, 400);
 }
 function pageCollection(slug) {
   const c = collOf(slug);
@@ -885,7 +886,7 @@ function pageCollection(slug) {
     </div></div>`;
   openPage(html, c);
   page().classList.add("cp");
-  mount3D($("#cp3d"), m0, page());
+  mount3D($("#cp3d"), m0, page(), () => page().classList.contains("open"));
   // carrousel des modèles + pastilles
   const track = $("#cpTrack"), info = $("#cpInfo"), sws = $$("[data-sw]");
   const show = i => {
@@ -1273,7 +1274,7 @@ function drawLB() {
   const s = LB.slides[LB.i], box = $("#lbBox"), body = $("#lbBody");
   const base = Math.min(body.clientWidth - 24, body.clientHeight - 24);
   box.style.width = box.style.height = Math.round(base * LB.z) + "px";
-  box.innerHTML = s.big ? `<img src="${esc(s.big)}" alt="">` : watchSVG(LB.m.skin, { diam: LB.m.diametre, vb: s.vb });
+  box.innerHTML = s.big ? `<img src="${esc(s.big)}" alt="">` : watchSVG(LB.m.skin, { diam: LB.m.diametre, vb: s.vb, fx: true });
   $("#lbTitle").textContent = `${LB.m.modele} — ${s.nom}`;
   $("#lbFoot").textContent = `Zoom ×${LB.z} · ${LB.i + 1}/${LB.slides.length} · double-touchez pour zoomer, glissez pour vous déplacer`;
 }
@@ -1490,23 +1491,8 @@ $("#homeLink").onclick = e => { e.preventDefault(); closeOv("menu"); closeOv("se
 $("#menu").addEventListener("click", e => { if (e.target.closest("a[href^='#']") && !e.target.closest("[data-goto],[data-zone-go]")) closeOv("menu"); });
 $("#search").addEventListener("click", e => { if (e.target.closest("a[href^='#']")) closeOv("search"); });
 $("#demoOk").onclick = () => { $("#demo").hidden = true; store.set("rm.demoOk", 1); };
-window.addEventListener("scroll", () => $("#top").classList.toggle("scrolled", scrollY > 4), { passive: true });
-// Reflets du vert poker : ils tournent comme sur un cadran soleillé quand on fait défiler (accueil et pages)
-(() => {
-  let raf = 0;
-  const calm = () => document.documentElement.classList.contains("calm") || matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const maj = () => {
-    raf = 0;
-    const y = page().classList.contains("open") ? page().scrollTop : scrollY;
-    const r = document.documentElement.style;
-    r.setProperty("--sun", `${(y * 0.22) % 360}deg`);
-    r.setProperty("--sunpct", String(Math.round((y * 0.08) % 200)));
-  };
-  const onScroll = () => { if (!raf && !calm()) raf = requestAnimationFrame(maj); };
-  addEventListener("scroll", onScroll, { passive: true });
-  page().addEventListener("scroll", onScroll, { passive: true });
-  $("#menu").addEventListener("scroll", onScroll, { passive: true });
-})();
+{ let haut = null; window.addEventListener("scroll", () => { const v = scrollY > 4; if (v !== haut) { haut = v; $("#top").classList.toggle("scrolled", v); } }, { passive: true }); }
+// Reflets du vert poker : animés directement par le navigateur au défilement (voir app.css, « reflets »), sans calcul ici.
 document.addEventListener("keydown", e => {
   if ($("#lb").classList.contains("open")) {
     if (e.key === "Escape") $("#lb").classList.remove("open");
@@ -1554,7 +1540,7 @@ async function start() {
   catch (e) { $("#grid").innerHTML = `<div class="empty"><h3>Les montres ne se chargent pas</h3><p>La connexion semble coupée. Tirez la page vers le bas pour réessayer.</p><button class="btn btn-green" onclick="location.reload()">Réessayer</button></div>`; return; }
   $("#demo").hidden = !DATA.demo || !!store.get("rm.demoOk", 0);
   // Montre 3D de l'accueil (chronographe or, cadran vert poker), avec le dessin en secours
-  mount3D($("#hero3d"), { skin: { type: "daytona", dial: "#035837", sub: "#03321e", bezel: "#03321e", insert: "#03321e", metal: "gold", bracelet: "oyster" }, diametre: 40 }, window);
+  mount3D($("#hero3d"), { skin: { type: "daytona", dial: "#035837", sub: "#03321e", bezel: "#03321e", insert: "#03321e", metal: "gold", bracelet: "oyster" }, diametre: 40 }, window, () => !page().classList.contains("open"));
   $("#annee").textContent = new Date().getFullYear();
   // Visuel d'accueil assorti au logo : chronographe or, cadran vert
   $("#heroImg").innerHTML = watchSVG({ type: "daytona", dial: "#035837", sub: "#03321e", bezel: "#03321e", insert: "#03321e", metal: "gold", bracelet: "oyster" }, { diam: 40, vb: "75 170 250 260", par: "xMidYMid slice" });

@@ -78,6 +78,7 @@ function strap(u, s, ms, top) {
 
 function watchSVG(s, o = {}) {
   const u = "w" + (++UID);
+  const fx = o.fx ? ` filter="url(#${u}ds)"` : "";   // ombres des index : seulement sur les grandes vues (coûteuses à afficher)
   const ms = metalSet(s.metal);
   const T = s.type;
   const dial = s.dial || "#111";
@@ -101,7 +102,7 @@ function watchSVG(s, o = {}) {
   d += `<radialGradient id="${u}db" cx=".5" cy=".15" r=".95"><stop offset="0" stop-color="#2a63c4"/><stop offset=".5" stop-color="#11306e"/><stop offset="1" stop-color="#020306"/></radialGradient>`;
   d += `<radialGradient id="${u}dome" cx=".5" cy=".35" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".25"/></radialGradient>`;
   d += `<linearGradient id="${u}glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/></linearGradient>`;
-  d += `<filter id="${u}ds" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="1.2" stdDeviation="1" flood-opacity=".45"/></filter>`;
+  if (o.fx) d += `<filter id="${u}ds" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="1.2" stdDeviation="1" flood-opacity=".45"/></filter>`;
   d += "</defs>";
 
   let g = d;
@@ -182,9 +183,9 @@ function watchSVG(s, o = {}) {
     for (let h = 0; h < 12; h++) {
       const a = h * 30;
       if (h === 3 && hasDate) continue;
-      if (h === 0) { const [x1, y1] = P(86, -7), [x2, y2] = P(86, 7), [x3, y3] = P(64, 0); g += `<path d="M${x1} ${y1}L${x2} ${y2}L${x3} ${y3}Z" fill="${lume}" stroke="url(#${u}bp${idxMetal})" stroke-width="2" filter="url(#${u}ds)"/>`; continue; }
-      if (h === 6 || h === 9 || h === 3) { const [x, y] = P(76, a); g += `<rect x="${x - 4.5}" y="${y - 11}" width="9" height="22" rx="1" fill="${lume}" stroke="url(#${u}bp${idxMetal})" stroke-width="2" transform="rotate(${a} ${x} ${y})" filter="url(#${u}ds)"/>`; continue; }
-      const [x, y] = P(78, a); g += `<circle cx="${x}" cy="${y}" r="7" fill="${lume}" stroke="url(#${u}bp${idxMetal})" stroke-width="2" filter="url(#${u}ds)"/>`;
+      if (h === 0) { const [x1, y1] = P(86, -7), [x2, y2] = P(86, 7), [x3, y3] = P(64, 0); g += `<path d="M${x1} ${y1}L${x2} ${y2}L${x3} ${y3}Z" fill="${lume}" stroke="url(#${u}bp${idxMetal})" stroke-width="2"${fx}/>`; continue; }
+      if (h === 6 || h === 9 || h === 3) { const [x, y] = P(76, a); g += `<rect x="${x - 4.5}" y="${y - 11}" width="9" height="22" rx="1" fill="${lume}" stroke="url(#${u}bp${idxMetal})" stroke-width="2" transform="rotate(${a} ${x} ${y})"${fx}/>`; continue; }
+      const [x, y] = P(78, a); g += `<circle cx="${x}" cy="${y}" r="7" fill="${lume}" stroke="url(#${u}bp${idxMetal})" stroke-width="2"${fx}/>`;
     }
   } else if (T === "explorer" || T === "airking" || T === "1908") {
     const nums = T === "1908" ? { 0: "12", 3: "3", 9: "9" } : T === "airking" ? { 3: "3", 6: "6", 9: "9" } : { 3: "3", 6: "6", 9: "9" };
@@ -209,8 +210,8 @@ function watchSVG(s, o = {}) {
       const dbl = h === 0;
       const [x, y] = P(T === "daytona" ? 80 : 77, a);
       const len = T === "daytona" ? 14 : 20, w = dbl ? 4.5 : 5.5;
-      if (dbl) { g += `<rect x="${x - 7}" y="${y - len / 2}" width="${w}" height="${len}" rx="1" fill="url(#${u}bp${idxMetal})" filter="url(#${u}ds)" transform="rotate(${a} ${x} ${y})"/><rect x="${x + 2.5}" y="${y - len / 2}" width="${w}" height="${len}" rx="1" fill="url(#${u}bp${idxMetal})" filter="url(#${u}ds)" transform="rotate(${a} ${x} ${y})"/>`; }
-      else g += `<rect x="${x - w / 2}" y="${y - len / 2}" width="${w}" height="${len}" rx="1" fill="url(#${u}bp${idxMetal})" filter="url(#${u}ds)" transform="rotate(${a} ${x} ${y})"/><rect x="${x - 1}" y="${y - len / 2 + 2}" width="2" height="${len * .5}" fill="${lume}" transform="rotate(${a} ${x} ${y})"/>`;
+      if (dbl) { g += `<rect x="${x - 7}" y="${y - len / 2}" width="${w}" height="${len}" rx="1" fill="url(#${u}bp${idxMetal})"${fx} transform="rotate(${a} ${x} ${y})"/><rect x="${x + 2.5}" y="${y - len / 2}" width="${w}" height="${len}" rx="1" fill="url(#${u}bp${idxMetal})"${fx} transform="rotate(${a} ${x} ${y})"/>`; }
+      else g += `<rect x="${x - w / 2}" y="${y - len / 2}" width="${w}" height="${len}" rx="1" fill="url(#${u}bp${idxMetal})"${fx} transform="rotate(${a} ${x} ${y})"/><rect x="${x - 1}" y="${y - len / 2 + 2}" width="2" height="${len * .5}" fill="${lume}" transform="rotate(${a} ${x} ${y})"/>`;
     }
   }
 
@@ -245,7 +246,7 @@ function watchSVG(s, o = {}) {
 
   // aiguilles (10 h 10)
   const hm = `url(#${u}bp${handM === "steel" ? "platinum" : handM})`;
-  const hand = (a, body) => `<g transform="rotate(${a} 200 300)" filter="url(#${u}ds)">${body}</g>`;
+  const hand = (a, body) => `<g transform="rotate(${a} 200 300)"${fx}>${body}</g>`;
   const sport = ["sub", "gmt", "yacht", "exp2", "explorer", "airking"].includes(T);
   if (T === "gmt" || T === "exp2") {
     const gc = T === "exp2" ? "#e86a12" : (Array.isArray(s.insert) && s.insert[0] === "#0c0c0e") ? "#c9a24a" : (T === "gmt" && Array.isArray(s.insert) && s.insert[1] === "#0c0c0e") ? "#2e8a4b" : "#c8202b";

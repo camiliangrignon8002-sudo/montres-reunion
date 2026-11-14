@@ -1,15 +1,14 @@
-// Monalex — montre en 3D (Three.js) : boîtier, lunette, couronne, verre et bracelet en vrai relief,
-// cadran tiré du dessin vectoriel de la montre. Tourne au défilement, se manipule au doigt. Rendu seulement quand ça bouge.
+// Monalex — montre en 3D (Three.js), version légère et fluide :
+// - bracelet en « instances » (2 à 3 dessins au lieu de ~150), verre simple sans effet de transmission ;
+// - rendu seulement quand on fait défiler ou qu'on tourne la montre, jamais en continu ;
+// - rien n'est calculé quand la montre n'est pas à l'écran ; tout est libéré quand elle disparaît.
 import * as THREE from "three";
 
-const METAL = {
-  steel: 0xd6d9de, platinum: 0xe4e6e9, whitegold: 0xe4e6e9, gold: 0xe2b85a, everose: 0xe0a585,
-  leather: 0x5a341d, rubber: 0x18191b,
-};
+const METAL = { steel: 0xd6d9de, platinum: 0xe4e6e9, whitegold: 0xe4e6e9, gold: 0xe2b85a, everose: 0xe0a585, leather: 0x5a341d, rubber: 0x18191b };
 
 function studio(renderer) {
   const env = new THREE.Scene();
-  env.add(new THREE.Mesh(new THREE.SphereGeometry(20, 32, 16), new THREE.MeshBasicMaterial({ color: 0x2a2c30, side: THREE.BackSide })));
+  env.add(new THREE.Mesh(new THREE.SphereGeometry(20, 16, 8), new THREE.MeshBasicMaterial({ color: 0x2a2c30, side: THREE.BackSide })));
   const panel = (w, h, x, y, z, ry, rx, lum) => {
     const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(0xffffff).multiplyScalar(lum), side: THREE.DoubleSide }));
     m.position.set(x, y, z); m.rotation.set(rx || 0, ry || 0, 0); env.add(m);
@@ -18,120 +17,118 @@ function studio(renderer) {
   panel(2, 14, 7, 0, 2, -Math.PI / 2.2, 0, 3.6);
   panel(12, 5, 0, 9, 0, 0, Math.PI / 2, 2.6);
   panel(8, 3, 0, -1, 9, Math.PI, 0, 1.3);
-  panel(3, 10, 0, 0, -9, 0, 0, 2.4);
   const pm = new THREE.PMREMGenerator(renderer);
   const t = pm.fromScene(env, .03).texture; pm.dispose(); return t;
 }
 
-// Le cadran (avec lunette et aiguilles) : rendu du dessin SVG dans une texture
-function faceTexture(svg, size = 1024) {
+function faceTexture(svg, size) {
   return new Promise(ok => {
     const img = new Image();
+    img.decoding = "async";
     img.onload = () => {
       const c = document.createElement("canvas"); c.width = c.height = size;
       const g = c.getContext("2d");
-      g.save(); g.beginPath(); g.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2); g.clip();
-      g.drawImage(img, 0, 0, size, size); g.restore();
-      const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; ok(t);
+      g.beginPath(); g.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2); g.clip();
+      g.drawImage(img, 0, 0, size, size);
+      const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4; ok(t);
     };
     img.onerror = () => ok(null);
     img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
   });
 }
 
-function metalMat(key, rough = .2) {
-  return new THREE.MeshPhysicalMaterial({ color: METAL[key] ?? METAL.steel, metalness: 1, roughness: rough, clearcoat: .3, clearcoatRoughness: .2, envMapIntensity: 1.15 });
-}
+const metalMat = (key, rough = .2) => new THREE.MeshStandardMaterial({ color: METAL[key] ?? METAL.steel, metalness: 1, roughness: rough, envMapIntensity: 1.15 });
 
 function buildWatch(skin, face) {
   const ms = window.metalSet ? window.metalSet(skin.metal) : { kase: "steel", bezel: "steel", center: "steel" };
   const g = new THREE.Group();
   const kase = metalMat(ms.kase, .22), bezel = metalMat(ms.bezel, .16), center = metalMat(ms.center, .12);
-
-  // boîtier (profil tourné : flanc arrondi) + face
   const prof = [[0, -.26], [1.2, -.26], [1.3, -.2], [1.32, .05], [1.3, .16], [1.26, .2], [0, .2]].map(([x, y]) => new THREE.Vector2(x, y));
-  const body = new THREE.Mesh(new THREE.LatheGeometry(prof, 96), kase); body.rotation.x = Math.PI / 2; g.add(body);
-  // lunette en relief
-  const ring = new THREE.Mesh(new THREE.TorusGeometry(1.2, .085, 24, 128), bezel); ring.position.z = .2; g.add(ring);
-  // cadran + lunette dessinés
-  const disc = new THREE.Mesh(new THREE.CircleGeometry(1.2, 128), new THREE.MeshPhysicalMaterial({ map: face, roughness: .35, metalness: .1, clearcoat: 1, clearcoatRoughness: .05 }));
+  const body = new THREE.Mesh(new THREE.LatheGeometry(prof, 64), kase); body.rotation.x = Math.PI / 2; g.add(body);
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(1.2, .085, 12, 64), bezel); ring.position.z = .2; g.add(ring);
+  const disc = new THREE.Mesh(new THREE.CircleGeometry(1.2, 64), new THREE.MeshStandardMaterial({ map: face, roughness: .3, metalness: .1 }));
   disc.position.z = .215; g.add(disc);
-  // verre saphir bombé
-  const glass = new THREE.Mesh(new THREE.SphereGeometry(3.2, 64, 16, 0, Math.PI * 2, 0, .36), new THREE.MeshPhysicalMaterial({ color: 0xffffff, transmission: 1, roughness: 0, thickness: .05, transparent: true, opacity: .18, envMapIntensity: 1.4, clearcoat: 1 }));
+  // verre : simple reflet transparent (l'effet « transmission » doublait le coût du rendu)
+  const glass = new THREE.Mesh(new THREE.SphereGeometry(3.2, 32, 8, 0, Math.PI * 2, 0, .36), new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: .1, roughness: 0, metalness: 1, depthWrite: false }));
   glass.rotation.x = Math.PI / 2; glass.position.z = .215 - 3.2 * Math.cos(.36) + .03; g.add(glass);
-  // couronne
-  const crown = new THREE.Mesh(new THREE.CylinderGeometry(.16, .16, .22, 24), metalMat(ms.bezel === "gold" ? "gold" : ms.kase, .25));
+  const crown = new THREE.Mesh(new THREE.CylinderGeometry(.16, .16, .22, 16), metalMat(ms.bezel === "gold" ? "gold" : ms.kase, .25));
   crown.rotation.z = Math.PI / 2; crown.position.set(1.42, 0, -.02); g.add(crown);
-  // cornes
+  const lugGeo = new THREE.BoxGeometry(.32, .62, .34);
   for (const sx of [-1, 1]) for (const sy of [-1, 1]) {
-    const lug = new THREE.Mesh(new THREE.BoxGeometry(.32, .62, .34), kase);
-    lug.position.set(sx * .62, sy * 1.28, -.03); lug.rotation.z = sx * sy * -.12; g.add(lug);
+    const lug = new THREE.Mesh(lugGeo, kase); lug.position.set(sx * .62, sy * 1.28, -.03); lug.rotation.z = sx * sy * -.12; g.add(lug);
   }
-  // bracelet : maillons le long d'une boucle qui passe derrière le boîtier (comme portée au poignet)
-  const strap = skin.bracelet;
-  const R = 2.25, cz = -1.95, a0 = Math.asin(1.5 / R), n = 34;
-  for (let i = 0; i <= n; i++) {
-    const a = a0 + (Math.PI * 2 - 2 * a0) * i / n;          // de la corne du haut, par l'arrière, à la corne du bas
-    const y = R * Math.sin(a), z = cz + R * Math.cos(a);
-    const link = new THREE.Group();
-    if (strap === "rubber" || strap === "leather") {
-      link.add(new THREE.Mesh(new THREE.BoxGeometry(1.08, .44, .16), new THREE.MeshPhysicalMaterial({ color: METAL[strap], roughness: strap === "rubber" ? .55 : .7, metalness: 0, clearcoat: strap === "rubber" ? .3 : 0 })));
-    } else {
-      const cols = strap === "jubilee" ? [[-.42, .3, kase], [-.17, .18, center], [0, .14, center], [.17, .18, center], [.42, .3, kase]] : [[-.36, .38, kase], [0, .34, ms.center !== ms.kase || strap === "president" ? center : kase], [.36, .38, kase]];
-      for (const [x, w, mat] of cols) { const b = new THREE.Mesh(new THREE.BoxGeometry(w, .4, .14), mat); b.position.x = x; link.add(b); }
+  // bracelet : chaque colonne de maillons = une seule « instance » dessinée en une fois
+  const strap = skin.bracelet, R = 2.25, cz = -1.95, a0 = Math.asin(1.5 / R), n = 34;
+  const cols = strap === "rubber" || strap === "leather"
+    ? [[0, 1.08, new THREE.MeshStandardMaterial({ color: METAL[strap], roughness: strap === "rubber" ? .55 : .75, metalness: 0 })]]
+    : strap === "jubilee" ? [[-.42, .3, kase], [-.17, .18, center], [0, .14, center], [.17, .18, center], [.42, .3, kase]]
+    : [[-.36, .38, kase], [0, .34, ms.center !== ms.kase || strap === "president" ? center : kase], [.36, .38, kase]];
+  const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), one = new THREE.Vector3(1, 1, 1), pos = new THREE.Vector3();
+  for (const [x, w, mat] of cols) {
+    const inst = new THREE.InstancedMesh(new THREE.BoxGeometry(w, .4, strap === "rubber" || strap === "leather" ? .16 : .14), mat, n + 1);
+    for (let i = 0; i <= n; i++) {
+      const a = a0 + (Math.PI * 2 - 2 * a0) * i / n;
+      pos.set(x, R * Math.sin(a), cz + R * Math.cos(a)); q.setFromEuler(e.set(-a, 0, 0));
+      inst.setMatrixAt(i, m4.compose(pos, q, one));
     }
-    link.position.set(0, y, z); link.rotation.x = -a; g.add(link);   // le maillon suit la courbe du bracelet
+    g.add(inst);
   }
   return g;
 }
 
-export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag = true } = {}) {
+export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag = true, actif = () => true } = {}) {
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
   let renderer;
-  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" }); }
+  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: dpr < 1.5, alpha: true, powerPreference: "default" }); }
   catch (e) { return null; }
   renderer.setClearColor(0, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
-  renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+  renderer.setPixelRatio(dpr);
   const scene = new THREE.Scene(); scene.environment = studio(renderer);
   scene.add(new THREE.AmbientLight(0xffffff, .35));
   const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(-3, 4, 6); scene.add(key);
-  const camera = new THREE.PerspectiveCamera(28, 1, .1, 60); camera.position.set(0, 0, 11);
+  const camera = new THREE.PerspectiveCamera(28, 1, .1, 60); camera.position.set(0, 0, 12);
 
-  const face = await faceTexture(svg);
-  const watch = buildWatch(skin, face); scene.add(watch);
-  watch.rotation.set(-.35, -.5, .12);
-
-  let tx = -.35, ty = -.5, dragX = 0, dragY = 0, dirty = true, raf = 0, alive = true, idle = 0;
+  const watch = buildWatch(skin, await faceTexture(svg, dpr > 1.2 ? 1024 : 768)); scene.add(watch);
+  let rx = -.35, ry = -.5, tx = rx, ty = ry, dragX = 0, dragY = 0, raf = 0, visible = true, mort = false;
+  watch.rotation.set(rx, ry, .12);
   const scrollY = () => scrollEl === window ? window.scrollY : scrollEl.scrollTop;
-  const target = () => {
+  const draw = () => renderer.render(scene, camera);
+  const loop = () => {
+    raf = 0;
+    if (mort) return;
+    if (!canvas.isConnected) { dispose(); return; }
+    if (!visible || !actif()) return;
     const y = scrollY();
-    ty = -.5 + y * .0045 + dragX + idle; tx = -.35 + Math.sin(y * .003) * .25 + dragY;
+    ty = -.5 + y * .0045 + dragX; tx = -.35 + Math.sin(y * .003) * .25 + dragY;
+    rx += (tx - rx) * .18; ry += (ty - ry) * .18;
+    watch.rotation.x = rx; watch.rotation.y = ry;
+    draw();
+    if (Math.abs(tx - rx) + Math.abs(ty - ry) > .001) raf = requestAnimationFrame(loop);  // on s'arrête dès que la montre est immobile
   };
+  const kick = () => { if (!raf && !mort) raf = requestAnimationFrame(loop); };
   const resize = () => {
     const w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return;
     renderer.setSize(w, h, false); camera.aspect = w / h;
-    camera.position.z = w / h < .8 ? 16.5 : 12.5; camera.updateProjectionMatrix(); dirty = true; kick();
+    camera.position.z = w / h < .8 ? 16.5 : 12.5; camera.updateProjectionMatrix(); draw();
   };
-  const loop = () => {
-    raf = 0; if (!alive) return;
-    target();
-    const dx = tx - watch.rotation.x, dy = ty - watch.rotation.y;
-    watch.rotation.x += dx * .12; watch.rotation.y += dy * .12;
-    if (Math.abs(dx) + Math.abs(dy) > .0005 || dirty) { renderer.render(scene, camera); dirty = false; kick(); }
-  };
-  const kick = () => { if (!raf && alive) raf = requestAnimationFrame(loop); };
-  const calm = () => document.documentElement.classList.contains("calm") || matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // légère rotation quand rien ne bouge
-  const idleT = setInterval(() => { if (!calm() && !document.hidden && canvas.isConnected) { idle += .004; kick(); } }, 40);
+  const io = new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) kick(); });
+  io.observe(canvas);
+  const ro = new ResizeObserver(resize); ro.observe(canvas);
   scrollEl.addEventListener("scroll", kick, { passive: true });
-  addEventListener("resize", resize);
   if (drag) {
     let p0 = null;
     canvas.addEventListener("pointerdown", e => { p0 = { x: e.clientX, y: e.clientY, dx: dragX, dy: dragY }; canvas.setPointerCapture(e.pointerId); });
     canvas.addEventListener("pointermove", e => { if (!p0) return; dragX = p0.dx + (e.clientX - p0.x) * .01; dragY = Math.max(-.9, Math.min(.9, p0.dy + (e.clientY - p0.y) * .006)); kick(); });
     const up = () => { p0 = null; }; canvas.addEventListener("pointerup", up); canvas.addEventListener("pointercancel", up);
   }
+  function dispose() {
+    if (mort) return; mort = true;
+    io.disconnect(); ro.disconnect(); scrollEl.removeEventListener("scroll", kick);
+    scene.traverse(o => { o.geometry?.dispose?.(); (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => { m?.map?.dispose?.(); m?.dispose?.(); }); });
+    scene.environment?.dispose?.(); renderer.dispose();
+  }
   resize(); kick();
-  return { dispose() { alive = false; clearInterval(idleT); scrollEl.removeEventListener("scroll", kick); removeEventListener("resize", resize); renderer.dispose(); } };
+  return { dispose, kick };
 }
