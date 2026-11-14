@@ -639,3 +639,21 @@ test("ZR : 3 personnes puis 2 pour la fermeture, sans alerte", () => {
   const r = apply(s, [put("murielle", "17:30", "23:00"), put("reine-claude", "17:30", "23:00"), put("charlotte", "17:30", "22:00")], { allowErrors: true });
   assert.ok(!C.validateWeek(r.state, W).some((i) => i.code === "STAFF_MIN" || i.code === "STAFF_MAX"));
 });
+
+test("passagers : > 1700 → 3 en ZR matin et soir ; ≤ 1800 une personne peut partir pour la fermeture", () => {
+  let s = withWeek1();
+  const W = "2026-12-07"; // été (période 25/10 → 27/03) : ZR 06:00–23:00
+  s = apply(s, [{ type: "setSettings", patch: { passengers: { [W]: 1750 } } }]).state;
+  let rules = C.paxRules(s, W);
+  assert.deepEqual(rules.map((r) => `${r.s}-${r.e}:${r.min}`), ["06:00-12:00:3", "17:00-22:00:3", "22:00-23:00:2"]);
+  s = apply(s, [{ type: "setSettings", patch: { passengers: { [W]: 1900 } } }]).state;
+  assert.deepEqual(C.paxRules(s, W).map((r) => `${r.s}-${r.e}:${r.min}`), ["06:00-12:00:3", "17:00-23:00:3"]);
+  s = apply(s, [{ type: "setSettings", patch: { passengers: { [W]: 1600 } } }]).state;
+  assert.equal(C.paxRules(s, W).length, 0);
+  s = apply(s, [{ type: "setSettings", patch: { passengers: { [W]: 1750 } } }]).state;
+  const put = (emp, a, b) => ({ type: "setShift", emp, date: W, segs: [{ s: a, e: b, z: "ZR" }] });
+  const st = apply(s, [put("murielle", "17:00", "23:00"), put("reine-claude", "17:00", "23:00"), put("charlotte", "17:00", "22:00")], { allowErrors: true }).state;
+  assert.ok(!C.validateWeek(st, W).some((i) => i.code === "STAFF_MIN" && /18:00|17:00|22:00/.test(i.msg) && /soir|17:00/.test(i.msg) && i.date === W && /ZR de 1[7-9]|ZR de 2/.test(i.msg)));
+  const st2 = apply(s, [put("murielle", "17:00", "23:00"), put("reine-claude", "17:00", "22:00")], { allowErrors: true }).state;
+  assert.ok(C.validateWeek(st2, W).some((i) => i.code === "STAFF_MIN" && /1750 passagers/.test(i.msg)));
+});

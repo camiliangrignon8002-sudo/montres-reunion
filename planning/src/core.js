@@ -55,6 +55,8 @@
     coverageFromTemplate: true,
     rulesConfirmed: false,
     appliedUpdates: [],
+    passengers: {}, // passagers prévus par jour : { "2026-11-23": 1750 }
+    paxThreshold: 1700, paxZone: "ZR", paxStaff: 3, paxCloseRelief: 1800, paxMorningEnd: "12:00", paxEveningStart: "17:00",
     staffing: [], // effectif min/max : [{ id, from, to, s, e, zone, min, max }]
     links: [], // personnes liées : [{ id, emps: [...], sameHours, sameZone, sameWeekends }]
   };
@@ -376,6 +378,20 @@
     const fmt = (arr) => arr.map((r) => ({ s: fromMin(r.s), e: fromMin(r.e), n: r.n }));
     return { low: fmt(low), high: fmt(high) };
   }
+  // Passagers : au-delà du seuil, effectif renforcé dans la zone le matin et le soir ; à la fermeture,
+  // une personne peut partir si les passagers ne dépassent pas le second seuil.
+  function paxRules(state, date) {
+    const st = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
+    const n = (st.passengers || {})[date];
+    if (n == null || n <= st.paxThreshold) return [];
+    const oh = openingHours(state, st.paxZone, date);
+    if (!oh) return [];
+    const close = toMin(oh.e), lastHour = fromMin(close - 60), base = { from: date, to: date, zone: st.paxZone, max: null, pax: n };
+    const out = [{ ...base, id: `pax-m-${date}`, s: oh.s, e: st.paxMorningEnd, min: st.paxStaff }];
+    if (n > st.paxCloseRelief) out.push({ ...base, id: `pax-s-${date}`, s: st.paxEveningStart, e: oh.e, min: st.paxStaff });
+    else out.push({ ...base, id: `pax-s-${date}`, s: st.paxEveningStart, e: lastHour, min: st.paxStaff }, { ...base, id: `pax-f-${date}`, s: lastHour, e: oh.e, min: Math.max(1, st.paxStaff - 1) });
+    return out.filter((r) => toMin(r.e) > toMin(r.s));
+  }
   // Incompatibilités : deux personnes qui ne travaillent jamais dans la même zone en même temps (dans les deux sens).
   const incompatible = (state, a, b) => {
     const ea = empById(state, a), eb = empById(state, b);
@@ -642,11 +658,11 @@
       const contract = Number(emp.contractHours) || 0;
       if (contract && contract < st.minContractHours && emp.role !== "alternant") add("info", "LEGAL_CONTRACT", emp.id, null, `${emp.name} : contrat de ${contract} h par semaine, sous le minimum de ${st.minContractHours} h d'un temps partiel (sauf dérogation).`);
     }
-    // Effectif minimum / maximum demandé à la création du planning.
-    for (const r of st.staffing || []) for (const d of weekDates(monday)) {
+    // Effectif minimum / maximum demandé à la création du planning (+ règles selon les passagers).
+    for (const r of [...(st.staffing || []), ...weekDates(monday).flatMap((d) => paxRules(state, d))]) for (const d of weekDates(monday)) {
       if (d < r.from || d > r.to || !w.shifts.some((x) => x.date === d)) continue;
       const g = staffingGaps(state, w.shifts, d, r), where = r.zone ? `en ${r.zone}` : "au total";
-      if (g.low.length) add("alerte", "STAFF_MIN", null, d, `${fmtDate(d, "day")} : ${g.low.map((x) => `${x.n} personne(s) ${where} de ${x.s} à ${x.e}`).join(", ")}, il en faut au moins ${r.min} (${r.s}–${r.e}).`);
+      if (g.low.length) add("alerte", "STAFF_MIN", null, d, `${fmtDate(d, "day")} : ${g.low.map((x) => `${x.n} personne(s) ${where} de ${x.s} à ${x.e}`).join(", ")}, il en faut au moins ${r.min} (${r.s}–${r.e}${r.pax != null ? `, ${r.pax} passagers prévus` : ""}).`);
       if (g.high.length) add("alerte", "STAFF_MAX", null, d, `${fmtDate(d, "day")} : ${g.high.map((x) => `${x.n} personnes ${where} de ${x.s} à ${x.e}`).join(", ")}, ${r.max} au maximum (${r.s}–${r.e}).`);
     }
     // Incompatibilités : jamais dans la même zone au même moment.
@@ -1274,6 +1290,13 @@
           const p = op.patch || {};
           for (const [k, v] of Object.entries(p)) {
             if (!(k in DEFAULT_SETTINGS)) continue;
+            if (k === "passengers") {
+              if (!v || typeof v !== "object" || Array.isArray(v)) { fail("Passagers invalides."); continue; }
+              const out = {};
+              for (const [d, n] of Object.entries(v)) { if (!isISO(d)) continue; if (n === "" || n == null) continue; const x = Math.round(Number(n)); if (!(x >= 0 && x < 100000)) { fail("Nombre de passagers invalide."); break; } out[d] = x; }
+              s.settings.passengers = Object.fromEntries(Object.entries(out).sort().slice(-800));
+              continue;
+            }
             if (k === "staffing") {
               if (!Array.isArray(v)) { fail("Effectifs invalides."); continue; }
               const out = [];
@@ -1447,7 +1470,7 @@
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, staffingGaps, incompatible, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, staffingGaps, paxRules, incompatible, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };

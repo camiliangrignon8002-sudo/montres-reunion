@@ -608,6 +608,7 @@
           const need = (s.settings.staffing || []).filter((r) => d >= r.from && d <= r.to);
           return h("th", { class: (d === today ? "today" : "") + (canEdit ? " day-click" : ""), title: canEdit ? "Toucher pour fixer le nombre de personnes ce jour-là" : null, onClick: canEdit ? () => this.openDayStaffing(d) : null },
             h("span", {}, C.DAYS[C.dow(d)]), h("span", { class: "d" }, C.fmtDate(d, "short")),
+            (s.settings.passengers || {})[d] != null ? h("span", { class: "need pax", title: `${s.settings.passengers[d]} passagers prévus` }, `✈︎ ${s.settings.passengers[d]}`) : null,
             need.length ? h("span", { class: "need", title: need.map((r) => `${r.s}–${r.e} ${r.zone || "ZP+ZR"} : ${r.min ?? "?"}–${r.max ?? "?"}`).join("\n") }, `👥 ${need.length}`) : null,
             h("span", { class: "cnt" }, s.zones.filter((z) => byZone[z.id]).map((z) => h("span", { class: `blk ${zoneStyle(s, z.id).cls}`, style: { "--z": z.color, padding: "0 5px" }, title: `${byZone[z.id]} en ${z.name}` }, h("small", {}, `${z.short} ${byZone[z.id]}`)))));
         }),
@@ -1249,7 +1250,23 @@
       if (kind === "close") { sIn.value = C.fromMin(C.toMin(oh.e) - 60); eIn.value = oh.e; } else { sIn.value = oh.s; eIn.value = C.fromMin(C.toMin(oh.s) + 60); }
       mn.focus();
     };
-    openDialog({ title: `Nombre de personnes · ${C.fmtDate(date, "day")}`, body: h("div", { class: "stack" }, box,
+    const st = this.state.settings;
+    const paxIn = h("input", { type: "number", class: "input", id: "ds-pax", min: "0", max: "99999", step: "10", placeholder: "ex. 1750", value: (st.passengers || {})[date] ?? "", style: { width: "140px" } });
+    const paxInfo = h("p", { class: "small muted" });
+    const drawPax = () => {
+      const rules = C.paxRules(this.state, date);
+      paxInfo.textContent = rules.length ? `Plus de ${st.paxThreshold} passagers : ${rules.map((r) => `${r.min} en ${r.zone} de ${r.s} à ${r.e}`).join(", ")}.` : `Au-delà de ${st.paxThreshold} passagers : ${st.paxStaff} personnes en ${st.paxZone} le matin et le soir (une peut partir pour la fermeture jusqu'à ${st.paxCloseRelief} passagers).`;
+    };
+    paxIn.addEventListener("change", async () => {
+      const pax = { ...(this.state.settings.passengers || {}) };
+      if (paxIn.value === "") delete pax[date]; else pax[date] = Number(paxIn.value);
+      const r = await this.commit([{ type: "setSettings", patch: { passengers: pax } }], { quiet: true, summary: `Passagers ${C.fmtDate(date, "short")} : ${paxIn.value || "—"}` });
+      if (r.ok) drawPax();
+    });
+    drawPax();
+    openDialog({ title: `Nombre de personnes · ${C.fmtDate(date, "day")}`, body: h("div", { class: "stack" },
+      h("div", { class: "row" }, h("label", { class: "f" }, "✈︎ Passagers prévus ce jour-là", paxIn)), paxInfo,
+      box,
       h("h3", {}, "Ajouter"),
       h("div", { class: "row" }, h("span", { class: "small muted" }, "Raccourcis :"), btn("🌅 Ouverture", () => preset("open"), "sm"), btn("🌙 Fermeture", () => preset("close"), "sm")),
       h("div", { class: "form-grid" }, h("label", { class: "f" }, "De", sIn), h("label", { class: "f" }, "À", eIn), h("label", { class: "f" }, "Zone", zone)),
@@ -1647,6 +1664,16 @@
             h("label", { class: "f" }, "Période été : du", h("input", { type: "date", class: "input", value: st.summerFrom || "", disabled: !edit, onChange: (ev) => this.commit([{ type: "setSettings", patch: { summerFrom: ev.target.value } }], { summary: `Période été à partir du ${ev.target.value}` }) })),
             h("label", { class: "f" }, "au (compris)", h("input", { type: "date", class: "input", value: st.summerTo || "", disabled: !edit, onChange: (ev) => this.commit([{ type: "setSettings", patch: { summerTo: ev.target.value } }], { summary: `Période été jusqu'au ${ev.target.value}` }) }))),
           h("p", { class: "small muted" }, `Horaires appliqués maintenant : ${C.seasonOf(this.today(), s) === "ete" ? "été" : "hiver"}. En dehors de la période été, ce sont les horaires d'hiver.`)),
+        h("div", { class: "stack", style: { "margin-top": "14px", gap: "8px" } }, h("h3", {}, "Selon les passagers"),
+          h("div", { class: "form-grid" },
+            num("paxThreshold", "Renfort au-delà de", "passagers"),
+            num("paxStaff", "Nombre de personnes", "personnes"),
+            h("label", { class: "f" }, "Dans la zone", h("select", { class: "input", disabled: !edit, onChange: (ev) => this.commit([{ type: "setSettings", patch: { paxZone: ev.target.value } }]) }, s.zones.filter((z) => z.id !== "ADM").map((z) => h("option", { value: z.id, selected: st.paxZone === z.id }, z.short)))),
+            num("paxCloseRelief", "Une personne peut partir pour la fermeture jusqu'à", "passagers")),
+          h("div", { class: "form-grid" },
+            h("label", { class: "f" }, "Matin : de l'ouverture à", h("input", { type: "time", class: "input", value: st.paxMorningEnd, disabled: !edit, onChange: (ev) => this.commit([{ type: "setSettings", patch: { paxMorningEnd: ev.target.value } }]) })),
+            h("label", { class: "f" }, "Soir : de … à la fermeture", h("input", { type: "time", class: "input", value: st.paxEveningStart, disabled: !edit, onChange: (ev) => this.commit([{ type: "setSettings", patch: { paxEveningStart: ev.target.value } }]) }))),
+          h("p", { class: "small muted" }, "Les passagers prévus se saisissent en touchant un jour en haut du planning de la semaine.")),
         h("div", { class: "stack", style: { "margin-top": "14px", gap: "8px" } }, h("h3", {}, "Droit du travail"), tog("checkLegal", "Vérifier les règles du droit du travail (le générateur et les remplaçants les respectent toujours)"),
           h("div", { class: "form-grid" },
             num("maxConsecutiveDays", "Jours de travail d'affilée, au plus", "jours"),
