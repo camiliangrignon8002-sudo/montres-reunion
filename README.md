@@ -320,9 +320,14 @@ Trouver une montre **et un détaillant officiel Rolex** à **Monaco**, puis en *
 - **Cartes au choix** sur chaque fiche : plan stylisé (tons verts et or), Google Maps, vue satellite Google, bouton
   **Google Earth 3D** (s'ouvre en vue inclinée sur l'adresse), et itinéraire Google, Plans ou Waze.
   Avec une clé Google Maps (`googleMapsKey` en haut de `app.js`), le plan devient une carte Google aux couleurs de l'appli.
-- **Annonces de démonstration** : les montres en vente, leurs vendeurs, téléphones et statistiques (connexion, temps de
-  réponse) sont fictifs ; elles ne sont rattachées à aucun détaillant réel. Les vraies annonces vont dans `montres.json`.
-- **Fiche d'une montre** : galerie zoomable, prix et baisse de prix, statut, qualité sur 10, état pièce par pièce,
+- **Uniquement des sources officielles** : le catalogue Rolex actuel (26 références, caractéristiques d'après rolex.com,
+  lien vers la page officielle pour le prix public) et les détaillants officiels. Aucun site d'occasion, de particuliers
+  ou de petites annonces. Rolex ne publie pas le stock de ses détaillants : la disponibilité se confirme en boutique.
+- **Filtres sur tout** : collection, état (neuve, ou Rolex Certified Pre-Owned des détaillants officiels), couleur du cadran,
+  matériau, diamètre, lunette, bracelet, fonctions (chronographe, 2e fuseau, date, jour-date, calendrier, plongée),
+  étanchéité minimum, prix (quand il est publié), zone.
+- **Alertes** : « Créer une alerte » enregistre la recherche ; une notification arrive quand une nouvelle montre y correspond.
+  « M'alerter pour cette montre » sur chaque fiche (disponibilité, prix). Liste et gestion dans « Notifications ».
   entretien (Rolex, horloger indépendant, inconnu), pièces changées, papiers, boîte, garantie, fiche technique.
 - **Compte** (gardé sur le téléphone) : favoris, montres suivies (alerte prix et statut), demandes aux vendeurs et
   détaillants avec le temps de réponse mesuré.

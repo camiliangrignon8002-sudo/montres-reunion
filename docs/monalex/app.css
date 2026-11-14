@@ -576,3 +576,6 @@ h1,h2,h3,.p-h1,.d-info h1,.hero-t h1,.sec-h h2,.d-sec h2,.acc-h h1,.seller-card 
 .gconsent p{max-width:340px;margin:0 0 16px}
 .notif-state{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .slide[data-basse],.gal-thumbs [data-basse]{display:none}
+.opt small{opacity:.55;margin-left:4px;font-size:.85em}
+.opt[data-zero]{opacity:.55}
+.opt[data-zero][aria-pressed=true]{opacity:1}

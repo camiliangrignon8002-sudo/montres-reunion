@@ -63,23 +63,19 @@
 
   <div class="wrap">
     <section class="sec">
-      <div class="sec-h"><div><div class="eyebrow">Les collections</div><h2>Choisissez un modèle</h2></div></div>
+      <div class="sec-h"><div><div class="eyebrow">Les collections</div><h2>Le catalogue officiel</h2></div></div>
       <div class="colls" id="colls"></div>
 
       <div class="tools">
-        <button class="chip" data-etat="" aria-pressed="true">Tout</button>
-        <button class="chip" data-etat="Neuf" aria-pressed="false">Neuves</button>
-        <button class="chip" data-etat="Occasion" aria-pressed="false">Occasion</button>
         <button class="chip" data-open-filters><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filtres <span class="n" id="nFilters" hidden></span></button>
+        <button class="chip" data-save-alert><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4l2-2ZM10 20a2 2 0 0 0 4 0"/></svg>Créer une alerte</button>
         <span class="grow"></span>
         <label class="sr" for="sort">Trier</label>
         <select class="sort" id="sort">
-          <option value="dist">Les plus proches</option>
-          <option value="recent">Les plus récentes</option>
-          <option value="react">Vendeur le plus réactif</option>
-          <option value="pa">Prix croissant</option>
-          <option value="pd">Prix décroissant</option>
-          <option value="q">Meilleur état</option>
+          <option value="coll">Par collection</option>
+          <option value="dist">Détaillant le plus proche</option>
+          <option value="dpa">Diamètre croissant</option>
+          <option value="dpd">Diamètre décroissant</option>
         </select>
         <div class="seg" role="group" aria-label="Affichage">
           <button id="vList" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Liste</button>
@@ -87,7 +83,6 @@
         </div>
       </div>
       <div class="count" id="count"></div>
-      <div class="vfilters" id="layers" hidden><button class="chip" data-layer="showAnn" aria-pressed="true">Annonces (points verts)</button><button class="chip" data-layer="showDet" aria-pressed="true">Détaillants officiels (points or)</button></div>
       <div id="bigmap" hidden></div>
       <div class="grid" id="grid" aria-busy="true"><div class="card skel" aria-hidden="true"><div class="pic"></div><div class="body"><i></i><i></i><i></i></div></div><div class="card skel" aria-hidden="true"><div class="pic"></div><div class="body"><i></i><i></i><i></i></div></div><div class="card skel" aria-hidden="true"><div class="pic"></div><div class="body"><i></i><i></i><i></i></div></div><div class="card skel" aria-hidden="true"><div class="pic"></div><div class="body"><i></i><i></i><i></i></div></div></div>
     </section>
@@ -95,11 +90,6 @@
     <section class="sec">
       <div class="sec-h"><div><div class="eyebrow">Détaillants officiels Rolex</div><h2>Où acheter, près de vous</h2><p class="count" id="offCount" style="margin:8px 0 0"></p></div><a href="#officiels">Tous les détaillants</a></div>
       <div class="sellers" id="officiels"><div class="srow skel" aria-hidden="true"><span class="avatar"></span><div class="who"><i></i><i></i></div></div><div class="srow skel" aria-hidden="true"><span class="avatar"></span><div class="who"><i></i><i></i></div></div><div class="srow skel" aria-hidden="true"><span class="avatar"></span><div class="who"><i></i><i></i></div></div></div>
-    </section>
-
-    <section class="sec">
-      <div class="sec-h"><div><div class="eyebrow">Réactivité</div><h2>Les vendeurs qui répondent le plus vite</h2></div><a href="#vendeurs">Tous les vendeurs</a></div>
-      <div class="sellers" id="topSellers"></div>
     </section>
 
     <section class="sec">
@@ -117,8 +107,7 @@
         <li><button data-goto="list">Toutes les montres</button></li>
         <li><button data-zone-go="monaco">Montres à Monaco</button></li>
         <li><a href="#officiels">Détaillants officiels</a></li>
-        <li><a href="#vendeurs">Vendeurs des annonces</a></li>
-        <li><a href="#suivis">Mes suivis</a></li>
+                <li><a href="#suivis">Mes suivis</a></li>
         <li><a href="#compte">Mon compte</a></li>
         <li><a href="#infos">À propos de Monalex</a></li>
         <li><a href="#infos" data-ancre="donnees">Données personnelles</a></li>
@@ -135,7 +124,7 @@
     </div>
     <div class="f-legal">
       <p id="updated"></p>
-      <p>Monalex est un service indépendant, non affilié à Rolex SA ni à ses détaillants. Les détaillants officiels listés sont réels (relevés sur rolex.com et leurs sites, à vérifier avant de vous déplacer). Les noms de modèles et de références sont cités pour décrire les montres. Les annonces de montres et leurs vendeurs, adresses précises, téléphones, e-mails et statistiques sont fictifs ; les prix sont indicatifs.</p>
+      <p>Monalex est un service indépendant, non affilié à Rolex SA ni à ses détaillants. Les détaillants officiels listés sont réels (relevés sur rolex.com et leurs sites, à vérifier avant de vous déplacer). Les noms de modèles et de références sont cités pour décrire les montres. Monalex ne présente que des sources officielles : le catalogue Rolex et ses détaillants officiels. Aucun site d'occasion ni de particuliers.</p>
       <p>Cartes © OpenStreetMap, © CARTO · Google Maps et Google Earth © Google</p>
     </div>
   </div>

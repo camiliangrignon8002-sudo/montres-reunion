@@ -90,18 +90,19 @@ const fmtKm = d => d < 1 ? "moins de 1 km" : d < 10 ? `${d.toFixed(1).replace(".
 let DATA = { vendeurs: {}, montres: [] };
 let ALL = [], VEND = [], DET = [], DETDATA = { detaillants: [] };
 const S = {
-  zone: store.get("rm.zone", "monaco"), coll: "", etat: "", q: "", sort: "dist", view: "list",
+  zone: store.get("rm.zone", "monaco"), coll: "", etat: "", q: "", sort: "coll", view: "list",
   f: emptyF(), origin: { ...CONFIG.origine }, near: false, inApp: false, lastLoad: 0,
 };
-function emptyF() { return { prixMax: 0, entretien: [], condition: [], materiau: [], vendeur: [], set: false, origine: false, enLigne: false }; }
+function emptyF() { return { prixMax: 0, colls: [], couleur: [], materiau: [], lunette: [], bracelet: [], diametre: [], complications: [], etat: [], etancheiteMin: 0, entretien: [], condition: [], vendeur: [], set: false, origine: false, enLigne: false }; }
 const ME = {
   get compte() { return store.get("rm.compte", null); },
   set compte(v) { v ? store.set("rm.compte", v) : store.del("rm.compte"); },
   favs: new Set(store.get("rm.favs", [])),
   suivis: store.get("rm.suivis", {}),
   demandes: store.get("rm.demandes", []),
+  alertes: store.get("rm.alertes", []),
   vues: store.get("rm.vues", []),
-  save() { store.set("rm.favs", [...this.favs]); store.set("rm.suivis", this.suivis); store.set("rm.demandes", this.demandes); store.set("rm.vues", this.vues); updateDots(); },
+  save() { store.set("rm.favs", [...this.favs]); store.set("rm.suivis", this.suivis); store.set("rm.demandes", this.demandes); store.set("rm.vues", this.vues); store.set("rm.alertes", this.alertes); updateDots(); },
 };
 
 function materiauGroupe(m) {
@@ -129,58 +130,69 @@ function vendeurGroupe(t) {
 const toutOrigine = m => (m.pieces || []).every(p => p.statut === "D'origine" || p.statut === "Remplacée par Rolex" || (p.statut === "Polie" && /rolex/i.test(p.note)));
 
 function prepare() {
-  VEND = Object.entries(DATA.vendeurs).map(([id, v]) => ({ id, ...v, dist: km(S.origin, v) }));
-  const rank = [...VEND].sort((a, b) => a.temps_reponse_min - b.temps_reponse_min || b.taux_reponse - a.taux_reponse);
-  rank.forEach((v, i) => v.rang = i + 1);
-  const byId = Object.fromEntries(VEND.map(v => [v.id, v]));
+  VEND = Object.entries(DATA.vendeurs || {}).map(([id, v]) => ({ id, ...v, dist: km(S.origin, v) }));
+  [...VEND].sort((a, b) => a.temps_reponse_min - b.temps_reponse_min).forEach((v, i) => v.rang = i + 1);
   DET = (DETDATA.detaillants || []).map(d => ({ ...d, officiel: true, dist: km(S.origin, d) }));
-  ALL = DATA.montres.map(m => {
-    const v = byId[m.vendeur] || {};
-    return { ...m, v, dist: v.dist, mat: materiauGroupe(m), ent: entretienGroupe(m) };
+  const byId = Object.fromEntries(VEND.map(v => [v.id, v]));
+  ALL = DATA.montres.map(m => ({ ...m, v: byId[m.vendeur] || null, mat: materiauGroupe(m), ent: entretienGroupe(m) }));
+  placeStores();
+}
+// Catalogue officiel : chaque référence est proposée par les détaillants officiels ; on rattache le plus proche de la zone choisie.
+function placeStores(zoneId = S.zone) {
+  const inZone = detsInZone(zoneId), proche = [...DET].sort((a, b) => a.dist - b.dist)[0];
+  ALL.forEach(m => {
+    if (m.vendeur && m.v) { m.dist = m.v.dist; return; }
+    m.dets = inZone; m.v = inZone[0] || proche || { nom: "", ville: "", pays: "", code_pays: "", lat: 0, lng: 0 }; m.dist = m.v.dist || 0;
   });
 }
-function recalcDist() { VEND.forEach(v => v.dist = km(S.origin, v)); DET.forEach(d => d.dist = km(S.origin, d)); ALL.forEach(m => m.dist = m.v.dist); }
+function recalcDist() { VEND.forEach(v => v.dist = km(S.origin, v)); DET.forEach(d => d.dist = km(S.origin, d)); placeStores(); }
 const montre = id => ALL.find(x => x.id === id);
 const vendeur = id => VEND.find(x => x.id === id) || DET.find(x => x.id === id);
 const detaillant = id => DET.find(x => x.id === id);
 
 /* ====================================================================== filtres et tri */
+function crit() { return { zone: S.zone, coll: S.coll, etat: S.etat, q: S.q, f: JSON.parse(JSON.stringify(S.f)) }; }
 function filtered(ignoreZone = false) {
-  const z = ZONES.find(z => z.id === S.zone) || ZONES[3];
-  const q = norm(S.q).trim().split(/\s+/).filter(Boolean);
-  const F = S.f;
-  const r = ALL.filter(m => {
-    if (!ignoreZone && !z.test(m.v.code_pays)) return false;
-    if (S.coll && m.collection !== S.coll) return false;
-    if (S.etat && m.etat !== S.etat) return false;
-    if (F.prixMax && m.prix > F.prixMax) return false;
+  const c = crit(); if (ignoreZone) c.zone = "monde";
+  return filterWith(c).sort(sorter(S.sort));
+}
+function etatDe(m) { return m.etat === "Neuf" ? "Neuve" : /pre-owned/i.test(m.v?.type || m.source_type || "") ? `${m.condition} (Pre-Owned)` : m.condition; }
+function filterWith(c) {
+  const z = ZONES.find(x => x.id === c.zone) || ZONES[3];
+  const zoneDet = DET.some(d => z.test(d.code_pays));
+  const q = norm(c.q).trim().split(/\s+/).filter(Boolean), F = { ...emptyF(), ...c.f };
+  const any = (arr, val) => !arr.length || arr.includes(val);
+  return ALL.filter(m => {
+    if (m.vendeur ? !z.test(m.v.code_pays) : !zoneDet) return false;
+    if (c.coll && m.collection !== c.coll) return false;
+    if (c.etat && m.etat !== c.etat) return false;
+    if (!any(F.colls, m.collection) || !any(F.couleur, m.couleur_cadran) || !any(F.materiau, m.mat) || !any(F.lunette, m.type_lunette) || !any(F.bracelet, m.type_bracelet) || !any(F.diametre, String(m.diametre)) || !any(F.etat, etatDe(m))) return false;
+    if (F.complications.length && !F.complications.every(x => (m.complications || []).includes(x))) return false;
+    if (F.etancheiteMin && m.etancheite < F.etancheiteMin) return false;
+    if (F.prixMax && m.prix && m.prix > F.prixMax) return false;
     if (F.entretien.length && !F.entretien.includes(m.ent)) return false;
-    if (F.condition.length && !F.condition.includes(m.condition)) return false;
-    if (F.materiau.length && !F.materiau.includes(m.mat)) return false;
-    if (F.vendeur.length && !F.vendeur.includes(vendeurGroupe(m.v.type))) return false;
-    if (F.set && !(m.papiers && m.boite)) return false;
-    if (F.origine && !toutOrigine(m)) return false;
-    if (F.enLigne && !isOnline(m.v)) return false;
+    if (F.set && !(m.papiers && m.boite) && m.etat !== "Neuf") return false;
     return !q.length || matchQ(m, q);
   });
-  return r.sort(sorter(S.sort));
 }
 function matchQ(m, q) {
-  const hay = norm([m.collection, m.modele, m.reference, m.cadran, m.materiau, m.etat, m.condition, m.v.nom, m.v.ville, m.v.pays, m.annee, m.statut].join(" "));
+  const hay = norm([m.collection, m.modele, m.reference, m.cadran, m.couleur_cadran, m.materiau, m.mat, m.lunette, m.type_bracelet, (m.complications || []).join(" "), m.etat, m.diametre + " mm", m.v?.nom, m.v?.ville, m.v?.pays].join(" "));
   return q.every(w => hay.includes(w));
 }
 function sorter(k) {
+  const ord = m => (ORDRE.indexOf(m.collection) + 1 || 99) * 1000 + m.diametre;
   return {
-    dist: (a, b) => a.dist - b.dist || a.prix - b.prix,
-    recent: (a, b) => (b.publie || "").localeCompare(a.publie || ""),
-    react: (a, b) => a.v.rang - b.v.rang || a.dist - b.dist,
-    pa: (a, b) => a.prix - b.prix, pd: (a, b) => b.prix - a.prix,
-    q: (a, b) => b.note - a.note || a.dist - b.dist,
-  }[k] || ((a, b) => a.dist - b.dist);
+    dist: (a, b) => a.dist - b.dist || ord(a) - ord(b),
+    coll: (a, b) => ord(a) - ord(b),
+    dpa: (a, b) => a.diametre - b.diametre || ord(a) - ord(b),
+    dpd: (a, b) => b.diametre - a.diametre || ord(a) - ord(b),
+    pa: (a, b) => (a.prix || 1e9) - (b.prix || 1e9), pd: (a, b) => (b.prix || 0) - (a.prix || 0),
+  }[k] || ((a, b) => ord(a) - ord(b));
 }
 function nbFiltres() {
-  const F = S.f;
-  return (F.prixMax ? 1 : 0) + F.entretien.length + F.condition.length + F.materiau.length + F.vendeur.length + (F.set ? 1 : 0) + (F.origine ? 1 : 0) + (F.enLigne ? 1 : 0);
+  const F = S.f; let n = (F.prixMax ? 1 : 0) + (F.etancheiteMin ? 1 : 0);
+  for (const k of ["colls", "couleur", "materiau", "lunette", "bracelet", "diametre", "complications", "etat"]) n += F[k].length;
+  return n;
 }
 
 /* ====================================================================== morceaux réutilisés */
@@ -218,15 +230,16 @@ function tagsOf(m) {
   return t.join("");
 }
 function cardHTML(m) {
-  const baisse = m.prix_initial > m.prix;
+  const baisse = m.prix && m.prix_initial > m.prix;
   return `<a class="card" href="#m/${encodeURIComponent(m.id)}">
     <div class="pic">${m.statut && m.statut !== "Disponible" ? `<span class="status ${stClass(m.statut)}">${esc(m.statut)}</span>` : ""}${picOf(m)}</div>
     <button class="fav" data-fav="${esc(m.id)}" aria-label="Favori" aria-pressed="${ME.favs.has(m.id)}">${HEART}</button>
     <div class="body">
       <span class="coll-n">${esc(m.collection)}</span>
       <h3>${esc(m.modele)}</h3>
-      <span class="price">${eur(m.prix, m.devise)}${baisse ? `<s>${eur(m.prix_initial, m.devise)}</s>` : ""}</span>
-      <span class="where">${PIN}${esc(lieu(m.v))} · ${fmtKm(m.dist)}</span>
+      <span class="cap">${esc(m.diametre)} mm · ${esc(m.couleur_cadran || "")} · ${esc(shortMat(m.materiau))}</span>
+      <span class="price">${m.prix ? eur(m.prix, m.devise) + (baisse ? `<s>${eur(m.prix_initial, m.devise)}</s>` : "") : "Neuve · prix public sur rolex.com"}</span>
+      ${m.v && m.v.nom ? `<span class="where">${PIN}${esc(m.vendeur ? lieu(m.v) : m.v.ville)} · ${fmtKm(m.dist)}${m.dets && m.dets.length > 1 ? ` · ${m.dets.length} détaillants` : ""}</span>` : ""}
     </div></a>`;
 }
 function avatar(v, big) { return `<span class="avatar ${isOnline(v) ? "on" : ""}" ${big ? 'style="width:72px;height:72px;font-size:24px"' : ""}>${esc(initials(v.nom))}</span>`; }
@@ -242,10 +255,9 @@ function pitem(m, side = "", extra = "") {
 
 /* ====================================================================== accueil */
 function renderZones() {
-  const base = filtered(true);
   $("#zones").innerHTML = ZONES.map((z, i) => {
-    const n = base.filter(m => z.test(m.v.code_pays)).length;
-    return `${i ? '<span class="zone-sep" aria-hidden="true">›</span>' : ""}<button class="zone" role="tab" data-z="${z.id}" aria-selected="${S.zone === z.id}">${esc(z.nom)}<small>${n} montre${n > 1 ? "s" : ""}</small></button>`;
+    const n = detsInZone(z.id).length;
+    return `${i ? '<span class="zone-sep" aria-hidden="true">›</span>' : ""}<button class="zone" role="tab" data-z="${z.id}" aria-selected="${S.zone === z.id}">${esc(z.nom)}<small>${n} détaillant${n > 1 ? "s" : ""}</small></button>`;
   }).join("");
   $("#fZone").textContent = $("#menuZone").textContent = ZONE_NOM[S.zone];
 }
@@ -264,8 +276,8 @@ function renderColls() {
 function renderGrid() {
   const r = filtered();
   const z = ZONES.find(z => z.id === S.zone);
-  $("#count").innerHTML = `<span><b>${r.length}</b> montre${r.length > 1 ? "s" : ""} · ${esc(z.sous)}${S.q ? ` · « ${esc(S.q)} » <button class="linkbtn" data-clear-q>effacer</button>` : ""}</span>
-    <span>Distances depuis ${S.near ? "votre position" : "Monaco"} · <button class="linkbtn" data-near>${PIN}${S.near ? "Revenir à Monaco" : "Autour de moi"}</button></span>`;
+  $("#count").innerHTML = `<span><b>${r.length}</b> référence${r.length > 1 ? "s" : ""} · ${detsInZone().length} détaillant${detsInZone().length > 1 ? "s" : ""} officiel${detsInZone().length > 1 ? "s" : ""} · ${esc(z.sous)}${S.q ? ` · « ${esc(S.q)} » <button class="linkbtn" data-clear-q>effacer</button>` : ""}</span>
+    <span>${nbFiltres() || S.q || S.coll ? `<button class="linkbtn" data-save-alert>M'alerter pour cette recherche</button> · ` : ""}Distances depuis ${S.near ? "votre position" : "Monaco"} · <button class="linkbtn" data-near>${PIN}${S.near ? "Revenir à Monaco" : "Autour de moi"}</button></span>`;
   if (!r.length) {
     const next = ZONES[ZONES.findIndex(x => x.id === S.zone) + 1];
     const zn = { monaco: "à Monaco", france: "à Monaco ni en France", europe: "en Europe", monde: "avec ces critères" }[S.zone];
@@ -273,16 +285,12 @@ function renderGrid() {
   } else $("#grid").innerHTML = r.map(cardHTML).join("");
   $("#grid").setAttribute("aria-busy", "false");
   if (S.view === "map") renderBigMap(r);
-  $("#layers").hidden = S.view !== "map";
   const n = nbFiltres(); $("#nFilters").hidden = !n; $("#nFilters").textContent = n;
   $$("[data-etat]").forEach(b => b.setAttribute("aria-pressed", b.dataset.etat === S.etat));
   $$(".coll").forEach(b => b.setAttribute("aria-pressed", b.dataset.c === S.coll));
   $("#sort").value = S.sort;
 }
-function renderSellers() {
-  const top = [...VEND].sort((a, b) => a.rang - b.rang).slice(0, 6);
-  $("#topSellers").innerHTML = top.map(sellerRow).join("");
-}
+function renderSellers() { const el = $("#topSellers"); if (el) el.innerHTML = [...VEND].sort((a, b) => a.rang - b.rang).slice(0, 6).map(sellerRow).join(""); }
 function tileHTML(href, cls, inner, label, attrs = "") {
   return `<a class="tile ${cls}" href="${href}" ${attrs}><div class="ti">${inner}</div><div class="tl">${label}</div></a>`;
 }
@@ -317,7 +325,7 @@ function renderOfficiels() {
   $("#offCount").textContent = `${list.length} détaillant${list.length > 1 ? "s" : ""} · ${ZONE_NOM[S.zone]}`;
   $("#officiels").innerHTML = list.slice(0, 9).map(detRow).join("") || `<div class="empty"><h3>Aucun détaillant relevé dans cette zone</h3></div>`;
 }
-function renderHome() { renderZones(); renderGrid(); renderSellers(); renderOfficiels(); $("#homeTiles").innerHTML = tiles("home"); }
+function renderHome() { placeStores(); renderZones(); renderGrid(); renderSellers(); renderOfficiels(); $("#homeTiles").innerHTML = tiles("home"); }
 
 /* ====================================================================== cartes géographiques */
 const TILES = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
@@ -333,27 +341,13 @@ function renderBigMap(list) {
   if (!window.L) { $("#bigmap").innerHTML = '<p style="padding:20px">La carte n\'a pas pu se charger.</p>'; return; }
   if (!bigMap) { bigMap = baseMap("bigmap").setView([CONFIG.origine.lat, CONFIG.origine.lng], 4); bigLayer = L.layerGroup().addTo(bigMap); }
   bigLayer.clearLayers();
-  if (S.showDet !== false) detsInZone().forEach(d => {
-    L.marker([d.lat, d.lng], { icon: L.divIcon({ className: "", html: '<div class="pin gold"></div>', iconSize: [22, 22], iconAnchor: [11, 11] }), title: d.nom, zIndexOffset: -100 }).addTo(bigLayer)
-      .bindPopup(`<div class="pop"><h4>${esc(d.nom)}</h4><div class="pv">Détaillant officiel · ${esc(d.adresse)}, ${esc(d.ville)}</div><a href="#d/${encodeURIComponent(d.id)}"><span>Voir la fiche, la carte et le téléphone</span><b>›</b></a></div>`);
-  });
-  const groups = new Map();
-  list.forEach(m => { if (!groups.has(m.vendeur)) groups.set(m.vendeur, []); groups.get(m.vendeur).push(m); });
   const pts = [];
-  if (S.showAnn === false) groups.clear();
-  groups.forEach(ms => {
-    const v = ms[0].v;
-    const icon = L.divIcon({ className: "", html: `<div class="pin">${ms.length}</div>`, iconSize: [36, 36], iconAnchor: [18, 18] });
-    L.marker([v.lat, v.lng], { icon, title: v.nom }).addTo(bigLayer)
-      .bindPopup(`<div class="pop"><h4><a href="#v/${encodeURIComponent(v.id)}" style="border:0;padding:0;display:inline">${esc(v.nom)}</a></h4><div class="pv">${esc(v.ville)}, ${esc(v.pays)} · ${isOnline(v) ? "en ligne" : "vu " + ago(v.derniere_connexion)}</div>${ms.map(m => `<a href="#m/${encodeURIComponent(m.id)}"><span>${esc(m.modele)}</span><b>${eur(m.prix, m.devise)}</b></a>`).join("")}</div>`);
-    pts.push([v.lat, v.lng]);
+  detsInZone().forEach(d => {
+    L.marker([d.lat, d.lng], { icon: L.divIcon({ className: "", html: '<div class="pin gold"></div>', iconSize: [22, 22], iconAnchor: [11, 11] }), title: d.nom }).addTo(bigLayer)
+      .bindPopup(`<div class="pop"><h4>${esc(d.nom)}</h4><div class="pv">Détaillant officiel · ${esc(d.adresse)}, ${esc(d.ville)}</div><a href="#d/${encodeURIComponent(d.id)}"><span>${list.length} référence${list.length > 1 ? "s" : ""} de votre recherche · fiche et téléphone</span><b>›</b></a></div>`);
+    pts.push([d.lat, d.lng]);
   });
-  if (S.showDet !== false) detsInZone().forEach(d => pts.push([d.lat, d.lng]));
-  setTimeout(() => {
-    bigMap.invalidateSize();
-    if (pts.length === 1) bigMap.setView(pts[0], 14);
-    else if (pts.length) bigMap.fitBounds(pts, { padding: [40, 40], maxZoom: 13 });
-  }, 30);
+  setTimeout(() => { bigMap.invalidateSize(); if (pts.length === 1) bigMap.setView(pts[0], 15); else if (pts.length) bigMap.fitBounds(pts, { padding: [40, 40], maxZoom: 13 }); }, 30);
 }
 const GSTYLE = [
   { elementType: "geometry", stylers: [{ color: "#f4f2ec" }] }, { elementType: "labels.text.fill", stylers: [{ color: "#545454" }] },
@@ -412,18 +406,44 @@ function alerts() {
   const out = [];
   for (const [id, s] of Object.entries(ME.suivis)) {
     const m = montre(id);
-    if (!m) { out.push({ id, type: "retiree", texte: "Annonce retirée (vendue ou supprimée)" }); continue; }
-    if (m.prix !== s.vu_prix) out.push({ id, m, type: "prix", texte: m.prix < s.vu_prix ? `Prix baissé de ${eur(s.vu_prix - m.prix)} (${eur(s.vu_prix)} → ${eur(m.prix)})` : `Prix augmenté : ${eur(s.vu_prix)} → ${eur(m.prix)}` });
+    if (!m) { out.push({ id, type: "retiree", texte: "Référence retirée du catalogue" }); continue; }
+    if ((m.prix || 0) !== (s.vu_prix || 0)) out.push({ id, m, type: "prix", texte: !s.vu_prix ? `Prix publié : ${eur(m.prix)}` : m.prix < s.vu_prix ? `Prix baissé de ${eur(s.vu_prix - m.prix)} (${eur(s.vu_prix)} → ${eur(m.prix)})` : `Prix : ${eur(s.vu_prix)} → ${eur(m.prix)}` });
     if ((m.statut || "Disponible") !== s.vu_statut) out.push({ id, m, type: "statut", texte: `Statut : ${s.vu_statut} → ${m.statut}` });
+  }
+  for (const a of ME.alertes) {
+    const ids = filterWith(a.crit).map(m => m.id);
+    ids.filter(x => !a.vus.includes(x)).forEach(x => out.push({ id: x, m: montre(x), type: "recherche", alerte: a.id, texte: `Nouvelle montre pour votre alerte « ${a.nom} »` }));
   }
   return out;
 }
-function markSeen(id) { const m = montre(id), s = ME.suivis[id]; if (!s) return; if (!m) { delete ME.suivis[id]; } else { s.vu_prix = m.prix; s.vu_statut = m.statut || "Disponible"; } ME.save(); }
+function nomCritere(c) {
+  const F = c.f, bits = [];
+  if (c.coll) bits.push(c.coll);
+  for (const k of ["colls", "etat", "couleur", "materiau", "diametre", "lunette", "bracelet", "complications"]) if (F[k] && F[k].length) bits.push(F[k].map(v => k === "diametre" ? v + " mm" : v).join(" ou "));
+  if (F.etancheiteMin) bits.push(`≥ ${nf(F.etancheiteMin)} m`);
+  if (F.prixMax) bits.push(`≤ ${eur(F.prixMax)}`);
+  if (c.q) bits.push(`« ${c.q} »`);
+  bits.push(ZONE_NOM[c.zone]);
+  return bits.join(" · ");
+}
+function saveAlert() {
+  if (!ME.compte) { store.set("rm.apres", { action: "alerte", crit: crit() }); toast("Créez votre compte pour recevoir des alertes."); location.hash = "compte"; return; }
+  const c = crit(), ids = filterWith(c).map(m => m.id);
+  ME.alertes.unshift({ id: Date.now().toString(36), nom: nomCritere(c), crit: c, vus: ids, cree: new Date().toISOString() });
+  ME.save(); toast(`Alerte créée : ${ids.length} montre${ids.length > 1 ? "s" : ""} aujourd'hui, vous serez prévenu des nouvelles.`);
+  if (ME.compte && !ME.compte.notif && "Notification" in window && Notification.permission === "default") setTimeout(() => { location.hash = "notifications"; }, 900);
+}
+function markSeen(id) {
+  const m = montre(id), s = ME.suivis[id];
+  if (s) { if (!m) delete ME.suivis[id]; else { s.vu_prix = m.prix || 0; s.vu_statut = m.statut || "Disponible"; } }
+  ME.alertes.forEach(a => { if (!a.vus.includes(id) && filterWith(a.crit).some(x => x.id === id)) a.vus.push(id); });
+  ME.save();
+}
 function follow(id) {
   const m = montre(id); if (!m) return;
-  if (!ME.compte) { store.set("rm.apres", { action: "suivre", id }); toast("Créez votre compte pour suivre cette montre."); location.hash = "compte"; return; }
-  ME.suivis[id] = { depuis: new Date().toISOString(), prix: m.prix, statut: m.statut || "Disponible", vu_prix: m.prix, vu_statut: m.statut || "Disponible" };
-  ME.favs.add(id); ME.save(); toast("Montre suivie. Vous serez prévenu à chaque changement.");
+  if (!ME.compte) { store.set("rm.apres", { action: "suivre", id }); toast("Créez votre compte pour recevoir des alertes."); location.hash = "compte"; return; }
+  ME.suivis[id] = { depuis: new Date().toISOString(), prix: m.prix || 0, statut: m.statut || "Disponible", vu_prix: m.prix || 0, vu_statut: m.statut || "Disponible" };
+  ME.favs.add(id); ME.save(); toast("Alerte créée pour cette montre.");
 }
 function unfollow(id) { delete ME.suivis[id]; ME.save(); toast("Vous ne suivez plus cette montre"); }
 function logDemande(vendeurId, montreId, canal) {
@@ -531,136 +551,71 @@ function mesEchanges(vId, mId) {
 /* ---------- fiche d'une montre */
 function pageMontre(id) {
   const m = montre(id);
-  if (!m) { openPage(`<div class="empty" style="margin-top:30px"><h3>Cette montre n'est plus en vente</h3><p>Elle a été vendue ou retirée par le vendeur.</p><button class="btn btn-green" data-goto="list">Voir les montres disponibles</button></div>`, "Annonce retirée"); return; }
+  if (!m) { openPage(`<div class="empty" style="margin-top:30px"><h3>Cette référence n'est plus au catalogue</h3><p>Elle a peut-être été arrêtée par Rolex.</p><button class="btn btn-green" data-goto="list">Voir le catalogue</button></div>`, "Référence introuvable"); return; }
   ME.vues = [id, ...ME.vues.filter(x => x !== id)].slice(0, 12); ME.save();
-  const v = m.v, L2 = mapsLinks(v);
   const photos = photosOf(m);
   const slides = photos.length ? photos.map((p, i) => ({ nom: p.legende || `Photo ${i + 1}`, html: `<img src="${esc(p.src)}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async" onload="checkPhoto(this)">`, big: p.hd || p.src }))
     : VUES.map(x => ({ nom: x.nom, html: watchSVG(m.skin, { diam: m.diametre, vb: x.vb, label: `${m.modele} — ${x.nom}` }), vb: x.vb }));
-  const ent = m.entretien || {};
-  const entIcon = ent.par === "Rolex" || m.etat === "Neuf" ? "" : ent.par === "Horloger indépendant" ? "ind" : "unk";
-  const similar = [...ALL.filter(x => x.id !== m.id && x.collection === m.collection).sort((a, b) => a.dist - b.dist),
-    ...ALL.filter(x => x.id !== m.id && x.collection !== m.collection).sort((a, b) => Math.abs(a.prix - m.prix) - Math.abs(b.prix - m.prix))].slice(0, 4);
+  const dets = detsInZone(), d0 = dets[0] || [...DET].sort((a, b) => a.dist - b.dist)[0];
+  const suivi = ME.suivis[m.id];
   const specs = [
-    ["Référence", m.reference], ["Année", m.annee], ["Diamètre", `${m.diametre} mm`], ["Matériau", m.materiau],
+    ["Référence", m.reference], ["Collection", m.collection], ["Diamètre", `${m.diametre} mm`], ["Matériau", m.materiau],
     ["Lunette", m.lunette], ["Cadran", m.cadran], ["Mouvement", "Perpétuel, mécanique à remontage automatique"],
     ["Calibre", m.calibre], ["Réserve de marche", `Environ ${m.reserve} heures`], ["Fonctions", m.fonctions],
     ["Bracelet", m.bracelet], ["Fermoir", m.fermoir], ["Étanchéité", `${nf(m.etancheite)} mètres`],
     ["Boîtier", "Oyster, monobloc, fond et couronne vissés"], ["Verre", "Saphir inrayable" + (m.skin.date && m.skin.type !== "daytona" ? ", loupe Cyclope sur la date" : "")],
   ];
-  const det = m.details || {};
-  const suivi = ME.suivis[m.id];
-  const statut = m.statut || "Disponible";
-  const baisse = m.prix_initial > m.prix;
-  const c = contactLinks(v, m);
-  const histo = (m.historique_annonce || []).slice().reverse();
+  const similar = ALL.filter(x => x.id !== m.id && (x.collection === m.collection || x.couleur_cadran === m.couleur_cadran)).slice(0, 4);
   const html = `
   <nav class="crumbs"><a href="#">Accueil</a> / <a href="#" data-coll-go="${esc(m.collection)}">${esc(m.collection)}</a> / <span>${esc(m.reference)}</span></nav>
   <div class="d-hero">
     <div class="gal">
       <div class="gal-main" id="galMain">${slides.map((s, i) => `<div class="slide" data-i="${i}">${s.html}</div>`).join("")}</div>
       <div class="gal-thumbs" id="galThumbs">${slides.map((s, i) => `<button data-i="${i}" aria-label="${esc(s.nom)}" aria-current="${i === 0}">${s.html}</button>`).join("")}</div>
-      <div class="gal-hint"><span id="galName">${esc(slides[0].nom)}</span> · touchez pour agrandir et zoomer</div>
+      <div class="gal-hint"><span id="galName">${esc(slides[0].nom)}</span> · touchez pour agrandir${photos.length ? "" : " · illustration, photos officielles sur rolex.com"}</div>
     </div>
     <div class="d-info">
       <div class="eyebrow">${esc(m.collection)}</div>
       <h1>${esc(m.modele)}</h1>
       <div class="cap">Oyster, ${esc(m.diametre)} mm, ${esc(shortMat(m.materiau))}</div>
-      <div class="ref">Référence ${esc(m.reference)} · ${esc(m.annee)}</div>
-      <div class="d-price"><b>${eur(m.prix, m.devise)}</b>${baisse ? `<s>${eur(m.prix_initial, m.devise)}</s>` : ""}<span class="pill ${stClass(statut)}">${esc(statut)}</span></div>
-      <div class="d-note">${m.etat === "Neuf" ? "Prix public indiqué par le vendeur" : baisse ? `Prix baissé de ${eur(m.prix_initial - m.prix)} depuis la mise en ligne` : "Prix demandé par le vendeur"} · mis à jour ${esc(ago(m.mise_a_jour))}</div>
-      <div class="tags" style="margin-top:14px">${tagsOf(m)}</div>
+      <div class="ref">Référence ${esc(m.reference)} · cadran ${esc(m.cadran.toLowerCase())}</div>
+      <div class="d-price"><b>${m.prix ? eur(m.prix, m.devise) : "Neuve"}</b><span class="pill">Catalogue officiel</span></div>
+      <div class="d-note">Prix public conseillé affiché sur rolex.com. Rolex ne publie pas le stock de ses détaillants : la disponibilité se confirme en boutique.</div>
       <div class="d-cta">
-        <a class="btn btn-green" href="${c.tel}" data-log="appel" data-v="${esc(v.id)}" data-m="${esc(m.id)}">Appeler</a>
-        <a class="btn btn-light" href="#contact" data-scroll="contact">Écrire au vendeur</a>
-        <button class="btn ${suivi ? "btn-light" : "btn-line"} full" data-follow="${esc(m.id)}" aria-pressed="${!!suivi}">${suivi ? "Suivie ✓ · ne plus suivre" : "Suivre cette montre"}</button>
-        <p class="d-note full" style="margin:0;text-align:center">${suivi ? "Vous serez prévenu à chaque changement de prix ou de statut." : "Alerte si le prix baisse ou si elle est réservée."}</p>
+        ${d0 && d0.tel ? `<a class="btn btn-green" href="tel:${digits(d0.tel)}" data-log="appel" data-v="${esc(d0.id)}" data-m="${esc(m.id)}">Appeler ${esc(d0.ville)}</a>` : `<a class="btn btn-green" href="#d/${encodeURIComponent(d0?.id || "")}">Détaillant le plus proche</a>`}
+        <a class="btn btn-light" href="${esc(m.url_ref || m.url_rolex)}" target="_blank" rel="noopener">Prix sur rolex.com</a>
+        <button class="btn ${suivi ? "btn-light" : "btn-line"} full" data-follow="${esc(m.id)}" aria-pressed="${!!suivi}">${suivi ? "Alerte active ✓ · arrêter" : "M'alerter pour cette montre"}</button>
+        <p class="d-note full" style="margin:0;text-align:center">Notification si elle devient disponible chez un détaillant, ou si son prix change.</p>
       </div>
-      <a class="box mini-seller" href="#v/${encodeURIComponent(v.id)}">${avatar(v)}<div class="who"><b>${esc(v.nom)}</b><span>${isOnline(v) ? '<span class="live">En ligne maintenant</span>' : "Vu " + esc(ago(v.derniere_connexion))} · répond en ~${fmtDur(v.temps_reponse_min)}</span><span>${PIN.replace("<svg", '<svg width="13" height="13" style="vertical-align:-2px;color:#127749"')} ${esc(lieu(v))} · à ${fmtKm(m.dist)} ${S.near ? "de vous" : "de Monaco"}</span></div>${CHEV}</a>
-      <div class="box">
-        <div class="qual-row"><div><div class="eyebrow">Qualité</div><b style="font-size:17px">${esc(m.condition)}</b></div><div class="qual-score">${String(m.note).replace(".", ",")}<small>/10</small></div></div>
-        <div class="bar"><i style="width:${m.note * 10}%"></i></div>
-        <p>${esc(m.polissage)}. ${esc(ent.resume || "")}.</p>
-      </div>
-      ${m.resume ? `<p class="d-resume">${esc(m.resume)}</p>` : ""}
+      ${d0 ? `<a class="box mini-seller" href="#d/${encodeURIComponent(d0.id)}"><span class="avatar gold">${esc(initials(d0.nom))}</span><div class="who"><b>${esc(d0.nom)}</b><span>Détaillant officiel · ${esc(d0.adresse)}, ${esc(d0.ville)}</span><span>À ${fmtKm(d0.dist)} ${S.near ? "de vous" : "de Monaco"}${dets.length > 1 ? ` · ${dets.length} détaillants dans la zone` : ""}</span></div>${CHEV}</a>` : ""}
     </div>
   </div>
 
-  <section class="d-sec">
-    <p class="kicker">Suivi de l'annonce</p>
-    <h2>Tout ce qui se passe sur cette montre</h2>
-    <div class="stats">
-      <div class="stat"><b>${nf(m.vues)}</b><span>vues de l'annonce</span></div>
-      <div class="stat"><b>${nf(m.favoris + (ME.favs.has(m.id) ? 1 : 0))}</b><span>personnes l'ont en favori</span></div>
-      <div class="stat"><b>${nf(m.demandes)}</b><span>demandes au vendeur</span></div>
-      <div class="stat"><b>${esc(fmtDay(m.publie + "T10:00"))}</b><span>mise en ligne</span></div>
-      <div class="stat"><b>${esc(ago(m.mise_a_jour))}</b><span>dernière mise à jour</span></div>
-    </div>
-    <div class="two">
-      <div class="box"><h3>Historique de l'annonce</h3><ul class="tl">${histo.map(e => `<li class="${e.type === "prix" ? "w" : e.type === "statut" ? "b" : ""}"><div class="dt">${esc(fmtDate(e.date))} · ${esc(ago(e.date))}</div><div class="who">${esc(e.texte)}</div></li>`).join("")}</ul></div>
-      <div class="box"><h3>Votre suivi</h3>${suivi ? `
-        <p>Vous suivez cette montre depuis le ${esc(fmtDate(suivi.depuis))}. Prix à ce moment : <b>${eur(suivi.prix)}</b>${suivi.prix !== m.prix ? `, aujourd'hui <b>${eur(m.prix)}</b> (${m.prix < suivi.prix ? "−" : "+"}${eur(Math.abs(m.prix - suivi.prix))})` : ", inchangé"}. Statut : <b>${esc(statut)}</b>.</p>
-        ${alerts().filter(a => a.id === m.id).map(a => `<span class="alert">● ${esc(a.texte)}</span>`).join("")}
-        <div class="mine" style="padding:0;background:none"><div class="row"><button class="btn btn-light" data-unfollow="${esc(m.id)}" style="background:#fff">Ne plus suivre</button></div></div>`
-        : `<p>Suivez cette montre pour être prévenu dès que son prix baisse, qu'elle est réservée ou vendue. Vos échanges avec le vendeur s'affichent aussi ici.</p><div class="mine" style="padding:0;background:none"><div class="row"><button class="btn btn-green" data-follow="${esc(m.id)}">Suivre cette montre</button></div></div>`}
-        ${mesEchanges(v.id, m.id).replace('class="box" style="margin-top:20px"', 'style="margin-top:16px"')}
-      </div>
-    </div>
-  </section>
-
-  <section class="d-sec">
-    <p class="kicker">État et historique</p>
-    <h2>Ce qui a été fait sur cette montre</h2>
-    <dl class="cond">${[["Boîtier", det.boitier], ["Lunette", det.lunette], ["Cadran", det.cadran], ["Verre", det.verre], ["Bracelet", det.bracelet]].map(([a, b]) => `<div><dt>${a}</dt><dd>${esc(b || "—")}</dd></div>`).join("")}</dl>
-    <div class="two">
-      <div class="box">
-        <h3>Entretien</h3>
-        <div class="maint"><div class="mi ${entIcon}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L4 16.8 7.2 20l5.3-5.3a4 4 0 0 0 5.2-5.4l-2.6 2.6-2.5-.6-.6-2.5Z"/></svg></div>
-          <div><b>${m.etat === "Neuf" ? "Montre neuve" : ent.par === "Rolex" ? "Entretenue par Rolex" : ent.par === "Horloger indépendant" ? "Entretenue par un horloger indépendant" : ent.par === "Aucun" ? "Aucun entretien à ce jour" : "Entretien inconnu"}</b><span>${esc(ent.resume || "")}</span></div></div>
-        ${(ent.historique || []).length ? `<ul class="tl">${ent.historique.map(h => `<li class="${h.par === "Rolex" ? "" : "w"}"><div class="dt">${esc(moisAnnee(h.date))}</div><div class="who">${esc(h.par)} — ${esc(h.lieu)}</div><p>${esc(h.travaux)}</p></li>`).join("")}</ul>` : `<p>Pas d'intervention enregistrée.</p>`}
-      </div>
-      <div class="box">
-        <h3>Pièces d'origine ou changées</h3>
-        <ul class="parts">${(m.pieces || []).map(p => `<li><span class="pn">${esc(p.piece)}${p.note ? `<span class="note">${esc(p.note)}</span>` : ""}</span><span class="st ${statutPiece(p.statut)}">${esc(p.statut)}</span></li>`).join("")}</ul>
-      </div>
-    </div>
-    <div style="margin-top:20px"><h3 style="font-size:19px;margin:0 0 12px">Authenticité et accessoires</h3>
-      <div class="checks">
-        ${check(m.papiers, "Papiers / carte de garantie", m.papiers ? "Fournis" : "Non fournis")}
-        ${check(m.boite, "Boîte d'origine", m.boite ? "Fournie" : "Non fournie")}
-        ${check(!/aucune|expir/i.test(m.garantie), "Garantie", m.garantie)}
-        ${check(toutOrigine(m), "Pièces d'origine Rolex", toutOrigine(m) ? "Aucune pièce non Rolex" : "Au moins une pièce non Rolex")}
-        ${check(!!m.achat, "Origine", m.achat || "Montre neuve, vendue par le détaillant")}
-        ${check(true, "Accessoires", m.accessoires || "—")}
-      </div>
-    </div>
+  <section class="d-sec" id="contact">
+    <p class="kicker">Où l'acheter neuve</p>
+    <h2>${dets.length} détaillant${dets.length > 1 ? "s" : ""} officiel${dets.length > 1 ? "s" : ""} · ${esc(ZONE_NOM[S.zone])}</h2>
+    <div class="vfilters">${ZONES.map(x => `<button class="chip" data-z="${x.id}" data-rerender aria-pressed="${S.zone === x.id}">${esc(x.nom.replace("+ ", ""))} (${detsInZone(x.id).length})</button>`).join("")}</div>
+    <div class="seller"><div class="sellers" style="grid-template-columns:1fr">${dets.map(detRow).join("") || `<div class="empty"><h3>Aucun détaillant relevé dans cette zone</h3><p>Élargissez la zone.</p></div>`}</div>
+      <div>${d0 ? mapBlock("dmap", d0) : ""}</div></div>
+    ${mesEchanges(d0?.id, m.id)}
   </section>
 
   <section class="d-sec">
     <p class="kicker">Caractéristiques</p>
     <h2>Fiche technique</h2>
     <dl class="specs">${specs.map(([a, b]) => `<div class="spec"><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join("")}</dl>
+    <p class="d-note" style="margin-top:16px">D'après rolex.com. <a href="${esc(m.url_ref || m.url_rolex)}" target="_blank" rel="noopener">Voir la page officielle</a>.</p>
   </section>
 
-  <section class="d-sec" id="contact">
-    <p class="kicker">Où la voir</p>
-    <h2>Le vendeur et le plan d'accès</h2>
-    <div class="seller">${sellerCard(v, m)}
-      <div>${mapBlock("dmap", v)}</div>
-    </div>
-    ${formMessage(v, m)}
-  </section>
-
-  ${similar.length ? `<section class="d-sec"><p class="kicker">À découvrir aussi</p><h2>Montres similaires</h2><div class="similar">${similar.map(cardHTML).join("")}</div></section>` : ""}`;
+  ${similar.length ? `<section class="d-sec"><p class="kicker">À découvrir aussi</p><h2>Références proches</h2><div class="similar">${similar.map(cardHTML).join("")}</div></section>` : ""}`;
 
   openPage(html, m.modele, `<button class="round" data-share aria-label="Partager"><svg viewBox="0 0 24 24"><path d="M12 15V4m0 0L8 8m4-4 4 4M5 12v6.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V12"/></svg></button><button class="round" data-fav="${esc(m.id)}" aria-pressed="${ME.favs.has(m.id)}" aria-label="Favori">${HEART}</button>`);
-
   const main = $("#galMain"), thumbs = $$("#galThumbs button");
   const setCur = i => { thumbs.forEach((b, j) => b.setAttribute("aria-current", i === j)); $("#galName").textContent = slides[i].nom; };
   thumbs.forEach(b => b.onclick = () => { const i = +b.dataset.i; main.scrollTo({ left: main.clientWidth * i, behavior: "smooth" }); setCur(i); });
   main.addEventListener("scroll", () => { const i = Math.round(main.scrollLeft / main.clientWidth); if (slides[i]) setCur(i); }, { passive: true });
   $$(".slide", main).forEach(el => el.onclick = () => openLB(m, slides, +el.dataset.i));
-  pageMap("dmap", v);
+  if (d0) pageMap("dmap", d0);
   if (alerts().some(a => a.id === m.id)) setTimeout(() => markSeen(m.id), 1500);
 }
 function formMessage(v, m) {
@@ -764,7 +719,7 @@ function pageInfos() {
     <div class="stats" style="grid-template-columns:repeat(4,1fr)">
       <div class="stat"><b>${DET.length}</b><span>détaillants officiels</span></div>
       <div class="stat"><b>${nPays}</b><span>pays couverts</span></div>
-      <div class="stat"><b>${ALL.length}</b><span>montres présentées</span></div>
+      <div class="stat"><b>${ALL.length}</b><span>références au catalogue</span></div>
       <div class="stat"><b>4</b><span>vues de carte</span></div>
     </div>
     <section class="d-sec"><p class="kicker">Comment ça marche</p><h2>En trois gestes</h2>
@@ -777,7 +732,7 @@ function pageInfos() {
     <section class="d-sec"><p class="kicker">Sources</p><h2>D'où viennent les informations</h2>
       <div class="two">
         <div class="box"><h3>Détaillants officiels</h3><p>Relevés le ${esc(fmtDay((DETDATA.verifie_le || "2026-11-14") + "T12:00"))} sur rolex.com et sur les sites des détaillants. Chaque fiche renvoie à sa source. Horaires et téléphones peuvent changer : appelez avant de vous déplacer.</p></div>
-        <div class="box"><h3>Montres présentées</h3><p>${DATA.demo ? "Dans cette version, les annonces, leurs vendeurs et leurs statistiques sont des exemples de démonstration. Ils ne sont rattachés à aucun détaillant réel." : "Les annonces sont fournies par les vendeurs, qui sont responsables de leur exactitude."}</p></div>
+        <div class="box"><h3>Catalogue</h3><p>Références du catalogue Rolex actuel, caractéristiques d'après rolex.com, où figure aussi le prix public conseillé. Rolex ne publie pas le stock de ses détaillants : la disponibilité se confirme en boutique. Aucun site d'occasion, de particuliers ou de petites annonces n'est utilisé.</p></div>
       </div>
     </section>
     <section class="d-sec" id="donnees"><p class="kicker">Données personnelles</p><h2>Vos informations restent sur votre téléphone</h2>
@@ -812,7 +767,13 @@ function pageNotifications() {
     <div class="box notif-state"><div><h3 style="margin:0 0 4px">${esc(etat)}</h3><p>${perm === "denied" ? "Autorisez Monalex dans les réglages de notifications du téléphone." : perm === "indisponible" ? "Sur iPhone, ajoutez d'abord Monalex à l'écran d'accueil (Partager, puis « Sur l'écran d'accueil »)." : !c ? "Un compte est nécessaire pour suivre des montres." : "Les alertes arrivent quand vous ouvrez ou rafraîchissez Monalex."}</p></div>
       ${!c ? `<a class="btn btn-green" href="#compte">Créer mon compte</a>` : perm === "granted" && c.notif ? `<button class="btn btn-light" data-notif-off style="background:#fff">Désactiver</button>` : perm === "default" || (perm === "granted" && !c.notif) ? `<button class="btn btn-green" data-notif>Activer les notifications</button>` : ""}
     </div>
-    <section class="d-sec"><p class="kicker">Alertes</p><h2>${al.length ? `${al.length} changement${al.length > 1 ? "s" : ""}` : "Aucune alerte"}</h2>
+    <section class="d-sec"><p class="kicker">Mes alertes</p><h2>${ME.alertes.length + Object.keys(ME.suivis).length ? `${ME.alertes.length} recherche${ME.alertes.length > 1 ? "s" : ""} · ${Object.keys(ME.suivis).length} montre${Object.keys(ME.suivis).length > 1 ? "s" : ""}` : "Aucune alerte"}</h2>
+      <div class="plist">${ME.alertes.map(a => { const n = filterWith(a.crit).length; return `<div class="pitem" style="grid-template-columns:1fr"><div><b>${esc(a.nom)}</b><span>${n} montre${n > 1 ? "s" : ""} correspondent aujourd'hui · créée le ${esc(fmtDay(a.cree))}</span><div class="mine" style="padding:0;background:none;margin-top:6px"><div class="row"><button class="btn btn-green" data-voir-alert="${a.id}">Voir les montres</button><button class="btn btn-light" data-del-alert="${a.id}" style="background:#fff">Supprimer</button></div></div></div></div>`; }).join("")}
+        ${Object.keys(ME.suivis).map(id => montre(id)).filter(Boolean).map(m => pitem(m, "", `<span>Alerte sur cette montre</span>`)).join("")}</div>
+      ${!ME.alertes.length ? `<p class="d-note" style="margin-top:12px">Choisissez vos critères dans « Filtres », puis « Créer une alerte avec ces critères ».</p>` : ""}
+      <div style="margin-top:14px"><button class="btn btn-line" data-goto="list">Nouvelle recherche</button></div>
+    </section>
+    <section class="d-sec"><p class="kicker">Nouveautés</p><h2>${al.length ? `${al.length} changement${al.length > 1 ? "s" : ""}` : "Aucune alerte"}</h2>
       ${al.length ? `<div class="plist">${al.map(a => a.m ? pitem(a.m, "", `<span class="alert">● ${esc(a.texte)}</span>`) : `<div class="box"><p>${esc(a.texte)}</p></div>`).join("")}</div><div style="margin-top:16px"><button class="btn btn-light" data-seen-all>Tout marquer comme lu</button></div>`
         : `<div class="empty"><h3>Rien de nouveau</h3><p>Les changements de prix et de statut de vos montres suivies s'afficheront ici.</p><a class="btn btn-green" href="#suivis">Mes montres suivies</a></div>`}
     </section>`, "Notifications");
@@ -950,6 +911,7 @@ async function saveAccount(form) {
   const apres = store.get("rm.apres", null);
   store.del("rm.apres");
   if (apres && apres.action === "suivre") { follow(apres.id); location.hash = "m/" + apres.id; return; }
+  if (apres && apres.action === "alerte") { Object.assign(S, { zone: apres.crit.zone, coll: apres.crit.coll, q: apres.crit.q, f: { ...emptyF(), ...apres.crit.f } }); saveAlert(); location.hash = "notifications"; return; }
   if (!old) location.hash = "suivis"; else pageCompte();
   renderHome();
 }
@@ -964,7 +926,6 @@ function renderMenu() {
     ["#", "Toutes les montres", 'data-goto="list"'],
     ["#", "Carte des montres", 'data-goto="map"'],
     ["#officiels", "Détaillants officiels", ""],
-    ["#vendeurs", "Vendeurs des annonces", ""],
     ["#suivis", `Mes suivis${a ? `<span class="dot">${a}</span>` : ""}`, ""],
     ["#suivis/demandes", "Mes demandes", ""],
     ["#compte", ME.compte ? "Mon compte" : "Créer un compte", ""],
@@ -981,12 +942,11 @@ function renderSearch() {
         <li><button data-goto="list">Trouvez votre montre</button></li>
         <li><button data-zone-go="monaco">Montres à Monaco</button></li>
         <li><a href="#officiels">Détaillants officiels Rolex</a></li>
-        <li><a href="#vendeurs">Vendeurs les plus réactifs</a></li>
         <li><a href="#suivis">Mes suivis</a></li>
-        <li><button data-sort-go="recent">Dernières annonces</button></li>
+        <li><a href="#notifications">Mes alertes</a></li>
       </ul>
       <p class="kicker" style="margin-top:30px">Recherches fréquentes</p>
-      <div class="vfilters" style="margin-top:12px">${["Daytona", "Submariner", "GMT-Master II", "Day-Date", "Datejust", "126610LN", "Officiel", "Monaco", "Paris", "Genève", "Dubaï"].map(t => `<button class="chip" data-qset="${esc(t)}">${esc(t)}</button>`).join("")}</div>`;
+      <div class="vfilters" style="margin-top:12px">${["Daytona", "Submariner", "GMT-Master II", "Day-Date", "Vert", "Bleu", "Or", "Chronographe", "126610LN", "Genève", "Dubaï"].map(t => `<button class="chip" data-qset="${esc(t)}">${esc(t)}</button>`).join("")}</div>`;
     return;
   }
   const res = ALL.filter(m => matchQ(m, q)).sort((a, b) => a.dist - b.dist);
@@ -1002,32 +962,34 @@ function renderSearch() {
 /* ====================================================================== panneau des filtres */
 function renderPanel() {
   const F = S.f;
-  const prixMax = Math.ceil(Math.max(...ALL.map(m => m.prix)) / 5000) * 5000;
-  const opts = (key, vals) => `<div class="opts">${vals.map(v => `<button class="opt" data-k="${key}" data-v="${esc(v)}" aria-pressed="${F[key].includes(v)}">${esc(v)}</button>`).join("")}</div>`;
+  const cnt = (key, val) => ALL.filter(m => key(m) === val || (Array.isArray(key(m)) && key(m).includes(val))).length;
+  const opts = (k, vals, key) => `<div class="opts">${vals.map(v => { const n = key ? cnt(key, v) : null; return `<button class="opt" data-k="${k}" data-v="${esc(v)}" aria-pressed="${F[k].includes(v)}"${n === 0 ? ' data-zero="1"' : ""}>${esc(v)}${n != null ? ` <small>${n}</small>` : ""}</button>`; }).join("")}</div>`;
+  const uniq = f => [...new Set(ALL.flatMap(m => [].concat(f(m))))].filter(Boolean);
+  const hasPrix = ALL.some(m => m.prix);
+  const prixMax = hasPrix ? Math.ceil(Math.max(...ALL.filter(m => m.prix).map(m => m.prix)) / 5000) * 5000 : 0;
   $("#panelBody").innerHTML = `
-    <div class="fgroup"><h3>Prix maximum</h3><div class="range"><input type="range" id="fPrix" min="5000" max="${prixMax}" step="1000" value="${F.prixMax || prixMax}" aria-label="Prix maximum"><output id="fPrixO">${F.prixMax ? eur(F.prixMax) : "Sans limite"}</output></div></div>
-    <div class="fgroup"><h3>Entretien</h3>${opts("entretien", ["Neuve", "Par Rolex", "Horloger indépendant", "Aucun ou inconnu"])}</div>
-    <div class="fgroup"><h3>État</h3>${opts("condition", ["Jamais portée", "Comme neuve", "Très bon état", "Bon état"])}</div>
-    <div class="fgroup"><h3>Matériau</h3>${opts("materiau", ["Acier", "Rolesor (bicolore)", "Or", "Platine", "Rolesium"])}</div>
-    <div class="fgroup"><h3>Vendeur</h3>${opts("vendeur", ["Certifié Pre-Owned", "Revendeur spécialisé", "Maison de ventes", "Particulier"])}</div>
-    <div class="fgroup">
-      <label class="tog">Boîte et papiers fournis<input type="checkbox" id="fSet" ${F.set ? "checked" : ""}></label>
-      <label class="tog">Uniquement des pièces Rolex<input type="checkbox" id="fOrig" ${F.origine ? "checked" : ""}></label>
-      <label class="tog">Vendeur en ligne maintenant<input type="checkbox" id="fOn" ${F.enLigne ? "checked" : ""}></label>
-    </div>`;
+    <div class="fgroup"><h3>Collection</h3>${opts("colls", collections().map(([c]) => c), m => m.collection)}</div>
+    <div class="fgroup"><h3>État</h3>${opts("etat", ["Neuve", "Comme neuve (Pre-Owned)", "Très bon état (Pre-Owned)", "Bon état (Pre-Owned)"], etatDe)}<p class="d-note" style="margin-top:8px">Pre-Owned : uniquement le programme Rolex Certified Pre-Owned des détaillants officiels. Aucune pour l'instant : créez une alerte pour être prévenu.</p></div>
+    <div class="fgroup"><h3>Couleur du cadran</h3>${opts("couleur", uniq(m => m.couleur_cadran).sort(), m => m.couleur_cadran)}</div>
+    <div class="fgroup"><h3>Matériau</h3>${opts("materiau", ["Acier", "Rolesor (bicolore)", "Or", "Platine", "Rolesium"], m => m.mat)}</div>
+    <div class="fgroup"><h3>Diamètre</h3>${opts("diametre", uniq(m => String(m.diametre)).sort(), m => String(m.diametre))}</div>
+    <div class="fgroup"><h3>Lunette</h3>${opts("lunette", uniq(m => m.type_lunette).sort(), m => m.type_lunette)}</div>
+    <div class="fgroup"><h3>Bracelet</h3>${opts("bracelet", uniq(m => m.type_bracelet).sort(), m => m.type_bracelet)}</div>
+    <div class="fgroup"><h3>Fonctions</h3>${opts("complications", uniq(m => m.complications || []).sort(), m => m.complications || [])}</div>
+    <div class="fgroup"><h3>Étanchéité minimum</h3>${`<div class="opts">${[0, 100, 300, 1220, 3900].map(v => `<button class="opt" data-etanche="${v}" aria-pressed="${F.etancheiteMin === v}">${v ? nf(v) + " m" : "Toutes"}</button>`).join("")}</div>`}</div>
+    ${hasPrix ? `<div class="fgroup"><h3>Prix maximum</h3><div class="range"><input type="range" id="fPrix" min="5000" max="${prixMax}" step="1000" value="${F.prixMax || prixMax}" aria-label="Prix maximum"><output id="fPrixO">${F.prixMax ? eur(F.prixMax) : "Sans limite"}</output></div></div>` : ""}
+    <div class="fgroup" style="border:0"><button class="btn btn-line" data-save-alert style="width:100%">Créer une alerte avec ces critères</button></div>`;
   const r = $("#fPrix");
-  r.oninput = () => { const v = +r.value; F.prixMax = v >= prixMax ? 0 : v; $("#fPrixO").textContent = F.prixMax ? eur(F.prixMax) : "Sans limite"; updApply(); };
-  $$(".opt", $("#panelBody")).forEach(b => b.onclick = () => {
+  if (r) r.oninput = () => { const v = +r.value; F.prixMax = v >= prixMax ? 0 : v; $("#fPrixO").textContent = F.prixMax ? eur(F.prixMax) : "Sans limite"; updApply(); };
+  $$(".opt[data-k]", $("#panelBody")).forEach(b => b.onclick = () => {
     const arr = F[b.dataset.k], v = b.dataset.v, i = arr.indexOf(v);
     i < 0 ? arr.push(v) : arr.splice(i, 1);
     b.setAttribute("aria-pressed", i < 0); updApply();
   });
-  $("#fSet").onchange = e => { F.set = e.target.checked; updApply(); };
-  $("#fOrig").onchange = e => { F.origine = e.target.checked; updApply(); };
-  $("#fOn").onchange = e => { F.enLigne = e.target.checked; updApply(); };
+  $$(".opt[data-etanche]", $("#panelBody")).forEach(b => b.onclick = () => { F.etancheiteMin = +b.dataset.etanche; $$(".opt[data-etanche]").forEach(x => x.setAttribute("aria-pressed", x === b)); updApply(); });
   updApply();
 }
-function updApply() { const n = filtered().length; $("#fApply").textContent = `Voir ${n} montre${n > 1 ? "s" : ""}`; }
+function updApply() { const n = filtered().length; $("#fApply").textContent = n ? `Voir ${n} montre${n > 1 ? "s" : ""}` : "Aucune montre · créez une alerte"; }
 function openPanel() { closeOv("menu"); renderPanel(); $("#panel").classList.add("open"); $("#panelBg").classList.add("open"); }
 function closePanel() { $("#panel").classList.remove("open"); $("#panelBg").classList.remove("open"); renderHome(); }
 $("#panelClose").onclick = $("#panelBg").onclick = closePanel;
@@ -1175,7 +1137,7 @@ document.addEventListener("click", e => {
   const zg = t.closest("[data-zone-go]"); if (zg) { e.preventDefault(); S.zone = zg.dataset.zoneGo; store.set("rm.zone", S.zone); renderHome(); goList(); return; }
   const cg = t.closest("[data-coll-go]"); if (cg) { e.preventDefault(); S.coll = cg.dataset.collGo; S.zone = "monde"; renderHome(); goList(); return; }
   const sg = t.closest("[data-sort-go]"); if (sg) { S.sort = sg.dataset.sortGo; S.zone = "monde"; renderHome(); goList(); return; }
-  const z = t.closest("[data-z]"); if (z) { S.zone = z.dataset.z; store.set("rm.zone", S.zone); renderHome(); return; }
+  const z = t.closest("[data-z]"); if (z) { S.zone = z.dataset.z; store.set("rm.zone", S.zone); renderHome(); if (z.hasAttribute("data-rerender")) route(); return; }
   const c = t.closest(".coll"); if (c) { S.coll = c.dataset.c; renderHome(); return; }
   const et = t.closest("[data-etat]"); if (et) { S.etat = et.dataset.etat; renderHome(); return; }
   if (t.closest("[data-open-filters]")) { openPanel(); return; }
@@ -1187,7 +1149,10 @@ document.addEventListener("click", e => {
   if (t.closest("[data-back]")) { if (S.inApp && history.length > 1) history.back(); else location.hash = ""; return; }
   const fo = t.closest("[data-follow]"); if (fo) { const id = fo.dataset.follow; ME.suivis[id] ? unfollow(id) : follow(id); if (ME.compte) pageMontre(id); return; }
   const uf = t.closest("[data-unfollow]"); if (uf) { unfollow(uf.dataset.unfollow); route(); return; }
-  if (t.closest("[data-seen-all]")) { Object.keys(ME.suivis).forEach(markSeen); route(); renderHome(); return; }
+  if (t.closest("[data-seen-all]")) { Object.keys(ME.suivis).forEach(markSeen); ME.alertes.forEach(a => a.vus = filterWith(a.crit).map(m => m.id)); ME.save(); route(); renderHome(); return; }
+  if (t.closest("[data-save-alert]")) { closePanel(); saveAlert(); return; }
+  const da = t.closest("[data-del-alert]"); if (da) { ME.alertes = ME.alertes.filter(a => a.id !== da.dataset.delAlert); ME.save(); toast("Alerte supprimée."); route(); return; }
+  const va = t.closest("[data-voir-alert]"); if (va) { const a = ME.alertes.find(x => x.id === va.dataset.voirAlert); if (a) { Object.assign(S, { zone: a.crit.zone, coll: a.crit.coll, q: a.crit.q, f: { ...emptyF(), ...a.crit.f } }); renderHome(); goList(); } return; }
   const vs = t.closest("[data-vsort]"); if (vs) { VSORT = vs.dataset.vsort; pageVendeurs(); return; }
   const oz = t.closest("[data-ozone]"); if (oz) { OZONE = oz.dataset.ozone; pageOfficiels(); return; }
   const vz = t.closest("[data-vzone]"); if (vz) { VZONE = vz.dataset.vzone; pageVendeurs(); return; }
@@ -1295,7 +1260,7 @@ function route() {
   const [k, a] = [h.split("/")[0], h.split("/").slice(1).join("/")];
   if (k === "m") pageMontre(a);
   else if (k === "v") pageVendeur(a);
-  else if (k === "vendeurs") pageVendeurs();
+  else if (k === "vendeurs") { location.replace("#officiels"); }
   else if (k === "d") pageDetaillant(a);
   else if (k === "officiels") pageOfficiels();
   else if (k === "infos") pageInfos();
