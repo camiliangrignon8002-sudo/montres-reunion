@@ -302,3 +302,29 @@ La canette suit la souris, s'écrase un peu quand on défile vite, les bulles ac
   Si une photo manque, la page montre une canette dessinée en code.
 - Lien direct vers un goût : `#blue-edition` à la fin de l'adresse.
 - Goûts et chiffres (indicatifs) : tableau `F` au début du script.
+
+---
+
+# ⌚ Localisateur de montres · Monaco
+
+Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/rolex-monaco/
+
+Trouver une montre à **Monaco**, puis en **France**, en **Europe** et **dans le monde** (onglets en haut de la liste,
+distances depuis Monaco ou « Autour de moi »). Présentation blanche, verte et or : en-tête avec l'emblème au centre,
+menu plein écran (tuiles + liste), recherche avec raccourcis, grand visuel d'accueil, pied de page gris.
+
+**Version de démonstration** : les annonces, vendeurs, adresses précises, téléphones, e-mails et statistiques
+sont fictifs. Projet non officiel, non affilié à Rolex SA : pas de logo ni de photo officielle.
+
+- **Fiche d'une montre** : galerie zoomable (vue de face, cadran, lunette, bracelet), prix et baisse de prix,
+  statut (disponible, réservée, enchères), note de qualité sur 10, état pièce par pièce, entretien (Rolex,
+  horloger indépendant, inconnu) avec historique, pièces d'origine ou changées, papiers, boîte, garantie,
+  fiche technique, carte, itinéraire (Google Maps, Plans, Waze), appel, WhatsApp, e-mail, SMS.
+- **Suivi de l'annonce** : vues, personnes en favori, demandes, date de mise en ligne, historique (prix, statut, photos).
+- **Vendeurs** : dernière connexion (« en ligne », « il y a 12 min »), temps de réponse habituel et classement
+  des plus réactifs, taux de réponse, dernière réponse à un client, avis, ventes, identité vérifiée.
+- **Compte** (gardé sur le téléphone) : favoris, montres suivies (alerte quand le prix baisse ou que la montre
+  est réservée / vendue, notification possible), historique des demandes aux vendeurs avec le temps de réponse.
+- **Rafraîchir** : tirer la page vers le bas, ou « Rafraîchir les annonces » dans le menu et le pied de page.
+- Fichiers : `docs/rolex-monaco/` — `index.html`, `app.css`, `app.js`, `watch.js` (montres dessinées en vectoriel),
+  `montres.json` (les annonces et vendeurs : à remplacer par les vraies, champ `photos` pour les vraies photos HD).

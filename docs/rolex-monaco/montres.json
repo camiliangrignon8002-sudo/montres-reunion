@@ -1,0 +1,4158 @@
+{
+ "demo": true,
+ "note": "Données de démonstration : vendeurs, adresses précises, téléphones et e-mails fictifs. Prix indicatifs.",
+ "mise_a_jour": "2026-11-14",
+ "genere_le": "2026-11-14T13:30+01:00",
+ "vendeurs": {
+  "mc-port": {
+   "nom": "Galerie Horlogère du Port",
+   "type": "Revendeur spécialisé",
+   "contact": "Élise Marchetti",
+   "adresse": "Quai Antoine Ier",
+   "ville": "Monaco",
+   "cp": "98000",
+   "pays": "Monaco",
+   "code_pays": "MC",
+   "lat": 43.7353,
+   "lng": 7.4237,
+   "tel": "+377 00 00 00 01",
+   "whatsapp": "+37700000001",
+   "email": "contact@galerie-port.example.com",
+   "site": "https://galerie-port.example.com",
+   "horaires": "Lun–sam 10h–19h",
+   "langues": "Français, anglais, italien",
+   "verifie": true,
+   "membre_depuis": "2024",
+   "derniere_connexion": "2026-11-14T13:29+01:00",
+   "temps_reponse_min": 8,
+   "taux_reponse": 97,
+   "derniere_reponse": "2026-11-14T11:57+01:00",
+   "ventes": 692,
+   "note": 4.8,
+   "avis": 617,
+   "annonces_actives": 3
+  },
+  "mc-casino": {
+   "nom": "Maison Monte-Carlo Temps",
+   "type": "Détaillant officiel (exemple)",
+   "contact": "Laurent Ferraud",
+   "adresse": "Place du Casino",
+   "ville": "Monte-Carlo",
+   "cp": "98000",
+   "pays": "Monaco",
+   "code_pays": "MC",
+   "lat": 43.7396,
+   "lng": 7.4276,
+   "tel": "+377 00 00 00 02",
+   "whatsapp": "+37700000002",
+   "email": "boutique@mc-temps.example.com",
+   "site": "https://mc-temps.example.com",
+   "horaires": "Lun–sam 10h–19h30, dim 11h–18h",
+   "langues": "Français, anglais, russe, italien",
+   "verifie": true,
+   "membre_depuis": "2020",
+   "derniere_connexion": "2026-11-14T12:55+01:00",
+   "temps_reponse_min": 12,
+   "taux_reponse": 98,
+   "derniere_reponse": "2026-11-14T12:21+01:00",
+   "ventes": 373,
+   "note": 4.8,
+   "avis": 372,
+   "annonces_actives": 2
+  },
+  "mc-fontvieille": {
+   "nom": "Atelier Fontvieille Pre-Owned",
+   "type": "Certifié Pre-Owned (exemple)",
+   "contact": "Sofia Benali",
+   "adresse": "Centre commercial de Fontvieille",
+   "ville": "Fontvieille",
+   "cp": "98000",
+   "pays": "Monaco",
+   "code_pays": "MC",
+   "lat": 43.729,
+   "lng": 7.416,
+   "tel": "+377 00 00 00 03",
+   "whatsapp": "+37700000003",
+   "email": "preowned@fontvieille.example.com",
+   "site": "https://fontvieille.example.com",
+   "horaires": "Mar–sam 9h30–18h30",
+   "langues": "Français, anglais, arabe",
+   "verifie": true,
+   "membre_depuis": "2021",
+   "derniere_connexion": "2026-11-14T13:27+01:00",
+   "temps_reponse_min": 8,
+   "taux_reponse": 95,
+   "derniere_reponse": "2026-11-14T09:38+01:00",
+   "ventes": 880,
+   "note": 4.7,
+   "avis": 218,
+   "annonces_actives": 2
+  },
+  "mc-particulier": {
+   "nom": "Particulier — Larvotto",
+   "type": "Particulier",
+   "contact": "M. R.",
+   "adresse": "Quartier du Larvotto",
+   "ville": "Monaco",
+   "cp": "98000",
+   "pays": "Monaco",
+   "code_pays": "MC",
+   "lat": 43.7462,
+   "lng": 7.435,
+   "tel": "+377 00 00 00 04",
+   "whatsapp": "+37700000004",
+   "email": "vendeur.larvotto@example.com",
+   "site": "",
+   "horaires": "Sur rendez-vous, en boutique partenaire",
+   "langues": "Français, anglais",
+   "verifie": true,
+   "membre_depuis": "2016",
+   "derniere_connexion": "2026-11-11T13:50+01:00",
+   "temps_reponse_min": 480,
+   "taux_reponse": 83,
+   "derniere_reponse": "2026-11-11T12:46+01:00",
+   "ventes": 3,
+   "note": 4.9,
+   "avis": 4,
+   "annonces_actives": 1
+  },
+  "fr-nice": {
+   "nom": "Comptoir Horloger de la Riviera",
+   "type": "Revendeur spécialisé",
+   "contact": "Antoine Giordano",
+   "adresse": "Avenue Jean Médecin",
+   "ville": "Nice",
+   "cp": "06000",
+   "pays": "France",
+   "code_pays": "FR",
+   "lat": 43.7034,
+   "lng": 7.2663,
+   "tel": "+33 1 99 00 00 11",
+   "whatsapp": "+33199000011",
+   "email": "contact@riviera-horloger.example.com",
+   "site": "https://riviera-horloger.example.com",
+   "horaires": "Lun–sam 10h–19h",
+   "langues": "Français, anglais, italien",
+   "verifie": true,
+   "membre_depuis": "2021",
+   "derniere_connexion": "2026-11-14T13:15+01:00",
+   "temps_reponse_min": 240,
+   "taux_reponse": 88,
+   "derniere_reponse": "2026-11-14T12:57+01:00",
+   "ventes": 413,
+   "note": 5.0,
+   "avis": 407,
+   "annonces_actives": 2
+  },
+  "fr-cannes": {
+   "nom": "Croisette Montres d'Exception",
+   "type": "Revendeur spécialisé",
+   "contact": "Camille Roux",
+   "adresse": "Boulevard de la Croisette",
+   "ville": "Cannes",
+   "cp": "06400",
+   "pays": "France",
+   "code_pays": "FR",
+   "lat": 43.5504,
+   "lng": 7.0237,
+   "tel": "+33 1 99 00 00 12",
+   "whatsapp": "+33199000012",
+   "email": "cannes@croisette-montres.example.com",
+   "site": "https://croisette-montres.example.com",
+   "horaires": "7j/7 10h–20h (juin–septembre), lun–sam hors saison",
+   "langues": "Français, anglais, russe",
+   "verifie": true,
+   "membre_depuis": "2024",
+   "derniere_connexion": "2026-11-14T12:20+01:00",
+   "temps_reponse_min": 10,
+   "taux_reponse": 97,
+   "derniere_reponse": "2026-11-14T11:31+01:00",
+   "ventes": 481,
+   "note": 4.3,
+   "avis": 470,
+   "annonces_actives": 2
+  },
+  "fr-paris": {
+   "nom": "Place Vendôme Horlogerie",
+   "type": "Détaillant officiel (exemple)",
+   "contact": "Hélène Varenne",
+   "adresse": "Rue de la Paix",
+   "ville": "Paris",
+   "cp": "75002",
+   "pays": "France",
+   "code_pays": "FR",
+   "lat": 48.8692,
+   "lng": 2.331,
+   "tel": "+33 1 99 00 00 13",
+   "whatsapp": "+33199000013",
+   "email": "paris@vendome-horlogerie.example.com",
+   "site": "https://vendome-horlogerie.example.com",
+   "horaires": "Lun–sam 10h30–19h",
+   "langues": "Français, anglais, chinois, japonais",
+   "verifie": true,
+   "membre_depuis": "2018",
+   "derniere_connexion": "2026-11-14T13:21+01:00",
+   "temps_reponse_min": 60,
+   "taux_reponse": 93,
+   "derniere_reponse": "2026-11-14T11:55+01:00",
+   "ventes": 274,
+   "note": 4.6,
+   "avis": 640,
+   "annonces_actives": 2
+  },
+  "fr-paris2": {
+   "nom": "Le Marais Vintage Watches",
+   "type": "Revendeur spécialisé",
+   "contact": "Julien Abécassis",
+   "adresse": "Rue Vieille du Temple",
+   "ville": "Paris",
+   "cp": "75004",
+   "pays": "France",
+   "code_pays": "FR",
+   "lat": 48.859,
+   "lng": 2.36,
+   "tel": "+33 1 99 00 00 14",
+   "whatsapp": "+33199000014",
+   "email": "hello@marais-vintage.example.com",
+   "site": "https://marais-vintage.example.com",
+   "horaires": "Mar–sam 11h–19h",
+   "langues": "Français, anglais, hébreu",
+   "verifie": true,
+   "membre_depuis": "2019",
+   "derniere_connexion": "2026-11-14T12:55+01:00",
+   "temps_reponse_min": 6,
+   "taux_reponse": 96,
+   "derniere_reponse": "2026-11-14T10:35+01:00",
+   "ventes": 173,
+   "note": 4.4,
+   "avis": 338,
+   "annonces_actives": 1
+  },
+  "fr-lyon": {
+   "nom": "Presqu'île Horlogerie",
+   "type": "Certifié Pre-Owned (exemple)",
+   "contact": "Marc Delorme",
+   "adresse": "Rue de la République",
+   "ville": "Lyon",
+   "cp": "69002",
+   "pays": "France",
+   "code_pays": "FR",
+   "lat": 45.762,
+   "lng": 4.8357,
+   "tel": "+33 1 99 00 00 15",
+   "whatsapp": "+33199000015",
+   "email": "lyon@presquile-horlogerie.example.com",
+   "site": "https://presquile-horlogerie.example.com",
+   "horaires": "Lun 14h–19h, mar–sam 10h–19h",
+   "langues": "Français, anglais",
+   "verifie": true,
+   "membre_depuis": "2023",
+   "derniere_connexion": "2026-11-12T13:10+01:00",
+   "temps_reponse_min": 10,
+   "taux_reponse": 98,
+   "derniere_reponse": "2026-11-12T09:17+01:00",
+   "ventes": 271,
+   "note": 4.8,
+   "avis": 429,
+   "annonces_actives": 1
+  },
+  "fr-sttropez": {
+   "nom": "Saint-Tropez Time Club",
+   "type": "Revendeur spécialisé",
+   "contact": "Nina Castellane",
+   "adresse": "Quai Jean Jaurès",
+   "ville": "Saint-Tropez",
+   "cp": "83990",
+   "pays": "France",
+   "code_pays": "FR",
+   "lat": 43.2717,
+   "lng": 6.6383,
+   "tel": "+33 1 99 00 00 16",
+   "whatsapp": "+33199000016",
+   "email": "club@st-tropez-time.example.com",
+   "site": "https://st-tropez-time.example.com",
+   "horaires": "Avril–octobre, 7j/7 10h–22h",
+   "langues": "Français, anglais, italien",
+   "verifie": true,
+   "membre_depuis": "2019",
+   "derniere_connexion": "2026-11-14T13:21+01:00",
+   "temps_reponse_min": 240,
+   "taux_reponse": 89,
+   "derniere_reponse": "2026-11-14T11:14+01:00",
+   "ventes": 158,
+   "note": 4.9,
+   "avis": 26,
+   "annonces_actives": 1
+  },
+  "fr-courchevel": {
+   "nom": "Altitude 1850 Horlogerie",
+   "type": "Revendeur spécialisé",
+   "contact": "Pierre Morand",
+   "adresse": "Rue du Rocher",
+   "ville": "Courchevel",
+   "cp": "73120",
+   "pays": "France",
+   "code_pays": "FR",
+   "lat": 45.4153,
+   "lng": 6.6346,
+   "tel": "+33 1 99 00 00 17",
+   "whatsapp": "+33199000017",
+   "email": "contact@altitude1850.example.com",
+   "site": "https://altitude1850.example.com",
+   "horaires": "Décembre–avril, 7j/7 10h–20h",
+   "langues": "Français, anglais, russe",
+   "verifie": true,
+   "membre_depuis": "2016",
+   "derniere_connexion": "2026-11-14T10:30+01:00",
+   "temps_reponse_min": 25,
+   "taux_reponse": 97,
+   "derniere_reponse": "2026-11-14T10:24+01:00",
+   "ventes": 450,
+   "note": 4.4,
+   "avis": 269,
+   "annonces_actives": 1
+  },
+  "fr-bordeaux": {
+   "nom": "Particulier — Bordeaux Chartrons",
+   "type": "Particulier",
+   "contact": "Mme L.",
+   "adresse": "Quartier des Chartrons",
+   "ville": "Bordeaux",
+   "cp": "33000",
+   "pays": "France",
+   "code_pays": "FR",
+   "lat": 44.853,
+   "lng": -0.57,
+   "tel": "+33 1 99 00 00 18",
+   "whatsapp": "+33199000018",
+   "email": "chartrons.vendeuse@example.com",
+   "site": "",
+   "horaires": "Remise en main propre en boutique partenaire",
+   "langues": "Français",
+   "verifie": false,
+   "membre_depuis": "2022",
+   "derniere_connexion": "2026-11-13T12:30+01:00",
+   "temps_reponse_min": 180,
+   "taux_reponse": 94,
+   "derniere_reponse": "2026-11-13T11:07+01:00",
+   "ventes": 1,
+   "note": 4.3,
+   "avis": 2,
+   "annonces_actives": 1
+  },
+  "ch-geneve": {
+   "nom": "Quai du Mont-Blanc Pre-Owned",
+   "type": "Certifié Pre-Owned (exemple)",
+   "contact": "Raphaël Monnier",
+   "adresse": "Quai du Mont-Blanc",
+   "ville": "Genève",
+   "cp": "1201",
+   "pays": "Suisse",
+   "code_pays": "CH",
+   "lat": 46.2095,
+   "lng": 6.149,
+   "tel": "+41 00 000 00 21",
+   "whatsapp": "+4100000002",
+   "email": "geneve@montblanc-preowned.example.com",
+   "site": "https://montblanc-preowned.example.com",
+   "horaires": "Lun–ven 10h–18h30, sam 10h–17h",
+   "langues": "Français, anglais, allemand, arabe",
+   "verifie": true,
+   "membre_depuis": "2023",
+   "derniere_connexion": "2026-11-14T06:50+01:00",
+   "temps_reponse_min": 10,
+   "taux_reponse": 97,
+   "derniere_reponse": "2026-11-14T03:41+01:00",
+   "ventes": 868,
+   "note": 4.6,
+   "avis": 443,
+   "annonces_actives": 1
+  },
+  "uk-london": {
+   "nom": "Mayfair Watch Exchange",
+   "type": "Revendeur spécialisé",
+   "contact": "Oliver Hastings",
+   "adresse": "Old Bond Street",
+   "ville": "Londres",
+   "cp": "W1S",
+   "pays": "Royaume-Uni",
+   "code_pays": "GB",
+   "lat": 51.5085,
+   "lng": -0.1415,
+   "tel": "+44 0000 000 022",
+   "whatsapp": "+440000000022",
+   "email": "desk@mayfair-exchange.example.com",
+   "site": "https://mayfair-exchange.example.com",
+   "horaires": "Mon–Sat 10am–6pm",
+   "langues": "Anglais, français",
+   "verifie": true,
+   "membre_depuis": "2020",
+   "derniere_connexion": "2026-11-14T10:30+01:00",
+   "temps_reponse_min": 6,
+   "taux_reponse": 97,
+   "derniere_reponse": "2026-11-14T06:34+01:00",
+   "ventes": 465,
+   "note": 4.9,
+   "avis": 171,
+   "annonces_actives": 1
+  },
+  "it-milan": {
+   "nom": "Montenapoleone Orologi",
+   "type": "Revendeur spécialisé",
+   "contact": "Giulia Ferri",
+   "adresse": "Via Monte Napoleone",
+   "ville": "Milan",
+   "cp": "20121",
+   "pays": "Italie",
+   "code_pays": "IT",
+   "lat": 45.4685,
+   "lng": 9.1958,
+   "tel": "+39 00 0000 0023",
+   "whatsapp": "+3900000023",
+   "email": "info@montenapoleone-orologi.example.com",
+   "site": "https://montenapoleone-orologi.example.com",
+   "horaires": "Lun–sab 10–19",
+   "langues": "Italien, anglais, français",
+   "verifie": true,
+   "membre_depuis": "2023",
+   "derniere_connexion": "2026-11-14T12:55+01:00",
+   "temps_reponse_min": 15,
+   "taux_reponse": 99,
+   "derniere_reponse": "2026-11-14T12:46+01:00",
+   "ventes": 635,
+   "note": 4.7,
+   "avis": 82,
+   "annonces_actives": 1
+  },
+  "de-munich": {
+   "nom": "Maximilianstraße Uhren",
+   "type": "Détaillant officiel (exemple)",
+   "contact": "Lukas Brandt",
+   "adresse": "Maximilianstraße",
+   "ville": "Munich",
+   "cp": "80539",
+   "pays": "Allemagne",
+   "code_pays": "DE",
+   "lat": 48.1394,
+   "lng": 11.583,
+   "tel": "+49 00 0000 0024",
+   "whatsapp": "+4900000024",
+   "email": "muenchen@max-uhren.example.com",
+   "site": "https://max-uhren.example.com",
+   "horaires": "Mo–Sa 10–19 Uhr",
+   "langues": "Allemand, anglais",
+   "verifie": true,
+   "membre_depuis": "2016",
+   "derniere_connexion": "2026-11-14T13:28+01:00",
+   "temps_reponse_min": 6,
+   "taux_reponse": 94,
+   "derniere_reponse": "2026-11-14T10:30+01:00",
+   "ventes": 236,
+   "note": 4.7,
+   "avis": 268,
+   "annonces_actives": 1
+  },
+  "es-madrid": {
+   "nom": "Salamanca Relojes Clásicos",
+   "type": "Revendeur spécialisé",
+   "contact": "Carmen Ortega",
+   "adresse": "Calle de Serrano",
+   "ville": "Madrid",
+   "cp": "28001",
+   "pays": "Espagne",
+   "code_pays": "ES",
+   "lat": 40.426,
+   "lng": -3.687,
+   "tel": "+34 000 000 025",
+   "whatsapp": "+34000000025",
+   "email": "hola@salamanca-relojes.example.com",
+   "site": "https://salamanca-relojes.example.com",
+   "horaires": "Lun–sáb 10:00–20:30",
+   "langues": "Espagnol, anglais, français",
+   "verifie": true,
+   "membre_depuis": "2016",
+   "derniere_connexion": "2026-11-14T13:28+01:00",
+   "temps_reponse_min": 240,
+   "taux_reponse": 88,
+   "derniere_reponse": "2026-11-14T12:32+01:00",
+   "ventes": 759,
+   "note": 4.5,
+   "avis": 83,
+   "annonces_actives": 1
+  },
+  "nl-amsterdam": {
+   "nom": "Amsterdam Auction House",
+   "type": "Maison de ventes",
+   "contact": "Daan de Vries",
+   "adresse": "P.C. Hooftstraat",
+   "ville": "Amsterdam",
+   "cp": "1071",
+   "pays": "Pays-Bas",
+   "code_pays": "NL",
+   "lat": 52.36,
+   "lng": 4.879,
+   "tel": "+31 00 000 0026",
+   "whatsapp": "+3100000026",
+   "email": "watches@ams-auction.example.com",
+   "site": "https://ams-auction.example.com",
+   "horaires": "Ma–za 10–18 uur, ventes le 1er jeudi du mois",
+   "langues": "Néerlandais, anglais",
+   "verifie": true,
+   "membre_depuis": "2021",
+   "derniere_connexion": "2026-11-14T12:55+01:00",
+   "temps_reponse_min": 25,
+   "taux_reponse": 94,
+   "derniere_reponse": "2026-11-14T12:30+01:00",
+   "ventes": 845,
+   "note": 4.4,
+   "avis": 268,
+   "annonces_actives": 1
+  },
+  "ae-dubai": {
+   "nom": "Dubai Marina Timepieces",
+   "type": "Revendeur spécialisé",
+   "contact": "Omar Al Mansouri",
+   "adresse": "Dubai Mall, Fashion Avenue",
+   "ville": "Dubaï",
+   "cp": "",
+   "pays": "Émirats arabes unis",
+   "code_pays": "AE",
+   "lat": 25.1985,
+   "lng": 55.2796,
+   "tel": "+971 0 000 0031",
+   "whatsapp": "+97100000031",
+   "email": "sales@marina-timepieces.example.com",
+   "site": "https://marina-timepieces.example.com",
+   "horaires": "7j/7 10h–23h",
+   "langues": "Arabe, anglais, français, russe",
+   "verifie": true,
+   "membre_depuis": "2016",
+   "derniere_connexion": "2026-11-14T12:20+01:00",
+   "temps_reponse_min": 40,
+   "taux_reponse": 98,
+   "derniere_reponse": "2026-11-14T10:29+01:00",
+   "ventes": 375,
+   "note": 5.0,
+   "avis": 77,
+   "annonces_actives": 1
+  },
+  "us-ny": {
+   "nom": "Madison Avenue Watch Gallery",
+   "type": "Certifié Pre-Owned (exemple)",
+   "contact": "Rachel Goldberg",
+   "adresse": "Madison Avenue",
+   "ville": "New York",
+   "cp": "NY 10065",
+   "pays": "États-Unis",
+   "code_pays": "US",
+   "lat": 40.768,
+   "lng": -73.9665,
+   "tel": "+1 000 000 0032",
+   "whatsapp": "+10000000032",
+   "email": "gallery@madison-watch.example.com",
+   "site": "https://madison-watch.example.com",
+   "horaires": "Mon–Sat 10am–7pm",
+   "langues": "Anglais, espagnol, français",
+   "verifie": true,
+   "membre_depuis": "2022",
+   "derniere_connexion": "2026-11-12T13:10+01:00",
+   "temps_reponse_min": 120,
+   "taux_reponse": 94,
+   "derniere_reponse": "2026-11-12T11:30+01:00",
+   "ventes": 835,
+   "note": 4.4,
+   "avis": 115,
+   "annonces_actives": 1
+  },
+  "us-miami": {
+   "nom": "Bal Harbour Luxury Watches",
+   "type": "Revendeur spécialisé",
+   "contact": "Diego Alvarez",
+   "adresse": "Collins Avenue",
+   "ville": "Miami",
+   "cp": "FL 33154",
+   "pays": "États-Unis",
+   "code_pays": "US",
+   "lat": 25.888,
+   "lng": -80.126,
+   "tel": "+1 000 000 0033",
+   "whatsapp": "+10000000033",
+   "email": "info@balharbour-watches.example.com",
+   "site": "https://balharbour-watches.example.com",
+   "horaires": "Mon–Sun 10am–9pm",
+   "langues": "Anglais, espagnol",
+   "verifie": true,
+   "membre_depuis": "2019",
+   "derniere_connexion": "2026-11-14T13:26+01:00",
+   "temps_reponse_min": 10,
+   "taux_reponse": 99,
+   "derniere_reponse": "2026-11-14T10:26+01:00",
+   "ventes": 732,
+   "note": 4.7,
+   "avis": 180,
+   "annonces_actives": 1
+  },
+  "jp-tokyo": {
+   "nom": "Ginza Precision Time",
+   "type": "Revendeur spécialisé",
+   "contact": "Haruto Sato",
+   "adresse": "Chūō-dōri, Ginza",
+   "ville": "Tokyo",
+   "cp": "104-0061",
+   "pays": "Japon",
+   "code_pays": "JP",
+   "lat": 35.6717,
+   "lng": 139.765,
+   "tel": "+81 0 0000 0034",
+   "whatsapp": "+8100000034",
+   "email": "ginza@precision-time.example.com",
+   "site": "https://precision-time.example.com",
+   "horaires": "11:00–20:00, fermé le mercredi",
+   "langues": "Japonais, anglais",
+   "verifie": true,
+   "membre_depuis": "2019",
+   "derniere_connexion": "2026-11-12T13:10+01:00",
+   "temps_reponse_min": 15,
+   "taux_reponse": 97,
+   "derniere_reponse": "2026-11-12T10:33+01:00",
+   "ventes": 498,
+   "note": 4.9,
+   "avis": 481,
+   "annonces_actives": 1
+  },
+  "hk": {
+   "nom": "Canton Road Horology",
+   "type": "Revendeur spécialisé",
+   "contact": "Grace Leung",
+   "adresse": "Canton Road, Tsim Sha Tsui",
+   "ville": "Hong Kong",
+   "cp": "",
+   "pays": "Hong Kong",
+   "code_pays": "HK",
+   "lat": 22.297,
+   "lng": 114.169,
+   "tel": "+852 0000 0035",
+   "whatsapp": "+85200000035",
+   "email": "hello@canton-horology.example.com",
+   "site": "https://canton-horology.example.com",
+   "horaires": "7j/7 11h–21h",
+   "langues": "Cantonais, mandarin, anglais",
+   "verifie": true,
+   "membre_depuis": "2016",
+   "derniere_connexion": "2026-11-14T12:20+01:00",
+   "temps_reponse_min": 10,
+   "taux_reponse": 98,
+   "derniere_reponse": "2026-11-14T10:03+01:00",
+   "ventes": 303,
+   "note": 4.5,
+   "avis": 121,
+   "annonces_actives": 1
+  },
+  "sg": {
+   "nom": "Orchard Road Watch Atelier",
+   "type": "Certifié Pre-Owned (exemple)",
+   "contact": "Wei Ling Tan",
+   "adresse": "Orchard Road",
+   "ville": "Singapour",
+   "cp": "238801",
+   "pays": "Singapour",
+   "code_pays": "SG",
+   "lat": 1.304,
+   "lng": 103.832,
+   "tel": "+65 0000 0036",
+   "whatsapp": "+6500000036",
+   "email": "atelier@orchard-watch.example.com",
+   "site": "https://orchard-watch.example.com",
+   "horaires": "7j/7 10h30–21h30",
+   "langues": "Anglais, mandarin, malais",
+   "verifie": true,
+   "membre_depuis": "2023",
+   "derniere_connexion": "2026-11-14T12:20+01:00",
+   "temps_reponse_min": 240,
+   "taux_reponse": 87,
+   "derniere_reponse": "2026-11-14T08:38+01:00",
+   "ventes": 129,
+   "note": 4.9,
+   "avis": 280,
+   "annonces_actives": 1
+  }
+ },
+ "montres": [
+  {
+   "id": "126610ln-mc-casino-1",
+   "reference": "126610LN",
+   "prix": 10900,
+   "devise": "EUR",
+   "vendeur": "mc-casino",
+   "skin": {
+    "type": "sub",
+    "dial": "#0b0c0e",
+    "bezel": "#0a0a0b",
+    "insert": "#0a0a0b",
+    "metal": "steel",
+    "bracelet": "oyster",
+    "date": true
+   },
+   "photos": [],
+   "collection": "Submariner",
+   "modele": "Submariner Date",
+   "diametre": 41,
+   "materiau": "Acier Oystersteel",
+   "lunette": "Tournante unidirectionnelle graduée 60 minutes, disque Cerachrom noir",
+   "cadran": "Noir",
+   "calibre": "3235",
+   "reserve": 70,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec rallonge Glidelock",
+   "etancheite": 300,
+   "fonctions": "Heures, minutes, petite seconde au centre, date à guichet, stop seconde",
+   "etat": "Neuf",
+   "condition": "Jamais portée",
+   "note": 10,
+   "polissage": "Jamais polie (film de protection d'origine)",
+   "details": {
+    "boitier": "Parfait, films de protection en place",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Parfait, non dimensionné"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Montre neuve : aucun entretien nécessaire",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex 5 ans, jusqu'en 2031",
+   "accessoires": "Boîte, sur-boîte, carte de garantie, livrets, étiquette verte",
+   "annee": 2026,
+   "publie": "2026-11-12",
+   "resume": "Pièce neuve disponible en boutique, prix public conseillé.",
+   "prix_initial": 10900,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-12T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-13T08:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-13T08:00+01:00",
+   "vues": 256,
+   "favoris": 34,
+   "demandes": 2
+  },
+  {
+   "id": "126710blro-mc-port-2",
+   "reference": "126710BLRO",
+   "prix": 22500,
+   "devise": "EUR",
+   "vendeur": "mc-port",
+   "skin": {
+    "type": "gmt",
+    "dial": "#0b0c0e",
+    "bezel": "#c8ccd2",
+    "insert": [
+     "#b3202a",
+     "#1d3f8f"
+    ],
+    "metal": "steel",
+    "bracelet": "jubilee",
+    "date": true
+   },
+   "photos": [],
+   "collection": "GMT-Master II",
+   "modele": "GMT-Master II",
+   "diametre": 40,
+   "materiau": "Acier Oystersteel",
+   "lunette": "Tournante bidirectionnelle graduée 24 heures, disque Cerachrom rouge et bleu",
+   "cadran": "Noir",
+   "calibre": "3285",
+   "reserve": 70,
+   "bracelet": "Jubilé, cinq rangs",
+   "fermoir": "Oysterlock avec rallonge Easylink 5 mm",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde, 2e fuseau horaire 24 h, date à saut instantané",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Aucune marque visible",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-traces de porté sur le fermoir uniquement"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Encore sous garantie internationale Rolex",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en mars 2029",
+   "achat": "Achat d'origine : Monaco, mars 2024",
+   "accessoires": "Boîte, carte de garantie, livrets, maillons supplémentaires",
+   "annee": 2024,
+   "publie": "2026-11-10",
+   "resume": "« Pepsi » sur Jubilé, set complet, portée quelques fois seulement.",
+   "prix_initial": 23000,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-10T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-11T05:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    },
+    {
+     "date": "2026-11-11T18:00+01:00",
+     "type": "prix",
+     "texte": "Prix baissé de 23000 € à 22500 €",
+     "avant": 23000,
+     "apres": 22500
+    }
+   ],
+   "mise_a_jour": "2026-11-11T18:00+01:00",
+   "vues": 200,
+   "favoris": 18,
+   "demandes": 3
+  },
+  {
+   "id": "126500ln-mc-port-3",
+   "reference": "126500LN",
+   "prix": 27900,
+   "devise": "EUR",
+   "vendeur": "mc-port",
+   "skin": {
+    "type": "daytona",
+    "dial": "#f2f1ec",
+    "sub": "#121212",
+    "bezel": "#0b0b0c",
+    "insert": "#0b0b0c",
+    "metal": "steel",
+    "bracelet": "oyster"
+   },
+   "photos": [],
+   "collection": "Cosmograph Daytona",
+   "modele": "Cosmograph Daytona",
+   "diametre": 40,
+   "materiau": "Acier Oystersteel",
+   "lunette": "Fixe, disque Cerachrom noir avec échelle tachymétrique",
+   "cadran": "Blanc, compteurs noirs",
+   "calibre": "4131",
+   "reserve": 72,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec rallonge Easylink 5 mm",
+   "etancheite": 100,
+   "fonctions": "Chronographe (compteurs 30 minutes et 12 heures), heures, minutes, petite seconde, stop seconde",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Aucune marque visible",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-traces de porté sur le fermoir uniquement"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Encore sous garantie internationale Rolex",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en septembre 2028",
+   "achat": "Achat d'origine : France, septembre 2023",
+   "accessoires": "Boîte, carte de garantie, livrets, maillons supplémentaires",
+   "annee": 2023,
+   "publie": "2026-11-13",
+   "resume": "Daytona cadran blanc nouvelle génération, calibre 4131, set complet.",
+   "prix_initial": 28700,
+   "statut": "Réservée",
+   "historique_annonce": [
+    {
+     "date": "2026-11-13T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-14T01:30+01:00",
+     "type": "statut",
+     "texte": "Statut : Réservée"
+    }
+   ],
+   "mise_a_jour": "2026-11-14T01:30+01:00",
+   "vues": 95,
+   "favoris": 30,
+   "demandes": 0
+  },
+  {
+   "id": "228238-mc-casino-4",
+   "reference": "228238",
+   "prix": 43600,
+   "devise": "EUR",
+   "vendeur": "mc-casino",
+   "skin": {
+    "type": "daydate",
+    "dial": "#d6bb7c",
+    "bezel": "fluted-gold",
+    "metal": "gold",
+    "bracelet": "president",
+    "date": true
+   },
+   "photos": [],
+   "collection": "Day-Date",
+   "modele": "Day-Date 40",
+   "diametre": 40,
+   "materiau": "Or jaune 18 ct",
+   "lunette": "Cannelée, or jaune 18 ct",
+   "cadran": "Champagne, index bâtons",
+   "calibre": "3255",
+   "reserve": 70,
+   "bracelet": "Président, maillons semi-circulaires trois rangs",
+   "fermoir": "Crownclasp dissimulé",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde, jour de la semaine en toutes lettres, date à saut instantané",
+   "etat": "Neuf",
+   "condition": "Jamais portée",
+   "note": 10,
+   "polissage": "Jamais polie (film de protection d'origine)",
+   "details": {
+    "boitier": "Parfait, films de protection en place",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Parfait, non dimensionné"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Montre neuve : aucun entretien nécessaire",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex 5 ans, jusqu'en 2031",
+   "accessoires": "Boîte, sur-boîte, carte de garantie, livrets, étiquette verte",
+   "annee": 2026,
+   "publie": "2026-11-08",
+   "resume": "Day-Date 40 or jaune, cadran champagne. Disponible immédiatement.",
+   "prix_initial": 43600,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-08T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-08T22:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-08T22:00+01:00",
+   "vues": 468,
+   "favoris": 19,
+   "demandes": 9
+  },
+  {
+   "id": "116500ln-mc-fontvieille-5",
+   "reference": "116500LN",
+   "prix": 24500,
+   "devise": "EUR",
+   "vendeur": "mc-fontvieille",
+   "skin": {
+    "type": "daytona",
+    "dial": "#0d0d0f",
+    "sub": "#cfd2d6",
+    "bezel": "#0b0b0c",
+    "insert": "#0b0b0c",
+    "metal": "steel",
+    "bracelet": "oyster"
+   },
+   "photos": [],
+   "collection": "Cosmograph Daytona",
+   "modele": "Cosmograph Daytona",
+   "diametre": 40,
+   "materiau": "Acier Oystersteel",
+   "lunette": "Fixe, disque Cerachrom noir avec échelle tachymétrique",
+   "cadran": "Noir",
+   "calibre": "4130",
+   "reserve": 72,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec rallonge Easylink 5 mm",
+   "etancheite": 100,
+   "fonctions": "Chronographe (compteurs 30 minutes et 12 heures), heures, minutes, petite seconde, stop seconde",
+   "etat": "Occasion",
+   "condition": "Très bon état",
+   "note": 9,
+   "polissage": "Polissage léger réalisé par Rolex lors de la révision",
+   "details": {
+    "boitier": "Remis à neuf par Rolex en 2025",
+    "lunette": "Parfaite (Cerachrom)",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Remis à neuf, aucun jeu"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Révision complète au Centre de service Rolex de Monaco en 2025",
+    "historique": [
+     {
+      "date": "2025-06",
+      "par": "Rolex",
+      "lieu": "Centre de service Rolex, Monaco",
+      "travaux": "Révision complète du calibre 4130, contrôle d'étanchéité, finition du boîtier et du bracelet. Garantie service 2 ans."
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Joints",
+     "statut": "Remplacée par Rolex",
+     "note": "Joints d'étanchéité changés à la révision"
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "Remplacée par Rolex",
+     "note": "Couronne neuve d'origine Rolex"
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie service Rolex jusqu'en juin 2027",
+   "achat": "Achat d'origine : Suisse, 2019",
+   "accessoires": "Boîte, carte de garantie, carte de service Rolex",
+   "annee": 2019,
+   "publie": "2026-11-11",
+   "resume": "Daytona cadran noir, révisée par Rolex en 2025, papiers et carte de service.",
+   "prix_initial": 24800,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-11T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-11T12:00+01:00",
+     "type": "verifiee",
+     "texte": "Authenticité et état contrôlés par le vendeur certifié"
+    },
+    {
+     "date": "2026-11-12T04:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-12T04:00+01:00",
+   "vues": 426,
+   "favoris": 12,
+   "demandes": 7
+  },
+  {
+   "id": "126334-mc-fontvieille-6",
+   "reference": "126334",
+   "prix": 13900,
+   "devise": "EUR",
+   "vendeur": "mc-fontvieille",
+   "skin": {
+    "type": "datejust",
+    "dial": "#1c3f86",
+    "bezel": "fluted",
+    "metal": "steel",
+    "bracelet": "jubilee",
+    "date": true
+   },
+   "photos": [],
+   "collection": "Datejust",
+   "modele": "Datejust 41",
+   "diametre": 41,
+   "materiau": "Rolesor gris (Oystersteel et or gris 18 ct)",
+   "lunette": "Cannelée, or gris 18 ct",
+   "cadran": "Bleu, index bâtons appliqués",
+   "calibre": "3235",
+   "reserve": 70,
+   "bracelet": "Jubilé, cinq rangs",
+   "fermoir": "Oysterclasp dissimulé avec Easylink",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde au centre, date à guichet avec loupe Cyclope",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Aucune marque visible",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-traces de porté sur le fermoir uniquement"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Encore sous garantie internationale Rolex",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en 2027",
+   "achat": "Achat d'origine : Monaco, 2022",
+   "accessoires": "Boîte, carte de garantie, livrets, maillons supplémentaires",
+   "annee": 2022,
+   "publie": "2026-11-05",
+   "resume": "Datejust 41 cadran bleu, lunette cannelée, Jubilé.",
+   "prix_initial": 13900,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-05T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-05T12:00+01:00",
+     "type": "verifiee",
+     "texte": "Authenticité et état contrôlés par le vendeur certifié"
+    },
+    {
+     "date": "2026-11-06T02:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-06T02:00+01:00",
+   "vues": 540,
+   "favoris": 14,
+   "demandes": 3
+  },
+  {
+   "id": "126622-mc-particulier-7",
+   "reference": "126622",
+   "prix": 12400,
+   "devise": "EUR",
+   "vendeur": "mc-particulier",
+   "skin": {
+    "type": "yacht",
+    "dial": "#5b6168",
+    "bezel": "#d4d7db",
+    "insert": "#d4d7db",
+    "metal": "steel",
+    "bracelet": "oyster",
+    "date": true
+   },
+   "photos": [],
+   "collection": "Yacht-Master",
+   "modele": "Yacht-Master 40",
+   "diametre": 40,
+   "materiau": "Rolesium (Oystersteel et platine 950)",
+   "lunette": "Tournante bidirectionnelle 60 minutes, platine 950 chiffres en relief",
+   "cadran": "Ardoise, inscriptions bleues",
+   "calibre": "3235",
+   "reserve": 70,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec Easylink",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde, date à guichet",
+   "etat": "Occasion",
+   "condition": "Très bon état",
+   "note": 8.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Fines rayures d'usage sur les cornes",
+    "lunette": "Parfaite (platine)",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Légères traces de porté"
+   },
+   "entretien": {
+    "par": "Aucun",
+    "resume": "Pas encore d'entretien nécessaire (montre de 2021)",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex expirée (2026)",
+   "achat": "Achat d'origine : Monaco, 2021",
+   "accessoires": "Boîte et carte de garantie",
+   "annee": 2021,
+   "publie": "2026-11-02",
+   "resume": "Vente entre particuliers, remise en main propre dans une boutique partenaire à Monaco.",
+   "prix_initial": 12800,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-02T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-03T16:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    },
+    {
+     "date": "2026-11-03T18:00+01:00",
+     "type": "prix",
+     "texte": "Prix baissé de 12800 € à 12400 €",
+     "avant": 12800,
+     "apres": 12400
+    }
+   ],
+   "mise_a_jour": "2026-11-03T18:00+01:00",
+   "vues": 1824,
+   "favoris": 9,
+   "demandes": 7
+  },
+  {
+   "id": "136660-mc-port-8",
+   "reference": "136660",
+   "prix": 14900,
+   "devise": "EUR",
+   "vendeur": "mc-port",
+   "skin": {
+    "type": "sub",
+    "dial": "grad-deepblue",
+    "bezel": "#0a0a0b",
+    "insert": "#0a0a0b",
+    "metal": "steel",
+    "bracelet": "oyster",
+    "date": true
+   },
+   "photos": [],
+   "collection": "Deepsea",
+   "modele": "Rolex Deepsea",
+   "diametre": 44,
+   "materiau": "Acier Oystersteel et titane RLX",
+   "lunette": "Tournante unidirectionnelle graduée 60 minutes, disque Cerachrom noir",
+   "cadran": "D-blue (dégradé bleu-noir)",
+   "calibre": "3235",
+   "reserve": 70,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec Glidelock et Fliplock",
+   "etancheite": 3900,
+   "fonctions": "Heures, minutes, seconde, date, valve à hélium, système Ringlock",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Aucune marque visible",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-traces de porté sur le fermoir uniquement"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Encore sous garantie internationale Rolex",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en 2029",
+   "achat": "Achat d'origine : Italie, 2024",
+   "accessoires": "Boîte, carte de garantie, livrets, maillons supplémentaires",
+   "annee": 2024,
+   "publie": "2026-11-14",
+   "resume": "Deepsea D-blue 44 mm, étanche à 3 900 m.",
+   "prix_initial": 15300,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-14T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    }
+   ],
+   "mise_a_jour": "2026-11-14T10:00+01:00",
+   "vues": 140,
+   "favoris": 10,
+   "demandes": 8
+  },
+  {
+   "id": "126610lv-fr-nice-9",
+   "reference": "126610LV",
+   "prix": 16200,
+   "devise": "EUR",
+   "vendeur": "fr-nice",
+   "skin": {
+    "type": "sub",
+    "dial": "#0b0c0e",
+    "bezel": "#0d4a2c",
+    "insert": "#0d4a2c",
+    "metal": "steel",
+    "bracelet": "oyster",
+    "date": true
+   },
+   "photos": [],
+   "collection": "Submariner",
+   "modele": "Submariner Date",
+   "diametre": 41,
+   "materiau": "Acier Oystersteel",
+   "lunette": "Tournante unidirectionnelle graduée 60 minutes, disque Cerachrom vert",
+   "cadran": "Noir",
+   "calibre": "3235",
+   "reserve": 70,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec rallonge Glidelock",
+   "etancheite": 300,
+   "fonctions": "Heures, minutes, seconde au centre, date à guichet, stop seconde",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Aucune marque visible",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-traces de porté sur le fermoir uniquement"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Encore sous garantie internationale Rolex",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en 2028",
+   "achat": "Achat d'origine : Nice, 2023",
+   "accessoires": "Boîte, carte de garantie, livrets, maillons supplémentaires",
+   "annee": 2023,
+   "publie": "2026-11-09",
+   "resume": "Submariner lunette verte, cadran noir, set complet.",
+   "prix_initial": 16600,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-09T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-10T01:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    },
+    {
+     "date": "2026-11-11T15:00+01:00",
+     "type": "prix",
+     "texte": "Prix baissé de 16600 € à 16200 €",
+     "avant": 16600,
+     "apres": 16200
+    }
+   ],
+   "mise_a_jour": "2026-11-11T15:00+01:00",
+   "vues": 445,
+   "favoris": 10,
+   "demandes": 4
+  },
+  {
+   "id": "126613lb-fr-cannes-10",
+   "reference": "126613LB",
+   "prix": 17800,
+   "devise": "EUR",
+   "vendeur": "fr-cannes",
+   "skin": {
+    "type": "sub",
+    "dial": "#15306e",
+    "bezel": "#c9a24a",
+    "insert": "#163a8c",
+    "metal": "twotone",
+    "bracelet": "oyster",
+    "date": true
+   },
+   "photos": [],
+   "collection": "Submariner",
+   "modele": "Submariner Date",
+   "diametre": 41,
+   "materiau": "Rolesor jaune (Oystersteel et or jaune 18 ct)",
+   "lunette": "Tournante unidirectionnelle graduée 60 minutes, disque Cerachrom bleu",
+   "cadran": "Bleu royal",
+   "calibre": "3235",
+   "reserve": 70,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec rallonge Glidelock",
+   "etancheite": 300,
+   "fonctions": "Heures, minutes, seconde au centre, date à guichet, stop seconde",
+   "etat": "Occasion",
+   "condition": "Très bon état",
+   "note": 8.5,
+   "polissage": "Polissage léger (horloger indépendant, 2024)",
+   "details": {
+    "boitier": "Arêtes préservées, polissage léger",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-rayures sur les maillons centraux"
+   },
+   "entretien": {
+    "par": "Horloger indépendant",
+    "resume": "Révision par un atelier indépendant agréé en 2024 (pièces Rolex d'origine)",
+    "historique": [
+     {
+      "date": "2024-04",
+      "par": "Horloger indépendant",
+      "lieu": "Atelier horloger, Cannes",
+      "travaux": "Révision du calibre 3235, changement des joints, polissage léger. Pièces d'origine Rolex."
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "Polie",
+     "note": "Polissage léger, arêtes conservées"
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Joints",
+     "statut": "Remplacée (non Rolex)",
+     "note": "Joints génériques posés par l'atelier"
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": false,
+   "garantie": "Garantie atelier 12 mois",
+   "achat": "Achat d'origine : Espagne, 2020",
+   "accessoires": "Carte de garantie, facture de révision (pas de boîte)",
+   "annee": 2020,
+   "publie": "2026-11-06",
+   "resume": "Submariner bicolore cadran bleu. Révisée par un horloger indépendant.",
+   "prix_initial": 18400,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-06T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-07T10:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    },
+    {
+     "date": "2026-11-08T13:00+01:00",
+     "type": "prix",
+     "texte": "Prix baissé de 18400 € à 17800 €",
+     "avant": 18400,
+     "apres": 17800
+    }
+   ],
+   "mise_a_jour": "2026-11-08T13:00+01:00",
+   "vues": 1264,
+   "favoris": 16,
+   "demandes": 5
+  },
+  {
+   "id": "126333-fr-cannes-11",
+   "reference": "126333",
+   "prix": 12900,
+   "devise": "EUR",
+   "vendeur": "fr-cannes",
+   "skin": {
+    "type": "datejust",
+    "dial": "#d8c191",
+    "bezel": "fluted-gold",
+    "metal": "twotone",
+    "bracelet": "jubilee",
+    "date": true
+   },
+   "photos": [],
+   "collection": "Datejust",
+   "modele": "Datejust 41",
+   "diametre": 41,
+   "materiau": "Rolesor jaune (Oystersteel et or jaune 18 ct)",
+   "lunette": "Cannelée, or jaune 18 ct",
+   "cadran": "Champagne, index bâtons",
+   "calibre": "3235",
+   "reserve": 70,
+   "bracelet": "Jubilé, cinq rangs",
+   "fermoir": "Oysterclasp dissimulé avec Easylink",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde au centre, date à guichet avec loupe Cyclope",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Aucune marque visible",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-traces de porté sur le fermoir uniquement"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Encore sous garantie internationale Rolex",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en 2027",
+   "achat": "Achat d'origine : France, 2022",
+   "accessoires": "Boîte, carte de garantie, livrets, maillons supplémentaires",
+   "annee": 2022,
+   "publie": "2026-10-30",
+   "resume": "Datejust 41 bicolore cadran champagne.",
+   "prix_initial": 12900,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-10-30T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-10-31T08:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-10-31T08:00+01:00",
+   "vues": 1275,
+   "favoris": 5,
+   "demandes": 9
+  },
+  {
+   "id": "126515ln-fr-paris-12",
+   "reference": "126515LN",
+   "prix": 43900,
+   "devise": "EUR",
+   "vendeur": "fr-paris",
+   "skin": {
+    "type": "daytona",
+    "dial": "#e2c1ae",
+    "sub": "#141414",
+    "bezel": "#0b0b0c",
+    "insert": "#0b0b0c",
+    "metal": "everose",
+    "bracelet": "rubber"
+   },
+   "photos": [],
+   "collection": "Cosmograph Daytona",
+   "modele": "Cosmograph Daytona",
+   "diametre": 40,
+   "materiau": "Or Everose 18 ct",
+   "lunette": "Fixe, disque Cerachrom noir avec échelle tachymétrique",
+   "cadran": "Sundust et noir",
+   "calibre": "4131",
+   "reserve": 72,
+   "bracelet": "Oysterflex noir",
+   "fermoir": "Oysterlock avec rallonge Easylink",
+   "etancheite": 100,
+   "fonctions": "Chronographe (compteurs 30 minutes et 12 heures), heures, minutes, petite seconde, stop seconde",
+   "etat": "Neuf",
+   "condition": "Jamais portée",
+   "note": 10,
+   "polissage": "Jamais polie (film de protection d'origine)",
+   "details": {
+    "boitier": "Parfait, films de protection en place",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Parfait, non dimensionné"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Montre neuve : aucun entretien nécessaire",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex 5 ans, jusqu'en 2031",
+   "accessoires": "Boîte, sur-boîte, carte de garantie, livrets, étiquette verte",
+   "annee": 2026,
+   "publie": "2026-11-13",
+   "resume": "Daytona or Everose sur Oysterflex, cadran sundust.",
+   "prix_initial": 43900,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-13T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-13T14:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-13T14:00+01:00",
+   "vues": 102,
+   "favoris": 42,
+   "demandes": 3
+  },
+  {
+   "id": "16610-fr-paris2-13",
+   "reference": "16610",
+   "prix": 8900,
+   "devise": "EUR",
+   "vendeur": "fr-paris2",
+   "skin": {
+    "type": "sub",
+    "dial": "#111214",
+    "bezel": "#151515",
+    "insert": "#1a1a1c",
+    "metal": "steel",
+    "bracelet": "oyster",
+    "date": true,
+    "alu": true
+   },
+   "photos": [],
+   "collection": "Submariner",
+   "modele": "Submariner Date (vintage)",
+   "diametre": 40,
+   "materiau": "Acier 904L",
+   "lunette": "Tournante unidirectionnelle, disque aluminium noir",
+   "cadran": "Noir, index tritium/Luminova selon l'année",
+   "calibre": "3135",
+   "reserve": 48,
+   "bracelet": "Oyster, maillons pleins",
+   "fermoir": "Oysterlock avec rallonge Fliplock",
+   "etancheite": 300,
+   "fonctions": "Heures, minutes, seconde au centre, date à guichet, stop seconde",
+   "etat": "Occasion",
+   "condition": "Bon état",
+   "note": 7.5,
+   "polissage": "Polie à plusieurs reprises",
+   "details": {
+    "boitier": "Polissages anciens, cornes un peu adoucies",
+    "lunette": "Disque aluminium patiné, petite marque à 40 min",
+    "cadran": "Tritium, belle patine crème homogène",
+    "verre": "Rayure fine à 2 h",
+    "bracelet": "Bracelet un peu détendu"
+   },
+   "entretien": {
+    "par": "Horloger indépendant",
+    "resume": "Dernière révision en 2022 par un horloger indépendant",
+    "historique": [
+     {
+      "date": "2014-02",
+      "par": "Rolex",
+      "lieu": "Centre de service Rolex, Paris",
+      "travaux": "Révision complète, verre remplacé."
+     },
+     {
+      "date": "2022-10",
+      "par": "Horloger indépendant",
+      "lieu": "Atelier, Paris 11e",
+      "travaux": "Révision du calibre 3135, joints changés."
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "Polie",
+     "note": "Plusieurs polissages"
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": "Disque aluminium d'époque"
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": "Tritium"
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": "Tritium assorties"
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "Remplacée par Rolex",
+     "note": "Changé en 2014"
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "Remplacée (non Rolex)",
+     "note": "Couronne générique"
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": false,
+   "boite": true,
+   "garantie": "Garantie boutique 6 mois",
+   "achat": "Achat d'origine inconnu",
+   "accessoires": "Boîte d'époque, pas de papiers",
+   "annee": 1998,
+   "publie": "2026-10-25",
+   "resume": "Submariner 16610 de 1998, cadran tritium patiné. Pour amateurs de vintage.",
+   "prix_initial": 8900,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-10-25T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-10-25T13:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-10-25T13:00+01:00",
+   "vues": 3000,
+   "favoris": 34,
+   "demandes": 4
+  },
+  {
+   "id": "124300-fr-lyon-14",
+   "reference": "124300",
+   "prix": 8400,
+   "devise": "EUR",
+   "vendeur": "fr-lyon",
+   "skin": {
+    "type": "op",
+    "dial": "#5f9a3a",
+    "bezel": "smooth",
+    "metal": "steel",
+    "bracelet": "oyster"
+   },
+   "photos": [],
+   "collection": "Oyster Perpetual",
+   "modele": "Oyster Perpetual 41",
+   "diametre": 41,
+   "materiau": "Acier Oystersteel",
+   "lunette": "Bombée, Oystersteel",
+   "cadran": "Vert vif",
+   "calibre": "3230",
+   "reserve": 70,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterclasp avec Easylink",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde au centre, stop seconde",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Aucune marque visible",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-traces de porté sur le fermoir uniquement"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Encore sous garantie internationale Rolex",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en 2028",
+   "achat": "Achat d'origine : Lyon, 2023",
+   "accessoires": "Boîte, carte de garantie, livrets, maillons supplémentaires",
+   "annee": 2023,
+   "publie": "2026-11-04",
+   "resume": "Oyster Perpetual 41 cadran vert, certifiée par le revendeur.",
+   "prix_initial": 8900,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-04T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-04T12:00+01:00",
+     "type": "verifiee",
+     "texte": "Authenticité et état contrôlés par le vendeur certifié"
+    },
+    {
+     "date": "2026-11-05T02:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    },
+    {
+     "date": "2026-11-06T18:00+01:00",
+     "type": "prix",
+     "texte": "Prix baissé de 8900 € à 8400 €",
+     "avant": 8900,
+     "apres": 8400
+    }
+   ],
+   "mise_a_jour": "2026-11-06T18:00+01:00",
+   "vues": 540,
+   "favoris": 12,
+   "demandes": 8
+  },
+  {
+   "id": "228235-fr-paris-15",
+   "reference": "228235",
+   "prix": 48500,
+   "devise": "EUR",
+   "vendeur": "fr-paris",
+   "skin": {
+    "type": "daydate",
+    "dial": "#4f5a2e",
+    "bezel": "fluted-rose",
+    "metal": "everose",
+    "bracelet": "president",
+    "date": true,
+    "roman": true
+   },
+   "photos": [],
+   "collection": "Day-Date",
+   "modele": "Day-Date 40",
+   "diametre": 40,
+   "materiau": "Or Everose 18 ct",
+   "lunette": "Cannelée, or Everose 18 ct",
+   "cadran": "Vert olive, chiffres romains",
+   "calibre": "3255",
+   "reserve": 70,
+   "bracelet": "Président, maillons semi-circulaires trois rangs",
+   "fermoir": "Crownclasp dissimulé",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde, jour de la semaine en toutes lettres, date à saut instantané",
+   "etat": "Neuf",
+   "condition": "Jamais portée",
+   "note": 10,
+   "polissage": "Jamais polie (film de protection d'origine)",
+   "details": {
+    "boitier": "Parfait, films de protection en place",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Parfait, non dimensionné"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Montre neuve : aucun entretien nécessaire",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex 5 ans, jusqu'en 2031",
+   "accessoires": "Boîte, sur-boîte, carte de garantie, livrets, étiquette verte",
+   "annee": 2026,
+   "publie": "2026-11-01",
+   "resume": "Day-Date 40 or Everose, cadran vert olive, chiffres romains.",
+   "prix_initial": 48500,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-01T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-01T19:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-01T19:00+01:00",
+   "vues": 806,
+   "favoris": 11,
+   "demandes": 8
+  },
+  {
+   "id": "126000-fr-sttropez-16",
+   "reference": "126000",
+   "prix": 9900,
+   "devise": "EUR",
+   "vendeur": "fr-sttropez",
+   "skin": {
+    "type": "op",
+    "dial": "#55c1c4",
+    "bezel": "smooth",
+    "metal": "steel",
+    "bracelet": "oyster"
+   },
+   "photos": [],
+   "collection": "Oyster Perpetual",
+   "modele": "Oyster Perpetual 36",
+   "diametre": 36,
+   "materiau": "Acier Oystersteel",
+   "lunette": "Bombée, Oystersteel",
+   "cadran": "Turquoise",
+   "calibre": "3230",
+   "reserve": 70,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterclasp avec Easylink",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde au centre, stop seconde",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Aucune marque visible",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-traces de porté sur le fermoir uniquement"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Encore sous garantie internationale Rolex",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en 2029",
+   "achat": "Achat d'origine : France, 2024",
+   "accessoires": "Boîte, carte de garantie, livrets, maillons supplémentaires",
+   "annee": 2024,
+   "publie": "2026-10-28",
+   "resume": "Oyster Perpetual 36 cadran turquoise.",
+   "prix_initial": 9900,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-10-28T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-10-28T20:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-10-28T20:00+01:00",
+   "vues": 1037,
+   "favoris": 12,
+   "demandes": 7
+  },
+  {
+   "id": "226659-fr-courchevel-17",
+   "reference": "226659",
+   "prix": 34900,
+   "devise": "EUR",
+   "vendeur": "fr-courchevel",
+   "skin": {
+    "type": "yacht",
+    "dial": "#0d0d0f",
+    "bezel": "#101012",
+    "insert": "#101012",
+    "metal": "whitegold",
+    "bracelet": "rubber"
+   },
+   "photos": [],
+   "collection": "Yacht-Master",
+   "modele": "Yacht-Master 42",
+   "diametre": 42,
+   "materiau": "Or gris 18 ct",
+   "lunette": "Tournante bidirectionnelle 60 minutes, disque Cerachrom noir mat",
+   "cadran": "Noir intense",
+   "calibre": "3235",
+   "reserve": 70,
+   "bracelet": "Oysterflex noir",
+   "fermoir": "Oysterlock avec Easylink",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde au centre, stop seconde",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Aucune marque visible",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-traces de porté sur le fermoir uniquement"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Encore sous garantie internationale Rolex",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en 2028",
+   "achat": "Achat d'origine : Suisse, 2023",
+   "accessoires": "Boîte, carte de garantie, livrets, maillons supplémentaires",
+   "annee": 2023,
+   "publie": "2026-11-12",
+   "resume": "Yacht-Master 42 or gris sur Oysterflex.",
+   "prix_initial": 34900,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-12T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-12T21:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-12T21:00+01:00",
+   "vues": 118,
+   "favoris": 20,
+   "demandes": 6
+  },
+  {
+   "id": "16233-fr-bordeaux-18",
+   "reference": "16233",
+   "prix": 6900,
+   "devise": "EUR",
+   "vendeur": "fr-bordeaux",
+   "skin": {
+    "type": "datejust",
+    "dial": "#d9c493",
+    "bezel": "fluted-gold",
+    "metal": "twotone",
+    "bracelet": "jubilee",
+    "date": true,
+    "roman": true
+   },
+   "photos": [],
+   "collection": "Datejust",
+   "modele": "Datejust 36 (vintage)",
+   "diametre": 36,
+   "materiau": "Rolesor jaune",
+   "lunette": "Cannelée, or jaune 18 ct",
+   "cadran": "Champagne, chiffres romains",
+   "calibre": "3135",
+   "reserve": 48,
+   "bracelet": "Jubilé, cinq rangs",
+   "fermoir": "Déployant à lame",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde au centre, date avec loupe Cyclope",
+   "etat": "Occasion",
+   "condition": "Bon état",
+   "note": 7,
+   "polissage": "Polie (date inconnue)",
+   "details": {
+    "boitier": "Traces d'usage normales",
+    "lunette": "Petites marques sur la cannelure",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Jubilé avec du jeu (étiré)"
+   },
+   "entretien": {
+    "par": "Inconnu",
+    "resume": "Historique d'entretien inconnu : révision conseillée",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "Polie",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": "Jubilé étiré"
+    }
+   ],
+   "papiers": true,
+   "boite": false,
+   "garantie": "Aucune",
+   "achat": "Achat d'origine : Bordeaux, 1995 (premier propriétaire)",
+   "accessoires": "Papiers d'origine de 1995",
+   "annee": 1995,
+   "publie": "2026-10-20",
+   "resume": "Datejust 36 bicolore de 1995, premier propriétaire, avec papiers.",
+   "prix_initial": 6900,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-10-20T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-10-20T20:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-10-20T20:00+01:00",
+   "vues": 1000,
+   "favoris": 5,
+   "demandes": 4
+  },
+  {
+   "id": "126711chnr-ch-geneve-19",
+   "reference": "126711CHNR",
+   "prix": 19800,
+   "devise": "EUR",
+   "vendeur": "ch-geneve",
+   "skin": {
+    "type": "gmt",
+    "dial": "#0b0c0e",
+    "bezel": "#d9a58a",
+    "insert": [
+     "#0c0c0e",
+     "#5a3121"
+    ],
+    "metal": "everose-tt",
+    "bracelet": "oyster",
+    "date": true
+   },
+   "photos": [],
+   "collection": "GMT-Master II",
+   "modele": "GMT-Master II",
+   "diametre": 40,
+   "materiau": "Rolesor Everose (Oystersteel et or Everose 18 ct)",
+   "lunette": "Tournante bidirectionnelle graduée 24 heures, disque Cerachrom brun et noir",
+   "cadran": "Noir",
+   "calibre": "3285",
+   "reserve": 70,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec rallonge Easylink 5 mm",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde, 2e fuseau horaire 24 h, date à saut instantané",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Révisée et certifiée Pre-Owned",
+   "details": {
+    "boitier": "Parfait",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Parfait"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Programme Certifié Pre-Owned : contrôlée et garantie 2 ans",
+    "historique": [
+     {
+      "date": "2026-05",
+      "par": "Rolex",
+      "lieu": "Contrôle Certifié Pre-Owned, Genève",
+      "travaux": "Contrôle d'authenticité, de précision et d'étanchéité, remise en état."
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie Certifié Pre-Owned 2 ans, jusqu'en mai 2028",
+   "achat": "Achat d'origine : Suisse, 2021",
+   "accessoires": "Boîte, carte de garantie, certificat Pre-Owned",
+   "annee": 2021,
+   "publie": "2026-11-07",
+   "resume": "GMT-Master II « Root Beer » en Rolesor Everose.",
+   "prix_initial": 20200,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-07T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-07T12:00+01:00",
+     "type": "verifiee",
+     "texte": "Authenticité et état contrôlés par le vendeur certifié"
+    },
+    {
+     "date": "2026-11-08T00:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    },
+    {
+     "date": "2026-11-10T15:00+01:00",
+     "type": "prix",
+     "texte": "Prix baissé de 20200 € à 19800 €",
+     "avant": 20200,
+     "apres": 19800
+    }
+   ],
+   "mise_a_jour": "2026-11-10T15:00+01:00",
+   "vues": 1064,
+   "favoris": 34,
+   "demandes": 8
+  },
+  {
+   "id": "126710blnr-uk-london-20",
+   "reference": "126710BLNR",
+   "prix": 18500,
+   "devise": "EUR",
+   "vendeur": "uk-london",
+   "skin": {
+    "type": "gmt",
+    "dial": "#0b0c0e",
+    "bezel": "#c8ccd2",
+    "insert": [
+     "#1b2f6b",
+     "#0c0c0e"
+    ],
+    "metal": "steel",
+    "bracelet": "oyster",
+    "date": true
+   },
+   "photos": [],
+   "collection": "GMT-Master II",
+   "modele": "GMT-Master II",
+   "diametre": 40,
+   "materiau": "Acier Oystersteel",
+   "lunette": "Tournante bidirectionnelle graduée 24 heures, disque Cerachrom bleu et noir",
+   "cadran": "Noir",
+   "calibre": "3285",
+   "reserve": 70,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec rallonge Easylink 5 mm",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde, 2e fuseau horaire 24 h, date à saut instantané",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Aucune marque visible",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-traces de porté sur le fermoir uniquement"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Encore sous garantie internationale Rolex",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en 2027",
+   "achat": "Achat d'origine : Royaume-Uni, 2022",
+   "accessoires": "Boîte, carte de garantie, livrets, maillons supplémentaires",
+   "annee": 2022,
+   "publie": "2026-11-03",
+   "resume": "GMT-Master II « Batman » sur bracelet Oyster.",
+   "prix_initial": 18500,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-03T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-03T18:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-03T18:00+01:00",
+   "vues": 660,
+   "favoris": 18,
+   "demandes": 7
+  },
+  {
+   "id": "52508-it-milan-21",
+   "reference": "52508",
+   "prix": 23900,
+   "devise": "EUR",
+   "vendeur": "it-milan",
+   "skin": {
+    "type": "1908",
+    "dial": "#f4f2ec",
+    "bezel": "fluted-thin",
+    "metal": "whitegold",
+    "bracelet": "leather"
+   },
+   "photos": [],
+   "collection": "1908",
+   "modele": "Perpetual 1908",
+   "diametre": 39,
+   "materiau": "Or gris 18 ct",
+   "lunette": "Double, bombée et cannelée, or gris 18 ct",
+   "cadran": "Blanc intense, chiffres 3-6-9",
+   "calibre": "7140",
+   "reserve": 66,
+   "bracelet": "Cuir d'alligator marron mat",
+   "fermoir": "Boucle déployante Dualclasp, or gris 18 ct",
+   "etancheite": 50,
+   "fonctions": "Heures, minutes, petite seconde à 6 h",
+   "etat": "Neuf",
+   "condition": "Jamais portée",
+   "note": 10,
+   "polissage": "Jamais polie (film de protection d'origine)",
+   "details": {
+    "boitier": "Parfait, films de protection en place",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Parfait, non dimensionné"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Montre neuve : aucun entretien nécessaire",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex 5 ans, jusqu'en 2030",
+   "accessoires": "Boîte, sur-boîte, carte de garantie, livrets, étiquette verte",
+   "annee": 2025,
+   "publie": "2026-10-31",
+   "resume": "Perpetual 1908 or gris, cadran blanc intense. Jamais portée.",
+   "prix_initial": 23900,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-10-31T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-01T08:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-01T08:00+01:00",
+   "vues": 896,
+   "favoris": 14,
+   "demandes": 6
+  },
+  {
+   "id": "224270-de-munich-22",
+   "reference": "224270",
+   "prix": 7900,
+   "devise": "EUR",
+   "vendeur": "de-munich",
+   "skin": {
+    "type": "explorer",
+    "dial": "#0e0f11",
+    "bezel": "smooth",
+    "metal": "steel",
+    "bracelet": "oyster"
+   },
+   "photos": [],
+   "collection": "Explorer",
+   "modele": "Explorer 40",
+   "diametre": 40,
+   "materiau": "Acier Oystersteel",
+   "lunette": "Bombée, Oystersteel",
+   "cadran": "Noir, chiffres 3-6-9 Chromalight",
+   "calibre": "3230",
+   "reserve": 70,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec Easylink",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde au centre, stop seconde",
+   "etat": "Neuf",
+   "condition": "Jamais portée",
+   "note": 10,
+   "polissage": "Jamais polie (film de protection d'origine)",
+   "details": {
+    "boitier": "Parfait, films de protection en place",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Parfait, non dimensionné"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Montre neuve : aucun entretien nécessaire",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex 5 ans, jusqu'en 2031",
+   "accessoires": "Boîte, sur-boîte, carte de garantie, livrets, étiquette verte",
+   "annee": 2026,
+   "publie": "2026-11-10",
+   "resume": "Explorer 40, la montre des explorateurs. Prix public.",
+   "prix_initial": 7900,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-10T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-11T01:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-11T01:00+01:00",
+   "vues": 260,
+   "favoris": 25,
+   "demandes": 0
+  },
+  {
+   "id": "226570-es-madrid-23",
+   "reference": "226570",
+   "prix": 10900,
+   "devise": "EUR",
+   "vendeur": "es-madrid",
+   "skin": {
+    "type": "exp2",
+    "dial": "#f3f2ee",
+    "bezel": "#c8ccd2",
+    "insert": "#c8ccd2",
+    "metal": "steel",
+    "bracelet": "oyster",
+    "date": true
+   },
+   "photos": [],
+   "collection": "Explorer",
+   "modele": "Explorer II",
+   "diametre": 42,
+   "materiau": "Acier Oystersteel",
+   "lunette": "Fixe, graduée 24 heures, Oystersteel",
+   "cadran": "Blanc (« Polar »)",
+   "calibre": "3285",
+   "reserve": 70,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec Easylink",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde, aiguille 24 heures, date à saut instantané",
+   "etat": "Occasion",
+   "condition": "Très bon état",
+   "note": 8.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Fines traces d'usage",
+    "lunette": "Petite marque sur la lunette à 18 h",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Traces de porté"
+   },
+   "entretien": {
+    "par": "Aucun",
+    "resume": "Pas d'entretien nécessaire à ce jour",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie boutique 12 mois",
+   "achat": "Achat d'origine : Espagne, 2022",
+   "accessoires": "Boîte et carte de garantie",
+   "annee": 2022,
+   "publie": "2026-11-01",
+   "resume": "Explorer II « Polar » cadran blanc, 42 mm.",
+   "prix_initial": 10900,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-01T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-02T12:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-02T12:00+01:00",
+   "vues": 1482,
+   "favoris": 25,
+   "demandes": 7
+  },
+  {
+   "id": "16710-nl-amsterdam-24",
+   "reference": "16710",
+   "prix": 13500,
+   "devise": "EUR",
+   "vendeur": "nl-amsterdam",
+   "skin": {
+    "type": "gmt",
+    "dial": "#121315",
+    "bezel": "#c8ccd2",
+    "insert": [
+     "#9c2b35",
+     "#33508f"
+    ],
+    "metal": "steel",
+    "bracelet": "oyster",
+    "date": true,
+    "alu": true
+   },
+   "photos": [],
+   "collection": "GMT-Master II",
+   "modele": "GMT-Master II (vintage)",
+   "diametre": 40,
+   "materiau": "Acier 904L",
+   "lunette": "Tournante bidirectionnelle 24 heures, disque aluminium rouge et bleu",
+   "cadran": "Noir",
+   "calibre": "3185",
+   "reserve": 50,
+   "bracelet": "Oyster, maillons pleins",
+   "fermoir": "Oysterlock",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde, 2e fuseau horaire 24 h, date",
+   "etat": "Occasion",
+   "condition": "Bon état",
+   "note": 7.5,
+   "polissage": "Polissage par Rolex en 2016",
+   "details": {
+    "boitier": "Polissage ancien, bonne épaisseur",
+    "lunette": "Disque « Pepsi » délavé, très recherché",
+    "cadran": "Parfait (Luminova)",
+    "verre": "Parfait",
+    "bracelet": "Bracelet d'origine, léger jeu"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Révisée par Rolex en 2016, à prévoir prochainement",
+    "historique": [
+     {
+      "date": "2016-09",
+      "par": "Rolex",
+      "lieu": "Centre de service Rolex, Amsterdam",
+      "travaux": "Révision complète, polissage du boîtier."
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "Polie",
+     "note": "Par Rolex, 2016"
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": "Disque aluminium « Pepsi » d'époque"
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "Remplacée par Rolex",
+     "note": "Aiguilles neuves Luminova, 2016"
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Aucune (vente aux enchères)",
+   "achat": "Achat d'origine : Pays-Bas, 2003",
+   "accessoires": "Boîte, papiers et facture de service Rolex 2016",
+   "annee": 2003,
+   "publie": "2026-11-09",
+   "resume": "Vente aux enchères le jeudi 4 décembre. Prix indiqué : estimation basse.",
+   "prix_initial": 13500,
+   "statut": "Vente aux enchères",
+   "historique_annonce": [
+    {
+     "date": "2026-11-09T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-09T15:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    },
+    {
+     "date": "2026-11-14T08:30+01:00",
+     "type": "statut",
+     "texte": "Statut : Vente aux enchères"
+    }
+   ],
+   "mise_a_jour": "2026-11-14T08:30+01:00",
+   "vues": 470,
+   "favoris": 10,
+   "demandes": 2
+  },
+  {
+   "id": "336934-ae-dubai-25",
+   "reference": "336934",
+   "prix": 21500,
+   "devise": "EUR",
+   "vendeur": "ae-dubai",
+   "skin": {
+    "type": "sky",
+    "dial": "#1f3f84",
+    "bezel": "fluted",
+    "metal": "steel",
+    "bracelet": "jubilee",
+    "date": true
+   },
+   "photos": [],
+   "collection": "Sky-Dweller",
+   "modele": "Sky-Dweller",
+   "diametre": 42,
+   "materiau": "Rolesor gris (Oystersteel et or gris 18 ct)",
+   "lunette": "Cannelée Ring Command, or gris 18 ct",
+   "cadran": "Bleu",
+   "calibre": "9002",
+   "reserve": 72,
+   "bracelet": "Jubilé, cinq rangs",
+   "fermoir": "Oysterclasp dissimulé avec Easylink",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde, 2e fuseau horaire, calendrier annuel, date à guichet",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Aucune marque visible",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-traces de porté sur le fermoir uniquement"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Encore sous garantie internationale Rolex",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en 2029",
+   "achat": "Achat d'origine : Dubaï, 2024",
+   "accessoires": "Boîte, carte de garantie, livrets, maillons supplémentaires",
+   "annee": 2024,
+   "publie": "2026-11-11",
+   "resume": "Sky-Dweller cadran bleu sur Jubilé, calendrier annuel.",
+   "prix_initial": 21800,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-11T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-12T00:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    },
+    {
+     "date": "2026-11-12T13:00+01:00",
+     "type": "prix",
+     "texte": "Prix baissé de 21800 € à 21500 €",
+     "avant": 21800,
+     "apres": 21500
+    }
+   ],
+   "mise_a_jour": "2026-11-12T13:00+01:00",
+   "vues": 135,
+   "favoris": 9,
+   "demandes": 9
+  },
+  {
+   "id": "126500ln-us-ny-26",
+   "reference": "126500LN",
+   "prix": 28900,
+   "devise": "EUR",
+   "vendeur": "us-ny",
+   "skin": {
+    "type": "daytona",
+    "dial": "#f2f1ec",
+    "sub": "#121212",
+    "bezel": "#0b0b0c",
+    "insert": "#0b0b0c",
+    "metal": "steel",
+    "bracelet": "oyster"
+   },
+   "photos": [],
+   "collection": "Cosmograph Daytona",
+   "modele": "Cosmograph Daytona",
+   "diametre": 40,
+   "materiau": "Acier Oystersteel",
+   "lunette": "Fixe, disque Cerachrom noir avec échelle tachymétrique",
+   "cadran": "Blanc, compteurs noirs",
+   "calibre": "4131",
+   "reserve": 72,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec rallonge Easylink 5 mm",
+   "etancheite": 100,
+   "fonctions": "Chronographe (compteurs 30 minutes et 12 heures), heures, minutes, petite seconde, stop seconde",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Parfait",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Parfait"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Programme Certifié Pre-Owned, garantie 2 ans",
+    "historique": [
+     {
+      "date": "2026-08",
+      "par": "Rolex",
+      "lieu": "Contrôle Certifié Pre-Owned, New York",
+      "travaux": "Contrôle d'authenticité, de précision et d'étanchéité."
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie Certifié Pre-Owned jusqu'en août 2028",
+   "achat": "Achat d'origine : États-Unis, 2024",
+   "accessoires": "Set complet + certificat Pre-Owned",
+   "annee": 2024,
+   "publie": "2026-11-12",
+   "resume": "Daytona cadran blanc certifiée Pre-Owned. Expédition assurée possible.",
+   "prix_initial": 28900,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-12T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-12T12:00+01:00",
+     "type": "verifiee",
+     "texte": "Authenticité et état contrôlés par le vendeur certifié"
+    },
+    {
+     "date": "2026-11-13T04:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-13T04:00+01:00",
+   "vues": 250,
+   "favoris": 8,
+   "demandes": 9
+  },
+  {
+   "id": "126600-us-miami-27",
+   "reference": "126600",
+   "prix": 13200,
+   "devise": "EUR",
+   "vendeur": "us-miami",
+   "skin": {
+    "type": "sub",
+    "dial": "#0b0c0e",
+    "bezel": "#0a0a0b",
+    "insert": "#0a0a0b",
+    "metal": "steel",
+    "bracelet": "oyster",
+    "date": true,
+    "red": true
+   },
+   "photos": [],
+   "collection": "Sea-Dweller",
+   "modele": "Sea-Dweller",
+   "diametre": 43,
+   "materiau": "Acier Oystersteel",
+   "lunette": "Tournante unidirectionnelle graduée 60 minutes, disque Cerachrom noir",
+   "cadran": "Noir, inscription rouge",
+   "calibre": "3235",
+   "reserve": 70,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec Glidelock et Fliplock",
+   "etancheite": 1220,
+   "fonctions": "Heures, minutes, seconde, date à guichet, valve à hélium",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Aucune marque visible",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-traces de porté sur le fermoir uniquement"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Encore sous garantie internationale Rolex",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en 2028",
+   "achat": "Achat d'origine : États-Unis, 2023",
+   "accessoires": "Boîte, carte de garantie, livrets, maillons supplémentaires",
+   "annee": 2023,
+   "publie": "2026-11-06",
+   "resume": "Sea-Dweller 43 mm, inscription rouge, étanche à 1 220 m.",
+   "prix_initial": 13200,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-06T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-06T17:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-06T17:00+01:00",
+   "vues": 1240,
+   "favoris": 5,
+   "demandes": 7
+  },
+  {
+   "id": "124060-jp-tokyo-28",
+   "reference": "124060",
+   "prix": 10200,
+   "devise": "EUR",
+   "vendeur": "jp-tokyo",
+   "skin": {
+    "type": "sub",
+    "dial": "#0b0c0e",
+    "bezel": "#0a0a0b",
+    "insert": "#0a0a0b",
+    "metal": "steel",
+    "bracelet": "oyster",
+    "date": false
+   },
+   "photos": [],
+   "collection": "Submariner",
+   "modele": "Submariner",
+   "diametre": 41,
+   "materiau": "Acier Oystersteel",
+   "lunette": "Tournante unidirectionnelle graduée 60 minutes, disque Cerachrom noir",
+   "cadran": "Noir",
+   "calibre": "3230",
+   "reserve": 70,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec rallonge Glidelock",
+   "etancheite": 300,
+   "fonctions": "Heures, minutes, seconde au centre, stop seconde",
+   "etat": "Occasion",
+   "condition": "Très bon état",
+   "note": 9,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Micro-traces sur le fond",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Légères traces sur le fermoir"
+   },
+   "entretien": {
+    "par": "Aucun",
+    "resume": "Pas d'entretien nécessaire",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en 2026",
+   "achat": "Achat d'origine : Japon, 2021",
+   "accessoires": "Set complet",
+   "annee": 2021,
+   "publie": "2026-11-02",
+   "resume": "Submariner sans date, la plus pure.",
+   "prix_initial": 11000,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-02T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-03T04:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    },
+    {
+     "date": "2026-11-04T16:00+01:00",
+     "type": "prix",
+     "texte": "Prix baissé de 11000 € à 10200 €",
+     "avant": 11000,
+     "apres": 10200
+    }
+   ],
+   "mise_a_jour": "2026-11-04T16:00+01:00",
+   "vues": 1716,
+   "favoris": 14,
+   "demandes": 5
+  },
+  {
+   "id": "228206-hk-29",
+   "reference": "228206",
+   "prix": 72000,
+   "devise": "EUR",
+   "vendeur": "hk",
+   "skin": {
+    "type": "daydate",
+    "dial": "#bfe0ea",
+    "bezel": "smooth",
+    "metal": "platinum",
+    "bracelet": "president",
+    "date": true
+   },
+   "photos": [],
+   "collection": "Day-Date",
+   "modele": "Day-Date 40",
+   "diametre": 40,
+   "materiau": "Platine 950",
+   "lunette": "Bombée, platine",
+   "cadran": "Bleu glacier",
+   "calibre": "3255",
+   "reserve": 70,
+   "bracelet": "Président, maillons semi-circulaires trois rangs",
+   "fermoir": "Crownclasp dissimulé",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde, jour de la semaine en toutes lettres, date à saut instantané",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Aucune marque visible",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-traces de porté sur le fermoir uniquement"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Encore sous garantie internationale Rolex",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en 2028",
+   "achat": "Achat d'origine : Hong Kong, 2023",
+   "accessoires": "Boîte, carte de garantie, livrets, maillons supplémentaires",
+   "annee": 2023,
+   "publie": "2026-11-08",
+   "resume": "Day-Date 40 platine cadran bleu glacier.",
+   "prix_initial": 72000,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-08T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-09T14:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-09T14:00+01:00",
+   "vues": 930,
+   "favoris": 10,
+   "demandes": 4
+  },
+  {
+   "id": "126900-sg-30",
+   "reference": "126900",
+   "prix": 7600,
+   "devise": "EUR",
+   "vendeur": "sg",
+   "skin": {
+    "type": "airking",
+    "dial": "#0e0f11",
+    "bezel": "smooth",
+    "metal": "steel",
+    "bracelet": "oyster"
+   },
+   "photos": [],
+   "collection": "Air-King",
+   "modele": "Air-King",
+   "diametre": 40,
+   "materiau": "Acier Oystersteel",
+   "lunette": "Bombée, Oystersteel",
+   "cadran": "Noir, minuterie 5-10-15… pour la navigation",
+   "calibre": "3230",
+   "reserve": 70,
+   "bracelet": "Oyster, maillons plats trois rangs",
+   "fermoir": "Oysterlock avec Easylink",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde au centre, stop seconde",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Parfait",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Parfait"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Programme Certifié Pre-Owned, garantie 2 ans",
+    "historique": [
+     {
+      "date": "2026-03",
+      "par": "Rolex",
+      "lieu": "Contrôle Certifié Pre-Owned, Singapour",
+      "travaux": "Contrôle complet."
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie Certifié Pre-Owned jusqu'en mars 2028",
+   "achat": "Achat d'origine : Singapour, 2023",
+   "accessoires": "Set complet + certificat Pre-Owned",
+   "annee": 2023,
+   "publie": "2026-11-03",
+   "resume": "Air-King nouvelle génération, cadran noir.",
+   "prix_initial": 7600,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-03T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-03T12:00+01:00",
+     "type": "verifiee",
+     "texte": "Authenticité et état contrôlés par le vendeur certifié"
+    },
+    {
+     "date": "2026-11-03T15:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-03T15:00+01:00",
+   "vues": 1265,
+   "favoris": 16,
+   "demandes": 9
+  },
+  {
+   "id": "126234-fr-nice-31",
+   "reference": "126234",
+   "prix": 11200,
+   "devise": "EUR",
+   "vendeur": "fr-nice",
+   "skin": {
+    "type": "datejust",
+    "dial": "#a6d3c5",
+    "bezel": "fluted",
+    "metal": "steel",
+    "bracelet": "jubilee",
+    "date": true
+   },
+   "photos": [],
+   "collection": "Datejust",
+   "modele": "Datejust 36",
+   "diametre": 36,
+   "materiau": "Rolesor gris (Oystersteel et or gris 18 ct)",
+   "lunette": "Cannelée, or gris 18 ct",
+   "cadran": "Vert menthe, index bâtons",
+   "calibre": "3235",
+   "reserve": 70,
+   "bracelet": "Jubilé, cinq rangs",
+   "fermoir": "Oysterclasp dissimulé avec Easylink",
+   "etancheite": 100,
+   "fonctions": "Heures, minutes, seconde au centre, date à guichet avec loupe Cyclope",
+   "etat": "Occasion",
+   "condition": "Comme neuve",
+   "note": 9.5,
+   "polissage": "Jamais polie",
+   "details": {
+    "boitier": "Aucune marque visible",
+    "lunette": "Parfaite",
+    "cadran": "Parfait",
+    "verre": "Parfait",
+    "bracelet": "Micro-traces de porté sur le fermoir uniquement"
+   },
+   "entretien": {
+    "par": "Rolex",
+    "resume": "Encore sous garantie internationale Rolex",
+    "historique": []
+   },
+   "pieces": [
+    {
+     "piece": "Boîtier",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Lunette / disque",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Cadran",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Aiguilles",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Verre saphir",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Couronne et tube",
+     "statut": "D'origine",
+     "note": ""
+    },
+    {
+     "piece": "Bracelet et fermoir",
+     "statut": "D'origine",
+     "note": ""
+    }
+   ],
+   "papiers": true,
+   "boite": true,
+   "garantie": "Garantie internationale Rolex jusqu'en 2029",
+   "achat": "Achat d'origine : Monaco, 2024",
+   "accessoires": "Boîte, carte de garantie, livrets, maillons supplémentaires",
+   "annee": 2024,
+   "publie": "2026-11-13",
+   "resume": "Datejust 36 cadran vert menthe, Jubilé.",
+   "prix_initial": 11800,
+   "statut": "Disponible",
+   "historique_annonce": [
+    {
+     "date": "2026-11-13T10:00+01:00",
+     "type": "publiee",
+     "texte": "Annonce publiée"
+    },
+    {
+     "date": "2026-11-13T23:00+01:00",
+     "type": "photos",
+     "texte": "Photos et fiche mises à jour"
+    }
+   ],
+   "mise_a_jour": "2026-11-13T23:00+01:00",
+   "vues": 57,
+   "favoris": 6,
+   "demandes": 6
+  }
+ ]
+}
