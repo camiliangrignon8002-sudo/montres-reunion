@@ -76,7 +76,7 @@ p { margin: 0; }
 .nav[aria-current="page"] svg { color: var(--accent); }
 .nav .count { margin-left: auto; font-size: 12px; background: var(--danger); color: #fff; border-radius: 10px; padding: 0 7px; font-weight: 600; }
 .main { min-width: 0; display: flex; flex-direction: column; }
-.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; display: flex; align-items: center; gap: 10px; padding-block: 12px; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: saturate(180%) blur(18px); -webkit-backdrop-filter: saturate(180%) blur(18px); border-bottom: 1px solid var(--line); }
+.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; display: flex; align-items: center; gap: 10px; padding-block: 12px; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); background: color-mix(in srgb, var(--bg) 82%, transparent); border-bottom: 1px solid var(--line); }
 .topbar .title { font-family: var(--font-display); font-weight: 650; font-size: 17px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .topbar .spacer { flex: 1; }
 .sync { font-size: 12px; color: var(--fg-2); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
@@ -314,7 +314,7 @@ table.t td { padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-al
   .topbar .sync .lbl { display: none; }
   h1 { font-size: 24px; }
   .week-head h1 { font-size: 20px; }
-  .tabbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px)); background: color-mix(in srgb, var(--surface) 88%, transparent); backdrop-filter: saturate(180%) blur(18px); -webkit-backdrop-filter: saturate(180%) blur(18px); border-top: 1px solid var(--line); }
+  .tabbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px)); background: color-mix(in srgb, var(--surface) 88%, transparent); border-top: 1px solid var(--line); }
   .tabbar button { flex: 1; border: 0; background: none; display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 10.5px; color: var(--fg-2); padding: 4px 0; cursor: pointer; }
   .tabbar button svg { width: 24px; height: 24px; }
   .tabbar button[aria-current="page"] { color: var(--accent); }
@@ -377,12 +377,12 @@ html.liquid { background: var(--g-bg-2); }
 html.liquid body { background: transparent; }
 html.liquid body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(700px 520px at 12% 12%, var(--g-spot-1), transparent 65%), radial-gradient(900px 700px at 88% 30%, var(--g-spot-2), transparent 60%), linear-gradient(160deg, var(--g-bg-1) 0%, var(--g-bg-2) 55%, var(--g-bg-3) 100%); }
 html.liquid body::before { background: transparent; }
-html.liquid .side { background: linear-gradient(180deg, var(--g-fill-1), var(--g-fill-2)); -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur); border-right: none; box-shadow: inset -1px 0 0 var(--g-edge), 8px 0 40px rgba(0,0,0,.05); }
+html.liquid .side { background: linear-gradient(180deg, var(--g-fill-1), var(--g-fill-2)); border-right: none; box-shadow: inset -1px 0 0 var(--g-edge), 8px 0 40px rgba(0,0,0,.05); }
 html.liquid .topbar { background: linear-gradient(180deg, var(--g-fill-1), var(--g-fill-2)); border-bottom: 1px solid var(--g-edge); }
 html.liquid .card, html.liquid .banner { background: linear-gradient(160deg, var(--g-fill-1) 0%, var(--g-fill-2) 45%, var(--g-fill-3) 100%); border: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), inset 0 -1px 0 var(--g-hi-2), var(--g-shadow); border-radius: 26px; }
 html.liquid .card.flat { box-shadow: inset 0 1px 0 var(--g-hi); }
 html.liquid .dialog, html.liquid .dialog header, html.liquid .dialog footer { background: var(--g-dialog); }
-html.liquid .dialog { -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur); border: 1px solid var(--g-edge); border-radius: 26px; box-shadow: inset 0 1px 0 var(--g-hi), 0 24px 70px rgba(0,0,0,.25); }
+html.liquid .dialog { border: 1px solid var(--g-edge); border-radius: 26px; box-shadow: inset 0 1px 0 var(--g-hi), 0 24px 70px rgba(0,0,0,.25); }
 html.liquid .plan thead th, html.liquid .plan th.name, html.liquid .plan td.name, html.liquid .plan thead th.name { background: color-mix(in srgb, var(--bg) 78%, transparent); }
 html.liquid .plan th, html.liquid .plan td { border-color: var(--g-edge); }
 html.liquid .blk { border-radius: 12px; background: linear-gradient(180deg, color-mix(in srgb, var(--z) 22%, var(--g-blk)), color-mix(in srgb, var(--z) 32%, var(--g-blk-2))); border: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), inset 3px 0 0 var(--z), 0 1px 2px rgba(0,0,0,.06); }
@@ -397,13 +397,13 @@ html.liquid .skill[aria-pressed="true"] { background: linear-gradient(180deg, va
 html.liquid .skill.badgeRouge[aria-pressed="true"] { background: var(--danger-soft); border-color: var(--danger); }
 html.liquid .skill.formation[aria-pressed="true"] { background: var(--warn-soft); border-color: var(--warn); }
 html.liquid .skill.ancien[aria-pressed="true"] { background: var(--ok-soft); border-color: var(--ok); }
-html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 66%, transparent), color-mix(in srgb, var(--bg) 84%, transparent)); -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur); border-top: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), 0 -6px 30px rgba(0,0,0,.06); }
+html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 66%, transparent), color-mix(in srgb, var(--bg) 84%, transparent)); border-top: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), 0 -6px 30px rgba(0,0,0,.06); }
 html.liquid .input { background: var(--g-btn-1); border-color: var(--g-edge); }
 
 /* Fluidité : flou réservé aux quelques grandes surfaces (menu, barres, fenêtres) ; rien de flou si l'appareil demande moins de transparence. */
-html.liquid .side, html.liquid .topbar, html.liquid .tabbar, html.liquid .dialog { will-change: transform; }
+
 @media (prefers-reduced-transparency: reduce) {
-  html.liquid .side, html.liquid .topbar, html.liquid .tabbar, html.liquid .dialog { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--g-dialog); }
+  html.liquid .side, html.liquid .topbar, html.liquid .tabbar, html.liquid .dialog { background: var(--g-dialog); }
 }
 .month .mday { contain: layout paint; }
 
@@ -459,10 +459,10 @@ html.liquid #splash { background: radial-gradient(700px 520px at 30% 20%, var(--
   @media (hover: hover) { html:not([data-theme="light"]) .card:hover { box-shadow: 0 16px 36px rgba(0, 0, 0, .5); } }
 }
 /* Écran qui apparaît en fondu (opacité + léger glissement : fluide même sur téléphone). */
-#content.enter > * { animation: screen-in .26s cubic-bezier(.2, .8, .2, 1) both; }
-#content.enter > *:nth-child(2) { animation-delay: .03s; }
-#content.enter > *:nth-child(3) { animation-delay: .06s; }
-@keyframes screen-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+#content.enter > * { animation: screen-in .16s ease-out both; }
+#content.enter > *:nth-child(2) { animation-delay: .02s; }
+#content.enter > *:nth-child(3) { animation-delay: .04s; }
+@keyframes screen-in { from { opacity: .4; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 /* Fluidité générale */
 html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 .content, .t-wrap, .plan-wrap { -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
@@ -502,3 +502,11 @@ html.liquid[data-theme="dark"] .dialog header, html.liquid[data-theme="dark"] .d
 .name-btn .car-toggle { margin-top: 4px; height: 24px; padding: 0 6px; }
 .name-btn .car-toggle svg { width: 15px; height: 15px; }
 @media (prefers-color-scheme: dark) { html:not([data-theme="light"]) .link-btn, html:not([data-theme="light"]) .car-toggle:not([aria-pressed="true"]) { background: #2c2c2e; } }
+
+/* Fluidité : aucun flou calculé en direct. Les barres qui ont du contenu qui défile dessous sont presque opaques. */
+.topbar { background: color-mix(in srgb, var(--bg) 96%, transparent); }
+html.liquid .topbar { background: linear-gradient(180deg, color-mix(in srgb, var(--g-bg-1) 97%, transparent), color-mix(in srgb, var(--g-bg-2) 93%, transparent)); box-shadow: inset 0 -1px 0 var(--g-edge), 0 6px 18px rgba(0, 0, 0, .04); }
+html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var(--g-bg-1) 95%, transparent), color-mix(in srgb, var(--g-bg-2) 97%, transparent)); }
+@media (max-width: 760px) { .tabbar { background: color-mix(in srgb, var(--surface) 98%, transparent); } }
+/* Le navigateur évite de dessiner ce qui est hors écran (listes et cartes longues). */
+.card.big .t-wrap, .month { contain: content; }
