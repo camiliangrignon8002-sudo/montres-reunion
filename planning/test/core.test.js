@@ -480,3 +480,29 @@ test("durée par semaine : dépassement possible jusqu'à 42 h, jamais au-delà"
   // jamais proposée en remplaçante au-delà de 42 h
   assert.ok(!C.findCandidates(r.state, C.addDays(W, 6), [{ s: "07:00", e: "12:00", z: "ZP" }]).some((c) => c.emp === "maelle"));
 });
+
+test("temps partiel : jamais 42 h (contrat + 10 % au plus) ; règles légales", () => {
+  let s = withWeek1();
+  s = apply(s, [{ type: "addEmployee", employee: { name: "Ruby", zones: { ZP: "confirme" } } }, { type: "updateEmployee", id: "ruby", patch: { contractHours: 21 } }]).state;
+  const cap = C.weekCap(s, C.empById(s, "ruby"));
+  assert.equal(cap.partTime, true);
+  assert.equal(cap.minutes, Math.round(21 * 60 * 1.1));
+  assert.equal(C.weekCap(s, C.empById(s, "charlotte")).minutes, 42 * 60);
+  const W = "2026-12-07";
+  const d = (i) => ({ type: "setShift", emp: "ruby", date: C.addDays(W, i), segs: [{ s: "14:30", e: "17:00", z: "ZP" }, { s: "17:30", e: "22:00", z: "ZP" }] });
+  assert.ok(apply(s, [d(0), d(1), d(2)]).ok); // 21 h
+  const r = apply(s, [d(0), d(1), d(2), d(3)]); // 28 h > 23 h 06
+  assert.equal(r.ok, false);
+  assert.match(r.errors.join(), /temps partiel/);
+  // droit du travail : 10 h par jour, 13 h d'amplitude, 6 h d'affilée, 7 jours d'affilée
+  const iss = (ops) => C.validateWeek(apply(s, ops, { allowErrors: true }).state, W).map((i) => i.code);
+  assert.ok(iss([{ type: "setShift", emp: "charlotte", date: W, segs: [{ s: "06:00", e: "12:00", z: "ZP" }, { s: "12:30", e: "17:30", z: "ZP" }] }]).includes("LEGAL_DAY_MAX"));
+  assert.ok(iss([{ type: "setShift", emp: "charlotte", date: W, segs: [{ s: "06:00", e: "09:00", z: "ZP" }, { s: "17:00", e: "20:00", z: "ZP" }] }]).includes("LEGAL_AMPLITUDE"));
+  assert.ok(iss([{ type: "setShift", emp: "charlotte", date: W, segs: [{ s: "06:00", e: "13:00", z: "ZP" }] }]).includes("LEGAL_CONTINUOUS"));
+  const seven = [0, 1, 2, 3, 4, 5, 6].map((i) => ({ type: "setShift", emp: "charlotte", date: C.addDays(W, i), segs: [{ s: "07:00", e: "11:00", z: "ZP" }] }));
+  const codes = iss(seven);
+  assert.ok(codes.includes("LEGAL_CONSECUTIVE") && codes.includes("LEGAL_DAYS_OFF"));
+  // jamais proposé(e) pour un 6e jour dans la semaine (2 jours de repos)
+  const five = apply(s, [0, 1, 2, 3, 4].map((i) => ({ type: "setShift", emp: "charlotte", date: C.addDays(W, i), segs: [{ s: "07:00", e: "11:00", z: "ZP" }] })), { allowErrors: true }).state;
+  assert.ok(!C.findCandidates(five, C.addDays(W, 5), [{ s: "07:00", e: "11:00", z: "ZP" }]).some((c) => c.emp === "charlotte"));
+});

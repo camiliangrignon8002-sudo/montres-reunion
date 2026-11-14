@@ -1159,8 +1159,17 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
     checkRest: true, minRestHours: 11,
     checkMaxDay: true, maxDayHours: 10,
     checkMaxWeek: true, maxWeekHours: 48,
-    hardMaxWeekHours: 42, // dépassement possible jusqu'à cette limite, jamais au-delà (heures sup comprises)
+    hardMaxWeekHours: 42, // temps plein : dépassement possible jusqu'à cette limite, jamais au-delà (heures sup comprises)
+    partTimeExtraPercent: 10, // temps partiel : heures complémentaires au plus 10 % du contrat (jamais 42 h)
     checkPause: true, minPauseMinutes: 30,
+    // Droit du travail (réglables dans « Zones et règles »)
+    checkLegal: true,
+    maxConsecutiveDays: 6, // jamais plus de 6 jours de travail d'affilée
+    minDaysOff: 2, // jours de repos par semaine
+    hardMaxDayHours: 10, // jamais plus de 10 h de travail dans la journée
+    maxAmplitudeHours: 13, // début → fin de journée : 13 h au plus
+    maxContinuousHours: 6, // jamais plus de 6 h d'affilée sans pause
+    minContractHours: 24, // temps partiel : 24 h par semaine au minimum (contrat)
     contractHours: 35,
     lateThreshold: 5, extraThreshold: 5,
     closingZP: "", closingZR: "",
@@ -1441,6 +1450,15 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
     const base = daysBetween(refMonday, shift.date) * 1440;
     return shiftRanges(shift.segs).map(([s, e]) => [base + s, base + e]);
   }
+  // Plafond de la semaine : 42 h pour un temps plein ; contrat + heures complémentaires pour un temps partiel.
+  function weekCap(state, emp) {
+    const st = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
+    const full = (st.contractHours || 35) * 60, hard = (st.hardMaxWeekHours || 42) * 60;
+    if (!emp || emp.role === "alternant") return { minutes: hard, partTime: false };
+    const contract = (Number(emp.contractHours) || 0) * 60 || templateMinutes(state, emp.id);
+    if (!contract || contract >= full) return { minutes: hard, partTime: false };
+    return { minutes: Math.min(hard, full - 1, Math.round(contract * (1 + (Number(st.partTimeExtraPercent) || 0) / 100))), partTime: true, contract };
+  }
   function weekExtraMinutes(state, monday, empId) {
     const end = addDays(monday, 6);
     return Object.values(state.adjustments || {}).filter((a) => a.emp === empId && a.date >= monday && a.date <= end && (a.type === "heures_sup" || a.type === "journee_sup")).reduce((x, a) => x + a.minutes, 0);
@@ -1531,6 +1549,13 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
         const pz = pauses(sh.segs).reduce((a, p) => a + p.min, 0);
         if (pz < st.minPauseMinutes) add("alerte", "PAUSE", sh.emp, d, `${who} : ${pz ? pz + " min" : "aucune"} de pause le ${fmtDate(d, "day")} (${st.minPauseMinutes} min prévues).`);
       }
+      if (st.checkLegal && timesOk) {
+        const r = shiftRanges(sh.segs), work = shiftMinutes(sh.segs), amp = r[r.length - 1][1] - r[0][0];
+        if (work > st.hardMaxDayHours * 60) add("alerte", "LEGAL_DAY_MAX", sh.emp, d, `${who} : ${fmtHours(work)} de travail le ${fmtDate(d, "day")}, au-delà du maximum légal de ${st.hardMaxDayHours} h par jour.`);
+        if (amp > st.maxAmplitudeHours * 60) add("alerte", "LEGAL_AMPLITUDE", sh.emp, d, `${who} : journée de ${fromMin(r[0][0])} à ${fromMin(r[r.length - 1][1])} le ${fmtDate(d, "day")}, soit ${fmtHours(amp)} entre le début et la fin (maximum ${st.maxAmplitudeHours} h).`);
+        const long = r.find(([a, b]) => b - a > st.maxContinuousHours * 60);
+        if (long) add("alerte", "LEGAL_CONTINUOUS", sh.emp, d, `${who} : ${fmtHours(long[1] - long[0])} d'affilée le ${fmtDate(d, "day")} (${fromMin(long[0])}–${fromMin(long[1])}) : pas plus de ${st.maxContinuousHours} h sans une pause d'au moins ${st.minPauseMinutes} min.`);
+      }
       if (st.checkMaxDay && timesOk && shiftMinutes(sh.segs) > st.maxDayHours * 60) add("alerte", "DAY_MAX", sh.emp, d, `${who} : ${fmtHours(shiftMinutes(sh.segs))} le ${fmtDate(d, "day")} (plus de ${st.maxDayHours} h).`);
     }
 
@@ -1607,8 +1632,9 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
       const cm = emp.active === false ? 0 : weekCourseMinutes(state, monday, emp.id);
       // Limite absolue de la semaine : planning + cours + heures sup et journées en plus.
       const extraW = weekExtraMinutes(state, monday, emp.id);
-      if (st.hardMaxWeekHours && m + cm + extraW > st.hardMaxWeekHours * 60) {
-        add("erreur", "WEEK_HARD_MAX", emp.id, null, `${emp.name} : ${fmtHours(m + cm + extraW)} cette semaine${cm || extraW ? ` (${[`${fmtHours(m)} de planning`, cm ? `${fmtHours(cm)} de cours` : null, extraW ? `${fmtHours(extraW)} d'heures en plus` : null].filter(Boolean).join(" + ")})` : ""}, au-delà du maximum de ${st.hardMaxWeekHours} h : aucun dépassement possible au-delà.`);
+      const cap = weekCap(state, emp);
+      if (st.hardMaxWeekHours && m + cm + extraW > cap.minutes) {
+        add("erreur", "WEEK_HARD_MAX", emp.id, null, `${emp.name} : ${fmtHours(m + cm + extraW)} cette semaine${cm || extraW ? ` (${[`${fmtHours(m)} de planning`, cm ? `${fmtHours(cm)} de cours` : null, extraW ? `${fmtHours(extraW)} d'heures en plus` : null].filter(Boolean).join(" + ")})` : ""}, au-delà du maximum de ${fmtHours(cap.minutes)}${cap.partTime ? ` (temps partiel : contrat de ${fmtHours(cap.contract)} + ${st.partTimeExtraPercent} % au plus)` : ""} : aucun dépassement possible au-delà.`);
         continue;
       }
       if (cm) {
@@ -1623,6 +1649,35 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
       if (st.checkMaxWeek && m > st.maxWeekHours * 60) add("alerte", "WEEK_MAX", emp.id, null, `${emp.name} : ${fmtHours(m)} sur la semaine, dépassement de ${fmtHours(m - st.maxWeekHours * 60)} (possible jusqu'à ${st.hardMaxWeekHours || st.maxWeekHours} h).`);
       const ref = templateMinutes(state, emp.id);
       if (ref && m !== ref) add("info", "HOURS_DIFF", emp.id, null, `${emp.name} : ${fmtHours(m)} cette semaine, ${fmtHours(ref)} dans le modèle.`);
+    }
+    // Droit du travail : jours consécutifs, jours de repos, contrat minimum.
+    if (st.checkLegal) for (const emp of state.employees) {
+      if (emp.active === false) continue;
+      const worked = (d) => {
+        const ww = getWeek(state, mondayOf(d));
+        return !!(ww && ww.shifts.some((x) => x.emp === emp.id && x.date === d)) || courseMinutesOn(state, emp, d) > 0;
+      };
+      const days = weekDates(monday);
+      const n = days.filter(worked).length;
+      if (!n) continue;
+      if (7 - n < st.minDaysOff) add("alerte", "LEGAL_DAYS_OFF", emp.id, null, `${emp.name} : ${n} jours travaillés cette semaine${courseMinutesOn(state, emp, days.find((d) => courseMinutesOn(state, emp, d) > 0) || days[0]) ? " (cours compris)" : ""}, il faut ${st.minDaysOff} jours de repos par semaine.`);
+      else if (st.minDaysOff >= 2) {
+        const off = days.filter((d) => !worked(d));
+        const together = off.some((d, i) => i && daysBetween(off[i - 1], d) === 1) || (worked(addDays(monday, -1)) === false && !worked(monday)) || (!worked(days[6]) && !worked(addDays(monday, 7)));
+        if (off.length >= 2 && !together) add("info", "LEGAL_DAYS_OFF_SPLIT", emp.id, null, `${emp.name} : jours de repos séparés cette semaine (${off.map((d) => DAYS[dow(d)].toLowerCase()).join(", ")}) ; deux jours d'affilée si possible.`);
+      }
+      // Jours consécutifs : série qui touche cette semaine, en regardant 6 jours avant et après.
+      let run = 0, start = null, flagged = false;
+      for (let d = addDays(monday, -6); d <= addDays(monday, 12); d = addDays(d, 1)) {
+        if (worked(d)) { if (!run) start = d; run++; }
+        else run = 0;
+        if (run > st.maxConsecutiveDays && !flagged && addDays(start, run - 1) >= monday && start <= addDays(monday, 6)) {
+          add("alerte", "LEGAL_CONSECUTIVE", emp.id, addDays(start, run - 1) < monday ? monday : addDays(start, run - 1), `${emp.name} : ${run} jours de travail d'affilée à partir du ${fmtDate(start, "short")} (maximum ${st.maxConsecutiveDays}).`);
+          flagged = true;
+        }
+      }
+      const contract = Number(emp.contractHours) || 0;
+      if (contract && contract < st.minContractHours && emp.role !== "alternant") add("info", "LEGAL_CONTRACT", emp.id, null, `${emp.name} : contrat de ${contract} h par semaine, sous le minimum de ${st.minContractHours} h d'un temps partiel (sauf dérogation).`);
     }
     // Jours de bureau minimum par semaine
     for (const emp of state.employees) {
@@ -1695,6 +1750,15 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
       if (w.shifts.some((s) => s.emp === emp.id && s.date === date)) continue;
       if (personalRuleIssues(emp, date, segs).length) continue; // horaires ou jours de repos fixes
       if (inTraining(emp, date) && segs.some((g) => aloneRanges(state, w.shifts, { emp: emp.id, date }, g).length)) continue; // en formation : jamais seul(e)
+      if (st.checkLegal && segs.every((g) => isTime(g.s) && isTime(g.e))) {
+        const r = shiftRanges(segs);
+        if (shiftMinutes(segs) > st.hardMaxDayHours * 60 || r[r.length - 1][1] - r[0][0] > st.maxAmplitudeHours * 60) continue;
+        const workedC = (d) => d === date || shiftsAround(state, monday).some((x) => x.emp === emp.id && x.date === d) || courseMinutesOn(state, emp, d) > 0;
+        if (7 - weekDates(monday).filter(workedC).length < st.minDaysOff) continue; // 2 jours de repos par semaine
+        let before = 0; for (let d = addDays(date, -1); workedC(d) && before < 7; d = addDays(d, -1)) before++;
+        let after = 0; for (let d = addDays(date, 1); workedC(d) && after < 7; d = addDays(d, 1)) after++;
+        if (before + 1 + after > st.maxConsecutiveDays) continue; // jamais plus de 6 jours d'affilée
+      }
       // Repos avec les jours voisins
       const cand = { emp: emp.id, date, segs };
       const cr = absRanges(cand, monday);
@@ -1712,7 +1776,7 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
       const weekMin = weekMinutes(state, monday, emp.id);
       const courseMin = weekCourseMinutes(state, monday, emp.id);
       const after = weekMin + courseMin + newMin + weekExtraMinutes(state, monday, emp.id);
-      if (st.hardMaxWeekHours && after > st.hardMaxWeekHours * 60) continue; // jamais au-delà de la limite absolue
+      if (st.hardMaxWeekHours && after > weekCap(state, emp).minutes) continue; // jamais au-delà de la limite (42 h, ou contrat + 10 % à temps partiel)
       const overtime = st.checkMaxWeek && weekMin + courseMin + newMin > st.maxWeekHours * 60;
       if (overtime) notes.push(`dépassement : ${fmtHours(weekMin + courseMin + newMin)} sur la semaine`);
       if (courseMin && weekMin + courseMin + newMin > (st.contractHours || 35) * 60) continue; // cours + travail ≤ contrat
@@ -2099,7 +2163,8 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
           if ((a.type === "heures_sup" || a.type === "journee_sup") && stx.hardMaxWeekHours) {
             const mo = mondayOf(a.date);
             const tot = weekMinutes(s, mo, emp.id) + weekCourseMinutes(s, mo, emp.id) + weekExtraMinutes(s, mo, emp.id) + min;
-            if (tot > stx.hardMaxWeekHours * 60) { fail(`${emp.name} arriverait à ${fmtHours(tot)} sur la semaine : le maximum est ${stx.hardMaxWeekHours} h, aucun dépassement au-delà.`); break; }
+            const capA = weekCap(s, emp);
+            if (tot > capA.minutes) { fail(`${emp.name} arriverait à ${fmtHours(tot)} sur la semaine : le maximum est ${fmtHours(capA.minutes)}${capA.partTime ? " (temps partiel)" : ""}, aucun dépassement au-delà.`); break; }
           }
           const id = a.id || uid("aj");
           s.adjustments[id] = { id, emp: emp.id, date: a.date, type: a.type, minutes: min, note: String(a.note || "").slice(0, 200), createdAt: meta.now || null, by: meta.by || null };
@@ -2209,7 +2274,7 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
             }
             if (Array.isArray(DEFAULT_SETTINGS[k])) { if (!Array.isArray(v)) { fail(`Valeur invalide pour ${k}.`); continue; } s.settings[k] = v.map(String).slice(0, 200); continue; }
             if (typeof DEFAULT_SETTINGS[k] === "string") { s.settings[k] = String(v).slice(0, 10); continue; }
-            if (typeof DEFAULT_SETTINGS[k] === "number" && !(Number(v) > 0)) { fail(`Valeur invalide pour ${k}.`); continue; }
+            if (typeof DEFAULT_SETTINGS[k] === "number" && !(Number(v) > 0 || (k === "partTimeExtraPercent" && Number(v) === 0))) { fail(`Valeur invalide pour ${k}.`); continue; }
             s.settings[k] = typeof DEFAULT_SETTINGS[k] === "number" ? Number(v) : !!v;
           }
           conf("settings");
@@ -2350,7 +2415,7 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };
@@ -3878,7 +3943,7 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
       h("h3", {}, "Personnes concernées"), h("div", { class: "form-grid" }, checks),
       h("p", { class: "small muted" }, `${absN} congé(s) ou absence(s) enregistré(s) et le calendrier d'alternance sont pris en compte automatiquement.`),
       h("section", { class: "card flat", id: "gen-max" }, h("h3", {}, "Critère : durée par semaine"),
-        h("p", { class: "small" }, `Dépassement possible au-delà de ${s.settings.maxWeekHours} h, mais jamais plus de `, h("b", {}, `${s.settings.hardMaxWeekHours || 42} h par semaine`), ", pour tout le monde (cours et heures sup compris). Réglable dans « Zones et règles »."),
+        h("p", { class: "small" }, `Temps plein : dépassement possible au-delà de ${s.settings.maxWeekHours} h, mais jamais plus de `, h("b", {}, `${s.settings.hardMaxWeekHours || 42} h par semaine`), ` (cours et heures sup compris). Temps partiel : jamais plus que le contrat + ${s.settings.partTimeExtraPercent ?? 10} %${(() => { const pt = s.employees.filter((e) => e.active !== false && C.weekCap(s, e).partTime); return pt.length ? ` (${pt.map((e) => `${e.name} ${C.fmtHours(C.weekCap(s, e).minutes)}`).join(", ")})` : ""; })()}. Réglable dans « Zones et règles ».`),
         Store.canWrite ? h("div", { class: "row" }, h("span", { class: "small muted" }, "Maximum :"), h("input", { type: "number", class: "input", id: "gen-hardmax", min: "1", max: "60", step: "0.5", value: s.settings.hardMaxWeekHours || 42, style: { width: "90px" }, onChange: (ev) => this.commit([{ type: "setSettings", patch: { hardMaxWeekHours: ev.target.value } }], { summary: `Maximum par semaine : ${ev.target.value} h`, quiet: true }) }), h("span", { class: "small muted" }, "heures")) : null),
       h("section", { class: "card flat", id: "gen-links" }, h("h3", {}, "Conditions : personnes liées"),
         h("p", { class: "small muted" }, "Les personnes liées travaillent aux mêmes horaires (dans la même zone ou non, au choix) et/ou ont les mêmes week-ends. Les conditions restent enregistrées pour les prochaines générations."),
@@ -4374,10 +4439,19 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
         h("div", { class: "form-grid", style: { "margin-top": "10px" } },
           h("div", { class: "stack", style: { gap: "6px" } }, tog("checkRest", "Vérifier le repos entre deux services"), num("minRestHours", "Repos minimum", "heures")),
           h("div", { class: "stack", style: { gap: "6px" } }, tog("checkMaxDay", "Vérifier la durée par jour"), num("maxDayHours", "Maximum par jour", "heures")),
-          h("div", { class: "stack", style: { gap: "6px" } }, tog("checkMaxWeek", "Vérifier la durée par semaine"), num("maxWeekHours", "Durée normale par semaine", "heures"), num("hardMaxWeekHours", "Dépassement possible jusqu'à", "heures (jamais au-delà)")),
+          h("div", { class: "stack", style: { gap: "6px" } }, tog("checkMaxWeek", "Vérifier la durée par semaine"), num("maxWeekHours", "Durée normale par semaine", "heures"), num("hardMaxWeekHours", "Temps plein : dépassement possible jusqu'à", "heures (jamais au-delà)"), num("partTimeExtraPercent", "Temps partiel : au plus", "% de plus que le contrat")),
           h("div", { class: "stack", style: { gap: "6px" } }, tog("checkPause", "Vérifier la pause (journées de plus de 6 h)"), num("minPauseMinutes", "Pause minimum", "minutes")),
           h("div", { class: "stack", style: { gap: "6px" } }, num("lateThreshold", "Retard compté à partir de", "minutes"), num("extraThreshold", "Heures sup comptées à partir de", "minutes")),
-          h("div", { class: "stack", style: { gap: "6px" } }, h("span", { class: "small muted" }, "Contrat de référence"), num("contractHours", "Heures par semaine", "heures"))),
+          h("div", { class: "stack", style: { gap: "6px" } }, h("span", { class: "small muted" }, "Contrat de référence"), num("contractHours", "Heures par semaine", "heures"), num("minContractHours", "Temps partiel : contrat minimum", "heures"))),
+        h("div", { class: "stack", style: { "margin-top": "14px", gap: "8px" } }, h("h3", {}, "Droit du travail"), tog("checkLegal", "Vérifier les règles du droit du travail (le générateur et les remplaçants les respectent toujours)"),
+          h("div", { class: "form-grid" },
+            num("maxConsecutiveDays", "Jours de travail d'affilée, au plus", "jours"),
+            num("minDaysOff", "Jours de repos par semaine, au moins", "jours"),
+            num("hardMaxDayHours", "Travail par jour, au plus", "heures"),
+            num("maxAmplitudeHours", "Début → fin de journée, au plus", "heures"),
+            num("maxContinuousHours", "Travail d'affilée sans pause, au plus", "heures"),
+            num("minRestHours", "Repos entre deux journées, au moins", "heures")),
+          h("p", { class: "small muted" }, "Pause : au moins le minimum réglé plus haut (30 min) après 6 h d'affilée. Deux jours de repos d'affilée si possible (simple information). Les jours de cours au CFA comptent comme des jours travaillés.")),
         h("div", { class: "stack", style: { "margin-top": "12px", gap: "8px" } },
           tog("coverageFromTemplate", "Signaler les postes du modèle non pourvus (hypothèse : le modèle donne le besoin en personnel)"),
           tog("rulesConfirmed", "J'ai vérifié ces règles"))));
