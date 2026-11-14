@@ -602,3 +602,20 @@ test("incompatibilités : jamais dans la même zone au même moment", () => {
   const st = apply(s, [put("maelle", "ZP")]).state;
   assert.ok(!C.findCandidates(st, W, [{ s: "08:00", e: "11:00", z: "ZP" }]).some((c) => c.emp === "murielle"));
 });
+
+test("effectif minimum / maximum sur une plage horaire", () => {
+  let s = withWeek1();
+  const W = "2026-12-07";
+  const r = apply(s, [{ type: "setSettings", patch: { staffing: [{ from: W, to: W, s: "07:00", e: "12:00", zone: "ZP", min: 2, max: 2 }] } }]);
+  assert.ok(r.ok, r.errors && r.errors.join());
+  s = r.state;
+  const put = (emp, a, b) => ({ type: "setShift", emp, date: W, segs: [{ s: a, e: b, z: "ZP" }] });
+  let iss = C.validateWeek(apply(s, [put("maelle", "07:00", "12:00"), put("charlotte", "09:00", "12:00")]).state, W);
+  const low = iss.find((i) => i.code === "STAFF_MIN");
+  assert.ok(low && /1 personne\(s\) en ZP de 07:00 à 09:00/.test(low.msg));
+  iss = C.validateWeek(apply(s, [put("maelle", "07:00", "12:00"), put("charlotte", "07:00", "12:00"), put("eric", "10:00", "12:00")]).state, W);
+  assert.ok(iss.some((i) => i.code === "STAFF_MAX" && /10:00 à 12:00/.test(i.msg)));
+  const st2 = apply(s, [put("maelle", "07:00", "12:00"), put("charlotte", "07:00", "12:00")]).state;
+  assert.ok(!C.findCandidates(st2, W, [{ s: "08:00", e: "11:00", z: "ZP" }]).length); // maximum atteint
+  assert.equal(apply(s, [{ type: "setSettings", patch: { staffing: [{ from: W, to: W, s: "12:00", e: "07:00", min: 1 }] } }]).ok, false);
+});

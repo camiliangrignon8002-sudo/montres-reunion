@@ -52,6 +52,7 @@
     coverageFromTemplate: true,
     rulesConfirmed: false,
     appliedUpdates: [],
+    staffing: [], // effectif min/max : [{ id, from, to, s, e, zone, min, max }]
     links: [], // personnes liées : [{ id, emps: [...], sameHours, sameZone, sameWeekends }]
   };
 
@@ -352,6 +353,26 @@
     if (!contract || contract >= full) return { minutes: hard, partTime: false };
     return { minutes: Math.min(hard, full - 1, Math.round(contract * (1 + (Number(st.partTimeExtraPercent) || 0) / 100))), partTime: true, contract };
   }
+  // Effectif : nombre de personnes présentes minute par minute sur une plage (zone donnée ou toutes zones de vente).
+  function staffingGaps(state, shifts, date, rule) {
+    const x = toMin(rule.s), y = toMin(rule.e);
+    const iv = [];
+    for (const sh of shifts) if (sh.date === date) for (const g of sh.segs || []) {
+      if (!isTime(g.s) || !isTime(g.e) || g.z === "ADM" || (rule.zone && g.z !== rule.zone)) continue;
+      const [a, b] = segRange(g); if (b > x && a < y) iv.push([Math.max(a, x), Math.min(b, y), sh.emp]);
+    }
+    const pts = [...new Set([x, y, ...iv.flatMap(([a, b]) => [a, b])])].sort((p, q) => p - q);
+    const low = [], high = [];
+    for (let i = 0; i < pts.length - 1; i++) {
+      const a = pts[i], b = pts[i + 1], mid = (a + b) / 2;
+      const n = new Set(iv.filter(([p, q]) => p <= mid && mid < q).map((z) => z[2])).size;
+      const push = (arr) => { const last = arr[arr.length - 1]; if (last && last.e === a && last.n === n) last.e = b; else arr.push({ s: a, e: b, n }); };
+      if (rule.min != null && n < rule.min) push(low);
+      if (rule.max != null && n > rule.max) push(high);
+    }
+    const fmt = (arr) => arr.map((r) => ({ s: fromMin(r.s), e: fromMin(r.e), n: r.n }));
+    return { low: fmt(low), high: fmt(high) };
+  }
   // Incompatibilités : deux personnes qui ne travaillent jamais dans la même zone en même temps (dans les deux sens).
   const incompatible = (state, a, b) => {
     const ea = empById(state, a), eb = empById(state, b);
@@ -618,6 +639,13 @@
       const contract = Number(emp.contractHours) || 0;
       if (contract && contract < st.minContractHours && emp.role !== "alternant") add("info", "LEGAL_CONTRACT", emp.id, null, `${emp.name} : contrat de ${contract} h par semaine, sous le minimum de ${st.minContractHours} h d'un temps partiel (sauf dérogation).`);
     }
+    // Effectif minimum / maximum demandé à la création du planning.
+    for (const r of st.staffing || []) for (const d of weekDates(monday)) {
+      if (d < r.from || d > r.to || !w.shifts.some((x) => x.date === d)) continue;
+      const g = staffingGaps(state, w.shifts, d, r), where = r.zone ? `en ${r.zone}` : "au total";
+      if (g.low.length) add("alerte", "STAFF_MIN", null, d, `${fmtDate(d, "day")} : ${g.low.map((x) => `${x.n} personne(s) ${where} de ${x.s} à ${x.e}`).join(", ")}, il en faut au moins ${r.min} (${r.s}–${r.e}).`);
+      if (g.high.length) add("alerte", "STAFF_MAX", null, d, `${fmtDate(d, "day")} : ${g.high.map((x) => `${x.n} personnes ${where} de ${x.s} à ${x.e}`).join(", ")}, ${r.max} au maximum (${r.s}–${r.e}).`);
+    }
     // Incompatibilités : jamais dans la même zone au même moment.
     for (const d of weekDates(monday)) {
       const day = w.shifts.filter((x) => x.date === d);
@@ -740,6 +768,7 @@
       if (overtime) score -= 20;
       score -= notes.length * 5;
       if (templateFor(state, date).some((t) => t.emp === emp.id && segKey(t.segs) === segKey(segs))) score += 10;
+      if ((st.staffing || []).some((r) => r.max != null && date >= r.from && date <= r.to && staffingGaps(state, [...w.shifts, { emp: emp.id, date, segs }], date, r).high.length && !staffingGaps(state, w.shifts, date, r).high.length)) continue; // dépasserait le maximum de personnes
       if (w.shifts.some((x) => x.date === date && incompatible(state, emp.id, x.emp) && sameZoneOverlap(segs, x.segs).length)) continue; // incompatibilité
       // Préférence de zone : obligatoire sauf si « si besoin, peut changer » est coché.
       const zp = emp.rules && emp.rules.weekZone;
@@ -1241,6 +1270,20 @@
           const p = op.patch || {};
           for (const [k, v] of Object.entries(p)) {
             if (!(k in DEFAULT_SETTINGS)) continue;
+            if (k === "staffing") {
+              if (!Array.isArray(v)) { fail("Effectifs invalides."); continue; }
+              const out = [];
+              for (const r of v) {
+                if (!r || !isISO(r.from) || !isISO(r.to) || r.to < r.from) { fail("Période d'effectif invalide."); break; }
+                if (!isTime(r.s) || !isTime(r.e) || toMin(r.e) <= toMin(r.s)) { fail("Plage horaire d'effectif invalide (début avant la fin)."); break; }
+                const mn = r.min === "" || r.min == null ? null : Number(r.min), mx = r.max === "" || r.max == null ? null : Number(r.max);
+                if ((mn == null && mx == null) || (mn != null && !(mn >= 0)) || (mx != null && !(mx >= 0)) || (mn != null && mx != null && mx < mn)) { fail("Indiquez un minimum et/ou un maximum de personnes (maximum ≥ minimum)."); break; }
+                if (r.zone && !zoneById(s, r.zone)) { fail("Zone inconnue."); break; }
+                out.push({ id: String(r.id || uid("eff")), from: r.from, to: r.to, s: r.s, e: r.e, zone: r.zone || "", min: mn, max: mx });
+              }
+              if (out.length === v.length) s.settings.staffing = out.slice(0, 100);
+              continue;
+            }
             if (k === "links") {
               if (!Array.isArray(v)) { fail("Liaisons invalides."); continue; }
               const out = [];
@@ -1400,7 +1443,7 @@
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, incompatible, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, staffingGaps, incompatible, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };

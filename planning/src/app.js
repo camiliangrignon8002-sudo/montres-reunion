@@ -915,6 +915,26 @@
     const drawSeason = () => seasonBox.replaceChildren(h("span", { class: "small muted" }, "Horaires des points de vente :"),
       ...[["ete", "Été"], ["hiver", "Hiver"]].map(([v, l]) => h("label", { class: "check" }, h("input", { type: "checkbox", id: `gen-season-${v}`, checked: season === v, onChange: () => { season = v; drawSeason(); } }), `${l} (ZP ${s.settings[`hoursZP_${v}`]}, ZR ${s.settings[`hoursZR_${v}`]})`)));
     drawSeason();
+    // Effectif min / max par période et plage horaire (enregistré, repris à chaque génération).
+    const range0 = (() => { const m = C.mondayOf(this.ui.monday); return { from: m, to: C.addDays(m, 6) }; })();
+    const stFrom = h("input", { type: "date", class: "input", id: "staff-from", value: range0.from }), stTo = h("input", { type: "date", class: "input", id: "staff-to", value: range0.to });
+    const stS = h("input", { type: "time", class: "input", id: "staff-s", value: "11:00" }), stE = h("input", { type: "time", class: "input", id: "staff-e", value: "14:00" });
+    const stZone = h("select", { class: "input", id: "staff-zone" }, h("option", { value: "" }, "ZP + ZR"), s.zones.filter((z) => z.id !== "ADM").map((z) => h("option", { value: z.id }, z.short)));
+    const stMin = h("input", { type: "number", class: "input", id: "staff-min", min: "0", max: "30", placeholder: "—" }), stMax = h("input", { type: "number", class: "input", id: "staff-max", min: "0", max: "30", placeholder: "—" });
+    const staffBox = h("div", { class: "stack", style: { gap: "6px" } });
+    const staffText = (r) => `${r.from === r.to ? C.fmtDate(r.from, "short") : `${C.fmtDate(r.from, "short")} → ${C.fmtDate(r.to, "short")}`}, ${r.s}–${r.e}, ${r.zone || "ZP + ZR"} : ${[r.min != null ? `au moins ${r.min}` : null, r.max != null ? `au plus ${r.max}` : null].filter(Boolean).join(", ")} personne(s)`;
+    const drawStaff = () => {
+      const list = this.state.settings.staffing || [];
+      staffBox.replaceChildren(...(list.length ? list.map((r) => h("div", { class: "item" }, h("span", { class: "grow" }, "👥 ", staffText(r)),
+        Store.canWrite ? iconBtn("close", "Retirer ce critère", async () => { const res = await this.commit([{ type: "setSettings", patch: { staffing: (this.state.settings.staffing || []).filter((x) => x.id !== r.id) } }], { quiet: true, summary: `Effectif retiré : ${staffText(r)}` }); if (res.ok) drawStaff(); }) : null))
+        : [h("p", { class: "small muted" }, "Aucun critère d'effectif.")]));
+    };
+    drawStaff();
+    const addStaff = async () => {
+      const r = { id: C.uid("eff"), from: stFrom.value, to: stTo.value || stFrom.value, s: stS.value, e: stE.value, zone: stZone.value, min: stMin.value === "" ? null : Number(stMin.value), max: stMax.value === "" ? null : Number(stMax.value) };
+      const res = await this.commit([{ type: "setSettings", patch: { staffing: [...(this.state.settings.staffing || []), r] } }], { quiet: true, summary: `Effectif : ${staffText(r)}` });
+      if (res.ok) { stMin.value = ""; stMax.value = ""; drawStaff(); }
+    };
     // Conditions : personnes liées (enregistrées, reprises à chaque génération).
     const linkBox = h("div", { class: "stack", style: { gap: "8px" } });
     const linkPick = s.employees.filter((e) => e.active !== false).map((e) => h("label", { class: "check" }, h("input", { type: "checkbox", value: e.id }), e.name));
@@ -946,6 +966,12 @@
       h("p", { class: "small muted" }, `${absN} congé(s) ou absence(s) enregistré(s) et le calendrier d'alternance sont pris en compte automatiquement.`),
       h("section", { class: "card flat", id: "gen-season" }, h("h3", {}, "Saison"), seasonBox,
         h("p", { class: "small muted" }, `Cochée d'après la période été (${C.fmtDate(s.settings.summerFrom || "2026-10-25", "short")} → ${C.fmtDate(s.settings.summerTo || "2027-03-27", "short")}) ; hiver en dehors. Les postes qui dépassent l'ouverture sont décalés pour y tenir.`)),
+      h("section", { class: "card flat", id: "gen-staff" }, h("h3", {}, "Critère : nombre de personnes"),
+        h("p", { class: "small muted" }, "Minimum et/ou maximum de personnes présentes sur une période et une plage horaire (dans une zone, ou ZP + ZR ensemble). Vérifié dans le planning ; les remplaçants ne dépassent jamais le maximum."),
+        staffBox,
+        Store.canWrite ? h("div", { class: "stack", style: { gap: "8px", "margin-top": "8px" } },
+          h("div", { class: "form-grid" }, h("label", { class: "f" }, "Du", stFrom), h("label", { class: "f" }, "Au (inclus)", stTo), h("label", { class: "f" }, "De", stS), h("label", { class: "f" }, "À", stE)),
+          h("div", { class: "form-grid" }, h("label", { class: "f" }, "Zone", stZone), h("label", { class: "f" }, "Minimum", stMin), h("label", { class: "f" }, "Maximum", stMax), h("div", { class: "f" }, h("span", {}, " "), btn("Ajouter", addStaff, "sm primary")))) : null),
       h("section", { class: "card flat", id: "gen-max" }, h("h3", {}, "Critère : durée par semaine"),
         h("p", { class: "small" }, `Temps plein : dépassement possible au-delà de ${s.settings.maxWeekHours} h, mais jamais plus de `, h("b", {}, `${s.settings.hardMaxWeekHours || 42} h par semaine`), ` (cours et heures sup compris). Temps partiel : jamais plus que le contrat + ${s.settings.partTimeExtraPercent ?? 10} %${(() => { const pt = s.employees.filter((e) => e.active !== false && C.weekCap(s, e).partTime); return pt.length ? ` (${pt.map((e) => `${e.name} ${C.fmtHours(C.weekCap(s, e).minutes)}`).join(", ")})` : ""; })()}. Réglable dans « Zones et règles ».`),
         Store.canWrite ? h("div", { class: "row" }, h("span", { class: "small muted" }, "Maximum :"), h("input", { type: "number", class: "input", id: "gen-hardmax", min: "1", max: "60", step: "0.5", value: s.settings.hardMaxWeekHours || 42, style: { width: "90px" }, onChange: (ev) => this.commit([{ type: "setSettings", patch: { hardMaxWeekHours: ev.target.value } }], { summary: `Maximum par semaine : ${ev.target.value} h`, quiet: true }) }), h("span", { class: "small muted" }, "heures")) : null),
@@ -987,7 +1013,8 @@
         h("div", { class: "row between" }, h("h3", {}, `Semaine du ${C.fmtWeek(r.monday)}`), r.skipped ? h("span", { class: "chip" }, "Déjà remplie : non modifiée") : h("span", { class: "chip info" }, `${r.report.placed} créneaux`)),
         r.skipped ? null : h("div", { class: "stack", style: { gap: "6px", "margin-top": "8px" } },
           r.report.notPlaced.length ? h("div", {}, h("b", { class: "small" }, `${r.report.notPlaced.length} poste(s) non attribué(s) :`), r.report.notPlaced.map((n) => h("div", { class: "issue alerte" }, h("span", { class: "ico" }, "?"), h("span", { class: "small" }, `${empName(s, n.emp)} · ${C.fmtDate(n.date, "day")} ${C.segLabel(n.segs)} — ${n.reason}. `, n.candidates.length ? `Remplaçants possibles : ${n.candidates.map((c) => c.name).join(", ")}.` : "Aucun remplaçant possible avec les règles actuelles.")))) : h("p", { class: "small", style: { color: "var(--ok)" } }, "Tous les postes du modèle sont attribués."),
-          (() => { const e = r.report.issues.filter((i) => i.level === "erreur"); const a = r.report.issues.filter((i) => i.level === "alerte" && i.code !== "UNCOVERED"); return h("p", { class: "small muted" }, `${e.length} erreur(s), ${a.length} alerte(s) à vérifier après enregistrement.`); })()))));
+(() => { const st = r.report.issues.filter((i) => i.code === "STAFF_MIN" || i.code === "STAFF_MAX"); return st.length ? h("div", {}, h("b", { class: "small" }, "Nombre de personnes :"), st.map((i) => h("div", { class: "issue alerte" }, h("span", { class: "ico" }, "👥"), h("span", {}, i.msg)))) : null; })(),
+                    (() => { const e = r.report.issues.filter((i) => i.level === "erreur"); const a = r.report.issues.filter((i) => i.level === "alerte" && i.code !== "UNCOVERED"); return h("p", { class: "small muted" }, `${e.length} erreur(s), ${a.length} alerte(s) à vérifier après enregistrement.`); })()))));
     openDialog({ title: "Proposition de planning", wide: true, body, actions: [{ label: "Fermer" }, { label: `Enregistrer ${todo.length} semaine(s) en brouillon`, primary: true, disabled: !todo.length, onClick: async () => {
       for (const r of todo) if (r.exists) await this.saveVersion(r.monday, "Avant régénération");
       const res = await this.commit(todo.map((r) => ({ type: "putWeek", monday: r.monday, week: r.week })), { source: "générateur", summary: `Génération : ${todo.map((r) => C.fmtDate(r.monday, "short")).join(", ")}` });
