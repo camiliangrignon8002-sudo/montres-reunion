@@ -1607,6 +1607,7 @@ async function start() {
     d.addEventListener("click", ev => { if (ev.target === d) d.close(); });
     // La Submariner de l'affiche, détourée, ressort en 3D et donne l'heure et la date en direct
     const live = $("#subLive");
+<<<<<<< HEAD
     // photo nette (aiguilles d'origine effacées proprement) + aiguilles et date en direct
     const lume = "#f4f2ea";
     live.innerHTML = `<img src="img/sub-montre.webp?v=3" alt="" width="770" height="1050" decoding="async">
@@ -1628,6 +1629,9 @@ async function start() {
       requestAnimationFrame(tourne);
     };
     tourne();
+=======
+    live.innerHTML = `<img src="img/sub-montre.webp?v=2" alt="" width="770" height="1050" decoding="async">`;   // photo nette, aiguilles d'origine
+>>>>>>> origin/main
     // effet 3D : la montre s'incline vers le doigt / la souris, et avec le téléphone
     const hero = $("#subPoster");
     const incline = (x, y) => live.style.setProperty("--rx", `${(-y * 14).toFixed(2)}deg`) || live.style.setProperty("--ry", `${(x * 18).toFixed(2)}deg`);
