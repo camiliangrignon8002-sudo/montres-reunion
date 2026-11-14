@@ -949,3 +949,18 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
 .sub-live{height:72%;aspect-ratio:330/380;translate:-50% -56%;
   -webkit-mask:linear-gradient(180deg,transparent 0,#000 16%,#000 84%,transparent 100%);mask:linear-gradient(180deg,transparent 0,#000 16%,#000 84%,transparent 100%)}
 @media (min-width:901px){.sub-live{height:76%;translate:-50% -54%}}
+/* La vraie montre de l'affiche, détourée, en relief 3D */
+.sub-poster{perspective:1200px}
+.sub-poster img{filter:blur(4px) brightness(.55) contrast(1.05)}
+.sub-live{height:96%;aspect-ratio:680/1260;translate:-50% -50%;-webkit-mask:none;mask:none;
+  filter:drop-shadow(0 40px 40px rgba(0,0,0,.8)) drop-shadow(0 8px 12px rgba(0,0,0,.55));
+  transform-style:preserve-3d;animation:sub-flotte 7s ease-in-out infinite}
+.sub-live>*{position:absolute;inset:0;width:100%;height:100%;display:block}
+.sub-live img{filter:none!important;transform:none!important;animation:none!important;object-fit:contain}
+.sub-live{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out}
+@keyframes sub-flotte{0%,100%{translate:-50% -50%}50%{translate:-50% calc(-50% - 10px)}}
+@media (min-width:901px){.sub-live{height:100%}}
+.sub-live::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;opacity:.5;
+  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%) 140% 0/300% 100% no-repeat;animation:sub-reflet 6s ease-in-out infinite;
+  -webkit-mask:url(img/sub-montre.webp) center/contain no-repeat;mask:url(img/sub-montre.webp) center/contain no-repeat}
+@keyframes sub-reflet{0%,30%{background-position:140% 0}70%,100%{background-position:-40% 0}}

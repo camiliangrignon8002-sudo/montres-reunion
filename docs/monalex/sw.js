@@ -1,7 +1,7 @@
 // Monalex : l'appli s'ouvre même sans réseau.
 // Fichiers de l'appli : cache d'abord. Annonces (montres.json) et page : réseau d'abord, cache si hors ligne.
-const V = 'monalex-v34';
-const APP = ['./', 'index.html', 'app.css?v=28', 'app.js?v=26', 'watch.js?v=20', 'watch3d.js?v=23', 'daytona3d.js?v=23', 'img/daytona-face.jpg?v=23', 'vendor/three.module.min.js', 'detaillants.json', 'vendor/leaflet.js', 'vendor/leaflet.css', 'manifest.webmanifest', 'icon-192.png', 'favicon-32.png', 'img/cadran-or.png', 'img/monalex-mot.png', 'img/logo.png', 'img/submariner.webp', 'img/submariner-900.webp', 'fonts/cormorant-garamond-latin-500-normal.woff2', 'fonts/eb-garamond-latin-400-normal.woff2'];
+const V = 'monalex-v35';
+const APP = ['./', 'index.html', 'app.css?v=29', 'app.js?v=27', 'watch.js?v=20', 'watch3d.js?v=23', 'daytona3d.js?v=23', 'img/daytona-face.jpg?v=23', 'vendor/three.module.min.js', 'detaillants.json', 'vendor/leaflet.js', 'vendor/leaflet.css', 'manifest.webmanifest', 'icon-192.png', 'favicon-32.png', 'img/cadran-or.png', 'img/monalex-mot.png', 'img/logo.png', 'img/submariner.webp', 'img/submariner-900.webp', 'img/sub-montre.webp', 'fonts/cormorant-garamond-latin-500-normal.woff2', 'fonts/eb-garamond-latin-400-normal.woff2'];
 
 self.addEventListener('install', ev => ev.waitUntil(caches.open(V).then(c => c.addAll(APP)).then(() => self.skipWaiting())));
 self.addEventListener('activate', ev => ev.waitUntil(

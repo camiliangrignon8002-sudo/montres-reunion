@@ -1605,19 +1605,33 @@ async function start() {
     $("#subFermer").addEventListener("click", () => d.close());
     $("#subVoir").addEventListener("click", () => d.close());
     d.addEventListener("click", ev => { if (ev.target === d) d.close(); });
-    // Submariner qui ressort de l'affiche : heure et date en direct
-    const live = $("#subLive"), maintenant = new Date();
-    live.innerHTML = watchSVG({ type: "sub", dial: "#0b0b0c", insert: "#0c0c0e", metal: "steel", bracelet: "oyster", date: true }, { diam: 41, fx: true, jour: maintenant.getDate(), vb: "40 110 330 380" });
+    // La Submariner de l'affiche, détourée, ressort en 3D et donne l'heure et la date en direct
+    const live = $("#subLive"), lume = "#f4f2ea", met = "#cfd2d6";
+    live.innerHTML = `<img src="img/sub-montre.webp" alt="" width="680" height="1260" decoding="async">
+<svg viewBox="0 0 680 1260" aria-hidden="true"><defs><filter id="subOmbre" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="3" dy="5" stdDeviation="3" flood-opacity=".55"/></filter>
+<linearGradient id="subMet" x1="0" x2="1"><stop offset="0" stop-color="#8d9096"/><stop offset=".5" stop-color="#f4f5f7"/><stop offset="1" stop-color="#9a9da3"/></linearGradient></defs>
+<text class="w-d" x="446" y="420" font-size="34" font-weight="700" fill="#111" text-anchor="middle" dominant-baseline="central" font-family="Helvetica,Arial,sans-serif"></text>
+<g filter="url(#subOmbre)">
+<g class="w-h"><path d="M294 410V336h12v74Z" fill="url(#subMet)"/><circle cx="300" cy="318" r="21" fill="${lume}" stroke="url(#subMet)" stroke-width="6"/><path d="M300 297v42M281.8 328.5 300 318l18.2 10.5" stroke="url(#subMet)" stroke-width="4" fill="none"/><path d="M293 298L300 272L307 298Z" fill="url(#subMet)"/></g>
+<g class="w-m"><path d="M291 410V262L300 228L309 262V410Z" fill="url(#subMet)"/><path d="M295 395V266L300 246L305 266V395Z" fill="${lume}"/></g>
+<g class="w-s"><path d="M298.6 460V226h2.8v234Z" fill="url(#subMet)"/><circle cx="300" cy="262" r="9" fill="${lume}" stroke="url(#subMet)" stroke-width="3"/></g>
+<circle cx="300" cy="410" r="10" fill="url(#subMet)"/><circle cx="300" cy="410" r="3" fill="#777"/></g></svg>`;
     const hH = live.querySelector(".w-h"), hM = live.querySelector(".w-m"), hS = live.querySelector(".w-s"), jD = live.querySelector(".w-d");
     const tourne = () => {
       const t = new Date(), s = t.getSeconds() + t.getMilliseconds() / 1000, m = t.getMinutes() + s / 60, h = (t.getHours() % 12) + m / 60;
-      hH && hH.setAttribute("transform", `rotate(${(h * 30).toFixed(2)} 200 300)`);
-      hM && hM.setAttribute("transform", `rotate(${(m * 6).toFixed(2)} 200 300)`);
-      hS && hS.setAttribute("transform", `rotate(${(s * 6).toFixed(2)} 200 300)`);
-      if (jD && jD.textContent !== String(t.getDate())) jD.textContent = t.getDate();
+      hH.setAttribute("transform", `rotate(${(h * 30).toFixed(2)} 300 410)`);
+      hM.setAttribute("transform", `rotate(${(m * 6).toFixed(2)} 300 410)`);
+      hS.setAttribute("transform", `rotate(${(s * 6).toFixed(2)} 300 410)`);
+      if (jD.textContent !== String(t.getDate())) jD.textContent = t.getDate();
       requestAnimationFrame(tourne);
     };
     tourne();
+    // effet 3D : la montre s'incline vers le doigt / la souris, et avec le téléphone
+    const hero = $("#subPoster");
+    const incline = (x, y) => live.style.setProperty("--rx", `${(-y * 14).toFixed(2)}deg`) || live.style.setProperty("--ry", `${(x * 18).toFixed(2)}deg`);
+    hero.addEventListener("pointermove", ev => { const r = hero.getBoundingClientRect(); incline((ev.clientX - r.left) / r.width - .5, (ev.clientY - r.top) / r.height - .5); });
+    hero.addEventListener("pointerleave", () => incline(0, 0));
+    addEventListener("deviceorientation", ev => { if (ev.gamma == null) return; incline(Math.max(-.5, Math.min(.5, ev.gamma / 50)), Math.max(-.5, Math.min(.5, (ev.beta - 45) / 60))); }, { passive: true });
     // léger effet de profondeur au défilement (téléphone)
     const im = $("#subPoster img"); let tic = false;
     addEventListener("scroll", () => { if (tic) return; tic = true; requestAnimationFrame(() => { tic = false; const y = Math.min(scrollY, innerHeight); im.style.setProperty("--px", (y * .35).toFixed(1) + "px"); }); }, { passive: true }); }
