@@ -906,8 +906,8 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
 .sub-btns .btn{flex:1 1 220px;padding:0 18px}
 .sub-btns .btn-glass{background:#fff;color:#111;border:1px solid #111}
 
-/* Téléphone / tablette : accueil immersif plein écran (affiche en fond, texte par-dessus) */
-@media (max-width:900px){
+/* Accueil immersif plein écran, téléphone et ordinateur (affiche en fond, texte par-dessus) */
+@media all{
   .hero{position:relative;padding:0;height:calc(100svh - var(--hh));min-height:620px;overflow:hidden;background:#0a0a0a;color:#fff}
   .sub-poster{position:absolute;inset:0 0 auto 0;height:74%;max-width:none;margin:0;border-radius:0;box-shadow:none;overflow:hidden}
   .sub-poster:hover{transform:none;box-shadow:none}
@@ -926,3 +926,15 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
 }
 @keyframes sub-respire{from{scale:1}to{scale:1.07}}
 @media (prefers-reduced-motion:reduce){.sub-poster img{animation:none}}
+@media (min-width:901px){
+  .hero{height:calc(100svh - var(--hh));min-height:640px;max-height:1100px}
+  .sub-poster{height:84%}
+  .sub-poster img{object-position:50% 35%}
+  .sub-poster::after{background:linear-gradient(180deg,rgba(10,10,10,.25) 0%,rgba(10,10,10,0) 14%,rgba(10,10,10,0) 55%,rgba(10,10,10,.8) 84%,#0a0a0a 100%)}
+  .sub-cta{top:auto;bottom:calc(16% + 26px);right:28px}
+  .hero .hero-t{padding:0 28px 40px}
+  .hero-t h1{font-size:clamp(52px,5.6vw,92px);margin:6px 0 24px}
+  .hero-t h1 br{display:none}
+  .hero-t .btn{min-width:210px}
+}
+.sub-cta{z-index:2}
