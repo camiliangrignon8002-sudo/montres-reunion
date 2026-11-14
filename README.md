@@ -317,6 +317,7 @@ Trouver une montre **et un détaillant officiel Rolex** à **Monaco**, puis en *
   Dubaï, Miami, Tokyo), avec adresse, téléphone, horaires quand ils sont publiés et lien vers la source. Fichier
   `docs/monalex/detaillants.json` : on ajoute une boutique en ajoutant une ligne. Rolex en compte plus de mille ; seuls
   ceux dont l'adresse a pu être confirmée sont dans la liste.
+- **Carte des boutiques** (accueil, vue Carte, et page Détaillants officiels) : carte claire pleine largeur, épingles blanches avec le cadran Monalex, regroupées avec leur nombre quand elles sont proches (on touche pour zoomer), barre « Trouver une boutique » avec « Autour de moi », panneau « Résultats » avec liste dépliable et choix Détaillants officiels / Centres de service.
 - **Cartes au choix** sur chaque fiche : plan stylisé (tons verts et or), Google Maps, vue satellite Google, bouton
   **Google Earth 3D** (s'ouvre en vue inclinée sur l'adresse), et itinéraire Google, Plans ou Waze.
   Avec une clé Google Maps (`googleMapsKey` en haut de `app.js`), le plan devient une carte Google aux couleurs de l'appli.

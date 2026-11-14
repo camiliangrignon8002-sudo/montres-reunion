@@ -339,15 +339,7 @@ function baseMap(el, opt) {
 }
 function renderBigMap(list) {
   if (!window.L) { $("#bigmap").innerHTML = '<p style="padding:20px">La carte n\'a pas pu se charger.</p>'; return; }
-  if (!bigMap) { bigMap = baseMap("bigmap").setView([CONFIG.origine.lat, CONFIG.origine.lng], 4); bigLayer = L.layerGroup().addTo(bigMap); }
-  bigLayer.clearLayers();
-  const pts = [];
-  detsInZone().forEach(d => {
-    L.marker([d.lat, d.lng], { icon: L.divIcon({ className: "", html: '<div class="pin gold"></div>', iconSize: [22, 22], iconAnchor: [11, 11] }), title: d.nom }).addTo(bigLayer)
-      .bindPopup(`<div class="pop"><h4>${esc(d.nom)}</h4><div class="pv">Détaillant officiel · ${esc(d.adresse)}, ${esc(d.ville)}</div><a href="#d/${encodeURIComponent(d.id)}"><span>${list.length} référence${list.length > 1 ? "s" : ""} de votre recherche · fiche et téléphone</span><b>›</b></a></div>`);
-    pts.push([d.lat, d.lng]);
-  });
-  setTimeout(() => { bigMap.invalidateSize(); if (pts.length === 1) bigMap.setView(pts[0], 15); else if (pts.length) bigMap.fitBounds(pts, { padding: [40, 40], maxZoom: 13 }); }, 30);
+  storeMap($("#bigmap"), detsInZone(), ZONE_NOM[S.zone]);
 }
 const GSTYLE = [
   { elementType: "geometry", stylers: [{ color: "#f4f2ec" }] }, { elementType: "labels.text.fill", stylers: [{ color: "#545454" }] },
@@ -365,6 +357,69 @@ function googleMaps() {
     const sc = document.createElement("script");
     sc.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(CONFIG.googleMapsKey)}&callback=__gmOk&language=fr`;
     sc.onerror = ko; document.head.appendChild(sc);
+  });
+}
+/* ---------- carte des boutiques, façon « trouver une boutique » : épingles regroupées, recherche, panneau de résultats */
+const SMAPS = new Map();
+function storeMap(el, dets, titre) {
+  if (!window.L || !el) return;
+  let st = SMAPS.get(el);
+  if (!st || !document.body.contains(st.root)) {
+    el.innerHTML = `<div class="smap">
+      <div class="smap-map"></div>
+      <form class="smap-search" role="search"><label class="sr">Trouver une boutique</label><input type="search" placeholder="Trouver une boutique" autocomplete="off" enterkeyhint="search">
+        <button type="button" class="smap-loc" aria-label="Autour de moi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></button></form>
+      <div class="smap-sheet"><div class="smap-h"><b>Résultats –&nbsp;<span class="smap-z"></span></b><button type="button" class="smap-tg" aria-expanded="false">Liste <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m6 15 6-6 6 6"/></svg></button></div>
+        <div class="smap-chips"><button type="button" data-sk="tous" aria-pressed="true">Détaillants officiels</button><button type="button" data-sk="service" aria-pressed="false">Centres de service</button></div>
+        <div class="smap-list" hidden></div></div></div>`;
+    const root = el.firstElementChild, mapEl = $(".smap-map", root);
+    const map = L.map(mapEl, { scrollWheelZoom: false, worldCopyJump: true, zoomControl: false }).setView([CONFIG.origine.lat, CONFIG.origine.lng], 4);
+    L.tileLayer(TILES, { attribution: ATTR, subdomains: "abcd", maxZoom: 19, detectRetina: true }).addTo(map);
+    L.control.zoom({ position: "bottomright" }).addTo(map);
+    st = { root, map, layer: L.layerGroup().addTo(map), q: "", kind: "tous", dets: [], titre: "" };
+    SMAPS.set(el, st);
+    map.on("zoomend", () => drawPins(st));
+    $("input", root).addEventListener("input", e => { st.q = e.target.value; fillStores(st, true); });
+    $(".smap-search", root).addEventListener("submit", e => { e.preventDefault(); $("input", root).blur(); });
+    $(".smap-loc", root).onclick = () => near();
+    $(".smap-tg", root).onclick = () => { const l = $(".smap-list", root), open = l.hidden; l.hidden = !open; $(".smap-tg", root).setAttribute("aria-expanded", open); };
+    $$("[data-sk]", root).forEach(b => b.onclick = () => { st.kind = b.dataset.sk; $$("[data-sk]", root).forEach(x => x.setAttribute("aria-pressed", x === b)); fillStores(st, true); });
+  }
+  st.dets = dets; st.titre = titre;
+  fillStores(st, true);
+}
+function storesOf(st) {
+  const q = norm(st.q).trim();
+  return st.dets.filter(d => (st.kind !== "service" || d.service) && (!q || norm(`${d.nom} ${d.ville} ${d.pays} ${d.adresse} ${d.cp}`).includes(q)));
+}
+function fillStores(st, fit) {
+  const list = storesOf(st), root = st.root;
+  $(".smap-z", root).textContent = st.q ? `« ${st.q} »` : st.titre;
+  $(".smap-list", root).innerHTML = list.map(d => `<a class="smap-item" href="#d/${encodeURIComponent(d.id)}"><span><b>${esc(d.nom)}</b><small>${esc(d.adresse)}, ${esc(d.cp)} ${esc(d.ville)}</small></span><em>${fmtKm(d.dist)}</em></a>`).join("") || `<p class="smap-empty">Aucune boutique trouvée.</p>`;
+  const cadre = () => {
+    st.map.invalidateSize();
+    const pts = list.map(d => [d.lat, d.lng]);
+    if (pts.length === 1) st.map.setView(pts[0], 15); else if (pts.length) st.map.fitBounds(pts, { padding: [70, 50], maxZoom: 13 });
+    drawPins(st);
+  };
+  if (fit) { cadre(); setTimeout(cadre, 80); } else drawPins(st);
+}
+function drawPins(st) {
+  const list = storesOf(st), map = st.map;
+  st.layer.clearLayers();
+  // regroupement : les boutiques à moins de 64 px l'une de l'autre forment une seule épingle avec leur nombre
+  const groups = [];
+  list.forEach(d => {
+    const pt = map.latLngToLayerPoint([d.lat, d.lng]);
+    const g = groups.find(g => g.pt.distanceTo(pt) < 64);
+    if (g) g.items.push(d); else groups.push({ pt, items: [d] });
+  });
+  groups.forEach(g => {
+    const lat = g.items.reduce((a, d) => a + d.lat, 0) / g.items.length, lng = g.items.reduce((a, d) => a + d.lng, 0) / g.items.length;
+    const icon = L.divIcon({ className: "", html: `<div class="spinw"><div class="spin"><img src="img/cadran-160.png" alt=""></div>${g.items.length > 1 ? `<b>${g.items.length}</b>` : ""}</div>`, iconSize: [58, 70], iconAnchor: [29, 68], popupAnchor: [0, -62] });
+    const mk = L.marker([lat, lng], { icon, title: g.items.length > 1 ? `${g.items.length} boutiques` : g.items[0].nom, riseOnHover: true }).addTo(st.layer);
+    if (g.items.length > 1) mk.on("click", () => map.fitBounds(g.items.map(d => [d.lat, d.lng]), { padding: [80, 60], maxZoom: 16 }));
+    else { const d = g.items[0]; mk.bindPopup(`<div class="pop"><h4>${esc(d.nom)}</h4><div class="pv">${esc(d.adresse)}, ${esc(d.ville)}${d.service ? " · centre de service" : ""}</div><a href="#d/${encodeURIComponent(d.id)}"><span>Voir la boutique</span><b>›</b></a>${d.tel ? `<a href="tel:${digits(d.tel)}" data-log="appel" data-v="${esc(d.id)}"><span>Appeler</span><b>${esc(d.tel)}</b></a>` : ""}</div>`); }
   });
 }
 function pageMap(id, v) {
@@ -696,16 +751,12 @@ function pageOfficiels() {
     <h1 class="p-h1">Les détaillants officiels</h1>
     <p class="p-lead">${DET.length} détaillants officiels Rolex relevés sur rolex.com et sur leurs sites, de Monaco au reste du monde. Choisissez une zone, puis ouvrez une fiche pour le plan, Google Maps, la vue satellite, Google Earth en 3D et le téléphone.</p>
     <div class="vfilters">${ZONES.map(x => `<button class="chip" data-ozone="${x.id}" aria-pressed="${zid === x.id}">${esc(x.nom.replace("+ ", ""))} (${detsInZone(x.id).length})</button>`).join("")}</div>
-    <div class="mapbox" style="margin-bottom:18px"><div id="omap"></div></div>
+    <div id="omap" style="margin-bottom:18px"></div>
     <div class="sellers">${list.map(detRow).join("")}</div>
     <p class="d-note" style="margin-top:18px">Liste vérifiée le ${esc(fmtDay(DETDATA.verifie_le + "T12:00"))}. Rolex compte plus de mille détaillants officiels : la liste complète est sur le site officiel de Rolex.</p>`;
   openPage(html, "Détaillants officiels");
-  if (window.L && list.length) {
-    if (pMap) { pMap.remove(); pMap = null; }
-    pMap = baseMap("omap", { worldCopyJump: false });
-    const pts = list.map(d => { L.marker([d.lat, d.lng], { icon: L.divIcon({ className: "", html: '<div class="pin gold"></div>', iconSize: [22, 22], iconAnchor: [11, 11] }) }).addTo(pMap).bindPopup(`<div class="pop"><h4>${esc(d.nom)}</h4><div class="pv">${esc(d.adresse)}, ${esc(d.ville)}</div><a href="#d/${encodeURIComponent(d.id)}"><span>Ouvrir la fiche</span><b>›</b></a></div>`); return [d.lat, d.lng]; });
-    setTimeout(() => { pMap.invalidateSize(); pts.length === 1 ? pMap.setView(pts[0], 15) : pMap.fitBounds(pts, { padding: [30, 30], maxZoom: 14 }); }, 350);
-  }
+  storeMap($("#omap"), list, ZONE_NOM[zid]);
+
 }
 
 /* ---------- à propos, fonctionnement, données personnelles */

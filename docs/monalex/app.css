@@ -579,3 +579,40 @@ h1,h2,h3,.p-h1,.d-info h1,.hero-t h1,.sec-h h2,.d-sec h2,.acc-h h1,.seller-card 
 .opt small{opacity:.55;margin-left:4px;font-size:.85em}
 .opt[data-zero]{opacity:.55}
 .opt[data-zero][aria-pressed=true]{opacity:1}
+
+/* ---------- carte des boutiques (style « trouver une boutique ») */
+#bigmap{height:auto;background:none;overflow:visible}
+#omap{height:auto!important}
+.smap{position:relative;border-radius:6px;overflow:hidden;background:#e9eef0}
+.smap-map{height:min(72vh,680px);background:#e9eef0}
+.smap .leaflet-tile-pane{filter:saturate(.55) brightness(1.04) contrast(.96)}
+.smap-search{position:absolute;z-index:500;top:16px;left:16px;right:16px;max-width:520px;margin:0 auto;display:flex;align-items:center;height:58px;background:#fff;border-radius:999px;box-shadow:0 8px 28px rgba(0,0,0,.14);padding:0 8px 0 24px}
+.smap-search input{flex:1;border:0;outline:0;background:none;font-size:19px;min-width:0;font-family:var(--font)}
+.smap-search input::placeholder{color:#8a8a8a}
+.smap-search input::-webkit-search-cancel-button{display:none}
+.smap-loc{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;color:var(--poker-2)}
+.smap-loc svg{width:26px;height:26px}
+.spin{position:relative;width:58px;height:58px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#fff;box-shadow:0 6px 14px rgba(0,0,0,.18);display:grid;place-items:center;transition:transform .15s}
+.spin img{width:38px;height:auto;transform:rotate(45deg)}
+.spinw{position:relative;width:58px;height:70px;padding-top:4px}
+.spinw b{position:absolute;top:-6px;right:-12px;min-width:28px;height:28px;padding:0 6px;border-radius:14px;background:var(--grad);color:#fff;font:600 14px/28px var(--font);text-align:center;box-shadow:0 0 0 2px #fff}
+.leaflet-marker-icon:hover .spinw .spin{transform:rotate(-45deg) scale(1.06)}
+.smap-sheet{position:relative;z-index:500;background:#fff;padding:18px 20px 14px;border-top:1px solid var(--line)}
+.smap-h{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.smap-h b{font-family:var(--display);font-size:22px;font-weight:600}
+.smap-z{color:var(--poker-2)}
+.smap-tg{display:inline-flex;align-items:center;gap:6px;color:var(--poker-2);font-size:18px;font-family:var(--font)}
+.smap-tg svg{width:18px;height:18px;transition:transform .2s}
+.smap-tg[aria-expanded=true] svg{transform:rotate(180deg)}
+.smap-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-top:14px}
+.smap-chips button{flex:none;height:44px;padding:0 20px;border-radius:999px;border:1.5px solid var(--ink);font-size:16px;font-family:var(--font);font-weight:500}
+.smap-chips button[aria-pressed=true]{background:var(--grad);color:#fff;border-color:transparent}
+.smap-list{margin-top:10px;max-height:340px;overflow-y:auto}
+.smap-item{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid var(--line);text-decoration:none}
+.smap-item b{display:block;font-weight:500}
+.smap-item small{display:block;color:var(--muted);font-size:14px}
+.smap-item em{font-style:normal;color:var(--muted);font-size:14px;white-space:nowrap}
+.smap-empty{color:var(--muted);margin:12px 0 0}
+.smap .leaflet-control-zoom{margin-bottom:14px!important;border:0!important;box-shadow:0 4px 14px rgba(0,0,0,.15)!important}
+@media (max-width:640px){.smap-map{height:64vh}.smap-search{height:54px;top:12px;left:12px;right:12px}.smap-search input{font-size:17px}}
+.leaflet-container .spin img{width:38px!important;height:auto!important;max-width:38px!important}
