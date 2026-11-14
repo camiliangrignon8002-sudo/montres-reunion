@@ -332,10 +332,17 @@ function collections() {
   ALL.forEach(m => { if (!map.has(m.collection)) map.set(m.collection, { m, n: 0 }); map.get(m.collection).n++; });
   return [...map.entries()].sort((a, b) => (ORDRE.indexOf(a[0]) + 1 || 99) - (ORDRE.indexOf(b[0]) + 1 || 99));
 }
+// vraie photo pour la vignette d'une collection : photo de boutique de la bonne référence, vue de face d'abord
+function photoColl(c) {
+  const ph = ALL.filter(m => m.collection === c).flatMap(m => photosOf(m).filter(p => p.exacte !== false).map(p => ({ p, m })));
+  ph.sort((a, b) => (/front|face/i.test(b.p.src) - /front|face/i.test(a.p.src)) || ((b.p.boutique === true) - (a.p.boutique === true)));
+  const x = ph[0];
+  return x ? `<span class="coll-ph"><img src="${esc(taille(x.p.src, 320))}" alt="${esc(x.m.modele)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></span>` : "";
+}
 function renderColls() {
   const list = collections();
   $("#colls").innerHTML = `<button class="coll" data-c="" aria-pressed="${!S.coll}"><svg viewBox="0 0 64 96"><g fill="none" stroke="#111" stroke-width="1.6"><circle cx="32" cy="48" r="18"/><circle cx="32" cy="48" r="12"/><path d="M24 30V8h16v22M24 66v22h16V66"/></g></svg><span>Toutes</span><small>${ALL.length} montres</small></button>` +
-    list.map(([c, { m, n }]) => `<button class="coll" data-c="${esc(c)}" aria-pressed="${S.coll === c}">${watchSVG(m.skin, { diam: m.diametre })}<span>${esc(c)}</span><small>${n} montre${n > 1 ? "s" : ""}</small></button>`).join("");
+    list.map(([c, { m, n }]) => `<button class="coll" data-c="${esc(c)}" aria-pressed="${S.coll === c}">${photoColl(c) || watchSVG(m.skin, { diam: m.diametre })}<span>${esc(c)}</span><small>${n} montre${n > 1 ? "s" : ""}</small></button>`).join("");
   $("#fColls").innerHTML = list.map(([c]) => `<li><a href="#c/${slugC(c)}">${esc(c)}</a></li>`).join("");
 }
 function renderGrid() {
@@ -1607,7 +1614,6 @@ async function start() {
     d.addEventListener("click", ev => { if (ev.target === d) d.close(); });
     // La Submariner de l'affiche, détourée, ressort en 3D et donne l'heure et la date en direct
     const live = $("#subLive");
-<<<<<<< HEAD
     // photo nette (aiguilles d'origine effacées proprement) + aiguilles et date en direct
     const lume = "#f4f2ea";
     live.innerHTML = `<img src="img/sub-montre.webp?v=3" alt="" width="770" height="1050" decoding="async">
@@ -1629,9 +1635,6 @@ async function start() {
       requestAnimationFrame(tourne);
     };
     tourne();
-=======
-    live.innerHTML = `<img src="img/sub-montre.webp?v=2" alt="" width="770" height="1050" decoding="async">`;   // photo nette, aiguilles d'origine
->>>>>>> origin/main
     // effet 3D : la montre s'incline vers le doigt / la souris, et avec le téléphone
     const hero = $("#subPoster");
     const incline = (x, y) => live.style.setProperty("--rx", `${(-y * 14).toFixed(2)}deg`) || live.style.setProperty("--ry", `${(x * 18).toFixed(2)}deg`);
