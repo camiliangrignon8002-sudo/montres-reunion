@@ -459,9 +459,6 @@ html.liquid #splash { background: radial-gradient(700px 520px at 30% 20%, var(--
   @media (hover: hover) { html:not([data-theme="light"]) .card:hover { box-shadow: 0 16px 36px rgba(0, 0, 0, .5); } }
 }
 /* Écran qui apparaît en fondu (opacité + léger glissement : fluide même sur téléphone). */
-#content.enter > * { animation: screen-in .16s ease-out both; }
-#content.enter > *:nth-child(2) { animation-delay: .02s; }
-#content.enter > *:nth-child(3) { animation-delay: .04s; }
 @keyframes screen-in { from { opacity: .4; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 /* Fluidité générale */
 html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }

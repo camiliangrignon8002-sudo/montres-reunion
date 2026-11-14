@@ -478,9 +478,6 @@ html.liquid #splash { background: radial-gradient(700px 520px at 30% 20%, var(--
   @media (hover: hover) { html:not([data-theme="light"]) .card:hover { box-shadow: 0 16px 36px rgba(0, 0, 0, .5); } }
 }
 /* Écran qui apparaît en fondu (opacité + léger glissement : fluide même sur téléphone). */
-#content.enter > * { animation: screen-in .16s ease-out both; }
-#content.enter > *:nth-child(2) { animation-delay: .02s; }
-#content.enter > *:nth-child(3) { animation-delay: .04s; }
 @keyframes screen-in { from { opacity: .4; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 /* Fluidité générale */
 html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
@@ -1222,11 +1219,15 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
   }
   const iso = (d) => `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`;
   const isISO = (s) => typeof s === "string" && /^\d{4}-\d{2}-\d{2}$/.test(s) && iso(parseISO(s)) === s;
-  const addDays = (s, n) => { const d = parseISO(s); d.setUTCDate(d.getUTCDate() + n); return iso(d); };
-  const dow = (s) => (parseISO(s).getUTCDay() + 6) % 7; // 0 = lundi
+  // Calculs de dates mis en cache (appelés des milliers de fois par affichage).
+  const dayNum = new Map(), numDay = new Map();
+  const toDayNum = (s) => { let v = dayNum.get(s); if (v === undefined) { v = Math.round(parseISO(s) / 86400000); if (dayNum.size < 20000) dayNum.set(s, v); } return v; };
+  const fromDayNum = (n) => { let v = numDay.get(n); if (v === undefined) { v = iso(new Date(n * 86400000)); if (numDay.size < 20000) numDay.set(n, v); } return v; };
+  const addDays = (s, n) => fromDayNum(toDayNum(s) + n);
+  const dow = (s) => (((toDayNum(s) + 3) % 7) + 7) % 7; // 0 = lundi (1970-01-01 était un jeudi)
   const mondayOf = (s) => addDays(s, -dow(s));
   const weekDates = (monday) => Array.from({ length: 7 }, (_, i) => addDays(monday, i));
-  const daysBetween = (a, b) => Math.round((parseISO(b) - parseISO(a)) / 86400000);
+  const daysBetween = (a, b) => toDayNum(b) - toDayNum(a);
   function fmtDate(s, style) {
     const d = parseISO(s);
     const dd = d.getUTCDate(), mm = d.getUTCMonth(), yy = d.getUTCFullYear();
@@ -3537,9 +3538,10 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
       this.render();
       // Changement d'écran : apparition en fondu (animation légère, faite par la carte graphique).
       const ct = document.querySelector("#content");
-      if (ct) { ct.classList.remove("enter"); void ct.offsetWidth; ct.classList.add("enter"); }
-      const c = document.querySelector(".content"); if (c) c.scrollTop = 0;
-      root.scrollTo && root.scrollTo({ top: 0, behavior: "instant" });
+      // Animation par la carte graphique, sans forcer un calcul de mise en page.
+      if (ct && ct.animate && !(root.matchMedia && root.matchMedia("(prefers-reduced-motion: reduce)").matches)) ct.animate([{ opacity: 0.4, transform: "translateY(6px)" }, { opacity: 1, transform: "none" }], { duration: 160, easing: "ease-out" });
+      // Retour en haut au prochain affichage (évite un calcul de mise en page forcé).
+      requestAnimationFrame(() => { const c = document.querySelector(".content"); if (c && c.scrollTop) c.scrollTop = 0; if (root.scrollY) root.scrollTo({ top: 0, behavior: "instant" }); });
     },
     toggleAI(open) {
       this.ui.aiOpen = open == null ? !this.ui.aiOpen : open;

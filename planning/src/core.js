@@ -66,11 +66,15 @@
   }
   const iso = (d) => `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`;
   const isISO = (s) => typeof s === "string" && /^\d{4}-\d{2}-\d{2}$/.test(s) && iso(parseISO(s)) === s;
-  const addDays = (s, n) => { const d = parseISO(s); d.setUTCDate(d.getUTCDate() + n); return iso(d); };
-  const dow = (s) => (parseISO(s).getUTCDay() + 6) % 7; // 0 = lundi
+  // Calculs de dates mis en cache (appelés des milliers de fois par affichage).
+  const dayNum = new Map(), numDay = new Map();
+  const toDayNum = (s) => { let v = dayNum.get(s); if (v === undefined) { v = Math.round(parseISO(s) / 86400000); if (dayNum.size < 20000) dayNum.set(s, v); } return v; };
+  const fromDayNum = (n) => { let v = numDay.get(n); if (v === undefined) { v = iso(new Date(n * 86400000)); if (numDay.size < 20000) numDay.set(n, v); } return v; };
+  const addDays = (s, n) => fromDayNum(toDayNum(s) + n);
+  const dow = (s) => (((toDayNum(s) + 3) % 7) + 7) % 7; // 0 = lundi (1970-01-01 était un jeudi)
   const mondayOf = (s) => addDays(s, -dow(s));
   const weekDates = (monday) => Array.from({ length: 7 }, (_, i) => addDays(monday, i));
-  const daysBetween = (a, b) => Math.round((parseISO(b) - parseISO(a)) / 86400000);
+  const daysBetween = (a, b) => toDayNum(b) - toDayNum(a);
   function fmtDate(s, style) {
     const d = parseISO(s);
     const dd = d.getUTCDate(), mm = d.getUTCMonth(), yy = d.getUTCFullYear();

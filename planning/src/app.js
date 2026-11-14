@@ -403,9 +403,10 @@
       this.render();
       // Changement d'écran : apparition en fondu (animation légère, faite par la carte graphique).
       const ct = document.querySelector("#content");
-      if (ct) { ct.classList.remove("enter"); void ct.offsetWidth; ct.classList.add("enter"); }
-      const c = document.querySelector(".content"); if (c) c.scrollTop = 0;
-      root.scrollTo && root.scrollTo({ top: 0, behavior: "instant" });
+      // Animation par la carte graphique, sans forcer un calcul de mise en page.
+      if (ct && ct.animate && !(root.matchMedia && root.matchMedia("(prefers-reduced-motion: reduce)").matches)) ct.animate([{ opacity: 0.4, transform: "translateY(6px)" }, { opacity: 1, transform: "none" }], { duration: 160, easing: "ease-out" });
+      // Retour en haut au prochain affichage (évite un calcul de mise en page forcé).
+      requestAnimationFrame(() => { const c = document.querySelector(".content"); if (c && c.scrollTop) c.scrollTop = 0; if (root.scrollY) root.scrollTo({ top: 0, behavior: "instant" }); });
     },
     toggleAI(open) {
       this.ui.aiOpen = open == null ? !this.ui.aiOpen : open;
