@@ -608,7 +608,7 @@
         }),
         h("th", { class: "tot" }, "Total"))),
       h("tbody", {}, grid.rows.map((row) => h("tr", { class: row.emp.active === false ? "inactive" : "" },
-        h("td", { class: "name" }, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"), C.weekDates(grid.monday).some((d) => C.inTraining(row.emp, d)) ? h("span", { class: "chip warn tiny-chip", title: "Jamais seule, à aucun moment" }, "En formation") : C.hasSkill(row.emp, "ancien") ? h("span", { class: "chip tiny-chip", title: "Personne expérimentée" }, "Ancien(ne)") : null),
+        h("td", { class: "name" }, canEdit ? h("button", { type: "button", class: "abs-plus", title: `Ajouter une absence pour ${row.emp.name}`, "aria-label": `Ajouter une absence pour ${row.emp.name}`, onClick: () => this.openAbsenceDialog(row.emp.id, grid.days[0] >= this.today() ? grid.days[0] : this.today()) }, "+") : null, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"), C.weekDates(grid.monday).some((d) => C.inTraining(row.emp, d)) ? h("span", { class: "chip warn tiny-chip", title: "Jamais seule, à aucun moment" }, "En formation") : C.hasSkill(row.emp, "ancien") ? h("span", { class: "chip tiny-chip", title: "Personne expérimentée" }, "Ancien(ne)") : null),
           (s.settings.links || []).filter((l) => l.kind === "trajet" && l.emps.includes(row.emp.id)).map((l) => this.carToggle(l, false))),
         row.cells.map((cell) => {
           const k = row.emp.id + "|" + cell.date, lvl = cellIssue[k];
@@ -616,13 +616,13 @@
           if (cell.shift) {
             kids.push(h("div", { class: "stack" }, cell.shift.segs.map((g) => blk(s, g)), cell.shift.office ? h("span", { class: "tag-office", title: "Jour de bureau" }, "Bureau") : null));
           } else {
-            if (cell.absences.length) kids.push(h("span", { class: "tag-abs" }, C.ABSENCE_TYPES[cell.absences[0].type]));
+            if (cell.absences.length) kids.push(h("span", { class: "tag-abs", title: cell.absences.map(C.absLabel).join(", ") }, C.absLabel(cell.absences[0])));
             if (cell.cal === "formation") kids.push(...courseTags(cell.course, ""));
             else if (cell.cal === "inconnu") kids.push(h("span", { class: "tag-unk", title: "Statut d'alternance inconnu ce jour-là" }, "?"));
-            if (canEdit && !cell.absences.length && (cell.cal !== "formation" || cell.course)) kids.push(h("span", { class: "add", "aria-hidden": "true" }, "+"));
+            if (canEdit && !cell.absences.some((a) => !C.absPartial(a)) && (cell.cal !== "formation" || cell.course)) kids.push(h("span", { class: "add", "aria-hidden": "true" }, "+"));
           }
           if (cell.shift && cell.cal === "formation") kids.push(...courseTags(cell.course, " !"));
-          if (cell.shift && cell.absences.length) kids.push(h("span", { class: "tag-abs" }, C.ABSENCE_TYPES[cell.absences[0].type] + " !"));
+          if (cell.shift && cell.absences.length) { const ab = cell.absences.find((a) => C.absOverlaps(a, cell.shift.segs)) || cell.absences[0]; kids.push(h("span", { class: "tag-abs", title: C.absLabel(ab) }, C.absLabel(ab) + (C.absOverlaps(ab, cell.shift.segs) ? " !" : ""))); }
           if (lvl) kids.push(h("span", { class: "flag" + (lvl === "alerte" ? " warn" : ""), title: issues.filter((i) => i.emp === row.emp.id && i.date === cell.date).map((i) => i.msg).join("\n") }, lvl === "erreur" ? "!" : "?"));
           const td = h("td", {
             class: `cell${cell.date === today ? " today" : ""}${lvl === "erreur" ? " has-err" : ""}`,
@@ -1148,6 +1148,61 @@
       h("p", { class: "small muted" }, cal.note || ""));
   } };
 
+  // Le planning s'adapte à une absence : journée entière → créneau libéré (poste à pourvoir) ;
+  // plage horaire → le créneau est coupé autour de l'absence.
+  App.addAbsenceAndAdapt = async function (absence, summary) {
+    const r = await this.commit([{ type: "addAbsence", absence }], { summary, noImpacts: true });
+    if (!r.ok) return r;
+    const s = this.state, to = absence.to || absence.from, partial = absence.s && absence.e;
+    const ops = [], done = [];
+    for (const w of Object.values(s.weeks)) for (const sh of w.shifts) {
+      if (sh.emp !== absence.emp || sh.date < absence.from || sh.date > to) continue;
+      const reason = `${absence.label || C.ABSENCE_TYPES[absence.type]}${partial ? ` ${absence.s}–${absence.e}` : ""}`;
+      if (!partial) { ops.push({ type: "removeShift", emp: sh.emp, date: sh.date, vacate: reason }); done.push(`${C.fmtDate(sh.date, "short")} libéré`); continue; }
+      const x = C.toMin(absence.s), y = C.toMin(absence.e);
+      const pieces = [];
+      for (const g of sh.segs) {
+        const [a, b] = [C.toMin(g.s), C.toMin(g.e)];
+        if (b <= x || a >= y) { pieces.push(g); continue; }
+        if (a < x && x - a >= 15) pieces.push({ ...g, e: C.fromMin(x) });
+        if (b > y && b - y >= 15) pieces.push({ ...g, s: C.fromMin(y) });
+      }
+      if (C.segKey(pieces) === C.segKey(sh.segs)) continue;
+      if (!pieces.length) { ops.push({ type: "removeShift", emp: sh.emp, date: sh.date, vacate: reason }); done.push(`${C.fmtDate(sh.date, "short")} libéré`); }
+      else { ops.push({ type: "setShift", emp: sh.emp, date: sh.date, segs: pieces.map(({ s: a, e, z }) => ({ s: a, e, z })), note: sh.note || "" }); done.push(`${C.fmtDate(sh.date, "short")} : ${pieces.map((g) => `${g.s}–${g.e}`).join(", ")}`); }
+    }
+    if (ops.length) {
+      const r2 = await this.commit(ops, { summary: `Planning adapté à l'absence (${empName(s, absence.emp)})`, allowErrors: true, quiet: true, noImpacts: true });
+      if (r2.ok) toast(`Planning adapté : ${done.join(" · ")}.${done.some((t) => /libéré/.test(t)) ? " Les postes libérés sont dans « Postes à pourvoir »." : ""}`);
+    }
+    return r;
+  };
+
+  // Ajout rapide d'une absence pour une personne (bouton « + » à côté de son prénom).
+  App.openAbsenceDialog = function (empId, date) {
+    const s = this.state, e = C.empById(s, empId);
+    const d0 = date || this.today();
+    const typeSel = h("select", { class: "input", id: "qa-type" }, Object.entries(C.ABSENCE_TYPES).filter(([k]) => k !== "fermeture").map(([k, v]) => h("option", { value: k, selected: k === "medical" }, v)));
+    const label = h("input", { class: "input", id: "qa-label", maxlength: "60", placeholder: "Ex. : rendez-vous médecin" });
+    const from = h("input", { type: "date", class: "input", id: "qa-from", value: d0 }), to = h("input", { type: "date", class: "input", id: "qa-to", value: d0 });
+    from.addEventListener("change", () => { if (to.value < from.value) to.value = from.value; });
+    const allDay = h("input", { type: "checkbox", id: "qa-allday" });
+    const sIn = h("input", { type: "time", class: "input", id: "qa-s", value: "09:00" }), eIn = h("input", { type: "time", class: "input", id: "qa-e", value: "11:00" });
+    allDay.addEventListener("change", () => { sIn.disabled = eIn.disabled = allDay.checked; });
+    openDialog({ title: `Absence de ${e.name}`, body: h("div", { class: "stack" },
+      h("div", { class: "form-grid" }, h("label", { class: "f" }, "Nom de l'absence", label), h("label", { class: "f" }, "Type", typeSel)),
+      h("div", { class: "form-grid" }, h("label", { class: "f" }, "Du", from), h("label", { class: "f" }, "Au (inclus)", to)),
+      h("div", { class: "form-grid" }, h("label", { class: "f" }, "Absent(e) de", sIn), h("label", { class: "f" }, "à", eIn)),
+      h("label", { class: "check" }, allDay, "Toute la journée"),
+      h("p", { class: "small muted" }, "Sur une plage horaire, la personne reste planifiable en dehors de ces heures.")),
+      actions: [{ label: "Annuler" }, { label: "Ajouter l'absence", primary: true, onClick: async () => {
+        if (!allDay.checked && !(sIn.value && eIn.value && eIn.value > sIn.value)) { toast("Indiquez une plage horaire (début avant la fin).", "err"); return false; }
+        const r = await this.addAbsenceAndAdapt({ emp: empId, type: typeSel.value, from: from.value, to: to.value, label: label.value.trim(), note: "", ...(allDay.checked ? {} : { s: sIn.value, e: eIn.value }) }, `${e.name} : ${label.value.trim() || C.ABSENCE_TYPES[typeSel.value]}`);
+        if (r.ok) toast("Absence ajoutée.");
+        return r.ok;
+      } }] });
+  };
+
   // ---------- Congés et absences ----------
   SCREENS.absences = { title: "Congés et absences", render() {
     const s = this.state, today = this.today();
@@ -1158,8 +1213,12 @@
     const from = h("input", { type: "date", class: "input", id: "abs-from", value: today }), to = h("input", { type: "date", class: "input", id: "abs-to", value: today });
     from.addEventListener("change", () => { if (to.value < from.value) to.value = from.value; });
     const note = h("input", { class: "input", id: "abs-note", maxlength: "300", placeholder: "Facultatif" });
+    const label = h("input", { class: "input", id: "abs-label", maxlength: "60", placeholder: "Ex. : rendez-vous médecin, kiné…" });
+    const allDay = h("input", { type: "checkbox", id: "abs-allday", checked: true });
+    const absS = h("input", { type: "time", class: "input", id: "abs-s", value: "09:00", disabled: true }), absE = h("input", { type: "time", class: "input", id: "abs-e", value: "11:00", disabled: true });
+    allDay.addEventListener("change", () => { absS.disabled = absE.disabled = allDay.checked; });
     const row = (a) => h("div", { class: "item" },
-      h("div", { class: "grow" }, h("b", {}, empName(s, a.emp)), h("div", { class: "small muted" }, C.ABSENCE_TYPES[a.type], a.note ? ` · ${a.note}` : "")),
+      h("div", { class: "grow" }, h("b", {}, empName(s, a.emp)), h("div", { class: "small muted" }, a.label ? `${a.label} · ${C.ABSENCE_TYPES[a.type]}` : C.ABSENCE_TYPES[a.type], C.absPartial(a) ? ` · de ${a.s} à ${a.e}` : "", a.note ? ` · ${a.note}` : "")),
       h("span", { class: "small num" }, a.from === a.to ? C.fmtDate(a.from, "num") : `${C.fmtDate(a.from, "short")} → ${C.fmtDate(a.to, "num")}`),
       Store.canWrite ? iconBtn("close", "Supprimer cette absence", async () => { if (await confirmDialog("Supprimer cette absence ?", `${empName(s, a.emp)} · ${C.ABSENCE_TYPES[a.type]} du ${C.fmtDate(a.from, "num")} au ${C.fmtDate(a.to, "num")}.`, "Supprimer", true)) this.commit([{ type: "removeAbsence", id: a.id }]); }) : null);
     // Frise du mois
@@ -1169,19 +1228,25 @@
     const moveM = (n) => { const d = new Date(Date.UTC(y, m - 1 + n, 1)); this.ui.absMonth = `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, "0")}`; this.render(); };
     const timeline = h("div", { class: "timeline" }, h("table", {},
       h("thead", {}, h("tr", {}, h("th", { class: "n" }, ""), days.map((d) => h("th", { class: C.dow(d) >= 5 ? "we" : "" }, Number(d.slice(8)))))),
-      h("tbody", {}, s.employees.filter((e) => e.active !== false).map((e) => h("tr", {}, h("td", { class: "n" }, e.name), days.map((d) => {
+      h("tbody", {}, s.employees.filter((e) => e.active !== false).map((e) => h("tr", {}, h("td", { class: "n" }, Store.canWrite ? h("button", { type: "button", class: "abs-plus", title: `Ajouter une absence pour ${e.name}`, onClick: () => this.openAbsenceDialog(e.id) }, "+") : null, e.name), days.map((d) => {
         const a = C.absencesOn(s, e.id, d)[0]; const c = C.calStatus(s, e, d) === "formation";
-        return h("td", { class: `${a ? "a " + a.type : c ? "c" : ""}${C.dow(d) >= 5 && !a && !c ? " we" : ""}`, title: a ? `${e.name} : ${C.ABSENCE_TYPES[a.type]}` : c ? `${e.name} : CFA` : "" });
+        return h("td", { class: `${a ? "a " + a.type + (C.absPartial(a) ? " partial" : "") : c ? "c" : ""}${C.dow(d) >= 5 && !a && !c ? " we" : ""}`, title: a ? `${e.name} : ${C.absLabel(a)}` : c ? `${e.name} : CFA` : "" });
       }))))));
     return h("div", { class: "stack", style: { gap: "16px" } },
       Store.canWrite ? h("section", { class: "card" }, h("h2", {}, "Ajouter une absence"),
         h("form", { class: "stack", onSubmit: async (e) => {
           e.preventDefault();
           if (!empSel.value) { toast("Choisissez une personne.", "err"); return; }
-          const r = await this.commit([{ type: "addAbsence", absence: { emp: empSel.value, type: typeSel.value, from: from.value, to: to.value, note: note.value } }], { impactTitle: "Créneaux déjà planifiés pendant cette absence" });
+          if (!allDay.checked && !(absS.value && absE.value && absE.value > absS.value)) { toast("Indiquez une plage horaire (début avant la fin).", "err"); return; }
+          const absence = { emp: empSel.value, type: typeSel.value, from: from.value, to: to.value, note: note.value, label: label.value.trim(), ...(allDay.checked ? {} : { s: absS.value, e: absE.value }) };
+          const r = empSel.value === "*" ? await this.commit([{ type: "addAbsence", absence }], { impactTitle: "Créneaux déjà planifiés pendant cette absence" }) : await this.addAbsenceAndAdapt(absence, `${empName(s, empSel.value)} : ${absence.label || C.ABSENCE_TYPES[absence.type]}`);
           if (r.ok) { toast("Absence enregistrée. Les prochaines générations en tiennent compte."); }
         } },
           h("div", { class: "form-grid" }, h("label", { class: "f" }, "Personne", empSel), h("label", { class: "f" }, "Type", typeSel), h("label", { class: "f" }, "Du", from), h("label", { class: "f" }, "Au (inclus)", to)),
+          h("label", { class: "f" }, "Nom de l'absence (facultatif)", label),
+          h("div", { class: "row", style: { "flex-wrap": "wrap", "align-items": "end" } }, h("label", { class: "check" }, allDay, "Toute la journée"),
+            h("label", { class: "f" }, "Absent(e) de", absS), h("label", { class: "f" }, "à", absE),
+            h("span", { class: "small muted" }, "Décochez « Toute la journée » pour une absence sur une plage horaire : la personne reste planifiable en dehors.")),
           h("label", { class: "f" }, "Note", note),
           h("div", { class: "row" }, h("button", { type: "submit", class: "btn primary" }, "Enregistrer l'absence"), h("span", { class: "small muted" }, "Si des créneaux existent déjà sur ces dates, ils sont listés pour que vous choisissiez quoi faire.")))) : null,
       h("section", { class: "card" }, h("div", { class: "row between" }, h("h2", { style: { "text-transform": "capitalize" } }, `${C.MONTHS[m - 1]} ${y}`), h("div", { class: "row" }, iconBtn("left", "Mois précédent", () => moveM(-1)), iconBtn("right", "Mois suivant", () => moveM(1)))),

@@ -12,6 +12,7 @@
     vacances: "Vacances",
     repos: "Jour de repos",
     arret: "Arrêt / absence",
+    medical: "Raison médicale",
     cours: "Journée de cours",
     indispo: "Indisponibilité",
     fermeture: "Fermeture",
@@ -305,6 +306,14 @@
     }
     return out;
   }
+  // Absence sur une plage horaire (ex. rendez-vous 09:00–11:00) : ne bloque que les créneaux qui la chevauchent.
+  const absPartial = (a) => !!(a && isTime(a.s) && isTime(a.e));
+  const absOverlaps = (a, segs) => {
+    if (!absPartial(a)) return true;
+    const x = toMin(a.s), y = toMin(a.e);
+    return (segs || []).some((g) => isTime(g.s) && isTime(g.e) && segRange(g)[0] < y && x < segRange(g)[1]);
+  };
+  const absLabel = (a) => `${a.label || ABSENCE_TYPES[a.type] || "Absence"}${absPartial(a) ? ` ${a.s}–${a.e}` : ""}`;
   const absenceDates = (a) => (a.open ? `depuis le ${fmtDate(a.from, "short")}, retour non renseigné` : `du ${fmtDate(a.from, "short")} au ${fmtDate(a.to, "short")}`);
 
   // ---------- Modèle ----------
@@ -377,7 +386,11 @@
     const out = { ok: true, block: [], warn: [] };
     if (!emp) { out.block.push("employé inconnu"); out.ok = false; return out; }
     if (emp.active === false) out.block.push("employé désactivé");
-    for (const a of absencesOn(state, empId, date)) out.block.push(`${ABSENCE_TYPES[a.type] || "absence"} ${absenceDates(a)}`);
+    for (const a of absencesOn(state, empId, date)) {
+      if (!absPartial(a)) out.block.push(`${a.label || ABSENCE_TYPES[a.type] || "absence"} ${absenceDates(a)}`);
+      else if (segs && segs.length && absOverlaps(a, segs)) out.block.push(`absent(e) de ${a.s} à ${a.e} (${a.label || ABSENCE_TYPES[a.type]})`);
+      else out.warn.push(`absent(e) de ${a.s} à ${a.e} (${a.label || ABSENCE_TYPES[a.type]})`);
+    }
     const cs = calStatus(state, emp, date);
     if (cs === "formation") {
       const cr = courseRanges(state, emp, date);
@@ -432,7 +445,7 @@
         for (let i = 1; i < r.length; i++) if (r[i][0] < r[i - 1][1]) add("erreur", "SEG_OVERLAP", sh.emp, d, `${who} : deux blocs se chevauchent le ${fmtDate(d, "day")}.`);
       }
       if (!allowedZones(emp).length) add("alerte", "ZONE_UNKNOWN_EMP", sh.emp, d, `${who} n'a aucune zone enregistrée : à définir dans « Zones ».`);
-      for (const a of absencesOn(state, sh.emp, d)) add("erreur", "ABSENCE", sh.emp, d, `${who} est absent(e) le ${fmtDate(d, "day")} (${ABSENCE_TYPES[a.type] || a.type}).`);
+      for (const a of absencesOn(state, sh.emp, d)) if (absOverlaps(a, sh.segs)) add("erreur", "ABSENCE", sh.emp, d, absPartial(a) ? `${who} est absent(e) le ${fmtDate(d, "day")} de ${a.s} à ${a.e} (${a.label || ABSENCE_TYPES[a.type]}) : le créneau chevauche cette absence.` : `${who} est absent(e) le ${fmtDate(d, "day")} (${a.label || ABSENCE_TYPES[a.type] || a.type}).`);
       const cs = calStatus(state, emp, d);
       if (cs === "formation") {
         const cr = courseRanges(state, emp, d);
@@ -1078,10 +1091,15 @@
           if (!ABSENCE_TYPES[a.type]) { fail(`Type d'absence inconnu « ${a.type} ».`); break; }
           const id = op.type === "updateAbsence" ? a.id : a.id || uid("abs");
           if (op.type === "updateAbsence" && !s.absences[id]) { fail("Absence introuvable."); break; }
-          s.absences[id] = { id, emp: emp.id, type: a.type, from: a.from, to, note: String(a.note || "").slice(0, 300), createdAt: (s.absences[id] && s.absences[id].createdAt) || meta.now || null };
+          const hasRange = a.s || a.e;
+          if (hasRange && !(isTime(a.s) && isTime(a.e) && toMin(a.e) > toMin(a.s))) { fail("Plage horaire de l'absence invalide (début avant la fin)."); break; }
+          const rec = { id, emp: emp.id, type: a.type, from: a.from, to, note: String(a.note || "").slice(0, 300), createdAt: (s.absences[id] && s.absences[id].createdAt) || meta.now || null };
+          if (a.label) rec.label = String(a.label).slice(0, 60);
+          if (hasRange) { rec.s = normTime(a.s) || a.s; rec.e = normTime(a.e) || a.e; }
+          s.absences[id] = rec;
           touched.absences.add(id);
           // Créneaux déjà planifiés touchés par cette absence : signalés, jamais modifiés en silence.
-          for (const w of Object.values(s.weeks)) for (const sh of w.shifts) if ((emp.id === "*" || sh.emp === emp.id) && sh.date >= a.from && sh.date <= to) impacts.push({ emp: sh.emp, date: sh.date, segs: sh.segs });
+          for (const w of Object.values(s.weeks)) for (const sh of w.shifts) if ((emp.id === "*" || sh.emp === emp.id) && sh.date >= a.from && sh.date <= to && absOverlaps(rec, sh.segs)) impacts.push({ emp: sh.emp, date: sh.date, segs: sh.segs });
           break;
         }
         case "addAdjustment": {
@@ -1352,7 +1370,7 @@
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };

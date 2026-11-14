@@ -187,19 +187,16 @@ const MOCK = `
     await page.selectOption("#abs-type", "arret");
     await page.fill("#abs-from", "2026-11-10"); await page.fill("#abs-to", "2026-11-11");
     await page.click("text=Enregistrer l'absence");
-    await page.waitForSelector("text=Créneaux déjà planifiés pendant cette absence");
-    const imp = await page.$$eval(".dialog .item", (x) => x.length);
-    check("absence : 2 créneaux concernés listés, rien modifié en silence", imp === 2, String(imp));
-    await page.click(".dialog .item >> nth=0 >> text=Libérer le créneau");
-    await page.waitForTimeout(150);
-    await page.click(".dialog footer >> text=Plus tard");
+    await page.waitForSelector("text=/Planning adapté/");
+    const adapt = await page.evaluate(() => { const w = PlanningApp.state.weeks["2026-11-09"]; return { left: w.shifts.filter((x) => x.emp === "eric" && ["2026-11-10", "2026-11-11"].includes(x.date)).length, vac: (w.vacated || []).filter((v) => v.emp === "eric").length }; });
+    check("absence : le planning s'adapte (2 créneaux libérés, postes à pourvoir)", adapt.left === 0 && adapt.vac === 2, JSON.stringify(adapt));
 
     // annulation
     const before = await page.evaluate(() => PlanningApp.state.weeks["2026-11-09"].shifts.length);
     await page.click("#undo-btn");
     await page.waitForTimeout(200);
     const after = await page.evaluate(() => PlanningApp.state.weeks["2026-11-09"].shifts.length);
-    check("annuler la dernière modification", after === before + 1, `${before} → ${after}`);
+    check("annuler la dernière modification", after === before + 2, `${before} → ${after}`);
 
     // rafraîchir
     await page.click("#refresh-btn");

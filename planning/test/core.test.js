@@ -574,3 +574,19 @@ test("administratif : zone ADM (bureau), compétence, jour de bureau", () => {
   const iss = C.validateWeek(r.state, W).map((i) => i.code);
   assert.ok(!iss.includes("OFFICE_DAYS") && !iss.includes("OUT_OF_HOURS"));
 });
+
+test("absence pour raison médicale sur une plage horaire, avec un nom", () => {
+  let s = withWeek1();
+  const d = "2026-10-20";
+  const r = apply(s, [{ type: "addAbsence", absence: { emp: "eric", type: "medical", from: d, to: d, label: "Rendez-vous médecin", s: "09:00", e: "10:30" } }]);
+  assert.ok(r.ok, r.errors && r.errors.join());
+  assert.ok(r.impacts.some((x) => x.emp === "eric" && x.date === d)); // Eric 07:00–14:30 ce jour-là
+  s = r.state;
+  const a = Object.values(s.absences)[0];
+  assert.equal(C.absLabel(a), "Rendez-vous médecin 09:00–10:30");
+  assert.ok(C.validateWeek(s, W1).some((i) => i.code === "ABSENCE" && i.emp === "eric" && /09:00 à 10:30/.test(i.msg)));
+  // en dehors de la plage : planifiable
+  assert.ok(C.availability(s, "eric", d, [{ s: "11:00", e: "15:00", z: "ZP" }]).ok);
+  assert.equal(C.availability(s, "eric", d, [{ s: "07:00", e: "12:00", z: "ZP" }]).ok, false);
+  assert.equal(apply(s, [{ type: "addAbsence", absence: { emp: "eric", type: "medical", from: d, s: "11:00", e: "10:00" } }]).ok, false);
+});

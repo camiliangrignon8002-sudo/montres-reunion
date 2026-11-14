@@ -525,3 +525,10 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
 .skill.pref-ZR[aria-pressed="true"] { background: color-mix(in srgb, #FF9500 22%, var(--surface)); border-color: #FF9500; color: #b86a00; }
 .skill.pref-matin[aria-pressed="true"] { background: #fff4d6; border-color: #e0a800; color: #8a6400; }
 .skill.pref-soir[aria-pressed="true"] { background: #e6e4ff; border-color: #5e5ce6; color: #3d3ab8; }
+.timeline td.a.medical { background: color-mix(in srgb, #af52de 30%, var(--surface)); }
+.timeline td.a.partial { background-image: linear-gradient(135deg, transparent 50%, var(--surface) 50%); }
+.abs-plus { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line-strong, var(--line)); background: var(--surface); color: var(--accent); font-weight: 700; font-size: 15px; line-height: 1; cursor: pointer; display: inline-grid; place-items: center; padding: 0; vertical-align: middle; }
+.abs-plus:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.plan td.name { position: sticky; }
+.plan td.name .abs-plus { position: absolute; top: 6px; right: 6px; }
+.timeline td.n .abs-plus { margin-right: 6px; width: 18px; height: 18px; font-size: 13px; }
