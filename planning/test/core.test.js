@@ -622,7 +622,7 @@ test("effectif minimum / maximum sur une plage horaire", () => {
 
 test("motif d'absence : CP, sanction, perso, intermetra", () => {
   const s = withWeek1();
-  assert.deepEqual(Object.values(C.ABSENCE_MOTIFS), ["CP", "Sanction", "Perso", "Intermetra"]);
+  assert.deepEqual(Object.values(C.ABSENCE_MOTIFS), ["CP", "Sanction", "Perso", "Intermetra", "Formation"]);
   const r = apply(s, [{ type: "addAbsence", absence: { emp: "maelle", type: "arret", motif: "sanction", from: "2026-12-08", to: "2026-12-08" } }]);
   assert.ok(r.ok);
   assert.equal(C.absLabel(Object.values(r.state.absences)[0]), "Sanction");

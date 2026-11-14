@@ -19,7 +19,7 @@
   };
 
   // Motif d'une absence (menu déroulant).
-  const ABSENCE_MOTIFS = { cp: "CP", sanction: "Sanction", perso: "Perso", intermetra: "Intermetra" };
+  const ABSENCE_MOTIFS = { cp: "CP", sanction: "Sanction", perso: "Perso", intermetra: "Intermetra", formation: "Formation" };
 
   // Heures réellement faites en plus ou en moins du planning.
   const ADJUST_TYPES = {
