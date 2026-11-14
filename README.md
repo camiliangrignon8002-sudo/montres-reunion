@@ -302,3 +302,60 @@ La canette suit la souris, s'écrase un peu quand on défile vite, les bulles ac
   Si une photo manque, la page montre une canette dessinée en code.
 - Lien direct vers un goût : `#blue-edition` à la fin de l'adresse.
 - Goûts et chiffres (indicatifs) : tableau `F` au début du script.
+
+---
+
+# ⌚ Monalex
+
+Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/monalex/ (adresse visée : https://monalexcamilian.com, voir plus bas)
+
+Trouver une montre **et un détaillant officiel Rolex** à **Monaco**, puis en **France**, en **Europe** et **dans le monde**
+(onglets en haut de la liste, distances depuis Monaco ou « Autour de moi »). Présentation blanche, vert poker et or : tous les éléments verts ont un effet soleillé (comme un cadran), dont les reflets tournent quand on fait défiler la page (désactivé avec « Réduire les animations »).
+
+- **Détaillants officiels (réels)** : 27 détaillants relevés sur rolex.com et sur leurs sites le 14 novembre 2026
+  (Monaco, Paris, Cannes, Nice, Saint-Tropez, Courchevel, Marseille, Lyon, Genève, Zurich, Londres, Madrid, Barcelone,
+  Dubaï, Miami, Tokyo), avec adresse, téléphone, horaires quand ils sont publiés et lien vers la source. Fichier
+  `docs/monalex/detaillants.json` : on ajoute une boutique en ajoutant une ligne. Rolex en compte plus de mille ; seuls
+  ceux dont l'adresse a pu être confirmée sont dans la liste.
+- **Annonces des boutiques** (relevées **toutes les 2 heures** par `monalex.py`, tâche `.github/workflows/monalex.yml`) :
+  17 boutiques de montres qui vendent des Rolex (Genève, Monaco, Nice, Cannes, Paris, Londres), liste `BOUTIQUES` dans `monalex.py`.
+  Le robot reconnaît les boutiques Shopify, WooCommerce et les fiches produit standard ; il garde seulement les Rolex disponibles
+  avec au moins une photo nette (1200 px quand la taille est connue), chaque photo une seule fois ; il respecte le robots.txt de
+  chaque site. Pas de petites annonces entre particuliers ni de places de marché. Les photos restent hébergées chez la boutique,
+  avec son nom et un lien vers l'annonce. Lancer à la main : **Actions → Monalex → Run workflow**. L'appli ouverte se met aussi
+  à jour toutes les 2 heures.
+- **Montres en 3D** (Three.js, comme le site Red Bull) : sur l'accueil et en haut de chaque collection ; elles tournent au
+  défilement et se manipulent au doigt (`docs/monalex/watch3d.js`).
+- **Pages des collections** (`#c/submariner`, etc., depuis les cartes de collection et le pied de page) : grand visuel et titre, carrousel des modèles à faire glisser avec pastilles de matière, favoris et « Découvrir ce modèle », gros plan « Découvrir les caractéristiques », « Aller plus loin » (où l'acheter, fiche technique, alerte, toutes les références), « Suivant » vers la collection d'après, barre flottante du nom de la collection pour naviguer.
+- **Carte des boutiques** (accueil, vue Carte, et page Détaillants officiels) : carte claire pleine largeur, épingles blanches avec le cadran Monalex, regroupées avec leur nombre quand elles sont proches (on touche pour zoomer), barre « Trouver une boutique » avec « Autour de moi », panneau « Résultats » avec liste dépliable et choix Détaillants officiels / Centres de service.
+- **Cartes au choix** sur chaque fiche : plan stylisé (tons verts et or), Google Maps, vue satellite Google, bouton
+  **Google Earth 3D** (s'ouvre en vue inclinée sur l'adresse), et itinéraire Google, Plans ou Waze.
+  Avec une clé Google Maps (`googleMapsKey` en haut de `app.js`), le plan devient une carte Google aux couleurs de l'appli.
+- **Uniquement des sources officielles** : le catalogue Rolex actuel (26 références, caractéristiques d'après rolex.com,
+  lien vers la page officielle pour le prix public) et les détaillants officiels. Aucun site d'occasion, de particuliers
+  ou de petites annonces. Rolex ne publie pas le stock de ses détaillants : la disponibilité se confirme en boutique.
+- **Filtres sur tout** : collection, état (neuve, ou Rolex Certified Pre-Owned des détaillants officiels), couleur du cadran,
+  matériau, diamètre, lunette, bracelet, fonctions (chronographe, 2e fuseau, date, jour-date, calendrier, plongée),
+  étanchéité minimum, prix (quand il est publié), zone.
+- **Alertes** : « Créer une alerte » enregistre la recherche ; une notification arrive quand une nouvelle montre y correspond.
+  « M'alerter pour cette montre » sur chaque fiche (disponibilité, prix). Liste et gestion dans « Notifications ».
+  entretien (Rolex, horloger indépendant, inconnu), pièces changées, papiers, boîte, garantie, fiche technique.
+- **Compte** (gardé sur le téléphone) : favoris, montres suivies (alerte prix et statut), demandes aux vendeurs et
+  détaillants avec le temps de réponse mesuré.
+- **Rafraîchir** : tirer la page vers le bas, ou « Rafraîchir les annonces » dans le menu.
+- **Polices** : Cormorant Garamond (titres) et EB Garamond (texte), hébergées avec le site (`docs/monalex/fonts/`, licence libre OFL). Adobe Garamond est prise en premier si un kit Adobe Fonts est ajouté. La police Rolex n'est pas disponible au public.
+- **Cookies** : bandeau Accepter / Refuser / En savoir plus. Seul Google Maps (onglets Google Maps et Satellite) dépose des cookies, et ne s'affiche qu'avec l'accord ; « Gérer les cookies » en bas de page.
+- **Notifications** : page dédiée (menu), activation sur le téléphone, liste des changements de prix et de statut des montres suivies.
+- **Photos** : seules les photos d'au moins 1200 px de large sont gardées, et chaque photo une seule fois (même adresse ou miniature de la même image).
+- **Sources** : colonne « Sources » en bas du site et page Sources (catalogue, détaillants officiels par pays, boutiques par pays, cartes, polices et outils), chaque source avec son lien. Droits d'auteur « © Monalex · Camilian » en bas de chaque page.
+- **Pages** : À propos (fonctionnement, sources, données personnelles, mentions) ; fenêtre de confirmation avant suppression du compte ; chargement avec cartes animées.
+- Logo Monalex : `docs/monalex/img/` (logo complet, cadran seul, mot « MONALEX », image de partage) ; icônes de l'écran d'accueil tirées du cadran.
+- Projet non affilié à Rolex SA : pas de logo ni de photo Rolex.
+
+## Monalex sur monalexcamilian.com
+
+1. Acheter le nom de domaine `monalexcamilian.com` (OVH, Gandi, Google Domains, Namecheap…).
+2. Comme ce dépôt publie déjà plusieurs applis, mettre Monalex dans un dépôt à part (par exemple `monalex`) avec GitHub Pages.
+3. Dans ce dépôt : Settings → Pages → Custom domain → `monalexcamilian.com` (GitHub crée le fichier `CNAME`), cocher « Enforce HTTPS ».
+4. Chez le vendeur du domaine, ajouter les enregistrements DNS de GitHub Pages : quatre `A` vers 185.199.108.153, 185.199.109.153,
+   185.199.110.153, 185.199.111.153, et un `CNAME` `www` vers `camiliangrignon8002-sudo.github.io`.

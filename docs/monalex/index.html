@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Monalex</title>
+<meta name="description" content="Monalex : trouvez une montre et un détaillant officiel, de Monaco au monde entier. État, entretien, prix, carte et contact du vendeur.">
+<meta name="robots" content="index,follow">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Monalex">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:title" content="Monalex">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:description" content="Trouver une montre et un détaillant officiel, de Monaco au monde entier.">
+<meta property="og:image" content="img/partage.jpg">
+<link rel="preload" href="fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/eb-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="demo" id="demo" hidden><div class="wrap"><span><b>Version de démonstration</b> : annonces, vendeurs, coordonnées et statistiques fictifs.</span><button class="btn btn-green" id="demoOk">OK</button></div></div>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <div class="top-l">
+      <button class="tb" id="btnMenu" aria-label="Menu"><svg class="ico" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 9h20M3 17h20"/></svg><span class="dot" id="menuDot" hidden></span></button>
+    </div>
+    <a class="emblem" href="#" aria-label="Monalex, accueil" id="homeLink"><img class="em-dial" src="img/cadran-160.png" alt="" width="160" height="147"><img class="em-word" src="img/monalex-mot.png" alt="Monalex" width="600" height="74"></a>
+    <div class="top-r">
+      <button class="tb" id="btnSearch" aria-label="Rechercher"><svg class="ico" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11.5" cy="11.5" r="7"/><path d="m21.5 21.5-5-5" stroke-linecap="round"/></svg></button>
+      <button class="tb" id="btnMap" aria-label="Carte des montres"><svg class="ico" viewBox="0 0 26 26"><path fill="#127749" d="M13 2.5a8 8 0 0 0-8 8c0 5.6 8 13 8 13s8-7.4 8-13a8 8 0 0 0-8-8Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/></svg></button>
+      <button class="tb" id="btnFavs" aria-label="Favoris et suivis"><svg class="ico" viewBox="0 0 26 26"><path fill="currentColor" d="M13 22.5S3 16.4 3 9.3A5.3 5.3 0 0 1 13 6.8a5.3 5.3 0 0 1 10 2.5c0 7.1-10 13.2-10 13.2Z"/></svg><span class="dot" id="favDot" hidden></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero" aria-label="Accueil">
+    <div class="hero-img" id="heroImg" aria-hidden="true"></div>
+    <canvas class="hero-3d" id="hero3d" aria-label="Montre en 3D, faites glisser pour la tourner"></canvas>
+    <div class="hero-sheen" aria-hidden="true"></div>
+    <div class="hero-t">
+      <div class="eyebrow">De Monaco au monde entier</div>
+      <h1>Trouvez<br>votre montre</h1>
+      <div class="btns">
+        <button class="btn btn-glass" id="heroSearch">Rechercher</button>
+        <button class="btn btn-glass" data-goto="list">Voir les montres</button>
+      </div>
+    </div>
+    <svg class="hero-down" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
+  </section>
+
+  <nav class="zones-bar" aria-label="Zone de recherche" id="liste">
+    <div class="wrap"><div class="zones" role="tablist" id="zones"></div></div>
+  </nav>
+
+  <div class="wrap">
+    <section class="sec">
+      <div class="sec-h"><div><div class="eyebrow">Les collections</div><h2>Le catalogue officiel</h2></div></div>
+      <div class="colls" id="colls"></div>
+
+      <div class="tools">
+        <button class="chip" data-open-filters><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filtres <span class="n" id="nFilters" hidden></span></button>
+        <button class="chip" data-save-alert><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4l2-2ZM10 20a2 2 0 0 0 4 0"/></svg>Créer une alerte</button>
+        <span class="grow"></span>
+        <label class="sr" for="sort">Trier</label>
+        <select class="sort" id="sort">
+          <option value="coll">Par collection</option>
+          <option value="dist">Détaillant le plus proche</option>
+          <option value="dpa">Diamètre croissant</option>
+          <option value="dpd">Diamètre décroissant</option>
+        </select>
+        <div class="seg" role="group" aria-label="Affichage">
+          <button id="vList" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Liste</button>
+          <button id="vMap" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 4 3 6.5v13.5L9 17.5l6 2.5 6-2.5V4l-6 2.5L9 4Z"/><path d="M9 4v13.5M15 6.5V20"/></svg>Carte</button>
+        </div>
+      </div>
+      <div class="count" id="count"></div>
+      <div id="bigmap" hidden></div>
+      <div class="grid" id="grid" aria-busy="true"><div class="card skel" aria-hidden="true"><div class="pic"></div><div class="body"><i></i><i></i><i></i></div></div><div class="card skel" aria-hidden="true"><div class="pic"></div><div class="body"><i></i><i></i><i></i></div></div><div class="card skel" aria-hidden="true"><div class="pic"></div><div class="body"><i></i><i></i><i></i></div></div><div class="card skel" aria-hidden="true"><div class="pic"></div><div class="body"><i></i><i></i><i></i></div></div></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><div><div class="eyebrow">Détaillants officiels Rolex</div><h2>Où acheter, près de vous</h2><p class="count" id="offCount" style="margin:8px 0 0"></p></div><a href="#officiels">Tous les détaillants</a></div>
+      <div class="sellers" id="officiels"><div class="srow skel" aria-hidden="true"><span class="avatar"></span><div class="who"><i></i><i></i></div></div><div class="srow skel" aria-hidden="true"><span class="avatar"></span><div class="who"><i></i><i></i></div></div><div class="srow skel" aria-hidden="true"><span class="avatar"></span><div class="who"><i></i><i></i></div></div></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><div><div class="eyebrow">Votre espace</div><h2>Suivez chaque montre</h2></div></div>
+      <div class="tiles" id="homeTiles"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-cols">
+      <div><h3>Les collections</h3><ul id="fColls"></ul></div>
+      <div><h3>Trouver et suivre</h3><ul>
+        <li><button data-goto="list">Toutes les montres</button></li>
+        <li><button data-zone-go="monaco">Montres à Monaco</button></li>
+        <li><a href="#officiels">Détaillants officiels</a></li>
+                <li><a href="#suivis">Mes suivis</a></li>
+        <li><a href="#compte">Mon compte</a></li>
+        <li><a href="#infos">À propos de Monalex</a></li>
+        <li><a href="#infos" data-ancre="donnees">Données personnelles</a></li>
+        <li><button data-ck-gerer>Gérer les cookies</button></li>
+        <li><a href="#notifications">Notifications</a></li>
+        <li><button data-refresh>Rafraîchir les annonces</button></li>
+      </ul></div>
+      <div><h3>Sources</h3><ul>
+        <li><a href="#sources/catalogue">Catalogue officiel</a></li>
+        <li><a href="#sources/detaillants">Détaillants officiels</a></li>
+        <li><a href="#sources/boutiques">Boutiques et annonces</a></li>
+        <li><a href="#sources/cartes">Cartes</a></li>
+        <li><a href="#sources/credits">Polices et outils</a></li>
+      </ul></div>
+    </div>
+    <div class="f-line"></div>
+    <div class="f-zone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg><span id="fZone">Monaco</span></div>
+    <div class="f-tog">
+      <label class="tog l"><input type="checkbox" id="optCalm">Réduire les animations</label>
+      <label class="tog l"><input type="checkbox" id="optContrast">Augmenter le contraste</label>
+    </div>
+    <div class="f-legal">
+      <p id="updated"></p>
+      <p>Monalex est un service indépendant, non affilié à Rolex SA ni à ses détaillants. Rolex et les noms de modèles sont des marques de Rolex SA, cités pour décrire les montres. Les annonces et leurs photos appartiennent aux boutiques citées. <a href="#sources">Toutes les sources</a> · <a href="#infos">À propos</a> · <a href="#infos" data-ancre="donnees">Données personnelles</a></p>
+      <p class="copyright">© <span id="annee">2026</span> Monalex · Camilian. Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- pages : fiche montre, vendeur, vendeurs, compte, suivis -->
+<section class="page" id="page" role="dialog" aria-modal="true"></section>
+
+<!-- menu plein écran -->
+<div class="ov" id="menu" role="dialog" aria-label="Menu">
+  <div class="wrap">
+    <div class="ov-top">
+      <button class="round" data-close aria-label="Fermer le menu"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></svg></button>
+      <span></span>
+      <span class="r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg><span id="menuZone">Monaco</span></span>
+    </div>
+    <div class="tiles" id="menuTiles"></div>
+    <ul class="menu-list" id="menuList"></ul>
+    <ul class="sub-list">
+      <li><button data-refresh>Rafraîchir les annonces</button></li>
+      <li><button data-open-filters>Filtrer les montres</button></li>
+      <li><button data-zone-go="monaco">Montres à Monaco</button></li>
+    </ul>
+    <div class="ov-foot"><img src="img/logo.png" alt="Monalex" width="260"></div>
+  </div>
+</div>
+
+<!-- recherche plein écran -->
+<div class="ov" id="search" role="dialog" aria-label="Recherche">
+  <div class="wrap">
+    <div class="ov-top">
+      <button class="round" data-close aria-label="Fermer la recherche"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></svg></button>
+      <span class="emblem" id="searchEmblem"></span>
+      <span></span>
+    </div>
+    <form class="sbar" id="searchForm" role="search">
+      <svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11.5" cy="11.5" r="7"/><path d="m21.5 21.5-5-5" stroke-linecap="round"/></svg>
+      <label class="sr" for="q">Recherche</label>
+      <input id="q" type="search" placeholder="Recherche" autocomplete="off" enterkeyhint="search">
+    </form>
+    <div id="searchBody"></div>
+  </div>
+</div>
+
+<!-- filtres -->
+<div class="panel-bg" id="panelBg"></div>
+<aside class="panel" id="panel" aria-label="Filtres" role="dialog">
+  <div class="panel-h"><h2>Filtres</h2><button class="round" id="panelClose" aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></svg></button></div>
+  <div class="panel-b" id="panelBody"></div>
+  <div class="panel-f"><button class="btn btn-light" id="fReset">Tout effacer</button><button class="btn btn-green" id="fApply">Voir les montres</button></div>
+</aside>
+
+<!-- visionneuse -->
+<div class="lb" id="lb" role="dialog" aria-label="Photo en grand">
+  <div class="lb-h">
+    <span id="lbTitle" style="font-weight:700;font-size:14px"></span>
+    <div class="lb-tools">
+      <button class="round" id="lbOut" aria-label="Dézoomer"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2M8 11h6"/></svg></button>
+      <button class="round" id="lbIn" aria-label="Zoomer"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2M8 11h6M11 8v6"/></svg></button>
+      <button class="round" id="lbClose" aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+  </div>
+  <div class="lb-b" id="lbBody"><div class="in" id="lbBox"></div></div>
+  <div class="lb-f" id="lbFoot"></div>
+</div>
+
+<div class="ptr" id="ptr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg></div>
+<dialog class="confirm" id="confirm" aria-labelledby="cfT"><h2 id="cfT"></h2><p id="cfP"></p><div class="cf-b"><button class="btn btn-light" id="cfNon"></button><button class="btn btn-danger" id="cfOui"></button></div></dialog>
+<section class="cookies" id="cookies" aria-label="Cookies" hidden>
+  <p><b>Cookies.</b> Monalex garde votre compte et vos favoris sur ce téléphone. Google Maps, s'il est affiché, dépose ses propres cookies.</p>
+  <div class="ck-b"><button class="btn btn-light" data-ck="non">Refuser</button><a class="btn btn-light" href="#infos" data-ancre="cookies-info" data-ck-plus>En savoir plus</a><button class="btn btn-green" data-ck="ok">Accepter</button></div>
+</section>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+<script src="vendor/leaflet.js"></script>
+<script src="watch.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

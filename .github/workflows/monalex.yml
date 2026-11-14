@@ -1,0 +1,31 @@
+name: Monalex
+
+on:
+  schedule:
+    - cron: "10 */2 * * *"   # toutes les 2 heures, jour et nuit
+  workflow_dispatch:         # bouton « Run workflow » pour lancer à la main
+
+permissions:
+  contents: write
+
+jobs:
+  annonces:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python monalex.py
+      - name: Publier les annonces
+        if: always()
+        run: |
+          git config user.name "monalex-bot"
+          git config user.email "monalex-bot@users.noreply.github.com"
+          git add docs/monalex/annonces.json data/monalex_vus.json
+          git diff --cached --quiet || git commit -m "Monalex : annonces des boutiques $(date -u +'%F %H:%M')"
+          for essai in 1 2 3; do
+            git pull --rebase -X theirs origin main && git push && break
+            sleep 5
+          done
