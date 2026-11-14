@@ -69,3 +69,20 @@ html:has(.hero){background:transparent}
 .hero .haut,.hero .barre,.hero .aide,.hero .vues,.hero .fiche,.hero .apropos{display:none!important}
 .hero .chargement{background:transparent;color:transparent}.hero .anneau{display:none}
 .hero #scene{cursor:default}
+
+.actions{display:flex;gap:8px;align-items:center}
+.btn.pilule{background:var(--verre);border:1px solid var(--ligne);height:38px;padding:0 16px}
+.galerie{position:fixed;inset:0;z-index:8;background:#eceded;display:grid;grid-template-rows:1fr auto auto;gap:10px;padding:max(16px,env(safe-area-inset-top)) 0 max(14px,env(safe-area-inset-bottom))}
+.galerie[hidden]{display:none}
+.g-grand{position:relative;display:grid;place-items:center;min-height:0;padding:0 56px;touch-action:pan-y}
+.g-grand img{max-width:100%;max-height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none}
+.g-fl{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid var(--ligne);background:rgba(255,255,255,.85);font-size:26px;line-height:1;cursor:pointer;color:var(--encre)}
+.g-prec{left:8px}.g-suiv{right:8px}
+.g-leg{margin:0;text-align:center;font:15px "EB Garamond",Georgia,serif;color:var(--doux)}
+.g-vign{display:flex;gap:8px;overflow-x:auto;padding:4px 16px;scrollbar-width:none}
+.g-vign::-webkit-scrollbar{display:none}
+.g-vign button{flex:none;width:64px;height:64px;padding:0;border:2px solid transparent;border-radius:12px;overflow:hidden;background:#fff;cursor:pointer}
+.g-vign button[aria-current=true]{border-color:var(--encre)}
+.g-vign img{width:100%;height:100%;object-fit:cover;display:block}
+.galerie .x{top:max(14px,env(safe-area-inset-top));right:14px;z-index:2;width:38px;height:38px}
+@media (max-width:640px){.g-grand{padding:0 8px}.g-fl{display:none}.btn.pilule{padding:0 12px}}

@@ -804,3 +804,18 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
 .emblem:hover .em-shine::after{animation-duration:2.4s}
 @keyframes em-eclat{0%{background-position:120% 0}22%,100%{background-position:-20% 0}}
 @media (prefers-reduced-motion:reduce){.em-shine::after{animation:none;opacity:0}}
+
+/* Accueil : photo détourée de la Daytona (flottement + reflet) */
+.hero-photo{position:absolute;z-index:1;left:50%;top:2%;height:54%;aspect-ratio:900/1260;transform:translateX(-50%);opacity:0;transition:opacity 1s;pointer-events:none;
+  filter:drop-shadow(0 26px 30px rgba(0,0,0,.45))}
+.hero-photo.on{opacity:1}
+.hero-photo img{display:block;width:100%;height:100%;animation:hp-flotte 8s ease-in-out infinite;
+  -webkit-mask:linear-gradient(to bottom,transparent 0,#000 13%,#000 85%,transparent 100%);mask:linear-gradient(to bottom,transparent 0,#000 13%,#000 85%,transparent 100%)}
+.hero-photo::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:soft-light;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.95) 48%,rgba(255,250,235,.6) 52%,transparent 65%) 130% 0/320% 100% no-repeat;
+  -webkit-mask:url(img/daytona-photo.webp) center/100% 100% no-repeat;mask:url(img/daytona-photo.webp) center/100% 100% no-repeat;
+  animation:hp-reflet 6s cubic-bezier(.4,0,.2,1) 1.4s infinite}
+@keyframes hp-flotte{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-10px) rotate(.6deg)}}
+@keyframes hp-reflet{0%{background-position:130% 0}35%,100%{background-position:-30% 0}}
+@media (min-width:900px){.hero-photo{height:70%;top:5%}}
+@media (prefers-reduced-motion:reduce){.hero-photo img,.hero-photo::after{animation:none}}
