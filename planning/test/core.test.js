@@ -590,3 +590,15 @@ test("absence pour raison médicale sur une plage horaire, avec un nom", () => {
   assert.equal(C.availability(s, "eric", d, [{ s: "07:00", e: "12:00", z: "ZP" }]).ok, false);
   assert.equal(apply(s, [{ type: "addAbsence", absence: { emp: "eric", type: "medical", from: d, s: "11:00", e: "10:00" } }]).ok, false);
 });
+
+test("incompatibilités : jamais dans la même zone au même moment", () => {
+  let s = withWeek1();
+  s = apply(s, [{ type: "updateEmployee", id: "maelle", patch: { rules: { incompatible: ["murielle"] } } }]).state;
+  assert.ok(C.incompatible(s, "murielle", "maelle")); // dans les deux sens
+  const W = "2026-12-07";
+  const put = (emp, z) => ({ type: "setShift", emp, date: W, segs: [{ s: "07:00", e: "12:00", z }] });
+  assert.ok(C.validateWeek(apply(s, [put("maelle", "ZP"), put("murielle", "ZP")]).state, W).some((i) => i.code === "INCOMPATIBLE"));
+  assert.ok(!C.validateWeek(apply(s, [put("maelle", "ZP"), put("murielle", "ZR")]).state, W).some((i) => i.code === "INCOMPATIBLE"));
+  const st = apply(s, [put("maelle", "ZP")]).state;
+  assert.ok(!C.findCandidates(st, W, [{ s: "08:00", e: "11:00", z: "ZP" }]).some((c) => c.emp === "murielle"));
+});

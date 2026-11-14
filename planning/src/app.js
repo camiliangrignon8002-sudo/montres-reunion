@@ -166,6 +166,7 @@
     if (e.onLeave) out.push(`En ${C.ABSENCE_TYPES[e.onLeave.type] ? C.ABSENCE_TYPES[e.onLeave.type].toLowerCase() : "congé"} depuis le ${C.fmtDate(e.onLeave.since, "short")}`);
     if (r.fixedHours) out.push(`Toujours ${r.fixedHours.s}–${r.fixedHours.e}`);
     if (r.maxEnd) out.push(`Jamais après ${r.maxEnd}`);
+    if ((r.incompatible || []).length) out.push(`Incompatible avec ${r.incompatible.map((id) => (C.empById(App.state, id) || { name: id }).name).join(", ")}`);
     if (r.weekZone) out.push(r.zoneFlex ? `Préférence ${r.weekZone} (peut changer si besoin)` : `Toujours en ${r.weekZone}`);
     if (r.prefers) out.push(`${r.shiftFlex ? "Préférence" : "Toujours"} ${r.prefers === "matin" ? "le matin" : "le soir"}${r.shiftFlex ? " (peut changer si besoin)" : ""}`);
     if (Array.isArray(r.daysOff) && r.daysOff.length) out.push(`Repos fixe : ${r.daysOff.map((d) => C.DAYS[d].toLowerCase()).join(", ")}`);
@@ -1454,6 +1455,9 @@
     pmPref.addEventListener("change", () => { if (pmPref.checked) amPref.checked = false; });
     const prefIn = { get value() { return amPref.checked ? "matin" : pmPref.checked ? "soir" : ""; } };
     const officeOn = h("input", { type: "checkbox", id: "emp-office", checked: !!r.officeMinDays });
+    // Incompatibilités (affichées aussi celles déclarées sur l'autre fiche).
+    const incBoxes = s.employees.filter((x) => x.id !== id && x.active !== false).map((x) => h("label", { class: "check" },
+      h("input", { type: "checkbox", value: x.id, checked: (r.incompatible || []).includes(x.id) || ((x.rules || {}).incompatible || []).includes(id) }), x.name));
     const officeN = h("input", { type: "number", class: "input", id: "emp-office-n", min: "1", max: "7", value: r.officeMinDays || 2, style: { width: "80px" } });
     const tr = e.training || {};
     const trOn = h("input", { type: "checkbox", id: "emp-train", checked: this.skillOn(e, "formation") });
@@ -1474,6 +1478,9 @@
       h("div", { class: "stack", style: { gap: "4px" } }, h("span", { class: "small muted" }, "Jours de repos fixes (jamais de créneau ces jours-là) :"), h("div", { class: "row" }, offBoxes)),
       r.note ? h("p", { class: "small muted" }, `Consigne : ${r.note}`) : null,
       h("label", { class: "f" }, "Heures par semaine (contrat)", contractIn),
+      h("h3", {}, "Incompatibilités"),
+      h("p", { class: "small muted" }, `${e.name} ne travaille jamais dans la même zone, au même moment, que les personnes cochées.`),
+      h("div", { class: "row", style: { "flex-wrap": "wrap" } }, incBoxes),
       h("h3", {}, "Horaires liés"),
       this.linkSection(id),
       h("h3", {}, "Compétences"),
@@ -1488,7 +1495,7 @@
         { label: "Enregistrer", primary: true, onClick: async () => {
           const daysOff = offBoxes.map((b) => b.querySelector("input")).filter((i) => i.checked).map((i) => Number(i.value));
           if (fixOn.checked && (!C.isTime(fixS.value) || !C.isTime(fixE.value))) { toast("Indiquez le début et la fin des horaires fixes.", "err"); return false; }
-          const rules = { ...r, fixedHours: fixOn.checked ? { s: fixS.value, e: fixE.value } : null, daysOff: daysOff.length ? daysOff : null, sameWeekends: sameWe.checked, maxEnd: maxEndIn.value || null, weekZone: weekZoneIn.value || null, zoneFlex: !!weekZoneIn.value && zoneFlex.checked, prefers: prefIn.value || null, shiftFlex: !!prefIn.value && shiftFlex.checked, officeMinDays: officeOn.checked ? Math.max(1, Math.min(7, Number(officeN.value) || 2)) : null, officeSince: officeOn.checked ? (r.officeMinDays ? r.officeSince || null : C.mondayOf(this.today())) : null };
+          const rules = { ...r, fixedHours: fixOn.checked ? { s: fixS.value, e: fixE.value } : null, daysOff: daysOff.length ? daysOff : null, sameWeekends: sameWe.checked, maxEnd: maxEndIn.value || null, incompatible: incBoxes.map((b) => b.querySelector("input")).filter((i) => i.checked).map((i) => i.value), weekZone: weekZoneIn.value || null, zoneFlex: !!weekZoneIn.value && zoneFlex.checked, prefers: prefIn.value || null, shiftFlex: !!prefIn.value && shiftFlex.checked, officeMinDays: officeOn.checked ? Math.max(1, Math.min(7, Number(officeN.value) || 2)) : null, officeSince: officeOn.checked ? (r.officeMinDays ? r.officeSince || null : C.mondayOf(this.today())) : null };
           if (rules.weekZone && !(sk.badgeRouge.checked || rules.weekZone !== "ZR")) { toast("Sans badge rouge, la zone de la semaine ne peut pas être ZR.", "err"); return false; }
           if (trOn.checked && !C.isISO(trSince.value)) { toast("Indiquez le début de la formation.", "err"); return false; }
           const training = trOn.checked ? { since: trSince.value } : e.training ? { ...e.training, ended: e.training.ended || this.today() } : undefined;
@@ -1499,7 +1506,10 @@
           if (sk.admin.checked) zones.ADM = zones.ADM || "confirme"; else delete zones.ADM;
           if (!zones.ZP) zones.ZP = "confirme";
           const zoneOps = JSON.stringify(zones) !== JSON.stringify(e.zones || {}) ? [{ type: "setZones", emp: id, zones }] : [];
-          return (await this.commit([{ type: "updateEmployee", id, patch: { name: name.value, role: role.value, aliases: aliases.value.split(",").map((x) => x.trim()).filter(Boolean), rules, training, contractHours, skills } }, ...zoneOps])).ok;
+          // Incompatibilité décochée ici mais déclarée sur l'autre fiche : retirée des deux côtés.
+          const incOps = s.employees.filter((x) => x.id !== id && ((x.rules || {}).incompatible || []).includes(id) && !rules.incompatible.includes(x.id))
+            .map((x) => ({ type: "updateEmployee", id: x.id, patch: { rules: { ...x.rules, incompatible: x.rules.incompatible.filter((y) => y !== id) } } }));
+          return (await this.commit([{ type: "updateEmployee", id, patch: { name: name.value, role: role.value, aliases: aliases.value.split(",").map((x) => x.trim()).filter(Boolean), rules, training, contractHours, skills } }, ...zoneOps, ...incOps])).ok;
         } },
       ] });
   };

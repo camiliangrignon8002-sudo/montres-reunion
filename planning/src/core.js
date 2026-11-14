@@ -352,6 +352,21 @@
     if (!contract || contract >= full) return { minutes: hard, partTime: false };
     return { minutes: Math.min(hard, full - 1, Math.round(contract * (1 + (Number(st.partTimeExtraPercent) || 0) / 100))), partTime: true, contract };
   }
+  // Incompatibilités : deux personnes qui ne travaillent jamais dans la même zone en même temps (dans les deux sens).
+  const incompatible = (state, a, b) => {
+    const ea = empById(state, a), eb = empById(state, b);
+    return !!((ea && ea.rules && (ea.rules.incompatible || []).includes(b)) || (eb && eb.rules && (eb.rules.incompatible || []).includes(a)));
+  };
+  // Plages où les deux sont dans la même zone au même moment.
+  function sameZoneOverlap(segsA, segsB) {
+    const out = [];
+    for (const g of segsA || []) for (const k of segsB || []) {
+      if (g.z !== k.z || !isTime(g.s) || !isTime(g.e) || !isTime(k.s) || !isTime(k.e)) continue;
+      const [a, b] = segRange(g), [c, d] = segRange(k);
+      if (a < d && c < b) out.push({ z: g.z, s: fromMin(Math.max(a, c)), e: fromMin(Math.min(b, d)) });
+    }
+    return out;
+  }
   // Saison : heure d'été du dernier dimanche de mars au samedi avant le dernier dimanche d'octobre.
   function lastSunday(y, m) { const d = new Date(Date.UTC(y, m + 1, 0)); d.setUTCDate(d.getUTCDate() - d.getUTCDay()); return iso(d); }
   const seasonAuto = (date) => { const y = Number(date.slice(0, 4)); return date >= lastSunday(y, 2) && date < lastSunday(y, 9) ? "ete" : "hiver"; };
@@ -603,6 +618,15 @@
       const contract = Number(emp.contractHours) || 0;
       if (contract && contract < st.minContractHours && emp.role !== "alternant") add("info", "LEGAL_CONTRACT", emp.id, null, `${emp.name} : contrat de ${contract} h par semaine, sous le minimum de ${st.minContractHours} h d'un temps partiel (sauf dérogation).`);
     }
+    // Incompatibilités : jamais dans la même zone au même moment.
+    for (const d of weekDates(monday)) {
+      const day = w.shifts.filter((x) => x.date === d);
+      for (let i = 0; i < day.length; i++) for (let j = i + 1; j < day.length; j++) {
+        if (!incompatible(state, day[i].emp, day[j].emp)) continue;
+        const ov = sameZoneOverlap(day[i].segs, day[j].segs);
+        if (ov.length) add("alerte", "INCOMPATIBLE", day[i].emp, d, `${nameOf(day[i].emp)} et ${nameOf(day[j].emp)} sont incompatibles : ensemble en ${ov[0].z} le ${fmtDate(d, "day")} (${ov.map((x) => `${x.s}–${x.e}`).join(", ")}).`);
+      }
+    }
     // Jours de bureau minimum par semaine
     for (const emp of state.employees) {
       const min = Number((emp.rules || {}).officeMinDays) || 0;
@@ -716,6 +740,7 @@
       if (overtime) score -= 20;
       score -= notes.length * 5;
       if (templateFor(state, date).some((t) => t.emp === emp.id && segKey(t.segs) === segKey(segs))) score += 10;
+      if (w.shifts.some((x) => x.date === date && incompatible(state, emp.id, x.emp) && sameZoneOverlap(segs, x.segs).length)) continue; // incompatibilité
       // Préférence de zone : obligatoire sauf si « si besoin, peut changer » est coché.
       const zp = emp.rules && emp.rules.weekZone;
       if (zp && segs.some((g) => g.z !== zp)) { if (!emp.rules.zoneFlex) continue; score -= 20; notes.push(`préfère la ${zp}`); }
@@ -1170,6 +1195,7 @@
             if (r.maxEnd && !isTime(r.maxEnd)) { fail("Heure de fin maximum invalide."); break; }
             if (r.weekZone && !zoneById(s, r.weekZone)) { fail("Zone de la semaine inconnue."); break; }
             if (r.prefers && !["matin", "soir"].includes(r.prefers)) { fail("Service préféré invalide."); break; }
+            if (r.incompatible && !(Array.isArray(r.incompatible) && r.incompatible.every((x) => empById(s, x) && x !== emp.id))) { fail("Liste d'incompatibilités invalide."); break; }
             if (r.officeMinDays != null && !(Number(r.officeMinDays) >= 0 && Number(r.officeMinDays) <= 7)) { fail("Nombre de jours de bureau invalide (0 à 7)."); break; }
             if (r.daysOff && !(Array.isArray(r.daysOff) && r.daysOff.every((d) => d >= 0 && d <= 6))) { fail("Jours de repos invalides."); break; }
           }
@@ -1374,7 +1400,7 @@
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, incompatible, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };

@@ -56,6 +56,7 @@
         "5 quater. Compétences : sans « badge rouge », jamais en ZR (ZP seulement). La première personne d'une zone doit avoir « ouverture du magasin » et la dernière « fermeture du magasin » quand quelqu'un dans l'équipe a ces compétences.",
         "5 quinquies. Personnes liées (réglages « links ») : mêmes horaires quand elles travaillent le même jour (zone libre sauf si « même zone »), et/ou mêmes week-ends.",
         "5 sexies. Durée par semaine : un dépassement au-delà de la durée normale est possible, mais jamais au-delà du maximum absolu (réglage hardMaxWeekHours, 42 h par défaut), cours et heures sup compris.",
+        "5 septies. Incompatibilités (rules.incompatible) : deux personnes incompatibles ne travaillent jamais dans la même zone au même moment.",
         "6. Si une proposition renvoie des alertes, résume-les en une ligne chacune.",
         "7. Réponds sans titres ni tableaux Markdown ; des listes courtes sont permises.",
       ].join("\n\n");
