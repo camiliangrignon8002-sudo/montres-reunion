@@ -774,3 +774,15 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
 .zs-i[aria-pressed=true] b{color:var(--poker-2)}
 .zsheet .wrap{padding-bottom:calc(40px + var(--safe-b))}
 .grid .plus{grid-column:1/-1;justify-self:center;margin:10px 0 20px;min-width:260px}
+
+/* ---------- photos cadrées proprement (jamais plus grandes que leur cadre) */
+.grid>*,.similar>*{min-width:0}
+.card .pic{position:relative;overflow:hidden}
+.card .pic img{position:absolute;inset:6%;width:88%;height:88%;object-fit:contain;mix-blend-mode:multiply}
+.gal-main .slide{position:relative;min-width:0;overflow:hidden}
+.gal-main .slide img{position:absolute;inset:4%;width:92%;height:92%;object-fit:contain;mix-blend-mode:multiply}
+.gal-thumbs button{position:relative}
+.gal-thumbs img{position:absolute;inset:6%;width:88%;height:88%;object-fit:contain;mix-blend-mode:multiply}
+.pitem .pp{position:relative;overflow:hidden;min-width:0}
+.pitem .pp img{position:absolute;inset:4%;width:92%;height:92%;object-fit:contain;mix-blend-mode:multiply}
+.cp-slide a{position:relative}

@@ -99,7 +99,49 @@ async function vraiModele(url) {
   } catch (e) { return null; }
 }
 
-export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag = true, actif = () => true, modele = "" } = {}) {
+// Vraie photo de montre détourée : le fond uni (pris dans les coins) devient transparent, la montre est recadrée.
+function photoDetouree(url) {
+  return new Promise((ok, ko) => {
+    const img = new Image(); img.crossOrigin = "anonymous"; img.decoding = "async";
+    img.onload = () => {
+      const W = Math.min(1100, img.naturalWidth), H = Math.round(W * img.naturalHeight / img.naturalWidth);
+      const c = document.createElement("canvas"); c.width = W; c.height = H;
+      const g = c.getContext("2d", { willReadFrequently: true }); g.drawImage(img, 0, 0, W, H);
+      let d; try { d = g.getImageData(0, 0, W, H); } catch (e) { ko(e); return; }
+      const px = d.data, coin = (x, y) => { const i = (y * W + x) * 4; return [px[i], px[i + 1], px[i + 2]]; };
+      const cs = [coin(2, 2), coin(W - 3, 2), coin(2, H - 3), coin(W - 3, H - 3)];
+      const fond = [0, 1, 2].map(k => cs.reduce((a, c) => a + c[k], 0) / 4);
+      const uni = cs.every(c => Math.abs(c[0] - fond[0]) + Math.abs(c[1] - fond[1]) + Math.abs(c[2] - fond[2]) < 40);
+      let x0 = W, y0 = H, x1 = 0, y1 = 0;
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+        const i = (y * W + x) * 4;
+        const dist = Math.abs(px[i] - fond[0]) + Math.abs(px[i + 1] - fond[1]) + Math.abs(px[i + 2] - fond[2]);
+        const a = uni ? Math.max(0, Math.min(255, (dist - 18) * 6)) : 255;
+        px[i + 3] = a;
+        if (a > 40) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+      }
+      g.putImageData(d, 0, 0);
+      if (x1 <= x0) { x0 = 0; y0 = 0; x1 = W - 1; y1 = H - 1; }
+      const cw = x1 - x0 + 1, ch = y1 - y0 + 1, out = document.createElement("canvas"); out.width = cw; out.height = ch;
+      out.getContext("2d").drawImage(c, x0, y0, cw, ch, 0, 0, cw, ch);
+      const t = new THREE.CanvasTexture(out); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4;
+      ok({ t, ratio: cw / ch });
+    };
+    img.onerror = ko;
+    img.src = url;
+  });
+}
+function photoWatch({ t, ratio }) {
+  const g = new THREE.Group(), h = 4.6, w = h * ratio;
+  const mat = new THREE.MeshStandardMaterial({ map: t, transparent: true, alphaTest: .08, roughness: .35, metalness: .25, side: THREE.DoubleSide });
+  const face = new THREE.Mesh(new THREE.PlaneGeometry(w, h), mat); g.add(face);
+  // reflet qui glisse sur la montre quand elle tourne
+  const reflet = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ alphaMap: t, color: 0xffffff, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false }));
+  reflet.position.z = .01; g.add(reflet); g.userData.reflet = reflet; g.userData.photo = true;
+  return g;
+}
+
+export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag = true, actif = () => true, modele = "", photo = "" } = {}) {
   const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ canvas, antialias: dpr < 1.5, alpha: true, powerPreference: "default" }); }
@@ -113,7 +155,11 @@ export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag 
   const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(-3, 4, 6); scene.add(key);
   const camera = new THREE.PerspectiveCamera(28, 1, .1, 60); camera.position.set(0, 0, 12);
 
-  const watch = (modele && await vraiModele(modele)) || buildWatch(skin, await faceTexture(svg, dpr > 1.2 ? 1024 : 768)); scene.add(watch);
+  let watch = modele && await vraiModele(modele);
+  if (!watch && photo) { try { watch = photoWatch(await photoDetouree(photo)); } catch (e) { watch = null; } }
+  if (!watch) watch = buildWatch(skin, await faceTexture(svg, dpr > 1.2 ? 1024 : 768));
+  scene.add(watch);
+  const estPhoto = !!watch.userData.photo;
   let rx = -.35, ry = -.5, tx = rx, ty = ry, dragX = 0, dragY = 0, raf = 0, visible = true, mort = false;
   watch.rotation.set(rx, ry, .12);
   const scrollY = () => scrollEl === window ? window.scrollY : scrollEl.scrollTop;
@@ -128,10 +174,14 @@ export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag 
     const dt = tPrec ? Math.min(.05, (t - tPrec) / 1000) : 0; tPrec = t;
     if (!calme()) spin += dt * 1.1;                              // tour complet en ~6 s, indépendant de la vitesse de l'écran
     const y = scrollY();
-    ty = -.5 + spin + y * .009 + dragX; tx = -.35 + Math.sin(y * .006) * .25 + dragY;   // deux fois plus réactif au défilement
+    if (estPhoto) {
+      const ang = spin * 1.6 + y * .009 + dragX;
+      ty = Math.sin(ang) * .62; tx = Math.sin(ang * .5) * .12 + dragY * .5;
+      watch.userData.reflet.material.opacity = Math.max(0, Math.sin(ang)) * .22;
+    } else { ty = -.5 + spin + y * .009 + dragX; tx = -.35 + Math.sin(y * .006) * .25 + dragY; }   // deux fois plus réactif au défilement
     const k = 1 - Math.pow(.0005, dt || .016);                  // lissage calé sur le temps réel
     rx += (tx - rx) * k; ry += (ty - ry) * k;
-    watch.rotation.x = rx; watch.rotation.y = ry;
+    watch.rotation.x = rx; watch.rotation.y = ry; if (estPhoto) watch.rotation.z = 0;
     draw();
     if (!calme() || Math.abs(tx - rx) + Math.abs(ty - ry) > .001) raf = requestAnimationFrame(loop);
   };

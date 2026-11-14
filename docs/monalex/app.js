@@ -154,7 +154,15 @@ function prepare() {
   // boutiques indépendantes (annonces relevées sur leurs sites)
   for (const [id, b] of Object.entries(ANNDATA.boutiques || {})) { const v = { id, ...b, type: "Boutique", boutique: true, dist: km(S.origin, b) }; VEND.push(v); byId[id] = v; }
   const ph = id => [...((PHOTOS.photos || {})[id] || [])].sort((a, b) => (b.exacte === true) - (a.exacte === true));   // la bonne référence d'abord
-  ALL = DATA.montres.map(m => ({ ...m, photos: ph(m.id).length ? ph(m.id) : m.photos || [], source: "Catalogue officiel", v: byId[m.vendeur] || null, mat: materiauGroupe(m), ent: entretienGroupe(m) }));
+  const studio = {};
+  for (const a of ANNDATA.annonces || []) {
+    if (!a.reference || !a.photos?.length || !byId[a.boutique]) continue;
+    const l = studio[a.reference] = studio[a.reference] || [];
+    if (l.length < 6) l.push({ ...a.photos[0], exacte: true, auteur: byId[a.boutique].nom, licence: "photo de la boutique", page: a.url, boutique: true });
+  }
+  // les photos « de face » d'abord (les plus propres)
+  Object.values(studio).forEach(l => l.sort((a, b) => /front|face/i.test(b.src) - /front|face/i.test(a.src)));
+  ALL = DATA.montres.map(m => ({ ...m, photos: [...(studio[m.reference] || []), ...ph(m.id)],  source: "Catalogue officiel", v: byId[m.vendeur] || null, mat: materiauGroupe(m), ent: entretienGroupe(m) }));
   const TAUX = { EUR: 1, CHF: 1.06, GBP: 1.17, USD: .92, AED: .25, JPY: .0061, HKD: .118, SGD: .69 };  // conversion indicative pour trier et filtrer
   for (const a of ANNDATA.annonces || []) {
     if (!byId[a.boutique]) continue;
@@ -233,6 +241,11 @@ function nbFiltres() {
 /* ====================================================================== morceaux réutilisés */
 // Photos : on garde seulement les photos nettes (1200 px de large au minimum quand la taille est connue) et une seule fois chacune.
 const PHOTO_MIN = 1200;
+function taille(src, w) {
+  if (/cdn\.shopify\.com|\/cdn\/shop\//.test(src)) return src + (src.includes("?") ? "&" : "?") + "width=" + w;
+  if (/upload\.wikimedia\.org\/.*\/thumb\//.test(src)) return src.replace(/\/\d+px-([^/]+)$/, `/${w}px-$1`);
+  return src;
+}
 function photosOf(m) {
   const vues = new Set();
   return (m.photos || []).map(p => typeof p === "string" ? { src: p } : p).filter(p => {
@@ -245,9 +258,9 @@ function photosOf(m) {
 }
 function checkPhoto(img) { if (img.naturalWidth && img.naturalWidth < PHOTO_MIN * 0.8) { const sl = img.closest(".slide,.pic,button"); if (sl) sl.dataset.basse = "1"; } }
 function picOf(m, o = {}) {
-  const ph = photosOf(m);
+  const ph = photosOf(m).filter(p => p.exacte !== false);
   if (ph.length) {
-    const src = ph[0].src;
+    const src = taille(ph[0].src, 640);
     return `<img src="${esc(src)}" alt="${esc(m.modele)}" loading="lazy" decoding="async" referrerpolicy="no-referrer">`;
   }
   return watchSVG(m.skin, { diam: m.diametre, label: m.modele, ...o });
@@ -267,7 +280,7 @@ function tagsOf(m) {
 function cardHTML(m) {
   const baisse = m.prix && m.prix_initial > m.prix;
   return `<a class="card" href="#m/${encodeURIComponent(m.id)}">
-    <div class="pic">${m.statut && m.statut !== "Disponible" ? `<span class="status ${stClass(m.statut)}">${esc(m.statut)}</span>` : ""}${!m.annonce && m.photos?.[0]?.exacte === false ? `<span class="status">Photo de la collection</span>` : ""}${picOf(m)}</div>
+    <div class="pic">${m.statut && m.statut !== "Disponible" ? `<span class="status ${stClass(m.statut)}">${esc(m.statut)}</span>` : ""}${picOf(m)}</div>
     <button class="fav" data-fav="${esc(m.id)}" aria-label="Favori" aria-pressed="${ME.favs.has(m.id)}">${HEART}</button>
     <div class="body">
       <span class="coll-n">${esc(m.collection)}</span>
@@ -688,7 +701,7 @@ function mesEchanges(vId, mId) {
 function pageAnnonce(m) {
   ME.vues = [m.id, ...ME.vues.filter(x => x !== m.id)].slice(0, 12); ME.save();
   const v = m.v, photos = photosOf(m), host = (() => { try { return new URL(m.url).hostname.replace(/^www\./, ""); } catch (e) { return v.site || ""; } })();
-  const slides = photos.map((p, i) => ({ nom: `Photo ${i + 1} sur ${photos.length}`, html: `<img src="${esc(p.src)}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async" ${i ? 'loading="lazy"' : ""} onload="checkPhoto(this)" referrerpolicy="no-referrer">`, big: p.src }));
+  const slides = photos.map((p, i) => ({ nom: `Photo ${i + 1} sur ${photos.length}`, html: `<img src="${esc(taille(p.src, 1400))}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async" ${i ? 'loading="lazy"' : ""} onload="checkPhoto(this)" referrerpolicy="no-referrer">`, big: taille(p.src, 2000) }));
   const suivi = ME.suivis[m.id];
   const det = [["Référence", m.reference], ["Collection", m.collection], ["Année", m.annee], ["État", m.condition], ["Boîte", m.boite == null ? "" : m.boite ? "Oui" : "Non"], ["Papiers", m.papiers == null ? "" : m.papiers ? "Oui" : "Non"], ["Prix", m.prix ? eur(m.prix, m.devise) + (m.devise !== "EUR" && m.prix_eur ? ` (≈ ${eur(m.prix_eur)})` : "") : "Sur demande"], ["Sur Monalex depuis", m.publie ? fmtDay(m.publie) : ""]].filter(([, b]) => b);
   const html = `
@@ -732,7 +745,7 @@ function pageMontre(id) {
   if (!m) { openPage(`<div class="empty" style="margin-top:30px"><h3>Cette référence n'est plus au catalogue</h3><p>Elle a peut-être été arrêtée par Rolex.</p><button class="btn btn-green" data-goto="list">Voir le catalogue</button></div>`, "Référence introuvable"); return; }
   ME.vues = [id, ...ME.vues.filter(x => x !== id)].slice(0, 12); ME.save();
   const photos = photosOf(m);
-  const slides = [...photos.map((p, i) => ({ nom: p.auteur ? `${p.exacte === false ? `Une autre ${m.collection} (référence différente) · ` : ""}Photo : ${p.auteur} · ${p.licence}` : `Photo ${i + 1}`, credit: p, html: `<img src="${esc(p.src)}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async" ${i ? 'loading="lazy"' : ""} onload="checkPhoto(this)">`, big: p.src })),
+  const slides = [...photos.map((p, i) => ({ nom: p.boutique ? `Photo : ${p.auteur}` : p.auteur ? `${p.exacte === false ? `Une autre ${m.collection} (référence différente) · ` : ""}Photo : ${p.auteur} · ${p.licence}` : `Photo ${i + 1}`, credit: p, html: `<img src="${esc(taille(p.src, 1400))}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async" ${i ? 'loading="lazy"' : ""} onload="checkPhoto(this)">`, big: p.src })),
     ...VUES.slice(0, photos.length ? 1 : 4).map(x => ({ nom: `${x.nom} (illustration)`, html: watchSVG(m.skin, { diam: m.diametre, vb: x.vb, fx: true, label: `${m.modele} — ${x.nom}` }), vb: x.vb }))];
   const dets = detsInZone(), d0 = dets[0] || [...DET].sort((a, b) => a.dist - b.dist)[0];
   const suivi = ME.suivis[m.id];
@@ -751,7 +764,8 @@ function pageMontre(id) {
       <div class="gal-main" id="galMain">${slides.map((s, i) => `<div class="slide" data-i="${i}">${s.html}</div>`).join("")}</div>
       <div class="gal-thumbs" id="galThumbs">${slides.map((s, i) => `<button data-i="${i}" aria-label="${esc(s.nom)}" aria-current="${i === 0}">${s.html}</button>`).join("")}</div>
       <div class="gal-hint"><span id="galName">${esc(slides[0].nom)}</span> · touchez pour agrandir</div>
-      ${photos.length ? `<p class="d-note">Photos libres de droits : ${photos.map(p => `<a href="${esc(p.page)}" target="_blank" rel="noopener">${esc(p.auteur)} (${esc(p.licence)})</a>`).join(", ")}, via Wikimedia Commons.</p>` : ""}
+      ${photos.some(p => p.boutique) ? `<p class="d-note">Photos des boutiques : ${[...new Map(photos.filter(p => p.boutique).map(p => [p.auteur, p])).values()].map(p => `<a href="${esc(p.page)}" target="_blank" rel="noopener">${esc(p.auteur)}</a>`).join(", ")} (voir leurs annonces).</p>` : ""}
+      ${photos.some(p => !p.boutique) ? `<p class="d-note">Photos libres de droits : ${photos.filter(p => !p.boutique).map(p => `<a href="${esc(p.page)}" target="_blank" rel="noopener">${esc(p.auteur)} (${esc(p.licence)})</a>`).join(", ")}, via Wikimedia Commons.</p>` : ""}
     </div>
     <div class="d-info">
       <div class="eyebrow">${esc(m.collection)}</div>
@@ -858,10 +872,17 @@ function swatch(m) {
 }
 /* ---------- montres en 3D (Three.js, comme le site Red Bull) */
 const M3D = new Map();
+// Photo pour la 3D : une vraie photo « de face » d'une montre de la collection, hébergée par Shopify (autorise l'usage en 3D)
+function photo3D(collection) {
+  const cand = (ANNDATA.annonces || []).filter(a => a.collection === collection && a.photos?.length).flatMap(a => a.photos.map(p => p.src))
+    .filter(src => /cdn\.shopify\.com/.test(src));
+  const best = cand.find(src => /front/i.test(src)) || cand[0];
+  return best ? taille(best, 1100) : "";
+}
 function mount3D(canvas, m, scrollEl, actif) {
   if (!canvas || M3D.get(canvas)) return;
   M3D.set(canvas, "…");
-  const go = () => import("./watch3d.js").then(mod => mod.mountWatch3D(canvas, m.skin, { svg: watchSVG(m.skin, { diam: m.diametre, vb: "71 171 258 258", fx: true }), scrollEl, actif, modele: m.skin.type === "daytona" ? "models/daytona.glb" : "" })).then(h => { if (h) { M3D.set(canvas, h); canvas.classList.add("on"); } else canvas.remove(); })
+  const go = () => import("./watch3d.js").then(mod => mod.mountWatch3D(canvas, m.skin, { svg: watchSVG(m.skin, { diam: m.diametre, vb: "71 171 258 258", fx: true }), scrollEl, actif, modele: m.skin.type === "daytona" ? "models/daytona.glb" : "", photo: photo3D(m.collection || "Cosmograph Daytona") })).then(h => { if (h) { M3D.set(canvas, h); canvas.classList.add("on"); } else canvas.remove(); })
     .catch(() => canvas.remove());
   if (document.documentElement.classList.contains("calm")) { canvas.remove(); return; }
   "requestIdleCallback" in window ? requestIdleCallback(go, { timeout: 1500 }) : setTimeout(go, 400);
@@ -1578,7 +1599,7 @@ async function start() {
   catch (e) { $("#grid").innerHTML = `<div class="empty"><h3>Les montres ne se chargent pas</h3><p>La connexion semble coupée. Tirez la page vers le bas pour réessayer.</p><button class="btn btn-green" onclick="location.reload()">Réessayer</button></div>`; return; }
   $("#demo").hidden = !DATA.demo || !!store.get("rm.demoOk", 0);
   // Montre 3D de l'accueil (chronographe or, cadran vert poker), avec le dessin en secours
-  mount3D($("#hero3d"), { skin: { type: "daytona", dial: "#035837", sub: "#03321e", bezel: "#03321e", insert: "#03321e", metal: "gold", bracelet: "oyster" }, diametre: 40 }, window, () => !page().classList.contains("open"));
+  mount3D($("#hero3d"), { skin: { type: "daytona", dial: "#035837", sub: "#03321e", bezel: "#03321e", insert: "#03321e", metal: "gold", bracelet: "oyster" }, diametre: 40, collection: "Cosmograph Daytona" }, window, () => !page().classList.contains("open"));
   $("#annee").textContent = new Date().getFullYear();
   // Visuel d'accueil assorti au logo : chronographe or, cadran vert
   $("#heroImg").innerHTML = watchSVG({ type: "daytona", dial: "#035837", sub: "#03321e", bezel: "#03321e", insert: "#03321e", metal: "gold", bracelet: "oyster" }, { diam: 40, vb: "75 170 250 260", par: "xMidYMid slice" });
