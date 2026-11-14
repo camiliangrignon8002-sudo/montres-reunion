@@ -1817,6 +1817,10 @@
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
+   },
+   {
+    "source": "Herren Immobilier",
+    "url": "https://www.herren-immobilier.com/location/appartement/7996"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -6588,51 +6592,6 @@
   "vu": "2026-11-06T14:19+04:00"
  },
  {
-  "id": "superimmo--annonces-location-appartement-25m-saint-denis-97490-x12etyh",
-  "source": "Superimmo",
-  "url": "https://www.superimmo.com/annonces/location-appartement-25m-saint-denis-97490-x12etyh",
-  "titre": "Location appartement 1 pièce 25,64 m² Saint-Denis (97490)",
-  "prix": 680.0,
-  "commune": "Saint-Denis",
-  "quartier": "",
-  "pieces": 1,
-  "type": "T1",
-  "surface": 25.64,
-  "meuble": null,
-  "photos": [
-   "https://photo.superimmo.com/a4oz8dgw9vvbo5xqnw9h15f4uhqt",
-   "https://photo.superimmo.com/5okye3ehproqzh6s7um74m9owh7d",
-   "https://photo.superimmo.com/l2sx8ehdk0l9jp52kmqxc6gs2vma",
-   "https://photo.superimmo.com/zouohr2cvekbhxapt97a2uecrv6x",
-   "https://photo.superimmo.com/ua8a55u46tbp0fcbek8lxt96k498",
-   "https://photo.superimmo.com/osi0272bri5qj3ry3ntppvji4mzz",
-   "https://photo.superimmo.com/b26pe5zwftokb2hzmyrhf48f1s54",
-   "https://photo.superimmo.com/wijc69ptyrq33nhyektfuryvn31v",
-   "https://photo.superimmo.com/uifwtvtln771wvvf2o6oyruss37e",
-   "https://photo.superimmo.com/kqj7a5kvxl9spzh5pq234gi3r1fj",
-   "https://photo.superimmo.com/7y97rg7vsq2lvejpdstdhn292sxk",
-   "https://photo.superimmo.com/mlwykdvwr31sgg95vizh234drymb",
-   "https://photo.superimmo.com/g0n756cgkf02hrv22uia6n0mhcr3",
-   "https://photo.superimmo.com/jxhh6sa163vj2o7mixcphoetpbn5",
-   "https://photo.superimmo.com/3agdoq98ybvj8df9o8wkf8exwzf8"
-  ],
-  "description": "Annonce appartement location 25,64 m² 1 pièce à Saint-Denis Si vous m'adoptez ... Je suis un",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Superimmo",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-06T07:05+04:00"
- },
- {
   "id": "zimo-01a1a189-df7b-78cb-b3c1-c59c4b2abbc0",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-2-pieces-44-m2/01a1a189-df7b-78cb-b3c1-c59c4b2abbc0",
@@ -7317,6 +7276,35 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "zimo-01a1a177-8ce8-7713-88b0-489e97d3a2f0",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/reprise-de-bail/01a1a177-8ce8-7713-88b0-489e97d3a2f0",
+  "titre": "Reprise de bail",
+  "prix": 703.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 44.0,
+  "meuble": null,
+  "photos": [],
+  "description": "Location T2 Saint-Denis (974) 2 pièces 44 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-03T17:23+04:00"
  },
  {
   "id": "pv-1293782366",
