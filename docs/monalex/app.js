@@ -777,6 +777,7 @@ function pageMontre(id) {
       <div class="d-cta">
         ${d0 && d0.tel ? `<a class="btn btn-green" href="tel:${digits(d0.tel)}" data-log="appel" data-v="${esc(d0.id)}" data-m="${esc(m.id)}">Appeler ${esc(d0.ville)}</a>` : `<a class="btn btn-green" href="#d/${encodeURIComponent(d0?.id || "")}">Détaillant le plus proche</a>`}
         <a class="btn btn-light" href="${esc(m.url_ref || m.url_rolex)}" target="_blank" rel="noopener">Prix sur rolex.com</a>
+        <a class="btn btn-light full" href="https://www.chrono24.fr/search/index.htm?dosearch=true&query=${encodeURIComponent("Rolex " + m.reference)}" target="_blank" rel="noopener">Voir les annonces sur Chrono24 ↗</a>
         <button class="btn ${suivi ? "btn-light" : "btn-line"} full" data-follow="${esc(m.id)}" aria-pressed="${!!suivi}">${suivi ? "Alerte active ✓ · arrêter" : "M'alerter pour cette montre"}</button>
         <p class="d-note full" style="margin:0;text-align:center">Notification si elle devient disponible chez un détaillant, ou si son prix change.</p>
       </div>
