@@ -1604,7 +1604,10 @@ async function start() {
     $("#subPoster").addEventListener("click", () => d.showModal());
     $("#subFermer").addEventListener("click", () => d.close());
     $("#subVoir").addEventListener("click", () => d.close());
-    d.addEventListener("click", ev => { if (ev.target === d) d.close(); }); }
+    d.addEventListener("click", ev => { if (ev.target === d) d.close(); });
+    // léger effet de profondeur au défilement (téléphone)
+    const im = $("#subPoster img"); let tic = false;
+    addEventListener("scroll", () => { if (tic) return; tic = true; requestAnimationFrame(() => { tic = false; const y = Math.min(scrollY, innerHeight); im.style.setProperty("--px", (y * .35).toFixed(1) + "px"); }); }, { passive: true }); }
   $("#annee").textContent = new Date().getFullYear();
   $("#searchEmblem").innerHTML = $("#homeLink").innerHTML;
   if (DATA.mise_a_jour) $("#updated").textContent = `Annonces mises à jour le ${new Date(DATA.mise_a_jour).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}.`;
