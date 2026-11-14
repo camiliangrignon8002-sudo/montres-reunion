@@ -545,6 +545,10 @@
       summary: "Camilian et Fleur : bouton voiture « Même trajet, même horaire »",
       patchLinks: { "lien-trajet-camilian-fleur": { kind: "trajet", label: "Même trajet, même horaire" } },
     }, {
+      id: "zone-administratif",
+      summary: "Zone « Administratif » (ADM, bureau) et compétence « Administratif » ajoutées",
+      addZone: { id: "ADM", name: "Administratif (bureau)", color: "#5E5CE6", pattern: "plein" },
+    }, {
       id: "competences",
       summary: "Compétences ajoutées à chaque personne (badge rouge, FDJ, ouverture, fermeture, en formation, ancien(ne)) : tout le monde peut travailler en ZP",
       skillsInit: true,

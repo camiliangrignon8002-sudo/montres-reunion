@@ -559,3 +559,18 @@ test("préférence de service : matin/soir obligatoire, ou « si besoin »", () 
   s = apply(s, [{ type: "updateEmployee", id: "maelle", patch: { rules: { prefers: "matin", shiftFlex: true } } }]).state;
   assert.ok(!C.validateWeek(apply(s, [{ type: "setShift", emp: "maelle", date: W, segs: pm }]).state, W).some((i) => i.code === "SHIFT_PREF"));
 });
+
+test("administratif : zone ADM (bureau), compétence, jour de bureau", () => {
+  let s = withWeek1();
+  s = apply(s, [{ type: "addZone", zone: { id: "ADM", name: "Administratif (bureau)", color: "#5E5CE6", pattern: "plein" } }]).state;
+  const ch = C.empById(s, "charlotte");
+  assert.equal(C.hasSkill(ch, "admin"), false);
+  const W = "2026-12-07", seg = [{ s: "09:00", e: "12:00", z: "ADM" }, { s: "12:30", e: "16:30", z: "ADM" }];
+  assert.equal(apply(s, [{ type: "setShift", emp: "charlotte", date: W, segs: seg }]).ok, false); // pas la compétence
+  s = apply(s, [{ type: "setZones", emp: "charlotte", zones: { ...ch.zones, ADM: "confirme" } }, { type: "updateEmployee", id: "charlotte", patch: { rules: { officeMinDays: 1 } } }]).state;
+  assert.equal(C.hasSkill(C.empById(s, "charlotte"), "admin"), true);
+  const r = apply(s, [{ type: "setShift", emp: "charlotte", date: W, segs: seg }]);
+  assert.ok(r.ok, r.errors && r.errors.join());
+  const iss = C.validateWeek(r.state, W).map((i) => i.code);
+  assert.ok(!iss.includes("OFFICE_DAYS") && !iss.includes("OUT_OF_HOURS"));
+});

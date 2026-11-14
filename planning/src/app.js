@@ -1258,9 +1258,10 @@
   };
 
   // ---------- Compétences ----------
-  const SKILL_KEYS = ["badgeRouge", "fdj", "ouverture", "fermeture", "formation", "ancien"];
+  const SKILL_KEYS = ["badgeRouge", "admin", "fdj", "ouverture", "fermeture", "formation", "ancien"];
   const SKILL_HELP = {
     badgeRouge: "Peut travailler en zone réservée (ZR). Sans badge rouge : zone publique (ZP) seulement.",
+    admin: "Peut être planifié(e) en administratif (bureau, zone ADM) : choisissez « ADM » sur le créneau. Compte comme jour de bureau.",
     fdj: "Peut tenir la Française des Jeux.",
     ouverture: "Peut ouvrir le magasin : la première personne de la zone doit l'avoir.",
     fermeture: "Peut fermer le magasin : la dernière personne de la zone doit l'avoir.",
@@ -1269,9 +1270,9 @@
   };
   App.skillOn = function (e, k) { return k === "formation" ? C.inTraining(e, this.today()) || !!(e.training && !e.training.ended && e.training.since > this.today()) : C.hasSkill(e, k); };
   App.skillOps = function (e, k, on) {
-    if (k === "badgeRouge") {
-      const zones = { ...(e.zones || {}) };
-      if (on) zones.ZR = "confirme"; else delete zones.ZR;
+    if (k === "badgeRouge" || k === "admin") {
+      const zones = { ...(e.zones || {}) }, z = k === "admin" ? "ADM" : "ZR";
+      if (on) zones[z] = "confirme"; else delete zones[z];
       if (!zones.ZP) zones.ZP = "confirme";
       return [{ type: "setZones", emp: e.id, zones }];
     }
@@ -1378,7 +1379,7 @@
     const officeN = h("input", { type: "number", class: "input", id: "emp-office-n", min: "1", max: "7", value: r.officeMinDays || 2, style: { width: "80px" } });
     const tr = e.training || {};
     const trOn = h("input", { type: "checkbox", id: "emp-train", checked: this.skillOn(e, "formation") });
-    const sk = Object.fromEntries(["badgeRouge", "fdj", "ouverture", "fermeture", "ancien"].map((k) => [k, h("input", { type: "checkbox", id: `emp-skill-${k}`, checked: this.skillOn(e, k) })]));
+    const sk = Object.fromEntries(["badgeRouge", "admin", "fdj", "ouverture", "fermeture", "ancien"].map((k) => [k, h("input", { type: "checkbox", id: `emp-skill-${k}`, checked: this.skillOn(e, k) })]));
     trOn.addEventListener("change", () => { if (trOn.checked) sk.ancien.checked = false; });
     sk.ancien.addEventListener("change", () => { if (sk.ancien.checked) trOn.checked = false; });
     const trSince = h("input", { type: "date", class: "input", id: "emp-train-since", value: tr.since || e.startedOn || this.today() });
@@ -1398,7 +1399,7 @@
       h("h3", {}, "Horaires liés"),
       this.linkSection(id),
       h("h3", {}, "Compétences"),
-      h("div", { class: "stack", style: { gap: "6px" } }, ["badgeRouge", "fdj", "ouverture", "fermeture"].map((k) => h("label", { class: "check", title: SKILL_HELP[k] }, sk[k], h("span", {}, h("b", {}, C.SKILLS[k]), h("span", { class: "small muted" }, ` — ${SKILL_HELP[k]}`)))),
+      h("div", { class: "stack", style: { gap: "6px" } }, ["badgeRouge", "admin", "fdj", "ouverture", "fermeture"].map((k) => h("label", { class: "check", title: SKILL_HELP[k] }, sk[k], h("span", {}, h("b", {}, C.SKILLS[k]), h("span", { class: "small muted" }, ` — ${SKILL_HELP[k]}`)))),
         h("label", { class: "check" }, trOn, h("span", {}, h("b", {}, "En formation"), h("span", { class: "small muted" }, ` — ${SKILL_HELP.formation}`))),
         h("label", { class: "f" }, "En formation depuis le (jusqu'à ce qu'on décoche)", trSince),
         h("label", { class: "check" }, sk.ancien, h("span", {}, h("b", {}, "Ancien(ne)"), h("span", { class: "small muted" }, ` — ${SKILL_HELP.ancien}`)))),
@@ -1417,6 +1418,7 @@
           const skills = { ...(e.skills || {}), fdj: sk.fdj.checked, ouverture: sk.ouverture.checked, fermeture: sk.fermeture.checked, ancien: sk.ancien.checked };
           const zones = { ...(e.zones || {}) };
           if (sk.badgeRouge.checked) zones.ZR = zones.ZR || "confirme"; else delete zones.ZR;
+          if (sk.admin.checked) zones.ADM = zones.ADM || "confirme"; else delete zones.ADM;
           if (!zones.ZP) zones.ZP = "confirme";
           const zoneOps = JSON.stringify(zones) !== JSON.stringify(e.zones || {}) ? [{ type: "setZones", emp: id, zones }] : [];
           return (await this.commit([{ type: "updateEmployee", id, patch: { name: name.value, role: role.value, aliases: aliases.value.split(",").map((x) => x.trim()).filter(Boolean), rules, training, contractHours, skills } }, ...zoneOps])).ok;
@@ -1873,6 +1875,7 @@
         if (!e || !e.onLeave || !(from > e.onLeave.since)) continue;
         ops.push({ type: "addAbsence", absence: { emp: id, type: e.onLeave.type || "vacances", from: e.onLeave.since, to: C.addDays(from, -1), note: "retour d'après le planning papier" } }, { type: "updateEmployee", id, patch: { onLeave: null } });
       }
+      if (u.addZone && !C.zoneById(this.state, u.addZone.id)) ops.push({ type: "addZone", zone: u.addZone });
       if (u.patchLinks) {
         const cur = this.state.settings.links || [];
         if (cur.some((l) => u.patchLinks[l.id])) ops.push({ type: "setSettings", patch: { links: cur.map((l) => (u.patchLinks[l.id] ? { ...l, ...u.patchLinks[l.id] } : l)) } });

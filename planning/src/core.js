@@ -168,8 +168,9 @@
   const inTraining = (emp, date) => !!(emp && emp.training && !emp.training.ended && (!emp.training.since || date >= emp.training.since));
   const trainingLabel = () => "";
   // Compétences cochables. Le badge rouge = droit de travailler en zone réservée (ZR) ; sans lui, ZP seulement.
-  const SKILLS = { badgeRouge: "Badge rouge (ZR)", fdj: "FDJ", ouverture: "Ouverture du magasin", fermeture: "Fermeture du magasin", formation: "En formation", ancien: "Ancien(ne)" };
-  const hasSkill = (emp, k) => !!(emp && (k === "badgeRouge" ? (emp.zones || {}).ZR : emp.skills && emp.skills[k]));
+  const SKILLS = { badgeRouge: "Badge rouge (ZR)", admin: "Administratif", fdj: "FDJ", ouverture: "Ouverture du magasin", fermeture: "Fermeture du magasin", formation: "En formation", ancien: "Ancien(ne)" };
+  const hasSkill = (emp, k) => !!(emp && (k === "badgeRouge" ? (emp.zones || {}).ZR : k === "admin" ? (emp.zones || {}).ADM : emp.skills && emp.skills[k]));
+  const isAdminZone = (z) => z === "ADM"; // bureau : pas un point de vente (pas d'ouverture, pas de « seul(e) »)
   // Plages (minutes) où la personne en formation est seule dans la zone du bloc : aucune personne confirmée présente.
   function aloneRanges(state, shifts, sh, g) {
     const [a, b] = segRange(g);
@@ -469,6 +470,7 @@
       const emp = empById(state, sh.emp);
       if (!inTraining(emp, sh.date) || !(sh.segs || []).every((g) => isTime(g.s) && isTime(g.e))) continue;
       for (const g of sh.segs) {
+        if (isAdminZone(g.z)) continue;
         const gaps = aloneRanges(state, w.shifts, sh, g);
         if (gaps.length) add("erreur", "TRAINEE_ALONE", sh.emp, sh.date, `${emp.name} est en formation${trainingLabel(emp)} et serait seul(e) en ${g.z} le ${fmtDate(sh.date, "day")} de ${rangesLabel(gaps)}.`);
       }
@@ -500,7 +502,7 @@
     // dès qu'au moins une personne de l'équipe l'a cochée.
     for (const [k, code, label] of [["ouverture", "OPEN_SKILL", "ouvre"], ["fermeture", "CLOSE_SKILL", "ferme"]]) {
       if (!state.employees.some((e) => e.active !== false && hasSkill(e, k))) continue;
-      for (const d of weekDates(monday)) for (const z of (state.zones || []).map((x) => x.id)) {
+      for (const d of weekDates(monday)) for (const z of (state.zones || []).map((x) => x.id).filter((z) => !isAdminZone(z))) {
         const segs = [];
         for (const sh of w.shifts) if (sh.date === d) for (const g of sh.segs || []) if (g.z === z && isTime(g.s) && isTime(g.e)) segs.push({ emp: sh.emp, r: segRange(g) });
         if (!segs.length) continue;
@@ -591,7 +593,7 @@
       if (emp.rules.officeSince && addDays(monday, 6) < emp.rules.officeSince) continue; // règle valable à partir de sa date
       const mine = w.shifts.filter((x) => x.emp === emp.id);
       if (!mine.length) continue;
-      const n = mine.filter((x) => x.office).length;
+      const n = mine.filter((x) => x.office || (x.segs || []).some((g) => isAdminZone(g.z))).length;
       if (n < min) add("alerte", "OFFICE_DAYS", emp.id, null, `${emp.name} : ${n} jour(s) de bureau cette semaine, il en faut au moins ${min}. Cochez « Jour de bureau » sur ses créneaux concernés.`);
     }
     // Couverture
@@ -654,7 +656,7 @@
       if (calStatus(state, emp, date) === "inconnu") continue; // jamais « disponible » par défaut
       if (w.shifts.some((s) => s.emp === emp.id && s.date === date)) continue;
       if (personalRuleIssues(emp, date, segs).length) continue; // horaires ou jours de repos fixes
-      if (inTraining(emp, date) && segs.some((g) => aloneRanges(state, w.shifts, { emp: emp.id, date }, g).length)) continue; // en formation : jamais seul(e)
+      if (inTraining(emp, date) && segs.some((g) => !isAdminZone(g.z) && aloneRanges(state, w.shifts, { emp: emp.id, date }, g).length)) continue; // en formation : jamais seul(e)
       if (st.checkOpening && segs.some((g) => outsideOpening(state, g, date))) continue; // jamais hors des horaires du PDV
       if (st.checkLegal && segs.every((g) => isTime(g.s) && isTime(g.e))) {
         const r = shiftRanges(segs);

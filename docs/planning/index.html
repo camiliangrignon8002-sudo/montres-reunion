@@ -1097,6 +1097,10 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
       summary: "Camilian et Fleur : bouton voiture « Même trajet, même horaire »",
       patchLinks: { "lien-trajet-camilian-fleur": { kind: "trajet", label: "Même trajet, même horaire" } },
     }, {
+      id: "zone-administratif",
+      summary: "Zone « Administratif » (ADM, bureau) et compétence « Administratif » ajoutées",
+      addZone: { id: "ADM", name: "Administratif (bureau)", color: "#5E5CE6", pattern: "plein" },
+    }, {
       id: "competences",
       summary: "Compétences ajoutées à chaque personne (badge rouge, FDJ, ouverture, fermeture, en formation, ancien(ne)) : tout le monde peut travailler en ZP",
       skillsInit: true,
@@ -1313,8 +1317,9 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
   const inTraining = (emp, date) => !!(emp && emp.training && !emp.training.ended && (!emp.training.since || date >= emp.training.since));
   const trainingLabel = () => "";
   // Compétences cochables. Le badge rouge = droit de travailler en zone réservée (ZR) ; sans lui, ZP seulement.
-  const SKILLS = { badgeRouge: "Badge rouge (ZR)", fdj: "FDJ", ouverture: "Ouverture du magasin", fermeture: "Fermeture du magasin", formation: "En formation", ancien: "Ancien(ne)" };
-  const hasSkill = (emp, k) => !!(emp && (k === "badgeRouge" ? (emp.zones || {}).ZR : emp.skills && emp.skills[k]));
+  const SKILLS = { badgeRouge: "Badge rouge (ZR)", admin: "Administratif", fdj: "FDJ", ouverture: "Ouverture du magasin", fermeture: "Fermeture du magasin", formation: "En formation", ancien: "Ancien(ne)" };
+  const hasSkill = (emp, k) => !!(emp && (k === "badgeRouge" ? (emp.zones || {}).ZR : k === "admin" ? (emp.zones || {}).ADM : emp.skills && emp.skills[k]));
+  const isAdminZone = (z) => z === "ADM"; // bureau : pas un point de vente (pas d'ouverture, pas de « seul(e) »)
   // Plages (minutes) où la personne en formation est seule dans la zone du bloc : aucune personne confirmée présente.
   function aloneRanges(state, shifts, sh, g) {
     const [a, b] = segRange(g);
@@ -1614,6 +1619,7 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
       const emp = empById(state, sh.emp);
       if (!inTraining(emp, sh.date) || !(sh.segs || []).every((g) => isTime(g.s) && isTime(g.e))) continue;
       for (const g of sh.segs) {
+        if (isAdminZone(g.z)) continue;
         const gaps = aloneRanges(state, w.shifts, sh, g);
         if (gaps.length) add("erreur", "TRAINEE_ALONE", sh.emp, sh.date, `${emp.name} est en formation${trainingLabel(emp)} et serait seul(e) en ${g.z} le ${fmtDate(sh.date, "day")} de ${rangesLabel(gaps)}.`);
       }
@@ -1645,7 +1651,7 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
     // dès qu'au moins une personne de l'équipe l'a cochée.
     for (const [k, code, label] of [["ouverture", "OPEN_SKILL", "ouvre"], ["fermeture", "CLOSE_SKILL", "ferme"]]) {
       if (!state.employees.some((e) => e.active !== false && hasSkill(e, k))) continue;
-      for (const d of weekDates(monday)) for (const z of (state.zones || []).map((x) => x.id)) {
+      for (const d of weekDates(monday)) for (const z of (state.zones || []).map((x) => x.id).filter((z) => !isAdminZone(z))) {
         const segs = [];
         for (const sh of w.shifts) if (sh.date === d) for (const g of sh.segs || []) if (g.z === z && isTime(g.s) && isTime(g.e)) segs.push({ emp: sh.emp, r: segRange(g) });
         if (!segs.length) continue;
@@ -1736,7 +1742,7 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
       if (emp.rules.officeSince && addDays(monday, 6) < emp.rules.officeSince) continue; // règle valable à partir de sa date
       const mine = w.shifts.filter((x) => x.emp === emp.id);
       if (!mine.length) continue;
-      const n = mine.filter((x) => x.office).length;
+      const n = mine.filter((x) => x.office || (x.segs || []).some((g) => isAdminZone(g.z))).length;
       if (n < min) add("alerte", "OFFICE_DAYS", emp.id, null, `${emp.name} : ${n} jour(s) de bureau cette semaine, il en faut au moins ${min}. Cochez « Jour de bureau » sur ses créneaux concernés.`);
     }
     // Couverture
@@ -1799,7 +1805,7 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
       if (calStatus(state, emp, date) === "inconnu") continue; // jamais « disponible » par défaut
       if (w.shifts.some((s) => s.emp === emp.id && s.date === date)) continue;
       if (personalRuleIssues(emp, date, segs).length) continue; // horaires ou jours de repos fixes
-      if (inTraining(emp, date) && segs.some((g) => aloneRanges(state, w.shifts, { emp: emp.id, date }, g).length)) continue; // en formation : jamais seul(e)
+      if (inTraining(emp, date) && segs.some((g) => !isAdminZone(g.z) && aloneRanges(state, w.shifts, { emp: emp.id, date }, g).length)) continue; // en formation : jamais seul(e)
       if (st.checkOpening && segs.some((g) => outsideOpening(state, g, date))) continue; // jamais hors des horaires du PDV
       if (st.checkLegal && segs.every((g) => isTime(g.s) && isTime(g.e))) {
         const r = shiftRanges(segs);
@@ -4361,9 +4367,10 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
   };
 
   // ---------- Compétences ----------
-  const SKILL_KEYS = ["badgeRouge", "fdj", "ouverture", "fermeture", "formation", "ancien"];
+  const SKILL_KEYS = ["badgeRouge", "admin", "fdj", "ouverture", "fermeture", "formation", "ancien"];
   const SKILL_HELP = {
     badgeRouge: "Peut travailler en zone réservée (ZR). Sans badge rouge : zone publique (ZP) seulement.",
+    admin: "Peut être planifié(e) en administratif (bureau, zone ADM) : choisissez « ADM » sur le créneau. Compte comme jour de bureau.",
     fdj: "Peut tenir la Française des Jeux.",
     ouverture: "Peut ouvrir le magasin : la première personne de la zone doit l'avoir.",
     fermeture: "Peut fermer le magasin : la dernière personne de la zone doit l'avoir.",
@@ -4372,9 +4379,9 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
   };
   App.skillOn = function (e, k) { return k === "formation" ? C.inTraining(e, this.today()) || !!(e.training && !e.training.ended && e.training.since > this.today()) : C.hasSkill(e, k); };
   App.skillOps = function (e, k, on) {
-    if (k === "badgeRouge") {
-      const zones = { ...(e.zones || {}) };
-      if (on) zones.ZR = "confirme"; else delete zones.ZR;
+    if (k === "badgeRouge" || k === "admin") {
+      const zones = { ...(e.zones || {}) }, z = k === "admin" ? "ADM" : "ZR";
+      if (on) zones[z] = "confirme"; else delete zones[z];
       if (!zones.ZP) zones.ZP = "confirme";
       return [{ type: "setZones", emp: e.id, zones }];
     }
@@ -4481,7 +4488,7 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
     const officeN = h("input", { type: "number", class: "input", id: "emp-office-n", min: "1", max: "7", value: r.officeMinDays || 2, style: { width: "80px" } });
     const tr = e.training || {};
     const trOn = h("input", { type: "checkbox", id: "emp-train", checked: this.skillOn(e, "formation") });
-    const sk = Object.fromEntries(["badgeRouge", "fdj", "ouverture", "fermeture", "ancien"].map((k) => [k, h("input", { type: "checkbox", id: `emp-skill-${k}`, checked: this.skillOn(e, k) })]));
+    const sk = Object.fromEntries(["badgeRouge", "admin", "fdj", "ouverture", "fermeture", "ancien"].map((k) => [k, h("input", { type: "checkbox", id: `emp-skill-${k}`, checked: this.skillOn(e, k) })]));
     trOn.addEventListener("change", () => { if (trOn.checked) sk.ancien.checked = false; });
     sk.ancien.addEventListener("change", () => { if (sk.ancien.checked) trOn.checked = false; });
     const trSince = h("input", { type: "date", class: "input", id: "emp-train-since", value: tr.since || e.startedOn || this.today() });
@@ -4501,7 +4508,7 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
       h("h3", {}, "Horaires liés"),
       this.linkSection(id),
       h("h3", {}, "Compétences"),
-      h("div", { class: "stack", style: { gap: "6px" } }, ["badgeRouge", "fdj", "ouverture", "fermeture"].map((k) => h("label", { class: "check", title: SKILL_HELP[k] }, sk[k], h("span", {}, h("b", {}, C.SKILLS[k]), h("span", { class: "small muted" }, ` — ${SKILL_HELP[k]}`)))),
+      h("div", { class: "stack", style: { gap: "6px" } }, ["badgeRouge", "admin", "fdj", "ouverture", "fermeture"].map((k) => h("label", { class: "check", title: SKILL_HELP[k] }, sk[k], h("span", {}, h("b", {}, C.SKILLS[k]), h("span", { class: "small muted" }, ` — ${SKILL_HELP[k]}`)))),
         h("label", { class: "check" }, trOn, h("span", {}, h("b", {}, "En formation"), h("span", { class: "small muted" }, ` — ${SKILL_HELP.formation}`))),
         h("label", { class: "f" }, "En formation depuis le (jusqu'à ce qu'on décoche)", trSince),
         h("label", { class: "check" }, sk.ancien, h("span", {}, h("b", {}, "Ancien(ne)"), h("span", { class: "small muted" }, ` — ${SKILL_HELP.ancien}`)))),
@@ -4520,6 +4527,7 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
           const skills = { ...(e.skills || {}), fdj: sk.fdj.checked, ouverture: sk.ouverture.checked, fermeture: sk.fermeture.checked, ancien: sk.ancien.checked };
           const zones = { ...(e.zones || {}) };
           if (sk.badgeRouge.checked) zones.ZR = zones.ZR || "confirme"; else delete zones.ZR;
+          if (sk.admin.checked) zones.ADM = zones.ADM || "confirme"; else delete zones.ADM;
           if (!zones.ZP) zones.ZP = "confirme";
           const zoneOps = JSON.stringify(zones) !== JSON.stringify(e.zones || {}) ? [{ type: "setZones", emp: id, zones }] : [];
           return (await this.commit([{ type: "updateEmployee", id, patch: { name: name.value, role: role.value, aliases: aliases.value.split(",").map((x) => x.trim()).filter(Boolean), rules, training, contractHours, skills } }, ...zoneOps])).ok;
@@ -4976,6 +4984,7 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
         if (!e || !e.onLeave || !(from > e.onLeave.since)) continue;
         ops.push({ type: "addAbsence", absence: { emp: id, type: e.onLeave.type || "vacances", from: e.onLeave.since, to: C.addDays(from, -1), note: "retour d'après le planning papier" } }, { type: "updateEmployee", id, patch: { onLeave: null } });
       }
+      if (u.addZone && !C.zoneById(this.state, u.addZone.id)) ops.push({ type: "addZone", zone: u.addZone });
       if (u.patchLinks) {
         const cur = this.state.settings.links || [];
         if (cur.some((l) => u.patchLinks[l.id])) ops.push({ type: "setSettings", patch: { links: cur.map((l) => (u.patchLinks[l.id] ? { ...l, ...u.patchLinks[l.id] } : l)) } });
