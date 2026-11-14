@@ -14,7 +14,7 @@
 <header class="haut">
   <a class="retour" href="../#/" aria-label="Retour à Monalex">← Monalex</a>
   <div class="titre"><h1>Cosmograph Daytona</h1><p>126500LN · Oystersteel · cadran blanc · reproduction 3D interprétative</p></div>
-  <button id="b-info" class="btn rond" type="button" aria-label="À propos de ce modèle">i</button>
+  <div class="actions"><button id="b-photos" class="btn pilule" type="button">Photos</button><button id="b-info" class="btn rond" type="button" aria-label="À propos de ce modèle">i</button></div>
 </header>
 
 <canvas id="scene" aria-label="Montre en 3D. Faites glisser pour tourner, pincez ou utilisez la molette pour zoomer, touchez une pièce pour la découvrir."></canvas>
@@ -42,7 +42,14 @@
   <p class="petit">Rolex, Oyster, Cosmograph, Daytona, Oysterlock, Easylink, Triplock, Cerachrom, Chromalight et Parachrom sont des marques de Rolex SA. Monalex n'est pas affilié à Rolex.</p>
 </aside>
 
-<script type="module" src="js/main.js?v=1"></script>
+<section id="galerie" class="galerie" hidden aria-label="Photos de la montre">
+  <button class="x g-x" type="button" aria-label="Fermer">×</button>
+  <div class="g-grand"><button class="g-fl g-prec" type="button" aria-label="Photo précédente">‹</button><img alt=""><button class="g-fl g-suiv" type="button" aria-label="Photo suivante">›</button></div>
+  <p class="g-leg"></p>
+  <div class="g-vign"></div>
+</section>
+<script type="module">import { galerie } from "./js/photos.js?v=1"; galerie();</script>
+<script type="module" src="js/main.js?v=2"></script>
 <script>
   // repli si le module échoue (pas de WebGL, navigateur trop ancien)
   setTimeout(() => { if (!document.body.classList.contains("pret")) document.body.classList.add("lent"); }, 12000);
