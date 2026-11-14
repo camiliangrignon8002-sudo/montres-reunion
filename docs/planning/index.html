@@ -3962,7 +3962,19 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
         const st = last && C.isTime(last.e) ? C.fromMin(C.toMin(last.e) + 30) : "09:00";
         segs.push({ s: st, e: C.fromMin(C.toMin(st) + 180), z: zones.length === 1 ? zones[0] : (last && last.z) || zones[0] || "" });
         draw();
-      }, "sm")));
+      }, "sm"),
+        // Administratif : met le créneau en bureau (ADM) ; la compétence est ajoutée si besoin.
+        C.zoneById(s, "ADM") ? btn("🗂 Administratif", async () => {
+          if (!C.zoneLevel(emp, "ADM")) {
+            const r = await this.commit([{ type: "setZones", emp: emp.id, zones: { ...(emp.zones || {}), ADM: "confirme" } }], { summary: `${emp.name} : compétence « Administratif » ajoutée`, quiet: true });
+            if (!r.ok) return;
+            emp = C.empById(this.state, emp.id);
+            toast(`${emp.name} peut maintenant être en administratif.`);
+          }
+          if (segs.length) segs.forEach((g) => { g.z = "ADM"; });
+          else segs.push({ s: "09:00", e: "12:30", z: "ADM" }, { s: "13:00", e: "16:30", z: "ADM" });
+          draw();
+        }, "sm" + (segs.length && segs.every((g) => g.z === "ADM") ? " primary" : "")) : null));
       const presets = presetsFor();
       if (presets.length) kids.push(h("div", { class: "stack", style: { gap: "6px" } }, h("span", { class: "small muted" }, "Horaires habituels (modèle) :"), h("div", { class: "suggest" }, presets.map((p) => h("button", { type: "button", onClick: () => { segs = p.map((g) => ({ ...g })); draw(); } }, `${C.segLabel(p)} ${[...new Set(p.map((g) => g.z))].join("/")}`)))));
       if (emp.rules && emp.rules.officeMinDays) kids.push(h("label", { class: "check" }, h("input", { type: "checkbox", id: "ed-office", checked: office, onChange: (e) => { office = e.target.checked; refreshCheck(); } }), `Jour de bureau (${emp.name} : au moins ${emp.rules.officeMinDays} par semaine)`));
@@ -3987,7 +3999,7 @@ html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid 
       if (!box || !emp) return;
       const ops = segs.length ? [{ type: "setShift", emp: emp.id, date, segs, note, office }] : existing ? [{ type: "removeShift", emp: emp.id, date }] : [];
       if (!ops.length) { box.replaceChildren(); return; }
-      const r = C.applyOps(s, ops, {});
+      const r = C.applyOps(this.state, ops, {});
       const total = C.shiftMinutes(segs.filter((g) => C.isTime(g.s) && C.isTime(g.e)));
       const p = segs.every((g) => C.isTime(g.s) && C.isTime(g.e)) ? C.pauses(segs) : [];
       const lines = [h("div", { class: "row small" }, h("b", {}, `Total ${C.fmtHours(total)}`), p.length ? h("span", { class: "muted" }, `· pause ${p.map((x) => `${x.s}–${x.e} (${x.min} min)`).join(", ")}`) : null)];
