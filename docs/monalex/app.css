@@ -969,4 +969,13 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
 .sub-live{aspect-ratio:770/1050;height:88%;translate:-43.6% -50%}
 @keyframes sub-flotte{0%,100%{translate:-43.6% -50%}50%{translate:-43.6% calc(-50% - 10px)}}
 @media (min-width:901px){.sub-live{height:94%}}
+<<<<<<< HEAD
+.sub-live::after{-webkit-mask:url(img/sub-montre.webp?v=3) center/contain no-repeat;mask:url(img/sub-montre.webp?v=3) center/contain no-repeat}
+
+/* Logo Monalex Watches (cadran + nom), version graphite sur l'en-tête blanc ; argent sur fonds sombres */
+.emblem .em-logo{display:block;height:56px;width:auto}
+.em-s-logo{--m:url(img/logo-monalex.png)}
+@media (max-width:640px){.emblem .em-logo{height:44px}}
+=======
 .sub-live::after{-webkit-mask:url(img/sub-montre.webp?v=2) center/contain no-repeat;mask:url(img/sub-montre.webp?v=2) center/contain no-repeat}
+>>>>>>> origin/main
