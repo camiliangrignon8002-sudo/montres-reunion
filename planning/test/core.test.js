@@ -654,3 +654,17 @@ test("passagers par créneau : > 1700 le matin ou le soir → 3 en ZR ; soir ≤
   const st2 = apply(s, [put("murielle", "18:00", "23:00"), put("reine-claude", "18:00", "22:00")], { allowErrors: true }).state;
   assert.ok(C.validateWeek(st2, W).some((i) => i.code === "STAFF_MIN" && /1750 passagers attendus/.test(i.msg)));
 });
+
+test("fusion de deux fiches (Helena → Lana)", () => {
+  let s = withWeek1();
+  s = apply(s, [{ type: "addEmployee", employee: { name: "Helena", zones: { ZP: "confirme" } } }, { type: "addEmployee", employee: { name: "Lana", zones: { ZP: "confirme" } } },
+    { type: "setShift", emp: "helena", date: "2026-12-07", segs: [{ s: "07:00", e: "12:00", z: "ZP" }] },
+    { type: "setShift", emp: "lana", date: "2026-12-08", segs: [{ s: "07:00", e: "12:00", z: "ZP" }] },
+    { type: "addAbsence", absence: { emp: "helena", type: "conges", from: "2026-12-10", to: "2026-12-10" } }]).state;
+  const r = apply(s, [{ type: "mergeEmployee", from: "helena", to: "lana" }]);
+  assert.ok(r.ok, r.errors && r.errors.join());
+  assert.ok(!C.empById(r.state, "helena"));
+  assert.equal(r.state.weeks["2026-12-07"].shifts.filter((x) => x.emp === "lana").length, 2);
+  assert.ok(Object.values(r.state.absences).some((a) => a.emp === "lana"));
+  assert.ok(!REF.employees.some((e) => e.id === "helena"));
+});

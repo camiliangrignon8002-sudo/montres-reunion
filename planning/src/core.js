@@ -1266,6 +1266,28 @@
           conf("employees");
           break;
         }
+        case "mergeEmployee": {
+          // Deux fiches pour une même personne : horaires, absences, heures et réglages réunis sur « to ».
+          const ef = empById(s, op.from), et = empById(s, op.to);
+          if (!ef || !et || ef.id === et.id) { fail("Fusion impossible : personne introuvable."); break; }
+          const fid = ef.id, tid = et.id;
+          for (const [m, w] of Object.entries(s.weeks)) {
+            if (!w.shifts.some((x) => x.emp === fid) && !(w.vacated || []).some((v) => v.emp === fid)) continue;
+            const taken = new Set(w.shifts.filter((x) => x.emp === tid).map((x) => x.date));
+            w.shifts = w.shifts.filter((x) => x.emp !== fid || !taken.has(x.date)).map((x) => (x.emp === fid ? { ...x, emp: tid } : x));
+            if (w.vacated) w.vacated = w.vacated.map((v) => (v.emp === fid ? { ...v, emp: tid } : v));
+            markWeek(m);
+          }
+          for (const a of Object.values(s.absences || {})) if (a.emp === fid) { a.emp = tid; touched.absences.add(a.id); }
+          for (const a of Object.values(s.adjustments || {})) if (a.emp === fid) { a.emp = tid; touched.adjustments.add(a.id); }
+          if (s.settings.links) { s.settings.links = s.settings.links.map((l) => ({ ...l, emps: [...new Set(l.emps.map((x) => (x === fid ? tid : x)))] })).filter((l) => l.emps.length > 1); conf("settings"); }
+          for (const e of s.employees) if (e.rules && (e.rules.incompatible || []).includes(fid)) e.rules = { ...e.rules, incompatible: [...new Set(e.rules.incompatible.map((x) => (x === fid ? tid : x)).filter((x) => x !== e.id))] };
+          const since = [ef.startedOn, et.startedOn, (ef.training || {}).since, (et.training || {}).since].filter(Boolean).sort()[0];
+          if (since) { et.startedOn = since; if (et.training) et.training = { ...et.training, since }; }
+          s.employees = s.employees.filter((x) => x.id !== fid); conf("employees");
+          messages.push(`${ef.name} réuni(e) avec ${et.name}.`);
+          break;
+        }
         case "removeEmployee": {
           const emp = empById(s, op.id); if (!emp) { fail("Employé introuvable."); break; }
           const used = Object.values(s.weeks).some((w) => w.shifts.some((x) => x.emp === emp.id)) || (s.template.shifts || []).some((t) => t.emp === emp.id);

@@ -334,7 +334,7 @@
   t02("eric", [2, 3, 4], std7(ZP));
   t02("fleur", [2, 3], g("15:30", "17:00", ZR, "17:30", "23:00", ZR));
   t02("fleur", [5], g("08:00", "12:00", ZR, "12:30", "15:30", ZR));
-  t02("helena", [0, 1, 3], std7(ZP));
+  t02("lana", [0, 1, 3], std7(ZP)); // écrit « Helena » sur la feuille : c'est Lana
   t02("lucas", [4, 5, 6], std7(ZP));
   t02("maelle", [2, 3, 4, 5, 6], g("05:30", "11:00", ZP, "11:30", "13:00", ZP));
   t02("mathilde", [0, 5, 6], g("15:30", "17:00", ZP, "17:30", "22:00", ZP));
@@ -370,15 +370,14 @@
   // Nouvelles personnes : arrivée = premier jour sur un planning papier ; heures = total de leur semaine sur le papier.
   const NEWCOMERS = [
     { id: "sabrina", name: "Sabrina", zones: { ZP: "confirme" }, since: "2026-10-26", contractHours: null },
-    { id: "helena", name: "Helena", zones: { ZP: "confirme" }, since: "2026-11-02", contractHours: 21 },
     { id: "ruby", name: "Ruby", zones: { ZP: "confirme" }, since: "2026-11-04", contractHours: 21 },
-    { id: "lana", name: "Lana", zones: { ZP: "confirme" }, since: "2026-11-10", contractHours: 28 },
+    { id: "lana", name: "Lana", zones: { ZP: "confirme" }, since: "2026-11-02", contractHours: 28 },
   ];
   const NOV = [
     { refId: "papier-2026-10-26-b", monday: "2026-10-26", shifts: T26.list, replace: true, newEmployees: NEWCOMERS.filter((x) => x.id === "sabrina"),
       totalsOnPaper: { camilian: 21, charlotte: 35, eric: 35, fleur: 21, lucas: 21, maelle: 35, mathilde: 30, murielle: 35, nathalie: 35, "reine-claude": 35, sabrina: 7, sebastien: 35 } },
-    { refId: "papier-2026-11-02", monday: "2026-11-02", shifts: T02.list, replace: true, newEmployees: NEWCOMERS.filter((x) => ["helena", "ruby"].includes(x.id)),
-      totalsOnPaper: { amandine: 35, camilian: 21, charlotte: 35, eric: 21, fleur: 21, helena: 21, lucas: 21, maelle: 35, mathilde: 30, murielle: 35, nathalie: 0, "reine-claude": 35, ruby: 21, sebastien: 35, sophie: 35 } },
+    { refId: "papier-2026-11-02", monday: "2026-11-02", shifts: T02.list, replace: true, newEmployees: NEWCOMERS.filter((x) => ["lana", "ruby"].includes(x.id)),
+      totalsOnPaper: { amandine: 35, camilian: 21, charlotte: 35, eric: 21, fleur: 21, lana: 21, lucas: 21, maelle: 35, mathilde: 30, murielle: 35, nathalie: 0, "reine-claude": 35, ruby: 21, sebastien: 35, sophie: 35 } },
     { refId: "papier-2026-11-09", monday: "2026-11-09", shifts: T09.list, replace: true, newEmployees: NEWCOMERS.filter((x) => x.id === "lana"),
       totalsOnPaper: { amandine: 35, camilian: 21, charlotte: 35, eric: 35, fleur: 21, lana: 28, lucas: 21, maelle: 35, mathilde: 30, murielle: 35, nathalie: 0, "reine-claude": 35, ruby: 21, sebastien: 35, sophie: 35 } },
   ].map((w) => ({ ...w, source: "planning papier (photo)", noClosing: true, zonesAdd: { camilian: ["ZP", "ZR"], fleur: ["ZP", "ZR"], lucas: ["ZP"], amandine: ["ZP", "ZR"], sophie: ["ZP", "ZR"], mathilde: ["ZP", "ZR"], murielle: ["ZP", "ZR"] } }));
@@ -556,6 +555,10 @@
       id: "passagers-hiver26",
       summary: "Passagers estimés du 25/10/2026 au 27/03/2027 importés (matin, entre-deux, soir)",
       paxImport: PAX_HIVER26,
+    }, {
+      id: "fusion-helena-lana",
+      summary: "Helena n'existe pas : c'était Lana. Horaires, absences et réglages d'Helena réunis sur Lana",
+      mergeEmp: { from: "helena", to: "lana" },
     }, {
       id: "competences",
       summary: "Compétences ajoutées à chaque personne (badge rouge, FDJ, ouverture, fermeture, en formation, ancien(ne)) : tout le monde peut travailler en ZP",

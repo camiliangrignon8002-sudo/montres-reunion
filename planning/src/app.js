@@ -2116,6 +2116,8 @@
         if (!e || !e.onLeave || !(from > e.onLeave.since)) continue;
         ops.push({ type: "addAbsence", absence: { emp: id, type: e.onLeave.type || "vacances", from: e.onLeave.since, to: C.addDays(from, -1), note: "retour d'après le planning papier" } }, { type: "updateEmployee", id, patch: { onLeave: null } });
       }
+      // Deux fiches pour une même personne : tout est réuni sur la bonne, puis l'autre est supprimée.
+      if (u.mergeEmp && C.empById(this.state, u.mergeEmp.from) && C.empById(this.state, u.mergeEmp.to)) ops.push({ type: "mergeEmployee", from: u.mergeEmp.from, to: u.mergeEmp.to });
       if (u.paxImport) ops.push({ type: "setSettings", patch: { passengers: { ...(this.state.settings.passengers || {}), ...u.paxImport } } });
       if (u.addZone && !C.zoneById(this.state, u.addZone.id)) ops.push({ type: "addZone", zone: u.addZone });
       if (u.patchLinks) {
