@@ -1599,7 +1599,11 @@ async function start() {
   catch (e) { $("#grid").innerHTML = `<div class="empty"><h3>Les montres ne se chargent pas</h3><p>La connexion semble coupée. Tirez la page vers le bas pour réessayer.</p><button class="btn btn-green" onclick="location.reload()">Réessayer</button></div>`; return; }
   $("#demo").hidden = !DATA.demo || !!store.get("rm.demoOk", 0);
   // Montre 3D de l'accueil (chronographe or, cadran vert poker), avec le dessin en secours
-  mount3D($("#hero3d"), { skin: { type: "daytona", dial: "#f2f1ec", sub: "#121212", bezel: "#0b0b0c", insert: "#0b0b0c", metal: "steel", bracelet: "oyster" }, diametre: 40, collection: "" }, window, () => !page().classList.contains("open"));
+  // Vitrine de l'accueil : le modèle Daytona complet (page daytona/), de face, sans interface
+  { const c = $("#hero3d"), f = document.createElement("iframe");
+    f.className = "hero-3d"; f.id = "hero3d"; f.src = "daytona/?hero"; f.title = "Cosmograph Daytona en 3D"; f.setAttribute("aria-hidden", "true"); f.tabIndex = -1; f.loading = "eager";
+    f.style.cssText = "border:0;background:transparent;pointer-events:none"; f.setAttribute("allowtransparency", "true");
+    f.onload = () => setTimeout(() => f.classList.add("on"), 400); c.replaceWith(f); }
   $("#annee").textContent = new Date().getFullYear();
   // Visuel d'accueil assorti au logo : chronographe or, cadran vert
   $("#heroImg").innerHTML = watchSVG({ type: "daytona", dial: "#035837", sub: "#03321e", bezel: "#03321e", insert: "#03321e", metal: "gold", bracelet: "oyster" }, { diam: 40, vb: "75 170 250 260", par: "xMidYMid slice" });

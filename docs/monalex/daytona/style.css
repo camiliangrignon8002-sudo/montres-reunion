@@ -62,3 +62,10 @@ html,body{margin:0;height:100%;background:var(--fond);color:var(--encre);font-fa
   .barre{left:12px;right:12px;transform:none;max-width:none}
 }
 @media (prefers-reduced-motion:reduce){.anneau{animation:none}}
+
+/* mode vitrine (accueil Monalex) */
+.hero,.hero body{background:transparent}
+html:has(.hero){background:transparent}
+.hero .haut,.hero .barre,.hero .aide,.hero .vues,.hero .fiche,.hero .apropos{display:none!important}
+.hero .chargement{background:transparent;color:transparent}.hero .anneau{display:none}
+.hero #scene{cursor:default}

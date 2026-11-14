@@ -18,18 +18,19 @@ import { animations } from "./animations.js";
 import { interface_ } from "./ui.js";
 
 const canvas = document.getElementById("scene");
+const params = new URLSearchParams(location.search), HERO = params.has("hero");   // ?hero : vitrine de l'accueil (fond transparent, sans interface)
+if (HERO) document.body.classList.add("hero");
 let renderer;
-try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" }); }
+try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: HERO, powerPreference: "high-performance" }); }
 catch (e) { document.body.classList.add("sans-webgl"); throw e; }
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.02;
 let pr = Math.min(window.devicePixelRatio || 1, 1.75); renderer.setPixelRatio(pr);
 
-const scene = new THREE.Scene(); scene.background = new THREE.Color(0xf4f3ef);
+const scene = new THREE.Scene(); if (!HERO) scene.background = new THREE.Color(0xf4f3ef);
 studio(renderer, scene);
-scene.add(ombreContact(-35));
+if (!HERO) scene.add(ombreContact(-35));
 
-const params = new URLSearchParams(location.search);
 const M = materiaux();
 const montre = new THREE.Group(); montre.position.z = -17; scene.add(montre);      // pivot de rotation au centre du bracelet
 const asm = new THREE.Group(); asm.position.z = 17; montre.add(asm);
@@ -64,8 +65,9 @@ const app = {
   reinitialiser() { fer.ouvrir(0); fer.easylink(0); ecl.basculer(0); anim.etat.ralenti = 1; if (anim.etat.chrono.marche) anim.departArret(); anim.etat.chrono.cumul = 0; },
   onSelection: null,
 };
-interface_(app);
+if (!HERO) interface_(app);
 app.mode(false);
+if (HERO) { C.ctl.enabled = false; anim.etat.balancier = true; C.cam.position.set(24, 6, 122); C.ctl.target.set(0, 0, -2); C.ctl.update(); }
 
 // --- sélection d'une pièce au clic (sans déclencher pendant une rotation de caméra)
 const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
