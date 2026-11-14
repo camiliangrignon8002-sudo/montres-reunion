@@ -605,7 +605,10 @@
         grid.days.map((d) => {
           const shifts = w ? w.shifts.filter((x) => x.date === d) : [];
           const byZone = {}; for (const x of shifts) for (const z of new Set(x.segs.map((g) => g.z))) byZone[z] = (byZone[z] || 0) + 1;
-          return h("th", { class: d === today ? "today" : "" }, h("span", {}, C.DAYS[C.dow(d)]), h("span", { class: "d" }, C.fmtDate(d, "short")),
+          const need = (s.settings.staffing || []).filter((r) => d >= r.from && d <= r.to);
+          return h("th", { class: (d === today ? "today" : "") + (canEdit ? " day-click" : ""), title: canEdit ? "Toucher pour fixer le nombre de personnes ce jour-là" : null, onClick: canEdit ? () => this.openDayStaffing(d) : null },
+            h("span", {}, C.DAYS[C.dow(d)]), h("span", { class: "d" }, C.fmtDate(d, "short")),
+            need.length ? h("span", { class: "need", title: need.map((r) => `${r.s}–${r.e} ${r.zone || "ZP+ZR"} : ${r.min ?? "?"}–${r.max ?? "?"}`).join("\n") }, `👥 ${need.length}`) : null,
             h("span", { class: "cnt" }, s.zones.filter((z) => byZone[z.id]).map((z) => h("span", { class: `blk ${zoneStyle(s, z.id).cls}`, style: { "--z": z.color, padding: "0 5px" }, title: `${byZone[z.id]} en ${z.name}` }, h("small", {}, `${z.short} ${byZone[z.id]}`)))));
         }),
         h("th", { class: "tot" }, "Total"))),
@@ -1217,6 +1220,37 @@
       if (r2.ok) toast(`Planning adapté : ${done.join(" · ")}.${done.some((t) => /libéré/.test(t)) ? " Les postes libérés sont dans « Postes à pourvoir »." : ""}`);
     }
     return r;
+  };
+
+  // Toucher un jour : fixer le nombre de personnes voulu sur des plages horaires de ce jour.
+  App.openDayStaffing = function (date) {
+    const box = h("div", { class: "stack", style: { gap: "6px" } });
+    const txt = (r) => `${r.s}–${r.e} · ${r.zone || "ZP + ZR"} · ${[r.min != null ? `au moins ${r.min}` : null, r.max != null ? `au plus ${r.max}` : null].filter(Boolean).join(", ")} personne(s)${r.from !== r.to ? ` (du ${C.fmtDate(r.from, "short")} au ${C.fmtDate(r.to, "short")})` : ""}`;
+    const draw = () => {
+      const list = (this.state.settings.staffing || []).filter((r) => date >= r.from && date <= r.to);
+      box.replaceChildren(...(list.length ? list.map((r) => h("div", { class: "item" }, h("span", { class: "grow" }, "👥 ", txt(r)),
+        iconBtn("close", "Retirer", async () => { const res = await this.commit([{ type: "setSettings", patch: { staffing: (this.state.settings.staffing || []).filter((x) => x.id !== r.id) } }], { quiet: true, summary: `Effectif retiré (${C.fmtDate(date, "short")})` }); if (res.ok) draw(); })))
+        : [h("p", { class: "small muted" }, "Aucun nombre de personnes fixé ce jour-là.")]));
+    };
+    draw();
+    const sIn = h("input", { type: "time", class: "input", id: "ds-s", value: "06:00" }), eIn = h("input", { type: "time", class: "input", id: "ds-e", value: "14:00" });
+    const zone = h("select", { class: "input", id: "ds-zone" }, h("option", { value: "" }, "ZP + ZR"), this.state.zones.filter((z) => z.id !== "ADM").map((z) => h("option", { value: z.id }, z.short)));
+    const mn = h("input", { type: "number", class: "input", id: "ds-min", min: "0", max: "30", placeholder: "—" }), mx = h("input", { type: "number", class: "input", id: "ds-max", min: "0", max: "30", placeholder: "—" });
+    const every = h("input", { type: "checkbox", id: "ds-every" });
+    openDialog({ title: `Nombre de personnes · ${C.fmtDate(date, "day")}`, body: h("div", { class: "stack" }, box,
+      h("h3", {}, "Ajouter"),
+      h("div", { class: "form-grid" }, h("label", { class: "f" }, "De", sIn), h("label", { class: "f" }, "À", eIn), h("label", { class: "f" }, "Zone", zone)),
+      h("div", { class: "form-grid" }, h("label", { class: "f" }, "Minimum de personnes", mn), h("label", { class: "f" }, "Maximum de personnes", mx)),
+      h("label", { class: "check" }, every, `Aussi tous les ${C.DAYS[C.dow(date)].toLowerCase()}s des 8 prochaines semaines`),
+      h("p", { class: "small muted" }, "Les manques et dépassements s'affichent dans « Points à vérifier » ; les remplaçants ne dépassent jamais le maximum.")),
+      actions: [{ label: "Fermer" }, { label: "Ajouter", primary: true, onClick: async () => {
+        const base = { s: sIn.value, e: eIn.value, zone: zone.value, min: mn.value === "" ? null : Number(mn.value), max: mx.value === "" ? null : Number(mx.value) };
+        const dates = every.checked ? Array.from({ length: 9 }, (_, i) => C.addDays(date, 7 * i)) : [date];
+        const rules = dates.map((d) => ({ id: C.uid("eff"), from: d, to: d, ...base }));
+        const res = await this.commit([{ type: "setSettings", patch: { staffing: [...(this.state.settings.staffing || []), ...rules] } }], { quiet: true, summary: `Effectif ${C.fmtDate(date, "short")} ${base.s}–${base.e}` });
+        if (res.ok) { mn.value = ""; mx.value = ""; draw(); toast("Nombre de personnes enregistré."); }
+        return false;
+      } }] });
   };
 
   // Ajout rapide d'une absence pour une personne (bouton « + » à côté de son prénom).
