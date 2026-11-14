@@ -2,7 +2,7 @@
 // Chaque rangée est un groupe-pivot posé le long d'une courbe « poignet » (cubique de Bézier), par abscisse curviligne.
 import * as THREE from "three";
 import { D } from "./dims.js";
-import { pave, piece, courber } from "./geo.js";
+import { pave, piece, courber, remap } from "./geo.js";
 
 export const ZFERMOIR = -40, DEMI_FERMOIR = 16.2;
 const P0 = new THREE.Vector2(21.9, -1.6);              // barrette à ressort entre les cornes (y, z)
@@ -28,7 +28,7 @@ function cote(M) {
   const e = repere(lenE / 2 - 1.2), emb = new THREE.Group();
   emb.position.set(0, e.y, e.z); emb.rotation.x = e.a;
   const Re = rayon(lenE / 2);
-  const ePlein = new THREE.Mesh(cintre(pave(19.7, lenE + 2.4, 3.3, .6, .5, 3), Re), M.acierSatine);
+  const ePlein = new THREE.Mesh(cintre(pave(19.7, lenE + 2.4, 3.2, .6, .42, 2), Re), [M.acierSatine, M.acierPoli]);
   const eCentre = new THREE.Mesh(cintre(pave(7.1, lenE + 2.2, 3.4, .5, .45, 3), Re), M.acierPoli); eCentre.position.z = .02;
   emb.add(ePlein, eCentre); g.add(piece(emb, "Embout plein", "Attache massive qui fait la jonction entre la carrure et le bracelet."));
   const rangs = [];
@@ -36,12 +36,14 @@ function cote(M) {
     const s = lenE + (i + .5) * pas, r = repere(s), w = largeur(s), wc = w * .36, wo = (w - wc) / 2 - .24;
     const rang = new THREE.Group(); rang.position.set(0, r.y, r.z); rang.rotation.x = r.a;
     const R = rayon(s);
-    const centre = new THREE.Mesh(cintre(pave(wc, pas - .22, 3.05, .55, .5, 3), R), M.acierPoli); centre.position.z = .08;
+    const ep = 3.0 - .45 * Math.min(1, s / L);                       // épaisseur : 3,0 → 2,55 mm (estimée)
+    const bombe = (geo, w, h) => remap(geo, (x, y, z) => [x, y, z > 0 ? z + h * Math.max(0, 1 - (2 * x / w) ** 2) : z]);
+    const centre = new THREE.Mesh(cintre(bombe(pave(wc, pas - .2, ep + .1, .5, .32, 3), wc, .22), R), M.acierPoli); centre.position.z = .1;
     rang.add(centre);
-    for (const sx of [1, -1]) { const o = new THREE.Mesh(cintre(pave(wo, pas - .06, 2.9, .5, .45, 3), R), M.acierSatine); o.position.x = sx * (wc / 2 + .12 + wo / 2); rang.add(o); }
+    for (const sx of [1, -1]) { const o = new THREE.Mesh(cintre(bombe(pave(wo, pas - .08, ep, .45, .42, 2), wo * 3, .12), R), [M.acierSatine, M.acierPoli]); o.position.x = sx * (wc / 2 + .12 + wo / 2); rang.add(o); }
     const goupille = new THREE.Mesh(new THREE.CylinderGeometry(.42, .42, w - .25, 12).rotateZ(Math.PI / 2), M.acierMvt); goupille.position.y = -pas / 2;
     rang.add(goupille);
-    rangs.push(rang); g.add(piece(rang, `Maillon Oyster n° ${i + 1}`, `Trois rangs : extérieurs satinés, central poli. Largeur ${w.toFixed(1)} mm (estimée).`));
+    rangs.push(rang); g.add(piece(rang, `Maillon Oyster n° ${i + 1}`, `Trois rangs : maillons extérieurs satinés à chanfreins polis, maillon central poli et bombé. Largeur ${w.toFixed(1)} mm (estimée).`));
   }
   return { g, rangs };
 }

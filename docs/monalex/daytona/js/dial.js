@@ -2,7 +2,7 @@
 import * as THREE from "three";
 import { D } from "./dims.js";
 import { TAU, uvPlan, pave, piece } from "./geo.js";
-import { cadran } from "./textures.js";
+import { cadran, azurageRelief } from "./textures.js";
 
 export function cadranGroupe(M, { marquages = true } = {}) {
   const g = new THREE.Group(); g.name = "cadran";
@@ -15,12 +15,14 @@ export function cadranGroupe(M, { marquages = true } = {}) {
   plaque.translate(0, 0, D.zCadran - .3); uvPlan(plaque, D.rCadran);
   g.add(piece(new THREE.Mesh(plaque, laque), "Cadran", "Cadran laqué blanc, minuterie au quart de seconde, compteurs à anneau noir."));
   const fondC = laque.clone(); fondC.roughness = .4; fondC.clearcoat = .3;
+  const sillons = new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: .55, roughness: .25, metalness: .15, bumpMap: azurageRelief(), bumpScale: 1.4, depthWrite: false, side: THREE.DoubleSide });
   const paroi = new THREE.MeshStandardMaterial({ color: 0x101011, roughness: .5, side: THREE.DoubleSide });
   const noms = ["Compteur 30 minutes (à 3 h)", "Compteur 12 heures (à 6 h)", "Petite seconde (à 9 h)"];
   comp.forEach(([x, y], i) => {
     const sg = new THREE.Group();
     const f = new THREE.CircleGeometry(D.rAnneauCompteur, 96); f.translate(x, y, D.zCompteur); uvPlan(f, D.rCadran);
     sg.add(new THREE.Mesh(f, fondC));
+    const az = new THREE.Mesh(new THREE.CircleGeometry(D.rCompteur - .05, 96), sillons); az.position.set(x, y, D.zCompteur + .006); sg.add(az);
     const w = new THREE.CylinderGeometry(D.rAnneauCompteur, D.rAnneauCompteur, D.zCadran - D.zCompteur, 96, 1, true); w.rotateX(Math.PI / 2); w.translate(x, y, (D.zCadran + D.zCompteur) / 2);
     sg.add(new THREE.Mesh(w, paroi));
     g.add(piece(sg, noms[i], "Compteur légèrement en creux, centre azuré, anneau noir gradué."));

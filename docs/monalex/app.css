@@ -789,3 +789,18 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
 .card .body,.card h3,.card .price,.card .where{overflow-wrap:anywhere}
 
 .cp-hero-t p.cp-3d-lien{padding-left:min(16vw,120px);margin-top:26px}
+
+/* Logo : éclat de lumière doré qui traverse le cadran puis le mot (comme un reflet sur du métal précieux) */
+.em-shine{position:relative;display:block;line-height:0}
+.em-shine::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(112deg,transparent 0 38%,rgba(255,236,170,.0) 40%,rgba(255,244,205,.95) 48%,#fff 50%,rgba(255,226,140,.9) 52%,rgba(255,236,170,0) 60%,transparent 62% 100%);
+  background-size:300% 100%;background-position:120% 0;mix-blend-mode:screen;
+  -webkit-mask:var(--m) center/100% 100% no-repeat;mask:var(--m) center/100% 100% no-repeat;
+  animation:em-eclat 7s cubic-bezier(.45,.05,.25,1) 1.2s infinite}
+.em-s-dial{--m:url(img/cadran-160.png)}
+.em-s-word{--m:url(img/monalex-mot.png)}
+.em-s-word::after{animation-delay:1.55s}
+.emblem .em-dial{filter:drop-shadow(0 4px 6px rgba(0,0,0,.18)) drop-shadow(0 0 7px rgba(214,175,92,.28))}
+.emblem:hover .em-shine::after{animation-duration:2.4s}
+@keyframes em-eclat{0%{background-position:120% 0}22%,100%{background-position:-20% 0}}
+@media (prefers-reduced-motion:reduce){.em-shine::after{animation:none;opacity:0}}

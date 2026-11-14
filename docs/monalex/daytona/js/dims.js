@@ -11,7 +11,7 @@ export const D = {
 
   // --- niveaux sur l'axe Z (estimés) : de l'arrière vers l'avant
   zFond: -5.95,               // extérieur du fond vissé
-  zCarrureBas: -4.9,
+  zCarrureBas: -3.7,
   zMouvementBas: -4.6,
   zMouvementHaut: -.7,
   zCadran: 2.55,
@@ -33,7 +33,7 @@ export const D = {
   posCompteurs: { minutes: [7.35, 0], heures: [0, -7.35], secondes: [-7.35, 0] },  // 30 min à 3 h, 12 h à 6 h, petite seconde à 9 h
 
   // --- bracelet Oyster (estimé)
-  pasMaillon: 4.7,
+  pasMaillon: 6.4,          // maillon Oyster ≈ 6,4 mm (estimé)
   largeurAttache: 20,
   largeurFermoir: 16,
   rayonPoignet: 27,           // forme posée « au poignet »

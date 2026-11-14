@@ -25,7 +25,7 @@ export function mouvement(M) {
   // --- platine perlée
   const platGeo = new THREE.CylinderGeometry(14.2, 14.2, 1.2, 128).rotateX(Math.PI / 2).translate(0, 0, ZP);
   g.add(piece(new THREE.Mesh(platGeo, [M.acierMvt, M.platine, M.platine]), "Platine", "Plaque de base du mouvement, décorée d'un perlage (cercles qui se chevauchent)."));
-  g.add(new THREE.Mesh(tour([[14.22, -4.85], [14.55, -4.85], [14.55, -.6], [14.22, -.6]], 128), M.acierMvt)); // cercle d'emboîtage
+  g.add(new THREE.Mesh(tour([[14.22, -4.8], [14.55, -4.8], [14.55, -.6], [14.22, -.6]], 128), M.acierMvt)); // cercle d'emboîtage
 
   // --- rouage (positions estimées, entraxes calculés pour que roues et pignons engrènent)
   const P = {};
@@ -114,21 +114,23 @@ export function mouvement(M) {
   // --- ponts (Côtes de Genève continues, anglage poli)
   const pont = (nom, details, cercles, z = Z_PONT, ep = .7) => {
     const pts = enveloppe(cercles);
-    const geo = plaque(pts, ep, .12); geo.translate(0, 0, z); uvPlan(geo, 14.2);
+    const geo = plaque(pts, ep, .17); geo.translate(0, 0, z); uvPlan(geo, 14.2);
     const m = new THREE.Mesh(geo, [M.pont, M.acierMvt]); g.add(piece(m, nom, details)); return m;
   };
-  pont("Pont de barillet", "Ponts décorés de Côtes de Genève, angles polis.", [[...P.B, 4.9], [-11.0, 4.0, 1.6], [-8.0, 9.0, 1.6], [-2.0, 7.5, 1.4]]);
-  pont("Pont de rouage", "Maintient roue moyenne et roue de seconde.", [[...P.T, 1.5], [...P.F, 1.4], [10.4, 7.0, 1.5], [4.0, 9.6, 1.4]]);
+  pont("Pont de barillet", "Ponts décorés de Côtes de Genève, angles polis.", [[...P.B, 5.0], [-12.0, 3.0, 1.8], [-9.0, 9.6, 1.8], [-3.0, 11.6, 1.6], [-2.0, 6.0, 1.6]]);
+  pont("Pont de rouage", "Maintient roue moyenne et roue de seconde.", [[...P.T, 1.8], [...P.F, 1.7], [11.2, 7.0, 1.6], [4.6, 11.8, 1.6], [1.6, 9.2, 1.6]]);
+  pont("Pont de remontage", "Porte le rochet et la roue de couronne du remontage.", [[-12.6, -.6, 1.4], [-8.6, .4, 1.6], [-9.6, -2.8, 1.4]], Z_PONT + .05, .55);
   pont("Pont de balancier traversant", "Pont de balancier fixé en deux points : meilleure tenue aux chocs.", [[...P.Bal, 1.3], [.6, -8.8, 1.6], [11.0, -3.8, 1.6]], Z_PONT - .25, .55);
   pont("Coq d'ancre", "", [[...P.E, .95], [...P.A, .9], [10.9, -.6, 1.2]], Z_PONT + .1, .45);
   pont("Pont de chronographe", "", [[...P.Col, 1.9], [-2.0, -11.4, 1.5], [-11.4, -3.0, 1.5]], Z_PONT + .15, .5);
   // pierres (rubis) et vis bleuies
   const pierre = ([x, y], z) => { const j = new THREE.Group(); j.position.set(x, y, z); j.add(new THREE.Mesh(new THREE.CylinderGeometry(.42, .42, .16, 20).rotateX(Math.PI / 2), M.rubis)); j.add(new THREE.Mesh(new THREE.TorusGeometry(.56, .1, 8, 24), M.acierMvt)); g.add(j); return j; };
   const zDessus = z => z - .38;
-  for (const p of [P.B, P.T, P.F]) pierre(p, zDessus(Z_PONT));
+  for (const p of [P.B, P.T, P.F, [-3.0, 11.6], [4.6, 11.8]]) pierre(p, zDessus(Z_PONT));
+  pierre([-8.6, .4], zDessus(Z_PONT + .05));
   pierre(P.Bal, zDessus(Z_PONT - .25)); pierre(P.E, zDessus(Z_PONT + .1)); pierre(P.A, zDessus(Z_PONT + .1));
   const vis = ([x, y], z) => { const v = new THREE.Group(); v.position.set(x, y, z); v.add(new THREE.Mesh(new THREE.CylinderGeometry(.62, .66, .3, 24).rotateX(Math.PI / 2), M.bleui)); const fente = new THREE.Mesh(new THREE.BoxGeometry(1.1, .16, .14), M.joint); fente.position.z = -.12; fente.rotation.z = Math.random() * 3; v.add(fente); g.add(v); };
-  for (const [p, z] of [[[-11.0, 4.0], Z_PONT], [[-8.0, 9.0], Z_PONT], [[10.4, 7.0], Z_PONT], [[4.0, 9.6], Z_PONT], [[.6, -8.8], Z_PONT - .25], [[11.0, -3.8], Z_PONT - .25], [[10.9, -.6], Z_PONT + .1], [[-2.0, -11.4], Z_PONT + .15], [[-11.4, -3.0], Z_PONT + .15]]) vis(p, zDessus(z) + .05);
+  for (const [p, z] of [[[-12.0, 3.0], Z_PONT], [[-9.0, 9.6], Z_PONT], [[11.2, 7.0], Z_PONT], [[1.6, 9.2], Z_PONT], [[-12.6, -.6], Z_PONT + .05], [[-9.6, -2.8], Z_PONT + .05], [[.6, -8.8], Z_PONT - .25], [[11.0, -3.8], Z_PONT - .25], [[10.9, -.6], Z_PONT + .1], [[-2.0, -11.4], Z_PONT + .15], [[-11.4, -3.0], Z_PONT + .15]]) vis(p, zDessus(z) + .05);
 
   // --- masse oscillante (rotor) + roues d'inverseur rouges
   for (const sx of [-1, 1]) { const w = new THREE.Mesh(roue(1.55, 30, { prof: .14, ep: .26, bev: 0 }), rouge); w.position.set(sx * 2.1, 2.35, -3.42); g.add(piece(w, "Roue d'inverseur", "Roues d'inverseur du remontage automatique bidirectionnel.")); }

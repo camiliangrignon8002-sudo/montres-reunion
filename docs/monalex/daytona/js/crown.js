@@ -5,7 +5,7 @@ import { cannele, piece } from "./geo.js";
 const cyl = (r, l, x0, seg = 48) => new THREE.CylinderGeometry(r, r, l, seg).rotateZ(-Math.PI / 2).translate(x0 + l / 2, 0, 0);
 
 export function couronne(M) {
-  const g = new THREE.Group(); g.name = "couronne"; g.position.set(0, 0, -.35);
+  const g = new THREE.Group(); g.name = "couronne"; g.position.set(0, 0, .2);
   g.add(new THREE.Mesh(cyl(1.75, 1.6, 19.4), M.acierPoli));                        // tube
   const corps = new THREE.Group();
   corps.add(new THREE.Mesh(cannele(3.05, 26, .2, 2.7, 21.0, .25), M.acierPoli));   // couronne cannelée

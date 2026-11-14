@@ -5,7 +5,7 @@ import { cannele, piece } from "./geo.js";
 const cyl = (r, l, x0, seg = 48) => new THREE.CylinderGeometry(r, r, l, seg).rotateZ(-Math.PI / 2).translate(x0 + l / 2, 0, 0);
 
 function poussoir(M, angle, nom, details) {
-  const g = new THREE.Group(); g.rotation.z = angle; g.position.z = -.35;
+  const g = new THREE.Group(); g.rotation.z = angle; g.position.z = .2;
   const p = new THREE.Group(); p.position.set(0, 0, 0);
   p.add(new THREE.Mesh(cyl(1.25, 3.0, 19.0), M.acierPoli));
   p.add(new THREE.Mesh(cannele(1.95, 18, .14, 1.5, 19.75, .15), M.acierPoli));   // bague vissée cannelée

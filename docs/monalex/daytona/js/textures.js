@@ -39,10 +39,16 @@ export function cotes(size = 1024, [r, v, b] = [205, 210, 216]) {
   for (let i = -size; i < size * 2; i += w) {
     const gr = g.createLinearGradient(i, 0, i + w, w * .55);
     const f = k => `rgb(${Math.min(255, r * k) | 0},${Math.min(255, v * k) | 0},${Math.min(255, b * k) | 0})`;
-    gr.addColorStop(0, f(.8)); gr.addColorStop(.5, f(1.12)); gr.addColorStop(1, f(.8));
+    gr.addColorStop(0, f(.68)); gr.addColorStop(.5, f(1.18)); gr.addColorStop(1, f(.68));
     g.save(); g.translate(i, 0); g.rotate(-.55); g.fillStyle = gr; g.fillRect(0, -size, w, size * 3); g.restore();
   }
   return tex(c);
+}
+// azurage en relief : carte de hauteur à sillons concentriques (fond transparent ailleurs)
+export function azurageRelief(size = 512) {
+  const [c, g] = canvas(size); g.fillStyle = "#808080"; g.fillRect(0, 0, size, size);
+  for (let r = 1; r < size / 2; r += 3) { g.strokeStyle = r % 6 < 3 ? "#9a9a9a" : "#666"; g.lineWidth = 1.5; g.beginPath(); g.arc(size / 2, size / 2, r, 0, TAU); g.stroke(); }
+  return tex(c, false);
 }
 // azurage concentrique (fond des compteurs)
 export function azurage(size = 512, fond = "#f1f0ec") {

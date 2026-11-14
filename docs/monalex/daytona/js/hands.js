@@ -15,7 +15,7 @@ function aiguille(L, queue, w, mat, contrepoids = 0) {
   const g = new THREE.Group();
   g.add(new THREE.Mesh(plaque([[-w, -queue], [w, -queue], [w * .6, L * .9], [0, L], [-w * .6, L * .9]], .07, .01), mat));
   if (contrepoids) { const c = new THREE.Mesh(new THREE.CylinderGeometry(contrepoids, contrepoids, .08, 32).rotateX(Math.PI / 2), mat); c.position.y = -queue + contrepoids * .6; g.add(c); }
-  g.add(new THREE.Mesh(new THREE.CylinderGeometry(w * 2.6 + .25, w * 2.6 + .25, .18, 32).rotateX(Math.PI / 2), mat));
+  const rm = Math.max(.3, w * 1.8 + .12); g.add(new THREE.Mesh(new THREE.CylinderGeometry(rm, rm, .16, 32).rotateX(Math.PI / 2), mat));
   return g;
 }
 export function aiguilles(M) {
