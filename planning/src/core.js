@@ -214,7 +214,11 @@
       const end = shiftRanges(segs).slice(-1)[0][1];
       if (end > toMin(r.maxEnd)) out.push({ code: "LATEST_END", level: "erreur", msg: `${emp.name} ne finit jamais après ${r.maxEnd} : ici ${shiftSpan(segs).e} le ${fmtDate(date, "day")}.` });
     }
-    if (r.weekZone && segs && segs.some((g) => g.z && g.z !== r.weekZone)) out.push({ code: "WEEK_ZONE", msg: `${emp.name} est en ${r.weekZone} toute la semaine : bloc en ${segs.find((g) => g.z !== r.weekZone).z} le ${fmtDate(date, "day")}.` });
+    if (r.prefers && !r.shiftFlex && segs && segs.length && segs.every((g) => isTime(g.s))) {
+      const morning = toMin(segs[0].s) < 12 * 60;
+      if ((r.prefers === "matin") !== morning) out.push({ code: "SHIFT_PREF", msg: `${emp.name} travaille obligatoirement ${r.prefers === "matin" ? "le matin" : "le soir"} (préférence cochée) : ${segs[0].s}–${segs[segs.length - 1].e} le ${fmtDate(date, "day")}.` });
+    }
+    if (r.weekZone && !r.zoneFlex && segs && segs.some((g) => g.z && g.z !== r.weekZone)) out.push({ code: "WEEK_ZONE", msg: `${emp.name} travaille obligatoirement en ${r.weekZone} (préférence cochée) : bloc en ${segs.find((g) => g.z !== r.weekZone).z} le ${fmtDate(date, "day")}.` });
     if (Array.isArray(r.daysOff) && r.daysOff.includes(dow(date))) out.push({ code: "FIXED_DAYOFF", msg: `${emp.name} ne travaille jamais le ${DAYS[dow(date)].toLowerCase()} (jour de repos fixe) : créneau le ${fmtDate(date, "day")}.` });
     return out;
   }
@@ -693,11 +697,16 @@
       if (overtime) score -= 20;
       score -= notes.length * 5;
       if (templateFor(state, date).some((t) => t.emp === emp.id && segKey(t.segs) === segKey(segs))) score += 10;
+      // Préférence de zone : obligatoire sauf si « si besoin, peut changer » est coché.
+      const zp = emp.rules && emp.rules.weekZone;
+      if (zp && segs.some((g) => g.z !== zp)) { if (!emp.rules.zoneFlex) continue; score -= 20; notes.push(`préfère la ${zp}`); }
+      else if (zp) score += 10;
       // Service préféré (matin ou soir) : jamais une erreur, seulement un ordre de proposition.
       const pref = emp.rules && emp.rules.prefers;
       if (pref) {
         const morning = toMin(shiftSpan(segs).s) < 12 * 60;
-        if ((pref === "matin") === morning) score += 12; else { score -= 25; notes.push(pref === "matin" ? "fait d'habitude le matin" : "fait d'habitude le soir"); }
+        if ((pref === "matin") === morning) score += 12;
+        else { if (!emp.rules.shiftFlex) continue; score -= 25; notes.push(pref === "matin" ? "fait d'habitude le matin" : "fait d'habitude le soir"); }
       }
       // Poste d'ouverture ou de fermeture : la compétence compte.
       for (const [k, first] of [["ouverture", true], ["fermeture", false]]) {

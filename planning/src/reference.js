@@ -447,13 +447,16 @@
   }, {
     id: "regles-2026-11-13b",
     rules: {
-      sebastien: { fixedHours: null, prefers: "matin", note: "Du matin (horaires variables dans la matinée) ; le soir reste possible si on le demande." },
+      sebastien: { fixedHours: null, prefers: "matin", shiftFlex: true, note: "Du matin (horaires variables dans la matinée) ; le soir reste possible si on le demande." },
     },
   }, {
     id: "regles-2026-11-13c",
     rules: {
       sonia: { weekZone: "ZR", note: "Toujours en zone réservée (ZR)." },
     },
+  }, {
+    id: "regles-2026-11-14",
+    rules: { sebastien: { shiftFlex: true } }, // matin de préférence, le soir reste possible
   }];
 
   for (const u of ruleUpdates) for (const [id, r] of Object.entries(u.rules)) { const e = employees.find((x) => x.id === id); e.rules = { ...(e.rules || {}), ...r }; e.rulesApplied = [...(e.rulesApplied || []), u.id]; }

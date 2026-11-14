@@ -535,3 +535,27 @@ test("saison choisie à la génération : postes décalés dans l'ouverture du p
   const r = apply(s, [{ type: "putWeek", monday: W, week: hiver }, { type: "setWeekSeason", monday: W, season: "ete" }], { allowErrors: true });
   assert.equal(r.state.weeks[W].season, "ete");
 });
+
+test("préférence de zone : obligatoire, ou « si besoin » peut changer", () => {
+  let s = withWeek1();
+  s = apply(s, [{ type: "updateEmployee", id: "murielle", patch: { rules: { weekZone: "ZR" } } }]).state;
+  const W = "2026-12-07", zp = [{ s: "14:30", e: "17:00", z: "ZP" }, { s: "17:30", e: "22:00", z: "ZP" }];
+  const iss = (st) => C.validateWeek(apply(st, [{ type: "setShift", emp: "murielle", date: W, segs: zp }]).state, W);
+  assert.ok(iss(s).some((i) => i.code === "WEEK_ZONE"));
+  assert.ok(!C.findCandidates(s, W, zp).some((c) => c.emp === "murielle"));
+  s = apply(s, [{ type: "updateEmployee", id: "murielle", patch: { rules: { weekZone: "ZR", zoneFlex: true } } }]).state;
+  assert.ok(!iss(s).some((i) => i.code === "WEEK_ZONE"));
+  const c = C.findCandidates(s, W, zp).find((x) => x.emp === "murielle");
+  assert.ok(c && c.notes.includes("préfère la ZR"));
+});
+
+test("préférence de service : matin/soir obligatoire, ou « si besoin »", () => {
+  let s = withWeek1();
+  assert.equal(C.empById(s, "sebastien").rules.shiftFlex, true);
+  s = apply(s, [{ type: "updateEmployee", id: "maelle", patch: { rules: { prefers: "matin" } } }]).state;
+  const W = "2026-12-07", pm = [{ s: "14:30", e: "17:00", z: "ZP" }, { s: "17:30", e: "22:00", z: "ZP" }];
+  assert.ok(C.validateWeek(apply(s, [{ type: "setShift", emp: "maelle", date: W, segs: pm }]).state, W).some((i) => i.code === "SHIFT_PREF"));
+  assert.ok(!C.findCandidates(s, W, pm).some((c) => c.emp === "maelle"));
+  s = apply(s, [{ type: "updateEmployee", id: "maelle", patch: { rules: { prefers: "matin", shiftFlex: true } } }]).state;
+  assert.ok(!C.validateWeek(apply(s, [{ type: "setShift", emp: "maelle", date: W, segs: pm }]).state, W).some((i) => i.code === "SHIFT_PREF"));
+});

@@ -166,7 +166,8 @@
     if (e.onLeave) out.push(`En ${C.ABSENCE_TYPES[e.onLeave.type] ? C.ABSENCE_TYPES[e.onLeave.type].toLowerCase() : "congé"} depuis le ${C.fmtDate(e.onLeave.since, "short")}`);
     if (r.fixedHours) out.push(`Toujours ${r.fixedHours.s}–${r.fixedHours.e}`);
     if (r.maxEnd) out.push(`Jamais après ${r.maxEnd}`);
-    if (r.prefers) out.push(r.prefers === "matin" ? "Du matin (soir possible)" : "Du soir (matin possible)");
+    if (r.weekZone) out.push(r.zoneFlex ? `Préférence ${r.weekZone} (peut changer si besoin)` : `Toujours en ${r.weekZone}`);
+    if (r.prefers) out.push(`${r.shiftFlex ? "Préférence" : "Toujours"} ${r.prefers === "matin" ? "le matin" : "le soir"}${r.shiftFlex ? " (peut changer si besoin)" : ""}`);
     if (Array.isArray(r.daysOff) && r.daysOff.length) out.push(`Repos fixe : ${r.daysOff.map((d) => C.DAYS[d].toLowerCase()).join(", ")}`);
     else if (r.sameWeekends) out.push("Mêmes week-ends (jours à préciser)");
     if (r.sameWeekends === false) out.push("Week-ends variables");
@@ -1287,6 +1288,29 @@
     patch.skills = skills;
     return [{ type: "updateEmployee", id: e.id, patch }];
   };
+  App.zonePrefChips = function (e) {
+    const r = e.rules || {};
+    const set = (patch, summary) => this.commit([{ type: "updateEmployee", id: e.id, patch: { rules: { ...r, ...patch } } }], { summary });
+    const zones = ["ZP", "ZR"].filter((z) => z === "ZP" || C.hasSkill(e, "badgeRouge"));
+    return h("div", { class: "skill-chips zone-pref" }, h("span", { class: "tiny muted" }, "Préférence :"),
+      zones.map((z) => Store.canWrite
+        ? h("button", { type: "button", class: `skill pref-${z}`, "aria-pressed": String(r.weekZone === z), title: `Cochée : ${e.name} travaille obligatoirement en ${z}`, onClick: () => set(r.weekZone === z ? { weekZone: null, zoneFlex: false } : { weekZone: z }, `${e.name} : préférence ${r.weekZone === z ? "retirée" : z}`) }, z)
+        : r.weekZone === z ? h("span", { class: `skill pref-${z}`, "aria-pressed": "true" }, z) : null),
+      r.weekZone ? (Store.canWrite
+        ? h("button", { type: "button", class: "skill flex", "aria-pressed": String(!!r.zoneFlex), title: "Si besoin, peut aller dans l'autre zone", onClick: () => set({ zoneFlex: !r.zoneFlex }, `${e.name} : ${r.zoneFlex ? "zone obligatoire" : "peut changer de zone si besoin"}`) }, "⇄ Si besoin")
+        : r.zoneFlex ? h("span", { class: "skill flex", "aria-pressed": "true" }, "⇄ Si besoin") : null) : null);
+  };
+  App.shiftPrefChips = function (e) {
+    const r = e.rules || {};
+    const set = (patch, summary) => this.commit([{ type: "updateEmployee", id: e.id, patch: { rules: { ...r, ...patch } } }], { summary });
+    return h("div", { class: "skill-chips zone-pref" }, h("span", { class: "tiny muted" }, "Service :"),
+      [["matin", "Matin"], ["soir", "Soir"]].map(([v, l]) => Store.canWrite
+        ? h("button", { type: "button", class: `skill pref-${v}`, "aria-pressed": String(r.prefers === v), title: `Cochée : ${e.name} travaille obligatoirement ${v === "matin" ? "le matin" : "le soir"}`, onClick: () => set(r.prefers === v ? { prefers: null, shiftFlex: false } : { prefers: v }, `${e.name} : service ${r.prefers === v ? "indifférent" : l.toLowerCase()}`) }, l)
+        : r.prefers === v ? h("span", { class: `skill pref-${v}`, "aria-pressed": "true" }, l) : null),
+      r.prefers ? (Store.canWrite
+        ? h("button", { type: "button", class: "skill flex", "aria-pressed": String(!!r.shiftFlex), title: "Si besoin, peut faire l'autre service", onClick: () => set({ shiftFlex: !r.shiftFlex }, `${e.name} : ${r.shiftFlex ? "service obligatoire" : "peut changer de service si besoin"}`) }, "⇄ Si besoin")
+        : r.shiftFlex ? h("span", { class: "skill flex", "aria-pressed": "true" }, "⇄ Si besoin") : null) : null);
+  };
   App.skillChips = function (e) {
     return h("div", { class: "skill-chips" }, SKILL_KEYS.map((k) => {
       const on = this.skillOn(e, k);
@@ -1320,7 +1344,7 @@
         h("tbody", {}, s.employees.map((e) => h("tr", {},
           h("td", {}, h("b", {}, e.name), (e.aliases || []).length ? h("div", { class: "tiny muted" }, `aussi : ${e.aliases.join(", ")}`) : null),
           h("td", {}, e.role === "alternant" ? h("span", { class: "chip cours" }, "Alternant(e)") : "Salarié(e)", e.contractHours ? h("div", { class: "tiny muted" }, `Contrat ${e.contractHours} h`) : null),
-          h("td", {}, this.skillChips(e)),
+          h("td", {}, this.skillChips(e), this.zonePrefChips(e), this.shiftPrefChips(e)),
           h("td", { class: "num" }, C.fmtHours(C.templateMinutes(s, e.id))),
           h("td", { class: "small" }, rulesText(e) || h("span", { class: "muted" }, "—")),
           h("td", {}, Store.canWrite ? h("input", { type: "checkbox", checked: e.active !== false, "aria-label": `${e.name} active`, onChange: (ev) => this.commit([{ type: "updateEmployee", id: e.id, patch: { active: ev.target.checked } }]) }) : (e.active !== false ? "Oui" : "Non")),
@@ -1338,8 +1362,18 @@
     const offBoxes = C.DAYS.map((d, i) => h("label", { class: "check" }, h("input", { type: "checkbox", value: String(i), checked: (r.daysOff || []).includes(i) }), d));
     const sameWe = h("input", { type: "checkbox", id: "emp-same-we", checked: !!r.sameWeekends });
     const maxEndIn = h("input", { type: "time", class: "input", id: "emp-max-end", value: r.maxEnd || "" });
-    const weekZoneIn = h("select", { class: "input", id: "emp-week-zone" }, h("option", { value: "" }, "Au choix (ZP ou ZR)"), s.zones.map((z) => h("option", { value: z.id, selected: r.weekZone === z.id }, `${z.short} toute la semaine`)));
-    const prefIn = h("select", { class: "input", id: "emp-prefers" }, [["", "Indifférent"], ["matin", "Du matin (le soir reste possible)"], ["soir", "Du soir (le matin reste possible)"]].map(([v, l]) => h("option", { value: v, selected: (r.prefers || "") === v }, l)));
+    const zpPref = h("input", { type: "checkbox", id: "emp-pref-zp", checked: r.weekZone === "ZP" });
+    const zrPref = h("input", { type: "checkbox", id: "emp-pref-zr", checked: r.weekZone === "ZR" });
+    const zoneFlex = h("input", { type: "checkbox", id: "emp-zone-flex", checked: !!r.zoneFlex });
+    zpPref.addEventListener("change", () => { if (zpPref.checked) zrPref.checked = false; });
+    zrPref.addEventListener("change", () => { if (zrPref.checked) zpPref.checked = false; });
+    const weekZoneIn = { get value() { return zpPref.checked ? "ZP" : zrPref.checked ? "ZR" : ""; } };
+    const amPref = h("input", { type: "checkbox", id: "emp-pref-matin", checked: r.prefers === "matin" });
+    const pmPref = h("input", { type: "checkbox", id: "emp-pref-soir", checked: r.prefers === "soir" });
+    const shiftFlex = h("input", { type: "checkbox", id: "emp-shift-flex", checked: !!r.shiftFlex });
+    amPref.addEventListener("change", () => { if (amPref.checked) pmPref.checked = false; });
+    pmPref.addEventListener("change", () => { if (pmPref.checked) amPref.checked = false; });
+    const prefIn = { get value() { return amPref.checked ? "matin" : pmPref.checked ? "soir" : ""; } };
     const officeOn = h("input", { type: "checkbox", id: "emp-office", checked: !!r.officeMinDays });
     const officeN = h("input", { type: "number", class: "input", id: "emp-office-n", min: "1", max: "7", value: r.officeMinDays || 2, style: { width: "80px" } });
     const tr = e.training || {};
@@ -1352,7 +1386,10 @@
     openDialog({ title: e.name, body: h("div", { class: "stack" }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("label", { class: "f" }, "Autres écritures (séparées par des virgules)", aliases),
       h("h3", {}, "Règles personnelles"),
       h("label", { class: "check" }, fixOn, "Toujours les mêmes horaires"), h("div", { class: "form-grid" }, h("label", { class: "f" }, "Début", fixS), h("label", { class: "f" }, "Fin", fixE)),
-      h("div", { class: "form-grid" }, h("label", { class: "f" }, "Fin au plus tard", maxEndIn), h("label", { class: "f" }, "Zone pour toute la semaine", weekZoneIn), h("label", { class: "f" }, "Service habituel", prefIn)),
+      h("div", { class: "form-grid" }, h("label", { class: "f" }, "Fin au plus tard", maxEndIn)),
+      h("div", { class: "row", style: { "flex-wrap": "wrap" } }, h("span", { class: "small muted" }, "Préférence de service :"), h("label", { class: "check" }, amPref, "Matin"), h("label", { class: "check" }, pmPref, "Soir"), h("label", { class: "check" }, shiftFlex, "Si besoin, peut changer de service")),
+      h("div", { class: "row", style: { "flex-wrap": "wrap" } }, h("span", { class: "small muted" }, "Préférence de zone :"), h("label", { class: "check" }, zpPref, "ZP"), h("label", { class: "check" }, zrPref, "ZR"), h("label", { class: "check" }, zoneFlex, "Si besoin, peut changer de zone")),
+      h("p", { class: "small muted", style: { "margin-top": "-6px" } }, "Zone cochée : la personne y travaille obligatoirement. Avec « si besoin, peut changer », elle reste de préférence dans cette zone mais peut aller dans l'autre."),
       h("div", { class: "row" }, h("label", { class: "check" }, officeOn, "Jours de bureau, au minimum"), officeN, h("span", { class: "small muted" }, "par semaine")),
       h("label", { class: "check" }, sameWe, "Toujours les mêmes week-ends"),
       h("div", { class: "stack", style: { gap: "4px" } }, h("span", { class: "small muted" }, "Jours de repos fixes (jamais de créneau ces jours-là) :"), h("div", { class: "row" }, offBoxes)),
@@ -1372,7 +1409,7 @@
         { label: "Enregistrer", primary: true, onClick: async () => {
           const daysOff = offBoxes.map((b) => b.querySelector("input")).filter((i) => i.checked).map((i) => Number(i.value));
           if (fixOn.checked && (!C.isTime(fixS.value) || !C.isTime(fixE.value))) { toast("Indiquez le début et la fin des horaires fixes.", "err"); return false; }
-          const rules = { ...r, fixedHours: fixOn.checked ? { s: fixS.value, e: fixE.value } : null, daysOff: daysOff.length ? daysOff : null, sameWeekends: sameWe.checked, maxEnd: maxEndIn.value || null, weekZone: weekZoneIn.value || null, prefers: prefIn.value || null, officeMinDays: officeOn.checked ? Math.max(1, Math.min(7, Number(officeN.value) || 2)) : null, officeSince: officeOn.checked ? (r.officeMinDays ? r.officeSince || null : C.mondayOf(this.today())) : null };
+          const rules = { ...r, fixedHours: fixOn.checked ? { s: fixS.value, e: fixE.value } : null, daysOff: daysOff.length ? daysOff : null, sameWeekends: sameWe.checked, maxEnd: maxEndIn.value || null, weekZone: weekZoneIn.value || null, zoneFlex: !!weekZoneIn.value && zoneFlex.checked, prefers: prefIn.value || null, shiftFlex: !!prefIn.value && shiftFlex.checked, officeMinDays: officeOn.checked ? Math.max(1, Math.min(7, Number(officeN.value) || 2)) : null, officeSince: officeOn.checked ? (r.officeMinDays ? r.officeSince || null : C.mondayOf(this.today())) : null };
           if (rules.weekZone && !(sk.badgeRouge.checked || rules.weekZone !== "ZR")) { toast("Sans badge rouge, la zone de la semaine ne peut pas être ZR.", "err"); return false; }
           if (trOn.checked && !C.isISO(trSince.value)) { toast("Indiquez le début de la formation.", "err"); return false; }
           const training = trOn.checked ? { since: trSince.value } : e.training ? { ...e.training, ended: e.training.ended || this.today() } : undefined;
