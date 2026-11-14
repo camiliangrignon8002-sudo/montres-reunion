@@ -1,5 +1,5 @@
 {
- "mise_a_jour": "2026-11-14T12:52+00:00",
+ "mise_a_jour": "2026-11-14T14:45+00:00",
  "sources": [
   {
    "id": "intemporel",
@@ -16,8 +16,8 @@
   {
    "id": "desbiolles",
    "nom": "Horlogerie Desbiolles",
-   "via": "fiches produit",
-   "annonces": 0
+   "via": "WooCommerce",
+   "annonces": 13
   },
   {
    "id": "lmdh",
@@ -149,7 +149,7 @@
    "id": "timepiece360",
    "nom": "Timepiece360",
    "via": "Shopify",
-   "annonces": 64
+   "annonces": 63
   },
   {
    "id": "watchmaestro",
@@ -2040,6 +2040,696 @@
    "premiere_vue": "2026-11-14T10:39+00:00"
   },
   {
+   "id": "1589b3fcd250",
+   "boutique": "desbiolles",
+   "reference": "268655",
+   "collection": "Yacht-Master",
+   "annee": "",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "ROLEX OYSTER PERPETUAL YACHT-MASTER ROSE GOLD LIKE NEW FULL SET REF 268655",
+   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-yacht-master-rose-gold-like-new-full-set-ref-268655/",
+   "prix": 22000,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4740-scaled.png",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4730-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4731-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4732-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4733-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4734-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4735-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4736-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4738-scaled.jpeg",
+     "w": 2560
+    }
+   ],
+   "description": "ROLEX OYSTER PERPETUAL YACHT-MASTER ROSE GOLD LIKE NEW\n FULL SET REF 268655\n Montre comme neuve, full set avec boite et papier, cadran noir,  boite or rose 18k, bracelet Oysterflex caoutchouc, lunette noir, mouvement automatique, calibre 2236.",
+   "premiere_vue": "2026-11-14T10:39+00:00"
+  },
+  {
+   "id": "94f0b446d16a",
+   "boutique": "desbiolles",
+   "reference": "326934",
+   "collection": "Sky-Dweller",
+   "annee": "",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "ROLEX OYSTER PERPETUAL SKY-DWELLER BLUE DIAL NEW UNWORN  FULL SET REF 326934",
+   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-sky-dweller-blue-dial-new-unworn-full-set-ref-326934/",
+   "prix": 19500,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4739-scaled.png",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4720-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4721-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4722-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4724-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4725-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4726-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4727-scaled.jpeg",
+     "w": 2560
+    }
+   ],
+   "description": "ROLEX OYSTER PERPETUAL SKY-DWELLER BLUE DIAL NEW UNWORN\n FULL SET REF 326934\n Montre neuve, jamais portée, full set avec boite et papier, cadran bleu,  boite et bracelet Jubilé en acier, lunette or blanc, mouvement automatique, calibre 9001.",
+   "premiere_vue": "2026-11-14T10:39+00:00"
+  },
+  {
+   "id": "f738a77ec11c",
+   "boutique": "desbiolles",
+   "reference": "168000",
+   "collection": "Submariner",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": null,
+   "titre": "ROLEX OYSTER PERPETUAL SUBMARINER DATE VINTAGE REF 168000",
+   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-submariner-date-vintage-ref-168000/",
+   "prix": 9000,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4749-scaled.png",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4742-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4743-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4744-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4745-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4746-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4747-scaled.jpeg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/10/IMG_4748-scaled.jpeg",
+     "w": 2560
+    }
+   ],
+   "description": "ROLEX OYSTER PERPETUAL SUBMARINER DATE VINTAGE REF 168000\n Montre en parfait état, cadran noir, index tritium , boite et bracelet Oyster en acier, lunette noir, mouvement automatique, calibre 3035.",
+   "premiere_vue": "2026-11-14T10:39+00:00"
+  },
+  {
+   "id": "45ff0fd9e058",
+   "boutique": "desbiolles",
+   "reference": "136660",
+   "collection": "Sea-Dweller",
+   "annee": "",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "ROLEX OYSTER PERPETUAL SEA-DWELLER DEEPSEA NEW UNWORN  FULL SET REF 136660",
+   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-sea-dweller-deepsea-new-unworn-full-set-ref-136660/",
+   "prix": 13000,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4612-scaled.png",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_9973-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_9975-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_9974-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_9976-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_9977-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_9980-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_9979-scaled.jpg",
+     "w": 2560
+    }
+   ],
+   "description": "ROLEX OYSTER PERPETUAL SEA-DWELLER DEEPSEA NEW UNWORN\n FULL SET REF 136660\n Montre neuve, jamais portée, full set avec boite et papier, cadran noir et bleu,  boite et bracelet Oyster en acier, lunette céramique noir, mouvement automatique, calibre 3235.",
+   "premiere_vue": "2026-11-14T10:39+00:00"
+  },
+  {
+   "id": "c5bc1af7e7c9",
+   "boutique": "desbiolles",
+   "reference": "126610LN",
+   "collection": "Submariner",
+   "annee": "",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "ROLEX OYSTER PERPETUAL SUBMARINER DATE NEW UNWORN FULL SET REF 126610LN",
+   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-submariner-date-new-unworn-full-set-ref-126610ln/",
+   "prix": 11500,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2394-scaled.png",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2385-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2386-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2387-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2388-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2389-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2390-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2391-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2392-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2393-scaled.jpg",
+     "w": 2560
+    }
+   ],
+   "description": "ROLEX OYSTER PERPETUAL SUBMARINER DATE NEW UNWORN\n FULL SET REF 126610LN\n Montre neuve, jamais portée, full set avec boite et papier, cadran noir, boite et bracelet Oyster en acier, lunette céramique noir, mouvement automatique, calibre 3235.",
+   "premiere_vue": "2026-11-14T10:39+00:00"
+  },
+  {
+   "id": "32eececf6ef2",
+   "boutique": "desbiolles",
+   "reference": "116234",
+   "collection": "Datejust",
+   "annee": "",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "ROLEX OYSTER PERPETUAL DATEJUST 36MM FULL SET REF 116234",
+   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-datejust-36mm-full-set-ref-116234/",
+   "prix": 9000,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4453-scaled.png",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4405-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4406-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4407-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4408-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4409-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4410-scaled.jpg",
+     "w": 2560
+    }
+   ],
+   "description": "ROLEX OYSTER PERPETUAL DATEJUST 36MM FULL SET\n REF 116234\n Montre en parfait état, comme neuve, full set avec boite et papier, cadran noir, boite et bracelet Jubilé en acier, lunette or blanc, mouvement automatique, calibre 3135.",
+   "premiere_vue": "2026-11-14T10:39+00:00"
+  },
+  {
+   "id": "0ab2b8cb9550",
+   "boutique": "desbiolles",
+   "reference": "116520",
+   "collection": "Cosmograph Daytona",
+   "annee": "",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "ROLEX OYSTER PERPETUAL DAYTONA APH DIAL FULL SET REF 116520",
+   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oysrolex-oyster-perpetual-daytona-aph-full-set-ref-116520ter-perpetual-submariner-no-date-full-set-ref-114060-copie/",
+   "prix": 22000,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/08/IMG_4196-scaled.png",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/08/IMG_4176-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/08/IMG_4177-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/08/IMG_4178-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/08/IMG_4179-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/08/IMG_4180-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/08/IMG_4181-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/08/IMG_4183-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/08/IMG_4184-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/08/IMG_4185-scaled.jpg",
+     "w": 2560
+    }
+   ],
+   "description": "ROLEX OYSTER PERPETUAL DAYTONA APH DIAL FULL SET\n REF 116520\n Montre en parfait état, comme neuve, full set avec boite et papier, cadran noir, APH, boite et bracelet Oyster en acier, lunette acier, mouvement automatique, calibre 4130.",
+   "premiere_vue": "2026-11-14T10:39+00:00"
+  },
+  {
+   "id": "8ee80532252a",
+   "boutique": "desbiolles",
+   "reference": "116710BLNR",
+   "collection": "GMT-Master II",
+   "annee": "",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "ROLEX OYSTER PERPETUAL GMT-MASTER II FULL STICKERS QR CODE FULL SET REF 116710BLNR",
+   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-gmt-master-ii-full-stickers-qr-code-full-set-ref-116710blnr/",
+   "prix": 14500,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/06/IMG_3373-scaled.png",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/06/IMG_3315-1-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/06/IMG_3316-1-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/06/IMG_3317-1-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/06/IMG_3318-1-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/06/IMG_3319-1-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/06/IMG_3320-1-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/06/IMG_3321-1-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/06/IMG_3322-1-scaled.jpg",
+     "w": 2560
+    }
+   ],
+   "description": "ROLEX OYSTER PERPETUAL GMT-MASTER II FULL STICKERS QR CODE FULL SET REF 116710BLNR\n Montre 100% neuve, full stickers, full set avec boite et papier, cadran noir, lunette céramique bleu/noir, boite et bracelet Oyster en acier, mouvement automatique, calibre 3186.",
+   "premiere_vue": "2026-11-14T10:39+00:00"
+  },
+  {
+   "id": "2cbec3acf36d",
+   "boutique": "desbiolles",
+   "reference": "69178",
+   "collection": "Datejust",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": null,
+   "titre": "ROLEX OYSTER PERPETUAL LADY DATEJUST 26MM OR JAUNE REF 69178",
+   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-lady-datejust-26mm-or-jaune-ref-69178/",
+   "prix": 8500,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/05/IMG_2916-scaled.png",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/05/IMG_2891-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/05/IMG_2892-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/05/IMG_2893-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/05/IMG_2894-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/05/IMG_2895-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/05/IMG_2897-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/05/IMG_2898-scaled.jpg",
+     "w": 2560
+    }
+   ],
+   "description": "ROLEX OYSTER PERPETUAL LADY DATEJUST 26MM OR JAUNE REF 69178\n Montre en parfait état, révision Rolex en 2014cadran champagne, lunette or jaune, boite et bracelet Président en or jaune, mouvement automatique, calibre 2135.",
+   "premiere_vue": "2026-11-14T10:39+00:00"
+  },
+  {
+   "id": "17e4f4cea5e2",
+   "boutique": "desbiolles",
+   "reference": "114060",
+   "collection": "Submariner",
+   "annee": "",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "ROLEX OYSTER PERPETUAL SUBMARINER NO DATE FULL SET REF 114060",
+   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-submariner-no-date-full-set-ref-114060/",
+   "prix": 10500,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/03/IMG_2405-scaled.png",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/03/IMG_2396-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/03/IMG_2397-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/03/IMG_2398-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/03/IMG_2399-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/03/IMG_2400-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/03/IMG_2401-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/03/IMG_2402-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/03/IMG_2403-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/03/IMG_2404-scaled.jpg",
+     "w": 2560
+    }
+   ],
+   "description": "ROLEX OYSTER PERPETUAL SUBMARINER NO DATE FULL SET\n REF 114060\n Montre en parfait état, comme neuve, full set avec boite et papier, cadran noir, boite et bracelet Oyster en acier, lunette céramique noir, mouvement automatique, calibre 3130.",
+   "premiere_vue": "2026-11-14T10:39+00:00"
+  },
+  {
+   "id": "1218282a9fa6",
+   "boutique": "desbiolles",
+   "reference": "16203",
+   "collection": "Datejust",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "ROLEX OYSTER PERPETUAL DATEJUST 36MM OR/ACIER FULL SET REF 16203",
+   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oysrolex-oyster-perpetual-datejust-36mm-or-acier-full-set-ref-16203ter-perpetual-submariner-new-full-set-ref-126610lv-copie/",
+   "prix": 8500,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/11/IMG_1050-scaled.png",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/11/IMG_1038-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/11/IMG_1039-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/11/IMG_1040-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/11/IMG_1041-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/11/IMG_1042-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/11/IMG_1055-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/11/IMG_1057-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/11/IMG_1058-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/11/IMG_1059-scaled.jpg",
+     "w": 2560
+    }
+   ],
+   "description": "ROLEX OYSTER PERPETUAL DATEJUST 36MM OR/ACIER FULL SET\n REF 16203\n Montre en parfait état, full set avec boite et papier, cadran noir, boite et bracelet Oyster en or/acier, mouvement automatique, calibre 3135.",
+   "premiere_vue": "2026-11-14T10:39+00:00"
+  },
+  {
+   "id": "edaf005a8225",
+   "boutique": "desbiolles",
+   "reference": "1016",
+   "collection": "Explorer",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": null,
+   "papiers": null,
+   "titre": "ROLEX OYSTER PERPETUAL EXPLORER I AUTOMATIC REF 1016",
+   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-explorer-i-automatic-ref-1016/",
+   "prix": 15000,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0925-scaled.png",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0244-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0245-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0246-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0247-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0248-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0249-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0250-scaled.jpg",
+     "w": 2560
+    }
+   ],
+   "description": "ROLEX OYSTER PERPETUAL EXPLORER I AUTOMATIC REF 1016\n Montre en bonne état, boîtier en acier, bracelet Oyster en acier, cadran et aiguilles en tritium.",
+   "premiere_vue": "2026-11-14T10:39+00:00"
+  },
+  {
+   "id": "b8961077fd12",
+   "boutique": "desbiolles",
+   "reference": "1675",
+   "collection": "GMT-Master II",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": null,
+   "titre": "ROLEX OYSTER PERPETUAL GMT-MASTER « LONG E » DIAL REF 1675",
+   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-gmt-master-long-e-dial-ref-1675/",
+   "prix": 18000,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/08/IMG_0944-scaled.png",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/01/IMG_7590-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/01/IMG_7592-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/01/IMG_7593-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/01/IMG_7594-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/01/IMG_7595-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/01/IMG_7596-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/01/IMG_7597-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/01/IMG_7598-scaled.jpg",
+     "w": 2560
+    }
+   ],
+   "description": "ROLEX OYSTER PERPETUAL GMT-MASTER « LONG E » DIAL\n REF 1675\n Montre en parfait état, avec boîte d’origine, boîtier en acier , cadran noir, index tritium, Long E dial, lunette noir/rouge, mouvement automatique, calibre 1570, bracelet Extensible Rivet Oyster en acier, end links 382, clasp code 2/70, case back II 71.",
+   "premiere_vue": "2026-11-14T10:39+00:00"
+  },
+  {
    "id": "a693e8a9e528",
    "boutique": "lmdh",
    "reference": "268655",
@@ -2739,7 +3429,7 @@
    "papiers": true,
    "titre": "Rolex Datejust 41 mm 126334 (2023)",
    "url": "https://www.labelmontre.fr/produit/rolex-datejust-41mm-126334-2023/",
-   "prix": 11900,
+   "prix": 12500,
    "devise": "EUR",
    "photos": [
     {
@@ -4450,6 +5140,56 @@
    ],
    "description": "﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ \n Specifications \n Brand \n Rolex \n Model Name \n Datejust \n Model No. \n 16200 \n Gender \n Men’s \n Case Diameter \n 36mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 7 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET Date function \n Dial \n Rolex SILVER dial with raised stick markers \n Bezel \n Rolex stainless steel smooth finish DOMED bezel \n Case \n Rolex stainless steel case \n Band \n Rolex stainless steel Oyster band with Rolex signed clasp \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!\n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances that most buyers may not even notice.) Please keep in mind that many of our compe",
    "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "ba269c1ee742",
+   "boutique": "beckertime",
+   "reference": "216570",
+   "collection": "Explorer",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Mens Rolex Stainless Steel Explorer II 216570 Watch 42mm Polar White (SKU 216570E2NMT)",
+   "url": "https://beckertime.com/product/used-rolex-explorer-ii-216570-42mm-mens-watch-216570e2nmt/",
+   "prix": 12700,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2019/09/216570B.jpeg",
+     "w": 1405
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2019/09/216570AA.jpeg",
+     "w": 1592
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2015/05/DSCN1355.jpg",
+     "w": 4096
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2015/05/DSCN1365.jpg",
+     "w": 4608
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2015/05/DSCN1363.jpg",
+     "w": 4608
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2015/05/DSCN1358.jpg",
+     "w": 4608
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2015/05/DSCN1359.jpg",
+     "w": 4608
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2015/05/DSCN1360.jpg",
+     "w": 4345
+    }
+   ],
+   "description": "Specifications \n Brand \n Rolex \n Model Name \n Explorer II \n Model No. \n 216570 \n Gender \n Mens \n Case Diameter \n 42mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex does NOT come with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 7 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement \n Dial \n Rolex WHITE dial with black trim ILLUMINATED markers \n Bezel \n Rolex stainless steel with black engraved 24-hour bezel \n Case \n Rolex stainless steel case \n Band \n Rolex stainless steel oyster bracelet with Rolex signed clasp. THIS IS THE NEWER HEAVIER STYLE SEL (SOLID END LINK) BAND THAT IS MOST DESIRED and SOUGHT AFTER. \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!\n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances tha",
+   "premiere_vue": "2026-11-14T14:45+00:00"
   },
   {
    "id": "2f9990761f02",
@@ -8677,56 +9417,6 @@
     }
    ],
    "description": "Specifications \n Brand \n Rolex \n Model Name \n Datejust \n Model No. \n 69179 \n Gender \n Ladies \n Case Diameter \n 26mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 6 1/5″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/4″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET DATE function \n Dial \n Rolex SILVER dial with raised ROMAN numeral markers \n Bezel \n Rolex 18k white gold FLUTED bezel \n Case \n Rolex 18k white gold case \n Band \n Rolex 18k white gold Presidential bracelet with Rolex signed hidden clasp \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!\n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances that most buyers may not even notice.) Please keep in mind that many of our competitors use fil",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "dbb1a07c7ba8",
-   "boutique": "beckertime",
-   "reference": "16613",
-   "collection": "Submariner",
-   "annee": "",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Mens Rolex Two-Tone Submariner Watch 16613 Silver Factory Serti Diamond Dial (SKU Y772434AMT)",
-   "url": "https://beckertime.com/product/mens-rolex-two-tone-submariner-factory-serti-diamond-16613-sku-y772434amt/",
-   "prix": 17200,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2022/04/Y772434AMT-11-2.jpg",
-     "w": 1365
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2022/04/Y772434AMT-11.jpg",
-     "w": 1440
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2022/04/Y772434AMT-1.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2022/04/Y772434AMT2-1.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2022/04/Y772434AMT4.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2022/04/Y772434AMT5.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2022/04/Y772434AMT3.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2022/04/Y772434AMT6.jpg",
-     "w": 4608
-    }
-   ],
-   "description": "Specifications \n Brand \n Rolex \n Model Name \n Submariner \n Model No. \n 16613 \n Gender \n Men’s \n Case Diameter \n 40mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 7 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET Date function \n Dial \n Rolex SILVER dial with diamond & blue sapphire markers. This is a factory diamond dial produced by Rolex. \n Bezel \n Rolex solid 18k yellow gold bezel with a blue bezel insert; Unidirectional time-lapse \n Case \n Rolex stainless steel case \n Band \n Rolex 2tone 18k yellow gold and stainless steel Oyster bracelet with Rolex signed flip-lock clasp and special divers extension. This is the desired (solid end link) sel band with the gold through clasp. \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED! \n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarant",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -60943,56 +61633,6 @@
     }
    ],
    "description": "This Pre-owned Rolex GMT-Master II 40mm, steel case, black dial, ceramic bezel and steel oyster bracelet with 10 links is in very good condition. Mechanised by Rolex calibre 3186 automatic movement. Includes CPO box, CPO warranty card dated February 2024, sales warranty card dated June 2008 and 2 Years timepiece360 warranty.",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "6db75d50871b",
-   "boutique": "timepiece360",
-   "reference": "",
-   "collection": "GMT-Master II",
-   "annee": "2013",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "GMT-Master II",
-   "url": "https://timepiece360.com/products/rolex-gmt-master-ii-116718ln",
-   "prix": 124000,
-   "devise": "AED",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/1_61882c12-1241-4666-9194-600accf10b62.webp?v=1789225428",
-     "w": 1800
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/2_c0501b39-e560-462c-be11-e51bdeace8f1.webp?v=1789225428",
-     "w": 1800
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/3_bc4292cf-1d98-456c-8ef7-2f51a79be7bf.webp?v=1789225428",
-     "w": 1800
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/7_578139ba-beb5-4a29-9a4d-2c79fcd856f8.webp?v=1789225428",
-     "w": 1800
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/5_3f3b0cef-bbec-4ac2-b0c4-4c68b705b15d.webp?v=1789225428",
-     "w": 1800
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/6_a665972d-0288-4976-8819-92edd406ad10.webp?v=1789225428",
-     "w": 1800
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/4_48ea7d1a-fb88-4c74-af13-f992d55a7936.webp?v=1789225428",
-     "w": 1800
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/8_bbaaaca3-2cb0-41e2-8c32-ee9c1a69218c.webp?v=1789225428",
-     "w": 1800
-    }
-   ],
-   "description": "This Pre-owned Rolex GMT-Master II 40mm, yellow gold case, black dial, ceramic bezel and yellow gold oyster bracelet with 11 links is in very good condition. Mechanised by Rolex calibre 3186 automatic movement. Includes box, sales warranty card dated November 2013 and 2 years Timepiece360 warranty.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
