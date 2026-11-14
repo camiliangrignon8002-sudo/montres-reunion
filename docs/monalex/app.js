@@ -975,6 +975,28 @@ function pageInfos() {
   if (S.ancre) { const a = S.ancre; S.ancre = null; setTimeout(() => { const el = document.getElementById(a); if (el) page().scrollTop = el.offsetTop - 70; }, 60); }
 }
 
+/* ---------- sources, rangées par catégorie */
+function pageSources(ouvrir = "") {
+  const host = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return u; } };
+  const ligne = (nom, sous, url) => `<li><span><b>${esc(nom)}</b>${sous ? `<small>${esc(sous)}</small>` : ""}</span>${url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(host(url))} ↗</a>` : ""}</li>`;
+  const parPays = (items, f) => { const m = new Map(); items.forEach(x => { const k = x.pays || "Autres"; if (!m.has(k)) m.set(k, []); m.get(k).push(x); }); return [...m.entries()].map(([k, xs]) => `<p class="src-pays">${esc(k)}</p><ul class="src-l">${xs.map(f).join("")}</ul>`).join(""); };
+  const bouts = Object.entries(ANNDATA.boutiques || {}).map(([id, b]) => ({ id, ...b, n: (ANNDATA.sources || []).find(x => x.id === id)?.annonces }));
+  const groupes = [
+    ["catalogue", "Catalogue officiel", "Les références, leurs caractéristiques et le prix public conseillé.", `<ul class="src-l">${ligne("Rolex — les montres", "Caractéristiques et prix public de chaque référence", "https://www.rolex.com/fr/watches")}${ligne("Rolex — trouver un détaillant", "Liste officielle des détaillants", "https://www.rolex.com/fr/store-locator")}</ul>`],
+    ["detaillants", `Détaillants officiels (${DET.length})`, `Adresses et téléphones relevés le ${fmtDay((DETDATA.verifie_le || "2026-11-14") + "T12:00")}, chacun avec sa fiche d'origine.`, parPays(DET, d => ligne(d.nom, `${d.adresse}, ${d.ville}`, d.source))],
+    ["boutiques", `Boutiques et annonces (${bouts.length})`, `Annonces relevées toutes les 2 heures sur le site de chaque boutique${ANNDATA.mise_a_jour ? `, dernière fois ${ago(ANNDATA.mise_a_jour, Date.now())}` : ""}. Les photos appartiennent aux boutiques.`, parPays(bouts, b => ligne(b.nom, `${b.ville}${b.n != null ? ` · ${b.n} annonce${b.n > 1 ? "s" : ""}` : ""}`, b.site))],
+    ["cartes", "Cartes", "Fonds de carte, vue satellite et 3D.", `<ul class="src-l">${ligne("OpenStreetMap", "Données cartographiques, © contributeurs OpenStreetMap", "https://www.openstreetmap.org/copyright")}${ligne("CARTO", "Fond de carte", "https://carto.com/attributions")}${ligne("Google Maps", "Plan et satellite, sur accord des cookies", "https://maps.google.com")}${ligne("Google Earth", "Vue 3D des adresses", "https://earth.google.com")}</ul>`],
+    ["credits", "Polices et outils", "Tous libres d'utilisation.", `<ul class="src-l">${ligne("Cormorant Garamond", "Police des titres · licence SIL OFL", "https://github.com/CatharsisFonts/Cormorant")}${ligne("EB Garamond", "Police du texte · licence SIL OFL", "https://github.com/octaviopardo/EBGaramond12")}${ligne("Three.js", "Montres en 3D · licence MIT", "https://threejs.org")}${ligne("Leaflet", "Cartes interactives · licence BSD", "https://leafletjs.com")}</ul>`],
+  ];
+  openPage(`
+    <nav class="crumbs"><a href="#">Accueil</a> / <span>Sources</span></nav>
+    <h1 class="p-h1">Sources</h1>
+    <p class="p-lead">D'où viennent les informations de Monalex. Uniquement des sources officielles et des sites de boutiques.</p>
+    <div class="src">${groupes.map(([id, titre, sous, corps]) => `<details id="src-${id}"${id === ouvrir || !ouvrir && id === "catalogue" ? " open" : ""}><summary><span>${esc(titre)}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></summary><p class="src-sous">${esc(sous)}</p>${corps}</details>`).join("")}</div>
+    <p class="copyright" style="text-align:center;margin-top:50px">© ${new Date().getFullYear()} Monalex · Camilian. Tous droits réservés.</p>`, "Sources");
+  if (ouvrir) setTimeout(() => { const el = $("#src-" + ouvrir); if (el) page().scrollTop = el.offsetTop - 80; }, 60);
+}
+
 /* ---------- notifications */
 function pageNotifications() {
   const c = ME.compte, al = alerts();
@@ -1151,6 +1173,7 @@ function renderMenu() {
     ["#compte", ME.compte ? "Mon compte" : "Créer un compte", ""],
     ["#notifications", `Notifications${alerts().length ? `<span class="dot">${alerts().length}</span>` : ""}`, ""],
     ["#infos", "À propos de Monalex", ""],
+    ["#sources", "Sources", ""],
   ].map(([h, l, at]) => `<li><a href="${h}" ${at}>${l}${CHEV.replace('class="chev"', "")}</a></li>`).join("");
 }
 function renderSearch() {
@@ -1490,6 +1513,7 @@ function route() {
   else if (k === "officiels") pageOfficiels();
   else if (k === "infos") pageInfos();
   else if (k === "notifications") pageNotifications();
+  else if (k === "sources") pageSources(a);
   else if (k === "suivis") pageSuivis(a || "suivis");
   else if (k === "compte") pageCompte();
   else closePage();

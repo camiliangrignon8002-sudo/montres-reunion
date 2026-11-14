@@ -347,6 +347,7 @@ Trouver une montre **et un détaillant officiel Rolex** à **Monaco**, puis en *
 - **Cookies** : bandeau Accepter / Refuser / En savoir plus. Seul Google Maps (onglets Google Maps et Satellite) dépose des cookies, et ne s'affiche qu'avec l'accord ; « Gérer les cookies » en bas de page.
 - **Notifications** : page dédiée (menu), activation sur le téléphone, liste des changements de prix et de statut des montres suivies.
 - **Photos** : seules les photos d'au moins 1200 px de large sont gardées, et chaque photo une seule fois (même adresse ou miniature de la même image).
+- **Sources** : colonne « Sources » en bas du site et page Sources (catalogue, détaillants officiels par pays, boutiques par pays, cartes, polices et outils), chaque source avec son lien. Droits d'auteur « © Monalex · Camilian » en bas de chaque page.
 - **Pages** : À propos (fonctionnement, sources, données personnelles, mentions) ; fenêtre de confirmation avant suppression du compte ; chargement avec cartes animées.
 - Logo Monalex : `docs/monalex/img/` (logo complet, cadran seul, mot « MONALEX », image de partage) ; icônes de l'écran d'accueil tirées du cadran.
 - Projet non affilié à Rolex SA : pas de logo ni de photo Rolex.
