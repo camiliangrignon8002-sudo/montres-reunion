@@ -307,7 +307,7 @@ La canette suit la souris, s'écrase un peu quand on défile vite, les bulles ac
 
 # ⌚ Monalex
 
-Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/monalex/
+Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/monalex/ (adresse visée : https://monalexcamilian.com, voir plus bas)
 
 Trouver une montre **et un détaillant officiel Rolex** à **Monaco**, puis en **France**, en **Europe** et **dans le monde**
 (onglets en haut de la liste, distances depuis Monaco ou « Autour de moi »). Présentation blanche, vert poker et or : tous les éléments verts ont un effet soleillé (comme un cadran), dont les reflets tournent quand on fait défiler la page (désactivé avec « Réduire les animations »).
@@ -317,6 +317,15 @@ Trouver une montre **et un détaillant officiel Rolex** à **Monaco**, puis en *
   Dubaï, Miami, Tokyo), avec adresse, téléphone, horaires quand ils sont publiés et lien vers la source. Fichier
   `docs/monalex/detaillants.json` : on ajoute une boutique en ajoutant une ligne. Rolex en compte plus de mille ; seuls
   ceux dont l'adresse a pu être confirmée sont dans la liste.
+- **Annonces des boutiques** (relevées **toutes les 2 heures** par `monalex.py`, tâche `.github/workflows/monalex.yml`) :
+  17 boutiques de montres qui vendent des Rolex (Genève, Monaco, Nice, Cannes, Paris, Londres), liste `BOUTIQUES` dans `monalex.py`.
+  Le robot reconnaît les boutiques Shopify, WooCommerce et les fiches produit standard ; il garde seulement les Rolex disponibles
+  avec au moins une photo nette (1200 px quand la taille est connue), chaque photo une seule fois ; il respecte le robots.txt de
+  chaque site. Pas de petites annonces entre particuliers ni de places de marché. Les photos restent hébergées chez la boutique,
+  avec son nom et un lien vers l'annonce. Lancer à la main : **Actions → Monalex → Run workflow**. L'appli ouverte se met aussi
+  à jour toutes les 2 heures.
+- **Montres en 3D** (Three.js, comme le site Red Bull) : sur l'accueil et en haut de chaque collection ; elles tournent au
+  défilement et se manipulent au doigt (`docs/monalex/watch3d.js`).
 - **Pages des collections** (`#c/submariner`, etc., depuis les cartes de collection et le pied de page) : grand visuel et titre, carrousel des modèles à faire glisser avec pastilles de matière, favoris et « Découvrir ce modèle », gros plan « Découvrir les caractéristiques », « Aller plus loin » (où l'acheter, fiche technique, alerte, toutes les références), « Suivant » vers la collection d'après, barre flottante du nom de la collection pour naviguer.
 - **Carte des boutiques** (accueil, vue Carte, et page Détaillants officiels) : carte claire pleine largeur, épingles blanches avec le cadran Monalex, regroupées avec leur nombre quand elles sont proches (on touche pour zoomer), barre « Trouver une boutique » avec « Autour de moi », panneau « Résultats » avec liste dépliable et choix Détaillants officiels / Centres de service.
 - **Cartes au choix** sur chaque fiche : plan stylisé (tons verts et or), Google Maps, vue satellite Google, bouton
@@ -341,3 +350,11 @@ Trouver une montre **et un détaillant officiel Rolex** à **Monaco**, puis en *
 - **Pages** : À propos (fonctionnement, sources, données personnelles, mentions) ; fenêtre de confirmation avant suppression du compte ; chargement avec cartes animées.
 - Logo Monalex : `docs/monalex/img/` (logo complet, cadran seul, mot « MONALEX », image de partage) ; icônes de l'écran d'accueil tirées du cadran.
 - Projet non affilié à Rolex SA : pas de logo ni de photo Rolex.
+
+## Monalex sur monalexcamilian.com
+
+1. Acheter le nom de domaine `monalexcamilian.com` (OVH, Gandi, Google Domains, Namecheap…).
+2. Comme ce dépôt publie déjà plusieurs applis, mettre Monalex dans un dépôt à part (par exemple `monalex`) avec GitHub Pages.
+3. Dans ce dépôt : Settings → Pages → Custom domain → `monalexcamilian.com` (GitHub crée le fichier `CNAME`), cocher « Enforce HTTPS ».
+4. Chez le vendeur du domaine, ajouter les enregistrements DNS de GitHub Pages : quatre `A` vers 185.199.108.153, 185.199.109.153,
+   185.199.110.153, 185.199.111.153, et un `CNAME` `www` vers `camiliangrignon8002-sudo.github.io`.

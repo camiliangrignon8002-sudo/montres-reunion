@@ -681,3 +681,22 @@ h1,h2,h3,.p-h1,.d-info h1,.hero-t h1,.sec-h h2,.d-sec h2,.acc-h h1,.seller-card 
 .cp-hero-img{position:relative;top:auto;left:auto;transform:none;margin:0 auto;width:min(66vw,360px)}
 .cp-hero-t{margin:26px auto 0}
 @media (min-width:900px){.cp-hero{flex-direction:row;align-items:center;min-height:720px;padding:40px 6%}.cp-hero-img{width:360px;margin:0}.cp-hero-t{margin:0 0 0 6%;padding-bottom:0}}
+
+/* ---------- 3D */
+.hero{background:radial-gradient(90% 70% at 50% 35%,#0b6b45 0%,#035837 35%,#03321e 70%,#011a0e 100%)}
+.hero-3d{position:absolute;inset:0 0 22% 0;width:100%;height:78%;z-index:1;opacity:0;transition:opacity .8s;touch-action:pan-y;cursor:grab}
+.hero-3d.on{opacity:1}
+.hero-3d.on~.hero-sheen{opacity:.35}
+.hero-img:has(+ .hero-3d.on){opacity:0;transition:opacity .8s}
+.cp-hero-img{position:relative}
+.cp-3d{position:absolute;inset:-12% -20%;width:140%;height:124%;opacity:0;transition:opacity .8s;touch-action:pan-y;cursor:grab}
+.cp-3d.on{opacity:1}
+.cp-hero-img:has(.cp-3d.on)>svg{opacity:0;transition:opacity .8s}
+/* ---------- épingle simple, un seul ton */
+.spin{color:var(--poker-2)}
+.spin .pin-ico{width:30px;height:30px;transform:rotate(45deg)}
+/* ---------- annonces des boutiques */
+.card .src{font-size:13px;color:var(--poker-2)}
+.d-ann{font-size:clamp(30px,4vw,46px)!important}
+.copyright{font-family:var(--display);font-size:17px;color:var(--ink);margin-top:14px!important}
+.hero-3d{inset:0 0 40% 0;height:60%}

@@ -45,6 +45,7 @@
 <main id="home">
   <section class="hero" aria-label="Accueil">
     <div class="hero-img" id="heroImg" aria-hidden="true"></div>
+    <canvas class="hero-3d" id="hero3d" aria-label="Montre en 3D, faites glisser pour la tourner"></canvas>
     <div class="hero-sheen" aria-hidden="true"></div>
     <div class="hero-t">
       <div class="eyebrow">De Monaco au monde entier</div>
@@ -125,7 +126,8 @@
     <div class="f-legal">
       <p id="updated"></p>
       <p>Monalex est un service indépendant, non affilié à Rolex SA ni à ses détaillants. Les détaillants officiels listés sont réels (relevés sur rolex.com et leurs sites, à vérifier avant de vous déplacer). Les noms de modèles et de références sont cités pour décrire les montres. Monalex ne présente que des sources officielles : le catalogue Rolex et ses détaillants officiels. Aucun site d'occasion ni de particuliers.</p>
-      <p>Cartes © OpenStreetMap, © CARTO · Google Maps et Google Earth © Google</p>
+      <p>Cartes © OpenStreetMap, © CARTO · Google Maps et Google Earth © Google · Photos des annonces © les boutiques citées</p>
+      <p class="copyright">© <span id="annee">2026</span> Monalex · Camilian. Tous droits réservés.</p>
     </div>
   </div>
 </footer>
@@ -199,6 +201,7 @@
 </section>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
 <script src="vendor/leaflet.js"></script>
 <script src="watch.js"></script>
 <script src="app.js"></script>

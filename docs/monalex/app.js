@@ -6,6 +6,8 @@ const CONFIG = {
   origine: { lat: 43.7384, lng: 7.4246, nom: "Monaco" },
   donnees: "montres.json",
   detaillants: "detaillants.json",
+  annonces: "annonces.json",       // annonces des boutiques, relevées toutes les 2 heures (monalex.py)
+  rafraichir: 2 * 60 * 60 * 1000,  // l'appli ouverte se met à jour toutes les 2 heures
   // Clé Google Maps (facultative) : avec elle, le plan stylisé devient une vraie carte Google aux couleurs de l'appli.
   googleMapsKey: "",
 };
@@ -88,12 +90,12 @@ const fmtKm = d => d < 1 ? "moins de 1 km" : d < 10 ? `${d.toFixed(1).replace(".
 
 /* ====================================================================== état */
 let DATA = { vendeurs: {}, montres: [] };
-let ALL = [], VEND = [], DET = [], DETDATA = { detaillants: [] };
+let ALL = [], VEND = [], DET = [], DETDATA = { detaillants: [] }, ANNDATA = { annonces: [], boutiques: {} };
 const S = {
   zone: store.get("rm.zone", "monaco"), coll: "", etat: "", q: "", sort: "coll", view: "list",
   f: emptyF(), origin: { ...CONFIG.origine }, near: false, inApp: false, lastLoad: 0,
 };
-function emptyF() { return { prixMax: 0, colls: [], couleur: [], materiau: [], lunette: [], bracelet: [], diametre: [], complications: [], etat: [], etancheiteMin: 0, entretien: [], condition: [], vendeur: [], set: false, origine: false, enLigne: false }; }
+function emptyF() { return { prixMax: 0, source: [], colls: [], couleur: [], materiau: [], lunette: [], bracelet: [], diametre: [], complications: [], etat: [], etancheiteMin: 0, entretien: [], condition: [], vendeur: [], set: false, origine: false, enLigne: false }; }
 const ME = {
   get compte() { return store.get("rm.compte", null); },
   set compte(v) { v ? store.set("rm.compte", v) : store.del("rm.compte"); },
@@ -134,7 +136,22 @@ function prepare() {
   [...VEND].sort((a, b) => a.temps_reponse_min - b.temps_reponse_min).forEach((v, i) => v.rang = i + 1);
   DET = (DETDATA.detaillants || []).map(d => ({ ...d, officiel: true, dist: km(S.origin, d) }));
   const byId = Object.fromEntries(VEND.map(v => [v.id, v]));
-  ALL = DATA.montres.map(m => ({ ...m, v: byId[m.vendeur] || null, mat: materiauGroupe(m), ent: entretienGroupe(m) }));
+  // boutiques indépendantes (annonces relevées sur leurs sites)
+  for (const [id, b] of Object.entries(ANNDATA.boutiques || {})) { const v = { id, ...b, type: "Boutique", boutique: true, dist: km(S.origin, b) }; VEND.push(v); byId[id] = v; }
+  ALL = DATA.montres.map(m => ({ ...m, source: "Catalogue officiel", v: byId[m.vendeur] || null, mat: materiauGroupe(m), ent: entretienGroupe(m) }));
+  const TAUX = { EUR: 1, CHF: 1.06, GBP: 1.17, USD: .92, AED: .25, JPY: .0061, HKD: .118, SGD: .69 };  // conversion indicative pour trier et filtrer
+  for (const a of ANNDATA.annonces || []) {
+    if (!byId[a.boutique]) continue;
+    const cat = DATA.montres.find(x => x.reference === a.reference), base = cat || {};
+    const m = { ...base, id: "a-" + a.id, annonce: true, source: "Boutiques", vendeur: a.boutique, v: byId[a.boutique],
+      collection: a.collection || base.collection || "Autres Rolex", modele: a.titre, reference: a.reference || "",
+      prix: a.prix || null, devise: a.devise || "EUR", prix_eur: a.prix ? Math.round(a.prix * (TAUX[a.devise] || 1)) : null,
+      etat: a.etat === "Neuf" ? "Neuf" : "Occasion", condition: a.etat === "Neuf" ? "Neuve" : "Occasion", annee: a.annee || "", boite: a.boite, papiers: a.papiers,
+      photos: a.photos || [], url: a.url, description: a.description || "", publie: a.premiere_vue, cat: !!cat,
+      skin: base.skin || { type: "op", dial: "#222", bezel: "smooth", metal: "steel", bracelet: "oyster" }, statut: "Disponible" };
+    m.mat = cat ? materiauGroupe(m) : ""; m.ent = "";
+    ALL.push(m);
+  }
   placeStores();
 }
 // Catalogue officiel : chaque référence est proposée par les détaillants officiels ; on rattache le plus proche de la zone choisie.
@@ -156,7 +173,7 @@ function filtered(ignoreZone = false) {
   const c = crit(); if (ignoreZone) c.zone = "monde";
   return filterWith(c).sort(sorter(S.sort));
 }
-function etatDe(m) { return m.etat === "Neuf" ? "Neuve" : /pre-owned/i.test(m.v?.type || m.source_type || "") ? `${m.condition} (Pre-Owned)` : m.condition; }
+function etatDe(m) { if (m.annonce) return m.etat === "Neuf" ? "Neuve" : "Occasion (boutique)"; return m.etat === "Neuf" ? "Neuve" : /pre-owned/i.test(m.v?.type || m.source_type || "") ? `${m.condition} (Pre-Owned)` : m.condition; }
 function filterWith(c) {
   const z = ZONES.find(x => x.id === c.zone) || ZONES[3];
   const zoneDet = DET.some(d => z.test(d.code_pays));
@@ -166,10 +183,11 @@ function filterWith(c) {
     if (m.vendeur ? !z.test(m.v.code_pays) : !zoneDet) return false;
     if (c.coll && m.collection !== c.coll) return false;
     if (c.etat && m.etat !== c.etat) return false;
+    if (!any(F.source || [], m.source)) return false;
     if (!any(F.colls, m.collection) || !any(F.couleur, m.couleur_cadran) || !any(F.materiau, m.mat) || !any(F.lunette, m.type_lunette) || !any(F.bracelet, m.type_bracelet) || !any(F.diametre, String(m.diametre)) || !any(F.etat, etatDe(m))) return false;
     if (F.complications.length && !F.complications.every(x => (m.complications || []).includes(x))) return false;
     if (F.etancheiteMin && m.etancheite < F.etancheiteMin) return false;
-    if (F.prixMax && m.prix && m.prix > F.prixMax) return false;
+    if (F.prixMax && (m.prix_eur || m.prix) && (m.prix_eur || m.prix) > F.prixMax) return false;
     if (F.entretien.length && !F.entretien.includes(m.ent)) return false;
     if (F.set && !(m.papiers && m.boite) && m.etat !== "Neuf") return false;
     return !q.length || matchQ(m, q);
@@ -186,12 +204,13 @@ function sorter(k) {
     coll: (a, b) => ord(a) - ord(b),
     dpa: (a, b) => a.diametre - b.diametre || ord(a) - ord(b),
     dpd: (a, b) => b.diametre - a.diametre || ord(a) - ord(b),
-    pa: (a, b) => (a.prix || 1e9) - (b.prix || 1e9), pd: (a, b) => (b.prix || 0) - (a.prix || 0),
+    pa: (a, b) => (a.prix_eur || a.prix || 1e9) - (b.prix_eur || b.prix || 1e9), pd: (a, b) => (b.prix_eur || b.prix || 0) - (a.prix_eur || a.prix || 0),
+    recent: (a, b) => (b.publie || "").localeCompare(a.publie || "") || ord(a) - ord(b),
   }[k] || ((a, b) => ord(a) - ord(b));
 }
 function nbFiltres() {
   const F = S.f; let n = (F.prixMax ? 1 : 0) + (F.etancheiteMin ? 1 : 0);
-  for (const k of ["colls", "couleur", "materiau", "lunette", "bracelet", "diametre", "complications", "etat"]) n += F[k].length;
+  for (const k of ["source", "colls", "couleur", "materiau", "lunette", "bracelet", "diametre", "complications", "etat"]) n += F[k].length;
   return n;
 }
 
@@ -213,7 +232,7 @@ function picOf(m, o = {}) {
   const ph = photosOf(m);
   if (ph.length) {
     const src = ph[0].src;
-    return `<img src="${esc(src)}" alt="${esc(m.modele)}" loading="lazy" decoding="async">`;
+    return `<img src="${esc(src)}" alt="${esc(m.modele)}" loading="lazy" decoding="async" referrerpolicy="no-referrer">`;
   }
   return watchSVG(m.skin, { diam: m.diametre, label: m.modele, ...o });
 }
@@ -237,8 +256,9 @@ function cardHTML(m) {
     <div class="body">
       <span class="coll-n">${esc(m.collection)}</span>
       <h3>${esc(m.modele)}</h3>
-      <span class="cap">${esc(m.diametre)} mm · ${esc(m.couleur_cadran || "")} · ${esc(shortMat(m.materiau))}</span>
-      <span class="price">${m.prix ? eur(m.prix, m.devise) + (baisse ? `<s>${eur(m.prix_initial, m.devise)}</s>` : "") : "Neuve · prix public sur rolex.com"}</span>
+      <span class="cap">${m.annonce ? [m.reference, m.annee, m.condition].filter(Boolean).map(esc).join(" · ") : `${esc(m.diametre)} mm · ${esc(m.couleur_cadran || "")} · ${esc(shortMat(m.materiau))}`}</span>
+      ${m.annonce ? `<span class="src">${esc(m.v.nom)}</span>` : ""}
+      <span class="price">${m.prix ? eur(m.prix, m.devise) + (baisse ? `<s>${eur(m.prix_initial, m.devise)}</s>` : "") : m.annonce ? "Prix sur demande" : "Neuve · prix public sur rolex.com"}</span>
       ${m.v && m.v.nom ? `<span class="where">${PIN}${esc(m.vendeur ? lieu(m.v) : m.v.ville)} · ${fmtKm(m.dist)}${m.dets && m.dets.length > 1 ? ` · ${m.dets.length} détaillants` : ""}</span>` : ""}
     </div></a>`;
 }
@@ -361,6 +381,7 @@ function googleMaps() {
 }
 /* ---------- carte des boutiques, façon « trouver une boutique » : épingles regroupées, recherche, panneau de résultats */
 const SMAPS = new Map();
+const PIN_ICON = `<svg class="pin-ico" viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 4h8l1 5M12 4l-1 5M12 28h8l1-5M12 28l-1-5"/><circle cx="16" cy="16" r="8"/><path d="M16 11.5V16l3 2"/></g></svg>`;
 function storeMap(el, dets, titre) {
   if (!window.L || !el) return;
   let st = SMAPS.get(el);
@@ -416,7 +437,7 @@ function drawPins(st) {
   });
   groups.forEach(g => {
     const lat = g.items.reduce((a, d) => a + d.lat, 0) / g.items.length, lng = g.items.reduce((a, d) => a + d.lng, 0) / g.items.length;
-    const icon = L.divIcon({ className: "", html: `<div class="spinw"><div class="spin"><img src="img/cadran-160.png" alt=""></div>${g.items.length > 1 ? `<b>${g.items.length}</b>` : ""}</div>`, iconSize: [58, 70], iconAnchor: [29, 68], popupAnchor: [0, -62] });
+    const icon = L.divIcon({ className: "", html: `<div class="spinw"><div class="spin">${PIN_ICON}</div>${g.items.length > 1 ? `<b>${g.items.length}</b>` : ""}</div>`, iconSize: [58, 70], iconAnchor: [29, 68], popupAnchor: [0, -62] });
     const mk = L.marker([lat, lng], { icon, title: g.items.length > 1 ? `${g.items.length} boutiques` : g.items[0].nom, riseOnHover: true }).addTo(st.layer);
     if (g.items.length > 1) mk.on("click", () => map.fitBounds(g.items.map(d => [d.lat, d.lng]), { padding: [80, 60], maxZoom: 16 }));
     else { const d = g.items[0]; mk.bindPopup(`<div class="pop"><h4>${esc(d.nom)}</h4><div class="pv">${esc(d.adresse)}, ${esc(d.ville)}${d.service ? " · centre de service" : ""}</div><a href="#d/${encodeURIComponent(d.id)}"><span>Voir la boutique</span><b>›</b></a>${d.tel ? `<a href="tel:${digits(d.tel)}" data-log="appel" data-v="${esc(d.id)}"><span>Appeler</span><b>${esc(d.tel)}</b></a>` : ""}</div>`); }
@@ -605,8 +626,50 @@ function mesEchanges(vId, mId) {
 }
 
 /* ---------- fiche d'une montre */
+function pageAnnonce(m) {
+  ME.vues = [m.id, ...ME.vues.filter(x => x !== m.id)].slice(0, 12); ME.save();
+  const v = m.v, photos = photosOf(m), host = (() => { try { return new URL(m.url).hostname.replace(/^www\./, ""); } catch (e) { return v.site || ""; } })();
+  const slides = photos.map((p, i) => ({ nom: `Photo ${i + 1} sur ${photos.length}`, html: `<img src="${esc(p.src)}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async" ${i ? 'loading="lazy"' : ""} onload="checkPhoto(this)" referrerpolicy="no-referrer">`, big: p.src }));
+  const suivi = ME.suivis[m.id];
+  const det = [["Référence", m.reference], ["Collection", m.collection], ["Année", m.annee], ["État", m.condition], ["Boîte", m.boite == null ? "" : m.boite ? "Oui" : "Non"], ["Papiers", m.papiers == null ? "" : m.papiers ? "Oui" : "Non"], ["Prix", m.prix ? eur(m.prix, m.devise) + (m.devise !== "EUR" && m.prix_eur ? ` (≈ ${eur(m.prix_eur)})` : "") : "Sur demande"], ["Sur Monalex depuis", m.publie ? fmtDay(m.publie) : ""]].filter(([, b]) => b);
+  const html = `
+  <nav class="crumbs"><a href="#">Accueil</a> / <a href="#" data-coll-go="${esc(m.collection)}">${esc(m.collection)}</a> / <span>${esc(m.reference || "Annonce")}</span></nav>
+  <div class="d-hero">
+    <div class="gal">
+      <div class="gal-main" id="galMain">${slides.map((s, i) => `<div class="slide" data-i="${i}">${s.html}</div>`).join("") || `<div class="slide">${watchSVG(m.skin, { diam: m.diametre || 40 })}</div>`}</div>
+      ${slides.length > 1 ? `<div class="gal-thumbs" id="galThumbs">${slides.map((s, i) => `<button data-i="${i}" aria-label="${esc(s.nom)}" aria-current="${i === 0}">${s.html.replace('decoding="async"', 'decoding="async" loading="lazy"')}</button>`).join("")}</div>` : ""}
+      <div class="gal-hint"><span id="galName">${esc(slides[0]?.nom || "")}</span> · photos ${esc(v.nom)}</div>
+    </div>
+    <div class="d-info">
+      <div class="eyebrow">${esc(m.collection)}</div>
+      <h1 class="d-ann">${esc(m.modele)}</h1>
+      <div class="ref">${[m.reference && "Référence " + m.reference, m.annee].filter(Boolean).map(esc).join(" · ")}</div>
+      <div class="d-price"><b>${m.prix ? eur(m.prix, m.devise) : "Prix sur demande"}</b><span class="pill">${esc(m.condition)}</span></div>
+      <div class="d-note">Annonce relevée sur le site de ${esc(v.nom)}, vérifiée toutes les 2 heures.</div>
+      <div class="d-cta">
+        <a class="btn btn-green full" href="${esc(m.url)}" target="_blank" rel="noopener" data-log="site" data-v="${esc(v.id)}" data-m="${esc(m.id)}">Voir l'annonce sur ${esc(host)}</a>
+        <button class="btn ${suivi ? "btn-light" : "btn-line"} full" data-follow="${esc(m.id)}" aria-pressed="${!!suivi}">${suivi ? "Alerte active ✓ · arrêter" : "M'alerter (prix, vente)"}</button>
+      </div>
+      <div class="box"><h3 style="margin-bottom:10px">${esc(v.nom)}</h3><p>Boutique indépendante · ${esc(v.adresse ? v.adresse + ", " : "")}${esc(v.ville)}, ${esc(v.pays)} · à ${fmtKm(v.dist)}</p><p style="margin-top:6px"><a href="${esc(v.site)}" target="_blank" rel="noopener">${esc((v.site || "").replace(/^https?:\/\//, ""))}</a></p></div>
+    </div>
+  </div>
+  <section class="d-sec"><p class="kicker">Détails</p><h2>L'annonce</h2>
+    <dl class="specs">${det.map(([a, b]) => `<div class="spec"><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join("")}</dl>
+    ${m.description ? `<p class="d-resume">${esc(m.description.slice(0, 900))}${m.description.length > 900 ? "…" : ""}</p>` : ""}
+    <p class="d-note" style="margin-top:16px">Annonce et photos : ${esc(v.nom)} (${esc(host)}). Monalex n'est pas le vendeur : l'achat se fait auprès de la boutique.</p>
+  </section>
+  <section class="d-sec"><p class="kicker">Où la voir</p><h2>${esc(v.nom)}</h2>${mapBlock("dmap", { ...v, adresse: v.adresse || v.ville, cp: v.cp || "" })}</section>`;
+  openPage(html, m.modele, `<button class="round" data-share aria-label="Partager"><svg viewBox="0 0 24 24"><path d="M12 15V4m0 0L8 8m4-4 4 4M5 12v6.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V12"/></svg></button><button class="round" data-fav="${esc(m.id)}" aria-pressed="${ME.favs.has(m.id)}" aria-label="Favori">${HEART}</button>`);
+  const main = $("#galMain"), thumbs = $$("#galThumbs button");
+  const setCur = i => { thumbs.forEach((b, j) => b.setAttribute("aria-current", i === j)); if (slides[i]) $("#galName").textContent = slides[i].nom; };
+  thumbs.forEach(b => b.onclick = () => { const i = +b.dataset.i; main.scrollTo({ left: main.clientWidth * i, behavior: "smooth" }); setCur(i); });
+  main.addEventListener("scroll", () => setCur(Math.round(main.scrollLeft / main.clientWidth)), { passive: true });
+  if (slides.length) $$(".slide", main).forEach(el => el.onclick = () => openLB(m, slides, +el.dataset.i));
+  pageMap("dmap", v);
+}
 function pageMontre(id) {
   const m = montre(id);
+  if (m && m.annonce) { pageAnnonce(m); return; }
   if (!m) { openPage(`<div class="empty" style="margin-top:30px"><h3>Cette référence n'est plus au catalogue</h3><p>Elle a peut-être été arrêtée par Rolex.</p><button class="btn btn-green" data-goto="list">Voir le catalogue</button></div>`, "Référence introuvable"); return; }
   ME.vues = [id, ...ME.vues.filter(x => x !== id)].slice(0, 12); ME.save();
   const photos = photosOf(m);
@@ -733,6 +796,15 @@ function swatch(m) {
   const set = metalSet(m.skin.metal), a = METALS[set.kase], b = METALS[set.bezel];
   return `linear-gradient(135deg, ${b[0]} 0%, ${b[1]} 35%, ${a[2]} 50%, ${a[1]} 70%, ${a[0]} 100%)`;
 }
+/* ---------- montres en 3D (Three.js, comme le site Red Bull) */
+const M3D = new Map();
+function mount3D(canvas, m, scrollEl) {
+  if (!canvas || M3D.get(canvas)) return;
+  M3D.set(canvas, "…");
+  import("./watch3d.js").then(mod => mod.mountWatch3D(canvas, m.skin, { svg: watchSVG(m.skin, { diam: m.diametre, vb: "71 171 258 258" }), scrollEl }))
+    .then(h => { if (h) { M3D.set(canvas, h); canvas.classList.add("on"); } else canvas.remove(); })
+    .catch(() => canvas.remove());
+}
 function pageCollection(slug) {
   const c = collOf(slug);
   if (!c) { location.hash = ""; return; }
@@ -742,7 +814,7 @@ function pageCollection(slug) {
   const m0 = ms[0], dets = detsInZone();
   const html = `
   <section class="cp-hero">
-    <div class="cp-hero-img">${watchSVG(m0.skin, { diam: m0.diametre, vb: "55 90 290 410" })}</div>
+    <div class="cp-hero-img">${watchSVG(m0.skin, { diam: m0.diametre, vb: "55 90 290 410" })}<canvas class="cp-3d" id="cp3d" aria-label="${esc(m0.modele)} en 3D, faites glisser pour la tourner"></canvas></div>
     <div class="cp-hero-t"><p class="eyebrow">${esc(c)}</p><h1>${esc(titre)}</h1><p>${esc(texte)}</p></div>
   </section>
 
@@ -788,6 +860,7 @@ function pageCollection(slug) {
     </div></div>`;
   openPage(html, c);
   page().classList.add("cp");
+  mount3D($("#cp3d"), m0, page());
   // carrousel des modèles + pastilles
   const track = $("#cpTrack"), info = $("#cpInfo"), sws = $$("[data-sw]");
   const show = i => {
@@ -1112,11 +1185,12 @@ function renderPanel() {
   const cnt = (key, val) => ALL.filter(m => key(m) === val || (Array.isArray(key(m)) && key(m).includes(val))).length;
   const opts = (k, vals, key) => `<div class="opts">${vals.map(v => { const n = key ? cnt(key, v) : null; return `<button class="opt" data-k="${k}" data-v="${esc(v)}" aria-pressed="${F[k].includes(v)}"${n === 0 ? ' data-zero="1"' : ""}>${esc(v)}${n != null ? ` <small>${n}</small>` : ""}</button>`; }).join("")}</div>`;
   const uniq = f => [...new Set(ALL.flatMap(m => [].concat(f(m))))].filter(Boolean);
-  const hasPrix = ALL.some(m => m.prix);
-  const prixMax = hasPrix ? Math.ceil(Math.max(...ALL.filter(m => m.prix).map(m => m.prix)) / 5000) * 5000 : 0;
+  const hasPrix = ALL.some(m => m.prix_eur || m.prix);
+  const prixMax = hasPrix ? Math.ceil(Math.max(...ALL.filter(m => m.prix_eur || m.prix).map(m => m.prix_eur || m.prix)) / 5000) * 5000 : 0;
   $("#panelBody").innerHTML = `
+    <div class="fgroup"><h3>Source</h3>${opts("source", ["Catalogue officiel", "Boutiques"], m => m.source)}</div>
     <div class="fgroup"><h3>Collection</h3>${opts("colls", collections().map(([c]) => c), m => m.collection)}</div>
-    <div class="fgroup"><h3>État</h3>${opts("etat", ["Neuve", "Comme neuve (Pre-Owned)", "Très bon état (Pre-Owned)", "Bon état (Pre-Owned)"], etatDe)}<p class="d-note" style="margin-top:8px">Pre-Owned : uniquement le programme Rolex Certified Pre-Owned des détaillants officiels. Aucune pour l'instant : créez une alerte pour être prévenu.</p></div>
+    <div class="fgroup"><h3>État</h3>${opts("etat", ["Neuve", "Occasion (boutique)", "Comme neuve (Pre-Owned)", "Très bon état (Pre-Owned)", "Bon état (Pre-Owned)"], etatDe)}<p class="d-note" style="margin-top:8px">Pre-Owned : uniquement le programme Rolex Certified Pre-Owned des détaillants officiels. Aucune pour l'instant : créez une alerte pour être prévenu.</p></div>
     <div class="fgroup"><h3>Couleur du cadran</h3>${opts("couleur", uniq(m => m.couleur_cadran).sort(), m => m.couleur_cadran)}</div>
     <div class="fgroup"><h3>Matériau</h3>${opts("materiau", ["Acier", "Rolesor (bicolore)", "Or", "Platine", "Rolesium"], m => m.mat)}</div>
     <div class="fgroup"><h3>Diamètre</h3>${opts("diametre", uniq(m => String(m.diametre)).sort(), m => String(m.diametre))}</div>
@@ -1172,6 +1246,7 @@ async function loadData(force) {
   const r = await fetch(CONFIG.donnees + (force ? `?t=${Date.now()}` : ""), { cache: force ? "no-store" : "no-cache" });
   if (!r.ok) throw new Error(r.status);
   DATA = await r.json();
+  try { const a = await fetch(CONFIG.annonces + `?t=${Math.floor(Date.now() / 6e5)}`, { cache: force ? "no-store" : "no-cache" }); if (a.ok) ANNDATA = await a.json(); } catch (e) {}
   try { const d = await fetch(CONFIG.detaillants + (force ? `?t=${Date.now()}` : ""), { cache: force ? "no-store" : "no-cache" }); if (d.ok) DETDATA = await d.json(); } catch (e) {}
   S.lastLoad = Date.now();
   prepare();
@@ -1217,6 +1292,7 @@ async function refresh(manual = true) {
   });
 })();
 document.addEventListener("visibilitychange", () => { if (!document.hidden && Date.now() - S.lastLoad > 5 * 60000) refresh(false); });
+setInterval(() => { if (!document.hidden) refresh(false); }, CONFIG.rafraichir);
 
 /* ====================================================================== navigation et clics */
 function goList(view) {
@@ -1425,6 +1501,9 @@ async function start() {
   try { await loadData(false); }
   catch (e) { $("#grid").innerHTML = `<div class="empty"><h3>Les montres ne se chargent pas</h3><p>La connexion semble coupée. Tirez la page vers le bas pour réessayer.</p><button class="btn btn-green" onclick="location.reload()">Réessayer</button></div>`; return; }
   $("#demo").hidden = !DATA.demo || !!store.get("rm.demoOk", 0);
+  // Montre 3D de l'accueil (chronographe or, cadran vert poker), avec le dessin en secours
+  mount3D($("#hero3d"), { skin: { type: "daytona", dial: "#035837", sub: "#03321e", bezel: "#03321e", insert: "#03321e", metal: "gold", bracelet: "oyster" }, diametre: 40 }, window);
+  $("#annee").textContent = new Date().getFullYear();
   // Visuel d'accueil assorti au logo : chronographe or, cadran vert
   $("#heroImg").innerHTML = watchSVG({ type: "daytona", dial: "#035837", sub: "#03321e", bezel: "#03321e", insert: "#03321e", metal: "gold", bracelet: "oyster" }, { diam: 40, vb: "75 170 250 260", par: "xMidYMid slice" });
   $("#searchEmblem").innerHTML = $("#homeLink").innerHTML;
