@@ -882,7 +882,7 @@ function photo3D(collection) {
 function mount3D(canvas, m, scrollEl, actif) {
   if (!canvas || M3D.get(canvas)) return;
   M3D.set(canvas, "…");
-  const go = () => import("./watch3d.js?v=19").then(mod => mod.mountWatch3D(canvas, m.skin, { svg: watchSVG(m.skin, { diam: m.diametre, vb: "71 171 258 258", fx: true }), scrollEl, actif, modele: m.skin.type === "daytona" ? "models/daytona.glb" : "", photo: photo3D(m.collection || "Cosmograph Daytona") })).then(h => { if (h) { M3D.set(canvas, h); canvas.classList.add("on"); } else canvas.remove(); })
+  const go = () => import("./watch3d.js?v=21").then(mod => mod.mountWatch3D(canvas, m.skin, { svg: watchSVG(m.skin, { diam: m.diametre, vb: "71 171 258 258", fx: true }), scrollEl, actif, modele: m.skin.type === "daytona" ? "models/daytona.glb" : "", photo: photo3D(m.collection || "Cosmograph Daytona") })).then(h => { if (h) { M3D.set(canvas, h); canvas.classList.add("on"); } else canvas.remove(); })
     .catch(() => canvas.remove());
   if (document.documentElement.classList.contains("calm")) { canvas.remove(); return; }
   "requestIdleCallback" in window ? requestIdleCallback(go, { timeout: 1500 }) : setTimeout(go, 400);
@@ -1599,7 +1599,7 @@ async function start() {
   catch (e) { $("#grid").innerHTML = `<div class="empty"><h3>Les montres ne se chargent pas</h3><p>La connexion semble coupée. Tirez la page vers le bas pour réessayer.</p><button class="btn btn-green" onclick="location.reload()">Réessayer</button></div>`; return; }
   $("#demo").hidden = !DATA.demo || !!store.get("rm.demoOk", 0);
   // Montre 3D de l'accueil (chronographe or, cadran vert poker), avec le dessin en secours
-  mount3D($("#hero3d"), { skin: { type: "daytona", dial: "#035837", sub: "#03321e", bezel: "#03321e", insert: "#03321e", metal: "gold", bracelet: "oyster" }, diametre: 40, collection: "Cosmograph Daytona" }, window, () => !page().classList.contains("open"));
+  mount3D($("#hero3d"), { skin: { type: "daytona", dial: "#f2f1ec", sub: "#121212", bezel: "#0b0b0c", insert: "#0b0b0c", metal: "steel", bracelet: "oyster" }, diametre: 40, collection: "" }, window, () => !page().classList.contains("open"));
   $("#annee").textContent = new Date().getFullYear();
   // Visuel d'accueil assorti au logo : chronographe or, cadran vert
   $("#heroImg").innerHTML = watchSVG({ type: "daytona", dial: "#035837", sub: "#03321e", bezel: "#03321e", insert: "#03321e", metal: "gold", bracelet: "oyster" }, { diam: 40, vb: "75 170 250 260", par: "xMidYMid slice" });

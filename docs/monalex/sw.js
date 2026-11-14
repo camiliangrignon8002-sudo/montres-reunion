@@ -1,7 +1,7 @@
 // Monalex : l'appli s'ouvre même sans réseau.
 // Fichiers de l'appli : cache d'abord. Annonces (montres.json) et page : réseau d'abord, cache si hors ligne.
-const V = 'monalex-v19';
-const APP = ['./', 'index.html', 'app.css?v=19', 'app.js?v=19', 'watch.js?v=19', 'watch3d.js?v=19', 'vendor/three.module.min.js', 'detaillants.json', 'vendor/leaflet.js', 'vendor/leaflet.css', 'manifest.webmanifest', 'icon-192.png', 'favicon-32.png', 'img/cadran-160.png', 'img/monalex-mot.png', 'img/logo.png', 'fonts/cormorant-garamond-latin-500-normal.woff2', 'fonts/eb-garamond-latin-400-normal.woff2'];
+const V = 'monalex-v21';
+const APP = ['./', 'index.html', 'app.css?v=19', 'app.js?v=19', 'watch.js?v=19', 'watch3d.js?v=21', 'daytona3d.js?v=21', 'vendor/three.module.min.js', 'detaillants.json', 'vendor/leaflet.js', 'vendor/leaflet.css', 'manifest.webmanifest', 'icon-192.png', 'favicon-32.png', 'img/cadran-160.png', 'img/monalex-mot.png', 'img/logo.png', 'fonts/cormorant-garamond-latin-500-normal.woff2', 'fonts/eb-garamond-latin-400-normal.woff2'];
 
 self.addEventListener('install', ev => ev.waitUntil(caches.open(V).then(c => c.addAll(APP)).then(() => self.skipWaiting())));
 self.addEventListener('activate', ev => ev.waitUntil(
