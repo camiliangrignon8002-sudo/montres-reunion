@@ -310,7 +310,7 @@ La canette suit la souris, s'écrase un peu quand on défile vite, les bulles ac
 Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/monalex/
 
 Trouver une montre **et un détaillant officiel Rolex** à **Monaco**, puis en **France**, en **Europe** et **dans le monde**
-(onglets en haut de la liste, distances depuis Monaco ou « Autour de moi »). Présentation blanche, verte et or.
+(onglets en haut de la liste, distances depuis Monaco ou « Autour de moi »). Présentation blanche, vert poker et or : tous les éléments verts ont un effet soleillé (comme un cadran), dont les reflets tournent quand on fait défiler la page (désactivé avec « Réduire les animations »).
 
 - **Détaillants officiels (réels)** : 27 détaillants relevés sur rolex.com et sur leurs sites le 14 novembre 2026
   (Monaco, Paris, Cannes, Nice, Saint-Tropez, Courchevel, Marseille, Lyon, Genève, Zurich, Londres, Madrid, Barcelone,

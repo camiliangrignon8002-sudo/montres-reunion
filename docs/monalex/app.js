@@ -1196,6 +1196,22 @@ $("#menu").addEventListener("click", e => { if (e.target.closest("a[href^='#']")
 $("#search").addEventListener("click", e => { if (e.target.closest("a[href^='#']")) closeOv("search"); });
 $("#demoOk").onclick = () => { $("#demo").hidden = true; store.set("rm.demoOk", 1); };
 window.addEventListener("scroll", () => $("#top").classList.toggle("scrolled", scrollY > 4), { passive: true });
+// Reflets du vert poker : ils tournent comme sur un cadran soleillé quand on fait défiler (accueil et pages)
+(() => {
+  let raf = 0;
+  const calm = () => document.documentElement.classList.contains("calm") || matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const maj = () => {
+    raf = 0;
+    const y = page().classList.contains("open") ? page().scrollTop : scrollY;
+    const r = document.documentElement.style;
+    r.setProperty("--sun", `${(y * 0.22) % 360}deg`);
+    r.setProperty("--sunpct", String(Math.round((y * 0.08) % 200)));
+  };
+  const onScroll = () => { if (!raf && !calm()) raf = requestAnimationFrame(maj); };
+  addEventListener("scroll", onScroll, { passive: true });
+  page().addEventListener("scroll", onScroll, { passive: true });
+  $("#menu").addEventListener("scroll", onScroll, { passive: true });
+})();
 document.addEventListener("keydown", e => {
   if ($("#lb").classList.contains("open")) {
     if (e.key === "Escape") $("#lb").classList.remove("open");
@@ -1240,7 +1256,7 @@ async function start() {
   catch (e) { $("#grid").innerHTML = `<div class="empty"><h3>Les montres ne se chargent pas</h3><p>La connexion semble coupée. Tirez la page vers le bas pour réessayer.</p><button class="btn btn-green" onclick="location.reload()">Réessayer</button></div>`; return; }
   $("#demo").hidden = !DATA.demo || !!store.get("rm.demoOk", 0);
   // Visuel d'accueil assorti au logo : chronographe or, cadran vert
-  $("#heroImg").innerHTML = watchSVG({ type: "daytona", dial: "#0f4a2c", sub: "#0f4a2c", bezel: "#0c3a22", insert: "#0c3a22", metal: "gold", bracelet: "oyster" }, { diam: 40, vb: "75 170 250 260", par: "xMidYMid slice" });
+  $("#heroImg").innerHTML = watchSVG({ type: "daytona", dial: "#035837", sub: "#03321e", bezel: "#03321e", insert: "#03321e", metal: "gold", bracelet: "oyster" }, { diam: 40, vb: "75 170 250 260", par: "xMidYMid slice" });
   $("#searchEmblem").innerHTML = $("#homeLink").innerHTML;
   if (DATA.mise_a_jour) $("#updated").textContent = `Annonces mises à jour le ${new Date(DATA.mise_a_jour).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}.`;
   renderColls(); renderHome(); updateDots();
