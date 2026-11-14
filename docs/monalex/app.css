@@ -964,3 +964,9 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
   background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%) 140% 0/300% 100% no-repeat;animation:sub-reflet 6s ease-in-out infinite;
   -webkit-mask:url(img/sub-montre.webp) center/contain no-repeat;mask:url(img/sub-montre.webp) center/contain no-repeat}
 @keyframes sub-reflet{0%,30%{background-position:140% 0}70%,100%{background-position:-40% 0}}
+
+/* Submariner : photo entière et nette, centrée sur son cadran */
+.sub-live{aspect-ratio:770/1050;height:88%;translate:-43.6% -50%}
+@keyframes sub-flotte{0%,100%{translate:-43.6% -50%}50%{translate:-43.6% calc(-50% - 10px)}}
+@media (min-width:901px){.sub-live{height:94%}}
+.sub-live::after{-webkit-mask:url(img/sub-montre.webp?v=2) center/contain no-repeat;mask:url(img/sub-montre.webp?v=2) center/contain no-repeat}
