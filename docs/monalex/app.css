@@ -786,3 +786,4 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
 .pitem .pp{position:relative;overflow:hidden;min-width:0}
 .pitem .pp img{position:absolute;inset:4%;width:92%;height:92%;object-fit:contain;mix-blend-mode:multiply}
 .cp-slide a{position:relative}
+.card .body,.card h3,.card .price,.card .where{overflow-wrap:anywhere}

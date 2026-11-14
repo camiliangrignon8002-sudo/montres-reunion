@@ -882,7 +882,7 @@ function photo3D(collection) {
 function mount3D(canvas, m, scrollEl, actif) {
   if (!canvas || M3D.get(canvas)) return;
   M3D.set(canvas, "…");
-  const go = () => import("./watch3d.js").then(mod => mod.mountWatch3D(canvas, m.skin, { svg: watchSVG(m.skin, { diam: m.diametre, vb: "71 171 258 258", fx: true }), scrollEl, actif, modele: m.skin.type === "daytona" ? "models/daytona.glb" : "", photo: photo3D(m.collection || "Cosmograph Daytona") })).then(h => { if (h) { M3D.set(canvas, h); canvas.classList.add("on"); } else canvas.remove(); })
+  const go = () => import("./watch3d.js?v=19").then(mod => mod.mountWatch3D(canvas, m.skin, { svg: watchSVG(m.skin, { diam: m.diametre, vb: "71 171 258 258", fx: true }), scrollEl, actif, modele: m.skin.type === "daytona" ? "models/daytona.glb" : "", photo: photo3D(m.collection || "Cosmograph Daytona") })).then(h => { if (h) { M3D.set(canvas, h); canvas.classList.add("on"); } else canvas.remove(); })
     .catch(() => canvas.remove());
   if (document.documentElement.classList.contains("calm")) { canvas.remove(); return; }
   "requestIdleCallback" in window ? requestIdleCallback(go, { timeout: 1500 }) : setTimeout(go, 400);
@@ -1611,4 +1611,10 @@ async function start() {
   notifyAlerts();
 }
 start();
-if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});
+// Service worker : dès qu'une nouvelle version est publiée, elle s'installe et la page se recharge une fois.
+if ("serviceWorker" in navigator && location.protocol === "https:") {
+  const avait = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).then(r => { r.update().catch(() => {}); setInterval(() => r.update().catch(() => {}), 30 * 60000); }).catch(() => {});
+  let recharge = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => { if (avait && !recharge) { recharge = true; location.reload(); } });
+}
