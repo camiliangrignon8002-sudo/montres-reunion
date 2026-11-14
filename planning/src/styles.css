@@ -514,3 +514,9 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
 .today-who { display: grid; grid-template-columns: minmax(0, 7.2em) auto; align-items: center; column-gap: 8px; }
 .today-who b { line-height: 1.2; }
 .today-who .chip { justify-self: start; }
+/* Allègement du dessin : blocs horaires à fond uni (sans dégradé ni ombre floue), cartes hors écran non dessinées. */
+html.liquid .blk { background: color-mix(in srgb, var(--z) 26%, var(--g-blk)); box-shadow: inset 3px 0 0 var(--z); }
+html.liquid .blk.seg-cours { background: color-mix(in srgb, var(--cours) 22%, var(--g-blk)); }
+html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid .skill { box-shadow: inset 0 1px 0 var(--g-hi); }
+.stack > .card:not(.big) { content-visibility: auto; contain-intrinsic-size: auto 360px; }
+.plan td.cell { contain: paint; }

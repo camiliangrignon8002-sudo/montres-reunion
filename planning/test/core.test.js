@@ -509,7 +509,10 @@ test("temps partiel : jamais 42 h (contrat + 10 % au plus) ; règles légales", 
 
 test("horaires d'ouverture des points de vente (été / hiver)", () => {
   let s = withWeek1();
-  assert.equal(C.seasonOf("2026-11-16", s), "ete"); // saison choisie à la main : été
+  assert.equal(C.seasonOf("2026-11-16", s), "ete"); // période été : 25/10/2026 → 27/03/2027
+  assert.equal(C.seasonOf("2027-03-27", s), "ete");
+  assert.equal(C.seasonOf("2027-03-28", s), "hiver");
+  assert.equal(C.seasonOf("2026-10-24", s), "hiver");
   const W = "2026-12-07";
   const late = [{ type: "setShift", emp: "maelle", date: W, segs: [{ s: "14:30", e: "17:30", z: "ZP" }, { s: "18:00", e: "22:30", z: "ZP" }] }];
   assert.ok(C.validateWeek(apply(s, late).state, W).some((i) => i.code === "OUT_OF_HOURS"));

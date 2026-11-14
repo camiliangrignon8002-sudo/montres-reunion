@@ -44,7 +44,8 @@
     closingZP: "", closingZR: "",
     // Horaires d'ouverture des points de vente (PDV), « début-fin » ; été = heure d'été (fin mars → fin octobre).
     checkOpening: true,
-    season: "ete", // saison en cours, choisie à la main : « ete » ou « hiver » (« auto » = changement d'heure)
+    season: "periode", // « periode » = été entre les deux dates ci-dessous, hiver sinon ; ou « ete » / « hiver » forcé
+    summerFrom: "2026-10-25", summerTo: "2027-03-27", // période « été » des points de vente (dates comprises)
     hoursZP_hiver: "05:30-21:00", hoursZP_ete: "05:30-22:00",
     hoursZR_hiver: "06:00-22:00", hoursZR_ete: "06:00-23:00",
     coverageFromTemplate: true,
@@ -336,7 +337,12 @@
   // Saison : heure d'été du dernier dimanche de mars au samedi avant le dernier dimanche d'octobre.
   function lastSunday(y, m) { const d = new Date(Date.UTC(y, m + 1, 0)); d.setUTCDate(d.getUTCDate() - d.getUTCDay()); return iso(d); }
   const seasonAuto = (date) => { const y = Number(date.slice(0, 4)); return date >= lastSunday(y, 2) && date < lastSunday(y, 9) ? "ete" : "hiver"; };
-  const seasonOf = (date, state) => { const v = state && state.settings && state.settings.season; return v === "ete" || v === "hiver" ? v : seasonAuto(date); };
+  const seasonOf = (date, state) => {
+    const st = { ...DEFAULT_SETTINGS, ...((state && state.settings) || {}) };
+    if (st.season === "ete" || st.season === "hiver") return st.season;
+    if (st.season === "auto") return seasonAuto(date);
+    return isISO(st.summerFrom) && isISO(st.summerTo) && date >= st.summerFrom && date <= st.summerTo ? "ete" : "hiver";
+  };
   function openingHours(state, zone, date) {
     const st = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
     const season = seasonOf(date, { settings: st }), v = st[`hours${zone}_${season}`];
@@ -1170,6 +1176,7 @@
             if (Array.isArray(DEFAULT_SETTINGS[k])) { if (!Array.isArray(v)) { fail(`Valeur invalide pour ${k}.`); continue; } s.settings[k] = v.map(String).slice(0, 200); continue; }
             if (typeof DEFAULT_SETTINGS[k] === "string") {
               if (k.startsWith("hours")) { const m = /^(\d\d:\d\d)-(\d\d:\d\d)$/.exec(String(v).trim()); if (!m || !isTime(m[1]) || !isTime(m[2])) { fail("Horaires d'ouverture invalides (format 05:30-21:00)."); continue; } s.settings[k] = `${m[1]}-${m[2]}`; continue; }
+              if ((k === "summerFrom" || k === "summerTo") && !isISO(String(v))) { fail("Date de période invalide."); continue; }
               s.settings[k] = String(v).slice(0, 10); continue;
             }
             if (typeof DEFAULT_SETTINGS[k] === "number" && !(Number(v) > 0 || (k === "partTimeExtraPercent" && Number(v) === 0))) { fail(`Valeur invalide pour ${k}.`); continue; }
