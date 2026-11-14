@@ -334,13 +334,34 @@ function renderGrid() {
     const next = ZONES[ZONES.findIndex(x => x.id === S.zone) + 1];
     const zn = { monaco: "à Monaco", france: "à Monaco ni en France", europe: "en Europe", monde: "avec ces critères" }[S.zone];
     $("#grid").innerHTML = `<div class="empty"><h3>Aucune montre ${zn} pour l'instant</h3><p>${next ? "Élargissez la recherche à la zone suivante." : "Retirez un ou deux filtres pour voir plus de montres."}</p>${next ? `<button class="btn btn-green" data-z="${next.id}">Voir : ${esc(next.nom)}</button>` : `<button class="btn btn-green" data-reset-all>Tout effacer</button>`}</div>`;
-  } else $("#grid").innerHTML = r.map(cardHTML).join("");
+  } else {
+    // par paquets : seules les premières montres sont dessinées, la suite arrive quand on descend
+    S.vus = Math.min(r.length, S.vus || PAQUET);
+    $("#grid").innerHTML = r.slice(0, S.vus).map(cardHTML).join("") + (r.length > S.vus ? `<button class="btn btn-light plus" data-plus>Voir plus de montres (${r.length - S.vus})</button>` : "");
+    S.liste = r;
+    observerPlus();
+  }
   $("#grid").setAttribute("aria-busy", "false");
   if (S.view === "map") renderBigMap(r);
   const n = nbFiltres(); $("#nFilters").hidden = !n; $("#nFilters").textContent = n;
   $$("[data-etat]").forEach(b => b.setAttribute("aria-pressed", b.dataset.etat === S.etat));
   $$(".coll").forEach(b => b.setAttribute("aria-pressed", b.dataset.c === S.coll));
   $("#sort").value = S.sort;
+}
+const PAQUET = 24;
+let ioPlus;
+function plus() {
+  const r = S.liste || [], de = S.vus; if (de >= r.length) return;
+  S.vus = Math.min(r.length, de + PAQUET);
+  const btn = $("#grid [data-plus]");
+  btn.insertAdjacentHTML("beforebegin", r.slice(de, S.vus).map(cardHTML).join(""));
+  if (S.vus >= r.length) btn.remove(); else btn.textContent = `Voir plus de montres (${r.length - S.vus})`;
+}
+function observerPlus() {
+  ioPlus?.disconnect();
+  const btn = $("#grid [data-plus]"); if (!btn || !("IntersectionObserver" in window)) return;
+  ioPlus = new IntersectionObserver(e => { if (e[0].isIntersecting) plus(); }, { rootMargin: "600px" });
+  ioPlus.observe(btn);
 }
 function renderSellers() { const el = $("#topSellers"); if (el) el.innerHTML = [...VEND].sort((a, b) => a.rang - b.rang).slice(0, 6).map(sellerRow).join(""); }
 function tileHTML(href, cls, inner, label, attrs = "") {
@@ -377,7 +398,7 @@ function renderOfficiels() {
   $("#offCount").textContent = `${list.length} détaillant${list.length > 1 ? "s" : ""} · ${ZONE_NOM[S.zone]}`;
   $("#officiels").innerHTML = list.slice(0, 9).map(detRow).join("") || `<div class="empty"><h3>Aucun détaillant relevé dans cette zone</h3></div>`;
 }
-function renderHome() { placeStores(); renderZones(); renderGrid(); renderSellers(); renderOfficiels(); $("#homeTiles").innerHTML = tiles("home"); }
+function renderHome() { S.vus = 0; placeStores(); renderZones(); renderGrid(); renderSellers(); renderOfficiels(); $("#homeTiles").innerHTML = tiles("home"); }
 
 /* ====================================================================== cartes géographiques */
 const TILES = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}";
@@ -1421,6 +1442,7 @@ document.addEventListener("click", e => {
   if (lt) { const k = lt.dataset.layer; S[k] = S[k] === false; lt.setAttribute("aria-pressed", S[k] !== false); renderGrid(); return; }
   const an = t.closest("[data-ancre]");
   if (an) { S.ancre = an.dataset.ancre; if (location.hash === "#infos") { e.preventDefault(); pageInfos(); } }
+  if (t.closest("[data-plus]")) { plus(); return; }
   const g = t.closest("[data-goto]"); if (g) { e.preventDefault(); goList(g.dataset.goto === "map" ? "map" : "list"); return; }
   const zg = t.closest("[data-zone-go]"); if (zg) { e.preventDefault(); S.zone = zg.dataset.zoneGo; store.set("rm.zone", S.zone); renderHome(); goList(); return; }
   const cg = t.closest("[data-coll-go]"); if (cg) { e.preventDefault(); S.coll = cg.dataset.collGo; S.zone = "monde"; renderHome(); goList(); return; }
@@ -1500,7 +1522,7 @@ $("#btnMap").onclick = () => goList("map");
 $("#btnFavs").onclick = () => { location.hash = alerts().length || Object.keys(ME.suivis).length ? "suivis" : "suivis/favoris"; };
 $("#q").oninput = renderSearch;
 $("#searchForm").onsubmit = e => { e.preventDefault(); applySearch(); };
-$("#sort").onchange = e => { S.sort = e.target.value; renderGrid(); };
+$("#sort").onchange = e => { S.sort = e.target.value; S.vus = 0; renderGrid(); };
 $("#vList").onclick = () => setView("list");
 $("#vMap").onclick = () => setView("map");
 $("#homeLink").onclick = e => { e.preventDefault(); closeOv("menu"); closeOv("search"); if (location.hash) location.hash = ""; window.scrollTo({ top: 0 }); };

@@ -773,3 +773,4 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
 .zs-i[aria-pressed=true] i{opacity:1}
 .zs-i[aria-pressed=true] b{color:var(--poker-2)}
 .zsheet .wrap{padding-bottom:calc(40px + var(--safe-b))}
+.grid .plus{grid-column:1/-1;justify-self:center;margin:10px 0 20px;min-width:260px}
