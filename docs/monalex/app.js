@@ -22,6 +22,16 @@ const store = {
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
   del(k) { try { localStorage.removeItem(k); } catch (e) {} },
 };
+function askConfirm({ titre, texte, oui, non }) {
+  return new Promise(res => {
+    const d = $("#confirm");
+    $("#cfT").textContent = titre; $("#cfP").textContent = texte; $("#cfOui").textContent = oui; $("#cfNon").textContent = non;
+    const fin = v => { d.close(); res(v); };
+    $("#cfOui").onclick = () => fin(true); $("#cfNon").onclick = () => fin(false);
+    d.oncancel = e => { e.preventDefault(); fin(false); };
+    d.showModal(); $("#cfNon").focus();
+  });
+}
 function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("on"), 2200); }
 function copy(t) { try { navigator.clipboard.writeText(t); } catch (e) { const a = document.createElement("textarea"); a.value = t; document.body.appendChild(a); a.select(); document.execCommand("copy"); a.remove(); } }
 const initials = s => String(s || "?").replace(/^(M\.|Mme)\s*/, "").split(/[\s—-]+/).filter(w => /^[A-ZÀ-Ý]/i.test(w) && !/^(du|de|la|le|des|d'|l')$/i.test(w)).slice(0, 2).map(w => w[0].toUpperCase()).join("") || "?";
@@ -107,7 +117,6 @@ function entretienGroupe(m) {
 }
 function vendeurGroupe(t) {
   t = norm(t);
-  if (t.includes("boutique")) return "Boutique";
   if (t.includes("pre-owned")) return "Certifié Pre-Owned";
   if (t.includes("particulier")) return "Particulier";
   if (t.includes("ventes")) return "Maison de ventes";
@@ -244,8 +253,10 @@ function renderGrid() {
     <span>Distances depuis ${S.near ? "votre position" : "Monaco"} · <button class="linkbtn" data-near>${PIN}${S.near ? "Revenir à Monaco" : "Autour de moi"}</button></span>`;
   if (!r.length) {
     const next = ZONES[ZONES.findIndex(x => x.id === S.zone) + 1];
-    $("#grid").innerHTML = `<div class="empty"><h3>Aucune montre ici pour l'instant</h3><p>${next ? "Élargissez la recherche :" : "Essayez avec moins de filtres."}</p>${next ? `<button class="btn btn-green" data-z="${next.id}">Chercher ${esc(next.nom.replace("+ ", "en "))}</button>` : `<button class="btn btn-green" data-reset-all>Tout effacer</button>`}</div>`;
+    const zn = { monaco: "à Monaco", france: "à Monaco ni en France", europe: "en Europe", monde: "avec ces critères" }[S.zone];
+    $("#grid").innerHTML = `<div class="empty"><h3>Aucune montre ${zn} pour l'instant</h3><p>${next ? "Élargissez la recherche à la zone suivante." : "Retirez un ou deux filtres pour voir plus de montres."}</p>${next ? `<button class="btn btn-green" data-z="${next.id}">Chercher ${esc(next.nom.replace("+ ", "en "))}</button>` : `<button class="btn btn-green" data-reset-all>Tout effacer</button>`}</div>`;
   } else $("#grid").innerHTML = r.map(cardHTML).join("");
+  $("#grid").setAttribute("aria-busy", "false");
   if (S.view === "map") renderBigMap(r);
   $("#layers").hidden = S.view !== "map";
   const n = nbFiltres(); $("#nFilters").hidden = !n; $("#nFilters").textContent = n;
@@ -395,9 +406,9 @@ function alerts() {
 function markSeen(id) { const m = montre(id), s = ME.suivis[id]; if (!s) return; if (!m) { delete ME.suivis[id]; } else { s.vu_prix = m.prix; s.vu_statut = m.statut || "Disponible"; } ME.save(); }
 function follow(id) {
   const m = montre(id); if (!m) return;
-  if (!ME.compte) { store.set("rm.apres", { action: "suivre", id }); toast("Créez votre compte pour suivre cette montre"); location.hash = "compte"; return; }
+  if (!ME.compte) { store.set("rm.apres", { action: "suivre", id }); toast("Créez votre compte pour suivre cette montre."); location.hash = "compte"; return; }
   ME.suivis[id] = { depuis: new Date().toISOString(), prix: m.prix, statut: m.statut || "Disponible", vu_prix: m.prix, vu_statut: m.statut || "Disponible" };
-  ME.favs.add(id); ME.save(); toast("Montre suivie : vous verrez chaque changement");
+  ME.favs.add(id); ME.save(); toast("Montre suivie. Vous serez prévenu à chaque changement.");
 }
 function unfollow(id) { delete ME.suivis[id]; ME.save(); toast("Vous ne suivez plus cette montre"); }
 function logDemande(vendeurId, montreId, canal) {
@@ -445,7 +456,7 @@ const statutPiece = s => s === "D'origine" ? "o" : s === "Remplacée par Rolex" 
 function messageType(m, v) {
   const c = ME.compte;
   const quoi = m ? `votre ${m.modele} (réf. ${m.reference}, ${m.annee}) affichée à ${eur(m.prix, m.devise)}` : "vos montres";
-  return `Bonjour${v.contact && !/^M\.|^Mme/.test(v.contact) ? " " + v.contact.split(" ")[0] : ""},\n\nJe suis intéressé(e) par ${quoi}.\n${m ? "Est-elle toujours disponible ? Serait-il possible de la voir ?" : "Pouvez-vous me dire ce que vous avez en ce moment ?"}\n\nMerci,${c ? `\n${c.prenom} ${c.nom}${c.tel ? "\n" + c.tel : ""}` : ""}`;
+  return `Bonjour${v.contact && !/^M\.|^Mme/.test(v.contact) ? " " + v.contact.split(" ")[0] : ""},\n\nJe suis intéressé(e) par ${quoi}.\n${m ? "Est-elle toujours disponible ? Serait-il possible de la voir ?" : "Pouvez-vous me dire ce que vous avez en ce moment ?"}\n\nMerci,${c ? `\n${c.prenom} ${c.nom}${c.tel ? "\n" + c.tel : ""}` : ""}`;
 }
 function contactLinks(v, m) {
   const txt = messageType(m, v), sub = m ? `${m.modele} réf. ${m.reference}` : "Demande d'information";
@@ -505,7 +516,7 @@ function mesEchanges(vId, mId) {
 /* ---------- fiche d'une montre */
 function pageMontre(id) {
   const m = montre(id);
-  if (!m) { openPage(`<div class="empty" style="margin-top:30px"><h3>Cette annonce n'existe plus</h3><p>Elle a peut-être été vendue ou retirée.</p><a class="btn btn-green" href="#">Voir les montres</a></div>`, "Annonce retirée"); return; }
+  if (!m) { openPage(`<div class="empty" style="margin-top:30px"><h3>Cette montre n'est plus en vente</h3><p>Elle a été vendue ou retirée par le vendeur.</p><button class="btn btn-green" data-goto="list">Voir les montres disponibles</button></div>`, "Annonce retirée"); return; }
   ME.vues = [id, ...ME.vues.filter(x => x !== id)].slice(0, 12); ME.save();
   const v = m.v, L2 = mapsLinks(v);
   const photos = (m.photos || []).map(p => typeof p === "string" ? { src: p } : p);
@@ -546,8 +557,9 @@ function pageMontre(id) {
       <div class="tags" style="margin-top:14px">${tagsOf(m)}</div>
       <div class="d-cta">
         <a class="btn btn-green" href="${c.tel}" data-log="appel" data-v="${esc(v.id)}" data-m="${esc(m.id)}">Appeler</a>
-        <a class="btn btn-light" href="#contact" data-scroll="contact">Écrire</a>
-        <button class="btn ${suivi ? "btn-light" : "btn-line"} full" data-follow="${esc(m.id)}">${suivi ? "✓ Vous suivez cette montre" : "Suivre cette montre (prix, statut, vendeur)"}</button>
+        <a class="btn btn-light" href="#contact" data-scroll="contact">Écrire au vendeur</a>
+        <button class="btn ${suivi ? "btn-light" : "btn-line"} full" data-follow="${esc(m.id)}" aria-pressed="${!!suivi}">${suivi ? "Suivie ✓ · ne plus suivre" : "Suivre cette montre"}</button>
+        <p class="d-note full" style="margin:0;text-align:center">${suivi ? "Vous serez prévenu à chaque changement de prix ou de statut." : "Alerte si le prix baisse ou si elle est réservée."}</p>
       </div>
       <a class="box mini-seller" href="#v/${encodeURIComponent(v.id)}">${avatar(v)}<div class="who"><b>${esc(v.nom)}</b><span>${isOnline(v) ? '<span class="live">En ligne maintenant</span>' : "Vu " + esc(ago(v.derniere_connexion))} · répond en ~${fmtDur(v.temps_reponse_min)}</span><span>${PIN.replace("<svg", '<svg width="13" height="13" style="vertical-align:-2px;color:#127749"')} ${esc(lieu(v))} · à ${fmtKm(m.dist)} ${S.near ? "de vous" : "de Monaco"}</span></div>${CHEV}</a>
       <div class="box">
@@ -692,7 +704,7 @@ function pageDetaillant(id) {
       </dl>
       <div class="sa">
         ${d.tel ? `<a class="btn btn-green" href="tel:${digits(d.tel)}" data-log="appel" data-v="${esc(d.id)}">Appeler</a>` : ""}
-        <a class="btn btn-light" href="${esc(d.source)}" target="_blank" rel="noopener" style="background:#fff">Fiche officielle</a>
+        <a class="btn btn-light" href="${esc(d.source)}" target="_blank" rel="noopener" style="background:#fff">${/rolex\.com/.test(d.source) ? "Voir sur rolex.com" : "Site du détaillant"}</a>
         <a class="btn btn-light" href="${earthUrl(d)}" target="_blank" rel="noopener" style="background:#fff">Google Earth 3D</a>
         <button class="btn btn-light" data-copy-v="${esc(d.id)}" style="background:#fff">Copier</button>
       </div>
@@ -726,6 +738,45 @@ function pageOfficiels() {
   }
 }
 
+/* ---------- à propos, fonctionnement, données personnelles */
+function pageInfos() {
+  const nPays = new Set(DET.map(d => d.code_pays)).size;
+  openPage(`
+    <nav class="crumbs"><a href="#">Accueil</a> / <span>À propos</span></nav>
+    <p class="kicker">Monalex</p>
+    <h1 class="p-h1">Trouver la bonne montre, au bon endroit.</h1>
+    <p class="p-lead">Monalex réunit les montres disponibles et les détaillants officiels, de Monaco au monde entier. Pour chaque montre : où elle se trouve, son état réel, son entretien, son prix et le vendeur à contacter.</p>
+    <div class="stats" style="grid-template-columns:repeat(4,1fr)">
+      <div class="stat"><b>${DET.length}</b><span>détaillants officiels</span></div>
+      <div class="stat"><b>${nPays}</b><span>pays couverts</span></div>
+      <div class="stat"><b>${ALL.length}</b><span>montres présentées</span></div>
+      <div class="stat"><b>4</b><span>vues de carte</span></div>
+    </div>
+    <section class="d-sec"><p class="kicker">Comment ça marche</p><h2>En trois gestes</h2>
+      <div class="steps">
+        <div class="box"><b class="num">1</b><h3>Choisissez une zone</h3><p>Monaco, puis la France, l'Europe ou le monde entier. Les montres et les détaillants sont classés du plus proche au plus loin.</p></div>
+        <div class="box"><b class="num">2</b><h3>Lisez la fiche complète</h3><p>État pièce par pièce, entretien Rolex ou indépendant, pièces changées, papiers, garantie, historique de l'annonce.</p></div>
+        <div class="box"><b class="num">3</b><h3>Contactez et suivez</h3><p>Appelez, écrivez, suivez la montre : vous êtes prévenu si son prix baisse ou si elle est réservée.</p></div>
+      </div>
+    </section>
+    <section class="d-sec"><p class="kicker">Sources</p><h2>D'où viennent les informations</h2>
+      <div class="two">
+        <div class="box"><h3>Détaillants officiels</h3><p>Relevés le ${esc(fmtDay((DETDATA.verifie_le || "2026-11-14") + "T12:00"))} sur rolex.com et sur les sites des détaillants. Chaque fiche renvoie à sa source. Horaires et téléphones peuvent changer : appelez avant de vous déplacer.</p></div>
+        <div class="box"><h3>Montres présentées</h3><p>${DATA.demo ? "Dans cette version, les annonces, leurs vendeurs et leurs statistiques sont des exemples de démonstration. Ils ne sont rattachés à aucun détaillant réel." : "Les annonces sont fournies par les vendeurs, qui sont responsables de leur exactitude."}</p></div>
+      </div>
+    </section>
+    <section class="d-sec" id="donnees"><p class="kicker">Données personnelles</p><h2>Vos informations restent sur votre téléphone</h2>
+      <div class="two">
+        <div class="box"><h3>Ce qui est enregistré</h3><p>Votre compte (nom, e-mail, téléphone, ville), vos favoris, vos montres suivies et l'historique de vos demandes. Tout est conservé dans ce navigateur, sur cet appareil. Monalex n'envoie rien à un serveur.</p></div>
+        <div class="box"><h3>Ce que vous contrôlez</h3><p>Vos messages partent de votre téléphone (e-mail, WhatsApp, SMS). Votre position n'est utilisée que si vous touchez « Autour de moi », et n'est pas conservée. Vous pouvez supprimer votre compte à tout moment depuis « Mon compte ».</p></div>
+      </div>
+    </section>
+    <section class="d-sec"><p class="kicker">Mentions</p><h2>Informations légales</h2>
+      <div class="box"><p>Monalex est un service indépendant, non affilié à Rolex SA ni à ses détaillants. Rolex, Oyster, Cosmograph Daytona, Submariner, GMT-Master II, Datejust, Day-Date et les autres noms de modèles sont des marques de Rolex SA, citées pour décrire les montres. Cartes © OpenStreetMap, © CARTO ; Google Maps et Google Earth © Google.</p></div>
+    </section>`, "À propos de Monalex");
+  if (S.ancre) { const a = S.ancre; S.ancre = null; setTimeout(() => { const el = document.getElementById(a); if (el) page().scrollTop = el.offsetTop - 70; }, 60); }
+}
+
 /* ---------- tous les vendeurs */
 let VSORT = "react", VZONE = "monde";
 function pageVendeurs() {
@@ -750,12 +801,12 @@ function pageVendeurs() {
 /* ---------- favoris, suivis et demandes */
 function pageSuivis(tab = "suivis") {
   const al = alerts();
-  const tabs = [["suivis", `Suivies (${Object.keys(ME.suivis).length})`], ["favoris", `Favoris (${ME.favs.size})`], ["demandes", `Mes demandes (${ME.demandes.length})`], ["vues", "Vues récemment"]];
+  const tabs = [["suivis", `Montres suivies (${Object.keys(ME.suivis).length})`], ["favoris", `Favoris (${ME.favs.size})`], ["demandes", `Mes demandes (${ME.demandes.length})`], ["vues", "Vues récemment"]];
   let body = "";
   if (tab === "suivis") {
     const ids = Object.keys(ME.suivis);
     body = !ME.compte ? `<div class="empty"><h3>Créez votre compte pour suivre des montres</h3><p>Vous verrez chaque baisse de prix, chaque réservation et chaque vente.</p><a class="btn btn-green" href="#compte">Créer mon compte</a></div>`
-      : !ids.length ? `<div class="empty"><h3>Aucune montre suivie</h3><p>Sur la fiche d'une montre, touchez « Suivre cette montre ».</p><button class="btn btn-green" data-goto="list">Voir les montres</button></div>`
+      : !ids.length ? `<div class="empty"><h3>Aucune montre suivie</h3><p>Suivez une montre pour être prévenu dès que son prix baisse ou qu'elle est réservée.</p><button class="btn btn-green" data-goto="list">Voir les montres</button></div>`
       : `${al.length ? `<div class="box" style="margin-bottom:16px"><h3>${al.length} changement${al.length > 1 ? "s" : ""} depuis votre dernière visite</h3>${al.map(a => `<span class="alert">● ${a.m ? esc(a.m.modele) + " — " : ""}${esc(a.texte)}</span>`).join("")}<div class="mine" style="padding:0;background:none"><div class="row"><button class="btn btn-light" data-seen-all style="background:#fff">Tout marquer comme vu</button></div></div></div>` : ""}
         <div class="plist">${ids.map(id => {
           const m = montre(id), s = ME.suivis[id];
@@ -767,7 +818,7 @@ function pageSuivis(tab = "suivis") {
         }).join("")}</div>`;
   } else if (tab === "favoris") {
     const ms = [...ME.favs].map(montre).filter(Boolean);
-    body = ms.length ? `<div class="grid">${ms.map(cardHTML).join("")}</div>` : `<div class="empty"><h3>Pas encore de favori</h3><p>Touchez le cœur d'une montre pour la garder ici.</p><button class="btn btn-green" data-goto="list">Voir les montres</button></div>`;
+    body = ms.length ? `<div class="grid">${ms.map(cardHTML).join("")}</div>` : `<div class="empty"><h3>Aucun favori</h3><p>Touchez ♡ sur une montre pour la retrouver ici.</p><button class="btn btn-green" data-goto="list">Voir les montres</button></div>`;
   } else if (tab === "demandes") {
     body = ME.demandes.length ? `<div class="plist">${ME.demandes.map(d => {
       const v = vendeur(d.vendeur), m = d.montre && montre(d.montre);
@@ -776,10 +827,10 @@ function pageSuivis(tab = "suivis") {
       const rep = d.repondu ? `<span class="alert">Réponse reçue en ${fmtDur(Math.max(1, Math.round((Date.parse(d.repondu) - Date.parse(d.date)) / 60000)))}</span>` : `<span class="alert w">En attente depuis ${fmtDur(att)} · ${v.temps_reponse_min ? `ce vendeur répond en ~${fmtDur(v.temps_reponse_min)} d'habitude` : "détaillant officiel"}</span>`;
       return `<div class="pitem" style="grid-template-columns:${m ? "76px " : ""}1fr">${m ? `<a class="pp" href="#m/${encodeURIComponent(m.id)}">${picOf(m)}</a>` : ""}<div><b>${esc(v.nom)}</b><span>${esc(d.canal[0].toUpperCase() + d.canal.slice(1))} · ${esc(fmtDate(d.date))}${m ? " · " + esc(m.modele) : ""}</span>${rep}
         <div class="mine" style="padding:0;background:none;margin-top:6px"><div class="row">${d.repondu ? "" : `<button class="btn btn-green" data-rep="${d.id}">Le vendeur m'a répondu</button>`}<a class="btn btn-light" href="#${v.officiel ? "d" : "v"}/${encodeURIComponent(v.id)}" style="background:#fff">Le vendeur</a><button class="btn btn-light" data-del-dem="${d.id}" style="background:#fff">Effacer</button></div></div></div></div>`;
-    }).join("")}</div>` : `<div class="empty"><h3>Aucune demande</h3><p>Quand vous appelez ou écrivez à un vendeur depuis l'appli, la demande s'affiche ici avec le temps de réponse.</p></div>`;
+    }).join("")}</div>` : `<div class="empty"><h3>Aucune demande</h3><p>Quand vous appelez ou écrivez à un vendeur depuis Monalex, la demande s'affiche ici avec le temps de réponse.</p></div>`;
   } else {
     const ms = ME.vues.map(montre).filter(Boolean);
-    body = ms.length ? `<div class="plist">${ms.map(m => pitem(m)).join("")}</div>` : `<div class="empty"><h3>Aucune montre vue</h3></div>`;
+    body = ms.length ? `<div class="plist">${ms.map(m => pitem(m)).join("")}</div>` : `<div class="empty"><h3>Aucune montre consultée</h3><p>Les fiches que vous ouvrez s'affichent ici.</p><button class="btn btn-green" data-goto="list">Voir les montres</button></div>`;
   }
   const notifBtn = ME.compte && "Notification" in window && Notification.permission !== "granted" ? `<button class="linkbtn" data-notif>Recevoir une notification à chaque changement</button>` : "";
   const html = `
@@ -854,7 +905,7 @@ async function saveAccount(form) {
   const c = { ...(old || {}), prenom: f.get("prenom").trim(), nom: f.get("nom").trim(), email: f.get("email").trim(), tel: (f.get("tel") || "").trim(), ville: (f.get("ville") || "").trim(), alertPrix: !!f.get("alertPrix"), alertStatut: !!f.get("alertStatut"), notif: !!f.get("notif"), cree: old?.cree || new Date().toISOString() };
   if (c.notif && "Notification" in window && Notification.permission === "default") { try { if (await Notification.requestPermission() !== "granted") c.notif = false; } catch (e) { c.notif = false; } }
   ME.compte = c;
-  toast(old ? "Informations enregistrées" : `Bienvenue ${c.prenom} !`);
+  toast(old ? "Informations enregistrées." : `Bienvenue, ${c.prenom}.`);
   const apres = store.get("rm.apres", null);
   store.del("rm.apres");
   if (apres && apres.action === "suivre") { follow(apres.id); location.hash = "m/" + apres.id; return; }
@@ -876,6 +927,7 @@ function renderMenu() {
     ["#suivis", `Mes suivis${a ? `<span class="dot">${a}</span>` : ""}`, ""],
     ["#suivis/demandes", "Mes demandes", ""],
     ["#compte", ME.compte ? "Mon compte" : "Créer un compte", ""],
+    ["#infos", "À propos de Monalex", ""],
   ].map(([h, l, at]) => `<li><a href="${h}" ${at}>${l}${CHEV.replace('class="chev"', "")}</a></li>`).join("");
 }
 function renderSearch() {
@@ -899,7 +951,7 @@ function renderSearch() {
   const ds = DET.filter(d => q.every(w => norm(`${d.nom} ${d.ville} ${d.pays} ${d.adresse} officiel rolex`).includes(w))).sort((a, b) => a.dist - b.dist);
   const vs = VEND.filter(v => q.every(w => norm(`${v.nom} ${v.ville} ${v.pays} ${v.type}`).includes(w)));
   $("#searchBody").innerHTML = `
-    ${res.length ? `<button class="btn btn-green" data-q-apply style="width:100%;margin-bottom:16px">Voir les ${res.length} montre${res.length > 1 ? "s" : ""} dans la liste</button>` : ds.length ? "" : `<div class="empty"><h3>Aucun résultat</h3><p>Essayez un modèle, une référence ou une ville.</p></div>`}
+    ${res.length ? `<button class="btn btn-green" data-q-apply style="width:100%;margin-bottom:16px">Voir ${res.length > 1 ? `les ${res.length} montres` : "la montre"}</button>` : ds.length ? "" : `<div class="empty"><h3>Aucun résultat</h3><p>Essayez un modèle, une référence ou une ville.</p></div>`}
     <div class="plist sres">${res.slice(0, 12).map(m => pitem(m)).join("")}</div>
     ${ds.length ? `<p class="kicker" style="margin-top:26px">Détaillants officiels</p><div class="sellers">${ds.slice(0, 9).map(detRow).join("")}</div>` : ""}
     ${vs.length ? `<p class="kicker" style="margin-top:26px">Vendeurs</p><div class="sellers">${vs.map(sellerRow).join("")}</div>` : ""}`;
@@ -915,7 +967,7 @@ function renderPanel() {
     <div class="fgroup"><h3>Entretien</h3>${opts("entretien", ["Neuve", "Par Rolex", "Horloger indépendant", "Aucun ou inconnu"])}</div>
     <div class="fgroup"><h3>État</h3>${opts("condition", ["Jamais portée", "Comme neuve", "Très bon état", "Bon état"])}</div>
     <div class="fgroup"><h3>Matériau</h3>${opts("materiau", ["Acier", "Rolesor (bicolore)", "Or", "Platine", "Rolesium"])}</div>
-    <div class="fgroup"><h3>Vendeur</h3>${opts("vendeur", ["Boutique", "Certifié Pre-Owned", "Revendeur spécialisé", "Maison de ventes", "Particulier"])}</div>
+    <div class="fgroup"><h3>Vendeur</h3>${opts("vendeur", ["Certifié Pre-Owned", "Revendeur spécialisé", "Maison de ventes", "Particulier"])}</div>
     <div class="fgroup">
       <label class="tog">Boîte et papiers fournis<input type="checkbox" id="fSet" ${F.set ? "checked" : ""}></label>
       <label class="tog">Uniquement des pièces Rolex<input type="checkbox" id="fOrig" ${F.origine ? "checked" : ""}></label>
@@ -983,7 +1035,7 @@ async function refresh(manual = true) {
     const a = alerts().length;
     if (manual) toast(a ? `Annonces à jour · ${a} changement${a > 1 ? "s" : ""} sur vos suivis` : `Annonces à jour · ${new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}`);
     notifyAlerts();
-  } catch (e) { if (manual) toast("Pas de connexion : affichage des dernières annonces connues"); }
+  } catch (e) { if (manual) toast("Pas de connexion. Vous voyez les dernières annonces enregistrées."); }
   setTimeout(() => { ptr.classList.remove("spin"); ptr.style.opacity = 0; ptr.style.transform = "translateY(-80px)"; refreshing = false; }, 350);
 }
 // Tirer vers le bas pour rafraîchir (accueil, pages et menu)
@@ -1031,12 +1083,12 @@ function setView(v) {
 }
 function near() {
   if (S.near) { S.near = false; S.origin = { ...CONFIG.origine }; recalcDist(); renderHome(); return; }
-  if (!navigator.geolocation) { toast("Position indisponible sur cet appareil"); return; }
-  toast("Recherche de votre position…");
+  if (!navigator.geolocation) { toast("Position indisponible sur cet appareil. Les distances partent de Monaco."); return; }
+  toast("Localisation en cours…");
   navigator.geolocation.getCurrentPosition(p => {
     S.near = true; S.origin = { lat: p.coords.latitude, lng: p.coords.longitude }; S.sort = "dist";
     recalcDist(); renderHome(); toast("Distances calculées depuis votre position");
-  }, () => toast("Position refusée : distances depuis Monaco"), { timeout: 10000 });
+  }, () => toast("Position non autorisée. Les distances partent de Monaco."), { timeout: 10000 });
 }
 
 document.addEventListener("click", e => {
@@ -1064,6 +1116,8 @@ document.addEventListener("click", e => {
   }
   const lt = t.closest("[data-layer]");
   if (lt) { const k = lt.dataset.layer; S[k] = S[k] === false; lt.setAttribute("aria-pressed", S[k] !== false); renderGrid(); return; }
+  const an = t.closest("[data-ancre]");
+  if (an) { S.ancre = an.dataset.ancre; if (location.hash === "#infos") { e.preventDefault(); pageInfos(); } }
   const g = t.closest("[data-goto]"); if (g) { e.preventDefault(); goList(g.dataset.goto === "map" ? "map" : "list"); return; }
   const zg = t.closest("[data-zone-go]"); if (zg) { e.preventDefault(); S.zone = zg.dataset.zoneGo; store.set("rm.zone", S.zone); renderHome(); goList(); return; }
   const cg = t.closest("[data-coll-go]"); if (cg) { e.preventDefault(); S.coll = cg.dataset.collGo; S.zone = "monde"; renderHome(); goList(); return; }
@@ -1084,7 +1138,7 @@ document.addEventListener("click", e => {
   const vs = t.closest("[data-vsort]"); if (vs) { VSORT = vs.dataset.vsort; pageVendeurs(); return; }
   const oz = t.closest("[data-ozone]"); if (oz) { OZONE = oz.dataset.ozone; pageOfficiels(); return; }
   const vz = t.closest("[data-vzone]"); if (vz) { VZONE = vz.dataset.vzone; pageVendeurs(); return; }
-  const rp = t.closest("[data-rep]"); if (rp) { const d = ME.demandes.find(x => x.id === rp.dataset.rep); if (d) { d.repondu = new Date().toISOString(); ME.save(); toast("Réponse notée"); route(); } return; }
+  const rp = t.closest("[data-rep]"); if (rp) { const d = ME.demandes.find(x => x.id === rp.dataset.rep); if (d) { d.repondu = new Date().toISOString(); ME.save(); toast("Réponse enregistrée."); route(); } return; }
   const dd = t.closest("[data-del-dem]"); if (dd) { ME.demandes = ME.demandes.filter(x => x.id !== dd.dataset.delDem); ME.save(); route(); return; }
   const cv = t.closest("[data-copy-v]"); if (cv) { const v = vendeur(cv.dataset.copyV); copy(`${v.nom}\n${v.contact || "Détaillant officiel Rolex"}\n${v.adresse}, ${v.cp} ${v.ville}, ${v.pays}\n${v.tel}\n${v.email}`); toast("Coordonnées copiées"); return; }
   const lg = t.closest("[data-log]"); if (lg) { logDemande(lg.dataset.v, lg.dataset.m, lg.dataset.log); }
@@ -1094,7 +1148,8 @@ document.addEventListener("click", e => {
   if (t.closest("[data-share]")) { share(); return; }
   if (t.closest("[data-notif]")) { askNotif(); return; }
   if (t.closest("[data-logout]")) {
-    if (confirm("Supprimer votre compte, vos suivis et vos demandes de cet appareil ?")) { ME.compte = null; ME.suivis = {}; ME.demandes = []; ME.save(); toast("Compte supprimé"); location.hash = ""; renderHome(); }
+    askConfirm({ titre: "Supprimer votre compte ?", texte: "Vos favoris, montres suivies et demandes seront effacés de ce téléphone. Cette action est définitive.", oui: "Supprimer le compte", non: "Garder mon compte" })
+      .then(ok => { if (!ok) return; ME.compte = null; ME.suivis = {}; ME.favs.clear(); ME.demandes = []; ME.save(); toast("Compte supprimé."); location.hash = ""; renderHome(); });
     return;
   }
   const sd = t.closest("[data-send]");
@@ -1120,7 +1175,7 @@ async function share() {
   else { copy(url); toast("Lien copié"); }
 }
 async function askNotif() {
-  if (!("Notification" in window)) { toast("Notifications indisponibles sur ce navigateur"); return; }
+  if (!("Notification" in window)) { toast("Ce navigateur ne permet pas les notifications. Ajoutez Monalex à l’écran d’accueil pour les activer."); return; }
   const p = await Notification.requestPermission();
   const c = ME.compte; if (c) { c.notif = p === "granted"; ME.compte = c; }
   toast(p === "granted" ? "Notifications activées" : "Notifications refusées"); route();
@@ -1172,6 +1227,7 @@ function route() {
   else if (k === "vendeurs") pageVendeurs();
   else if (k === "d") pageDetaillant(a);
   else if (k === "officiels") pageOfficiels();
+  else if (k === "infos") pageInfos();
   else if (k === "suivis") pageSuivis(a || "suivis");
   else if (k === "compte") pageCompte();
   else closePage();
@@ -1181,7 +1237,7 @@ window.addEventListener("hashchange", route);
 /* ====================================================================== démarrage */
 async function start() {
   try { await loadData(false); }
-  catch (e) { $("#grid").innerHTML = `<div class="empty"><h3>Impossible de charger les montres</h3><p>Vérifiez la connexion, puis tirez la page vers le bas.</p></div>`; return; }
+  catch (e) { $("#grid").innerHTML = `<div class="empty"><h3>Les montres ne se chargent pas</h3><p>La connexion semble coupée. Tirez la page vers le bas pour réessayer.</p><button class="btn btn-green" onclick="location.reload()">Réessayer</button></div>`; return; }
   $("#demo").hidden = !DATA.demo || !!store.get("rm.demoOk", 0);
   // Visuel d'accueil assorti au logo : chronographe or, cadran vert
   $("#heroImg").innerHTML = watchSVG({ type: "daytona", dial: "#0f4a2c", sub: "#0f4a2c", bezel: "#0c3a22", insert: "#0c3a22", metal: "gold", bracelet: "oyster" }, { diam: 40, vb: "75 170 250 260", par: "xMidYMid slice" });

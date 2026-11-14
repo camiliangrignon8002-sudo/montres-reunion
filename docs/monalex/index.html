@@ -4,7 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Monalex</title>
-<meta name="description" content="Trouver une montre à Monaco, en France, en Europe et dans le monde : où elle se trouve, son état, son entretien, son prix, le vendeur et sa réactivité.">
+<meta name="description" content="Monalex : trouvez une montre et un détaillant officiel, de Monaco au monde entier. État, entretien, prix, carte et contact du vendeur.">
+<meta name="robots" content="index,follow">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#ffffff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -14,6 +16,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:title" content="Monalex">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
 <meta property="og:description" content="Trouver une montre et un détaillant officiel, de Monaco au monde entier.">
 <meta property="og:image" content="img/partage.jpg">
 <link rel="stylesheet" href="vendor/leaflet.css">
@@ -40,7 +44,7 @@
   <section class="hero" aria-label="Accueil">
     <div class="hero-img" id="heroImg" aria-hidden="true"></div>
     <div class="hero-t">
-      <div class="eyebrow">Monalex · Monaco</div>
+      <div class="eyebrow">De Monaco au monde entier</div>
       <h1>Trouvez<br>votre montre</h1>
       <div class="btns">
         <button class="btn btn-glass" id="heroSearch">Rechercher</button>
@@ -82,12 +86,12 @@
       <div class="count" id="count"></div>
       <div class="vfilters" id="layers" hidden><button class="chip" data-layer="showAnn" aria-pressed="true">Annonces (points verts)</button><button class="chip" data-layer="showDet" aria-pressed="true">Détaillants officiels (points or)</button></div>
       <div id="bigmap" hidden></div>
-      <div class="grid" id="grid"></div>
+      <div class="grid" id="grid" aria-busy="true"><div class="card skel" aria-hidden="true"><div class="pic"></div><div class="body"><i></i><i></i><i></i></div></div><div class="card skel" aria-hidden="true"><div class="pic"></div><div class="body"><i></i><i></i><i></i></div></div><div class="card skel" aria-hidden="true"><div class="pic"></div><div class="body"><i></i><i></i><i></i></div></div><div class="card skel" aria-hidden="true"><div class="pic"></div><div class="body"><i></i><i></i><i></i></div></div></div>
     </section>
 
     <section class="sec">
       <div class="sec-h"><div><div class="eyebrow">Détaillants officiels Rolex</div><h2>Où acheter, près de vous</h2><p class="count" id="offCount" style="margin:8px 0 0"></p></div><a href="#officiels">Tous les détaillants</a></div>
-      <div class="sellers" id="officiels"></div>
+      <div class="sellers" id="officiels"><div class="srow skel" aria-hidden="true"><span class="avatar"></span><div class="who"><i></i><i></i></div></div><div class="srow skel" aria-hidden="true"><span class="avatar"></span><div class="who"><i></i><i></i></div></div><div class="srow skel" aria-hidden="true"><span class="avatar"></span><div class="who"><i></i><i></i></div></div></div>
     </section>
 
     <section class="sec">
@@ -113,6 +117,8 @@
         <li><a href="#vendeurs">Vendeurs des annonces</a></li>
         <li><a href="#suivis">Mes suivis</a></li>
         <li><a href="#compte">Mon compte</a></li>
+        <li><a href="#infos">À propos de Monalex</a></li>
+        <li><a href="#infos" data-ancre="donnees">Données personnelles</a></li>
         <li><button data-refresh>Rafraîchir les annonces</button></li>
       </ul></div>
     </div>
@@ -124,7 +130,7 @@
     </div>
     <div class="f-legal">
       <p id="updated"></p>
-      <p>Monalex est un prototype non affilié à Rolex SA ni à ses détaillants. Les détaillants officiels listés sont réels (relevés sur rolex.com et leurs sites, à vérifier avant de vous déplacer). Les noms de modèles et de références sont cités pour décrire les montres. Les annonces de montres et leurs vendeurs, adresses précises, téléphones, e-mails et statistiques sont fictifs ; les prix sont indicatifs.</p>
+      <p>Monalex est un service indépendant, non affilié à Rolex SA ni à ses détaillants. Les détaillants officiels listés sont réels (relevés sur rolex.com et leurs sites, à vérifier avant de vous déplacer). Les noms de modèles et de références sont cités pour décrire les montres. Les annonces de montres et leurs vendeurs, adresses précises, téléphones, e-mails et statistiques sont fictifs ; les prix sont indicatifs.</p>
       <p>Cartes © OpenStreetMap, © CARTO · Google Maps et Google Earth © Google</p>
     </div>
   </div>
@@ -192,6 +198,7 @@
 </div>
 
 <div class="ptr" id="ptr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg></div>
+<dialog class="confirm" id="confirm" aria-labelledby="cfT"><h2 id="cfT"></h2><p id="cfP"></p><div class="cf-b"><button class="btn btn-light" id="cfNon"></button><button class="btn btn-danger" id="cfOui"></button></div></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="vendor/leaflet.js"></script>
