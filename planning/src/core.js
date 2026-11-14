@@ -42,6 +42,11 @@
     contractHours: 35,
     lateThreshold: 5, extraThreshold: 5,
     closingZP: "", closingZR: "",
+    // Horaires d'ouverture des points de vente (PDV), « début-fin » ; été = heure d'été (fin mars → fin octobre).
+    checkOpening: true,
+    season: "ete", // saison en cours, choisie à la main : « ete » ou « hiver » (« auto » = changement d'heure)
+    hoursZP_hiver: "05:30-21:00", hoursZP_ete: "05:30-22:00",
+    hoursZR_hiver: "06:00-22:00", hoursZR_ete: "06:00-23:00",
     coverageFromTemplate: true,
     rulesConfirmed: false,
     appliedUpdates: [],
@@ -328,6 +333,22 @@
     if (!contract || contract >= full) return { minutes: hard, partTime: false };
     return { minutes: Math.min(hard, full - 1, Math.round(contract * (1 + (Number(st.partTimeExtraPercent) || 0) / 100))), partTime: true, contract };
   }
+  // Saison : heure d'été du dernier dimanche de mars au samedi avant le dernier dimanche d'octobre.
+  function lastSunday(y, m) { const d = new Date(Date.UTC(y, m + 1, 0)); d.setUTCDate(d.getUTCDate() - d.getUTCDay()); return iso(d); }
+  const seasonAuto = (date) => { const y = Number(date.slice(0, 4)); return date >= lastSunday(y, 2) && date < lastSunday(y, 9) ? "ete" : "hiver"; };
+  const seasonOf = (date, state) => { const v = state && state.settings && state.settings.season; return v === "ete" || v === "hiver" ? v : seasonAuto(date); };
+  function openingHours(state, zone, date) {
+    const st = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
+    const season = seasonOf(date, { settings: st }), v = st[`hours${zone}_${season}`];
+    const m = v && /^(\d\d:\d\d)-(\d\d:\d\d)$/.exec(v);
+    return m ? { s: m[1], e: m[2], season } : null;
+  }
+  const outsideOpening = (state, g, date) => {
+    const oh = openingHours(state, g.z, date);
+    if (!oh || !isTime(g.s) || !isTime(g.e)) return null;
+    const [a, b] = segRange(g);
+    return a < toMin(oh.s) || b > toMin(oh.e) ? oh : null;
+  };
   function weekExtraMinutes(state, monday, empId) {
     const end = addDays(monday, 6);
     return Object.values(state.adjustments || {}).filter((a) => a.emp === empId && a.date >= monday && a.date <= end && (a.type === "heures_sup" || a.type === "journee_sup")).reduce((x, a) => x + a.minutes, 0);
@@ -417,6 +438,10 @@
       if (st.checkPause && timesOk && shiftMinutes(sh.segs) > 6 * 60) {
         const pz = pauses(sh.segs).reduce((a, p) => a + p.min, 0);
         if (pz < st.minPauseMinutes) add("alerte", "PAUSE", sh.emp, d, `${who} : ${pz ? pz + " min" : "aucune"} de pause le ${fmtDate(d, "day")} (${st.minPauseMinutes} min prévues).`);
+      }
+      if (st.checkOpening && timesOk) for (const g of sh.segs) {
+        const oh = outsideOpening(state, g, d);
+        if (oh) add("alerte", "OUT_OF_HOURS", sh.emp, d, `${who} : ${g.s}–${g.e} en ${g.z} le ${fmtDate(d, "day")}, en dehors des horaires du point de vente (${g.z} ${oh.season === "ete" ? "été" : "hiver"} : ${oh.s}–${oh.e}).`);
       }
       if (st.checkLegal && timesOk) {
         const r = shiftRanges(sh.segs), work = shiftMinutes(sh.segs), amp = r[r.length - 1][1] - r[0][0];
@@ -619,6 +644,7 @@
       if (w.shifts.some((s) => s.emp === emp.id && s.date === date)) continue;
       if (personalRuleIssues(emp, date, segs).length) continue; // horaires ou jours de repos fixes
       if (inTraining(emp, date) && segs.some((g) => aloneRanges(state, w.shifts, { emp: emp.id, date }, g).length)) continue; // en formation : jamais seul(e)
+      if (st.checkOpening && segs.some((g) => outsideOpening(state, g, date))) continue; // jamais hors des horaires du PDV
       if (st.checkLegal && segs.every((g) => isTime(g.s) && isTime(g.e))) {
         const r = shiftRanges(segs);
         if (shiftMinutes(segs) > st.hardMaxDayHours * 60 || r[r.length - 1][1] - r[0][0] > st.maxAmplitudeHours * 60) continue;
@@ -1142,7 +1168,10 @@
               continue;
             }
             if (Array.isArray(DEFAULT_SETTINGS[k])) { if (!Array.isArray(v)) { fail(`Valeur invalide pour ${k}.`); continue; } s.settings[k] = v.map(String).slice(0, 200); continue; }
-            if (typeof DEFAULT_SETTINGS[k] === "string") { s.settings[k] = String(v).slice(0, 10); continue; }
+            if (typeof DEFAULT_SETTINGS[k] === "string") {
+              if (k.startsWith("hours")) { const m = /^(\d\d:\d\d)-(\d\d:\d\d)$/.exec(String(v).trim()); if (!m || !isTime(m[1]) || !isTime(m[2])) { fail("Horaires d'ouverture invalides (format 05:30-21:00)."); continue; } s.settings[k] = `${m[1]}-${m[2]}`; continue; }
+              s.settings[k] = String(v).slice(0, 10); continue;
+            }
             if (typeof DEFAULT_SETTINGS[k] === "number" && !(Number(v) > 0 || (k === "partTimeExtraPercent" && Number(v) === 0))) { fail(`Valeur invalide pour ${k}.`); continue; }
             s.settings[k] = typeof DEFAULT_SETTINGS[k] === "number" ? Number(v) : !!v;
           }
@@ -1284,7 +1313,7 @@
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
     norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
-    calendarCode, calStatus, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
+    calendarCode, calStatus, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
   };

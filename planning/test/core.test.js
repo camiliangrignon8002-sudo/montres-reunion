@@ -506,3 +506,17 @@ test("temps partiel : jamais 42 h (contrat + 10 % au plus) ; règles légales", 
   const five = apply(s, [0, 1, 2, 3, 4].map((i) => ({ type: "setShift", emp: "charlotte", date: C.addDays(W, i), segs: [{ s: "07:00", e: "11:00", z: "ZP" }] })), { allowErrors: true }).state;
   assert.ok(!C.findCandidates(five, C.addDays(W, 5), [{ s: "07:00", e: "11:00", z: "ZP" }]).some((c) => c.emp === "charlotte"));
 });
+
+test("horaires d'ouverture des points de vente (été / hiver)", () => {
+  let s = withWeek1();
+  assert.equal(C.seasonOf("2026-11-16", s), "ete"); // saison choisie à la main : été
+  const W = "2026-12-07";
+  const late = [{ type: "setShift", emp: "maelle", date: W, segs: [{ s: "14:30", e: "17:30", z: "ZP" }, { s: "18:00", e: "22:30", z: "ZP" }] }];
+  assert.ok(C.validateWeek(apply(s, late).state, W).some((i) => i.code === "OUT_OF_HOURS"));
+  const ok = [{ type: "setShift", emp: "maelle", date: W, segs: [{ s: "14:30", e: "17:30", z: "ZP" }, { s: "18:00", e: "22:00", z: "ZP" }] }];
+  assert.ok(!C.validateWeek(apply(s, ok).state, W).some((i) => i.code === "OUT_OF_HOURS"));
+  s = apply(s, [{ type: "setSettings", patch: { season: "hiver" } }]).state;
+  assert.ok(C.validateWeek(apply(s, ok).state, W).some((i) => i.code === "OUT_OF_HOURS")); // hiver : ZP ferme à 21:00
+  assert.equal(apply(s, [{ type: "setSettings", patch: { hoursZP_hiver: "5h30" } }]).ok, false);
+  assert.ok(!C.findCandidates(s, W, [{ s: "18:00", e: "22:00", z: "ZP" }]).length);
+});
