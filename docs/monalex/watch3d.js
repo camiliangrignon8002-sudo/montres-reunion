@@ -159,8 +159,8 @@ export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag 
   // Daytona modélisée en vraie 3D (boîtier, lunette, poussoirs, cadran, bracelet Oyster)
   if (!watch && skin.type === "daytona") {
     try {
-      const { buildDaytona, studioDaytona } = await import("./daytona3d.js?v=22");
-      watch = buildDaytona({ hi: dpr > 1.2, photo: "img/daytona-face.jpg?v=22" });
+      const { buildDaytona, studioDaytona } = await import("./daytona3d.js?v=23");
+      watch = buildDaytona({ hi: dpr > 1.2, photo: "img/daytona-face.jpg?v=23" });
       scene.environment.dispose(); scene.environment = studioDaytona(renderer);
     } catch (e) { console.warn(e); watch = null; }
   }
@@ -190,7 +190,9 @@ export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag 
     else { ty = -.5 + spin + y * .009 + dragX; tx = -.35 + Math.sin(y * .006) * .25 + dragY; }   // deux fois plus réactif au défilement
     const k = 1 - Math.pow(.0005, dt || .016);                  // lissage calé sur le temps réel
     rx += (tx - rx) * k; ry += (ty - ry) * k;
+    const vRot = dt ? (ty - ry) / Math.max(dt, .001) : 0;
     watch.rotation.x = rx; watch.rotation.y = ry; if (estPhoto) watch.rotation.z = 0;
+    if (watch.userData.anime && dt) watch.userData.anime(dt, Math.max(-3, Math.min(3, vRot * .05)));
     draw();
     if (!calme() || Math.abs(tx - rx) + Math.abs(ty - ry) > .001) raf = requestAnimationFrame(loop);
   };
