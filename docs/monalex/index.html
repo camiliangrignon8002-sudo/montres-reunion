@@ -59,7 +59,7 @@
   </section>
 
   <nav class="zones-bar" aria-label="Zone de recherche" id="liste">
-    <div class="wrap"><div class="zones" role="tablist" id="zones"></div><div class="regions" id="regions" hidden></div></div>
+    <div class="wrap"><div class="zones" id="zones"></div></div>
   </nav>
 
   <div class="wrap">
@@ -178,6 +178,17 @@
   </div>
 </div>
 
+<!-- choix de la zone -->
+<div class="ov zsheet" id="zonesheet" role="dialog" aria-label="Zone de recherche">
+  <div class="wrap">
+    <div class="ov-top"><button class="round" data-close aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></svg></button><span></span><span></span></div>
+    <h2 class="zs-h">Où chercher ?</h2>
+    <p class="zs-p">Choisissez une zone pour afficher ses boutiques et ses montres.</p>
+    <button class="zs-near" data-zone-near><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>Autour de moi<small>Toutes les boutiques, de la plus proche à la plus lointaine</small></button>
+    <div id="zoneList"></div>
+  </div>
+</div>
+
 <!-- filtres -->
 <div class="panel-bg" id="panelBg"></div>
 <aside class="panel" id="panel" aria-label="Filtres" role="dialog">
@@ -208,7 +219,7 @@
 </section>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js","three/addons/":"./vendor/jsm/"}}</script>
 <script src="vendor/leaflet.js"></script>
 <script src="watch.js"></script>
 <script src="app.js"></script>

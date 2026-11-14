@@ -324,8 +324,9 @@ Trouver une montre **et un détaillant officiel Rolex** à **Monaco**, puis en *
   chaque site. Pas de petites annonces entre particuliers ni de places de marché. Les photos restent hébergées chez la boutique,
   avec son nom et un lien vers l'annonce. Lancer à la main : **Actions → Monalex → Run workflow**. L'appli ouverte se met aussi
   à jour toutes les 2 heures.
-- **Montres en 3D** (Three.js, comme le site Red Bull) : sur l'accueil et en haut de chaque collection ; elles tournent au
-  défilement et se manipulent au doigt (`docs/monalex/watch3d.js`).
+- **Montres en 3D** (Three.js, comme le site Red Bull) : sur l'accueil et en haut de chaque collection ; elles tournent seules à la
+  cadence de l'écran, plus vite au défilement, et se manipulent au doigt (`docs/monalex/watch3d.js`). **Vraie Daytona** : déposer un
+  modèle 3D sous licence dans `docs/monalex/models/daytona.glb` (voir `models/LISEZ-MOI.txt`), il remplace le modèle dessiné.
 - **Pages des collections** (`#c/submariner`, etc., depuis les cartes de collection et le pied de page) : grand visuel et titre, carrousel des modèles à faire glisser avec pastilles de matière, favoris et « Découvrir ce modèle », gros plan « Découvrir les caractéristiques », « Aller plus loin » (où l'acheter, fiche technique, alerte, toutes les références), « Suivant » vers la collection d'après, barre flottante du nom de la collection pour naviguer.
 - **Carte des boutiques** (accueil, vue Carte, et page Détaillants officiels) : carte claire pleine largeur, épingles blanches avec le cadran Monalex, regroupées avec leur nombre quand elles sont proches (on touche pour zoomer), barre « Trouver une boutique » avec « Autour de moi », panneau « Résultats » avec liste dépliable et choix Détaillants officiels / Centres de service.
 - **Cartes au choix** sur chaque fiche : plan stylisé (tons verts et or), Google Maps, vue satellite Google, bouton
