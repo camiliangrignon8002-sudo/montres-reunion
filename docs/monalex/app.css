@@ -1,4 +1,4 @@
-/* Localisateur de montres — mise en page (style blanc, vert et or) */
+/* Monalex — mise en page (style blanc, vert et or) */
 :root{
   --ink:#212121; --ink-2:#545454; --muted:#767676; --line:#e6e6e6;
   --bg:#ffffff; --bg2:#f7f7f7; --bg3:#efefef;
@@ -48,7 +48,9 @@ a{color:inherit}
 .tb .dot,.menu-list .dot{min-width:18px;height:18px;border-radius:9px;background:var(--green);color:#fff;font-size:10.5px;font-weight:700;display:grid;place-items:center;padding:0 5px}
 .tb .dot{position:absolute;top:6px;right:5px}
 .emblem{display:grid;place-items:center;text-decoration:none}
-.emblem svg{width:46px;height:46px;filter:drop-shadow(0 6px 8px rgba(0,0,0,.18))}
+.emblem{gap:1px}
+.emblem svg{width:40px;height:40px;filter:drop-shadow(0 6px 8px rgba(0,0,0,.18))}
+.wordmark{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:13px;letter-spacing:.22em;color:var(--green);padding-left:.22em;line-height:1}
 
 /* ---------- héros plein écran */
 .hero{position:relative;height:calc(100svh - var(--hh));min-height:520px;max-height:880px;overflow:hidden;background:#d8d6d1;color:#fff}
@@ -452,3 +454,20 @@ footer{background:var(--bg2);color:var(--ink);padding:56px 0 calc(40px + var(--s
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 html.calm *{transition:none!important;animation:none!important}
+
+/* ---------- Monalex : détaillants officiels et cartes au choix */
+.avatar.gold{background:linear-gradient(135deg,#d9b866,#a37e2c);color:#fff}
+.pin.gold{width:22px;height:22px;background:linear-gradient(135deg,#e2c477,#a37e2c);border:3px solid #fff;font-size:0}
+.mtabs{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.mtabs button,.mtabs a{height:38px;padding:0 14px;border-radius:999px;background:var(--bg2);font-size:14px;font-weight:700;color:var(--ink-2);display:inline-flex;align-items:center;text-decoration:none}
+.mtabs button[aria-pressed=true]{background:var(--ink);color:#fff}
+.mtabs .earth{background:var(--grad);color:#fff}
+.mapbox{position:relative;border-radius:var(--r);overflow:hidden;background:#e8e6e1}
+.mapbox>div,.mapbox iframe{display:block;width:100%;height:420px;border:0}
+.mapbox>div[hidden],.mapbox iframe[hidden]{display:none}
+#omap{height:min(60vh,520px)!important}
+/* plan stylisé : tons verts et or */
+.stylise .leaflet-tile-pane{filter:grayscale(.85) sepia(.32) hue-rotate(65deg) saturate(1.15) brightness(1.04) contrast(.95)}
+.stylise{background:#e9ece4}
+@media (max-width:640px){.mapbox>div,.mapbox iframe{height:340px}.wordmark{font-size:11px}.emblem svg{width:34px;height:34px}}
+.srow .avatar{display:grid;place-items:center;font-size:17px;color:#fff;margin:0}

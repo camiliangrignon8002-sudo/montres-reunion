@@ -1,7 +1,7 @@
-// Localisateur de montres : l'appli s'ouvre même sans réseau.
+// Monalex : l'appli s'ouvre même sans réseau.
 // Fichiers de l'appli : cache d'abord. Annonces (montres.json) et page : réseau d'abord, cache si hors ligne.
-const V = 'rm-v2';
-const APP = ['./', 'index.html', 'app.css', 'app.js', 'watch.js', 'vendor/leaflet.js', 'vendor/leaflet.css', 'manifest.webmanifest', 'icon-192.png', 'favicon-32.png'];
+const V = 'monalex-v3';
+const APP = ['./', 'index.html', 'app.css', 'app.js', 'watch.js', 'detaillants.json', 'vendor/leaflet.js', 'vendor/leaflet.css', 'manifest.webmanifest', 'icon-192.png', 'favicon-32.png'];
 
 self.addEventListener('install', ev => ev.waitUntil(caches.open(V).then(c => c.addAll(APP)).then(() => self.skipWaiting())));
 self.addEventListener('activate', ev => ev.waitUntil(

@@ -305,26 +305,26 @@ La canette suit la souris, s'écrase un peu quand on défile vite, les bulles ac
 
 ---
 
-# ⌚ Localisateur de montres · Monaco
+# ⌚ Monalex
 
-Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/rolex-monaco/
+Appli : https://camiliangrignon8002-sudo.github.io/montres-reunion/monalex/
 
-Trouver une montre à **Monaco**, puis en **France**, en **Europe** et **dans le monde** (onglets en haut de la liste,
-distances depuis Monaco ou « Autour de moi »). Présentation blanche, verte et or : en-tête avec l'emblème au centre,
-menu plein écran (tuiles + liste), recherche avec raccourcis, grand visuel d'accueil, pied de page gris.
+Trouver une montre **et un détaillant officiel Rolex** à **Monaco**, puis en **France**, en **Europe** et **dans le monde**
+(onglets en haut de la liste, distances depuis Monaco ou « Autour de moi »). Présentation blanche, verte et or.
 
-**Version de démonstration** : les annonces, vendeurs, adresses précises, téléphones, e-mails et statistiques
-sont fictifs. Projet non officiel, non affilié à Rolex SA : pas de logo ni de photo officielle.
-
-- **Fiche d'une montre** : galerie zoomable (vue de face, cadran, lunette, bracelet), prix et baisse de prix,
-  statut (disponible, réservée, enchères), note de qualité sur 10, état pièce par pièce, entretien (Rolex,
-  horloger indépendant, inconnu) avec historique, pièces d'origine ou changées, papiers, boîte, garantie,
-  fiche technique, carte, itinéraire (Google Maps, Plans, Waze), appel, WhatsApp, e-mail, SMS.
-- **Suivi de l'annonce** : vues, personnes en favori, demandes, date de mise en ligne, historique (prix, statut, photos).
-- **Vendeurs** : dernière connexion (« en ligne », « il y a 12 min »), temps de réponse habituel et classement
-  des plus réactifs, taux de réponse, dernière réponse à un client, avis, ventes, identité vérifiée.
-- **Compte** (gardé sur le téléphone) : favoris, montres suivies (alerte quand le prix baisse ou que la montre
-  est réservée / vendue, notification possible), historique des demandes aux vendeurs avec le temps de réponse.
-- **Rafraîchir** : tirer la page vers le bas, ou « Rafraîchir les annonces » dans le menu et le pied de page.
-- Fichiers : `docs/rolex-monaco/` — `index.html`, `app.css`, `app.js`, `watch.js` (montres dessinées en vectoriel),
-  `montres.json` (les annonces et vendeurs : à remplacer par les vraies, champ `photos` pour les vraies photos HD).
+- **Détaillants officiels (réels)** : 27 détaillants relevés sur rolex.com et sur leurs sites le 14 novembre 2026
+  (Monaco, Paris, Cannes, Nice, Saint-Tropez, Courchevel, Marseille, Lyon, Genève, Zurich, Londres, Madrid, Barcelone,
+  Dubaï, Miami, Tokyo), avec adresse, téléphone, horaires quand ils sont publiés et lien vers la source. Fichier
+  `docs/monalex/detaillants.json` : on ajoute une boutique en ajoutant une ligne. Rolex en compte plus de mille ; seuls
+  ceux dont l'adresse a pu être confirmée sont dans la liste.
+- **Cartes au choix** sur chaque fiche : plan stylisé (tons verts et or), Google Maps, vue satellite Google, bouton
+  **Google Earth 3D** (s'ouvre en vue inclinée sur l'adresse), et itinéraire Google, Plans ou Waze.
+  Avec une clé Google Maps (`googleMapsKey` en haut de `app.js`), le plan devient une carte Google aux couleurs de l'appli.
+- **Annonces de démonstration** : les montres en vente, leurs vendeurs, téléphones et statistiques (connexion, temps de
+  réponse) sont fictifs ; elles ne sont rattachées à aucun détaillant réel. Les vraies annonces vont dans `montres.json`.
+- **Fiche d'une montre** : galerie zoomable, prix et baisse de prix, statut, qualité sur 10, état pièce par pièce,
+  entretien (Rolex, horloger indépendant, inconnu), pièces changées, papiers, boîte, garantie, fiche technique.
+- **Compte** (gardé sur le téléphone) : favoris, montres suivies (alerte prix et statut), demandes aux vendeurs et
+  détaillants avec le temps de réponse mesuré.
+- **Rafraîchir** : tirer la page vers le bas, ou « Rafraîchir les annonces » dans le menu.
+- Projet non affilié à Rolex SA : pas de logo ni de photo officielle.

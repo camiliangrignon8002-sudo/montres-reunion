@@ -34,7 +34,7 @@
   },
   "mc-casino": {
    "nom": "Maison Monte-Carlo Temps",
-   "type": "Détaillant officiel (exemple)",
+   "type": "Boutique (exemple)",
    "contact": "Laurent Ferraud",
    "adresse": "Place du Casino",
    "ville": "Monte-Carlo",
@@ -174,7 +174,7 @@
   },
   "fr-paris": {
    "nom": "Place Vendôme Horlogerie",
-   "type": "Détaillant officiel (exemple)",
+   "type": "Boutique (exemple)",
    "contact": "Hélène Varenne",
    "adresse": "Rue de la Paix",
    "ville": "Paris",
@@ -426,7 +426,7 @@
   },
   "de-munich": {
    "nom": "Maximilianstraße Uhren",
-   "type": "Détaillant officiel (exemple)",
+   "type": "Boutique (exemple)",
    "contact": "Lukas Brandt",
    "adresse": "Maximilianstraße",
    "ville": "Munich",

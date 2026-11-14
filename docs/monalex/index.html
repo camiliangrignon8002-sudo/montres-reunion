@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Localisateur de montres</title>
+<title>Monalex</title>
 <meta name="description" content="Trouver une montre à Monaco, en France, en Europe et dans le monde : où elle se trouve, son état, son entretien, son prix, le vendeur et sa réactivité.">
 <meta name="theme-color" content="#ffffff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Montres">
+<meta name="apple-mobile-web-app-title" content="Monalex">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -24,7 +24,7 @@
     <div class="top-l">
       <button class="tb" id="btnMenu" aria-label="Menu"><svg class="ico" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 9h20M3 17h20"/></svg><span class="dot" id="menuDot" hidden></span></button>
     </div>
-    <a class="emblem" href="#" aria-label="Accueil" id="homeLink"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="eg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3dfa6"/><stop offset=".45" stop-color="#b8892f"/><stop offset="1" stop-color="#e7c97f"/></linearGradient></defs><circle cx="24" cy="24" r="20" fill="none" stroke="url(#eg)" stroke-width="3"/><circle cx="24" cy="24" r="14.5" fill="none" stroke="url(#eg)" stroke-width="1.2"/><g stroke="url(#eg)" stroke-width="2.4" stroke-linecap="round"><path d="M24 11.5v3.5M36.5 24H33M24 36.5V33M11.5 24H15"/><path d="M24 24l-5-6.2M24 24l7.5-3.2"/></g><circle cx="24" cy="24" r="2.2" fill="#b8892f"/></svg></a>
+    <a class="emblem" href="#" aria-label="Accueil" id="homeLink"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="eg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3dfa6"/><stop offset=".45" stop-color="#b8892f"/><stop offset="1" stop-color="#e7c97f"/></linearGradient></defs><circle cx="24" cy="24" r="20" fill="none" stroke="url(#eg)" stroke-width="3"/><circle cx="24" cy="24" r="14.5" fill="none" stroke="url(#eg)" stroke-width="1.2"/><g stroke="url(#eg)" stroke-width="2.4" stroke-linecap="round"><path d="M24 11.5v3.5M36.5 24H33M24 36.5V33M11.5 24H15"/><path d="M24 24l-5-6.2M24 24l7.5-3.2"/></g><circle cx="24" cy="24" r="2.2" fill="#b8892f"/></svg><span class="wordmark">MONALEX</span></a>
     <div class="top-r">
       <button class="tb" id="btnSearch" aria-label="Rechercher"><svg class="ico" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11.5" cy="11.5" r="7"/><path d="m21.5 21.5-5-5" stroke-linecap="round"/></svg></button>
       <button class="tb" id="btnMap" aria-label="Carte des montres"><svg class="ico" viewBox="0 0 26 26"><path fill="#127749" d="M13 2.5a8 8 0 0 0-8 8c0 5.6 8 13 8 13s8-7.4 8-13a8 8 0 0 0-8-8Zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/></svg></button>
@@ -37,7 +37,7 @@
   <section class="hero" aria-label="Accueil">
     <div class="hero-img" id="heroImg" aria-hidden="true"></div>
     <div class="hero-t">
-      <div class="eyebrow">Montres · Monaco</div>
+      <div class="eyebrow">Monalex · Monaco</div>
       <h1>Trouvez<br>votre montre</h1>
       <div class="btns">
         <button class="btn btn-glass" id="heroSearch">Rechercher</button>
@@ -77,8 +77,14 @@
         </div>
       </div>
       <div class="count" id="count"></div>
+      <div class="vfilters" id="layers" hidden><button class="chip" data-layer="showAnn" aria-pressed="true">Annonces (points verts)</button><button class="chip" data-layer="showDet" aria-pressed="true">Détaillants officiels (points or)</button></div>
       <div id="bigmap" hidden></div>
       <div class="grid" id="grid"></div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><div><div class="eyebrow">Détaillants officiels Rolex</div><h2>Où acheter, près de vous</h2><p class="count" id="offCount" style="margin:8px 0 0"></p></div><a href="#officiels">Tous les détaillants</a></div>
+      <div class="sellers" id="officiels"></div>
     </section>
 
     <section class="sec">
@@ -100,7 +106,8 @@
       <div><h3>Trouver et suivre</h3><ul>
         <li><button data-goto="list">Toutes les montres</button></li>
         <li><button data-zone-go="monaco">Montres à Monaco</button></li>
-        <li><a href="#vendeurs">Les vendeurs</a></li>
+        <li><a href="#officiels">Détaillants officiels</a></li>
+        <li><a href="#vendeurs">Vendeurs des annonces</a></li>
         <li><a href="#suivis">Mes suivis</a></li>
         <li><a href="#compte">Mon compte</a></li>
         <li><button data-refresh>Rafraîchir les annonces</button></li>
@@ -114,8 +121,8 @@
     </div>
     <div class="f-legal">
       <p id="updated"></p>
-      <p>Prototype de démonstration, non affilié à Rolex SA ni à ses détaillants. Les noms de modèles et de références sont cités pour décrire les montres. Dans cette version, les annonces, vendeurs, adresses précises, téléphones, e-mails et statistiques sont fictifs ; les prix sont indicatifs.</p>
-      <p>Cartes © OpenStreetMap, © CARTO</p>
+      <p>Monalex est un prototype non affilié à Rolex SA ni à ses détaillants. Les détaillants officiels listés sont réels (relevés sur rolex.com et leurs sites, à vérifier avant de vous déplacer). Les noms de modèles et de références sont cités pour décrire les montres. Les annonces de montres et leurs vendeurs, adresses précises, téléphones, e-mails et statistiques sont fictifs ; les prix sont indicatifs.</p>
+      <p>Cartes © OpenStreetMap, © CARTO · Google Maps et Google Earth © Google</p>
     </div>
   </div>
 </footer>
@@ -138,7 +145,7 @@
       <li><button data-open-filters>Filtrer les montres</button></li>
       <li><button data-zone-go="monaco">Montres à Monaco</button></li>
     </ul>
-    <div class="ov-foot"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="none" stroke="#b8892f" stroke-width="3"/><circle cx="24" cy="24" r="14.5" fill="none" stroke="#b8892f" stroke-width="1.2"/><g stroke="#b8892f" stroke-width="2.4" stroke-linecap="round"><path d="M24 11.5v3.5M36.5 24H33M24 36.5V33M11.5 24H15"/><path d="M24 24l-5-6.2M24 24l7.5-3.2"/></g></svg><div>MONACO</div></div>
+    <div class="ov-foot"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="none" stroke="#b8892f" stroke-width="3"/><circle cx="24" cy="24" r="14.5" fill="none" stroke="#b8892f" stroke-width="1.2"/><g stroke="#b8892f" stroke-width="2.4" stroke-linecap="round"><path d="M24 11.5v3.5M36.5 24H33M24 36.5V33M11.5 24H15"/><path d="M24 24l-5-6.2M24 24l7.5-3.2"/></g></svg><div>MONALEX</div></div>
   </div>
 </div>
 

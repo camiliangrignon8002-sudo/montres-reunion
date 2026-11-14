@@ -1,10 +1,13 @@
 "use strict";
-/* Localisateur de montres — fonctionnement de l'appli.
+/* Monalex — fonctionnement de l'appli.
    Données : montres.json (montres + vendeurs). Compte, favoris, suivis et demandes : gardés sur l'appareil. */
 
 const CONFIG = {
   origine: { lat: 43.7384, lng: 7.4246, nom: "Monaco" },
   donnees: "montres.json",
+  detaillants: "detaillants.json",
+  // Clé Google Maps (facultative) : avec elle, le plan stylisé devient une vraie carte Google aux couleurs de l'appli.
+  googleMapsKey: "",
 };
 
 /* ====================================================================== outils */
@@ -71,7 +74,7 @@ const fmtKm = d => d < 1 ? "moins de 1 km" : d < 10 ? `${d.toFixed(1).replace(".
 
 /* ====================================================================== état */
 let DATA = { vendeurs: {}, montres: [] };
-let ALL = [], VEND = [];
+let ALL = [], VEND = [], DET = [], DETDATA = { detaillants: [] };
 const S = {
   zone: store.get("rm.zone", "monaco"), coll: "", etat: "", q: "", sort: "dist", view: "list",
   f: emptyF(), origin: { ...CONFIG.origine }, near: false, inApp: false, lastLoad: 0,
@@ -104,7 +107,7 @@ function entretienGroupe(m) {
 }
 function vendeurGroupe(t) {
   t = norm(t);
-  if (t.includes("detaillant")) return "Détaillant officiel";
+  if (t.includes("boutique")) return "Boutique";
   if (t.includes("pre-owned")) return "Certifié Pre-Owned";
   if (t.includes("particulier")) return "Particulier";
   if (t.includes("ventes")) return "Maison de ventes";
@@ -117,14 +120,16 @@ function prepare() {
   const rank = [...VEND].sort((a, b) => a.temps_reponse_min - b.temps_reponse_min || b.taux_reponse - a.taux_reponse);
   rank.forEach((v, i) => v.rang = i + 1);
   const byId = Object.fromEntries(VEND.map(v => [v.id, v]));
+  DET = (DETDATA.detaillants || []).map(d => ({ ...d, officiel: true, dist: km(S.origin, d) }));
   ALL = DATA.montres.map(m => {
     const v = byId[m.vendeur] || {};
     return { ...m, v, dist: v.dist, mat: materiauGroupe(m), ent: entretienGroupe(m) };
   });
 }
-function recalcDist() { VEND.forEach(v => v.dist = km(S.origin, v)); ALL.forEach(m => m.dist = m.v.dist); }
+function recalcDist() { VEND.forEach(v => v.dist = km(S.origin, v)); DET.forEach(d => d.dist = km(S.origin, d)); ALL.forEach(m => m.dist = m.v.dist); }
 const montre = id => ALL.find(x => x.id === id);
-const vendeur = id => VEND.find(x => x.id === id);
+const vendeur = id => VEND.find(x => x.id === id) || DET.find(x => x.id === id);
+const detaillant = id => DET.find(x => x.id === id);
 
 /* ====================================================================== filtres et tri */
 function filtered(ignoreZone = false) {
@@ -242,6 +247,7 @@ function renderGrid() {
     $("#grid").innerHTML = `<div class="empty"><h3>Aucune montre ici pour l'instant</h3><p>${next ? "Élargissez la recherche :" : "Essayez avec moins de filtres."}</p>${next ? `<button class="btn btn-green" data-z="${next.id}">Chercher ${esc(next.nom.replace("+ ", "en "))}</button>` : `<button class="btn btn-green" data-reset-all>Tout effacer</button>`}</div>`;
   } else $("#grid").innerHTML = r.map(cardHTML).join("");
   if (S.view === "map") renderBigMap(r);
+  $("#layers").hidden = S.view !== "map";
   const n = nbFiltres(); $("#nFilters").hidden = !n; $("#nFilters").textContent = n;
   $$("[data-etat]").forEach(b => b.setAttribute("aria-pressed", b.dataset.etat === S.etat));
   $$(".coll").forEach(b => b.setAttribute("aria-pressed", b.dataset.c === S.coll));
@@ -274,7 +280,18 @@ function tiles(kind) {
     tileHTML("#compte", "", watchSVG(daytona.skin, { diam: daytona.diametre }), ME.compte ? `Mon compte` : "Créer mon compte"),
   ].join("");
 }
-function renderHome() { renderZones(); renderGrid(); renderSellers(); $("#homeTiles").innerHTML = tiles("home"); }
+function detRow(d) {
+  return `<a class="srow" href="#d/${encodeURIComponent(d.id)}"><span class="avatar gold">${esc(initials(d.nom))}</span><div class="who"><b>${esc(d.nom)}</b>
+    <span class="rx">Détaillant officiel Rolex${d.service ? " · centre de service" : ""}</span>
+    <span>${esc(d.adresse)}, ${esc(d.ville)} · ${fmtKm(d.dist)}</span></div>${CHEV}</a>`;
+}
+function detsInZone(zoneId = S.zone) { const z = ZONES.find(x => x.id === zoneId) || ZONES[3]; return DET.filter(d => z.test(d.code_pays)).sort((a, b) => a.dist - b.dist); }
+function renderOfficiels() {
+  const list = detsInZone();
+  $("#offCount").textContent = `${list.length} détaillant${list.length > 1 ? "s" : ""} · ${ZONE_NOM[S.zone]}`;
+  $("#officiels").innerHTML = list.slice(0, 9).map(detRow).join("") || `<div class="empty"><h3>Aucun détaillant relevé dans cette zone</h3></div>`;
+}
+function renderHome() { renderZones(); renderGrid(); renderSellers(); renderOfficiels(); $("#homeTiles").innerHTML = tiles("home"); }
 
 /* ====================================================================== cartes géographiques */
 const TILES = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png";
@@ -282,6 +299,7 @@ const ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStree
 let bigMap, bigLayer, pMap;
 function baseMap(el, opt) {
   const map = L.map(el, { scrollWheelZoom: false, worldCopyJump: true, ...opt });
+  (typeof el === "string" ? document.getElementById(el) : el).classList.add("stylise");
   L.tileLayer(TILES, { attribution: ATTR, subdomains: "abcd", maxZoom: 19, detectRetina: true }).addTo(map);
   return map;
 }
@@ -289,9 +307,14 @@ function renderBigMap(list) {
   if (!window.L) { $("#bigmap").innerHTML = '<p style="padding:20px">La carte n\'a pas pu se charger.</p>'; return; }
   if (!bigMap) { bigMap = baseMap("bigmap").setView([CONFIG.origine.lat, CONFIG.origine.lng], 4); bigLayer = L.layerGroup().addTo(bigMap); }
   bigLayer.clearLayers();
+  if (S.showDet !== false) detsInZone().forEach(d => {
+    L.marker([d.lat, d.lng], { icon: L.divIcon({ className: "", html: '<div class="pin gold"></div>', iconSize: [22, 22], iconAnchor: [11, 11] }), title: d.nom, zIndexOffset: -100 }).addTo(bigLayer)
+      .bindPopup(`<div class="pop"><h4>${esc(d.nom)}</h4><div class="pv">Détaillant officiel · ${esc(d.adresse)}, ${esc(d.ville)}</div><a href="#d/${encodeURIComponent(d.id)}"><span>Voir la fiche, la carte et le téléphone</span><b>›</b></a></div>`);
+  });
   const groups = new Map();
   list.forEach(m => { if (!groups.has(m.vendeur)) groups.set(m.vendeur, []); groups.get(m.vendeur).push(m); });
   const pts = [];
+  if (S.showAnn === false) groups.clear();
   groups.forEach(ms => {
     const v = ms[0].v;
     const icon = L.divIcon({ className: "", html: `<div class="pin">${ms.length}</div>`, iconSize: [36, 36], iconAnchor: [18, 18] });
@@ -299,19 +322,56 @@ function renderBigMap(list) {
       .bindPopup(`<div class="pop"><h4><a href="#v/${encodeURIComponent(v.id)}" style="border:0;padding:0;display:inline">${esc(v.nom)}</a></h4><div class="pv">${esc(v.ville)}, ${esc(v.pays)} · ${isOnline(v) ? "en ligne" : "vu " + ago(v.derniere_connexion)}</div>${ms.map(m => `<a href="#m/${encodeURIComponent(m.id)}"><span>${esc(m.modele)}</span><b>${eur(m.prix, m.devise)}</b></a>`).join("")}</div>`);
     pts.push([v.lat, v.lng]);
   });
+  if (S.showDet !== false) detsInZone().forEach(d => pts.push([d.lat, d.lng]));
   setTimeout(() => {
     bigMap.invalidateSize();
     if (pts.length === 1) bigMap.setView(pts[0], 14);
     else if (pts.length) bigMap.fitBounds(pts, { padding: [40, 40], maxZoom: 13 });
   }, 30);
 }
+const GSTYLE = [
+  { elementType: "geometry", stylers: [{ color: "#f4f2ec" }] }, { elementType: "labels.text.fill", stylers: [{ color: "#545454" }] },
+  { elementType: "labels.text.stroke", stylers: [{ color: "#ffffff" }] }, { featureType: "water", elementType: "geometry", stylers: [{ color: "#b9d3c2" }] },
+  { featureType: "road", elementType: "geometry", stylers: [{ color: "#ffffff" }] }, { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#e8d9b0" }] },
+  { featureType: "poi", stylers: [{ visibility: "off" }] }, { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#d3e4d7" }, { visibility: "on" }] },
+  { featureType: "transit", stylers: [{ visibility: "simplified" }] }, { featureType: "administrative", elementType: "geometry.stroke", stylers: [{ color: "#127749" }] },
+];
+let gLoad;
+function googleMaps() {
+  if (!CONFIG.googleMapsKey) return Promise.reject();
+  if (window.google?.maps) return Promise.resolve(google.maps);
+  return gLoad = gLoad || new Promise((ok, ko) => {
+    window.__gmOk = () => ok(google.maps);
+    const sc = document.createElement("script");
+    sc.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(CONFIG.googleMapsKey)}&callback=__gmOk&language=fr`;
+    sc.onerror = ko; document.head.appendChild(sc);
+  });
+}
 function pageMap(id, v) {
-  if (!window.L || !$("#" + id)) return;
+  if (!$("#" + id)) return;
+  if (CONFIG.googleMapsKey) {
+    googleMaps().then(g => {
+      const map = new g.Map($("#" + id), { center: { lat: v.lat, lng: v.lng }, zoom: 16, styles: GSTYLE, mapTypeControl: false, streetViewControl: true, fullscreenControl: true });
+      new g.Marker({ map, position: { lat: v.lat, lng: v.lng }, title: v.nom, icon: { path: g.SymbolPath.CIRCLE, scale: 9, fillColor: "#127749", fillOpacity: 1, strokeColor: "#c9a961", strokeWeight: 3 } });
+    }).catch(() => {});
+    return;
+  }
+  if (!window.L) return;
   if (pMap) { pMap.remove(); pMap = null; }
   pMap = baseMap(id, { worldCopyJump: false }).setView([v.lat, v.lng], 15);
   L.marker([v.lat, v.lng], { icon: L.divIcon({ className: "", html: '<div class="pin one"></div>', iconSize: [18, 18], iconAnchor: [9, 9] }) })
     .addTo(pMap).bindPopup(`<div class="pop"><h4>${esc(v.nom)}</h4><div class="pv" style="margin:0">${esc(v.adresse)}, ${esc(v.cp)} ${esc(v.ville)}</div></div>`).openPopup();
   setTimeout(() => pMap && pMap.invalidateSize(), 400);
+}
+function earthUrl(v) { return `https://earth.google.com/web/search/${encodeURIComponent(`${v.adresse}, ${v.cp} ${v.ville}, ${v.pays}`)}/@${v.lat},${v.lng},60a,600d,35y,0h,65t,0r`; }
+function mapBlock(id, v) {
+  const L2 = mapsLinks(v);
+  return `<div class="mtabs" role="group" aria-label="Type de carte" data-lat="${v.lat}" data-lng="${v.lng}" data-nom="${esc(v.nom)}" data-for="${id}">
+      <button data-mt="plan" aria-pressed="true">Plan</button><button data-mt="gmap" aria-pressed="false">Google Maps</button><button data-mt="sat" aria-pressed="false">Satellite</button>
+      <a href="${earthUrl(v)}" target="_blank" rel="noopener" class="earth">Google Earth 3D ↗</a></div>
+    <div class="mapbox"><div id="${id}"></div><iframe title="Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" hidden></iframe></div>
+    ${v.position_approx ? '<p class="d-note" style="margin-top:8px">Position approximative (ville).</p>' : ""}
+    <div class="route"><a class="btn btn-light" href="${L2.google}" target="_blank" rel="noopener">Itinéraire Google</a><a class="btn btn-light" href="${L2.apple}" target="_blank" rel="noopener">Plans</a><a class="btn btn-light" href="${L2.waze}" target="_blank" rel="noopener">Waze</a></div>`;
 }
 function mapsLinks(v) {
   return {
@@ -371,11 +431,11 @@ function openPage(html, title, actions = "") {
   el.scrollTop = same ? keep : 0;
   el.dataset.h = location.hash;
   el.classList.add("open"); document.body.classList.add("lock");
-  document.title = `${title} — Localisateur de montres`;
+  document.title = `${title}  · Monalex`;
 }
 function closePage() {
   page().classList.remove("open"); document.body.classList.remove("lock");
-  document.title = "Localisateur de montres";
+  document.title = "Monalex";
   setTimeout(() => { if (!page().classList.contains("open") && pMap) { pMap.remove(); pMap = null; } }, 400);
 }
 page().addEventListener("scroll", () => { const t = $(".p-top", page()); if (t) t.classList.toggle("scrolled", page().scrollTop > 4); }, { passive: true });
@@ -559,9 +619,7 @@ function pageMontre(id) {
     <p class="kicker">Où la voir</p>
     <h2>Le vendeur et le plan d'accès</h2>
     <div class="seller">${sellerCard(v, m)}
-      <div><div id="dmap"></div>
-        <div class="route"><a class="btn btn-light" href="${L2.google}" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-light" href="${L2.apple}" target="_blank" rel="noopener">Plans</a><a class="btn btn-light" href="${L2.waze}" target="_blank" rel="noopener">Waze</a></div>
-      </div>
+      <div>${mapBlock("dmap", v)}</div>
     </div>
     ${formMessage(v, m)}
   </section>
@@ -606,13 +664,66 @@ function pageVendeur(id) {
     <div class="stat"><b>${nf(v.ventes)}</b><span>ventes depuis ${esc(v.membre_depuis)}</span></div>
   </div>
   <div class="seller">${sellerCard(v, null)}
-    <div><div id="vmap"></div><div class="route"><a class="btn btn-light" href="${L2.google}" target="_blank" rel="noopener">Google Maps</a><a class="btn btn-light" href="${L2.apple}" target="_blank" rel="noopener">Plans</a><a class="btn btn-light" href="${L2.waze}" target="_blank" rel="noopener">Waze</a></div></div>
+    <div>${mapBlock("vmap", v)}</div>
   </div>
   ${mesEchanges(v.id)}
   ${formMessage(v, null)}
   <section class="d-sec" style="margin-top:40px"><p class="kicker">En vente</p><h2>${ms.length} montre${ms.length > 1 ? "s" : ""} chez ce vendeur</h2><div class="similar">${ms.map(cardHTML).join("")}</div></section>`;
   openPage(html, v.nom);
   pageMap("vmap", v);
+}
+
+/* ---------- détaillant officiel (données réelles) */
+function pageDetaillant(id) {
+  const d = detaillant(id);
+  if (!d) { location.hash = "officiels"; return; }
+  const proches = DET.filter(x => x.id !== d.id).sort((a, b) => km(d, a) - km(d, b)).slice(0, 3);
+  const html = `
+  <nav class="crumbs"><a href="#">Accueil</a> / <a href="#officiels">Détaillants officiels</a> / <span>${esc(d.ville)}</span></nav>
+  <div class="acc-h"><span class="avatar gold" style="width:72px;height:72px;font-size:24px">${esc(initials(d.nom))}</span><div><div class="eyebrow">Détaillant officiel Rolex${d.service ? " · centre de service" : ""}</div><h1>${esc(d.nom)}</h1><p>${esc(lieu(d))} · à ${fmtKm(d.dist)} ${S.near ? "de vous" : "de Monaco"}</p></div></div>
+  <div class="seller">
+    <div class="seller-card">
+      <div class="tags"><span class="tag g">Détaillant officiel</span>${d.service ? '<span class="tag">Centre de service</span>' : ""}<span class="tag o">Vérifié le ${esc(fmtDay(DETDATA.verifie_le + "T12:00"))}</span></div>
+      <dl>
+        <div><dt>Adresse</dt><dd>${esc(d.adresse)}<br>${esc(d.cp)} ${esc(d.ville)}, ${esc(d.pays)}</dd></div>
+        <div><dt>Téléphone</dt><dd>${d.tel ? `<a href="tel:${digits(d.tel)}" data-log="appel" data-v="${esc(d.id)}">${esc(d.tel)}</a>` : "Voir la fiche officielle"}</dd></div>
+        <div><dt>Horaires</dt><dd>${esc(d.horaires || "Voir la fiche officielle")}</dd></div>
+        <div><dt>Source</dt><dd><a href="${esc(d.source)}" target="_blank" rel="noopener">${esc(new URL(d.source).hostname.replace(/^www\./, ""))}</a></dd></div>
+      </dl>
+      <div class="sa">
+        ${d.tel ? `<a class="btn btn-green" href="tel:${digits(d.tel)}" data-log="appel" data-v="${esc(d.id)}">Appeler</a>` : ""}
+        <a class="btn btn-light" href="${esc(d.source)}" target="_blank" rel="noopener" style="background:#fff">Fiche officielle</a>
+        <a class="btn btn-light" href="${earthUrl(d)}" target="_blank" rel="noopener" style="background:#fff">Google Earth 3D</a>
+        <button class="btn btn-light" data-copy-v="${esc(d.id)}" style="background:#fff">Copier</button>
+      </div>
+      <p class="d-note" style="margin-top:16px">Les détaillants officiels ne publient pas leur stock en ligne : appelez ou passez en boutique pour demander une montre. Les temps de réponse ne sont pas publics : ceux de vos propres demandes s'affichent ci-dessous.</p>
+    </div>
+    <div>${mapBlock("dmap", d)}</div>
+  </div>
+  ${mesEchanges(d.id)}
+  <section class="d-sec" style="margin-top:40px"><p class="kicker">À proximité</p><h2>Autres détaillants officiels</h2><div class="sellers">${proches.map(detRow).join("")}</div></section>`;
+  openPage(html, d.nom);
+  pageMap("dmap", d);
+}
+let OZONE = null;
+function pageOfficiels() {
+  const zid = OZONE || S.zone;
+  const list = detsInZone(zid);
+  const html = `
+    <nav class="crumbs"><a href="#">Accueil</a> / <span>Détaillants officiels</span></nav>
+    <h1 class="p-h1">Les détaillants officiels</h1>
+    <p class="p-lead">${DET.length} détaillants officiels Rolex relevés sur rolex.com et sur leurs sites, de Monaco au reste du monde. Choisissez une zone, puis ouvrez une fiche pour le plan, Google Maps, la vue satellite, Google Earth en 3D et le téléphone.</p>
+    <div class="vfilters">${ZONES.map(x => `<button class="chip" data-ozone="${x.id}" aria-pressed="${zid === x.id}">${esc(x.nom.replace("+ ", ""))} (${detsInZone(x.id).length})</button>`).join("")}</div>
+    <div class="mapbox" style="margin-bottom:18px"><div id="omap"></div></div>
+    <div class="sellers">${list.map(detRow).join("")}</div>
+    <p class="d-note" style="margin-top:18px">Liste vérifiée le ${esc(fmtDay(DETDATA.verifie_le + "T12:00"))}. Rolex compte plus de mille détaillants officiels : la liste complète est sur le site officiel de Rolex.</p>`;
+  openPage(html, "Détaillants officiels");
+  if (window.L && list.length) {
+    if (pMap) { pMap.remove(); pMap = null; }
+    pMap = baseMap("omap", { worldCopyJump: false });
+    const pts = list.map(d => { L.marker([d.lat, d.lng], { icon: L.divIcon({ className: "", html: '<div class="pin gold"></div>', iconSize: [22, 22], iconAnchor: [11, 11] }) }).addTo(pMap).bindPopup(`<div class="pop"><h4>${esc(d.nom)}</h4><div class="pv">${esc(d.adresse)}, ${esc(d.ville)}</div><a href="#d/${encodeURIComponent(d.id)}"><span>Ouvrir la fiche</span><b>›</b></a></div>`); return [d.lat, d.lng]; });
+    setTimeout(() => { pMap.invalidateSize(); pts.length === 1 ? pMap.setView(pts[0], 15) : pMap.fitBounds(pts, { padding: [30, 30], maxZoom: 14 }); }, 350);
+  }
 }
 
 /* ---------- tous les vendeurs */
@@ -662,9 +773,9 @@ function pageSuivis(tab = "suivis") {
       const v = vendeur(d.vendeur), m = d.montre && montre(d.montre);
       if (!v) return "";
       const att = Math.max(1, Math.round((Date.now() - Date.parse(d.date)) / 60000));
-      const rep = d.repondu ? `<span class="alert">Réponse reçue en ${fmtDur(Math.max(1, Math.round((Date.parse(d.repondu) - Date.parse(d.date)) / 60000)))}</span>` : `<span class="alert w">En attente depuis ${fmtDur(att)} · ce vendeur répond en ~${fmtDur(v.temps_reponse_min)} d'habitude</span>`;
+      const rep = d.repondu ? `<span class="alert">Réponse reçue en ${fmtDur(Math.max(1, Math.round((Date.parse(d.repondu) - Date.parse(d.date)) / 60000)))}</span>` : `<span class="alert w">En attente depuis ${fmtDur(att)} · ${v.temps_reponse_min ? `ce vendeur répond en ~${fmtDur(v.temps_reponse_min)} d'habitude` : "détaillant officiel"}</span>`;
       return `<div class="pitem" style="grid-template-columns:${m ? "76px " : ""}1fr">${m ? `<a class="pp" href="#m/${encodeURIComponent(m.id)}">${picOf(m)}</a>` : ""}<div><b>${esc(v.nom)}</b><span>${esc(d.canal[0].toUpperCase() + d.canal.slice(1))} · ${esc(fmtDate(d.date))}${m ? " · " + esc(m.modele) : ""}</span>${rep}
-        <div class="mine" style="padding:0;background:none;margin-top:6px"><div class="row">${d.repondu ? "" : `<button class="btn btn-green" data-rep="${d.id}">Le vendeur m'a répondu</button>`}<a class="btn btn-light" href="#v/${encodeURIComponent(v.id)}" style="background:#fff">Le vendeur</a><button class="btn btn-light" data-del-dem="${d.id}" style="background:#fff">Effacer</button></div></div></div></div>`;
+        <div class="mine" style="padding:0;background:none;margin-top:6px"><div class="row">${d.repondu ? "" : `<button class="btn btn-green" data-rep="${d.id}">Le vendeur m'a répondu</button>`}<a class="btn btn-light" href="#${v.officiel ? "d" : "v"}/${encodeURIComponent(v.id)}" style="background:#fff">Le vendeur</a><button class="btn btn-light" data-del-dem="${d.id}" style="background:#fff">Effacer</button></div></div></div></div>`;
     }).join("")}</div>` : `<div class="empty"><h3>Aucune demande</h3><p>Quand vous appelez ou écrivez à un vendeur depuis l'appli, la demande s'affiche ici avec le temps de réponse.</p></div>`;
   } else {
     const ms = ME.vues.map(montre).filter(Boolean);
@@ -760,7 +871,8 @@ function renderMenu() {
   $("#menuList").innerHTML = [
     ["#", "Toutes les montres", 'data-goto="list"'],
     ["#", "Carte des montres", 'data-goto="map"'],
-    ["#vendeurs", "Les vendeurs", ""],
+    ["#officiels", "Détaillants officiels", ""],
+    ["#vendeurs", "Vendeurs des annonces", ""],
     ["#suivis", `Mes suivis${a ? `<span class="dot">${a}</span>` : ""}`, ""],
     ["#suivis/demandes", "Mes demandes", ""],
     ["#compte", ME.compte ? "Mon compte" : "Créer un compte", ""],
@@ -774,19 +886,22 @@ function renderSearch() {
       <ul class="sub-list" style="margin-top:6px">
         <li><button data-goto="list">Trouvez votre montre</button></li>
         <li><button data-zone-go="monaco">Montres à Monaco</button></li>
+        <li><a href="#officiels">Détaillants officiels Rolex</a></li>
         <li><a href="#vendeurs">Vendeurs les plus réactifs</a></li>
         <li><a href="#suivis">Mes suivis</a></li>
         <li><button data-sort-go="recent">Dernières annonces</button></li>
       </ul>
       <p class="kicker" style="margin-top:30px">Recherches fréquentes</p>
-      <div class="vfilters" style="margin-top:12px">${["Daytona", "Submariner", "GMT-Master II", "Day-Date", "Datejust", "126610LN", "Neuve", "Monaco", "Paris"].map(t => `<button class="chip" data-qset="${esc(t)}">${esc(t)}</button>`).join("")}</div>`;
+      <div class="vfilters" style="margin-top:12px">${["Daytona", "Submariner", "GMT-Master II", "Day-Date", "Datejust", "126610LN", "Officiel", "Monaco", "Paris", "Genève", "Dubaï"].map(t => `<button class="chip" data-qset="${esc(t)}">${esc(t)}</button>`).join("")}</div>`;
     return;
   }
   const res = ALL.filter(m => matchQ(m, q)).sort((a, b) => a.dist - b.dist);
+  const ds = DET.filter(d => q.every(w => norm(`${d.nom} ${d.ville} ${d.pays} ${d.adresse} officiel rolex`).includes(w))).sort((a, b) => a.dist - b.dist);
   const vs = VEND.filter(v => q.every(w => norm(`${v.nom} ${v.ville} ${v.pays} ${v.type}`).includes(w)));
   $("#searchBody").innerHTML = `
-    ${res.length ? `<button class="btn btn-green" data-q-apply style="width:100%;margin-bottom:16px">Voir les ${res.length} montre${res.length > 1 ? "s" : ""} dans la liste</button>` : `<div class="empty"><h3>Aucun résultat</h3><p>Essayez un modèle, une référence ou une ville.</p></div>`}
+    ${res.length ? `<button class="btn btn-green" data-q-apply style="width:100%;margin-bottom:16px">Voir les ${res.length} montre${res.length > 1 ? "s" : ""} dans la liste</button>` : ds.length ? "" : `<div class="empty"><h3>Aucun résultat</h3><p>Essayez un modèle, une référence ou une ville.</p></div>`}
     <div class="plist sres">${res.slice(0, 12).map(m => pitem(m)).join("")}</div>
+    ${ds.length ? `<p class="kicker" style="margin-top:26px">Détaillants officiels</p><div class="sellers">${ds.slice(0, 9).map(detRow).join("")}</div>` : ""}
     ${vs.length ? `<p class="kicker" style="margin-top:26px">Vendeurs</p><div class="sellers">${vs.map(sellerRow).join("")}</div>` : ""}`;
 }
 
@@ -800,7 +915,7 @@ function renderPanel() {
     <div class="fgroup"><h3>Entretien</h3>${opts("entretien", ["Neuve", "Par Rolex", "Horloger indépendant", "Aucun ou inconnu"])}</div>
     <div class="fgroup"><h3>État</h3>${opts("condition", ["Jamais portée", "Comme neuve", "Très bon état", "Bon état"])}</div>
     <div class="fgroup"><h3>Matériau</h3>${opts("materiau", ["Acier", "Rolesor (bicolore)", "Or", "Platine", "Rolesium"])}</div>
-    <div class="fgroup"><h3>Vendeur</h3>${opts("vendeur", ["Détaillant officiel", "Certifié Pre-Owned", "Revendeur spécialisé", "Maison de ventes", "Particulier"])}</div>
+    <div class="fgroup"><h3>Vendeur</h3>${opts("vendeur", ["Boutique", "Certifié Pre-Owned", "Revendeur spécialisé", "Maison de ventes", "Particulier"])}</div>
     <div class="fgroup">
       <label class="tog">Boîte et papiers fournis<input type="checkbox" id="fSet" ${F.set ? "checked" : ""}></label>
       <label class="tog">Uniquement des pièces Rolex<input type="checkbox" id="fOrig" ${F.origine ? "checked" : ""}></label>
@@ -854,6 +969,7 @@ async function loadData(force) {
   const r = await fetch(CONFIG.donnees + (force ? `?t=${Date.now()}` : ""), { cache: force ? "no-store" : "no-cache" });
   if (!r.ok) throw new Error(r.status);
   DATA = await r.json();
+  try { const d = await fetch(CONFIG.detaillants + (force ? `?t=${Date.now()}` : ""), { cache: force ? "no-store" : "no-cache" }); if (d.ok) DETDATA = await d.json(); } catch (e) {}
   S.lastLoad = Date.now();
   prepare();
 }
@@ -934,6 +1050,20 @@ document.addEventListener("click", e => {
     toast(on ? "Ajoutée aux favoris" : "Retirée des favoris");
     return;
   }
+  const mt = t.closest("[data-mt]");
+  if (mt) {
+    const box = mt.closest(".mtabs"), k = mt.dataset.mt, wrap = box.nextElementSibling, fr = $("iframe", wrap), plan = wrap.firstElementChild;
+    $$("[data-mt]", box).forEach(b => b.setAttribute("aria-pressed", b === mt));
+    if (k === "plan") { fr.hidden = true; plan.hidden = false; if (pMap) setTimeout(() => pMap.invalidateSize(), 50); }
+    else {
+      const q = `${box.dataset.lat},${box.dataset.lng}`;
+      fr.src = `https://maps.google.com/maps?q=${q}&z=${k === "sat" ? 18 : 16}&t=${k === "sat" ? "k" : "m"}&hl=fr&output=embed`;
+      fr.hidden = false; plan.hidden = true;
+    }
+    return;
+  }
+  const lt = t.closest("[data-layer]");
+  if (lt) { const k = lt.dataset.layer; S[k] = S[k] === false; lt.setAttribute("aria-pressed", S[k] !== false); renderGrid(); return; }
   const g = t.closest("[data-goto]"); if (g) { e.preventDefault(); goList(g.dataset.goto === "map" ? "map" : "list"); return; }
   const zg = t.closest("[data-zone-go]"); if (zg) { e.preventDefault(); S.zone = zg.dataset.zoneGo; store.set("rm.zone", S.zone); renderHome(); goList(); return; }
   const cg = t.closest("[data-coll-go]"); if (cg) { e.preventDefault(); S.coll = cg.dataset.collGo; S.zone = "monde"; renderHome(); goList(); return; }
@@ -952,10 +1082,11 @@ document.addEventListener("click", e => {
   const uf = t.closest("[data-unfollow]"); if (uf) { unfollow(uf.dataset.unfollow); route(); return; }
   if (t.closest("[data-seen-all]")) { Object.keys(ME.suivis).forEach(markSeen); route(); renderHome(); return; }
   const vs = t.closest("[data-vsort]"); if (vs) { VSORT = vs.dataset.vsort; pageVendeurs(); return; }
+  const oz = t.closest("[data-ozone]"); if (oz) { OZONE = oz.dataset.ozone; pageOfficiels(); return; }
   const vz = t.closest("[data-vzone]"); if (vz) { VZONE = vz.dataset.vzone; pageVendeurs(); return; }
   const rp = t.closest("[data-rep]"); if (rp) { const d = ME.demandes.find(x => x.id === rp.dataset.rep); if (d) { d.repondu = new Date().toISOString(); ME.save(); toast("Réponse notée"); route(); } return; }
   const dd = t.closest("[data-del-dem]"); if (dd) { ME.demandes = ME.demandes.filter(x => x.id !== dd.dataset.delDem); ME.save(); route(); return; }
-  const cv = t.closest("[data-copy-v]"); if (cv) { const v = vendeur(cv.dataset.copyV); copy(`${v.nom}\n${v.contact}\n${v.adresse}, ${v.cp} ${v.ville}, ${v.pays}\n${v.tel}\n${v.email}`); toast("Coordonnées copiées"); return; }
+  const cv = t.closest("[data-copy-v]"); if (cv) { const v = vendeur(cv.dataset.copyV); copy(`${v.nom}\n${v.contact || "Détaillant officiel Rolex"}\n${v.adresse}, ${v.cp} ${v.ville}, ${v.pays}\n${v.tel}\n${v.email}`); toast("Coordonnées copiées"); return; }
   const lg = t.closest("[data-log]"); if (lg) { logDemande(lg.dataset.v, lg.dataset.m, lg.dataset.log); }
   const sc = t.closest("[data-scroll]"); if (sc) { e.preventDefault(); $("#" + sc.dataset.scroll).scrollIntoView({ behavior: "smooth" }); return; }
   const qs = t.closest("[data-qset]"); if (qs) { $("#q").value = qs.dataset.qset; renderSearch(); return; }
@@ -1039,6 +1170,8 @@ function route() {
   if (k === "m") pageMontre(a);
   else if (k === "v") pageVendeur(a);
   else if (k === "vendeurs") pageVendeurs();
+  else if (k === "d") pageDetaillant(a);
+  else if (k === "officiels") pageOfficiels();
   else if (k === "suivis") pageSuivis(a || "suivis");
   else if (k === "compte") pageCompte();
   else closePage();
