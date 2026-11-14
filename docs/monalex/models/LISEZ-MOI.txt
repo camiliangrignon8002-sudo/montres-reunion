@@ -1,0 +1,8 @@
+Vraie Daytona en 3D
+===================
+Déposez ici un modèle 3D de Rolex Daytona au format glTF binaire, nommé exactement :  daytona.glb
+(et son crédit dans daytona-credit.txt, une ligne, par exemple : « Modèle 3D : Nom de l'auteur, licence CC BY 4.0, lien »).
+
+Monalex le charge tout seul à la place du modèle dessiné, sur l'accueil et sur la page Cosmograph Daytona.
+Le modèle doit être utilisable légalement (licence libre CC BY / CC0, ou acheté avec une licence d'usage web).
+Conseil : moins de 5 Mo et moins de 200 000 triangles pour rester fluide sur téléphone.

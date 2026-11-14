@@ -74,10 +74,15 @@ function moisAnnee(s) { const [y, mo] = String(s || "").split("-"); return mo ? 
 /* ====================================================================== zones */
 const EUROPE = new Set("AD AL AT BA BE BG BY CH CY CZ DE DK EE ES FI FR GB GR HR HU IE IS IT LI LT LU LV MC MD ME MK MT NL NO PL PT RO RS SE SI SK SM UA VA XK".split(" "));
 const ZONES = [
-  { id: "monaco", nom: "Monaco", sous: "La Principauté", test: c => c === "MC" },
-  { id: "france", nom: "+ France", sous: "Monaco et France", test: c => c === "MC" || c === "FR" },
-  { id: "europe", nom: "+ Europe", sous: "Toute l'Europe", test: c => EUROPE.has(c) },
-  { id: "monde", nom: "Monde entier", sous: "Partout dans le monde", test: () => true },
+  { id: "monaco", nom: "Monaco", sous: "La Principauté", groupe: "Près de Monaco", test: c => c === "MC" },
+  { id: "france", nom: "France", sous: "Toute la France", groupe: "Près de Monaco", test: c => c === "FR" },
+  { id: "europe", nom: "Europe", sous: "Tout le continent, Monaco et France compris", groupe: "Près de Monaco", test: c => EUROPE.has(c) },
+  { id: "ameriques", nom: "Amériques", sous: "États-Unis, Canada, Amérique latine", groupe: "Dans le monde", test: c => /^(US|CA|MX|BR|AR|CL|CO|PE|PA|UY|DO|PR|BS|KY)$/.test(c) },
+  { id: "moyen-orient", nom: "Moyen-Orient", sous: "Émirats, Qatar, Koweït…", groupe: "Dans le monde", test: c => /^(AE|QA|KW|SA|BH|OM|LB|JO|IL|TR)$/.test(c) },
+  { id: "asie", nom: "Asie", sous: "Hong Kong, Singapour, Japon…", groupe: "Dans le monde", test: c => /^(HK|SG|JP|CN|TW|KR|TH|MY|ID|PH|VN|IN|MO)$/.test(c) },
+  { id: "oceanie", nom: "Océanie", sous: "Australie, Nouvelle-Zélande", groupe: "Dans le monde", test: c => /^(AU|NZ)$/.test(c) },
+  { id: "afrique", nom: "Afrique", sous: "", groupe: "Dans le monde", test: c => /^(ZA|MA|EG|NG|KE|MU|TN|SN|CI)$/.test(c) },
+  { id: "monde", nom: "Monde entier", sous: "Toutes les boutiques", groupe: "Dans le monde", test: () => true },
 ];
 const REGIONS = [
   ["europe", "Europe", c => EUROPE.has(c)],
@@ -88,7 +93,7 @@ const REGIONS = [
   ["afrique", "Afrique", c => /^(ZA|MA|EG|NG|KE|MU|TN|SN|CI)$/.test(c)],
 ];
 const regionOk = (c, region) => !region || (REGIONS.find(r => r[0] === region) || [, , () => true])[2](c);
-const ZONE_NOM = { monaco: "Monaco", france: "Monaco et France", europe: "Europe", monde: "Monde entier" };
+const ZONE_NOM = Object.fromEntries(ZONES.map(z => [z.id, z.nom]));
 function km(a, b) {
   const R = 6371, t = x => x * Math.PI / 180;
   const dLa = t(b.lat - a.lat), dLo = t(b.lng - a.lng);
@@ -148,7 +153,8 @@ function prepare() {
   const byId = Object.fromEntries(VEND.map(v => [v.id, v]));
   // boutiques indépendantes (annonces relevées sur leurs sites)
   for (const [id, b] of Object.entries(ANNDATA.boutiques || {})) { const v = { id, ...b, type: "Boutique", boutique: true, dist: km(S.origin, b) }; VEND.push(v); byId[id] = v; }
-  ALL = DATA.montres.map(m => ({ ...m, photos: (PHOTOS.photos || {})[m.id] || m.photos || [], source: "Catalogue officiel", v: byId[m.vendeur] || null, mat: materiauGroupe(m), ent: entretienGroupe(m) }));
+  const ph = id => [...((PHOTOS.photos || {})[id] || [])].sort((a, b) => (b.exacte === true) - (a.exacte === true));   // la bonne référence d'abord
+  ALL = DATA.montres.map(m => ({ ...m, photos: ph(m.id).length ? ph(m.id) : m.photos || [], source: "Catalogue officiel", v: byId[m.vendeur] || null, mat: materiauGroupe(m), ent: entretienGroupe(m) }));
   const TAUX = { EUR: 1, CHF: 1.06, GBP: 1.17, USD: .92, AED: .25, JPY: .0061, HKD: .118, SGD: .69 };  // conversion indicative pour trier et filtrer
   for (const a of ANNDATA.annonces || []) {
     if (!byId[a.boutique]) continue;
@@ -261,7 +267,7 @@ function tagsOf(m) {
 function cardHTML(m) {
   const baisse = m.prix && m.prix_initial > m.prix;
   return `<a class="card" href="#m/${encodeURIComponent(m.id)}">
-    <div class="pic">${m.statut && m.statut !== "Disponible" ? `<span class="status ${stClass(m.statut)}">${esc(m.statut)}</span>` : ""}${picOf(m)}</div>
+    <div class="pic">${m.statut && m.statut !== "Disponible" ? `<span class="status ${stClass(m.statut)}">${esc(m.statut)}</span>` : ""}${!m.annonce && m.photos?.[0]?.exacte === false ? `<span class="status">Photo de la collection</span>` : ""}${picOf(m)}</div>
     <button class="fav" data-fav="${esc(m.id)}" aria-label="Favori" aria-pressed="${ME.favs.has(m.id)}">${HEART}</button>
     <div class="body">
       <span class="coll-n">${esc(m.collection)}</span>
@@ -284,20 +290,28 @@ function pitem(m, side = "", extra = "") {
 }
 
 /* ====================================================================== accueil */
+function zoneStats(id) {
+  const z = ZONES.find(x => x.id === id);
+  const boutiques = DET.filter(d => z.test(d.code_pays)).length + VEND.filter(v => v.boutique && z.test(v.code_pays)).length;
+  const montres = filterWith({ ...crit(), zone: id, region: "" }).length;
+  return { boutiques, montres };
+}
 function renderZones() {
-  $("#zones").innerHTML = ZONES.map((z, i) => {
-    const n = detsInZone(z.id, "").length + VEND.filter(v => v.boutique && z.test(v.code_pays)).length;
-    return `${i ? '<span class="zone-sep" aria-hidden="true">›</span>' : ""}<button class="zone" role="tab" data-z="${z.id}" aria-selected="${S.zone === z.id}">${esc(z.nom)}<small>${n} boutique${n > 1 ? "s" : ""}</small></button>`;
-  }).join("");
-  const reg = $("#regions");
-  if (reg) {
-    reg.hidden = S.zone !== "monde";
-    reg.innerHTML = `<button class="rchip" data-region="" aria-pressed="${!S.region}">Tout le monde</button>` + REGIONS.map(([id, nom]) => {
-      const n = detsInZone("monde", id).length + VEND.filter(v => v.boutique && regionOk(v.code_pays, id)).length;
-      return n ? `<button class="rchip" data-region="${id}" aria-pressed="${S.region === id}">${esc(nom)} <small>${n}</small></button>` : "";
-    }).join("");
-  }
-  $("#fZone").textContent = $("#menuZone").textContent = S.zone === "monde" && S.region ? REGIONS.find(r => r[0] === S.region)[1] : ZONE_NOM[S.zone];
+  const z = ZONES.find(x => x.id === S.zone) || ZONES[0], st = zoneStats(z.id);
+  $("#zones").innerHTML = `<button class="zbar" data-zone-open aria-haspopup="dialog">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>
+      <span class="zb-t"><small>Zone de recherche</small><b>${esc(z.nom)}</b><em>${st.boutiques} boutique${st.boutiques > 1 ? "s" : ""} · ${st.montres} montre${st.montres > 1 ? "s" : ""}</em></span>
+      <span class="btn btn-green zb-c">Changer</span></button>`;
+  $("#fZone").textContent = $("#menuZone").textContent = z.nom;
+}
+function openZones() {
+  const groupes = [...new Set(ZONES.map(z => z.groupe))];
+  $("#zoneList").innerHTML = groupes.map(g => `<p class="zs-g">${esc(g)}</p>` + ZONES.filter(z => z.groupe === g).map(z => {
+    const st = zoneStats(z.id);
+    if (!st.boutiques && z.id !== "monde") return "";
+    return `<button class="zs-i" data-z="${z.id}" aria-pressed="${S.zone === z.id}"><span><b>${esc(z.nom)}</b><small>${esc(z.sous)}</small></span><em>${st.boutiques} boutique${st.boutiques > 1 ? "s" : ""}<br>${st.montres} montre${st.montres > 1 ? "s" : ""}</em><i aria-hidden="true">✓</i></button>`;
+  }).join("")).join("");
+  openOv("zonesheet");
 }
 const ORDRE = ["Submariner", "Cosmograph Daytona", "GMT-Master II", "Datejust", "Day-Date", "Oyster Perpetual", "Explorer", "Sea-Dweller", "Deepsea", "Yacht-Master", "Sky-Dweller", "1908", "Air-King"];
 function collections() {
@@ -319,14 +333,35 @@ function renderGrid() {
   if (!r.length) {
     const next = ZONES[ZONES.findIndex(x => x.id === S.zone) + 1];
     const zn = { monaco: "à Monaco", france: "à Monaco ni en France", europe: "en Europe", monde: "avec ces critères" }[S.zone];
-    $("#grid").innerHTML = `<div class="empty"><h3>Aucune montre ${zn} pour l'instant</h3><p>${next ? "Élargissez la recherche à la zone suivante." : "Retirez un ou deux filtres pour voir plus de montres."}</p>${next ? `<button class="btn btn-green" data-z="${next.id}">Chercher ${esc(next.nom.replace("+ ", "en "))}</button>` : `<button class="btn btn-green" data-reset-all>Tout effacer</button>`}</div>`;
-  } else $("#grid").innerHTML = r.map(cardHTML).join("");
+    $("#grid").innerHTML = `<div class="empty"><h3>Aucune montre ${zn} pour l'instant</h3><p>${next ? "Élargissez la recherche à la zone suivante." : "Retirez un ou deux filtres pour voir plus de montres."}</p>${next ? `<button class="btn btn-green" data-z="${next.id}">Voir : ${esc(next.nom)}</button>` : `<button class="btn btn-green" data-reset-all>Tout effacer</button>`}</div>`;
+  } else {
+    // par paquets : seules les premières montres sont dessinées, la suite arrive quand on descend
+    S.vus = Math.min(r.length, S.vus || PAQUET);
+    $("#grid").innerHTML = r.slice(0, S.vus).map(cardHTML).join("") + (r.length > S.vus ? `<button class="btn btn-light plus" data-plus>Voir plus de montres (${r.length - S.vus})</button>` : "");
+    S.liste = r;
+    observerPlus();
+  }
   $("#grid").setAttribute("aria-busy", "false");
   if (S.view === "map") renderBigMap(r);
   const n = nbFiltres(); $("#nFilters").hidden = !n; $("#nFilters").textContent = n;
   $$("[data-etat]").forEach(b => b.setAttribute("aria-pressed", b.dataset.etat === S.etat));
   $$(".coll").forEach(b => b.setAttribute("aria-pressed", b.dataset.c === S.coll));
   $("#sort").value = S.sort;
+}
+const PAQUET = 24;
+let ioPlus;
+function plus() {
+  const r = S.liste || [], de = S.vus; if (de >= r.length) return;
+  S.vus = Math.min(r.length, de + PAQUET);
+  const btn = $("#grid [data-plus]");
+  btn.insertAdjacentHTML("beforebegin", r.slice(de, S.vus).map(cardHTML).join(""));
+  if (S.vus >= r.length) btn.remove(); else btn.textContent = `Voir plus de montres (${r.length - S.vus})`;
+}
+function observerPlus() {
+  ioPlus?.disconnect();
+  const btn = $("#grid [data-plus]"); if (!btn || !("IntersectionObserver" in window)) return;
+  ioPlus = new IntersectionObserver(e => { if (e[0].isIntersecting) plus(); }, { rootMargin: "600px" });
+  ioPlus.observe(btn);
 }
 function renderSellers() { const el = $("#topSellers"); if (el) el.innerHTML = [...VEND].sort((a, b) => a.rang - b.rang).slice(0, 6).map(sellerRow).join(""); }
 function tileHTML(href, cls, inner, label, attrs = "") {
@@ -363,7 +398,7 @@ function renderOfficiels() {
   $("#offCount").textContent = `${list.length} détaillant${list.length > 1 ? "s" : ""} · ${ZONE_NOM[S.zone]}`;
   $("#officiels").innerHTML = list.slice(0, 9).map(detRow).join("") || `<div class="empty"><h3>Aucun détaillant relevé dans cette zone</h3></div>`;
 }
-function renderHome() { placeStores(); renderZones(); renderGrid(); renderSellers(); renderOfficiels(); $("#homeTiles").innerHTML = tiles("home"); }
+function renderHome() { S.vus = 0; placeStores(); renderZones(); renderGrid(); renderSellers(); renderOfficiels(); $("#homeTiles").innerHTML = tiles("home"); }
 
 /* ====================================================================== cartes géographiques */
 const TILES = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}";
@@ -697,7 +732,7 @@ function pageMontre(id) {
   if (!m) { openPage(`<div class="empty" style="margin-top:30px"><h3>Cette référence n'est plus au catalogue</h3><p>Elle a peut-être été arrêtée par Rolex.</p><button class="btn btn-green" data-goto="list">Voir le catalogue</button></div>`, "Référence introuvable"); return; }
   ME.vues = [id, ...ME.vues.filter(x => x !== id)].slice(0, 12); ME.save();
   const photos = photosOf(m);
-  const slides = [...photos.map((p, i) => ({ nom: p.auteur ? `Photo : ${p.auteur} · ${p.licence}` : `Photo ${i + 1}`, credit: p, html: `<img src="${esc(p.src)}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async" ${i ? 'loading="lazy"' : ""} onload="checkPhoto(this)">`, big: p.src })),
+  const slides = [...photos.map((p, i) => ({ nom: p.auteur ? `${p.exacte === false ? `Une autre ${m.collection} (référence différente) · ` : ""}Photo : ${p.auteur} · ${p.licence}` : `Photo ${i + 1}`, credit: p, html: `<img src="${esc(p.src)}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async" ${i ? 'loading="lazy"' : ""} onload="checkPhoto(this)">`, big: p.src })),
     ...VUES.slice(0, photos.length ? 1 : 4).map(x => ({ nom: `${x.nom} (illustration)`, html: watchSVG(m.skin, { diam: m.diametre, vb: x.vb, fx: true, label: `${m.modele} — ${x.nom}` }), vb: x.vb }))];
   const dets = detsInZone(), d0 = dets[0] || [...DET].sort((a, b) => a.dist - b.dist)[0];
   const suivi = ME.suivis[m.id];
@@ -826,7 +861,7 @@ const M3D = new Map();
 function mount3D(canvas, m, scrollEl, actif) {
   if (!canvas || M3D.get(canvas)) return;
   M3D.set(canvas, "…");
-  const go = () => import("./watch3d.js").then(mod => mod.mountWatch3D(canvas, m.skin, { svg: watchSVG(m.skin, { diam: m.diametre, vb: "71 171 258 258", fx: true }), scrollEl, actif })).then(h => { if (h) { M3D.set(canvas, h); canvas.classList.add("on"); } else canvas.remove(); })
+  const go = () => import("./watch3d.js").then(mod => mod.mountWatch3D(canvas, m.skin, { svg: watchSVG(m.skin, { diam: m.diametre, vb: "71 171 258 258", fx: true }), scrollEl, actif, modele: m.skin.type === "daytona" ? "models/daytona.glb" : "" })).then(h => { if (h) { M3D.set(canvas, h); canvas.classList.add("on"); } else canvas.remove(); })
     .catch(() => canvas.remove());
   if (document.documentElement.classList.contains("calm")) { canvas.remove(); return; }
   "requestIdleCallback" in window ? requestIdleCallback(go, { timeout: 1500 }) : setTimeout(go, 400);
@@ -1407,12 +1442,15 @@ document.addEventListener("click", e => {
   if (lt) { const k = lt.dataset.layer; S[k] = S[k] === false; lt.setAttribute("aria-pressed", S[k] !== false); renderGrid(); return; }
   const an = t.closest("[data-ancre]");
   if (an) { S.ancre = an.dataset.ancre; if (location.hash === "#infos") { e.preventDefault(); pageInfos(); } }
+  if (t.closest("[data-plus]")) { plus(); return; }
   const g = t.closest("[data-goto]"); if (g) { e.preventDefault(); goList(g.dataset.goto === "map" ? "map" : "list"); return; }
   const zg = t.closest("[data-zone-go]"); if (zg) { e.preventDefault(); S.zone = zg.dataset.zoneGo; store.set("rm.zone", S.zone); renderHome(); goList(); return; }
   const cg = t.closest("[data-coll-go]"); if (cg) { e.preventDefault(); S.coll = cg.dataset.collGo; S.zone = "monde"; renderHome(); goList(); return; }
   const sg = t.closest("[data-sort-go]"); if (sg) { S.sort = sg.dataset.sortGo; S.zone = "monde"; renderHome(); goList(); return; }
   const rg = t.closest("[data-region]"); if (rg) { S.region = rg.dataset.region; renderHome(); return; }
-  const z = t.closest("[data-z]"); if (z) { S.zone = z.dataset.z; store.set("rm.zone", S.zone); renderHome(); if (z.hasAttribute("data-rerender")) route(); return; }
+  if (t.closest("[data-zone-open]")) { openZones(); return; }
+  if (t.closest("[data-zone-near]")) { closeOv("zonesheet"); S.zone = "monde"; store.set("rm.zone", S.zone); S.sort = "dist"; near(); return; }
+  const z = t.closest("[data-z]"); if (z) { if (z.closest("#zonesheet")) closeOv("zonesheet"); S.zone = z.dataset.z; store.set("rm.zone", S.zone); renderHome(); if (z.hasAttribute("data-rerender")) route(); return; }
   const c = t.closest(".coll"); if (c) { if (c.dataset.c) location.hash = "c/" + slugC(c.dataset.c); else { S.coll = ""; renderHome(); } return; }
   const et = t.closest("[data-etat]"); if (et) { S.etat = et.dataset.etat; renderHome(); return; }
   if (t.closest("[data-open-filters]")) { openPanel(); return; }
@@ -1484,7 +1522,7 @@ $("#btnMap").onclick = () => goList("map");
 $("#btnFavs").onclick = () => { location.hash = alerts().length || Object.keys(ME.suivis).length ? "suivis" : "suivis/favoris"; };
 $("#q").oninput = renderSearch;
 $("#searchForm").onsubmit = e => { e.preventDefault(); applySearch(); };
-$("#sort").onchange = e => { S.sort = e.target.value; renderGrid(); };
+$("#sort").onchange = e => { S.sort = e.target.value; S.vus = 0; renderGrid(); };
 $("#vList").onclick = () => setView("list");
 $("#vMap").onclick = () => setView("map");
 $("#homeLink").onclick = e => { e.preventDefault(); closeOv("menu"); closeOv("search"); if (location.hash) location.hash = ""; window.scrollTo({ top: 0 }); };

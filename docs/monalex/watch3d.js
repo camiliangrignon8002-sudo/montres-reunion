@@ -51,8 +51,17 @@ function buildWatch(skin, face) {
   // verre : simple reflet transparent (l'effet « transmission » doublait le coût du rendu)
   const glass = new THREE.Mesh(new THREE.SphereGeometry(3.2, 32, 8, 0, Math.PI * 2, 0, .36), new THREE.MeshStandardMaterial({ color: 0xffffff, transparent: true, opacity: .1, roughness: 0, metalness: 1, depthWrite: false }));
   glass.rotation.x = Math.PI / 2; glass.position.z = .215 - 3.2 * Math.cos(.36) + .03; g.add(glass);
-  const crown = new THREE.Mesh(new THREE.CylinderGeometry(.16, .16, .22, 16), metalMat(ms.bezel === "gold" ? "gold" : ms.kase, .25));
+  const crownMat = metalMat(ms.bezel === "gold" ? "gold" : ms.kase, .25);
+  const crown = new THREE.Mesh(new THREE.CylinderGeometry(.16, .16, .22, 16), crownMat);
   crown.rotation.z = Math.PI / 2; crown.position.set(1.42, 0, -.02); g.add(crown);
+  if (skin.type === "daytona") {   // poussoirs du chronographe, à 2 h et 4 h, avec leurs protections vissées
+    for (const ang of [Math.PI / 6, -Math.PI / 6]) {
+      const pp = new THREE.Group(); pp.rotation.z = ang;
+      const tube = new THREE.Mesh(new THREE.CylinderGeometry(.11, .11, .14, 16), crownMat); tube.rotation.z = Math.PI / 2; tube.position.set(1.36, 0, -.02);
+      const tete = new THREE.Mesh(new THREE.CylinderGeometry(.08, .08, .12, 16), crownMat); tete.rotation.z = Math.PI / 2; tete.position.set(1.48, 0, -.02);
+      pp.add(tube, tete); g.add(pp);
+    }
+  }
   const lugGeo = new THREE.BoxGeometry(.32, .62, .34);
   for (const sx of [-1, 1]) for (const sy of [-1, 1]) {
     const lug = new THREE.Mesh(lugGeo, kase); lug.position.set(sx * .62, sy * 1.28, -.03); lug.rotation.z = sx * sy * -.12; g.add(lug);
@@ -76,7 +85,21 @@ function buildWatch(skin, face) {
   return g;
 }
 
-export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag = true, actif = () => true } = {}) {
+// Vrai modèle 3D : models/daytona.glb, s'il existe. Il est centré et mis à l'échelle tout seul.
+async function vraiModele(url) {
+  try {
+    const r = await fetch(url, { method: "HEAD" });
+    if (!r.ok) return null;
+    const { GLTFLoader } = await import("./vendor/jsm/loaders/GLTFLoader.js");
+    const gltf = await new GLTFLoader().loadAsync(url);
+    const obj = gltf.scene, box = new THREE.Box3().setFromObject(obj), size = box.getSize(new THREE.Vector3()), c = box.getCenter(new THREE.Vector3());
+    obj.position.sub(c);
+    const g = new THREE.Group(); g.add(obj); g.scale.setScalar(4.6 / Math.max(size.x, size.y, size.z));
+    return g;
+  } catch (e) { return null; }
+}
+
+export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag = true, actif = () => true, modele = "" } = {}) {
   const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ canvas, antialias: dpr < 1.5, alpha: true, powerPreference: "default" }); }
@@ -90,22 +113,27 @@ export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag 
   const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(-3, 4, 6); scene.add(key);
   const camera = new THREE.PerspectiveCamera(28, 1, .1, 60); camera.position.set(0, 0, 12);
 
-  const watch = buildWatch(skin, await faceTexture(svg, dpr > 1.2 ? 1024 : 768)); scene.add(watch);
+  const watch = (modele && await vraiModele(modele)) || buildWatch(skin, await faceTexture(svg, dpr > 1.2 ? 1024 : 768)); scene.add(watch);
   let rx = -.35, ry = -.5, tx = rx, ty = ry, dragX = 0, dragY = 0, raf = 0, visible = true, mort = false;
   watch.rotation.set(rx, ry, .12);
   const scrollY = () => scrollEl === window ? window.scrollY : scrollEl.scrollTop;
   const draw = () => renderer.render(scene, camera);
-  const loop = () => {
+  let tPrec = 0, spin = 0;
+  const calme = () => document.documentElement.classList.contains("calm") || matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const loop = (t) => {
     raf = 0;
     if (mort) return;
     if (!canvas.isConnected) { dispose(); return; }
-    if (!visible || !actif()) return;
+    if (!visible || !actif() || document.hidden) { tPrec = 0; return; }
+    const dt = tPrec ? Math.min(.05, (t - tPrec) / 1000) : 0; tPrec = t;
+    if (!calme()) spin += dt * 1.1;                              // tour complet en ~6 s, indépendant de la vitesse de l'écran
     const y = scrollY();
-    ty = -.5 + y * .0045 + dragX; tx = -.35 + Math.sin(y * .003) * .25 + dragY;
-    rx += (tx - rx) * .18; ry += (ty - ry) * .18;
+    ty = -.5 + spin + y * .009 + dragX; tx = -.35 + Math.sin(y * .006) * .25 + dragY;   // deux fois plus réactif au défilement
+    const k = 1 - Math.pow(.0005, dt || .016);                  // lissage calé sur le temps réel
+    rx += (tx - rx) * k; ry += (ty - ry) * k;
     watch.rotation.x = rx; watch.rotation.y = ry;
     draw();
-    if (Math.abs(tx - rx) + Math.abs(ty - ry) > .001) raf = requestAnimationFrame(loop);  // on s'arrête dès que la montre est immobile
+    if (!calme() || Math.abs(tx - rx) + Math.abs(ty - ry) > .001) raf = requestAnimationFrame(loop);
   };
   const kick = () => { if (!raf && !mort) raf = requestAnimationFrame(loop); };
   const resize = () => {
@@ -114,6 +142,7 @@ export async function mountWatch3D(canvas, skin, { svg, scrollEl = window, drag 
     camera.position.z = w / h < .8 ? 16.5 : 12.5; camera.updateProjectionMatrix(); draw();
   };
   const io = new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) kick(); });
+  document.addEventListener("visibilitychange", kick);
   io.observe(canvas);
   const ro = new ResizeObserver(resize); ro.observe(canvas);
   scrollEl.addEventListener("scroll", kick, { passive: true });

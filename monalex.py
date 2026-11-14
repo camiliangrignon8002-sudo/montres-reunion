@@ -270,6 +270,7 @@ def relever(bid, b):
 
 
 # ---------------------------------------------------------------- photos libres du catalogue (Wikimedia Commons)
+COPIE = re.compile(r"\b(style|homage|hommage|replica|replique|fake|copie|copy|tribute|watchdives|inspired|clone|mod)\b")
 LICENCES_LIBRES = ("cc0", "public domain", "domaine public", "pd", "cc by", "cc-by")
 
 
@@ -307,9 +308,12 @@ def photos_catalogue():
                 cand = []
             for c in cand:
                 t = norm(c["titre"])
-                bon = norm(ref) in t if q.endswith(ref) else ("rolex" in t and all(w in t for w in mots))
+                if COPIE.search(t):
+                    continue  # copies et montres « dans le style de » : jamais
+                exacte = norm(ref) in t
+                bon = exacte if q.endswith(ref) else ("rolex" in t and all(w in t for w in mots))
                 if bon and c["src"] not in utilisees and c["src"] not in [x["src"] for x in trouvees]:
-                    trouvees.append(c)
+                    trouvees.append({**c, "exacte": exacte})
             if len(trouvees) >= 3:
                 break
             time.sleep(PAUSE)
