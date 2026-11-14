@@ -3,20 +3,13 @@
  "photos": {
   "126610ln": [
    {
-    "titre": "File:C3 lume on a Rolex Submariner date style Watchdives WD680Q homage watch.jpg",
-    "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/C3_lume_on_a_Rolex_Submariner_date_style_Watchdives_WD680Q_homage_watch.jpg/1920px-C3_lume_on_a_Rolex_Submariner_date_style_Watchdives_WD680Q_homage_watch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "w": 1600,
-    "auteur": "Francis Flinch",
-    "licence": "CC0",
-    "page": "https://commons.wikimedia.org/wiki/File:C3_lume_on_a_Rolex_Submariner_date_style_Watchdives_WD680Q_homage_watch.jpg"
-   },
-   {
     "titre": "File:Rolex Submariner and GMT Master II.jpg",
     "src": "https://upload.wikimedia.org/wikipedia/commons/1/11/Rolex_Submariner_and_GMT_Master_II.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
     "w": 1600,
     "auteur": "OpaleHorse",
     "licence": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Submariner_and_GMT_Master_II.jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Submariner_and_GMT_Master_II.jpg",
+    "exacte": false
    },
    {
     "titre": "File:Rolex Oyster Perpetual Date Submariner Watch.JPG",
@@ -24,7 +17,8 @@
     "w": 1600,
     "auteur": "User:Eternalsleeper",
     "licence": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Oyster_Perpetual_Date_Submariner_Watch.JPG"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Oyster_Perpetual_Date_Submariner_Watch.JPG",
+    "exacte": false
    },
    {
     "titre": "File:Rolex Submariner watch 16613.JPG",
@@ -32,7 +26,8 @@
     "w": 1600,
     "auteur": "User:Eternalsleeper",
     "licence": "Public domain",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Submariner_watch_16613.JPG"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Submariner_watch_16613.JPG",
+    "exacte": false
    },
    {
     "titre": "File:Rolex Submariner Professional.JPG",
@@ -40,7 +35,8 @@
     "w": 1600,
     "auteur": "Dr.K.",
     "licence": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Submariner_Professional.JPG"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Submariner_Professional.JPG",
+    "exacte": false
    },
    {
     "titre": "File:The Rolex Submariner Professional.JPG",
@@ -48,7 +44,8 @@
     "w": 1298,
     "auteur": "Dr.K. ( talk ) 17:56, 28 January 2007 (UTC)",
     "licence": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:The_Rolex_Submariner_Professional.JPG"
+    "page": "https://commons.wikimedia.org/wiki/File:The_Rolex_Submariner_Professional.JPG",
+    "exacte": false
    }
   ],
   "126610lv": [
@@ -58,7 +55,8 @@
     "w": 1600,
     "auteur": "Dr.K.",
     "licence": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Back_of_Rolex_Submariner_Professional.JPG"
+    "page": "https://commons.wikimedia.org/wiki/File:Back_of_Rolex_Submariner_Professional.JPG",
+    "exacte": false
    },
    {
     "titre": "File:Original Rolex Submariner diving wristwatch (l.) and three watches copying its design (Alpha, Invicta and Steeldive).jpg",
@@ -66,7 +64,8 @@
     "w": 1600,
     "auteur": "derivative work above: Pittigrilli \n File:The Rolex Submariner Professional.JPG : Dr.K. \n File:Alpha watches - analog au",
     "licence": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Original_Rolex_Submariner_diving_wristwatch_(l.)_and_three_watches_copying_its_design_(Alpha,_Invicta_and_Steeldive).jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Original_Rolex_Submariner_diving_wristwatch_(l.)_and_three_watches_copying_its_design_(Alpha,_Invicta_and_Steeldive).jpg",
+    "exacte": false
    },
    {
     "titre": "File:Rolex Submariner ref. 14060M, metà anni 2000.jpg",
@@ -74,7 +73,8 @@
     "w": 1600,
     "auteur": "Clyde94",
     "licence": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Submariner_ref._14060M,_met%C3%A0_anni_2000.jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Submariner_ref._14060M,_met%C3%A0_anni_2000.jpg",
+    "exacte": false
    },
    {
     "titre": "File:Edge view of Rolex Submariner Professional.JPG",
@@ -82,7 +82,8 @@
     "w": 1600,
     "auteur": "No machine-readable author provided. Tasoskessaris assumed (based on copyright claims).",
     "licence": "CC BY-SA 3.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Edge_view_of_Rolex_Submariner_Professional.JPG"
+    "page": "https://commons.wikimedia.org/wiki/File:Edge_view_of_Rolex_Submariner_Professional.JPG",
+    "exacte": false
    },
    {
     "titre": "File:Rolex Submariner ref. 16618 Sultan Dial.jpg",
@@ -90,7 +91,8 @@
     "w": 1600,
     "auteur": "EMore98",
     "licence": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Submariner_ref._16618_Sultan_Dial.jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Submariner_ref._16618_Sultan_Dial.jpg",
+    "exacte": false
    },
    {
     "titre": "File:Montre Laroche-Posay Water resistant ; Rolex submariner.jpg",
@@ -98,7 +100,8 @@
     "w": 1600,
     "auteur": "Mathious Ier",
     "licence": "CC0",
-    "page": "https://commons.wikimedia.org/wiki/File:Montre_Laroche-Posay_Water_resistant_;_Rolex_submariner.jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Montre_Laroche-Posay_Water_resistant_;_Rolex_submariner.jpg",
+    "exacte": false
    }
   ],
   "124060": [],
@@ -110,7 +113,8 @@
     "w": 1200,
     "auteur": "Qubeek",
     "licence": "CC0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_GMT_Master_II_126710BLRO.jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_GMT_Master_II_126710BLRO.jpg",
+    "exacte": true
    },
    {
     "titre": "File:Rolex-GMT-Master-II-Batgirl.jpg",
@@ -118,7 +122,8 @@
     "w": 1200,
     "auteur": "Brattyq",
     "licence": "CC0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex-GMT-Master-II-Batgirl.jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex-GMT-Master-II-Batgirl.jpg",
+    "exacte": false
    },
    {
     "titre": "File:Rolex GMT-Master ref. 1675 \"Pink Panther\".jpg",
@@ -126,7 +131,8 @@
     "w": 1468,
     "auteur": "EMore98",
     "licence": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_GMT-Master_ref._1675_%22Pink_Panther%22.jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_GMT-Master_ref._1675_%22Pink_Panther%22.jpg",
+    "exacte": false
    },
    {
     "titre": "File:Rolex GMT-Master II ref. 16710 Coke.jpg",
@@ -134,7 +140,8 @@
     "w": 1600,
     "auteur": "EMore98",
     "licence": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_GMT-Master_II_ref._16710_Coke.jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_GMT-Master_II_ref._16710_Coke.jpg",
+    "exacte": false
    },
    {
     "titre": "File:Rolex GMT-Master II ref. 126713GRNR.jpg",
@@ -142,7 +149,8 @@
     "w": 1200,
     "auteur": "EMore98",
     "licence": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_GMT-Master_II_ref._126713GRNR.jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_GMT-Master_II_ref._126713GRNR.jpg",
+    "exacte": false
    }
   ],
   "126710blnr": [],
@@ -163,7 +171,8 @@
     "w": 1600,
     "auteur": "EMore98",
     "licence": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Quadrante_Med_Blue_del_Rolex_Oyster_Perpetual_ref._126000.jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Quadrante_Med_Blue_del_Rolex_Oyster_Perpetual_ref._126000.jpg",
+    "exacte": true
    }
   ],
   "224270": [
@@ -173,7 +182,8 @@
     "w": 1600,
     "auteur": "Max3351",
     "licence": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Oyster_Perpetual_Explorer_Ref._114270_Cal._3130.png"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Oyster_Perpetual_Explorer_Ref._114270_Cal._3130.png",
+    "exacte": false
    }
   ],
   "226570": [
@@ -183,7 +193,8 @@
     "w": 1400,
     "auteur": "File:Rolex Explorer 2.JPG : TheMonster17\n derivative work: Pittigrilli",
     "licence": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Explorer_II_(edited).jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Explorer_II_(edited).jpg",
+    "exacte": false
    },
    {
     "titre": "File:Rolex Explorer II ref. 16550 Pannone, metà anni Ottanta.jpg",
@@ -191,7 +202,8 @@
     "w": 1342,
     "auteur": "EMore98",
     "licence": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Explorer_II_ref._16550_Pannone,_met%C3%A0_anni_Ottanta.jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Explorer_II_ref._16550_Pannone,_met%C3%A0_anni_Ottanta.jpg",
+    "exacte": false
    },
    {
     "titre": "File:Rolex Explorer II del 1972, ref. 1655, ribattezzato \"Freccione\".jpg",
@@ -199,7 +211,8 @@
     "w": 1243,
     "auteur": "Clyde94",
     "licence": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Explorer_II_del_1972,_ref._1655,_ribattezzato_%22Freccione%22.jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Explorer_II_del_1972,_ref._1655,_ribattezzato_%22Freccione%22.jpg",
+    "exacte": false
    },
    {
     "titre": "File:Rolex explorer II spotted 16570 (51867940419).jpg",
@@ -207,7 +220,8 @@
     "w": 1600,
     "auteur": "Mario A. P. from San Sebastian, Spain",
     "licence": "CC BY-SA 2.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_explorer_II_spotted_16570_(51867940419).jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_explorer_II_spotted_16570_(51867940419).jpg",
+    "exacte": false
    },
    {
     "titre": "File:Casual Rolex Explorer II 16570 wearing (51868278355).jpg",
@@ -215,7 +229,8 @@
     "w": 1600,
     "auteur": "Mario A. P. from San Sebastian, Spain",
     "licence": "CC BY-SA 2.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Casual_Rolex_Explorer_II_16570_wearing_(51868278355).jpg"
+    "page": "https://commons.wikimedia.org/wiki/File:Casual_Rolex_Explorer_II_16570_wearing_(51868278355).jpg",
+    "exacte": false
    }
   ],
   "126600": [],

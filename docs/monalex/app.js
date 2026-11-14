@@ -153,7 +153,8 @@ function prepare() {
   const byId = Object.fromEntries(VEND.map(v => [v.id, v]));
   // boutiques indépendantes (annonces relevées sur leurs sites)
   for (const [id, b] of Object.entries(ANNDATA.boutiques || {})) { const v = { id, ...b, type: "Boutique", boutique: true, dist: km(S.origin, b) }; VEND.push(v); byId[id] = v; }
-  ALL = DATA.montres.map(m => ({ ...m, photos: (PHOTOS.photos || {})[m.id] || m.photos || [], source: "Catalogue officiel", v: byId[m.vendeur] || null, mat: materiauGroupe(m), ent: entretienGroupe(m) }));
+  const ph = id => [...((PHOTOS.photos || {})[id] || [])].sort((a, b) => (b.exacte === true) - (a.exacte === true));   // la bonne référence d'abord
+  ALL = DATA.montres.map(m => ({ ...m, photos: ph(m.id).length ? ph(m.id) : m.photos || [], source: "Catalogue officiel", v: byId[m.vendeur] || null, mat: materiauGroupe(m), ent: entretienGroupe(m) }));
   const TAUX = { EUR: 1, CHF: 1.06, GBP: 1.17, USD: .92, AED: .25, JPY: .0061, HKD: .118, SGD: .69 };  // conversion indicative pour trier et filtrer
   for (const a of ANNDATA.annonces || []) {
     if (!byId[a.boutique]) continue;
@@ -266,7 +267,7 @@ function tagsOf(m) {
 function cardHTML(m) {
   const baisse = m.prix && m.prix_initial > m.prix;
   return `<a class="card" href="#m/${encodeURIComponent(m.id)}">
-    <div class="pic">${m.statut && m.statut !== "Disponible" ? `<span class="status ${stClass(m.statut)}">${esc(m.statut)}</span>` : ""}${picOf(m)}</div>
+    <div class="pic">${m.statut && m.statut !== "Disponible" ? `<span class="status ${stClass(m.statut)}">${esc(m.statut)}</span>` : ""}${!m.annonce && m.photos?.[0]?.exacte === false ? `<span class="status">Photo de la collection</span>` : ""}${picOf(m)}</div>
     <button class="fav" data-fav="${esc(m.id)}" aria-label="Favori" aria-pressed="${ME.favs.has(m.id)}">${HEART}</button>
     <div class="body">
       <span class="coll-n">${esc(m.collection)}</span>
@@ -710,7 +711,7 @@ function pageMontre(id) {
   if (!m) { openPage(`<div class="empty" style="margin-top:30px"><h3>Cette référence n'est plus au catalogue</h3><p>Elle a peut-être été arrêtée par Rolex.</p><button class="btn btn-green" data-goto="list">Voir le catalogue</button></div>`, "Référence introuvable"); return; }
   ME.vues = [id, ...ME.vues.filter(x => x !== id)].slice(0, 12); ME.save();
   const photos = photosOf(m);
-  const slides = [...photos.map((p, i) => ({ nom: p.auteur ? `Photo : ${p.auteur} · ${p.licence}` : `Photo ${i + 1}`, credit: p, html: `<img src="${esc(p.src)}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async" ${i ? 'loading="lazy"' : ""} onload="checkPhoto(this)">`, big: p.src })),
+  const slides = [...photos.map((p, i) => ({ nom: p.auteur ? `${p.exacte === false ? `Une autre ${m.collection} (référence différente) · ` : ""}Photo : ${p.auteur} · ${p.licence}` : `Photo ${i + 1}`, credit: p, html: `<img src="${esc(p.src)}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async" ${i ? 'loading="lazy"' : ""} onload="checkPhoto(this)">`, big: p.src })),
     ...VUES.slice(0, photos.length ? 1 : 4).map(x => ({ nom: `${x.nom} (illustration)`, html: watchSVG(m.skin, { diam: m.diametre, vb: x.vb, fx: true, label: `${m.modele} — ${x.nom}` }), vb: x.vb }))];
   const dets = detsInZone(), d0 = dets[0] || [...DET].sort((a, b) => a.dist - b.dist)[0];
   const suivi = ME.suivis[m.id];
