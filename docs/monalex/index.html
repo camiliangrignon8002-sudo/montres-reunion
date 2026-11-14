@@ -20,6 +20,8 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:description" content="Trouver une montre et un détaillant officiel, de Monaco au monde entier.">
 <meta property="og:image" content="img/partage.jpg">
+<link rel="preload" href="fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/eb-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="vendor/leaflet.css">
 <link rel="stylesheet" href="app.css">
 </head>
@@ -120,6 +122,8 @@
         <li><a href="#compte">Mon compte</a></li>
         <li><a href="#infos">À propos de Monalex</a></li>
         <li><a href="#infos" data-ancre="donnees">Données personnelles</a></li>
+        <li><button data-ck-gerer>Gérer les cookies</button></li>
+        <li><a href="#notifications">Notifications</a></li>
         <li><button data-refresh>Rafraîchir les annonces</button></li>
       </ul></div>
     </div>
@@ -200,6 +204,10 @@
 
 <div class="ptr" id="ptr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg></div>
 <dialog class="confirm" id="confirm" aria-labelledby="cfT"><h2 id="cfT"></h2><p id="cfP"></p><div class="cf-b"><button class="btn btn-light" id="cfNon"></button><button class="btn btn-danger" id="cfOui"></button></div></dialog>
+<section class="cookies" id="cookies" aria-label="Cookies" hidden>
+  <p><b>Cookies.</b> Monalex garde votre compte et vos favoris sur ce téléphone. Google Maps, s'il est affiché, dépose ses propres cookies.</p>
+  <div class="ck-b"><button class="btn btn-light" data-ck="non">Refuser</button><a class="btn btn-light" href="#infos" data-ancre="cookies-info" data-ck-plus>En savoir plus</a><button class="btn btn-green" data-ck="ok">Accepter</button></div>
+</section>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="vendor/leaflet.js"></script>

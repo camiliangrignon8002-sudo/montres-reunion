@@ -32,6 +32,10 @@ function askConfirm({ titre, texte, oui, non }) {
     d.showModal(); $("#cfNon").focus();
   });
 }
+/* Cookies : nécessaire = stockage du compte sur le téléphone ; Google Maps (cookies tiers) seulement après accord */
+const COOK = { get: () => store.get("rm.cookies", null), set(v) { store.set("rm.cookies", v); $("#cookies").hidden = true; } };
+const googleOk = () => COOK.get() === "ok";
+function showCookies() { $("#cookies").hidden = false; }
 function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove("on"), 2200); }
 function copy(t) { try { navigator.clipboard.writeText(t); } catch (e) { const a = document.createElement("textarea"); a.value = t; document.body.appendChild(a); a.select(); document.execCommand("copy"); a.remove(); } }
 const initials = s => String(s || "?").replace(/^(M\.|Mme)\s*/, "").split(/[\s—-]+/).filter(w => /^[A-ZÀ-Ý]/i.test(w) && !/^(du|de|la|le|des|d'|l')$/i.test(w)).slice(0, 2).map(w => w[0].toUpperCase()).join("") || "?";
@@ -180,9 +184,23 @@ function nbFiltres() {
 }
 
 /* ====================================================================== morceaux réutilisés */
+// Photos : on garde seulement les photos nettes (1200 px de large au minimum quand la taille est connue) et une seule fois chacune.
+const PHOTO_MIN = 1200;
+function photosOf(m) {
+  const vues = new Set();
+  return (m.photos || []).map(p => typeof p === "string" ? { src: p } : p).filter(p => {
+    if (!p || !p.src) return false;
+    if (p.w && p.w < PHOTO_MIN) return false;
+    const cle = (p.empreinte || p.src.split("?")[0].replace(/[-_](\d{2,4}x\d{2,4}|small|thumb|mini)(?=\.)/i, "")).toLowerCase();
+    if (vues.has(cle)) return false;
+    vues.add(cle); return true;
+  });
+}
+function checkPhoto(img) { if (img.naturalWidth && img.naturalWidth < PHOTO_MIN * 0.8) { const sl = img.closest(".slide,.pic,button"); if (sl) sl.dataset.basse = "1"; } }
 function picOf(m, o = {}) {
-  if (m.photos && m.photos.length) {
-    const p = m.photos[0], src = typeof p === "string" ? p : p.src;
+  const ph = photosOf(m);
+  if (ph.length) {
+    const src = ph[0].src;
     return `<img src="${esc(src)}" alt="${esc(m.modele)}" loading="lazy" decoding="async">`;
   }
   return watchSVG(m.skin, { diam: m.diametre, label: m.modele, ...o });
@@ -207,11 +225,8 @@ function cardHTML(m) {
     <div class="body">
       <span class="coll-n">${esc(m.collection)}</span>
       <h3>${esc(m.modele)}</h3>
-      <span class="cap">${esc(m.diametre)} mm, ${esc(shortMat(m.materiau))}</span>
       <span class="price">${eur(m.prix, m.devise)}${baisse ? `<s>${eur(m.prix_initial, m.devise)}</s>` : ""}</span>
       <span class="where">${PIN}${esc(lieu(m.v))} · ${fmtKm(m.dist)}</span>
-      <span class="seen"><span class="live ${isOnline(m.v) ? "" : "off"}">${isOnline(m.v) ? "Vendeur en ligne" : "Vu " + ago(m.v.derniere_connexion)}</span></span>
-      <div class="tags">${tagsOf(m)}</div>
     </div></a>`;
 }
 function avatar(v, big) { return `<span class="avatar ${isOnline(v) ? "on" : ""}" ${big ? 'style="width:72px;height:72px;font-size:24px"' : ""}>${esc(initials(v.nom))}</span>`; }
@@ -519,8 +534,8 @@ function pageMontre(id) {
   if (!m) { openPage(`<div class="empty" style="margin-top:30px"><h3>Cette montre n'est plus en vente</h3><p>Elle a été vendue ou retirée par le vendeur.</p><button class="btn btn-green" data-goto="list">Voir les montres disponibles</button></div>`, "Annonce retirée"); return; }
   ME.vues = [id, ...ME.vues.filter(x => x !== id)].slice(0, 12); ME.save();
   const v = m.v, L2 = mapsLinks(v);
-  const photos = (m.photos || []).map(p => typeof p === "string" ? { src: p } : p);
-  const slides = photos.length ? photos.map((p, i) => ({ nom: p.legende || `Photo ${i + 1}`, html: `<img src="${esc(p.src)}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async">`, big: p.hd || p.src }))
+  const photos = photosOf(m);
+  const slides = photos.length ? photos.map((p, i) => ({ nom: p.legende || `Photo ${i + 1}`, html: `<img src="${esc(p.src)}" alt="${esc(m.modele)} — photo ${i + 1}" decoding="async" onload="checkPhoto(this)">`, big: p.hd || p.src }))
     : VUES.map(x => ({ nom: x.nom, html: watchSVG(m.skin, { diam: m.diametre, vb: x.vb, label: `${m.modele} — ${x.nom}` }), vb: x.vb }));
   const ent = m.entretien || {};
   const entIcon = ent.par === "Rolex" || m.etat === "Neuf" ? "" : ent.par === "Horloger indépendant" ? "ind" : "unk";
@@ -771,10 +786,36 @@ function pageInfos() {
         <div class="box"><h3>Ce que vous contrôlez</h3><p>Vos messages partent de votre téléphone (e-mail, WhatsApp, SMS). Votre position n'est utilisée que si vous touchez « Autour de moi », et n'est pas conservée. Vous pouvez supprimer votre compte à tout moment depuis « Mon compte ».</p></div>
       </div>
     </section>
+    <section class="d-sec" id="cookies-info"><p class="kicker">Cookies</p><h2>Ce que Monalex enregistre</h2>
+      <div class="two">
+        <div class="box"><h3>Nécessaire</h3><p>Le stockage de votre navigateur garde votre compte, vos favoris, vos suivis, vos choix d'affichage et ce choix de cookies. Rien n'est envoyé à un serveur ni à un tiers. Sans lui, l'appli ne peut pas mémoriser votre compte.</p></div>
+        <div class="box"><h3>Google Maps (facultatif)</h3><p>Les onglets « Google Maps » et « Satellite » chargent une carte Google, qui dépose ses propres cookies. Ils ne s'affichent qu'avec votre accord. Le plan, les polices et le reste du site n'en utilisent pas. Monalex n'utilise ni publicité ni mesure d'audience.</p></div>
+      </div>
+      <div class="row" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px"><button class="btn btn-green" data-ck="ok">Accepter Google Maps</button><button class="btn btn-light" data-ck="non">Refuser</button></div>
+      <p class="d-note" style="margin-top:10px">Choix actuel : ${COOK.get() === "ok" ? "accepté" : COOK.get() === "non" ? "refusé" : "pas encore fait"}.</p>
+    </section>
     <section class="d-sec"><p class="kicker">Mentions</p><h2>Informations légales</h2>
       <div class="box"><p>Monalex est un service indépendant, non affilié à Rolex SA ni à ses détaillants. Rolex, Oyster, Cosmograph Daytona, Submariner, GMT-Master II, Datejust, Day-Date et les autres noms de modèles sont des marques de Rolex SA, citées pour décrire les montres. Cartes © OpenStreetMap, © CARTO ; Google Maps et Google Earth © Google.</p></div>
     </section>`, "À propos de Monalex");
   if (S.ancre) { const a = S.ancre; S.ancre = null; setTimeout(() => { const el = document.getElementById(a); if (el) page().scrollTop = el.offsetTop - 70; }, 60); }
+}
+
+/* ---------- notifications */
+function pageNotifications() {
+  const c = ME.compte, al = alerts();
+  const perm = "Notification" in window ? Notification.permission : "indisponible";
+  const etat = perm === "granted" && c?.notif ? "Activées sur ce téléphone" : perm === "denied" ? "Bloquées dans les réglages du téléphone" : perm === "indisponible" ? "Non disponibles sur ce navigateur" : "Désactivées";
+  openPage(`
+    <nav class="crumbs"><a href="#">Accueil</a> / <span>Notifications</span></nav>
+    <h1 class="p-h1">Notifications</h1>
+    <p class="p-lead">Soyez prévenu quand le prix d'une montre suivie baisse, ou quand elle est réservée ou vendue.</p>
+    <div class="box notif-state"><div><h3 style="margin:0 0 4px">${esc(etat)}</h3><p>${perm === "denied" ? "Autorisez Monalex dans les réglages de notifications du téléphone." : perm === "indisponible" ? "Sur iPhone, ajoutez d'abord Monalex à l'écran d'accueil (Partager, puis « Sur l'écran d'accueil »)." : !c ? "Un compte est nécessaire pour suivre des montres." : "Les alertes arrivent quand vous ouvrez ou rafraîchissez Monalex."}</p></div>
+      ${!c ? `<a class="btn btn-green" href="#compte">Créer mon compte</a>` : perm === "granted" && c.notif ? `<button class="btn btn-light" data-notif-off style="background:#fff">Désactiver</button>` : perm === "default" || (perm === "granted" && !c.notif) ? `<button class="btn btn-green" data-notif>Activer les notifications</button>` : ""}
+    </div>
+    <section class="d-sec"><p class="kicker">Alertes</p><h2>${al.length ? `${al.length} changement${al.length > 1 ? "s" : ""}` : "Aucune alerte"}</h2>
+      ${al.length ? `<div class="plist">${al.map(a => a.m ? pitem(a.m, "", `<span class="alert">● ${esc(a.texte)}</span>`) : `<div class="box"><p>${esc(a.texte)}</p></div>`).join("")}</div><div style="margin-top:16px"><button class="btn btn-light" data-seen-all>Tout marquer comme lu</button></div>`
+        : `<div class="empty"><h3>Rien de nouveau</h3><p>Les changements de prix et de statut de vos montres suivies s'afficheront ici.</p><a class="btn btn-green" href="#suivis">Mes montres suivies</a></div>`}
+    </section>`, "Notifications");
 }
 
 /* ---------- tous les vendeurs */
@@ -927,6 +968,7 @@ function renderMenu() {
     ["#suivis", `Mes suivis${a ? `<span class="dot">${a}</span>` : ""}`, ""],
     ["#suivis/demandes", "Mes demandes", ""],
     ["#compte", ME.compte ? "Mon compte" : "Créer un compte", ""],
+    ["#notifications", `Notifications${alerts().length ? `<span class="dot">${alerts().length}</span>` : ""}`, ""],
     ["#infos", "À propos de Monalex", ""],
   ].map(([h, l, at]) => `<li><a href="${h}" ${at}>${l}${CHEV.replace('class="chev"', "")}</a></li>`).join("");
 }
@@ -1102,12 +1144,23 @@ document.addEventListener("click", e => {
     toast(on ? "Ajoutée aux favoris" : "Retirée des favoris");
     return;
   }
+  const ck = t.closest("[data-ck]");
+  if (ck) { COOK.set(ck.dataset.ck); toast(ck.dataset.ck === "ok" ? "Cookies acceptés." : "Cookies refusés. Google Maps ne s'affichera qu'à votre demande."); if (page().classList.contains("open")) route(); return; }
+  if (t.closest("[data-ck-plus]")) { $("#cookies").hidden = true; }
+  if (t.closest("[data-ck-gerer]")) { showCookies(); return; }
+  const ga = t.closest("[data-gallow]");
+  if (ga) { COOK.set("ok"); const b = ga.closest(".mapbox").previousElementSibling.querySelector('[data-mt="' + ga.dataset.gallow + '"]'); b && b.click(); return; }
   const mt = t.closest("[data-mt]");
   if (mt) {
     const box = mt.closest(".mtabs"), k = mt.dataset.mt, wrap = box.nextElementSibling, fr = $("iframe", wrap), plan = wrap.firstElementChild;
     $$("[data-mt]", box).forEach(b => b.setAttribute("aria-pressed", b === mt));
-    if (k === "plan") { fr.hidden = true; plan.hidden = false; if (pMap) setTimeout(() => pMap.invalidateSize(), 50); }
-    else {
+    if (k === "plan") { $$(".gconsent", wrap).forEach(x => x.remove()); fr.hidden = true; plan.hidden = false; if (pMap) setTimeout(() => pMap.invalidateSize(), 50); }
+    else if (!googleOk()) {
+      $$(".gconsent", wrap).forEach(x => x.remove());
+      plan.hidden = true; fr.hidden = true;
+      wrap.insertAdjacentHTML("beforeend", `<div class="gconsent"><div><p>Google Maps dépose ses propres cookies. Autorisez-le pour afficher cette carte.</p><button class="btn btn-green" data-gallow="${k}">Autoriser Google Maps</button></div></div>`);
+    } else {
+      $$(".gconsent", wrap).forEach(x => x.remove());
       const q = `${box.dataset.lat},${box.dataset.lng}`;
       fr.src = `https://maps.google.com/maps?q=${q}&z=${k === "sat" ? 18 : 16}&t=${k === "sat" ? "k" : "m"}&hl=fr&output=embed`;
       fr.hidden = false; plan.hidden = true;
@@ -1147,6 +1200,7 @@ document.addEventListener("click", e => {
   if (t.closest("[data-q-apply]")) { applySearch(); return; }
   if (t.closest("[data-share]")) { share(); return; }
   if (t.closest("[data-notif]")) { askNotif(); return; }
+  if (t.closest("[data-notif-off]")) { const c = ME.compte; if (c) { c.notif = false; ME.compte = c; } toast("Notifications désactivées."); route(); return; }
   if (t.closest("[data-logout]")) {
     askConfirm({ titre: "Supprimer votre compte ?", texte: "Vos favoris, montres suivies et demandes seront effacés de ce téléphone. Cette action est définitive.", oui: "Supprimer le compte", non: "Garder mon compte" })
       .then(ok => { if (!ok) return; ME.compte = null; ME.suivis = {}; ME.favs.clear(); ME.demandes = []; ME.save(); toast("Compte supprimé."); location.hash = ""; renderHome(); });
@@ -1178,6 +1232,7 @@ async function askNotif() {
   if (!("Notification" in window)) { toast("Ce navigateur ne permet pas les notifications. Ajoutez Monalex à l’écran d’accueil pour les activer."); return; }
   const p = await Notification.requestPermission();
   const c = ME.compte; if (c) { c.notif = p === "granted"; ME.compte = c; }
+  if (p === "granted") notifyAlerts();
   toast(p === "granted" ? "Notifications activées" : "Notifications refusées"); route();
 }
 function applySearch() { S.q = $("#q").value.trim(); S.zone = "monde"; closeOv("search"); renderHome(); goList(); }
@@ -1244,6 +1299,7 @@ function route() {
   else if (k === "d") pageDetaillant(a);
   else if (k === "officiels") pageOfficiels();
   else if (k === "infos") pageInfos();
+  else if (k === "notifications") pageNotifications();
   else if (k === "suivis") pageSuivis(a || "suivis");
   else if (k === "compte") pageCompte();
   else closePage();
@@ -1261,6 +1317,7 @@ async function start() {
   if (DATA.mise_a_jour) $("#updated").textContent = `Annonces mises à jour le ${new Date(DATA.mise_a_jour).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}.`;
   renderColls(); renderHome(); updateDots();
   route(); S.started = true;
+  if (!COOK.get()) setTimeout(showCookies, 900);
   notifyAlerts();
 }
 start();
