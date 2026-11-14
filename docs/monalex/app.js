@@ -1607,7 +1607,27 @@ async function start() {
     d.addEventListener("click", ev => { if (ev.target === d) d.close(); });
     // La Submariner de l'affiche, détourée, ressort en 3D et donne l'heure et la date en direct
     const live = $("#subLive");
-    live.innerHTML = `<img src="img/sub-montre.webp?v=2" alt="" width="770" height="1050" decoding="async">`;   // photo nette, aiguilles d'origine
+    // photo nette (aiguilles d'origine effacées proprement) + aiguilles et date en direct
+    const lume = "#f4f2ea";
+    live.innerHTML = `<img src="img/sub-montre.webp?v=3" alt="" width="770" height="1050" decoding="async">
+<svg viewBox="0 0 770 1050" aria-hidden="true"><defs><filter id="subOmbre" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="3" dy="5" stdDeviation="3" flood-opacity=".6"/></filter>
+<linearGradient id="subMet" x1="0" x2="1"><stop offset="0" stop-color="#8d9096"/><stop offset=".5" stop-color="#f4f5f7"/><stop offset="1" stop-color="#9a9da3"/></linearGradient></defs>
+<text class="w-d" x="484" y="399" font-size="38" font-weight="700" fill="#111" text-anchor="middle" dominant-baseline="central" font-family="Helvetica,Arial,sans-serif"></text>
+<g filter="url(#subOmbre)" transform="translate(340 390) scale(.94) translate(-300 -410)">
+<g class="w-h"><path d="M294 410V336h12v74Z" fill="url(#subMet)"/><circle cx="300" cy="318" r="21" fill="${lume}" stroke="url(#subMet)" stroke-width="6"/><path d="M300 297v42M281.8 328.5 300 318l18.2 10.5" stroke="url(#subMet)" stroke-width="4" fill="none"/><path d="M293 298L300 272L307 298Z" fill="url(#subMet)"/></g>
+<g class="w-m"><path d="M291 410V262L300 228L309 262V410Z" fill="url(#subMet)"/><path d="M295 395V266L300 246L305 266V395Z" fill="${lume}"/></g>
+<g class="w-s"><path d="M298.6 460V226h2.8v234Z" fill="url(#subMet)"/><circle cx="300" cy="262" r="9" fill="${lume}" stroke="url(#subMet)" stroke-width="3"/></g>
+<circle cx="300" cy="410" r="10" fill="url(#subMet)"/><circle cx="300" cy="410" r="3" fill="#777"/></g></svg>`;
+    const hH = live.querySelector(".w-h"), hM = live.querySelector(".w-m"), hS = live.querySelector(".w-s"), jD = live.querySelector(".w-d");
+    const tourne = () => {
+      const t = new Date(), s = t.getSeconds() + t.getMilliseconds() / 1000, m = t.getMinutes() + s / 60, h = (t.getHours() % 12) + m / 60;
+      hH.setAttribute("transform", `rotate(${(h * 30).toFixed(2)} 300 410)`);
+      hM.setAttribute("transform", `rotate(${(m * 6).toFixed(2)} 300 410)`);
+      hS.setAttribute("transform", `rotate(${(Math.floor(s * 8) / 8 * 6).toFixed(2)} 300 410)`);   // trotteuse : 8 petits pas par seconde
+      if (jD.textContent !== String(t.getDate())) jD.textContent = t.getDate();
+      requestAnimationFrame(tourne);
+    };
+    tourne();
     // effet 3D : la montre s'incline vers le doigt / la souris, et avec le téléphone
     const hero = $("#subPoster");
     const incline = (x, y) => live.style.setProperty("--rx", `${(-y * 14).toFixed(2)}deg`) || live.style.setProperty("--ry", `${(x * 18).toFixed(2)}deg`);
