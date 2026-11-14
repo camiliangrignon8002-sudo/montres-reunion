@@ -6773,6 +6773,46 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "bienici-citya-immobilier-52424705300084-GES24010107-542",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/sainte-marie/appartement/2pieces/citya-immobilier-52424705300084-GES24010107-542",
+  "titre": "T2 44 m²",
+  "prix": 700,
+  "commune": "Sainte-Marie",
+  "quartier": "Gaspards",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 44,
+  "meuble": true,
+  "photos": [
+   "https://file.bienici.com/photo/citya-immobilier-52424705300084-GES24010107-542_box.ics.fr_cit_CITYA_IDR_tic_location_photo_filigrane-SEJOUR-8172545310875124069.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-52424705300084-GES24010107-542_box.ics.fr_cit_CITYA_IDR_tic_location_photo_filigrane-CUISINE-2881814249844364048.jpg",
+   "https://file.bienici.com/photo/citya-immobilier-52424705300084-GES24010107-542_box.ics.fr_cit_CITYA_IDR_tic_location_photo_filigrane-CHAMBRE-8770587038255841257.jpg"
+  ],
+  "description": "À LOUER : Charmant appartement T2 Meublé situé au GASPARD à Sainte-Marie. Ce bien, d'une superficie de 44 m², se trouve au rez-de-chaussée d'un immeuble sans ascenseur, offrant un accès facile et pratique. L'appartement est entièrement meublé, ce qui vous permettra de vous installer rapidement et confortablement.\n\nL'espace de vie est bien agencé, avec deux pièces qui peuvent être utilisées selon vos besoins. \nLa luminosité naturelle inonde l'appartement, créant une atmosphère accueillante et chaleureuse. \n\nL'appartement est idéalement situé à proximité du centre-ville, du bord de mer et des transports en commun. De plus, les commerces, les écoles et les pharmacies se trouvent à quelques pas, facilitant ainsi le quotidien de ses habitants.\n\nEn outre, la résidence est calme, offrant un cadre de vie paisible et agréable. Un parking extérieur est également disponible, garantissant un stationnement facile et pratique.\n\nCet appartement est parfait pour les personnes en quête d'un lieu de vie élégant, confortable et bien situé. Ne manquez pas cette opportunité unique de louer ce charmant appartement à SAINTE MARIE.\n\nPour plus d'informations ou pour organiser une visite, n'hésitez pas à nous contacter. \n Loyer de 700,00 euros par mois charges comprises dont 30,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). \n Soit avec Assurance Habitation et Assistance* ( 22.42 euros ) : 722,42 euros. \n Les honoraires charge locataire sont de 577,28 euros ( soit 13,12 euros/m² ) dont 133,32 euros pour état des lieux ( soit 3,03 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/sainte-suzanne-97441/547#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/sainte-suzanne-97441/547#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
+  "caracteristiques": [
+   "1e étage",
+   "1 chambre",
+   "Meublé",
+   "Parking",
+   "Ascenseur",
+   "Proche transports"
+  ],
+  "date": "2026-11-14T06:07:38.715Z",
+  "annonceur": "Citya Belvédère Immobilier",
+  "lat": -20.8985888,
+  "lon": 55.5558805,
+  "charges": 30,
+  "pro": true,
+  "tel": "0262 73 73 40",
+  "email": "",
+  "adresse": "5 rue Pierre Bérégovoy ZAC Bel Air 2, 97441 Sainte-Suzanne",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-14T11:21+04:00"
+ },
+ {
   "id": "ep-22758974",
   "source": "EntreParticuliers",
   "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/studio-1-piece-28-m2/ref-22758974",
@@ -7214,12 +7254,7 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/sainte-marie/appartement/2pieces/citya-immobilier-52424705300084-GES24010107-542"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
