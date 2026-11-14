@@ -240,21 +240,21 @@ function watchSVG(s, o = {}) {
   // date + loupe Cyclope
   if (hasDate) {
     g += `<rect x="252" y="289" width="24" height="22" rx="2" fill="#fff" stroke="url(#${u}bp${idxMetal})" stroke-width="1.8"/>`;
-    g += `<text x="264" y="300.5" font-size="17" font-weight="700" fill="#111" text-anchor="middle" dominant-baseline="central" font-family="Helvetica,Arial,sans-serif">14</text>`;
+    g += `<text x="264" y="300.5" font-size="17" font-weight="700" fill="#111" text-anchor="middle" dominant-baseline="central" font-family="Helvetica,Arial,sans-serif" class="w-d">${o.jour || 14}</text>`;
     g += `<rect x="247" y="285" width="34" height="30" rx="6" fill="url(#${u}glass)" stroke="rgba(255,255,255,.55)" stroke-width="1"/>`;
   }
 
   // aiguilles (10 h 10)
   const hm = `url(#${u}bp${handM === "steel" ? "platinum" : handM})`;
-  const hand = (a, body) => `<g transform="rotate(${a} 200 300)"${fx}>${body}</g>`;
+  const hand = (a, body, c = "") => `<g${c ? ` class="${c}"` : ""} transform="rotate(${a} 200 300)"${fx}>${body}</g>`;
   const sport = ["sub", "gmt", "yacht", "exp2", "explorer", "airking"].includes(T);
   if (T === "gmt" || T === "exp2") {
     const gc = T === "exp2" ? "#e86a12" : (Array.isArray(s.insert) && s.insert[0] === "#0c0c0e") ? "#c9a24a" : (T === "gmt" && Array.isArray(s.insert) && s.insert[1] === "#0c0c0e") ? "#2e8a4b" : "#c8202b";
     g += hand(150, `<rect x="198.8" y="216" width="2.4" height="84" fill="${gc}"/><path d="M192 222L208 222L200 205Z" fill="${gc}" stroke="${hm}" stroke-width="1"/>`);
   }
   if (sport) {
-    g += hand(305, `<path d="M197 300V250h6v50Z" fill="${hm}"/><circle cx="200" cy="243" r="11" fill="${lume}" stroke="${hm}" stroke-width="3"/><path d="M200 232v22M190.5 248.5 200 243l9.5 5.5" stroke="${hm}" stroke-width="2.2" fill="none"/><path d="M196.5 232L200 220L203.5 232Z" fill="${hm}"/>`);
-    g += hand(60, `<path d="M195.5 300V226L200 216L204.5 226V300Z" fill="${lume}" stroke="${hm}" stroke-width="2.2"/>`);
+    g += hand(305, `<path d="M197 300V250h6v50Z" fill="${hm}"/><circle cx="200" cy="243" r="11" fill="${lume}" stroke="${hm}" stroke-width="3"/><path d="M200 232v22M190.5 248.5 200 243l9.5 5.5" stroke="${hm}" stroke-width="2.2" fill="none"/><path d="M196.5 232L200 220L203.5 232Z" fill="${hm}"/>`, "w-h");
+    g += hand(60, `<path d="M195.5 300V226L200 216L204.5 226V300Z" fill="${lume}" stroke="${hm}" stroke-width="2.2"/>`, "w-m");
   } else if (T === "1908") {
     g += hand(305, `<path d="M200 300L196 262L200 246L204 262Z" fill="#2c2c2e"/>`);
     g += hand(60, `<path d="M200 300L197 240L200 216L203 240Z" fill="#2c2c2e"/>`);
@@ -265,7 +265,7 @@ function watchSVG(s, o = {}) {
   if (T === "1908") g += `<line x1="200" y1="350" x2="${200 + 14 * Math.sin(1.2)}" y2="${350 - 14 * Math.cos(1.2)}" stroke="#2c2c2e" stroke-width="1"/>`;
   else {
     const sc = T === "sea" ? "#c8202b" : (light && !sport ? "#1b1b1d" : hm);
-    g += hand(186, `<rect x="199.2" y="214" width="1.6" height="112" fill="${sc}"/>${sport ? `<circle cx="200" cy="236" r="5" fill="${lume}" stroke="${sc}" stroke-width="1.6"/>` : ""}`);
+    g += hand(186, `<rect x="199.2" y="214" width="1.6" height="112" fill="${sc}"/>${sport ? `<circle cx="200" cy="236" r="5" fill="${lume}" stroke="${sc}" stroke-width="1.6"/>` : ""}`, "w-s");
   }
   g += `<circle cx="200" cy="300" r="4.5" fill="${hm}" stroke="rgba(0,0,0,.35)" stroke-width=".6"/>`;
   // reflet du verre

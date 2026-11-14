@@ -23,7 +23,7 @@
 <link rel="preload" href="fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/eb-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="vendor/leaflet.css">
-<link rel="stylesheet" href="app.css?v=27">
+<link rel="stylesheet" href="app.css?v=28">
 </head>
 <body>
 <div class="demo" id="demo" hidden><div class="wrap"><span><b>Version de démonstration</b> : annonces, vendeurs, coordonnées et statistiques fictifs.</span><button class="btn btn-green" id="demoOk">OK</button></div></div>
@@ -46,6 +46,7 @@
   <section class="hero" aria-label="Accueil">
     <button class="sub-poster" id="subPoster" type="button" aria-label="Rolex Submariner : son histoire et la page officielle">
       <img src="img/submariner.webp" srcset="img/submariner-900.webp 900w, img/submariner.webp 1672w" sizes="(max-width:900px) 100vw, 1180px" alt="Affiche noir et blanc de la Rolex Submariner" width="1672" height="941" fetchpriority="high" decoding="async">
+      <span class="sub-live" id="subLive" role="img" aria-label="Submariner à l'heure et à la date du jour"></span>
       <span class="sub-cta"><span class="sub-cta-n">Submariner · </span>son histoire<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </button>
     <div class="hero-t">
@@ -247,7 +248,7 @@
 
 <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js","three/addons/":"./vendor/jsm/"}}</script>
 <script src="vendor/leaflet.js"></script>
-<script src="watch.js?v=19"></script>
-<script src="app.js?v=25"></script>
+<script src="watch.js?v=20"></script>
+<script src="app.js?v=26"></script>
 </body>
 </html>

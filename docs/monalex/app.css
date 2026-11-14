@@ -938,3 +938,14 @@ html.calm .hero-sheen,html.calm .btn-green::after,html.calm .tile.dark::after{an
   .hero-t .btn{min-width:210px}
 }
 .sub-cta{z-index:2}
+/* L'affiche devient un fond photo flou ; la Submariner en direct ressort au premier plan */
+.sub-poster img{filter:blur(3px) brightness(.62) contrast(1.05)}
+.sub-live{position:absolute;left:50%;top:50%;z-index:1;height:94%;aspect-ratio:2/3;translate:-50% -48%;pointer-events:none;
+  filter:drop-shadow(0 34px 38px rgba(0,0,0,.75)) drop-shadow(0 6px 10px rgba(0,0,0,.5));animation:sub-flotte 7s ease-in-out infinite}
+.sub-live svg{display:block;width:100%;height:100%}
+@keyframes sub-flotte{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-10px) rotate(1deg)}}
+@media (prefers-reduced-motion:reduce){.sub-live{animation:none}}
+@media (min-width:901px){.sub-live{height:100%}}
+.sub-live{height:72%;aspect-ratio:330/380;translate:-50% -56%;
+  -webkit-mask:linear-gradient(180deg,transparent 0,#000 16%,#000 84%,transparent 100%);mask:linear-gradient(180deg,transparent 0,#000 16%,#000 84%,transparent 100%)}
+@media (min-width:901px){.sub-live{height:76%;translate:-50% -54%}}

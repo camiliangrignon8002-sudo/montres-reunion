@@ -1605,6 +1605,19 @@ async function start() {
     $("#subFermer").addEventListener("click", () => d.close());
     $("#subVoir").addEventListener("click", () => d.close());
     d.addEventListener("click", ev => { if (ev.target === d) d.close(); });
+    // Submariner qui ressort de l'affiche : heure et date en direct
+    const live = $("#subLive"), maintenant = new Date();
+    live.innerHTML = watchSVG({ type: "sub", dial: "#0b0b0c", insert: "#0c0c0e", metal: "steel", bracelet: "oyster", date: true }, { diam: 41, fx: true, jour: maintenant.getDate(), vb: "40 110 330 380" });
+    const hH = live.querySelector(".w-h"), hM = live.querySelector(".w-m"), hS = live.querySelector(".w-s"), jD = live.querySelector(".w-d");
+    const tourne = () => {
+      const t = new Date(), s = t.getSeconds() + t.getMilliseconds() / 1000, m = t.getMinutes() + s / 60, h = (t.getHours() % 12) + m / 60;
+      hH && hH.setAttribute("transform", `rotate(${(h * 30).toFixed(2)} 200 300)`);
+      hM && hM.setAttribute("transform", `rotate(${(m * 6).toFixed(2)} 200 300)`);
+      hS && hS.setAttribute("transform", `rotate(${(s * 6).toFixed(2)} 200 300)`);
+      if (jD && jD.textContent !== String(t.getDate())) jD.textContent = t.getDate();
+      requestAnimationFrame(tourne);
+    };
+    tourne();
     // léger effet de profondeur au défilement (téléphone)
     const im = $("#subPoster img"); let tic = false;
     addEventListener("scroll", () => { if (tic) return; tic = true; requestAnimationFrame(() => { tic = false; const y = Math.min(scrollY, innerHeight); im.style.setProperty("--px", (y * .35).toFixed(1) + "px"); }); }, { passive: true }); }
