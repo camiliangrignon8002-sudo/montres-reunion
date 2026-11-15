@@ -40,8 +40,10 @@ test("modèle : les totaux relus correspondent à la colonne Total du papier", (
 test("génération semaine 1 : tout le monde a ses horaires, aucune erreur bloquante", () => {
   const s = fresh();
   const { week, report } = C.generateWeek(s, W1);
-  assert.equal(week.shifts.length, 54); // modèle + Lucas (absent du modèle) ; Mathilde 4 journées de 7 h (30 h de contrat)
-  assert.ok(week.shifts.every((x) => C.shiftMinutes(x.segs) === 420)); // journées de 7 h 30 dont 30 min de pause
+  assert.equal(week.shifts.length, 55); // modèle + Lucas (absent du modèle)
+  // journées de 7 h 30 dont 30 min de pause ; 30 h de contrat = 5 journées de 6 h (Mathilde)
+  assert.ok(week.shifts.every((x) => C.shiftMinutes(x.segs) === C.stdDayMinutes(s, C.empById(s, x.emp))));
+  assert.equal(week.shifts.filter((x) => x.emp === "mathilde").reduce((a, x) => a + C.shiftMinutes(x.segs), 0), 30 * 60);
   for (const e of s.employees.filter((x) => x.active !== false && C.allowedZones(x).length)) assert.ok(week.shifts.some((x) => x.emp === e.id), e.name + " doit travailler");
   assert.ok(report.notPlaced.every((n) => n.trim)); // seulement des journées en trop (contrat réduit)
   assert.equal(C.blockingIssues(report.issues).length, 0);

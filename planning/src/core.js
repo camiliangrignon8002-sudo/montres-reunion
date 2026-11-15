@@ -469,6 +469,16 @@
     }
     return best == null ? segs : segs.map((g) => ({ ...g, s: fromMin(toMin(g.s) + best), e: fromMin(toMin(g.e) + best) }));
   }
+  // Journée type d'une personne : 7 h de travail (7 h 30 avec la pause) ; un contrat qui ne tombe pas en journées
+  // de 7 h (ex. 30 h) est réparti en journées égales (30 h = 5 × 6 h) pour faire exactement ses heures.
+  function stdDayMinutes(state, emp) {
+    const st = { ...DEFAULT_SETTINGS, ...(state.settings || {}) }, full = (st.contractHours || 35) * 60;
+    if (!emp || emp.role === "alternant") return 420;
+    const c = (Number(emp.contractHours) || 0) * 60 || templateMinutes(state, emp.id) || full;
+    if (c >= full || c % 420 === 0) return 420;
+    const days = Math.ceil(c / 420);
+    return Math.round(c / days / 30) * 30;
+  }
   function weekExtraMinutes(state, monday, empId) {
     const end = addDays(monday, 6);
     return Object.values(state.adjustments || {}).filter((a) => a.emp === empId && a.date >= monday && a.date <= end && (a.type === "heures_sup" || a.type === "journee_sup")).reduce((x, a) => x + a.minutes, 0);
@@ -568,7 +578,7 @@
         const oh = outsideOpening(state, g, d);
         if (oh) add("alerte", "OUT_OF_HOURS", sh.emp, d, `${who} : ${g.s}–${g.e} en ${g.z} le ${fmtDate(d, "day")}, en dehors des horaires du point de vente (${g.z} ${oh.season === "ete" ? "été" : "hiver"} : ${oh.s}–${oh.e}).`);
       }
-      if (timesOk && !paperWeek && st.standardDay) { const r = shiftRanges(sh.segs), wk = shiftMinutes(sh.segs), amp = r[r.length - 1][1] - r[0][0]; if (wk !== 420 || amp !== 450) add("alerte", "DAY_STD", sh.emp, d, `${who} : ${shiftSpan(sh.segs).s}–${shiftSpan(sh.segs).e} le ${fmtDate(d, "day")} (${fmtHours(wk)} de travail) ; une journée fait 7 h 30 avec 30 min de pause (sauf accord de la direction).`); }
+      if (timesOk && !paperWeek && st.standardDay) { const r = shiftRanges(sh.segs), wk = shiftMinutes(sh.segs), amp = r[r.length - 1][1] - r[0][0]; const L = stdDayMinutes(state, emp); if (wk !== L || amp !== L + 30) add("alerte", "DAY_STD", sh.emp, d, `${who} : ${shiftSpan(sh.segs).s}–${shiftSpan(sh.segs).e} le ${fmtDate(d, "day")} (${fmtHours(wk)} de travail) ; une journée fait ${fmtHours(L + 30)} avec 30 min de pause${L !== 420 ? ` (${fmtHours(L)} de travail pour son contrat)` : ""} (sauf accord de la direction).`); }
       if (timesOk) { const ev = eveningOutside(state, sh.segs); if (ev) add("alerte", "EVENING_SLOT", sh.emp, d, `${who} : ${shiftSpan(sh.segs).s}–${shiftSpan(sh.segs).e} le ${fmtDate(d, "day")}, hors des horaires possibles du soir en ${ev.z} (${ev.slots.map((w) => `${w.s}–${w.e}`).join(" ou ")}).`); }
       if (st.checkLegal && timesOk) {
         const r = shiftRanges(sh.segs), work = shiftMinutes(sh.segs), amp = r[r.length - 1][1] - r[0][0];
@@ -1019,17 +1029,19 @@
     // 1) Journées types : toujours 7 h 30 de présence avec 30 min de pause (7 h de travail).
     //    Nombre de journées : 5 pour un temps plein ; contrat ÷ 7 h pour un temps partiel ; 5 − jours de cours pour un alternant.
     const DAY = 420, PAUSE = 30;
-    const toStd = (segs) => {
+    const toStd = (segs, len) => {
+      len = len || DAY;
       const t = segs.filter((g) => isTime(g.s) && isTime(g.e));
       if (!t.length || t.length !== segs.length) return segs;
       const r = shiftRanges(t), a0 = r[0][0], b0 = r[r.length - 1][1];
-      if (shiftMinutes(t) === DAY && b0 - a0 === DAY + PAUSE && t.length === 2) return segs;
+      if (shiftMinutes(t) === len && b0 - a0 === len + PAUSE && t.length === 2) return segs;
       const evening = a0 >= 12 * 60;
-      const A = evening ? b0 - DAY - PAUSE : a0;
-      let h = segMinutes(t[0]); if (!(h >= 120 && h <= 360)) h = 240;
-      return [{ s: fromMin(A), e: fromMin(A + h), z: t[0].z }, { s: fromMin(A + h + PAUSE), e: fromMin(A + DAY + PAUSE), z: t[t.length - 1].z }];
+      const A = evening ? b0 - len - PAUSE : a0;
+      let h = segMinutes(t[0]); if (!(h >= 120 && h <= 360 && len - h >= 60 && len - h <= 360)) h = Math.round(len / 2 / 30) * 30;
+      return [{ s: fromMin(A), e: fromMin(A + h), z: t[0].z }, { s: fromMin(A + h + PAUSE), e: fromMin(A + len + PAUSE), z: t[t.length - 1].z }];
     };
-    for (const x of week.shifts) if (inRange(x.date)) x.segs = snapEvening(state, fitSeason(toStd(x.segs)));
+    const lenOf = (id) => stdDayMinutes(state, empById(state, id));
+    for (const x of week.shifts) if (inRange(x.date)) x.segs = snapEvening(state, fitSeason(toStd(x.segs, lenOf(x.emp))));
     const courseDays = (id) => weekDates(monday).filter((d) => inRange(d) && courseMinutesOn(state, empById(state, id), d) > 0).length;
     const absentDays = (id) => weekDates(monday).filter((d) => inRange(d) && absentDay(id, d)).length;
     const workDaysTarget = (emp) => {
@@ -1038,7 +1050,7 @@
       if (emp.role === "alternant") return Math.max(0, full - courseDays(emp.id));
       const c = (Number(emp.contractHours) || 0) * 60 || templateMinutes(state, emp.id) || fullC;
       if (c >= fullC) return full;
-      return Math.max(1, Math.min(full, Math.round(c * rangeDays / 7 / DAY)));
+      return Math.max(1, Math.min(full, Math.round(c * rangeDays / 7 / stdDayMinutes(state, emp))));
     };
     // Trop de journées (alternants avec des jours de cours, temps partiel) : on retire celles où l'équipe est la plus nombreuse.
     for (const emp of state.employees) {
@@ -1082,7 +1094,7 @@
             const cs = calStatus(state, emp, date);
             if (emp.role === "alternant" && cs !== "entreprise" && cs !== "weekend") continue;
             const tried = new Set();
-            for (const B of bases) for (const segs of shapeFor(emp, B)) {
+            for (const B0 of bases) for (const segs of shapeFor(emp, toStd(B0, lenOf(emp.id)))) {
               if (tried.has(segKey(segs))) continue;
               tried.add(segKey(segs));
               const c = findCandidates(work, date, segs, { exclude: state.employees.filter((e) => e.id !== emp.id).map((e) => e.id) })[0];
@@ -1103,7 +1115,7 @@
       // Plus de place : on libère une place en passant quelqu'un qui peut aller dans les deux zones vers l'autre zone (mêmes jours).
       const tryPlace = (emp, date) => {
         let best = null;
-        for (const B of bases) for (const segs of shapeFor(emp, B)) {
+        for (const B of bases) for (const segs of shapeFor(emp, toStd(B, lenOf(emp.id)))) {
           const c = findCandidates(work, date, segs, { exclude: state.employees.filter((e) => e.id !== emp.id).map((e) => e.id) })[0];
           if (c && c.restOk && (!best || c.score > best.sc)) best = { sc: c.score, segs };
         }
@@ -1762,7 +1774,7 @@
     DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, ABSENCE_MOTIFS, deviationFromTimes, applyClosing, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
-    norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones, eveningOutside, snapEvening,
+    norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones, eveningOutside, snapEvening, stdDayMinutes,
     calendarCode, calStatus, staffingGaps, paxRules, paxOf, paxSlots, incompatible, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,

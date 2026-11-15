@@ -586,6 +586,10 @@
       patchLinks: { "lien-trajet-camilian-fleur": { tolerance: 60 } },
       settings: { eveningSlots: { ZR: ["15:30-23:00", "14:30-22:00"], ZP: ["14:30-22:00", "13:30-21:00"] } },
     }, {
+      id: "contrat-mathilde-30h",
+      summary: "Mathilde : contrat de 30 h (5 journées de 6 h, soit 6 h 30 avec la pause)",
+      patchEmp: { mathilde: { contractHours: 30 } },
+    }, {
       id: "effectif-max-zones",
       summary: "Nombre maximum de personnes : ZR 3 le matin et 3 le soir ; ZP 4 le matin et 2 le soir",
       addStaffing: [
