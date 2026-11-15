@@ -1165,6 +1165,12 @@ details.gen-more[open] > summary { color: var(--fg); }
       id: "plannings-novembre",
       summary: "Plannings papier du 26/10 (version corrigée), du 02/11 et du 09/11 ajoutés ; Sabrina, Helena, Ruby et Lana en formation",
       validatePaperWeeks: true,
+    }, {
+      id: "eric-zp-trajet-soir",
+      summary: "Eric jamais en ZR ; Camilian et Fleur : 1 h de décalage permise ; horaires du soir dans les tranches possibles (ZR 15:30–23:00 ou 14:30–22:00, ZP 14:30–22:00 ou 13:30–21:00)",
+      patchEmp: { eric: { zones: { ZP: "confirme" } } },
+      patchLinks: { "lien-trajet-camilian-fleur": { tolerance: 60 } },
+      settings: { eveningSlots: { ZR: ["15:30-23:00", "14:30-22:00"], ZP: ["14:30-22:00", "13:30-21:00"] } },
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
@@ -1236,6 +1242,7 @@ details.gen-more[open] > summary { color: var(--fg); }
     hardMaxDayHours: 10, // jamais plus de 10 h de travail dans la journée
     maxAmplitudeHours: 13, // début → fin de journée : 13 h au plus
     maxContinuousHours: 6, // jamais plus de 6 h d'affilée sans pause
+    eveningSlots: { ZR: ["15:30-23:00", "14:30-22:00"], ZP: ["14:30-22:00", "13:30-21:00"] }, // tranches possibles pour le soir
     minContractHours: 24, // temps partiel : 24 h par semaine au minimum (contrat)
     contractHours: 35,
     lateThreshold: 5, extraThreshold: 5,
@@ -1638,6 +1645,29 @@ details.gen-more[open] > summary { color: var(--fg); }
     const [a, b] = segRange(g);
     return a < toMin(oh.s) || b > toMin(oh.e) ? oh : null;
   };
+  // Horaires du soir : toujours dans une des tranches possibles de la zone (ex. ZR 15:30–23:00 ou 14:30–22:00).
+  const eveningSlotsOf = (state, z) => ((({ ...DEFAULT_SETTINGS, ...(state.settings || {}) }).eveningSlots || {})[z] || []).map((v) => /^(\d\d:\d\d)-(\d\d:\d\d)$/.exec(v)).filter(Boolean).map((m) => ({ s: m[1], e: m[2], a: toMin(m[1]), b: toMin(m[2]) }));
+  function eveningOutside(state, segs) {
+    const t = (segs || []).filter((g) => isTime(g.s) && isTime(g.e) && !isAdminZone(g.z));
+    if (!t.length || toMin(t[0].s) < 12 * 60) return null;
+    const z = t[t.length - 1].z, slots = eveningSlotsOf(state, z);
+    if (!slots.length) return null;
+    const r = shiftRanges(t), a = r[0][0], b = r[r.length - 1][1];
+    return slots.some((w) => a >= w.a && b <= w.b) ? null : { z, slots };
+  }
+  // Recale un créneau du soir dans la tranche la plus proche (même durée), si besoin.
+  function snapEvening(state, segs) {
+    const out = eveningOutside(state, segs);
+    if (!out) return segs;
+    const r = shiftRanges(segs), a = r[0][0], b = r[r.length - 1][1];
+    let best = null;
+    for (const w of out.slots) {
+      if (b - a > w.b - w.a) continue;
+      const d = a < w.a ? w.a - a : b > w.b ? w.b - b : 0;
+      if (!best || Math.abs(d) < Math.abs(best)) best = d;
+    }
+    return best == null ? segs : segs.map((g) => ({ ...g, s: fromMin(toMin(g.s) + best), e: fromMin(toMin(g.e) + best) }));
+  }
   function weekExtraMinutes(state, monday, empId) {
     const end = addDays(monday, 6);
     return Object.values(state.adjustments || {}).filter((a) => a.emp === empId && a.date >= monday && a.date <= end && (a.type === "heures_sup" || a.type === "journee_sup")).reduce((x, a) => x + a.minutes, 0);
@@ -1736,6 +1766,7 @@ details.gen-more[open] > summary { color: var(--fg); }
         const oh = outsideOpening(state, g, d);
         if (oh) add("alerte", "OUT_OF_HOURS", sh.emp, d, `${who} : ${g.s}–${g.e} en ${g.z} le ${fmtDate(d, "day")}, en dehors des horaires du point de vente (${g.z} ${oh.season === "ete" ? "été" : "hiver"} : ${oh.s}–${oh.e}).`);
       }
+      if (timesOk) { const ev = eveningOutside(state, sh.segs); if (ev) add("alerte", "EVENING_SLOT", sh.emp, d, `${who} : ${shiftSpan(sh.segs).s}–${shiftSpan(sh.segs).e} le ${fmtDate(d, "day")}, hors des horaires possibles du soir en ${ev.z} (${ev.slots.map((w) => `${w.s}–${w.e}`).join(" ou ")}).`); }
       if (st.checkLegal && timesOk) {
         const r = shiftRanges(sh.segs), work = shiftMinutes(sh.segs), amp = r[r.length - 1][1] - r[0][0];
         if (work > st.hardMaxDayHours * 60) add("alerte", "LEGAL_DAY_MAX", sh.emp, d, `${who} : ${fmtHours(work)} de travail le ${fmtDate(d, "day")}, au-delà du maximum légal de ${st.hardMaxDayHours} h par jour.`);
@@ -1765,8 +1796,10 @@ details.gen-more[open] > summary { color: var(--fg); }
         const sh = l.emps.map((id) => w.shifts.find((x) => x.emp === id && x.date === d)).filter(Boolean);
         if (l.sameHours && sh.length > 1) {
           const spans = sh.map((x) => shiftSpan(x.segs));
-          if (spans.some((p) => p.s !== spans[0].s || p.e !== spans[0].e) && l.kind === "trajet") add("info", "LINK_TRIP", sh[0].emp, d, `Horaires différents ${[...sh].reverse().map((x) => nameOf(x.emp)).join(" / ")} le ${fmtDate(d, "day")} : trajet plus compliqué (${sh.map((x, i) => `${nameOf(x.emp)} ${spans[i].s}–${spans[i].e}`).join(", ")}).`);
-          else if (spans.some((p) => p.s !== spans[0].s || p.e !== spans[0].e)) add("alerte", "LINK_HOURS", sh[0].emp, d, `${names} doivent avoir les mêmes horaires : ${sh.map((x, i) => `${nameOf(x.emp)} ${spans[i].s}–${spans[i].e}`).join(", ")} le ${fmtDate(d, "day")}.`);
+          const tol = l.tolerance != null ? Number(l.tolerance) || 0 : l.kind === "trajet" ? 60 : 0; // trajet : 1 h de décalage au début ou à la fin, ce n'est pas gênant
+          const far = (p) => !isTime(p.s) || !isTime(spans[0].s) ? p.s !== spans[0].s : Math.abs(toMin(p.s) - toMin(spans[0].s)) > tol || Math.abs(toMin(p.e) - toMin(spans[0].e)) > tol;
+          if (spans.some(far) && l.kind === "trajet") add("info", "LINK_TRIP", sh[0].emp, d, `Horaires différents ${[...sh].reverse().map((x) => nameOf(x.emp)).join(" / ")} le ${fmtDate(d, "day")} : trajet plus compliqué (${sh.map((x, i) => `${nameOf(x.emp)} ${spans[i].s}–${spans[i].e}`).join(", ")}).`);
+          else if (spans.some(far)) add("alerte", "LINK_HOURS", sh[0].emp, d, `${names} doivent avoir les mêmes horaires : ${sh.map((x, i) => `${nameOf(x.emp)} ${spans[i].s}–${spans[i].e}`).join(", ")} le ${fmtDate(d, "day")}.`);
           if (l.sameZone) {
             const zk = sh.map((x) => [...new Set(x.segs.map((g) => g.z))].sort().join("/"));
             if (zk.some((z) => z !== zk[0])) add("alerte", "LINK_ZONE", sh[0].emp, d, `${names} doivent être dans la même zone le ${fmtDate(d, "day")} (${sh.map((x, i) => `${nameOf(x.emp)} ${zk[i]}`).join(", ")}).`);
@@ -1955,14 +1988,17 @@ details.gen-more[open] > summary { color: var(--fg); }
       if (personalRuleIssues(emp, date, segs).length) continue; // horaires ou jours de repos fixes
       if (inTraining(emp, date) && segs.some((g) => !isAdminZone(g.z) && aloneRanges(state, w.shifts, { emp: emp.id, date }, g).length)) continue; // en formation : jamais seul(e)
       if (st.checkOpening && segs.some((g) => outsideOpening(state, g, date))) continue; // jamais hors des horaires du PDV
+      if (eveningOutside(state, segs)) continue; // le soir : seulement dans les tranches possibles
       if (st.checkLegal && segs.every((g) => isTime(g.s) && isTime(g.e))) {
         const r = shiftRanges(segs);
         if (shiftMinutes(segs) > st.hardMaxDayHours * 60 || r[r.length - 1][1] - r[0][0] > st.maxAmplitudeHours * 60) continue;
         const workedC = (d) => d === date || shiftsAround(state, monday).some((x) => x.emp === emp.id && x.date === d) || courseMinutesOn(state, emp, d) > 0;
+        if (!(opts && opts.sameDay)) { // allonger un jour déjà travaillé ne change pas le nombre de jours
         if (7 - weekDates(monday).filter(workedC).length < st.minDaysOff) continue; // 2 jours de repos par semaine
         let before = 0; for (let d = addDays(date, -1); workedC(d) && before < 7; d = addDays(d, -1)) before++;
         let after = 0; for (let d = addDays(date, 1); workedC(d) && after < 7; d = addDays(d, 1)) after++;
         if (before + 1 + after > st.maxConsecutiveDays) continue; // jamais plus de 6 jours d'affilée
+        }
       }
       // Repos avec les jours voisins
       const cand = { emp: emp.id, date, segs };
@@ -2056,7 +2092,8 @@ details.gen-more[open] > summary { color: var(--fg); }
       for (const t of templateFor(state, date)) {
         const emp = empById(state, t.emp);
         const wz = emp && emp.rules && emp.rules.weekZone && allowedZones(emp).includes(emp.rules.weekZone) ? emp.rules.weekZone : null;
-        const segs = fitSeason(t.segs.map(({ s, e, z }) => ({ s, e, z: wz || z }))); // zone imposée toute la semaine, horaires de la saison
+        const okZ = emp ? allowedZones(emp).filter((z) => !isAdminZone(z)) : [];
+        const segs = snapEvening(state, fitSeason(t.segs.map(({ s, e, z }) => ({ s, e, z: wz || (!emp || okZ.includes(z) || isAdminZone(z) || !okZ.length ? z : okZ[0]) })))); // zone imposée ou autorisée, horaires de la saison, tranche du soir
         let reason = null;
         if (!emp) reason = "personne absente de l'équipe";
         else if (emp.active === false) reason = "employé désactivé";
@@ -2169,7 +2206,11 @@ details.gen-more[open] > summary { color: var(--fg); }
       const shapesOf = (len) => {
         const out = [];
         for (const B of bases) {
-          if (len >= shiftMinutes(B.segs) - 15) { out.push(B.segs); continue; }
+          if (len >= shiftMinutes(B.segs) - 15) {
+            out.push(B.segs);
+            if (len > shiftMinutes(B.segs) + 15) { const h1 = Math.round(len / 2 / 30) * 30; out.push([{ s: fromMin(B.a), e: fromMin(B.a + h1), z: B.z }, { s: fromMin(B.a + h1 + 30), e: fromMin(B.a + len + 30), z: B.z }]); }
+            continue;
+          }
           const pause = len > 360 ? 30 : 0, h1 = Math.round(len / 2 / 30) * 30;
           for (const start of [B.a, B.b - len - pause]) {
             if (start < 0) continue;
@@ -2186,7 +2227,7 @@ details.gen-more[open] > summary { color: var(--fg); }
         const zs = allowedZones(emp).filter((z) => !isAdminZone(z));
         if (!zs.length) return null;
         const wz = emp.rules && emp.rules.weekZone && zs.includes(emp.rules.weekZone) ? emp.rules.weekZone : null;
-        return fitSeason(segs.map((g) => ({ ...g, z: wz || (zs.includes(g.z) ? g.z : zs[0]) })));
+        return snapEvening(state, fitSeason(segs.map((g) => ({ ...g, z: wz || (zs.includes(g.z) ? g.z : zs[0]) }))));
       };
       // Manque de personnel (effectif minimum + règle des passagers), en personnes × minutes
       const rulesOn = (date) => [...(stG.staffing || []), ...paxRules(state, date)].filter((r) => r.min != null && date >= r.from && date <= r.to);
@@ -2203,9 +2244,9 @@ details.gen-more[open] > summary { color: var(--fg); }
           if (needDays <= 0 && (deficit < 150 || offDays(emp.id) <= maxOff)) continue;
           if (needDays <= 0) continue; // 5 jours déjà : ses heures sont dans ses journées
           // Durée de la journée : le reste de ses heures réparti sur les jours qui manquent (3 h minimum, 7 h maximum).
-          const want = Math.min(420, Math.max(180, Math.round(Math.max(deficit, 0) / needDays / 30) * 30));
+          const want = Math.min(600, Math.max(180, Math.round(Math.max(deficit, 0) / needDays / 30) * 30));
           let best = null;
-          for (const len of [...new Set([want, want - 30, want - 60, want + 30, 240, 180].filter((x) => x >= 120 && x <= 420))]) {
+          for (const len of [...new Set([want, want - 30, want - 60, want + 30, 420, 240, 180].filter((x) => x >= 120 && x <= 600))]) {
             for (const date of weekDates(monday)) {
               if (!inRange(date) || busy(emp.id, date) || absentDay(emp.id, date)) continue;
               if (extra.some((x) => x.emp === emp.id && x.date === date)) continue;
@@ -2236,6 +2277,40 @@ details.gen-more[open] > summary { color: var(--fg); }
       week.shifts.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
       // Ceux qui ne peuvent pas avoir leurs 5 jours : signalé dans le rapport
       for (const emp of people) if (offDays(emp.id) > maxOff) tooManyOff.push({ emp: emp.id, off: offDays(emp.id), reason: `${offDays(emp.id)} jours sans travail cette semaine : aucun autre créneau possible avec les règles (repos, heures, zones, formation)` });
+    }
+    // 3) Heures minimum : 35 h au total pour un temps plein (travail + cours pour les alternants), le contrat pour un temps partiel.
+    //    On allonge les journées par 30 min (fin, sinon début), en respectant toutes les règles.
+    if (opts.fillAll !== false) {
+      const targetOf = (emp) => Math.round((emp.role === "alternant" ? Math.max(0, fullC - weekCourseMinutes(work, monday, emp.id)) : (Number(emp.contractHours) || 0) * 60 || templateMinutes(state, emp.id) || fullC) * rangeDays / 7);
+      const others = (id) => state.employees.filter((e) => e.id !== id).map((e) => e.id);
+      for (const emp of state.employees) {
+        if (emp.active === false || (include && !include.has(emp.id))) continue;
+        for (let guard = 0; guard < 24; guard++) {
+          const mine = mineOf(emp.id);
+          const deficit = targetOf(emp) - mine.reduce((a, x) => a + shiftMinutes(x.segs), 0);
+          if (deficit < 15 || !mine.length) break;
+          const step = deficit >= 30 ? 30 : deficit;
+          let done = false;
+          for (const x of mine.slice().sort((p, q) => shiftMinutes(p.segs) - shiftMinutes(q.segs))) {
+            if (x.segs.some((g) => !isTime(g.s) || !isTime(g.e))) continue;
+            const L = x.segs.length - 1;
+            const tries = [
+              x.segs.map((g, i) => i === L ? { ...g, e: fromMin(toMin(g.e) + step) } : { ...g }),
+              x.segs.map((g, i) => i === 0 ? { ...g, s: fromMin(toMin(g.s) - step) } : { ...g }),
+            ];
+            for (const segs of tries) {
+              if (segs.some((g) => segMinutes(g) > (stG.maxContinuousHours || 6) * 60 || segMinutes(g) <= 0)) continue;
+              const idx = week.shifts.indexOf(x);
+              week.shifts.splice(idx, 1); work.weeks[monday] = week;
+              const c = findCandidates(work, x.date, segs, { exclude: others(emp.id), sameDay: true })[0];
+              week.shifts.splice(idx, 0, x);
+              if (c && c.restOk) { x.segs = segs; done = true; break; }
+            }
+            if (done) break;
+          }
+          if (!done) break;
+        }
+      }
     }
     // Jours de bureau minimum : marqués sur les journées où l'équipe est la plus nombreuse.
     for (const emp of state.employees) {
@@ -2683,10 +2758,16 @@ details.gen-more[open] > summary { color: var(--fg); }
                 const emps = [...new Set((l && l.emps) || [])].filter((id) => empById(s, id));
                 if (emps.length < 2) { fail("Une liaison relie au moins deux personnes."); break; }
                 if (!l.sameHours && !l.sameWeekends) { fail("Choisissez au moins « mêmes horaires » ou « mêmes week-ends »."); break; }
-                out.push({ id: String(l.id || uid("lien")), emps, sameHours: !!l.sameHours, sameZone: !!l.sameZone, sameWeekends: !!l.sameWeekends, active: l.active !== false, label: String(l.label || "").slice(0, 60), ...(l.kind === "trajet" ? { kind: "trajet" } : {}), ...(isISO(l.since) ? { since: l.since } : {}) });
+                out.push({ id: String(l.id || uid("lien")), emps, sameHours: !!l.sameHours, sameZone: !!l.sameZone, sameWeekends: !!l.sameWeekends, active: l.active !== false, label: String(l.label || "").slice(0, 60), ...(l.kind === "trajet" ? { kind: "trajet" } : {}), ...(isISO(l.since) ? { since: l.since } : {}), ...(Number(l.tolerance) >= 0 && Number(l.tolerance) <= 240 && l.tolerance != null ? { tolerance: Number(l.tolerance) } : {}) });
               }
               if (out.length === v.length) s.settings.links = out.slice(0, 50);
               continue;
+            }
+            if (k === "eveningSlots") {
+              if (!v || typeof v !== "object" || Array.isArray(v)) { fail("Tranches du soir invalides."); continue; }
+              const out = {};
+              for (const [z, list] of Object.entries(v)) { if (!/^[A-Z]{1,4}$/.test(z) || !Array.isArray(list)) continue; out[z] = list.map((x) => /^(\d\d:\d\d)-(\d\d:\d\d)$/.exec(String(x).trim())).filter((m) => m && isTime(m[1]) && isTime(m[2])).map((m) => `${m[1]}-${m[2]}`).slice(0, 6); }
+              s.settings.eveningSlots = out; continue;
             }
             if (Array.isArray(DEFAULT_SETTINGS[k])) { if (!Array.isArray(v)) { fail(`Valeur invalide pour ${k}.`); continue; } s.settings[k] = v.map(String).slice(0, 200); continue; }
             if (typeof DEFAULT_SETTINGS[k] === "string") {
@@ -2834,7 +2915,7 @@ details.gen-more[open] > summary { color: var(--fg); }
     DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, ABSENCE_MOTIFS, deviationFromTimes, applyClosing, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
-    norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones,
+    norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones, eveningOutside, snapEvening,
     calendarCode, calStatus, staffingGaps, paxRules, paxOf, paxSlots, incompatible, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
@@ -5763,6 +5844,20 @@ details.gen-more[open] > summary { color: var(--fg); }
         ops.push({ type: "setWeekStatus", monday: w.week, status: "validé", acknowledge: true });
       }
       if (u.settings) ops.push({ type: "setSettings", patch: u.settings });
+      for (const [id, patch] of Object.entries(u.patchEmp || {})) {
+        const e = C.empById(this.state, id); if (!e) continue;
+        const { zones, ...rest } = patch;
+        if (zones) {
+          // Ses blocs dans une zone retirée passent dans sa zone (plannings enregistrés et modèle).
+          const keep = Object.keys(zones), to = keep[0];
+          const fix = (segs) => segs.map((g) => (keep.includes(g.z) || g.z === "ADM" ? g : { ...g, z: to }));
+          for (const [m, w] of Object.entries(this.state.weeks)) if (w.shifts.some((x) => x.emp === id && x.segs.some((g) => !keep.includes(g.z) && g.z !== "ADM"))) ops.push({ type: "putWeek", monday: m, week: { ...w, shifts: w.shifts.map((x) => (x.emp === id ? { ...x, segs: fix(x.segs) } : x)) } });
+          const t = this.state.template;
+          if (t.shifts.some((x) => x.emp === id && x.segs.some((g) => !keep.includes(g.z) && g.z !== "ADM"))) ops.push({ type: "setTemplate", template: { ...t, shifts: t.shifts.map((x) => (x.emp === id ? { ...x, segs: fix(x.segs) } : x)) } });
+          ops.push({ type: "setZones", emp: id, zones });
+        }
+        if (Object.keys(rest).length) ops.push({ type: "updateEmployee", id, patch: rest });
+      }
       for (const [id, from] of Object.entries(u.leave || {})) {
         if (!C.empById(this.state, id)) continue;
         ops.push({ type: "updateEmployee", id, patch: { active: false, leftOn: from } });

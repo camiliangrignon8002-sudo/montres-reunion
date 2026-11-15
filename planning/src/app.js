@@ -2306,6 +2306,20 @@
         ops.push({ type: "setWeekStatus", monday: w.week, status: "validé", acknowledge: true });
       }
       if (u.settings) ops.push({ type: "setSettings", patch: u.settings });
+      for (const [id, patch] of Object.entries(u.patchEmp || {})) {
+        const e = C.empById(this.state, id); if (!e) continue;
+        const { zones, ...rest } = patch;
+        if (zones) {
+          // Ses blocs dans une zone retirée passent dans sa zone (plannings enregistrés et modèle).
+          const keep = Object.keys(zones), to = keep[0];
+          const fix = (segs) => segs.map((g) => (keep.includes(g.z) || g.z === "ADM" ? g : { ...g, z: to }));
+          for (const [m, w] of Object.entries(this.state.weeks)) if (w.shifts.some((x) => x.emp === id && x.segs.some((g) => !keep.includes(g.z) && g.z !== "ADM"))) ops.push({ type: "putWeek", monday: m, week: { ...w, shifts: w.shifts.map((x) => (x.emp === id ? { ...x, segs: fix(x.segs) } : x)) } });
+          const t = this.state.template;
+          if (t.shifts.some((x) => x.emp === id && x.segs.some((g) => !keep.includes(g.z) && g.z !== "ADM"))) ops.push({ type: "setTemplate", template: { ...t, shifts: t.shifts.map((x) => (x.emp === id ? { ...x, segs: fix(x.segs) } : x)) } });
+          ops.push({ type: "setZones", emp: id, zones });
+        }
+        if (Object.keys(rest).length) ops.push({ type: "updateEmployee", id, patch: rest });
+      }
       for (const [id, from] of Object.entries(u.leave || {})) {
         if (!C.empById(this.state, id)) continue;
         ops.push({ type: "updateEmployee", id, patch: { active: false, leftOn: from } });

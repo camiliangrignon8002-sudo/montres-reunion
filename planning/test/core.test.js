@@ -674,3 +674,17 @@ test("fusion de deux fiches (Helena → Lana)", () => {
   assert.ok(Object.values(r.state.absences).some((a) => a.emp === "lana"));
   assert.ok(!REF.employees.some((e) => e.id === "helena"));
 });
+
+test("soir : horaires seulement dans les tranches possibles (ZR 15:30–23:00 / 14:30–22:00, ZP 14:30–22:00 / 13:30–21:00)", () => {
+  const s = fresh();
+  assert.equal(C.eveningOutside(s, [{ s: "15:30", e: "19:00", z: "ZR" }, { s: "19:30", e: "23:00", z: "ZR" }]), null);
+  assert.equal(C.eveningOutside(s, [{ s: "13:30", e: "17:00", z: "ZP" }, { s: "17:30", e: "21:00", z: "ZP" }]), null);
+  assert.ok(C.eveningOutside(s, [{ s: "16:00", e: "23:30", z: "ZR" }]));
+  assert.ok(C.eveningOutside(s, [{ s: "13:30", e: "21:00", z: "ZR" }]));
+  assert.equal(C.eveningOutside(s, [{ s: "06:00", e: "13:30", z: "ZR" }]), null); // le matin n'est pas concerné
+  const snapped = C.snapEvening(s, [{ s: "16:00", e: "19:30", z: "ZR" }, { s: "20:00", e: "23:30", z: "ZR" }]);
+  assert.equal(C.eveningOutside(s, snapped), null);
+  // généré : aucun horaire du soir hors tranche
+  const { week } = C.generateWeek(s, W1);
+  assert.ok(week.shifts.every((x) => !C.eveningOutside(s, x.segs)));
+});

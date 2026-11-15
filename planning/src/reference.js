@@ -579,6 +579,12 @@
       id: "plannings-novembre",
       summary: "Plannings papier du 26/10 (version corrigée), du 02/11 et du 09/11 ajoutés ; Sabrina, Helena, Ruby et Lana en formation",
       validatePaperWeeks: true,
+    }, {
+      id: "eric-zp-trajet-soir",
+      summary: "Eric jamais en ZR ; Camilian et Fleur : 1 h de décalage permise ; horaires du soir dans les tranches possibles (ZR 15:30–23:00 ou 14:30–22:00, ZP 14:30–22:00 ou 13:30–21:00)",
+      patchEmp: { eric: { zones: { ZP: "confirme" } } },
+      patchLinks: { "lien-trajet-camilian-fleur": { tolerance: 60 } },
+      settings: { eveningSlots: { ZR: ["15:30-23:00", "14:30-22:00"], ZP: ["14:30-22:00", "13:30-21:00"] } },
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",
