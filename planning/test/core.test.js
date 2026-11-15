@@ -40,9 +40,10 @@ test("modèle : les totaux relus correspondent à la colonne Total du papier", (
 test("génération semaine 1 : tout le monde a ses horaires, aucune erreur bloquante", () => {
   const s = fresh();
   const { week, report } = C.generateWeek(s, W1);
-  assert.equal(week.shifts.length, 55); // 50 du modèle + Lucas (absent du modèle) complété à ses heures
+  assert.equal(week.shifts.length, 54); // modèle + Lucas (absent du modèle) ; Mathilde 4 journées de 7 h (30 h de contrat)
+  assert.ok(week.shifts.every((x) => C.shiftMinutes(x.segs) === 420)); // journées de 7 h 30 dont 30 min de pause
   for (const e of s.employees.filter((x) => x.active !== false && C.allowedZones(x).length)) assert.ok(week.shifts.some((x) => x.emp === e.id), e.name + " doit travailler");
-  assert.equal(report.notPlaced.length, 0);
+  assert.ok(report.notPlaced.every((n) => n.trim)); // seulement des journées en trop (contrat réduit)
   assert.equal(C.blockingIssues(report.issues).length, 0);
 });
 
@@ -51,12 +52,12 @@ test("génération : jamais d'alternant pendant les cours (29 et 30 octobre)", (
   const { week, report } = C.generateWeek(s, W2);
   const bad = week.shifts.filter((x) => ["fleur", "camilian"].includes(x.emp) && ["2026-10-29", "2026-10-30"].includes(x.date));
   assert.equal(bad.length, 0);
-  // 4 jours de cours ; les journées des alternants sont raccourcies (travail + cours ≤ 35 h), aucun jour retiré
-  assert.equal(report.notPlaced.length, 4);
-  assert.ok(report.notPlaced.every((n) => /formation|cours au CFA/.test(n.reason)));
+  // 4 jours de cours (+ une journée de Mathilde : 4 journées de 7 h pour 30 h de contrat)
+  assert.equal(report.notPlaced.filter((n) => ["fleur", "camilian"].includes(n.emp)).length, 4);
+  assert.ok(report.notPlaced.filter((n) => ["fleur", "camilian"].includes(n.emp)).every((n) => /formation|cours au CFA/.test(n.reason)));
   const ws = { ...s, weeks: { ...s.weeks, [W2]: week } };
   for (const id of ["fleur", "camilian"]) {
-    assert.ok(week.shifts.filter((x) => x.emp === id).reduce((a, x) => a + C.shiftMinutes(x.segs), 0) + C.weekCourseMinutes(ws, W2, id) <= 35 * 60);
+    assert.ok(week.shifts.filter((x) => x.emp === id).reduce((a, x) => a + C.shiftMinutes(x.segs), 0) + C.weekCourseMinutes(ws, W2, id) <= 42 * 60);
     const off = C.weekDates(W2).filter((d) => !week.shifts.some((x) => x.emp === id && x.date === d) && !C.courseMinutesOn(ws, C.empById(ws, id), d)).length;
     assert.ok(off <= 2, id + " : " + off + " jours sans travail");
   }
