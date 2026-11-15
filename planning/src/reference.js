@@ -585,6 +585,15 @@
       patchEmp: { eric: { zones: { ZP: "confirme" } } },
       patchLinks: { "lien-trajet-camilian-fleur": { tolerance: 60 } },
       settings: { eveningSlots: { ZR: ["15:30-23:00", "14:30-22:00"], ZP: ["14:30-22:00", "13:30-21:00"] } },
+    }, {
+      id: "effectif-max-zones",
+      summary: "Nombre maximum de personnes : ZR 3 le matin et 3 le soir ; ZP 4 le matin et 2 le soir",
+      addStaffing: [
+        { id: "max-zr-matin", from: "2026-01-01", to: "2030-12-31", s: "05:30", e: "13:00", zone: "ZR", min: null, max: 3 },
+        { id: "max-zr-soir", from: "2026-01-01", to: "2030-12-31", s: "15:30", e: "23:00", zone: "ZR", min: null, max: 3 },
+        { id: "max-zp-matin", from: "2026-01-01", to: "2030-12-31", s: "05:30", e: "13:00", zone: "ZP", min: null, max: 4 },
+        { id: "max-zp-soir", from: "2026-01-01", to: "2030-12-31", s: "15:30", e: "22:00", zone: "ZP", min: null, max: 2 },
+      ],
     }],
     source: {
       planning: "Planning à partir du 19/10/2026 – Semaine 1 – Page 1/2 (photo)",

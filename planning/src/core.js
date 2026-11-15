@@ -976,6 +976,46 @@
       }
       return out;
     };
+    // 0) Nombre maximum de personnes par zone (ex. ZR 3 le matin et le soir, ZP 4 le matin et 2 le soir) :
+    //    les postes du modèle en trop passent dans l'autre zone ou sur un autre horaire, sinon l'alerte reste.
+    {
+      const othersOf = (id) => state.employees.filter((e) => e.id !== id).map((e) => e.id);
+      const altBases = [];
+      for (const t of (state.template && state.template.shifts) || []) { const k = segKey(t.segs); if (!altBases.some((x) => segKey(x) === k)) altBases.push(t.segs.map(({ s, e, z }) => ({ s, e, z }))); }
+      for (const date of weekDates(monday)) {
+        if (!inRange(date)) continue;
+        for (const r of (stG.staffing || []).filter((x) => x.max != null && date >= x.from && date <= x.to)) {
+          for (let guard = 0; guard < 12; guard++) {
+            const day = week.shifts.filter((x) => x.date === date);
+            const g = staffingGaps(state, day, date, r);
+            if (!g.high.length) break;
+            const hi = g.high[0], a = toMin(hi.s), b = toMin(hi.e);
+            const contrib = day.filter((x) => x.segs.some((q) => isTime(q.s) && isTime(q.e) && (!r.zone || q.z === r.zone) && segRange(q)[1] > a && segRange(q)[0] < b))
+              .sort((p, q) => (p.filled ? 0 : 1) - (q.filled ? 0 : 1));
+            let moved = false;
+            for (const x of contrib) {
+              const emp = empById(state, x.emp);
+              if (!emp) continue;
+              const zs = allowedZones(emp).filter((z) => !isAdminZone(z));
+              const len = shiftMinutes(x.segs);
+              const alts = [];
+              for (const z of zs) alts.push(snapEvening(state, fitSeason(x.segs.map((q) => ({ ...q, z: isAdminZone(q.z) ? q.z : z })))));
+              for (const B of altBases) if (Math.abs(shiftMinutes(B) - len) <= 60) for (const z of zs) alts.push(snapEvening(state, fitSeason(B.map((q) => ({ ...q, z })))));
+              const idx = week.shifts.indexOf(x);
+              week.shifts.splice(idx, 1);
+              for (const segs of alts) {
+                if (segKey(segs) === segKey(x.segs)) continue;
+                const c = findCandidates(work, date, segs, { exclude: othersOf(emp.id), sameDay: true })[0];
+                if (c && c.restOk) { x.segs = segs; moved = true; break; }
+              }
+              week.shifts.splice(idx, 0, x);
+              if (moved) break;
+            }
+            if (!moved) break;
+          }
+        }
+      }
+    }
     // 1) Alternants : travail + cours ne dépassent jamais le contrat. On raccourcit leurs journées (on ne leur retire pas de jour).
     for (const emp of state.employees) {
       if (emp.role !== "alternant" || emp.active === false || (include && !include.has(emp.id))) continue;

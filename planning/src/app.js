@@ -2306,6 +2306,7 @@
         ops.push({ type: "setWeekStatus", monday: w.week, status: "validé", acknowledge: true });
       }
       if (u.settings) ops.push({ type: "setSettings", patch: u.settings });
+      if (u.addStaffing) { const cur = this.state.settings.staffing || []; const add = u.addStaffing.filter((r) => !cur.some((x) => x.id === r.id)); if (add.length) ops.push({ type: "setSettings", patch: { staffing: [...cur, ...add] } }); }
       for (const [id, patch] of Object.entries(u.patchEmp || {})) {
         const e = C.empById(this.state, id); if (!e) continue;
         const { zones, ...rest } = patch;
