@@ -691,3 +691,21 @@ test("soir : horaires seulement dans les tranches possibles (ZR 15:30–23:00 / 
   const { week } = C.generateWeek(s, W1);
   assert.ok(week.shifts.every((x) => !C.eveningOutside(s, x.segs)));
 });
+
+test("ouverture : ZP à l'ouverture et ZR à l'ouverture chaque jour, seulement par une personne ancienne (jamais en formation)", () => {
+  const s = withWeek1();
+  const M = "2026-11-30";
+  const { week } = C.generateWeek(s, M);
+  const ws = { ...s, weeks: { ...s.weeks, [M]: week } };
+  const iss = C.validateWeek(ws, M);
+  assert.equal(iss.filter((i) => i.code === "OPENING_NEW").length, 0);
+  // un(e) non ancien(ne) qui ouvre : signalé
+  const e = s.employees.find((x) => x.id === "eric");
+  const w2 = { ...week, shifts: week.shifts.map((x) => x) };
+  const opener = w2.shifts.find((x) => x.segs[0].z === "ZP" && x.segs[0].s === C.openingHours(ws, "ZP", x.date).s);
+  if (opener) {
+    const st2 = { ...ws, employees: ws.employees.map((x) => ({ ...x, skills: { ...(x.skills || {}), ancien: x.id !== opener.emp } })) };
+    assert.ok(C.validateWeek(st2, M).some((i) => i.code === "OPENING_NEW"));
+  }
+  assert.ok(e);
+});
