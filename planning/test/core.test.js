@@ -51,12 +51,16 @@ test("génération : jamais d'alternant pendant les cours (29 et 30 octobre)", (
   const { week, report } = C.generateWeek(s, W2);
   const bad = week.shifts.filter((x) => ["fleur", "camilian"].includes(x.emp) && ["2026-10-29", "2026-10-30"].includes(x.date));
   assert.equal(bad.length, 0);
-  // 4 jours de cours + 2 journées retirées (travail + cours limités à 35 h)
-  assert.equal(report.notPlaced.length, 6);
+  // 4 jours de cours ; les journées des alternants sont raccourcies (travail + cours ≤ 35 h), aucun jour retiré
+  assert.equal(report.notPlaced.length, 4);
   assert.ok(report.notPlaced.every((n) => /formation|cours au CFA/.test(n.reason)));
-  for (const id of ["fleur", "camilian"]) assert.ok(week.shifts.filter((x) => x.emp === id).reduce((a, x) => a + C.shiftMinutes(x.segs), 0) + C.weekCourseMinutes({ ...s, weeks: { ...s.weeks, [W2]: week } }, W2, id) <= 35 * 60);
-  s.weeks[W2] = week;
-  assert.equal(C.uncoveredPosts(s, W2).length, 6);
+  const ws = { ...s, weeks: { ...s.weeks, [W2]: week } };
+  for (const id of ["fleur", "camilian"]) {
+    assert.ok(week.shifts.filter((x) => x.emp === id).reduce((a, x) => a + C.shiftMinutes(x.segs), 0) + C.weekCourseMinutes(ws, W2, id) <= 35 * 60);
+    const off = C.weekDates(W2).filter((d) => !week.shifts.some((x) => x.emp === id && x.date === d) && !C.courseMinutesOn(ws, C.empById(ws, id), d)).length;
+    assert.ok(off <= 2, id + " : " + off + " jours sans travail");
+  }
+  assert.equal(report.tooManyOff.length, 0);
 });
 
 test("génération : statut d'alternance inconnu = non disponible", () => {

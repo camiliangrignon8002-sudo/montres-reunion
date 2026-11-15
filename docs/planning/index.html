@@ -2122,31 +2122,66 @@ details.gen-more[open] > summary { color: var(--fg); }
     const fullC = (stG.contractHours || 35) * 60;
     const mineOf = (id) => week.shifts.filter((x) => x.emp === id && inRange(x.date));
     const staffOn = (date) => week.shifts.filter((x) => x.date === date).length;
-    // 1) Alternants : travail + cours ne dépassent jamais le contrat ; on retire les journées en trop (là où l'équipe est la plus nombreuse).
+    // Absence sur toute la journée (congé, arrêt…) : ce jour ne compte ni comme travaillé ni comme repos.
+    const tooManyOff = [];
+    const absentDay = (id, date) => absencesOn(state, id, date).some((x) => !absPartial(x));
+    const busy = (id, date) => week.shifts.some((x) => x.emp === id && x.date === date) || courseMinutesOn(state, empById(state, id), date) > 0;
+    const offDays = (id) => weekDates(monday).filter((d) => inRange(d) && !busy(id, d) && !absentDay(id, d)).length;
+    const maxOff = Math.round((stG.minDaysOff || 2) * rangeDays / 7);   // 2 jours de repos par semaine, pas plus
+    // Raccourcit un créneau à « len » minutes de travail (on garde le début ; les blocs de la fin sont coupés).
+    const shorten = (segs, len) => {
+      const out = []; let left = len;
+      for (const g of segs) {
+        if (left <= 0) break;
+        if (!isTime(g.s) || !isTime(g.e)) { out.push({ ...g }); continue; }
+        const d = segMinutes(g);
+        if (d <= left) { out.push({ ...g }); left -= d; } else { out.push({ ...g, e: fromMin(toMin(g.s) + left) }); left = 0; }
+      }
+      return out;
+    };
+    // 1) Alternants : travail + cours ne dépassent jamais le contrat. On raccourcit leurs journées (on ne leur retire pas de jour).
     for (const emp of state.employees) {
       if (emp.role !== "alternant" || emp.active === false || (include && !include.has(emp.id))) continue;
       const course = weekCourseMinutes(work, monday, emp.id);
       if (!course) continue;
-      let mine = mineOf(emp.id);
-      while (mine.length && mine.reduce((a, x) => a + shiftMinutes(x.segs), 0) + course > fullC) {
-        const partners = new Set(links.filter((l) => l.sameHours && l.emps.includes(emp.id)).flatMap((l) => l.emps).filter((id) => id !== emp.id));
-        const partnerOff = (d) => notPlaced.some((n) => partners.has(n.emp) && n.date === d && /cours au CFA cette semaine/.test(n.reason)) ? 1 : 0;
-        const drop = mine.slice().sort((a, b) => partnerOff(b.date) - partnerOff(a.date) || staffOn(b.date) - staffOn(a.date) || (a.date < b.date ? 1 : -1))[0];
-        week.shifts = week.shifts.filter((x) => x !== drop); work.weeks[monday] = week;
-        const pi = placed.findIndex((p) => p.emp === drop.emp && p.date === drop.date); if (pi >= 0) placed.splice(pi, 1);
-        notPlaced.push({ emp: drop.emp, date: drop.date, segs: drop.segs, reason: `${fmtHours(course)} de cours au CFA cette semaine : travail + cours limités à ${fmtHours(fullC)}` });
-        mine = mineOf(emp.id);
+      const mine = mineOf(emp.id);
+      const total = mine.reduce((a, x) => a + shiftMinutes(x.segs), 0);
+      const allowed = Math.max(0, fullC - course);
+      if (total <= allowed || !mine.length) continue;
+      const per = Math.floor(allowed / mine.length / 30) * 30;
+      for (const x of mine) {
+        if (per < 120) { week.shifts = week.shifts.filter((y) => y !== x); notPlaced.push({ emp: x.emp, date: x.date, segs: x.segs, reason: `${fmtHours(course)} de cours au CFA cette semaine : travail + cours limités à ${fmtHours(fullC)}` }); continue; }
+        x.segs = shorten(x.segs, per);
       }
+      work.weeks[monday] = week;
     }
-    // 2) Personnes sans horaires (ou pas assez) : on leur donne des postes pris dans le modèle, jusqu'à leurs heures de la semaine.
+    // 2) Tout le monde travaille : au plus 2 jours de repos par semaine, et ses heures de la semaine
+    //    (journées plus courtes pour les contrats réduits et les alternants).
     if (opts.fillAll !== false) {
-      const shapes = [];
-      for (const t of (state.template && state.template.shifts) || []) if (!shapes.some((x) => segKey(x) === segKey(t.segs))) shapes.push(t.segs.map(({ s, e, z }) => ({ s, e, z })));
+      const bases = [];
+      for (const t of (state.template && state.template.shifts) || []) {
+        const sp = shiftSpan(t.segs);
+        if (!isTime(sp.s) || !isTime(sp.e)) continue;
+        const k = `${sp.s}-${sp.e}-${t.segs[0].z}`;
+        if (!bases.some((x) => x.k === k)) bases.push({ k, a: toMin(sp.s), b: toMin(sp.e), z: t.segs[0].z, segs: t.segs.map(({ s, e, z }) => ({ s, e, z })) });
+      }
+      // Créneaux d'une durée donnée : au début ou à la fin d'un poste du modèle, avec une pause au-delà de 6 h.
+      const shapesOf = (len) => {
+        const out = [];
+        for (const B of bases) {
+          if (len >= shiftMinutes(B.segs) - 15) { out.push(B.segs); continue; }
+          const pause = len > 360 ? 30 : 0, h1 = Math.round(len / 2 / 30) * 30;
+          for (const start of [B.a, B.b - len - pause]) {
+            if (start < 0) continue;
+            out.push(pause ? [{ s: fromMin(start), e: fromMin(start + h1), z: B.z }, { s: fromMin(start + h1 + pause), e: fromMin(start + len + pause), z: B.z }] : [{ s: fromMin(start), e: fromMin(start + len), z: B.z }]);
+          }
+        }
+        return out;
+      };
       const target = (emp) => {
-        let m = emp.role === "alternant" ? Math.max(0, fullC - weekCourseMinutes(work, monday, emp.id)) : (Number(emp.contractHours) || 0) * 60 || templateMinutes(state, emp.id) || fullC;
+        const m = emp.role === "alternant" ? Math.max(0, fullC - weekCourseMinutes(work, monday, emp.id)) : (Number(emp.contractHours) || 0) * 60 || templateMinutes(state, emp.id) || fullC;
         return Math.round(m * rangeDays / 7);
       };
-      const maxDays = Math.max(0, 7 - (stG.minDaysOff || 2));
       const shapeFor = (emp, segs) => {
         const zs = allowedZones(emp).filter((z) => !isAdminZone(z));
         if (!zs.length) return null;
@@ -2162,28 +2197,34 @@ details.gen-more[open] > summary { color: var(--fg); }
       for (let round = 0, progress = true; progress && round < 7; round++) {
         progress = false;
         for (const emp of people) {
-          const mine = week.shifts.filter((x) => x.emp === emp.id && inRange(x.date));
-          const done = mine.reduce((a, x) => a + shiftMinutes(x.segs), 0);
+          const done = mineOf(emp.id).reduce((a, x) => a + shiftMinutes(x.segs), 0);
           const deficit = target(emp) - done;
-          if (deficit < 150 || week.shifts.filter((x) => x.emp === emp.id).length >= maxDays) continue;
+          const needDays = offDays(emp.id) - maxOff;
+          if (needDays <= 0 && (deficit < 150 || offDays(emp.id) <= maxOff)) continue;
+          if (needDays <= 0) continue; // 5 jours déjà : ses heures sont dans ses journées
+          // Durée de la journée : le reste de ses heures réparti sur les jours qui manquent (3 h minimum, 7 h maximum).
+          const want = Math.min(420, Math.max(180, Math.round(Math.max(deficit, 0) / needDays / 30) * 30));
           let best = null;
-          for (const date of weekDates(monday)) {
-            if (!inRange(date) || week.shifts.some((x) => x.emp === emp.id && x.date === date)) continue;
-            if (extra.some((x) => x.emp === emp.id && x.date === date)) continue;
-            if (emp.role === "alternant" && calStatus(state, emp, date) !== "entreprise" && calStatus(state, emp, date) !== "weekend") continue;
-            const tried = new Set();
-            for (const sh of shapes) {
-              const segs = shapeFor(emp, sh);
-              if (!segs || tried.has(segKey(segs))) continue;
-              tried.add(segKey(segs));
-              const c = findCandidates(work, date, segs, { exclude: state.employees.filter((e) => e.id !== emp.id).map((e) => e.id) })[0];
-              if (!c || !c.restOk) continue;
-              const len = shiftMinutes(segs);
-              const day = week.shifts.filter((x) => x.date === date);
-              const gain = lack(date, day) - lack(date, [...day, { emp: emp.id, date, segs }]);
-              const sc = c.score - 6 * sameZoneCount(date, segs) - 2 * staffOn(date) + (len <= deficit + 60 ? 8 : -25) + gain / 15;
-              if (!best || sc > best.sc) best = { sc, date, segs };
+          for (const len of [...new Set([want, want - 30, want - 60, want + 30, 240, 180].filter((x) => x >= 120 && x <= 420))]) {
+            for (const date of weekDates(monday)) {
+              if (!inRange(date) || busy(emp.id, date) || absentDay(emp.id, date)) continue;
+              if (extra.some((x) => x.emp === emp.id && x.date === date)) continue;
+              const cs = calStatus(state, emp, date);
+              if (emp.role === "alternant" && cs !== "entreprise" && cs !== "weekend") continue;
+              const tried = new Set();
+              for (const sh of shapesOf(len)) {
+                const segs = shapeFor(emp, sh);
+                if (!segs || tried.has(segKey(segs))) continue;
+                tried.add(segKey(segs));
+                const c = findCandidates(work, date, segs, { exclude: state.employees.filter((e) => e.id !== emp.id).map((e) => e.id) })[0];
+                if (!c || !c.restOk) continue;
+                const day = week.shifts.filter((x) => x.date === date);
+                const gain = lack(date, day) - lack(date, [...day, { emp: emp.id, date, segs }]);
+                const sc = c.score - 6 * sameZoneCount(date, segs) - 2 * staffOn(date) + gain / 15 - Math.abs(shiftMinutes(segs) - want) / 10 + (dow(date) >= 5 ? -4 : 0);
+                if (!best || sc > best.sc) best = { sc, date, segs };
+              }
             }
+            if (best) break;
           }
           if (!best) continue;
           week.shifts.push({ id: uid("c"), emp: emp.id, date: best.date, segs: best.segs, filled: true });
@@ -2193,6 +2234,8 @@ details.gen-more[open] > summary { color: var(--fg); }
         }
       }
       week.shifts.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+      // Ceux qui ne peuvent pas avoir leurs 5 jours : signalé dans le rapport
+      for (const emp of people) if (offDays(emp.id) > maxOff) tooManyOff.push({ emp: emp.id, off: offDays(emp.id), reason: `${offDays(emp.id)} jours sans travail cette semaine : aucun autre créneau possible avec les règles (repos, heures, zones, formation)` });
     }
     // Jours de bureau minimum : marqués sur les journées où l'équipe est la plus nombreuse.
     for (const emp of state.employees) {
@@ -2205,7 +2248,7 @@ details.gen-more[open] > summary { color: var(--fg); }
     const tmp = { ...state, weeks: { ...(state.weeks || {}), [monday]: week } };
     const issues = validateWeek(tmp, monday);
     const suggestions = notPlaced.map((n) => ({ ...n, candidates: findCandidates(tmp, n.date, n.segs, { exclude: [n.emp] }).slice(0, 3) }));
-    return { week, report: { placed: placed.length, notPlaced: suggestions, issues } };
+    return { week, report: { placed: placed.length, notPlaced: suggestions, issues, tooManyOff } };
   }
 
   // ---------- Grille d'affichage / export ----------
@@ -4416,7 +4459,7 @@ details.gen-more[open] > summary { color: var(--fg); }
     const curW = C.getWeek(s, C.mondayOf(this.ui.monday));
     if (curW && curW.shifts.length) overwrite.checked = false;
     const genParts = only ? [] : [
-      h("div", { class: "banner info", "data-keep": "1" }, h("b", {}, "Rien à remplir : l'appli prépare tout le planning. "), "Chaque personne de l'équipe reçoit son poste (ZP ou ZR) et ses horaires pour ses heures de la semaine, d'après le modèle, son contrat, ses cours, ses absences et toutes les règles. Choisissez juste la période, puis vérifiez la proposition avant d'enregistrer."),
+      h("div", { class: "banner info", "data-keep": "1" }, h("b", {}, "Rien à remplir : l'appli prépare tout le planning. "), "Chaque personne de l'équipe reçoit son poste (ZP ou ZR) et ses horaires : 5 jours de travail (2 jours de repos au maximum, les cours comptent comme travaillés), avec des journées plus courtes pour les contrats réduits, d'après le modèle, son contrat, ses cours, ses absences et toutes les règles. Choisissez juste la période, puis vérifiez la proposition avant d'enregistrer."),
       h("div", { class: "row", "data-keep": "1" }, seg), (periodBox.dataset.keep = "1", periodBox),
       h("h3", {}, "Personnes concernées"), h("div", { class: "form-grid" }, checks),
       h("p", { class: "small muted" }, `${absN} congé(s) ou absence(s) enregistré(s) et le calendrier d'alternance sont pris en compte automatiquement.`)];
@@ -4475,10 +4518,11 @@ details.gen-more[open] > summary { color: var(--fg); }
           (() => { // Qui travaille : chacun avec ses jours et ses heures
             const ids = (opts.employees || s.employees.map((e) => e.id)).filter((id) => { const e = C.empById(s, id); return e && e.active !== false; });
             const tmpS = { ...s, weeks: { ...s.weeks, [r.monday]: r.week } };
-            const rows = ids.map((id) => { const mine = r.week.shifts.filter((x) => x.emp === id && x.date >= opts.from && x.date <= opts.to); return { id, n: mine.length, min: mine.reduce((a, x) => a + C.shiftMinutes(x.segs), 0), cours: C.weekCourseMinutes(tmpS, r.monday, id) }; });
+            const rows = ids.map((id) => { const mine = r.week.shifts.filter((x) => x.emp === id && x.date >= opts.from && x.date <= opts.to); const e = C.empById(s, id); return { id, n: mine.length, min: mine.reduce((a, x) => a + C.shiftMinutes(x.segs), 0), cours: C.weekCourseMinutes(tmpS, r.monday, id), cj: C.weekDates(r.monday).filter((d) => !mine.some((x) => x.date === d) && C.courseMinutesOn(tmpS, e, d) > 0).length }; });
             const zero = rows.filter((x) => !x.n);
             return h("div", { class: "gen-who" }, h("b", { class: "small" }, zero.length ? `${rows.length - zero.length} personne(s) sur ${rows.length} ont des horaires :` : `Tout le monde a son poste et ses horaires (${rows.length} personnes) :`),
-              h("div", { class: "row", style: { "flex-wrap": "wrap", gap: "6px", "margin-top": "6px" } }, rows.map((x) => h("span", { class: `chip ${x.n ? "ok" : x.cours ? "cours" : "err"}` }, `${empName(s, x.id)} · ${x.n ? `${x.n} j · ${C.fmtHours(x.min)}` : x.cours ? "cours toute la semaine" : "aucun horaire"}${x.n && x.cours ? ` + ${C.fmtHours(x.cours)} cours` : ""}`))),
+              h("div", { class: "row", style: { "flex-wrap": "wrap", gap: "6px", "margin-top": "6px" } }, rows.map((x) => h("span", { class: `chip ${x.n ? "ok" : x.cours ? "cours" : "err"}` }, `${empName(s, x.id)} · ${x.n ? `${x.n} j · ${C.fmtHours(x.min)}` : x.cours ? "cours toute la semaine" : "aucun horaire"}${x.n && x.cours ? ` + ${x.cj ? `${x.cj} j de ` : ""}cours (${C.fmtHours(x.cours)})` : ""}`))),
+              (r.report.tooManyOff || []).map((x) => h("div", { class: "issue alerte" }, h("span", { class: "ico" }, "!"), h("span", { class: "small" }, `${empName(s, x.emp)} : ${x.reason}.`))),
               zero.filter((x) => !x.cours).length ? h("p", { class: "small muted", style: { "margin-top": "6px" } }, "Sans horaire : absent(e) toute la période, zone de travail non renseignée dans sa fiche, ou aucune place possible avec les règles (voir les alertes après enregistrement).") : null);
           })(),
           r.report.notPlaced.length ? h("div", {}, h("b", { class: "small" }, `${r.report.notPlaced.length} poste(s) non attribué(s) :`), r.report.notPlaced.map((n) => h("div", { class: "issue alerte" }, h("span", { class: "ico" }, "?"), h("span", { class: "small" }, `${empName(s, n.emp)} · ${C.fmtDate(n.date, "day")} ${C.segLabel(n.segs)} — ${n.reason}. `, n.candidates.length ? `Remplaçants possibles : ${n.candidates.map((c) => c.name).join(", ")}.` : "Aucun remplaçant possible avec les règles actuelles.")))) : h("p", { class: "small", style: { color: "var(--ok)" } }, "Tous les postes du modèle sont attribués."),
