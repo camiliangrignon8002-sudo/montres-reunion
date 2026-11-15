@@ -89,35 +89,6 @@
   "vu": "2026-11-03T19:05+04:00"
  },
  {
-  "id": "zimo-01a1a0d1-e2b9-7998-8661-c5f72faa2e4f",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio/01a1a0d1-e2b9-7998-8661-c5f72faa2e4f",
-  "titre": "Appartement Location Saint-Denis 1p 30m² 350€",
-  "prix": 350.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 30.0,
-  "meuble": null,
-  "photos": [],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 30 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-03T14:09+04:00"
- },
- {
   "id": "pv-1297022875",
   "source": "ParuVendu",
   "url": "https://www.paruvendu.fr/immobilier/location/appartement/1297022875A1KILHAP000",
@@ -166,40 +137,6 @@
    }
   ],
   "vu": "2026-11-03T21:13+04:00"
- },
- {
-  "id": "ep-22743188",
-  "source": "EntreParticuliers",
-  "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-1-piece-22-m2/ref-22743188",
-  "titre": "Appartement 1 pièce 22 m² — Saint-Denis",
-  "prix": 364.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 22.0,
-  "meuble": null,
-  "photos": [
-   "https://www.entreparticuliers.com/media/epc-photos/photo_e1aa5f42-9cc3-4d36-9860-a53bfd31677f.jpg"
-  ],
-  "description": "RUNIMMO vous propose à la location à Sainte-Clotilde, résidence « Central Fac 11 » proche de l'université dans une résidence étudiante récente un studio de 22.10m² situé au deuxième étage avec ascenseur comprenant une entrée avec cuisine, une pièce principale, une grande salle de bains avec wc. Disponible de suite.***Logement soumis au régime PINEL OM (plafond de ressources pour le locataire) *** Pour une visite contactez EMILIE au 0692 26 92 05.\nLoyer de base 364 €/mois. Provision sur charges 40 €/mois, régularisation annuelle. Dépôt de garantie 364 €. Non soumis au DPE.",
-  "caracteristiques": [
-   "Ascenseur",
-   "Proche université"
-  ],
-  "date": "",
-  "annonceur": "Particulier",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "0692 26 92 05",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-31T14:50+04:00"
  },
  {
   "id": "superimmo-o-com-annonces-location-appartement-23m-moufia-97490-x129k38",
