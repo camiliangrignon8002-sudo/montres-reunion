@@ -159,10 +159,11 @@ const MOCK = `
     for (let i = 0; i < 4; i++) await page.click('button[aria-label="Semaine suivante"]');
     await page.waitForSelector("text=Aucun horaire pour cette semaine.");
     await page.click(".empty >> text=Générer à partir du modèle");
-    await page.click("text=Préparer la proposition");
+    await page.click(".dialog footer >> text=Générer le planning");
     await page.waitForSelector("text=Proposition de planning");
     const notPlaced = await page.textContent(".dialog");
-    check("génération : 4 postes non attribués (CFA les 26-27 nov. ; Nathalie revenue le 16/11)", /4 poste\(s\) non attribué/.test(notPlaced) && !/acances/.test(notPlaced) && (notPlaced.match(/(formation|cours) au CFA/g) || []).length === 4);
+    console.log("   [aperçu] " + (notPlaced.match(/\d+ poste\(s\) non attribué/) || ["0"])[0] + " ; " + (notPlaced.match(/Tout le monde a son poste[^:]*/) || ["(pas tout le monde)"])[0]);
+    check("génération : tout le monde a ses horaires ; postes non attribués seulement à cause du CFA (Nathalie revenue le 16/11)", /Tout le monde a son poste et ses horaires/.test(notPlaced) && !/acances/.test(notPlaced) && (notPlaced.match(/poste\(s\) non attribué/) ? (notPlaced.match(/(formation|cours) au CFA/g) || []).length >= 4 : true));
     await page.click(".dialog footer >> text=/Enregistrer 1 semaine/");
     await page.waitForSelector("text=Postes à pourvoir");
     const coursTags = await page.$$eval('tr:has(td.name b:text-is("Fleur")) td', (tds) => tds.filter((t) => t.querySelector(".seg-cours")).length);

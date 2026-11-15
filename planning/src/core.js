@@ -921,6 +921,93 @@
         changed = true; break;
       }
     }
+    // ---------- Tout le monde travaille : chacun reçoit son poste et ses horaires ----------
+    const work = { ...state, weeks: { ...(state.weeks || {}), [monday]: week } };
+    const inRange = (d) => d >= from && d <= to;
+    const rangeDays = weekDates(monday).filter(inRange).length;
+    const fullC = (stG.contractHours || 35) * 60;
+    const mineOf = (id) => week.shifts.filter((x) => x.emp === id && inRange(x.date));
+    const staffOn = (date) => week.shifts.filter((x) => x.date === date).length;
+    // 1) Alternants : travail + cours ne dépassent jamais le contrat ; on retire les journées en trop (là où l'équipe est la plus nombreuse).
+    for (const emp of state.employees) {
+      if (emp.role !== "alternant" || emp.active === false || (include && !include.has(emp.id))) continue;
+      const course = weekCourseMinutes(work, monday, emp.id);
+      if (!course) continue;
+      let mine = mineOf(emp.id);
+      while (mine.length && mine.reduce((a, x) => a + shiftMinutes(x.segs), 0) + course > fullC) {
+        const partners = new Set(links.filter((l) => l.sameHours && l.emps.includes(emp.id)).flatMap((l) => l.emps).filter((id) => id !== emp.id));
+        const partnerOff = (d) => notPlaced.some((n) => partners.has(n.emp) && n.date === d && /cours au CFA cette semaine/.test(n.reason)) ? 1 : 0;
+        const drop = mine.slice().sort((a, b) => partnerOff(b.date) - partnerOff(a.date) || staffOn(b.date) - staffOn(a.date) || (a.date < b.date ? 1 : -1))[0];
+        week.shifts = week.shifts.filter((x) => x !== drop); work.weeks[monday] = week;
+        const pi = placed.findIndex((p) => p.emp === drop.emp && p.date === drop.date); if (pi >= 0) placed.splice(pi, 1);
+        notPlaced.push({ emp: drop.emp, date: drop.date, segs: drop.segs, reason: `${fmtHours(course)} de cours au CFA cette semaine : travail + cours limités à ${fmtHours(fullC)}` });
+        mine = mineOf(emp.id);
+      }
+    }
+    // 2) Personnes sans horaires (ou pas assez) : on leur donne des postes pris dans le modèle, jusqu'à leurs heures de la semaine.
+    if (opts.fillAll !== false) {
+      const shapes = [];
+      for (const t of (state.template && state.template.shifts) || []) if (!shapes.some((x) => segKey(x) === segKey(t.segs))) shapes.push(t.segs.map(({ s, e, z }) => ({ s, e, z })));
+      const target = (emp) => {
+        let m = emp.role === "alternant" ? Math.max(0, fullC - weekCourseMinutes(work, monday, emp.id)) : (Number(emp.contractHours) || 0) * 60 || templateMinutes(state, emp.id) || fullC;
+        return Math.round(m * rangeDays / 7);
+      };
+      const maxDays = Math.max(0, 7 - (stG.minDaysOff || 2));
+      const shapeFor = (emp, segs) => {
+        const zs = allowedZones(emp).filter((z) => !isAdminZone(z));
+        if (!zs.length) return null;
+        const wz = emp.rules && emp.rules.weekZone && zs.includes(emp.rules.weekZone) ? emp.rules.weekZone : null;
+        return fitSeason(segs.map((g) => ({ ...g, z: wz || (zs.includes(g.z) ? g.z : zs[0]) })));
+      };
+      // Manque de personnel (effectif minimum + règle des passagers), en personnes × minutes
+      const rulesOn = (date) => [...(stG.staffing || []), ...paxRules(state, date)].filter((r) => r.min != null && date >= r.from && date <= r.to);
+      const lack = (date, shifts) => rulesOn(date).reduce((a, r) => a + staffingGaps(state, shifts, date, r).low.reduce((b, x) => b + (r.min - x.n) * (toMin(x.e) - toMin(x.s)), 0), 0);
+      const sameZoneCount = (date, segs) => week.shifts.filter((x) => x.date === date).reduce((a, x) => a + (sameZoneOverlap(segs, x.segs).length ? 1 : 0), 0);
+      const people = state.employees.filter((e) => e.active !== false && (!include || include.has(e.id)) && allowedZones(e).some((z) => !isAdminZone(z)))
+        .sort((a, b) => (inTraining(a, from) ? 1 : 0) - (inTraining(b, from) ? 1 : 0)); // personnes en formation en dernier (jamais seules)
+      for (let round = 0, progress = true; progress && round < 7; round++) {
+        progress = false;
+        for (const emp of people) {
+          const mine = week.shifts.filter((x) => x.emp === emp.id && inRange(x.date));
+          const done = mine.reduce((a, x) => a + shiftMinutes(x.segs), 0);
+          const deficit = target(emp) - done;
+          if (deficit < 150 || week.shifts.filter((x) => x.emp === emp.id).length >= maxDays) continue;
+          let best = null;
+          for (const date of weekDates(monday)) {
+            if (!inRange(date) || week.shifts.some((x) => x.emp === emp.id && x.date === date)) continue;
+            if (extra.some((x) => x.emp === emp.id && x.date === date)) continue;
+            if (emp.role === "alternant" && calStatus(state, emp, date) !== "entreprise" && calStatus(state, emp, date) !== "weekend") continue;
+            const tried = new Set();
+            for (const sh of shapes) {
+              const segs = shapeFor(emp, sh);
+              if (!segs || tried.has(segKey(segs))) continue;
+              tried.add(segKey(segs));
+              const c = findCandidates(work, date, segs, { exclude: state.employees.filter((e) => e.id !== emp.id).map((e) => e.id) })[0];
+              if (!c || !c.restOk) continue;
+              const len = shiftMinutes(segs);
+              const day = week.shifts.filter((x) => x.date === date);
+              const gain = lack(date, day) - lack(date, [...day, { emp: emp.id, date, segs }]);
+              const sc = c.score - 6 * sameZoneCount(date, segs) - 2 * staffOn(date) + (len <= deficit + 60 ? 8 : -25) + gain / 15;
+              if (!best || sc > best.sc) best = { sc, date, segs };
+            }
+          }
+          if (!best) continue;
+          week.shifts.push({ id: uid("c"), emp: emp.id, date: best.date, segs: best.segs, filled: true });
+          placed.push({ emp: emp.id, date: best.date });
+          work.weeks[monday] = week;
+          progress = true;
+        }
+      }
+      week.shifts.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+    }
+    // Jours de bureau minimum : marqués sur les journées où l'équipe est la plus nombreuse.
+    for (const emp of state.employees) {
+      const min = Number((emp.rules || {}).officeMinDays) || 0;
+      if (!min || emp.active === false || (emp.rules.officeSince && addDays(monday, 6) < emp.rules.officeSince)) continue;
+      const mine = week.shifts.filter((x) => x.emp === emp.id && inRange(x.date));
+      let n = mine.filter((x) => x.office || x.segs.some((g) => isAdminZone(g.z))).length;
+      for (const x of mine.filter((x) => !x.office).sort((a, b) => staffOn(b.date) - staffOn(a.date))) { if (n >= min) break; x.office = true; n++; }
+    }
     const tmp = { ...state, weeks: { ...(state.weeks || {}), [monday]: week } };
     const issues = validateWeek(tmp, monday);
     const suggestions = notPlaced.map((n) => ({ ...n, candidates: findCandidates(tmp, n.date, n.segs, { exclude: [n.emp] }).slice(0, 3) }));

@@ -990,12 +990,23 @@
         h("label", { class: "btn primary" }, icon("import"), "Ajouter une photo", h("input", { type: "file", id: "gen-imp-photo", accept: "image/*", hidden: true, onChange: (e) => { const f = e.target.files[0]; e.target.value = ""; if (f) { dlg.close(); this.importWeekFile(f, C.mondayOf(weekIn.value || this.ui.monday)); } } })),
         h("label", { class: "btn" }, icon("import"), "Ajouter un fichier", h("input", { type: "file", id: "gen-imp-file", accept: "image/*,.csv,.txt,.xlsx,.xlsm,.ods,.pdf,text/csv,text/plain,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", hidden: true, onChange: (e) => { const f = e.target.files[0]; e.target.value = ""; if (f) { dlg.close(); this.importWeekFile(f, C.mondayOf(weekIn.value || this.ui.monday)); } } }))),
       h("p", { class: "small muted", style: { "margin-top": "6px" } }, `Fichiers acceptés : photo ou capture (JPEG, PNG, HEIC…), Excel (.xlsx), CSV, texte.${AI.imagesOk ? "" : " La lecture des photos et des tableaux libres utilise l'assistant Claude : ouvrez l'application dans Claude pour l'utiliser (le CSV de l'appli marche partout)."}`));
+    // Fenêtre simple : l'essentiel en haut, tous les réglages repliés (facultatifs)
+    const wrapGen = (el) => {
+      if (only) return el;
+      const det = h("details", { class: "gen-more" }, h("summary", {}, "Réglages (facultatif) : personnes, saison, critères, conditions, import"));
+      const inner = h("div", { class: "stack", style: { "margin-top": "12px" } });
+      for (const c of Array.from(el.children)) if (!c.dataset || !c.dataset.keep) inner.append(c);
+      det.append(inner); el.append(det);
+      return el;
+    };
+    const curW = C.getWeek(s, C.mondayOf(this.ui.monday));
+    if (curW && curW.shifts.length) overwrite.checked = false;
     const genParts = only ? [] : [
-      h("p", { class: "muted small" }, `Le générateur reprend le planning modèle (« ${s.template.label || "modèle"} ») jour par jour, avec ses horaires, pauses et zones. Il n'attribue jamais un créneau pendant des cours, une absence ou dans une zone non autorisée : ces postes restent « à pourvoir », avec des remplaçants proposés.`),
-      h("div", { class: "row" }, seg), periodBox,
+      h("div", { class: "banner info", "data-keep": "1" }, h("b", {}, "Rien à remplir : l'appli prépare tout le planning. "), "Chaque personne de l'équipe reçoit son poste (ZP ou ZR) et ses horaires pour ses heures de la semaine, d'après le modèle, son contrat, ses cours, ses absences et toutes les règles. Choisissez juste la période, puis vérifiez la proposition avant d'enregistrer."),
+      h("div", { class: "row", "data-keep": "1" }, seg), (periodBox.dataset.keep = "1", periodBox),
       h("h3", {}, "Personnes concernées"), h("div", { class: "form-grid" }, checks),
       h("p", { class: "small muted" }, `${absN} congé(s) ou absence(s) enregistré(s) et le calendrier d'alternance sont pris en compte automatiquement.`)];
-    const dlg = openDialog({ title: only ? "Critères du planning" : "Générer un planning", wide: true, body: h("div", { class: "stack" }, importSection, ...genParts, only ? paxSection : null,
+    const dlg = openDialog({ title: only ? "Critères du planning" : "Générer un planning", wide: true, body: wrapGen(h("div", { class: "stack" }, ...genParts, only ? paxSection : null,
       only ? null : h("section", { class: "card flat", id: "gen-season" }, h("h3", {}, "Saison"), seasonBox,
         h("p", { class: "small muted" }, `Cochée d'après la période été (${C.fmtDate(s.settings.summerFrom || "2026-10-25", "short")} → ${C.fmtDate(s.settings.summerTo || "2027-03-27", "short")}) ; hiver en dehors. Les postes qui dépassent l'ouverture sont décalés pour y tenir.`)),
       h("section", { class: "card flat", id: "gen-staff" }, h("h3", {}, "Critère : nombre de personnes"),
@@ -1018,8 +1029,8 @@
       only ? rulesLink : null,
       only ? null : h("details", {}, h("summary", { class: "small" }, "Contraintes particulières pour cette génération"),
         h("div", { class: "stack", style: { "margin-top": "8px" } }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Personne", xEmp), h("label", { class: "f" }, "Indisponible le", xDate), btn("Ajouter", () => { if (C.isISO(xDate.value)) { extra.push({ emp: xEmp.value, date: xDate.value }); drawExtra(); } }, "sm")), extraBox)),
-      only ? null : h("label", { class: "check" }, overwrite, "Remplacer les semaines qui contiennent déjà des horaires (une version de chacune est enregistrée avant)")),
-      actions: only ? [{ label: "Générer avec ces critères", onClick: () => { setTimeout(() => this.openGenerate(), 0); } }, { label: "Fermer", primary: true, onClick: () => { this.render(); } }] : [{ label: "Annuler" }, { label: "Préparer la proposition", primary: true, onClick: () => {
+      only ? null : h("label", { class: "check", "data-keep": "1" }, overwrite, "Remplacer les semaines qui contiennent déjà des horaires (une version de chacune est enregistrée avant)"), importSection)),
+      actions: only ? [{ label: "Générer avec ces critères", onClick: () => { setTimeout(() => this.openGenerate(), 0); } }, { label: "Fermer", primary: true, onClick: () => { this.render(); } }] : [{ label: "Annuler" }, { label: "Générer le planning", primary: true, onClick: () => {
         const { from, to } = range();
         if (!C.isISO(from) || !C.isISO(to) || to < from) { toast("Période invalide.", "err"); return false; }
         if (C.daysBetween(from, to) > 92) { toast("Trois mois maximum à la fois.", "err"); return false; }
@@ -1047,6 +1058,15 @@
       results.map((r) => h("section", { class: "card flat" },
         h("div", { class: "row between" }, h("h3", {}, `Semaine du ${C.fmtWeek(r.monday)}`), r.skipped ? h("span", { class: "chip" }, "Déjà remplie : non modifiée") : h("span", { class: "chip info" }, `${r.report.placed} créneaux`)),
         r.skipped ? null : h("div", { class: "stack", style: { gap: "6px", "margin-top": "8px" } },
+          (() => { // Qui travaille : chacun avec ses jours et ses heures
+            const ids = (opts.employees || s.employees.map((e) => e.id)).filter((id) => { const e = C.empById(s, id); return e && e.active !== false; });
+            const tmpS = { ...s, weeks: { ...s.weeks, [r.monday]: r.week } };
+            const rows = ids.map((id) => { const mine = r.week.shifts.filter((x) => x.emp === id && x.date >= opts.from && x.date <= opts.to); return { id, n: mine.length, min: mine.reduce((a, x) => a + C.shiftMinutes(x.segs), 0), cours: C.weekCourseMinutes(tmpS, r.monday, id) }; });
+            const zero = rows.filter((x) => !x.n);
+            return h("div", { class: "gen-who" }, h("b", { class: "small" }, zero.length ? `${rows.length - zero.length} personne(s) sur ${rows.length} ont des horaires :` : `Tout le monde a son poste et ses horaires (${rows.length} personnes) :`),
+              h("div", { class: "row", style: { "flex-wrap": "wrap", gap: "6px", "margin-top": "6px" } }, rows.map((x) => h("span", { class: `chip ${x.n ? "ok" : x.cours ? "cours" : "err"}` }, `${empName(s, x.id)} · ${x.n ? `${x.n} j · ${C.fmtHours(x.min)}` : x.cours ? "cours toute la semaine" : "aucun horaire"}${x.n && x.cours ? ` + ${C.fmtHours(x.cours)} cours` : ""}`))),
+              zero.filter((x) => !x.cours).length ? h("p", { class: "small muted", style: { "margin-top": "6px" } }, "Sans horaire : absent(e) toute la période, zone de travail non renseignée dans sa fiche, ou aucune place possible avec les règles (voir les alertes après enregistrement).") : null);
+          })(),
           r.report.notPlaced.length ? h("div", {}, h("b", { class: "small" }, `${r.report.notPlaced.length} poste(s) non attribué(s) :`), r.report.notPlaced.map((n) => h("div", { class: "issue alerte" }, h("span", { class: "ico" }, "?"), h("span", { class: "small" }, `${empName(s, n.emp)} · ${C.fmtDate(n.date, "day")} ${C.segLabel(n.segs)} — ${n.reason}. `, n.candidates.length ? `Remplaçants possibles : ${n.candidates.map((c) => c.name).join(", ")}.` : "Aucun remplaçant possible avec les règles actuelles.")))) : h("p", { class: "small", style: { color: "var(--ok)" } }, "Tous les postes du modèle sont attribués."),
 (() => { const st = r.report.issues.filter((i) => i.code === "STAFF_MIN" || i.code === "STAFF_MAX"); return st.length ? h("div", {}, h("b", { class: "small" }, "Nombre de personnes :"), st.map((i) => h("div", { class: "issue alerte" }, h("span", { class: "ico" }, "👥"), h("span", {}, i.msg)))) : null; })(),
                     (() => { const e = r.report.issues.filter((i) => i.level === "erreur"); const a = r.report.issues.filter((i) => i.level === "alerte" && i.code !== "UNCOVERED"); return h("p", { class: "small muted" }, `${e.length} erreur(s), ${a.length} alerte(s) à vérifier après enregistrement.`); })()))));

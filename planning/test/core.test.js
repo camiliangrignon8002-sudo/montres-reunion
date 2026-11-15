@@ -37,10 +37,11 @@ test("modèle : les totaux relus correspondent à la colonne Total du papier", (
   for (const e of s.employees) assert.equal(C.templateMinutes(s, e.id) / 60, REF.totalsOnPaper[e.id] ?? 0, e.name);
 });
 
-test("génération semaine 1 : 52 créneaux, aucune erreur bloquante", () => {
+test("génération semaine 1 : tout le monde a ses horaires, aucune erreur bloquante", () => {
   const s = fresh();
   const { week, report } = C.generateWeek(s, W1);
-  assert.equal(week.shifts.length, 50);
+  assert.equal(week.shifts.length, 55); // 50 du modèle + Lucas (absent du modèle) complété à ses heures
+  for (const e of s.employees.filter((x) => x.active !== false && C.allowedZones(x).length)) assert.ok(week.shifts.some((x) => x.emp === e.id), e.name + " doit travailler");
   assert.equal(report.notPlaced.length, 0);
   assert.equal(C.blockingIssues(report.issues).length, 0);
 });
@@ -50,11 +51,12 @@ test("génération : jamais d'alternant pendant les cours (29 et 30 octobre)", (
   const { week, report } = C.generateWeek(s, W2);
   const bad = week.shifts.filter((x) => ["fleur", "camilian"].includes(x.emp) && ["2026-10-29", "2026-10-30"].includes(x.date));
   assert.equal(bad.length, 0);
-  assert.equal(report.notPlaced.length, 4);
+  // 4 jours de cours + 2 journées retirées (travail + cours limités à 35 h)
+  assert.equal(report.notPlaced.length, 6);
   assert.ok(report.notPlaced.every((n) => /formation|cours au CFA/.test(n.reason)));
-  // les postes non pourvus restent signalés, jamais remplis d'office
+  for (const id of ["fleur", "camilian"]) assert.ok(week.shifts.filter((x) => x.emp === id).reduce((a, x) => a + C.shiftMinutes(x.segs), 0) + C.weekCourseMinutes({ ...s, weeks: { ...s.weeks, [W2]: week } }, W2, id) <= 35 * 60);
   s.weeks[W2] = week;
-  assert.equal(C.uncoveredPosts(s, W2).length, 4);
+  assert.equal(C.uncoveredPosts(s, W2).length, 6);
 });
 
 test("génération : statut d'alternance inconnu = non disponible", () => {
@@ -206,7 +208,7 @@ test("export CSV puis réimport : mêmes créneaux", () => {
   assert.ok(csv.startsWith("﻿Semaine;Date"));
   const { shifts, rejected } = C.csvToShifts(s, csv);
   assert.equal(rejected.length, 0);
-  assert.equal(shifts.length, 50);
+  assert.equal(shifts.length, s.weeks[W1].shifts.length);
   const r = apply(fresh(), [{ type: "importShifts", shifts }], { allowErrors: true });
   const a = r.state.weeks[W1].shifts.map((x) => x.emp + x.date + C.segKey(x.segs)).sort();
   const b = s.weeks[W1].shifts.map((x) => x.emp + x.date + C.segKey(x.segs)).sort();
