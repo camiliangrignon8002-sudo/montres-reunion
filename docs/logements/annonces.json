@@ -2099,6 +2099,40 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "zimo-01a1e003-bef2-779a-8d84-76c1fd3d2fbc",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-meuble-dans-residence-securisee/01a1e003-bef2-779a-8d84-76c1fd3d2fbc",
+  "titre": "Studio Meublé dans residence sécurisée",
+  "prix": 520.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 18.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/naEVolgCmjx481N6j1YuOS7W0RDKiQHY0V5-pJL5yE8/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_723a7e11-a5d3-4910-ae2c-620154e61ca3.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 18 m²",
+  "caracteristiques": [
+   "Meublé",
+   "Résidence sécurisée"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-15T20:56+04:00"
+ },
+ {
   "id": "zimo-01a10749-aca3-789d-8ed6-418fa0357c3f",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-les-scribes-1/01a10749-aca3-789d-8ed6-418fa0357c3f",
