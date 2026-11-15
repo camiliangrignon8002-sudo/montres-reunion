@@ -3293,6 +3293,19 @@ html[data-theme="dark"] .pax-alert { background: #3a2a00; color: #ffd27a; border
       ].join("\n");
       return this.sample.json(prompt, { images: [file], modelTier: "complex", cache: false });
     },
+    // ---------- Lecture d'un planning fait dans un autre outil (tableau converti en texte) ----------
+    async readPlanningText(text, App) {
+      const prompt = [
+        "Voici le contenu d'un fichier de planning d'équipe hebdomadaire fait dans un autre outil (tableur ou texte). Les cellules d'une ligne sont séparées par « | ».",
+        "Retrouve pour chaque personne et chaque jour (lundi à dimanche) les blocs horaires (début, fin) et la zone si elle est indiquée ; un jour peut avoir plusieurs blocs séparés par une pause.",
+        `Zones connues : ${App.state.zones.map((z) => `${z.id} (${z.name})`).join(", ")}. Si la zone n'est pas indiquée, mets la zone vide et un « doute ».`,
+        `Équipe connue : ${App.state.employees.map((e) => e.name).join(", ")}.`,
+        "Réponds uniquement avec un JSON : {\"semaine_du\":\"AAAA-MM-JJ du lundi ou null\",\"lignes\":[{\"prenom\":\"...\",\"jours\":[{\"jour\":0,\"blocs\":[{\"debut\":\"13:30\",\"fin\":\"17:00\",\"zone\":\"ZP\",\"doute\":\"raison si incertain, sinon vide\"}]}]}],\"incertitudes\":[\"...\"]}",
+        "jour : 0 = lundi … 6 = dimanche. N'invente rien. Si le fichier contient plusieurs semaines, ne garde que la première et signale-le dans « incertitudes ».",
+        "", "Contenu du fichier :", text,
+      ].join("\n");
+      return this.sample.json(prompt, { modelTier: "complex", cache: false });
+    },
     async readCalendarImage(file) {
       const prompt = [
         "Cette image est un calendrier d'alternance (école / entreprise) sur plusieurs mois.",
@@ -4292,12 +4305,19 @@ html[data-theme="dark"] .pax-alert { background: #3a2a00; color: #ffd27a; border
     const rulesLink = h("section", { class: "card flat" }, h("h3", {}, "Autres critères"),
       h("p", { class: "small muted" }, "Règles par personne (zone, matin/soir, horaires liés, incompatibilités, jours de bureau…) : fiche de chaque personne dans « Équipe ». Droit du travail, horaires d'ouverture, 42 h : « Zones et règles »."),
       h("div", { class: "row" }, btn("Équipe", () => { this._dlgClose && this._dlgClose(); this.go("team"); }, "sm"), btn("Zones et règles", () => { this._dlgClose && this._dlgClose(); this.go("zones"); }, "sm")));
+    // Importer un planning déjà fait (papier ou autre outil) : photo ou fichier
+    const importSection = only || !Store.canWrite ? null : h("section", { class: "card flat", id: "gen-import" }, h("h3", {}, "Importer un planning déjà fait"),
+      h("p", { class: "small muted" }, "Fait sur papier ou dans un autre outil ? Ajoutez une photo ou le fichier : l'appli le lit, vous vérifiez, puis il est mis dans la semaine choisie ci-dessous."),
+      h("div", { class: "row", style: { "flex-wrap": "wrap", "margin-top": "8px" } },
+        h("label", { class: "btn primary" }, icon("import"), "Ajouter une photo", h("input", { type: "file", id: "gen-imp-photo", accept: "image/*", hidden: true, onChange: (e) => { const f = e.target.files[0]; e.target.value = ""; if (f) { dlg.close(); this.importWeekFile(f, C.mondayOf(weekIn.value || this.ui.monday)); } } })),
+        h("label", { class: "btn" }, icon("import"), "Ajouter un fichier", h("input", { type: "file", id: "gen-imp-file", accept: "image/*,.csv,.txt,.xlsx,.xlsm,.ods,.pdf,text/csv,text/plain,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", hidden: true, onChange: (e) => { const f = e.target.files[0]; e.target.value = ""; if (f) { dlg.close(); this.importWeekFile(f, C.mondayOf(weekIn.value || this.ui.monday)); } } }))),
+      h("p", { class: "small muted", style: { "margin-top": "6px" } }, `Fichiers acceptés : photo ou capture (JPEG, PNG, HEIC…), Excel (.xlsx), CSV, texte.${AI.imagesOk ? "" : " La lecture des photos et des tableaux libres utilise l'assistant Claude : ouvrez l'application dans Claude pour l'utiliser (le CSV de l'appli marche partout)."}`));
     const genParts = only ? [] : [
       h("p", { class: "muted small" }, `Le générateur reprend le planning modèle (« ${s.template.label || "modèle"} ») jour par jour, avec ses horaires, pauses et zones. Il n'attribue jamais un créneau pendant des cours, une absence ou dans une zone non autorisée : ces postes restent « à pourvoir », avec des remplaçants proposés.`),
       h("div", { class: "row" }, seg), periodBox,
       h("h3", {}, "Personnes concernées"), h("div", { class: "form-grid" }, checks),
       h("p", { class: "small muted" }, `${absN} congé(s) ou absence(s) enregistré(s) et le calendrier d'alternance sont pris en compte automatiquement.`)];
-    const dlg = openDialog({ title: only ? "Critères du planning" : "Générer un planning", wide: true, body: h("div", { class: "stack" }, ...genParts, only ? paxSection : null,
+    const dlg = openDialog({ title: only ? "Critères du planning" : "Générer un planning", wide: true, body: h("div", { class: "stack" }, importSection, ...genParts, only ? paxSection : null,
       only ? null : h("section", { class: "card flat", id: "gen-season" }, h("h3", {}, "Saison"), seasonBox,
         h("p", { class: "small muted" }, `Cochée d'après la période été (${C.fmtDate(s.settings.summerFrom || "2026-10-25", "short")} → ${C.fmtDate(s.settings.summerTo || "2027-03-27", "short")}) ; hiver en dehors. Les postes qui dépassent l'ouverture sont décalés pour y tenir.`)),
       h("section", { class: "card flat", id: "gen-staff" }, h("h3", {}, "Critère : nombre de personnes"),
@@ -5205,30 +5225,126 @@ html[data-theme="dark"] .pax-alert { background: #3a2a00; color: #ffd27a; border
     let data;
     try { data = await AI.readPlanningImage(file, this); } catch (e) { d.close(); toast(AI.errorText(e), "err"); return; }
     d.close();
-    const s = this.state;
+    this.reviewReadPlanning(data, { mode: "modele", fileName: file.name });
+  };
+
+  // Planning fait ailleurs (papier, autre outil) : photo ou fichier → vérification → semaine de l'appli
+  App.importWeekFile = async function (file, monday) {
+    if (!file) return;
+    const name = (file.name || "").toLowerCase(), type = file.type || "";
+    const isImg = type.startsWith("image/") || /\.(jpe?g|png|heic|heif|webp|gif)$/.test(name);
+    const isCSV = /\.csv$/.test(name) || type === "text/csv";
+    const isXLSX = /\.(xlsx|xlsm)$/.test(name) || type.includes("spreadsheetml");
+    if (/\.pdf$/.test(name) || type === "application/pdf") { this.showErrors(["Les PDF ne peuvent pas être lus directement : faites une capture d'écran du planning (ou exportez-le en Excel) et ajoutez-la comme photo."], "Import d'un planning"); return; }
+    if (/\.(ods|xls)$/.test(name)) { this.showErrors(["Ce format de tableur n'est pas lu : enregistrez le fichier en .xlsx ou en .csv, ou ajoutez une capture d'écran."], "Import d'un planning"); return; }
+    let text = "";
+    if (isCSV) {
+      text = await file.text().catch(() => "");
+      const { shifts } = C.csvToShifts(this.state, text);
+      if (shifts.length) { this.importCSV(file); return; }      // CSV au format de l'appli : import direct
+    } else if (isXLSX) {
+      try { text = await xlsxToText(file); } catch (e) { this.showErrors(["Le fichier Excel n'a pas pu être ouvert. Enregistrez-le en .xlsx ou .csv et réessayez."], "Import d'un planning"); return; }
+      const asCSV = text.split("\n").map((l) => l.replace(/ \| /g, ";")).join("\n");
+      if (C.csvToShifts(this.state, asCSV).shifts.length) { this.importCSV(new File([asCSV], file.name.replace(/\.\w+$/, ".csv"), { type: "text/csv" })); return; }
+    } else if (!isImg) text = await file.text().catch(() => "");
+    if (isImg ? !AI.imagesOk : !AI.sample) { this.showErrors([isImg ? "La lecture des photos utilise l'assistant Claude : ouvrez l'application dans Claude pour importer une photo." : "Ce tableau n'est pas au format de l'appli : sa lecture utilise l'assistant Claude. Ouvrez l'application dans Claude, ou exportez-le au format CSV de l'appli (écran Exportation)."], "Import d'un planning"); return; }
+    if (!isImg && !text.trim()) { toast("Le fichier est vide ou illisible.", "err"); return; }
+    const d = openDialog({ title: isImg ? "Lecture de la photo…" : "Lecture du fichier…", body: h("p", { class: "muted" }, "Claude lit le planning. Cela peut prendre une à deux minutes."), actions: [] });
+    let data;
+    try { data = isImg ? await AI.readPlanningImage(file, this) : await AI.readPlanningText(text.slice(0, 60000), this); } catch (e) { d.close(); toast(AI.errorText(e), "err"); return; }
+    d.close();
+    this.reviewReadPlanning(data, { mode: "semaine", monday, fileName: file.name });
+  };
+
+  App.reviewReadPlanning = function (data, o) {
+    const s = this.state, week = o.mode === "semaine";
     const rows = (data && data.lignes) || [];
+    if (!rows.length) { this.showErrors(["Aucun horaire n'a été reconnu. Essayez une photo plus nette, prise bien en face, ou un autre fichier."], "Import d'un planning"); return; }
     const draft = rows.map((r) => {
       const f = C.findEmployee(s, r.prenom);
       return { name: String(r.prenom || ""), emp: f.emp ? f.emp.id : "", days: Array.from({ length: 7 }, (_, i) => { const j = (r.jours || []).find((x) => Number(x.jour) === i); return j ? (j.blocs || []).map((b) => `${b.debut}-${b.fin} ${String(b.zone || "").toUpperCase()}${b.doute ? " ?" : ""}`).join(", ") : ""; }) };
     });
     const parse = (txt) => String(txt).split(",").map((p) => p.trim()).filter(Boolean).map((p) => { const m = p.match(/^(\S+)\s*-\s*(\S+)\s+([A-Za-z]+)/); return m ? { s: C.normTime(m[1]), e: C.normTime(m[2]), z: m[3].toUpperCase() } : { bad: p }; });
+    const lu = data && C.isISO(data.semaine_du) ? C.mondayOf(data.semaine_du) : null;
+    const weekIn = h("input", { type: "date", class: "input", id: "imp-week", value: lu || o.monday || this.ui.monday });
+    const head = () => C.DAYS_SHORT.map((x, i) => h("th", {}, week && C.isISO(weekIn.value) ? `${x} ${C.fmtDate(C.addDays(C.mondayOf(weekIn.value), i), "short")}` : x));
+    const thead = h("thead", {}, h("tr", {}, h("th", {}, "Ligne lue"), h("th", {}, "Personne"), head()));
+    weekIn.addEventListener("change", () => thead.replaceChildren(h("tr", {}, h("th", {}, "Ligne lue"), h("th", {}, "Personne"), head())));
     const body = h("div", { class: "stack" },
+      week ? h("div", { class: "form-grid" }, h("label", { class: "f" }, "Semaine du planning (n'importe quel jour)", weekIn), h("p", { class: "small muted", style: { "align-self": "end" } }, lu ? `Semaine lue sur le document : ${C.fmtWeek(lu)}.` : "Aucune date lue sur le document : vérifiez la semaine.")) : null,
       h("p", { class: "small muted" }, "Corrigez chaque case au format « 13:30-17:00 ZP, 17:30-21:00 ZP ». Un « ? » signale une lecture incertaine (à retirer une fois vérifiée). Rattachez chaque ligne à une personne de l'équipe."),
       (data && data.incertitudes || []).length ? h("div", { class: "banner small" }, "Incertitudes signalées : ", data.incertitudes.join(" ; ")) : null,
-      h("div", { class: "t-wrap" }, h("table", { class: "t" }, h("thead", {}, h("tr", {}, h("th", {}, "Ligne lue"), h("th", {}, "Personne"), C.DAYS_SHORT.map((x) => h("th", {}, x)))),
+      h("div", { class: "t-wrap" }, h("table", { class: "t" }, thead,
         h("tbody", {}, draft.map((r) => h("tr", {}, h("td", {}, r.name),
           h("td", {}, h("select", { class: "input", style: { width: "auto" }, onChange: (e) => { r.emp = e.target.value; } }, h("option", { value: "" }, "Ignorer"), s.employees.map((e) => h("option", { value: e.id, selected: e.id === r.emp }, e.name)))),
           r.days.map((v, i) => h("td", {}, h("input", { class: "input", style: { "min-width": "170px", "font-size": "13px" }, value: v, onInput: (e) => { r.days[i] = e.target.value; } })))))))));
-    openDialog({ title: "Vérifier le planning lu", wide: true, body, actions: [{ label: "Annuler" }, { label: "Enregistrer comme modèle", primary: true, onClick: async () => {
+    openDialog({ title: week ? "Vérifier le planning importé" : "Vérifier le planning lu", wide: true, body, actions: [{ label: "Annuler" }, { label: week ? "Mettre dans le planning" : "Enregistrer comme modèle", primary: true, onClick: async () => {
       const shifts = [], problems = [];
       for (const r of draft) { if (!r.emp) continue; r.days.forEach((v, i) => { if (!v.trim()) return; if (v.includes("?")) problems.push(`${r.name}, ${C.DAYS[i]} : lecture incertaine non vérifiée`); const segs = parse(v.replace(/\?/g, "")); if (segs.some((g) => g.bad || !g.s || !g.e || !C.zoneById(s, g.z))) problems.push(`${r.name}, ${C.DAYS[i]} : « ${v} » illisible`); else shifts.push({ emp: r.emp, dow: i, segs }); }); }
       if (problems.length) { this.showErrors(problems.slice(0, 12), "À corriger avant d'enregistrer"); return false; }
       if (!shifts.length) { toast("Aucune ligne rattachée.", "err"); return false; }
+      if (week) {
+        if (!C.isISO(weekIn.value)) { toast("Choisissez la semaine.", "err"); return false; }
+        const monday = C.mondayOf(weekIn.value), w = C.getWeek(s, monday);
+        if (w && w.shifts.length && !(await confirmDialog("Cette semaine a déjà des horaires", `Les journées importées remplaceront celles des mêmes personnes (${shifts.length} journées). Une version de la semaine est enregistrée avant.`, "Importer"))) return false;
+        if (w && w.shifts.length) await this.saveVersion(monday, "Avant import d'un planning");
+        const res = await this.commit([{ type: "importShifts", shifts: shifts.map((x) => ({ emp: x.emp, date: C.addDays(monday, x.dow), segs: x.segs })) }], { source: "import", summary: `Planning importé (${o.fileName || "fichier"}) pour la semaine du ${C.fmtWeek(monday)}`, allowErrors: true });
+        if (res.ok) { this.ui.monday = monday; this.go("week"); toast("Planning importé : vérifiez les alertes de la semaine."); }
+        return res.ok;
+      }
       if (!(await confirmDialog("Remplacer le planning modèle ?", `${shifts.length} journées type remplaceront le modèle actuel. L'ancien reste dans l'historique.`, "Remplacer"))) return false;
-      const r = await this.commit([{ type: "setTemplate", template: { label: `Modèle importé le ${C.fmtDate(this.today(), "num")}`, referenceWeek: data && C.isISO(data.semaine_du) ? data.semaine_du : null, shifts } }], { source: "import", summary: `Nouveau planning modèle (photo ${file.name})` });
+      const r = await this.commit([{ type: "setTemplate", template: { label: `Modèle importé le ${C.fmtDate(this.today(), "num")}`, referenceWeek: lu, shifts } }], { source: "import", summary: `Nouveau planning modèle (photo ${o.fileName || ""})` });
       return r.ok;
     } }] });
   };
+
+  // Lecture d'un .xlsx sans bibliothèque : dézippe (deflate) et rend chaque feuille en lignes « a | b | c ».
+  async function xlsxToText(file) {
+    const buf = new Uint8Array(await file.arrayBuffer()), dv = new DataView(buf.buffer);
+    let eocd = -1;
+    for (let i = buf.length - 22; i >= Math.max(0, buf.length - 70000); i--) if (dv.getUint32(i, true) === 0x06054b50) { eocd = i; break; }
+    if (eocd < 0) throw new Error("zip");
+    const n = dv.getUint16(eocd + 10, true); let p = dv.getUint32(eocd + 16, true);
+    const files = {}, dec = new TextDecoder();
+    for (let k = 0; k < n; k++) {
+      const method = dv.getUint16(p + 10, true), csize = dv.getUint32(p + 20, true), nl = dv.getUint16(p + 28, true), el = dv.getUint16(p + 30, true), cl = dv.getUint16(p + 32, true), off = dv.getUint32(p + 42, true);
+      const fname = dec.decode(buf.subarray(p + 46, p + 46 + nl));
+      files[fname] = { method, csize, off };
+      p += 46 + nl + el + cl;
+    }
+    const read = async (fname) => {
+      const f = files[fname]; if (!f) return "";
+      const start = f.off + 30 + dv.getUint16(f.off + 26, true) + dv.getUint16(f.off + 28, true);
+      const raw = buf.subarray(start, start + f.csize);
+      if (f.method === 0) return dec.decode(raw);
+      const ds = new Blob([raw]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+      return await new Response(ds).text();
+    };
+    const xml = (t) => new DOMParser().parseFromString(t, "application/xml");
+    const shared = [];
+    const ss = await read("xl/sharedStrings.xml");
+    if (ss) xml(ss).querySelectorAll("si").forEach((si) => shared.push(Array.from(si.getElementsByTagName("t")).map((t) => t.textContent).join("")));
+    const sheets = Object.keys(files).filter((f) => /^xl\/worksheets\/sheet\d+\.xml$/.test(f)).sort((a, b) => parseInt(a.match(/\d+/)) - parseInt(b.match(/\d+/)));
+    const hhmm = (x) => { const m = Math.round(x * 1440) % 1440; return `${String(Math.floor(m / 60)).padStart(2, "0")}:${String(m % 60).padStart(2, "0")}`; };
+    const out = [];
+    for (const sh of sheets.slice(0, 12)) {
+      out.push(`--- Feuille ${sh.match(/\d+/)[0]} ---`);
+      xml(await read(sh)).querySelectorAll("row").forEach((row) => {
+        const cells = Array.from(row.getElementsByTagName("c")).map((c) => {
+          const t = c.getAttribute("t"), v = c.getElementsByTagName("v")[0], is = c.getElementsByTagName("is")[0];
+          if (t === "s" && v) return shared[+v.textContent] || "";
+          if (t === "inlineStr" && is) return is.textContent;
+          if (!v) return "";
+          const num = Number(v.textContent);
+          if (t !== "str" && !isNaN(num)) { if (num > 0 && num < 1) return hhmm(num); if (num > 30000 && num < 80000 && Number.isInteger(num)) return C.addDays("1899-12-30", num); }
+          return v.textContent;
+        });
+        if (cells.some((x) => String(x).trim())) out.push(cells.join(" | "));
+      });
+    }
+    return out.join("\n");
+  }
+  App.xlsxToText = xlsxToText;
 
   App.importCalendarImage = async function (file) {
     if (!file) return;

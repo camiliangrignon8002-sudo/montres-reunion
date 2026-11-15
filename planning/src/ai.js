@@ -219,6 +219,19 @@
       ].join("\n");
       return this.sample.json(prompt, { images: [file], modelTier: "complex", cache: false });
     },
+    // ---------- Lecture d'un planning fait dans un autre outil (tableau converti en texte) ----------
+    async readPlanningText(text, App) {
+      const prompt = [
+        "Voici le contenu d'un fichier de planning d'équipe hebdomadaire fait dans un autre outil (tableur ou texte). Les cellules d'une ligne sont séparées par « | ».",
+        "Retrouve pour chaque personne et chaque jour (lundi à dimanche) les blocs horaires (début, fin) et la zone si elle est indiquée ; un jour peut avoir plusieurs blocs séparés par une pause.",
+        `Zones connues : ${App.state.zones.map((z) => `${z.id} (${z.name})`).join(", ")}. Si la zone n'est pas indiquée, mets la zone vide et un « doute ».`,
+        `Équipe connue : ${App.state.employees.map((e) => e.name).join(", ")}.`,
+        "Réponds uniquement avec un JSON : {\"semaine_du\":\"AAAA-MM-JJ du lundi ou null\",\"lignes\":[{\"prenom\":\"...\",\"jours\":[{\"jour\":0,\"blocs\":[{\"debut\":\"13:30\",\"fin\":\"17:00\",\"zone\":\"ZP\",\"doute\":\"raison si incertain, sinon vide\"}]}]}],\"incertitudes\":[\"...\"]}",
+        "jour : 0 = lundi … 6 = dimanche. N'invente rien. Si le fichier contient plusieurs semaines, ne garde que la première et signale-le dans « incertitudes ».",
+        "", "Contenu du fichier :", text,
+      ].join("\n");
+      return this.sample.json(prompt, { modelTier: "complex", cache: false });
+    },
     async readCalendarImage(file) {
       const prompt = [
         "Cette image est un calendrier d'alternance (école / entreprise) sur plusieurs mois.",
