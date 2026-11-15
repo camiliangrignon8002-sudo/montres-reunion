@@ -368,6 +368,45 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "herren-immobilier-www-herren-immobilier-com-location-appartement-7992",
+  "source": "Herren Immobilier",
+  "url": "https://www.herren-immobilier.com/location/appartement/7992",
+  "titre": "Studio de 24m² à Ste Clotilde",
+  "prix": 375.0,
+  "commune": "Saint-Denis",
+  "quartier": "",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 24.0,
+  "meuble": null,
+  "photos": [
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/main.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/preview.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_144813.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_145038.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/DSC06474.jpg",
+   "https://www.herren-immobilier.com/images/stories/snpi.jpg",
+   "https://www.herren-immobilier.com/images/com_jea/images/7937/min.jpg"
+  ],
+  "description": "> Studio de 24m² � Ste Clotilde Réf : 5008 � Adresse : 97490 STE CLOTILDE Avantages Climatisation Placard(s) Proximité Ecole(s) Proximité Comme...",
+  "caracteristiques": [
+   "Climatisation"
+  ],
+  "date": "",
+  "annonceur": "Herren Immobilier",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "herren-location@orange.fr",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-22T01:51+04:00"
+ },
+ {
   "id": "zimo-01a1a373-5e94-7173-b821-6f56c54cd672",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a1a373-5e94-7173-b821-6f56c54cd672",
@@ -5887,6 +5926,37 @@
    }
   ],
   "vu": "2026-10-21T21:47+04:00"
+ },
+ {
+  "id": "zimo-01a1df28-8bc9-7aa8-8b2d-6b53fbc6efac",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/t1-cosy-centre-ville-saint-denis/01a1df28-8bc9-7aa8-8b2d-6b53fbc6efac",
+  "titre": "T1 Cosy centre ville SAINT DENIS",
+  "prix": 675.0,
+  "commune": "Saint-Denis",
+  "quartier": "Centre-ville",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 24.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/BkvlcdiM1SrE9oxJ4srgM0b8eZ_RcThIlbKt3PbLDF8/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_27dc5275-4c4a-43cc-9bad-8e099a25a5e4.jpg"
+  ],
+  "description": "Location T1 Saint-Denis (974) 1 pièces 24 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-15T17:12+04:00"
  },
  {
   "id": "zimo-01a149cf-61c2-7e26-b2b4-dd03b333d1e3",
