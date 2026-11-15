@@ -5362,43 +5362,36 @@
   "vu": "2026-11-03T21:13+04:00"
  },
  {
-  "id": "ep-22742396",
-  "source": "EntreParticuliers",
-  "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/a-louer-a-saint-denis-camelias-appartement-t1-bis-meuble-residence-altea/ref-22742396",
-  "titre": "À louer à Saint-Denis, Camélias : appartement T1 bis meublé - Résidence ALTEA — Saint-Denis",
+  "id": "zimo-01a18b78-ae39-7a9a-8923-9e9b1759d7e2",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-1-piece-28-m2/01a18b78-ae39-7a9a-8923-9e9b1759d7e2",
+  "titre": "À louer à Saint-Denis, Camélias : appartement T1 bis meublé - Résidence ALTEA",
   "prix": 656.0,
   "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
+  "quartier": "Les Camélias",
   "pieces": 1,
   "type": "T1",
   "surface": 28.0,
   "meuble": true,
   "photos": [
-   "https://www.entreparticuliers.com/media/epc-photos/photo_5e90db6d-6011-48db-a74e-2763e2505d1f.jpg"
+   "https://img.e-xiste.com/fViQk8cm0frDps_i0ULTETZq69yL915zuiPlb-Z04d8/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_631a2bdf-dbca-4785-a1b8-af70d9404b12.jpg"
   ],
-  "description": "L'agence LOGER Sainte-Clotilde vous propose à la location ce charmant appartement meublé de type T1 bis , idéalement situé dans le quartier recherché des Camélias, sur les hauteurs verdoyantes de La Providence à Saint-Denis, offrant un environnement paisible tout en restant proche des commodités du centre-ville.\nCe bien d'une surface habitable de 28,16 m² se trouve au sein de la résidence ALTEA, connue pour sa tranquillité et son cadre agréable. L'appartement est climatisé, entièrement meublé, et prêt à accueillir son futur occupant dans les meilleures conditions.\nDès l'entrée, on découvre un espace de vie fonctionnel et lumineux composé d'un séjour confortable, d'un coin nuit distinct, et d'un coin cuisine bien équipé comprenant un évier, une hotte, des plaques de cuisson quatre feux, un four, un réfrigérateur ainsi que de nombreux placards de rangement, garantissant un quotidien pratique et organisé.\nLa salle de bains dispose d'une baignoire, de placards intégrés, et d'un WC, offrant un bon niveau de confort.\nL'un des atouts majeurs de ce bien est sa belle vue dégagée, apportant une véritable sensation d'espace et de sérénité au quotidien. Le tout est complété par une place de stationnement privative, un avantage considérable dans ce secteur de Saint-Denis.\nSitué dans un coin calme, ce logement conviendra parfaitement à une personne seule ou à un jeune couple en quête de tranquillité, tout en profitant d'une localisation stratégique, à proximité de Saint-Denis centre et des grands axes routiers.\nPour obtenir plus de renseignements ou pour organiser une visite, n'hésitez pas à contacter Anick Bernard au 0692 65 22 76 ou par email à a.bernard@loger.com",
+  "description": "Location T1 bis Saint-Denis (974) 1 pièces 28 m²",
   "caracteristiques": [
-   "Meublé",
-   "Parking",
-   "Climatisation"
+   "Meublé"
   ],
   "date": "",
-  "annonceur": "Particulier",
+  "annonceur": "Pro · via DOMimmo",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "0692 65 22 76",
-  "email": "a.bernard@loger.com",
+  "tel": "",
+  "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-1-piece-28-m2/01a18b78-ae39-7a9a-8923-9e9b1759d7e2"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-30T11:16+04:00"
  },
  {
