@@ -3918,6 +3918,7 @@ html[data-theme="dark"] .pax-alert { background: #3a2a00; color: #ffd27a; border
     const actions = h("div", { class: "row" },
       canEdit ? btn([icon("wand"), "Générer"], () => this.openGenerate(), "primary sm") : null,
       canEdit ? btn(["🎯 ", "Critères"], () => this.openCriteria(), "sm") : null,
+      canEdit ? btn([icon("import"), "Importer"], () => this.openImportWeek(monday), "sm") : null,
       canEdit && w && w.shifts.length ? btn([icon("check"), w.status === "validé" ? "Repasser en brouillon" : "Valider"], () => this.openValidate(), "sm") : null,
       canEdit ? btn([icon("plus"), "Créneau"], () => this.openEditor(null, this.ui.day), "sm") : null,
       btn("Exporter", () => this.go("export"), "sm ghost"),
@@ -4029,7 +4030,7 @@ html[data-theme="dark"] .pax-alert { background: #3a2a00; color: #ffd27a; border
 
     return h("div", { class: "stack", style: { gap: "16px" } },
       head, actions, legend(s),
-      !w || !w.shifts.length ? h("div", { class: "empty" }, h("p", {}, "Aucun horaire pour cette semaine."), canEdit ? h("div", { class: "row", style: { "justify-content": "center", "margin-top": "12px" } }, btn("Générer à partir du modèle", () => this.openGenerate(), "primary"), btn("Dupliquer la semaine précédente", () => this.duplicateFrom(C.addDays(monday, -7), monday), "")) : null) : null,
+      !w || !w.shifts.length ? h("div", { class: "empty" }, h("p", {}, "Aucun horaire pour cette semaine."), canEdit ? h("div", { class: "row", style: { "justify-content": "center", "margin-top": "12px" } }, btn("Générer à partir du modèle", () => this.openGenerate(), "primary"), btn("Dupliquer la semaine précédente", () => this.duplicateFrom(C.addDays(monday, -7), monday), ""), btn([icon("import"), "Importer un planning (photo ou fichier)"], () => this.openImportWeek(monday), "")) : null) : null,
       this.ui.view === "grid" ? h("div", { class: "grid-wrap" }, table) : dayView(),
       postsCard, issuesCard);
   } };
@@ -5254,6 +5255,18 @@ html[data-theme="dark"] .pax-alert { background: #3a2a00; color: #ffd27a; border
     try { data = isImg ? await AI.readPlanningImage(file, this) : await AI.readPlanningText(text.slice(0, 60000), this); } catch (e) { d.close(); toast(AI.errorText(e), "err"); return; }
     d.close();
     this.reviewReadPlanning(data, { mode: "semaine", monday, fileName: file.name });
+  };
+
+  // Bouton « Importer » de la semaine : planning fait sur papier ou dans un autre outil
+  App.openImportWeek = function (monday) {
+    const pick = (accept, id) => h("input", { type: "file", id, accept, hidden: true, onChange: (e) => { const f = e.target.files[0]; e.target.value = ""; if (f) { d.close(); this.importWeekFile(f, monday); } } });
+    const d = openDialog({ title: "Importer un planning", body: h("div", { class: "stack" },
+      h("p", {}, `Planning fait sur papier ou dans un autre outil, pour la semaine du ${C.fmtWeek(monday)} (modifiable à la vérification).`),
+      h("div", { class: "row", style: { "flex-wrap": "wrap" } },
+        h("label", { class: "btn primary" }, icon("import"), "Ajouter une photo", pick("image/*", "imp-photo")),
+        h("label", { class: "btn" }, icon("import"), "Ajouter un fichier", pick("image/*,.csv,.txt,.xlsx,.xlsm,.ods,.pdf,text/csv,text/plain,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "imp-file"))),
+      h("p", { class: "small muted" }, `Photo ou capture, Excel (.xlsx), CSV ou texte. L'appli lit le planning, vous vérifiez case par case, puis il est mis dans la semaine.${AI.imagesOk ? "" : " La lecture des photos et des tableaux libres utilise l'assistant Claude (application ouverte dans Claude)."}`)),
+      actions: [{ label: "Fermer" }] });
   };
 
   App.reviewReadPlanning = function (data, o) {
