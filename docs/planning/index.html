@@ -2365,6 +2365,63 @@ details.gen-more[open] > summary { color: var(--fg); }
         }
       }
       week.shifts.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+      // Repos de 11 h qui bloque : on change l'horaire de ses journées voisines (soir → matin ou l'inverse) pour libérer le jour.
+      for (const emp of people) {
+        for (let guard = 0; guard < 7 && mineOf(emp.id).length < workDaysTarget(emp); guard++) {
+          let ok = false;
+          for (const date of weekDates(monday)) {
+            if (ok || !inRange(date) || busy(emp.id, date) || absentDay(emp.id, date) || extra.some((x) => x.emp === emp.id && x.date === date)) continue;
+            if (emp.role === "alternant" && !["entreprise", "weekend"].includes(calStatus(state, emp, date))) continue;
+            const near = week.shifts.filter((y) => y.emp === emp.id && (y.date === addDays(date, -1) || y.date === addDays(date, 1)));
+            if (!near.length) continue;
+            const saved = near.map((y) => y.segs);
+            const variants = (y) => bases.flatMap((B) => shapeFor(emp, toStd(B, lenOf(emp.id)))).filter((v) => segKey(v) !== segKey(y.segs));
+            // essaie chaque combinaison simple : une journée voisine changée, puis les deux
+            const tryWith = () => { const b = tryPlace(emp, date); if (b) { week.shifts.push({ id: uid("c"), emp: emp.id, date, segs: b.segs, filled: true }); placed.push({ emp: emp.id, date }); return true; } return false; };
+            const setIfOk = (y, v) => { const idx = week.shifts.indexOf(y); week.shifts.splice(idx, 1); const c = findCandidates(work, y.date, v, { exclude: state.employees.filter((e) => e.id !== emp.id).map((e) => e.id), sameDay: true })[0]; week.shifts.splice(idx, 0, y); if (c && c.restOk) { y.segs = v; return true; } return false; };
+            outer: for (const y of near) for (const v of variants(y)) {
+              if (!setIfOk(y, v)) continue;
+              if (tryWith()) { ok = true; break outer; }
+              const other = near.find((z) => z !== y);
+              if (other) for (const v2 of variants(other)) { if (!setIfOk(other, v2)) continue; if (tryWith()) { ok = true; break outer; } other.segs = saved[near.indexOf(other)]; }
+              near.forEach((z, i) => { z.segs = saved[i]; });
+            }
+          }
+          if (!ok) break;
+        }
+      }
+      // Toujours pas de place : on déplace la journée de quelqu'un d'autre sur un de ses jours libres pour faire de la place.
+      const canWorkOn = (e, date) => inRange(date) && !busy(e.id, date) && !absentDay(e.id, date) && !extra.some((x) => x.emp === e.id && x.date === date)
+        && !(e.role === "alternant" && !["entreprise", "weekend"].includes(calStatus(state, e, date))) && !personalRuleIssues(e, date, []).some((x) => x.code === "FIXED_DAYOFF");
+      const others1 = (id) => state.employees.filter((e) => e.id !== id).map((e) => e.id);
+      for (const emp of people) {
+        for (let guard = 0; guard < 7 && mineOf(emp.id).length < workDaysTarget(emp); guard++) {
+          let ok = false;
+          for (const date of weekDates(monday)) {
+            if (ok || !canWorkOn(emp, date)) continue;
+            for (const x of week.shifts.filter((y) => y.date === date && y.emp !== emp.id && !y.office)) {
+              const e2 = empById(state, x.emp);
+              if (!e2 || links.some((l) => l.sameHours && l.emps.includes(e2.id))) continue;
+              const idx = week.shifts.indexOf(x);
+              for (const d2 of weekDates(monday)) {
+                if (d2 === date || !canWorkOn(e2, d2)) continue;
+                week.shifts.splice(idx, 1);
+                const c2 = findCandidates(work, d2, x.segs, { exclude: others1(e2.id) })[0];
+                if (!c2 || !c2.restOk) { week.shifts.splice(idx, 0, x); continue; }
+                const moved = { ...x, date: d2 };
+                week.shifts.push(moved);
+                const b = tryPlace(emp, date);
+                if (b) { week.shifts.push({ id: uid("c"), emp: emp.id, date, segs: b.segs, filled: true }); placed.push({ emp: emp.id, date }); ok = true; break; }
+                week.shifts.splice(week.shifts.indexOf(moved), 1);
+                week.shifts.splice(idx, 0, x);
+              }
+              if (ok) break;
+            }
+          }
+          if (!ok) break;
+        }
+      }
+      week.shifts.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
       for (const emp of people) {
         const n = mineOf(emp.id).length, t = workDaysTarget(emp);
         if (n < t) tooManyOff.push({ emp: emp.id, off: offDays(emp.id), reason: `${n} journée(s) sur ${t} : aucune autre place possible avec les règles (maximum par zone, repos, zones, formation)` });
