@@ -1297,6 +1297,42 @@
   "vu": "2026-11-12T13:17+04:00"
  },
  {
+  "id": "bienici-citya-immobilier-52424705300084-GES24010027-542",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/sainte-marie/appartement/1pieces/citya-immobilier-52424705300084-GES24010027-542",
+  "titre": "T1 25 m²",
+  "prix": 472.7,
+  "commune": "Sainte-Marie",
+  "quartier": "Gaspards",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 25,
+  "meuble": false,
+  "photos": [
+   "https://file.bienici.com/photo/citya-immobilier-52424705300084-GES24010027-542_box.ics.fr_cit_CITYA_IDR_tic_location_photo_filigrane-filigrane-aurore_facade-927887587084399517-15819158443795982456.jpg"
+  ],
+  "description": "EXCLUSIVITÉ - APPARTEMENT T1 AVEC TERRASSE - Venez découvrir cet appartement T1 de 25 m², situé à Sainte-Marie (97438). Il offre une pièce principale, une cuisine et une salle d'eau. \nPour profiter des beaux jours, cet appartement possède également une terrasse.\nIl est en bon état général. L'appartement est mis en location avec une place de parking.\nL'appartement se trouve dans le quartier de Gaspards. Plusieurs écoles (maternelles, élémentaire et collège) se trouvent à moins de 10 minutes du bien.\nVotre agence Citya Belvédère vous invite à découvrir toutes ses originalités en prenant RDV avec l'un de nos conseillers immobiliers.\n\nAdnane AKBARALY au <span class=\"importDescriptionDecorator\" data-type=\"phone\">0692 50 81 69</span> ou par mail <span class=\"importDescriptionDecorator\" data-type=\"email\">aakbaraly@citya.com</span>\n\nCitya Immobilier Belvédère - Agence Sainte-Suzanne : ZAC Bel Air II - 5 Rue Pierre Bérégovoy - 97441 Sainte-Suzanne.  Le bien est soumis au statut de la copropriété. \n\n Loyer de 472,70 euros par mois charges comprises dont 23,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). \n Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 491,93 euros. \n Les honoraires charge locataire sont de 328,00 euros ( soit 13,12 euros/m² ) dont 75,75 euros pour état des lieux ( soit 3,03 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/sainte-suzanne-97441/547#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/sainte-suzanne-97441/547#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
+  "caracteristiques": [
+   "Parking (1)",
+   "2e étage",
+   "Varangue / balcon",
+   "Parking"
+  ],
+  "date": "2026-11-16T16:08:15.830Z",
+  "annonceur": "Citya Belvédère Immobilier",
+  "lat": -20.898924584635292,
+  "lon": 55.55572237275396,
+  "charges": 23,
+  "pro": true,
+  "tel": "0692 50 81 69",
+  "email": "aakbaraly@citya.com",
+  "adresse": "5 rue Pierre Bérégovoy ZAC Bel Air 2, 97441 Sainte-Suzanne",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-16T21:29+04:00"
+ },
+ {
   "id": "zimo-01a0ee0f-d9c9-747e-9e8b-982bb7757c62",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/location-appartement-1-piece-25-25-m2-a-saint-denis/01a0ee0f-d9c9-747e-9e8b-982bb7757c62",
@@ -2485,10 +2521,6 @@
   "caf": false,
   "aussi": [
    {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/2pieces/citya-immobilier-12453256-GES04490006-495"
-   },
-   {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-2-pieces-44-m2/01a1d0ac-6d6e-7e26-979e-57ba752cf05d"
    }
@@ -2727,49 +2759,35 @@
   "vu": "2026-11-04T10:18+04:00"
  },
  {
-  "id": "bienici-citya-immobilier-501991-GES00020025-34",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/la-montagne/appartement/2pieces/citya-immobilier-501991-GES00020025-34",
-  "titre": "T2 41 m²",
-  "prix": 551.02,
+  "id": "zimo-01a1c134-3aac-75a0-b256-e3f5a30dfd6d",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-42-m2/01a1c134-3aac-75a0-b256-e3f5a30dfd6d",
+  "titre": "Appartement 2 pièces 42 m²",
+  "prix": 551.0,
   "commune": "Saint-Denis",
-  "quartier": "La Montagne 8ème",
+  "quartier": "Saint-Denis",
   "pieces": 2,
   "type": "T2",
-  "surface": 41.61,
-  "meuble": false,
+  "surface": 42.0,
+  "meuble": null,
   "photos": [
-   "https://file.bienici.com/photo/citya-immobilier-501991-GES00020025-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_90-filigrane-FullSizeRender-8849276271054378349.jpg"
+   "https://img.e-xiste.com/RqUpSx8-w3yP3b852X7hUpv7BaO2XTJgbkweeARZHks/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_5f631177-a055-4d10-9b4d-afb03bdfcc9e.jpg"
   ],
-  "description": "CITYA - A louer résidence Piton Trésor de standing à La Montagne T2 comprenant un séjour une cuisine semi-équipée, une chambre climatisée, un dégagement avec placard, une salle de bains, un wc, une varangue et une place de parking.\nLa résidence ce situe à proximité de toutes commodités.  Le bien est soumis au statut de la copropriété. \n\n Loyer de 551,02 euros par mois charges comprises dont 51,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). \n Soit avec Assurance Habitation et Assistance* ( 22.42 euros ) : 573,44 euros. \n Les honoraires charge locataire sont de 540,93 euros ( soit 13,00 euros/m² ) dont 126,08 euros pour état des lieux ( soit 3,03 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
-  "caracteristiques": [
-   "Ascenseur",
-   "Climatisation",
-   "Accès handicapé",
-   "Parking (1)",
-   "2e étage",
-   "1 chambre",
-   "Varangue / balcon",
-   "Parking"
-  ],
-  "date": "2026-11-09T16:06:42.608Z",
-  "annonceur": "Citya Saint Denis",
-  "lat": -20.887304,
-  "lon": 55.422444,
-  "charges": 51,
+  "description": "Location T2 Saint-Denis (974) 2 pièces 42 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via Citya",
+  "lat": null,
+  "lon": null,
+  "charges": null,
   "pro": true,
-  "tel": "0262 32 43 24",
+  "tel": "",
   "email": "",
-  "adresse": "45 rue de Paris, 97400 Saint-Denis",
+  "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-2-pieces-42-m2/01a1c134-3aac-75a0-b256-e3f5a30dfd6d"
-   }
-  ],
-  "vu": "2026-11-09T20:20+04:00"
+  "aussi": [],
+  "vu": "2026-11-16T21:29+04:00"
  },
  {
   "id": "bienici-immo-facile-61704747",
@@ -5709,6 +5727,37 @@
    }
   ],
   "vu": "2026-11-16T19:24+04:00"
+ },
+ {
+  "id": "zimo-01a1e532-ed5b-7456-a303-7c6795e8f8de",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-27-4m2-a-louer-a-la-bretagne/01a1e532-ed5b-7456-a303-7c6795e8f8de",
+  "titre": "STUDIO 27,4m2 à louer à La Bretagne",
+  "prix": 669.0,
+  "commune": "Saint-Denis",
+  "quartier": "La Bretagne",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 28.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/KH76QVNa59NFriNZbqHNAkdg5kXCC9jAHZATZtdRKQI/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_d5e9536b-6e85-4a44-96bd-6abc57ef44ef.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 28 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-16T21:29+04:00"
  },
  {
   "id": "zimo-01a13159-76f9-7700-9b1f-87ed81f7d0dc",
