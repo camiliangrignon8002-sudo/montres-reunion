@@ -1801,8 +1801,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
       const ov = cr ? courseOverlap(courseBusy(state, emp, date), segs) : [];
       if (!cr) out.block.push("en formation au CFA ce jour-là");
       else if (ov.length) out.block.push(`en cours au CFA de ${rangesLabel(ov)}`);
-      else if (!segs || !segs.length) out.block.push(`en cours au CFA (${rangesLabel(cr)})`);
-      else out.warn.push(`jour de cours au CFA (${rangesLabel(cr)})`);
+      else out.block.push(`jour de cours au CFA (${rangesLabel(cr)}) : pas de travail le même jour`); // jamais travail + CFA le même jour
     }
     if (cs === "inconnu") out.warn.push("statut d'alternance inconnu ce jour-là");
     for (const g of segs || []) {
@@ -1857,6 +1856,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
         const ov = cr ? courseOverlap(courseBusy(state, emp, d), sh.segs) : [];
         if (!cr) add("erreur", "FORMATION", sh.emp, d, `${who} est en formation au CFA le ${fmtDate(d, "day")}.`);
         else if (ov.length) add("erreur", "FORMATION", sh.emp, d, `${who} est en cours au CFA le ${fmtDate(d, "day")} de ${rangesLabel(ov)}  : le créneau chevauche ${ov.every((x) => x.lunch) ? "la pause déjeuner au CFA" : "les cours"}.`);
+        else if (!paperWeek) add("erreur", "FORMATION", sh.emp, d, `${who} va au CFA le ${fmtDate(d, "day")} (${rangesLabel(cr)}) : pas de travail le même jour.`);
         else if (st.checkMaxDay && timesOk) {
           const c = courseMinutesOn(state, emp, d), w = shiftMinutes(sh.segs);
           if (c + w > st.maxDayHours * 60) add("alerte", "DAY_MAX_COURSE", sh.emp, d, `${who} : ${fmtHours(c + w)} le ${fmtDate(d, "day")} en comptant les cours (${fmtHours(c)} de cours + ${fmtHours(w)} de travail, plus de ${st.maxDayHours} h).`);
@@ -2487,7 +2487,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
             for (const x of week.shifts.filter((y) => y.date === date && y.emp !== emp.id && !y.office && !y.locked)) {
               const e2 = empById(state, x.emp);
               const zs2 = allowedZones(e2).filter((z) => !isAdminZone(z));
-              if (zs2.length < 2 || (e2.rules && e2.rules.weekZone && !e2.rules.zoneFlex) || links.some((l) => l.sameHours && l.emps.includes(e2.id))) continue;
+              if (zs2.length < 2 || (e2.rules && e2.rules.weekZone && !e2.rules.zoneFlex) || links.some((l) => l.sameHours && l.sameZone && l.emps.includes(e2.id))) continue; // lien « même trajet » : la zone peut changer
               const cur = [...new Set(x.segs.map((g) => g.z))];
               for (const z of zs2.filter((z) => !(cur.length === 1 && cur[0] === z))) { // autre zone, ou une seule zone au lieu de deux
                 const alt = snapEvening(seasonState, fitSeason(x.segs.map((g) => ({ ...g, z }))), date, e2);
@@ -2863,6 +2863,25 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
       let seed2 = 11; const rnd2 = () => (seed2 = (seed2 * 1103515245 + 12345) % 2147483648) / 2147483648;
       let iter2 = 0;
       while (cur.sc > 0 && Date.now() - t1 < budget2 && iter2++ < 300) {
+        // Journée manquante : on essaie d'en ajouter une (jour libre, horaire possible), vérification complète
+        const lacking = state.employees.filter((e) => e.active !== false && (!include || include.has(e.id)) && allowedZones(e).some((z) => !isAdminZone(z)) && mineOf(e.id).length < workDaysTarget(e));
+        if (lacking.length && rnd2() < 0.5) {
+          const e = lacking[Math.floor(rnd2() * lacking.length)], L = lenOf(e.id);
+          let bestAdd = null;
+          for (const d of weekDates(monday)) {
+            if (!inRange(d) || busy(e.id, d) || absentDay(e.id, d) || extra.some((q) => q.emp === e.id && q.date === d)) continue;
+            if (e.role === "alternant" && !["entreprise", "weekend"].includes(calStatus(state, e, d))) continue;
+            if (personalRuleIssues(e, d, []).some((q) => q.code === "FIXED_DAYOFF")) continue;
+            for (const z of allowedZones(e).filter((q) => !isAdminZone(q))) for (const w of slotsOf(view, z, d, e)) {
+              if (L + PAUSE > w.b - w.a) continue;
+              const h = Math.min(240, L - 60);
+              const x = { id: uid("c"), emp: e.id, date: d, segs: [{ s: fromMin(w.a), e: fromMin(w.a + h), z }, { s: fromMin(w.a + h + PAUSE), e: fromMin(w.a + L + PAUSE), z }], filled: true };
+              week.shifts.push(x); const r = evalAll(); week.shifts.pop();
+              if (r.sc < cur.sc && (!bestAdd || r.sc < bestAdd.sc)) bestAdd = { sc: r.sc, x };
+            }
+          }
+          if (bestAdd) { week.shifts.push(bestAdd.x); placed.push({ emp: e.id, date: bestAdd.x.date }); cur = evalAll(); continue; }
+        }
         const bads = cur.iss.filter((i) => i.level !== "info" && (W[i.code] || i.level === "erreur"));
         if (!bads.length) break;
         const iss = bads[Math.floor(rnd2() * bads.length)];
