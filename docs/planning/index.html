@@ -382,62 +382,20 @@ table.t td.num { white-space: nowrap; }
 @keyframes splash-bar { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
 @media (prefers-reduced-motion: reduce) { #splash img, #splash i::after { animation: none; } }
 
-/* ---------- Survol à la souris : léger agrandissement (ordinateur seulement) ---------- */
-@media (hover: hover) {
-  .btn, .icon-btn, .nav, .skill, .chip, .seg-ctl button, .daybar button, .name-btn, .mday, .blk, .tag-abs, .tag-cours, .tag-unk, .card, .item, .issue, .banner, .kpi, .legend > span, .alt-item, .tabbar button, .zone-pick button {
-    transition: transform .14s ease-out;
-  }
-  .btn:hover, .icon-btn:hover, .seg-ctl button:hover, .zone-pick button:hover { transform: scale(1.06); }
-  .skill:hover, .chip:hover { transform: scale(1.08); }
-  .nav:hover { transform: scale(1.03); }
-  .daybar button:hover, .mday:hover { transform: scale(1.04); z-index: 1; }
-  .name-btn:hover { transform: scale(1.04); transform-origin: left center; }
-  .plan td.cell .blk:hover, .blk:hover { transform: scale(1.06); z-index: 2; }
-  .card:not(.big):hover { transform: scale(1.03); }
-  /* Grandes cartes (tableaux, formulaires) : elles se soulèvent au lieu de grossir, pour que le texte reste net. */
-  .card.big:hover { transform: translateY(-5px); }
-  .item:hover { transform: scale(1.03); }
-  .issue:hover { background: color-mix(in srgb, var(--fg) 4%, transparent); }
-  
-  .banner:hover, .kpi:hover, .legend > span:hover, .alt-item:hover { transform: scale(1.03); }
-  .tag-abs:hover, .tag-cours:hover, .tag-unk:hover { transform: scale(1.06); }
-  .btn:active, .icon-btn:active, .skill:active, .nav:active { transform: scale(.97); }
-}
-
-/* ---------- Ombre au survol et fluidité ---------- */
-@media (hover: hover) {
-  html .btn:hover, html .icon-btn:hover, html .seg-ctl button:hover, html .zone-pick button:hover, html .skill:hover, html .chip:hover,
-  html .daybar button:hover, html .mday:hover, html .tag-abs:hover, html .tag-cours:hover, html .tag-unk:hover {
-    box-shadow: 0 8px 22px rgba(0, 0, 0, .14), 0 2px 6px rgba(0, 0, 0, .08);
-  }
-  html .btn.primary:hover { box-shadow: 0 10px 26px rgba(0, 113, 227, .38), 0 2px 6px rgba(0, 0, 0, .1); }
-  html .nav:hover, html .name-btn:hover { box-shadow: 0 6px 18px rgba(0, 0, 0, .1); }
-  html .plan td.cell .blk:hover, html .blk:hover { box-shadow: 0 10px 24px rgba(0, 0, 0, .16), 0 2px 6px rgba(0, 0, 0, .08), inset 3px 0 0 var(--z); }
-  html .card:hover { box-shadow: 0 16px 36px rgba(0, 0, 0, .14), 0 3px 8px rgba(0, 0, 0, .05); }
-  html .item:hover, html .alt-item:hover, html .kpi:hover, html .banner:hover, html .legend > span:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, .1); border-radius: 12px;
-  }
-}
-@media (prefers-color-scheme: dark) {
-  @media (hover: hover) { html:not([data-theme="light"]) .card:hover { box-shadow: 0 16px 36px rgba(0, 0, 0, .5); } }
-}
+/* Survol : pas d'agrandissement ni d'ombre, seulement un léger fond sur les lignes de problèmes. */
+@media (hover: hover) { .issue:hover { background: color-mix(in srgb, var(--fg) 4%, transparent); } }
 /* Écran qui apparaît en fondu (opacité + léger glissement : fluide même sur téléphone). */
 @keyframes screen-in { from { opacity: .4; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 /* Fluidité générale */
 html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 .content, .t-wrap, .plan-wrap { -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
-@media (hover: none) {
-  .btn:active, .icon-btn:active, .nav:active, .skill:active, .blk:active, .mday:active, .item:active, .tabbar button:active, .daybar button:active { transform: scale(.96); transition: transform .12s ease; }
-}
 
 /* Position fixée d'avance : le survol ne déclenche plus de recalcul de la mise en page. */
 .blk, .mday, .daybar button { position: relative; }
-/* Petites cartes sur leur propre calque : leur agrandissement est fait par la carte graphique. */
-@media (hover: hover) { .card:not(.big) { will-change: transform; } }
 .issue { border-radius: 10px; padding-left: 6px; padding-right: 6px; }
 .issue .grow { flex: 0 1 auto; min-width: 0; }
 .issue-x { flex: none; margin-left: 4px; margin-top: -2px; width: 26px; height: 26px; border-radius: 50%; border: 0; background: transparent; color: var(--fg-3); font-size: 13px; cursor: pointer; display: grid; place-items: center; transition: background-color .12s, color .12s, transform .12s; }
-.issue-x:hover { background: var(--danger-soft); color: var(--danger); transform: scale(1.15); }
+.issue-x:hover { background: var(--danger-soft); color: var(--danger); }
 
 /* Champs alignés : même hauteur pour les listes, dates, heures et textes. */
 input.input:not([type="checkbox"]):not([type="radio"]):not([type="color"]), select.input { height: 42px; box-sizing: border-box; }
