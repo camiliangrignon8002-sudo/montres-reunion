@@ -186,6 +186,8 @@
   // Compétences cochables. Le badge rouge = droit de travailler en zone réservée (ZR) ; sans lui, ZP seulement.
   const SKILLS = { badgeRouge: "Badge rouge (ZR)", admin: "Administratif", fdj: "FDJ", ouverture: "Ouverture du magasin", fermeture: "Fermeture du magasin", formation: "En formation", ancien: "Ancien(ne)" };
   const hasSkill = (emp, k) => !!(emp && (k === "badgeRouge" ? (emp.zones || {}).ZR : k === "admin" ? (emp.zones || {}).ADM : emp.skills && emp.skills[k]));
+  // Accord des textes selon la personne : « seul(e) » → « seul » (homme) ou « seule » (femme).
+  const genderize = (text, gender) => gender === "m" ? String(text).replace(/\((?:n?e)\)/g, "").replace(/\(s\)/g, "s") : gender === "f" ? String(text).replace(/\(ne\)/g, "ne").replace(/\(e\)/g, "e") : String(text);
   const isAdminZone = (z) => z === "ADM"; // bureau : pas un point de vente (pas d'ouverture, pas de « seul(e) »)
   // Plages (minutes) où la personne en formation est seule dans la zone du bloc : aucune personne confirmée présente.
   function aloneRanges(state, shifts, sh, g) {
@@ -569,7 +571,7 @@
     const st = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
     const w = getWeek(state, monday);
     const issues = [];
-    const add = (level, code, emp, date, msg) => issues.push({ level, code, emp, date, msg, blocking: BLOCKING.has(code) });
+    const add = (level, code, emp, date, msg) => issues.push({ level, code, emp, date, msg: emp ? genderize(msg, (empById(state, emp) || {}).gender) : msg, blocking: BLOCKING.has(code) });
     if (!w) return issues;
     const nameOf = (id) => (empById(state, id) || { name: id }).name;
     const paperWeek = !!(w.refId || /papier/.test(w.source || ""));
@@ -1677,7 +1679,7 @@
       // Règles qui bloquent : regroupées par raison
       const why = {};
       for (const x of explain) (why[x.why] = why[x.why] || []).push(x.name);
-      return { ...n, candidates, blockers: Object.entries(why).map(([reason, names]) => ({ reason, names })).sort((p, q) => q.names.length - p.names.length) };
+      return { ...n, reason: genderize(n.reason, (empById(state, n.emp) || {}).gender), candidates, blockers: Object.entries(why).map(([reason, names]) => ({ reason, names })).sort((p, q) => q.names.length - p.names.length) };
     });
     return { week, report: { placed: placed.length, notPlaced: suggestions, issues, tooManyOff } };
   }
@@ -2003,7 +2005,7 @@
             if (s.employees.some((x) => x.id !== emp.id && norm(x.name) === norm(n))) { fail(`${n} existe déjà.`); break; }
             emp.name = n;
           }
-          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave", "training", "contractHours", "startedOn", "backOn", "skills"]) if (p[k] !== undefined) emp[k] = p[k];
+          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave", "training", "contractHours", "startedOn", "backOn", "skills", "gender"]) if (p[k] !== undefined) emp[k] = p[k];
           if (p.onLeave && !isISO(p.onLeave.since)) { fail("Date de début des vacances invalide."); break; }
           if (p.training && p.training.since && !isISO(p.training.since)) { fail("Date de début de formation invalide."); break; }
           if (p.contractHours != null && !(Number(p.contractHours) > 0 && Number(p.contractHours) <= 48)) { fail("Heures du contrat invalides (entre 1 et 48)."); break; }
@@ -2272,7 +2274,7 @@
     DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, ABSENCE_MOTIFS, deviationFromTimes, applyClosing, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
-    norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones, eveningOutside, snapEvening, slotsOf, stdDayMinutes, holeRanges,
+    norm, slug, uid, genderize, empById, findEmployee, zoneLevel, zoneById, allowedZones, eveningOutside, snapEvening, slotsOf, stdDayMinutes, holeRanges,
     calendarCode, calStatus, staffingGaps, paxRules, paxOf, paxSlots, incompatible, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,

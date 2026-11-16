@@ -1209,6 +1209,10 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
       summary: "Mathilde : contrat de 30 h (5 journées de 6 h, soit 6 h 30 avec la pause)",
       patchEmp: { mathilde: { contractHours: 30 } },
     }, {
+      id: "genres-equipe",
+      summary: "Accords : Camilian, Eric, Sebastien et Lucas sont des hommes, les autres des femmes",
+      patchEmp: Object.fromEntries([...["camilian", "eric", "sebastien", "lucas"].map((id) => [id, { gender: "m" }]), ...["amandine", "charlotte", "fleur", "maelle", "mathilde", "murielle", "nathalie", "reine-claude", "sonia", "sophie", "sabrina", "ruby", "lana"].map((id) => [id, { gender: "f" }])]),
+    }, {
       id: "effectif-max-zones",
       summary: "Nombre maximum de personnes : ZR 3 le matin et 3 le soir ; ZP 4 le matin et 2 le soir",
       addStaffing: [
@@ -1432,6 +1436,8 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
   // Compétences cochables. Le badge rouge = droit de travailler en zone réservée (ZR) ; sans lui, ZP seulement.
   const SKILLS = { badgeRouge: "Badge rouge (ZR)", admin: "Administratif", fdj: "FDJ", ouverture: "Ouverture du magasin", fermeture: "Fermeture du magasin", formation: "En formation", ancien: "Ancien(ne)" };
   const hasSkill = (emp, k) => !!(emp && (k === "badgeRouge" ? (emp.zones || {}).ZR : k === "admin" ? (emp.zones || {}).ADM : emp.skills && emp.skills[k]));
+  // Accord des textes selon la personne : « seul(e) » → « seul » (homme) ou « seule » (femme).
+  const genderize = (text, gender) => gender === "m" ? String(text).replace(/\((?:n?e)\)/g, "").replace(/\(s\)/g, "s") : gender === "f" ? String(text).replace(/\(ne\)/g, "ne").replace(/\(e\)/g, "e") : String(text);
   const isAdminZone = (z) => z === "ADM"; // bureau : pas un point de vente (pas d'ouverture, pas de « seul(e) »)
   // Plages (minutes) où la personne en formation est seule dans la zone du bloc : aucune personne confirmée présente.
   function aloneRanges(state, shifts, sh, g) {
@@ -1815,7 +1821,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
     const st = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
     const w = getWeek(state, monday);
     const issues = [];
-    const add = (level, code, emp, date, msg) => issues.push({ level, code, emp, date, msg, blocking: BLOCKING.has(code) });
+    const add = (level, code, emp, date, msg) => issues.push({ level, code, emp, date, msg: emp ? genderize(msg, (empById(state, emp) || {}).gender) : msg, blocking: BLOCKING.has(code) });
     if (!w) return issues;
     const nameOf = (id) => (empById(state, id) || { name: id }).name;
     const paperWeek = !!(w.refId || /papier/.test(w.source || ""));
@@ -2923,7 +2929,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
       // Règles qui bloquent : regroupées par raison
       const why = {};
       for (const x of explain) (why[x.why] = why[x.why] || []).push(x.name);
-      return { ...n, candidates, blockers: Object.entries(why).map(([reason, names]) => ({ reason, names })).sort((p, q) => q.names.length - p.names.length) };
+      return { ...n, reason: genderize(n.reason, (empById(state, n.emp) || {}).gender), candidates, blockers: Object.entries(why).map(([reason, names]) => ({ reason, names })).sort((p, q) => q.names.length - p.names.length) };
     });
     return { week, report: { placed: placed.length, notPlaced: suggestions, issues, tooManyOff } };
   }
@@ -3249,7 +3255,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
             if (s.employees.some((x) => x.id !== emp.id && norm(x.name) === norm(n))) { fail(`${n} existe déjà.`); break; }
             emp.name = n;
           }
-          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave", "training", "contractHours", "startedOn", "backOn", "skills"]) if (p[k] !== undefined) emp[k] = p[k];
+          for (const k of ["role", "active", "calendarId", "aliases", "zoneNote", "aliasNote", "rules", "rulesApplied", "leftOn", "onLeave", "training", "contractHours", "startedOn", "backOn", "skills", "gender"]) if (p[k] !== undefined) emp[k] = p[k];
           if (p.onLeave && !isISO(p.onLeave.since)) { fail("Date de début des vacances invalide."); break; }
           if (p.training && p.training.since && !isISO(p.training.since)) { fail("Date de début de formation invalide."); break; }
           if (p.contractHours != null && !(Number(p.contractHours) > 0 && Number(p.contractHours) <= 48)) { fail("Heures du contrat invalides (entre 1 et 48)."); break; }
@@ -3518,7 +3524,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
     DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, ABSENCE_MOTIFS, deviationFromTimes, applyClosing, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
-    norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones, eveningOutside, snapEvening, slotsOf, stdDayMinutes, holeRanges,
+    norm, slug, uid, genderize, empById, findEmployee, zoneLevel, zoneById, allowedZones, eveningOutside, snapEvening, slotsOf, stdDayMinutes, holeRanges,
     calendarCode, calStatus, staffingGaps, paxRules, paxOf, paxSlots, incompatible, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
@@ -4774,7 +4780,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
         }),
         h("th", { class: "tot" }, "Total"))),
       h("tbody", {}, grid.rows.map((row) => h("tr", { class: row.emp.active === false ? "inactive" : "" },
-        h("td", { class: "name" }, canEdit ? h("button", { type: "button", class: "abs-plus", title: `Ajouter une absence pour ${row.emp.name}`, "aria-label": `Ajouter une absence pour ${row.emp.name}`, onClick: () => this.openAbsenceDialog(row.emp.id, grid.days[0] >= this.today() ? grid.days[0] : this.today()) }, "+") : null, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"), C.weekDates(grid.monday).some((d) => C.inTraining(row.emp, d)) ? h("span", { class: "chip warn tiny-chip", title: "Jamais seule, à aucun moment" }, "En formation") : null),
+        h("td", { class: "name" }, canEdit ? h("button", { type: "button", class: "abs-plus", title: `Ajouter une absence pour ${row.emp.name}`, "aria-label": `Ajouter une absence pour ${row.emp.name}`, onClick: () => this.openAbsenceDialog(row.emp.id, grid.days[0] >= this.today() ? grid.days[0] : this.today()) }, "+") : null, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? C.genderize("Alternant(e)", row.emp.gender) : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"), C.weekDates(grid.monday).some((d) => C.inTraining(row.emp, d)) ? h("span", { class: "chip warn tiny-chip", title: "Jamais seule, à aucun moment" }, "En formation") : null),
           (s.settings.links || []).filter((l) => l.kind === "trajet" && l.emps.includes(row.emp.id)).map((l) => this.carToggle(l, false))),
         row.cells.map((cell) => {
           const k = row.emp.id + "|" + cell.date, lvl = cellIssue[k];
@@ -5791,7 +5797,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
         h("thead", {}, h("tr", {}, h("th", {}, "Prénom"), h("th", {}, "Statut"), h("th", {}, "Compétences"), h("th", {}, "Heures du modèle"), h("th", {}, "Règles"), h("th", {}, "Active"), h("th", {}, ""))),
         h("tbody", {}, s.employees.map((e) => h("tr", {},
           h("td", {}, h("b", {}, e.name), (e.aliases || []).length ? h("div", { class: "tiny muted" }, `aussi : ${e.aliases.join(", ")}`) : null),
-          h("td", {}, e.role === "alternant" ? h("span", { class: "chip cours" }, "Alternant(e)") : "Salarié(e)", e.contractHours ? h("div", { class: "tiny muted" }, `Contrat ${e.contractHours} h`) : null),
+          h("td", {}, e.role === "alternant" ? h("span", { class: "chip cours" }, C.genderize("Alternant(e)", e.gender)) : C.genderize("Salarié(e)", e.gender), e.contractHours ? h("div", { class: "tiny muted" }, `Contrat ${e.contractHours} h`) : null),
           h("td", {}, this.skillChips(e), this.zonePrefChips(e), this.shiftPrefChips(e)),
           h("td", { class: "num" }, C.fmtHours(C.templateMinutes(s, e.id))),
           h("td", { class: "small" }, rulesText(e) || h("span", { class: "muted" }, "—")),
@@ -5803,6 +5809,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
     const name = h("input", { class: "input", id: "emp-name", value: e.name });
     const aliases = h("input", { class: "input", id: "emp-alias", value: (e.aliases || []).join(", "), placeholder: "Autres façons d'écrire le prénom" });
     const role = h("select", { class: "input", id: "emp-role" }, h("option", { value: "salarie", selected: e.role !== "alternant" }, "Salarié(e)"), h("option", { value: "alternant", selected: e.role === "alternant" }, "Alternant(e)"));
+    const genderSel = h("select", { class: "input", id: "emp-gender" }, h("option", { value: "", selected: !e.gender }, "Non précisé"), h("option", { value: "f", selected: e.gender === "f" }, "Femme"), h("option", { value: "m", selected: e.gender === "m" }, "Homme"));
     const r = e.rules || {};
     const fixOn = h("input", { type: "checkbox", id: "emp-fix", checked: !!r.fixedHours });
     const fixS = h("input", { type: "time", class: "input", id: "emp-fix-s", value: r.fixedHours ? r.fixedHours.s : "" });
@@ -5834,7 +5841,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
     sk.ancien.addEventListener("change", () => { if (sk.ancien.checked) trOn.checked = false; });
     const trSince = h("input", { type: "date", class: "input", id: "emp-train-since", value: tr.since || e.startedOn || this.today() });
     const contractIn = h("input", { type: "number", class: "input", id: "emp-contract", min: "1", max: "48", step: "0.5", value: e.contractHours || "", placeholder: String(s.settings.contractHours || 35) });
-    openDialog({ title: e.name, body: h("div", { class: "stack" }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("label", { class: "f" }, "Autres écritures (séparées par des virgules)", aliases),
+    openDialog({ title: e.name, body: h("div", { class: "stack" }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role), h("label", { class: "f" }, "Genre (accords des textes)", genderSel)), h("label", { class: "f" }, "Autres écritures (séparées par des virgules)", aliases),
       h("h3", {}, "Règles personnelles"),
       h("label", { class: "check" }, fixOn, "Toujours les mêmes horaires"), h("div", { class: "form-grid" }, h("label", { class: "f" }, "Début", fixS), h("label", { class: "f" }, "Fin", fixE)),
       h("div", { class: "form-grid" }, h("label", { class: "f" }, "Fin au plus tard", maxEndIn)),
@@ -5877,7 +5884,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
           // Incompatibilité décochée ici mais déclarée sur l'autre fiche : retirée des deux côtés.
           const incOps = s.employees.filter((x) => x.id !== id && ((x.rules || {}).incompatible || []).includes(id) && !rules.incompatible.includes(x.id))
             .map((x) => ({ type: "updateEmployee", id: x.id, patch: { rules: { ...x.rules, incompatible: x.rules.incompatible.filter((y) => y !== id) } } }));
-          return (await this.commit([{ type: "updateEmployee", id, patch: { name: name.value, role: role.value, aliases: aliases.value.split(",").map((x) => x.trim()).filter(Boolean), rules, training, contractHours, skills } }, ...zoneOps, ...incOps])).ok;
+          return (await this.commit([{ type: "updateEmployee", id, patch: { name: name.value, role: role.value, gender: genderSel.value || null, aliases: aliases.value.split(",").map((x) => x.trim()).filter(Boolean), rules, training, contractHours, skills } }, ...zoneOps, ...incOps])).ok;
         } },
       ] });
   };

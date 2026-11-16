@@ -593,6 +593,10 @@
       summary: "Mathilde : contrat de 30 h (5 journées de 6 h, soit 6 h 30 avec la pause)",
       patchEmp: { mathilde: { contractHours: 30 } },
     }, {
+      id: "genres-equipe",
+      summary: "Accords : Camilian, Eric, Sebastien et Lucas sont des hommes, les autres des femmes",
+      patchEmp: Object.fromEntries([...["camilian", "eric", "sebastien", "lucas"].map((id) => [id, { gender: "m" }]), ...["amandine", "charlotte", "fleur", "maelle", "mathilde", "murielle", "nathalie", "reine-claude", "sonia", "sophie", "sabrina", "ruby", "lana"].map((id) => [id, { gender: "f" }])]),
+    }, {
       id: "effectif-max-zones",
       summary: "Nombre maximum de personnes : ZR 3 le matin et 3 le soir ; ZP 4 le matin et 2 le soir",
       addStaffing: [

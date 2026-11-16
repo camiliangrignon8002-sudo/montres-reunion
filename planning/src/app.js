@@ -613,7 +613,7 @@
         }),
         h("th", { class: "tot" }, "Total"))),
       h("tbody", {}, grid.rows.map((row) => h("tr", { class: row.emp.active === false ? "inactive" : "" },
-        h("td", { class: "name" }, canEdit ? h("button", { type: "button", class: "abs-plus", title: `Ajouter une absence pour ${row.emp.name}`, "aria-label": `Ajouter une absence pour ${row.emp.name}`, onClick: () => this.openAbsenceDialog(row.emp.id, grid.days[0] >= this.today() ? grid.days[0] : this.today()) }, "+") : null, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"), C.weekDates(grid.monday).some((d) => C.inTraining(row.emp, d)) ? h("span", { class: "chip warn tiny-chip", title: "Jamais seule, à aucun moment" }, "En formation") : null),
+        h("td", { class: "name" }, canEdit ? h("button", { type: "button", class: "abs-plus", title: `Ajouter une absence pour ${row.emp.name}`, "aria-label": `Ajouter une absence pour ${row.emp.name}`, onClick: () => this.openAbsenceDialog(row.emp.id, grid.days[0] >= this.today() ? grid.days[0] : this.today()) }, "+") : null, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? C.genderize("Alternant(e)", row.emp.gender) : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"), C.weekDates(grid.monday).some((d) => C.inTraining(row.emp, d)) ? h("span", { class: "chip warn tiny-chip", title: "Jamais seule, à aucun moment" }, "En formation") : null),
           (s.settings.links || []).filter((l) => l.kind === "trajet" && l.emps.includes(row.emp.id)).map((l) => this.carToggle(l, false))),
         row.cells.map((cell) => {
           const k = row.emp.id + "|" + cell.date, lvl = cellIssue[k];
@@ -1630,7 +1630,7 @@
         h("thead", {}, h("tr", {}, h("th", {}, "Prénom"), h("th", {}, "Statut"), h("th", {}, "Compétences"), h("th", {}, "Heures du modèle"), h("th", {}, "Règles"), h("th", {}, "Active"), h("th", {}, ""))),
         h("tbody", {}, s.employees.map((e) => h("tr", {},
           h("td", {}, h("b", {}, e.name), (e.aliases || []).length ? h("div", { class: "tiny muted" }, `aussi : ${e.aliases.join(", ")}`) : null),
-          h("td", {}, e.role === "alternant" ? h("span", { class: "chip cours" }, "Alternant(e)") : "Salarié(e)", e.contractHours ? h("div", { class: "tiny muted" }, `Contrat ${e.contractHours} h`) : null),
+          h("td", {}, e.role === "alternant" ? h("span", { class: "chip cours" }, C.genderize("Alternant(e)", e.gender)) : C.genderize("Salarié(e)", e.gender), e.contractHours ? h("div", { class: "tiny muted" }, `Contrat ${e.contractHours} h`) : null),
           h("td", {}, this.skillChips(e), this.zonePrefChips(e), this.shiftPrefChips(e)),
           h("td", { class: "num" }, C.fmtHours(C.templateMinutes(s, e.id))),
           h("td", { class: "small" }, rulesText(e) || h("span", { class: "muted" }, "—")),
@@ -1642,6 +1642,7 @@
     const name = h("input", { class: "input", id: "emp-name", value: e.name });
     const aliases = h("input", { class: "input", id: "emp-alias", value: (e.aliases || []).join(", "), placeholder: "Autres façons d'écrire le prénom" });
     const role = h("select", { class: "input", id: "emp-role" }, h("option", { value: "salarie", selected: e.role !== "alternant" }, "Salarié(e)"), h("option", { value: "alternant", selected: e.role === "alternant" }, "Alternant(e)"));
+    const genderSel = h("select", { class: "input", id: "emp-gender" }, h("option", { value: "", selected: !e.gender }, "Non précisé"), h("option", { value: "f", selected: e.gender === "f" }, "Femme"), h("option", { value: "m", selected: e.gender === "m" }, "Homme"));
     const r = e.rules || {};
     const fixOn = h("input", { type: "checkbox", id: "emp-fix", checked: !!r.fixedHours });
     const fixS = h("input", { type: "time", class: "input", id: "emp-fix-s", value: r.fixedHours ? r.fixedHours.s : "" });
@@ -1673,7 +1674,7 @@
     sk.ancien.addEventListener("change", () => { if (sk.ancien.checked) trOn.checked = false; });
     const trSince = h("input", { type: "date", class: "input", id: "emp-train-since", value: tr.since || e.startedOn || this.today() });
     const contractIn = h("input", { type: "number", class: "input", id: "emp-contract", min: "1", max: "48", step: "0.5", value: e.contractHours || "", placeholder: String(s.settings.contractHours || 35) });
-    openDialog({ title: e.name, body: h("div", { class: "stack" }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role)), h("label", { class: "f" }, "Autres écritures (séparées par des virgules)", aliases),
+    openDialog({ title: e.name, body: h("div", { class: "stack" }, h("div", { class: "form-grid" }, h("label", { class: "f" }, "Prénom", name), h("label", { class: "f" }, "Statut", role), h("label", { class: "f" }, "Genre (accords des textes)", genderSel)), h("label", { class: "f" }, "Autres écritures (séparées par des virgules)", aliases),
       h("h3", {}, "Règles personnelles"),
       h("label", { class: "check" }, fixOn, "Toujours les mêmes horaires"), h("div", { class: "form-grid" }, h("label", { class: "f" }, "Début", fixS), h("label", { class: "f" }, "Fin", fixE)),
       h("div", { class: "form-grid" }, h("label", { class: "f" }, "Fin au plus tard", maxEndIn)),
@@ -1716,7 +1717,7 @@
           // Incompatibilité décochée ici mais déclarée sur l'autre fiche : retirée des deux côtés.
           const incOps = s.employees.filter((x) => x.id !== id && ((x.rules || {}).incompatible || []).includes(id) && !rules.incompatible.includes(x.id))
             .map((x) => ({ type: "updateEmployee", id: x.id, patch: { rules: { ...x.rules, incompatible: x.rules.incompatible.filter((y) => y !== id) } } }));
-          return (await this.commit([{ type: "updateEmployee", id, patch: { name: name.value, role: role.value, aliases: aliases.value.split(",").map((x) => x.trim()).filter(Boolean), rules, training, contractHours, skills } }, ...zoneOps, ...incOps])).ok;
+          return (await this.commit([{ type: "updateEmployee", id, patch: { name: name.value, role: role.value, gender: genderSel.value || null, aliases: aliases.value.split(",").map((x) => x.trim()).filter(Boolean), rules, training, contractHours, skills } }, ...zoneOps, ...incOps])).ok;
         } },
       ] });
   };
