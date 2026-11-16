@@ -2722,7 +2722,8 @@ html.ciel .blk { box-shadow: none; }
         const shapeFor2 = (emp, segs) => { const zs = allowedZones(emp).filter((z) => !isAdminZone(z)); if (!zs.length) return []; const wz = emp.rules && emp.rules.weekZone && zs.includes(emp.rules.weekZone) ? [emp.rules.weekZone] : zs; return wz.map((z) => snapEvening(seasonState, fitSeason(segs.map((g) => ({ ...g, z }))), monday)); };
         const shapesCache = {};
         const shapesFor = (emp) => shapesCache[emp.id] || (shapesCache[emp.id] = bases2.flatMap((B) => shapeFor2(emp, toStd(B, lenOf(emp.id)))));
-        while (Date.now() - t0 < budget && stale < 400) {
+        let iter = 0; // limite d'essais en plus du temps (horloge figée possible)
+        while (Date.now() - t0 < budget && stale < 400 && iter++ < 4000) {
           stale++;
           const r = rnd();
           if (r < 0.2) { // journée en plus pour quelqu'un à qui il en manque
@@ -2813,7 +2814,8 @@ html.ciel .blk { box-shadow: none; }
       let cur = evalAll();
       const t1 = Date.now(), budget2 = opts.repairMs != null ? opts.repairMs : 2500;
       let seed2 = 11; const rnd2 = () => (seed2 = (seed2 * 1103515245 + 12345) % 2147483648) / 2147483648;
-      while (cur.sc > 0 && Date.now() - t1 < budget2) {
+      let iter2 = 0;
+      while (cur.sc > 0 && Date.now() - t1 < budget2 && iter2++ < 300) {
         const bads = cur.iss.filter((i) => i.level !== "info" && (W[i.code] || i.level === "erreur"));
         if (!bads.length) break;
         const iss = bads[Math.floor(rnd2() * bads.length)];

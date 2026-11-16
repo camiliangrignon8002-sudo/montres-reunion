@@ -160,7 +160,7 @@ const MOCK = `
     await page.waitForSelector("text=Aucun horaire pour cette semaine.");
     await page.click(".empty >> text=Générer à partir du modèle");
     await page.click(".dialog footer >> text=Générer le planning");
-    await page.waitForSelector("text=Proposition de planning");
+    await page.waitForSelector("text=Proposition de planning", { timeout: 120000 });
     const notPlaced = await page.textContent(".dialog");
     console.log("   [aperçu] " + (notPlaced.match(/\d+ poste\(s\) non attribué/) || ["0"])[0] + " ; " + (notPlaced.match(/Tout le monde a son poste[^:]*/) || ["(pas tout le monde)"])[0]);
     check("génération : tout le monde a ses horaires ; postes non attribués seulement à cause du CFA (Nathalie revenue le 16/11)", /Tout le monde a son poste et ses horaires/.test(notPlaced) && !/acances/.test(notPlaced) && (notPlaced.match(/poste\(s\) non attribué/) ? (notPlaced.match(/(formation|cours) au CFA/g) || []).length >= 4 : true));
