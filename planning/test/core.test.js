@@ -394,6 +394,7 @@ test("nouvelles personnes en formation : jamais seules dans leur zone (même pen
   // Lundi 19/10 : Eric en ZP de 07:00 à 12:00 puis 12:30–14:30 ; Ruby de 07:00 à 14:30 serait seule de 12:00 à 12:30.
   const eric = s.weeks["2026-10-19"].shifts.find((x) => x.emp === "eric" && x.date === "2026-10-19");
   assert.ok(eric);
+  eric.segs = [{ s: "07:00", e: "12:00", z: "ZP" }, { s: "12:30", e: "14:30", z: "ZP" }];
   const others = s.weeks["2026-10-19"].shifts.filter((x) => x.date === "2026-10-19" && x.emp !== "eric" && x.segs.some((g) => g.z === "ZP"));
   s.weeks["2026-10-19"].shifts = s.weeks["2026-10-19"].shifts.filter((x) => !others.includes(x));
   const r = apply(s, [{ type: "setShift", emp: "ruby", date: "2026-10-19", segs: [{ s: "07:00", e: "14:30", z: "ZP" }] }]);

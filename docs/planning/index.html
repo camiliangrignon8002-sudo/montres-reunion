@@ -1703,6 +1703,23 @@ ul.blockers b { color: var(--fg); font-weight: 600; }
   const opensZone = (state, segs, date) => (segs || []).some((g, i) => i === 0 && isTime(g.s) && !isAdminZone(g.z) && (() => { const oh = openingHours(state, g.z, date); return oh && g.s === oh.s; })());
   // (tant que personne n'a l'étiquette « ancien(ne) », tout le monde sauf les personnes en formation peut ouvrir)
   const canOpenIn = (state, emp, date) => !!emp && !inTraining(emp, date) && (hasSkill(emp, "ancien") || !(state.employees || []).some((e) => e.active !== false && hasSkill(e, "ancien")));
+  // Trous : moments où une zone ouverte n'a personne (jour de bureau non compté), par pas de 15 min.
+  function holeRanges(state, shifts, date, z) {
+    const oh = openingHours(state, z, date);
+    if (!oh) return [];
+    const iv = [];
+    for (const sh of shifts) if (sh.date === date && !sh.office) for (const g of sh.segs || []) if (g.z === z && isTime(g.s) && isTime(g.e)) iv.push(segRange(g));
+    const out = [];
+    let start = null;
+    const a = toMin(oh.s), b = toMin(oh.e) > toMin(oh.s) ? toMin(oh.e) : toMin(oh.e) + 1440;
+    for (let t = a; t < b; t += 15) {
+      const empty = !iv.some(([x, y]) => x <= t && y >= t + 15);
+      if (empty && start == null) start = t;
+      if (!empty && start != null) { out.push({ s: fromMin(start), e: fromMin(t), min: t - start }); start = null; }
+    }
+    if (start != null) out.push({ s: fromMin(start), e: fromMin(b), min: b - start });
+    return out;
+  }
   function weekExtraMinutes(state, monday, empId) {
     const end = addDays(monday, 6);
     return Object.values(state.adjustments || {}).filter((a) => a.emp === empId && a.date >= monday && a.date <= end && (a.type === "heures_sup" || a.type === "journee_sup")).reduce((x, a) => x + a.minutes, 0);
@@ -1978,7 +1995,13 @@ ul.blockers b { color: var(--fg); font-weight: 600; }
       if (n < min) add("alerte", "OFFICE_DAYS", emp.id, null, `${emp.name} : ${n} jour(s) de bureau cette semaine, il en faut au moins ${min}. Cochez « Jour de bureau » sur ses créneaux concernés.`);
     }
     // Couverture
-    if (!(opts && opts.skipCoverage)) for (const u of uncoveredPosts(state, monday)) add("alerte", "UNCOVERED", u.templateEmp, u.date, `Poste du modèle non pourvu le ${fmtDate(u.date, "day")} : ${segLabel(u.segs)} (${u.segs.map((g) => g.z).filter((v, i, a) => a.indexOf(v) === i).join("/")}) — habituellement ${nameOf(u.templateEmp)}${u.reason ? ", " + u.reason : ""}.`);
+    // Trous : une zone ouverte sans personne
+    if (!paperWeek) for (const d of weekDates(monday)) {
+      if (!w.shifts.some((x) => x.date === d)) continue;
+      for (const z of ["ZP", "ZR"]) if (zoneById(state, z)) for (const hr of holeRanges(state, w.shifts, d, z)) add("alerte", "HOLE", null, d, `Trou en ${z} le ${fmtDate(d, "day")} de ${hr.s} à ${hr.e} : personne dans la zone.`);
+    }
+    // Postes du modèle : seulement pour les plannings faits à la main ou sur papier (la génération réorganise tout).
+    if (!(opts && opts.skipCoverage) && w.source !== "généré") for (const u of uncoveredPosts(state, monday)) add("alerte", "UNCOVERED", u.templateEmp, u.date, `Poste du modèle non pourvu le ${fmtDate(u.date, "day")} : ${segLabel(u.segs)} (${u.segs.map((g) => g.z).filter((v, i, a) => a.indexOf(v) === i).join("/")}) — habituellement ${nameOf(u.templateEmp)}${u.reason ? ", " + u.reason : ""}.`);
     return issues;
   }
   const blockingIssues = (issues) => issues.filter((i) => i.blocking);
@@ -2538,6 +2561,171 @@ ul.blockers b { color: var(--fg); font-weight: 600; }
             week.shifts.splice(idx, 0, t);
           }
           if (ok2) break;
+        }
+      }
+    }
+    // Pas de trous : pauses décalées et horaires glissés pour que chaque zone ait toujours quelqu'un
+    // (et le nombre minimum de personnes, ex. 3 en ZR le soir avec beaucoup de passagers).
+    {
+      const minRules = (date) => [...(stG.staffing || []), ...paxRules(state, date)].filter((r) => r.min != null && date >= r.from && date <= r.to);
+      const bad = (date) => {
+        const day = week.shifts.filter((x) => x.date === date);
+        let v = 0;
+        for (const z of ["ZP", "ZR"]) if (zoneById(state, z)) v += 6 * holeRanges(state, day, date, z).reduce((a, x) => a + x.min, 0);
+        for (const r of minRules(date)) v += staffingGaps(state, day, date, r).low.reduce((a, x) => a + (r.min - x.n) * (toMin(x.e) - toMin(x.s)), 0);
+        return v;
+      };
+      const othersY = (id) => state.employees.filter((e) => e.id !== id).map((e) => e.id);
+      const okFor = (x, segs) => {
+        if (segs.some((g) => segMinutes(g) <= 0 || segMinutes(g) > (stG.maxContinuousHours || 6) * 60)) return false;
+        const idx = week.shifts.indexOf(x); week.shifts.splice(idx, 1);
+        const c = findCandidates(work, x.date, segs, { exclude: othersY(x.emp), sameDay: true })[0];
+        week.shifts.splice(idx, 0, x);
+        if (!c || !c.restOk) return false;
+        const old = x.segs; x.segs = segs;
+        const alone = week.shifts.some((y) => y.date === x.date && inTraining(empById(state, y.emp), x.date) && y.segs.some((g) => !isAdminZone(g.z) && aloneRanges(state, week.shifts, y, g).length));
+        const lostOpen = ["ZP", "ZR"].some((z) => { const oh = openingHours(state, z, x.date); return oh && old[0].z === z && old[0].s === oh.s && !week.shifts.some((y) => y !== x && y.date === x.date && !y.office && y.segs[0].z === z && y.segs[0].s === oh.s) && !(segs[0].z === z && segs[0].s === oh.s); });
+        x.segs = old;
+        return !alone && !lostOpen;
+      };
+      // variantes d'une journée : pause ailleurs, journée glissée de 30 min à 2 h, autre zone
+      const variants = (x) => {
+        const out = [], t = x.segs.filter((g) => isTime(g.s) && isTime(g.e));
+        if (t.length !== x.segs.length || !t.length) return out;
+        const L = shiftMinutes(t), r = shiftRanges(t), a0 = r[0][0];
+        const zs = allowedZones(empById(state, x.emp)).filter((z) => !isAdminZone(z));
+        const build = (A, h, z1, z2) => [{ s: fromMin(A), e: fromMin(A + h), z: z1 }, { s: fromMin(A + h + PAUSE), e: fromMin(A + L + PAUSE), z: z2 }];
+        for (const shift of [0, -30, 30, -60, 60, -90, 90, -120, 120]) for (const z of [...new Set([t[0].z, ...zs])]) for (let h = 120; h <= 360; h += 30) {
+          if (L - h < 60 || L - h > 360) continue;
+          const segs = build(a0 + shift, h, z, t.length > 1 && z === t[0].z ? t[t.length - 1].z : z);
+          if (segKey(segs) !== segKey(x.segs)) out.push(segs);
+        }
+        return out;
+      };
+      // Jours trop peu couverts (ex. dimanche) : on y déplace la journée d'une personne venant d'un jour plus chargé.
+      const openerLost = (y) => ["ZP", "ZR"].some((z) => { const oh = openingHours(state, z, y.date); return oh && y.segs[0].z === z && y.segs[0].s === oh.s && !week.shifts.some((q) => q !== y && q.date === y.date && !q.office && q.segs[0].z === z && q.segs[0].s === oh.s); });
+      const tAloneOn = (d) => week.shifts.some((q) => q.date === d && inTraining(empById(state, q.emp), d) && q.segs.some((g) => !isAdminZone(g.z) && aloneRanges(state, week.shifts, q, g).length));
+      for (let guard = 0; guard < 25; guard++) {
+        const days = weekDates(monday).filter(inRange).map((d) => ({ d, b: bad(d) })).sort((p, q) => q.b - p.b);
+        if (!days.length || !days[0].b) break;
+        const moves = [];
+        for (const { d: date, b: bDate } of days.filter((x) => x.b > 0)) {
+          for (const y of week.shifts.filter((q) => q.date !== date && inRange(q.date) && !q.office && !links.some((l) => l.sameHours && l.emps.includes(q.emp)))) {
+            const e = empById(state, y.emp);
+            if (busy(e.id, date) || absentDay(e.id, date) || extra.some((x) => x.emp === e.id && x.date === date)) continue;
+            if (e.role === "alternant" && !["entreprise", "weekend"].includes(calStatus(state, e, date))) continue;
+            if (personalRuleIssues(e, date, y.segs).length) continue;
+            const d2 = y.date, b2 = bad(d2);
+            y.date = date;
+            const gain = bDate + b2 - bad(date) - bad(d2);
+            y.date = d2;
+            if (gain > 0) moves.push({ y, date, gain });
+          }
+        }
+        moves.sort((p, q) => q.gain - p.gain);
+        let moved = false;
+        for (const { y, date } of moves.slice(0, 80)) {
+          const d2 = y.date;
+          if (openerLost(y)) continue;
+          const idx = week.shifts.indexOf(y); week.shifts.splice(idx, 1);
+          const c = findCandidates(work, date, y.segs, { exclude: othersY(y.emp) })[0];
+          week.shifts.splice(idx, 0, y);
+          if (!c || !c.restOk) continue;
+          y.date = date;
+          if (tAloneOn(d2) || tAloneOn(date)) { y.date = d2; continue; }
+          moved = true; break;
+        }
+        if (!moved) break;
+      }
+      for (let pass = 0; pass < 2; pass++) for (const date of weekDates(monday)) {
+        if (!inRange(date)) continue;
+        for (let guard = 0; guard < 30; guard++) {
+          const before = bad(date);
+          if (!before) break;
+          let best = null;
+          for (const x of week.shifts.filter((y) => y.date === date && !y.office && !links.some((l) => l.sameHours && l.emps.includes(y.emp)))) {
+            const old = x.segs;
+            for (const v of variants(x)) {
+              x.segs = v; const after = bad(date); x.segs = old;
+              if (after < before && (!best || after < best.after)) best = { x, v, after };
+            }
+          }
+          if (!best) break;
+          // on prend la meilleure variante possible avec toutes les règles (sinon la suivante)
+          if (okFor(best.x, best.v)) { best.x.segs = best.v; continue; }
+          let applied = false;
+          const all = [];
+          for (const x of week.shifts.filter((y) => y.date === date && !y.office && !links.some((l) => l.sameHours && l.emps.includes(y.emp)))) {
+            const old = x.segs;
+            for (const v of variants(x)) { x.segs = v; const after = bad(date); x.segs = old; if (after < before) all.push({ x, v, after }); }
+          }
+          all.sort((p, q) => p.after - q.after);
+          for (const c of all.slice(0, 60)) if (okFor(c.x, c.v)) { c.x.segs = c.v; applied = true; break; }
+          if (!applied) break;
+        }
+      }
+      // Recherche locale sur toute la semaine : on essaie des changements (horaire, pause, zone, jour, journée en plus)
+      // et on garde ceux qui réduisent trous, manques de personnel, ouvertures manquantes et journées manquantes.
+      {
+        let seed = 7; const rnd = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
+        const pick = (arr) => arr[Math.floor(rnd() * arr.length)];
+        const openMissing = (d) => ["ZP", "ZR"].filter((z) => { const oh = zoneById(state, z) && openingHours(state, z, d); return oh && week.shifts.some((q) => q.date === d) && !week.shifts.some((q) => q.date === d && !q.office && q.segs[0].z === z && q.segs[0].s === oh.s); }).length;
+        const dayScore = (d) => bad(d) + 300 * openMissing(d) + (tAloneOn(d) ? 5000 : 0);
+        const missing = (e) => Math.max(0, workDaysTarget(e) - mineOf(e.id).length);
+        const ppl = state.employees.filter((e) => e.active !== false && (!include || include.has(e.id)) && allowedZones(e).some((z) => !isAdminZone(z)));
+        const movable = (q) => inRange(q.date) && !q.office && !links.some((l) => l.sameHours && l.emps.includes(q.emp));
+        const canDay = (e, d) => inRange(d) && !busy(e.id, d) && !absentDay(e.id, d) && !extra.some((x) => x.emp === e.id && x.date === d) && !(e.role === "alternant" && !["entreprise", "weekend"].includes(calStatus(state, e, d))) && !personalRuleIssues(e, d, []).some((x) => x.code === "FIXED_DAYOFF");
+        const legal = (emp, d, segs, sameDay) => { const c = findCandidates(work, d, segs, { exclude: othersY(emp), sameDay })[0]; return !!(c && c.restOk); };
+        const t0 = Date.now(), budget = opts.searchMs != null ? opts.searchMs : 1500;
+        let stale = 0;
+        const bases2 = [];
+        for (const t of (state.template && state.template.shifts) || []) { const sg = toStd(t.segs.map(({ s: a, e: b, z }) => ({ s: a, e: b, z }))); if (!bases2.some((x) => segKey(x) === segKey(sg))) bases2.push(sg); }
+        for (const z of ["ZP", "ZR"]) if (zoneById(state, z)) for (const st0 of ["06:00", "06:30", "07:00", "07:30", "08:00"]) { const sg = toStd([{ s: st0, e: fromMin(toMin(st0) + DAY + PAUSE), z }]); if (!bases2.some((x) => segKey(x) === segKey(sg))) bases2.push(sg); }
+        const shapeFor2 = (emp, segs) => { const zs = allowedZones(emp).filter((z) => !isAdminZone(z)); if (!zs.length) return []; const wz = emp.rules && emp.rules.weekZone && zs.includes(emp.rules.weekZone) ? [emp.rules.weekZone] : zs; return wz.map((z) => snapEvening(state, fitSeason(segs.map((g) => ({ ...g, z }))))); };
+        const shapesCache = {};
+        const shapesFor = (emp) => shapesCache[emp.id] || (shapesCache[emp.id] = bases2.flatMap((B) => shapeFor2(emp, toStd(B, lenOf(emp.id)))));
+        while (Date.now() - t0 < budget && stale < 400) {
+          stale++;
+          const r = rnd();
+          if (r < 0.2) { // journée en plus pour quelqu'un à qui il en manque
+            const lack = ppl.filter((e) => missing(e) > 0);
+            if (!lack.length) continue;
+            const e = pick(lack), d = pick(weekDates(monday));
+            if (!canDay(e, d)) continue;
+            const segs = pick(shapesFor(e) || []); if (!segs) continue;
+            const before = dayScore(d);
+            const x = { id: uid("c"), emp: e.id, date: d, segs, filled: true };
+            if (!legal(e.id, d, segs, false)) continue;
+            week.shifts.push(x);
+            if (dayScore(d) - 400 < before) { placed.push({ emp: e.id, date: d }); stale = 0; } else week.shifts.pop();
+            continue;
+          }
+          const cand = week.shifts.filter(movable);
+          if (!cand.length) break;
+          const x = pick(cand), e = empById(state, x.emp);
+          if (r < 0.6) { // autre horaire / pause / zone le même jour
+            const vs = variants(x); if (!vs.length) continue;
+            const v = pick(vs), old = x.segs, before = dayScore(x.date);
+            x.segs = v; const after = dayScore(x.date); x.segs = old;
+            if (after >= before) continue;
+            const idx = week.shifts.indexOf(x); week.shifts.splice(idx, 1);
+            const ok = legal(x.emp, x.date, v, true);
+            week.shifts.splice(idx, 0, x);
+            if (ok) { x.segs = v; if (dayScore(x.date) < before) stale = 0; else x.segs = old; }
+          } else { // la même journée un autre jour (même horaire ou un autre)
+            const d = pick(weekDates(monday));
+            if (d === x.date || !canDay(e, d)) continue;
+            const d0 = x.date, segs = rnd() < 0.5 ? x.segs : pick(shapesFor(e) || [x.segs]);
+            const before = dayScore(d0) + dayScore(d), old = x.segs;
+            x.date = d; x.segs = segs; const after = dayScore(d0) + dayScore(d); x.date = d0; x.segs = old;
+            if (after >= before) continue;
+            const idx = week.shifts.indexOf(x); week.shifts.splice(idx, 1);
+            const ok = legal(x.emp, d, segs, false);
+            week.shifts.splice(idx, 0, x);
+            if (!ok) continue;
+            x.date = d; x.segs = segs;
+            if (dayScore(d0) + dayScore(d) < before) stale = 0; else { x.date = d0; x.segs = old; }
+          }
         }
       }
     }
@@ -3165,7 +3353,7 @@ ul.blockers b { color: var(--fg); font-weight: 600; }
     DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, ABSENCE_MOTIFS, deviationFromTimes, applyClosing, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
-    norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones, eveningOutside, snapEvening, stdDayMinutes,
+    norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones, eveningOutside, snapEvening, stdDayMinutes, holeRanges,
     calendarCode, calStatus, staffingGaps, paxRules, paxOf, paxSlots, incompatible, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
