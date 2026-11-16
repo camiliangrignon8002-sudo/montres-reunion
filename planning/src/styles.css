@@ -585,3 +585,4 @@ html.relay #splash i::after { background: var(--red); }
   html.relay:not([data-theme="light"]) .input:focus { border-color: #c9ced8; box-shadow: 0 0 0 3px rgba(201, 206, 216, .15); }
 }
 html.relay .top-logo { width: 30px; height: 30px; border-radius: 8px; flex: none; }
+ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 14px; } ul.cond-list li { margin: 3px 0; }

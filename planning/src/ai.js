@@ -219,6 +219,26 @@
       ].join("\n");
       return this.sample.json(prompt, { images: [file], modelTier: "complex", cache: false });
     },
+    // ---------- Conditions écrites pour une génération ----------
+    async readConditions(text, App, from, to) {
+      const C = root.PlanningCore, st = App.state;
+      const days = []; for (let d = from; d <= to; d = C.addDays(d, 1)) days.push(`${d} = ${C.DAYS[C.dow(d)].toLowerCase()}`);
+      const slots = ["ZP", "ZR"].map((z) => `${z} : ${C.slotsOf(st, z, from).map((w) => `${w.s}-${w.e}`).join(", ")}`).join(" ; ");
+      const prompt = [
+        "Tu prépares un planning d'équipe. La personne a écrit des conditions à respecter pour cette génération. Transforme-les en données.",
+        `Jours de la période : ${days.join(", ")}.`,
+        `Équipe (id = prénom) : ${st.employees.filter((e) => e.active !== false).map((e) => `${e.id} = ${e.name}`).join(", ")}.`,
+        `Zones : ZP (zone publique), ZR (zone réservée). Horaires possibles : ${slots}. Une journée dure 7 h 30 avec 30 min de pause.`,
+        "Réponds uniquement avec un JSON :",
+        '{"repos":[{"id":"...","date":"AAAA-MM-JJ"}],"horaires":[{"id":"...","date":"AAAA-MM-JJ","debut":"HH:MM","fin":"HH:MM","zone":"ZP|ZR","bureau":false}],"regles":[{"id":"...","zone":"ZP|ZR|null","service":"matin|soir|null","fin_max":"HH:MM|null"}],"compris":["une phrase courte par condition comprise"],"non_compris":["condition que tu n\'as pas pu traduire"]}',
+        "- « repos » : la personne ne travaille pas ce jour-là (congé, repos, indisponible).",
+        "- « horaires » : un horaire imposé un jour précis (si la personne dit « le soir » ou « le matin » un jour précis, choisis l'horaire possible correspondant dans sa zone).",
+        "- « regles » : valable toute la période (toujours en ZR, que le matin, ne finit pas après 20:00…).",
+        "N'invente rien ; si un prénom n'existe pas ou si c'est ambigu, mets-le dans « non_compris ».",
+        "", "Conditions écrites :", text,
+      ].join("\n");
+      return this.sample.json(prompt, { modelTier: "default", cache: false });
+    },
     // ---------- Lecture d'un planning fait dans un autre outil (tableau converti en texte) ----------
     async readPlanningText(text, App) {
       const prompt = [

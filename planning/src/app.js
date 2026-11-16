@@ -1000,9 +1000,12 @@
     };
     const curW = C.getWeek(s, C.mondayOf(this.ui.monday));
     if (curW && curW.shifts.length) overwrite.checked = false;
+    const condIn = h("textarea", { class: "input", id: "gen-cond", rows: "3", placeholder: "Ex. : Sophie en repos mercredi. Eric de 07:00 à 14:30 lundi. Lana toujours le matin. Mathilde en ZR toute la semaine." });
     const genParts = only ? [] : [
-      h("div", { class: "banner info", "data-keep": "1" }, h("b", {}, "Rien à remplir : l'appli prépare tout le planning. "), "Chaque personne de l'équipe reçoit son poste (ZP ou ZR) et ses horaires : 5 jours de travail (2 jours de repos au maximum, les cours comptent comme travaillés), avec des journées plus courtes pour les contrats réduits, d'après le modèle, son contrat, ses cours, ses absences et toutes les règles. Choisissez juste la période, puis vérifiez la proposition avant d'enregistrer."),
+      h("div", { class: "banner info", "data-keep": "1" }, h("b", {}, "Rien à remplir : l'appli prépare tout le planning. "), "Chaque personne de l'équipe reçoit son poste (ZP ou ZR) et ses horaires : journées de 7 h 30 sur les horaires possibles, 2 jours de repos au maximum (les cours comptent comme travaillés), ses heures de contrat, d'après le modèle, son contrat, ses cours, ses absences et toutes les règles. Choisissez juste la période, puis vérifiez la proposition avant d'enregistrer."),
       h("div", { class: "row", "data-keep": "1" }, seg), (periodBox.dataset.keep = "1", periodBox),
+      h("label", { class: "f", "data-keep": "1" }, "Conditions pour ce planning (facultatif)", condIn,
+        h("span", { class: "small muted" }, AI.sample ? "Écrivez vos conditions comme vous les diriez : le planning les respecte et se construit autour." : "La lecture des conditions écrites utilise l'assistant Claude (application ouverte dans Claude).")),
       h("h3", {}, "Personnes concernées"), h("div", { class: "form-grid" }, checks),
       h("p", { class: "small muted" }, `${absN} congé(s) ou absence(s) enregistré(s) et le calendrier d'alternance sont pris en compte automatiquement.`)];
     const dlg = openDialog({ title: only ? "Critères du planning" : "Générer un planning", wide: true, body: wrapGen(h("div", { class: "stack" }, ...genParts, only ? paxSection : null,
@@ -1034,9 +1037,39 @@
         if (!C.isISO(from) || !C.isISO(to) || to < from) { toast("Période invalide.", "err"); return false; }
         if (C.daysBetween(from, to) > 92) { toast("Trois mois maximum à la fois.", "err"); return false; }
         const employees = checks.map((c) => c.querySelector("input")).filter((i) => i.checked).map((i) => i.value);
+        const cond = condIn.value.trim();
+        if (cond) {
+          if (!AI.sample) { toast("La lecture des conditions écrites n'est possible que dans l'application ouverte dans Claude.", "err"); return false; }
+          this.applyConditions(cond, { from, to, employees, unavailable: extra, overwrite: overwrite.checked, season });
+          return;
+        }
         this.previewGeneration({ from, to, employees, unavailable: extra, overwrite: overwrite.checked, season });
       } }] });
     this._dlgClose = () => dlg && dlg.close && dlg.close();
+  };
+  // Conditions écrites : Claude les traduit en repos, horaires imposés et règles, puis la génération se fait autour.
+  App.applyConditions = async function (text, base) {
+    const d = openDialog({ title: "Lecture des conditions…", body: h("p", { class: "muted" }, "Claude lit vos conditions, puis le planning se construit autour."), actions: [] });
+    let data;
+    try { data = await AI.readConditions(text, this, base.from, base.to); } catch (e) { d.close(); toast(AI.errorText(e), "err"); return; }
+    d.close();
+    const s = this.state, ok = (id) => !!C.empById(s, id);
+    const unavailable = [...(base.unavailable || []), ...((data && data.repos) || []).filter((r) => ok(r.id) && C.isISO(r.date)).map((r) => ({ emp: r.id, date: r.date }))];
+    const fixed = ((data && data.horaires) || []).filter((r) => ok(r.id) && C.isISO(r.date) && C.isTime(C.normTime(r.debut)) && C.isTime(C.normTime(r.fin))).map((r) => {
+      const a = C.toMin(C.normTime(r.debut)), b = C.toMin(C.normTime(r.fin)), z = String(r.zone || "ZP").toUpperCase(), span = b - a;
+      const h1 = span > 360 ? Math.round((span - 30) / 2 / 30) * 30 : span;
+      const segs = span > 360 ? [{ s: C.fromMin(a), e: C.fromMin(a + h1), z }, { s: C.fromMin(a + h1 + 30), e: C.fromMin(b), z }] : [{ s: C.fromMin(a), e: C.fromMin(b), z }];
+      return { emp: r.id, date: r.date, segs, office: !!r.bureau };
+    });
+    const rulesOverride = {};
+    for (const r of (data && data.regles) || []) {
+      if (!ok(r.id)) continue;
+      const o = rulesOverride[r.id] = rulesOverride[r.id] || {};
+      if (r.zone === "ZP" || r.zone === "ZR") { o.weekZone = r.zone; o.zoneFlex = false; }
+      if (r.service === "matin" || r.service === "soir") { o.prefers = r.service; o.shiftFlex = false; }
+      if (r.fin_max && C.isTime(C.normTime(r.fin_max))) o.maxEnd = C.normTime(r.fin_max);
+    }
+    this.previewGeneration({ ...base, unavailable, fixed, rulesOverride, conditions: { text, compris: (data && data.compris) || [], nonCompris: (data && data.non_compris) || [] } });
   };
   App.previewGeneration = function (opts) {
     const s = this.state;
@@ -1046,7 +1079,7 @@
     for (const m of weeks) {
       const exists = C.getWeek(s, m) && C.getWeek(s, m).shifts.some((x) => x.date >= opts.from && x.date <= opts.to);
       if (exists && !opts.overwrite) { results.push({ monday: m, skipped: true }); continue; }
-      const g = C.generateWeek(tmp, m, { employees: opts.employees, from: opts.from > m ? opts.from : m, to: opts.to < C.addDays(m, 6) ? opts.to : C.addDays(m, 6), unavailable: opts.unavailable, season: opts.season, now: new Date().toISOString() });
+      const g = C.generateWeek(tmp, m, { employees: opts.employees, from: opts.from > m ? opts.from : m, to: opts.to < C.addDays(m, 6) ? opts.to : C.addDays(m, 6), unavailable: opts.unavailable, season: opts.season, fixed: opts.fixed, rulesOverride: opts.rulesOverride, now: new Date().toISOString() });
       if (exists) { g.week.status = "brouillon"; }
       tmp = { ...tmp, weeks: { ...tmp.weeks, [m]: g.week } };
       results.push({ monday: m, week: g.week, report: g.report, exists });
@@ -1054,6 +1087,9 @@
     const todo = results.filter((r) => !r.skipped);
     const body = h("div", { class: "stack" },
       h("p", { class: "muted small" }, "Proposition non enregistrée. Vérifiez puis enregistrez en brouillon : la validation se fait ensuite semaine par semaine."),
+      opts.conditions ? h("section", { class: "card flat" }, h("h3", {}, "Vos conditions"),
+        h("ul", { class: "cond-list" }, opts.conditions.compris.map((c) => h("li", {}, "✓ ", c))),
+        opts.conditions.nonCompris.length ? h("div", { class: "banner small" }, "Pas compris (non appliqué) : ", opts.conditions.nonCompris.join(" ; ")) : null) : null,
       results.map((r) => h("section", { class: "card flat" },
         h("div", { class: "row between" }, h("h3", {}, `Semaine du ${C.fmtWeek(r.monday)}`), r.skipped ? h("span", { class: "chip" }, "Déjà remplie : non modifiée") : h("span", { class: "chip info" }, `${r.report.placed} créneaux`)),
         r.skipped ? null : h("div", { class: "stack", style: { gap: "6px", "margin-top": "8px" } },
@@ -1067,7 +1103,7 @@
               (r.report.tooManyOff || []).map((x) => h("div", { class: "issue alerte" }, h("span", { class: "ico" }, "!"), h("span", { class: "small" }, `${empName(s, x.emp)} : ${x.reason}.`))),
               zero.length ? h("p", { class: "small muted", style: { "margin-top": "6px" } }, "Sans horaire : absent(e) toute la période, zone de travail non renseignée dans sa fiche, ou aucune place possible avec les règles (voir les alertes après enregistrement).") : null);
           })(),
-          r.report.notPlaced.length ? h("div", {}, h("b", { class: "small" }, `${r.report.notPlaced.length} poste(s) non attribué(s) :`), r.report.notPlaced.map((n) => h("div", { class: "issue alerte" }, h("span", { class: "ico" }, "?"), h("span", { class: "small" }, `${empName(s, n.emp)} · ${C.fmtDate(n.date, "day")} ${C.segLabel(n.segs)} — ${n.reason}. `, n.candidates.length ? `Remplaçants possibles : ${n.candidates.map((c) => c.name).join(", ")}.` : "Aucun remplaçant possible. Ce qui bloque :", n.candidates.length || !(n.blockers || []).length ? null : h("ul", { class: "blockers" }, n.blockers.map((b) => h("li", {}, h("b", {}, b.reason), ` : ${b.names.join(", ")}`))))))) : h("p", { class: "small", style: { color: "var(--ok)" } }, "Tous les postes du modèle sont attribués."),
+          r.report.notPlaced.filter((n) => !n.trim).length ? h("div", {}, h("b", { class: "small" }, `${r.report.notPlaced.filter((n) => !n.trim).length} poste(s) non attribué(s) :`), r.report.notPlaced.filter((n) => !n.trim).map((n) => h("div", { class: "issue alerte" }, h("span", { class: "ico" }, "?"), h("span", { class: "small" }, `${empName(s, n.emp)} · ${C.fmtDate(n.date, "day")} ${C.segLabel(n.segs)} — ${n.reason}. `, n.candidates.length ? `Remplaçants possibles : ${n.candidates.map((c) => c.name).join(", ")}.` : "Aucun remplaçant possible. Ce qui bloque :", n.candidates.length || !(n.blockers || []).length ? null : h("ul", { class: "blockers" }, n.blockers.map((b) => h("li", {}, h("b", {}, b.reason), ` : ${b.names.join(", ")}`))))))) : h("p", { class: "small", style: { color: "var(--ok)" } }, "Tous les postes du modèle sont attribués."),
 (() => { const st = r.report.issues.filter((i) => i.code === "STAFF_MIN" || i.code === "STAFF_MAX"); return st.length ? h("div", {}, h("b", { class: "small" }, "Nombre de personnes :"), st.map((i) => h("div", { class: "issue alerte" }, h("span", { class: "ico" }, "👥"), h("span", {}, i.msg)))) : null; })(),
                     (() => { const e = r.report.issues.filter((i) => i.level === "erreur"); const a = r.report.issues.filter((i) => i.level === "alerte" && i.code !== "UNCOVERED"); return h("p", { class: "small muted" }, `${e.length} erreur(s), ${a.length} alerte(s) à vérifier après enregistrement.`); })()))));
     openDialog({ title: "Proposition de planning", wide: true, body, actions: [{ label: "Fermer" }, { label: `Enregistrer ${todo.length} semaine(s) en brouillon`, primary: true, disabled: !todo.length, onClick: async () => {

@@ -948,6 +948,8 @@
   // ---------- Génération ----------
   function generateWeek(state, monday, opts) {
     opts = opts || {};
+    // Règles demandées pour cette génération seulement (conditions écrites) : zone, matin/soir, heure de fin maximum.
+    if (opts.rulesOverride) state = { ...state, employees: state.employees.map((e) => (opts.rulesOverride[e.id] ? { ...e, rules: { ...(e.rules || {}), ...opts.rulesOverride[e.id] } } : e)) };
     const include = opts.employees ? new Set(opts.employees) : null;
     const from = opts.from || monday, to = opts.to || addDays(monday, 6);
     const extra = opts.unavailable || []; // [{emp, date}] contraintes ponctuelles
@@ -990,6 +992,16 @@
         else { week.shifts.push({ id: uid("c"), emp: emp.id, date, segs }); placed.push({ emp: emp.id, date }); }
       }
     }
+    // Conditions écrites pour cette génération : horaires imposés (jamais modifiés ensuite).
+    for (const f of opts.fixed || []) {
+      if (!empById(state, f.emp) || !isISO(f.date) || f.date < from || f.date > to || !(f.segs || []).length) continue;
+      week.shifts = week.shifts.filter((x) => !(x.emp === f.emp && x.date === f.date));
+      const pi = placed.findIndex((p) => p.emp === f.emp && p.date === f.date); if (pi >= 0) placed.splice(pi, 1);
+      week.shifts.push({ id: uid("c"), emp: f.emp, date: f.date, segs: f.segs.map(({ s: a1, e: b1, z }) => ({ s: a1, e: b1, z })), locked: true, ...(f.office ? { office: true } : {}) });
+      placed.push({ emp: f.emp, date: f.date });
+    }
+    // Jours de repos demandés : la personne ne travaille pas ce jour-là.
+    week.shifts = week.shifts.filter((x) => !extra.some((u) => u.emp === x.emp && u.date === x.date));
     // Personnes liées : on aligne les horaires (et la zone si demandé) sur la première personne du groupe, et les week-ends.
     const links = (opts.links || (state.settings && state.settings.links) || []).filter((x) => x.active !== false);
     const canTake = (emp, date, segs) => emp && emp.active !== false && (!include || include.has(emp.id)) && !extra.some((x) => x.emp === emp.id && x.date === date)
@@ -1086,7 +1098,7 @@
             if (!g.high.length) break;
             const hi = g.high[0], a = toMin(hi.s), b = toMin(hi.e);
             const contrib = day.filter((x) => x.segs.some((q) => isTime(q.s) && isTime(q.e) && (!r.zone || q.z === r.zone) && segRange(q)[1] > a && segRange(q)[0] < b))
-              .sort((p, q) => (p.filled ? 0 : 1) - (q.filled ? 0 : 1));
+              .filter((p) => !p.locked).sort((p, q) => (p.filled ? 0 : 1) - (q.filled ? 0 : 1));
             let moved = false;
             for (const x of contrib) {
               const emp = empById(state, x.emp);
@@ -1126,7 +1138,7 @@
       return [{ s: fromMin(A), e: fromMin(A + h), z: t[0].z }, { s: fromMin(A + h + PAUSE), e: fromMin(A + len + PAUSE), z: t[t.length - 1].z }];
     };
     const lenOf = (id) => stdDayMinutes(state, empById(state, id));
-    for (const x of week.shifts) if (inRange(x.date)) x.segs = snapEvening(seasonState, fitSeason(toStd(x.segs, lenOf(x.emp))), x.date, empById(state, x.emp));
+    for (const x of week.shifts) if (inRange(x.date) && !x.locked) x.segs = snapEvening(seasonState, fitSeason(toStd(x.segs, lenOf(x.emp))), x.date, empById(state, x.emp));
     const courseDays = (id) => weekDates(monday).filter((d) => inRange(d) && courseMinutesOn(state, empById(state, id), d) > 0).length;
     const absentDays = (id) => weekDates(monday).filter((d) => inRange(d) && absentDay(id, d)).length;
     const workDaysTarget = (emp) => {
@@ -1143,7 +1155,7 @@
       const links0 = links.filter((l) => l.sameHours && l.emps.includes(emp.id)).flatMap((l) => l.emps).filter((id) => id !== emp.id);
       for (let mine = mineOf(emp.id); mine.length > workDaysTarget(emp); mine = mineOf(emp.id)) {
         const partnerOff = (d) => (notPlaced.some((n) => links0.includes(n.emp) && n.date === d && n.trim) ? 1 : 0);
-        const drop = mine.slice().sort((p, q) => (p.office ? 1 : 0) - (q.office ? 1 : 0) || partnerOff(q.date) - partnerOff(p.date) || staffOn(q.date) - staffOn(p.date) || (p.date < q.date ? 1 : -1))[0]; // jamais un jour de bureau
+        const drop = mine.slice().sort((p, q) => (p.office || p.locked ? 1 : 0) - (q.office || q.locked ? 1 : 0) || partnerOff(q.date) - partnerOff(p.date) || staffOn(q.date) - staffOn(p.date) || (p.date < q.date ? 1 : -1))[0]; // jamais un jour de bureau
         week.shifts = week.shifts.filter((y) => y !== drop);
         const pi = placed.findIndex((p) => p.emp === drop.emp && p.date === drop.date); if (pi >= 0) placed.splice(pi, 1);
         notPlaced.push({ emp: drop.emp, date: drop.date, segs: drop.segs, trim: true, reason: emp.role === "alternant" ? `${courseDays(emp.id)} jour(s) de cours au CFA cette semaine : ${workDaysTarget(emp)} journée(s) de travail suffisent` : `${workDaysTarget(emp)} journée(s) de 7 h pour son contrat` });
@@ -1220,7 +1232,7 @@
             if (ok || !inRange(date) || busy(emp.id, date) || absentDay(emp.id, date) || extra.some((x) => x.emp === emp.id && x.date === date)) continue;
             const cs = calStatus(state, emp, date);
             if (emp.role === "alternant" && cs !== "entreprise" && cs !== "weekend") continue;
-            for (const x of week.shifts.filter((y) => y.date === date && y.emp !== emp.id && !y.office)) {
+            for (const x of week.shifts.filter((y) => y.date === date && y.emp !== emp.id && !y.office && !y.locked)) {
               const e2 = empById(state, x.emp);
               const zs2 = allowedZones(e2).filter((z) => !isAdminZone(z));
               if (zs2.length < 2 || (e2.rules && e2.rules.weekZone && !e2.rules.zoneFlex) || links.some((l) => l.sameHours && l.emps.includes(e2.id))) continue;
@@ -1278,7 +1290,7 @@
           let ok = false;
           for (const date of weekDates(monday)) {
             if (ok || !canWorkOn(emp, date)) continue;
-            for (const x of week.shifts.filter((y) => y.date === date && y.emp !== emp.id && !y.office)) {
+            for (const x of week.shifts.filter((y) => y.date === date && y.emp !== emp.id && !y.office && !y.locked)) {
               const e2 = empById(state, x.emp);
               if (!e2 || links.some((l) => l.sameHours && l.emps.includes(e2.id))) continue;
               const idx = week.shifts.indexOf(x);
@@ -1327,13 +1339,13 @@
         const oh = openingHours(state, z, date);
         if (!oh) continue;
         // personnes qui ne peuvent pas ouvrir : décalées
-        for (const x of week.shifts.filter((y) => y.date === date && y.segs[0] && y.segs[0].z === z && y.segs[0].s === oh.s && !canOpenIn(state, empById(state, y.emp), date))) {
+        for (const x of week.shifts.filter((y) => y.date === date && !y.locked && y.segs[0] && y.segs[0].z === z && y.segs[0].s === oh.s && !canOpenIn(state, empById(state, y.emp), date))) {
           const L = lenOf(x.emp);
           for (const shift of [90, 60, 30, 120, 150]) { const st0 = toMin(oh.s) + shift; if (trySet(x, toStd([{ s: fromMin(st0), e: fromMin(st0 + L + 30), z }], L))) break; }
         }
         const day = () => week.shifts.filter((y) => y.date === date && !y.office);
         if (day().some((y) => y.segs[0] && y.segs[0].z === z && y.segs[0].s === oh.s)) continue;
-        const cands = day().filter((y) => canOpenIn(state, empById(state, y.emp), date) && allowedZones(empById(state, y.emp)).includes(z) && !links.some((l) => l.sameHours && l.emps.includes(y.emp)))
+        const cands = day().filter((y) => !y.locked && canOpenIn(state, empById(state, y.emp), date) && allowedZones(empById(state, y.emp)).includes(z) && !links.some((l) => l.sameHours && l.emps.includes(y.emp)))
           .sort((p, q) => (p.emp === "nathalie" ? -1 : 0) - (q.emp === "nathalie" ? -1 : 0) || toMin(shiftSpan(p.segs).s) - toMin(shiftSpan(q.segs).s));
         let done = false;
         for (const x of cands) {
@@ -1349,7 +1361,7 @@
           if (e.active === false || (include && !include.has(e.id)) || !canOpenIn(state, e, date) || !allowedZones(e).includes(z)) continue;
           if (busy(e.id, date) || absentDay(e.id, date) || links.some((l) => l.sameHours && l.emps.includes(e.id))) continue;
           if (personalRuleIssues(e, date, []).some((x) => x.code === "FIXED_DAYOFF")) continue;
-          for (const y of week.shifts.filter((q) => q.emp === e.id && q.date !== date && inRange(q.date) && !q.office && !isOpener(q))) {
+          for (const y of week.shifts.filter((q) => q.emp === e.id && q.date !== date && inRange(q.date) && !q.office && !q.locked && !isOpener(q))) {
             const L = lenOf(e.id), segs = toStd([{ s: oh.s, e: fromMin(toMin(oh.s) + L + 30), z }], L);
             const idx = week.shifts.indexOf(y); week.shifts.splice(idx, 1);
             const c = findCandidates(work, date, segs, { exclude: othersX(e.id) })[0];
@@ -1366,7 +1378,7 @@
         if (tryOpener()) continue;
         // Toujours rien : une autre journée du matin dans cette zone (personne non ancienne ou pas) part sur un de ses jours libres.
         let ok2 = false;
-        for (const t of week.shifts.filter((y) => y.date === date && !y.office && y.segs[0].z === z && toMin(y.segs[0].s) < 12 * 60 && !links.some((l) => l.sameHours && l.emps.includes(y.emp)))) {
+        for (const t of week.shifts.filter((y) => y.date === date && !y.office && !y.locked && y.segs[0].z === z && toMin(y.segs[0].s) < 12 * 60 && !links.some((l) => l.sameHours && l.emps.includes(y.emp)))) {
           const et = empById(state, t.emp);
           for (const d2 of weekDates(monday)) {
             if (d2 === date || !inRange(d2) || busy(et.id, d2) || absentDay(et.id, d2) || personalRuleIssues(et, d2, []).some((x) => x.code === "FIXED_DAYOFF")) continue;
@@ -1431,7 +1443,7 @@
         if (!days.length || !days[0].b) break;
         const moves = [];
         for (const { d: date, b: bDate } of days.filter((x) => x.b > 0)) {
-          for (const y of week.shifts.filter((q) => q.date !== date && inRange(q.date) && !q.office && !links.some((l) => l.sameHours && l.emps.includes(q.emp)))) {
+          for (const y of week.shifts.filter((q) => q.date !== date && inRange(q.date) && !q.office && !q.locked && !links.some((l) => l.sameHours && l.emps.includes(q.emp)))) {
             const e = empById(state, y.emp);
             if (busy(e.id, date) || absentDay(e.id, date) || extra.some((x) => x.emp === e.id && x.date === date)) continue;
             if (e.role === "alternant" && !["entreprise", "weekend"].includes(calStatus(state, e, date))) continue;
@@ -1464,7 +1476,7 @@
           const before = bad(date);
           if (!before) break;
           let best = null;
-          for (const x of week.shifts.filter((y) => y.date === date && !y.office && !links.some((l) => l.sameHours && l.emps.includes(y.emp)))) {
+          for (const x of week.shifts.filter((y) => y.date === date && !y.office && !y.locked && !links.some((l) => l.sameHours && l.emps.includes(y.emp)))) {
             const old = x.segs;
             for (const v of variants(x)) {
               x.segs = v; const after = bad(date); x.segs = old;
@@ -1476,7 +1488,7 @@
           if (okFor(best.x, best.v)) { best.x.segs = best.v; continue; }
           let applied = false;
           const all = [];
-          for (const x of week.shifts.filter((y) => y.date === date && !y.office && !links.some((l) => l.sameHours && l.emps.includes(y.emp)))) {
+          for (const x of week.shifts.filter((y) => y.date === date && !y.office && !y.locked && !links.some((l) => l.sameHours && l.emps.includes(y.emp)))) {
             const old = x.segs;
             for (const v of variants(x)) { x.segs = v; const after = bad(date); x.segs = old; if (after < before) all.push({ x, v, after }); }
           }
@@ -1494,7 +1506,7 @@
         const dayScore = (d) => bad(d) + 300 * openMissing(d) + (tAloneOn(d) ? 5000 : 0);
         const missing = (e) => Math.max(0, workDaysTarget(e) - mineOf(e.id).length);
         const ppl = state.employees.filter((e) => e.active !== false && (!include || include.has(e.id)) && allowedZones(e).some((z) => !isAdminZone(z)));
-        const movable = (q) => inRange(q.date) && !q.office && !links.some((l) => l.sameHours && l.emps.includes(q.emp));
+        const movable = (q) => inRange(q.date) && !q.office && !q.locked && !links.some((l) => l.sameHours && l.emps.includes(q.emp));
         const canDay = (e, d) => inRange(d) && !busy(e.id, d) && !absentDay(e.id, d) && !extra.some((x) => x.emp === e.id && x.date === d) && !(e.role === "alternant" && !["entreprise", "weekend"].includes(calStatus(state, e, d))) && !personalRuleIssues(e, d, []).some((x) => x.code === "FIXED_DAYOFF");
         const legal = (emp, d, segs, sameDay) => { const c = findCandidates(work, d, segs, { exclude: othersY(emp), sameDay })[0]; return !!(c && c.restOk); };
         const t0 = Date.now(), budget = opts.searchMs != null ? opts.searchMs : 1500;
@@ -1555,7 +1567,7 @@
     for (const l of links.filter((x) => x.sameHours)) for (const date of weekDates(monday)) {
       if (!inRange(date)) continue;
       const sh = l.emps.map((id) => week.shifts.find((x) => x.emp === id && x.date === date)).filter(Boolean);
-      if (sh.length < 2) continue;
+      if (sh.length < 2 || sh.some((x) => x.locked)) continue;
       const spans = sh.map((x) => shiftSpan(x.segs));
       if (spans.every((p) => p.s === spans[0].s && p.e === spans[0].e)) continue;
       const ref = sh.slice().sort((p, q) => toMin(shiftSpan(p.segs).e) - toMin(shiftSpan(q.segs).e))[0];
@@ -1603,7 +1615,7 @@
         if (!bads.length) break;
         const iss = bads[Math.floor(rnd2() * bads.length)];
         // journées concernées : celles de la personne, ou celles du jour
-        const pool = week.shifts.filter((q) => inRange(q.date) && !q.office && (iss.emp ? q.emp === iss.emp : q.date === iss.date));
+        const pool = week.shifts.filter((q) => inRange(q.date) && !q.office && !q.locked && (iss.emp ? q.emp === iss.emp : q.date === iss.date));
         if (!pool.length) continue;
         const x = pool[Math.floor(rnd2() * pool.length)];
         const opts2 = optionsFor(x).sort(() => rnd2() - 0.5).slice(0, 12);
@@ -1646,7 +1658,7 @@
         if (!inRange(date)) continue;
         for (let round = 0; round < 4; round++) {
           let improved = false;
-          for (const x of week.shifts.filter((y) => y.date === date && !y.office)) {
+          for (const x of week.shifts.filter((y) => y.date === date && !y.office && !y.locked)) {
             const base = costDay(date), old = x.segs;
             let best = { c: base, segs: old };
             for (const v of pauseOpts(x)) { x.segs = v; const c = costDay(date); if (c < best.c) best = { c, segs: v }; }
