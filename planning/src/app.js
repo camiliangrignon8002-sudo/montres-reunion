@@ -148,11 +148,11 @@
     return h("span", { class: `zone-tag blk ${zs.cls}`, style: { "--z": zs.color } }, zs.short);
   }
   function legend(state) {
-    return h("div", { class: "legend", "aria-label": "Légende" },
+    return h("details", { class: "legend-fold" }, h("summary", {}, "Légende"), h("div", { class: "legend", "aria-label": "Légende" },
       state.zones.map((z) => h("span", {}, h("span", { class: `blk ${zoneStyle(state, z.id).cls}`, style: { "--z": z.color, width: "34px", "justify-content": "center" } }, h("small", {}, z.short)), z.name)),
       h("span", {}, h("span", { class: "tag-cours" }, "Cours"), "Formation CFA"),
       h("span", {}, h("span", { class: "tag-abs" }, "Absent"), "Congé / absence"),
-      h("span", {}, h("span", { class: "tag-unk" }, "?"), "Statut inconnu"));
+      h("span", {}, h("span", { class: "tag-unk" }, "?"), "Statut inconnu")));
   }
   const monthName = (k) => `${C.MONTHS[Number(k.slice(5, 7)) - 1]} ${k.slice(0, 4)}`;
   // Le mois en cours puis les précédents (« 2026-10 », « 2026-09 », …)
@@ -583,7 +583,7 @@
       h("div", { class: "when" }, iconBtn("left", "Semaine précédente", () => { this.ui.monday = C.addDays(monday, -7); this.render(); }), iconBtn("right", "Semaine suivante", () => { this.ui.monday = C.addDays(monday, 7); this.render(); })),
       h("div", { class: "stack", style: { gap: "0" } }, h("h1", {}, C.fmtWeek(monday)), h("span", { class: "small muted" }, `Semaine ${C.isoWeekNumber(monday)}${w && w.source ? " · " + w.source : ""}`)),
       iconBtn("download", "Télécharger le planning de la semaine en PDF", () => this.downloadPDF([monday], `planning-semaine-${monday}.pdf`), { class: "icon-btn dl-btn", id: "dl-week" }),
-      status, seasonToggle,
+      status, w && w.shifts.length ? h("span", { class: "chip", title: "Horaires des points de vente de cette semaine (à changer dans « Plus »)" }, wSeason === "ete" ? "☀︎ Été" : "❄︎ Hiver") : null,
       monday !== C.mondayOf(today) ? btn("Aujourd'hui", () => { this.ui.monday = C.mondayOf(today); this.ui.day = today; this.render(); }, "sm ghost") : null,
       h("div", { style: { flex: "1" } }),
       h("div", { class: "seg-ctl", role: "group", "aria-label": "Affichage" },
@@ -591,11 +591,9 @@
         h("button", { type: "button", "aria-pressed": String(this.ui.view === "day"), onClick: () => { this.ui.view = "day"; this.savePrefs(); this.render(); } }, "Jour")));
     const actions = h("div", { class: "row" },
       canEdit ? btn([icon("wand"), "Générer"], () => this.openGenerate(), "primary sm") : null,
-      canEdit ? btn(["🎯 ", "Critères"], () => this.openCriteria(), "sm") : null,
-      canEdit ? btn([icon("import"), "Importer"], () => this.openImportWeek(monday), "sm") : null,
-      canEdit && w && w.shifts.length ? btn([icon("check"), w.status === "validé" ? "Repasser en brouillon" : "Valider"], () => this.openValidate(), "sm") : null,
       canEdit ? btn([icon("plus"), "Créneau"], () => this.openEditor(null, this.ui.day), "sm") : null,
-      btn("Exporter", () => this.go("export"), "sm ghost"),
+      canEdit && w && w.shifts.length ? btn([icon("check"), w.status === "validé" ? "Repasser en brouillon" : "Valider"], () => this.openValidate(), "sm") : null,
+      canEdit ? null : btn("Exporter", () => this.go("export"), "sm ghost"),
       canEdit ? h("button", { type: "button", class: "btn sm ghost", onClick: (e) => this.weekMenu(e.currentTarget) }, icon("more"), "Plus") : null);
 
     // Grille
@@ -609,13 +607,12 @@
           return h("th", { class: (d === today ? "today" : "") + (canEdit ? " day-click" : ""), title: canEdit ? "Toucher pour fixer le nombre de personnes ce jour-là" : null, onClick: canEdit ? () => this.openDayStaffing(d) : null },
             h("span", {}, C.DAYS[C.dow(d)]), h("span", { class: "d" }, C.fmtDate(d, "short"), d === today ? h("span", { class: "today-pill" }, "Aujourd'hui") : null),
             (() => { const p = C.paxOf(s, d); return p ? h("span", { class: "need pax", title: p.slots ? `Passagers attendus : ${p.m} le matin (05:30–13:00), ${p.a} entre 13:00 et 18:00, ${p.s} le soir (après 18:00)` : `${p.total} passagers attendus` }, `✈︎ ${p.total.toLocaleString("fr-FR")}`) : null; })(),
-            (() => { const p = C.paxOf(s, d), st = s.settings; return p && p.slots && p.s > st.paxThreshold ? h("span", { class: "pax-alert", title: `Soir : ${p.s} passagers attendus (plus de ${st.paxThreshold}). Pensez à une ${st.paxStaff}e personne en ${st.paxZone}${p.s <= st.paxCloseRelief ? ` ; jusqu'à ${st.paxCloseRelief} passagers, elle peut partir avant la fermeture` : ""}.` }, h("b", {}, `🌙 Soir : ${p.s.toLocaleString("fr-FR")} pax`), h("br"), `Pensez à une ${st.paxStaff}e personne en ${st.paxZone}`) : null; })(),
-            need.length ? h("span", { class: "need", title: need.map((r) => `${r.s}–${r.e} ${r.zone || "ZP+ZR"} : ${r.min ?? "?"}–${r.max ?? "?"}`).join("\n") }, `👥 ${need.length}`) : null,
-            h("span", { class: "cnt" }, s.zones.filter((z) => byZone[z.id]).map((z) => h("span", { class: `blk ${zoneStyle(s, z.id).cls}`, style: { "--z": z.color, padding: "0 5px" }, title: `${byZone[z.id]} en ${z.name}` }, h("small", {}, `${z.short} ${byZone[z.id]}`)))));
+            (() => { const p = C.paxOf(s, d), st = s.settings; return p && p.slots && p.s > st.paxThreshold ? h("span", { class: "pax-alert", title: `Soir : ${p.s} passagers attendus (plus de ${st.paxThreshold}). Pensez à une ${st.paxStaff}e personne en ${st.paxZone}${p.s <= st.paxCloseRelief ? ` ; jusqu'à ${st.paxCloseRelief} passagers, elle peut partir avant la fermeture` : ""}.` }, `🌙 3e en ${st.paxZone}`) : null; })(),
+            h("span", { class: "cnt-line", title: s.zones.filter((z) => byZone[z.id]).map((z) => `${byZone[z.id]} en ${z.name}`).join(", ") + (need.length ? "\nNombre de personnes : " + need.map((r) => `${r.s}–${r.e} ${r.zone || "ZP+ZR"} : ${r.min ?? "?"}–${r.max ?? "?"}`).join(", ") : "") }, s.zones.filter((z) => byZone[z.id]).map((z) => `${z.short} ${byZone[z.id]}`).join(" · ")));
         }),
         h("th", { class: "tot" }, "Total"))),
       h("tbody", {}, grid.rows.map((row) => h("tr", { class: row.emp.active === false ? "inactive" : "" },
-        h("td", { class: "name" }, canEdit ? h("button", { type: "button", class: "abs-plus", title: `Ajouter une absence pour ${row.emp.name}`, "aria-label": `Ajouter une absence pour ${row.emp.name}`, onClick: () => this.openAbsenceDialog(row.emp.id, grid.days[0] >= this.today() ? grid.days[0] : this.today()) }, "+") : null, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"), C.weekDates(grid.monday).some((d) => C.inTraining(row.emp, d)) ? h("span", { class: "chip warn tiny-chip", title: "Jamais seule, à aucun moment" }, "En formation") : C.hasSkill(row.emp, "ancien") ? h("span", { class: "chip tiny-chip", title: "Personne expérimentée" }, "Ancien(ne)") : null),
+        h("td", { class: "name" }, canEdit ? h("button", { type: "button", class: "abs-plus", title: `Ajouter une absence pour ${row.emp.name}`, "aria-label": `Ajouter une absence pour ${row.emp.name}`, onClick: () => this.openAbsenceDialog(row.emp.id, grid.days[0] >= this.today() ? grid.days[0] : this.today()) }, "+") : null, h("button", { type: "button", class: "name-btn", onClick: () => this.openPerson(row.emp.id, "week"), title: `Heures de ${row.emp.name}` }, h("b", {}, row.emp.name), h("span", {}, row.emp.role === "alternant" ? "Alternant(e)" : Object.keys(row.emp.zones || {}).join(" · ") || "zone ?"), C.weekDates(grid.monday).some((d) => C.inTraining(row.emp, d)) ? h("span", { class: "chip warn tiny-chip", title: "Jamais seule, à aucun moment" }, "En formation") : null),
           (s.settings.links || []).filter((l) => l.kind === "trajet" && l.emps.includes(row.emp.id)).map((l) => this.carToggle(l, false))),
         row.cells.map((cell) => {
           const k = row.emp.id + "|" + cell.date, lvl = cellIssue[k];
@@ -724,7 +721,12 @@
 
   App.weekMenu = function (anchor) {
     const monday = this.ui.monday, s = this.state, w = C.getWeek(s, monday);
+    const sz = C.seasonOf(monday, s), wsz = (w && w.season) || sz;
     const items = [
+      ["🎯 Critères du planning", () => this.openCriteria()],
+      ["Importer un planning (photo ou fichier)", () => this.openImportWeek(monday)],
+      ["Exporter (PDF, Excel)", () => this.go("export")],
+      ...(w && w.shifts.length ? [[wsz === "ete" ? "Passer aux horaires d'hiver" : "Passer aux horaires d'été", () => this.commit([{ type: "setWeekSeason", monday, season: wsz === "ete" ? "hiver" : "ete" }], { summary: `Semaine du ${C.fmtWeek(monday)} : horaires ${wsz === "ete" ? "d'hiver" : "d'été"}` })]] : []),
       ["Dupliquer cette semaine vers…", () => this.openDuplicate()],
       ["Copier un jour vers un autre…", () => this.openCopyDay()],
       ["Enregistrer une version", async () => { if (await this.saveVersion(monday, "Version enregistrée manuellement")) toast("Version enregistrée. Retrouvez-la dans Historique."); }],

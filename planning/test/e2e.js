@@ -93,7 +93,7 @@ const MOCK = `
     await page.waitForSelector("table.plan");
     const cells = await page.$$eval("table.plan td.cell .blk", (b) => b.length);
     check("semaine du 19/10 importée : 100 blocs (50 journées, sans Lydia)", cells === 100, String(cells));
-    check("légende visible", await page.isVisible(".legend"));
+    check("légende disponible (repliée)", await page.isVisible(".legend-fold > summary"));
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/2-semaine.png` });
 
     // édition : Fleur mercredi
