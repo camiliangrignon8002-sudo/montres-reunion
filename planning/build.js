@@ -90,7 +90,7 @@ ${body(plainTag)}<script>if ("serviceWorker" in navigator && location.protocol =
 `);
   fs.writeFileSync(path.join(out, "manifest.webmanifest"), JSON.stringify({
     name: "RelayTime", short_name: "RelayTime", description: "RelayTime : plannings de l'équipe, zones, alternants, absences.",
-    start_url: "./", scope: "./", display: "standalone", background_color: "#0b1226", theme_color: "#0f1a33", lang: "fr",
+    start_url: "./", scope: "./", display: "standalone", background_color: "#0a2a96", theme_color: "#0f1a33", lang: "fr",
     icons: [{ src: "icon-192.png", sizes: "192x192", type: "image/png" }, { src: "icon-512.png", sizes: "512x512", type: "image/png", purpose: "any maskable" }],
   }, null, 2) + "\n");
   fs.writeFileSync(path.join(out, "sw.js"), `// Appli Planning : fonctionne hors connexion (réseau d'abord, copie locale si pas de réseau).
