@@ -342,74 +342,16 @@ table.t td.num { white-space: nowrap; }
 .skill.formation[aria-pressed="true"] { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); }
 .skill.ancien[aria-pressed="true"] { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
 
-/* ---------- Style « verre liquide » (par défaut ; « Classique » dans Zones et règles) ---------- */
-html.liquid {
-  --g-bg-1: #f6f7f9; --g-bg-2: #e4e7ec; --g-bg-3: #f1f2f5; --g-spot-1: rgba(255,255,255,.95); --g-spot-2: rgba(205,210,220,.75);
-  --g-fill-1: rgba(255,255,255,.62); --g-fill-2: rgba(255,255,255,.28); --g-fill-3: rgba(255,255,255,.40);
-  --g-edge: rgba(255,255,255,.6); --g-hi: rgba(255,255,255,.95); --g-hi-2: rgba(255,255,255,.35);
-  --g-btn-1: rgba(255,255,255,.78); --g-btn-2: rgba(255,255,255,.38); --g-sel: rgba(255,255,255,.96); --g-sel-fg: #1d1d1f;
-  --g-shadow: 0 8px 24px rgba(0,0,0,.07), 0 1px 3px rgba(0,0,0,.04); --g-blk: rgba(255,255,255,.7); --g-blk-2: rgba(255,255,255,.35);
-  --g-dialog: rgba(255,255,255,.97); --g-blur: saturate(160%) blur(28px);
-  --surface: rgba(255,255,255,.34); --surface-2: rgba(255,255,255,.22); --line: rgba(255,255,255,.7); --bg: #eceef2;
-}
-@media (prefers-color-scheme: dark) {
-  html.liquid:not([data-theme="light"]) {
-    --g-bg-1: #1a1b1f; --g-bg-2: #0d0e10; --g-bg-3: #16171a; --g-spot-1: rgba(90,95,110,.35); --g-spot-2: rgba(60,64,75,.45);
-    --g-fill-1: rgba(60,62,70,.55); --g-fill-2: rgba(30,31,36,.35); --g-fill-3: rgba(45,47,54,.45);
-    --g-edge: rgba(255,255,255,.12); --g-hi: rgba(255,255,255,.22); --g-hi-2: rgba(255,255,255,.06);
-    --g-btn-1: rgba(90,92,100,.55); --g-btn-2: rgba(50,52,58,.4); --g-sel: rgba(120,122,130,.6); --g-sel-fg: #fff;
-    --g-shadow: 0 10px 40px rgba(0,0,0,.45); --g-blk: rgba(40,42,48,.55); --g-blk-2: rgba(25,26,30,.45);
-    --g-dialog: rgba(36,37,42,.97);
-    --surface: rgba(40,42,48,.4); --surface-2: rgba(30,31,36,.35); --line: rgba(255,255,255,.1); --bg: #0f1012;
-  }
-}
-html.liquid[data-theme="dark"] {
-  --g-bg-1: #1a1b1f; --g-bg-2: #0d0e10; --g-bg-3: #16171a; --g-spot-1: rgba(90,95,110,.35); --g-spot-2: rgba(60,64,75,.45);
-  --g-fill-1: rgba(60,62,70,.55); --g-fill-2: rgba(30,31,36,.35); --g-fill-3: rgba(45,47,54,.45);
-  --g-edge: rgba(255,255,255,.12); --g-hi: rgba(255,255,255,.22); --g-hi-2: rgba(255,255,255,.06);
-  --g-btn-1: rgba(90,92,100,.55); --g-btn-2: rgba(50,52,58,.4); --g-sel: rgba(120,122,130,.6); --g-sel-fg: #fff;
-  --g-shadow: 0 10px 40px rgba(0,0,0,.45); --g-blk: rgba(40,42,48,.55); --g-blk-2: rgba(25,26,30,.45);
-  --g-dialog: rgba(36,37,42,.97);
-  --surface: rgba(40,42,48,.4); --surface-2: rgba(30,31,36,.35); --line: rgba(255,255,255,.1); --bg: #0f1012;
-}
-html.liquid { background: var(--g-bg-2); }
+
 /* Fond peint une seule fois sur un calque fixe (plus fluide au défilement que background-attachment: fixed). */
-html.liquid body { background: transparent; }
-html.liquid body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(700px 520px at 12% 12%, var(--g-spot-1), transparent 65%), radial-gradient(900px 700px at 88% 30%, var(--g-spot-2), transparent 60%), linear-gradient(160deg, var(--g-bg-1) 0%, var(--g-bg-2) 55%, var(--g-bg-3) 100%); }
-html.liquid body::before { background: transparent; }
-html.liquid .side { background: linear-gradient(180deg, var(--g-fill-1), var(--g-fill-2)); border-right: none; box-shadow: inset -1px 0 0 var(--g-edge), 8px 0 40px rgba(0,0,0,.05); }
-html.liquid .topbar { background: linear-gradient(180deg, var(--g-fill-1), var(--g-fill-2)); border-bottom: 1px solid var(--g-edge); }
-html.liquid .card, html.liquid .banner { background: linear-gradient(160deg, var(--g-fill-1) 0%, var(--g-fill-2) 45%, var(--g-fill-3) 100%); border: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), inset 0 -1px 0 var(--g-hi-2), var(--g-shadow); border-radius: 26px; }
-html.liquid .card.flat { box-shadow: inset 0 1px 0 var(--g-hi); }
-html.liquid .dialog, html.liquid .dialog header, html.liquid .dialog footer { background: var(--g-dialog); }
-html.liquid .dialog { border: 1px solid var(--g-edge); border-radius: 26px; box-shadow: inset 0 1px 0 var(--g-hi), 0 24px 70px rgba(0,0,0,.25); }
-html.liquid .plan thead th, html.liquid .plan th.name, html.liquid .plan td.name, html.liquid .plan thead th.name { background: color-mix(in srgb, var(--bg) 78%, transparent); }
-html.liquid .plan th, html.liquid .plan td { border-color: var(--g-edge); }
-html.liquid .blk { border-radius: 12px; background: linear-gradient(180deg, color-mix(in srgb, var(--z) 22%, var(--g-blk)), color-mix(in srgb, var(--z) 32%, var(--g-blk-2))); border: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), inset 3px 0 0 var(--z), 0 1px 2px rgba(0,0,0,.06); }
-html.liquid .blk.seg-cours { background: linear-gradient(180deg, color-mix(in srgb, var(--cours) 18%, var(--g-blk)), color-mix(in srgb, var(--cours) 28%, var(--g-blk-2))); }
-html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid .skill { background: linear-gradient(180deg, var(--g-btn-1), var(--g-btn-2)); border: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), 0 2px 8px rgba(0,0,0,.06); }
-html.liquid .btn, html.liquid .seg-ctl, html.liquid .skill { border-radius: 999px; }
-html.liquid .btn.primary { background: linear-gradient(180deg, #2b8cff, #0069e6); color: #fff; border-color: rgba(255,255,255,.4); box-shadow: inset 0 1px 0 rgba(255,255,255,.55), 0 4px 14px rgba(0,113,227,.28); }
-html.liquid .btn.danger { background: linear-gradient(180deg, color-mix(in srgb, var(--danger) 85%, #fff), var(--danger)); color: #fff; }
-html.liquid .seg-ctl button[aria-pressed="true"], html.liquid .daybar button[aria-pressed="true"] { background: var(--g-sel); color: var(--g-sel-fg); border-color: var(--g-edge); box-shadow: 0 2px 8px rgba(0,0,0,.1); }
-html.liquid .daybar button[aria-pressed="true"] b { color: var(--g-sel-fg); }
-html.liquid .skill[aria-pressed="true"] { background: linear-gradient(180deg, var(--accent-soft), color-mix(in srgb, var(--accent-soft) 60%, transparent)); border-color: var(--accent); }
-html.liquid .skill.badgeRouge[aria-pressed="true"] { background: var(--danger-soft); border-color: var(--danger); }
-html.liquid .skill.formation[aria-pressed="true"] { background: var(--warn-soft); border-color: var(--warn); }
-html.liquid .skill.ancien[aria-pressed="true"] { background: var(--ok-soft); border-color: var(--ok); }
-html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 66%, transparent), color-mix(in srgb, var(--bg) 84%, transparent)); border-top: 1px solid var(--g-edge); box-shadow: inset 0 1px 0 var(--g-hi), 0 -6px 30px rgba(0,0,0,.06); }
-html.liquid .input { background: var(--g-btn-1); border-color: var(--g-edge); }
 
 /* Fluidité : flou réservé aux quelques grandes surfaces (menu, barres, fenêtres) ; rien de flou si l'appareil demande moins de transparence. */
 
-@media (prefers-reduced-transparency: reduce) {
-  html.liquid .side, html.liquid .topbar, html.liquid .tabbar, html.liquid .dialog { background: var(--g-dialog); }
-}
+
 .month .mday { contain: layout paint; }
 
 /* ---------- Écran de démarrage ---------- */
 #splash { position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: var(--bg); transition: opacity .35s ease, visibility .35s; }
-html.liquid #splash { background: radial-gradient(700px 520px at 30% 20%, var(--g-spot-1), transparent 65%), linear-gradient(160deg, var(--g-bg-1), var(--g-bg-2) 60%, var(--g-bg-3)); }
 #splash img { width: 88px; height: 88px; border-radius: 22px; box-shadow: 0 14px 40px rgba(0, 60, 180, .28); animation: splash-pop .9s ease-in-out infinite alternate; }
 #splash b { font-family: var(--font-display, var(--font)); font-size: 17px; font-weight: 650; color: var(--fg); letter-spacing: -.01em; }
 #splash i { width: 120px; height: 4px; border-radius: 99px; background: var(--line); overflow: hidden; position: relative; }
@@ -481,9 +423,7 @@ input.input:not([type="checkbox"]):not([type="radio"]):not([type="color"]), sele
 .form-grid > label.f > span:first-child { min-height: 1.3em; }
 .tag-office { display: inline-block; width: fit-content; font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
 .link-section .item { gap: 8px; }
-html.liquid .dialog header, html.liquid .dialog footer { background: #fff; }
-@media (prefers-color-scheme: dark) { html.liquid:not([data-theme="light"]) .dialog header, html.liquid:not([data-theme="light"]) .dialog footer { background: #242529; } }
-html.liquid[data-theme="dark"] .dialog header, html.liquid[data-theme="dark"] .dialog footer { background: #242529; }
+
 /* Liaisons : bouton « lier » et bouton voiture (vert = même trajet, blanc = non) */
 .link-section { display: flex; flex-direction: column; gap: 8px; }
 .link-head { gap: 8px; }
@@ -502,8 +442,6 @@ html.liquid[data-theme="dark"] .dialog header, html.liquid[data-theme="dark"] .d
 
 /* Fluidité : aucun flou calculé en direct. Les barres qui ont du contenu qui défile dessous sont presque opaques. */
 .topbar { background: color-mix(in srgb, var(--bg) 96%, transparent); }
-html.liquid .topbar { background: linear-gradient(180deg, color-mix(in srgb, var(--g-bg-1) 97%, transparent), color-mix(in srgb, var(--g-bg-2) 93%, transparent)); box-shadow: inset 0 -1px 0 var(--g-edge), 0 6px 18px rgba(0, 0, 0, .04); }
-html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var(--g-bg-1) 95%, transparent), color-mix(in srgb, var(--g-bg-2) 97%, transparent)); }
 @media (max-width: 760px) { .tabbar { background: color-mix(in srgb, var(--surface) 98%, transparent); } }
 /* Le navigateur évite de dessiner ce qui est hors écran (listes et cartes longues). */
 .card.big .t-wrap, .month { contain: content; }
@@ -512,9 +450,6 @@ html.liquid .tabbar { background: linear-gradient(180deg, color-mix(in srgb, var
 .today-who b { line-height: 1.2; }
 .today-who .chip { justify-self: start; }
 /* Allègement du dessin : blocs horaires à fond uni (sans dégradé ni ombre floue), cartes hors écran non dessinées. */
-html.liquid .blk { background: color-mix(in srgb, var(--z) 26%, var(--g-blk)); box-shadow: inset 3px 0 0 var(--z); }
-html.liquid .blk.seg-cours { background: color-mix(in srgb, var(--cours) 22%, var(--g-blk)); }
-html.liquid .btn, html.liquid .seg-ctl, html.liquid .daybar button, html.liquid .skill { box-shadow: inset 0 1px 0 var(--g-hi); }
 .stack > .card:not(.big) { content-visibility: auto; contain-intrinsic-size: auto 360px; }
 .plan td.cell { contain: paint; }
 .zone-pref { margin-top: 6px; align-items: center; }
@@ -562,3 +497,99 @@ details.gen-more[open] > summary { color: var(--fg); }
 ul.blockers { margin: 6px 0 2px; padding-left: 18px; font-size: 12.5px; color: var(--fg-2); }
 ul.blockers li { margin: 2px 0; }
 ul.blockers b { color: var(--fg); font-weight: 600; }
+
+/* ======================================================================
+   Thème « Bleu ciel » (par défaut) : fond bleu clair dégradé, cartes blanches,
+   menu blanc avec l'élément actif en bleu plein, typographie Inter.
+   ====================================================================== */
+html.ciel {
+  --bg: #e9f1ff; --surface: #ffffff; --surface-2: #f5f8ff; --line: #e2e9f6; --line-strong: #cfdaf0;
+  --fg: #1a2b4c; --fg-2: #627392; --fg-3: #93a1bb;
+  --accent: #2f6fed; --accent-soft: #e7efff;
+  --shadow: 0 10px 30px rgba(36, 76, 160, .08), 0 1px 3px rgba(36, 76, 160, .05);
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --r: 18px; --r-sm: 12px;
+  background: #dfe9ff;
+}
+html.ciel body { background: transparent; font-family: var(--font); letter-spacing: -0.005em; }
+html.ciel body::before { background: transparent; }
+html.ciel body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(900px 600px at 15% 0%, #f4f8ff 0%, transparent 60%), radial-gradient(900px 700px at 100% 100%, #b9d0ff 0%, transparent 60%), linear-gradient(135deg, #edf3ff 0%, #dbe7ff 55%, #c9dcff 100%); }
+html.ciel h1 { font-weight: 700; letter-spacing: -0.02em; color: #14244a; }
+html.ciel h2, html.ciel h3 { font-weight: 600; color: #1a2b4c; }
+
+/* Menu latéral blanc, élément actif en bleu plein */
+html.ciel .side { background: #ffffff; border-right: 0; box-shadow: 8px 0 30px rgba(36, 76, 160, .06); padding: 22px 0 20px; }
+html.ciel .brand { padding: 4px 22px 18px; }
+html.ciel .nav { border-radius: 0; padding: 11px 22px; color: #4a5b7c; font-weight: 500; }
+html.ciel .nav svg { color: #7f8fae; }
+html.ciel .nav:hover { background: #f1f5ff; transform: none; box-shadow: none; }
+html.ciel .nav[aria-current="page"] { background: linear-gradient(90deg, #3b78f2, #2f6fed); color: #fff; font-weight: 600; box-shadow: 0 6px 16px rgba(47, 111, 237, .28); }
+html.ciel .nav[aria-current="page"] svg { color: #fff; }
+html.ciel .nav-group { padding: 16px 22px 6px; color: #9aa8c2; }
+
+/* Barre du haut */
+html.ciel .topbar { background: rgba(255, 255, 255, .86); border-bottom: 1px solid #e5ecf8; box-shadow: 0 2px 12px rgba(36, 76, 160, .05); }
+html.ciel .topbar .title { font-weight: 700; color: #14244a; }
+
+/* Cartes blanches arrondies, ombre douce */
+html.ciel .card, html.ciel .banner { background: #ffffff; border: 1px solid rgba(226, 233, 246, .9); border-radius: 18px; box-shadow: var(--shadow); }
+html.ciel .card.flat { background: #f7faff; box-shadow: none; }
+html.ciel .banner { background: #ffffff; }
+html.ciel .banner.info { background: #edf3ff; border-color: #d6e3ff; }
+html.ciel .empty { background: rgba(255, 255, 255, .7); border-color: #cddcf6; border-radius: 18px; }
+html.ciel .kpi b { color: #2f6fed; }
+
+/* Boutons */
+html.ciel .btn { background: #ffffff; border: 1px solid #d9e3f5; color: #1f3361; border-radius: 12px; box-shadow: 0 1px 2px rgba(36, 76, 160, .06); }
+html.ciel .btn.primary { background: #2f6fed; border-color: #2f6fed; color: #fff; box-shadow: 0 6px 16px rgba(47, 111, 237, .3); }
+html.ciel .btn.ghost { background: transparent; border-color: transparent; box-shadow: none; }
+html.ciel .seg-ctl { background: #eaf0fc; border-radius: 12px; }
+html.ciel .seg-ctl button { border-radius: 10px; }
+html.ciel .seg-ctl button[aria-pressed="true"] { background: #fff; color: #2f6fed; box-shadow: 0 2px 8px rgba(36, 76, 160, .12); }
+html.ciel .chip.info { background: #e7efff; color: #2f6fed; }
+html.ciel .input, html.ciel select.input, html.ciel textarea.input { background: #ffffff; border-color: #d9e3f5; border-radius: 12px; }
+html.ciel .input:focus { border-color: #2f6fed; box-shadow: 0 0 0 3px rgba(47, 111, 237, .15); outline: none; }
+
+/* Planning */
+html.ciel .grid-wrap { background: #ffffff; border: 1px solid #e2e9f6; border-radius: 18px; box-shadow: var(--shadow); }
+html.ciel .plan thead th, html.ciel .plan th.name, html.ciel .plan td.name, html.ciel .plan thead th.name { background: #f7faff; }
+html.ciel .plan td.name { background: #ffffff; }
+html.ciel .plan th, html.ciel .plan td { border-color: #edf2fb; }
+html.ciel .blk { border-radius: 10px; }
+html.ciel .daybar button { border-radius: 14px; background: #fff; border-color: #e2e9f6; }
+html.ciel .daybar button[aria-pressed="true"] { background: #2f6fed; border-color: #2f6fed; color: #fff; }
+html.ciel .daybar button[aria-pressed="true"] b { color: #fff; }
+html.ciel .mday { border-radius: 14px; border-color: #e2e9f6; }
+
+/* Fenêtres */
+html.ciel .overlay { background: rgba(20, 40, 90, .28); }
+html.ciel .dialog, html.ciel .dialog header, html.ciel .dialog footer { background: #ffffff; }
+html.ciel .dialog { border-radius: 22px; border: 1px solid #e2e9f6; box-shadow: 0 30px 80px rgba(20, 40, 90, .25); }
+html.ciel details.gen-more { background: #f7faff; border-color: #e2e9f6; }
+
+/* Barre d'onglets (téléphone) */
+html.ciel .tabbar { background: rgba(255, 255, 255, .96); border-top: 1px solid #e2e9f6; }
+html.ciel .tabbar button[aria-current="page"] { color: #2f6fed; }
+
+/* Écran de démarrage */
+html.ciel #splash { background: linear-gradient(135deg, #edf3ff, #c9dcff); }
+
+/* Mode sombre : bleu nuit */
+@media (prefers-color-scheme: dark) {
+  html.ciel:not([data-theme="light"]) {
+    --bg: #0d1630; --surface: #15213f; --surface-2: #1a2749; --line: #253463; --line-strong: #2f4074;
+    --fg: #e8eeff; --fg-2: #a5b3d4; --fg-3: #7e8db3; --accent: #6b9bff; --accent-soft: #1d2d58;
+    background: #0d1630;
+  }
+  html.ciel:not([data-theme="light"]) body::after { background: radial-gradient(900px 600px at 15% 0%, #1b2b5a 0%, transparent 60%), linear-gradient(135deg, #0f1a38 0%, #0b1430 100%); }
+  html.ciel:not([data-theme="light"]) .side, html.ciel:not([data-theme="light"]) .card, html.ciel:not([data-theme="light"]) .banner,
+  html.ciel:not([data-theme="light"]) .grid-wrap, html.ciel:not([data-theme="light"]) .dialog, html.ciel:not([data-theme="light"]) .dialog header,
+  html.ciel:not([data-theme="light"]) .dialog footer, html.ciel:not([data-theme="light"]) .btn, html.ciel:not([data-theme="light"]) .input,
+  html.ciel:not([data-theme="light"]) .plan td.name, html.ciel:not([data-theme="light"]) .daybar button, html.ciel:not([data-theme="light"]) .tabbar { background: #15213f; border-color: #253463; color: var(--fg); }
+  html.ciel:not([data-theme="light"]) .topbar { background: rgba(13, 22, 48, .9); border-color: #253463; }
+  html.ciel:not([data-theme="light"]) .plan thead th, html.ciel:not([data-theme="light"]) .card.flat, html.ciel:not([data-theme="light"]) .plan th.name { background: #1a2749; }
+  html.ciel:not([data-theme="light"]) h1, html.ciel:not([data-theme="light"]) h2, html.ciel:not([data-theme="light"]) h3, html.ciel:not([data-theme="light"]) .topbar .title { color: #e8eeff; }
+  html.ciel:not([data-theme="light"]) .btn.primary { background: #3b78f2; color: #fff; }
+}

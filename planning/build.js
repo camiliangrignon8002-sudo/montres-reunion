@@ -49,6 +49,8 @@ async function main() {
   const body = (refScript) => `<title>Planning équipe</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Plannings de l'équipe : zones de travail, alternants, absences, génération et assistant IA.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 ${src("styles.css")}
 </style>
@@ -70,7 +72,7 @@ ${appScripts}
   fs.writeFileSync(path.join(out, "index.html"), `<!doctype html>
 <html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#e9f1ff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
