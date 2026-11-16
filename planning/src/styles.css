@@ -456,101 +456,6 @@ ul.blockers { margin: 6px 0 2px; padding-left: 18px; font-size: 12.5px; color: v
 ul.blockers li { margin: 2px 0; }
 ul.blockers b { color: var(--fg); font-weight: 600; }
 
-/* ======================================================================
-   Thème « Bleu ciel » (par défaut) : fond bleu clair dégradé, cartes blanches,
-   menu blanc avec l'élément actif en bleu plein, typographie Inter.
-   ====================================================================== */
-html.ciel {
-  --bg: #e9f1ff; --surface: #ffffff; --surface-2: #f5f8ff; --line: #e2e9f6; --line-strong: #cfdaf0;
-  --fg: #1a2b4c; --fg-2: #627392; --fg-3: #93a1bb;
-  --accent: #2f6fed; --accent-soft: #e7efff;
-  --shadow: 0 10px 30px rgba(36, 76, 160, .08), 0 1px 3px rgba(36, 76, 160, .05);
-  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  --r: 18px; --r-sm: 12px;
-  background: #dfe9ff;
-}
-html.ciel body { background: transparent; font-family: var(--font); letter-spacing: -0.005em; }
-html.ciel body::before { background: transparent; }
-html.ciel body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-  background: radial-gradient(900px 600px at 15% 0%, #f4f8ff 0%, transparent 60%), radial-gradient(900px 700px at 100% 100%, #b9d0ff 0%, transparent 60%), linear-gradient(135deg, #edf3ff 0%, #dbe7ff 55%, #c9dcff 100%); }
-html.ciel h1 { font-weight: 700; letter-spacing: -0.02em; color: #14244a; }
-html.ciel h2, html.ciel h3 { font-weight: 600; color: #1a2b4c; }
-
-/* Menu latéral blanc, élément actif en bleu plein */
-html.ciel .side { background: #ffffff; border-right: 0; box-shadow: 8px 0 30px rgba(36, 76, 160, .06); padding: 22px 0 20px; }
-html.ciel .brand { padding: 4px 22px 18px; }
-html.ciel .nav { border-radius: 0; padding: 11px 22px; color: #4a5b7c; font-weight: 500; }
-html.ciel .nav svg { color: #7f8fae; }
-html.ciel .nav:hover { background: #f1f5ff; transform: none; box-shadow: none; }
-html.ciel .nav[aria-current="page"] { background: linear-gradient(90deg, #3b78f2, #2f6fed); color: #fff; font-weight: 600; box-shadow: 0 6px 16px rgba(47, 111, 237, .28); }
-html.ciel .nav[aria-current="page"] svg { color: #fff; }
-html.ciel .nav-group { padding: 16px 22px 6px; color: #9aa8c2; }
-
-/* Barre du haut */
-html.ciel .topbar { background: rgba(255, 255, 255, .86); border-bottom: 1px solid #e5ecf8; box-shadow: 0 2px 12px rgba(36, 76, 160, .05); }
-html.ciel .topbar .title { font-weight: 700; color: #14244a; }
-
-/* Cartes blanches arrondies, ombre douce */
-html.ciel .card, html.ciel .banner { background: #ffffff; border: 1px solid rgba(226, 233, 246, .9); border-radius: 18px; box-shadow: var(--shadow); }
-html.ciel .card.flat { background: #f7faff; box-shadow: none; }
-html.ciel .banner { background: #ffffff; }
-html.ciel .banner.info { background: #edf3ff; border-color: #d6e3ff; }
-html.ciel .empty { background: rgba(255, 255, 255, .7); border-color: #cddcf6; border-radius: 18px; }
-html.ciel .kpi b { color: #2f6fed; }
-
-/* Boutons */
-html.ciel .btn { background: #ffffff; border: 1px solid #d9e3f5; color: #1f3361; border-radius: 12px; box-shadow: 0 1px 2px rgba(36, 76, 160, .06); }
-html.ciel .btn.primary { background: #2f6fed; border-color: #2f6fed; color: #fff; box-shadow: 0 6px 16px rgba(47, 111, 237, .3); }
-html.ciel .btn.ghost { background: transparent; border-color: transparent; box-shadow: none; }
-html.ciel .seg-ctl { background: #eaf0fc; border-radius: 12px; }
-html.ciel .seg-ctl button { border-radius: 10px; }
-html.ciel .seg-ctl button[aria-pressed="true"] { background: #fff; color: #2f6fed; box-shadow: 0 2px 8px rgba(36, 76, 160, .12); }
-html.ciel .chip.info { background: #e7efff; color: #2f6fed; }
-html.ciel .input, html.ciel select.input, html.ciel textarea.input { background: #ffffff; border-color: #d9e3f5; border-radius: 12px; }
-html.ciel .input:focus { border-color: #2f6fed; box-shadow: 0 0 0 3px rgba(47, 111, 237, .15); outline: none; }
-
-/* Planning */
-html.ciel .grid-wrap { background: #ffffff; border: 1px solid #e2e9f6; border-radius: 18px; box-shadow: var(--shadow); }
-html.ciel .plan thead th, html.ciel .plan th.name, html.ciel .plan td.name, html.ciel .plan thead th.name { background: #f7faff; }
-html.ciel .plan td.name { background: #ffffff; }
-html.ciel .plan th, html.ciel .plan td { border-color: #edf2fb; }
-html.ciel .blk { border-radius: 10px; }
-html.ciel .daybar button { border-radius: 14px; background: #fff; border-color: #e2e9f6; }
-html.ciel .daybar button[aria-pressed="true"] { background: #2f6fed; border-color: #2f6fed; color: #fff; }
-html.ciel .daybar button[aria-pressed="true"] b { color: #fff; }
-html.ciel .mday { border-radius: 14px; border-color: #e2e9f6; }
-
-/* Fenêtres */
-html.ciel .overlay { background: rgba(20, 40, 90, .28); }
-html.ciel .dialog, html.ciel .dialog header, html.ciel .dialog footer { background: #ffffff; }
-html.ciel .dialog { border-radius: 22px; border: 1px solid #e2e9f6; box-shadow: 0 30px 80px rgba(20, 40, 90, .25); }
-html.ciel details.gen-more { background: #f7faff; border-color: #e2e9f6; }
-
-/* Barre d'onglets (téléphone) */
-html.ciel .tabbar { background: rgba(255, 255, 255, .96); border-top: 1px solid #e2e9f6; }
-html.ciel .tabbar button[aria-current="page"] { color: #2f6fed; }
-
-/* Écran de démarrage */
-html.ciel #splash { background: linear-gradient(135deg, #edf3ff, #c9dcff); }
-
-/* Mode sombre : bleu nuit */
-@media (prefers-color-scheme: dark) {
-  html.ciel:not([data-theme="light"]) {
-    --bg: #0d1630; --surface: #15213f; --surface-2: #1a2749; --line: #253463; --line-strong: #2f4074;
-    --fg: #e8eeff; --fg-2: #a5b3d4; --fg-3: #7e8db3; --accent: #6b9bff; --accent-soft: #1d2d58;
-    background: #0d1630;
-  }
-  html.ciel:not([data-theme="light"]) body::after { background: radial-gradient(900px 600px at 15% 0%, #1b2b5a 0%, transparent 60%), linear-gradient(135deg, #0f1a38 0%, #0b1430 100%); }
-  html.ciel:not([data-theme="light"]) .side, html.ciel:not([data-theme="light"]) .card, html.ciel:not([data-theme="light"]) .banner,
-  html.ciel:not([data-theme="light"]) .grid-wrap, html.ciel:not([data-theme="light"]) .dialog, html.ciel:not([data-theme="light"]) .dialog header,
-  html.ciel:not([data-theme="light"]) .dialog footer, html.ciel:not([data-theme="light"]) .btn, html.ciel:not([data-theme="light"]) .input,
-  html.ciel:not([data-theme="light"]) .plan td.name, html.ciel:not([data-theme="light"]) .daybar button, html.ciel:not([data-theme="light"]) .tabbar { background: #15213f; border-color: #253463; color: var(--fg); }
-  html.ciel:not([data-theme="light"]) .topbar { background: rgba(13, 22, 48, .9); border-color: #253463; }
-  html.ciel:not([data-theme="light"]) .plan thead th, html.ciel:not([data-theme="light"]) .card.flat, html.ciel:not([data-theme="light"]) .plan th.name { background: #1a2749; }
-  html.ciel:not([data-theme="light"]) h1, html.ciel:not([data-theme="light"]) h2, html.ciel:not([data-theme="light"]) h3, html.ciel:not([data-theme="light"]) .topbar .title { color: #e8eeff; }
-  html.ciel:not([data-theme="light"]) .btn.primary { background: #3b78f2; color: #fff; }
-}
 /* Ergonomie : moins d'informations à la fois */
 details.legend-fold > summary { cursor: pointer; font-size: 12.5px; color: var(--fg-2); width: fit-content; list-style: none; padding: 2px 10px; border-radius: 999px; background: rgba(255,255,255,.7); border: 1px solid var(--line); }
 details.legend-fold > summary::-webkit-details-marker { display: none; }
@@ -559,24 +464,124 @@ details.legend-fold[open] > summary { margin-bottom: 8px; }
 .plan thead th .pax-alert { display: inline-block; margin-top: 4px; font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; background: #fff3d6; color: #8a5a00; border: 0; }
 .plan thead th .need.pax { display: inline-block; margin-right: 6px; }
 
-/* Plat, sans effet « verre » : fonds unis, pas de transparence ni de dégradé, ombres très discrètes. */
-html.ciel { --shadow: 0 1px 2px rgba(20, 40, 90, .06); background: #eef3fb; }
-html.ciel body::after { background: #eef3fb; }
-html.ciel .topbar { background: #ffffff; box-shadow: none; border-bottom: 1px solid #e2e9f6; }
-html.ciel .side { box-shadow: none; border-right: 1px solid #e2e9f6; }
-html.ciel .nav[aria-current="page"] { background: #2f6fed; box-shadow: none; }
-html.ciel .card, html.ciel .banner, html.ciel .grid-wrap { box-shadow: var(--shadow); border: 1px solid #e2e9f6; }
-html.ciel .btn, html.ciel .btn.primary { box-shadow: none; }
-html.ciel .seg-ctl button[aria-pressed="true"] { box-shadow: 0 1px 2px rgba(20, 40, 90, .1); }
-html.ciel .tabbar { background: #ffffff; }
-html.ciel .dialog { box-shadow: 0 12px 40px rgba(20, 40, 90, .18); }
-html.ciel .overlay { background: rgba(20, 40, 90, .35); }
-html.ciel #splash { background: #eef3fb; }
-html.ciel .empty { background: #ffffff; }
-html.ciel details.legend-fold > summary { background: #ffffff; }
-html.ciel .blk { box-shadow: none; }
-@media (prefers-color-scheme: dark) {
-  html.ciel:not([data-theme="light"]) { background: #0d1630; }
-  html.ciel:not([data-theme="light"]) body::after { background: #0d1630; }
-  html.ciel:not([data-theme="light"]) .topbar { background: #15213f; }
+
+/* ======================================================================
+   Thème RelayTime : bleu nuit, argent et rouge (d'après le logo).
+   Clair ou sombre selon le réglage de l'appareil. Plat : fonds unis, pas de transparence.
+   ====================================================================== */
+html.relay {
+  --navy: #0f1a33; --navy-2: #1a2747; --silver: #c9ced8; --red: #c8102e; --red-2: #a50d26;
+  --bg: #f4f6fa; --surface: #ffffff; --surface-2: #f7f8fb; --line: #e3e7ef; --line-strong: #cdd3df;
+  --fg: #0f1a33; --fg-2: #5b6782; --fg-3: #8f99ad;
+  --accent: #c8102e; --accent-soft: #fdecef;
+  --shadow: 0 1px 2px rgba(15, 26, 51, .06);
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --r: 14px; --r-sm: 10px;
+  background: var(--bg);
 }
+html.relay body { background: var(--bg); font-family: var(--font); }
+html.relay body::before { background: var(--bg); }
+html.relay h1 { font-weight: 800; letter-spacing: -0.02em; color: var(--fg); }
+html.relay h2, html.relay h3 { font-weight: 700; color: var(--fg); }
+
+/* Logo : icône + RELAY (argent ou bleu nuit) TIME (rouge), en italique comme le logo */
+.wordmark { font-family: "Inter", Arial, sans-serif; font-style: italic; font-weight: 800; letter-spacing: .02em; line-height: 1; }
+.wordmark .wm-relay { color: var(--fg); }
+.wordmark .wm-time { color: var(--red, #c8102e); }
+html.relay .brand { flex-direction: row; align-items: center; gap: 10px; padding: 4px 18px 20px; }
+html.relay .brand-logo { width: 40px; height: 40px; border-radius: 10px; flex: none; }
+html.relay .brand-txt { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+html.relay .brand .wordmark { font-size: 20px; }
+
+/* Menu latéral bleu nuit (comme le fond du logo), page en cours marquée en rouge */
+html.relay .side { background: var(--navy); border-right: 0; padding: 22px 0 20px; }
+html.relay .side .wordmark .wm-relay { color: #e9ecf2; }
+html.relay .side .tiny.muted { color: #8f9bb8; }
+html.relay .nav { color: #c9cfdc; border-radius: 0; padding: 11px 20px; font-weight: 500; border-left: 3px solid transparent; }
+html.relay .nav svg { color: #8f9bb8; }
+html.relay .nav:hover { background: var(--navy-2); color: #fff; }
+html.relay .nav[aria-current="page"] { background: var(--navy-2); color: #ffffff; font-weight: 600; border-left-color: var(--red); }
+html.relay .nav[aria-current="page"] svg { color: var(--red); }
+html.relay .nav .count { background: var(--red); }
+html.relay .nav-group { color: #6f7b98; padding: 16px 20px 6px; }
+
+/* Barre du haut */
+html.relay .topbar { background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: none; }
+html.relay .topbar .title { font-weight: 700; color: var(--fg); }
+
+/* Cartes et blocs */
+html.relay .card, html.relay .banner, html.relay .grid-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); }
+html.relay .card.flat { background: var(--surface-2); box-shadow: none; }
+html.relay .banner.info { background: #eef1f7; border-color: var(--line); }
+html.relay .empty { background: var(--surface); border-color: var(--line-strong); border-radius: 14px; }
+html.relay .kpi b { color: var(--navy); }
+
+/* Boutons : principal rouge, secondaires sobres */
+html.relay .btn { background: var(--surface); border: 1px solid var(--line-strong); color: var(--fg); border-radius: 10px; box-shadow: none; }
+html.relay .btn:hover { border-color: var(--fg-3); }
+html.relay .btn.primary { background: var(--red); border-color: var(--red); color: #fff; }
+html.relay .btn.primary:hover { background: var(--red-2); border-color: var(--red-2); }
+html.relay .btn.ghost { background: transparent; border-color: transparent; }
+html.relay .seg-ctl { background: #e9edf4; border-radius: 10px; }
+html.relay .seg-ctl button { border-radius: 8px; }
+html.relay .seg-ctl button[aria-pressed="true"] { background: var(--navy); color: #fff; box-shadow: none; }
+html.relay .input, html.relay select.input, html.relay textarea.input { background: var(--surface); border-color: var(--line-strong); border-radius: 10px; }
+html.relay .input:focus { border-color: var(--navy); box-shadow: 0 0 0 3px rgba(15, 26, 51, .12); outline: none; }
+html.relay .chip.info { background: #e8ecf4; color: var(--navy); }
+html.relay a { color: var(--red); }
+
+/* Planning */
+html.relay .plan thead th, html.relay .plan th.name, html.relay .plan thead th.name { background: var(--surface-2); }
+html.relay .plan td.name { background: var(--surface); }
+html.relay .plan th, html.relay .plan td { border-color: #edf0f5; }
+html.relay .plan thead th.today { background: #eef1f7 !important; color: var(--navy); box-shadow: inset 0 3px 0 var(--red); }
+html.relay .plan thead th.today .d { color: var(--red); }
+html.relay .plan td.today { background: #f7f8fb !important; }
+html.relay .today-pill { background: var(--red) !important; color: #fff !important; }
+html.relay .blk { border-radius: 8px; box-shadow: none; }
+html.relay .daybar button { background: var(--surface); border-color: var(--line); border-radius: 12px; }
+html.relay .daybar button[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
+html.relay .daybar button[aria-pressed="true"] b { color: #fff; }
+html.relay .mday { border-color: var(--line); border-radius: 12px; }
+html.relay .mday.today { border-color: var(--red); box-shadow: inset 0 0 0 1px var(--red); }
+
+/* Fenêtres */
+html.relay .overlay { background: rgba(15, 26, 51, .45); }
+html.relay .dialog, html.relay .dialog header, html.relay .dialog footer { background: var(--surface); }
+html.relay .dialog { border-radius: 18px; border: 1px solid var(--line); box-shadow: 0 16px 48px rgba(15, 26, 51, .22); }
+html.relay details.gen-more, html.relay details.legend-fold > summary { background: var(--surface-2); border-color: var(--line); }
+
+/* Barre d'onglets (téléphone) */
+html.relay .tabbar { background: var(--surface); border-top: 1px solid var(--line); }
+html.relay .tabbar button[aria-current="page"] { color: var(--red); }
+
+/* Démarrage : fond bleu nuit, logo et RELAY TIME */
+html.relay #splash { background: var(--navy); }
+html.relay #splash img { box-shadow: 0 14px 40px rgba(0, 0, 0, .45); }
+html.relay #splash .wordmark { font-size: 26px; }
+html.relay #splash .wm-relay { color: #e9ecf2; }
+html.relay #splash i { background: rgba(255, 255, 255, .15); }
+html.relay #splash i::after { background: var(--red); }
+
+/* Sombre (réglage de l'appareil) : bleu nuit du logo, texte argent */
+@media (prefers-color-scheme: dark) {
+  html.relay:not([data-theme="light"]) {
+    --bg: #0b1226; --surface: #131c35; --surface-2: #18223f; --line: #243052; --line-strong: #2f3c63;
+    --fg: #e8ebf2; --fg-2: #a9b2c7; --fg-3: #7d88a3; --accent: #e5354f; --accent-soft: #3a1520;
+    --shadow: none; color-scheme: dark;
+  }
+  html.relay:not([data-theme="light"]) .side { background: #08101f; }
+  html.relay:not([data-theme="light"]) .nav:hover, html.relay:not([data-theme="light"]) .nav[aria-current="page"] { background: #131c35; }
+  html.relay:not([data-theme="light"]) .seg-ctl { background: #18223f; }
+  html.relay:not([data-theme="light"]) .seg-ctl button[aria-pressed="true"], html.relay:not([data-theme="light"]) .daybar button[aria-pressed="true"] { background: #c9ced8; color: #0b1226; border-color: #c9ced8; }
+  html.relay:not([data-theme="light"]) .daybar button[aria-pressed="true"] b { color: #0b1226; }
+  html.relay:not([data-theme="light"]) .kpi b, html.relay:not([data-theme="light"]) .chip.info { color: #c9ced8; }
+  html.relay:not([data-theme="light"]) .chip.info { background: #18223f; }
+  html.relay:not([data-theme="light"]) .banner.info { background: #18223f; }
+  html.relay:not([data-theme="light"]) .plan thead th.today { background: #1d2848 !important; color: #e8ebf2; }
+  html.relay:not([data-theme="light"]) .plan td.today { background: #151f3b !important; }
+  html.relay:not([data-theme="light"]) .plan th, html.relay:not([data-theme="light"]) .plan td { border-color: #1f2a49; }
+  html.relay:not([data-theme="light"]) .input:focus { border-color: #c9ced8; box-shadow: 0 0 0 3px rgba(201, 206, 216, .15); }
+}
+html.relay .top-logo { width: 30px; height: 30px; border-radius: 8px; flex: none; }

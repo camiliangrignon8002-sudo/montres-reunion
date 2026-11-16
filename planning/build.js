@@ -46,7 +46,7 @@ async function main() {
 
   const tag = (code) => `<script>\n${code.replace(/<\/script/gi, "<\\/script")}\n</script>`;
   const appScripts = ["core.js", "store.js", "exports.js", "ai.js", "app.js"].map((f) => tag(src(f))).join("\n");
-  const body = (refScript) => `<title>Planning équipe</title>
+  const body = (refScript) => `<title>RelayTime</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Plannings de l'équipe : zones de travail, alternants, absences, génération et assistant IA.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,7 +54,8 @@ async function main() {
 <style>
 ${src("styles.css")}
 </style>
-<div id="splash" role="status" aria-label="Chargement du planning"><img src="data:image/png;base64,${fs.readFileSync(S("splash-logo.png")).toString("base64")}" alt="" width="88" height="88"><b>Planning équipe</b><i></i></div>
+<div id="splash" role="status" aria-label="Chargement de RelayTime"><img src="data:image/png;base64,${fs.readFileSync(S("splash-logo.png")).toString("base64")}" alt="" width="88" height="88"><b class="wordmark"><span class="wm-relay">RELAY</span><span class="wm-time">TIME</span></b><i></i></div>
+<script>window.RELAYTIME_LOGO = "data:image/png;base64,${fs.readFileSync(S("brand-logo.png")).toString("base64")}";</script>
 <div id="app-root"></div>
 <noscript>Cette application a besoin de JavaScript.</noscript>
 ${refScript}
@@ -72,12 +73,12 @@ ${appScripts}
   fs.writeFileSync(path.join(out, "index.html"), `<!doctype html>
 <html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#e9f1ff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1226" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Planning">
+<meta name="apple-mobile-web-app-title" content="RelayTime">
 <meta name="robots" content="noindex">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -88,8 +89,8 @@ ${body(plainTag)}<script>if ("serviceWorker" in navigator && location.protocol =
 </body></html>
 `);
   fs.writeFileSync(path.join(out, "manifest.webmanifest"), JSON.stringify({
-    name: "Planning équipe", short_name: "Planning", description: "Plannings de l'équipe : zones, alternants, absences.",
-    start_url: "./", scope: "./", display: "standalone", background_color: "#f5f5f7", theme_color: "#f5f5f7", lang: "fr",
+    name: "RelayTime", short_name: "RelayTime", description: "RelayTime : plannings de l'équipe, zones, alternants, absences.",
+    start_url: "./", scope: "./", display: "standalone", background_color: "#0b1226", theme_color: "#0f1a33", lang: "fr",
     icons: [{ src: "icon-192.png", sizes: "192x192", type: "image/png" }, { src: "icon-512.png", sizes: "512x512", type: "image/png", purpose: "any maskable" }],
   }, null, 2) + "\n");
   fs.writeFileSync(path.join(out, "sw.js"), `// Appli Planning : fonctionne hors connexion (réseau d'abord, copie locale si pas de réseau).

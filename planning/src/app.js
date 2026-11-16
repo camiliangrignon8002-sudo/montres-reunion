@@ -1,4 +1,4 @@
-// Interface de l'application « Planning équipe ».
+// Interface de l'application « RelayTime » (plannings de l'équipe).
 (function (root) {
   "use strict";
   const C = root.PlanningCore, Store = root.PlanningStore, AI = root.PlanningAI, X = root.PlanningExports;
@@ -16,7 +16,7 @@
   }
 
   // ---------- Apparence ----------
-  document.documentElement.classList.add("ciel"); // un seul thème : bleu ciel
+  document.documentElement.classList.add("relay"); // thème RelayTime (clair ou sombre selon l'appareil)
 
   // Écran de démarrage (logo) : retiré en fondu dès que le planning est affiché.
   function hideSplash() {
@@ -417,7 +417,7 @@
     renderShell() {
       const nav = (id, label, ic) => h("button", { type: "button", class: "nav", "data-screen": id, onClick: () => this.go(id) }, icon(ic), h("span", {}, label));
       const side = h("nav", { class: "side", "aria-label": "Navigation" },
-        h("div", { class: "brand" }, h("b", {}, "Planning équipe"), h("span", { class: "tiny muted" }, "Zone aéroportuaire")),
+        h("div", { class: "brand" }, root.RELAYTIME_LOGO ? h("img", { class: "brand-logo", src: root.RELAYTIME_LOGO, alt: "", width: "40", height: "40" }) : null, h("div", { class: "brand-txt" }, h("b", { class: "wordmark" }, h("span", { class: "wm-relay" }, "RELAY"), h("span", { class: "wm-time" }, "TIME")), h("span", { class: "tiny muted" }, "Plannings de l'équipe"))),
         nav("dashboard", "Tableau de bord", "home"), nav("week", "Planning semaine", "week"), nav("month", "Planning du mois", "month"), nav("hours", "Heures par personne", "clock"),
         h("div", { class: "nav-group" }, "Organisation"),
         nav("absences", "Congés et absences", "leave"), nav("alternants", "Calendrier alternants", "school"), nav("team", "Équipe", "team"), nav("zones", "Zones et règles", "zones"),
@@ -428,6 +428,7 @@
         tab("dashboard", "Accueil", "home"), tab("week", "Planning", "week"), tab("absences", "Absences", "leave"),
         tab("ai", "Assistant", "spark", () => this.toggleAI(true)), tab("more", "Plus", "menu", () => this.openMore()));
       const top = h("header", { class: "topbar" },
+        root.RELAYTIME_LOGO ? h("img", { class: "top-logo hide-lg", src: root.RELAYTIME_LOGO, alt: "RelayTime", width: "30", height: "30" }) : null,
         h("div", { class: "title", id: "screen-title" }, ""),
         h("div", { class: "spacer" }),
         h("span", { id: "sync", class: "sync" }),
@@ -454,7 +455,7 @@
       document.querySelectorAll("[data-screen]").forEach((b) => b.setAttribute("aria-current", b.dataset.screen === screen ? "page" : "false"));
       const def = SCREENS[screen];
       document.querySelector("#screen-title").textContent = def.title;
-      document.title = "Planning équipe";
+      document.title = "RelayTime";
       const undo = document.querySelector("#undo-btn"); if (undo) undo.disabled = !this.describeUndo() || !Store.canWrite;
       const content = document.querySelector("#content");
       const nodes = [];
@@ -2391,7 +2392,7 @@
       const ms = mondays().filter((m) => C.getWeek(s, m) && C.getWeek(s, m).shifts.length);
       if (!ms.length) { toast("Aucun horaire sur cette période.", "err"); return; }
       let data, type;
-      if (kind === "pdf") { data = X.weeksToPDF(s, ms, "Planning équipe"); type = "application/pdf"; }
+      if (kind === "pdf") { data = X.weeksToPDF(s, ms, "RelayTime"); type = "application/pdf"; }
       else if (kind === "xlsx") { data = X.weeksToXLSX(s, ms); type = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"; }
       else { data = C.weeksToCSV(s, ms); type = "text/csv;charset=utf-8"; }
       await saveFile(name(kind), new Blob([data], { type }));
@@ -2409,7 +2410,7 @@
   App.downloadPDF = async function (mondays, filename) {
     const ms = mondays.filter((m) => { const w = C.getWeek(this.state, m); return w && w.shifts.length; });
     if (!ms.length) { toast("Aucun horaire à télécharger sur cette période.", "err"); return; }
-    const data = X.weeksToPDF(this.state, ms, "Planning équipe");
+    const data = X.weeksToPDF(this.state, ms, "RelayTime");
     await saveFile(filename, new Blob([data], { type: "application/pdf" }));
   };
 

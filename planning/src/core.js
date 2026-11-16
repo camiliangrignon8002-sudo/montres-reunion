@@ -789,12 +789,14 @@
     // Jours de bureau minimum par semaine
     for (const emp of state.employees) {
       const min = Number((emp.rules || {}).officeMinDays) || 0;
-      if (!min || emp.active === false) continue;
+      if ((!min && !Array.isArray((emp.rules || {}).officeDays)) || emp.active === false) continue;
       if (emp.rules.officeSince && addDays(monday, 6) < emp.rules.officeSince) continue; // règle valable à partir de sa date
       const mine = w.shifts.filter((x) => x.emp === emp.id);
       if (!mine.length) continue;
       const n = mine.filter((x) => x.office || (x.segs || []).some((g) => isAdminZone(g.z))).length;
-      if (n < min) add("alerte", "OFFICE_DAYS", emp.id, null, `${emp.name} : ${n} jour(s) de bureau cette semaine, il en faut au moins ${min}. Cochez « Jour de bureau » sur ses créneaux concernés.`);
+      const od = Array.isArray(emp.rules.officeDays) ? emp.rules.officeDays : null;
+      if (od) for (const x of mine) if (!!x.office !== od.includes(dow(x.date))) add("alerte", "OFFICE_DAYS", emp.id, x.date, `${emp.name} : bureau le ${od.map((d) => DAYS[d].toLowerCase()).join(" et le ")}${x.office ? ` (pas le ${DAYS[dow(x.date)].toLowerCase()})` : ` : cochez « Jour de bureau » le ${fmtDate(x.date, "day")}`}.`);
+      if (n < min && !od) add("alerte", "OFFICE_DAYS", emp.id, null, `${emp.name} : ${n} jour(s) de bureau cette semaine, il en faut au moins ${min}. Cochez « Jour de bureau » sur ses créneaux concernés.`);
     }
     // Couverture
     // Trous : une zone ouverte sans personne
@@ -1047,7 +1049,24 @@
     // Jours de bureau (Charlotte) : marqués d'abord. Affichés en ZP mais au bureau : ils ne comptent pas dans le nombre de personnes.
     for (const emp of state.employees) {
       const min = Number((emp.rules || {}).officeMinDays) || 0;
-      if (!min || emp.active === false || (emp.rules.officeSince && addDays(monday, 6) < emp.rules.officeSince)) continue;
+      if ((!min && !Array.isArray((emp.rules || {}).officeDays)) || emp.active === false || (emp.rules.officeSince && addDays(monday, 6) < emp.rules.officeSince)) continue;
+      if (include && !include.has(emp.id)) continue;
+      const fixedDays = Array.isArray(emp.rules.officeDays) ? emp.rules.officeDays : null;
+      if (fixedDays) {
+        // Jours de bureau fixes (ex. lundi et mardi) : elle travaille ces jours-là, au bureau
+        for (const d of weekDates(monday)) {
+          if (!inRange(d) || !fixedDays.includes(dow(d))) continue;
+          let x = week.shifts.find((q) => q.emp === emp.id && q.date === d);
+          if (!x && !absentDay(emp.id, d) && availability(state, emp.id, d, []).ok) {
+            const t = templateFor(state, d).find((q) => q.emp === emp.id) || ((state.template && state.template.shifts) || []).find((q) => q.emp === emp.id);
+            const segs = t ? t.segs.map(({ s: a, e: b, z }) => ({ s: a, e: b, z })) : [{ s: "07:00", e: "11:00", z: "ZP" }, { s: "11:30", e: "14:30", z: "ZP" }];
+            x = { id: uid("c"), emp: emp.id, date: d, segs }; week.shifts.push(x); placed.push({ emp: emp.id, date: d });
+          }
+          if (x) x.office = true;
+        }
+        for (const x of week.shifts.filter((q) => q.emp === emp.id && q.office && !fixedDays.includes(dow(q.date)))) x.office = false;
+        continue;
+      }
       const mine = week.shifts.filter((x) => x.emp === emp.id && inRange(x.date));
       let n = mine.filter((x) => x.office || x.segs.some((g) => isAdminZone(g.z))).length;
       for (const x of mine.filter((x) => !x.office).sort((a, b) => staffOn(b.date) - staffOn(a.date))) { if (n >= min) break; x.office = true; n++; }
@@ -1124,7 +1143,7 @@
       const links0 = links.filter((l) => l.sameHours && l.emps.includes(emp.id)).flatMap((l) => l.emps).filter((id) => id !== emp.id);
       for (let mine = mineOf(emp.id); mine.length > workDaysTarget(emp); mine = mineOf(emp.id)) {
         const partnerOff = (d) => (notPlaced.some((n) => links0.includes(n.emp) && n.date === d && n.trim) ? 1 : 0);
-        const drop = mine.slice().sort((p, q) => partnerOff(q.date) - partnerOff(p.date) || staffOn(q.date) - staffOn(p.date) || (p.date < q.date ? 1 : -1))[0];
+        const drop = mine.slice().sort((p, q) => (p.office ? 1 : 0) - (q.office ? 1 : 0) || partnerOff(q.date) - partnerOff(p.date) || staffOn(q.date) - staffOn(p.date) || (p.date < q.date ? 1 : -1))[0]; // jamais un jour de bureau
         week.shifts = week.shifts.filter((y) => y !== drop);
         const pi = placed.findIndex((p) => p.emp === drop.emp && p.date === drop.date); if (pi >= 0) placed.splice(pi, 1);
         notPlaced.push({ emp: drop.emp, date: drop.date, segs: drop.segs, trim: true, reason: emp.role === "alternant" ? `${courseDays(emp.id)} jour(s) de cours au CFA cette semaine : ${workDaysTarget(emp)} journée(s) de travail suffisent` : `${workDaysTarget(emp)} journée(s) de 7 h pour son contrat` });
@@ -1986,6 +2005,7 @@
             if (r.incompatible && !(Array.isArray(r.incompatible) && r.incompatible.every((x) => empById(s, x) && x !== emp.id))) { fail("Liste d'incompatibilités invalide."); break; }
             if (r.officeMinDays != null && !(Number(r.officeMinDays) >= 0 && Number(r.officeMinDays) <= 7)) { fail("Nombre de jours de bureau invalide (0 à 7)."); break; }
             if (r.daysOff && !(Array.isArray(r.daysOff) && r.daysOff.every((d) => d >= 0 && d <= 6))) { fail("Jours de repos invalides."); break; }
+            if (r.officeDays && !(Array.isArray(r.officeDays) && r.officeDays.every((d) => d >= 0 && d <= 6))) { fail("Jours de bureau invalides."); break; }
           }
           conf("employees");
           break;

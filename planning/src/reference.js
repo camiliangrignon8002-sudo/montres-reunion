@@ -460,6 +460,9 @@
   }, {
     id: "regles-2026-11-14",
     rules: { sebastien: { shiftFlex: true } }, // matin de préférence, le soir reste possible
+  }, {
+    id: "bureau-lundi-mardi",
+    rules: { charlotte: { officeDays: [0, 1], note: "Bureau le lundi et le mardi." } },
   }];
 
   for (const u of ruleUpdates) for (const [id, r] of Object.entries(u.rules)) { const e = employees.find((x) => x.id === id); e.rules = { ...(e.rules || {}), ...r }; e.rulesApplied = [...(e.rulesApplied || []), u.id]; }
