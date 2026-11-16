@@ -559,3 +559,6 @@ html[data-theme="dark"] .pax-alert { background: #3a2a00; color: #ffd27a; border
 details.gen-more { border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; background: var(--surface-2); }
 details.gen-more > summary { cursor: pointer; font-weight: 600; font-size: 14px; color: var(--fg-2); }
 details.gen-more[open] > summary { color: var(--fg); }
+ul.blockers { margin: 6px 0 2px; padding-left: 18px; font-size: 12.5px; color: var(--fg-2); }
+ul.blockers li { margin: 2px 0; }
+ul.blockers b { color: var(--fg); font-weight: 600; }

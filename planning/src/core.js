@@ -42,6 +42,7 @@
     hardMaxDayHours: 10, // jamais plus de 10 h de travail dans la journée
     maxAmplitudeHours: 13, // début → fin de journée : 13 h au plus
     maxContinuousHours: 6, // jamais plus de 6 h d'affilée sans pause
+    countCourseHours: false, // les heures de cours ne sont pas comptées : seulement les horaires du Relay
     standardDay: true, // journée type : 7 h 30 de présence dont 30 min de pause
     eveningSlots: { ZR: ["15:30-23:00", "14:30-22:00"], ZP: ["14:30-22:00", "13:30-21:00"] }, // tranches possibles pour le soir
     minContractHours: 24, // temps partiel : 24 h par semaine au minimum (contrat)
@@ -294,7 +295,10 @@
     const r = courseRanges(state, emp, date);
     return r ? r.reduce((a, x) => a + toMin(x.e) - toMin(x.s), 0) : 0;
   }
+  // Heures de cours au CFA comptées dans les heures de la semaine : non, l'appli ne compte que les horaires du Relay
+  // (réglage « countCourseHours »). Les jours de cours restent des jours non disponibles et non comptés comme repos.
   function weekCourseMinutes(state, monday, empId) {
+    if (!(state.settings && state.settings.countCourseHours)) return 0;
     const emp = empById(state, empId);
     if (!emp || emp.role !== "alternant") return 0;
     return weekDates(monday).reduce((a, d) => a + courseMinutesOn(state, emp, d), 0);
@@ -810,26 +814,27 @@
     const out = [];
     for (const emp of state.employees) {
       if (exclude.has(emp.id) || emp.active === false) continue;
+      const skip = (why) => { if (opts && opts.explain) opts.explain.push({ emp: emp.id, name: emp.name, why }); };
       const av = availability(state, emp.id, date, segs);
       const notes = [...av.warn];
-      if (!av.ok) continue;
-      if (!allowedZones(emp).length) continue;
-      if (calStatus(state, emp, date) === "inconnu") continue; // jamais « disponible » par défaut
-      if (w.shifts.some((s) => s.emp === emp.id && s.date === date)) continue;
-      if (personalRuleIssues(emp, date, segs).length) continue; // horaires ou jours de repos fixes
-      if (inTraining(emp, date) && segs.some((g) => !isAdminZone(g.z) && aloneRanges(state, w.shifts, { emp: emp.id, date }, g).length)) continue; // en formation : jamais seul(e)
-      if (st.checkOpening && segs.some((g) => outsideOpening(state, g, date))) continue; // jamais hors des horaires du PDV
-      if (eveningOutside(state, segs)) continue; // le soir : seulement dans les tranches possibles
-      if (opensZone(state, segs, date) && !canOpenIn(state, emp, date)) continue; // ouverture : ancien(ne)s seulement, jamais en formation
+      if (!av.ok) { skip(String(av.block[0] || "indisponible").replace(` pour ${emp.name}`, "")); continue; }
+      if (!allowedZones(emp).length) { skip("aucune zone autorisée dans sa fiche"); continue; }
+      if (calStatus(state, emp, date) === "inconnu") { skip("statut d'alternance inconnu ce jour-là"); continue; } // jamais « disponible » par défaut
+      if (w.shifts.some((s) => s.emp === emp.id && s.date === date)) { skip("travaille déjà ce jour-là"); continue; }
+      if (personalRuleIssues(emp, date, segs).length) { skip(personalRuleIssues(emp, date, segs)[0].code === "FIXED_DAYOFF" ? "jour de repos fixe" : personalRuleIssues(emp, date, segs)[0].code === "WEEK_ZONE" ? "travaille seulement dans une autre zone" : personalRuleIssues(emp, date, segs)[0].code === "LATEST_END" ? "ne finit jamais aussi tard" : "horaires fixes ou préférence matin/soir"); continue; } // horaires ou jours de repos fixes
+      if (inTraining(emp, date) && segs.some((g) => !isAdminZone(g.z) && aloneRanges(state, w.shifts, { emp: emp.id, date }, g).length)) { skip("en formation : serait seul(e)"); continue; } // en formation : jamais seul(e)
+      if (st.checkOpening && segs.some((g) => outsideOpening(state, g, date))) { skip("hors des horaires du point de vente"); continue; } // jamais hors des horaires du PDV
+      if (eveningOutside(state, segs)) { skip("hors des tranches du soir"); continue; } // le soir : seulement dans les tranches possibles
+      if (opensZone(state, segs, date) && !canOpenIn(state, emp, date)) { skip("ne peut pas ouvrir (pas ancienne ou en formation)"); continue; } // ouverture : ancien(ne)s seulement, jamais en formation
       if (st.checkLegal && segs.every((g) => isTime(g.s) && isTime(g.e))) {
         const r = shiftRanges(segs);
-        if (shiftMinutes(segs) > st.hardMaxDayHours * 60 || r[r.length - 1][1] - r[0][0] > st.maxAmplitudeHours * 60) continue;
+        if (shiftMinutes(segs) > st.hardMaxDayHours * 60 || r[r.length - 1][1] - r[0][0] > st.maxAmplitudeHours * 60) { skip("journée trop longue"); continue; }
         const workedC = (d) => d === date || shiftsAround(state, monday).some((x) => x.emp === emp.id && x.date === d) || courseMinutesOn(state, emp, d) > 0;
         if (!(opts && opts.sameDay)) { // allonger un jour déjà travaillé ne change pas le nombre de jours
-        if (7 - weekDates(monday).filter(workedC).length < st.minDaysOff) continue; // 2 jours de repos par semaine
+        if (7 - weekDates(monday).filter(workedC).length < st.minDaysOff) { skip("a déjà ses 5 jours (2 jours de repos obligatoires)"); continue; } // 2 jours de repos par semaine
         let before = 0; for (let d = addDays(date, -1); workedC(d) && before < 7; d = addDays(d, -1)) before++;
         let after = 0; for (let d = addDays(date, 1); workedC(d) && after < 7; d = addDays(d, 1)) after++;
-        if (before + 1 + after > st.maxConsecutiveDays) continue; // jamais plus de 6 jours d'affilée
+        if (before + 1 + after > st.maxConsecutiveDays) { skip(`plus de ${st.maxConsecutiveDays} jours d'affilée`); continue; } // jamais plus de 6 jours d'affilée
         }
       }
       // Repos avec les jours voisins
@@ -844,15 +849,15 @@
         const gap = a >= cEnd ? a - cEnd : cStart - b;
         if (gap >= 0 && st.checkRest && gap < st.minRestHours * 60) restOk = false;
       }
-      if (overlap) continue;
+      if (overlap) { skip("chevauche un autre horaire ou des cours"); continue; }
       if (!restOk) { notes.push(`repos < ${st.minRestHours} h avec un autre service`); }
       const weekMin = weekMinutes(state, monday, emp.id);
       const courseMin = weekCourseMinutes(state, monday, emp.id);
       const after = weekMin + courseMin + newMin + weekExtraMinutes(state, monday, emp.id);
-      if (st.hardMaxWeekHours && after > weekCap(state, emp).minutes) continue; // jamais au-delà de la limite (42 h, ou contrat + 10 % à temps partiel)
+      if (st.hardMaxWeekHours && after > weekCap(state, emp).minutes) { skip(`dépasserait ses heures maximum de la semaine (${fmtHours(weekCap(state, emp).minutes)})`); continue; } // jamais au-delà de la limite (42 h, ou contrat + 10 % à temps partiel)
       const overtime = st.checkMaxWeek && weekMin + courseMin + newMin > st.maxWeekHours * 60;
       if (overtime) notes.push(`dépassement : ${fmtHours(weekMin + courseMin + newMin)} sur la semaine`);
-      if (courseMin && weekMin + courseMin + newMin > (st.hardMaxWeekHours || 42) * 60) continue; // cours + travail ≤ maximum de la semaine
+      if (courseMin && weekMin + courseMin + newMin > (st.hardMaxWeekHours || 42) * 60) { skip("cours + travail au-delà du maximum"); continue; } // cours + travail ≤ maximum de la semaine
       const dayCourse = courseMinutesOn(state, emp, date);
       if (st.checkMaxDay && newMin + dayCourse > st.maxDayHours * 60) notes.push(dayCourse ? `plus de ${st.maxDayHours} h dans la journée avec les cours` : `plus de ${st.maxDayHours} h dans la journée`);
       if (courseMin) notes.push(`${fmtHours(courseMin)} de cours cette semaine`);
@@ -864,18 +869,18 @@
       if (overtime) score -= 20;
       score -= notes.length * 5;
       if (templateFor(state, date).some((t) => t.emp === emp.id && segKey(t.segs) === segKey(segs))) score += 10;
-      if ((st.staffing || []).some((r) => r.max != null && date >= r.from && date <= r.to && staffingGaps(state, [...w.shifts, { emp: emp.id, date, segs }], date, r).high.length && !staffingGaps(state, w.shifts, date, r).high.length)) continue; // dépasserait le maximum de personnes
-      if (w.shifts.some((x) => x.date === date && incompatible(state, emp.id, x.emp) && sameZoneOverlap(segs, x.segs).length)) continue; // incompatibilité
+      if ((st.staffing || []).some((r) => r.max != null && date >= r.from && date <= r.to && staffingGaps(state, [...w.shifts, { emp: emp.id, date, segs }], date, r).high.length && !staffingGaps(state, w.shifts, date, r).high.length)) { skip("zone déjà au maximum de personnes"); continue; } // dépasserait le maximum de personnes
+      if (w.shifts.some((x) => x.date === date && incompatible(state, emp.id, x.emp) && sameZoneOverlap(segs, x.segs).length)) { skip("incompatible avec une personne présente"); continue; } // incompatibilité
       // Préférence de zone : obligatoire sauf si « si besoin, peut changer » est coché.
       const zp = emp.rules && emp.rules.weekZone;
-      if (zp && segs.some((g) => g.z !== zp)) { if (!emp.rules.zoneFlex) continue; score -= 20; notes.push(`préfère la ${zp}`); }
+      if (zp && segs.some((g) => g.z !== zp)) { if (!emp.rules.zoneFlex) { skip(`travaille seulement en ${zp}`); continue; } score -= 20; notes.push(`préfère la ${zp}`); }
       else if (zp) score += 10;
       // Service préféré (matin ou soir) : jamais une erreur, seulement un ordre de proposition.
       const pref = emp.rules && emp.rules.prefers;
       if (pref) {
         const morning = toMin(shiftSpan(segs).s) < 12 * 60;
         if ((pref === "matin") === morning) score += 12;
-        else { if (!emp.rules.shiftFlex) continue; score -= 25; notes.push(pref === "matin" ? "fait d'habitude le matin" : "fait d'habitude le soir"); }
+        else { if (!emp.rules.shiftFlex) { skip(pref === "matin" ? "fait seulement le matin" : "fait seulement le soir"); continue; } score -= 25; notes.push(pref === "matin" ? "fait d'habitude le matin" : "fait d'habitude le soir"); }
       }
       // Poste d'ouverture ou de fermeture : la compétence compte.
       for (const [k, first] of [["ouverture", true], ["fermeture", false]]) {
@@ -1344,7 +1349,14 @@
     }
     const tmp = { ...state, weeks: { ...(state.weeks || {}), [monday]: week } };
     const issues = validateWeek(tmp, monday);
-    const suggestions = notPlaced.map((n) => ({ ...n, candidates: findCandidates(tmp, n.date, n.segs, { exclude: [n.emp] }).slice(0, 3) }));
+    const suggestions = notPlaced.map((n) => {
+      const explain = [];
+      const candidates = findCandidates(tmp, n.date, n.segs, { exclude: [n.emp], explain }).slice(0, 3);
+      // Règles qui bloquent : regroupées par raison
+      const why = {};
+      for (const x of explain) (why[x.why] = why[x.why] || []).push(x.name);
+      return { ...n, candidates, blockers: Object.entries(why).map(([reason, names]) => ({ reason, names })).sort((p, q) => q.names.length - p.names.length) };
+    });
     return { week, report: { placed: placed.length, notPlaced: suggestions, issues, tooManyOff } };
   }
 
@@ -1909,7 +1921,7 @@
     let planned = 0, course = 0;
     const empC = empById(state, empId);
     for (let d = from; d <= to; d = addDays(d, 1)) {
-      if (empC && empC.role === "alternant") course += courseMinutesOn(state, empC, d);
+      if (empC && empC.role === "alternant" && state.settings && state.settings.countCourseHours) course += courseMinutesOn(state, empC, d);
       const w = getWeek(state, mondayOf(d));
       const sh = w && w.shifts.find((x) => x.emp === empId && x.date === d);
       if (sh) { const m = shiftMinutes(sh.segs); planned += m; days.push({ date: d, minutes: m, segs: sh.segs }); }
