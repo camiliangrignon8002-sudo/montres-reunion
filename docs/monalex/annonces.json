@@ -1,5 +1,5 @@
 {
- "mise_a_jour": "2026-11-16T15:07+00:00",
+ "mise_a_jour": "2026-11-16T17:16+00:00",
  "sources": [
   {
    "id": "intemporel",
@@ -17,7 +17,7 @@
    "id": "desbiolles",
    "nom": "Horlogerie Desbiolles",
    "via": "WooCommerce",
-   "annonces": 13
+   "annonces": 14
   },
   {
    "id": "lmdh",
@@ -119,7 +119,7 @@
    "id": "grandcaliber",
    "nom": "Grand Caliber",
    "via": "Shopify",
-   "annonces": 125
+   "annonces": 127
   },
   {
    "id": "swisswatchexpo",
@@ -131,7 +131,7 @@
    "id": "watchguys",
    "nom": "WatchGuys",
    "via": "Shopify",
-   "annonces": 657
+   "annonces": 659
   },
   {
    "id": "mywatchllc",
@@ -172,7 +172,7 @@
   {
    "id": "hjluxury",
    "nom": "HJ Luxury",
-   "via": "WooCommerce",
+   "via": "fiches produit",
    "annonces": 0
   }
  ],
@@ -2038,6 +2038,60 @@
    ],
    "description": "La Rolex Sea-Dweller 126600 , une pièce iconique de l’horlogerie, est née de la collaboration entre Rolex et les plongeurs professionnels dans les années 1960. Conçue pour répondre aux exigences extrêmes des profondeurs marines, elle incarne l’excellence et l’innovation de la marque. Dotée d’une valve à hélium pour les plongées en caisson et d’une lunette en céramique Cerachrom résistante aux rayures, elle allie fonctionnalité et esthétique. Son mouvement automatique certifié Superlative Chronometer assure une précision remarquable dans toutes les conditions, tandis que sa construction robuste garantit une durabilité exceptionnelle. Porter une Rolex Sea-Dweller, c’est s’approprier un morceau d’histoire horlogère et affirmer son engagement envers la qualité et la performance. Que ce soit lors d’une exploration sous-marine ou dans la vie quotidienne, cette montre emblématique continue de séduire par son allure intemporelle et sa fiabilité inégalée, faisant d’elle un véritable symbole de prestige et de sophistication.\n Authenticité et Sécurité \n Guichard Collection offre à ses clients des montres de la plus haute qualité, en toute confiance et sécurité. Afin de garantir l’authenticité de chaque montre, Guichard Collection s’associe avec WatchCertificate , un organisme de certification indépendant renommé.\n Inspection et Certification \n Tout d’abord, un expert indépendant de WatchCertificate inspecte minutieusement chaque montre que Guichard Collection vend. Ensuite, cet expert c",
    "premiere_vue": "2026-11-14T10:39+00:00"
+  },
+  {
+   "id": "100ec3dfe6c6",
+   "boutique": "desbiolles",
+   "reference": "126610LV",
+   "collection": "Submariner",
+   "annee": "",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "ROLEX OYSTER PERPETUAL SUBMARINER DATE NEW UNWORN  FULL SET REF 126610LV",
+   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-submariner-date-new-unworn-full-set-ref-126610lv/",
+   "prix": 13500,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_1007-scaled.png",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_0997-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_0998-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_0999-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_1001-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_1002-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_1004-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_1005-scaled.jpg",
+     "w": 2560
+    },
+    {
+     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_1006-scaled.jpg",
+     "w": 2560
+    }
+   ],
+   "description": "ROLEX OYSTER PERPETUAL SUBMARINER DATE NEW UNWORN\n FULL SET REF 126610LV\n Montre neuve, jamais portée, full set avec boite et papier, cadran noir, lunette verte,  boite et bracelet Oyster en acier, lunette céramique noir, mouvement automatique, calibre 3235.",
+   "premiere_vue": "2026-11-16T17:16+00:00"
   },
   {
    "id": "1589b3fcd250",
@@ -9412,6 +9466,56 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
+   "id": "37f2ce2fae11",
+   "boutique": "grandcaliber",
+   "reference": "126300",
+   "collection": "Datejust",
+   "annee": "2025",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex Datejust 41 126300",
+   "url": "https://grandcaliber.com/products/rolex-datejust-41-126300-dallas-rolex-9",
+   "prix": 11595,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126300_Front_07.jpg?v=1794849195",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126300_Back_07.jpg?v=1794849201",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126300_Clasp_07.jpg?v=1794849214",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126300_InnerClasp_07.jpg?v=1794849222",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126300_Card07.jpg?v=1794849231",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126300_Tag_07.jpg?v=1794849242",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126300_Book_07.jpg?v=1794849248",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126300_Box_07.jpg?v=1794849256",
+     "w": 1440
+    }
+   ],
+   "description": "Brand: Rolex\n Model: Datejust 41\n Reference: 126300\n Case Material: Steel\n Bracelet Material: Steel\n Size: 41mm\n Dial Color: Silver\n Bezel Material: Steel\n Date: 2025\n Condition: Pre-Owned\n Included Items: Watch with original box and papers\n Movement: Automatic\n Crystal: Sapphire Crystal\n Water Resistance: 10 ATM\n Stock ID: 565RA",
+   "premiere_vue": "2026-11-16T17:16+00:00"
+  },
+  {
    "id": "fc6cdbbe1436",
    "boutique": "grandcaliber",
    "reference": "1655",
@@ -9634,6 +9738,56 @@
    ],
    "description": "Brand: Rolex\n Model: Oyster Perpetual 41\n Reference: 134300\n Case Material: Steel\n Bracelet Material: Steel\n Size: 414mm\n Dial Color: Jubilee Motif\n Bezel Material: Steel\n Date: 2026\n Condition: Brand New\n Included Items: Watch with original box and papers\n Movement: Automatic\n Crystal: Sapphire Crystal\n Water Resistance: 10 ATM\n Stock ID: 88870",
    "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "45695372d372",
+   "boutique": "grandcaliber",
+   "reference": "226570",
+   "collection": "Explorer",
+   "annee": "2021",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex Explorer II 226570",
+   "url": "https://grandcaliber.com/products/rolex-explorer-ii-226572-dallas-rolex-3",
+   "prix": 11385,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Explorer_II_226570_Front01.jpg?v=1794847951",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Explorer_II_226570_Back01.jpg?v=1794847961",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Explorer_II_226570_Clasp01.jpg?v=1794847968",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Explorer_II_226570_InnerClasp01.jpg?v=1794847976",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Explorer_II_226570_Card01.jpg?v=1794847983",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Explorer_II_226570_Tag01.jpg?v=1794847993",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Explorer_II_226570_Book01.jpg?v=1794847998",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Explorer_II_226570_Box01.jpg?v=1794848006",
+     "w": 1440
+    }
+   ],
+   "description": "Brand: Rolex\n Model: Explorer II\n Reference: 226570\n Case Material: Steel\n Bracelet Material: Steel\n Size: 42mm\n Dial Color: White\n Bezel Material: Steel\n Date: 2021\n Condition: Pre-Owned\n Included Items: Watch with original box and papers\n Movement: Automatic\n Crystal: Sapphire Crystal\n Water Resistance: 10 ATM\n Stock ID: 015VL",
+   "premiere_vue": "2026-11-16T17:16+00:00"
   },
   {
    "id": "04d619e056d9",
@@ -15866,6 +16020,44 @@
    ],
    "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Datejust \n Reference Number: \n 126234 \n SKU: \n WG3786 \n Condition: \n Unworn \n i \n Gender: \n Unisex \n Style: \n Classic, Luxury \n Box and Papers: \n Box and Papers \n Note: \n White Hangtag Included \n Year: \n 2026 \n Warranty: \n WatchGuys 2-Year Warranty \n Note: \n 5-Year Rolex Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 36mm \n Dial Color: \n Purple Aubergine \n Dial Hour Marker: \n Roman/Diamond \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date",
    "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "a423748a46ce",
+   "boutique": "watchguys",
+   "reference": "126900",
+   "collection": "Air-King",
+   "annee": "2024",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex Air King 126900 Black Oyster",
+   "url": "https://www.watchguys.com/products/rolex-air-king-126900-black-oyster",
+   "prix": 9195,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-air-king-126900-black-1.webp?v=1791257509",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-air-king-126900-black-2.webp?v=1791257512",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-air-king-126900-black-3.webp?v=1791257516",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-air-king-126900-black-4.webp?v=1791257520",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Modern_Rolex_Box_with_Papers_5ffde747-f5c5-4a19-90cf-2248a437db20_2cf0398e-235c-45dc-ac04-9125cdcb08f3.webp?v=1791257525",
+     "w": 2048
+    }
+   ],
+   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Air-King \n Reference Number: \n 126900 \n SKU: \n WG3819 \n Condition: \n Excellent \n i \n Gender: \n Men's\n Style: \n Casual \n Box and Papers: \n Box and Papers \n Note: \n White Hangtag Included \n Year: \n 2024 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Arabic \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Time Only",
+   "premiere_vue": "2026-11-16T17:16+00:00"
   },
   {
    "id": "25418874a72c",
@@ -26044,6 +26236,32 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
+   "id": "ab369ed32b97",
+   "boutique": "watchguys",
+   "reference": "116400V",
+   "collection": "Milgauss",
+   "annee": "2010",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex Milgauss 116400V Black Oyster",
+   "url": "https://www.watchguys.com/products/rolex-milgauss-116400v-black-oyster",
+   "prix": 10895,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-milgauss-116400gv-black-watches-885.webp?v=1791243162",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_Box_Old_Green_2c63bf8f-5116-4c21-9309-531e8b396cd0.webp?v=1791243168",
+     "w": 2048
+    }
+   ],
+   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Milgauss \n Reference Number: \n 116400V \n SKU: \n WG3550 \n Condition: \n Excellent i \n Gender: \n Mens \n Style: \n Casual, Sport \n Box and Papers: \n Box and Papers \n Year: \n 2010 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster Clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Anti-magnetic",
+   "premiere_vue": "2026-11-16T17:16+00:00"
+  },
+  {
    "id": "5f1da93c4ed9",
    "boutique": "watchguys",
    "reference": "116710LN",
@@ -35920,6 +36138,56 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
+   "id": "352fa417568e",
+   "boutique": "mywatchllc",
+   "reference": "",
+   "collection": "Day-Date",
+   "annee": "2026",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "NEW 2026 Rolex Day-Date 36mm 128395TBR Presidential Rose Gold Blue-Green Dial",
+   "url": "https://mywatchllc.com/products/new-2026-rolex-day-date-36mm-128395tbr-presidential-rose-gold-blue-dial",
+   "prix": 105000,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/F7F99908-ED78-4879-B507-338D3ADFD804.jpg?v=1790710557",
+     "w": 2509
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/67907E26-EA18-4B0D-9A80-8C4D8A5406B3.jpg?v=1790710558",
+     "w": 2555
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/5FA666A8-2D42-4AAA-A591-46C2245235D4.jpg?v=1790710558",
+     "w": 2504
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/88B23090-6FBB-43E3-9555-426E52F007A1.jpg?v=1790710557",
+     "w": 2288
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/FD793876-CC21-4B58-A8E1-640092463DF9.jpg?v=1790710557",
+     "w": 2348
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/AF7047F4-87E2-40CE-BAC3-C603467B71E1.jpg?v=1790710557",
+     "w": 2272
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/2F697ABB-D160-44D6-B06D-774BFA16CF2D.jpg?v=1790710557",
+     "w": 1580
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/1ABF60DB-0E5E-4C5A-B7C1-2EE79073E5C4.jpg?v=1790710558",
+     "w": 3024
+    }
+   ],
+   "description": "Rolex Day-Date 36mm 128395TBR-0032 Presidential Bracelet Everose Gold Baguette Diamond Set Bezel and Blue-Green Diamond Baguette Dial  \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty\n ✔️Serial Number Tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome\n See every Rolex Day-Date in stock and the full Rolex lineup.",
+   "premiere_vue": "2026-11-16T17:16+00:00"
+  },
+  {
    "id": "e7d0f1ca35d2",
    "boutique": "mywatchllc",
    "reference": "",
@@ -35974,7 +36242,7 @@
      "w": 2876
     }
    ],
-   "description": "2023 Rolex Submariner Date Cookie Monster 41mm 126619LB-0003 White Gold Black Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated May 2023 \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Bezel Protector \n ✔️Size: 8.25inch wrist (Full Links) \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome",
+   "description": "2023 Rolex Submariner Date Cookie Monster 41mm 126619LB-0003 White Gold Black Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated May 2023 \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Bezel Protector \n ✔️Size: 8.25inch wrist (Full Links) \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome\n Explore our complete Rolex Cookie Monster collection and every Rolex Submariner we carry.",
    "premiere_vue": "2026-11-14T16:43+00:00"
   },
   {
@@ -36032,7 +36300,7 @@
      "w": 3024
     }
    ],
-   "description": "2022 Rolex Day-Date 40mm 228238 Presidential 18kt Yellow Gold Fluted Bezel and Money Green Dial \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated July 2022 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty Booklets    \n ✔️Green and White Hang Tags included \n ✔️Material:18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in excellent overall condition.  \n ✔️ Trades welcome",
+   "description": "2022 Rolex Day-Date 40mm 228238 Presidential 18kt Yellow Gold Fluted Bezel and Money Green Dial \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated July 2022 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty Booklets    \n ✔️Green and White Hang Tags included \n ✔️Material:18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in excellent overall condition.  \n ✔️ Trades welcome \n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T16:43+00:00"
   },
   {
@@ -36206,7 +36474,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228235-0032 Presidential 18kt Everose Gold White Dial  \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty    \n ✔️Serial Number Tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets    \n ✔️Green Hang Tag included \n ✔️Material:18kt Rose Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228235-0032 Presidential 18kt Everose Gold White Dial  \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty    \n ✔️Serial Number Tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets    \n ✔️Green Hang Tag included \n ✔️Material:18kt Rose Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome \n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -36264,7 +36532,7 @@
      "w": 3000
     }
    ],
-   "description": "NEW 2026 Rolex Submariner Date \"Bluesy\" 41mm 126613LB-0002 Two-Tone Stainless Steel and 18kt Yellow Gold Royal Blue Dial Oyster Bracelet \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Reference: 126613LB \n ✔️Material: Oystersteel and 18kt Yellow Gold \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets \n ✔️Green Hang Tag included \n ✔️Size: 8.25inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome \n See our full Rolex Bluesy collection, or view every Rolex Submariner for sale.",
+   "description": "NEW 2026 Rolex Submariner Date \"Bluesy\" 41mm 126613LB-0002 Two-Tone Stainless Steel and 18kt Yellow Gold Royal Blue Dial Oyster Bracelet \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Reference: 126613LB \n ✔️Material: Oystersteel and 18kt Yellow Gold \n ✔️Manual and Warranty booklets \n ✔️Green Hang Tag included \n ✔️Size: 8.25inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome \n See our full Rolex Bluesy collection, or view every Rolex Submariner for sale.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -36330,7 +36598,7 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
-   "id": "2ea159510a75",
+   "id": "93bb30f95569",
    "boutique": "mywatchllc",
    "reference": "",
    "collection": "Submariner",
@@ -36339,7 +36607,7 @@
    "boite": true,
    "papiers": true,
    "titre": "NEW 2026 Rolex Submariner 41mm 126610LN Stainless Steel Black Dial",
-   "url": "https://mywatchllc.com/products/new-2026-rolex-submariner-41mm-126610ln-stainless-steel-black-dial-8",
+   "url": "https://mywatchllc.com/products/new-2026-rolex-submariner-41mm-126610ln-stainless-steel-black-dial-3",
    "prix": 15250,
    "devise": "USD",
    "photos": [
@@ -36384,65 +36652,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2026 Rolex Submariner Date 41mm 126610LN-0001 Stainless Steel Black Dial Oyster Bracelet with Glidelock and Black Ceramic Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed)\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: Oystersteel\n ✔️Size: 8.25inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "93bb30f95569",
-   "boutique": "mywatchllc",
-   "reference": "",
-   "collection": "Submariner",
-   "annee": "2026",
-   "etat": "Neuf",
-   "boite": true,
-   "papiers": true,
-   "titre": "NEW 2026 Rolex Submariner 41mm 126610LN Stainless Steel Black Dial",
-   "url": "https://mywatchllc.com/products/new-2026-rolex-submariner-41mm-126610ln-stainless-steel-black-dial-3",
-   "prix": 15600,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/41785941-622B-467F-BE77-0FA6CD053B23.png?v=1768415080",
-     "w": 2521
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/E4EE7BEF-9CD1-47EC-A015-45E349EF7339.png?v=1768415080",
-     "w": 2589
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/55BAF26A-AB27-4B3E-8788-41DF0F40B01A.png?v=1768415080",
-     "w": 2541
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/F9466B7D-C7FF-498E-84E0-667699202CB8.png?v=1768415080",
-     "w": 2592
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/31B0C052-F3BA-4BE4-A24E-65159315A865.png?v=1768415080",
-     "w": 2632
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/AF555AB4-B6E2-4FA9-B4D1-92E16B34545B.png?v=1768415080",
-     "w": 2451
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/CE1ED83F-B0D8-4930-B20F-BC5218C706CA.png?v=1768415080",
-     "w": 2567
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/5B133E45-D0C3-4AF1-983B-DE2110249008.png?v=1768415080",
-     "w": 2264
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/AB645EC6-6E14-4BA4-8A67-D0DA95C7C109.png?v=1768415080",
-     "w": 1645
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/DDFB4FB6-4B31-4E7C-8517-B3A6D9F4FA9C.png?v=1768415080",
-     "w": 3024
-    }
-   ],
-   "description": "NEW 2026 Rolex Submariner Date 41mm 126610LN-0001 Stainless Steel Black Dial Oyster Bracelet with Glidelock and Black Ceramic Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed)\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: Oystersteel\n ✔️Size: 8.25inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Submariner Date 41mm 126610LN-0001 Stainless Steel Black Dial Oyster Bracelet with Glidelock and Black Ceramic Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed)\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: Oystersteel\n ✔️Size: 8.25inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Explore more Rolex Submariner watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -36500,7 +36710,7 @@
      "w": 2966
     }
    ],
-   "description": "2026 Rolex Sky-Dweller 42mm 336934-0005 Stainless Steel and 18k White Gold Fluted Bezel Oyster Bracelet Bright Blue Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty\n ✔️Serial Number Tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Material: Stainless Steel\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Material: Oystersteel\n ✔️Watch is in Mint condition.\n ✔️ Trades welcome",
+   "description": "2026 Rolex Sky-Dweller 42mm 336934-0005 Stainless Steel and 18k White Gold Fluted Bezel Oyster Bracelet Bright Blue Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty\n ✔️Serial Number Tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Material: Stainless Steel\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Material: Oystersteel\n ✔️Watch is in Mint condition.\n ✔️ Trades welcome\n Discover our full Rolex Sky-Dweller collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -36620,7 +36830,7 @@
      "w": 3024
     }
    ],
-   "description": "2026 Rolex Submariner Date 41mm 126610LN-0001 Stainless Steel Black Dial Oyster Bracelet with Glidelock and Black Ceramic Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated July 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: Oystersteel\n ✔️Size: 8.25inch wrist (Full Links)\n ✔️Watch is in Mint condition.\n ✔️ Trades welcome",
+   "description": "2026 Rolex Submariner Date 41mm 126610LN-0001 Stainless Steel Black Dial Oyster Bracelet with Glidelock and Black Ceramic Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated July 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: Oystersteel\n ✔️Size: 8.25inch wrist (Full Links)\n ✔️Watch is in Mint condition.\n ✔️ Trades welcome\n See every Rolex Submariner in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -36852,7 +37062,7 @@
      "w": 1645
     }
    ],
-   "description": "2018 Rolex Yacht-Master 37mm 268655-0017 18kt Everose Gold Oysterflex Black Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2018 \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: 7.0inch wrist (Oysterflex) \n ✔️Need a different size? We stock genuine Rolex OEM Oysterflex straps and can size one to your wrist before shipping. Please inquire before purchasing to confirm availability. \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome",
+   "description": "2018 Rolex Yacht-Master 37mm 268655-0017 18kt Everose Gold Oysterflex Black Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2018 \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: 7.0inch wrist (Oysterflex) \n ✔️Need a different size? We stock genuine Rolex OEM Oysterflex straps and can size one to your wrist before shipping. Please inquire before purchasing to confirm availability. \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome  \n Explore more Rolex Yacht-Master watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -37730,7 +37940,7 @@
      "w": 3010
     }
    ],
-   "description": "2025 Rolex Sky-Dweller 42mm 336934-0002 Oystersteel and 18kt White Gold Fluted Bezel Jubilee Bracelet Mint Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated June 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Material: Stainless Steel \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in excellent overall condition. \n ✔️ Trades welcome",
+   "description": "2025 Rolex Sky-Dweller 42mm 336934-0002 Oystersteel and 18kt White Gold Fluted Bezel Jubilee Bracelet Mint Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated June 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Material: Stainless Steel \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in excellent overall condition. \n ✔️ Trades welcome\n See every Rolex Sky-Dweller in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -37962,7 +38172,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 36mm 128238-0130 18kt Yellow Gold Presidential Bracelet Bright Green Diamond-Set Baguette Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️ 5 year manufacturer warranty \n ✔️Serial Number Tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 36mm 128238-0130 18kt Yellow Gold Presidential Bracelet Bright Green Diamond-Set Baguette Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️ 5 year manufacturer warranty \n ✔️Serial Number Tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome  \n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -38078,7 +38288,7 @@
      "w": 2916
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228238 Presidential 18kt Yellow Gold Green Ombre Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty  \n ✔️Serial Number Tag (NEW STYLE TAG)  \n ✔️Manual and Warranty booklets                                                                                           \n ✔️Green Hang Tag included \n ✔️Material:18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228238 Presidential 18kt Yellow Gold Green Ombre Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty  \n ✔️Serial Number Tag (NEW STYLE TAG)  \n ✔️Manual and Warranty booklets                                                                                           \n ✔️Green Hang Tag included \n ✔️Material:18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome \n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -38986,7 +39196,7 @@
      "w": 2725
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336934-0002 Oystersteel and 18kt White Gold Fluted Bezel Jubilee Bracelet Mint Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️ NEW Wood-Grained Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️ NEW Wood-Grained Green Hang Tags included \n ✔️Material: Stainless Steel \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336934-0002 Oystersteel and 18kt White Gold Fluted Bezel Jubilee Bracelet Mint Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️ NEW Wood-Grained Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️ NEW Wood-Grained Green Hang Tags included \n ✔️Material: Stainless Steel \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome\n See every Rolex Sky-Dweller in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -39338,7 +39548,7 @@
      "w": 2781
     }
    ],
-   "description": "2024 Rolex Sky-Dweller 42mm 336934-0006 “White Rolesor” Oystersteel and 18kt White Gold Fluted Bezel Jubilee Bracelet Bright Blue Dial \n Note: Watch is protected with protection film on the buckle and case back. \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated October 2024 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Mint / Link New condition. \n ✔️ Trades welcome",
+   "description": "2024 Rolex Sky-Dweller 42mm 336934-0006 “White Rolesor” Oystersteel and 18kt White Gold Fluted Bezel Jubilee Bracelet Bright Blue Dial \n Note: Watch is protected with protection film on the buckle and case back. \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated October 2024 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Mint / Link New condition. \n ✔️ Trades welcome\n Discover our full Rolex Sky-Dweller collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -39396,7 +39606,7 @@
      "w": 1645
     }
    ],
-   "description": "2017 Rolex Submariner Date 40mm 116618LN-0011 18kt Yellow Gold Black Dial \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2017 \n ✔️Manual and Warranty booklets    \n ✔️Green and White Hang Tags included \n ✔️Material: 18kt Yellow Gold \n ✔️Size: 8.25inch wrist (Full Links) \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome",
+   "description": "2017 Rolex Submariner Date 40mm 116618LN-0011 18kt Yellow Gold Black Dial \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2017 \n ✔️Manual and Warranty booklets    \n ✔️Green and White Hang Tags included \n ✔️Material: 18kt Yellow Gold \n ✔️Size: 8.25inch wrist (Full Links) \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome\n Explore more Rolex Submariner watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -39454,7 +39664,7 @@
      "w": 2960
     }
    ],
-   "description": "2024 Rolex Day-Date 40mm 228238 Presidential 18kt Yellow Gold Green Ombre Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated October 2024 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty booklets                                                                                           \n ✔️Green Hang Tag included \n ✔️Bezel Protector \n ✔️Material:18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Mint condition.\n ✔️ Trades welcome",
+   "description": "2024 Rolex Day-Date 40mm 228238 Presidential 18kt Yellow Gold Green Ombre Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated October 2024 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty booklets                                                                                           \n ✔️Green Hang Tag included \n ✔️Bezel Protector \n ✔️Material:18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Mint condition.\n ✔️ Trades welcome \n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -39512,7 +39722,7 @@
      "w": 2889
     }
    ],
-   "description": "2025 Rolex Day-Date 40mm 228238 Presidential 18kt Yellow Gold Green Ombre Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated February 2025 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty booklets                                                                                           \n ✔️Green Hang Tag included \n ✔️Material:18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Mint condition.\n ✔️ Trades welcome",
+   "description": "2025 Rolex Day-Date 40mm 228238 Presidential 18kt Yellow Gold Green Ombre Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated February 2025 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty booklets                                                                                           \n ✔️Green Hang Tag included \n ✔️Material:18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Mint condition.\n ✔️ Trades welcome \n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -39922,7 +40132,7 @@
      "w": 2806
     }
    ],
-   "description": "2024 Rolex Sky-Dweller 42mm 336934-0002 Oystersteel and 18kt White Gold Fluted Bezel Jubilee Bracelet Mint Green Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated September 2024 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Material: Stainless Steel \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome",
+   "description": "2024 Rolex Sky-Dweller 42mm 336934-0002 Oystersteel and 18kt White Gold Fluted Bezel Jubilee Bracelet Mint Green Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated September 2024 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Material: Stainless Steel \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome\n Explore more Rolex Sky-Dweller watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -40096,7 +40306,7 @@
      "w": 2944
     }
    ],
-   "description": "2022 Rolex Yacht-Master II 44mm 116688 18K Yellow Gold Oyster Bracelet White Dial \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes\n ✔️Warranty card dated February 2022\n ✔️5 Year Manufacturer Warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Material: 18kt Yellow Gold\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is in excellent overall condition. \n ✔️ Trades welcome",
+   "description": "2022 Rolex Yacht-Master II 44mm 116688 18K Yellow Gold Oyster Bracelet White Dial \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes\n ✔️Warranty card dated February 2022\n ✔️5 Year Manufacturer Warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Material: 18kt Yellow Gold\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is in excellent overall condition. \n ✔️ Trades welcome\n Explore more Rolex Yacht-Master watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -40212,7 +40422,7 @@
      "w": 2977
     }
    ],
-   "description": "2025 Rolex Submariner No Date 41mm 124060-0001 Stainless Steel Black Dial Oyster Bracelet with Glidelock  \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated October 2025 \n ✔️5 year manufacturer warranty  \n ✔️Reference: 124060 \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Material: Oystersteel \n ✔️Size: 8.25inch wrist (Full Links) \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome\n Userguide",
+   "description": "2025 Rolex Submariner No Date 41mm 124060-0001 Stainless Steel Black Dial Oyster Bracelet with Glidelock  \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated October 2025 \n ✔️5 year manufacturer warranty  \n ✔️Reference: 124060 \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Material: Oystersteel \n ✔️Size: 8.25inch wrist (Full Links) \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome\n Userguide \n Discover our full Rolex Submariner collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -40386,7 +40596,7 @@
      "w": 2793
     }
    ],
-   "description": "2022 Rolex Sky-Dweller 42mm 326934-0003 “White Rolesor” Oystersteel and 18kt White Gold Fluted Bezel Oyster Bracelet Bright Blue Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2022 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 8.0inch wrist (Full Links)  \n ✔️Watch is in excellent overall condition. \n ✔️ Trades welcome",
+   "description": "2022 Rolex Sky-Dweller 42mm 326934-0003 “White Rolesor” Oystersteel and 18kt White Gold Fluted Bezel Oyster Bracelet Bright Blue Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2022 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 8.0inch wrist (Full Links)  \n ✔️Watch is in excellent overall condition. \n ✔️ Trades welcome\n Explore more Rolex Sky-Dweller watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -40444,7 +40654,7 @@
      "w": 2987
     }
    ],
-   "description": "2021 Rolex Yacht-Master 42mm 226659-0002 18kt White Gold Oysterflex Black Dial \n Includes the following: \n ✔️Original Double Rolex boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2021 \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.25inch - 7.75in wrist (Oysterflex) \n ✔️Need a different size? We stock genuine Rolex OEM Oysterflex straps and can size one to your wrist before shipping. Please inquire before purchasing to confirm availability \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome",
+   "description": "2021 Rolex Yacht-Master 42mm 226659-0002 18kt White Gold Oysterflex Black Dial \n Includes the following: \n ✔️Original Double Rolex boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2021 \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.25inch - 7.75in wrist (Oysterflex) \n ✔️Need a different size? We stock genuine Rolex OEM Oysterflex straps and can size one to your wrist before shipping. Please inquire before purchasing to confirm availability \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome  \n Discover our full Rolex Yacht-Master collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -40734,7 +40944,7 @@
      "w": 2954
     }
    ],
-   "description": "NEW 2026 Rolex Yacht-Master 40mm 126655-0002 18kt Rose Gold Oysterflex Black Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.25inch - 7.75inch wrist (Oysterflex) \n ✔️Need a different size? We stock genuine Rolex OEM Oysterflex straps and can size one to your wrist before shipping. Please inquire before purchasing to confirm availability. \n ✔️Watch is BRAND NEW/ UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Yacht-Master 40mm 126655-0002 18kt Rose Gold Oysterflex Black Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.25inch - 7.75inch wrist (Oysterflex) \n ✔️Need a different size? We stock genuine Rolex OEM Oysterflex straps and can size one to your wrist before shipping. Please inquire before purchasing to confirm availability. \n ✔️Watch is BRAND NEW/ UNWORN \n ✔️ Trades welcome \n See every Rolex Yacht-Master in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -40803,7 +41013,7 @@
    "annee": "2009",
    "etat": "Occasion",
    "boite": true,
-   "papiers": null,
+   "papiers": true,
    "titre": "2009 Rolex Day-Date II 41mm 218206 Platinum Ice Blue Roman Numeral Dial",
    "url": "https://mywatchllc.com/products/rolex-day-date-ii-41mm-218206-platinum-ice-blue-roman-numeral-dial",
    "prix": 42500,
@@ -40854,7 +41064,7 @@
      "w": 3024
     }
    ],
-   "description": "2009 Rolex Day-Date II 41mm 218206 President Bracelet Smooth Bezel Platinum Ice Blue Roman Numeral Dial \n Includes the following: \n ✔️Original Rolex XL box\n ✔️Dial verified via official Rolex serial check\n ✔️Material: Platinum\n ✔️Size: 7.75inch wrist (FULL LINKS)\n ✔️Watch is in excellent overall condition.  \n ✔️ Trades welcome\n User Guide",
+   "description": "2009 Rolex Day-Date II 41mm 218206 President Bracelet Smooth Bezel Platinum Ice Blue Roman Numeral Dial \n Includes the following: \n ✔️Original Rolex XL box\n ✔️Dial verified via official Rolex serial check\n ✔️Material: Platinum\n ✔️Size: 7.75inch wrist (FULL LINKS)\n ✔️Watch is in excellent overall condition.  \n ✔️ Trades welcome\n User Guide \n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -40912,7 +41122,7 @@
      "w": 2766
     }
    ],
-   "description": "2022 Rolex Day-Date 40mm 228206-0004 with Presidential Bracelet Crafted in Platinum and an Ice Blue Motif Dial \n Includes the following: \n ✔️Original Rolex Double Boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated July 2022\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in Mint condition.  \n ✔️ Trades welcome",
+   "description": "2022 Rolex Day-Date 40mm 228206-0004 with Presidential Bracelet Crafted in Platinum and an Ice Blue Motif Dial \n Includes the following: \n ✔️Original Rolex Double Boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated July 2022\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in Mint condition.  \n ✔️ Trades welcome\n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -41062,7 +41272,7 @@
      "w": 1644
     }
    ],
-   "description": "2013 Rolex Yacht-Master II 44mm 116681 Two-Tone 18kt Everose Gold and Oystersteel White Dial \n Includes the following: \n ✔️Original Rolex Double boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2013 \n ✔️Green serial number tag \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is in Mint condition.  \n ✔️ Trades welcome",
+   "description": "2013 Rolex Yacht-Master II 44mm 116681 Two-Tone 18kt Everose Gold and Oystersteel White Dial \n Includes the following: \n ✔️Original Rolex Double boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2013 \n ✔️Green serial number tag \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is in Mint condition.  \n ✔️ Trades welcome\n Discover our full Rolex Yacht-Master collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -41120,7 +41330,7 @@
      "w": 2918
     }
    ],
-   "description": "2022 Rolex Day-Date 40mm 228238-0061 Presidential 18kt Yellow Gold Green Roman Numeral Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated May 2022 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty Booklets    \n ✔️Green and White Hang Tags included \n ✔️Material:18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Min condition.\n ✔️ Trades welcome",
+   "description": "2022 Rolex Day-Date 40mm 228238-0061 Presidential 18kt Yellow Gold Green Roman Numeral Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated May 2022 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty Booklets    \n ✔️Green and White Hang Tags included \n ✔️Material:18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Mint condition.\n ✔️ Trades welcome \n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -41352,7 +41562,7 @@
      "w": 1645
     }
    ],
-   "description": "2016 Rolex Sky-Dweller 42mm 326935 Everose Gold with Oyster Bracelet and Sundust Roman Numeral Dial \n NOTE: Watch has factory Rolex stickers on the left and right side of the case, lugs and the case back. \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2016 \n ✔️Manual and Warranty Booklets       \n ✔️Green and Red Hang Tags included \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome",
+   "description": "2016 Rolex Sky-Dweller 42mm 326935 Everose Gold with Oyster Bracelet and Sundust Roman Numeral Dial \n NOTE: Watch has factory Rolex stickers on the left and right side of the case, lugs and the case back. \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2016 \n ✔️Manual and Warranty Booklets       \n ✔️Green and Red Hang Tags included \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome\n Explore more Rolex Sky-Dweller watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -41700,7 +41910,7 @@
      "w": 2806
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228239-0076 Presidential Bracelet 18kt White Gold Blue Ombré Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in Brand New/Unworn.\n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228239-0076 Presidential Bracelet 18kt White Gold Blue Ombré Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in Brand New/Unworn.\n ✔️ Trades welcome\n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -41816,7 +42026,7 @@
      "w": 1645
     }
    ],
-   "description": "NEW 2026 Rolex Yacht-Master 40mm 126622-0001 in Oystersteel and Platinum Oyster Bracelet and Rhodium Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Yacht-Master 40mm 126622-0001 in Oystersteel and Platinum Oyster Bracelet and Rhodium Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Explore more Rolex Yacht-Master watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -42454,7 +42664,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336934 Oystersteel and 18kt White Gold Fluted Bezel with a Jubilee Bracelet and White Dial \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year warranty from date on warranty card \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Stainless Steel and 18K White Gold Fluted Bezel \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336934 Oystersteel and 18kt White Gold Fluted Bezel with a Jubilee Bracelet and White Dial \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year warranty from date on warranty card \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Stainless Steel and 18K White Gold Fluted Bezel \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n See every Rolex Sky-Dweller in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -42570,7 +42780,7 @@
      "w": 1200
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 36mm 128235-0085 Presidential Bracelet 18kt Everose Gold Blue Baguette Diamond Dial Fluted Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed)  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Material: 18K Rose Good \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is  BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 36mm 128235-0085 Presidential Bracelet 18kt Everose Gold Blue Baguette Diamond Dial Fluted Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed)  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Material: 18K Rose Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is  BRAND NEW/UNWORN. \n ✔️ Trades welcome\n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -42628,7 +42838,7 @@
      "w": 3024
     }
    ],
-   "description": "2024 Rolex Day-Date 40mm 228239-0076 Presidential Bracelet 18kt White Gold Blue Ombré Dial \n Includes the following: \n ✔️Original Rolex Double Boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated August 2024\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in excellent overall condition.\n ✔️ Trades welcome",
+   "description": "2024 Rolex Day-Date 40mm 228239-0076 Presidential Bracelet 18kt White Gold Blue Ombré Dial \n Includes the following: \n ✔️Original Rolex Double Boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated August 2024\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in excellent overall condition.\n ✔️ Trades welcome\n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -42806,7 +43016,7 @@
      "w": 1645
     }
    ],
-   "description": "2023 Certified Pre-Owned Rolex Day-Date 40mm 228239-0055 Presidential 18 kt White Gold Meteorite Diamond Baguette Dial \n NOTE: Rolex Certified Pre Owned (CPO) Warranty Card includes 2 years of warranty from April 2026 to April 2028 covered by all Rolex Authorized Dealers Internationally  \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Original Warranty card dated 2023 \n ✔️Certified Pre-Owned Warranty Card dated April 2026  \n ✔️Warranty valid until April 2028 \n ✔️Manual and Warranty Booklets  \n ✔️Certified Pre-Owned Hang Tag \n ✔️Green and White Hang Tag included \n ✔️Bezel Protector \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Material: 18K White Gold \n ✔️Watch is in excellent overall condition. \n ✔️ Trades welcome",
+   "description": "2023 Certified Pre-Owned Rolex Day-Date 40mm 228239-0055 Presidential 18 kt White Gold Meteorite Diamond Baguette Dial \n NOTE: Rolex Certified Pre Owned (CPO) Warranty Card includes 2 years of warranty from April 2026 to April 2028 covered by all Rolex Authorized Dealers Internationally  \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Original Warranty card dated 2023 \n ✔️Certified Pre-Owned Warranty Card dated April 2026  \n ✔️Warranty valid until April 2028 \n ✔️Manual and Warranty Booklets  \n ✔️Certified Pre-Owned Hang Tag \n ✔️Green and White Hang Tag included \n ✔️Bezel Protector \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Material: 18K White Gold \n ✔️Watch is in excellent overall condition. \n ✔️ Trades welcome \n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -43212,7 +43422,7 @@
      "w": 1645
     }
    ],
-   "description": "Rolex Day-Date Platinum 40mm 228236-0012 Fluted Bezel President Bracelet Ice Blue Roman Numeral Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty\n ✔️Serial Number Tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Material: Platinum\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n User Guide",
+   "description": "Rolex Day-Date Platinum 40mm 228236-0012 Fluted Bezel President Bracelet Ice Blue Roman Numeral Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty\n ✔️Serial Number Tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Material: Platinum\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n User Guide \n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -43270,7 +43480,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336235-0002 18kt Everose Gold Oysterflex Chocolate Dial \n NOTE: Watch is stickered on the clasp lock and clasp. \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Warranty card dated 2026 \n ✔️Manual and Warranty Booklets      \n ✔️Green and White Hang Tags                                                                             \n ✔️Material: Everose Gold \n ✔️Size: Adjustable (Oysterflex) \n ✔️Additional straps available. Please inquire before purchase \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336235-0002 18kt Everose Gold Oysterflex Chocolate Dial \n NOTE: Watch is stickered on the clasp lock and clasp. \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Warranty card dated 2026 \n ✔️Manual and Warranty Booklets      \n ✔️Green and White Hang Tags                                                                             \n ✔️Material: Everose Gold \n ✔️Size: Adjustable (Oysterflex) \n ✔️Additional straps available. Please inquire before purchase \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome \n See every Rolex Sky-Dweller in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -43450,7 +43660,7 @@
    "collection": "Day-Date",
    "annee": "2016",
    "etat": "Occasion",
-   "boite": null,
+   "boite": true,
    "papiers": true,
    "titre": "2016 Rolex Day-Date II 41mm 218235 Presidential 18kt Rose Gold Ivory White Dial",
    "url": "https://mywatchllc.com/products/2016-rolex-day-date-ii-41mm-218235-presidential-18kt-rose-gold-ivory-white-dial",
@@ -43498,7 +43708,7 @@
      "w": 1645
     }
    ],
-   "description": "2016 Rolex Day-Date II 41mm 218235 Rose Gold President Bracelet Fluted Bezel Ivory White Dial  \n Includes the following: \n ✔️Original Rolex Double Boxed\n ✔️Warranty card dated 2016\n ✔️Warranty and Manual Booklets\n ✔️Green Serial Number Tag\n ✔️Green Hang Tag\n ✔️Material: Everose Gold\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in Mint condition.  \n ✔️ Trades welcome\n User Guide",
+   "description": "2016 Rolex Day-Date II 41mm 218235 Rose Gold President Bracelet Fluted Bezel Ivory White Dial  \n Includes the following: \n ✔️Original Rolex Double Boxed\n ✔️Warranty card dated 2016\n ✔️Warranty and Manual Booklets\n ✔️Green Serial Number Tag\n ✔️Green Hang Tag\n ✔️Material: Everose Gold\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in Mint condition.  \n ✔️ Trades welcome\n User Guide \n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -43904,7 +44114,7 @@
      "w": 2880
     }
    ],
-   "description": "2021 Rolex Day-Date 40mm 228235-0025 Presidential Bracelet 18kt Everose Gold Olive Green Dial Fluted Bezel \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2021 \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Material: 18K Rose Good \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome",
+   "description": "2021 Rolex Day-Date 40mm 228235-0025 Presidential Bracelet 18kt Everose Gold Olive Green Dial Fluted Bezel \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2021 \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Material: 18K Rose Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome\n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -44112,7 +44322,7 @@
      "w": 2647
     }
    ],
-   "description": "2020 Rolex Yacht-Master 42mm 226659-0002 18kt White Gold Oysterflex Black Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated July 2020 \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: Adjustable (Oysterflex) \n ✔️Additional straps available. Please inquire before purchase \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome",
+   "description": "2020 Rolex Yacht-Master 42mm 226659-0002 18kt White Gold Oysterflex Black Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated July 2020 \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: Adjustable (Oysterflex) \n ✔️Additional straps available. Please inquire before purchase \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome  \n Discover our full Rolex Yacht-Master collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -44228,7 +44438,7 @@
      "w": 2815
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228239-0005 Presidential 18 kt White Gold Meteorite Diamond Baguette Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty Booklets    \n ✔️Green Hang Tag included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Material: 18K White Gold \n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228239-0005 Presidential 18 kt White Gold Meteorite Diamond Baguette Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty Booklets    \n ✔️Green Hang Tag included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Material: 18K White Gold \n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome \n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -44580,7 +44790,7 @@
      "w": 2812
     }
    ],
-   "description": "NEW 2025 Rolex Day-Date 40mm 228396TBR-0039 Presidential Bracelet Platinum with Baguette Diamond Set Bezel and Ice Blue Dial \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated December 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Bezel Protector\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Day-Date 40mm 228396TBR-0039 Presidential Bracelet Platinum with Baguette Diamond Set Bezel and Ice Blue Dial \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated December 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Bezel Protector\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in BRAND NEW/UNWORN \n ✔️ Trades welcome\n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -44638,7 +44848,7 @@
      "w": 3024
     }
    ],
-   "description": "2024 Rolex Sky-Dweller 42mm 336235-0002 18kt Everose Gold Oysterflex Rhodium Slate Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Warranty card dated February 2024 \n ✔️Manual and Warranty Booklets      \n ✔️Green Hang Tag                                                                           \n ✔️Material: Everose Gold \n ✔️Size: 6.75inch - 7.25inch wrist (Oysterflex) \n ✔️Need a different size? We stock genuine Rolex OEM Oysterflex straps and can size one to your wrist before shipping. Please inquire before purchasing to confirm availability \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome",
+   "description": "2024 Rolex Sky-Dweller 42mm 336235-0002 18kt Everose Gold Oysterflex Rhodium Slate Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Warranty card dated February 2024 \n ✔️Manual and Warranty Booklets      \n ✔️Green Hang Tag                                                                           \n ✔️Material: Everose Gold \n ✔️Size: 6.75inch - 7.25inch wrist (Oysterflex) \n ✔️Need a different size? We stock genuine Rolex OEM Oysterflex straps and can size one to your wrist before shipping. Please inquire before purchasing to confirm availability \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome \n Discover our full Rolex Sky-Dweller collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -44808,7 +45018,7 @@
      "w": 1644
     }
    ],
-   "description": "2017 (est.) Rolex Yacht-Master II 44mm 116688 18K Yellow Gold Oyster Bracelet White Dial \n NOTE: RSC - Rolex service card contains a valid warranty good at any Rolex authorized dealer worldwide.  Rolex performed a complete overhaul on this watch. \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes\n ✔️Original Rolex warranty card \n ✔️(RSC) Rolex service card valid until September 2028\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Bezel Protector\n ✔️Travel pouch\n ✔️Material: 18kt Yellow Gold\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is in Mint condition. \n ✔️ Trades welcome",
+   "description": "2017 (est.) Rolex Yacht-Master II 44mm 116688 18K Yellow Gold Oyster Bracelet White Dial \n NOTE: RSC - Rolex service card contains a valid warranty good at any Rolex authorized dealer worldwide.  Rolex performed a complete overhaul on this watch. \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes\n ✔️Original Rolex warranty card \n ✔️(RSC) Rolex service card valid until September 2028\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Bezel Protector\n ✔️Travel pouch\n ✔️Material: 18kt Yellow Gold\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is in Mint condition. \n ✔️ Trades welcome\n Explore more Rolex Yacht-Master watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -44866,7 +45076,7 @@
      "w": 2784
     }
    ],
-   "description": "2024 Rolex Day-Date 36mm 128239-0023 Presidential Bracelet 18kt White Gold Blue Ombré Diamond Dial \n Includes the following: \n ✔️Original Rolex Double boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated July 2024\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in Mint, Like New condition\n ✔️ Trades welcome",
+   "description": "2024 Rolex Day-Date 36mm 128239-0023 Presidential Bracelet 18kt White Gold Blue Ombré Diamond Dial \n Includes the following: \n ✔️Original Rolex Double boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated July 2024\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in Mint, Like New condition\n ✔️ Trades welcome\n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -45570,7 +45780,7 @@
      "w": 2663
     }
    ],
-   "description": "2026 Rolex Submariner Date Starbucks 41mm 126610LV-0002 Stainless Steel Black Dial Oyster Bracelet and Green Ceramic Bezel  \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated April 2026 \n ✔️5 Year Manufacturer Warranty \n ✔️Manual and Warranty booklets \n ✔️Green and White Hang Tags included \n ✔️Material: Stainless Steel  \n ✔️Size: 8.25 inch wrist (Full Links) \n ✔️Watch is in excellent overall condition. \n ✔️ Trades welcome",
+   "description": "2026 Rolex Submariner Date Starbucks 41mm 126610LV-0002 Stainless Steel Black Dial Oyster Bracelet and Green Ceramic Bezel  \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated April 2026 \n ✔️5 Year Manufacturer Warranty \n ✔️Manual and Warranty booklets \n ✔️Green and White Hang Tags included \n ✔️Material: Stainless Steel  \n ✔️Size: 8.25 inch wrist (Full Links) \n ✔️Watch is in excellent overall condition. \n ✔️ Trades welcome\n Browse every Rolex Starbucks we carry, plus our entire Rolex Submariner collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -45744,7 +45954,7 @@
      "w": 1644
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 36mm 128398TBR Presidential Bracelet 18kt Yellow Gold Diamond Set Bezel and Carnelian Diamond Dial  \n This dial features hour markers in 18 kt gold, set with 32 diamonds, and a Roman VI and IX in 18 kt gold, set with 24 diamonds. \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 36mm 128398TBR Presidential Bracelet 18kt Yellow Gold Diamond Set Bezel and Carnelian Diamond Dial  \n This dial features hour markers in 18 kt gold, set with 32 diamonds, and a Roman VI and IX in 18 kt gold, set with 24 diamonds. \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome\n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -45918,7 +46128,7 @@
      "w": 1644
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228348RBR-0037 Presidential Bracelet 18k Yellow Gold with Diamond Set Bezel and Diamond-Paved Dial with 10 baguette-cut diamond hour markers \n Includes the following:  \n ✔️ BRAND NEW ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228348RBR-0037 Presidential Bracelet 18k Yellow Gold with Diamond Set Bezel and Diamond-Paved Dial with 10 baguette-cut diamond hour markers \n Includes the following:  \n ✔️ BRAND NEW ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome\n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -46034,7 +46244,7 @@
      "w": 2792
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228345RBR Presidential Bracelet 18kt Everose Gold with Diamond Set Bezel and Chocolate Diamond Baguette Dial \n NOTE: Watch still stickered on the lugs, partial bracelet near the clasp and case back \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated August 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228345RBR Presidential Bracelet 18kt Everose Gold with Diamond Set Bezel and Chocolate Diamond Baguette Dial \n NOTE: Watch still stickered on the lugs, partial bracelet near the clasp and case back \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated August 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -46334,7 +46544,7 @@
      "w": 1645
     }
    ],
-   "description": "Rolex Day-Date 36mm 128238-0088 18k Yellow Gold President Carnelian Diamond Dial \n Includes the following: \n ✔️Original Rolex Double XL boxed  \n ✔️Box and Papers - Yes  \n ✔️ 5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.75inch wrist (Full Links)  \n ✔️ Trades welcome",
+   "description": "Rolex Day-Date 36mm 128238-0088 18k Yellow Gold President Carnelian Diamond Dial \n Includes the following: \n ✔️Original Rolex Double XL boxed  \n ✔️Box and Papers - Yes  \n ✔️ 5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.75inch wrist (Full Links)  \n ✔️ Trades welcome  \n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -46508,7 +46718,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 36mm 128235-0075 Presidential Everose Gold Fluted Bezel Brown Ombre Roman Numeral Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Material: 18kt Rose Gold \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 36mm 128235-0075 Presidential Everose Gold Fluted Bezel Brown Ombre Roman Numeral Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Material: 18kt Rose Gold \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome  \n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -46740,7 +46950,7 @@
      "w": 2897
     }
    ],
-   "description": "2024 Rolex Sky-Dweller 42mm 336934-0006 “White Rolesor” Oystersteel and 18kt White Gold Fluted Bezel Jubilee Bracelet Bright Blue Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated February 2024 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome",
+   "description": "2024 Rolex Sky-Dweller 42mm 336934-0006 “White Rolesor” Oystersteel and 18kt White Gold Fluted Bezel Jubilee Bracelet Bright Blue Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated February 2024 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Mint condition. \n ✔️ Trades welcome\n Discover our full Rolex Sky-Dweller collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -47292,7 +47502,7 @@
      "w": 1645
     }
    ],
-   "description": "NEW 2026 Rolex Yacht-Master 42mm 226627-0001 Titanium Intense Black Dial Oyster Bracelet \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty\n ✔️Serial Number Tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size:8.0inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Yacht-Master 42mm 226627-0001 Titanium Intense Black Dial Oyster Bracelet \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty\n ✔️Serial Number Tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size:8.0inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Explore more Rolex Yacht-Master watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -47570,7 +47780,7 @@
      "w": 1615
     }
    ],
-   "description": "2017 Rolex Day-Date 40mm 228235-0025 Presidential Bracelet 18kt Everose Gold Olive Green Dial Fluted Bezel \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2017 \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Bezel Protector \n ✔️Material: 18K Rose Good \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in excellent overall condition.   \n ✔️ Trades welcome",
+   "description": "2017 Rolex Day-Date 40mm 228235-0025 Presidential Bracelet 18kt Everose Gold Olive Green Dial Fluted Bezel \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2017 \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Bezel Protector \n ✔️Material: 18K Rose Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in excellent overall condition.   \n ✔️ Trades welcome\n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -47686,7 +47896,7 @@
      "w": 2987
     }
    ],
-   "description": "NEW 2026 Rolex Yacht-Master II 44mm 126680 Stainless Steel White Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Yacht-Master II 44mm 126680 Stainless Steel White Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n See every Rolex Yacht-Master in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -47697,7 +47907,7 @@
    "annee": "1986",
    "etat": "Occasion",
    "boite": true,
-   "papiers": null,
+   "papiers": true,
    "titre": "1986 Rolex Day-Date 36mm 18238 Presidential Yellow Gold Silver Dial",
    "url": "https://mywatchllc.com/products/1986-rolex-day-date-36mm-18238-presidential-yellow-gold-silver-dial",
    "prix": 20450,
@@ -47748,7 +47958,7 @@
      "w": 2496
     }
    ],
-   "description": "1986 Rolex Day-Date 36mm 18238 Presidential 18k Yellow Gold Silver Dial \n Includes the following: \n ✔️Original Rolex Day-Date Box  \n ✔️Size: 7.25inch wrist \n ✔️Watch is in Mint condition.  \n ✔️Band has minimal stretch and is in mint condition considering its age \n ✔️9.3 million serial  \n ✔️Presidential Bracelet \n ✔️ Pressure Tested:  This timepiece has been pressure tested and verified water-resistant to factory specification. \n ✔️ Timekeeping: The Day-Date has been tested on our timegrapher and is running well within Rolex Specification. Spot on accurate and ready for daily wear. \n ✔️ Trades welcome",
+   "description": "1986 Rolex Day-Date 36mm 18238 Presidential 18k Yellow Gold Silver Dial \n Includes the following: \n ✔️Original Rolex Day-Date Box  \n ✔️Size: 7.25inch wrist \n ✔️Watch is in Mint condition.  \n ✔️Band has minimal stretch and is in mint condition considering its age \n ✔️9.3 million serial  \n ✔️Presidential Bracelet \n ✔️ Pressure Tested:  This timepiece has been pressure tested and verified water-resistant to factory specification. \n ✔️ Timekeeping: The Day-Date has been tested on our timegrapher and is running well within Rolex Specification. Spot on accurate and ready for daily wear. \n ✔️ Trades welcome  \n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -48324,7 +48534,7 @@
      "w": 2904
     }
    ],
-   "description": "2005 Rolex Yacht-Master 40mm 16622 Oystersteel with Platinum Bezel and Dial and Oyster Bracelet \n NOTE: COMPLETE COLLECTORS SET! Complete with both original hang tags, All booklets , Cleaning Cloth and Warranty papers with leather holder. \n Includes the following: \n ✔️Original Double Rolex boxed \n ✔️Box and Papers - Yes \n ✔️Original Warranty Papers       \n ✔️Manual and Factory Service booklets    \n ✔️Green and Red Hang Tags included \n ✔️Felt Rolex Cleaning Cloth \n ✔️Material: Stainless Steel \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is in excellent overall condition.   \n ✔️ Trades welcome",
+   "description": "2005 Rolex Yacht-Master 40mm 16622 Oystersteel with Platinum Bezel and Dial and Oyster Bracelet \n NOTE: COMPLETE COLLECTORS SET! Complete with both original hang tags, All booklets , Cleaning Cloth and Warranty papers with leather holder. \n Includes the following: \n ✔️Original Double Rolex boxed \n ✔️Box and Papers - Yes \n ✔️Original Warranty Papers       \n ✔️Manual and Factory Service booklets    \n ✔️Green and Red Hang Tags included \n ✔️Felt Rolex Cleaning Cloth \n ✔️Material: Stainless Steel \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is in excellent overall condition.   \n ✔️ Trades welcome\n Discover our full Rolex Yacht-Master collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -48382,7 +48592,7 @@
      "w": 3024
     }
    ],
-   "description": "Rolex Day-Date 36mm 128238-0132 Presidential Bracelet 18kt Yellow Gold Gold Champagne Diamond Baguette Dial \n Includes the following: \n ✔️Original Rolex Double Boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card \n ✔️5 year manufacturer warranty  \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️ Trades welcome",
+   "description": "Rolex Day-Date 36mm 128238-0132 Presidential Bracelet 18kt Yellow Gold Champagne Diamond Baguette Dial \n Includes the following: \n ✔️Original Rolex Double Boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card \n ✔️5 year manufacturer warranty  \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️ Trades welcome  \n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -48440,7 +48650,7 @@
      "w": 2793
     }
    ],
-   "description": "2025 Rolex Sky-Dweller 42mm 336933 Two-Tone Oystersteel and 18 kt Yellow Gold with Jubilee Bracelet and Black Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated January 2025 \n ✔️5 year manufacturer warranty  \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Material: Yellow Rolesor - Stainless Steel and 18K Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in excellent overall condition.   \n ✔️ Trades welcome",
+   "description": "2025 Rolex Sky-Dweller 42mm 336933 Two-Tone Oystersteel and 18 kt Yellow Gold with Jubilee Bracelet and Black Dial \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated January 2025 \n ✔️5 year manufacturer warranty  \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Material: Yellow Rolesor - Stainless Steel and 18K Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in excellent overall condition.   \n ✔️ Trades welcome  \n Discover our full Rolex Sky-Dweller collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -48566,7 +48776,7 @@
    "collection": "Yacht-Master",
    "annee": "2026",
    "etat": "Neuf",
-   "boite": null,
+   "boite": true,
    "papiers": true,
    "titre": "NEW 2026 Rolex Yacht-Master 42mm 226658 Gold Oysterflex Black Dial",
    "url": "https://mywatchllc.com/products/rolex-yacht-master-42mm-oysterflex-226658-gold-black-dial-1",
@@ -48614,7 +48824,7 @@
      "w": 1645
     }
    ],
-   "description": "NEW 2026 Rolex Yacht-Master 42mm 226658-0002 18kt Yellow Gold Oysterflex Bracelet Black Dial \n Includes the following: \n ✔️Original Rolex Double boxed  \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Material: 18kt Yellow Gold \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Yacht-Master 42mm 226658-0002 18kt Yellow Gold Oysterflex Bracelet Black Dial \n Includes the following: \n ✔️Original Rolex Double boxed  \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Material: 18kt Yellow Gold \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Explore more Rolex Yacht-Master watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -48888,7 +49098,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228235-0056 Presidential 18kt Everose Gold Presidential Bracelet Mother of Pearl (MOP) Diamond Baguette Dial  \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026  \n ✔️5 year manufacturer warranty    \n ✔️Serial number tag  \n ✔️Manual and Warranty Booklets    \n ✔️Green Hang Tag included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228235-0056 Presidential 18kt Everose Gold Presidential Bracelet Mother of Pearl (MOP) Diamond Baguette Dial  \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026  \n ✔️5 year manufacturer warranty    \n ✔️Serial number tag  \n ✔️Manual and Warranty Booklets    \n ✔️Green Hang Tag included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome \n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -49004,7 +49214,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228348RBR-0040 Presidential Bracelet Diamond Bezel Green Roman Numeral Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Bezel Protector\n ✔️Material: 18K Yellow Gold\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228348RBR-0040 Presidential Bracelet Diamond Bezel Green Roman Numeral Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Bezel Protector\n ✔️Material: 18K Yellow Gold\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -49062,7 +49272,7 @@
      "w": 2792
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336934-0005 Stainless Steel and 18k White Gold Fluted Bezel Oyster Bracelet Bright Blue Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: Stainless Steel\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Material: Oystersteel\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336934-0005 Stainless Steel and 18k White Gold Fluted Bezel Oyster Bracelet Bright Blue Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: Stainless Steel\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Material: Oystersteel\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome\n See every Rolex Sky-Dweller in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -49286,7 +49496,7 @@
      "w": 2870
     }
    ],
-   "description": "NEW 2025 Rolex Day-Date 40mm 228235-0025 Presidential Bracelet 18kt Everose Gold Olive Green Dial Fluted Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated October 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Material: 18kt Rose Good \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is  BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Day-Date 40mm 228235-0025 Presidential Bracelet 18kt Everose Gold Olive Green Dial Fluted Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated October 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Material: 18kt Rose Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is  BRAND NEW/UNWORN. \n ✔️ Trades welcome\n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -49634,7 +49844,7 @@
      "w": 2976
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336938 18kt Yellow Gold Oyster Bright Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty booklets          \n ✔️Green and White Hang Tags included \n ✔️Material: 18kt Yellow Gold \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336938 18kt Yellow Gold Oyster Bright Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty booklets          \n ✔️Green and White Hang Tags included \n ✔️Material: 18kt Yellow Gold \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome \n Explore more Rolex Sky-Dweller watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -50376,7 +50586,7 @@
      "w": 2738
     }
    ],
-   "description": "2025 Rolex Sky-Dweller 42mm 336934-0001 Stainless Steel Oyster Bracelet Mint Green Dial \n Includes the following: \n ✔️ BRAND NEW 2025 UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated April 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: Oystersteel and 18k White Gold Bezel\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is in excellent overall condition.\n ✔️ Trades welcome",
+   "description": "2025 Rolex Sky-Dweller 42mm 336934-0001 Stainless Steel Oyster Bracelet Mint Green Dial \n Includes the following: \n ✔️ BRAND NEW 2025 UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated April 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: Oystersteel and 18k White Gold Bezel\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is in excellent overall condition.\n ✔️ Trades welcome\n See every Rolex Sky-Dweller in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -50608,7 +50818,7 @@
      "w": 2852
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336934-0006 “White Rolesor” Oystersteel and 18kt White Gold Fluted Bezel Jubilee Bracelet Bright Blue Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX! (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336934-0006 “White Rolesor” Oystersteel and 18kt White Gold Fluted Bezel Jubilee Bracelet Bright Blue Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX! (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Explore more Rolex Sky-Dweller watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -50956,7 +51166,7 @@
      "w": 2917
     }
    ],
-   "description": "Rolex Day-Date 36mm 128395TBR-0033 Presidential Bracelet Everose Gold Baguette \"Trapeze\" Diamond Set Bezel and Olive Green Roman Numeral Dial  \n Note: 20K Below retail, only watch in the entire world for sale. We are selling this Baguette Trapeze version of the watch for the price of the 30K cheaper round diamond variant! You will never see this deal again i can guarantee that! \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Bezel Protector\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "Rolex Day-Date 36mm 128395TBR-0033 Presidential Bracelet Everose Gold Baguette \"Trapeze\" Diamond Set Bezel and Olive Green Roman Numeral Dial  \n Note: 20K Below retail, only watch in the entire world for sale. We are selling this Baguette Trapeze version of the watch for the price of the 30K cheaper round diamond variant! You will never see this deal again I can guarantee that! \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Bezel Protector\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome\n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -51014,7 +51224,7 @@
      "w": 1645
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336934-004 18K Yellow Gold Oysterflex Fluted Bezel Bright Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Material: Stainless Steel \n ✔️Size: Adjustable (Oysterflex) \n ✔️Watch is  BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336934-004 18K Yellow Gold Oysterflex Fluted Bezel Bright Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Material: Stainless Steel \n ✔️Size: Adjustable (Oysterflex) \n ✔️Watch is  BRAND NEW/UNWORN \n ✔️ Trades welcome\n Explore more Rolex Sky-Dweller watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -51130,7 +51340,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 36mm 128235 Presidential Bracelet 18kt Everose Gold Olive Green Dial Fluted Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed)  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Material: 18K Rose Good \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is  BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 36mm 128235 Presidential Bracelet 18kt Everose Gold Olive Green Dial Fluted Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed)  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Material: 18K Rose Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is  BRAND NEW/UNWORN. \n ✔️ Trades welcome\n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -51478,7 +51688,7 @@
      "w": 3024
     }
    ],
-   "description": "Rolex Submariner 116659SABR Blue Sapphire and Diamond Bezel Watch with Blue Dial. Off Catalog Factory Rolex Diamonds. \n NOTE: Off catalog VVIP watch that only the most exclusive clients have access to. Complete factory, natural diamonds and sapphires done with precision by Rolex.  \n Includes the following: \n ✔️Original Rolex XL Boxed (Double Boxed)\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2020\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Blue Gem-Set Bezel\n ✔️Size: 8.5inch wrist (Full Links)\n ✔️Watch is in mint condition\n ✔️ Trades welcome",
+   "description": "Rolex Submariner 116659SABR Blue Sapphire and Diamond Bezel Watch with Blue Dial. Off Catalog Factory Rolex Diamonds. \n NOTE: Off catalog VVIP watch that only the most exclusive clients have access to. Complete factory, natural diamonds and sapphires done with precision by Rolex.  \n Includes the following: \n ✔️Original Rolex XL Boxed (Double Boxed)\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2020\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Blue Gem-Set Bezel\n ✔️Size: 8.5inch wrist (Full Links)\n ✔️Watch is in mint condition\n ✔️ Trades welcome\n See every Rolex Submariner in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -51644,7 +51854,7 @@
      "w": 2906
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228348RBR-0045 Presidential Bracelet Diamond Bezel Green Ombré Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: 18K Yellow Gold\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228348RBR-0045 Presidential Bracelet Diamond Bezel Green Ombré Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: 18K Yellow Gold\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -51702,7 +51912,7 @@
      "w": 1644
     }
    ],
-   "description": "2025 Rolex Day-Date 40mm 228349RBR-0045 Presidential Bracelet White Gold Diamond Bezel Blue Ombré Dial \n Includes the following: \n ✔️Original Rolex Double XL boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated August 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: 18K White Gold\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in excellent overall condition.\n ✔️ Trades welcome",
+   "description": "2025 Rolex Day-Date 40mm 228349RBR-0045 Presidential Bracelet White Gold Diamond Bezel Blue Ombré Dial \n Includes the following: \n ✔️Original Rolex Double XL boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated August 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: 18K White Gold\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in excellent overall condition.\n ✔️ Trades welcome\n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -52216,7 +52426,7 @@
      "w": 2839
     }
    ],
-   "description": "2022 Certified Pre-Owned Rolex Day-Date 40mm 228345RBR-0012 Presidential Bracelet 18kt Everose Gold with Factory Original Rolex Diamond Set Bezel and White Roman Numeral Dial  \n NOTE: Rolex Certified Pre Owned (CPO) Warranty Card includes 2 years of warranty from March 2026 to March 2028 covered by all Rolex Authorized Dealers Internationally  \n Includes the following:  \n ✔️Original Rolex XL Double Boxed\n ✔️Box and Papers - Yes\n ✔️Original Warranty Card dated 2022\n ✔️CPO (Certified Pre Owned) Warranty card dated March 2026\n ✔️Manual and Warranty Booklets\n ✔️Green and White Hang Tags included\n ✔️CPO (Certified Pre Owned) White Hang Tag included\n ✔️Size: 7.75in wrist (Full Links)\n ✔️Watch is in excellent overall condition. \n ✔️ Trades welcome",
+   "description": "2022 Certified Pre-Owned Rolex Day-Date 40mm 228345RBR-0012 Presidential Bracelet 18kt Everose Gold with Factory Original Rolex Diamond Set Bezel and White Roman Numeral Dial  \n NOTE: Rolex Certified Pre Owned (CPO) Warranty Card includes 2 years of warranty from March 2026 to March 2028 covered by all Rolex Authorized Dealers Internationally  \n Includes the following:  \n ✔️Original Rolex XL Double Boxed\n ✔️Box and Papers - Yes\n ✔️Original Warranty Card dated 2022\n ✔️CPO (Certified Pre Owned) Warranty card dated March 2026\n ✔️Manual and Warranty Booklets\n ✔️Green and White Hang Tags included\n ✔️CPO (Certified Pre Owned) White Hang Tag included\n ✔️Size: 7.75in wrist (Full Links)\n ✔️Watch is in excellent overall condition. \n ✔️ Trades welcome\n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -52688,7 +52898,7 @@
      "w": 2667
     }
    ],
-   "description": "2025 Rolex Sky-Dweller 42mm 336934-0001 Stainless Steel Oyster Bracelet Mint Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed)\n ✔️Box and Papers - Yes\n ✔️Warranty card dated December 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Bezel Protector\n ✔️Material: Oystersteel and 18k White Gold Bezel\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in excellent overall condition.\n ✔️ Trades welcome",
+   "description": "2025 Rolex Sky-Dweller 42mm 336934-0001 Stainless Steel Oyster Bracelet Mint Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed)\n ✔️Box and Papers - Yes\n ✔️Warranty card dated December 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Bezel Protector\n ✔️Material: Oystersteel and 18k White Gold Bezel\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is in excellent overall condition.\n ✔️ Trades welcome\n See every Rolex Sky-Dweller in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -52746,7 +52956,7 @@
      "w": 2956
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228238-0005 Presidential Champagne Diamond Baguette Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228238-0005 Presidential Champagne Diamond Baguette Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -52804,7 +53014,7 @@
      "w": 2766
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336933 Two Tone Stainless Steel and 18k Yellow Gold Jubilee Bracelet White Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336933 Two Tone Stainless Steel and 18k Yellow Gold Jubilee Bracelet White Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n See every Rolex Sky-Dweller in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -52862,7 +53072,7 @@
      "w": 2048
     }
    ],
-   "description": "NEW 2026 Rolex Yacht-Master 42mm 226659-0002 18kt White Gold Oysterflex Black Dial \n Includes the following: \n ✔️Original Double Rolex boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️ 5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: Adjustable (Oysterflex) \n ✔️Additional straps available. Please inquire before purchase \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Yacht-Master 42mm 226659-0002 18kt White Gold Oysterflex Black Dial \n Includes the following: \n ✔️Original Double Rolex boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️ 5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: Adjustable (Oysterflex) \n ✔️Additional straps available. Please inquire before purchase \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome  \n Explore more Rolex Yacht-Master watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -52920,7 +53130,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2025 Rolex Yacht-Master 37mm 268655 18kt Everose Gold Oysterflex Black Dial \n Includes the following: \n ✔️Original Rolex Double boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Watch is BRAND NEW/UNWORN  \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Yacht-Master 37mm 268655 18kt Everose Gold Oysterflex Black Dial \n Includes the following: \n ✔️Original Rolex Double boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Watch is BRAND NEW/UNWORN  \n ✔️ Trades welcome  \n See every Rolex Yacht-Master in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -52978,7 +53188,7 @@
      "w": 2982
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228238 Presidential 18kt Yellow Gold Green Ombre Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty booklets                                                                                           \n ✔️Green and White Hang Tags included \n ✔️Material:18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228238 Presidential 18kt Yellow Gold Green Ombre Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty booklets                                                                                           \n ✔️Green and White Hang Tags included \n ✔️Material:18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome \n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -53094,7 +53304,7 @@
      "w": 2902
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228238-0061 Presidential 18kt Yellow Gold Money Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty Booklets    \n ✔️Green Hang Tag included \n ✔️Material:18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228238-0061 Presidential 18kt Yellow Gold Money Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty Booklets    \n ✔️Green Hang Tag included \n ✔️Material:18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome \n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -53152,7 +53362,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336935 Everose Gold with Oyster Bracelet and Blue Dial \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty  \n ✔️Manual and Warranty Booklets       \n ✔️Green and White Hang Tags included \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336935 Everose Gold with Oyster Bracelet and Blue Dial \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty  \n ✔️Manual and Warranty Booklets       \n ✔️Green and White Hang Tags included \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Discover our full Rolex Sky-Dweller collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -53210,7 +53420,7 @@
      "w": 2778
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336935 Everose Gold with Jubilee Bracelet and Blue Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty  \n ✔️Manual and Warranty Booklets       \n ✔️Green and White Hang Tags included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336935 Everose Gold with Jubilee Bracelet and Blue Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty  \n ✔️Manual and Warranty Booklets       \n ✔️Green and White Hang Tags included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Explore more Rolex Sky-Dweller watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -53268,7 +53478,7 @@
      "w": 2854
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228348RBR-0001 Presidential Bracelet 18kt Yellow Gold with Diamond Set Bezel and Black Diamond Dial with 10 baguette-cut diamond hour markers \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228348RBR-0001 Presidential Bracelet 18kt Yellow Gold with Diamond Set Bezel and Black Diamond Dial with 10 baguette-cut diamond hour markers \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -53384,7 +53594,7 @@
      "w": 1206
     }
    ],
-   "description": "NEW 2026 Rolex Yacht-Master 40mm 126622-0002 Stainless Steel Oyster Bracelet Bright Blue Dial Platinum Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Material: Oystersteel and Platinum Bezel\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Yacht-Master 40mm 126622-0002 Stainless Steel Oyster Bracelet Bright Blue Dial Platinum Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Material: Oystersteel and Platinum Bezel\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n See every Rolex Yacht-Master in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -53558,7 +53768,7 @@
      "w": 2834
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336933 Two-Tone Oystersteel and 18 kt Yellow Gold with Jubilee Bracelet and Black Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty Card dated 2026 \n ✔️5 year manufacturer warranty  \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Material: Yellow Rolesor - Stainless Steel and 18K Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336933 Two-Tone Oystersteel and 18 kt Yellow Gold with Jubilee Bracelet and Black Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty Card dated 2026 \n ✔️5 year manufacturer warranty  \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Material: Yellow Rolesor - Stainless Steel and 18K Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome  \n Discover our full Rolex Sky-Dweller collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -54080,7 +54290,7 @@
      "w": 2966
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228235-0055 Presidential 18kt Everose Gold Slate Ombre Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty booklets    \n ✔️Green and White Hang Tags included \n ✔️Material:18kt Rose Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228235-0055 Presidential 18kt Everose Gold Slate Ombre Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty booklets    \n ✔️Green and White Hang Tags included \n ✔️Material:18kt Rose Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome \n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -54590,7 +54800,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date Platinum 36mm 128236 Fluted Bezel President Bracelet Ice Blue Roman Numeral Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Material: Platinum\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n User Guide",
+   "description": "NEW 2026 Rolex Day-Date Platinum 36mm 128236 Fluted Bezel President Bracelet Ice Blue Roman Numeral Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Material: Platinum\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n User Guide \n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -54764,7 +54974,7 @@
      "w": 2954
     }
    ],
-   "description": "NEW 2025 Rolex Day-Date 40mm 228238-0042 18K Yellow Gold Presidential Bracelet White Roman Numeral Dial Fluted Bezel \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.75inch wrist (Full Links)  \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Day-Date 40mm 228238-0042 18K Yellow Gold Presidential Bracelet White Roman Numeral Dial Fluted Bezel \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 7.75inch wrist (Full Links)  \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome  \n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -54880,7 +55090,7 @@
      "w": 2972
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228238-0004 Presidential 18kt Yellow Gold Bright Black Diamond Baguette Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️ 5 year manufacturer warranty\n ✔️Warranty and Manual Booklets  \n ✔️Green and White Hang Tags \n ✔️️Material: 18kt Yellow Gold \n ✔️️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228238-0004 Presidential 18kt Yellow Gold Bright Black Diamond Baguette Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️ 5 year manufacturer warranty\n ✔️Warranty and Manual Booklets  \n ✔️Green and White Hang Tags \n ✔️️Material: 18kt Yellow Gold \n ✔️️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome \n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -55000,7 +55210,7 @@
      "w": 2811
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228238-0067 Presidential 18kt Yellow Gold Bright Black Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️ 5 year manufacturer warranty\n ✔️Warranty and Manual Booklets  \n ✔️Green and White Hang Tags \n ✔️️Material: 18kt Yellow Gold \n ✔️️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228238-0067 Presidential 18kt Yellow Gold Bright Black Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️ 5 year manufacturer warranty\n ✔️Warranty and Manual Booklets  \n ✔️Green and White Hang Tags \n ✔️️Material: 18kt Yellow Gold \n ✔️️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome \n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -55116,7 +55326,7 @@
      "w": 2994
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336934-0001 Stainless Steel Oyster Bracelet Mint Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: Oystersteel and 18k White Gold Bezel\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336934-0001 Stainless Steel Oyster Bracelet Mint Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: Oystersteel and 18k White Gold Bezel\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome\n See every Rolex Sky-Dweller in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -55174,7 +55384,7 @@
      "w": 2721
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336933 Two-Tone Stainless Steel and 18k Yellow Gold Jubilee Bracelet Champagne Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336933 Two-Tone Stainless Steel and 18k Yellow Gold Jubilee Bracelet Champagne Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome\n Discover our full Rolex Sky-Dweller collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -55290,7 +55500,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2026 Rolex Day-Date 40mm 228235-0025 Presidential Bracelet 18kt Everose Gold Olive Green Dial Fluted Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed)  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Material: 18K Rose Good \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is  BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Day-Date 40mm 228235-0025 Presidential Bracelet 18kt Everose Gold Olive Green Dial Fluted Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed)  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Material: 18K Rose Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is  BRAND NEW/UNWORN. \n ✔️ Trades welcome\n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -55340,7 +55550,7 @@
      "w": 2292
     }
    ],
-   "description": "NEW 2026 Rolex Submariner Date 41mm 126613LN-0002  Two-Tone  \"Yellow Rolesor\" Stainless Steel and 18kt Yellow Gold with Black Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Reference: 126613LN \n ✔️Material: Oystersteel and 18k Yellow Gold \n ✔️Size: 8.25inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Submariner Date 41mm 126613LN-0002  Two-Tone  \"Yellow Rolesor\" Stainless Steel and 18kt Yellow Gold with Black Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Reference: 126613LN \n ✔️Material: Oystersteel and 18k Yellow Gold \n ✔️Size: 8.25inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Explore more Rolex Submariner watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -55688,7 +55898,7 @@
      "w": 2787
     }
    ],
-   "description": "2023 Rolex Yacht-Master II 44mm 116688 18K Yellow Gold Oyster Bracelet White Dial \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes\n ✔️Warranty card dated July 2023\n ✔️5 Year Manufacturer Warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: 18kt Yellow Gold\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is in Mint condition. \n ✔️ Trades welcome",
+   "description": "2023 Rolex Yacht-Master II 44mm 116688 18K Yellow Gold Oyster Bracelet White Dial \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes\n ✔️Warranty card dated July 2023\n ✔️5 Year Manufacturer Warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: 18kt Yellow Gold\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is in Mint condition. \n ✔️ Trades welcome\n See every Rolex Yacht-Master in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -56268,7 +56478,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336934-0008 Oystersteel and 18kt White Gold Fluted Bezel with a Jubilee Bracelet and Black Dial \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year warranty from date on warranty card \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Stainless Steel and 18K White Gold Fluted Bezel \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336934-0008 Oystersteel and 18kt White Gold Fluted Bezel with a Jubilee Bracelet and Black Dial \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year warranty from date on warranty card \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Stainless Steel and 18K White Gold Fluted Bezel \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Discover our full Rolex Sky-Dweller collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -56550,7 +56760,7 @@
      "w": 3024
     }
    ],
-   "description": "2024 Rolex Day-Date 40mm 228239 Presidential 18kt White Gold Presidential Bracelet Mother of Pearl Diamond Baguette Dial  \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated November 2024 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty Booklets    \n ✔️Green and White Hang Tags included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in excellent overall condition.   \n ✔️ Trades welcome",
+   "description": "2024 Rolex Day-Date 40mm 228239 Presidential 18kt White Gold Presidential Bracelet Mother of Pearl Diamond Baguette Dial  \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated November 2024 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty Booklets    \n ✔️Green and White Hang Tags included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in excellent overall condition.   \n ✔️ Trades welcome \n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -56724,7 +56934,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336938 18kt Yellow Gold Jubilee Bright Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty booklets          \n ✔️Green and White Hang Tags included \n ✔️Material: 18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is Brand New/Unworn. \n ✔️ Trades welcome",
+   "description": "NEW 2026 Rolex Sky-Dweller 42mm 336938 18kt Yellow Gold Jubilee Bright Green Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty booklets          \n ✔️Green and White Hang Tags included \n ✔️Material: 18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is Brand New/Unworn. \n ✔️ Trades welcome \n See every Rolex Sky-Dweller in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -56898,7 +57108,7 @@
      "w": 2884
     }
    ],
-   "description": "Rolex Day-Date 36mm 128396TBR Presidential Bracelet Platinum with Baguette Diamond Set Bezel and Ice Blue Dial with 10 baguette-cut diamond hour markers BRAND NEW/UNWORN. \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card \n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Bezel Protector\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "Rolex Day-Date 36mm 128396TBR Presidential Bracelet Platinum with Baguette Diamond Set Bezel and Ice Blue Dial with 10 baguette-cut diamond hour markers BRAND NEW/UNWORN. \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card \n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Bezel Protector\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome\n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -57536,7 +57746,7 @@
      "w": 1645
     }
    ],
-   "description": "NEW 2025 Rolex Day-Date 40mm 228349RBR Presidential Bracelet White Gold Diamond Bezel Blue Ombré Dial \n Note: Watch is FACTORY ROLEX STICKERED including side of the case including barcode sticker and case back sticker. \n Includes the following: \n ✔️Original Rolex Double XL boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Bezel Protector\n ✔️Material: 18K White Gold\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Day-Date 40mm 228349RBR Presidential Bracelet White Gold Diamond Bezel Blue Ombré Dial \n Note: Watch is FACTORY ROLEX STICKERED including side of the case including barcode sticker and case back sticker. \n Includes the following: \n ✔️Original Rolex Double XL boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Bezel Protector\n ✔️Material: 18K White Gold\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -57710,7 +57920,7 @@
      "w": 2048
     }
    ],
-   "description": "NEW 2025 Rolex Day-Date 40mm 228396TBR Presidential Bracelet Platinum with Baguette Diamond Set Bezel and Ice Blue Dial with 10 baguette-cut diamond hour markers \n Note: Watch is Rolex Factory stickered including clasp sticker, lugs and case back sticker. \n Includes the following:  \n ✔️ BRAND NEW 2025 UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated August 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Bezel Protector\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Day-Date 40mm 228396TBR Presidential Bracelet Platinum with Baguette Diamond Set Bezel and Ice Blue Dial with 10 baguette-cut diamond hour markers \n Note: Watch is Rolex Factory stickered including clasp sticker, lugs and case back sticker. \n Includes the following:  \n ✔️ BRAND NEW 2025 UPDATED ROLEX XL BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated August 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Bezel Protector\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome\n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -57872,7 +58082,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2025 Rolex Submariner Date 41mm 126618LN 18kt Yellow Gold Black Dial \n Includes the following: \n ✔️ BRAND NEW 2025 UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty      \n ✔️Manual and Warranty booklets    \n ✔️Green and White Hang Tags included \n ✔️Material: 18kt Yellow Gold \n ✔️Size: 8.25inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Submariner Date 41mm 126618LN 18kt Yellow Gold Black Dial \n Includes the following: \n ✔️ BRAND NEW 2025 UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty      \n ✔️Manual and Warranty booklets    \n ✔️Green and White Hang Tags included \n ✔️Material: 18kt Yellow Gold \n ✔️Size: 8.25inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n See every Rolex Submariner in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -58154,7 +58364,7 @@
      "w": 1206
     }
    ],
-   "description": "Rolex Day-Date 40mm 228345RBR Presidential Bracelet 18k Everose Gold with Diamond Set Bezel Slate Ombre Dial | Smoke Ombre | The Oscar  \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️18K Rose Gold\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "Rolex Day-Date 40mm 228345RBR Presidential Bracelet 18k Everose Gold with Diamond Set Bezel Slate Ombre Dial | Smoke Ombre | The Oscar  \n Includes the following:  \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️18K Rose Gold\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Discover our full Rolex Day-Date collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -58212,7 +58422,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2025 Rolex Day-Date 36mm 128345RBR Presidential Bracelet 18kt Everose Gold with Diamond Set Bezel and Blue-Green Dial  with 10 baguette-cut diamond hour markers \n Includes the following:  \n ✔️Original Rolex Double XL boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.5inch wrist (Full Links)\n ✔️ Original Purchase Receipt\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Day-Date 36mm 128345RBR Presidential Bracelet 18kt Everose Gold with Diamond Set Bezel and Blue-Green Dial  with 10 baguette-cut diamond hour markers \n Includes the following:  \n ✔️Original Rolex Double XL boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.5inch wrist (Full Links)\n ✔️ Original Purchase Receipt\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -58590,7 +58800,7 @@
      "w": 1576
     }
    ],
-   "description": "NEW 2025 Rolex Sky-Dweller 42mm 336938 18kt Yellow Gold Jubilee Champagne Dial \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty booklets          \n ✔️Green and White Hang Tags included \n ✔️Material: 18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Sky-Dweller 42mm 336938 18kt Yellow Gold Jubilee Champagne Dial \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty    \n ✔️Manual and Warranty booklets          \n ✔️Green and White Hang Tags included \n ✔️Material: 18kt Yellow Gold \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome \n Explore more Rolex Sky-Dweller watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -58968,7 +59178,7 @@
      "w": 1206
     }
    ],
-   "description": "NEW 2025 Rolex Sky-Dweller 42mm 336934 Stainless Steel and 18k White Gold Fluted Bezel Oyster Bracelet White Dial \n Includes the following: \n ✔️ BRAND NEW 2025 UPDATED ROLEX BOX (DOUBLE BOXED) \n ✔️Box and Papers - Yes  \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN  \n ✔️ Stickers will be removed at time of shipping \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Sky-Dweller 42mm 336934 Stainless Steel and 18k White Gold Fluted Bezel Oyster Bracelet White Dial \n Includes the following: \n ✔️ BRAND NEW 2025 UPDATED ROLEX BOX (DOUBLE BOXED) \n ✔️Box and Papers - Yes  \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN  \n ✔️ Stickers will be removed at time of shipping \n ✔️ Trades welcome\n Discover our full Rolex Sky-Dweller collection along with every Rolex watch we have in stock.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -59142,7 +59352,7 @@
      "w": 3024
     }
    ],
-   "description": "Rolex Day-Date 40mm 228235 Presidential Everose Gold Chocolate Dial \n Includes the following: \n ✔️Original Rolex Double boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Bezel Protector \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Material: 18kt Rose Gold \n ✔️Watch is mint. \n ✔️ Trades welcome",
+   "description": "Rolex Day-Date 40mm 228235 Presidential Everose Gold Chocolate Dial \n Includes the following: \n ✔️Original Rolex Double boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Bezel Protector \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Material: 18kt Rose Gold \n ✔️Watch is mint. \n ✔️ Trades welcome  \n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -59242,7 +59452,7 @@
      "w": 1206
     }
    ],
-   "description": "NEW 2025 Rolex Day-Date 40mm 228238 Presidential Bracelet 18k  Yellow Gold Gold Mother Of Pearl Diamond Baguette Dial \n Includes the following: \n ✔️Original Double Rolex boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2025\n ✔️5 year manufacturer warranty\n ✔️Manual & Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Day-Date 40mm 228238 Presidential Bracelet 18k  Yellow Gold Mother Of Pearl Diamond Baguette Dial \n Includes the following: \n ✔️Original Double Rolex boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2025\n ✔️5 year manufacturer warranty\n ✔️Manual & Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -59296,7 +59506,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2025 Rolex Sky-Dweller 42mm 336938 18 kt Yellow Gold Oyster Bracelet Bright Black Dial \n Includes the following: \n ✔️Original Double Rolex boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty    \n ✔️Manual & Warranty booklets                                                                                             \n ✔️Green Hang Tag included \n ✔️Material: 18kt Yellow Gold \n ✔️Size: 8 inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN .  \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Sky-Dweller 42mm 336938 18 kt Yellow Gold Oyster Bracelet Bright Black Dial \n Includes the following: \n ✔️Original Double Rolex boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty    \n ✔️Manual & Warranty booklets                                                                                             \n ✔️Green Hang Tag included \n ✔️Material: 18kt Yellow Gold \n ✔️Size: 8 inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN .  \n ✔️ Trades welcome                                                                                 \n Explore more Rolex Sky-Dweller watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -59354,7 +59564,7 @@
      "w": 1206
     }
    ],
-   "description": "NEW 2025 Rolex Day-Date 40mm 228238 Presidential 18kt Yellow Gold Champagne Roman Numeral Dial \n Includes the following: \n ✔️Original Rolex Double boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Day-Date 40mm 228238 Presidential 18kt Yellow Gold Champagne Roman Numeral Dial \n Includes the following: \n ✔️Original Rolex Double boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in BRAND NEW/UNWORN \n ✔️ Trades welcome\n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -59404,7 +59614,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2025 Rolex Day-Date 40mm 228235-0003 18kt Rose Gold Presidential Bracelet Chocolate Diamond Baguette Dial \n Includes the following: \n ✔️Original Rolex Double boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty\n ✔️Manual & Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades Welcome",
+   "description": "NEW 2025 Rolex Day-Date 40mm 228235-0003 18kt Rose Gold Presidential Bracelet Chocolate Diamond Baguette Dial \n Includes the following: \n ✔️Original Rolex Double boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty\n ✔️Manual & Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades Welcome\n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -59462,7 +59672,7 @@
      "w": 2048
     }
    ],
-   "description": "NEW 2025 Rolex Day-Date 40mm 228238 Presidential 18kt Yellow Gold Bright Black Diamond Baguette Dial \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: 18kt Yellow Gold\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Day-Date 40mm 228238 Presidential 18kt Yellow Gold Bright Black Diamond Baguette Dial \n Includes the following: \n ✔️Original Rolex Double boxed \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: 18kt Yellow Gold\n ✔️Size: 7.75inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n See every Rolex Day-Date in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -60234,7 +60444,7 @@
      "w": 2048
     }
    ],
-   "description": "NEW 2025 Rolex Day-Date 40mm 228238 Presidential Black Onyx Diamond Baguette Dial \n Includes the following: \n ✔️Original Rolex Double boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Day-Date 40mm 228238 Presidential Black Onyx Diamond Baguette Dial \n Includes the following: \n ✔️Original Rolex Double boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome  \n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -60288,7 +60498,7 @@
      "w": 2048
     }
    ],
-   "description": "NEW 2025 Rolex Yacht-Master 40mm 126621 Two-Tone Black Dial \n Includes the following: \n ✔️Original Rolex Double Boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size: 7.75 inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN.\n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Yacht-Master 40mm 126621 Two-Tone Black Dial \n Includes the following: \n ✔️Original Rolex Double Boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2025\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size: 7.75 inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN.\n ✔️ Trades welcome\n See every Rolex Yacht-Master in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -60528,7 +60738,7 @@
      "w": 3024
     }
    ],
-   "description": "NEW 2025 Rolex Sky-Dweller 42mm 336933 Two-Tone Stainless Steel and 18kt Yellow Gold Oyster Bracelet White Dial \n Includes the following: \n ✔️ BRAND NEW 2025 UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN  \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Sky-Dweller 42mm 336933 Two-Tone Stainless Steel and 18kt Yellow Gold Oyster Bracelet White Dial \n Includes the following: \n ✔️ BRAND NEW 2025 UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included  \n ✔️Size: 8.0inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN  \n ✔️ Trades welcome  \n See every Rolex Sky-Dweller in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -60586,7 +60796,7 @@
      "w": 2048
     }
    ],
-   "description": "NEW 2025 Rolex Sky-Dweller 42mm 336934 Stainless Steel and 18k White Gold Fluted Bezel Oyster Bracelet Black Dial \n Includes the following: \n ✔️Original Double Rolex boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual & Warranty booklets \n ✔️Green and White Hang Tags included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN  \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Sky-Dweller 42mm 336934 Stainless Steel and 18k White Gold Fluted Bezel Oyster Bracelet Black Dial \n Includes the following: \n ✔️Original Double Rolex boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual & Warranty booklets \n ✔️Green and White Hang Tags included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN  \n ✔️ Trades welcome\n Explore more Rolex Sky-Dweller watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -60702,7 +60912,7 @@
      "w": 2048
     }
    ],
-   "description": "NEW 2025 Rolex Sky-Dweller 42mm 336933 Two-Tone Stainless Steel and 18k Yellow Gold Oyster Bracelet Black Dial \n Includes the following: \n ✔️Original Rolex Double boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty  \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome",
+   "description": "NEW 2025 Rolex Sky-Dweller 42mm 336933 Two-Tone Stainless Steel and 18k Yellow Gold Oyster Bracelet Black Dial \n Includes the following: \n ✔️Original Rolex Double boxed  \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2025 \n ✔️5 year manufacturer warranty  \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome  \n Explore more Rolex Sky-Dweller watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
