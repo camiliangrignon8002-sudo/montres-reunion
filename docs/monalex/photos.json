@@ -1,5 +1,5 @@
 {
- "mise_a_jour": "2026-11-15T22:50+00:00",
+ "mise_a_jour": "2026-11-16T22:59+00:00",
  "photos": {
   "126610ln": [
    {
@@ -155,7 +155,17 @@
   ],
   "126710blnr": [],
   "126711chnr": [],
-  "126500ln": [],
+  "126500ln": [
+   {
+    "titre": "File:Rolex Cosmograph Daytona Panda.jpg",
+    "src": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Rolex_Cosmograph_Daytona_Panda.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "w": 1382,
+    "auteur": "Shuntfield",
+    "licence": "CC BY-SA 4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Cosmograph_Daytona_Panda.jpg",
+    "exacte": false
+   }
+  ],
   "126515ln": [],
   "126334": [],
   "126234": [],
@@ -171,26 +181,7 @@
   "136660": [],
   "126622": [],
   "226659": [],
-  "336934": [
-   {
-    "titre": "File:Rolex Sky-Dweller in oro bianco.jpg",
-    "src": "https://upload.wikimedia.org/wikipedia/commons/1/13/Rolex_Sky-Dweller_in_oro_bianco.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-    "w": 1524,
-    "auteur": "EMore98",
-    "licence": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Rolex_Sky-Dweller_in_oro_bianco.jpg",
-    "exacte": false
-   },
-   {
-    "titre": "File:Sistema Ring Command brevettato da Rolex per gestire le funzioni supplementari su Sky-Dweller e Yacht-Master II.jpg",
-    "src": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Sistema_Ring_Command_brevettato_da_Rolex_per_gestire_le_funzioni_supplementari_su_Sky-Dweller_e_Yacht-Master_II.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-    "w": 1407,
-    "auteur": "EMore98",
-    "licence": "CC BY-SA 4.0",
-    "page": "https://commons.wikimedia.org/wiki/File:Sistema_Ring_Command_brevettato_da_Rolex_per_gestire_le_funzioni_supplementari_su_Sky-Dweller_e_Yacht-Master_II.jpg",
-    "exacte": false
-   }
-  ],
+  "336934": [],
   "52508": [],
   "126900": [
    {
