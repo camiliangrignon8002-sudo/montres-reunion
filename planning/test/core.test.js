@@ -279,7 +279,7 @@ test("règles personnelles : horaires fixes et jours de repos signalés, respect
   const sat = C.findCandidates(s, "2026-10-24", [{ s: "07:00", e: "14:30", z: "ZP" }]).map((c) => c.emp);
   assert.ok(!sat.includes("eric"));
   // Sebastien proposé en priorité le matin, en dernier le soir (jamais exclu)
-  const am = C.findCandidates(s, "2026-12-08", [{ s: "06:00", e: "11:00", z: "ZP" }, { s: "11:30", e: "13:30", z: "ZP" }]);
+  const am = C.findCandidates(s, "2026-12-08", [{ s: "07:00", e: "11:00", z: "ZP" }, { s: "11:30", e: "14:30", z: "ZP" }]);
   const pm = C.findCandidates(s, "2026-12-08", [{ s: "14:30", e: "17:00", z: "ZP" }, { s: "17:30", e: "22:00", z: "ZP" }]);
   const sa = am.find((c) => c.emp === "sebastien"), sp = pm.find((c) => c.emp === "sebastien");
   assert.ok(sa && sp && sa.score > sp.score);
@@ -679,19 +679,22 @@ test("fusion de deux fiches (Helena → Lana)", () => {
   assert.ok(!REF.employees.some((e) => e.id === "helena"));
 });
 
-test("soir : horaires seulement dans les tranches possibles (ZR 15:30–23:00 / 14:30–22:00, ZP 14:30–22:00 / 13:30–21:00)", () => {
+test("horaires possibles : début de plage (ZP 05:30, 07:00, 08:00, 14:30 ; ZR 06:00, 07:00, 08:00, 15:30), alternant la veille du CFA 1 h plus tôt l'après-midi", () => {
   const s = fresh();
+  const D = "2026-11-18";
   assert.equal(C.eveningOutside(s, [{ s: "15:30", e: "19:00", z: "ZR" }, { s: "19:30", e: "23:00", z: "ZR" }]), null);
-  assert.equal(C.eveningOutside(s, [{ s: "13:30", e: "17:00", z: "ZP" }, { s: "17:30", e: "21:00", z: "ZP" }]), null);
-  assert.ok(C.eveningOutside(s, [{ s: "16:00", e: "23:30", z: "ZR" }]));
-  assert.ok(C.eveningOutside(s, [{ s: "13:30", e: "21:00", z: "ZR" }]));
-  assert.equal(C.eveningOutside(s, [{ s: "06:00", e: "13:30", z: "ZR" }]), null); // le matin n'est pas concerné
-  const snapped = C.snapEvening(s, [{ s: "16:00", e: "19:30", z: "ZR" }, { s: "20:00", e: "23:30", z: "ZR" }]);
-  assert.equal(C.eveningOutside(s, snapped), null);
-  // généré : aucun horaire du soir hors tranche
-  const { week } = C.generateWeek(s, W1);
-  assert.ok(week.shifts.every((x) => !C.eveningOutside(s, x.segs)));
+  assert.equal(C.eveningOutside(s, [{ s: "05:30", e: "09:00", z: "ZP" }, { s: "09:30", e: "13:00", z: "ZP" }]), null);
+  assert.equal(C.eveningOutside(s, [{ s: "08:00", e: "11:30", z: "ZR" }, { s: "12:00", e: "15:30", z: "ZR" }]), null);
+  assert.ok(C.eveningOutside(s, [{ s: "09:00", e: "16:30", z: "ZP" }])); // commence au milieu d'une plage
+  assert.ok(C.eveningOutside(s, [{ s: "14:30", e: "22:00", z: "ZR" }])); // 14:30 n'est pas une plage de la ZR
+  // généré : toutes les journées sur une plage
+  const s1 = withWeek1();
+  const { week } = C.generateWeek(s1, "2026-11-30");
+  const ws = { ...s1, weeks: { ...s1.weeks, "2026-11-30": week } };
+  assert.ok(week.shifts.every((x) => !C.eveningOutside(ws, x.segs, x.date, C.empById(s1, x.emp))), JSON.stringify(week.shifts.filter((x) => C.eveningOutside(ws, x.segs, x.date, C.empById(s1, x.emp))).map((x) => x.emp + " " + x.date + " " + C.segLabel(x.segs))));
+  assert.ok(D);
 });
+
 
 test("ouverture : ZP à l'ouverture et ZR à l'ouverture chaque jour, seulement par une personne ancienne (jamais en formation)", () => {
   const s = withWeek1();

@@ -1280,6 +1280,8 @@ html.ciel .blk { box-shadow: none; }
     maxContinuousHours: 6, // jamais plus de 6 h d'affilée sans pause
     countCourseHours: false, // les heures de cours ne sont pas comptées : seulement les horaires du Relay
     standardDay: true, // journée type : 7 h 30 de présence dont 30 min de pause
+    shiftSlots: { ZP: ["05:30-13:00", "07:00-14:30", "08:00-15:30", "14:30-22:00"], ZR: ["06:00-13:30", "07:00-14:30", "08:00-15:30", "15:30-23:00"] }, // horaires possibles
+    alternantEveShift: 60, // veille de CFA : plage de l'après-midi 1 h plus tôt
     eveningSlots: { ZR: ["15:30-23:00", "14:30-22:00"], ZP: ["14:30-22:00", "13:30-21:00"] }, // tranches possibles pour le soir
     minContractHours: 24, // temps partiel : 24 h par semaine au minimum (contrat)
     contractHours: 35,
@@ -1686,26 +1688,42 @@ html.ciel .blk { box-shadow: none; }
     const [a, b] = segRange(g);
     return a < toMin(oh.s) || b > toMin(oh.e) ? oh : null;
   };
-  // Horaires du soir : toujours dans une des tranches possibles de la zone (ex. ZR 15:30–23:00 ou 14:30–22:00).
-  const eveningSlotsOf = (state, z) => ((({ ...DEFAULT_SETTINGS, ...(state.settings || {}) }).eveningSlots || {})[z] || []).map((v) => /^(\d\d:\d\d)-(\d\d:\d\d)$/.exec(v)).filter(Boolean).map((m) => ({ s: m[1], e: m[2], a: toMin(m[1]), b: toMin(m[2]) }));
-  function eveningOutside(state, segs) {
+  // Horaires possibles : chaque journée commence au début d'une des plages de sa zone et finit au plus tard à la fin
+  // (ZP 05:30–13:00, 07:00–14:30, 08:00–15:30, 14:30–22:00 ; ZR 06:00–13:30, 07:00–14:30, 08:00–15:30, 15:30–23:00).
+  // Les plages sont recalées sur l'ouverture de la saison. La veille d'un jour de CFA, un(e) alternant(e) peut
+  // faire la plage de l'après-midi 1 h plus tôt (commencer et finir 1 h plus tôt).
+  function slotsOf(state, z, date, emp) {
+    const st = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
+    const list = ((st.shiftSlots || {})[z] || []).map((v) => /^(\d\d:\d\d)-(\d\d:\d\d)$/.exec(v)).filter(Boolean).map((m) => ({ a: toMin(m[1]), b: toMin(m[2]) }));
+    const oh = date ? openingHours(state, z, date) : null;
+    const out = list.map((w) => {
+      if (!oh) return w;
+      const o = toMin(oh.s), c = toMin(oh.e) > toMin(oh.s) ? toMin(oh.e) : toMin(oh.e) + 1440;
+      const d = w.b > c ? c - w.b : w.a < o ? o - w.a : 0;
+      return { a: w.a + d, b: w.b + d };
+    });
+    if (emp && emp.role === "alternant" && date && calStatus(state, emp, addDays(date, 1)) === "formation")
+      for (const w of out.filter((x) => x.a >= 12 * 60)) out.push({ a: w.a - (st.alternantEveShift || 60), b: w.b - (st.alternantEveShift || 60), early: true });
+    return out.map((w) => ({ ...w, s: fromMin(w.a), e: fromMin(w.b) }));
+  }
+  function eveningOutside(state, segs, date, emp) {
     const t = (segs || []).filter((g) => isTime(g.s) && isTime(g.e) && !isAdminZone(g.z));
-    if (!t.length || toMin(t[0].s) < 12 * 60) return null;
-    const z = t[t.length - 1].z, slots = eveningSlotsOf(state, z);
+    if (!t.length) return null;
+    const z = t[0].z, slots = slotsOf(state, z, date, emp);
     if (!slots.length) return null;
     const r = shiftRanges(t), a = r[0][0], b = r[r.length - 1][1];
-    return slots.some((w) => a >= w.a && b <= w.b) ? null : { z, slots };
+    return slots.some((w) => a === w.a && b <= w.b) ? null : { z, slots: slots.filter((w) => !w.early) };
   }
-  // Recale un créneau du soir dans la tranche la plus proche (même durée), si besoin.
-  function snapEvening(state, segs) {
-    const out = eveningOutside(state, segs);
+  // Recale une journée sur la plage la plus proche (même durée, début de plage), si besoin.
+  function snapEvening(state, segs, date, emp) {
+    const out = eveningOutside(state, segs, date, emp);
     if (!out) return segs;
     const r = shiftRanges(segs), a = r[0][0], b = r[r.length - 1][1];
     let best = null;
-    for (const w of out.slots) {
+    for (const w of slotsOf(state, out.z, date, emp)) {
       if (b - a > w.b - w.a) continue;
-      const d = a < w.a ? w.a - a : b > w.b ? w.b - b : 0;
-      if (!best || Math.abs(d) < Math.abs(best)) best = d;
+      const d = w.a - a;
+      if (best == null || Math.abs(d) < Math.abs(best)) best = d;
     }
     return best == null ? segs : segs.map((g) => ({ ...g, s: fromMin(toMin(g.s) + best), e: fromMin(toMin(g.e) + best) }));
   }
@@ -1840,7 +1858,7 @@ html.ciel .blk { box-shadow: none; }
         if (oh) add("alerte", "OUT_OF_HOURS", sh.emp, d, `${who} : ${g.s}–${g.e} en ${g.z} le ${fmtDate(d, "day")}, en dehors des horaires du point de vente (${g.z} ${oh.season === "ete" ? "été" : "hiver"} : ${oh.s}–${oh.e}).`);
       }
       if (timesOk && !paperWeek && st.standardDay) { const r = shiftRanges(sh.segs), wk = shiftMinutes(sh.segs), amp = r[r.length - 1][1] - r[0][0]; const L = stdDayMinutes(state, emp); if (wk !== L || amp !== L + 30) add("alerte", "DAY_STD", sh.emp, d, `${who} : ${shiftSpan(sh.segs).s}–${shiftSpan(sh.segs).e} le ${fmtDate(d, "day")} (${fmtHours(wk)} de travail) ; une journée fait ${fmtHours(L + 30)} avec 30 min de pause${L !== 420 ? ` (${fmtHours(L)} de travail pour son contrat)` : ""} (sauf accord de la direction).`); }
-      if (timesOk) { const ev = eveningOutside(state, sh.segs); if (ev) add("alerte", "EVENING_SLOT", sh.emp, d, `${who} : ${shiftSpan(sh.segs).s}–${shiftSpan(sh.segs).e} le ${fmtDate(d, "day")}, hors des horaires possibles du soir en ${ev.z} (${ev.slots.map((w) => `${w.s}–${w.e}`).join(" ou ")}).`); }
+      if (timesOk && !paperWeek) { const ev = eveningOutside(state, sh.segs, d, emp); if (ev) add("alerte", "EVENING_SLOT", sh.emp, d, `${who} : ${shiftSpan(sh.segs).s}–${shiftSpan(sh.segs).e} le ${fmtDate(d, "day")}, ce n'est pas un horaire possible en ${ev.z} (${ev.slots.map((w) => `${w.s}–${w.e}`).join(", ")}).`); }
       if (st.checkLegal && timesOk) {
         const r = shiftRanges(sh.segs), work = shiftMinutes(sh.segs), amp = r[r.length - 1][1] - r[0][0];
         if (work > st.hardMaxDayHours * 60) add("alerte", "LEGAL_DAY_MAX", sh.emp, d, `${who} : ${fmtHours(work)} de travail le ${fmtDate(d, "day")}, au-delà du maximum légal de ${st.hardMaxDayHours} h par jour.`);
@@ -2083,7 +2101,7 @@ html.ciel .blk { box-shadow: none; }
       if (personalRuleIssues(emp, date, segs).length) { skip(personalRuleIssues(emp, date, segs)[0].code === "FIXED_DAYOFF" ? "jour de repos fixe" : personalRuleIssues(emp, date, segs)[0].code === "WEEK_ZONE" ? "travaille seulement dans une autre zone" : personalRuleIssues(emp, date, segs)[0].code === "LATEST_END" ? "ne finit jamais aussi tard" : "horaires fixes ou préférence matin/soir"); continue; } // horaires ou jours de repos fixes
       if (inTraining(emp, date) && segs.some((g) => !isAdminZone(g.z) && aloneRanges(state, w.shifts, { emp: emp.id, date }, g).length)) { skip("en formation : serait seul(e)"); continue; } // en formation : jamais seul(e)
       if (st.checkOpening && segs.some((g) => outsideOpening(state, g, date))) { skip("hors des horaires du point de vente"); continue; } // jamais hors des horaires du PDV
-      if (eveningOutside(state, segs)) { skip("hors des tranches du soir"); continue; } // le soir : seulement dans les tranches possibles
+      if (eveningOutside(state, segs, date, emp)) { skip("pas un horaire possible (début de plage)"); continue; } // le soir : seulement dans les tranches possibles
       if (opensZone(state, segs, date) && !canOpenIn(state, emp, date)) { skip("ne peut pas ouvrir (pas ancienne ou en formation)"); continue; } // ouverture : ancien(ne)s seulement, jamais en formation
       if (st.checkLegal && segs.every((g) => isTime(g.s) && isTime(g.e))) {
         const r = shiftRanges(segs);
@@ -2172,6 +2190,7 @@ html.ciel .blk { box-shadow: none; }
     const season = opts.season === "ete" || opts.season === "hiver" ? opts.season : seasonOf(monday, state);
     const week = { week: monday, status: "brouillon", source: "généré", season, generatedAt: opts.now || null, shifts: keep.map((s) => ({ ...s, segs: s.segs.map((g) => ({ ...g })) })) };
     const stG = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
+    const seasonState = { ...state, weeks: { ...(state.weeks || {}), [monday]: week } }; // saison choisie pour cette génération
     // Horaires de la saison choisie : un poste qui déborde est décalé pour tenir dans l'ouverture du point de vente.
     const fitSeason = (segs) => {
       if (!stG.checkOpening || !segs.length || !segs.every((g) => isTime(g.s) && isTime(g.e))) return segs;
@@ -2189,7 +2208,7 @@ html.ciel .blk { box-shadow: none; }
         const emp = empById(state, t.emp);
         const wz = emp && emp.rules && emp.rules.weekZone && allowedZones(emp).includes(emp.rules.weekZone) ? emp.rules.weekZone : null;
         const okZ = emp ? allowedZones(emp).filter((z) => !isAdminZone(z)) : [];
-        const segs = snapEvening(state, fitSeason(t.segs.map(({ s, e, z }) => ({ s, e, z: wz || (!emp || okZ.includes(z) || isAdminZone(z) || !okZ.length ? z : okZ[0]) })))); // zone imposée ou autorisée, horaires de la saison, tranche du soir
+        const segs = snapEvening(seasonState, fitSeason(t.segs.map(({ s, e, z }) => ({ s, e, z: wz || (!emp || okZ.includes(z) || isAdminZone(z) || !okZ.length ? z : okZ[0]) }))), date, emp); // zone imposée ou autorisée, horaires de la saison, tranche du soir
         let reason = null;
         if (!emp) reason = "personne absente de l'équipe";
         else if (emp.active === false) reason = "employé désactivé";
@@ -2292,8 +2311,8 @@ html.ciel .blk { box-shadow: none; }
               const zs = allowedZones(emp).filter((z) => !isAdminZone(z));
               const len = shiftMinutes(x.segs);
               const alts = [];
-              for (const z of zs) alts.push(snapEvening(state, fitSeason(x.segs.map((q) => ({ ...q, z: isAdminZone(q.z) ? q.z : z })))));
-              for (const B of altBases) if (Math.abs(shiftMinutes(B) - len) <= 60) for (const z of zs) alts.push(snapEvening(state, fitSeason(B.map((q) => ({ ...q, z })))));
+              for (const z of zs) alts.push(snapEvening(seasonState, fitSeason(x.segs.map((q) => ({ ...q, z: isAdminZone(q.z) ? q.z : z }))), date, emp));
+              for (const B of altBases) if (Math.abs(shiftMinutes(B) - len) <= 60) for (const z of zs) alts.push(snapEvening(seasonState, fitSeason(B.map((q) => ({ ...q, z }))), date, emp));
               const idx = week.shifts.indexOf(x);
               week.shifts.splice(idx, 1);
               for (const segs of alts) {
@@ -2324,7 +2343,7 @@ html.ciel .blk { box-shadow: none; }
       return [{ s: fromMin(A), e: fromMin(A + h), z: t[0].z }, { s: fromMin(A + h + PAUSE), e: fromMin(A + len + PAUSE), z: t[t.length - 1].z }];
     };
     const lenOf = (id) => stdDayMinutes(state, empById(state, id));
-    for (const x of week.shifts) if (inRange(x.date)) x.segs = snapEvening(state, fitSeason(toStd(x.segs, lenOf(x.emp))));
+    for (const x of week.shifts) if (inRange(x.date)) x.segs = snapEvening(seasonState, fitSeason(toStd(x.segs, lenOf(x.emp))), x.date, empById(state, x.emp));
     const courseDays = (id) => weekDates(monday).filter((d) => inRange(d) && courseMinutesOn(state, empById(state, id), d) > 0).length;
     const absentDays = (id) => weekDates(monday).filter((d) => inRange(d) && absentDay(id, d)).length;
     const workDaysTarget = (emp) => {
@@ -2356,16 +2375,15 @@ html.ciel .blk { box-shadow: none; }
         if (!bases.some((x) => segKey(x) === segKey(segs))) bases.push(segs);
       }
       // Horaires du matin possibles en plus du modèle : début toutes les 30 min jusqu'à 08:00 (journée type)
-      for (const z of ["ZP", "ZR"]) for (const st0 of ["06:00", "06:30", "07:00", "07:30", "08:00"]) {
-        if (!zoneById(state, z)) continue;
-        const segs = toStd([{ s: st0, e: fromMin(toMin(st0) + DAY + PAUSE), z }]);
+      for (const z of ["ZP", "ZR"]) if (zoneById(state, z)) for (const w of slotsOf(state, z, monday)) {
+        const segs = toStd([{ s: w.s, e: fromMin(w.a + DAY + PAUSE), z }]);
         if (!bases.some((x) => segKey(x) === segKey(segs))) bases.push(segs);
       }
       const shapeFor = (emp, segs) => {
         const zs = allowedZones(emp).filter((z) => !isAdminZone(z));
         if (!zs.length) return [];
         const wz = emp.rules && emp.rules.weekZone && zs.includes(emp.rules.weekZone) ? [emp.rules.weekZone] : zs;
-        return wz.map((z) => snapEvening(state, fitSeason(segs.map((g) => ({ ...g, z })))));
+        return wz.map((z) => snapEvening(seasonState, fitSeason(segs.map((g) => ({ ...g, z }))), monday));
       };
       const rulesOn = (date) => [...(stG.staffing || []), ...paxRules(state, date)].filter((r) => r.min != null && date >= r.from && date <= r.to);
       const lack = (date, shifts) => rulesOn(date).reduce((a, r) => a + staffingGaps(state, shifts, date, r).low.reduce((b, x) => b + (r.min - x.n) * (toMin(x.e) - toMin(x.s)), 0), 0);
@@ -2425,7 +2443,7 @@ html.ciel .blk { box-shadow: none; }
               if (zs2.length < 2 || (e2.rules && e2.rules.weekZone && !e2.rules.zoneFlex) || links.some((l) => l.sameHours && l.emps.includes(e2.id))) continue;
               const cur = [...new Set(x.segs.map((g) => g.z))];
               for (const z of zs2.filter((z) => !(cur.length === 1 && cur[0] === z))) { // autre zone, ou une seule zone au lieu de deux
-                const alt = snapEvening(state, fitSeason(x.segs.map((g) => ({ ...g, z }))));
+                const alt = snapEvening(seasonState, fitSeason(x.segs.map((g) => ({ ...g, z }))), date, e2);
                 const old = x.segs, idx = week.shifts.indexOf(x);
                 week.shifts.splice(idx, 1);
                 const c2 = findCandidates(work, date, alt, { exclude: state.employees.filter((e) => e.id !== x.emp).map((e) => e.id), sameDay: true })[0];
@@ -2615,9 +2633,9 @@ html.ciel .blk { box-shadow: none; }
         const L = shiftMinutes(t), r = shiftRanges(t), a0 = r[0][0];
         const zs = allowedZones(empById(state, x.emp)).filter((z) => !isAdminZone(z));
         const build = (A, h, z1, z2) => [{ s: fromMin(A), e: fromMin(A + h), z: z1 }, { s: fromMin(A + h + PAUSE), e: fromMin(A + L + PAUSE), z: z2 }];
-        for (const shift of [0, -30, 30, -60, 60, -90, 90, -120, 120]) for (const z of [...new Set([t[0].z, ...zs])]) for (let h = 120; h <= 360; h += 30) {
-          if (L - h < 60 || L - h > 360) continue;
-          const segs = build(a0 + shift, h, z, t.length > 1 && z === t[0].z ? t[t.length - 1].z : z);
+        for (const z of [...new Set([t[0].z, ...zs])]) for (const w of slotsOf(state, z, x.date, empById(state, x.emp))) for (let h = 120; h <= 360; h += 30) {
+          if (L - h < 60 || L - h > 360 || L + PAUSE > w.b - w.a) continue;
+          const segs = build(w.a, h, z, z);
           if (segKey(segs) !== segKey(x.segs)) out.push(segs);
         }
         return out;
@@ -2700,8 +2718,8 @@ html.ciel .blk { box-shadow: none; }
         let stale = 0;
         const bases2 = [];
         for (const t of (state.template && state.template.shifts) || []) { const sg = toStd(t.segs.map(({ s: a, e: b, z }) => ({ s: a, e: b, z }))); if (!bases2.some((x) => segKey(x) === segKey(sg))) bases2.push(sg); }
-        for (const z of ["ZP", "ZR"]) if (zoneById(state, z)) for (const st0 of ["06:00", "06:30", "07:00", "07:30", "08:00"]) { const sg = toStd([{ s: st0, e: fromMin(toMin(st0) + DAY + PAUSE), z }]); if (!bases2.some((x) => segKey(x) === segKey(sg))) bases2.push(sg); }
-        const shapeFor2 = (emp, segs) => { const zs = allowedZones(emp).filter((z) => !isAdminZone(z)); if (!zs.length) return []; const wz = emp.rules && emp.rules.weekZone && zs.includes(emp.rules.weekZone) ? [emp.rules.weekZone] : zs; return wz.map((z) => snapEvening(state, fitSeason(segs.map((g) => ({ ...g, z }))))); };
+        for (const z of ["ZP", "ZR"]) if (zoneById(state, z)) for (const w of slotsOf(state, z, monday)) { const sg = toStd([{ s: w.s, e: fromMin(w.a + DAY + PAUSE), z }]); if (!bases2.some((x) => segKey(x) === segKey(sg))) bases2.push(sg); }
+        const shapeFor2 = (emp, segs) => { const zs = allowedZones(emp).filter((z) => !isAdminZone(z)); if (!zs.length) return []; const wz = emp.rules && emp.rules.weekZone && zs.includes(emp.rules.weekZone) ? [emp.rules.weekZone] : zs; return wz.map((z) => snapEvening(seasonState, fitSeason(segs.map((g) => ({ ...g, z }))), monday)); };
         const shapesCache = {};
         const shapesFor = (emp) => shapesCache[emp.id] || (shapesCache[emp.id] = bases2.flatMap((B) => shapeFor2(emp, toStd(B, lenOf(emp.id)))));
         while (Date.now() - t0 < budget && stale < 400) {
@@ -2770,6 +2788,89 @@ html.ciel .blk { box-shadow: none; }
         if (pick) x.segs = pick; else { ok = false; break; }
       }
       if (!ok) sh.forEach((x, i) => { x.segs = saved[i]; });
+    }
+    // Réparation finale : on corrige un à un les problèmes restants (repos, jours d'affilée, ouverture, trous,
+    // effectif) en essayant d'autres horaires, d'autres jours ou d'autres zones, avec la vérification complète.
+    if (opts.fillAll !== false) {
+      const W = { erreur: 2000, OPENING_MISSING: 400, REST: 300, LEGAL_CONSECUTIVE: 300, LEGAL_DAYS_OFF: 300, HOLE: 120, STAFF_MIN: 40, STAFF_MAX: 2000, EVENING_SLOT: 200, DAY_STD: 50, TRAINEE_ALONE: 2000 };
+      const view = { ...state, weeks: { ...(state.weeks || {}), [monday]: week } };
+      const scoreIss = (iss) => iss.reduce((a, i) => a + (i.level === "erreur" ? W.erreur : W[i.code] || (i.level === "alerte" ? 250 : 0)), 0);
+      const evalAll = () => { view.weeks[monday] = week; const iss = validateWeek(view, monday, { skipCoverage: true }); return { iss, sc: scoreIss(iss) + 600 * state.employees.filter((e) => e.active !== false && (!include || include.has(e.id)) && allowedZones(e).some((z) => !isAdminZone(z))).reduce((a, e) => a + Math.max(0, workDaysTarget(e) - mineOf(e.id).length), 0) }; };
+      // Habitudes des plannings précédents (papier) : horaires et zones que chaque personne fait d'habitude.
+      const habit = {};
+      for (const pw of Object.values(state.weeks || {})) if (pw.refId || /papier/.test(pw.source || "")) for (const x of pw.shifts || []) { const k = `${x.emp}|${x.segs[0] && x.segs[0].z}|${x.segs[0] && x.segs[0].s}`; habit[k] = (habit[k] || 0) + 1; }
+      const partnersOf = (id) => links.filter((l) => l.sameHours && l.emps.includes(id)).flatMap((l) => l.emps).filter((x) => x !== id);
+      const optionsFor = (x) => {
+        const e = empById(state, x.emp), out = [];
+        const L = lenOf(x.emp);
+        for (const z of allowedZones(e).filter((q) => !isAdminZone(q))) for (const w of slotsOf(view, z, x.date, e)) for (const h of [120, 150, 180, 210, 240, 270, 300]) {
+          if (L - h < 60 || L - h > 360 || L + PAUSE > w.b - w.a) continue;
+          out.push({ date: x.date, segs: [{ s: fromMin(w.a), e: fromMin(w.a + h), z }, { s: fromMin(w.a + h + PAUSE), e: fromMin(w.a + L + PAUSE), z }], hab: habit[`${x.emp}|${z}|${fromMin(w.a)}`] || 0 });
+        }
+        for (const d of weekDates(monday)) if (d !== x.date && inRange(d) && !busy(e.id, d) && !absentDay(e.id, d) && !extra.some((q) => q.emp === e.id && q.date === d) && !(e.role === "alternant" && !["entreprise", "weekend"].includes(calStatus(state, e, d))) && !personalRuleIssues(e, d, []).some((q) => q.code === "FIXED_DAYOFF")) out.push({ date: d, segs: x.segs, hab: 0 });
+        return out;
+      };
+      let cur = evalAll();
+      const t1 = Date.now(), budget2 = opts.repairMs != null ? opts.repairMs : 2500;
+      let seed2 = 11; const rnd2 = () => (seed2 = (seed2 * 1103515245 + 12345) % 2147483648) / 2147483648;
+      while (cur.sc > 0 && Date.now() - t1 < budget2) {
+        const bads = cur.iss.filter((i) => i.level !== "info" && (W[i.code] || i.level === "erreur"));
+        if (!bads.length) break;
+        const iss = bads[Math.floor(rnd2() * bads.length)];
+        // journées concernées : celles de la personne, ou celles du jour
+        const pool = week.shifts.filter((q) => inRange(q.date) && !q.office && (iss.emp ? q.emp === iss.emp : q.date === iss.date));
+        if (!pool.length) continue;
+        const x = pool[Math.floor(rnd2() * pool.length)];
+        const opts2 = optionsFor(x).sort(() => rnd2() - 0.5).slice(0, 12);
+        let best = null;
+        const group = [x, ...partnersOf(x.emp).map((id) => week.shifts.find((q) => q.emp === id && q.date === x.date)).filter(Boolean)];
+        const saved = group.map((q) => ({ q, date: q.date, segs: q.segs }));
+        for (const o of opts2) {
+          let ok = true;
+          for (const q of group) { if (q !== x && (busy(q.emp, o.date) && o.date !== q.date)) { ok = false; break; } q.date = o.date; q.segs = q === x ? o.segs : o.segs.map((g, i) => ({ ...g, z: (saved.find((v) => v.q === q).segs[i] || saved.find((v) => v.q === q).segs[0]).z })); }
+          if (ok) { const r = evalAll(); const sc = r.sc - (o.hab ? 5 : 0); if (sc < cur.sc && (!best || sc < best.sc)) best = { sc, r, o }; }
+          for (const v of saved) { v.q.date = v.date; v.q.segs = v.segs; }
+        }
+        if (best) {
+          for (const q of group) { q.date = best.o.date; q.segs = q === x ? best.o.segs : best.o.segs.map((g, i) => ({ ...g, z: (saved.find((v) => v.q === q).segs[i] || saved.find((v) => v.q === q).segs[0]).z })); }
+          cur = evalAll();
+        }
+      }
+      week.shifts.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+    }
+    // Pauses : placées jour par jour pour qu'il y ait toujours quelqu'un (et l'effectif minimum), sans laisser
+    // une personne en formation seule. Seule la pause bouge : début, fin et zone restent les mêmes.
+    {
+      const rulesP = (date) => [...(stG.staffing || []), ...paxRules(state, date)].filter((r) => r.min != null && date >= r.from && date <= r.to);
+      const costDay = (date) => {
+        const day = week.shifts.filter((x) => x.date === date);
+        let v = 0;
+        for (const z of ["ZP", "ZR"]) if (zoneById(state, z)) v += 8 * holeRanges(state, day, date, z).reduce((a, x) => a + x.min, 0);
+        for (const r of rulesP(date)) v += staffingGaps(state, day, date, r).low.reduce((a, x) => a + (r.min - x.n) * (toMin(x.e) - toMin(x.s)), 0);
+        for (const x of day) if (inTraining(empById(state, x.emp), date)) for (const g of x.segs) if (!isAdminZone(g.z) && aloneRanges(state, week.shifts, x, g).length) v += 100000;
+        return v;
+      };
+      const pauseOpts = (x) => {
+        const t = x.segs;
+        if (t.length !== 2 || t.some((g) => !isTime(g.s) || !isTime(g.e))) return [];
+        const a = toMin(t[0].s), b = toMin(t[1].e), P = toMin(t[1].s) - toMin(t[0].e), L = b - a - P, out = [];
+        for (let h = 120; h <= 360; h += 30) { if (L - h < 60 || L - h > (stG.maxContinuousHours || 6) * 60) continue; out.push([{ ...t[0], e: fromMin(a + h) }, { ...t[1], s: fromMin(a + h + P) }]); }
+        return out;
+      };
+      for (const date of weekDates(monday)) {
+        if (!inRange(date)) continue;
+        for (let round = 0; round < 4; round++) {
+          let improved = false;
+          for (const x of week.shifts.filter((y) => y.date === date && !y.office)) {
+            const base = costDay(date), old = x.segs;
+            let best = { c: base, segs: old };
+            for (const v of pauseOpts(x)) { x.segs = v; const c = costDay(date); if (c < best.c) best = { c, segs: v }; }
+            x.segs = best.segs;
+            if (best.segs !== old) improved = true;
+          }
+          if (!improved) break;
+        }
+      }
     }
     const tmp = { ...state, weeks: { ...(state.weeks || {}), [monday]: week } };
     const issues = validateWeek(tmp, monday);
@@ -3373,7 +3474,7 @@ html.ciel .blk { box-shadow: none; }
     DAYS, DAYS_SHORT, MONTHS, ABSENCE_TYPES, ABSENCE_MOTIFS, deviationFromTimes, applyClosing, openLeave, absenceDates, OPEN_END, ADJUST_TYPES, hoursSummary, parseDuration, DEFAULT_SETTINGS, BLOCKING, CAL_LABELS, CAL_CODES, CONFIG_KEYS, SHIFT_OPS,
     parseISO, iso, isISO, addDays, dow, mondayOf, weekDates, daysBetween, fmtDate, fmtWeek, isoWeekNumber,
     isTime, normTime, toMin, fromMin, segRange, segMinutes, shiftRanges, shiftMinutes, fmtHours, hoursDecimal, segKey, segLabel, pauses,
-    norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones, eveningOutside, snapEvening, stdDayMinutes, holeRanges,
+    norm, slug, uid, empById, findEmployee, zoneLevel, zoneById, allowedZones, eveningOutside, snapEvening, slotsOf, stdDayMinutes, holeRanges,
     calendarCode, calStatus, staffingGaps, paxRules, paxOf, paxSlots, incompatible, absPartial, absOverlaps, absLabel, seasonOf, openingHours, weekCap, weekExtraMinutes, dismissKey, trainingEnd, inTraining, SKILLS, hasSkill, aloneRanges, courseRanges, courseBusy, courseMinutesOn, weekCourseMinutes, rangesLabel, courseSpanLabel, absencesOn, templateFor, templateMinutes, getWeek, emptyWeek, weekMinutes,
     availability, validateWeek, personalRuleIssues, shiftSpan, blockingIssues, uncoveredPosts, findCandidates, generateWeek, weekGrid,
     weeksToCSV, parseCSV, csvToShifts, applyOps, applyChanges, stateFromReference, clone,
