@@ -558,3 +558,25 @@ details.legend-fold[open] > summary { margin-bottom: 8px; }
 .plan thead th .cnt-line { display: block; margin-top: 4px; font-size: 11px; font-weight: 600; color: var(--fg-2); }
 .plan thead th .pax-alert { display: inline-block; margin-top: 4px; font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; background: #fff3d6; color: #8a5a00; border: 0; }
 .plan thead th .need.pax { display: inline-block; margin-right: 6px; }
+
+/* Plat, sans effet « verre » : fonds unis, pas de transparence ni de dégradé, ombres très discrètes. */
+html.ciel { --shadow: 0 1px 2px rgba(20, 40, 90, .06); background: #eef3fb; }
+html.ciel body::after { background: #eef3fb; }
+html.ciel .topbar { background: #ffffff; box-shadow: none; border-bottom: 1px solid #e2e9f6; }
+html.ciel .side { box-shadow: none; border-right: 1px solid #e2e9f6; }
+html.ciel .nav[aria-current="page"] { background: #2f6fed; box-shadow: none; }
+html.ciel .card, html.ciel .banner, html.ciel .grid-wrap { box-shadow: var(--shadow); border: 1px solid #e2e9f6; }
+html.ciel .btn, html.ciel .btn.primary { box-shadow: none; }
+html.ciel .seg-ctl button[aria-pressed="true"] { box-shadow: 0 1px 2px rgba(20, 40, 90, .1); }
+html.ciel .tabbar { background: #ffffff; }
+html.ciel .dialog { box-shadow: 0 12px 40px rgba(20, 40, 90, .18); }
+html.ciel .overlay { background: rgba(20, 40, 90, .35); }
+html.ciel #splash { background: #eef3fb; }
+html.ciel .empty { background: #ffffff; }
+html.ciel details.legend-fold > summary { background: #ffffff; }
+html.ciel .blk { box-shadow: none; }
+@media (prefers-color-scheme: dark) {
+  html.ciel:not([data-theme="light"]) { background: #0d1630; }
+  html.ciel:not([data-theme="light"]) body::after { background: #0d1630; }
+  html.ciel:not([data-theme="light"]) .topbar { background: #15213f; }
+}
