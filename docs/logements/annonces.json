@@ -4111,7 +4111,12 @@
   "adresse": "45 rue de Paris, 97400 Saint-Denis",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-2-pieces-43-m2/01a1ea6c-105d-7e86-8816-0b6cb5d67891"
+   }
+  ],
   "vu": "2026-11-17T20:13+04:00"
  },
  {
