@@ -1,5 +1,5 @@
 {
- "mise_a_jour": "2026-11-17T09:02+00:00",
+ "mise_a_jour": "2026-11-17T11:05+00:00",
  "sources": [
   {
    "id": "intemporel",
@@ -17,7 +17,7 @@
    "id": "desbiolles",
    "nom": "Horlogerie Desbiolles",
    "via": "WooCommerce",
-   "annonces": 14
+   "annonces": 11
   },
   {
    "id": "lmdh",
@@ -149,7 +149,7 @@
    "id": "timepiece360",
    "nom": "Timepiece360",
    "via": "Shopify",
-   "annonces": 62
+   "annonces": 65
   },
   {
    "id": "watchmaestro",
@@ -2298,110 +2298,6 @@
    "premiere_vue": "2026-11-14T10:39+00:00"
   },
   {
-   "id": "c5bc1af7e7c9",
-   "boutique": "desbiolles",
-   "reference": "126610LN",
-   "collection": "Submariner",
-   "annee": "",
-   "etat": "Neuf",
-   "boite": true,
-   "papiers": true,
-   "titre": "ROLEX OYSTER PERPETUAL SUBMARINER DATE NEW UNWORN FULL SET REF 126610LN",
-   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-submariner-date-new-unworn-full-set-ref-126610ln/",
-   "prix": 11500,
-   "devise": "CHF",
-   "photos": [
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2394-scaled.png",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2385-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2386-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2387-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2388-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2389-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2390-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2391-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2392-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_2393-scaled.jpg",
-     "w": 2560
-    }
-   ],
-   "description": "ROLEX OYSTER PERPETUAL SUBMARINER DATE NEW UNWORN\n FULL SET REF 126610LN\n Montre neuve, jamais portée, full set avec boite et papier, cadran noir, boite et bracelet Oyster en acier, lunette céramique noir, mouvement automatique, calibre 3235.",
-   "premiere_vue": "2026-11-14T10:39+00:00"
-  },
-  {
-   "id": "32eececf6ef2",
-   "boutique": "desbiolles",
-   "reference": "116234",
-   "collection": "Datejust",
-   "annee": "",
-   "etat": "Neuf",
-   "boite": true,
-   "papiers": true,
-   "titre": "ROLEX OYSTER PERPETUAL DATEJUST 36MM FULL SET REF 116234",
-   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-datejust-36mm-full-set-ref-116234/",
-   "prix": 9000,
-   "devise": "CHF",
-   "photos": [
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4453-scaled.png",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4405-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4406-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4407-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4408-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4409-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2026/09/IMG_4410-scaled.jpg",
-     "w": 2560
-    }
-   ],
-   "description": "ROLEX OYSTER PERPETUAL DATEJUST 36MM FULL SET\n REF 116234\n Montre en parfait état, comme neuve, full set avec boite et papier, cadran noir, boite et bracelet Jubilé en acier, lunette or blanc, mouvement automatique, calibre 3135.",
-   "premiere_vue": "2026-11-14T10:39+00:00"
-  },
-  {
    "id": "0ab2b8cb9550",
    "boutique": "desbiolles",
    "reference": "116520",
@@ -2412,7 +2308,7 @@
    "papiers": true,
    "titre": "ROLEX OYSTER PERPETUAL DAYTONA APH DIAL FULL SET REF 116520",
    "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oysrolex-oyster-perpetual-daytona-aph-full-set-ref-116520ter-perpetual-submariner-no-date-full-set-ref-114060-copie/",
-   "prix": 22000,
+   "prix": 21000,
    "devise": "CHF",
    "photos": [
     {
@@ -2677,56 +2573,6 @@
     }
    ],
    "description": "ROLEX OYSTER PERPETUAL DATEJUST 36MM OR/ACIER FULL SET\n REF 16203\n Montre en parfait état, full set avec boite et papier, cadran noir, boite et bracelet Oyster en or/acier, mouvement automatique, calibre 3135.",
-   "premiere_vue": "2026-11-14T10:39+00:00"
-  },
-  {
-   "id": "edaf005a8225",
-   "boutique": "desbiolles",
-   "reference": "1016",
-   "collection": "Explorer",
-   "annee": "",
-   "etat": "Occasion",
-   "boite": null,
-   "papiers": null,
-   "titre": "ROLEX OYSTER PERPETUAL EXPLORER I AUTOMATIC REF 1016",
-   "url": "https://www.artisanhorloger.ch/montres-occasion/rolex-oyster-perpetual-explorer-i-automatic-ref-1016/",
-   "prix": 15000,
-   "devise": "CHF",
-   "photos": [
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0925-scaled.png",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0244-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0245-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0246-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0247-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0248-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0249-scaled.jpg",
-     "w": 2560
-    },
-    {
-     "src": "https://www.artisanhorloger.ch/wp-content/uploads/2025/09/IMG_0250-scaled.jpg",
-     "w": 2560
-    }
-   ],
-   "description": "ROLEX OYSTER PERPETUAL EXPLORER I AUTOMATIC REF 1016\n Montre en bonne état, boîtier en acier, bracelet Oyster en acier, cadran et aiguilles en tritium.",
    "premiere_vue": "2026-11-14T10:39+00:00"
   },
   {
@@ -61082,6 +60928,156 @@
    ],
    "description": "This pre-owned Rolex Submariner Date reference 116610LV is powered by an automatic movement in a 40mm stainless steel case with a green rotating bezel. The green dial features a date display and is protected by sapphire crystal. The steel Oyster bracelet leads to a folding clasp. This Rolex reference 116610LV is in good condition. Includes box and papers. Circa 2015.",
    "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "702bae3e7fa2",
+   "boutique": "timepiece360",
+   "reference": "",
+   "collection": "",
+   "annee": "2026",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "Land-Dweller 36",
+   "url": "https://timepiece360.com/products/land-dweller-36",
+   "prix": 77000,
+   "devise": "AED",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/1_c1dd5cfa-0c2d-4106-b6dd-5ab521072553.webp?v=1794913235",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/2_9390d4e4-09c0-4341-973e-2f1982516a86.webp?v=1794913235",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/3_a5756435-793d-4cf6-a7d3-b96f7600862d.webp?v=1794913235",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/4_658b6ca2-1a22-4318-b1b9-8e6e7ffaf62c.webp?v=1794913235",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/7_b8ca0b85-9593-43ff-ac57-9010946b2ed8.webp?v=1794913235",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/6_72b5d0ef-7a42-4e09-8cc0-54b225b44c15.webp?v=1794913235",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/5_1fc324b4-dce9-4bbb-9b3d-036515be9de8.webp?v=1794913235",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/8_6d2820f2-43de-4d7d-996f-853ea02d09ee.webp?v=1794913235",
+     "w": 1800
+    }
+   ],
+   "description": "This Rolex Land-Dweller 36mm, steel case, white dial, white gold bezel and steel jubilee bracelet with 23 links is in unworn condition. Mechanised by Rolex calibre 7135 automatic movement. Includes box and sales warranty card dated April 2026.",
+   "premiere_vue": "2026-11-17T11:05+00:00"
+  },
+  {
+   "id": "8de5cabeb2c8",
+   "boutique": "timepiece360",
+   "reference": "",
+   "collection": "Day-Date",
+   "annee": "1995",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Day-Date 39",
+   "url": "https://timepiece360.com/products/day-date-52",
+   "prix": 159000,
+   "devise": "AED",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/1_3d166cc9-5b12-44e1-a215-6f6d53d31a53.webp?v=1794911752",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/3_9d466aa0-4988-467f-90eb-d74454fdae89.webp?v=1794911752",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/5_6a6bba44-1c72-41f5-9030-f364ae6d7853.webp?v=1794911752",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/9_f2a9fd12-dfd9-433d-a350-7947a1660960.webp?v=1794911752",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/7_78df2431-6d90-4e70-8b7d-30d6325d42b9.webp?v=1794911752",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/6_7c5e4a5f-dfe5-4192-9ea3-bb42b44f1ac8.webp?v=1794911752",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/8_de78046b-c9d1-4ac6-b9c4-feff3c5fd38d.webp?v=1794911752",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/10_dd9652c9-df77-4077-8f4b-e8b3551a9f22.webp?v=1794911752",
+     "w": 1800
+    }
+   ],
+   "description": "This Pre-owned Rolex Day-Date 39mm, platinum case, silver diamond dial, diamond set on bezel and platinum pearlmaster bracelet with 13 links is in very good condition. Mechanised by Rolex calibre 3155 automatic movement. The year of production is 1995 as determined by the serial number starting with \"W\". Includes box, service warranty card dated October 2011 and 2 years Timepiece360 warranty. The serial and model numbers have been re-engraved.",
+   "premiere_vue": "2026-11-17T11:05+00:00"
+  },
+  {
+   "id": "1a0ab5d93e42",
+   "boutique": "timepiece360",
+   "reference": "",
+   "collection": "Day-Date",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": null,
+   "titre": "Day-Date 36",
+   "url": "https://timepiece360.com/products/rolex-day-date-36-128235",
+   "prix": 277000,
+   "devise": "AED",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/1_8a1c42c0-f956-4773-9475-07066d1aaa72.webp?v=1794908848",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/3_335f14c3-c4a9-4437-bf1c-898dcc36265b.webp?v=1794908848",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/5_a4ec93ce-9eda-4014-80c4-82ae6b8ba406.webp?v=1794908848",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/9_6e804522-8e72-4f89-a428-5a91ccd1e8e0.webp?v=1794908848",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/7_ce18164d-ce68-460b-98cb-d34292df3556.webp?v=1794908848",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/6_7e4b69da-8b46-44ac-aa7e-27fcebd5824f.webp?v=1794908848",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/8_d4a8760a-4f0f-4ad0-a0d6-59d1e4c7b822.webp?v=1794908848",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/10_65c426fd-6dd8-4d84-829b-e196dd957ce9.webp?v=1794908848",
+     "w": 1800
+    }
+   ],
+   "description": "This Pre-owned Rolex Day-Date 36mm, rose gold case, rosé dial with chipped glass, rose gold bezel and rose gold president with modified diamonds bracelet with 23 links is in excellent condition. Mechanised by Rolex calibre 3255 automatic movement. Includes box and 2 years Timepiece360 warranty.",
+   "premiere_vue": "2026-11-17T11:05+00:00"
   },
   {
    "id": "a585aad50186",
