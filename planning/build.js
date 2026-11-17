@@ -73,8 +73,8 @@ ${appScripts}
   fs.writeFileSync(path.join(out, "index.html"), `<!doctype html>
 <html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b1226" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F2F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1A1A1A" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -90,7 +90,7 @@ ${body(plainTag)}<script>if ("serviceWorker" in navigator && location.protocol =
 `);
   fs.writeFileSync(path.join(out, "manifest.webmanifest"), JSON.stringify({
     name: "RelayTime", short_name: "RelayTime", description: "RelayTime : plannings de l'équipe, zones, alternants, absences.",
-    start_url: "./", scope: "./", display: "standalone", background_color: "#0a2a96", theme_color: "#0f1a33", lang: "fr",
+    start_url: "./", scope: "./", display: "standalone", background_color: "#0a2a96", theme_color: "#252525", lang: "fr",
     icons: [{ src: "icon-192.png", sizes: "192x192", type: "image/png" }, { src: "icon-512.png", sizes: "512x512", type: "image/png", purpose: "any maskable" }],
   }, null, 2) + "\n");
   fs.writeFileSync(path.join(out, "sw.js"), `// Appli Planning : fonctionne hors connexion (réseau d'abord, copie locale si pas de réseau).

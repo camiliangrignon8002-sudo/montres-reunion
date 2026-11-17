@@ -710,7 +710,7 @@
   App.postsList = function (posts) {
     const s = this.state;
     return h("div", {}, posts.map((u) => {
-      const cands = C.findCandidates(s, u.date, u.segs, { exclude: [u.templateEmp] }).slice(0, 4);
+      const cands = C.findCandidates(s, u.date, u.segs, { exclude: [u.templateEmp] }).filter((c) => !c.notes.length && c.restOk).slice(0, 4); // seulement des remplaçants qui respectent toutes les règles
       return h("div", { class: "post" },
         h("div", { class: "row between" }, h("div", {}, h("b", {}, C.fmtDate(u.date, "day")), h("div", { class: "small muted" }, `Habituellement ${empName(s, u.templateEmp)} — ${u.reason}`)), h("div", { class: "row" }, u.segs.map((g) => blk(s, g)))),
         cands.length ? h("div", { class: "row" }, h("span", { class: "small muted" }, "Remplaçants possibles :"), cands.map((c) => btn(`${c.name} · ${C.fmtHours(c.weekMinutes)}${c.notes.length ? " ⚠" : ""}`, async () => {

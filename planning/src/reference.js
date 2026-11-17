@@ -463,6 +463,12 @@
   }, {
     id: "bureau-lundi-mardi",
     rules: { charlotte: { officeDays: [0, 1], note: "Bureau le lundi et le mardi." } },
+  }, {
+    id: "week-ends-2026-11-17",
+    rules: {
+      nathalie: { daysOff: [4, 5], note: "De l'ouverture de la zone réservée (06:00) à 13:30, repos le vendredi et le samedi." },
+      sebastien: { prefDaysOff: [5, 6], note: "Du matin (horaires variables dans la matinée) ; repos le samedi et le dimanche si possible." },
+    },
   }];
 
   for (const u of ruleUpdates) for (const [id, r] of Object.entries(u.rules)) { const e = employees.find((x) => x.id === id); e.rules = { ...(e.rules || {}), ...r }; e.rulesApplied = [...(e.rulesApplied || []), u.id]; }

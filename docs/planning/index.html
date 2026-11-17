@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f4f6fa" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b1226" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F2F2F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1A1A1A" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -491,11 +491,11 @@ details.legend-fold[open] > summary { margin-bottom: 8px; }
    Clair ou sombre selon le réglage de l'appareil. Plat : fonds unis, pas de transparence.
    ====================================================================== */
 html.relay {
-  --navy: #0f1a33; --navy-2: #1a2747; --silver: #c9ced8; --red: #c8102e; --red-2: #a50d26;
-  --bg: #f4f6fa; --surface: #ffffff; --surface-2: #f7f8fb; --line: #e3e7ef; --line-strong: #cdd3df;
-  --fg: #0f1a33; --fg-2: #5b6782; --fg-3: #8f99ad;
-  --accent: #c8102e; --accent-soft: #fdecef;
-  --shadow: 0 1px 2px rgba(15, 26, 51, .06);
+  --navy: #252525; --navy-2: #333333; --silver: #c9c9c9; --red: #E2231A; --red-2: #c01c14;
+  --bg: #F2F2F2; --surface: #FFFFFF; --surface-2: #F7F7F7; --line: #E3E3E3; --line-strong: #CFCFCF;
+  --fg: #252525; --fg-2: #777777; --fg-3: #9A9A9A;
+  --accent: #E2231A; --accent-soft: #FDECEB;
+  --shadow: 0 1px 2px rgba(37, 37, 37, .06);
   --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   --font-display: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   --r: 14px; --r-sm: 10px;
@@ -517,15 +517,15 @@ html.relay .brand .wordmark { font-size: 20px; }
 
 /* Menu latéral bleu nuit (comme le fond du logo), page en cours marquée en rouge */
 html.relay .side { background: var(--navy); border-right: 0; padding: 22px 0 20px; }
-html.relay .side .wordmark .wm-relay { color: #e9ecf2; }
-html.relay .side .tiny.muted { color: #8f9bb8; }
-html.relay .nav { color: #c9cfdc; border-radius: 0; padding: 11px 20px; font-weight: 500; border-left: 3px solid transparent; }
-html.relay .nav svg { color: #8f9bb8; }
+html.relay .side .wordmark .wm-relay { color: #FFFFFF; }
+html.relay .side .tiny.muted { color: #9A9A9A; }
+html.relay .nav { color: #D6D6D6; border-radius: 0; padding: 11px 20px; font-weight: 500; border-left: 3px solid transparent; }
+html.relay .nav svg { color: #9A9A9A; }
 html.relay .nav:hover { background: var(--navy-2); color: #fff; }
 html.relay .nav[aria-current="page"] { background: var(--navy-2); color: #ffffff; font-weight: 600; border-left-color: var(--red); }
 html.relay .nav[aria-current="page"] svg { color: var(--red); }
 html.relay .nav .count { background: var(--red); }
-html.relay .nav-group { color: #6f7b98; padding: 16px 20px 6px; }
+html.relay .nav-group { color: #777777; padding: 16px 20px 6px; }
 
 /* Barre du haut */
 html.relay .topbar { background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: none; }
@@ -534,7 +534,7 @@ html.relay .topbar .title { font-weight: 700; color: var(--fg); }
 /* Cartes et blocs */
 html.relay .card, html.relay .banner, html.relay .grid-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); }
 html.relay .card.flat { background: var(--surface-2); box-shadow: none; }
-html.relay .banner.info { background: #eef1f7; border-color: var(--line); }
+html.relay .banner.info { background: #F7F7F7; border-color: var(--line); }
 html.relay .empty { background: var(--surface); border-color: var(--line-strong); border-radius: 14px; }
 html.relay .kpi b { color: var(--navy); }
 
@@ -544,21 +544,21 @@ html.relay .btn:hover { border-color: var(--fg-3); }
 html.relay .btn.primary { background: var(--red); border-color: var(--red); color: #fff; }
 html.relay .btn.primary:hover { background: var(--red-2); border-color: var(--red-2); }
 html.relay .btn.ghost { background: transparent; border-color: transparent; }
-html.relay .seg-ctl { background: #e9edf4; border-radius: 10px; }
+html.relay .seg-ctl { background: #E9E9E9; border-radius: 10px; }
 html.relay .seg-ctl button { border-radius: 8px; }
 html.relay .seg-ctl button[aria-pressed="true"] { background: var(--navy); color: #fff; box-shadow: none; }
 html.relay .input, html.relay select.input, html.relay textarea.input { background: var(--surface); border-color: var(--line-strong); border-radius: 10px; }
-html.relay .input:focus { border-color: var(--navy); box-shadow: 0 0 0 3px rgba(15, 26, 51, .12); outline: none; }
-html.relay .chip.info { background: #e8ecf4; color: var(--navy); }
+html.relay .input:focus { border-color: var(--navy); box-shadow: 0 0 0 3px rgba(37, 37, 37, .12); outline: none; }
+html.relay .chip.info { background: #EDEDED; color: var(--navy); }
 html.relay a { color: var(--red); }
 
 /* Planning */
 html.relay .plan thead th, html.relay .plan th.name, html.relay .plan thead th.name { background: var(--surface-2); }
 html.relay .plan td.name { background: var(--surface); }
-html.relay .plan th, html.relay .plan td { border-color: #edf0f5; }
-html.relay .plan thead th.today { background: #eef1f7 !important; color: var(--navy); box-shadow: inset 0 3px 0 var(--red); }
+html.relay .plan th, html.relay .plan td { border-color: #ECECEC; }
+html.relay .plan thead th.today { background: #FDECEB !important; color: var(--navy); box-shadow: inset 0 3px 0 var(--red); }
 html.relay .plan thead th.today .d { color: var(--red); }
-html.relay .plan td.today { background: #f7f8fb !important; }
+html.relay .plan td.today { background: #FFF8F7 !important; }
 html.relay .today-pill { background: var(--red) !important; color: #fff !important; }
 html.relay .blk { border-radius: 8px; box-shadow: none; }
 html.relay .daybar button { background: var(--surface); border-color: var(--line); border-radius: 12px; }
@@ -568,9 +568,9 @@ html.relay .mday { border-color: var(--line); border-radius: 12px; }
 html.relay .mday.today { border-color: var(--red); box-shadow: inset 0 0 0 1px var(--red); }
 
 /* Fenêtres */
-html.relay .overlay { background: rgba(15, 26, 51, .45); }
+html.relay .overlay { background: rgba(37, 37, 37, .45); }
 html.relay .dialog, html.relay .dialog header, html.relay .dialog footer { background: var(--surface); }
-html.relay .dialog { border-radius: 18px; border: 1px solid var(--line); box-shadow: 0 16px 48px rgba(15, 26, 51, .22); }
+html.relay .dialog { border-radius: 18px; border: 1px solid var(--line); box-shadow: 0 16px 48px rgba(37, 37, 37, .22); }
 html.relay details.gen-more, html.relay details.legend-fold > summary { background: var(--surface-2); border-color: var(--line); }
 
 /* Barre d'onglets (téléphone) */
@@ -581,29 +581,29 @@ html.relay .tabbar button[aria-current="page"] { color: var(--red); }
 html.relay #splash { background: var(--navy); }
 html.relay #splash img { box-shadow: 0 14px 40px rgba(0, 0, 0, .45); }
 html.relay #splash .wordmark { font-size: 26px; }
-html.relay #splash .wm-relay { color: #e9ecf2; }
+html.relay #splash .wm-relay { color: #FFFFFF; }
 html.relay #splash i { background: rgba(255, 255, 255, .15); }
 html.relay #splash i::after { background: var(--red); }
 
 /* Sombre (réglage de l'appareil) : bleu nuit du logo, texte argent */
 @media (prefers-color-scheme: dark) {
   html.relay:not([data-theme="light"]) {
-    --bg: #0b1226; --surface: #131c35; --surface-2: #18223f; --line: #243052; --line-strong: #2f3c63;
-    --fg: #e8ebf2; --fg-2: #a9b2c7; --fg-3: #7d88a3; --accent: #e5354f; --accent-soft: #3a1520;
+    --bg: #1A1A1A; --surface: #252525; --surface-2: #2C2C2C; --line: #363636; --line-strong: #444444;
+    --fg: #F2F2F2; --fg-2: #AAAAAA; --fg-3: #777777; --accent: #E2231A; --accent-soft: #3A1715;
     --shadow: none; color-scheme: dark;
   }
-  html.relay:not([data-theme="light"]) .side { background: #08101f; }
-  html.relay:not([data-theme="light"]) .nav:hover, html.relay:not([data-theme="light"]) .nav[aria-current="page"] { background: #131c35; }
-  html.relay:not([data-theme="light"]) .seg-ctl { background: #18223f; }
-  html.relay:not([data-theme="light"]) .seg-ctl button[aria-pressed="true"], html.relay:not([data-theme="light"]) .daybar button[aria-pressed="true"] { background: #c9ced8; color: #0b1226; border-color: #c9ced8; }
-  html.relay:not([data-theme="light"]) .daybar button[aria-pressed="true"] b { color: #0b1226; }
-  html.relay:not([data-theme="light"]) .kpi b, html.relay:not([data-theme="light"]) .chip.info { color: #c9ced8; }
-  html.relay:not([data-theme="light"]) .chip.info { background: #18223f; }
-  html.relay:not([data-theme="light"]) .banner.info { background: #18223f; }
-  html.relay:not([data-theme="light"]) .plan thead th.today { background: #1d2848 !important; color: #e8ebf2; }
-  html.relay:not([data-theme="light"]) .plan td.today { background: #151f3b !important; }
-  html.relay:not([data-theme="light"]) .plan th, html.relay:not([data-theme="light"]) .plan td { border-color: #1f2a49; }
-  html.relay:not([data-theme="light"]) .input:focus { border-color: #c9ced8; box-shadow: 0 0 0 3px rgba(201, 206, 216, .15); }
+  html.relay:not([data-theme="light"]) .side { background: #111111; }
+  html.relay:not([data-theme="light"]) .nav:hover, html.relay:not([data-theme="light"]) .nav[aria-current="page"] { background: #252525; }
+  html.relay:not([data-theme="light"]) .seg-ctl { background: #2C2C2C; }
+  html.relay:not([data-theme="light"]) .seg-ctl button[aria-pressed="true"], html.relay:not([data-theme="light"]) .daybar button[aria-pressed="true"] { background: #F2F2F2; color: #252525; border-color: #F2F2F2; }
+  html.relay:not([data-theme="light"]) .daybar button[aria-pressed="true"] b { color: #252525; }
+  html.relay:not([data-theme="light"]) .kpi b, html.relay:not([data-theme="light"]) .chip.info { color: #F2F2F2; }
+  html.relay:not([data-theme="light"]) .chip.info { background: #2C2C2C; }
+  html.relay:not([data-theme="light"]) .banner.info { background: #2C2C2C; }
+  html.relay:not([data-theme="light"]) .plan thead th.today { background: #3A1715 !important; color: #F2F2F2; }
+  html.relay:not([data-theme="light"]) .plan td.today { background: #2A1F1E !important; }
+  html.relay:not([data-theme="light"]) .plan th, html.relay:not([data-theme="light"]) .plan td { border-color: #333333; }
+  html.relay:not([data-theme="light"]) .input:focus { border-color: #F2F2F2; box-shadow: 0 0 0 3px rgba(242, 242, 242, .15); }
 }
 html.relay .top-logo { width: 30px; height: 30px; border-radius: 8px; flex: none; }
 ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 14px; } ul.cond-list li { margin: 3px 0; }
@@ -1079,6 +1079,12 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
   }, {
     id: "bureau-lundi-mardi",
     rules: { charlotte: { officeDays: [0, 1], note: "Bureau le lundi et le mardi." } },
+  }, {
+    id: "week-ends-2026-11-17",
+    rules: {
+      nathalie: { daysOff: [4, 5], note: "De l'ouverture de la zone réservée (06:00) à 13:30, repos le vendredi et le samedi." },
+      sebastien: { prefDaysOff: [5, 6], note: "Du matin (horaires variables dans la matinée) ; repos le samedi et le dimanche si possible." },
+    },
   }];
 
   for (const u of ruleUpdates) for (const [id, r] of Object.entries(u.rules)) { const e = employees.find((x) => x.id === id); e.rules = { ...(e.rules || {}), ...r }; e.rulesApplied = [...(e.rulesApplied || []), u.id]; }
@@ -2070,7 +2076,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
     const st = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
     if (!st.coverageFromTemplate) return [];
     const w = getWeek(state, monday);
-    if (!w) return [];
+    if (!w || w.source === "généré") return []; // semaine générée : réorganisée, plus de « postes du modèle »
     const out = [];
     // Semaine tirée d'un planning papier : le papier fait foi ; seuls les postes vidés depuis (départ, absence…) sont à pourvoir.
     const paper = !!(w.refId || /papier/.test(w.source || ""));
@@ -2164,6 +2170,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
       if (overtime) score -= 20;
       score -= notes.length * 5;
       if (templateFor(state, date).some((t) => t.emp === emp.id && segKey(t.segs) === segKey(segs))) score += 10;
+      if (emp.rules && Array.isArray(emp.rules.prefDaysOff) && emp.rules.prefDaysOff.includes(dow(date))) { score -= 40; notes.push(`repos souhaité le ${DAYS[dow(date)].toLowerCase()}`); }
       if ((st.staffing || []).some((r) => r.max != null && date >= r.from && date <= r.to && staffingGaps(state, [...w.shifts, { emp: emp.id, date, segs }], date, r).high.length && !staffingGaps(state, w.shifts, date, r).high.length)) { skip("zone déjà au maximum de personnes"); continue; } // dépasserait le maximum de personnes
       if (w.shifts.some((x) => x.date === date && incompatible(state, emp.id, x.emp) && sameZoneOverlap(segs, x.segs).length)) { skip("incompatible avec une personne présente"); continue; } // incompatibilité
       // Préférence de zone : obligatoire sauf si « si besoin, peut changer » est coché.
@@ -2229,18 +2236,19 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
         const wz = emp && emp.rules && emp.rules.weekZone && allowedZones(emp).includes(emp.rules.weekZone) ? emp.rules.weekZone : null;
         const okZ = emp ? allowedZones(emp).filter((z) => !isAdminZone(z)) : [];
         const segs = snapEvening(seasonState, fitSeason(t.segs.map(({ s, e, z }) => ({ s, e, z: wz || (!emp || okZ.includes(z) || isAdminZone(z) || !okZ.length ? z : okZ[0]) }))), date, emp); // zone imposée ou autorisée, horaires de la saison, tranche du soir
-        let reason = null;
+        let reason = null, trimDay = false;
         if (!emp) reason = "personne absente de l'équipe";
         else if (emp.active === false) reason = "employé désactivé";
         else if (include && !include.has(emp.id)) reason = "non sélectionné(e) pour cette génération";
         else if (extra.some((x) => x.emp === emp.id && x.date === date)) reason = "contrainte particulière saisie pour cette génération";
+        else if (personalRuleIssues(emp, date, []).some((x) => x.code === "FIXED_DAYOFF")) { reason = `repos fixe le ${DAYS[dow(date)].toLowerCase()}`; trimDay = true; }
         else {
           const av = availability(state, emp.id, date, segs);
           if (!av.ok) reason = av.block[0];
           else if (calStatus(state, emp, date) === "formation") reason = `jour de cours au CFA (${rangesLabel(courseRanges(state, emp, date))})`;
           else if (emp.role === "alternant" && calStatus(state, emp, date) === "inconnu") reason = "statut d'alternance inconnu (jamais considéré comme disponible)";
         }
-        if (reason) notPlaced.push({ emp: t.emp, date, segs, reason });
+        if (reason) notPlaced.push({ emp: t.emp, date, segs, reason, ...(trimDay ? { trim: true } : {}) });
         else { week.shifts.push({ id: uid("c"), emp: emp.id, date, segs }); placed.push({ emp: emp.id, date }); }
       }
     }
@@ -2334,6 +2342,21 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
       const mine = week.shifts.filter((x) => x.emp === emp.id && inRange(x.date));
       let n = mine.filter((x) => x.office || x.segs.some((g) => isAdminZone(g.z))).length;
       for (const x of mine.filter((x) => !x.office).sort((a, b) => staffOn(b.date) - staffOn(a.date))) { if (n >= min) break; x.office = true; n++; }
+    }
+    // Repos souhaités (ex. Sebastien le week-end, si possible) : ses journées ces jours-là vont sur un jour libre de la semaine.
+    for (const emp of state.employees) {
+      const pref = emp.rules && Array.isArray(emp.rules.prefDaysOff) ? emp.rules.prefDaysOff : null;
+      if (!pref || emp.active === false || (include && !include.has(emp.id))) continue;
+      for (const x of week.shifts.filter((q) => q.emp === emp.id && inRange(q.date) && !q.locked && pref.includes(dow(q.date)))) {
+        const others0 = state.employees.filter((e) => e.id !== emp.id).map((e) => e.id);
+        for (const d of weekDates(monday)) {
+          if (!inRange(d) || pref.includes(dow(d)) || busy(emp.id, d) || absentDay(emp.id, d) || extra.some((q) => q.emp === emp.id && q.date === d)) continue;
+          const idx = week.shifts.indexOf(x); week.shifts.splice(idx, 1);
+          const c = findCandidates(work, d, x.segs, { exclude: others0 })[0];
+          week.shifts.splice(idx, 0, x);
+          if (c && c.restOk) { x.date = d; break; }
+        }
+      }
     }
     // 0) Nombre maximum de personnes par zone (ex. ZR 3 le matin et le soir, ZP 4 le matin et 2 le soir) :
     //    les postes du modèle en trop passent dans l'autre zone ou sur un autre horaire, sinon l'alerte reste.
@@ -3289,6 +3312,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
             if (r.officeMinDays != null && !(Number(r.officeMinDays) >= 0 && Number(r.officeMinDays) <= 7)) { fail("Nombre de jours de bureau invalide (0 à 7)."); break; }
             if (r.daysOff && !(Array.isArray(r.daysOff) && r.daysOff.every((d) => d >= 0 && d <= 6))) { fail("Jours de repos invalides."); break; }
             if (r.officeDays && !(Array.isArray(r.officeDays) && r.officeDays.every((d) => d >= 0 && d <= 6))) { fail("Jours de bureau invalides."); break; }
+            if (r.prefDaysOff && !(Array.isArray(r.prefDaysOff) && r.prefDaysOff.every((d) => d >= 0 && d <= 6))) { fail("Jours de repos souhaités invalides."); break; }
           }
           conf("employees");
           break;
@@ -3772,13 +3796,20 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
       const legend = state.zones.map((z) => ({ label: `${z.short} ${z.name}`, rgb: mix(z.color, 0.55) })).concat([{ label: "Cours CFA", rgb: [255, 214, 235] }, { label: "Absence", rgb: [229, 229, 234] }]);
       for (const l of legend.reverse()) { const tw = textWidth(l.label, 8) + 18; lx -= tw; rect(lx, M + 6, 10, 10, l.rgb); text(lx + 13, M + 14, l.label, 8); lx -= 8; }
       const top = M + 44, nameW = 96, totalW = 44, dayW = (W - 2 * M - nameW - totalW) / 7;
-      const rowH = Math.min(30, (H - top - M - 20) / grid.rows.length);
-      rect(M, top, W - 2 * M, 20, [242, 242, 247]);
+      // En-tête : jour, puis passagers attendus (total et soir) quand ils sont connus
+      const pax = grid.days.map((d) => (C.paxOf ? C.paxOf(state, d) : null));
+      const headH = pax.some(Boolean) ? 32 : 20;
+      const rowH = Math.min(30, (H - top - M - headH) / grid.rows.length);
+      rect(M, top, W - 2 * M, headH, [242, 242, 247]);
       text(M + 6, top + 13, "Équipe", 8.5, true);
-      grid.days.forEach((d, i) => text(M + nameW + i * dayW + 6, top + 13, `${C.DAYS_SHORT[C.dow(d)]} ${C.fmtDate(d, "short")}`, 8.5, true));
+      grid.days.forEach((d, i) => {
+        text(M + nameW + i * dayW + 6, top + 13, `${C.DAYS_SHORT[C.dow(d)]} ${C.fmtDate(d, "short")}`, 8.5, true);
+        const p = pax[i];
+        if (p) text(M + nameW + i * dayW + 6, top + 26, `${p.total.toLocaleString("fr-FR").replace(/\s/g, " ")} passagers${p.slots ? ` (soir ${p.s})` : ""}`, 7, false, [90, 90, 100]);
+      });
       text(W - M - totalW + 6, top + 13, "Total", 8.5, true);
       grid.rows.forEach((row, r) => {
-        const y = top + 20 + r * rowH;
+        const y = top + headH + r * rowH;
         text(M + 6, y + rowH / 2 + 3, row.emp.name, 8.5, true);
         row.cells.forEach((cell, i) => {
           const x = M + nameW + i * dayW;
@@ -4896,7 +4927,7 @@ ul.cond-list { margin: 6px 0 0; padding-left: 4px; list-style: none; font-size: 
   App.postsList = function (posts) {
     const s = this.state;
     return h("div", {}, posts.map((u) => {
-      const cands = C.findCandidates(s, u.date, u.segs, { exclude: [u.templateEmp] }).slice(0, 4);
+      const cands = C.findCandidates(s, u.date, u.segs, { exclude: [u.templateEmp] }).filter((c) => !c.notes.length && c.restOk).slice(0, 4); // seulement des remplaçants qui respectent toutes les règles
       return h("div", { class: "post" },
         h("div", { class: "row between" }, h("div", {}, h("b", {}, C.fmtDate(u.date, "day")), h("div", { class: "small muted" }, `Habituellement ${empName(s, u.templateEmp)} — ${u.reason}`)), h("div", { class: "row" }, u.segs.map((g) => blk(s, g)))),
         cands.length ? h("div", { class: "row" }, h("span", { class: "small muted" }, "Remplaçants possibles :"), cands.map((c) => btn(`${c.name} · ${C.fmtHours(c.weekMinutes)}${c.notes.length ? " ⚠" : ""}`, async () => {

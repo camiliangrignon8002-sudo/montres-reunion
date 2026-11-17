@@ -295,7 +295,7 @@ test("règles personnelles : horaires fixes et jours de repos signalés, respect
   assert.ok(early.ok);
   assert.ok(!C.validateWeek(early.state, W1).some((i) => i.emp === "eric" && i.code === "FIXED_HOURS"));
   assert.ok(!C.findCandidates(s, "2026-10-21", [{ s: "10:00", e: "13:00", z: "ZP" }, { s: "13:30", e: "17:30", z: "ZP" }]).some((c) => c.emp === "eric"));
-  assert.deepEqual(C.empById(s, "nathalie").rules.daysOff, [5, 6]);
+  assert.deepEqual(C.empById(s, "nathalie").rules.daysOff, [4, 5]);
   // le modèle (semaine du 19/10) respecte ces règles : aucune alerte de règle personnelle
   assert.equal(C.validateWeek(s, W1).filter((i) => i.code === "FIXED_HOURS" || i.code === "FIXED_DAYOFF").length, 0);
 });

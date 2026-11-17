@@ -820,7 +820,7 @@
     const st = { ...DEFAULT_SETTINGS, ...(state.settings || {}) };
     if (!st.coverageFromTemplate) return [];
     const w = getWeek(state, monday);
-    if (!w) return [];
+    if (!w || w.source === "généré") return []; // semaine générée : réorganisée, plus de « postes du modèle »
     const out = [];
     // Semaine tirée d'un planning papier : le papier fait foi ; seuls les postes vidés depuis (départ, absence…) sont à pourvoir.
     const paper = !!(w.refId || /papier/.test(w.source || ""));
@@ -914,6 +914,7 @@
       if (overtime) score -= 20;
       score -= notes.length * 5;
       if (templateFor(state, date).some((t) => t.emp === emp.id && segKey(t.segs) === segKey(segs))) score += 10;
+      if (emp.rules && Array.isArray(emp.rules.prefDaysOff) && emp.rules.prefDaysOff.includes(dow(date))) { score -= 40; notes.push(`repos souhaité le ${DAYS[dow(date)].toLowerCase()}`); }
       if ((st.staffing || []).some((r) => r.max != null && date >= r.from && date <= r.to && staffingGaps(state, [...w.shifts, { emp: emp.id, date, segs }], date, r).high.length && !staffingGaps(state, w.shifts, date, r).high.length)) { skip("zone déjà au maximum de personnes"); continue; } // dépasserait le maximum de personnes
       if (w.shifts.some((x) => x.date === date && incompatible(state, emp.id, x.emp) && sameZoneOverlap(segs, x.segs).length)) { skip("incompatible avec une personne présente"); continue; } // incompatibilité
       // Préférence de zone : obligatoire sauf si « si besoin, peut changer » est coché.
@@ -979,18 +980,19 @@
         const wz = emp && emp.rules && emp.rules.weekZone && allowedZones(emp).includes(emp.rules.weekZone) ? emp.rules.weekZone : null;
         const okZ = emp ? allowedZones(emp).filter((z) => !isAdminZone(z)) : [];
         const segs = snapEvening(seasonState, fitSeason(t.segs.map(({ s, e, z }) => ({ s, e, z: wz || (!emp || okZ.includes(z) || isAdminZone(z) || !okZ.length ? z : okZ[0]) }))), date, emp); // zone imposée ou autorisée, horaires de la saison, tranche du soir
-        let reason = null;
+        let reason = null, trimDay = false;
         if (!emp) reason = "personne absente de l'équipe";
         else if (emp.active === false) reason = "employé désactivé";
         else if (include && !include.has(emp.id)) reason = "non sélectionné(e) pour cette génération";
         else if (extra.some((x) => x.emp === emp.id && x.date === date)) reason = "contrainte particulière saisie pour cette génération";
+        else if (personalRuleIssues(emp, date, []).some((x) => x.code === "FIXED_DAYOFF")) { reason = `repos fixe le ${DAYS[dow(date)].toLowerCase()}`; trimDay = true; }
         else {
           const av = availability(state, emp.id, date, segs);
           if (!av.ok) reason = av.block[0];
           else if (calStatus(state, emp, date) === "formation") reason = `jour de cours au CFA (${rangesLabel(courseRanges(state, emp, date))})`;
           else if (emp.role === "alternant" && calStatus(state, emp, date) === "inconnu") reason = "statut d'alternance inconnu (jamais considéré comme disponible)";
         }
-        if (reason) notPlaced.push({ emp: t.emp, date, segs, reason });
+        if (reason) notPlaced.push({ emp: t.emp, date, segs, reason, ...(trimDay ? { trim: true } : {}) });
         else { week.shifts.push({ id: uid("c"), emp: emp.id, date, segs }); placed.push({ emp: emp.id, date }); }
       }
     }
@@ -1084,6 +1086,21 @@
       const mine = week.shifts.filter((x) => x.emp === emp.id && inRange(x.date));
       let n = mine.filter((x) => x.office || x.segs.some((g) => isAdminZone(g.z))).length;
       for (const x of mine.filter((x) => !x.office).sort((a, b) => staffOn(b.date) - staffOn(a.date))) { if (n >= min) break; x.office = true; n++; }
+    }
+    // Repos souhaités (ex. Sebastien le week-end, si possible) : ses journées ces jours-là vont sur un jour libre de la semaine.
+    for (const emp of state.employees) {
+      const pref = emp.rules && Array.isArray(emp.rules.prefDaysOff) ? emp.rules.prefDaysOff : null;
+      if (!pref || emp.active === false || (include && !include.has(emp.id))) continue;
+      for (const x of week.shifts.filter((q) => q.emp === emp.id && inRange(q.date) && !q.locked && pref.includes(dow(q.date)))) {
+        const others0 = state.employees.filter((e) => e.id !== emp.id).map((e) => e.id);
+        for (const d of weekDates(monday)) {
+          if (!inRange(d) || pref.includes(dow(d)) || busy(emp.id, d) || absentDay(emp.id, d) || extra.some((q) => q.emp === emp.id && q.date === d)) continue;
+          const idx = week.shifts.indexOf(x); week.shifts.splice(idx, 1);
+          const c = findCandidates(work, d, x.segs, { exclude: others0 })[0];
+          week.shifts.splice(idx, 0, x);
+          if (c && c.restOk) { x.date = d; break; }
+        }
+      }
     }
     // 0) Nombre maximum de personnes par zone (ex. ZR 3 le matin et le soir, ZP 4 le matin et 2 le soir) :
     //    les postes du modèle en trop passent dans l'autre zone ou sur un autre horaire, sinon l'alerte reste.
@@ -2039,6 +2056,7 @@
             if (r.officeMinDays != null && !(Number(r.officeMinDays) >= 0 && Number(r.officeMinDays) <= 7)) { fail("Nombre de jours de bureau invalide (0 à 7)."); break; }
             if (r.daysOff && !(Array.isArray(r.daysOff) && r.daysOff.every((d) => d >= 0 && d <= 6))) { fail("Jours de repos invalides."); break; }
             if (r.officeDays && !(Array.isArray(r.officeDays) && r.officeDays.every((d) => d >= 0 && d <= 6))) { fail("Jours de bureau invalides."); break; }
+            if (r.prefDaysOff && !(Array.isArray(r.prefDaysOff) && r.prefDaysOff.every((d) => d >= 0 && d <= 6))) { fail("Jours de repos souhaités invalides."); break; }
           }
           conf("employees");
           break;

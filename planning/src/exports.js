@@ -46,13 +46,20 @@
       const legend = state.zones.map((z) => ({ label: `${z.short} ${z.name}`, rgb: mix(z.color, 0.55) })).concat([{ label: "Cours CFA", rgb: [255, 214, 235] }, { label: "Absence", rgb: [229, 229, 234] }]);
       for (const l of legend.reverse()) { const tw = textWidth(l.label, 8) + 18; lx -= tw; rect(lx, M + 6, 10, 10, l.rgb); text(lx + 13, M + 14, l.label, 8); lx -= 8; }
       const top = M + 44, nameW = 96, totalW = 44, dayW = (W - 2 * M - nameW - totalW) / 7;
-      const rowH = Math.min(30, (H - top - M - 20) / grid.rows.length);
-      rect(M, top, W - 2 * M, 20, [242, 242, 247]);
+      // En-tête : jour, puis passagers attendus (total et soir) quand ils sont connus
+      const pax = grid.days.map((d) => (C.paxOf ? C.paxOf(state, d) : null));
+      const headH = pax.some(Boolean) ? 32 : 20;
+      const rowH = Math.min(30, (H - top - M - headH) / grid.rows.length);
+      rect(M, top, W - 2 * M, headH, [242, 242, 247]);
       text(M + 6, top + 13, "Équipe", 8.5, true);
-      grid.days.forEach((d, i) => text(M + nameW + i * dayW + 6, top + 13, `${C.DAYS_SHORT[C.dow(d)]} ${C.fmtDate(d, "short")}`, 8.5, true));
+      grid.days.forEach((d, i) => {
+        text(M + nameW + i * dayW + 6, top + 13, `${C.DAYS_SHORT[C.dow(d)]} ${C.fmtDate(d, "short")}`, 8.5, true);
+        const p = pax[i];
+        if (p) text(M + nameW + i * dayW + 6, top + 26, `${p.total.toLocaleString("fr-FR").replace(/\s/g, " ")} passagers${p.slots ? ` (soir ${p.s})` : ""}`, 7, false, [90, 90, 100]);
+      });
       text(W - M - totalW + 6, top + 13, "Total", 8.5, true);
       grid.rows.forEach((row, r) => {
-        const y = top + 20 + r * rowH;
+        const y = top + headH + r * rowH;
         text(M + 6, y + rowH / 2 + 3, row.emp.name, 8.5, true);
         row.cells.forEach((cell, i) => {
           const x = M + nameW + i * dayW;
