@@ -993,6 +993,51 @@
   "vu": "2026-11-03T23:11+04:00"
  },
  {
+  "id": "superimmo--annonces-location-appartement-19m-saint-denis-97490-x12ghjt",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-19m-saint-denis-97490-x12ghjt",
+  "titre": "Location appartement 1 pièce 19 m² Saint-Denis (97490)",
+  "prix": 450.0,
+  "commune": "Saint-Denis",
+  "quartier": "",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 19.0,
+  "meuble": null,
+  "photos": [
+   "https://photo.superimmo.com/yvsdpr4ptnd9gtjfp9xkou42cv04",
+   "https://photo.superimmo.com/v4idi25apt9nrh8ulraulsehimtp",
+   "https://photo.superimmo.com/4l48olh8jp5kv2dlcei30qi5rtrx",
+   "https://photo.superimmo.com/ndi1puqa3h86ds4btxeyps0axar5",
+   "https://photo.superimmo.com/3ssbul63kxlwq8qd6bjkn69qhfrs",
+   "https://photo.superimmo.com/v9o6u6n6bnbpjwjwzhob4cre9r3g",
+   "https://photo.superimmo.com/d440d9wi7uk63mp5ebv406wobiru",
+   "https://photo.superimmo.com/0og069bbor4gw0r97h5vk3gbmac4",
+   "https://photo.superimmo.com/cc27qfnga5olp3957yhrrytpg5q5",
+   "https://photo.superimmo.com/xpqzla2uqr3sakhzbl3tbhdbp2l4",
+   "https://photo.superimmo.com/22jirrhmx0ddqbre2gpzvqj63v34",
+   "https://photo.superimmo.com/p7063j66bvl6uyp21pjbitpj7i5t",
+   "https://photo.superimmo.com/gnof0he8hx2dyqrwik3u7y1ybacu",
+   "https://photo.superimmo.com/1sekqlvsrhsszabclyxmvd8gyxhp",
+   "https://photo.superimmo.com/lbm8q3qwlp1gxdkg5jste0kilucy"
+  ],
+  "description": "Annonce appartement location 19 m² 1 pièce à Saint-Denis L'agence GTI vous propose à la location",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Superimmo",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 95 00 39",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-13T07:01+04:00"
+ },
+ {
   "id": "zimo-01a1a373-5f14-7942-8731-eedfe7f8fb29",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-1-piece-32-m2/01a1a373-5f14-7942-8731-eedfe7f8fb29",
@@ -1656,6 +1701,10 @@
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
+   },
+   {
+    "source": "Herren Immobilier",
+    "url": "https://www.herren-immobilier.com/location/appartement/7996"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -1952,35 +2001,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-03T20:07+04:00"
- },
- {
-  "id": "zimo-01a1a189-ddbb-745c-97ff-47e11503c03e",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-39-m2/01a1a189-ddbb-745c-97ff-47e11503c03e",
-  "titre": "Appartement 1 pièce 39 m²",
-  "prix": 515.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "T1",
-  "surface": 39.0,
-  "meuble": null,
-  "photos": [],
-  "description": "Location T1 Saint-Denis (974) 1 pièces 39 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via bien'ici",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-03T17:23+04:00"
  },
  {
   "id": "zimo-01a03cd1-7ccd-70ad-9030-fc042e9aa3c4",
