@@ -1,5 +1,5 @@
 {
- "mise_a_jour": "2026-11-17T07:20+00:00",
+ "mise_a_jour": "2026-11-17T09:02+00:00",
  "sources": [
   {
    "id": "intemporel",
@@ -149,7 +149,7 @@
    "id": "timepiece360",
    "nom": "Timepiece360",
    "via": "Shopify",
-   "annonces": 61
+   "annonces": 62
   },
   {
    "id": "watchmaestro",
@@ -61082,6 +61082,56 @@
    ],
    "description": "This pre-owned Rolex Submariner Date reference 116610LV is powered by an automatic movement in a 40mm stainless steel case with a green rotating bezel. The green dial features a date display and is protected by sapphire crystal. The steel Oyster bracelet leads to a folding clasp. This Rolex reference 116610LV is in good condition. Includes box and papers. Circa 2015.",
    "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "a585aad50186",
+   "boutique": "timepiece360",
+   "reference": "",
+   "collection": "Submariner",
+   "annee": "2026",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "Submariner Date \"Starbucks\"",
+   "url": "https://timepiece360.com/products/submariner-date-starbucks1",
+   "prix": 64000,
+   "devise": "AED",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/1_8e0f4df8-a92f-4f38-b91c-927989883f8b.webp?v=1776765165",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/3_e7544a6d-554f-4711-b725-02d07dd4ac4a.webp?v=1776765165",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/5_40f75b3a-068d-469c-b87e-e16066691f85.webp?v=1776765165",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/9_3fd29f6b-27ea-4101-ba3c-1d17d7d65beb.webp?v=1776765165",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/7_c36804b1-cead-4a4e-a488-f110ce2fd7bc.webp?v=1776765165",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/6_e041eaf1-06c2-45dc-ab8e-cc0a1eb17ebb.webp?v=1776765165",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/8_1c9f7ec2-653a-4dfa-999c-a3bc367155a4.webp?v=1776765165",
+     "w": 1800
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/10_6449246c-4c2c-453f-a0d3-390984a8fecf.webp?v=1776765165",
+     "w": 1800
+    }
+   ],
+   "description": "This Rolex Submariner Date \"Starbucks\" MK2 41mm, steel case, black dial, ceramic bezel and steel oyster bracelet with 12 links in unworn condition. Mechanised by Rolex calibre 3235 automatic movement. Includes box and sales warranty card dated November 2026.",
+   "premiere_vue": "2026-11-17T09:02+00:00"
   },
   {
    "id": "05b2aa251096",
