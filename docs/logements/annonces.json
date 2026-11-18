@@ -838,35 +838,6 @@
   "vu": "2026-10-27T02:51+04:00"
  },
  {
-  "id": "zimo-01a1a189-dd87-7efc-b93b-26cd262c4545",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-1-piece-24-m2/01a1a189-dd87-7efc-b93b-26cd262c4545",
-  "titre": "Studio 1 pièce 24 m²",
-  "prix": 443.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 24.0,
-  "meuble": null,
-  "photos": [],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 24 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via bien'ici",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-03T17:23+04:00"
- },
- {
   "id": "pv-1296630166",
   "source": "ParuVendu",
   "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296630166A1KILHAP000",
@@ -1649,6 +1620,10 @@
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
+   },
+   {
+    "source": "Herren Immobilier",
+    "url": "https://www.herren-immobilier.com/location/appartement/7996"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -3153,6 +3128,40 @@
   "vu": "2026-10-29T15:57+04:00"
  },
  {
+  "id": "zimo-01a1eeb2-0aa5-77a5-b169-56dcaed5879e",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/loue-studio-semi-meuble-jardin-de-l-etat/01a1eeb2-0aa5-77a5-b169-56dcaed5879e",
+  "titre": "Loue studio semi meuble jardin de l etat",
+  "prix": 600.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 20.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/hAkaYrmbQZnxpxC-6dz7lGvPMnHGFMmb54nLC0avPHY/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_33745aee-234a-4e6a-bf68-d24f080f67fe.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
+  "caracteristiques": [
+   "Meublé",
+   "Jardin"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-04T07:04+04:00"
+ },
+ {
   "id": "zimo-01a1e07a-0ac9-7f96-8b7f-b0d1fe8676e6",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-meuble-sainte-clotilde-centre/01a1e07a-0ac9-7f96-8b7f-b0d1fe8676e6",
@@ -3246,37 +3255,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-09T22:05+04:00"
- },
- {
-  "id": "zimo-01a1c05e-3488-7827-8d4c-624deb71f85d",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-20-m2/01a1c05e-3488-7827-8d4c-624deb71f85d",
-  "titre": "Appartement 1 pièce 20 m²",
-  "prix": 600.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 20.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/jlVP0fQix8n8NyORI2uhydy0-SmQidomp1PHwjw8FrE/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_80d5f64f-e2a9-4367-9bff-2c4c55b13253.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via Figaro Immobilier",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-04T07:04+04:00"
  },
  {
   "id": "zimo-01a1b153-1e5e-72a8-90f3-cd091d68e5a5",
