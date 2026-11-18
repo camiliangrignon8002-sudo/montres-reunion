@@ -4301,7 +4301,7 @@
    "Résidence sécurisée",
    "Proche transports"
   ],
-  "date": "2026-11-17T16:08:17.548Z",
+  "date": "2026-11-18T05:07:11.813Z",
   "annonceur": "Citya Belvédère Immobilier",
   "lat": -20.9009882,
   "lon": 55.4786968,
@@ -4907,7 +4907,7 @@
    "1 chambre",
    "Parking"
   ],
-  "date": "2026-11-17T16:08:17.046Z",
+  "date": "2026-11-18T05:07:11.813Z",
   "annonceur": "Citya Belvédère Immobilier",
   "lat": -20.893371332795134,
   "lon": 55.47509179122314,
@@ -5903,6 +5903,39 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-30T17:13+04:00"
+ },
+ {
+  "id": "zimo-01a1ece3-6349-7f5d-b68a-06fc3ad5b793",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-meuble-ste-suzanne-quartier-francais/01a1ece3-6349-7f5d-b68a-06fc3ad5b793",
+  "titre": "Studio meublé Ste Suzanne Quartier Français",
+  "prix": 670.0,
+  "commune": "Sainte-Suzanne",
+  "quartier": "Quartier Français",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 25.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/o-UchHoxdCnOS30JINY1YD9WK3LmPRhR_TKjCwH0RHA/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_08562dae-0a68-47cc-ab63-720341be9ab7.jpg"
+  ],
+  "description": "Location Studio Sainte-Suzanne (974) 1 pièces 25 m²",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord-Est",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-18T09:21+04:00"
  },
  {
   "id": "zimo-01a1a3db-f1fb-7da9-bd9d-78b8ca3968b3",
@@ -7153,35 +7186,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "zimo-01a1a177-8ce8-7713-88b0-489e97d3a2f0",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/reprise-de-bail/01a1a177-8ce8-7713-88b0-489e97d3a2f0",
-  "titre": "Reprise de bail",
-  "prix": 703.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 44.0,
-  "meuble": null,
-  "photos": [],
-  "description": "Location T2 Saint-Denis (974) 2 pièces 44 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-03T17:23+04:00"
  },
  {
   "id": "zimo-01a1a1f1-fc9b-7439-bbc7-84f749ea0a93",
