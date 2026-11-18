@@ -6191,34 +6191,52 @@
   "vu": "2026-11-17T14:23+04:00"
  },
  {
-  "id": "zimo-01a1e9fd-a684-7c38-ac1e-83efb55aa0ac",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/duplex-1-piece-31-m2/01a1e9fd-a684-7c38-ac1e-83efb55aa0ac",
-  "titre": "Duplex 1 pièce 31 m²",
+  "id": "superimmo--annonces-location-appartement-31m-saint-denis-97400-x12hq1t",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-31m-saint-denis-97400-x12hq1t",
+  "titre": "Location appartement 1 pièce 31,38 m² Saint-Denis (97400)",
   "prix": 679.0,
   "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
+  "quartier": "",
   "pieces": 1,
   "type": "T1",
-  "surface": 31.0,
+  "surface": 31.38,
   "meuble": null,
   "photos": [
-   "https://img.e-xiste.com/zBzgpPq6MXppmp8FrrHY54xMbFcGzvj4WGqA1Cuh3jQ/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_4dc5d787-2bda-4f46-901a-efdf935b389c.jpg"
+   "https://photo.superimmo.com/0vi75nk6cohwuyumg0qfkkj52d9m",
+   "https://photo.superimmo.com/1vaadhintmat6dcxvj11c4heabr0",
+   "https://photo.superimmo.com/nosmjo829jfle2jqih5kugv0wvz6",
+   "https://photo.superimmo.com/u6cgrpvh6o7cfg9ghjik7k7p8v1k",
+   "https://photo.superimmo.com/cvbcnvvdkqcgbboorb1virqo1ywg",
+   "https://photo.superimmo.com/lw7n28srua79tfmigk9lcrav6eor",
+   "https://photo.superimmo.com/hjr5wqpsr2y4mvj3vkaktrdqmzae",
+   "https://photo.superimmo.com/jj7ruzaj8xxfvebqu9h9hual2n0u",
+   "https://photo.superimmo.com/l918ajm04e32si6nmfnekt2plc0v",
+   "https://photo.superimmo.com/8er1tyr2oo4ntrjs0pytvvycrza5",
+   "https://photo.superimmo.com/a6npkvkyqd92utw1tn4d9whtrrxh",
+   "https://photo.superimmo.com/9ww58zjm51pytegxe9p6647m9ni8",
+   "https://photo.superimmo.com/rlkr8czdbdaxr6rbrilnud3jk8g1",
+   "https://photo.superimmo.com/b6hxtxqgmgq7tijdcohknbgyq3ol"
   ],
-  "description": "Location Duplex Saint-Denis (974) 1 pièces 31 m²",
+  "description": "Annonce appartement location 31,38 m² 1 pièce à Saint-Denis Premium Immobilier vous présente à la location",
   "caracteristiques": [],
   "date": "",
-  "annonceur": "Pro · via leboncoin",
+  "annonceur": "Superimmo",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0262 21 78 54",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/duplex-1-piece-31-m2/01a1e9fd-a684-7c38-ac1e-83efb55aa0ac"
+   }
+  ],
   "vu": "2026-11-17T19:09+04:00"
  },
  {
