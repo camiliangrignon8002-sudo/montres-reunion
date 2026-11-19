@@ -781,35 +781,6 @@
   "vu": "2026-10-27T02:51+04:00"
  },
  {
-  "id": "zimo-01a1a189-dd87-7efc-b93b-26cd262c4545",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-1-piece-24-m2/01a1a189-dd87-7efc-b93b-26cd262c4545",
-  "titre": "Studio 1 pièce 24 m²",
-  "prix": 443.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 24.0,
-  "meuble": null,
-  "photos": [],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 24 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via bien'ici",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-03T17:23+04:00"
- },
- {
   "id": "pv-1296630166",
   "source": "ParuVendu",
   "url": "https://www.paruvendu.fr/immobilier/location/appartement/1296630166A1KILHAP000",
@@ -5259,6 +5230,49 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-03T21:13+04:00"
+ },
+ {
+  "id": "ep-22805624",
+  "source": "EntreParticuliers",
+  "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/studio-meuble-et-climatise-avec-grande-terrasse/ref-22805624",
+  "titre": "Studio meublé et climatisé avec grande terrasse — Saint-Denis",
+  "prix": 659.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 18.0,
+  "meuble": true,
+  "photos": [
+   "https://www.entreparticuliers.com/media/epc-photos/photo_4d29f68c-a2fd-4032-9ea3-e4e0997c11bb.jpg"
+  ],
+  "description": "Go immo vous propose à la location ce studio situé au butor à champ-fleuri, à deux pas d'un hypermarché, de la cité des arts et du boulevard lancastel. Ce studio de 18.8 m² entièrement rénové, meublé et climatisé saura vous apporter confort et bien-être avec tous les équipements et mobiliers dont vous avez besoin. Les beaux jours, vous profiterez de sa grande terrasse avec salon de jardin. Le tout dans une charmante résidence sécurisée avec une place de parking privative en sous-sol. Conditions financière : - le loyer hors charges est de 619eur - loyer charges comprises 659eur comprenant : 20eur de teom et 20eur de copro - dépôt de garantie : 1238eur - honoraire agence : 246.65 eur dont 56.96eur pour l'état des lieux contactez-nous pour visiter !  www. Georisques. Gouv. Fr.",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Climatisation",
+   "Jardin",
+   "Résidence sécurisée"
+  ],
+  "date": "",
+  "annonceur": "Particulier",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/studio-meuble-et-climatise-avec-grande-terrasse/01a1f2ea-34b8-7f14-b4bc-c8a64323d8c4"
+   }
+  ],
+  "vu": "2026-11-19T13:24+04:00"
  },
  {
   "id": "bienici-ag970168-549637991",
