@@ -1,5 +1,5 @@
 {
- "mise_a_jour": "2026-11-19T07:19+00:00",
+ "mise_a_jour": "2026-11-19T09:07+00:00",
  "sources": [
   {
    "id": "intemporel",
@@ -149,7 +149,7 @@
    "id": "timepiece360",
    "nom": "Timepiece360",
    "via": "Shopify",
-   "annonces": 68
+   "annonces": 67
   },
   {
    "id": "watchmaestro",
@@ -161,7 +161,7 @@
    "id": "thestore",
    "nom": "The Store Dubai",
    "via": "WooCommerce",
-   "annonces": 451
+   "annonces": 452
   },
   {
    "id": "watchexchange-sg",
@@ -62615,28 +62615,6 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
-   "id": "f71f21b75777",
-   "boutique": "timepiece360",
-   "reference": "",
-   "collection": "Submariner",
-   "annee": "",
-   "etat": "Occasion",
-   "boite": null,
-   "papiers": null,
-   "titre": "Submariner Date \"Starbucks\" MK2",
-   "url": "https://timepiece360.com/products/submariner-date-starbucks-mk2",
-   "prix": 86000,
-   "devise": "AED",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0650/0188/1839/files/1_0979fe8f-5410-4684-8cc3-f9cb2355a0cd.jpg?v=1716468074",
-     "w": 1800
-    }
-   ],
-   "description": "Rolex Submariner Date \"Starbucks\" MK2 41mm, steel case, black dial, ceramic bezel and steel oyster bracelet. Mechanized by Rolex calibre 3235 automatic movement.",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
    "id": "0ab91e7099a7",
    "boutique": "timepiece360",
    "reference": "",
@@ -64107,6 +64085,28 @@
    ],
    "description": "The Rolex Sea-Dweller James Cameron, reference 136650, is an excellent dive watch built for extreme depths. The 2025 model is completely unworn and includes its original box and papers. It uses a large 44mm steel case that feels very solid. The most unique feature is the dial because it starts bright blue at the top and slowly turns black at the bottom, just like the deep ocean. A solid ceramic bezel surrounds the glass to prevent everyday scratches.  \n The Sea-Dweller has a very accurate automatic movement, which keeps exact time without a battery. The thick steel bracelet matches the heavy case and balances the watch comfortably on your wrist. The dial has no standard numbers. That’s why the large glowing markers make reading the time very easy in dark places. It is a highly reliable steel watch for men who want true quality and excellent water resistance.",
    "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "7bc528509ba5",
+   "boutique": "thestore",
+   "reference": "116528SACO",
+   "collection": "Cosmograph Daytona",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": null,
+   "papiers": null,
+   "titre": "Pre-Owned Rolex Cosmograph Daytona Leopard 116528SACO",
+   "url": "https://www.thestore.ae/product/pre-owned-rolex-cosmograph-daytona-leopard-116528saco/",
+   "prix": null,
+   "devise": "AED",
+   "photos": [
+    {
+     "src": "https://www.thestore.ae/wp-content/uploads/2026/11/Screenshot_2026-11-17-12-06-05-90_e4424258c8b8649f6e67d283a50a2cbc-scaled.jpg",
+     "w": 1200
+    }
+   ],
+   "description": "",
+   "premiere_vue": "2026-11-19T09:07+00:00"
   },
   {
    "id": "6b36d7783443",
