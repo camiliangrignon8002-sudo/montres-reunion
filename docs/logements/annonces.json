@@ -154,37 +154,6 @@
   "vu": "2026-11-18T11:35+04:00"
  },
  {
-  "id": "zimo-01a13c82-7cd5-7e45-b5f5-b3bf995e897d",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-au-moufia/01a13c82-7cd5-7e45-b5f5-b3bf995e897d",
-  "titre": "Studio au Moufia",
-  "prix": 370.0,
-  "commune": "Saint-Denis",
-  "quartier": "Le Moufia",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 23.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/CxFxMTCtKc5dTLjh83UEo-y9QJ5NhM4RvhoaKysfrQQ/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_2fe964f1-701d-49dc-80f8-8c3de6f1184c.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 23 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via ParuVendu",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
   "id": "zimo-01a1a4cf-378a-783b-8c00-76b260f6bee9",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-a-louer-au-port/01a1a4cf-378a-783b-8c00-76b260f6bee9",
@@ -1514,33 +1483,46 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a1a4c6-1b98-7eb1-990d-381e7ceef14e",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/loue-studio-au-moufia/01a1a4c6-1b98-7eb1-990d-381e7ceef14e",
-  "titre": "Loue studio au moufia",
+  "id": "figaro-98661035",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-98661035.html",
+  "titre": "Location  appartement 1 pièce 20 m² à Moufia (97490), 500 €",
   "prix": 500.0,
   "commune": "Saint-Denis",
-  "quartier": "Le Moufia",
+  "quartier": "Moufia",
   "pieces": 1,
   "type": "Studio",
   "surface": 20.0,
   "meuble": null,
-  "photos": [],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
-  "caracteristiques": [],
+  "photos": [
+   "https://lh3.googleusercontent.com/4AmR21oczw3d0xwlGeqTEe3VHkaEfugPmyOtPv01WvX2-UFQUQEW6BuTRJgF2j-X-KNoI38Fn2lfPo2SbofEZd9WLgAqD1pSSGmqGA=rw-w700-h660-l80"
+  ],
+  "description": "A louer studio comprenant :\n1 kitchenette\n1 pièce principale climatisée\n1 SDE + WC\nPlacards aménagés",
+  "caracteristiques": [
+   "Climatisation"
+  ],
   "date": "",
-  "annonceur": "Particulier · via leboncoin",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
-  "pro": false,
+  "pro": true,
   "tel": "",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
-  "vu": "2026-11-03T22:03+04:00"
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/loue-studio-au-moufia/01a1a4c6-1b98-7eb1-990d-381e7ceef14e"
+   },
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/studio/01a1a28d-46dc-72a3-8b45-667450f619e3"
+   }
+  ],
+  "vu": "2026-10-21T13:51+04:00"
  },
  {
   "id": "zimo-01a1a41b-dcce-7010-900c-575b74aa0265",
@@ -2453,6 +2435,43 @@
   "vu": "2026-11-04T10:18+04:00"
  },
  {
+  "id": "figaro-99684193",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-99684193.html",
+  "titre": "Location  appartement 1 pièce 19 m² à Saint-Denis (97400), 550 €",
+  "prix": 550.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 19.0,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/-MHpqso9X992Nn3aE_p7LbTHZZzgwHJYo9pVkzDN251NMOXs47jex1QIcqzIxv1ryvxRKykzW3F47kXkDhh0Bjf_zTsJ8Tn9fIE4=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/suQCh9zdhT1Pr88a6ZekpA3X9-ATpUaHJP16ScO0VxBs0Lr4Xfb2ITMYszIZhi9EbqD6HDzdfh8jsjja_ViY9AVhP7_XKXigPoB-=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/vWIMGCErBDYYQd7K5dz8s_6i3BrfZoS59OAXxcT3CW79yJOuYeOdZFxVPorUJHET2Xk0mei0ItbmGUY2ealSImtrse5T8z24CwOnJA=rw-w940-h605-l80"
+  ],
+  "description": "Florence DOÉ 0692 01 28 80 florencedoe@outre-mer-immobilier.re https://www.outre-mer-immobilier.re/louer.html Studio meublé neuf? Près de la Fac\nStudio meublé de 18 m², entièrement refait à neuf, situé au rez-de-chaussée de la résidence Central Fac n°1, à proximité immédiate de l?université.\nLe logement comprend :\n- canapé-lit,\n- table à manger avec chaises hautes,\n- machine à laver,\n- vaisselle,\n- kitchenette équipée,\n- salle d?eau avec WC\nIdéal pour étudiant, proche de la faculté, des commerces et des transports.Plus d'informations et des vidéos ? Venez consulter notre site internet outre-mer-immobilier ou contactez moi : Florence DOÉ Négociateur(trice) Immobilier au 0692 01 28 80 - Vous avez également un bien à vendre ? Appelez-moi au 0692 01 28 80 pour une estimation gratuite !------------------------------------------Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site www.georisques.gouv.fr",
+  "caracteristiques": [
+   "Meublé",
+   "Proche transports",
+   "Proche université"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "0692 01 28 80",
+  "email": "florencedoe@outre-mer-immobilier.re",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-10-21T19:53+04:00"
+ },
+ {
   "id": "bienici-immo-facile-61704747",
   "source": "Bien'ici",
   "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/immo-facile-61704747",
@@ -2819,6 +2838,43 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:07+04:00"
+ },
+ {
+  "id": "figaro-110828989",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110828989.html",
+  "titre": "Location meublée appartement 1 pièce 34.5 m² à Saint denis chaudron (97490), 580 €",
+  "prix": 580.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint denis chaudron",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 34.5,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/Ee7YoFOOG1TBELmLZbwRW9FhSwRfcoprsvFm6RhuoCXfdQZoz4mls34OwyyM_PWbAT7BgwA34gzbGqsi3owp3ShPsgn-o9GAOvRs=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/19oO3M6gvhr0sSc8a9t5R2pl7I1NhQo-TnN63WDubafYn_2Um6tlH0_roa8bhujCAXkdx3NwsPRlpMyAvRKV4pjniYn5sSAlsLdtlg=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/6JGiGs4L2gyfPtqxVxWlau-Idta7ByFiJDehk6QZe59ISuowC5wqACpA3pAAYHrGxdVjFyCmmZ2sZ-8hn1DMbJdbwPJA2DB6TcUMmQ=rw-w940-h605-l80"
+  ],
+  "description": "Studio meublé d'une superficie d'environ 34,50 m², situé dans une résidence calme avec place de parking privative.\nIl se compose d'une entrée, d'une salle de bains avec WC, d'un coin cuisine ainsi que d'une pièce principale avec placards de rangement.\nVous profiterez également d'une grande varangue de 12,02 m² offrant une vue dégagée sur la mer.\nLe logement sera disponible à partir du 02/12/2026\n* Loyer avec charges : 580.00 €, dont :\n- 20 € de provisions pour charges récupérables\n* Dépôt de garantie : 1 120.00 €\n* Honoraires de location : 448.00 € (10.00 €/m² : visite, rédaction bail - 3.00 €/m² : état des lieux)\nMVS ORPI : Envoyer vos dossiers pour étude à yoclain@orpi.com",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "yoclain@orpi.com",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-19T00:17+04:00"
  },
  {
   "id": "zimo-01a1a397-32e1-781d-a591-04191886ea6d",
@@ -3617,6 +3673,10 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
+   {
+    "source": "Figaro Immobilier",
+    "url": "https://immobilier.lefigaro.fr/annonces/annonce-110683147.html"
+   },
    {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-t1-res-les-marquises/01a1a1ce-55f3-7e8c-bbeb-0e4ac0bc6ede"
@@ -5221,37 +5281,6 @@
   "vu": "2026-11-09T23:12+04:00"
  },
  {
-  "id": "zimo-01a10d4b-a9dd-733c-86a6-5c9c6ebc994e",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-19-m2/01a10d4b-a9dd-733c-86a6-5c9c6ebc994e",
-  "titre": "Appartement Saint-Denis 1 pièce(s) 18.78 m2",
-  "prix": 650.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 18.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/DJtAQ60DPLDyAdh5gtoyQaxGwPnQPmOdHqye1fwTb3Y/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_0470d9a6-58ce-4c86-94a3-c42c03cf6601.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 18 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via DOMimmo",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
- },
- {
   "id": "zimo-01a1a433-f2cc-76dd-98b2-01d12bfd44c3",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/location-studio-etudiant/01a1a433-f2cc-76dd-98b2-01d12bfd44c3",
@@ -5732,46 +5761,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-03T23:11+04:00"
- },
- {
-  "id": "figaro-108763619",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-108763619.html",
-  "titre": "Location  appartement 1 pièce 22.88 m² à Sainte Clotilde (97490), 660 €",
-  "prix": 660.0,
-  "commune": "Saint-Denis",
-  "quartier": "Sainte Clotilde",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 22.88,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/QWqeT3VAHwJ0LkPn9OPQIzFhFEaBvkg_odmzK9ElOkQoKxEuFInsf5YsGj-9TgaOpg0GxgPrjsfvhyWWQXfEBu5GpVSnyTCU9rXm0sc=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/L4lJ-wVPt78puF_t46BOeMKDM1_xLffzcBWmBQTxcSou4ik79XimYC-tYYzBsm8MNnS-g1UDyjPClHcbUDkPjCzpG1n93m8YVWKjpw=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/xEaKqjza4PaiwR0B_GQUKG_LrTHah88_DgwbvVvpyRKDMVqKP8vi21sOzcg0qT_rp8bssrhC0oPhKkWnJUblkDc2-iJqUDFpqP0W=rw-w940-h605-l80"
-  ],
-  "description": "Venez visiter ce charmant studio meublé très bien agencé situé dans la résidence le Rembrand proche de la clinique et de la faculté comprenant une entrée, une pièce à vivre climatisée, une cuisine aménagée avec placards haut et bas et équipée d'un réfrigérateur, micro ondes, évier, plaque de cuisson...... , une salle d'eau avec douche et toilette et une varangue donnant sur le jardin de la résidence.\nUne place de parking est attribuée à ce logement.\nce logement est disponible de suite.\nLoyer mensuel 660 € dont 20 € de provision pour charges de copropriété\nDépôt de garantie 1260 € soit deux mois de loyer hors charges\nHonoraires locataires 13 € du m2 soit 286 € dont 66 € pour état des lieux soit 3 € du m2\nPour toute visite contactez David agent commercial du réseau teka Immo au 0692 14 60 00 ou ou par é-mail :david.teka@tekaimmo.fr\nlien vers notre barème :http://www.teka Immo.com/pdf/honoraires.pdf.Annonce rédigée sous la responsabilité éditoriale de l'agent.\n\\r",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Parking",
-   "Climatisation",
-   "Jardin",
-   "Cuisine équipée"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "0692 14 60 00",
-  "email": "david.teka@tekaimmo.fr",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T17:56+04:00"
  },
  {
   "id": "ep-22793553",
@@ -7473,6 +7462,37 @@
   "vu": "2026-11-03T20:07+04:00"
  },
  {
+  "id": "zimo-01a1f5a5-d446-7a37-8f82-6906729038dd",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-52-m2/01a1f5a5-d446-7a37-8f82-6906729038dd",
+  "titre": "Appartement 2 pièces 52 m²",
+  "prix": 706.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 52.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/D3OjZpfbT60t1BprunlqE26n3_voaHf7lwhCpDnwAwM/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_3bd0b881-4c13-4354-9bce-5ff0e4532bf4.jpg"
+  ],
+  "description": "Location T2 Saint-Denis (974) 2 pièces 52 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-20T02:05+04:00"
+ },
+ {
   "id": "zimo-01a1a4bc-b16e-77f8-bf14-90466e10b22d",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/a-louer-studio-meuble/01a1a4bc-b16e-77f8-bf14-90466e10b22d",
@@ -7533,46 +7553,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "figaro-110709197",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110709197.html",
-  "titre": "Location  appartement 2 pièces 42.25 m² à Saint denis chaudron (97490), 715 €",
-  "prix": 715.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint denis chaudron",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 42.25,
-  "meuble": true,
-  "photos": [
-   "https://lh3.googleusercontent.com/RfybwlVKjHT9ifCNkM-m5zctdWR9Ct4J-ijgUFMYj91nOzlwBQEX0Q6-1rvb37-jCYB-47gwMCk_3gYu9-O4Gbua-yGtv0P6Lw6iT3c=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/b2jKmUZKgczq84NdRx7ouVYp_EkVdPBb8eTi0cCLjB6jiUy_LKyqNuK2A67DFpqNpil1hsEWMdM_TRR6cjM8OQv1PrhgSEttNYQE=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/mzFcBa3pWMK7BTbjXUgxF8W9thfpcnY5KtXMOGN-uNBgrgoT8RUtqyCbcmr3wsvd8nI3EnBH4MGe-CxfVYfT-ckw74Q8keFeNTh2=rw-w940-h605-l80"
-  ],
-  "description": "Disponible le 3 décembre / résidence sénior\n.\nSuperbe T2 de 42 m² situé au 1er étage de la résidence seniors calme et sécurisée, Les Patios d'Or Sainte Clotilde, ruelle Magnan.\nLE LOGEMENT\nEntrée avec visiophone\nSéjour lumineux avec baie vitrée\nChambre\nCuisine aménagée avec meubles hauts et bas, évier, plaque de cuisson vitrocéramique, hotte aspirante.\nSalle d'eau adaptée aux séniors : douche au ras du sol, siège rabattable, barres d'appui et de maintien, WC réhaussés.\nLES PLUS\nVarangue exposée ouest\nAscenseur\nRésidence aux normes PMR\neau chaude collective\nLA RESIDENCE\nToutes nos résidences disposent d'un club-house animé par un régisseur. Les résidents peuvent participer quotidiennement à diverses animations (comprises dans les charges) et profiter :\nd'un espace détente,\nd'un espace loisirs,\nd'un espace cuisine.\nAfin de répondre aux besoins de chacun, les services dédiés aux seniors sont proposés à la carte :\nservices à la personne,\ntélésurveillance,\nservices paramédicaux,\nlivraison de repas.\nACCES :\nBus : ligne 10, arrêt Champ fleuri ou lignes n°5,6,7et 8 arrêt Butor.\nLoyer soumis au dispositif Pinel Outre Mer.\nHonoraires de 554,32 € TTC à la charge du locataire comprenant 128,02 € TTC pour l'état des lieux. Loyer de base 589.00 €/mois. Provision sur charges 126 €/mois, régularisation annuelle. Dépôt de garantie 589 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
-  "caracteristiques": [
-   "Varangue / balcon",
-   "Ascenseur",
-   "Cuisine équipée",
-   "Résidence sécurisée",
-   "Proche transports",
-   "Accès handicapé"
-  ],
-  "date": "",
-  "annonceur": "",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-11T01:00+04:00"
  },
  {
   "id": "ep-22772248",
