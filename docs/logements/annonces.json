@@ -125,36 +125,24 @@
   "vu": "2026-11-18T11:35+04:00"
  },
  {
-  "id": "superimmo-o-com-annonces-location-appartement-23m-moufia-97490-x129k38",
-  "source": "Superimmo",
-  "url": "https://www.superimmo.com/annonces/location-appartement-23m-moufia-97490-x129k38",
-  "titre": "Location appartement 1 pièce 23 m² Moufia (97490)",
+  "id": "zimo-01a13c82-7cd5-7e45-b5f5-b3bf995e897d",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-au-moufia/01a13c82-7cd5-7e45-b5f5-b3bf995e897d",
+  "titre": "Studio au Moufia",
   "prix": 370.0,
   "commune": "Saint-Denis",
-  "quartier": "",
+  "quartier": "Le Moufia",
   "pieces": 1,
   "type": "Studio",
   "surface": 23.0,
   "meuble": null,
   "photos": [
-   "https://photo.superimmo.com/siw6rqkuir52aamhehun8r22579v",
-   "https://photo.superimmo.com/o5g72p0lwo9qnpo1rxhelhg2sv06",
-   "https://photo.superimmo.com/3r31aodtafd45ea1z9cc2sszp90n",
-   "https://photo.superimmo.com/wk02lw2q5e255q4qgjx3hbmsz1f3",
-   "https://photo.superimmo.com/t62gv11mlo9yuyv77gqemlwp21hg",
-   "https://photo.superimmo.com/tiic98f5fp7fur4fuhl5xh9i2x0a",
-   "https://photo.superimmo.com/q2f5a1g5965rxrj9ta9kebts6ojc",
-   "https://photo.superimmo.com/akze036k8898m8fvdnu46vd42vq5",
-   "https://photo.superimmo.com/hanbhtipilh5hjp8198vkkva3p6l",
-   "https://photo.superimmo.com/526dsnpa5kqi8l4zyrt16wnygdh5",
-   "https://photo.superimmo.com/1buyjd2uaqipjv3d8m0gu11oyoyj",
-   "https://photo.superimmo.com/gqwbvihfmb9tzx4b2pa33ty7n6tv",
-   "https://photo.superimmo.com/7p76bblovxvht3p6xznqggme9gg8"
+   "https://img.e-xiste.com/CxFxMTCtKc5dTLjh83UEo-y9QJ5NhM4RvhoaKysfrQQ/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_2fe964f1-701d-49dc-80f8-8c3de6f1184c.jpg"
   ],
-  "description": "Annonce appartement location 23 m² 1 pièce à Moufia Studio au Ce Studio de 22m2 au",
+  "description": "Location Studio Saint-Denis (974) 1 pièces 23 m²",
   "caracteristiques": [],
   "date": "",
-  "annonceur": "Superimmo",
+  "annonceur": "Pro · via ParuVendu",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -164,12 +152,7 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/studio-au-moufia/01a13c82-7cd5-7e45-b5f5-b3bf995e897d"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
  },
  {
