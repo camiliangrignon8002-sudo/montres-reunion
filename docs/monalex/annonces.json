@@ -1,5 +1,5 @@
 {
- "mise_a_jour": "2026-11-20T01:06+00:00",
+ "mise_a_jour": "2026-11-20T02:53+00:00",
  "sources": [
   {
    "id": "intemporel",
@@ -131,7 +131,7 @@
    "id": "watchguys",
    "nom": "WatchGuys",
    "via": "Shopify",
-   "annonces": 668
+   "annonces": 667
   },
   {
    "id": "mywatchllc",
@@ -172,7 +172,7 @@
   {
    "id": "hjluxury",
    "nom": "HJ Luxury",
-   "via": "fiches produit",
+   "via": "WooCommerce",
    "annonces": 0
   }
  ],
@@ -29888,44 +29888,6 @@
     }
    ],
    "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n GMT-Master II \n Reference Number: \n 126710BLNR \n Nickname: \n Batman \n SKU: \n WG3977 \n Condition: \n Excellent i \n Gender: \n Men's \n Style: \n Sport, Casual \n Box and Papers: \n Box and Papers \n Note: \n White Hangtag Included \n Year: \n 2022 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Dot/Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date, GMT",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "d5d9d1c49d29",
-   "boutique": "watchguys",
-   "reference": "116509",
-   "collection": "Cosmograph Daytona",
-   "annee": "2007",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Rolex Daytona 116509 Meteorite Roman",
-   "url": "https://www.watchguys.com/products/rolex-daytona-116509-meteorite-roman",
-   "prix": 57895,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-daytona-116509-meteorite-roman-1.webp?v=1791234919",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-daytona-116509-meteorite-roman-2.webp?v=1791234925",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-daytona-116509-meteorite-roman-3.webp?v=1791234931",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-daytona-116509-meteorite-roman-4.webp?v=1791234937",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Modern_Rolex_Box_No_Papers_49a8791d-9560-48b6-b003-506ac1874fbb.webp?v=1791234943",
-     "w": 2048
-    }
-   ],
-   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Daytona \n Reference Number: \n 116509 \n SKU: \n P154 \n Condition: \n Excellent \n i \n Gender: \n Mens \n Style: \n Casual, Sport \n Box and Papers: \n Box Only \n Year: \n 2007 \n Warranty: \n WatchGuys 1-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n 18K White Gold \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Meteorite \n Dial Hour Marker: \n Roman \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n 18K White Gold \n Color: \n 18K White Gold \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n 7 1/4″ – 7 1/2″ \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Chronograph, Tachymeter",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
