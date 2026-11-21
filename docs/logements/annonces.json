@@ -2501,6 +2501,39 @@
   "vu": "2026-11-03T22:03+04:00"
  },
  {
+  "id": "zimo-01a1ffcd-ed18-76d8-b316-9b051ccbec9e",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-climatise/01a1ffcd-ed18-76d8-b316-9b051ccbec9e",
+  "titre": "Studio climatisé",
+  "prix": 550.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 20.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/zFJs-kABvcz69dSru3iwsvg_1nVULARDIrhR9Dt4NAk/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_37163dc0-1497-4638-8f26-84d30f9b12c1.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
+  "caracteristiques": [
+   "Climatisation"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-22T02:12+04:00"
+ },
+ {
   "id": "zimo-01a1a4b8-3f93-788f-b167-15a346796331",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/loue-t1-saint-denis-bellepierre/01a1a4b8-3f93-788f-b167-15a346796331",
@@ -6478,6 +6511,72 @@
   "vu": "2026-11-03T17:23+04:00"
  },
  {
+  "id": "zimo-01a1ffe9-ce2d-7310-a63f-a055afb6c167",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-t2-en-duplex-non-meuble/01a1ffe9-ce2d-7310-a63f-a055afb6c167",
+  "titre": "Appartement t2 en duplex non meuble",
+  "prix": 690.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 46.0,
+  "meuble": false,
+  "photos": [
+   "https://img.e-xiste.com/kJYU4c-Q5eKxqf1cPBi-BkzimikSUl8y_euPk0L36UE/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_8754b49b-c79d-482b-9839-69b2095a3ee5.jpg"
+  ],
+  "description": "Location Duplex Saint-Denis (974) 2 pièces 46 m²",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-22T02:12+04:00"
+ },
+ {
+  "id": "zimo-01a1ff5b-c363-76f1-b10b-59b8a40da44d",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/loue-f1-meuble-de-32-m2-690-longue-duree-hors-eau-edf-situee-a-a-saint-denis-apl-ok/01a1ff5b-c363-76f1-b10b-59b8a40da44d",
+  "titre": "Loue F1 meublé de 32 m² 690 longue durée hors eau edf située à à Saint-Denis APL ok",
+  "prix": 690.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 3,
+  "type": "T3",
+  "surface": 28.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/qh82rx1dPrJC6aPRCeV7mewAcmDCI_m5xVahEiyBhd0/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_cfdc4131-c2e9-4b5b-a6d6-272a7d321bf5.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 3 pièces 28 m²",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": true,
+  "aussi": [],
+  "vu": "2026-11-22T02:12+04:00"
+ },
+ {
   "id": "superimmo-onces-location-appartement-44m-sainte-clotilde-97490-x12cqfs",
   "source": "Superimmo",
   "url": "https://www.superimmo.com/annonces/location-appartement-44m-sainte-clotilde-97490-x12cqfs",
@@ -6984,6 +7083,39 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-03T20:07+04:00"
+ },
+ {
+  "id": "zimo-01a1ff5b-bcf2-7568-b767-515cabd528e5",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-t1-meuble-fonctionnel-calme-et-bien-situe/01a1ff5b-bcf2-7568-b767-515cabd528e5",
+  "titre": "Studio T1 meublé fonctionnel, calme et bien situé",
+  "prix": 700.0,
+  "commune": "La Possession",
+  "quartier": "La Possession",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 20.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/WQwD1d7Dj8q1Nly700gSO7ZjD9AaFMc38SUDnRLiYQs/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_bfaca960-cb0b-4014-8f76-fe4a1d51cfbf.jpg"
+  ],
+  "description": "Location T1 La Possession (974) 1 pièces 20 m²",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord-Ouest",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-22T02:12+04:00"
  },
  {
   "id": "zimo-01a1a332-c26f-74ef-8004-358df775ec2d",
