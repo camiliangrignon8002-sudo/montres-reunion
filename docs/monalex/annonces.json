@@ -1,5 +1,5 @@
 {
- "mise_a_jour": "2026-11-22T17:46+00:00",
+ "mise_a_jour": "2026-11-22T23:33+00:00",
  "sources": [
   {
    "id": "intemporel",
@@ -131,7 +131,7 @@
    "id": "watchguys",
    "nom": "WatchGuys",
    "via": "Shopify",
-   "annonces": 670
+   "annonces": 669
   },
   {
    "id": "mywatchllc",
@@ -25749,44 +25749,6 @@
    ],
    "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Milgauss \n Reference Number: \n 116400V \n SKU: \n WG3550 \n Condition: \n Excellent i \n Gender: \n Mens \n Style: \n Casual, Sport \n Box and Papers: \n Box and Papers \n Year: \n 2010 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster Clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Anti-magnetic",
    "premiere_vue": "2026-11-16T17:16+00:00"
-  },
-  {
-   "id": "f4eb30b9f02e",
-   "boutique": "watchguys",
-   "reference": "126710BLNR",
-   "collection": "GMT-Master II",
-   "annee": "2024",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Rolex GMT-Master II 126710BLNR Stainless Steel Batgirl Jubilee",
-   "url": "https://www.watchguys.com/products/rolex-gmt-master-ii-126710blnr-stainless-steel-batgirl-jubilee",
-   "prix": 18795,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_126710_GMT_Batgirl_Jubilee_5f79c8e4-95fb-47e9-a651-fe148c41789d.webp?v=1791243139",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_GMT-Master_126710BLNR_Batgirl_Watch_on_Wrist_93b4c339-86da-4c6c-9959-dca6c31c3cac.webp?v=1791243144",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126710blnr-batgirl-704.webp?v=1791243147",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126710blnr-batgirl-996.webp?v=1791243151",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Modern_Rolex_Box_with_Papers_ef918993-0301-44b2-861e-275c410b9318.png?v=1795021662",
-     "w": 2048
-    }
-   ],
-   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n GMT-Master II \n Reference Number: \n 126710BLNR \n Nickname: \n Batgirl \n SKU: \n WG4047 \n Condition: \n Excellent i \n Gender: \n Men's \n Style: \n Sport, Casual \n Box and Papers: \n Box and Papers \n Year: \n 2024 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Dot/Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date, GMT",
-   "premiere_vue": "2026-11-18T17:09+00:00"
   },
   {
    "id": "5f1da93c4ed9",
