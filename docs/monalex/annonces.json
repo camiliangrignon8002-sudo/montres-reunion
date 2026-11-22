@@ -1,5 +1,5 @@
 {
- "mise_a_jour": "2026-11-21T20:29+00:00",
+ "mise_a_jour": "2026-11-22T02:08+00:00",
  "sources": [
   {
    "id": "intemporel",
@@ -161,7 +161,7 @@
    "id": "thestore",
    "nom": "The Store Dubai",
    "via": "WooCommerce",
-   "annonces": 451
+   "annonces": 452
   },
   {
    "id": "watchexchange-sg",
@@ -5075,6 +5075,52 @@
    "premiere_vue": "2026-11-21T20:29+00:00"
   },
   {
+   "id": "f002ffa26c3e",
+   "boutique": "beckertime",
+   "reference": "69160",
+   "collection": "",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Ladies Rolex Stainless Steel Date 69160 Watch with Silver Dial (SKU S146047MT)",
+   "url": "https://beckertime.com/product/used-rolex-date-womens-s146047mt/",
+   "prix": 5600,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2019/08/DCBBAAA69160AAA-1.jpeg",
+     "w": 1984
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2019/08/DDCBBAAA69160AAA-1.jpeg",
+     "w": 1696
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2019/08/QA69160AAA-1.jpeg",
+     "w": 1696
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2019/08/A830-0.jpg",
+     "w": 2400
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2019/08/A830-5.jpg",
+     "w": 2400
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2019/08/A830-6.jpg",
+     "w": 2400
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2019/08/WQA69160AAA-1.jpeg",
+     "w": 1632
+    }
+   ],
+   "description": "Specifications \n Brand \n Rolex \n Model Name \n Date \n Model No. \n 69160 \n Gender \n Ladies \n Case Diameter \n 26mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 6 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET Date function \n Dial \n Rolex SILVER dial with raised stick markers \n Bezel \n Rolex stainless steel smooth finish DOMED bezel \n Case \n Rolex stainless steel case \n Band \n Rolex stainless steel Oyster bracelet with Rolex signed clasp \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!\n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances that most buyers may not even notice.) Please keep in mind that many of our competitors use file photos ",
+   "premiere_vue": "2026-11-22T02:08+00:00"
+  },
+  {
    "id": "87967e5c6ed6",
    "boutique": "beckertime",
    "reference": "16220",
@@ -5123,6 +5169,60 @@
    ],
    "description": "﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ \n Specifications \n Brand \n Rolex \n Model Name \n Datejust \n Model No. \n 16220 \n Gender \n Men’s \n Case Diameter \n 36mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 7 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/4″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET Date function \n Dial \n Rolex SILVER dial with raised stick markers \n Bezel \n Rolex stainless steel ENGINE-TURNED bezel \n Case \n Rolex stainless steel case \n Band \n Rolex stainless steel Jubilee band with Rolex signed clasp \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!\n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances that most buyers may not even notice.) Please keep in mind that many of our competitors use fi",
    "premiere_vue": "2026-11-20T21:46+00:00"
+  },
+  {
+   "id": "6e547735aabd",
+   "boutique": "beckertime",
+   "reference": "79240",
+   "collection": "",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Ladies Rolex Stainless Steel Date Watch Silver Dial 79240 with Rolex Papers (SKU A736213AMT)",
+   "url": "https://beckertime.com/product/ladies-rolex-stainless-steel-date-watch-silver-dial-79240-with-papers-sku-a736213amt/",
+   "prix": 6000,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/11/AA79240-1.jpeg",
+     "w": 1362
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/11/A79240-1.jpeg",
+     "w": 1425
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/01/A736213AMT9-1.jpg",
+     "w": 1920
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/01/A736213OAMT2.jpg",
+     "w": 1920
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/01/A736213OAMT3.jpg",
+     "w": 1920
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/01/A736213OAMT4.jpg",
+     "w": 1920
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/01/A736213OAMT5.jpg",
+     "w": 1920
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/01/A736213OAMT6.jpg",
+     "w": 1920
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/01/A736213OAMT7.jpg",
+     "w": 1920
+    }
+   ],
+   "description": "﻿ ﻿ ﻿ ﻿ ﻿ \n Specifications \n Brand \n Rolex \n Model Name \n Date \n Model No. \n 79240 \n Gender \n Ladies \n Case Diameter \n 26mm \n Box \n No \n Papers \n Yes \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 6 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET DATE function \n Dial \n Rolex SILVER dial with raised stick markers \n Bezel \n Rolex stainless steel ENGINE-TURNED bezel \n Case \n Rolex stainless steel case \n Band \n Original stainless steel Oyster bracelet with Rolex signed clasp \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!",
+   "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
    "id": "0ff3f2cbef16",
@@ -5227,6 +5327,40 @@
    ],
    "description": "﻿ ﻿ ﻿ ﻿ \n Specifications \n Brand \n Rolex \n Model Name \n Datejust \n Model No. \n 16200 \n Gender \n Men’s \n Case Diameter \n 36mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 7 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET Date function \n Dial \n Rolex SILVER dial with raised stick markers \n Bezel \n Rolex stainless steel smooth finish DOMED bezel \n Case \n Rolex stainless steel case \n Band \n Rolex stainless steel Oyster band with Rolex signed clasp \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!\n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances that most buyers may not even notice.) Please keep in mind that many of our competitors use file phot",
    "premiere_vue": "2026-11-19T17:10+00:00"
+  },
+  {
+   "id": "ff063664e64d",
+   "boutique": "beckertime",
+   "reference": "79240",
+   "collection": "",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Ladies Rolex Stainless Steel Date 79240 Watch with Silver Dial (SKU Y938732NMT)",
+   "url": "https://beckertime.com/product/used-rolex-date-womens-y938732nmt/",
+   "prix": 5600,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2016/09/79240A-1.jpeg",
+     "w": 1229
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2016/09/79240E-1.jpeg",
+     "w": 1445
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2016/09/79240C-1.jpeg",
+     "w": 1783
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2016/09/79240D-1.jpeg",
+     "w": 1414
+    }
+   ],
+   "description": "Specifications \n Brand \n Rolex \n Model Name \n Date \n Model No. \n 79240 \n Gender \n Ladies \n Case Diameter \n 26mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 6 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/4″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET DATE function \n Dial \n Rolex SILVER dial with raised stick markers \n Bezel \n Rolex stainless steel ENGINE-TURNED bezel \n Case \n Rolex stainless steel case \n Band \n Rolex stainless steel Jubilee bracelet with Rolex signed clasp \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!\n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances that most buyers may not even notice.) Please keep in mind that many of our competitors use file photos as we",
+   "premiere_vue": "2026-11-22T02:08+00:00"
   },
   {
    "id": "6a07b508db2c",
@@ -5573,6 +5707,48 @@
    ],
    "description": "Specifications \n Brand \n Rolex \n Model Name \n Explorer \n Model No. \n 114270 \n Gender \n Mens \n Case Diameter \n 36mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex does NOT come with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 7 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement \n Dial \n Rolex BLACK dial with raised 3/6/9 Arabic markers \n Bezel \n Rolex stainless steel smooth finish DOMED bezel \n Case \n Rolex stainless steel case \n Band \n Rolex stainless steel Oyster bracelet with Rolex signed fliplock clasp. This is the SEL (Solid End Link) style Rolex band that is desired by many. \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!\n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances that most buyers may not even ",
    "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "5450e36936fa",
+   "boutique": "beckertime",
+   "reference": "69240",
+   "collection": "",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Ladies Rolex Stainless Steel Date 69240 Watch with Black Dial (SKU W6822010MT)",
+   "url": "https://beckertime.com/product/used-rolex-date-womens-w6822010mt/",
+   "prix": 5400,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2015/06/69240AAA-1.jpeg",
+     "w": 1323
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2015/06/AW6822010MT-1.jpg",
+     "w": 1696
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2015/06/69240C-1.jpeg",
+     "w": 1696
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2015/06/ADSCN1646.jpg",
+     "w": 3404
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2015/06/DSCN1648.jpg",
+     "w": 4151
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2015/06/DSCN1649-1.jpg",
+     "w": 3709
+    }
+   ],
+   "description": "Specifications \n Brand \n Rolex \n Model Name \n Date \n Model No. \n 69240 \n Gender \n Ladies \n Case Diameter \n 26mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 6 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET DATE function \n Dial \n Rolex BLACK dial with raised stick markers \n Bezel \n Rolex stainless steel ENGINE-TURNED bezel \n Case \n Rolex stainless steel case \n Band \n Rolex stainless steel Oyster band with Rolex signed clasp \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!\n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances that most buyers may not even notice.) Please keep in mind that many of our competitors use file photos as well, bu",
+   "premiere_vue": "2026-11-22T02:08+00:00"
   },
   {
    "id": "fdfb8af5728b",
@@ -7565,7 +7741,7 @@
      "w": 1920
     }
    ],
-   "description": "﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ \n Specifications \n Brand \n Rolex \n Model Name \n Date \n Model No. \n 79160 \n Gender \n Ladies \n Case Diameter \n 26mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 6 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET Date function \n Dial \n Rolex WHITE dial with raised 2/4/6/8/10 ARABIC markers and ILLUMINATED markers \n Bezel \n Rolex stainless steel smooth finish DOMED bezel \n Case \n Rolex stainless steel case \n Band \n Rolex stainless steel Oyster bracelet with Rolex signed clasp. \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED! \n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances that most buyers may not even notice.) Please kee",
+   "description": "﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ \n Specifications \n Brand \n Rolex \n Model Name \n Date \n Model No. \n 79160 \n Gender \n Ladies \n Case Diameter \n 26mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 6 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET DATE function \n Dial \n Rolex WHITE dial with raised 2/4/6/8/10 ARABIC markers and ILLUMINATED markers \n Bezel \n Rolex stainless steel smooth finish DOMED bezel \n Case \n Rolex stainless steel case \n Band \n Rolex stainless steel Oyster bracelet with Rolex signed clasp \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED! \n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances that most buyers may not even notice.) Please ke",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -9238,214 +9414,6 @@
     }
    ],
    "description": "Specifications \n Brand \n Rolex \n Model Name \n Datejust \n Model No. \n 16220 \n Gender \n Men’s \n Case Diameter \n 36mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 7 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/4″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET DATE function \n Dial \n Rolex BLUE dial with raised stick markers. Light scratches, spotting and surface nicks \n Bezel \n Rolex stainless steel ENGINE-TURNED bezel \n Case \n Rolex stainless steel case \n Band \n Rolex stainless steel Jubilee bracelet with Rolex signed clasp. Moderate stretch and wear. \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!\n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances that most buyers may not even notice.) Pl",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "d6ba9e5ecee9",
-   "boutique": "beckertime",
-   "reference": "16613T",
-   "collection": "Submariner",
-   "annee": "",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Mens Rolex Two-Tone 18K/SS Submariner Watch Blue Dial 16613T (SKU D226222AMT)",
-   "url": "https://beckertime.com/product/mens-rolex-two-tone-18k-ss-submariner-watch-blue-dial-16613t-sku-d226222amt/",
-   "prix": 14300,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/D226222AMT8.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/D226222AMT.jpg",
-     "w": 1580
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/D226222AMT2.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/D226222AMT3.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/D226222AMT4.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/D226222AMT5.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/D226222AMT6.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/D226222AMT7.jpg",
-     "w": 1920
-    }
-   ],
-   "description": "﻿ ﻿ ﻿ ﻿ ﻿ \n Specifications \n Brand \n Rolex \n Model Name \n Submariner \n Model No. \n 16613T \n Gender \n Men’s \n Case Diameter \n 40mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 7 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET Date function \n Dial \n Rolex BLUE dial with white ILLUMINATING markers \n Bezel \n Rolex solid 18k yellow gold with blue bezel insert; Unidirectional time lapse. Bezel has signs of wear. \n Case \n Rolex stainless steel case \n Band \n Rolex 2tone 18k yellow gold and stainless steel Oyster bracelet with Rolex signed flip-lock clasp and special divers extension. THIS IS THE DESIRED (SOLID END LINK) SEL BAND WITH THE GOLD THROUGH CLASP. Band has Stretch and Wear. \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!\n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarante",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "a26336f35ff0",
-   "boutique": "beckertime",
-   "reference": "16710",
-   "collection": "GMT-Master II",
-   "annee": "",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Mens Rolex Stainless Steel GMT Master II Black and Red Coke Bezel Black Dial 16710 (SKU A86995AMT)",
-   "url": "https://beckertime.com/product/mens-rolex-stainless-steel-gmt-master-ii-black-and-red-coke-bezel-black-dial-16710-sku-a86995amt/",
-   "prix": 15000,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/16710B-1.jpeg",
-     "w": 1386
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/16710A-1.jpeg",
-     "w": 1456
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/A869955OAMT.jpg",
-     "w": 1580
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/A869955OAMT2.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/A869955OAMT3.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/A869955AMT4.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/A869955AMT5.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/A869955AMT6.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/A869955AMT7.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/A869955OAMT8.jpg",
-     "w": 1920
-    }
-   ],
-   "description": "﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ \n Specifications \n Brand \n Rolex \n Model Name \n GMT-Master II \n Model No. \n 16710 \n Gender \n Mens \n Case Diameter \n 40mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex does NOT come with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Sapphire Crystal – A few nicks along the edge \n Max Wrist Size \n 7 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with INDEPENDENT HOUR HAND ADJUSTMENT \n Dial \n Rolex BLACK dial with white markers \n Bezel \n Rolex stainless steel bezel with 24-hour black & red “Coke” bezel insert \n Case \n Rolex stainless steel case; Light scratches, dings and wear. \n Band \n Rolex stainless steel Oyster bracelet with Rolex signed flip lock clasp and special divers extension. This is the SEL (solid end link) Rolex Oyster band that is sought after and desired. \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "68620c38edf6",
-   "boutique": "beckertime",
-   "reference": "1803",
-   "collection": "Day-Date",
-   "annee": "",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Mens Vintage Rolex 18K Yellow Gold Day-Date 1803 Watch Champagne Dial (SKU 1803BFPAMT)",
-   "url": "https://beckertime.com/product/mens-vintage-rolex-18k-yellow-gold-day-date-1803-watch-champagne-dial-sku-1803bfpamt/",
-   "prix": 10000,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/1803BFPAMT8.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/1803BFPAMT.jpg",
-     "w": 1580
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/1803BFPAMT2.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/1803BFPAMT3.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/1803BFPAMT4.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/1803BFPAMT5.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/1803BFPAMT6.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/1803BFPAMT7.jpg",
-     "w": 1920
-    }
-   ],
-   "description": "﻿ ﻿ ﻿ \n Specifications \n Brand \n Rolex \n Model Name \n Day-Date \n Model No. \n 1803 \n Gender \n Mens \n Case Diameter \n 36mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Acrylic Crystal \n Max Wrist Size \n 8″ wrist \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement \n Dial \n Rolex GOLD CHAMPAGNE dial with raised stick markers; Light scratches and wear. \n Bezel \n Rolex solid 18k yellow gold FLUTED bezel \n Case \n Rolex solid 18k yellow gold case \n Band \n BROWN leather strap with plain stainless steel gold-tone buckle. This strap is not made by Rolex. It is a custom aftermarket leather strap. \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED! \n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances that most buyers may not even notice.) Please keep in mind that many of our competitors use",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "aeb1ce5d9f4b",
-   "boutique": "beckertime",
-   "reference": "15210",
-   "collection": "",
-   "annee": "1980",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Mens Rolex Stainless Steel Date Watch Silver Dial Oyster Band 15210 (SKU Y706209FPOAMT)",
-   "url": "https://beckertime.com/product/mens-rolex-stainless-steel-date-watch-silver-dial-oyster-band-15210-sku-y706209fpoamt/",
-   "prix": 6000,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/Y706209AMT8.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/Y706209AMT.jpg",
-     "w": 1580
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/Y706209AMT2.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/Y706209AMT3.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/Y706209AMT4.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/Y706209AMT5.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/Y706209AMT6.jpg",
-     "w": 1920
-    },
-    {
-     "src": "https://beckertime.com/wp-content/uploads/2026/03/Y706209AMT7.jpg",
-     "w": 1920
-    }
-   ],
-   "description": "﻿ ﻿ \n Specifications \n Brand \n Rolex \n Model Name \n Date \n Model No. \n 15210 \n Gender \n Mens \n Case Diameter \n 34mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 7 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET DATE function \n Dial \n Rolex SILVER dial with raised yellow gold stick markers. This is a “T Swiss T” dial from the 1980’s. \n Bezel \n Rolex stainless steel ENGINE-TURNED INDEX bezel \n Case \n Rolex stainless steel case \n Band \n Rolex stainless steel Oyster bracelet with Rolex signed clasp \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -33313,7 +33281,7 @@
    "papiers": true,
    "titre": "Rolex Daytona 116506 Platinum Ice Blue",
    "url": "https://www.watchguys.com/products/rolex-daytona-116506-platinum-ice-blue",
-   "prix": 90995,
+   "prix": 88795,
    "devise": "USD",
    "photos": [
     {
@@ -35237,6 +35205,64 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
+   "id": "88b575c2d8ed",
+   "boutique": "mywatchllc",
+   "reference": "",
+   "collection": "Submariner",
+   "annee": "2026",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "NEW 2026 Rolex Submariner 41mm 124060 Stainless Steel Black Dial",
+   "url": "https://mywatchllc.com/products/new-2026-rolex-submariner-41mm-124060-stainless-steel-black-dial-5",
+   "prix": 14000,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/DA66E882-58E2-44E7-8131-9EC6F89518CA_6de12298-e08c-43ba-84a7-64080226f0dc.png?v=1779918741",
+     "w": 2576
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/D5D6F63D-F7F0-4BFC-AD32-AE9DEC146521_5c745d6a-5b70-4ceb-bc95-8c215e8ebec2.png?v=1779918741",
+     "w": 2708
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/D42D9A86-2A68-40BE-B921-A7A4C14D40F1_b55725c6-b8e6-45ad-b351-116dcf435152.png?v=1779918741",
+     "w": 2644
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/B3411CA8-65BA-48D0-9F00-D34DCC723E42_ea84bb37-46ff-482f-9416-a54d5357339c.png?v=1779918741",
+     "w": 2657
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/0CFE54DC-1E35-499F-A1D8-7AC6B98258CB_1790d7d3-9408-490d-bc84-210820ccbc23.png?v=1779918741",
+     "w": 2725
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/7888F866-DA98-4261-BB83-92325653B498_a5e789c9-b433-443d-ad1c-e9acd1939f32.png?v=1779918740",
+     "w": 2441
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/895C84B9-6E7D-4BAC-B9AE-7AC948814704_ed0b5e6e-7451-4f42-9561-9e18158c2dfc.png?v=1779918741",
+     "w": 2689
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/12727FBD-BEF9-4E31-A01C-702DFAAEB62E_79f434ed-5231-4fe6-9e43-f526f81ede4a.png?v=1779918744",
+     "w": 2378
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/484DBD3E-3F2C-4354-A29A-D04A4C8CCA2A_850406ac-5647-4343-8463-14a7692adbc9.png?v=1779918740",
+     "w": 1644
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/63BCF43C-83DE-4FB1-B2EB-F2F530FC84BC_e686c3e6-db3d-4f4a-b963-58f258887918.png?v=1779918741",
+     "w": 3024
+    }
+   ],
+   "description": "NEW 2026 Rolex Submariner  No Date 41mm 124060-0001 Stainless Steel Black Dial Oyster Bracelet with Glidelock  \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty  \n ✔️Reference: 124060 \n ✔️Manual and Warranty booklets  \n ✔️Green and White Hang Tags included \n ✔️Material: Oystersteel \n ✔️Size: 8.25inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Userguide",
+   "premiere_vue": "2026-11-22T02:08+00:00"
+  },
+  {
    "id": "5aa58fd1c78e",
    "boutique": "mywatchllc",
    "reference": "",
@@ -36337,64 +36363,6 @@
    ],
    "description": "NEW 2026 Rolex Cosmograph Daytona 40mm 126519LN-0007 18kt White Gold Oysterflex Bracelet Cerachrom Bezel with Tachymetric Scale and Meteorite Dial  \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets \n ✔️Green Hang Tag included \n ✔️Size: 7.0inch - 7.5inch wrist (Oysterflex) \n ✔️Need a different size? We stock genuine Rolex OEM Oysterflex straps and can size one to your wrist before shipping. Please inquire before purchasing to confirm availability. \n ✔️Watch is BRAND NEW/UNWORN . \n ✔️ Trades welcome \n See every Rolex Daytona in stock and the full Rolex lineup.",
    "premiere_vue": "2026-11-19T19:01+00:00"
-  },
-  {
-   "id": "c447eb78a67d",
-   "boutique": "mywatchllc",
-   "reference": "",
-   "collection": "GMT-Master II",
-   "annee": "2026",
-   "etat": "Neuf",
-   "boite": true,
-   "papiers": true,
-   "titre": "NEW 2026 Rolex GMT-Master II Batgirl 40mm 126710BLNR Jubilee (NEW STYLE CARD)",
-   "url": "https://mywatchllc.com/products/rolex-batgirl-gmt-master-ii-40mm-126710blnr-jubilee-bracelet",
-   "prix": 20350,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/56FE5370-FCA4-4627-A816-6896BAC76E1D.jpg?v=1787077420",
-     "w": 2725
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/BE310196-88C6-4B7A-836E-7B10BEF60386.jpg?v=1787077420",
-     "w": 2512
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/E10F43ED-CE73-4E5E-BCBA-17345C6A85EA.jpg?v=1787077420",
-     "w": 2476
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/629731C6-3D38-4CED-83AC-69C1D0B80B6A.jpg?v=1787077420",
-     "w": 2521
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/08827AB2-908A-4DF8-A324-AF66CE8934CE.jpg?v=1787077419",
-     "w": 2573
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/23FF2A0F-27B1-4204-88EE-58BEB17D842A.jpg?v=1787077419",
-     "w": 2157
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/D9479EB7-B2E2-47D0-BBC8-074DF70EC52C.jpg?v=1787077421",
-     "w": 2228
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/E3D8DA57-1DDD-4D44-B2DD-36474587EAD1.jpg?v=1787077419",
-     "w": 2421
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/3B87C9B4-2CEA-4828-A09A-0739DE33A5E0.jpg?v=1787077419",
-     "w": 1645
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/B4679753-E8D3-4444-B2DA-FF41706A29A0.jpg?v=1787077419",
-     "w": 1645
-    }
-   ],
-   "description": "Rolex GMT-Master II Batgirl 40mm 126710BLNR-0002 in Oystersteel with Jubilee Bracelet and Black Dial UNWORN / BRAND NEW 2026 \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty Card Dated 2026 (NEW STYLE CARD) \n ✔️5 Year Manufacturer Warranty \n ✔️Manual and Warranty booklets \n ✔️Serial number hang tag (NEW STYLE TAG) \n ✔️Green Hang Tag included \n ✔️Material: Stainless Steel \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome \n Userguide \n Want this look on an Oyster bracelet? Discover the Rolex Batman collection, see the complete Rolex Batgirl collection, or shop all Rolex GMT-Master II watches.",
-   "premiere_vue": "2026-11-18T20:57+00:00"
   },
   {
    "id": "376d46c9a18c",
@@ -52625,7 +52593,7 @@
    "papiers": true,
    "titre": "NEW 2026 Rolex Datejust 41mm 126301 Two-Tone Jubilee Sundust Diamond Dial",
    "url": "https://mywatchllc.com/products/new-2026-rolex-datejust-41mm-126301-two-tone-jubilee-sundust-diamond-dial",
-   "prix": 17500,
+   "prix": 16000,
    "devise": "USD",
    "photos": [
     {
@@ -64369,6 +64337,28 @@
    ],
    "description": "The Rolex Sea-Dweller James Cameron, reference 136650, is an excellent dive watch built for extreme depths. The 2025 model is completely unworn and includes its original box and papers. It uses a large 44mm steel case that feels very solid. The most unique feature is the dial because it starts bright blue at the top and slowly turns black at the bottom, just like the deep ocean. A solid ceramic bezel surrounds the glass to prevent everyday scratches.  \n The Sea-Dweller has a very accurate automatic movement, which keeps exact time without a battery. The thick steel bracelet matches the heavy case and balances the watch comfortably on your wrist. The dial has no standard numbers. That’s why the large glowing markers make reading the time very easy in dark places. It is a highly reliable steel watch for men who want true quality and excellent water resistance.",
    "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "17f3a2f2b369",
+   "boutique": "thestore",
+   "reference": "126300",
+   "collection": "Datejust",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": null,
+   "papiers": null,
+   "titre": "Pre-Owned Rolex DateJust Oystersteel 41mm White Dial Jubilee Bracelet 126300-0028",
+   "url": "https://www.thestore.ae/product/pre-owned-rolex-datejust-oystersteel-41mm-white-dial-jubilee-bracelet-126300/",
+   "prix": null,
+   "devise": "AED",
+   "photos": [
+    {
+     "src": "https://www.thestore.ae/wp-content/uploads/2026/11/1000000525-1536x1536.jpg",
+     "w": 1536
+    }
+   ],
+   "description": "",
+   "premiere_vue": "2026-11-22T02:08+00:00"
   },
   {
    "id": "6b36d7783443",
