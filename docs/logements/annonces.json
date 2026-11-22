@@ -3450,20 +3450,18 @@
   "vu": "2026-11-09T22:05+04:00"
  },
  {
-  "id": "zimo-01a1b153-1e5e-72a8-90f3-cd091d68e5a5",
+  "id": "zimo-01a1a4bc-8e99-7be5-9f3b-4728aa3d6320",
   "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-moufia/01a1b153-1e5e-72a8-90f3-cd091d68e5a5",
-  "titre": "Studio moufia",
+  "url": "https://www.zimo.fr/annonce/studio-independant/01a1a4bc-8e99-7be5-9f3b-4728aa3d6320",
+  "titre": "Studio indépendant",
   "prix": 600.0,
   "commune": "Saint-Denis",
-  "quartier": "Le Moufia",
+  "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
   "surface": 18.0,
   "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/mIvg0fhXo5f5kWSfV8tzoyHFEDfX3rDLMse0xe17WtA/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_91e7a430-7d85-4fe4-a5b4-b859c43a1d54.jpg"
-  ],
+  "photos": [],
   "description": "Location Studio Saint-Denis (974) 1 pièces 18 m²",
   "caracteristiques": [],
   "date": "",
@@ -3478,7 +3476,7 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
+  "vu": "2026-11-06T23:10+04:00"
  },
  {
   "id": "zimo-01a1a484-cca8-7269-af91-69f34fd4c48b",
@@ -4948,6 +4946,39 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-20T22:41+04:00"
+ },
+ {
+  "id": "zimo-01a1f4a8-65f7-74c4-a7c6-aa2228e6811f",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/f1-bis-mble-terrasse-pisc/01a1f4a8-65f7-74c4-a7c6-aa2228e6811f",
+  "titre": "F1 bis mblé terrasse pisc",
+  "prix": 650.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 34.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/yRXz47hGZ_hoHFweFWKAbSr0jtA2a5hDkC2uppwa99I/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_8e14c095-a5e6-4a4a-b888-8f4cd6b988f1.jpg"
+  ],
+  "description": "Location T1 bis Saint-Denis (974) 1 pièces 34 m²",
+  "caracteristiques": [
+   "Varangue / balcon"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-19T22:06+04:00"
  },
  {
   "id": "zimo-01a1ef96-da45-7550-86d4-7e478ae3c1bb",
@@ -7588,39 +7619,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
- },
- {
-  "id": "zimo-01a1f4a8-65f7-74c4-a7c6-aa2228e6811f",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/f1-bis-mble-terrasse-pisc/01a1f4a8-65f7-74c4-a7c6-aa2228e6811f",
-  "titre": "F1 bis mblé terrasse pisc",
-  "prix": 730.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "T1",
-  "surface": 34.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/jRFO1xH8gL6sR1CkwRfGXM7-egPAwuLMP0T29Fqqkds/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_b60feb08-1aee-4d2c-b067-a677c3ccff9b.jpg"
-  ],
-  "description": "Location T1 bis Saint-Denis (974) 1 pièces 34 m²",
-  "caracteristiques": [
-   "Varangue / balcon"
-  ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-19T22:06+04:00"
  },
  {
   "id": "zimo-01a152cd-c740-7666-bde6-114b192f5824",
