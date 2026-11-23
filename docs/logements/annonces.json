@@ -1593,41 +1593,38 @@
   "vu": "2026-11-20T22:41+04:00"
  },
  {
-  "id": "pv-1295653924",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1295653924A1KILHAP000",
-  "titre": "Location appartement 1 pièce de 71m2 à Saint denis (97490)",
+  "id": "superimmo--annonces-location-appartement-71m-saint-denis-97490-x1246ia",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-71m-saint-denis-97490-x1246ia",
+  "titre": "Location appartement 1 pièce 71 m² Saint-Denis (97490)",
   "prix": 500.0,
   "commune": "Saint-Denis",
-  "quartier": "Sainte-Clotilde",
+  "quartier": "",
   "pieces": 1,
   "type": "T1",
   "surface": 71.0,
   "meuble": true,
   "photos": [
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/24/ff/L3dhL2ltYWdlcy9iaWVucy8xLzE2YTYwODMyMjgyMDY1OGExZjM3NDM4ZjBmNDkzZmUxL3Bob3RvX2EzOTYwNDJjZTU5NDliMTdiMmEwZTRhYTJhZTcyZDI1LmpwZz8yMDI2MTEwODAxNDAwNA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/f7/04/L3dhL2ltYWdlcy9iaWVucy8xLzE2YTYwODMyMjgyMDY1OGExZjM3NDM4ZjBmNDkzZmUxL3Bob3RvXzNiZWQwMGUzYTRmMDU3YWYyYTI0MTliYzEwOTFjNjA5LmpwZz8yMDI2MTEwODAxNDAwNA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/c0/8f/L3dhL2ltYWdlcy9iaWVucy8xLzE2YTYwODMyMjgyMDY1OGExZjM3NDM4ZjBmNDkzZmUxL3Bob3RvXzc4YTc1MjU2YjEyODc4NGIwODZjZDMzZDVjZTE5ZjQ0LmpwZz8yMDI2MTEwODAxNDAwNA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/30/c6/L3dhL2ltYWdlcy9iaWVucy8xLzE2YTYwODMyMjgyMDY1OGExZjM3NDM4ZjBmNDkzZmUxL3Bob3RvXzA3NGM5ODAzOGY1NGJkMmUzYWU3MDI4MDZkZWUxOWRiLmpwZz8yMDI2MTEwODAxNDAwNA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/82/52/L3dhL2ltYWdlcy9iaWVucy8xLzE2YTYwODMyMjgyMDY1OGExZjM3NDM4ZjBmNDkzZmUxL3Bob3RvX2ViMWY5YzVhMDg3ZjQxOGExODVlYWY4YzFkZDQ3NGVhLmpwZz8yMDI2MTEwODAxNDAwNA_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/de/eb/L3dhL2ltYWdlcy9iaWVucy8xLzAxODIzYmNhMWIzYmFhZWJhYjRmN2MzNmQwNzg5NGVlL3Bob3RvXzZlNWNlNjI3MTU2M2E2MDEzYzU4MmEyMWYwNzU2YjkxLmpwZz8yMDI2MTAyNzIzNTY1NQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/68/89/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS1JTUdfMjAyMTExMDlfMTEyMjM2LTgyMDc2Mzk4NzQ4MDE0NzA4MS5qcGc_MjAyNjExMjAxMTM5NTg_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/media.studio-net.fr/bd/ba/L2JpZW5zLzM0MTQ3MDE1L3g2YWZmNjI2MGU3ZmIxPzIwMjYxMTIwMDgxNjUx_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/72/44/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS0xMDA3MTctMTk2NjQyLTQ4NDIzNzIxOTQ2MzUzNTQ5OTcuanBnPzIwMjYxMTIwMDU1MTA4_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/photos.exportadapt.com/2f/61/LzY5MDA0LzY5MDA0MTA0NjhfNzYuanBnPzIwMjYxMTIwMDE0MTAx_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/56/41/L2NpdF9DSVRZQV9TVEdJTExFU190aWMvbG9jYXRpb24vcGhvdG8vZmlsaWdyYW5lLUlNR18zMzEwLTg0MjA2MDQyMTY0NDU2Nzc4MDIuanBnPzIwMjYxMTE5MTEzNzUz_rct?func=crop&w=1000&gravity=auto"
+   "https://photo.superimmo.com/gf30vdhx5s05y0n0h137u5jna8go",
+   "https://photo.superimmo.com/o5g72p0lwo9qnpo1rxhelhg2sv06",
+   "https://photo.superimmo.com/22ugzulyxxv361kjidk57kmiuw28",
+   "https://photo.superimmo.com/5hqupl6cz4evqfb1xmua9wc6d51i",
+   "https://photo.superimmo.com/9tvxe0plsl2zapcxv1qfdduc0tu3",
+   "https://photo.superimmo.com/biqya13nr951t0h9ic22x66e3jcr",
+   "https://photo.superimmo.com/ngqd0fr37e66rgrfzbwv8wyhl8j0",
+   "https://photo.superimmo.com/riwak42lll4i8q44j250lbcn1qfs",
+   "https://photo.superimmo.com/1dau3vimqdkunnacar7bhdl06zsw",
+   "https://photo.superimmo.com/yp28vjyl5eupjl5ce2uvijhtjeyi",
+   "https://photo.superimmo.com/p1fp9jkxb82ty2kenhoygh48ewcg",
+   "https://photo.superimmo.com/fn3ejflb0f1r82do0qxymiiwxbni",
+   "https://photo.superimmo.com/ver2xyi1inofk63yqslslnme2ciz",
+   "https://photo.superimmo.com/104irezlk8vdrt9mde54f55b1t76",
+   "https://photo.superimmo.com/lze7k5fb97hj4ceu5fzlk0vzan1u"
   ],
-  "description": "Chambres meublées individuelles dans une villa neuve, idéalement située à proximité de l'université et des transports. Espaces communs confortables et accès sécurisé pour une vie pratique et agréable.\nSituée dans le secteur du Moufia à Sainte-Clotilde, 3 chambres meublées individuelles proposées à la location au sein d'une villa T4 neuve de 71m2. Chaque chambre bénéficie d'un espace privatif meublé, au sein d'un logement partagé avec deux autres occupantes. Les parties communes comprennent un séjour ouvert sur une cuisine équipée, une salle d'eau, un WC, un petit rangement ainsi qu'une petite terrasse aménagée. Vous disposez également d'un accès piéton sécurisé. Tout le mobilier / électroménager est neuf.\nSituée à proximité de l'Université de La Réunion, du rectorat, d'établissements scolaires et des transports en commun, et à seulement 3 minutes en voiture du Boulevard Sud, cette location bénéficie d'un emplacement particulièrement pratique pour les étudiantes.\nL'eau et l'électricité sont compris dans le loyer de chaque chambre.\nDisponible à partir de mi-octobre 2026.\nLoyer mensuel par chambre : 500,00 € charges comprises.\nDépôt de garantie : un mois de loyer charges comprises, soit 500,00 €.\nHonoraires en zone tendue : 307,67 €.\nHERREN Immobilier /\nDétails :\nNombre de pièces : 1\nNb de salle d'eau : 1\nTerrasse : 1\nNombre de wc : 1\nPart Honoraires Etat des lieux : 213 euros\nLieu : DOM-TOM (97)",
-  "caracteristiques": [
-   "Meublé",
-   "Varangue / balcon",
-   "Cuisine équipée",
-   "Résidence sécurisée",
-   "Proche transports",
-   "Proche université"
-  ],
+  "description": "Annonce appartement location 71 m² 1 pièce à Saint-Denis Chambres meublées à Ste Clotilde Située dans",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "HERREN IMMOBILIER",
+  "annonceur": "Superimmo",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -1639,12 +1636,12 @@
   "caf": false,
   "aussi": [
    {
-    "source": "Herren Immobilier",
-    "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
+    "source": "ParuVendu",
+    "url": "https://www.paruvendu.fr/immobilier/location/appartement/1295653924A1KILHAP000"
    },
    {
     "source": "Herren Immobilier",
-    "url": "https://www.herren-immobilier.com/location/appartement/7996"
+    "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -4915,6 +4912,73 @@
   "vu": "2026-11-04T07:04+04:00"
  },
  {
+  "id": "zimo-01a20710-904b-72ca-9155-b4fd35876a95",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-meuble-vue-mer-clim-et-parking/01a20710-904b-72ca-9155-b4fd35876a95",
+  "titre": "STUDIO MEUBLÉ - vue mer - clim et parking",
+  "prix": 650.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 20.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/swHDsro5J_2QOlwfWM0kmS-LwLi1mL2OXsDmFgMCUYs/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_8b3d81c0-5173-414b-a0c1-4e7390b6626f.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 20 m²",
+  "caracteristiques": [
+   "Meublé",
+   "Parking",
+   "Climatisation",
+   "Vue mer"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-23T13:11+04:00"
+ },
+ {
+  "id": "zimo-01a206a2-615d-7bcc-abcf-d25fa69a6064",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/location-appartement-saint-denis-650/01a206a2-615d-7bcc-abcf-d25fa69a6064",
+  "titre": "Location appartement Saint-Denis 650",
+  "prix": 650.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 42.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/y0i74zEt_XJCFC59-pNLMTc-aaj0tbj4ADnKJNMxrDg/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_d617193d-9b6d-4e5e-a6d2-fb8b4efdb9e2.jpg"
+  ],
+  "description": "Location T2 Saint-Denis (974) 2 pièces 42 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-23T13:11+04:00"
+ },
+ {
   "id": "zimo-01a1f9c8-8870-7b8f-b962-57d19738596d",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/montgaillard-appart-f1bis-lumineux-et-securise-de-44m2/01a1f9c8-8870-7b8f-b962-57d19738596d",
@@ -5583,6 +5647,37 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "zimo-01a20710-959f-747a-b0fd-eb979c208370",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/st-denis-centre-ville-t2-59-m2-r-mazagran/01a20710-959f-747a-b0fd-eb979c208370",
+  "titre": "ST DENIS Centre ville T2 - 59 m² R. MAZAGRAN",
+  "prix": 660.0,
+  "commune": "Saint-Denis",
+  "quartier": "Centre-ville",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 59.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/8D_hSUdtJO7-u7IRYN6sICY_7wjhbt1dC2tKKvG0l3o/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_b4481ae9-d8d8-476d-90f7-011238803413.jpg"
+  ],
+  "description": "Location T2 Saint-Denis (974) 2 pièces 59 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-23T13:11+04:00"
  },
  {
   "id": "zimo-01a1d8bc-3004-7786-baba-2c579a81f55a",
