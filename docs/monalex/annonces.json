@@ -1,5 +1,5 @@
 {
- "mise_a_jour": "2026-11-22T23:33+00:00",
+ "mise_a_jour": "2026-11-23T07:25+00:00",
  "sources": [
   {
    "id": "intemporel",
@@ -131,7 +131,7 @@
    "id": "watchguys",
    "nom": "WatchGuys",
    "via": "Shopify",
-   "annonces": 669
+   "annonces": 668
   },
   {
    "id": "mywatchllc",
@@ -34401,44 +34401,6 @@
    ],
    "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Air-King \n Reference Number: \n 116900 \n SKU: \n WG3887 \n Condition: \n Excellent \n i \n Gender: \n Men's\n Style: \n Casual \n Box and Papers: \n Box and Papers \n Note: \n White Hangtag Included \n Year: \n 2019 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Arabic \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n 7 1/4\" - 7 1/2\" \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Time Only",
    "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "b78f441fa6cf",
-   "boutique": "watchguys",
-   "reference": "126710BLNR",
-   "collection": "GMT-Master II",
-   "annee": "2026",
-   "etat": "Neuf",
-   "boite": true,
-   "papiers": true,
-   "titre": "Rolex GMT-Master II 126710BLNR Batman",
-   "url": "https://www.watchguys.com/products/unworn-rolex-gmt-master-ii-126710blnr-batman",
-   "prix": 19195,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_Batman_GMT_Oyster_126710.webp?v=1791218935",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/RolexGMT-MasterBatman126710BLNR_2.webp?v=1791218940",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/RolexGMT-MasterBatman126710BLNR_3.webp?v=1791218945",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/RolexGMT-MasterBatman126710BLNR_4.webp?v=1791218949",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/New_Rolex_Box_with_Cards_eb84f7b7-b9ce-4f4d-9d3a-d902f1ab37b6.webp?v=1791218960",
-     "w": 2048
-    }
-   ],
-   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n GMT-Master \n Reference Number: \n 126710BLNR \n Nickname: \n Batman \n SKU: \n WG4064 \n Condition: \n Unworn \n i \n Gender: \n Men's \n Style: \n Sport, Casual \n Box and Papers: \n Box and Papers \n Note: \n New Eco-Friendly Warranty Card & Hang Tag \n Year: \n 2026 \n Warranty: \n WatchGuys 2-Year Warranty \n Note: \n 5-Year Rolex Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Dot/Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date, GMT",
-   "premiere_vue": "2026-11-19T01:13+00:00"
   },
   {
    "id": "92744ec8b6f9",
