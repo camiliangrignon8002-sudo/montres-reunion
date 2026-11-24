@@ -1,5 +1,5 @@
 {
- "mise_a_jour": "2026-11-23T20:06+00:00",
+ "mise_a_jour": "2026-11-24T04:43+00:00",
  "sources": [
   {
    "id": "intemporel",
@@ -119,7 +119,7 @@
    "id": "grandcaliber",
    "nom": "Grand Caliber",
    "via": "Shopify",
-   "annonces": 124
+   "annonces": 126
   },
   {
    "id": "swisswatchexpo",
@@ -131,7 +131,7 @@
    "id": "watchguys",
    "nom": "WatchGuys",
    "via": "Shopify",
-   "annonces": 675
+   "annonces": 676
   },
   {
    "id": "mywatchllc",
@@ -154,8 +154,8 @@
   {
    "id": "watchmaestro",
    "nom": "WatchMaestro",
-   "via": "fiches produit",
-   "annonces": 0
+   "via": "WooCommerce",
+   "annonces": 7
   },
   {
    "id": "thestore",
@@ -5021,6 +5021,56 @@
    "premiere_vue": "2026-11-14T10:39+00:00"
   },
   {
+   "id": "cdacd9f2db37",
+   "boutique": "beckertime",
+   "reference": "15200",
+   "collection": "",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Mens Rolex Date 15200 Stainless Steel Watch Gold Champagne Dial (SKU K411436GAMT)",
+   "url": "https://beckertime.com/product/mens-rolex-date-15200-stainless-steel-watch-gold-champagne-dial-sku-k411436gamt/",
+   "prix": 6100,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/11/K411436GAMT-1.jpg",
+     "w": 1388
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/11/K411436GAMT.jpg",
+     "w": 1580
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/11/K411436GAMT2.jpg",
+     "w": 1920
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/11/K411436GAMT3.jpg",
+     "w": 1920
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/11/K411436GAMT4.jpg",
+     "w": 1920
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/11/K411436GAMT5.jpg",
+     "w": 1920
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/11/K411436GAMT6.jpg",
+     "w": 1920
+    },
+    {
+     "src": "https://beckertime.com/wp-content/uploads/2026/11/K411436GAMT7.jpg",
+     "w": 1920
+    }
+   ],
+   "description": "﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ ﻿ \n Specifications \n Brand \n Rolex \n Model Name \n Date \n Model No. \n 15200 \n Gender \n Mens \n Case Diameter \n 34mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 7 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex officially certified chronometer self-winding automatic movement with QUICKSET DATE function \n Dial \n Rolex GOLD CHAMPAGNE dial with raised markers. Light spotting and wear. This is an older “T Swiss T” dial. \n Bezel \n Rolex stainless steel smooth finish DOMED bezel \n Case \n Rolex stainless steel case \n Band \n Rolex stainless steel Oyster bracelet with Rolex signed clasp \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!\n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances that most b",
+   "premiere_vue": "2026-11-24T04:43+00:00"
+  },
+  {
    "id": "42717310ae9b",
    "boutique": "beckertime",
    "reference": "114270",
@@ -9375,50 +9425,88 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
-   "id": "ebcc078a45c4",
-   "boutique": "beckertime",
-   "reference": "14000M",
-   "collection": "Air-King",
-   "annee": "",
+   "id": "520050dfe543",
+   "boutique": "grandcaliber",
+   "reference": "326259TBR",
+   "collection": "Sky-Dweller",
+   "annee": "2022",
    "etat": "Occasion",
    "boite": true,
    "papiers": true,
-   "titre": "Mens Rolex Air-King Precision 14000M Stainless Steel Watch with Black Dial (SKU BF106315AMT)",
-   "url": "https://beckertime.com/product/mens-rolex-air-king-precision-14000m-stainless-steel-watch-with-black-dial-sku-bf106315amt/",
-   "prix": 6100,
+   "titre": "Rolex Sky-Dweller 326259TBR",
+   "url": "https://grandcaliber.com/products/rolex-sky-dweller-326259tbr-dallas-rolex",
+   "prix": 196135,
    "devise": "USD",
    "photos": [
     {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/F106315AMT8.jpg",
-     "w": 1920
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Sky-Dweller_326259TBR.jpg?v=1795469445",
+     "w": 1440
     },
     {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/F106315AMT.jpg",
-     "w": 1580
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Sky-Dweller_326259TBR_0.jpg?v=1795469452",
+     "w": 1440
     },
     {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/F106315AMT345.jpg",
-     "w": 1966
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Sky-Dweller_326259TBR_1.jpg?v=1795469468",
+     "w": 1440
     },
     {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/F106315AMT2.jpeg",
-     "w": 1801
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Sky-Dweller_326259TBR_2.jpg?v=1795469475",
+     "w": 1440
     },
     {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/F106315AMT4.jpg",
-     "w": 1920
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Sky-Dweller_326259TBR_3.jpg?v=1795469483",
+     "w": 1440
     },
     {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/F106315AMT5.jpg",
-     "w": 1920
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Sky-Dweller_326259TBR_4.jpg?v=1795469526",
+     "w": 1440
     },
     {
-     "src": "https://beckertime.com/wp-content/uploads/2026/04/F106315AMT6.jpg",
-     "w": 1920
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Sky-Dweller_326259TBR_5.jpg?v=1795469532",
+     "w": 1440
     }
    ],
-   "description": "﻿ ﻿ ﻿ ﻿ ﻿ ﻿ \n Specifications \n Brand \n Rolex \n Model Name \n Air-King \n Model No. \n 14000M \n Gender \n Mens \n Case Diameter \n 34mm \n Box \n No \n Papers \n No \n Warranty \n Yes – BeckerTime 1 Year Warranty [ ? ] \n Condition [ What is this? ] \n Preowned – Super Excellent Condition \n This Rolex comes with the BeckerTime Lifetime Trade-Up Guarantee \n Crystal Type \n Aftermarket Sapphire Crystal \n Max Wrist Size \n 7 1/2″ wrist \n Additional Links \n Available for an additional cost. Link adds 1/3″ \n Watch Features \n Movement \n Rolex self-winding automatic movement \n Dial \n Rolex BLACK dial with raised stick markers \n Bezel \n Rolex stainless steel smooth finish DOMED bezel \n Case \n Rolex stainless steel case \n Band \n Rolex stainless steel Oyster bracelet with Rolex signed clasp \n AS WITH ALL OF OUR WATCHES, AUTHENTICITY IS GUARANTEED!\n THIS IS A FILE PHOTO. What does that mean? \n You may be asking why we use file photos… When we have more than one of the same item… we will only take pictures of one of the items. The item will be in the same condition and be as described. This helps us keep our costs down and pass the savings onto the buyer. Additionally, we have a 30 day unconditional money back guarantee. We don’t use file photos for every item… but only when the item will be the same as pictured and described. (There may be slight variances that most buyers may not even notice.) Please keep in mind that many of our competitors use file photos as well, but will not disclose this informati",
-   "premiere_vue": "2026-11-14T10:49+00:00"
+   "description": "Brand: Rolex\n Model: Sky-Dweller\n Reference: 326259TBR\n Case Material: White Gold\n Bracelet Material: Rubber\n Size: 42mm\n Dial Color: Meteorite Baguette\n Bezel Material: White Gold\n Date: 2022\n Condition: Pre-Owned\n Included Items: Watch with original box and papers\n Movement: Automatic\n Crystal: Sapphire Crystal\n Water Resistance: 10 ATM\n Stock ID: 787L9",
+   "premiere_vue": "2026-11-24T04:43+00:00"
+  },
+  {
+   "id": "8ebe4fbcdb61",
+   "boutique": "grandcaliber",
+   "reference": "18238",
+   "collection": "Day-Date",
+   "annee": "1997",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": null,
+   "titre": "Rolex Day Date \"SLAW\" 18238",
+   "url": "https://grandcaliber.com/products/rolex-day-date-slaw-18238-dallas-rolex",
+   "prix": 60550,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Day_Date_SLAW_18238.jpg?v=1795468668",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Day_Date_SLAW_18238_0.jpg?v=1795468676",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Day_Date_SLAW_18238_1.jpg?v=1795468741",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Day_Date_SLAW_18238_2.jpg?v=1795468749",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/6724445966ed8da21c58b8d7204c39c8Rolex_Day_Date_SLAW_18238.jpg?v=1795468755",
+     "w": 1440
+    }
+   ],
+   "description": "Brand: Rolex\n Model: Day Date \"SLAW\"\n Reference: 18238\n Case Material: Yellow Gold\n Bracelet Material: Yellow Gold\n Size: 36mm\n Dial Color: SLAW\n Bezel Material: Yellow Gold\n Date: 1997\n Condition: Pre-Owned\n Included Items: Watch with original box\n Movement: Automatic\n Crystal: Sapphire Crystal\n Water Resistance: 10 ATM\n Stock ID: 412D9",
+   "premiere_vue": "2026-11-24T04:43+00:00"
   },
   {
    "id": "3862f4cba915",
@@ -9547,6 +9635,56 @@
    "premiere_vue": "2026-11-19T22:53+00:00"
   },
   {
+   "id": "11023895b2be",
+   "boutique": "grandcaliber",
+   "reference": "126900",
+   "collection": "Air-King",
+   "annee": "2026",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex Air King Automatic Black Dial 126900",
+   "url": "https://grandcaliber.com/products/rolex-air-king-automatic-black-dial-126900-dallas-rolex-4",
+   "prix": 9575,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Air_King_Automatic_Black_Dial_126900_Front_03.jpg?v=1795467024",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Air_King_Automatic_Black_Dial_126900_Back_0.jpg?v=1795467030",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Air_King_Automatic_Black_Dial_126900_Clasp_03.jpg?v=1795467036",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Air_King_Automatic_Black_Dial_126900_InnerClasp_03.jpg?v=1795467042",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Air_King_Automatic_Black_Dial_126900_Card_03.jpg?v=1795467049",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Air_King_Automatic_Black_Dial_126900_Tag_03.jpg?v=1795467055",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Air_King_Automatic_Black_Dial_126900_Booklet_03.jpg?v=1795467061",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Air_King_Automatic_Black_Dial_126900_Box_03.jpg?v=1795467067",
+     "w": 1440
+    }
+   ],
+   "description": "Brand: Rolex\n Model: Air King Automatic Black Dial\n Reference: 126900\n Case Material: Steel\n Bracelet Material: Steel\n Size: 40mm\n Dial Color: Black\n Bezel Material: Steel\n Date: 2026\n Condition: Pre-Owned\n Included Items: Watch with original box and papers\n Movement: Automatic\n Crystal: Sapphire Crystal\n Water Resistance: 10 ATM\n Stock ID: 596GF",
+   "premiere_vue": "2026-11-24T04:43+00:00"
+  },
+  {
    "id": "a91da4dc2656",
    "boutique": "grandcaliber",
    "reference": "134300",
@@ -9645,6 +9783,64 @@
    ],
    "description": "Brand: Rolex\n Model: Datejust 41\n Reference: 126300\n Case Material: Steel\n Bracelet Material: Steel\n Size: 41mm\n Dial Color: Silver\n Bezel Material: Steel\n Date: 2025\n Condition: Pre-Owned\n Included Items: Watch with original box and papers\n Movement: Automatic\n Crystal: Sapphire Crystal\n Water Resistance: 10 ATM\n Stock ID: 565RA",
    "premiere_vue": "2026-11-16T17:16+00:00"
+  },
+  {
+   "id": "ec2d505c23f6",
+   "boutique": "grandcaliber",
+   "reference": "18238",
+   "collection": "Day-Date",
+   "annee": "2001",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex Day-Date \"President\" 18238",
+   "url": "https://grandcaliber.com/products/rolex-day-date-president-118238-dallas-rolex-1",
+   "prix": 22150,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Day-Date_President_118238_Front_02.jpg?v=1795124493",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Day-Date_President_118238_Back_02.jpg?v=1795124499",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Day-Date_President_118238_Clasp_02.jpg?v=1795124505",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Day-Date_President_118238_InnerClasp_02.jpg?v=1795124513",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Day-Date_President_118238_Card_02.jpg?v=1795124518",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Day-Date_President_118238_Tags_02.jpg?v=1795124524",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Day-Date_President_118238_Booklet_02.jpg?v=1795124530",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Day-Date_President_118238_Book_02.jpg?v=1795124538",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Day-Date_President_118238_Service_02.jpg?v=1795124551",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Day-Date_President_118238_Box_02.jpg?v=1795124558",
+     "w": 1440
+    }
+   ],
+   "description": "Brand: Rolex\n Model: Day-Date \"President\"\n Reference: 118238\n Case Material: Yellow Gold\n Bracelet Material: Yellow Gold\n Size: 36mm\n Dial Color: Ivory Pyramide\n Bezel Material: Yellow Gold\n Date: 2001\n Condition: Pre-Owned\n Included Items: Watch with original box and papers\n Movement: Automatic\n Crystal: Sapphire Crystal\n Water Resistance: 10 ATM\n Stock ID: 3443M",
+   "premiere_vue": "2026-11-19T22:53+00:00"
   },
   {
    "id": "a614268560e9",
@@ -9892,56 +10088,6 @@
     }
    ],
    "description": "Brand: Rolex\n Model: Oyster Perpetual 36\n Reference: 126000\n Case Material: Silver\n Bracelet Material: Steel\n Size: 36mm\n Dial Color: Pistachio\n Bezel Material: Steel\n Date: 2026\n Condition: Pre-Owned\n Included Items: Watch with original box and papers\n Movement: Automatic\n Crystal: Sapphire Crystal\n Water Resistance: 10 ATM\n Stock ID: 043HE",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "2266853842c9",
-   "boutique": "grandcaliber",
-   "reference": "126334",
-   "collection": "Datejust",
-   "annee": "2024",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Rolex Datejust 41 126334",
-   "url": "https://grandcaliber.com/products/rolex-datejust-41-126334-dallas-rolex-14",
-   "prix": 17080,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126334_Front_07.jpg?v=1794598141",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126334_Back_07.jpg?v=1794598151",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126334_Clasp_07.jpg?v=1794598157",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126334_InnerClasp_07.jpg?v=1794598164",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126334_Card_07.jpg?v=1794598170",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126334_Tag_07.jpg?v=1794598180",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126334_Booklet_07.jpg?v=1794598189",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Datejust_41_126334_Box_07.jpg?v=1794598196",
-     "w": 1440
-    }
-   ],
-   "description": "Brand: Rolex\n Model: Datejust 41\n Reference: 126334\n Case Material: Steel\n Bracelet Material: Steel\n Size: 41mm\n Dial Color: Mint Green\n Bezel Material: White Gold\n Date: 2024\n Condition: Pre-Owned\n Included Items: Watch with original box and papers\n Movement: Automatic\n Crystal: Sapphire Crystal\n Water Resistance: 10 ATM\n Stock ID: 216CU",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -10764,52 +10910,6 @@
     }
    ],
    "description": "Requires Service-No Warranty \nBrand: Rolex\nModel: Oyster Perpetual\nReference: 6285\nCase Material: Yellow Gold\nBracelet Material: Aftermarket Leather\nSize: 34mm\nDial Color: Honeycomb\nBezel Material: Yellow Gold\nDate: 1954\nCondition: Pre-Owned\nIncluded Items: Watch Only\nMovement: Automatic\nCrystal: Plexiglass\nWater Resistance: 3 ATM\nStock ID: 632ST",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "58dde6fef9b1",
-   "boutique": "grandcaliber",
-   "reference": "124270",
-   "collection": "Explorer",
-   "annee": "2021",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Rolex Explorer 124270",
-   "url": "https://grandcaliber.com/products/rolex-explorer-124272-dallas-rolex-1",
-   "prix": 8540,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Explorer_124270_Front_01.jpg?v=1793893924",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/ce0bf3ee8876fb547d3c6d7aa09e154e.jpg?v=1793893840",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Explorer_124270_Clasp_01.jpg?v=1793893933",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Explorer_124270_InnerClasp_01.jpg?v=1793893941",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Explorer_124270_Card_01.jpg?v=1793893946",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Explorer_124270_Tags_01.jpg?v=1793893955",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Explorer_124270_Box_01.jpg?v=1793893961",
-     "w": 1440
-    }
-   ],
-   "description": "Brand: Rolex\n Model: Explorer\n Reference: 124270\n Case Material: Steel\n Bracelet Material: Steel\n Size: 36mm\n Dial Color: Black\n Bezel Material: Steel\n Date: 2021\n Condition: Pre-Owned\n Included Items: Watch with original box and papers\n Movement: Automatic\n Crystal: Sapphire Crystal\n Water Resistance: 10 ATM\n Stock ID: 784KY",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -13899,56 +13999,6 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
-   "id": "72205ef435fc",
-   "boutique": "grandcaliber",
-   "reference": "126710BLRO",
-   "collection": "GMT-Master II",
-   "annee": "2022",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Rolex GMT-Master II 126710BLRO",
-   "url": "https://grandcaliber.com/products/40mm-pepsi-rolex-gmt-master-ii-126710blro-2022-dallas-watches",
-   "prix": 26910,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_GMT-Master_II_126710BLRO_01.jpg?v=1782245685",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_GMT-Master_II_126710BLRO_02.jpg?v=1782245691",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_GMT-Master_II_126710BLRO_03.jpg?v=1782245698",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_GMT-Master_II_126710BLRO_04.jpg?v=1782245709",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_GMT-Master_II_126710BLRO_05.jpg?v=1782245716",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_GMT-Master_II_126710BLRO_06.jpg?v=1782245722",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_GMT-Master_II_126710BLRO_07.jpg?v=1782245730",
-     "w": 1440
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_GMT-Master_II_126710BLRO_08.jpg?v=1782245736",
-     "w": 1440
-    }
-   ],
-   "description": "Brand: Rolex\nModel: GMT-Master II\nReference: 126710BLRO\nCase Material: Steel\nBracelet Material: Steel\nSize: 40mm\nDial Color: Black\nBezel Material: Ceramic\nDate: 2022\nCondition: Pre-Owned\nIncluded Items: Watch with original box and papers\nMovement: Automatic\nCrystal: Sapphire Crystal\nWater Resistance: 10 ATM\nStock ID: 583IH",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
    "id": "993fbe48ac9f",
    "boutique": "grandcaliber",
    "reference": "228238",
@@ -14703,6 +14753,48 @@
    ],
    "description": "Brand: Rolex\nModel: Oyster Perpetual 41\nReference: 124300\nCase Material: Steel\nBracelet Material: Steel\nSize: 41mm\nDial Color: Turquoise Blue\nBezel Material: Steel\nDate: 2022\nCondition: Brand New (Factory Stickers)\nIncluded Items: Watch with original box and papers\nMovement: Automatic\nCrystal: Sapphire Crystal\nWater Resistance: 10 ATM\nStock ID: 749J4",
    "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "dfa6de2da5cb",
+   "boutique": "grandcaliber",
+   "reference": "16610LV",
+   "collection": "Submariner",
+   "annee": "2008",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": null,
+   "titre": "Rolex Submariner 16610LV",
+   "url": "https://grandcaliber.com/products/rolex-submariner-16610lv-kermit-dfw-rolex",
+   "prix": 13455,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Submariner_16610LV_Front_0.jpg?v=1769101113",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Submariner_16610LV_Creative.jpg?v=1770313924",
+     "w": 2000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Submariner_16610LV_Back_0.jpg?v=1770313924",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Submariner_16610LV_Clasp_0.jpg?v=1770313924",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Submariner_16610LV_InnerClasp_0.jpg?v=1770313924",
+     "w": 1440
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0637/9159/5764/files/Rolex_Submariner_16610LV_Box_0.jpg?v=1770313924",
+     "w": 1440
+    }
+   ],
+   "description": "Brand: Rolex\nModel: Submariner\nReference: 16610LV\nCase Material: Steel\nBracelet Material: Steel\nSize: 40mm\nDial Color: Black\nBezel Material: Aluminium\nDate: 2008\nCondition: Pre-Owned\nIncluded Items: Watch with original box\nMovement: Automatic\nCrystal: Sapphire Crystal\nWater Resistance: 30 ATM\nStock ID: 278HS",
+   "premiere_vue": "2026-11-24T04:43+00:00"
   },
   {
    "id": "2389fe4d4b64",
@@ -17221,6 +17313,40 @@
    ],
    "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Sea-Dweller \n Deepsea \n Reference Number: \n 136660 \n SKU: \n WG3178 \n Condition: \n Excellent \n i \n Gender: \n Men's \n Style: \n Sport, Casual \n Box and Papers: \n Box and Papers \n Note: \n White Hangtag Included \n Year: \n 2026 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 44mm \n Dial Color: \n Black \n Dial Hour Marker: \n Dot/Index \n Water Resistance: \n 3900m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Glidelock clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date",
    "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "749b2f847f4a",
+   "boutique": "watchguys",
+   "reference": "126610LN",
+   "collection": "Submariner",
+   "annee": "2024",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex Submariner 126610LN Black",
+   "url": "https://www.watchguys.com/products/rolex-submariner-126610ln-black",
+   "prix": 14495,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-submariner-126610ln-black-watches-833.webp?v=1791255487",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-submariner-126610ln-black-watches-693.webp?v=1791255491",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-submariner-126610ln-black-watches-500.webp?v=1791255494",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Modern_Rolex_Box_with_Papers_ef918993-0301-44b2-861e-275c410b9318.png?v=1795021662",
+     "w": 2048
+    }
+   ],
+   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Submariner \n Reference Number: \n 126610LN \n SKU: \n WG4083 \n Condition: \n Excellent \n i \n Gender: \n Men's \n Style: \n Sport, Casual \n Box and Papers: \n Box and Papers \n Year: \n 2024 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 41mm \n Dial Color: \n Black \n Dial Hour Marker: \n Dot/Index \n Water Resistance: \n 300m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Glidelock clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date",
+   "premiere_vue": "2026-11-24T04:43+00:00"
   },
   {
    "id": "6931b96e5ef6",
@@ -22045,6 +22171,40 @@
    ],
    "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Daytona \n Reference Number: \n 126519LN \n SKU: \n C386 \n Condition: \n Unworn \n i \n Gender: \n Mens \n Style: \n Casual, Sport \n Box and Papers: \n Box and Papers \n Note: \n Green Hang Tag Only (No White Hangtag) \n Year: \n 2025-2026 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n 18K White Gold \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Diamond \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Rubber \n Color: \n Black \n Buckle Type: \n Oyster clasp \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Chronograph, Tachymeter",
    "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "cf3e04ad06af",
+   "boutique": "watchguys",
+   "reference": "124270",
+   "collection": "Explorer",
+   "annee": "2023",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex Explorer 124270 Black Oyster",
+   "url": "https://www.watchguys.com/products/rolex-explorer-124270-black-oyster",
+   "prix": 8995,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-explorer-124270-black-209.webp?v=1791248173",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-explorer-124270-black-873.webp?v=1791248177",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-explorer-124270-black-781.webp?v=1791248180",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Modern_Rolex_Box_with_Papers_5731012c-e68a-46fa-ace2-7b11e4d00670.webp?v=1791248186",
+     "w": 2048
+    }
+   ],
+   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Explorer \n Reference Number: \n 124270 \n SKU: \n WG4086 \n Condition: \n Excellent \n i \n Gender: \n Unisex\n Style: \n Classic, Sport \n Box and Papers: \n Box and Papers \n Note: \n White Hangtag Included \n Year: \n 2023 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 36mm \n Dial Color: \n Black \n Dial Hour Marker: \n Arabic/Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Time Only",
+   "premiere_vue": "2026-11-24T04:43+00:00"
   },
   {
    "id": "96c54df827d4",
@@ -27005,13 +27165,13 @@
    "boutique": "watchguys",
    "reference": "277200",
    "collection": "Oyster Perpetual",
-   "annee": "2025",
+   "annee": "2026",
    "etat": "Neuf",
    "boite": true,
    "papiers": true,
    "titre": "Rolex Oyster Perpetual 277200 Pistachio Green",
    "url": "https://www.watchguys.com/products/rolex-oyster-perpetual-277200-pistachio-green",
-   "prix": 10595,
+   "prix": 10195,
    "devise": "USD",
    "photos": [
     {
@@ -27023,7 +27183,7 @@
      "w": 2048
     }
    ],
-   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Oyster Perpetual \n Reference Number: \n 277200 \n SKU: \n C214 \n Condition: \n Unworn i \n Gender: \n Ladies \n Style: \n Casual \n Box and Papers: \n Box and Papers \n Note: \n Green Hangtag Only (No White Hangtag) \n Year: \n 2025-2026 \n Warranty: \n WatchGuys 2-Year Warranty \n Note: \n 5-Year Rolex Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 31mm \n Dial Color: \n Pistachio Green \n Dial Hour Marker: \n Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Time Only",
+   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Oyster Perpetual \n Reference Number: \n 277200 \n SKU: \n WG4087 \n Condition: \n Unworn i \n Gender: \n Ladies \n Style: \n Casual \n Box and Papers: \n Box and Papers \n Note: \n White Hangtag Included \n Year: \n 2026 \n Warranty: \n WatchGuys 2-Year Warranty \n Note: \n 5-Year Rolex Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 31mm \n Dial Color: \n Pistachio Green \n Dial Hour Marker: \n Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Time Only",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -27458,60 +27618,6 @@
     }
    ],
    "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Daytona \n Reference Number: \n 126519LN \n SKU: \n C387 \n Condition: \n Unworn \n i \n Gender: \n Mens \n Style: \n Casual, Sport \n Box and Papers: \n Box and Papers \n Note: \n Green Hangtag Only (No White Hangtag) \n Year: \n 2025-2026 \n Warranty: \n WatchGuys 2-Year Warranty \n Note: \n 5-Year Rolex Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n 18K White Gold \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Meteorite \n Dial Hour Marker: \n Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Rubber \n Color: \n Black \n Buckle Type: \n Oyster clasp \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Chronograph, Tachymeter",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "a705d7d67c08",
-   "boutique": "watchguys",
-   "reference": "126729VTNR",
-   "collection": "GMT-Master II",
-   "annee": "2025",
-   "etat": "Neuf",
-   "boite": true,
-   "papiers": true,
-   "titre": "Rolex GMT-Master II 126729VTNR Green",
-   "url": "https://www.watchguys.com/products/rolex-gmt-master-ii-126729vtnr-green",
-   "prix": 43495,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126729vtnr-sprite-hulk_1_277d3ff4-b7dc-43e6-bbd4-4fa75a3f9e26.webp?v=1791252028",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_GMT-Master_II_126729VTNR_Dial_WatchGuys.webp?v=1791240336",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_GMT-Master_II_126729VTNR_Left_Side_WatchGuys.webp?v=1791240344",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_GMT-Master_II_126729VTNR_Right_Side_WatchGuys.webp?v=1791240352",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_GMT-Master_II_126729VTNR_Buckle_WatchGuys.webp?v=1791240359",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126729vtnr-sprite-hulk_2.webp?v=1791252053",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126729vtnr-sprite-hulk_3.webp?v=1791252059",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126729vtnr-sprite-hulk_4.webp?v=1791252067",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/New_Rolex_Box_with_Cards_855c19dc-9c3b-4f36-bc51-c3b9b758c882.webp?v=1791252072",
-     "w": 2048
-    }
-   ],
-   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n GMT-Master II \n Reference Number: \n 126729VTNR \n SKU: \n WG2775 \n Condition: \n Unworn \n i \n Gender: \n Men's \n Style: \n Sport, Casual \n Box and Papers: \n Box and Papers \n Note: \n White Hangtag Included \n Year: \n 2025 \n Warranty: \n WatchGuys 2-Year Warranty \n Note: \n 5-Year Rolex Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n 18K White Gold \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Green \n Dial Hour Marker: \n Dot/Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n 18K White Gold \n Color: \n White Gold \n Buckle Type: \n Oyster Clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date, GMT",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -28193,6 +28299,32 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
+   "id": "4cc1b2aa4b48",
+   "boutique": "watchguys",
+   "reference": "16713",
+   "collection": "GMT-Master II",
+   "annee": "1997",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex GMT-Master II 16713 Black Oyster",
+   "url": "https://www.watchguys.com/products/rolex-gmt-master-ii-16713-black-oyster",
+   "prix": 10795,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-16713-black-watches-338.webp?v=1791238697",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-16713-black-watches-232.webp?v=1791238703",
+     "w": 2048
+    }
+   ],
+   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n GMT-Master II \n Reference Number: \n 16713 \n SKU: \n WG4074 \n Condition: \n Very Good \n i \n Gender: \n Men's \n Style: \n Sport, Casual \n Box and Papers: \n Box and Papers \n Note: \n Serialized Hangtag Included \n Year: \n 1997 \n Warranty: \n WatchGuys 1-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Dot/Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel and 18K Yellow Gold \n Color: \n Silver and Yellow Gold \n Buckle Type: \n Oyster clasp \n Note: \n Steel Buckle \n Bracelet Length: \n 7 1/4″ – 7 1/2″ \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date, GMT",
+   "premiere_vue": "2026-11-24T04:43+00:00"
+  },
+  {
    "id": "bbcfeccff72c",
    "boutique": "watchguys",
    "reference": "126500LN",
@@ -28828,48 +28960,6 @@
     }
    ],
    "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Datejust \n Reference Number: \n 126234 \n SKU: \n C304 \n Condition: \n Unworn i \n Gender: \n Unisex \n Style: \n Classic \n Box and Papers: \n Box and Papers \n Note: \n Green Hangtag Only (No White Hangtag) \n Year: \n 2025-2026 \n Warranty: \n Watch Guys 2-Year Warranty \n Note: \n 5-Year Rolex Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 36mm \n Dial Color: \n Black \n Dial Hour Marker: \n Diamond \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "a59db4e0d1b7",
-   "boutique": "watchguys",
-   "reference": "126500LN",
-   "collection": "Cosmograph Daytona",
-   "annee": "2025",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Rolex Daytona 126500LN Panda",
-   "url": "https://www.watchguys.com/products/rolex-daytona-126500ln-panda",
-   "prix": 35995,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-daytona-126500ln_panda_1_20512aa8-844c-4911-b9b4-76bfc3bb0a6b.webp?v=1791237101",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_Daytona_126500LN_Panda_Wrist_Shot.webp?v=1791237105",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-daytona-126500ln_panda_2_ced30b3d-258c-4ed6-a53f-4d198c0ce289.webp?v=1791237111",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-daytona-126500ln_panda_3_42d49fbf-99be-4aba-bc18-470e73ddcec8.webp?v=1791237118",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-daytona-126500ln_panda_4_2742b531-b7ce-4b16-be72-50d92db140cf.webp?v=1791237126",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/New_Rolex_Box_with_Cards_a31b6150-2ac9-40a7-8357-80ffe6e57edb.png?v=1795458402",
-     "w": 1800
-    }
-   ],
-   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Daytona \n Reference Number: \n 126500 \n Nickname: \n Panda \n SKU: \n WG4035 \n Condition: \n Excellent i \n Gender: \n Mens \n Style: \n Casual, Sport \n Box and Papers: \n Box and Papers \n Year: \n 2025 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n White \n Dial Hour Marker: \n Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Chronograph, Tachymeter",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -30055,44 +30145,6 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
-   "id": "2876079843db",
-   "boutique": "watchguys",
-   "reference": "126715CHNR",
-   "collection": "GMT-Master II",
-   "annee": "2026",
-   "etat": "Neuf",
-   "boite": true,
-   "papiers": true,
-   "titre": "Rolex GMT-Master II 126715CHNR Root Beer",
-   "url": "https://www.watchguys.com/products/rolex-gmt-master-ii-126715chnr-root-beer",
-   "prix": 47995,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126715chnr-root-beer-watches-783.webp?v=1791221171",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_GMT-Master_II_126715CHNR_Root_Beer_91b260e1-3fc2-4e59-8f11-f46106adedbd.png?v=1793818855",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126715chnr-root-beer-watches-336.webp?v=1791221176",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126715chnr-root-beer-watches-124.webp?v=1791221182",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/New_Rolex_Box_with_Cards_51d8ec68-5587-4b75-a4cf-cae204e7dd62.webp?v=1791221187",
-     "w": 2048
-    }
-   ],
-   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n GMT-Master II \n Reference Number: \n 126715CHNR \n Nickname: \n Root Beer \n SKU: \n WG3635 \n Condition: \n Unworn i \n Gender: \n Men's \n Style: \n Sport, Casual \n Box and Papers: \n Box and Papers \n Year: \n 2026 \n Warranty: \n WatchGuys 2-Year Warranty \n Note: \n 5-Year Rolex Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n 18K Rose Gold \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Dot/Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n 18K Rose Gold \n Color: \n Rose Gold \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date, GMT",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
    "id": "528450be813f",
    "boutique": "watchguys",
    "reference": "228235",
@@ -30549,6 +30601,44 @@
    ],
    "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Explorer \n Reference Number: \n 216570 \n SKU: \n WG3551 \n Condition: \n Excellent \n i \n Gender: \n Men's\n Style: \n Classic, Sport \n Box and Papers: \n Box and Papers \n Year: \n 2014 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 42mm \n Dial Color: \n Black \n Dial Hour Marker: \n Dot/Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date, GMT",
    "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "17c467a1a70d",
+   "boutique": "watchguys",
+   "reference": "126711CHNR",
+   "collection": "GMT-Master II",
+   "annee": "2023",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex GMT-Master II 126711CHNR Two Tone",
+   "url": "https://www.watchguys.com/products/rolex-gmt-master-ii-126711chnr-two-tone",
+   "prix": 19895,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126711chnr-two-tone-watches-267.webp?v=1791233512",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_GMT-Master_II_126711CHNR_Root_Beer_wrist_dcf20487-30c5-4d71-bc47-41472d00c6fd.webp?v=1791233520",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126711chnr-two-tone-watches-777.webp?v=1791233524",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126711chnr-two-tone-watches-371.webp?v=1791233529",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Modern_Rolex_Box_with_Papers_ef918993-0301-44b2-861e-275c410b9318.png?v=1795021662",
+     "w": 2048
+    }
+   ],
+   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n GMT-Master II \n Reference Number: \n 126711CHNR \n Nickname: \n Root Beer \n SKU: \n WG4082 \n Condition: \n Excellent \n i \n Gender: \n Men's \n Style: \n Sport, Casual \n Box and Papers: \n Box and Papers \n Year: \n 2023 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Dot/Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel and 18k Rose Gold \n Color: \n Silver and Rose Gold \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date, GMT",
+   "premiere_vue": "2026-11-24T04:43+00:00"
   },
   {
    "id": "b954840d8169",
@@ -31471,13 +31561,13 @@
    "boutique": "watchguys",
    "reference": "126334",
    "collection": "Datejust",
-   "annee": "2025",
-   "etat": "Neuf",
+   "annee": "2026",
+   "etat": "Occasion",
    "boite": true,
    "papiers": true,
    "titre": "Rolex Datejust 126334 Wimbledon",
    "url": "https://www.watchguys.com/products/rolex-datejust-126334-wimbledon-oyster",
-   "prix": 16195,
+   "prix": 15795,
    "devise": "USD",
    "photos": [
     {
@@ -31501,7 +31591,7 @@
      "w": 2048
     }
    ],
-   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Datejust \n Reference Number: \n 126334 \n Nickname: \n Wimbledon \n SKU: \n C257 \n Condition: \n Unworn \n i \n Gender: \n Men's \n Style: \n Classic, Casual \n Box and Papers: \n Box and Papers \n Note: \n Green Hangtag Only (No White Hangtag) \n Year: \n 2025-2026 \n Warranty: \n WatchGuys 2-Year Warranty \n Note: \n 5-Year Rolex Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 41mm \n Dial Color: \n Slate \"Wimbledon\" \n Dial Hour Marker: \n Roman \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date",
+   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Datejust \n Reference Number: \n 126334 \n Nickname: \n Wimbledon \n SKU: \n WG4084 \n Condition: \n Excellent \n i \n Gender: \n Men's \n Style: \n Classic, Casual \n Box and Papers: \n Box and Papers \n Note: \n White Hangtag Included \n Year: \n 2026 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 41mm \n Dial Color: \n Slate \"Wimbledon\" \n Dial Hour Marker: \n Roman \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -33071,7 +33161,7 @@
    "papiers": true,
    "titre": "Rolex Yacht-Master II 116689 White Gold",
    "url": "https://www.watchguys.com/products/rolex-yacht-master-116689",
-   "prix": 34395,
+   "prix": 33695,
    "devise": "USD",
    "photos": [
     {
@@ -34411,40 +34501,6 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
-   "id": "11c576850a72",
-   "boutique": "watchguys",
-   "reference": "116900",
-   "collection": "Air-King",
-   "annee": "2019",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Rolex Air King 116900 Black",
-   "url": "https://www.watchguys.com/products/rolex-air-king-116900-black",
-   "prix": 7995,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-air-king-116900-black-809.webp?v=1791218967",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-air-king-116900-black-507.webp?v=1791218971",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-air-king-116900-black-751.webp?v=1791218975",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Modern_Rolex_Box_with_Old_Card_36f1f8fc-5252-42c6-af31-91b4ddddebb1.webp?v=1791218982",
-     "w": 2048
-    }
-   ],
-   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Air-King \n Reference Number: \n 116900 \n SKU: \n WG3887 \n Condition: \n Excellent \n i \n Gender: \n Men's\n Style: \n Casual \n Box and Papers: \n Box and Papers \n Note: \n White Hangtag Included \n Year: \n 2019 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Arabic \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n 7 1/4\" - 7 1/2\" \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Time Only",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
    "id": "b78f441fa6cf",
    "boutique": "watchguys",
    "reference": "126710BLNR",
@@ -35301,6 +35357,164 @@
    ],
    "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Datejust \n Reference Number: \n 126333 \n SKU: \n WG3269 \n Condition: \n Very Good \n i \n Gender: \n Men's \n Style: \n Classic \n Box and Papers: \n Box and Papers \n Note: \n White Hangtag Included \n Year: \n 2023 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 41mm \n Dial Color: \n Champagne \n Dial Hour Marker: \n Diamond \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel and 18K Yellow Gold \n Color: \n Silver and Yellow Gold \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n 7 1/4” – 7 1/2” \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date",
    "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "6dd2b0b4ad07",
+   "boutique": "watchguys",
+   "reference": "116713LN",
+   "collection": "GMT-Master II",
+   "annee": "2018",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex GMT-Master II 116713LN",
+   "url": "https://www.watchguys.com/products/rolex-gmt-master-ii-116713ln",
+   "prix": 13895,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-116713ln-watches-840.webp?v=1791242643",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-116713ln-watches-967.webp?v=1791242647",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-116713ln-watches-814.webp?v=1791242651",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-116713ln-watches-593.webp?v=1791242654",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-116713ln-watches-957.webp?v=1791242658",
+     "w": 2048
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Modern_Rolex_Box_with_Old_Card_294121e6-0fec-46ba-a69a-a80419090878.webp?v=1791215599",
+     "w": 2048
+    }
+   ],
+   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n GMT-Master II \n Reference Number: \n 116713LN \n SKU: \n WG4085 \n Condition: \n Excellent \n i \n Gender: \n Men's \n Style: \n Casual, Sport \n Box and Papers: \n Box and Papers \n Year: \n 2018 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Dot \n Water Resistance: \n 100m \n BRACELET/STRAP \n Bracelet Material: \n Stainless Steel and 18k Yellow Gold \n Bracelet Color: \n Silver and Yellow Gold \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n 7 1/4″ – 7 1/2″ \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date, GMT",
+   "premiere_vue": "2026-11-24T04:43+00:00"
+  },
+  {
+   "id": "cf0adb58c1f7",
+   "boutique": "mywatchllc",
+   "reference": "",
+   "collection": "Cosmograph Daytona",
+   "annee": "2026",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "NEW 2026 Rolex Daytona 40mm 126500LN Stainless Steel Black Dial",
+   "url": "https://mywatchllc.com/products/new-2026-rolex-daytona-40mm-126500ln-stainless-steel-black-dial",
+   "prix": 32500,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/4E8CB6AC-CE72-4127-9415-5DAF3B704E93.jpg?v=1783970511",
+     "w": 2523
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/E1BCC569-3C20-412E-91F2-75EDCECF3EC9.jpg?v=1783970511",
+     "w": 2478
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/334F18A5-C847-40D1-93D5-E1A6616DAFE3.jpg?v=1783970511",
+     "w": 2572
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/C17E1CAA-8877-4FA8-B047-AFBFB7D196E3.jpg?v=1783970511",
+     "w": 2569
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/6120AE65-310E-4B9D-A69C-B3D43C1511EA.jpg?v=1783970511",
+     "w": 2122
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/A2A1EEB5-C01F-466E-BBC0-988211CEA9E8.jpg?v=1783970511",
+     "w": 2120
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/F1AEAF50-A151-4F79-A891-34C720B119B3.jpg?v=1783970511",
+     "w": 2182
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/EF4B2A79-1D51-47B2-8F17-6E1E179BD7A1.jpg?v=1783970511",
+     "w": 2029
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/C603DC62-8F8F-4C30-9A52-1950D9691CDD.jpg?v=1783970511",
+     "w": 1644
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/B6F9A639-6878-4858-9FCC-70868E16D00C.jpg?v=1783970512",
+     "w": 2724
+    }
+   ],
+   "description": "NEW 2026 Rolex Cosmograph Daytona 40mm 126500LN-0002 Oystersteel Black Dial Oyster Bracelet Black Ceramic Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: Stainless Steel\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome\n Explore more Rolex Daytona watches or browse the complete Rolex collection.",
+   "premiere_vue": "2026-11-24T04:43+00:00"
+  },
+  {
+   "id": "33f3cbdfc867",
+   "boutique": "mywatchllc",
+   "reference": "",
+   "collection": "Submariner",
+   "annee": "2025",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "2025 Rolex Submariner Starbucks 41mm 126610LV Black Dial",
+   "url": "https://mywatchllc.com/products/2025-rolex-submariner-starbucks-41mm-126610lv-black-dial-5",
+   "prix": 14675,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-B9D5724D-68B8-47AA-B8B8-D4854AE322DA-L0-001.jpg?v=1795206135",
+     "w": 2720
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-C046D834-CC32-4455-8CD0-B264193AC392-L0-001.jpg?v=1795206133",
+     "w": 2579
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-FC629BC9-E6B7-4E51-A669-EB0AAAE26433-L0-001.jpg?v=1795206135",
+     "w": 2612
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-D6C349C2-C170-47A1-BD76-6A972B87B367-L0-001.jpg?v=1795206136",
+     "w": 2644
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-F8CDF7B7-7238-4A9F-B7CE-7B15CFA54CAD-L0-001.jpg?v=1795206132",
+     "w": 2624
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-AF02BB21-0CB7-4CEE-8CF0-735678D6CBAC-L0-001.jpg?v=1795206133",
+     "w": 2509
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-4530BAEF-92EB-4A62-AD0C-81DD902609E9-L0-001.jpg?v=1795206130",
+     "w": 2864
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-D8269C19-3E2F-4D28-9314-B5E447223D4D-L0-001.jpg?v=1795206131",
+     "w": 2606
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-ED9F8C25-1E16-4609-A70D-E6C536D67C60-L0-001.jpg?v=1795206132",
+     "w": 1645
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-01BD0F71-8C5A-4387-85DC-F89B2F08AC66-L0-001.jpg?v=1795206134",
+     "w": 2700
+    }
+   ],
+   "description": "2025 Rolex Submariner Date Starbucks 41mm 126610LV-0002 Stainless Steel Black Dial Oyster Bracelet and Green Ceramic Bezel \n Includes the following: \n ✔️Original Rolex Double Boxed \n ✔️Box and Papers - Yes \n ✔️Warranty card dated January 2025 \n ✔️5 Year Manufacturer Warranty \n ✔️Manual and Warranty booklets \n ✔️Green Hang Tag included \n ✔️Material: Stainless Steel \n ✔️Size: 8.25 inch wrist (Full Links) \n ✔️Watch is in Mint / Like New condition. \n ✔️ Trades welcome\n Discover the complete Rolex Starbucks collection, or view all Rolex Submariner watches for sale.",
+   "premiere_vue": "2026-11-24T04:43+00:00"
   },
   {
    "id": "af1245005d82",
@@ -38945,64 +39159,6 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
-   "id": "2aaa32b49f53",
-   "boutique": "mywatchllc",
-   "reference": "",
-   "collection": "GMT-Master II",
-   "annee": "2025",
-   "etat": "Neuf",
-   "boite": true,
-   "papiers": true,
-   "titre": "2025 Rolex GMT-Master II Sprite 40mm 126720VTNR Jubilee",
-   "url": "https://mywatchllc.com/products/2025-rolex-gmt-master-ii-sprite-40mm-126720vtnr-jubilee-2",
-   "prix": 16750,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-96E7CAC9-AE5A-45CA-83A6-F9960EA97F8C-L0-001.jpg?v=1794241221",
-     "w": 2590
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-F9519403-B8F1-465C-849D-1EE683D2D4D9-L0-001.jpg?v=1794241219",
-     "w": 2356
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-C314CCC5-C96E-47B6-B2EA-2E313027377D-L0-001.jpg?v=1794241221",
-     "w": 2427
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-FBA611A0-9D60-426D-BD54-9CFF1C65AE12-L0-001.jpg?v=1794241221",
-     "w": 2437
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-98217E76-AC1B-44AB-8882-7D9CED50F936-L0-001.jpg?v=1794241218",
-     "w": 2505
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-B6AE61D1-C9C3-4D15-8F57-FCADE9AC1F02-L0-001.jpg?v=1794241219",
-     "w": 2175
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-ECCDBF88-5717-4822-8829-8F6DCC623628-L0-001.jpg?v=1794241216",
-     "w": 2618
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-CC633DC4-65F5-44C7-9882-D02C0D00D964-L0-001.jpg?v=1794241218",
-     "w": 2513
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-FCCB623E-E2B3-4C23-8139-479CF6EF09D4-L0-001.jpg?v=1794241216",
-     "w": 1645
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-91C55B31-08EF-4DB6-94CF-1A520E07FE93-L0-001.jpg?v=1794241220",
-     "w": 2731
-    }
-   ],
-   "description": "2025 Rolex GMT-Master II Sprite 40mm 126720VTNR-0002 Oystersteel Jubilee Bracelet \n NOTE: Watch is stickered on the clasp lock and both sides of the case including the barcode sticker. \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated July 2025 \n ✔️5 year manufacturer warranty \n ✔️Manual and Warranty booklets \n ✔️Green and White Hang Tags included \n ✔️Material: Stainless Steel \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is in Mint / Like New condition. \n ✔️ Trades welcome\n Discover our full Rolex Sprite collection along with every Rolex GMT-Master II we have in stock.",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
    "id": "6178eb7755d9",
    "boutique": "mywatchllc",
    "reference": "",
@@ -39584,6 +39740,64 @@
     }
    ],
    "description": "NEW 2026 Rolex Day-Date 36mm 128238-0130 18kt Yellow Gold Presidential Bracelet Bright Green Diamond-Set Baguette Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️ 5 year manufacturer warranty \n ✔️Serial Number Tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome  \n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
+   "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "a9494c47cce4",
+   "boutique": "mywatchllc",
+   "reference": "",
+   "collection": "GMT-Master II",
+   "annee": "2026",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "NEW 2026 Rolex GMT-Master II Bruce Wayne 40mm 126710GRNR Oyster (NEW STYLE CARD/STICKERED)",
+   "url": "https://mywatchllc.com/products/new-2026-rolex-gmt-master-ii-bruce-wayne-40mm-126710grnr-oyster-new-style-card-stickered-1",
+   "prix": 20000,
+   "devise": "USD",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-14EA08F1-9B37-464A-9113-A9D94EAE4A36-L0-001.jpg?v=1793654964",
+     "w": 2620
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-ED7448C9-62D5-44E1-9CCA-ED53146109A5-L0-001.jpg?v=1793654963",
+     "w": 2194
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-651B133B-316C-4C53-A1F2-C40C80CD33C6-L0-001.jpg?v=1793654964",
+     "w": 2406
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-118AF6E8-B923-4068-9F05-BADB4F7595F1-L0-001.jpg?v=1793654964",
+     "w": 2431
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-B8F36193-6A68-4996-B3FA-0505248C236C-L0-001.jpg?v=1793654962",
+     "w": 2425
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-DCF44D60-C86B-4A17-85C9-E200AF0FFBE9-L0-001.jpg?v=1793654963",
+     "w": 2439
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-B0753821-D03C-4A05-96EA-E59C73F82CF9-L0-001.jpg?v=1793654960",
+     "w": 2566
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-78B3FB0E-78BF-4DDA-90AD-8FDBD8152D23-L0-001.jpg?v=1793654961",
+     "w": 2590
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-49177D6B-D196-48D5-A537-5E6C47D0CAE7-L0-001.jpg?v=1793654962",
+     "w": 1645
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-CB7DEE00-FAC3-41F8-ACD9-5474C1366BB0-L0-001.jpg?v=1793654964",
+     "w": 2926
+    }
+   ],
+   "description": "NEW 2026 Rolex GMT-Master II Bruce Wayne 40mm 126710GRNR-0004 Oyster Bracelet Black Dial Grey and Black Ceramic Bezel \n NOTE: Watch is stickered including clasp lock, clasp, end links, both sides of the case including the barcode sticker and back of case. \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Box) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty \n ✔️Serial number tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Userguide \n See every Rolex Bruce Wayne in stock and the full Rolex GMT-Master II lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -42339,64 +42553,6 @@
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
-   "id": "6905b5b8e1f0",
-   "boutique": "mywatchllc",
-   "reference": "",
-   "collection": "Cosmograph Daytona",
-   "annee": "2026",
-   "etat": "Neuf",
-   "boite": true,
-   "papiers": true,
-   "titre": "NEW 2026 Rolex Daytona 40mm 126500LN Stainless Steel Black Dial",
-   "url": "https://mywatchllc.com/products/new-2026-rolex-daytona-40mm-126500ln-stainless-steel-black-dial-1",
-   "prix": 32500,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/721832A8-D1E6-4F77-948E-9F611E47B319.jpg?v=1783970644",
-     "w": 2523
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/D7A0B8E2-13ED-4A7F-8CD2-4C9F60E8C79B.jpg?v=1783970644",
-     "w": 2478
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/A6116395-E085-4BA8-B3E8-2F98E3960B5C.jpg?v=1783970644",
-     "w": 2572
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/3940E7A2-3386-4FD3-93BC-3E1119ECB005.jpg?v=1783970644",
-     "w": 2569
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/9ECF04AE-3003-44ED-8E11-590D25BC9EE9.jpg?v=1783970644",
-     "w": 2122
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/A371F1C2-8BA0-4437-973D-2C02FF96F060.jpg?v=1783970644",
-     "w": 2120
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/5D57D93A-1534-4574-A6BF-BA1E88073ED8.jpg?v=1783970644",
-     "w": 2182
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/DC292420-71AE-4EE9-9306-535CE2D436C0.jpg?v=1783970644",
-     "w": 2029
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/79D1D020-FA8C-41AF-A7DB-CA6F8A4AAC76.jpg?v=1783970644",
-     "w": 1644
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/CDF967F9-B1B1-4782-9AFE-A507C676F1DE.jpg?v=1783970644",
-     "w": 2724
-    }
-   ],
-   "description": "NEW 2026 Rolex Cosmograph Daytona 40mm 126500LN-0002 Oystersteel Black Dial Oyster Bracelet Black Ceramic Bezel \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2026\n ✔️5 year manufacturer warranty\n ✔️Manual and Warranty booklets\n ✔️Green and White Hang Tags included\n ✔️Material: Stainless Steel\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is BRAND NEW/UNWORN. \n ✔️ Trades welcome\n Discover our full Rolex Daytona collection along with every Rolex watch we have in stock.",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
    "id": "e2cb18b00412",
    "boutique": "mywatchllc",
    "reference": "",
@@ -43919,7 +44075,7 @@
    "papiers": true,
    "titre": "NEW 2026 Rolex Datejust 36mm 126233 Two-Tone Jubilee Olive Green Dial",
    "url": "https://mywatchllc.com/products/rolex-datejust-36mm-126233-two-tone-jubilee-olive-green-dial",
-   "prix": 18000,
+   "prix": 18500,
    "devise": "USD",
    "photos": [
     {
@@ -46845,64 +47001,6 @@
    ],
    "description": "Rolex Cosmograph Daytona \"Baby Le Mans\" 40mm 126519LN-0001 White Gold Black Dial \nIncludes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes  \n ✔️Warranty card dated 2026 \n ✔️5 year Manufacturer warranty  \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: Oysterflex \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome  \n Explore more Rolex Daytona watches or browse the complete Rolex collection.",
    "premiere_vue": "2026-11-14T18:45+00:00"
-  },
-  {
-   "id": "b77d6caecc1a",
-   "boutique": "mywatchllc",
-   "reference": "",
-   "collection": "GMT-Master II",
-   "annee": "2018",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "2018 Rolex GMT-Master II 40mm 116710LN Stainless Steel Black Dial",
-   "url": "https://mywatchllc.com/products/2018-rolex-gmt-master-ii-40mm-116710ln-stainless-steel-black-dial-17",
-   "prix": 14000,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/E50BEB6A-C6A3-47DA-9DEC-55B93D7BFF29.jpg?v=1782773464",
-     "w": 2622
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/87664F43-DF5A-43C0-B024-5203BD14C695.jpg?v=1782773464",
-     "w": 2659
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/5B1D5DF9-01CE-470B-BBF2-5AC38403A31C.jpg?v=1782773464",
-     "w": 2620
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/C39EF437-D0A5-4D6C-9AEC-5EF3B38D31A8.jpg?v=1782773463",
-     "w": 2633
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/77D43E59-4600-410E-A1BA-2E948D7567BF.jpg?v=1782773464",
-     "w": 2563
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/2B5F60F2-D83B-46C8-BAE9-4BF9CAE5A31F.jpg?v=1782773464",
-     "w": 2271
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/40EDFF2C-8A2D-433E-B0F2-22D84D92CDB8.jpg?v=1782773464",
-     "w": 2522
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/19E4ABAB-1456-412D-9946-EC3A5219073B.jpg?v=1782773464",
-     "w": 2363
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/D10D1C62-91D3-4284-B5CE-1707F880A88F.jpg?v=1782773464",
-     "w": 1645
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/70BE6EA4-D689-446A-8A66-C00BB397E645.jpg?v=1782773464",
-     "w": 1645
-    }
-   ],
-   "description": "2018 Rolex GMT-Master II 40mm 116710LN-0001 Stainless Steel Black Dial \n Includes the following: \n ✔️Original Rolex Double Boxed\n ✔️Box and Papers - Yes\n ✔️Warranty card dated 2018\n ✔️Manual and Warranty booklets\n ✔️Green Hang Tag included\n ✔️Size: 8.0inch wrist (Full Links)\n ✔️Watch is in excellent overall condition. \n ✔️ Trades welcome\n See every Rolex GMT-Master II in stock and the full Rolex lineup.",
-   "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
    "id": "9133641cde57",
@@ -63848,6 +63946,352 @@
     }
    ],
    "description": "Rolex Day-Date 40mm, rose gold case, green dial, rose gold f luted bezel and rose gold bracelet. Mechanized by Rolex calibre 3255 automatic movement.",
+   "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "7c5001658c97",
+   "boutique": "watchmaestro",
+   "reference": "",
+   "collection": "Cosmograph Daytona",
+   "annee": "2008",
+   "etat": "Occasion",
+   "boite": null,
+   "papiers": null,
+   "titre": "Rolex Daytona White Gold Beach Blue Dial",
+   "url": "https://watchmaestro.com/watches/product/05134429132026/",
+   "prix": 359900,
+   "devise": "AED",
+   "photos": [
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2026/01/Rolex-Beach-Daytona-Blue-1.webp",
+     "w": 2000
+    }
+   ],
+   "description": "Rolex Daytona 116519 is a 2008 chronograph with a 40mm white gold case and a pale blue Beach dial. Three subdials sit on the face: a 30-minute counter on the right, a 12-hour counter on the left and running seconds at the bottom. Black print names Rolex, Oyster Perpetual, Superlative Chronometer Officially Certified and Cosmograph, and the word Daytona is printed in red. The hands are black with white-filled centers.\n The white gold bezel carries an engraved tachymeter scale, and the crown and chronograph pushers have a ribbed grip. Instead of a metal bracelet, the watch comes on a light blue leather strap with a textured scale pattern and stitched edges. The movement is automatic, so the rotor winds it as you move. This Rolex Daytona is available in very good condition.",
+   "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "2fcef2c1f4b1",
+   "boutique": "watchmaestro",
+   "reference": "",
+   "collection": "Datejust",
+   "annee": "2023",
+   "etat": "Neuf",
+   "boite": null,
+   "papiers": true,
+   "titre": "Rolex Datejust 41 Two Tone Sundust Diamond dial",
+   "url": "https://watchmaestro.com/watches/product/1671322432023/",
+   "prix": 73900,
+   "devise": "AED",
+   "photos": [
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/03/Rolex-Datejust-41-Two-Tone-RG-Steel-1.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/03/Rolex-Datejust-41-Two-Tone-RG-Steel-2.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/03/Rolex-Datejust-41-Two-Tone-RG-Steel-4.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/03/Rolex-Datejust-41-Two-Tone-RG-Steel-3.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/03/Rolex-Datejust-41-Two-Tone-RG-Steel-8.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/03/Rolex-Datejust-41-Two-Tone-RG-Steel-7.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/03/Rolex-Datejust-41-Two-Tone-RG-Steel-6.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/03/Rolex-Datejust-41-Two-Tone-RG-Steel-5.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/03/Rolex-Datejust-41-Two-Tone-RG-Steel-9.webp",
+     "w": 2000
+    }
+   ],
+   "description": "This is the Rolex Datejust 41mm in brand-new condition. The watch features a Sundust Dial, adorned with Diamond-set hour markers. It flaunts a stainless steel case along with a Rose Gold Smooth/Domed Bezel. Offering both comfort and style, the watch is further complimented with a Two-Tone Oyster Bracelet, which is built from a fusion of Stainless Steel and Rose Gold.  Acquired in 2023, this brand-new Rolex Datejust 41mm arrives with its original boxes and papers\n For those seeking a watch that transcends trends and embodies sophistication, the Rolex Datejust 41mm stands as one of the best options in this price bracket. The watch even comes with the Superlative Chronometer certification ensuring great timekeeping. With this, Rolex also promises a precision of -2/+2 sec/day.",
+   "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "21cfac9be8a4",
+   "boutique": "watchmaestro",
+   "reference": "278273",
+   "collection": "Datejust",
+   "annee": "2024",
+   "etat": "Neuf",
+   "boite": null,
+   "papiers": null,
+   "titre": "Rolex Datejust 31 Steel with Blue Roman Dial & Jubilee Bracelet",
+   "url": "https://watchmaestro.com/watches/product/3972650032024/",
+   "prix": 44900,
+   "devise": "AED",
+   "photos": [
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/01/Rolex-Datejust-31-Blue-Roman-Steel-1.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/01/Rolex-Datejust-31-Blue-Roman-Steel-2.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/01/Rolex-Datejust-31-Blue-Roman-Steel-3.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/01/Rolex-Datejust-31-Blue-Roman-Steel-4.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/01/Rolex-Datejust-31-Blue-Roman-Steel-8.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/01/Rolex-Datejust-31-Blue-Roman-Steel-7.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/01/Rolex-Datejust-31-Blue-Roman-Steel-6.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/01/Rolex-Datejust-31-Blue-Roman-Steel-5.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/01/Rolex-Datejust-31-Blue-Roman-Steel-9.webp",
+     "w": 2000
+    }
+   ],
+   "description": "Presenting the Rolex Datejust 31mm flaunting a mesmerizing Blue Dial with Roman Numerals on it. It is a brand-new watch with a 2024 purchase date, which makes it highly sought after. Being a Datejust model, this one gets a date window at 3 o’clock ensuring both functionality and refinement. Encased in stainless steel, the 31mm watch is paired with a White Gold Fluted Bezel. The striking Jubilee Bracelet, perfectly balances the look and appeal of the watch and sits very comfortably on the wrist. It is a very subtle yet unique combination.\n Rolex Datejust 31mm reference 278273 is available in a variety of dial color options. The 31mm Datejust lineup is specially designed for women and it is not just available in stainless steel but also comes in two-tone options and in full gold variants.",
+   "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "b6e2710688d4",
+   "boutique": "watchmaestro",
+   "reference": "",
+   "collection": "GMT-Master II",
+   "annee": "",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex GMT-Master II Pavé Dial with Sapphire & Ruby Bezel",
+   "url": "https://watchmaestro.com/watches/product/2373834272024/",
+   "prix": 580000,
+   "devise": "AED",
+   "photos": [
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/02/Rolex-GMT-Master-II-126755SARU-1.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/02/Rolex-GMT-Master-II-126755SARU-2.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/02/Rolex-GMT-Master-II-126755SARU-4.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/02/Rolex-GMT-Master-II-126755SARU-3.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/02/Rolex-GMT-Master-II-126755SARU-5.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/02/Rolex-GMT-Master-II-126755SARU-7.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/02/Rolex-GMT-Master-II-126755SARU-6.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/02/Rolex-GMT-Master-II-126755SARU-9.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2024/02/Rolex-GMT-Master-II-126755SARU-8.webp",
+     "w": 2000
+    }
+   ],
+   "description": "The Rolex GMT Master II 126755SARU is a rare jewel, an off-catalogue creation from Rolex that defies convention. Featuring a Pavé Dial, this timepiece comes with a factory-set Sapphire and Ruby bezel, giving it the bi-color look the GMT Master series is known for. Besides that, the watch even gets Diamonds gracefully embellished on the lugs and on the crown guards. All of this is set on a 18ct Rose Gold case, which sits on a 18ct Rose Gold bracelet. Overall, these diamonds and precious stones create a mesmerizing look. This is one of the most sought-after watches Rolex has ever introduced.\n This one in particular does not come with box and papers. However, that means that you can get this rare timepiece on your wrist for a relatively lower price than what you would have had to pay if it did had the box and papers. Reach out to us for a price request and discover the allure of owning a truly rare and off-catalogue gem from Rolex.",
+   "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "6069fb214313",
+   "boutique": "watchmaestro",
+   "reference": "126000",
+   "collection": "Oyster Perpetual",
+   "annee": "2024",
+   "etat": "Occasion",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex Oyster Perpetual 36 with Tiffany Dial",
+   "url": "https://watchmaestro.com/watches/product/11113623162025/",
+   "prix": 51900,
+   "devise": "AED",
+   "photos": [
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/09/Rolex-OP-36-Tiffany-1.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/09/Rolex-OP-36-Tiffany-2.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/09/Rolex-OP-36-Tiffany-4.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/09/Rolex-OP-36-Tiffany-3.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/09/Rolex-OP-36-Tiffany-8.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/09/Rolex-OP-36-Tiffany-7.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/09/Rolex-OP-36-Tiffany-6.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/09/Rolex-OP-36-Tiffany-5.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/09/Rolex-OP-36-Tiffany-9.webp",
+     "w": 2000
+    }
+   ],
+   "description": "The Rolex Oyster Perpetual 36 ref. 126000 with the turquoise “Tiffany” dial has become one of the most recognizable modern OPs. It offers a clean and minimal design, which is appealing to many. The 36mm Oystersteel case and Oyster bracelet keep the watch understated, but the vibrant dial makes it pop instantly. No date, no complications, just the purest form of Rolex design with a playful twist. Purchased in 2024, this example comes pre-owned with box and papers. Offered in a great condition, this piece still has the Rolex warranty intact.\n Inside, the Calibre 3230 delivers Rolex’s latest-generation performance, with a 70-hour power reserve and Superlative Chronometer accuracy. For collectors looking to add one of the most talked-about dial variations of recent years, this Oyster Perpetual “Tiffany” remains a standout choice.",
+   "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "6afce381c7b2",
+   "boutique": "watchmaestro",
+   "reference": "",
+   "collection": "Submariner",
+   "annee": "2019",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex Submariner Hulk with Green Dial & Green Ceramic Bezel",
+   "url": "https://watchmaestro.com/watches/product/01116035232025/",
+   "prix": 79900,
+   "devise": "AED",
+   "photos": [
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/10/Rolex-Submariner-Hulk-Green-Dial-Green-Bezel-1.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/10/Rolex-Submariner-Hulk-Green-Dial-Green-Bezel-2.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/10/Rolex-Submariner-Hulk-Green-Dial-Green-Bezel-4.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/10/Rolex-Submariner-Hulk-Green-Dial-Green-Bezel-3.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/10/Rolex-Submariner-Hulk-Green-Dial-Green-Bezel-8.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/10/Rolex-Submariner-Hulk-Green-Dial-Green-Bezel-7.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/10/Rolex-Submariner-Hulk-Green-Dial-Green-Bezel-6.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/10/Rolex-Submariner-Hulk-Green-Dial-Green-Bezel-5.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2025/10/Rolex-Submariner-Hulk-Green-Dial-Green-Bezel-9.webp",
+     "w": 2000
+    }
+   ],
+   "description": "Get this Rolex Submariner Hulk in like-new condition. It comes complete with its original box and papers. The watch features a 40mm case, which is made from stainless steel and paired with a beautifully matched steel bracelet. And the green Cerachrom bezel insert made of ceramic is what makes this model more defining and beautiful. The green Cerachrom bezel also matches the green dial. Likewise, the dial uses luminous shapes for markers instead of numerals. Purchased in 2019, this watch gets a 1-year warranty from WatchMaestro.\n When you put this Submariner Hulk on your wrist, it feels beautiful, comfortable, and reliable. Not only does the 40mm size fit well on most men’s wrists, but it also does not feel too large or heavy. The steel bracelet is smooth and cozy and does not pull hair. Thus, this luxury watch is comfortable for all-day wear. The green color looks very unique, especially under bright sunlight. The dial feels awesome and vivid in sunlight, while it appears more subtle indoors. So, this Submariner Hulk will surely add a unique color to your outfit.",
+   "premiere_vue": "2026-11-14T10:49+00:00"
+  },
+  {
+   "id": "e2525543c608",
+   "boutique": "watchmaestro",
+   "reference": "136650",
+   "collection": "Sea-Dweller",
+   "annee": "2025",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex Sea-Dweller 44mm James Cameron",
+   "url": "https://watchmaestro.com/watches/product/02118479022026/",
+   "prix": 60900,
+   "devise": "AED",
+   "photos": [
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2026/02/Rolex-Sea-Dweller-Deepsea-James-Cameron-1.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2026/02/Rolex-Sea-Dweller-Deepsea-James-Cameron-2.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2026/02/Rolex-Sea-Dweller-Deepsea-James-Cameron-4.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2026/02/Rolex-Sea-Dweller-Deepsea-James-Cameron-3.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2026/02/Rolex-Sea-Dweller-Deepsea-James-Cameron-8.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2026/02/Rolex-Sea-Dweller-Deepsea-James-Cameron-7.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2026/02/Rolex-Sea-Dweller-Deepsea-James-Cameron-6.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2026/02/Rolex-Sea-Dweller-Deepsea-James-Cameron-5.webp",
+     "w": 2000
+    },
+    {
+     "src": "https://watchmaestro.com/wp-content/uploads/2026/02/Rolex-Sea-Dweller-Deepsea-James-Cameron-9.webp",
+     "w": 2000
+    }
+   ],
+   "description": "The Rolex Sea-Dweller James Cameron, reference 136650, is an excellent dive watch built for extreme depths. The 2025 model is completely unworn and includes its original box and papers. It uses a large 44mm steel case that feels very solid. The most unique feature is the dial because it starts bright blue at the top and slowly turns black at the bottom, just like the deep ocean. A solid ceramic bezel surrounds the glass to prevent everyday scratches.  \n The Sea-Dweller has a very accurate automatic movement, which keeps exact time without a battery. The thick steel bracelet matches the heavy case and balances the watch comfortably on your wrist. The dial has no standard numbers. That’s why the large glowing markers make reading the time very easy in dark places. It is a highly reliable steel watch for men who want true quality and excellent water resistance.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
