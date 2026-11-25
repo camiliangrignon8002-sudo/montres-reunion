@@ -323,35 +323,6 @@
   "vu": "2026-11-03T22:03+04:00"
  },
  {
-  "id": "zimo-01a1a239-74d2-7ae9-8286-9d7bb8033a77",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-23-m2/01a1a239-74d2-7ae9-8286-9d7bb8033a77",
-  "titre": "Appartement 1 pièce 23 m²",
-  "prix": 396.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 23.0,
-  "meuble": null,
-  "photos": [],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 23 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via bien'ici",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-03T21:13+04:00"
- },
- {
   "id": "zimo-01a1a437-dd4a-70cf-ac9c-e05e8d23814a",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-1-piece-28-m2/01a1a437-dd4a-70cf-ac9c-e05e8d23814a",
@@ -1744,6 +1715,10 @@
    {
     "source": "Herren Immobilier",
     "url": "https://www.herren-immobilier.com/location/appartement/7996-2222222222222222222_2"
+   },
+   {
+    "source": "Herren Immobilier",
+    "url": "https://www.herren-immobilier.com/location/appartement/7996"
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
@@ -1993,6 +1968,37 @@
    }
   ],
   "vu": "2026-10-21T12:04+04:00"
+ },
+ {
+  "id": "zimo-01a20f58-1ddc-7c0a-9cd3-35c26793bcdf",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-45-m2/01a20f58-1ddc-7c0a-9cd3-35c26793bcdf",
+  "titre": "Appartement 2 pièces 45 m²",
+  "prix": 507.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 45.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/IHM1neXJuiqaXO66GNLQRZMcZcRNVAl8UXy3SZJ2QaE/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_3e89eead-a9df-4561-a883-e6bae8d9b718.jpg"
+  ],
+  "description": "Location T2 Saint-Denis (974) 2 pièces 45 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via FNAIM",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-25T06:33+04:00"
  },
  {
   "id": "zimo-01a1a189-dd44-7661-b3ce-4f5e1461cc10",
@@ -2652,37 +2658,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-04T02:00+04:00"
- },
- {
-  "id": "zimo-01a1f3ce-8d43-7ebe-835d-6fe853b8b733",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/t2-aux-gaspards/01a1f3ce-8d43-7ebe-835d-6fe853b8b733",
-  "titre": "T2 aux gaspards",
-  "prix": 544.0,
-  "commune": "Sainte-Marie",
-  "quartier": "Sainte-Marie",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 44.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/BvFtS-f4NMWDILbHH8nvBX1lRjRPSOpzjH-ajW6uyYo/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_c52ba962-089f-4a11-9d0e-cba7c808c8be.jpg"
-  ],
-  "description": "Location T2 Sainte-Marie (974) 2 pièces 44 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-19T17:35+04:00"
  },
  {
   "id": "zimo-01a1a284-19e3-76f2-9a69-7d3c24df5b94",
@@ -4095,37 +4070,6 @@
   "vu": "2026-11-06T03:56+04:00"
  },
  {
-  "id": "zimo-01a1ea6c-105d-7e86-8816-0b6cb5d67891",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-43-m2/01a1ea6c-105d-7e86-8816-0b6cb5d67891",
-  "titre": "Appartement 2 pièces 43 m²",
-  "prix": 603.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 43.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/DAOinSKkWbjDn2phKPNv2PUci1ZlIFZqLWpP8hNoerk/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_77f8372b-a423-4f2b-88fe-b8ea75c664d4.jpg"
-  ],
-  "description": "Location T2 Saint-Denis (974) 2 pièces 43 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via Citya",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-18T13:22+04:00"
- },
- {
   "id": "zimo-01a1676c-1203-7ab7-ad18-f0a5235f54af",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-1-piece-20-m2/01a1676c-1203-7ab7-ad18-f0a5235f54af",
@@ -4521,37 +4465,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-19T23:16+04:00"
- },
- {
-  "id": "zimo-01a207fa-f608-755e-91d7-f24b9a1b6815",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/ste-suzanne-quartier-francais-t2-56-m2/01a207fa-f608-755e-91d7-f24b9a1b6815",
-  "titre": "STE SUZANNE quartier Français T2 56 m²",
-  "prix": 620.0,
-  "commune": "Sainte-Suzanne",
-  "quartier": "Quartier Français",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 56.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/oOV10Gs7b-qDdOTL2urqri50Sy-XrlbibqkzKEGGWg0/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_c11a9e2b-0066-4d54-98c7-15da9af7f4e8.jpg"
-  ],
-  "description": "Location T2 Sainte-Suzanne (974) 2 pièces 56 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord-Est",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-24T01:30+04:00"
  },
  {
   "id": "superimmo--annonces-location-appartement-19m-saint-denis-97490-x12ct6o",
@@ -5261,35 +5174,36 @@
   "vu": "2026-11-05T17:29+04:00"
  },
  {
-  "id": "pv-1297840775",
-  "source": "ParuVendu",
-  "url": "https://www.paruvendu.fr/immobilier/location/appartement/1297840775A1KILHAP000",
-  "titre": "Location appartement 1 pièce de 31m2 à Saint denis (97490)",
+  "id": "superimmo--annonces-location-appartement-31m-saint-denis-97490-x12jdl6",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-31m-saint-denis-97490-x12jdl6",
+  "titre": "Location appartement 1 pièce 31 m² Saint-Denis (97490)",
   "prix": 650.0,
   "commune": "Saint-Denis",
-  "quartier": "Sainte-Clotilde",
+  "quartier": "",
   "pieces": 1,
   "type": "Studio",
   "surface": 31.0,
   "meuble": null,
   "photos": [
-   "https://img.paruvendu.fr/media_ext/_https_/photos.ubiflow.net/82/7b/Lzk3MTAzMS81NjIzNDU1NjIvcGhvdG9zLzEuanBnPzIwMjYxMTI0MTQ1MjIy_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/photos.ubiflow.net/16/74/Lzk3MTAzMS81NjIzNDU1NjIvcGhvdG9zLzIuanBnPzIwMjYxMTI0MTQ1MjIy_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/photos.ubiflow.net/cf/97/Lzk3MTAzMS81NjIzNDU1NjIvcGhvdG9zLzMuanBnPzIwMjYxMTI0MTQ1MjIy_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/photos.ubiflow.net/cc/8e/Lzk3MTAzMS81NjIzNDU1NjIvcGhvdG9zLzQuanBnPzIwMjYxMTI0MTQ1MjIy_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/d5/55/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS1kb21haW5lX2RlLTE1Mjg5Mjk4MzczODA2NDMyODg0LmpwZz8yMDI2MTEyNDExNDAzMw_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/dc/6e/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS1BTUFSQU5URVMtNjc2OTAxNzUwNzYzMTEzOTA0NC5qcGc_MjAyNjExMjQxMTQwMzE_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/29/af/L2NpdF9DSVRZQV9TVEdJTExFU190aWMvbG9jYXRpb24vcGhvdG8vMjAyMTAyMThfMTMzMzMwLTUxMDA2ODQ5MjY4NjM1NzY2NDEuanBnPzIwMjYxMTI0MTE0MDI5_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/box.ics.fr/0d/2d/L2NpdF9DSVRZQV9JRFJfdGljL2xvY2F0aW9uL3Bob3RvL2ZpbGlncmFuZS0xLS01OTMyNjcwNTE1ODQ5MzQyNDk5LmpwZz8yMDI2MTEyNDExMzgzOQ_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/herrenimmo.staticlbi.com/2a/52/L3dhL2ltYWdlcy9iaWVucy8xLzE2YTYwODMyMjgyMDY1OGExZjM3NDM4ZjBmNDkzZmUxL3Bob3RvX2EzOTYwNDJjZTU5NDliMTdiMmEwZTRhYTJhZTcyZDI1LmpwZz8yMDI2MTEyNDA1MTUwNw_rct?func=crop&w=1000&gravity=auto",
-   "https://img.paruvendu.fr/media_ext/_https_/photos.ubiflow.net/f2/63/LzM0MDM2OS81MTI3MDM2ODAvcGhvdG9zLzEuanBnPzIwMjYxMTI0MDQwNTI1_rct?func=crop&w=1000&gravity=auto"
+   "https://photo.superimmo.com/whm67m5k0jzu6ix0zia3z634opou",
+   "https://photo.superimmo.com/cpmbbw8eo3stg5bugg3uo6qti5c2",
+   "https://photo.superimmo.com/2ro4w0uvxs847ex3o877x7nnkdnn",
+   "https://photo.superimmo.com/epuyjwe2pvqd8v4hkzcpniqj442a",
+   "https://photo.superimmo.com/q54i3sbt77gzmt34z3maks4konvd",
+   "https://photo.superimmo.com/vsrarye7b2pyusi3njg7jlun8ff6",
+   "https://photo.superimmo.com/w8v7fzlx6p2fh981ybyz0109tnc8",
+   "https://photo.superimmo.com/if6t864mxvmhoo2i6yayo19qutrr",
+   "https://photo.superimmo.com/2hv5alium3batuj8j4aj1gq7xlnu",
+   "https://photo.superimmo.com/8lh07lbve55w45d65jbw42897s0q",
+   "https://photo.superimmo.com/buuxsm93y2akect35wwpvqp89cp9",
+   "https://photo.superimmo.com/c5jhnpijnz5ff95ejspp6zl2rncq",
+   "https://photo.superimmo.com/2e0f6p6wl2r21ylzy804oiada365"
   ],
-  "description": "Studio spacieux de 32m2 au 1er étage, idéalement situé à Saint Denis. Inclus dans le loyer : eau et EDF. Disponible dès maintenant.\nUn studio situé au 1er étage d'une superficie de 32m2 composé d'une entrée, d'un séjour, d'une kitchenette et d'une salle de bains/WC.\nDisponible dès maintenant.\nEau, EDF inclus dans le loyer.\nLoyer avec charges : 650.00 €, dont :\n- provision pour charges : 40.00 €\n- Provision pour TEOM : 10.00 €\nDépôt de garantie : 600.00 €\nHonoraires de location : 415.00 € (10€/m² : visite, rédaction bail - 3€/m² : état des lieux)\nMVS ORPI :\nNom du négociateur : MANDER Eric\nHonoraires d'état des lieux : 415 €\nBien situé dans une ville soumis à l'encadrement des loyers :\nLoyer de Référence Majoré : 600 €\nMontant du complément de loyer : 10 €\nAdresse : 6, Rue des Jacinthes\nApt 18 - Rés Central fac 3, Saint Denis, DOM-TOM (97)",
-  "caracteristiques": [
-   "Proche université"
-  ],
+  "description": "Annonce appartement location 31 m² 1 pièce à Saint-Denis Un studio situé au 1er étage d'une",
+  "caracteristiques": [],
   "date": "",
-  "annonceur": "ORPI MVS SAINT GILLES LES BAINS",
+  "annonceur": "Superimmo",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -5300,6 +5214,10 @@
   "secteur": "Nord",
   "caf": false,
   "aussi": [
+   {
+    "source": "ParuVendu",
+    "url": "https://www.paruvendu.fr/immobilier/location/appartement/1297840775A1KILHAP000"
+   },
    {
     "source": "Bien'ici",
     "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/1pieces/ag971031-562345562"
@@ -5308,45 +5226,34 @@
   "vu": "2026-11-24T21:53+04:00"
  },
  {
-  "id": "figaro-111245325",
-  "source": "Figaro Immobilier",
-  "url": "https://immobilier.lefigaro.fr/annonces/annonce-111245325.html",
-  "titre": "Location  appartement 1 pièce 31.96 m² à Saint denis chaudron (97490), 650 €",
+  "id": "zimo-01a20ca5-6f53-7dd4-89ec-20b8455aac56",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-1-piece-32-m2/01a20ca5-6f53-7dd4-89ec-20b8455aac56",
+  "titre": "Studio 1 pièce 32 m²",
   "prix": 650.0,
   "commune": "Saint-Denis",
-  "quartier": "Saint denis chaudron",
+  "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
-  "surface": 31.96,
+  "surface": 32.0,
   "meuble": null,
   "photos": [
-   "https://lh3.googleusercontent.com/--qRxhISS0lG4OA8X_nwQlmwu8_Jx3Cbzi7XdBWlwJ47rg4tBQ-K_kEdN0XuGVZc8JEoNMKMZ78eLzOdBVio_AkQIWjX5OZ3S2v2Jw=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/nQ76c-aYi605SWpk4v9FTv6la2HhZxq3er6tEh-WuV2w9JckZijKpU2j2PMEQjk4LUoWmWwl3HavRpChDsB9QGi1t_MGs5sRwYzRVF4=rw-w940-h605-l80",
-   "https://lh3.googleusercontent.com/N-FYEHxEdAPZO8wIhOxP-38mlMUQRO2HLgc5ftsZ85Mw9crPrndcURuR2_ypMc_GHTgiLgmjLvzge-DWZ_6bmbElcwAyJvlAjewN=rw-w940-h605-l80"
+   "https://img.e-xiste.com/o7x24eK_YWFRT9puatXiC0mMuGDSrgmgJijScIPzl6c/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_20a4b995-aa28-48ba-b524-787bcfed09c2.jpg"
   ],
-  "description": "Un studio situé au 1er étage d'une superficie de 32m2 composé d'une entrée, d'un séjour, d'une kitchenette et d'une salle de bains/WC.\nDisponible dès maintenant.\nEau, EDF inclus dans le loyer.\nLoyer avec charges : 650.00 €, dont :\n- provision pour charges : 40.00 €\n- Provision pour TEOM : 10.00 €\nDépôt de garantie : 600.00 €\nHonoraires de location : 415.00 € (10€/m² : visite, rédaction bail - 3€/m² : état des lieux)\nMVS ORPI : 02.62.51.74.74",
+  "description": "Location Studio Saint-Denis (974) 1 pièces 32 m²",
   "caracteristiques": [],
   "date": "",
-  "annonceur": "",
+  "annonceur": "Pro · via Orpi",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "0262 51 74 74",
+  "tel": "",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/studio-1-piece-32-m2/01a20ca5-6f53-7dd4-89ec-20b8455aac56"
-   },
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/location-d-un-appartement/01a1a1ee-3cba-79eb-8309-00150257a716"
-   }
-  ],
+  "aussi": [],
   "vu": "2026-11-03T19:05+04:00"
  },
  {
@@ -5371,37 +5278,6 @@
    "Climatisation",
    "Vue mer"
   ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-23T13:11+04:00"
- },
- {
-  "id": "zimo-01a206a2-615d-7bcc-abcf-d25fa69a6064",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/location-appartement-saint-denis-650/01a206a2-615d-7bcc-abcf-d25fa69a6064",
-  "titre": "Location appartement Saint-Denis 650",
-  "prix": 650.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 42.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/y0i74zEt_XJCFC59-pNLMTc-aaj0tbj4ADnKJNMxrDg/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_d617193d-9b6d-4e5e-a6d2-fb8b4efdb9e2.jpg"
-  ],
-  "description": "Location T2 Saint-Denis (974) 2 pièces 42 m²",
-  "caracteristiques": [],
   "date": "",
   "annonceur": "Particulier · via leboncoin",
   "lat": null,
@@ -5483,34 +5359,48 @@
   "vu": "2026-11-19T22:06+04:00"
  },
  {
-  "id": "zimo-01a1ef96-da45-7550-86d4-7e478ae3c1bb",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-1-piece-22-m2/01a1ef96-da45-7550-86d4-7e478ae3c1bb",
-  "titre": "Studio 1 pièce 22 m²",
+  "id": "figaro-111048899",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-111048899.html",
+  "titre": "Location meublée appartement 1 pièce 22.17 m² à Saint-Denis (97400), 650 €",
   "prix": 650.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
-  "surface": 22.0,
-  "meuble": null,
+  "surface": 22.17,
+  "meuble": true,
   "photos": [
-   "https://img.e-xiste.com/JQcDK1CPdkTaDN3KMq51NGkyem3ISmwWz4yM0eyP2as/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_b0218937-9699-41a2-8161-e2c0698d75d0.jpg"
+   "https://lh3.googleusercontent.com/7kmhnTwwJ92YhkPhloJPGSUq4LTImR7LEFXEoQQbRsO88ULTihT_9wD6vk5kdtNqqbgSRvLw_E3CieX7uz1iB_HxAIfbltXYXGB0Vg=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/ZIyV8mALwtY1AAoX4EG_iRrMS4mNyRJAzsLGB5LfPKbJThdFTY-JnEQ9_7a5hG5Ln_riK-ksVS1SQRVTKvEv2tKLobfACzm6Fiv4=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/TKbyjcVL1h_ut7OHP8uOBjZsFajpqVK5pr2hMealkh9k-RVQFz2Dh3kO1h7Z8PAW_s_yo3sX7TDQf_OqtH3FhUGCKbMFvVoisaobDQ=rw-w940-h605-l80"
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 22 m²",
-  "caracteristiques": [],
+  "description": "ENEZ Immobilier vous propose ce studio meublé de 22,17m2 situé Résidence Oiseau de Paradis, 215 Boulevard Jean Jaurès.\nEntrée avec placard, salon séjour avec kitchenette aménagée et équipée, salle d'eau avec WC.\nLe studio est complété par une varangue.\nL'appartement est disponible de suite\nAppelez-nous vite au 0693228334 pour organiser une visite !",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon"
+  ],
   "date": "",
-  "annonceur": "Pro · via leboncoin",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0693 22 83 34",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/studio-1-piece-22-m2/01a1ef96-da45-7550-86d4-7e478ae3c1bb"
+   },
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/loue-studio-vue-sur-saint-denis/01a1e9f1-2a7e-7904-9fd1-c5c28db9b570"
+   }
+  ],
   "vu": "2026-11-17T19:09+04:00"
  },
  {
@@ -6058,37 +5948,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "zimo-01a20710-959f-747a-b0fd-eb979c208370",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/st-denis-centre-ville-t2-59-m2-r-mazagran/01a20710-959f-747a-b0fd-eb979c208370",
-  "titre": "ST DENIS Centre ville T2 - 59 m² R. MAZAGRAN",
-  "prix": 660.0,
-  "commune": "Saint-Denis",
-  "quartier": "Centre-ville",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 59.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/8D_hSUdtJO7-u7IRYN6sICY_7wjhbt1dC2tKKvG0l3o/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_b4481ae9-d8d8-476d-90f7-011238803413.jpg"
-  ],
-  "description": "Location T2 Saint-Denis (974) 2 pièces 59 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-23T13:11+04:00"
- },
- {
   "id": "zimo-01a1d8bc-3004-7786-baba-2c579a81f55a",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/charmant-studio-meuble-renove-avec-balcon-et-vue-montagne/01a1d8bc-3004-7786-baba-2c579a81f55a",
@@ -6222,37 +6081,6 @@
    }
   ],
   "vu": "2026-11-16T19:24+04:00"
- },
- {
-  "id": "zimo-01a1e532-ed5b-7456-a303-7c6795e8f8de",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-27-4m2-a-louer-a-la-bretagne/01a1e532-ed5b-7456-a303-7c6795e8f8de",
-  "titre": "STUDIO 27,4m2 à louer à La Bretagne",
-  "prix": 669.0,
-  "commune": "Saint-Denis",
-  "quartier": "La Bretagne",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 28.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/KH76QVNa59NFriNZbqHNAkdg5kXCC9jAHZATZtdRKQI/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_d5e9536b-6e85-4a44-96bd-6abc57ef44ef.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 28 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-16T21:29+04:00"
  },
  {
   "id": "zimo-01a1f37c-0c2d-7764-bf5b-d609a8507521",
@@ -6594,39 +6422,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-15T17:12+04:00"
- },
- {
-  "id": "zimo-01a0e80a-d592-754d-88c5-866c256ae9d1",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/location-d-un-studio-meuble-au-barachois/01a0e80a-d592-754d-88c5-866c256ae9d1",
-  "titre": "Location d'un studio meublé au Barachois",
-  "prix": 675.0,
-  "commune": "Saint-Denis",
-  "quartier": "Barachois",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 24.0,
-  "meuble": true,
-  "photos": [
-   "https://img.e-xiste.com/iPJYuOfJ8y2kfrYtirWMhmbofh2H1ZdyibhDW2LaiNw/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_96d2f1fd-cade-41e7-933b-3b5193065308.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 24 m²",
-  "caracteristiques": [
-   "Meublé"
-  ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
  },
  {
   "id": "immotransac-1333",
@@ -7064,39 +6859,6 @@
   "vu": "2026-11-24T21:53+04:00"
  },
  {
-  "id": "zimo-01a1ffe9-ce2d-7310-a63f-a055afb6c167",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-t2-en-duplex-non-meuble/01a1ffe9-ce2d-7310-a63f-a055afb6c167",
-  "titre": "Appartement t2 en duplex non meuble",
-  "prix": 690.0,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 46.0,
-  "meuble": false,
-  "photos": [
-   "https://img.e-xiste.com/kJYU4c-Q5eKxqf1cPBi-BkzimikSUl8y_euPk0L36UE/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_8754b49b-c79d-482b-9839-69b2095a3ee5.jpg"
-  ],
-  "description": "Location Duplex Saint-Denis (974) 2 pièces 46 m²",
-  "caracteristiques": [
-   "Meublé"
-  ],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-22T02:12+04:00"
- },
- {
   "id": "zimo-01a1ff5b-c363-76f1-b10b-59b8a40da44d",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/loue-f1-meuble-de-32-m2-690-longue-duree-hors-eau-edf-situee-a-a-saint-denis-apl-ok/01a1ff5b-c363-76f1-b10b-59b8a40da44d",
@@ -7425,34 +7187,47 @@
   "vu": "2026-11-24T21:53+04:00"
  },
  {
-  "id": "zimo-01a20d8f-670f-76db-82d4-30ace0786b66",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-1-piece-25-m2/01a20d8f-670f-76db-82d4-30ace0786b66",
-  "titre": "Appartement 1 pièce 25 m²",
+  "id": "ep-22829629",
+  "source": "EntreParticuliers",
+  "url": "https://www.entreparticuliers.com/annonces-immobilieres/appartement/location/saint-denis-97400/appartement-1-piece-25-m2/ref-22829629",
+  "titre": "Appartement 1 pièce 25 m² — Saint-Denis",
   "prix": 697.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
   "surface": 25.0,
-  "meuble": null,
+  "meuble": true,
   "photos": [
-   "https://img.e-xiste.com/3vwpQ16HWpjZXLa22ain3LkUrpJPI5Fy2nfeKI1bkGs/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_5bd92506-9aa5-47de-a717-534eb28455a8.jpg"
+   "https://www.entreparticuliers.com/media/epc-photos/photo_8b258620-bdd0-4670-90e9-e1b16f7cfb8b.jpg"
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 25 m²",
-  "caracteristiques": [],
+  "description": "Premium Immobilier vous propose à la location MEUBLÉE à proximité de l'université de Sainte-Clotilde un studio 25 m2 habitable situé au dernier étage avec magnifique vue mer. (résidence OISEAU DU PARADIS)\nLibre de suite, le montant du loyer est de 643,65 € /mois hors charges + 53€ /mois de provision sur charges (charges de copropriété et d'enlèvement d'ordures ménagères), soit un loyer charges comprises de 696,65€ par mois.\nIl comprend un coin cuisine ouvert sur la pièce de vie, une salle d'eau avec WC et un balcon. Soit une surface totale de 28 m2.\nVous bénéficiez également d'une place de stationnement en sous-sol sécurisé.\nL'appartement est implanté dans une résidence sécurisée et récente dotée d'une salle de sport et d'une piscine.\nCet appartement est disponible dès le 14 décembre 2026.\nPremium Immobilier - à louer - meublé -  appartement - studio - T1 - Saint Denis - Studio - Dernier étage - Sainte Clotilde - proche FAC\nCopropriété de 291 lots (Pas de procédure en cours).\nCharges annuelles : 73.00 euros. Franck MOUNOUSSAMY-DARCEL (EI) Agent Commercial - Numéro RSAC : 82063990400037 - Saint-Denis.",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Piscine",
+   "Vue mer",
+   "Résidence sécurisée",
+   "Proche université"
+  ],
   "date": "",
-  "annonceur": "Pro · via SeLoger",
+  "annonceur": "Particulier",
   "lat": null,
   "lon": null,
   "charges": null,
-  "pro": true,
+  "pro": false,
   "tel": "",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-1-piece-25-m2/01a20d8f-670f-76db-82d4-30ace0786b66"
+   }
+  ],
   "vu": "2026-11-24T21:53+04:00"
  },
  {
@@ -7719,35 +7494,6 @@
   "vu": "2026-11-03T20:07+04:00"
  },
  {
-  "id": "zimo-01a1a4c6-3fdd-73e3-a18a-96be0f1b344d",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/apparemment-t2-a-louer/01a1a4c6-3fdd-73e3-a18a-96be0f1b344d",
-  "titre": "Apparemment T2 à louer",
-  "prix": 700.0,
-  "commune": "Sainte-Marie",
-  "quartier": "Sainte-Marie",
-  "pieces": 3,
-  "type": "T3",
-  "surface": 45.0,
-  "meuble": null,
-  "photos": [],
-  "description": "Location T2 Sainte-Marie (974) 3 pièces 45 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Particulier · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": false,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-04T09:13+04:00"
- },
- {
   "id": "zimo-01a1ff5b-bcf2-7568-b767-515cabd528e5",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-t1-meuble-fonctionnel-calme-et-bien-situe/01a1ff5b-bcf2-7568-b767-515cabd528e5",
@@ -7779,6 +7525,35 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-22T02:12+04:00"
+ },
+ {
+  "id": "zimo-01a1a4c6-3fdd-73e3-a18a-96be0f1b344d",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/apparemment-t2-a-louer/01a1a4c6-3fdd-73e3-a18a-96be0f1b344d",
+  "titre": "Apparemment T2 à louer",
+  "prix": 700.0,
+  "commune": "Sainte-Marie",
+  "quartier": "Sainte-Marie",
+  "pieces": 3,
+  "type": "T3",
+  "surface": 45.0,
+  "meuble": null,
+  "photos": [],
+  "description": "Location T2 Sainte-Marie (974) 3 pièces 45 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-04T09:13+04:00"
  },
  {
   "id": "zimo-01a1a332-c26f-74ef-8004-358df775ec2d",
@@ -7853,24 +7628,32 @@
   "vu": "2026-10-21T12:59+04:00"
  },
  {
-  "id": "zimo-01a1affb-957d-7be9-abe5-15f832a602af",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-1-piece-25-m2/01a1affb-957d-7be9-abe5-15f832a602af",
-  "titre": "Studio 1 pièce 25 m²",
+  "id": "figaro-110703821",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110703821.html",
+  "titre": "Location meublée appartement 1 pièce 25 m² à Saint-Denis (97400), 702 €",
   "prix": 702.0,
   "commune": "Saint-Denis",
   "quartier": "Saint-Denis",
   "pieces": 1,
   "type": "Studio",
   "surface": 25.0,
-  "meuble": null,
+  "meuble": true,
   "photos": [
-   "https://img.e-xiste.com/01ydZS5Z4c7zjSA4OE50NMvdbVJznM3Q70CR2UxHMeo/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_d2eaa78b-e878-4aed-8573-3b4aca5f1712.jpg"
+   "https://lh3.googleusercontent.com/it-RKJ3kWZimyXBBi7Uf5K5fcG1LmugKg7ciNTqzJA8Kr9IAyNzZRX-X4HloP400N-xVau-jJMssiGu4s7NdLPCgmUgFFssMTAcsgxY=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/CCD9qZMTIMH1x-KXkMCqHQX2BHM4vRPgzMhWU_LVAVrSxj3o6I3e_jnEYwBOKF0A5ktKiMcEwScnSAm5DY7gbmjeyGUJXldAyBMRtV0=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/M0bx6wqJy5OGJD3tmMWa2r6JWK173sMQPprszQ6mtFWJDltUWBh2yeZLanVTrTnUgPHmWkO6NKEG9MVIqyqefRjF0-XohTZLjkm6vQ=rw-w940-h605-l80"
   ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 25 m²",
-  "caracteristiques": [],
+  "description": "Nous vous proposons à la location ce studio meublé de 25m2, dans la résidence LE CLOS SAINT JACQUES à Saint-Denis.\nLa résidence se trouve à proximité du Jardin d'état, dans la Rue Montreuil\nL'appartement, situé au 1er étage se compose d'une pièce de vie avec espace buanderie et dressing, un coin cuisine aménagée et équipée, 1 salle d'eau et 1 wc. 1 balcon complète ce logement.\nPas de place de parking\nle logement est disponible au 3 décembre, suite au préavis des locataires, mais les visites commencent.\nLoyer : 702,41EUR (dont 50EUR de provisions pour charges de copropriété)\nEau, électricité et internet non inclus. Logement loué meublé.\nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : www.georisques.gouv.fr",
+  "caracteristiques": [
+   "Meublé",
+   "Varangue / balcon",
+   "Parking",
+   "Jardin",
+   "Cuisine équipée"
+  ],
   "date": "",
-  "annonceur": "Pro · via leboncoin",
+  "annonceur": "",
   "lat": null,
   "lon": null,
   "charges": null,
@@ -7880,7 +7663,12 @@
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/studio-1-piece-25-m2/01a1affb-957d-7be9-abe5-15f832a602af"
+   }
+  ],
   "vu": "2026-11-06T14:19+04:00"
  },
  {
@@ -8116,6 +7904,79 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
+  "id": "figaro-110709197",
+  "source": "Figaro Immobilier",
+  "url": "https://immobilier.lefigaro.fr/annonces/annonce-110709197.html",
+  "titre": "Location  appartement 2 pièces 42.25 m² à Saint denis chaudron (97490), 715 €",
+  "prix": 715.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint denis chaudron",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 42.25,
+  "meuble": true,
+  "photos": [
+   "https://lh3.googleusercontent.com/RfybwlVKjHT9ifCNkM-m5zctdWR9Ct4J-ijgUFMYj91nOzlwBQEX0Q6-1rvb37-jCYB-47gwMCk_3gYu9-O4Gbua-yGtv0P6Lw6iT3c=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/b2jKmUZKgczq84NdRx7ouVYp_EkVdPBb8eTi0cCLjB6jiUy_LKyqNuK2A67DFpqNpil1hsEWMdM_TRR6cjM8OQv1PrhgSEttNYQE=rw-w940-h605-l80",
+   "https://lh3.googleusercontent.com/mzFcBa3pWMK7BTbjXUgxF8W9thfpcnY5KtXMOGN-uNBgrgoT8RUtqyCbcmr3wsvd8nI3EnBH4MGe-CxfVYfT-ckw74Q8keFeNTh2=rw-w940-h605-l80"
+  ],
+  "description": "Disponible le 3 décembre / résidence sénior\n.\nSuperbe T2 de 42 m² situé au 1er étage de la résidence seniors calme et sécurisée, Les Patios d'Or Sainte Clotilde, ruelle Magnan.\nLE LOGEMENT\nEntrée avec visiophone\nSéjour lumineux avec baie vitrée\nChambre\nCuisine aménagée avec meubles hauts et bas, évier, plaque de cuisson vitrocéramique, hotte aspirante.\nSalle d'eau adaptée aux séniors : douche au ras du sol, siège rabattable, barres d'appui et de maintien, WC réhaussés.\nLES PLUS\nVarangue exposée ouest\nAscenseur\nRésidence aux normes PMR\neau chaude collective\nLA RESIDENCE\nToutes nos résidences disposent d'un club-house animé par un régisseur. Les résidents peuvent participer quotidiennement à diverses animations (comprises dans les charges) et profiter :\nd'un espace détente,\nd'un espace loisirs,\nd'un espace cuisine.\nAfin de répondre aux besoins de chacun, les services dédiés aux seniors sont proposés à la carte :\nservices à la personne,\ntélésurveillance,\nservices paramédicaux,\nlivraison de repas.\nACCES :\nBus : ligne 10, arrêt Champ fleuri ou lignes n°5,6,7et 8 arrêt Butor.\nLoyer soumis au dispositif Pinel Outre Mer.\nHonoraires de 554,32 € TTC à la charge du locataire comprenant 128,02 € TTC pour l'état des lieux. Loyer de base 589.00 €/mois. Provision sur charges 126 €/mois, régularisation annuelle. Dépôt de garantie 589 €. Non soumis au DPE. Les informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : georisques.gouv.fr.",
+  "caracteristiques": [
+   "Varangue / balcon",
+   "Ascenseur",
+   "Cuisine équipée",
+   "Résidence sécurisée",
+   "Proche transports",
+   "Accès handicapé"
+  ],
+  "date": "",
+  "annonceur": "",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-11T01:00+04:00"
+ },
+ {
+  "id": "zimo-01a20f38-4c0c-7025-b766-6cdbb0ff3fca",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/studio-meuble/01a20f38-4c0c-7025-b766-6cdbb0ff3fca",
+  "titre": "Studio meublé",
+  "prix": 720.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 1,
+  "type": "Studio",
+  "surface": 25.0,
+  "meuble": true,
+  "photos": [
+   "https://img.e-xiste.com/T5NCYY3pNE6hwffdiVwe9LzpaePC07vBDlmw9E48Ei0/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_30cb79c6-694b-4d9a-9ae4-5a48d88af3ed.jpg"
+  ],
+  "description": "Location Studio Saint-Denis (974) 1 pièces 25 m²",
+  "caracteristiques": [
+   "Meublé"
+  ],
+  "date": "",
+  "annonceur": "Particulier · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": false,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-25T06:33+04:00"
+ },
+ {
   "id": "zimo-01a1a200-1856-7b64-98e6-acd475f35b67",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-f3-deux-chambres/01a1a200-1856-7b64-98e6-acd475f35b67",
@@ -8277,6 +8138,37 @@
   "vu": "2026-11-04T02:59+04:00"
  },
  {
+  "id": "zimo-01a207f1-9c9f-7901-bf0a-1cb54912cf98",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-48-m2/01a207f1-9c9f-7901-bf0a-1cb54912cf98",
+  "titre": "Appartement 2 pièces 48 m²",
+  "prix": 740.0,
+  "commune": "La Possession",
+  "quartier": "La Possession",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 48.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/9PUYsYO-tFMS_K9hw5a5pCTMlwwZTaEfTutnMC54LYI/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_56e93b2a-92b6-4765-a2a5-be3125d07942.jpg"
+  ],
+  "description": "Location T2 La Possession (974) 2 pièces 48 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord-Ouest",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-24T01:30+04:00"
+ },
+ {
   "id": "zimo-01a1cf4b-d85a-732f-854d-59937880ef88",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/t2-meuble-vue-mer-environnement-calme/01a1cf4b-d85a-732f-854d-59937880ef88",
@@ -8309,36 +8201,5 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-12T15:17+04:00"
- },
- {
-  "id": "zimo-01a207f1-9c9f-7901-bf0a-1cb54912cf98",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-48-m2/01a207f1-9c9f-7901-bf0a-1cb54912cf98",
-  "titre": "Appartement 2 pièces 48 m²",
-  "prix": 740.0,
-  "commune": "La Possession",
-  "quartier": "La Possession",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 48.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/9PUYsYO-tFMS_K9hw5a5pCTMlwwZTaEfTutnMC54LYI/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_56e93b2a-92b6-4765-a2a5-be3125d07942.jpg"
-  ],
-  "description": "Location T2 La Possession (974) 2 pièces 48 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord-Ouest",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-24T01:30+04:00"
  }
 ]
