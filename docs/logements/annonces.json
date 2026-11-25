@@ -263,45 +263,6 @@
   "vu": "2026-10-21T12:04+04:00"
  },
  {
-  "id": "herren-immobilier-www-herren-immobilier-com-location-appartement-7992",
-  "source": "Herren Immobilier",
-  "url": "https://www.herren-immobilier.com/location/appartement/7992",
-  "titre": "Studio de 24m² à Ste Clotilde",
-  "prix": 375.0,
-  "commune": "Saint-Denis",
-  "quartier": "",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 24.0,
-  "meuble": null,
-  "photos": [
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/main.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/preview.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_144813.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/20220404_145038.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7992/secondary/DSC06474.jpg",
-   "https://www.herren-immobilier.com/images/stories/snpi.jpg",
-   "https://www.herren-immobilier.com/images/com_jea/images/7873/min.jpg"
-  ],
-  "description": "> Studio de 24m² � Ste Clotilde Réf : 5008 � Adresse : 97490 STE CLOTILDE Avantages Climatisation Placard(s) Proximité Ecole(s) Proximité Comme...",
-  "caracteristiques": [
-   "Climatisation"
-  ],
-  "date": "",
-  "annonceur": "Herren Immobilier",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "herren-location@orange.fr",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-22T01:51+04:00"
- },
- {
   "id": "zimo-01a1a373-5e94-7173-b821-6f56c54cd672",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a1a373-5e94-7173-b821-6f56c54cd672",
@@ -995,6 +956,48 @@
    }
   ],
   "vu": "2026-11-24T21:53+04:00"
+ },
+ {
+  "id": "bienici-citya-immobilier-501991-GES05190488-34",
+  "source": "Bien'ici",
+  "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/1pieces/citya-immobilier-501991-GES05190488-34",
+  "titre": "T1 22 m²",
+  "prix": 450,
+  "commune": "Saint-Denis",
+  "quartier": "Le Butor - Champ-Fleuri - Sainte-Clotilde",
+  "pieces": 1,
+  "type": "T1",
+  "surface": 22.02,
+  "meuble": false,
+  "photos": [
+   "https://file.bienici.com/photo/citya-immobilier-501991-GES05190488-34_box.ics.fr_cit_CITYA_STDENIS_tic_location_photo_filigrane-OISEAU_DE_PARADIS-5267119864809302866-16453454035585347279.jpg"
+  ],
+  "description": "À LOUER : Appartement T1 situé à Sainte Clotilde, dans le code postal 97490. Ce bien immobilier offre une surface habitable de 22.02 m², idéal pour une personne seule ou un couple cherchant un espace fonctionnel et agréable. \n\nL'appartement se trouve au quatrième étage d'un immeuble avec ascenseur, facilitant l'accès à votre logement. Il est équipé d'un système de chauffage individuel par climatisation, garantissant un confort optimal tout au long de l'année. La cuisine est aménagée, vous permettant de profiter d'un espace pratique pour préparer vos repas.\n\nCe logement est situé dans un quartier dynamique, à proximité de nombreux commerces et services. À moins de 500 mètres, vous trouverez l'Asia Store pour vos courses quotidiennes, ainsi qu'une boulangerie, la Boulangerie tradition de Bourbon, pour vos envies de pain frais. Pour des courses plus importantes, le supermarché Shoppy est accessible à moins de 1000 mètres.\n\nLes familles apprécieront la proximité des établissements scolaires, avec l'École des Badamiers à moins de 500 mètres et plusieurs autres écoles élémentaires et collèges dans un rayon de 1000 mètres. De plus, des pharmacies sont également à proximité, garantissant un accès facile aux soins de santé.\n\nEnfin, pour les étudiants ou les professionnels, l'appartement est situé à proximité de plusieurs amphithéâtres et du CIRAD, facilitant l'accès aux universités et aux centres de formation. Ce bien est une opportunité à ne pas manquer pour ceux qui recherchent un cadre de vie pratique et agréable à Sainte Clotilde.  Le bien est soumis au statut de la copropriété. \n\n Loyer de 450,00 euros par mois charges comprises dont 35,00 euros par mois de provision pour charges (soumis à la régularisation annuelle). \n Soit avec Assurance Habitation et Assistance* ( 19.23 euros ) : 469,23 euros. \n Les honoraires charge locataire sont de 288,90 euros ( soit 13,12 euros/m² ) dont 66,72 euros pour état des lieux ( soit 3,03 euros/m² ). \n Vous pouvez consulter les barèmes d'honoraires à l'adresse suivante : \n <span class=\"importDescriptionDecorator\" data-url=\"https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location\" data-type=\"agencyFeeUrl\">https://www.citya.com/agences-immobilieres/saint-denis-97400/201#bareme-location</span> \nLes informations sur les risques auxquels ce bien est exposé sont disponibles sur le site Géorisques : https://www.georisques.gouv.fr.  *Service facultatif. Contribution annuelle \"attentats\" non comprise. Voir conditions en agence.",
+  "caracteristiques": [
+   "Ascenseur",
+   "Accès handicapé",
+   "4e étage",
+   "Climatisation",
+   "Proche université"
+  ],
+  "date": "2026-11-25T16:11:49.068Z",
+  "annonceur": "Citya Saint Denis",
+  "lat": -20.899233,
+  "lon": 55.478959,
+  "charges": 35,
+  "pro": true,
+  "tel": "0262 32 43 24",
+  "email": "",
+  "adresse": "45 rue de Paris, 97400 Saint-Denis",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-1-piece-22-m2/01a213fe-12df-79bc-990d-d1a3a7a18f0a"
+   }
+  ],
+  "vu": "2026-11-26T02:36+04:00"
  },
  {
   "id": "zimo-01a1a2c5-470f-7550-8fad-c2e1a4312981",
@@ -2986,10 +2989,6 @@
   "caf": false,
   "aussi": [
    {
-    "source": "Bien'ici",
-    "url": "https://www.bienici.com/annonce/location/sainte-clotilde/appartement/2pieces/citya-immobilier-52424705300084-GES23820080-542"
-   },
-   {
     "source": "Zimo",
     "url": "https://www.zimo.fr/annonce/appartement-2-pieces-38-m2/01a20951-b715-7a16-8a67-4a711bb56015"
    }
@@ -4199,37 +4198,6 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-06T03:56+04:00"
- },
- {
-  "id": "zimo-01a1676c-1203-7ab7-ad18-f0a5235f54af",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/studio-1-piece-20-m2/01a1676c-1203-7ab7-ad18-f0a5235f54af",
-  "titre": "Appartement Saint Denis 1 pièce - BELLEPIERRE -",
-  "prix": 605.0,
-  "commune": "Saint-Denis",
-  "quartier": "Bellepierre",
-  "pieces": 1,
-  "type": "Studio",
-  "surface": 19.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/5Tqwj2TmnFu2Lw6cKXHfiE91hxCNfYrq0-dRQQBJr7g/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_5f8e1dcf-f6ee-4771-b95d-6041631f2361.jpg"
-  ],
-  "description": "Location Studio Saint-Denis (974) 1 pièces 19 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via DOMimmo",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-23T11:03+04:00"
  },
  {
   "id": "zimo-01a1a265-0073-7dc9-9db0-a6a8c693d456",
@@ -6088,49 +6056,35 @@
   "vu": "2026-11-03T23:11+04:00"
  },
  {
-  "id": "bienici-immo-facile-56310092",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/2pieces/immo-facile-56310092",
+  "id": "zimo-01a212ac-3b33-75ae-b3e2-1d9a3dc4a7f9",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-saint-denis-2-piece-s-58-m2/01a212ac-3b33-75ae-b3e2-1d9a3dc4a7f9",
   "titre": "Appartement Saint Denis 2 pièce(s) 58 m2",
-  "prix": 662,
+  "prix": 662.0,
   "commune": "Saint-Denis",
-  "quartier": "Centre-ville",
+  "quartier": "Saint-Denis",
   "pieces": 2,
   "type": "T2",
-  "surface": 58,
-  "meuble": false,
+  "surface": 58.0,
+  "meuble": null,
   "photos": [
-   "https://file.bienici.com/photo/immo-facile-56310092_media.immo-facile.com_office20_flamboyants_270723_catalog_images_pr_p_5_6_3_1_0_0_9_2_56310092a.jpg_DATEMAJ_16_03_2025-17_33_51",
-   "https://file.bienici.com/photo/immo-facile-56310092_media.immo-facile.com_office20_flamboyants_270723_catalog_images_pr_p_5_6_3_1_0_0_9_2_56310092b.jpg_DATEMAJ_16_03_2025-17_33_52",
-   "https://file.bienici.com/photo/immo-facile-56310092_media.immo-facile.com_office20_flamboyants_270723_catalog_images_pr_p_5_6_3_1_0_0_9_2_56310092c.jpg_DATEMAJ_16_03_2025-17_33_52",
-   "https://file.bienici.com/photo/immo-facile-56310092_media.immo-facile.com_office20_flamboyants_270723_catalog_images_pr_p_5_6_3_1_0_0_9_2_56310092d.jpg_DATEMAJ_16_03_2025-17_33_52",
-   "https://file.bienici.com/photo/immo-facile-56310092_media.immo-facile.com_office20_flamboyants_270723_catalog_images_pr_p_5_6_3_1_0_0_9_2_56310092e.jpg_DATEMAJ_16_03_2025-17_33_53"
+   "https://img.e-xiste.com/NSz-E3lD3TxykQI4oJeWr6jlEPiTFNcowVhjzVPXL-o/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_35ba517d-904f-40f4-a05e-1bee06f82508.jpg"
   ],
-  "description": "Appartement duplex d'environ 58 m², comprenant une chambre, situé au 2ème étage par escalier uniquement, comprenant Séjour et cuisine ouverte et en duplex  sous comble, Chambre, Salle de Bains, WC et 1 place de parking au sous/sol de l'immeuble. Rés. 'Issop' située au centre ville de St-Denis (97400). Libre de suite. Commercial <span class=\"importDescriptionDecorator\" data-type=\"phone\">06 93 10 46 06</span>",
-  "caracteristiques": [
-   "1e étage",
-   "1 chambre",
-   "Construit en 2004",
-   "Parking"
-  ],
-  "date": "2026-11-25T09:55:12.401Z",
-  "annonceur": "LES FLAMBOYANTS",
-  "lat": -20.878737419015188,
-  "lon": 55.45314857084733,
-  "charges": 30,
+  "description": "Location Duplex Saint-Denis (974) 2 pièces 58 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via bien'ici",
+  "lat": null,
+  "lon": null,
+  "charges": null,
   "pro": true,
-  "tel": "0693 10 46 06",
+  "tel": "",
   "email": "",
-  "adresse": "96 rue Jules Auber, 97400 SAINT-DENIS",
+  "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [
-   {
-    "source": "Zimo",
-    "url": "https://www.zimo.fr/annonce/appartement-saint-denis-2-piece-s-58-m2/01a212ac-3b33-75ae-b3e2-1d9a3dc4a7f9"
-   }
-  ],
-  "vu": "2026-11-25T17:04+04:00"
+  "aussi": [],
+  "vu": "2026-11-26T02:36+04:00"
  },
  {
   "id": "ep-22793553",
@@ -6915,6 +6869,39 @@
   "vu": "2026-11-03T17:23+04:00"
  },
  {
+  "id": "zimo-01a213a7-0611-7283-8a21-59e1ab223c23",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-t3-69-m2-2-pkgs-balcons/01a213a7-0611-7283-8a21-59e1ab223c23",
+  "titre": "Appartement T3 69 m² 2 pkgs Balcons",
+  "prix": 690.0,
+  "commune": "Saint-Denis",
+  "quartier": "Saint-Denis",
+  "pieces": 3,
+  "type": "T3",
+  "surface": 69.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/-KhgJdzM2171UmYwIMe6PNyvT7d__4NHPJ7q8myLi8I/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_16f6f00b-9f20-4447-9baf-69f93b7856fd.jpg"
+  ],
+  "description": "Location T3 Saint-Denis (974) 3 pièces 69 m²",
+  "caracteristiques": [
+   "Varangue / balcon"
+  ],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-26T02:36+04:00"
+ },
+ {
   "id": "zimo-01a20da9-2e7f-7ba5-93c5-c3ee8d853e6c",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/studio-champ-fleuri-terrasse/01a20da9-2e7f-7ba5-93c5-c3ee8d853e6c",
@@ -7255,7 +7242,12 @@
   "adresse": "28 RUE LECONTE DE LISLE, 97419 LA POSSESSION",
   "secteur": "Nord-Ouest",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/appartement-t2-la-possession/01a2132c-1cde-760c-a833-5d3fd3e12a01"
+   }
+  ],
   "vu": "2026-11-25T17:04+04:00"
  },
  {
@@ -7293,34 +7285,53 @@
   "vu": "2026-10-31T08:58+04:00"
  },
  {
-  "id": "zimo-01a20d8f-0a6e-73a1-b77a-4600bd05803d",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/duplex-2-pieces-55-m2/01a20d8f-0a6e-73a1-b77a-4600bd05803d",
-  "titre": "Duplex 2 pièces 55 m²",
+  "id": "superimmo-onces-location-appartement-55m-sainte-clotilde-97490-x12jjav",
+  "source": "Superimmo",
+  "url": "https://www.superimmo.com/annonces/location-appartement-55m-sainte-clotilde-97490-x12jjav",
+  "titre": "Location appartement 2 pièces 55,2 m² Sainte-Clotilde (97490)",
   "prix": 696.0,
   "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
+  "quartier": "",
   "pieces": 2,
   "type": "T2",
-  "surface": 55.0,
+  "surface": 55.2,
   "meuble": null,
   "photos": [
-   "https://img.e-xiste.com/F7KTNFIuf-ItP7HLRoqZw8k4Sdox3PbDrogCg2NgchA/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_fbd7e29c-0ab9-4b80-acd1-4a3c439c89ba.jpg"
+   "https://photo.superimmo.com/8zlnqrj9amy2tst52q6cfv2xtfaz",
+   "https://photo.superimmo.com/1vaadhintmat6dcxvj11c4heabr0",
+   "https://photo.superimmo.com/qztgyjp091o8pw5di9pvyjv7dczm",
+   "https://photo.superimmo.com/cdf65aqbedgxda8lpiyagfrsiy4t",
+   "https://photo.superimmo.com/ay9mv98er1m95qjus53ckrboqs4h",
+   "https://photo.superimmo.com/ouxz4yiulu62ug0lnl9j1pjmolmp",
+   "https://photo.superimmo.com/nk9bpmc3045i0kn89n8ppaj74ko4",
+   "https://photo.superimmo.com/iagxxo10t1zv7tpcm93jieq4xpwm",
+   "https://photo.superimmo.com/ppnye1xegr1qq9e3s97vs0tcaabj",
+   "https://photo.superimmo.com/3jm0pb0x62s8sdpw2nex46xjxlz8",
+   "https://photo.superimmo.com/jxo74r9nezy0msqo7q46xuchpmda",
+   "https://photo.superimmo.com/vtctmab0kefhfyxpmbsfyh5uh0o1",
+   "https://photo.superimmo.com/ww4tqv227pp1e46mms0glbt2kn3y",
+   "https://photo.superimmo.com/5u9lmvdw4uk03kpf82bua4di2h40",
+   "https://photo.superimmo.com/vp4oay5wonbmuvpo969tofenh9zm"
   ],
-  "description": "Location Duplex Saint-Denis (974) 2 pièces 55 m²",
+  "description": "Annonce appartement location 55,2 m² 2 pièces à Sainte-Clotilde Premium Immobilier vous présente en location nue",
   "caracteristiques": [],
   "date": "",
-  "annonceur": "Pro · via leboncoin",
+  "annonceur": "Superimmo",
   "lat": null,
   "lon": null,
   "charges": null,
   "pro": true,
-  "tel": "",
+  "tel": "0262 21 78 54",
   "email": "",
   "adresse": "",
   "secteur": "Nord",
   "caf": false,
-  "aussi": [],
+  "aussi": [
+   {
+    "source": "Zimo",
+    "url": "https://www.zimo.fr/annonce/duplex-2-pieces-55-m2/01a20d8f-0a6e-73a1-b77a-4600bd05803d"
+   }
+  ],
   "vu": "2026-11-24T21:53+04:00"
  },
  {
@@ -7366,44 +7377,6 @@
    }
   ],
   "vu": "2026-11-24T21:53+04:00"
- },
- {
-  "id": "bienici-ag970404-554365799",
-  "source": "Bien'ici",
-  "url": "https://www.bienici.com/annonce/location/saint-denis/appartement/2pieces/ag970404-554365799",
-  "titre": "À LOUER – APPARTEMENT T2 AVEC VARANGUE ET PARKING EN SOUS-SOL – DOMENJOD, SAINTE-CLOTILDE",
-  "prix": 698,
-  "commune": "Saint-Denis",
-  "quartier": "Saint-Denis",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 47,
-  "meuble": false,
-  "photos": [],
-  "description": "Domenjod – Sainte-Clotilde | Réf. G517\n\nDisponible à compter du 5 novembre 2026\n\nSitué dans le secteur recherché de Domenjod à Sainte-Clotilde, au sein d'une résidence construite en 2010, cet appartement T2 bénéficie d'un environnement calme, à proximité des commerces, des établissements scolaires et des arrêts de bus.\n\nSitué au 1er étage, ce logement comprend un couloir d'entrée, un séjour, une kitchenette, une salle de bains et des WC.\n\nVous apprécierez particulièrement sa varangue de 13,82 m², idéale pour profiter d'un agréable espace extérieur, ainsi que sa place de stationnement en sous-sol, un véritable atout au quotidien.\n\nConditions financières :\n\nLoyer mensuel hors charges : 645 €\n\nProvision mensuelle sur charges : 55 €, avec régularisation annuelle\n\nLoyer mensuel charges comprises : 700 €\n\nDépôt de garantie : 645 €\n\nHonoraires à la charge du locataire : 529,47 € TTC maximum, dont 384,94 € TTC pour la visite, la constitution du dossier et la rédaction du bail, et 144,53 € TTC pour l'état des lieux d'entrée, sous réserve du respect des plafonds applicables et du montant facturé au bailleur.\n\nCaractéristiques du bien :\n\nType : appartement T2\nSurface habitable : 47,70 m², sous réserve de confirmation par le certificat de mesurage\nSurface totale annoncée : 61,52 m², sous réserve de confirmation\nVarangue : 13,82 m²\nÉtage : 1er\nStationnement : une place en sous-sol\nAnnée de construction : 2010\nCopropriété : 28 lots\n\nVous souhaitez visiter cet appartement ? Contactez-nous pour convenir d'un rendez-vous.\n\nRetrouvez le barème des honoraires de SEI – STAR EUROPE IMMOBILIER sur notre site :\n<span class=\"importDescriptionDecorator\" data-url=\"https://immobilier-sei.com/tarifs.html\" data-type=\"agencyFeeUrl\">http://www.immobilier-sei.com/tarifs.html</span>",
-  "caracteristiques": [
-   "Parking (1)",
-   "1e étage",
-   "1 chambre",
-   "Construit en 2010",
-   "Libre le 04/11/2026",
-   "Varangue / balcon",
-   "Parking",
-   "Proche transports"
-  ],
-  "date": "2026-10-21T05:10:48.423Z",
-  "annonceur": "STAR EUROPE IMMOBILIER",
-  "lat": -20.87998885,
-  "lon": 55.448136944,
-  "charges": 55,
-  "pro": true,
-  "tel": "0262 21 48 48",
-  "email": "",
-  "adresse": "ZAC DU TRIANGLE - 10 RUE DE LA FRATERNITE - STE CLOTILDE, 97490 ST DENIS",
-  "secteur": "Nord",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-10-21T12:04+04:00"
  },
  {
   "id": "pv-1293782366",
@@ -8305,37 +8278,6 @@
   "vu": "2026-11-25T17:04+04:00"
  },
  {
-  "id": "zimo-01a207f1-9c9f-7901-bf0a-1cb54912cf98",
-  "source": "Zimo",
-  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-48-m2/01a207f1-9c9f-7901-bf0a-1cb54912cf98",
-  "titre": "Appartement 2 pièces 48 m²",
-  "prix": 740.0,
-  "commune": "La Possession",
-  "quartier": "La Possession",
-  "pieces": 2,
-  "type": "T2",
-  "surface": 48.0,
-  "meuble": null,
-  "photos": [
-   "https://img.e-xiste.com/9PUYsYO-tFMS_K9hw5a5pCTMlwwZTaEfTutnMC54LYI/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_56e93b2a-92b6-4765-a2a5-be3125d07942.jpg"
-  ],
-  "description": "Location T2 La Possession (974) 2 pièces 48 m²",
-  "caracteristiques": [],
-  "date": "",
-  "annonceur": "Pro · via leboncoin",
-  "lat": null,
-  "lon": null,
-  "charges": null,
-  "pro": true,
-  "tel": "",
-  "email": "",
-  "adresse": "",
-  "secteur": "Nord-Ouest",
-  "caf": false,
-  "aussi": [],
-  "vu": "2026-11-24T01:30+04:00"
- },
- {
   "id": "zimo-01a1cf4b-d85a-732f-854d-59937880ef88",
   "source": "Zimo",
   "url": "https://www.zimo.fr/annonce/t2-meuble-vue-mer-environnement-calme/01a1cf4b-d85a-732f-854d-59937880ef88",
@@ -8368,5 +8310,36 @@
   "caf": false,
   "aussi": [],
   "vu": "2026-11-12T15:17+04:00"
+ },
+ {
+  "id": "zimo-01a207f1-9c9f-7901-bf0a-1cb54912cf98",
+  "source": "Zimo",
+  "url": "https://www.zimo.fr/annonce/appartement-2-pieces-48-m2/01a207f1-9c9f-7901-bf0a-1cb54912cf98",
+  "titre": "Appartement 2 pièces 48 m²",
+  "prix": 740.0,
+  "commune": "La Possession",
+  "quartier": "La Possession",
+  "pieces": 2,
+  "type": "T2",
+  "surface": 48.0,
+  "meuble": null,
+  "photos": [
+   "https://img.e-xiste.com/9PUYsYO-tFMS_K9hw5a5pCTMlwwZTaEfTutnMC54LYI/q:80/format:webp/rs:fill:800:600:0:0/plain/https%3A%2F%2Fzimo-images.s3.fr-par.scw.cloud%2Fphoto_56e93b2a-92b6-4765-a2a5-be3125d07942.jpg"
+  ],
+  "description": "Location T2 La Possession (974) 2 pièces 48 m²",
+  "caracteristiques": [],
+  "date": "",
+  "annonceur": "Pro · via leboncoin",
+  "lat": null,
+  "lon": null,
+  "charges": null,
+  "pro": true,
+  "tel": "",
+  "email": "",
+  "adresse": "",
+  "secteur": "Nord-Ouest",
+  "caf": false,
+  "aussi": [],
+  "vu": "2026-11-24T01:30+04:00"
  }
 ]
