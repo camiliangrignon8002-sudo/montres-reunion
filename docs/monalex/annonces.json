@@ -1,11 +1,11 @@
 {
- "mise_a_jour": "2026-11-26T00:14+00:00",
+ "mise_a_jour": "2026-11-26T10:46+00:00",
  "sources": [
   {
    "id": "intemporel",
    "nom": "Intemporel Collection",
    "via": "Shopify",
-   "annonces": 12
+   "annonces": 14
   },
   {
    "id": "guichard",
@@ -131,13 +131,13 @@
    "id": "watchguys",
    "nom": "WatchGuys",
    "via": "Shopify",
-   "annonces": 684
+   "annonces": 682
   },
   {
    "id": "mywatchllc",
    "nom": "My Watch LLC",
    "via": "Shopify",
-   "annonces": 444
+   "annonces": 443
   },
   {
    "id": "kingjewelers",
@@ -507,6 +507,170 @@
   }
  },
  "annonces": [
+  {
+   "id": "caf70ee24d53",
+   "boutique": "intemporel",
+   "reference": "126613LB",
+   "collection": "Submariner",
+   "annee": "2022",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex Submariner Date",
+   "url": "https://intemporel-collection.ch/products/rolex-submariner-date",
+   "prix": 15500,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU1.jpg?v=1795685957",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU2.jpg?v=1795685955",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU3.jpg?v=1795685956",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU4.jpg?v=1795685955",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU5.jpg?v=1795685956",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU6.jpg?v=1795685955",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU7.jpg?v=1795685955",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU_11.jpg?v=1795685980",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU_12.jpg?v=1795685980",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU_14.jpg?v=1795685980",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU_10.jpg?v=1795685980",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU_13.jpg?v=1795685981",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU_15.jpg?v=1795685980",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU_16.jpg?v=1795685981",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU_17.jpg?v=1795685982",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-SUBMARINER-126613LB-BLEU_8.jpg?v=1795685980",
+     "w": 4000
+    }
+   ],
+   "description": "Découvrez cette Rolex Submariner Date réf. 126613LB, une montre de plongée emblématique en acier Oystersteel et or jaune 18 ct, présentée ici dans une configuration neuve datant de 2022 . Son cadran bleu et sa lunette tournante unidirectionnelle bleue lui confèrent une allure immédiatement reconnaissable.\nÉquipée du mouvement mécanique à remontage automatique Rolex calibre 3235 , elle affiche la date à 3 heures sous la loupe Cyclope et offre une réserve de marche d’environ 70 heures. Son boîtier Oyster de 41 mm est conçu pour garantir une étanchéité jusqu’à 300 mètres.\nCette Rolex Submariner Date 126613LB est proposée en full set, avec sa boîte et sa facture d’origine . Une pièce recherchée, alliant l’expertise horlogère Rolex à l’élégance du bleu et de l’or jaune.",
+   "premiere_vue": "2026-11-26T10:46+00:00"
+  },
+  {
+   "id": "c32ddfdef51e",
+   "boutique": "intemporel",
+   "reference": "126519LN",
+   "collection": "Cosmograph Daytona",
+   "annee": "2024",
+   "etat": "Neuf",
+   "boite": true,
+   "papiers": true,
+   "titre": "Rolex Daytona",
+   "url": "https://intemporel-collection.ch/products/rolex-daytona-1",
+   "prix": 42000,
+   "devise": "CHF",
+   "photos": [
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPHDAYTONA-126519LN-NOIR3.jpg?v=1795685450",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPHDAYTONA-126519LN-NOIR1.jpg?v=1795685450",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPHDAYTONA-126519LN-NOIR2.jpg?v=1795685451",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPHDAYTONA-126519LN-NOIR4.jpg?v=1795685450",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPHDAYTONA-126519LN-NOIR5.jpg?v=1795685449",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPHDAYTONA-126519LN-NOIR6.jpg?v=1795685450",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPHDAYTONA-126519LN-NOIR7.jpg?v=1795685449",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPH_DAYTONA-126519LN-NOIR_18.jpg?v=1795685472",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPH_DAYTONA-126519LN-NOIR_8.jpg?v=1795685469",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPH_DAYTONA-126519LN-NOIR_9.jpg?v=1795685469",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPH_DAYTONA-126519LN-NOIR_16.jpg?v=1795685471",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPH_DAYTONA-126519LN-NOIR_15.jpg?v=1795685471",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPH_DAYTONA-126519LN-NOIR_13.jpg?v=1795685471",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPH_DAYTONA-126519LN-NOIR_12.jpg?v=1795685472",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPH_DAYTONA-126519LN-NOIR_11.jpg?v=1795685471",
+     "w": 4000
+    },
+    {
+     "src": "https://cdn.shopify.com/s/files/1/1068/2856/2774/files/ROLEX-COSMOGRAPH_DAYTONA-126519LN-NOIR_17.jpg?v=1795685471",
+     "w": 4000
+    }
+   ],
+   "description": "Découvrez cette Rolex Cosmograph Daytona réf. 126519LN , une montre neuve de 2024 qui associe l’élégance de l’or gris 18 ct à l’allure sportive de la collection Daytona. Son cadran noir, ses compteurs contrastés et sa lunette noire graduée composent une présentation immédiatement reconnaissable. Le boîtier de 40 mm est accompagné du bracelet Oysterflex noir , apprécié pour son confort et son maintien au poignet.\nAnimée par le calibre Rolex 4131 à remontage automatique, cette Daytona offre les fonctions heures, minutes, secondes et chronographe, avec une réserve de marche d’environ 72 heures. Étanche jusqu’à 100 mètres, elle conjugue savoir-faire horloger et polyvalence au quotidien.\nCette Rolex Daytona 126519LN de 2024 est proposée en état neuf, en full set, avec sa boîte et sa facture d’origine. Une pièce recherchée, idéale pour les amateurs de montres de luxe et de chronographes Rolex.",
+   "premiere_vue": "2026-11-26T10:46+00:00"
+  },
   {
    "id": "24e2866cac1d",
    "boutique": "intemporel",
@@ -3674,7 +3838,7 @@
    "papiers": true,
    "titre": "Rolex Oyster Perpetual 31 mm Cadran Tiffany",
    "url": "https://manvstime.fr/boutique/rolex/rolex-oyster-perpetual-31-mm-cadran-tiffany/",
-   "prix": 12950,
+   "prix": 11950,
    "devise": "EUR",
    "photos": [
     {
@@ -16633,44 +16797,6 @@
    ],
    "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Datejust \n Reference Number: \n 126233 \n SKU: \n D151 \n Condition: \n Unworn i \n Gender: \n Unisex \n Style: \n Luxury \n Box and Papers: \n Box and Papers \n Note: \n Green Hangtag Only (No White Hangtag) \n Year: \n 2026 \n Warranty: \n WatchGuys 2-Year Warranty \n Note: \n 5-Year Rolex Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 36mm \n Dial Color: \n Olive Green \n Dial Hour Marker: \n Roman \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel and 18K Yellow Gold \n Color: \n Silver and Yellow Gold \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date",
    "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "ea417a7ca836",
-   "boutique": "watchguys",
-   "reference": "126509",
-   "collection": "Cosmograph Daytona",
-   "annee": "2025",
-   "etat": "Occasion",
-   "boite": true,
-   "papiers": true,
-   "titre": "Rolex Daytona 126509 Blue",
-   "url": "https://www.watchguys.com/products/rolex-daytona-126509-blue-oyster",
-   "prix": 54595,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-daytona-126509-blue-index-1.webp?v=1792611122",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-daytona-126509-blue-index-2.webp?v=1792611128",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-daytona-126509-blue-index-3.webp?v=1792611134",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-daytona-126509-blue-index-4.webp?v=1792611139",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/New_Rolex_Box_with_Cards_82c37cc0-dad0-4f5d-8e3b-2bc0ee56190c.webp?v=1792611145",
-     "w": 2048
-    }
-   ],
-   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Daytona \n Reference Number: \n 126509 \n SKU: \n P156 \n Condition: \n Excellent \n i \n Gender: \n Mens \n Style: \n Casual, Sport \n Box and Papers: \n Box and Papers \n Note: \n White Hangtag Included \n Year: \n 2025 \n Warranty: \n WatchGuys 2-Year Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n 18K White Gold \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Blue \n Dial Hour Marker: \n Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n 18K White Gold \n Color: \n White Gold \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n 7 1/4” – 7 1/2” \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Chronograph, Tachymeter",
-   "premiere_vue": "2026-11-26T00:14+00:00"
   },
   {
    "id": "c3ffa4a76dff",
@@ -34425,7 +34551,7 @@
    "papiers": true,
    "titre": "Rolex Day-Date 228238 Yellow Gold",
    "url": "https://www.watchguys.com/products/rolex-day-date-228238-champagne-roman",
-   "prix": 51995,
+   "prix": 51395,
    "devise": "USD",
    "photos": [
     {
@@ -35452,44 +35578,6 @@
     }
    ],
    "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n Datejust \n Reference Number: \n 126333 \n SKU: \n C290 \n Condition: \n Unworn \n i \n Gender: \n Mens \n Style: \n Casual, Luxury \n Box and Papers: \n Box and Papers \n Note: \n Green Hang Tag Only (No White Hangtag) \n Year: \n 2025-2026 \n Warranty: \n WatchGuys 2-Year Warranty \n Note: \n 5-Year Rolex Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 41mm \n Dial Color: \n Champagne \n Dial Hour Marker: \n Diamond \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel and Yellow Gold \n Color: \n Silver and Yellow Gold \n Buckle Type: \n Oyster Clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date, Time",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "c3ef55285a90",
-   "boutique": "watchguys",
-   "reference": "126710BLNR",
-   "collection": "GMT-Master II",
-   "annee": "2026",
-   "etat": "Neuf",
-   "boite": true,
-   "papiers": true,
-   "titre": "Rolex GMT-Master II 126710BLNR Batgirl",
-   "url": "https://www.watchguys.com/products/unworn-rolex-gmt-master-ii-126710blnr",
-   "prix": 20095,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_126710_GMT_Batgirl_Jubilee_5f79c8e4-95fb-47e9-a651-fe148c41789d.webp?v=1791243139",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/Rolex_GMT-Master_126710BLNR_Batgirl_Watch_on_Wrist_93b4c339-86da-4c6c-9959-dca6c31c3cac.webp?v=1791243144",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126710blnr-batgirl-704.webp?v=1791243147",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/rolex-gmt-master-ii-126710blnr-batgirl-996.webp?v=1791243151",
-     "w": 2048
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0612/0354/6292/files/New_Rolex_Box_with_Cards_e0d28a13-e16b-4469-bd28-e33010231df1.webp?v=1791217855",
-     "w": 2048
-    }
-   ],
-   "description": "WATCH DETAILS \n Brand: \n Rolex \n Model: \n GMT-Master II \n Reference Number: \n 126710BLNR \n Nickname: \n Batgirl \n SKU: \n WG4001 \n Condition: \n Unworn i \n Gender: \n Men's \n Style: \n Sport, Casual \n Box and Papers: \n Box and Papers \n Note: \n New Eco-Friendly Warranty Card & Hang Tag \n Year: \n 2026 \n Warranty: \n WatchGuys 2-Year Warranty \n Note: \n 5-Year Rolex Warranty \n Made In: \n Switzerland \n CASE/DIAL \n Case Material: \n Stainless Steel \n Case Shape: \n Round \n Case Size: \n 40mm \n Dial Color: \n Black \n Dial Hour Marker: \n Dot/Index \n Water Resistance: \n 100m \n BRACELET/STRAP \n Material: \n Stainless Steel \n Color: \n Silver \n Buckle Type: \n Oyster clasp \n Bracelet Length: \n Full Links \n MOVEMENT/FUNCTION \n Movement: \n Automatic \n Complication: \n Date, GMT",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
@@ -40740,64 +40828,6 @@
     }
    ],
    "description": "NEW 2026 Rolex Day-Date 36mm 128238-0130 18kt Yellow Gold Presidential Bracelet Bright Green Diamond-Set Baguette Dial \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Boxed) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️ 5 year manufacturer warranty \n ✔️Serial Number Tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome  \n Explore more Rolex Day-Date watches or browse the complete Rolex collection.",
-   "premiere_vue": "2026-11-14T10:49+00:00"
-  },
-  {
-   "id": "a9494c47cce4",
-   "boutique": "mywatchllc",
-   "reference": "",
-   "collection": "GMT-Master II",
-   "annee": "2026",
-   "etat": "Neuf",
-   "boite": true,
-   "papiers": true,
-   "titre": "NEW 2026 Rolex GMT-Master II Bruce Wayne 40mm 126710GRNR Oyster (NEW STYLE CARD/STICKERED)",
-   "url": "https://mywatchllc.com/products/new-2026-rolex-gmt-master-ii-bruce-wayne-40mm-126710grnr-oyster-new-style-card-stickered-1",
-   "prix": 20000,
-   "devise": "USD",
-   "photos": [
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-14EA08F1-9B37-464A-9113-A9D94EAE4A36-L0-001.jpg?v=1793654964",
-     "w": 2620
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-ED7448C9-62D5-44E1-9CCA-ED53146109A5-L0-001.jpg?v=1793654963",
-     "w": 2194
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-651B133B-316C-4C53-A1F2-C40C80CD33C6-L0-001.jpg?v=1793654964",
-     "w": 2406
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-118AF6E8-B923-4068-9F05-BADB4F7595F1-L0-001.jpg?v=1793654964",
-     "w": 2431
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-B8F36193-6A68-4996-B3FA-0505248C236C-L0-001.jpg?v=1793654962",
-     "w": 2425
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-DCF44D60-C86B-4A17-85C9-E200AF0FFBE9-L0-001.jpg?v=1793654963",
-     "w": 2439
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-B0753821-D03C-4A05-96EA-E59C73F82CF9-L0-001.jpg?v=1793654960",
-     "w": 2566
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-78B3FB0E-78BF-4DDA-90AD-8FDBD8152D23-L0-001.jpg?v=1793654961",
-     "w": 2590
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-49177D6B-D196-48D5-A537-5E6C47D0CAE7-L0-001.jpg?v=1793654962",
-     "w": 1645
-    },
-    {
-     "src": "https://cdn.shopify.com/s/files/1/0735/9152/1557/files/library-CB7DEE00-FAC3-41F8-ACD9-5474C1366BB0-L0-001.jpg?v=1793654964",
-     "w": 2926
-    }
-   ],
-   "description": "NEW 2026 Rolex GMT-Master II Bruce Wayne 40mm 126710GRNR-0004 Oyster Bracelet Black Dial Grey and Black Ceramic Bezel \n NOTE: Watch is stickered including clasp lock, clasp, end links, both sides of the case including the barcode sticker and back of case. \n Includes the following: \n ✔️ BRAND NEW UPDATED ROLEX BOX (Double Box) \n ✔️Box and Papers - Yes \n ✔️Warranty card dated 2026 (NEW STYLE CARD) \n ✔️5 year manufacturer warranty \n ✔️Serial number tag (NEW STYLE TAG) \n ✔️Manual and Warranty booklets  \n ✔️Green Hang Tag included  \n ✔️Size: 7.75inch wrist (Full Links) \n ✔️Watch is BRAND NEW/UNWORN \n ✔️ Trades welcome\n Userguide \n See every Rolex Bruce Wayne in stock and the full Rolex GMT-Master II lineup.",
    "premiere_vue": "2026-11-14T10:49+00:00"
   },
   {
